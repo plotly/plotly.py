@@ -122,7 +122,7 @@ IFrame(snippet_url + 'marker-style', width='100%', height=630)
 
 ### Opacity
 
-Setting opacity outside the marker will set the opacity of the trace. Thus, it will allow greater visbility of additional traces but like fully opaque it is hard to distinguish density.
+Setting opacity outside the marker will set the opacity of the trace. Thus, it will allow greater visibility of additional traces but like fully opaque it is hard to distinguish density.
 
 ```python
 import plotly.graph_objects as go
@@ -201,7 +201,7 @@ fig.show()
 
 ### Marker Opacity
 
-To maximise visibility of density, it is recommended to set the opacity inside the marker `marker:{opacity:0.5}`. If mulitple traces exist with high density, consider using marker opacity in conjunction with trace opacity.
+To maximise visibility of density, it is recommended to set the opacity inside the marker `marker:{opacity:0.5}`. If multiple traces exist with high density, consider using marker opacity in conjunction with trace opacity.
 
 ```python
 import plotly.graph_objects as go

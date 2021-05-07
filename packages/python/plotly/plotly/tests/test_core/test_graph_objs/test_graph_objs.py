@@ -7,7 +7,6 @@ OLD_CLASS_NAMES = [
     "AngularAxis",
     "Annotation",
     "Annotations",
-    "Area",
     "Bar",
     "Box",
     "ColorBar",

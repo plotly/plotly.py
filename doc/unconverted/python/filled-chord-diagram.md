@@ -28,7 +28,7 @@ jupyter:
 
 Circular layout or [Chord diagram](https://en.wikipedia.org/wiki/Chord_diagram) is a method of visualizing  data that describe relationships. It was intensively promoted  through [Circos](http://circos.ca/), a software package in Perl that  was initially designed for displaying genomic data.
 
-M Bostock developed reusable charts  for [chord diagrams](http://bl.ocks.org/mbostock/4062006) in d3.js. Two years ago on [stackoverflow](http://stackoverflow.com/questions/19105801/chord-diagram-in-python), the exsistence of a Python package for plotting chord diagrams was adressed, but the question was closed due to being *off topic*.<br> Here we show that a chord diagram can be generated in Python with Plotly. We illustrate the method of generating a chord diagram from data recorded in a square matrix. The rows and columns represent the same entities.
+M Bostock developed reusable charts  for [chord diagrams](http://bl.ocks.org/mbostock/4062006) in d3.js. Two years ago on [stackoverflow](http://stackoverflow.com/questions/19105801/chord-diagram-in-python), the existence of a Python package for plotting chord diagrams was addressed, but the question was closed due to being *off topic*.<br> Here we show that a chord diagram can be generated in Python with Plotly. We illustrate the method of generating a chord diagram from data recorded in a square matrix. The rows and columns represent the same entities.
 
 This example considers a community of 5 friends on Facebook. We record the number of comments posted by each member on the other friends' walls. The data table is given in the next cell:
 
@@ -82,7 +82,7 @@ Let us denote by `total_comments` the total number of posts recorded in this com
 
 Theoretically the interval `[0, total_comments)` is mapped linearly onto the unit circle, identified with the interval $[0,2\pi)$.
 
-For a better looking plot one proceeds as follows: starting from the angular position $0$, in counter-clockwise direction, one draws succesively, around the unit circle,  two parallel arcs of length equal to a mapped row sum value, minus a fixed gap. Click the image below:
+For a better looking plot one proceeds as follows: starting from the angular position $0$, in counter-clockwise direction, one draws successively, around the unit circle,  two parallel arcs of length equal to a mapped row sum value, minus a fixed gap. Click the image below:
 
 
 
@@ -291,7 +291,7 @@ def control_pts(angle, radius):
 
 ```python
 def ctrl_rib_chords(l, r, radius):
-    # this function returns a 2-list containing control poligons of the two quadratic Bezier
+    # this function returns a 2-list containing control polygons of the two quadratic Bezier
     #curves that are opposite sides in a ribbon
     #l (r) the list of angular variables of the ribbon arc ends defining
     #the ribbon starting (ending) arc

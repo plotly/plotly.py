@@ -37,7 +37,7 @@ jupyter:
 <!-- #region -->
 ### Version Problems
 
-In order to follow the examples in this documentation, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3.
+In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
 
 ### Import Problems
 
@@ -62,24 +62,10 @@ IFrame(snippet_url + 'renderers', width='100%', height=630)
 ```
 
 <!-- #region -->
-### Jupyter Notebook Classic Problems
-
-The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
-
-The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
-
-If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
-
-```python
-import plotly.io as pio
-pio.renderers.default='notebook'
-```
-
-As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
 
 ### JupyterLab Problems
 
-In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There are two extensions: `jupyterlab-plotly` for rendering figures with `fig.show()` and `plotlywidget` for the `FigureWidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1.x and 2.x but not 0.x.
+In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There is one extension: `plotlywidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1 or above but not 0.x.
 
 To list your current extensions, run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
 
@@ -87,7 +73,15 @@ To list your current extensions, run the following command in a terminal shell *
 $ jupyter labextension list
 ```
 
-If you have [installed additional python environments](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) (or kernels) to use with JupyterLab, or if you are using a centrally hosted JupyterLab installation, you need to make sure that the extensions are installed in the python environment used to launch JupyterLab (the "server" environment). If you accidentally installed the extensions (and run the command above) in one of the additional python environments ("processing" environments), then it is possible for the command above to list the correct extensions but for them to not be available in the JupyterLab front-end you have loaded in your browser. To check if this is the problem, you can [look at the active extension list through your browser via the JupyterLab Extension Manager](https://jupyterlab.readthedocs.io/en/stable/user/extensions.html#using-the-extension-manager), which will always list the extensions in the "server" environment. To summarize: if you use JupyterLab with multiple python environments, the extensions must be installed in the "server" environment, and the plotly python library must be installed in each "processing" environment that you intend to use. 
+If you have [installed additional python environments](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) (or kernels) to use with JupyterLab, or if you are using a centrally hosted JupyterLab installation, you need to make sure that the extensions are installed in the python environment used to launch JupyterLab (the "server" environment). If you accidentally installed the extensions (and run the command above) in one of the additional python environments ("processing" environments), then it is possible for the command above to list the correct extensions but for them to not be available in the JupyterLab front-end you have loaded in your browser. To check if this is the problem, you can [look at the active extension list through your browser via the JupyterLab Extension Manager](https://jupyterlab.readthedocs.io/en/stable/user/extensions.html#using-the-extension-manager), which will always list the extensions in the "server" environment. To summarize: if you use JupyterLab with multiple python environments, the extensions must be installed in the "server" environment, and the plotly python library must be installed in each "processing" environment that you intend to use.
+
+> Version 4.14.3 or earlier needed two extensions (`jupyterlab-plotly` and `plotlywidget`) to be installed manually running:
+
+```bash
+$ jupyter labextension install jupyterlab-plotly @jupyter-widgets/jupyterlab-manager plotlywidget
+```
+
+#### JupyterLab 2 and earlier
 
 If you have the correct version of the extensions installed and active in your active JupyterLab sessions and are still seeing problems, the issue may clear up if you rebuild JupyterLab. This shouldn't be required in principle but many users have resolved their issues this way. To rebuild JupyterLab, shut down JupyterLab and run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
 
@@ -98,7 +92,6 @@ $ jupyter lab build
 To uninstall your Plotly extensions prior to reinstalling them, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
 
 ```bash
-$ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
 
@@ -121,6 +114,22 @@ unset NODE_OPTIONS
 # (Windows)
 set NODE_OPTIONS=
 ```
+
+### Jupyter Classic Notebook Problems
+
+The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
+
+The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
+
+If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
+
+```python
+import plotly.io as pio
+pio.renderers.default='notebook'
+```
+
+As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
+
 <!-- #endregion -->
 
 ### VSCode Notebook, Nteract and Streamlit Problems

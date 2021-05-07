@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from six import string_types
 import os
 import json
+from pathlib import Path
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict
 
@@ -14,7 +15,10 @@ try:
     root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
     package_dir = os.path.join(root_dir, "package_data")
     scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
-    scope.mathjax = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+    if scope.mathjax is None:
+        scope.mathjax = (
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+        )
 except ImportError:
     PlotlyScope = None
     scope = None
@@ -92,9 +96,19 @@ def to_image(
     # -------------
     if engine == "auto":
         if scope is not None:
+            # Default to kaleido if available
             engine = "kaleido"
         else:
-            engine = "orca"
+            # See if orca is available
+            from ._orca import validate_executable
+
+            try:
+                validate_executable()
+                engine = "orca"
+            except:
+                # If orca not configured properly, make sure we display the error
+                # message advising the installation of kaleido
+                engine = "kaleido"
 
     if engine == "orca":
         # Fall back to legacy orca image export path
@@ -156,7 +170,7 @@ def write_image(
 
     file: str or writeable
         A string representing a local file path or a writeable object
-        (e.g. an open file descriptor)
+        (e.g. a pathlib.Path object or an open file descriptor)
 
     format: str or None
         The desired image format. One of
@@ -215,14 +229,23 @@ def write_image(
     -------
     None
     """
-    # Check if file is a string
-    # -------------------------
-    file_is_str = isinstance(file, string_types)
+    # Try to cast `file` as a pathlib object `path`.
+    # ----------------------------------------------
+    if isinstance(file, string_types):
+        # Use the standard Path constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):
+        # `file` is already a Path object.
+        path = file
+    else:
+        # We could not make a Path object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
 
     # Infer format if not specified
     # -----------------------------
-    if file_is_str and format is None:
-        _, ext = os.path.splitext(file)
+    if path is not None and format is None:
+        ext = path.suffix
         if ext:
             format = ext.lstrip(".")
         else:
@@ -254,11 +277,25 @@ For example:
 
     # Open file
     # ---------
-    if file_is_str:
-        with open(file, "wb") as f:
-            f.write(img_data)
+    if path is None:
+        # We previously failed to make sense of `file` as a pathlib object.
+        # Attempt to write to `file` as an open file descriptor.
+        try:
+            file.write(img_data)
+            return
+        except AttributeError:
+            pass
+        raise ValueError(
+            """
+The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
+""".format(
+                file=file
+            )
+        )
     else:
-        file.write(img_data)
+        # We previously succeeded in interpreting `file` as a pathlib object.
+        # Now we can use `write_bytes()`.
+        path.write_bytes(img_data)
 
 
 def full_figure_for_development(fig, warn=True, as_dict=False):

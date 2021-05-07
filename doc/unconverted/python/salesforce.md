@@ -190,7 +190,7 @@ for name, temp_df in large_opps_df.groupby('Owner'):
             name=name,
             text=hover_text,
             marker=dict(
-                size=(temp_df.Probability / 2) # helps keep the bubbles of managable size
+                size=(temp_df.Probability / 2) # helps keep the bubbles of manageable size
             )
         )
     )
