@@ -815,7 +815,7 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     Interpolates between colors in a colorscale to find the specific colors
     corresponding to the specified sample values. The colorscale can be specified
     as a list of `[scale, color]` pairs, as a list of colors, or as a named
-    plotly colorscale. The samplepoints can be specefies an iterable of specific
+    plotly colorscale. The samplepoints can be specefied as an iterable of specific
     points in the range [0.0, 1.0], or as an integer number of points which will
     be spaced equally between the low value (default 0.0) and the high value
     (default 1.0). The output is a list of colors, formatted according to the
@@ -831,8 +831,8 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
                 colorscale = PLOTLY_SCALES[colorscale]
             else:
                 raise exceptions.PlotlyError(
-                    "If your colors variable is a string, it must be a "
-                    "Plotly scale, an rgb color or a hex color."
+                    "If your colorscale variable is a string, "
+                    "it must be a Plotly scale."
                 )
         else:
             colorscale = make_colorscale(colorscale)
