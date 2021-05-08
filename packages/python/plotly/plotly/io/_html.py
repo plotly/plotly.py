@@ -425,11 +425,6 @@ def write_html(
 
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
-        directory as the HTML file. If `file` is a string to a local file path
-        and `full_html` is True then
-
-        If 'directory', a script tag is included that references an external
-        plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.  If `file` is a string to a local file
         path and `full_html` is True, then the plotly.min.js bundle is copied
         into the directory of the resulting HTML file. If a file named
