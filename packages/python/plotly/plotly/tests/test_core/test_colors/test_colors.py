@@ -149,7 +149,6 @@ class TestColors(TestCase):
         # test for non-existing colorscale
         pattern = r"Colorscale \S+ is not a built-in scale."
         name = "foo"
-
         self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
 
         # test non-capitalised access
@@ -164,3 +163,34 @@ class TestColors(TestCase):
         self.assertEqual(
             colors.diverging.Portland_r, colors.get_colorscale("portland_r")
         )
+
+    def test_sample_colorscale(self):
+
+        # test that sampling a colorscale at the defined points returns the same
+        defined_colors = colors.sequential.Inferno
+        sampled_colors = colors.sample_colorscale(
+            defined_colors, len(defined_colors), colortype="rgb"
+        )
+        defined_colors_rgb = colors.convert_colors_to_same_type(
+            defined_colors, colortype="rgb"
+        )[0]
+        self.assertEqual(sampled_colors, defined_colors_rgb)
+
+        # test sampling an easy colorscale that goes [red, green, blue]
+        defined_colors = ["rgb(255,0,0)", "rgb(0,255,0)", "rgb(0,0,255)"]
+        samplepoints = [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0]
+        expected_output = [
+            (1.0, 0.0, 0.0),
+            (0.75, 0.25, 0.0),
+            (0.5, 0.5, 0.0),
+            (0.25, 0.75, 0.0),
+            (0.0, 1.0, 0.0),
+            (0.0, 0.75, 0.25),
+            (0.0, 0.5, 0.5),
+            (0.0, 0.25, 0.75),
+            (0.0, 0.0, 1.0),
+        ]
+        output = colors.sample_colorscale(
+            defined_colors, samplepoints, colortype="tuple"
+        )
+        self.assertEqual(expected_output, output)
