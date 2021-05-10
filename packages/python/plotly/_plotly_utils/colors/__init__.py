@@ -854,13 +854,7 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
         validate_colorscale(colorscale)
     except exceptions.PlotlyError:
         if isinstance(colorscale, str):
-            if colorscale in PLOTLY_SCALES:
-                colorscale = PLOTLY_SCALES[colorscale]
-            else:
-                raise exceptions.PlotlyError(
-                    "If your colorscale variable is a string, "
-                    "it must be a Plotly scale."
-                )
+            colorscale = get_colorscale(colorscale)
         else:
             colorscale = make_colorscale(colorscale)
 
