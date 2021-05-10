@@ -138,6 +138,32 @@ class TestColors(TestCase):
             PlotlyError, pattern2, colors.make_colorscale, color_list2, scale
         )
 
+    def test_get_colorscale(self):
+
+        # test for incorrect input type
+        pattern = "Name argument have to be a string."
+        name = colors.sequential.haline
+
+        self.assertRaisesRegexp(PlotlyError, pattern, colors.get_colorscale, name)
+
+        # test for non-existing colorscale
+        pattern = r"Colorscale \S+ is not a built-in scale."
+        name = "foo"
+        self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
+
+        # test non-capitalised access
+        self.assertEqual(colors.sequential.haline, colors.get_colorscale("haline"))
+        # test capitalised access
+        self.assertEqual(colors.diverging.Earth, colors.get_colorscale("Earth"))
+        # test accessing non-capitalised scale with capitalised name
+        self.assertEqual(colors.cyclical.mrybm, colors.get_colorscale("Mrybm"))
+        # test accessing capitalised scale with non-capitalised name
+        self.assertEqual(colors.sequential.Viridis, colors.get_colorscale("viridis"))
+        # test accessing reversed scale
+        self.assertEqual(
+            colors.diverging.Portland_r, colors.get_colorscale("portland_r")
+        )
+
     def test_sample_colorscale(self):
 
         # test that sampling a colorscale at the defined points returns the same
