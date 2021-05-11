@@ -152,16 +152,29 @@ class TestColors(TestCase):
         self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
 
         # test non-capitalised access
-        self.assertEqual(colors.sequential.haline, colors.get_colorscale("haline"))
+        self.assertEqual(
+            colors.make_colorscale(colors.sequential.haline),
+            colors.get_colorscale("haline"),
+        )
         # test capitalised access
-        self.assertEqual(colors.diverging.Earth, colors.get_colorscale("Earth"))
+        self.assertEqual(
+            colors.make_colorscale(colors.diverging.Earth),
+            colors.get_colorscale("Earth"),
+        )
         # test accessing non-capitalised scale with capitalised name
-        self.assertEqual(colors.cyclical.mrybm, colors.get_colorscale("Mrybm"))
+        self.assertEqual(
+            colors.make_colorscale(colors.cyclical.mrybm),
+            colors.get_colorscale("Mrybm"),
+        )
         # test accessing capitalised scale with non-capitalised name
-        self.assertEqual(colors.sequential.Viridis, colors.get_colorscale("viridis"))
+        self.assertEqual(
+            colors.make_colorscale(colors.sequential.Viridis),
+            colors.get_colorscale("viridis"),
+        )
         # test accessing reversed scale
         self.assertEqual(
-            colors.diverging.Portland_r, colors.get_colorscale("portland_r")
+            colors.make_colorscale(colors.diverging.Portland_r),
+            colors.get_colorscale("portland_r"),
         )
 
     def test_sample_colorscale(self):
@@ -194,3 +207,7 @@ class TestColors(TestCase):
             defined_colors, samplepoints, colortype="tuple"
         )
         self.assertEqual(expected_output, output)
+
+        self.assertEqual(
+            colors.sample_colorscale("TuRbId_r", 12), colors.sequential.turbid_r,
+        )
