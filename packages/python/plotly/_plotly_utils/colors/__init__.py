@@ -831,8 +831,8 @@ def get_colorscale(name):
         raise exceptions.PlotlyError(f"Colorscale {name} is not a built-in scale.")
 
     if should_reverse:
-        return colorscale[::-1]
-    return colorscale
+        colorscale = colorscale[::-1]
+    return make_colorscale(colorscale)
 
 
 def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rgb"):
