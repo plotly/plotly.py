@@ -197,7 +197,7 @@ The following trace types are their own subplots and support a domain attribute:
 * [`parcoords`](/python/parallel-coordinates-plot/) and [`parcats`](/python/parallel-categories-diagram/): continuous and categorical multidimensional figures with [parallel coordinates](/python/parallel-coordinates-plot/) and [parallel sets](/python/parallel-categories-diagram/)
 * [`sankey`](/python/sankey-diagram/): [flow diagrams](/python/sankey-diagram/)
 * [`table`](/python/table/): [text-based tables](/python/table/)
-* [`indicator`](http://indicators/): big numbers, [gauges](/python/gauge-charts/), and [bullet charts](/python/bullet-charts/)
+* [`indicator`](/python/indicator/): big numbers, [gauges](/python/gauge-charts/), and [bullet charts](/python/bullet-charts/)
 
 ### Carpet Trace Types and Subplots
 
