@@ -8,7 +8,6 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             no_blank=kwargs.pop("no_blank", True),
-            role=kwargs.pop("role", "style"),
             strict=kwargs.pop("strict", True),
             **kwargs
         )

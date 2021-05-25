@@ -53,6 +53,7 @@ class Contour(_BaseTraceType):
         "x0",
         "xaxis",
         "xcalendar",
+        "xhoverformat",
         "xperiod",
         "xperiod0",
         "xperiodalignment",
@@ -62,6 +63,7 @@ class Contour(_BaseTraceType):
         "y0",
         "yaxis",
         "ycalendar",
+        "yhoverformat",
         "yperiod",
         "yperiod0",
         "yperiodalignment",
@@ -301,6 +303,12 @@ class Contour(_BaseTraceType):
                     a.contour.colorbar.tickformatstopdefaults),
                     sets the default property values to use for
                     elements of contour.colorbar.tickformatstops
+                ticklabeloverflow
+                    Determines how we handle tick labels that would
+                    overflow either the graph div or the domain of
+                    the axis. The default value for inside tick
+                    labels is *hide past domain*. In other cases
+                    the default is *hide past div*.
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen
@@ -1474,6 +1482,32 @@ class Contour(_BaseTraceType):
     def xcalendar(self, val):
         self["xcalendar"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xperiod
     # -------
     @property
@@ -1675,6 +1709,32 @@ class Contour(_BaseTraceType):
     def ycalendar(self, val):
         self["ycalendar"] = val
 
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
+
     # yperiod
     # -------
     @property
@@ -1834,10 +1894,11 @@ class Contour(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rule using d3 formatting mini-
-        languages which are very similar to those in Python. See:
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format
+        Sets the hover text formatting rule for `z`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format By default the
+        values are formatted using generic number format.
     
         The 'zhoverformat' property is a string and must be specified as:
           - A string
@@ -2153,6 +2214,14 @@ class Contour(_BaseTraceType):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2191,6 +2260,14 @@ class Contour(_BaseTraceType):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2224,10 +2301,12 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -2292,6 +2371,7 @@ class Contour(_BaseTraceType):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -2301,6 +2381,7 @@ class Contour(_BaseTraceType):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -2536,6 +2617,14 @@ class Contour(_BaseTraceType):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2574,6 +2663,14 @@ class Contour(_BaseTraceType):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2607,10 +2704,12 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -2833,6 +2932,10 @@ an instance of :class:`plotly.graph_objs.Contour`"""
         _v = xcalendar if xcalendar is not None else _v
         if _v is not None:
             self["xcalendar"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xperiod", None)
         _v = xperiod if xperiod is not None else _v
         if _v is not None:
@@ -2869,6 +2972,10 @@ an instance of :class:`plotly.graph_objs.Contour`"""
         _v = ycalendar if ycalendar is not None else _v
         if _v is not None:
             self["ycalendar"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("yperiod", None)
         _v = yperiod if yperiod is not None else _v
         if _v is not None:

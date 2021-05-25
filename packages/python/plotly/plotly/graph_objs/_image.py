@@ -42,6 +42,7 @@ class Image(_BaseTraceType):
         "z",
         "zmax",
         "zmin",
+        "zsmooth",
         "zsrc",
     }
 
@@ -845,6 +846,28 @@ class Image(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zsmooth
+    # -------
+    @property
+    def zsmooth(self):
+        """
+        Picks a smoothing algorithm used to smooth `z` data. This only
+        applies for image traces that use the `source` attribute.
+    
+        The 'zsmooth' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['fast', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["zsmooth"]
+
+    @zsmooth.setter
+    def zsmooth(self, val):
+        self["zsmooth"] = val
+
     # zsrc
     # ----
     @property
@@ -1036,6 +1059,10 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zsmooth
+            Picks a smoothing algorithm used to smooth `z` data.
+            This only applies for image traces that use the
+            `source` attribute.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -1076,6 +1103,7 @@ class Image(_BaseTraceType):
         z=None,
         zmax=None,
         zmin=None,
+        zsmooth=None,
         zsrc=None,
         **kwargs
     ):
@@ -1254,6 +1282,10 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zsmooth
+            Picks a smoothing algorithm used to smooth `z` data.
+            This only applies for image traces that use the
+            `source` attribute.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -1419,6 +1451,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zsmooth", None)
+        _v = zsmooth if zsmooth is not None else _v
+        if _v is not None:
+            self["zsmooth"] = _v
         _v = arg.pop("zsrc", None)
         _v = zsrc if zsrc is not None else _v
         if _v is not None:

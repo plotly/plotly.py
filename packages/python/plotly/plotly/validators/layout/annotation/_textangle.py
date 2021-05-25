@@ -9,6 +9,5 @@ class TextangleValidator(_plotly_utils.basevalidators.AngleValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc+arraydraw"),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

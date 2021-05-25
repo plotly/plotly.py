@@ -3,6 +3,7 @@ import sys
 if sys.version_info < (3, 7):
     from ._showscale import ShowscaleValidator
     from ._reversescale import ReversescaleValidator
+    from ._pattern import PatternValidator
     from ._opacitysrc import OpacitysrcValidator
     from ._opacity import OpacityValidator
     from ._line import LineValidator
@@ -25,6 +26,7 @@ else:
         [
             "._showscale.ShowscaleValidator",
             "._reversescale.ReversescaleValidator",
+            "._pattern.PatternValidator",
             "._opacitysrc.OpacitysrcValidator",
             "._opacity.OpacityValidator",
             "._line.LineValidator",

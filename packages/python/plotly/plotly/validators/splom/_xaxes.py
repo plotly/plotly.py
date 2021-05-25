@@ -16,6 +16,5 @@ class XaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     "editType": "plot",
                 },
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

@@ -1268,10 +1268,10 @@ class Aaxis(_BaseTraceHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see: https://github.com/d3/d3-3.x-api-
         reference/blob/master/Formatting.md#d3_format And for dates
-        see:  We add one item to d3's date formatter: "%{n}f" for
-        fractional seconds with n digits. For example, *2016-10-13
-        09:15:23.456* with tickformat "%H~%M~%S.%2f" would display
-        "09~15~23.46"
+        see: https://github.com/d3/d3-time-format#locale_format We add
+        one item to d3's date formatter: "%{n}f" for fractional seconds
+        with n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -1807,10 +1807,11 @@ class Aaxis(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see:  We add one item to d3's date formatter:
-            "%{n}f" for fractional seconds with n digits. For
-            example, *2016-10-13 09:15:23.456* with tickformat
-            "%H~%M~%S.%2f" would display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
             A tuple of :class:`plotly.graph_objects.carpet.aaxis.Ti
             ckformatstop` instances or dicts with compatible
@@ -2088,10 +2089,11 @@ class Aaxis(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see:  We add one item to d3's date formatter:
-            "%{n}f" for fractional seconds with n digits. For
-            example, *2016-10-13 09:15:23.456* with tickformat
-            "%H~%M~%S.%2f" would display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
             A tuple of :class:`plotly.graph_objects.carpet.aaxis.Ti
             ckformatstop` instances or dicts with compatible

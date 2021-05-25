@@ -30,12 +30,10 @@ if sys.version_info < (3, 7):
     from ._selectionrevision import SelectionrevisionValidator
     from ._selectdirection import SelectdirectionValidator
     from ._scene import SceneValidator
-    from ._radialaxis import RadialaxisValidator
     from ._polar import PolarValidator
     from ._plot_bgcolor import Plot_BgcolorValidator
     from ._piecolorway import PiecolorwayValidator
     from ._paper_bgcolor import Paper_BgcolorValidator
-    from ._orientation import OrientationValidator
     from ._newshape import NewshapeValidator
     from ._modebar import ModebarValidator
     from ._metasrc import MetasrcValidator
@@ -65,7 +63,6 @@ if sys.version_info < (3, 7):
     from ._extendfunnelareacolors import ExtendfunnelareacolorsValidator
     from ._editrevision import EditrevisionValidator
     from ._dragmode import DragmodeValidator
-    from ._direction import DirectionValidator
     from ._datarevision import DatarevisionValidator
     from ._computed import ComputedValidator
     from ._colorway import ColorwayValidator
@@ -84,7 +81,6 @@ if sys.version_info < (3, 7):
     from ._autosize import AutosizeValidator
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
-    from ._angularaxis import AngularaxisValidator
     from ._activeshape import ActiveshapeValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -122,12 +118,10 @@ else:
             "._selectionrevision.SelectionrevisionValidator",
             "._selectdirection.SelectdirectionValidator",
             "._scene.SceneValidator",
-            "._radialaxis.RadialaxisValidator",
             "._polar.PolarValidator",
             "._plot_bgcolor.Plot_BgcolorValidator",
             "._piecolorway.PiecolorwayValidator",
             "._paper_bgcolor.Paper_BgcolorValidator",
-            "._orientation.OrientationValidator",
             "._newshape.NewshapeValidator",
             "._modebar.ModebarValidator",
             "._metasrc.MetasrcValidator",
@@ -157,7 +151,6 @@ else:
             "._extendfunnelareacolors.ExtendfunnelareacolorsValidator",
             "._editrevision.EditrevisionValidator",
             "._dragmode.DragmodeValidator",
-            "._direction.DirectionValidator",
             "._datarevision.DatarevisionValidator",
             "._computed.ComputedValidator",
             "._colorway.ColorwayValidator",
@@ -176,7 +169,6 @@ else:
             "._autosize.AutosizeValidator",
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
-            "._angularaxis.AngularaxisValidator",
             "._activeshape.ActiveshapeValidator",
         ],
     )

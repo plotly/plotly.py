@@ -283,6 +283,16 @@ class Histogram2DcontourValidator(_plotly_utils.basevalidators.CompoundValidator
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
@@ -310,6 +320,16 @@ class Histogram2DcontourValidator(_plotly_utils.basevalidators.CompoundValidator
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .
@@ -322,11 +342,13 @@ class Histogram2DcontourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Defaults to `false` when `zmin` and `zmax` are
                 set by the user.
             zhoverformat
-                Sets the hover text formatting rule using d3
-                formatting mini-languages which are very
-                similar to those in Python. See:
+                Sets the hover text formatting rule for `z`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
+                By default the values are formatted using
+                generic number format.
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if

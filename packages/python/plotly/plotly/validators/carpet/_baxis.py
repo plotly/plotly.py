@@ -176,7 +176,9 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 similar to those in Python. For numbers, see:
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                And for dates see:  We add one item to d3's
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format We add one item to d3's
                 date formatter: "%{n}f" for fractional seconds
                 with n digits. For example, *2016-10-13
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"

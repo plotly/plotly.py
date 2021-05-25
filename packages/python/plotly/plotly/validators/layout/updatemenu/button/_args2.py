@@ -18,6 +18,5 @@ class Args2Validator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"valType": "any", "editType": "arraydraw"},
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )
