@@ -61,8 +61,10 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         # We catch false positive cases (e.g. strings such as titles, labels etc.)
         # but this is ok since the intention is to skip the decoding / reencoding
         # step when it's completely safe
+
         if not ("NaN" in encoded_o or "Infinity" in encoded_o):
             return encoded_o
+
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
