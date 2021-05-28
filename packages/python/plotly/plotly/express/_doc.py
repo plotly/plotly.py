@@ -449,7 +449,7 @@ docs = dict(
         "str (default `'group'`)",
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, boxes are on drawn top of one another.",
-        "In `'group'` mode, baxes are placed beside each other.",
+        "In `'group'` mode, boxes are placed beside each other.",
     ],
     violinmode=[
         "str (default `'group'`)",
