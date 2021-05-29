@@ -475,7 +475,7 @@ def create_violin(
         of param colors. This means colors must be a list with at least 2
         colors in it (Plotly colorscales are accepted since they map to a
         list of two rgb colors). Default = False
-    :param (dict) group_stats: a dictioanry where each key is a unique
+    :param (dict) group_stats: a dictionary where each key is a unique
         value from the group_header column in data. Each value must be a
         number and will be used to color the violin plots if a colorscale
         is being used.

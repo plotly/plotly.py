@@ -45,7 +45,7 @@ In the same way as the X or Y position of a mark in cartesian coordinates can be
 This document explains the following discrete-color-related concepts:
 
 - **color sequences** are lists of colors to be mapped onto discrete data values. No interpolation occurs when using color sequences, unlike with [continuous color scales](/python/colorscales/), and each color is used as-is. Color sequence defaults depend on the `layout.colorway` attribute of the active [template](/python/templates/), and can be explicitly specified using the `color_discrete_sequence` argument for many [Plotly Express](/python/plotly-express/) functions.
-- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](/python/legend/) under the `layout.legend` attribute. Legends are the discrete equivalent of [continous color bars](/python/colorscales/)
+- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](/python/legend/) under the `layout.legend` attribute. Legends are the discrete equivalent of [continuous color bars](/python/colorscales/)
 
 ### Discrete Color with Plotly Express
 
@@ -68,7 +68,7 @@ The `size` column, however, contains numbers:
 import plotly.express as px
 df = px.data.tips()
 fig = px.scatter(df, x="total_bill", y="tip", color="size",
-                 title="Numeric 'size' values mean continous color")
+                 title="Numeric 'size' values mean continuous color")
 
 fig.show()
 ```
@@ -94,7 +94,7 @@ df["size"] = df["size"].astype(str) #convert to string
 df["size"] = df["size"].astype(float) #convert back to numeric
 
 fig = px.scatter(df, x="total_bill", y="tip", color="size",
-                 title="Numeric 'size' values mean continous color")
+                 title="Numeric 'size' values mean continuous color")
 
 fig.show()
 ```

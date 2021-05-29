@@ -53,7 +53,7 @@ def to_scalar_or_list(v):
         return v
 
 
-def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
+def copy_to_readonly_numpy_array_or_list(v, kind=None, force_numeric=False):
     """
     Convert an array-like value into a read-only numpy array
 
@@ -89,7 +89,13 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
 
     # u: unsigned int, i: signed int, f: float
     numeric_kinds = {"u", "i", "f"}
-    kind_default_dtypes = {"u": "uint32", "i": "int32", "f": "float64", "O": "object"}
+    kind_default_dtypes = {
+        "u": "uint32",
+        "i": "int32",
+        "f": "float64",
+        "O": "object",
+        "U": "U",
+    }
 
     # Handle pandas Series and Index objects
     if pd and isinstance(v, (pd.Series, pd.Index)):
@@ -103,21 +109,22 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
+    elif pd and isinstance(v, pd.DataFrame) and len(set(v.dtypes)) == 1:
+        dtype = v.dtypes.tolist()[0]
+        if dtype.kind in numeric_kinds:
+            v = v.values
+        elif dtype.kind == "M":
+            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
         if is_numpy_convertable(v):
-            return copy_to_readonly_numpy_array(
+            return copy_to_readonly_numpy_array_or_list(
                 np.array(v), kind=kind, force_numeric=force_numeric
             )
         else:
             # v is not homogenous array
-            v_list = [to_scalar_or_list(e) for e in v]
-
-            # Lookup dtype for requested kind, if any
-            dtype = kind_default_dtypes.get(first_kind, None)
-
-            # construct new array from list
-            new_v = np.array(v_list, order="C", dtype=dtype)
+            return [to_scalar_or_list(e) for e in v]
     elif v.dtype.kind in numeric_kinds:
         # v is a homogenous numeric array
         if kind and v.dtype.kind not in kind:
@@ -128,6 +135,12 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         else:
             # Either no kind was requested or requested kind is satisfied
             new_v = np.ascontiguousarray(v.copy())
+    elif v.dtype.kind == "O":
+        if kind:
+            dtype = kind_default_dtypes.get(first_kind, None)
+            return np.array(v, dtype=dtype)
+        else:
+            return v.tolist()
     else:
         # v is a non-numeric homogenous array
         new_v = v.copy()
@@ -142,12 +155,12 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     if "U" not in kind:
         # Force non-numeric arrays to have object type
         # --------------------------------------------
-        # Here we make sure that non-numeric arrays have the object
-        # datatype. This works around cases like np.array([1, 2, '3']) where
+        # Here we make sure that non-numeric arrays become lists
+        # This works around cases like np.array([1, 2, '3']) where
         # numpy converts the integers to strings and returns array of dtype
         # '<U21'
-        if new_v.dtype.kind not in ["u", "i", "f", "O"]:
-            new_v = np.array(v, dtype="object")
+        if new_v.dtype.kind not in ["u", "i", "f", "O", "M"]:
+            return v.tolist()
 
     # Set new array to be read-only
     # -----------------------------
@@ -184,7 +197,7 @@ def is_homogeneous_array(v):
             if v_numpy.shape == ():
                 return False
             else:
-                return True
+                return True  # v_numpy.dtype.kind in ["u", "i", "f", "M", "U"]
     return False
 
 
@@ -386,7 +399,7 @@ class DataArrayValidator(BaseValidator):
             # Pass None through
             pass
         elif is_homogeneous_array(v):
-            v = copy_to_readonly_numpy_array(v)
+            v = copy_to_readonly_numpy_array_or_list(v)
         elif is_simple_array(v):
             v = to_scalar_or_list(v)
         else:
@@ -591,7 +604,7 @@ class EnumeratedValidator(BaseValidator):
                 self.raise_invalid_elements(invalid_els[:10])
 
             if is_homogeneous_array(v):
-                v = copy_to_readonly_numpy_array(v)
+                v = copy_to_readonly_numpy_array_or_list(v)
             else:
                 v = to_scalar_or_list(v)
         else:
@@ -747,7 +760,7 @@ class NumberValidator(BaseValidator):
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
             try:
-                v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
+                v_array = copy_to_readonly_numpy_array_or_list(v, force_numeric=True)
             except (ValueError, TypeError, OverflowError):
                 self.raise_invalid_val(v)
 
@@ -874,7 +887,7 @@ class IntegerValidator(BaseValidator):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
-            v_array = copy_to_readonly_numpy_array(
+            v_array = copy_to_readonly_numpy_array_or_list(
                 v, kind=("i", "u"), force_numeric=True
             )
 
@@ -1035,26 +1048,7 @@ class StringValidator(BaseValidator):
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els)
 
-            if is_homogeneous_array(v):
-                np = get_module("numpy")
-
-                # If not strict, let numpy cast elements to strings
-                v = copy_to_readonly_numpy_array(v, kind="U")
-
-                # Check no_blank
-                if self.no_blank:
-                    invalid_els = v[v == ""][:10].tolist()
-                    if invalid_els:
-                        self.raise_invalid_elements(invalid_els)
-
-                # Check values
-                if self.values:
-                    invalid_inds = np.logical_not(np.isin(v, self.values))
-                    invalid_els = v[invalid_inds][:10].tolist()
-                    if invalid_els:
-                        self.raise_invalid_elements(invalid_els)
-
-            elif is_simple_array(v):
+            if is_simple_array(v) or is_homogeneous_array(v):
                 if not self.strict:
                     v = [StringValidator.to_str_or_unicode_or_none(e) for e in v]
 
@@ -1331,8 +1325,12 @@ class ColorValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-            v = copy_to_readonly_numpy_array(v)
-            if self.numbers_allowed() and v.dtype.kind in ["u", "i", "f"]:
+            v = copy_to_readonly_numpy_array_or_list(v)
+            if (
+                not isinstance(v, list)
+                and self.numbers_allowed()
+                and v.dtype.kind in ["u", "i", "f"]
+            ):
                 # Numbers are allowed and we have an array of numbers.
                 # All good
                 pass
@@ -1346,9 +1344,9 @@ class ColorValidator(BaseValidator):
 
                 # ### Check that elements have valid colors types ###
                 elif self.numbers_allowed() or invalid_els:
-                    v = copy_to_readonly_numpy_array(validated_v, kind="O")
+                    v = copy_to_readonly_numpy_array_or_list(validated_v, kind="O")
                 else:
-                    v = copy_to_readonly_numpy_array(validated_v, kind="U")
+                    v = copy_to_readonly_numpy_array_or_list(validated_v, kind="U")
         elif self.array_ok and is_simple_array(v):
             validated_v = [self.validate_coerce(e, should_raise=False) for e in v]
 
@@ -1863,7 +1861,7 @@ class FlaglistValidator(BaseValidator):
                 self.raise_invalid_elements(invalid_els)
 
             if is_homogeneous_array(v):
-                v = copy_to_readonly_numpy_array(validated_v, kind="U")
+                v = copy_to_readonly_numpy_array_or_list(validated_v, kind="U")
             else:
                 v = to_scalar_or_list(v)
         else:
@@ -1911,7 +1909,7 @@ class AnyValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-            v = copy_to_readonly_numpy_array(v, kind="O")
+            v = copy_to_readonly_numpy_array_or_list(v, kind="O")
         elif self.array_ok and is_simple_array(v):
             v = to_scalar_or_list(v)
         return v

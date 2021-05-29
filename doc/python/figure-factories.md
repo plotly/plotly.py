@@ -35,7 +35,7 @@ jupyter:
 
 #### `plotly.figure_factory`
 
-The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](/python/graph-objects/) and prior to the existence of [Plotly Express](/python/plotly-express/). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unecessary and are therefore deprecated as "legacy", but remain in the module for backwards-compatibility reasons.
+The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](/python/graph-objects/) and prior to the existence of [Plotly Express](/python/plotly-express/). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and are therefore deprecated as "legacy", but remain in the module for backwards-compatibility reasons.
 
 The following types of plots are still difficult to create with Graph Objects or Plotly Express and therefore the corresponding Figure Factories are *not* deprecated:
 

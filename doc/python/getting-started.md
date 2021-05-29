@@ -42,7 +42,7 @@ The [`plotly` Python library](/python/) is an interactive, [open-source](/python
 
 Built on top of the Plotly JavaScript library ([plotly.js](https://plotly.com/javascript/)), `plotly` enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash. The `plotly` Python library is sometimes referred to as "plotly.py" to differentiate it from the JavaScript library.
 
-Thanks to deep integration with the [orca](https://github.com/plotly/orca) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
+Thanks to deep integration with our [Kaleido](https://medium.com/plotly/introducing-kaleido-b03c4b7b1d81) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
 
 This Getting Started guide explains how to install `plotly` and related optional pages. Once you've installed, you can use our documentation in three main ways:
 
@@ -56,16 +56,16 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 
 ### Installation
 
-`plotly` may be installed using pip...
+`plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==4.14.1
+$ pip install plotly==4.14.3
 ```
 
-or conda.
+or `conda`:
 
 ```
-$ conda install -c plotly plotly=4.14.1
+$ conda install -c plotly plotly=4.14.3
 ```
 
 This package contains everything you need to write figures to standalone HTML files.
@@ -98,16 +98,16 @@ IFrame(snippet_url + 'getting-started', width='100%', height=630)
 #### Jupyter Notebook Support
 
 For use in the classic [Jupyter Notebook](https://jupyter.org/), install the `notebook` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-$ pip install "notebook>=5.3" "ipywidgets>=7.2"
+$ pip install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
-or conda.
+or `conda`:
 
 ```
-$ conda install "notebook>=5.3" "ipywidgets>=7.2"
+$ conda install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
 These packages contain everything you need to run a Jupyter notebook...
@@ -138,29 +138,29 @@ fig
 
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
-#### JupyterLab Support (Python 3.5+)
+#### JupyterLab Support
 
 For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-$ pip install jupyterlab "ipywidgets>=7.5"
+$ pip install jupyterlab "ipywidgets>=7.6"
 ```
 
-or conda.
+or `conda`:
 
 ```
-$ conda install jupyterlab "ipywidgets=7.5"
+$ conda install jupyterlab "ipywidgets>=7.6"
 ```
 
-Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
+For JupyterLab 2 or earlier, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
 # JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.14.1
+jupyter labextension install jupyterlab-plotly@4.14.3
 
 # OPTIONAL: Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.1
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.3
 ```
 
 These packages contain everything you need to run JupyterLab...

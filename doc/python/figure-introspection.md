@@ -35,7 +35,7 @@ jupyter:
 
 ### The Figure Lifecycle
 
-As explained in the [Figure Data Structure documentation](/python/figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](/python/plotly-express/) or [Graph Objects](/python/graph-objects/) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.
+As explained in the [Figure Data Structure documentation](/python/figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](/python/plotly-express/) or [Graph Objects](/python/graph-objects/)) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.
 
 As part of this rendering process, Plotly.js will determine, based on the attributes that have been set, which other attributes require values in order to draw the figure. Plotly.js will then apply either static or dynamic defaults to all of the remaining required attributes and render the figure. A good example of a static default would be the text font size: if unspecified, the default value is always the same. A good example of a dynamic default would be the range of an axis: if unspecified, the default will be computed based on the range of the data in traces associated with that axis.
 
@@ -91,7 +91,7 @@ Now let's look at the "full" figure after Plotly.js has computed the default val
 
 > Heads-up: the full figure is quite long and intimidating, and this page is meant to help demystify things so **please read on**!
 
-Please also note that the `.full_figure_for_development()` function is really meant for interactive learning and debugging, rather than production use, hence its name and the warning it produces by default, which you can see below, and which can be supressed with `warn=False`.
+Please also note that the `.full_figure_for_development()` function is really meant for interactive learning and debugging, rather than production use, hence its name and the warning it produces by default, which you can see below, and which can be suppressed with `warn=False`.
 
 ```python
 full_fig = fig.full_figure_for_development()

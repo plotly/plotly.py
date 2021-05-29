@@ -12,7 +12,7 @@ jupyter:
     language: python
     name: python2
   plotly:
-    description: How to 3D Parameteric Plots in Python
+    description: How to 3D Parametric Plots in Python
     display_as: 3d_charts
     language: python
     layout: base
@@ -80,7 +80,7 @@ py.iplot(fig, filename='Parametric_plot')
 ```
 
 <!-- #region {"deletable": true, "editable": true} -->
-#### Parameteric Plot with Colorscale
+#### Parametric Plot with Colorscale
 <!-- #endregion -->
 
 ```python deletable=true editable=true

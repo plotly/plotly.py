@@ -126,7 +126,7 @@ def test_rejection_by_element_aok(val, validator_aok):
         [],
         ["bar12"],
         ("foo", "bar012", "baz"),
-        np.array([]),
+        np.array([], dtype="object"),
         np.array(["bar12"]),
         np.array(["foo", "bar012", "baz"]),
     ],
@@ -135,7 +135,7 @@ def test_acceptance_aok(val, validator_aok_re):
     # Values should be accepted and returned unchanged
     coerce_val = validator_aok_re.validate_coerce(val)
     if isinstance(val, (np.ndarray, pd.Series)):
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
+        assert coerce_val == list(np.array(val))
     elif isinstance(val, (list, tuple)):
         assert validator_aok_re.present(coerce_val) == tuple(val)
     else:

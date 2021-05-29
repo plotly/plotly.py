@@ -16,6 +16,8 @@ def validate_coerce_fig_to_dict(fig, validate):
             fig_dict = plotly.graph_objs.Figure(fig).to_plotly_json()
         else:
             fig_dict = fig
+    elif hasattr(fig, "to_plotly_json"):
+        fig_dict = fig.to_plotly_json()
     else:
         raise ValueError(
             """

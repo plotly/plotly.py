@@ -61,8 +61,10 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         # We catch false positive cases (e.g. strings such as titles, labels etc.)
         # but this is ok since the intention is to skip the decoding / reencoding
         # step when it's completely safe
+
         if not ("NaN" in encoded_o or "Infinity" in encoded_o):
             return encoded_o
+
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
@@ -184,8 +186,13 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         if obj is numpy.ma.core.masked:
             return float("nan")
-        else:
-            raise NotEncodable
+        elif isinstance(obj, numpy.ndarray) and obj.dtype.kind == "M":
+            try:
+                return numpy.datetime_as_string(obj).tolist()
+            except TypeError:
+                pass
+
+        raise NotEncodable
 
     @staticmethod
     def encode_as_datetime(obj):

@@ -137,3 +137,77 @@ class TestColors(TestCase):
         self.assertRaisesRegexp(
             PlotlyError, pattern2, colors.make_colorscale, color_list2, scale
         )
+
+    def test_get_colorscale(self):
+
+        # test for incorrect input type
+        pattern = "Name argument have to be a string."
+        name = colors.sequential.haline
+
+        self.assertRaisesRegexp(PlotlyError, pattern, colors.get_colorscale, name)
+
+        # test for non-existing colorscale
+        pattern = r"Colorscale \S+ is not a built-in scale."
+        name = "foo"
+        self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
+
+        # test non-capitalised access
+        self.assertEqual(
+            colors.make_colorscale(colors.sequential.haline),
+            colors.get_colorscale("haline"),
+        )
+        # test capitalised access
+        self.assertEqual(
+            colors.make_colorscale(colors.diverging.Earth),
+            colors.get_colorscale("Earth"),
+        )
+        # test accessing non-capitalised scale with capitalised name
+        self.assertEqual(
+            colors.make_colorscale(colors.cyclical.mrybm),
+            colors.get_colorscale("Mrybm"),
+        )
+        # test accessing capitalised scale with non-capitalised name
+        self.assertEqual(
+            colors.make_colorscale(colors.sequential.Viridis),
+            colors.get_colorscale("viridis"),
+        )
+        # test accessing reversed scale
+        self.assertEqual(
+            colors.make_colorscale(colors.diverging.Portland_r),
+            colors.get_colorscale("portland_r"),
+        )
+
+    def test_sample_colorscale(self):
+
+        # test that sampling a colorscale at the defined points returns the same
+        defined_colors = colors.sequential.Inferno
+        sampled_colors = colors.sample_colorscale(
+            defined_colors, len(defined_colors), colortype="rgb"
+        )
+        defined_colors_rgb = colors.convert_colors_to_same_type(
+            defined_colors, colortype="rgb"
+        )[0]
+        self.assertEqual(sampled_colors, defined_colors_rgb)
+
+        # test sampling an easy colorscale that goes [red, green, blue]
+        defined_colors = ["rgb(255,0,0)", "rgb(0,255,0)", "rgb(0,0,255)"]
+        samplepoints = [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0]
+        expected_output = [
+            (1.0, 0.0, 0.0),
+            (0.75, 0.25, 0.0),
+            (0.5, 0.5, 0.0),
+            (0.25, 0.75, 0.0),
+            (0.0, 1.0, 0.0),
+            (0.0, 0.75, 0.25),
+            (0.0, 0.5, 0.5),
+            (0.0, 0.25, 0.75),
+            (0.0, 0.0, 1.0),
+        ]
+        output = colors.sample_colorscale(
+            defined_colors, samplepoints, colortype="tuple"
+        )
+        self.assertEqual(expected_output, output)
+
+        self.assertEqual(
+            colors.sample_colorscale("TuRbId_r", 12), colors.sequential.turbid_r,
+        )

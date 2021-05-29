@@ -43,7 +43,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             cheaterslope
                 The shift applied to each successive row of
                 data in creating a cheater plot. Only used if
-                `x` is been ommitted.
+                `x` is been omitted.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -134,7 +134,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
             x
                 A two dimensional array of x coordinates at
-                each carpet point. If ommitted, the plot is a
+                each carpet point. If omitted, the plot is a
                 cheater plot and the xaxis is hidden by
                 default.
             xaxis

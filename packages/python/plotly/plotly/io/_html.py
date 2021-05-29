@@ -1,13 +1,16 @@
 import uuid
-import json
 import os
+from pathlib import Path
 import webbrowser
 
 import six
 
+from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly import utils
+
+_json = get_module("json")
 
 
 # Build script to set global PlotlyConfig object. This must execute before
@@ -132,6 +135,7 @@ def to_html(
     str
         Representation of figure as an HTML div string
     """
+    from plotly.io.json import to_json_plotly
 
     # ## Validate figure ##
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
@@ -140,15 +144,11 @@ def to_html(
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    jdata = json.dumps(
-        fig_dict.get("data", []), cls=utils.PlotlyJSONEncoder, sort_keys=True
-    )
-    jlayout = json.dumps(
-        fig_dict.get("layout", {}), cls=utils.PlotlyJSONEncoder, sort_keys=True
-    )
+    jdata = to_json_plotly(fig_dict.get("data", []))
+    jlayout = to_json_plotly(fig_dict.get("layout", {}))
 
     if fig_dict.get("frames", None):
-        jframes = json.dumps(fig_dict.get("frames", []), cls=utils.PlotlyJSONEncoder)
+        jframes = to_json_plotly(fig_dict.get("frames", []))
     else:
         jframes = None
 
@@ -224,7 +224,7 @@ def to_html(
 
         if auto_play:
             if animation_opts:
-                animation_opts_arg = ", " + json.dumps(animation_opts)
+                animation_opts_arg = ", " + _json.dumps(animation_opts)
             else:
                 animation_opts_arg = ""
             then_animate = """.then(function(){{
@@ -234,7 +234,7 @@ def to_html(
             )
 
     # Serialize config dict to JSON
-    jconfig = json.dumps(config)
+    jconfig = _json.dumps(config)
 
     script = """\
                 if (document.getElementById("{id}")) {{\
@@ -410,7 +410,7 @@ def write_html(
         Figure object or dict representing a figure
     file: str or writeable
         A string representing a local file path or a writeable object
-        (e.g. an open file descriptor)
+        (e.g. a pathlib.Path object or an open file descriptor)
     config: dict or None (default None)
         Plotly.js figure config options
     auto_play: bool (default=True)
@@ -436,11 +436,6 @@ def write_html(
         HTML files generated with this option are about 3MB smaller than those
         generated with include_plotlyjs=True, but they require an active
         internet connection in order to load the plotly.js library.
-
-        If 'directory', a script tag is included that references an external
-        plotly.min.js bundle that is assumed to reside in the same
-        directory as the HTML file. If `file` is a string to a local file path
-        and `full_html` is True then
 
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
@@ -535,24 +530,31 @@ def write_html(
     )
 
     # Check if file is a string
-    file_is_str = isinstance(file, six.string_types)
+    if isinstance(file, six.string_types):
+        # Use the standard pathlib constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):  # PurePath is the most general pathlib object.
+        # `file` is already a pathlib object.
+        path = file
+    else:
+        # We could not make a pathlib object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
 
     # Write HTML string
-    if file_is_str:
-        with open(file, "w") as f:
-            f.write(html_str)
+    if path is not None:
+        path.write_text(html_str)
     else:
         file.write(html_str)
 
     # Check if we should copy plotly.min.js to output directory
-    if file_is_str and full_html and include_plotlyjs == "directory":
-        bundle_path = os.path.join(os.path.dirname(file), "plotly.min.js")
+    if path is not None and full_html and include_plotlyjs == "directory":
+        bundle_path = path.parent / "plotly.min.js"
 
-        if not os.path.exists(bundle_path):
-            with open(bundle_path, "w") as f:
-                f.write(get_plotlyjs())
+        if not bundle_path.exists():
+            bundle_path.write_text(get_plotlyjs())
 
     # Handle auto_open
-    if file_is_str and full_html and auto_open:
-        url = "file://" + os.path.abspath(file)
+    if path is not None and full_html and auto_open:
+        url = path.absolute().as_uri()
         webbrowser.open(url)

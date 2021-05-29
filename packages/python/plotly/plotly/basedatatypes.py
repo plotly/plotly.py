@@ -3297,6 +3297,7 @@ Invalid property path '{key_path_str}' for layout
         # Frame key is only added if there are any frames
         res = {"data": data, "layout": layout}
         frames = deepcopy([frame._props for frame in self._frame_objs])
+
         if frames:
             res["frames"] = frames
 
@@ -3413,6 +3414,13 @@ Invalid property path '{key_path_str}' for layout
         remove_uids: bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for an encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
+
         Returns
         -------
         str
@@ -3468,6 +3476,13 @@ Invalid property path '{key_path_str}' for layout
 
         remove_uids: bool (default True)
             True if trace UIDs should be omitted from the JSON representation
+
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for an encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
 
         Returns
         -------
@@ -3578,7 +3593,7 @@ Invalid property path '{key_path_str}' for layout
         ----------
         file: str or writeable
             A string representing a local file path or a writeable object
-            (e.g. an open file descriptor)
+            (e.g. a pathlib.Path object or an open file descriptor)
         config: dict or None (default None)
             Plotly.js figure config options
         auto_play: bool (default=True)
@@ -3751,7 +3766,7 @@ Invalid property path '{key_path_str}' for layout
         ----------
         file: str or writeable
             A string representing a local file path or a writeable object
-            (e.g. an open file descriptor)
+            (e.g. a pathlib.Path object or an open file descriptor)
 
         format: str or None
             The desired image format. One of

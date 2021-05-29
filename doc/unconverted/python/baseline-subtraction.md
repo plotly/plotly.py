@@ -60,7 +60,7 @@ py.iplot(table, filename='milk-production-dataframe')
 ```
 
 #### Plot with Baseline
-To subtact a baseline estimate from our data, it is a good idea to first we must first calculate the baseline values then plot the data with the baseline drawn in.
+To subtract a baseline estimate from our data, it is a good idea to first we must first calculate the baseline values then plot the data with the baseline drawn in.
 
 ```python
 baseline_values = peakutils.baseline(time_series)

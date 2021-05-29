@@ -9,6 +9,7 @@ import math
 import decimal
 from datetime import datetime as dt
 from unittest import TestCase
+from time import time
 import pytest
 
 import numpy as np
@@ -20,7 +21,9 @@ import os
 import base64
 
 from plotly import optional_imports, utils
+import plotly.graph_objects as go
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
+from plotly.utils import get_by_path
 from PIL import Image
 
 
@@ -257,6 +260,63 @@ class TestJSONEncoder(TestCase):
         j6 = _json.dumps(ts.index, cls=utils.PlotlyJSONEncoder)
         assert j6 == '["2011-01-01T00:00:00", "2011-01-01T01:00:00"]'
 
+    def test_encode_customdata_datetime_series(self):
+        df = pd.DataFrame(dict(t=pd.to_datetime(["2010-01-01", "2010-01-02"])))
+
+        # 1D customdata
+        fig = Figure(
+            Scatter(x=df["t"], customdata=df["t"]), layout=dict(template="none")
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":["2010-01-01T00:00:00","2010-01-02T00:00:00"]'
+            )
+        )
+
+    def test_encode_customdata_datetime_homogenous_dataframe(self):
+        df = pd.DataFrame(
+            dict(
+                t1=pd.to_datetime(["2010-01-01", "2010-01-02"]),
+                t2=pd.to_datetime(["2011-01-01", "2011-01-02"]),
+            )
+        )
+        # 2D customdata
+        fig = Figure(
+            Scatter(x=df["t1"], customdata=df[["t1", "t2"]]),
+            layout=dict(template="none"),
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":'
+                '[["2010-01-01T00:00:00","2011-01-01T00:00:00"],'
+                '["2010-01-02T00:00:00","2011-01-02T00:00:00"]'
+            )
+        )
+
+    def test_encode_customdata_datetime_inhomogenous_dataframe(self):
+        df = pd.DataFrame(
+            dict(t=pd.to_datetime(["2010-01-01", "2010-01-02"]), v=np.arange(2),)
+        )
+        # 2D customdata
+        fig = Figure(
+            Scatter(x=df["t"], customdata=df[["t", "v"]]), layout=dict(template="none")
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":'
+                '[["2010-01-01T00:00:00",0],["2010-01-02T00:00:00",1]]'
+            )
+        )
+
     def test_numpy_masked_json_encoding(self):
         l = [1, 2, np.ma.core.masked]
         j1 = _json.dumps(l, cls=utils.PlotlyJSONEncoder)
@@ -277,6 +337,15 @@ class TestJSONEncoder(TestCase):
         j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
         assert j1 == '["2014-01-01", "2014-01-02"]'
 
+    def test_numpy_datetime64(self):
+        a = pd.date_range("2011-07-11", "2011-07-13", freq="D").values
+        j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
+        assert (
+            j1 == '["2011-07-11T00:00:00.000000000", '
+            '"2011-07-12T00:00:00.000000000", '
+            '"2011-07-13T00:00:00.000000000"]'
+        )
+
     def test_pil_image_encoding(self):
         import _plotly_utils
 
@@ -292,11 +361,101 @@ class TestJSONEncoder(TestCase):
         j1 = _json.dumps({"source": img}, cls=utils.PlotlyJSONEncoder)
         assert j1 == '{"source": "%s"}' % expected_uri
 
+    def test_nan_to_null(self):
+        array = [1, float("NaN"), float("Inf"), float("-Inf"), "platypus"]
+        result = _json.dumps(array, cls=utils.PlotlyJSONEncoder)
+        expected_result = '[1, null, null, null, "platypus"]'
+        self.assertEqual(result, expected_result)
+
+    def test_invalid_encode_exception(self):
+        with self.assertRaises(TypeError):
+            _json.dumps({"a": {1}}, cls=utils.PlotlyJSONEncoder)
+
+    def test_fast_track_finite_arrays(self):
+        # if NaN or Infinity is found in the json dump
+        # of a figure, it is decoded and re-encoded to replace these values
+        # with null. This test checks that NaN and Infinity values are
+        # indeed converted to null, and that the encoding of figures
+        # without inf or nan is faster (because we can avoid decoding
+        # and reencoding).
+        z = np.random.randn(100, 100)
+        x = np.arange(100.0)
+        fig_1 = go.Figure(go.Heatmap(z=z, x=x))
+        t1 = time()
+        json_str_1 = _json.dumps(fig_1, cls=utils.PlotlyJSONEncoder)
+        t2 = time()
+        x[0] = np.nan
+        x[1] = np.inf
+        fig_2 = go.Figure(go.Heatmap(z=z, x=x))
+        t3 = time()
+        json_str_2 = _json.dumps(fig_2, cls=utils.PlotlyJSONEncoder)
+        t4 = time()
+        assert t2 - t1 < t4 - t3
+        assert "null" in json_str_2
+        assert "NaN" not in json_str_2
+        assert "Infinity" not in json_str_2
+        x = np.arange(100.0)
+        fig_3 = go.Figure(go.Heatmap(z=z, x=x))
+        fig_3.update_layout(title_text="Infinity")
+        t5 = time()
+        json_str_3 = _json.dumps(fig_3, cls=utils.PlotlyJSONEncoder)
+        t6 = time()
+        assert t2 - t1 < t6 - t5
+        assert "Infinity" in json_str_3
+
+
+class TestNumpyIntegerBaseType(TestCase):
+    def test_numpy_integer_import(self):
+        # should generate a figure with subplots of array and not throw a ValueError
+        import numpy as np
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+
+        indices_rows = np.array([1], dtype=np.int)
+        indices_cols = np.array([1], dtype=np.int)
+        fig = make_subplots(rows=1, cols=1)
+        fig.add_trace(go.Scatter(y=[1]), row=indices_rows[0], col=indices_cols[0])
+
+        data_path = ("data", 0, "y")
+        value = get_by_path(fig, data_path)
+        expected_value = (1,)
+        self.assertEqual(value, expected_value)
+
+    def test_get_numpy_int_type(self):
+        import numpy as np
+        from _plotly_utils.utils import _get_int_type
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int, np.integer)
+
+        self.assertEqual(int_type_tuple, expected_tuple)
+
+
+class TestNoNumpyIntegerBaseType(TestCase):
+    def test_no_numpy_int_type(self):
+        import sys
+        from _plotly_utils.utils import _get_int_type
+        from _plotly_utils.optional_imports import get_module
+
+        np = get_module("numpy", should_load=False)
+        if np:
+            sys.modules.pop("numpy")
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int,)
+
+        self.assertEqual(int_type_tuple, expected_tuple)
+
 
 if matplotlylib:
 
     @pytest.mark.matplotlib
     def test_masked_constants_example():
+        try:
+            pd.options.plotting.backend = "matplotlib"
+        except Exception:
+            pass
+
         # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
         data = {
             "esN": [0, 1, 2, 3],

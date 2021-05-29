@@ -1718,7 +1718,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
         pattern4 = (
             "Error. You have set colors to a dictionary but have not "
             "picked an index. An index is required if you are "
-            "assigning colors to particular values in a dictioanry."
+            "assigning colors to particular values in a dictionary."
         )
 
         self.assertRaisesRegexp(

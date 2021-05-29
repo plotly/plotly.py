@@ -34,7 +34,7 @@ jupyter:
 
 ### Hover Labels
 
-One of the most deceptively-power features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear.
+One of the most deceptively-powerful features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear.
 
 There are three hover modes available in Plotly. The default setting is `layout.hovermode='closest'`, wherein a single hover label appears for the point directly underneath the cursor.
 
