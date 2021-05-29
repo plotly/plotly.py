@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: Visualize Principle Component Analysis (PCA) of your high-dimensional
       data in Python with Plotly.
@@ -41,7 +41,7 @@ We will use [Scikit-learn](https://scikit-learn.org/) to load one of the dataset
 
 ## High-dimensional PCA Analysis with  `px.scatter_matrix`
 
-The dimensionality reduction technique we will be using is called the [Principal Component Analysis (PCA)](https://scikit-learn.org/stable/modules/decomposition.html#pca). It is a powerful technique that arises from linear algebra and probability theory. In essense, it computes a matrix that represents the variation of your data ([covariance matrix/eigenvectors][covmatrix]), and rank them by their relevance (explained variance/eigenvalues). For a video tutorial, see [this segment on PCA](https://youtu.be/rng04VJxUt4?t=98) from the Coursera ML course.
+The dimensionality reduction technique we will be using is called the [Principal Component Analysis (PCA)](https://scikit-learn.org/stable/modules/decomposition.html#pca). It is a powerful technique that arises from linear algebra and probability theory. In essence, it computes a matrix that represents the variation of your data ([covariance matrix/eigenvectors][covmatrix]), and rank them by their relevance (explained variance/eigenvalues). For a video tutorial, see [this segment on PCA](https://youtu.be/rng04VJxUt4?t=98) from the Coursera ML course.
 
 [covmatrix]: https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues#:~:text=As%20it%20is%20a%20square%20symmetric%20matrix%2C%20it%20can%20be%20diagonalized%20by%20choosing%20a%20new%20orthogonal%20coordinate%20system%2C%20given%20by%20its%20eigenvectors%20(incidentally%2C%20this%20is%20called%20spectral%20theorem)%3B%20corresponding%20eigenvalues%20will%20then%20be%20located%20on%20the%20diagonal.%20In%20this%20new%20coordinate%20system%2C%20the%20covariance%20matrix%20is%20diagonal%20and%20looks%20like%20that%3A
 
@@ -134,6 +134,19 @@ fig = px.scatter_matrix(
 )
 fig.update_traces(diagonal_visible=False)
 fig.show()
+```
+
+## PCA analysis in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'pca-visualization', width='100%', height=630)
 ```
 
 ## 2D PCA Scatter Plot

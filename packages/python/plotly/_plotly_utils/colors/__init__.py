@@ -377,7 +377,7 @@ def validate_colors(colors, colortype="tuple"):
 
 def validate_colors_dict(colors, colortype="tuple"):
     """
-    Validates dictioanry of color(s)
+    Validates dictionary of color(s)
     """
     # validate each color element in the dictionary
     for key in colors:
@@ -491,15 +491,15 @@ def convert_colors_to_same_type(
         return (colors_list, scale)
     else:
         raise exceptions.PlotlyError(
-            "You must select either rgb or tuple " "for your colortype variable."
+            "You must select either rgb or tuple for your colortype variable."
         )
 
 
 def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
     """
-    Converts a colors in a dictioanry of colors to the specified color type
+    Converts a colors in a dictionary of colors to the specified color type
 
-    :param (dict) colors_dict: a dictioanry whose values are single colors
+    :param (dict) colors_dict: a dictionary whose values are single colors
     """
     for key in colors_dict:
         if "#" in colors_dict[key]:
@@ -519,7 +519,7 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
         return colors_dict
     else:
         raise exceptions.PlotlyError(
-            "You must select either rgb or tuple " "for your colortype variable."
+            "You must select either rgb or tuple for your colortype variable."
         )
 
 
@@ -536,7 +536,7 @@ def validate_scale_values(scale):
     """
     if len(scale) < 2:
         raise exceptions.PlotlyError(
-            "You must input a list of scale values " "that has at least two values."
+            "You must input a list of scale values that has at least two values."
         )
 
     if (scale[0] != 0) or (scale[-1] != 1):
@@ -584,7 +584,7 @@ def make_colorscale(colors, scale=None):
     # validate minimum colors length of 2
     if len(colors) < 2:
         raise exceptions.PlotlyError(
-            "You must input a list of colors that " "has at least two colors."
+            "You must input a list of colors that has at least two colors."
         )
 
     if scale is None:
@@ -594,7 +594,7 @@ def make_colorscale(colors, scale=None):
     else:
         if len(colors) != len(scale):
             raise exceptions.PlotlyError(
-                "The length of colors and scale " "must be the same."
+                "The length of colors and scale must be the same."
             )
 
         validate_scale_values(scale)
@@ -806,3 +806,75 @@ def named_colorscales():
     from _plotly_utils.basevalidators import ColorscaleValidator
 
     return [c for c in ColorscaleValidator("", "").named_colorscales]
+
+
+def get_colorscale(name):
+    """
+    Returns the colorscale for a given name. See `named_colorscales` for the
+    built-in colorscales.
+    """
+    from _plotly_utils.basevalidators import ColorscaleValidator
+
+    if not isinstance(name, str):
+        raise exceptions.PlotlyError("Name argument have to be a string.")
+
+    name = name.lower()
+    if name[-2:] == "_r":
+        should_reverse = True
+        name = name[:-2]
+    else:
+        should_reverse = False
+
+    if name in ColorscaleValidator("", "").named_colorscales:
+        colorscale = ColorscaleValidator("", "").named_colorscales[name]
+    else:
+        raise exceptions.PlotlyError(f"Colorscale {name} is not a built-in scale.")
+
+    if should_reverse:
+        colorscale = colorscale[::-1]
+    return make_colorscale(colorscale)
+
+
+def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rgb"):
+    """
+    Samples a colorscale at specific points.
+
+    Interpolates between colors in a colorscale to find the specific colors
+    corresponding to the specified sample values. The colorscale can be specified
+    as a list of `[scale, color]` pairs, as a list of colors, or as a named
+    plotly colorscale. The samplepoints can be specefied as an iterable of specific
+    points in the range [0.0, 1.0], or as an integer number of points which will
+    be spaced equally between the low value (default 0.0) and the high value
+    (default 1.0). The output is a list of colors, formatted according to the
+    specified colortype.
+    """
+    from bisect import bisect_left
+
+    try:
+        validate_colorscale(colorscale)
+    except exceptions.PlotlyError:
+        if isinstance(colorscale, str):
+            colorscale = get_colorscale(colorscale)
+        else:
+            colorscale = make_colorscale(colorscale)
+
+    scale = colorscale_to_scale(colorscale)
+    validate_scale_values(scale)
+    colors = colorscale_to_colors(colorscale)
+    colors = validate_colors(colors, colortype="tuple")
+
+    if isinstance(samplepoints, int):
+        samplepoints = [
+            low + idx / (samplepoints - 1) * (high - low) for idx in range(samplepoints)
+        ]
+    elif isinstance(samplepoints, float):
+        samplepoints = [samplepoints]
+
+    sampled_colors = []
+    for point in samplepoints:
+        high = bisect_left(scale, point)
+        low = high - 1
+        interpolant = (point - scale[low]) / (scale[high] - scale[low])
+        sampled_color = find_intermediate_color(colors[low], colors[high], interpolant)
+        sampled_colors.append(sampled_color)
+    return validate_colors(sampled_colors, colortype=colortype)

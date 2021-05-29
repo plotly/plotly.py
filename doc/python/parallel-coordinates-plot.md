@@ -24,7 +24,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to make parallel coorindates plots in Python with Plotly.
+    description: How to make parallel coordinates plots in Python with Plotly.
     display_as: scientific
     language: python
     layout: base

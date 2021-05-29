@@ -238,12 +238,7 @@ the `plotly/plotly.js` GitHub repository (and place them in
 `plotly/package_data`). It will then regenerate all of the `graph_objs`
 classes based on the new schema.
 
-For dev branches, it is also possible to use `updateplotlyjsdev --devrepo reponame --devbranch branchname` to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively. For example, to update to a version from a pull request to the `plotly/plotly.js` repo that is numbered 555, run:
-
-```bash
-$ cd packages/python/plotly
-$ python setup.py updateplotlyjsdev --devbranch pull/555
-```
+For dev branches, it is also possible to use `updateplotlyjsdev --devrepo reponame --devbranch branchname` to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively. 
 
 ## Testing
 
@@ -280,7 +275,7 @@ pytest  packages/python/plotly/plotly/tests/test_core/
 pytest plotly/tests/test_plotly/test_plot.py
 ```
 
-or for a specfic test function
+or for a specific test function
 
 ```bash
 pytest plotly/tests/test_plotly/test_plot.py::test_function

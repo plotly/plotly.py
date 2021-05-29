@@ -3,15 +3,10 @@ import plotly.io as pio
 import pytest
 import plotly
 import json
-import sys
 import os
-
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-    import tempfile
-else:
-    from mock import MagicMock
-    from backports import tempfile
+import tempfile
+from unittest.mock import MagicMock
+from pathlib import Path
 
 
 # fixtures
@@ -154,7 +149,32 @@ def test_from_json_skip_invalid(fig1):
 def test_read_json_from_filelike(fig1, fig_type_spec, fig_type):
     # Configure file-like mock
     filemock = MagicMock()
+    del filemock.read_text
     filemock.read.return_value = pio.to_json(fig1)
+
+    # read_json on mock file
+    fig1_loaded = pio.read_json(filemock, output_type=fig_type_spec)
+
+    # Check return type
+    assert isinstance(fig1_loaded, fig_type)
+
+    # Check loaded figure
+    assert pio.to_json(fig1_loaded) == pio.to_json(fig1.to_dict())
+
+
+@pytest.mark.parametrize(
+    "fig_type_spec,fig_type",
+    [
+        ("Figure", go.Figure),
+        (go.Figure, go.Figure),
+        ("FigureWidget", go.FigureWidget),
+        (go.FigureWidget, go.FigureWidget),
+    ],
+)
+def test_read_json_from_pathlib(fig1, fig_type_spec, fig_type):
+    # Configure pathlib.Path-like mock
+    filemock = MagicMock(spec=Path)
+    filemock.read_text.return_value = pio.to_json(fig1)
 
     # read_json on mock file
     fig1_loaded = pio.read_json(filemock, output_type=fig_type_spec)
@@ -200,6 +220,7 @@ def test_read_json_from_file_string(fig1, fig_type_spec, fig_type):
 def test_write_json_filelike(fig1, pretty, remove_uids):
     # Configure file-like mock
     filemock = MagicMock()
+    del filemock.write_text
 
     # write_json to mock file
     pio.write_json(fig1, filemock, pretty=pretty, remove_uids=remove_uids)
@@ -207,6 +228,20 @@ def test_write_json_filelike(fig1, pretty, remove_uids):
     # check write contents
     expected = pio.to_json(fig1, pretty=pretty, remove_uids=remove_uids)
     filemock.write.assert_called_once_with(expected)
+
+
+@pytest.mark.parametrize("pretty", [True, False])
+@pytest.mark.parametrize("remove_uids", [True, False])
+def test_write_json_pathlib(fig1, pretty, remove_uids):
+    # Configure file-like mock
+    filemock = MagicMock(spec=Path)
+
+    # write_json to mock file
+    pio.write_json(fig1, filemock, pretty=pretty, remove_uids=remove_uids)
+
+    # check write contents
+    expected = pio.to_json(fig1, pretty=pretty, remove_uids=remove_uids)
+    filemock.write_text.assert_called_once_with(expected)
 
 
 @pytest.mark.parametrize("pretty", [True, False])

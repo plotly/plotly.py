@@ -313,7 +313,7 @@ def test_repr_html(renderer):
         "                                    window.PLOTLYENV=window.PLOTLYENV || {};"
         '                                    if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
         ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
-        '                        [],                        {"template": {}},'
+        '                        [],                        {"template":{}},'
         '                        {"responsive": true}                    )                };'
         "                            </script>        </div>"
     )

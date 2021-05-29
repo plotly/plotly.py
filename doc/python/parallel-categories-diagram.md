@@ -43,7 +43,7 @@ For other representations of multivariate data, also see [parallel coordinates](
 
 #### Basic Parallel Category Diagram with plotly.express
 
-This example visualizes the resturant bills of a sample of 244 people. Hovering over a category rectangle (sex, smoker, etc) displays a tooltip with the number of people with that single trait. Hovering over a ribbon in the diagram displays a tooltip with the number of people with a particular combination of the five traits connected by the ribbon.
+This example visualizes the restaurant bills of a sample of 244 people. Hovering over a category rectangle (sex, smoker, etc) displays a tooltip with the number of people with that single trait. Hovering over a ribbon in the diagram displays a tooltip with the number of people with a particular combination of the five traits connected by the ribbon.
 
 By default, `px.parallel_categories` will display any column in the `data_frame` that has a cardinality (or number of unique values) of less than 50. This can be overridden either by passing in a specific list of columns to `dimensions` or by setting `dimensions_max_cardinality` to something other than 50. 
 
@@ -72,7 +72,7 @@ fig.show()
 
 ### Basic Parallel Categories Diagram with `graph_objects`
 
-This example illustartes the hair color, eye color, and sex of a sample of 8 people. The dimension labels can be dragged horizontally to reorder the dimensions and the category rectangles can be dragged vertically to reorder the categories within a dimension.
+This example illustrates the hair color, eye color, and sex of a sample of 8 people. The dimension labels can be dragged horizontally to reorder the dimensions and the category rectangles can be dragged vertically to reorder the categories within a dimension.
 
 ```python
 import plotly.graph_objects as go
@@ -112,7 +112,7 @@ fig = go.Figure(go.Parcats(
 fig.show()
 ```
 
-#### Mutli-Color Parallel Categories Diagram
+#### Multi-Color Parallel Categories Diagram
 
 The color of the ribbons can be specified with the `line.color` property. Similar to other trace types, this property may be set to an array of numbers, which are then mapped to colors according to the the colorscale specified in the `line.colorscale` property.
 

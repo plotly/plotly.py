@@ -10,6 +10,7 @@ from unittest import TestCase
 import pytest
 
 import plotly
+import plotly.io as pio
 from plotly import optional_imports
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
@@ -40,6 +41,7 @@ class PlotlyOfflineTestCase(TestCase):
 
         @pytest.mark.matplotlib
         def test_iplot_mpl_works(self):
+            plotly.offline.init_notebook_mode()
             # Generate matplotlib plot for tests
             fig = plt.figure()
 
@@ -76,12 +78,8 @@ class PlotlyOfflineMPLTestCase(TestCase):
             data = figure["data"]
 
             layout = figure["layout"]
-            data_json = _json.dumps(
-                data, cls=plotly.utils.PlotlyJSONEncoder, sort_keys=True
-            )
-            layout_json = _json.dumps(
-                layout, cls=plotly.utils.PlotlyJSONEncoder, sort_keys=True
-            )
+            data_json = pio.json.to_json_plotly(data)
+            layout_json = pio.json.to_json_plotly(layout)
             html = self._read_html(plotly.offline.plot_mpl(fig))
 
             # blank out uid before comparisons

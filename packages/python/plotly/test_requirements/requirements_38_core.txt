@@ -1,0 +1,4 @@
+requests==2.25.1
+six==1.15.0
+tenacity==6.2.0
+pytest==6.2.3
