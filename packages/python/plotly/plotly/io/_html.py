@@ -6,7 +6,7 @@ import webbrowser
 import six
 
 from _plotly_utils.optional_imports import get_module
-from plotly.io._utils import validate_coerce_fig_to_dict
+from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly import utils
 
@@ -61,10 +61,16 @@ def to_html(
         fully self-contained and can be used offline.
 
         If 'cdn', a script tag that references the plotly.js CDN is included
-        in the output. HTML files generated with this option are about 3MB
-        smaller than those generated with include_plotlyjs=True, but they
-        require an active internet connection in order to load the plotly.js
-        library.
+        in the output. The url used is versioned to match the bundled plotly.js.
+        HTML files generated with this option are about 3MB smaller than those
+        generated with include_plotlyjs=True, but they require an active
+        internet connection in order to load the plotly.js library.
+
+        If 'cdn-latest', a script tag that always references the latest plotly.js
+        CDN is included in the output.
+        HTML files generated with this option are about 3MB smaller than those
+        generated with include_plotlyjs=True, but they require an active
+        internet connection in order to load the plotly.js library.
 
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
@@ -266,12 +272,15 @@ def to_html(
         require_start = 'require(["plotly"], function(Plotly) {'
         require_end = "});"
 
-    elif include_plotlyjs == "cdn":
+    elif include_plotlyjs == "cdn" or include_plotlyjs == "cdn-latest":
+        cdn_url = plotly_cdn_url()
+        if include_plotlyjs == "cdn-latest":
+            cdn_url = plotly_cdn_url(cdn_ver="latest")
         load_plotlyjs = """\
         {win_config}
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>\
+        <script src="{cdn_url}"></script>\
     """.format(
-            win_config=_window_plotly_config
+            win_config=_window_plotly_config, cdn_url=cdn_url
         )
 
     elif include_plotlyjs == "directory":
@@ -417,10 +426,16 @@ def write_html(
         fully self-contained and can be used offline.
 
         If 'cdn', a script tag that references the plotly.js CDN is included
-        in the output. HTML files generated with this option are about 3MB
-        smaller than those generated with include_plotlyjs=True, but they
-        require an active internet connection in order to load the plotly.js
-        library.
+        in the output. The url used is versioned to match the bundled plotly.js.
+        HTML files generated with this option are about 3MB smaller than those
+        generated with include_plotlyjs=True, but they require an active
+        internet connection in order to load the plotly.js library.
+
+        If 'cdn-latest', a script tag that always references the latest plotly.js
+        CDN is included in the output.
+        HTML files generated with this option are about 3MB smaller than those
+        generated with include_plotlyjs=True, but they require an active
+        internet connection in order to load the plotly.js library.
 
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same

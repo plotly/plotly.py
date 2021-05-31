@@ -7,9 +7,10 @@ import os
 from os.path import isdir
 
 import six
-from plotly.io import to_json, to_image, write_image, write_html
 from plotly import utils, optional_imports
+from plotly.io import to_json, to_image, write_image, write_html
 from plotly.io._orca import ensure_server
+from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly.tools import return_figure_from_figure_or_data
 
@@ -289,7 +290,7 @@ class HtmlRenderer(MimetypeRenderer):
         require.undef("plotly");
         requirejs.config({{
             paths: {{
-                'plotly': ['https://cdn.plot.ly/plotly-latest.min']
+                'plotly': ['{plotly_cdn}']
             }}
         }});
         require(['plotly'], function(Plotly) {{
@@ -298,7 +299,9 @@ class HtmlRenderer(MimetypeRenderer):
         }}
         </script>
         """.format(
-                    win_config=_window_plotly_config, mathjax_config=_mathjax_config
+                    win_config=_window_plotly_config,
+                    mathjax_config=_mathjax_config,
+                    plotly_cdn=plotly_cdn_url().rstrip(".js"),
                 )
 
             else:
