@@ -64,7 +64,7 @@ If `"array"`, the placement of the ticks is set via `tickvals` and the tick text
 ```python
 import plotly.graph_objects as go
 
-go.Figure(go.Scatter(
+fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
 ))
@@ -101,7 +101,7 @@ For more formatting types, see: https://github.com/d3/d3-format/blob/master/READ
 ```python
 import plotly.graph_objects as go
 
-go.Figure(go.Scatter(
+fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
 ))

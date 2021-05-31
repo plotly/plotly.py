@@ -321,7 +321,7 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Scatter(y=[1, 3, 2], line=dict(color="crimson"))],
-    layout=dict(title=dict(text="A Graph Object Figure With Magic Underscore Notation"))
+    layout=dict(title=dict(text="A Graph Objects Figure Without Magic Underscore Notation"))
 )
 
 fig.show()
@@ -334,7 +334,7 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Scatter(y=[1, 3, 2], line_color="crimson")],
-    layout_title_text="Another Graph Object Figure With Magic Underscore Notation"
+    layout_title_text="A Graph Objects Figure With Magic Underscore Notation"
 )
 
 fig.show()
