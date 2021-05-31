@@ -67,6 +67,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickformatstopdefaults",
         "tickformatstops",
         "ticklabelmode",
+        "ticklabeloverflow",
         "ticklabelposition",
         "ticklen",
         "tickmode",
@@ -1839,6 +1840,31 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelmode(self, val):
         self["ticklabelmode"] = val
 
+    # ticklabeloverflow
+    # -----------------
+    @property
+    def ticklabeloverflow(self):
+        """
+        Determines how we handle tick labels that would overflow either
+        the graph div or the domain of the axis. The default value for
+        inside tick labels is *hide past domain*. Otherwise on
+        "category" and "multicategory" axes the default is "allow". In
+        other cases the default is *hide past div*.
+    
+        The 'ticklabeloverflow' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['allow', 'hide past div', 'hide past domain']
+
+        Returns
+        -------
+        Any
+        """
+        return self["ticklabeloverflow"]
+
+    @ticklabeloverflow.setter
+    def ticklabeloverflow(self, val):
+        self["ticklabeloverflow"] = val
+
     # ticklabelposition
     # -----------------
     @property
@@ -2703,6 +2729,13 @@ class YAxis(_BaseLayoutHierarchyType):
             effect for axes of `type` "date" When set to "period",
             tick labels are drawn in the middle of the period
             between ticks.
+        ticklabeloverflow
+            Determines how we handle tick labels that would
+            overflow either the graph div or the domain of the
+            axis. The default value for inside tick labels is *hide
+            past domain*. Otherwise on "category" and
+            "multicategory" axes the default is "allow". In other
+            cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
             the axis Please note that top or bottom has no effect
@@ -2848,6 +2881,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformatstops=None,
         tickformatstopdefaults=None,
         ticklabelmode=None,
+        ticklabeloverflow=None,
         ticklabelposition=None,
         ticklen=None,
         tickmode=None,
@@ -3205,6 +3239,13 @@ class YAxis(_BaseLayoutHierarchyType):
             effect for axes of `type` "date" When set to "period",
             tick labels are drawn in the middle of the period
             between ticks.
+        ticklabeloverflow
+            Determines how we handle tick labels that would
+            overflow either the graph div or the domain of the
+            axis. The default value for inside tick labels is *hide
+            past domain*. Otherwise on "category" and
+            "multicategory" axes the default is "allow". In other
+            cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
             the axis Please note that top or bottom has no effect
@@ -3551,6 +3592,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = ticklabelmode if ticklabelmode is not None else _v
         if _v is not None:
             self["ticklabelmode"] = _v
+        _v = arg.pop("ticklabeloverflow", None)
+        _v = ticklabeloverflow if ticklabeloverflow is not None else _v
+        if _v is not None:
+            self["ticklabeloverflow"] = _v
         _v = arg.pop("ticklabelposition", None)
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:

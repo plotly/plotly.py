@@ -2,13 +2,17 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._zsrc import ZsrcValidator
+    from ._zhoverformat import ZhoverformatValidator
     from ._z import ZValidator
     from ._ysrc import YsrcValidator
+    from ._yhoverformat import YhoverformatValidator
     from ._y import YValidator
     from ._xsrc import XsrcValidator
+    from ._xhoverformat import XhoverformatValidator
     from ._x import XValidator
     from ._visible import VisibleValidator
     from ._valuesrc import ValuesrcValidator
+    from ._valuehoverformat import ValuehoverformatValidator
     from ._value import ValueValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
@@ -62,13 +66,17 @@ else:
         [],
         [
             "._zsrc.ZsrcValidator",
+            "._zhoverformat.ZhoverformatValidator",
             "._z.ZValidator",
             "._ysrc.YsrcValidator",
+            "._yhoverformat.YhoverformatValidator",
             "._y.YValidator",
             "._xsrc.XsrcValidator",
+            "._xhoverformat.XhoverformatValidator",
             "._x.XValidator",
             "._visible.VisibleValidator",
             "._valuesrc.ValuesrcValidator",
+            "._valuehoverformat.ValuehoverformatValidator",
             "._value.ValueValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",

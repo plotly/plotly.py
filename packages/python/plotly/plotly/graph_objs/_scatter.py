@@ -39,15 +39,12 @@ class Scatter(_BaseTraceType):
         "name",
         "opacity",
         "orientation",
-        "r",
-        "rsrc",
         "selected",
         "selectedpoints",
         "showlegend",
         "stackgaps",
         "stackgroup",
         "stream",
-        "t",
         "text",
         "textfont",
         "textposition",
@@ -55,7 +52,6 @@ class Scatter(_BaseTraceType):
         "textsrc",
         "texttemplate",
         "texttemplatesrc",
-        "tsrc",
         "type",
         "uid",
         "uirevision",
@@ -65,6 +61,7 @@ class Scatter(_BaseTraceType):
         "x0",
         "xaxis",
         "xcalendar",
+        "xhoverformat",
         "xperiod",
         "xperiod0",
         "xperiodalignment",
@@ -73,6 +70,7 @@ class Scatter(_BaseTraceType):
         "y0",
         "yaxis",
         "ycalendar",
+        "yhoverformat",
         "yperiod",
         "yperiod0",
         "yperiodalignment",
@@ -1148,48 +1146,6 @@ class Scatter(_BaseTraceType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # r
-    # -
-    @property
-    def r(self):
-        """
-        r coordinates in scatter traces are deprecated!Please switch to
-        the "scatterpolar" trace type.Sets the radial coordinatesfor
-        legacy polar chart only.
-    
-        The 'r' property is an array that may be specified as a tuple,
-        list, numpy array, or pandas Series
-
-        Returns
-        -------
-        numpy.ndarray
-        """
-        return self["r"]
-
-    @r.setter
-    def r(self, val):
-        self["r"] = val
-
-    # rsrc
-    # ----
-    @property
-    def rsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for  r .
-    
-        The 'rsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["rsrc"]
-
-    @rsrc.setter
-    def rsrc(self, val):
-        self["rsrc"] = val
-
     # selected
     # --------
     @property
@@ -1359,28 +1315,6 @@ class Scatter(_BaseTraceType):
     @stream.setter
     def stream(self, val):
         self["stream"] = val
-
-    # t
-    # -
-    @property
-    def t(self):
-        """
-        t coordinates in scatter traces are deprecated!Please switch to
-        the "scatterpolar" trace type.Sets the angular coordinatesfor
-        legacy polar chart only.
-    
-        The 't' property is an array that may be specified as a tuple,
-        list, numpy array, or pandas Series
-
-        Returns
-        -------
-        numpy.ndarray
-        """
-        return self["t"]
-
-    @t.setter
-    def t(self, val):
-        self["t"] = val
 
     # text
     # ----
@@ -1586,26 +1520,6 @@ class Scatter(_BaseTraceType):
     def texttemplatesrc(self, val):
         self["texttemplatesrc"] = val
 
-    # tsrc
-    # ----
-    @property
-    def tsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for  t .
-    
-        The 'tsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tsrc"]
-
-    @tsrc.setter
-    def tsrc(self, val):
-        self["tsrc"] = val
-
     # uid
     # ---
     @property
@@ -1806,6 +1720,32 @@ class Scatter(_BaseTraceType):
     def xcalendar(self, val):
         self["xcalendar"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xperiod
     # -------
     @property
@@ -1982,6 +1922,32 @@ class Scatter(_BaseTraceType):
     @ycalendar.setter
     def ycalendar(self, val):
         self["ycalendar"] = val
+
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
 
     # yperiod
     # -------
@@ -2250,13 +2216,6 @@ class Scatter(_BaseTraceType):
             if it is `false`. Sets the stacking direction. With "v"
             ("h"), the y (x) values of subsequent traces are added.
             Also affects the default value of `fill`.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -2297,10 +2256,6 @@ class Scatter(_BaseTraceType):
         stream
             :class:`plotly.graph_objects.scatter.Stream` instance
             or dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2338,9 +2293,6 @@ class Scatter(_BaseTraceType):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2384,6 +2336,14 @@ class Scatter(_BaseTraceType):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2416,6 +2376,14 @@ class Scatter(_BaseTraceType):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2470,15 +2438,12 @@ class Scatter(_BaseTraceType):
         name=None,
         opacity=None,
         orientation=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stackgaps=None,
         stackgroup=None,
         stream=None,
-        t=None,
         text=None,
         textfont=None,
         textposition=None,
@@ -2486,7 +2451,6 @@ class Scatter(_BaseTraceType):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -2495,6 +2459,7 @@ class Scatter(_BaseTraceType):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -2503,6 +2468,7 @@ class Scatter(_BaseTraceType):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -2693,13 +2659,6 @@ class Scatter(_BaseTraceType):
             if it is `false`. Sets the stacking direction. With "v"
             ("h"), the y (x) values of subsequent traces are added.
             Also affects the default value of `fill`.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -2740,10 +2699,6 @@ class Scatter(_BaseTraceType):
         stream
             :class:`plotly.graph_objects.scatter.Stream` instance
             or dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2781,9 +2736,6 @@ class Scatter(_BaseTraceType):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2827,6 +2779,14 @@ class Scatter(_BaseTraceType):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2859,6 +2819,14 @@ class Scatter(_BaseTraceType):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -3032,14 +3000,6 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = orientation if orientation is not None else _v
         if _v is not None:
             self["orientation"] = _v
-        _v = arg.pop("r", None)
-        _v = r if r is not None else _v
-        if _v is not None:
-            self["r"] = _v
-        _v = arg.pop("rsrc", None)
-        _v = rsrc if rsrc is not None else _v
-        if _v is not None:
-            self["rsrc"] = _v
         _v = arg.pop("selected", None)
         _v = selected if selected is not None else _v
         if _v is not None:
@@ -3064,10 +3024,6 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = stream if stream is not None else _v
         if _v is not None:
             self["stream"] = _v
-        _v = arg.pop("t", None)
-        _v = t if t is not None else _v
-        if _v is not None:
-            self["t"] = _v
         _v = arg.pop("text", None)
         _v = text if text is not None else _v
         if _v is not None:
@@ -3096,10 +3052,6 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = texttemplatesrc if texttemplatesrc is not None else _v
         if _v is not None:
             self["texttemplatesrc"] = _v
-        _v = arg.pop("tsrc", None)
-        _v = tsrc if tsrc is not None else _v
-        if _v is not None:
-            self["tsrc"] = _v
         _v = arg.pop("uid", None)
         _v = uid if uid is not None else _v
         if _v is not None:
@@ -3132,6 +3084,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = xcalendar if xcalendar is not None else _v
         if _v is not None:
             self["xcalendar"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xperiod", None)
         _v = xperiod if xperiod is not None else _v
         if _v is not None:
@@ -3164,6 +3120,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = ycalendar if ycalendar is not None else _v
         if _v is not None:
             self["ycalendar"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("yperiod", None)
         _v = yperiod if yperiod is not None else _v
         if _v is not None:

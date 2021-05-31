@@ -9,7 +9,6 @@ class ShowtickprefixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
-            role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
             **kwargs
         )

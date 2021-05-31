@@ -11,6 +11,5 @@ class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
             dflt=kwargs.pop("dflt", None),
             edit_type=kwargs.pop("edit_type", "calc"),
             regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

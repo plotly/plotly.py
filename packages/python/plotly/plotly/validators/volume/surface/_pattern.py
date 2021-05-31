@@ -9,6 +9,5 @@ class PatternValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             extras=kwargs.pop("extras", ["all", "odd", "even"]),
             flags=kwargs.pop("flags", ["A", "B", "C", "D", "E"]),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

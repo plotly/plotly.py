@@ -2,19 +2,25 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._zsrc import ZsrcValidator
+    from ._zhoverformat import ZhoverformatValidator
     from ._z import ZValidator
     from ._ysrc import YsrcValidator
+    from ._yhoverformat import YhoverformatValidator
     from ._y import YValidator
     from ._xsrc import XsrcValidator
+    from ._xhoverformat import XhoverformatValidator
     from ._x import XValidator
     from ._wsrc import WsrcValidator
+    from ._whoverformat import WhoverformatValidator
     from ._w import WValidator
     from ._vsrc import VsrcValidator
     from ._visible import VisibleValidator
+    from ._vhoverformat import VhoverformatValidator
     from ._v import VValidator
     from ._usrc import UsrcValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
+    from ._uhoverformat import UhoverformatValidator
     from ._u import UValidator
     from ._textsrc import TextsrcValidator
     from ._text import TextValidator
@@ -60,19 +66,25 @@ else:
         [],
         [
             "._zsrc.ZsrcValidator",
+            "._zhoverformat.ZhoverformatValidator",
             "._z.ZValidator",
             "._ysrc.YsrcValidator",
+            "._yhoverformat.YhoverformatValidator",
             "._y.YValidator",
             "._xsrc.XsrcValidator",
+            "._xhoverformat.XhoverformatValidator",
             "._x.XValidator",
             "._wsrc.WsrcValidator",
+            "._whoverformat.WhoverformatValidator",
             "._w.WValidator",
             "._vsrc.VsrcValidator",
             "._visible.VisibleValidator",
+            "._vhoverformat.VhoverformatValidator",
             "._v.VValidator",
             "._usrc.UsrcValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
+            "._uhoverformat.UhoverformatValidator",
             "._u.UValidator",
             "._textsrc.TextsrcValidator",
             "._text.TextValidator",

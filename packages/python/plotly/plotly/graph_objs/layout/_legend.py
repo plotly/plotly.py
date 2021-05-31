@@ -341,7 +341,9 @@ class Legend(_BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 font
-                    Sets this legend's title font.
+                    Sets this legend's title font. Defaults to
+                    `legend.font` with its size increased about
+                    20%.
                 side
                     Determines the location of legend's title with
                     respect to the legend items. Defaulted to "top"

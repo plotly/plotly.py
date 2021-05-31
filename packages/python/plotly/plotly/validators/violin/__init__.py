@@ -2,10 +2,12 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._ysrc import YsrcValidator
+    from ._yhoverformat import YhoverformatValidator
     from ._yaxis import YaxisValidator
     from ._y0 import Y0Validator
     from ._y import YValidator
     from ._xsrc import XsrcValidator
+    from ._xhoverformat import XhoverformatValidator
     from ._xaxis import XaxisValidator
     from ._x0 import X0Validator
     from ._x import XValidator
@@ -62,10 +64,12 @@ else:
         [],
         [
             "._ysrc.YsrcValidator",
+            "._yhoverformat.YhoverformatValidator",
             "._yaxis.YaxisValidator",
             "._y0.Y0Validator",
             "._y.YValidator",
             "._xsrc.XsrcValidator",
+            "._xhoverformat.XhoverformatValidator",
             "._xaxis.XaxisValidator",
             "._x0.X0Validator",
             "._x.XValidator",

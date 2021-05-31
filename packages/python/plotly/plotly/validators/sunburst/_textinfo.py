@@ -20,6 +20,5 @@ class TextinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
                     "percent parent",
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

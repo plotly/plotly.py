@@ -20,6 +20,7 @@ if sys.version_info < (3, 7):
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
     from ._ticklabelposition import TicklabelpositionValidator
+    from ._ticklabeloverflow import TicklabeloverflowValidator
     from ._ticklabelmode import TicklabelmodeValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
@@ -104,6 +105,7 @@ else:
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
             "._ticklabelposition.TicklabelpositionValidator",
+            "._ticklabeloverflow.TicklabeloverflowValidator",
             "._ticklabelmode.TicklabelmodeValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",

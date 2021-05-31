@@ -14,6 +14,5 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

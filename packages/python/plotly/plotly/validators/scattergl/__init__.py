@@ -5,6 +5,7 @@ if sys.version_info < (3, 7):
     from ._yperiodalignment import YperiodalignmentValidator
     from ._yperiod0 import Yperiod0Validator
     from ._yperiod import YperiodValidator
+    from ._yhoverformat import YhoverformatValidator
     from ._ycalendar import YcalendarValidator
     from ._yaxis import YaxisValidator
     from ._y0 import Y0Validator
@@ -13,6 +14,7 @@ if sys.version_info < (3, 7):
     from ._xperiodalignment import XperiodalignmentValidator
     from ._xperiod0 import Xperiod0Validator
     from ._xperiod import XperiodValidator
+    from ._xhoverformat import XhoverformatValidator
     from ._xcalendar import XcalendarValidator
     from ._xaxis import XaxisValidator
     from ._x0 import X0Validator
@@ -69,6 +71,7 @@ else:
             "._yperiodalignment.YperiodalignmentValidator",
             "._yperiod0.Yperiod0Validator",
             "._yperiod.YperiodValidator",
+            "._yhoverformat.YhoverformatValidator",
             "._ycalendar.YcalendarValidator",
             "._yaxis.YaxisValidator",
             "._y0.Y0Validator",
@@ -77,6 +80,7 @@ else:
             "._xperiodalignment.XperiodalignmentValidator",
             "._xperiod0.Xperiod0Validator",
             "._xperiod.XperiodValidator",
+            "._xhoverformat.XhoverformatValidator",
             "._xcalendar.XcalendarValidator",
             "._xaxis.XaxisValidator",
             "._x0.X0Validator",

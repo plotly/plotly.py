@@ -16,6 +16,5 @@ class ZminValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"valType": "number", "editType": "calc"},
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )
