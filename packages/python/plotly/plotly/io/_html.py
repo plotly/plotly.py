@@ -66,12 +66,6 @@ def to_html(
         generated with include_plotlyjs=True, but they require an active
         internet connection in order to load the plotly.js library.
 
-        If 'cdn-latest', a script tag that always references the latest plotly.js
-        CDN is included in the output.
-        HTML files generated with this option are about 3MB smaller than those
-        generated with include_plotlyjs=True, but they require an active
-        internet connection in order to load the plotly.js library.
-
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.
@@ -272,15 +266,12 @@ def to_html(
         require_start = 'require(["plotly"], function(Plotly) {'
         require_end = "});"
 
-    elif include_plotlyjs == "cdn" or include_plotlyjs == "cdn-latest":
-        cdn_url = plotly_cdn_url()
-        if include_plotlyjs == "cdn-latest":
-            cdn_url = plotly_cdn_url(cdn_ver="latest")
+    elif include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
         <script src="{cdn_url}"></script>\
     """.format(
-            win_config=_window_plotly_config, cdn_url=cdn_url
+            win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
         )
 
     elif include_plotlyjs == "directory":
@@ -427,12 +418,6 @@ def write_html(
 
         If 'cdn', a script tag that references the plotly.js CDN is included
         in the output. The url used is versioned to match the bundled plotly.js.
-        HTML files generated with this option are about 3MB smaller than those
-        generated with include_plotlyjs=True, but they require an active
-        internet connection in order to load the plotly.js library.
-
-        If 'cdn-latest', a script tag that always references the latest plotly.js
-        CDN is included in the output.
         HTML files generated with this option are about 3MB smaller than those
         generated with include_plotlyjs=True, but they require an active
         internet connection in order to load the plotly.js library.
