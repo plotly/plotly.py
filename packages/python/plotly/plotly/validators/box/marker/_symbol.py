@@ -8,7 +8,6 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
                 "values",
                 [

@@ -10,6 +10,5 @@ class MinorgridcountValidator(_plotly_utils.basevalidators.IntegerValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

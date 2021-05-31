@@ -14,6 +14,5 @@ class SectorValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"valType": "number", "editType": "plot"},
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

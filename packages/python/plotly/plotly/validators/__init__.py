@@ -47,7 +47,6 @@ if sys.version_info < (3, 7):
     from ._box import BoxValidator
     from ._barpolar import BarpolarValidator
     from ._bar import BarValidator
-    from ._area import AreaValidator
     from ._layout import LayoutValidator
     from ._frames import FramesValidator
     from ._data import DataValidator
@@ -104,7 +103,6 @@ else:
             "._box.BoxValidator",
             "._barpolar.BarpolarValidator",
             "._bar.BarValidator",
-            "._area.AreaValidator",
             "._layout.LayoutValidator",
             "._frames.FramesValidator",
             "._data.DataValidator",

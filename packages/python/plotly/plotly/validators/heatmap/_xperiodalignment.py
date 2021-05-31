@@ -8,7 +8,6 @@ class XperiodalignmentValidator(_plotly_utils.basevalidators.EnumeratedValidator
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "scaled"}),
-            role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["start", "middle", "end"]),
             **kwargs
         )

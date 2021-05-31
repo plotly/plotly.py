@@ -34,6 +34,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabeloverflow",
         "ticklabelposition",
         "ticklen",
         "tickmode",
@@ -847,6 +848,30 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabeloverflow
+    # -----------------
+    @property
+    def ticklabeloverflow(self):
+        """
+        Determines how we handle tick labels that would overflow either
+        the graph div or the domain of the axis. The default value for
+        inside tick labels is *hide past domain*. In other cases the
+        default is *hide past div*.
+    
+        The 'ticklabeloverflow' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['allow', 'hide past div', 'hide past domain']
+
+        Returns
+        -------
+        Any
+        """
+        return self["ticklabeloverflow"]
+
+    @ticklabeloverflow.setter
+    def ticklabeloverflow(self, val):
+        self["ticklabeloverflow"] = val
+
     # ticklabelposition
     # -----------------
     @property
@@ -1449,6 +1474,12 @@ class ColorBar(_BaseTraceHierarchyType):
             face.colorbar.tickformatstopdefaults), sets the default
             property values to use for elements of
             isosurface.colorbar.tickformatstops
+        ticklabeloverflow
+            Determines how we handle tick labels that would
+            overflow either the graph div or the domain of the
+            axis. The default value for inside tick labels is *hide
+            past domain*. In other cases the default is *hide past
+            div*.
         ticklabelposition
             Determines where tick labels are drawn.
         ticklen
@@ -1555,6 +1586,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabeloverflow=None,
         ticklabelposition=None,
         ticklen=None,
         tickmode=None,
@@ -1709,6 +1741,12 @@ class ColorBar(_BaseTraceHierarchyType):
             face.colorbar.tickformatstopdefaults), sets the default
             property values to use for elements of
             isosurface.colorbar.tickformatstops
+        ticklabeloverflow
+            Determines how we handle tick labels that would
+            overflow either the graph div or the domain of the
+            axis. The default value for inside tick labels is *hide
+            past domain*. In other cases the default is *hide past
+            div*.
         ticklabelposition
             Determines where tick labels are drawn.
         ticklen
@@ -1914,6 +1952,10 @@ an instance of :class:`plotly.graph_objs.isosurface.ColorBar`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabeloverflow", None)
+        _v = ticklabeloverflow if ticklabeloverflow is not None else _v
+        if _v is not None:
+            self["ticklabeloverflow"] = _v
         _v = arg.pop("ticklabelposition", None)
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:

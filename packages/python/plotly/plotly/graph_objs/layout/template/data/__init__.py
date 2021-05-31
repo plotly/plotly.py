@@ -1,7 +1,6 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._area import Area
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -55,7 +54,6 @@ else:
         __name__,
         [],
         [
-            "._area.Area",
             "._bar.Bar",
             "._barpolar.Barpolar",
             "._box.Box",

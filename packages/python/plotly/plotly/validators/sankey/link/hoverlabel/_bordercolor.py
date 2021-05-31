@@ -10,6 +10,5 @@ class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

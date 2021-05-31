@@ -19,6 +19,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"valType": "any", "editType": "plot"},
                 ],
             ),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

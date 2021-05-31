@@ -11,6 +11,5 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

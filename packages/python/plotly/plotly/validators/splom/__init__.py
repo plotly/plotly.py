@@ -1,7 +1,9 @@
 import sys
 
 if sys.version_info < (3, 7):
+    from ._yhoverformat import YhoverformatValidator
     from ._yaxes import YaxesValidator
+    from ._xhoverformat import XhoverformatValidator
     from ._xaxes import XaxesValidator
     from ._visible import VisibleValidator
     from ._unselected import UnselectedValidator
@@ -42,7 +44,9 @@ else:
         __name__,
         [],
         [
+            "._yhoverformat.YhoverformatValidator",
             "._yaxes.YaxesValidator",
+            "._xhoverformat.XhoverformatValidator",
             "._xaxes.XaxesValidator",
             "._visible.VisibleValidator",
             "._unselected.UnselectedValidator",

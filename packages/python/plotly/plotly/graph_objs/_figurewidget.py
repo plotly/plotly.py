@@ -19,21 +19,20 @@ class FigureWidget(BaseFigureWidget):
                 (e.g. Scatter(...), Bar(...), etc.)
               - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
-                    One of: ['area', 'bar', 'barpolar', 'box',
-                             'candlestick', 'carpet', 'choropleth',
-                             'choroplethmapbox', 'cone', 'contour',
-                             'contourcarpet', 'densitymapbox', 'funnel',
-                             'funnelarea', 'heatmap', 'heatmapgl',
-                             'histogram', 'histogram2d',
-                             'histogram2dcontour', 'image', 'indicator',
-                             'isosurface', 'mesh3d', 'ohlc', 'parcats',
-                             'parcoords', 'pie', 'pointcloud', 'sankey',
-                             'scatter', 'scatter3d', 'scattercarpet',
-                             'scattergeo', 'scattergl', 'scattermapbox',
-                             'scatterpolar', 'scatterpolargl',
-                             'scatterternary', 'splom', 'streamtube',
-                             'sunburst', 'surface', 'table', 'treemap',
-                             'violin', 'volume', 'waterfall']
+                    One of: ['bar', 'barpolar', 'box', 'candlestick',
+                             'carpet', 'choropleth', 'choroplethmapbox',
+                             'cone', 'contour', 'contourcarpet',
+                             'densitymapbox', 'funnel', 'funnelarea',
+                             'heatmap', 'heatmapgl', 'histogram',
+                             'histogram2d', 'histogram2dcontour', 'image',
+                             'indicator', 'isosurface', 'mesh3d', 'ohlc',
+                             'parcats', 'parcoords', 'pie', 'pointcloud',
+                             'sankey', 'scatter', 'scatter3d',
+                             'scattercarpet', 'scattergeo', 'scattergl',
+                             'scattermapbox', 'scatterpolar',
+                             'scatterpolargl', 'scatterternary', 'splom',
+                             'streamtube', 'sunburst', 'surface', 'table',
+                             'treemap', 'violin', 'volume', 'waterfall']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -51,9 +50,6 @@ class FigureWidget(BaseFigureWidget):
                     
                     activeshape
                         :class:`plotly.graph_objects.layout.Activeshape
-                        ` instance or dict with compatible properties
-                    angularaxis
-                        :class:`plotly.graph_objects.layout.AngularAxis
                         ` instance or dict with compatible properties
                     annotations
                         A tuple of
@@ -165,11 +161,6 @@ class FigureWidget(BaseFigureWidget):
                         being treated as immutable, thus any data array
                         with a different identity from its predecessor
                         contains new data.
-                    direction
-                        Legacy polar charts are deprecated! Please
-                        switch to "polar" subplots. Sets the direction
-                        corresponding to positive angles in legacy
-                        polar charts.
                     dragmode
                         Determines the mode of drag interactions.
                         "select" and "lasso" apply only to scatter
@@ -301,13 +292,7 @@ class FigureWidget(BaseFigureWidget):
                         hoverlabel will appear per trace. In this mode,
                         spikelines are enabled by default perpendicular
                         to the specified axis. If false, hover
-                        interactions are disabled. If `clickmode`
-                        includes the "select" flag, `hovermode`
-                        defaults to "closest". If `clickmode` lacks the
-                        "select" flag, it defaults to "x" or "y"
-                        (depending on the trace's `orientation` value)
-                        for plots based on cartesian coordinates. For
-                        anything else the default value is "closest".
+                        interactions are disabled.
                     images
                         A tuple of
                         :class:`plotly.graph_objects.layout.Image`
@@ -347,11 +332,6 @@ class FigureWidget(BaseFigureWidget):
                     newshape
                         :class:`plotly.graph_objects.layout.Newshape`
                         instance or dict with compatible properties
-                    orientation
-                        Legacy polar charts are deprecated! Please
-                        switch to "polar" subplots. Rotates the entire
-                        polar by the given angle in legacy polar
-                        charts.
                     paper_bgcolor
                         Sets the background color of the paper where
                         the graph is drawn.
@@ -366,9 +346,6 @@ class FigureWidget(BaseFigureWidget):
                         in-between x and y axes.
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
-                        instance or dict with compatible properties
-                    radialaxis
-                        :class:`plotly.graph_objects.layout.RadialAxis`
                         instance or dict with compatible properties
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
@@ -595,184 +572,6 @@ class FigureWidget(BaseFigureWidget):
         """
         super(FigureWidget, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
-    def add_area(
-        self,
-        customdata=None,
-        customdatasrc=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        ids=None,
-        idssrc=None,
-        legendgroup=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        opacity=None,
-        r=None,
-        rsrc=None,
-        showlegend=None,
-        stream=None,
-        t=None,
-        tsrc=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        row=None,
-        col=None,
-        **kwargs
-    ):
-        """
-        Add a new Area trace
-        
-        Parameters
-        ----------
-        customdata
-            Assigns extra data each datum. This may be useful when
-            listening to hover, click and selection events. Note
-            that, "scatter" traces also appends customdata items in
-            the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            customdata .
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
-        hoverlabel
-            :class:`plotly.graph_objects.area.Hoverlabel` instance
-            or dict with compatible properties
-        ids
-            Assigns id labels to each datum. These ids for object
-            constancy of data points during animation. Should be an
-            array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
-        marker
-            :class:`plotly.graph_objects.area.Marker` instance or
-            dict with compatible properties
-        meta
-            Assigns extra meta information associated with this
-            trace that can be used in various text attributes.
-            Attributes such as trace `name`, graph, axis and
-            colorbar `title.text`, annotation `text`
-            `rangeselector`, `updatemenues` and `sliders` `label`
-            text all support `meta`. To access the trace `meta`
-            values in an attribute in the same trace, simply use
-            `%{meta[i]}` where `i` is the index or key of the
-            `meta` item in question. To access trace `meta` in
-            layout attributes, use `%{data[n[.meta[i]}` where `i`
-            is the index or key of the `meta` and `n` is the trace
-            index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            meta .
-        name
-            Sets the trace name. The trace name appear as the
-            legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        r
-            Area traces are deprecated! Please switch to the
-            "barpolar" trace type. Sets the radial coordinates for
-            legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.area.Stream` instance or
-            dict with compatible properties
-        t
-            Area traces are deprecated! Please switch to the
-            "barpolar" trace type. Sets the angular coordinates for
-            legacy polar chart only.
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
-        uid
-            Assign an id to this trace, Use this to provide object
-            constancy between traces during animations and
-            transitions.
-        uirevision
-            Controls persistence of some user-driven changes to the
-            trace: `constraintrange` in `parcoords` traces, as well
-            as some `editable: true` modifications such as `name`
-            and `colorbar.title`. Defaults to `layout.uirevision`.
-            Note that other user-driven trace attribute changes are
-            controlled by `layout` attributes: `trace.visible` is
-            controlled by `layout.legend.uirevision`,
-            `selectedpoints` is controlled by
-            `layout.selectionrevision`, and `colorbar.(x|y)`
-            (accessible with `config: {editable: true}`) is
-            controlled by `layout.editrevision`. Trace changes are
-            tracked by `uid`, which only falls back on trace index
-            if no `uid` is provided. So if your app can add/remove
-            traces before the end of the `data` array, such that
-            the same trace has a different index, you can still
-            preserve user-driven changes if you give each trace a
-            `uid` that stays with it as it moves.
-        visible
-            Determines whether or not this trace is visible. If
-            "legendonly", the trace is not drawn, but can appear as
-            a legend item (provided that the legend itself is
-            visible).
-        row : 'all', int or None (default)
-            Subplot row index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            rows in the specified column(s).
-        col : 'all', int or None (default)
-            Subplot col index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            columns in the specified row(s).
-
-        Returns
-        -------
-        FigureWidget
-        """
-        from plotly.graph_objs import Area
-
-        new_trace = Area(
-            customdata=customdata,
-            customdatasrc=customdatasrc,
-            hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
-            ids=ids,
-            idssrc=idssrc,
-            legendgroup=legendgroup,
-            marker=marker,
-            meta=meta,
-            metasrc=metasrc,
-            name=name,
-            opacity=opacity,
-            r=r,
-            rsrc=rsrc,
-            showlegend=showlegend,
-            stream=stream,
-            t=t,
-            tsrc=tsrc,
-            uid=uid,
-            uirevision=uirevision,
-            visible=visible,
-            **kwargs
-        )
-        return self.add_trace(new_trace, row=row, col=col)
-
     def add_bar(
         self,
         alignmentgroup=None,
@@ -808,13 +607,10 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         orientation=None,
         outsidetextfont=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stream=None,
-        t=None,
         text=None,
         textangle=None,
         textfont=None,
@@ -823,7 +619,6 @@ class FigureWidget(BaseFigureWidget):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -834,6 +629,7 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -842,6 +638,7 @@ class FigureWidget(BaseFigureWidget):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -1005,13 +802,6 @@ class FigureWidget(BaseFigureWidget):
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.bar.Selected` instance or
             dict with compatible properties
@@ -1028,10 +818,6 @@ class FigureWidget(BaseFigureWidget):
         stream
             :class:`plotly.graph_objects.bar.Stream` instance or
             dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1056,7 +842,8 @@ class FigureWidget(BaseFigureWidget):
             there is another bar stacked on this one, then the text
             gets pushed inside. "auto" tries to position `text`
             inside the bar, but if the bar is too small and no bar
-            is stacked on this one the text is moved outside.
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
             textposition .
@@ -1082,9 +869,6 @@ class FigureWidget(BaseFigureWidget):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1133,6 +917,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -1165,6 +957,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -1245,13 +1045,10 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             orientation=orientation,
             outsidetextfont=outsidetextfont,
-            r=r,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             stream=stream,
-            t=t,
             text=text,
             textangle=textangle,
             textfont=textfont,
@@ -1260,7 +1057,6 @@ class FigureWidget(BaseFigureWidget):
             textsrc=textsrc,
             texttemplate=texttemplate,
             texttemplatesrc=texttemplatesrc,
-            tsrc=tsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -1271,6 +1067,7 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -1279,6 +1076,7 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -1663,6 +1461,7 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -1671,6 +1470,7 @@ class FigureWidget(BaseFigureWidget):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -2029,6 +1829,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2062,6 +1870,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2173,6 +1989,7 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -2181,6 +1998,7 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -2228,11 +2046,13 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
         xsrc=None,
         yaxis=None,
+        yhoverformat=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -2399,6 +2219,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2423,6 +2251,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -2488,11 +2324,13 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
+            yhoverformat=yhoverformat,
             **kwargs
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -3478,19 +3316,25 @@ class FigureWidget(BaseFigureWidget):
         text=None,
         textsrc=None,
         u=None,
+        uhoverformat=None,
         uid=None,
         uirevision=None,
         usrc=None,
         v=None,
+        vhoverformat=None,
         visible=None,
         vsrc=None,
         w=None,
+        whoverformat=None,
         wsrc=None,
         x=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -3697,6 +3541,13 @@ class FigureWidget(BaseFigureWidget):
             text .
         u
             Sets the x components of the vector field.
+        uhoverformat
+            Sets the hover text formatting rule for `u`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3724,6 +3575,13 @@ class FigureWidget(BaseFigureWidget):
             .
         v
             Sets the y components of the vector field.
+        vhoverformat
+            Sets the hover text formatting rule for `v`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -3734,24 +3592,55 @@ class FigureWidget(BaseFigureWidget):
             .
         w
             Sets the z components of the vector field.
+        whoverformat
+            Sets the hover text formatting rule for `w`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         wsrc
             Sets the source reference on Chart Studio Cloud for  w
             .
         x
             Sets the x coordinates of the vector field and of the
             displayed cones.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the y coordinates of the vector field and of the
             displayed cones.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the z coordinates of the vector field and of the
             displayed cones.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -3810,19 +3699,25 @@ class FigureWidget(BaseFigureWidget):
             text=text,
             textsrc=textsrc,
             u=u,
+            uhoverformat=uhoverformat,
             uid=uid,
             uirevision=uirevision,
             usrc=usrc,
             v=v,
+            vhoverformat=vhoverformat,
             visible=visible,
             vsrc=vsrc,
             w=w,
+            whoverformat=whoverformat,
             wsrc=wsrc,
             x=x,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -3873,6 +3768,7 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -3882,6 +3778,7 @@ class FigureWidget(BaseFigureWidget):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -4117,6 +4014,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -4155,6 +4060,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -4188,10 +4101,12 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -4279,6 +4194,7 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -4288,6 +4204,7 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -5055,6 +4972,7 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         x0=None,
         xaxis=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -5062,6 +4980,7 @@ class FigureWidget(BaseFigureWidget):
         y=None,
         y0=None,
         yaxis=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -5259,7 +5178,8 @@ class FigureWidget(BaseFigureWidget):
             there is another bar stacked on this one, then the text
             gets pushed inside. "auto" tries to position `text`
             inside the bar, but if the bar is too small and no bar
-            is stacked on this one the text is moved outside.
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
             textposition .
@@ -5326,6 +5246,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -5356,6 +5284,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -5451,6 +5387,7 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -5458,6 +5395,7 @@ class FigureWidget(BaseFigureWidget):
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -5830,6 +5768,7 @@ class FigureWidget(BaseFigureWidget):
         xaxis=None,
         xcalendar=None,
         xgap=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -5840,6 +5779,7 @@ class FigureWidget(BaseFigureWidget):
         yaxis=None,
         ycalendar=None,
         ygap=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -6066,6 +6006,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -6106,6 +6054,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -6139,10 +6095,12 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -6228,6 +6186,7 @@ class FigureWidget(BaseFigureWidget):
             xaxis=xaxis,
             xcalendar=xcalendar,
             xgap=xgap,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -6238,6 +6197,7 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ygap=ygap,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -6308,7 +6268,11 @@ class FigureWidget(BaseFigureWidget):
         """
         Add a new Heatmapgl trace
         
-        WebGL version of the heatmap trace type.
+        "heatmapgl" trace is deprecated! Please consider switching to
+        the "heatmap" or "image" trace types. Alternatively you could
+        contribute/sponsor rewriting this trace type based on cartesian
+        features and using regl framework. WebGL version of the heatmap
+        trace type.
 
         Parameters
         ----------
@@ -6622,11 +6586,13 @@ class FigureWidget(BaseFigureWidget):
         xaxis=None,
         xbins=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         yaxis=None,
         ybins=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         row=None,
         col=None,
@@ -6875,6 +6841,14 @@ class FigureWidget(BaseFigureWidget):
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -6890,6 +6864,14 @@ class FigureWidget(BaseFigureWidget):
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -6965,11 +6947,13 @@ class FigureWidget(BaseFigureWidget):
             xaxis=xaxis,
             xbins=xbins,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             yaxis=yaxis,
             ybins=ybins,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             **kwargs
         )
@@ -7016,6 +7000,7 @@ class FigureWidget(BaseFigureWidget):
         xbins=None,
         xcalendar=None,
         xgap=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         yaxis=None,
@@ -7023,6 +7008,7 @@ class FigureWidget(BaseFigureWidget):
         ybins=None,
         ycalendar=None,
         ygap=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zauto=None,
@@ -7273,6 +7259,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -7297,6 +7291,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -7308,10 +7310,12 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -7397,6 +7401,7 @@ class FigureWidget(BaseFigureWidget):
             xbins=xbins,
             xcalendar=xcalendar,
             xgap=xgap,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             yaxis=yaxis,
@@ -7404,6 +7409,7 @@ class FigureWidget(BaseFigureWidget):
             ybins=ybins,
             ycalendar=ycalendar,
             ygap=ygap,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
             zauto=zauto,
@@ -7461,12 +7467,14 @@ class FigureWidget(BaseFigureWidget):
         xbingroup=None,
         xbins=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         yaxis=None,
         ybingroup=None,
         ybins=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zauto=None,
@@ -7731,6 +7739,14 @@ class FigureWidget(BaseFigureWidget):
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -7753,6 +7769,14 @@ class FigureWidget(BaseFigureWidget):
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -7764,10 +7788,12 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -7854,12 +7880,14 @@ class FigureWidget(BaseFigureWidget):
             xbingroup=xbingroup,
             xbins=xbins,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             yaxis=yaxis,
             ybingroup=ybingroup,
             ybins=ybins,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
             zauto=zauto,
@@ -7906,6 +7934,7 @@ class FigureWidget(BaseFigureWidget):
         z=None,
         zmax=None,
         zmin=None,
+        zsmooth=None,
         zsrc=None,
         row=None,
         col=None,
@@ -8084,6 +8113,10 @@ class FigureWidget(BaseFigureWidget):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zsmooth
+            Picks a smoothing algorithm used to smooth `z` data.
+            This only applies for image traces that use the
+            `source` attribute.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -8147,6 +8180,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zmax=zmax,
             zmin=zmin,
+            zsmooth=zsmooth,
             zsrc=zsrc,
             **kwargs
         )
@@ -8367,13 +8401,17 @@ class FigureWidget(BaseFigureWidget):
         uid=None,
         uirevision=None,
         value=None,
+        valuehoverformat=None,
         valuesrc=None,
         visible=None,
         x=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -8605,6 +8643,13 @@ class FigureWidget(BaseFigureWidget):
             `uid` that stays with it as it moves.
         value
             Sets the 4th dimension (value) of the vertices.
+        valuehoverformat
+            Sets the hover text formatting rule for `value`  using
+            d3 formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
             value .
@@ -8615,16 +8660,40 @@ class FigureWidget(BaseFigureWidget):
             visible).
         x
             Sets the X coordinates of the vertices on X axis.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the Y coordinates of the vertices on Y axis.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the Z coordinates of the vertices on Z axis.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -8690,13 +8759,17 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             value=value,
+            valuehoverformat=valuehoverformat,
             valuesrc=valuesrc,
             visible=visible,
             x=x,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -8760,12 +8833,15 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         x=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zcalendar=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -9075,6 +9151,14 @@ class FigureWidget(BaseFigureWidget):
             and Z coordinates of the nth vertex.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -9084,6 +9168,14 @@ class FigureWidget(BaseFigureWidget):
             and Z coordinates of the nth vertex.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -9093,6 +9185,14 @@ class FigureWidget(BaseFigureWidget):
             and Z coordinates of the nth vertex.
         zcalendar
             Sets the calendar system to use with `z` date data.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -9170,12 +9270,15 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             x=x,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -9220,11 +9323,13 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
         xsrc=None,
         yaxis=None,
+        yhoverformat=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -9390,6 +9495,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -9414,6 +9527,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -9479,11 +9600,13 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
+            yhoverformat=yhoverformat,
             **kwargs
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -10287,8 +10410,9 @@ class FigureWidget(BaseFigureWidget):
         """
         Add a new Pointcloud trace
         
-        The data visualized as a point cloud set in `x` and `y` using
-        the WebGl plotting engine.
+        "pointcloud" trace is deprecated! Please consider switching to
+        the "scattergl" trace type. The data visualized as a point
+        cloud set in `x` and `y` using the WebGl plotting engine.
 
         Parameters
         ----------
@@ -10735,15 +10859,12 @@ class FigureWidget(BaseFigureWidget):
         name=None,
         opacity=None,
         orientation=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stackgaps=None,
         stackgroup=None,
         stream=None,
-        t=None,
         text=None,
         textfont=None,
         textposition=None,
@@ -10751,7 +10872,6 @@ class FigureWidget(BaseFigureWidget):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -10760,6 +10880,7 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -10768,6 +10889,7 @@ class FigureWidget(BaseFigureWidget):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -10958,13 +11080,6 @@ class FigureWidget(BaseFigureWidget):
             if it is `false`. Sets the stacking direction. With "v"
             ("h"), the y (x) values of subsequent traces are added.
             Also affects the default value of `fill`.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -11005,10 +11120,6 @@ class FigureWidget(BaseFigureWidget):
         stream
             :class:`plotly.graph_objects.scatter.Stream` instance
             or dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -11046,9 +11157,6 @@ class FigureWidget(BaseFigureWidget):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -11092,6 +11200,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -11124,6 +11240,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -11201,15 +11325,12 @@ class FigureWidget(BaseFigureWidget):
             name=name,
             opacity=opacity,
             orientation=orientation,
-            r=r,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             stackgaps=stackgaps,
             stackgroup=stackgroup,
             stream=stream,
-            t=t,
             text=text,
             textfont=textfont,
             textposition=textposition,
@@ -11217,7 +11338,6 @@ class FigureWidget(BaseFigureWidget):
             textsrc=textsrc,
             texttemplate=texttemplate,
             texttemplatesrc=texttemplatesrc,
-            tsrc=tsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -11226,6 +11346,7 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -11234,6 +11355,7 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -11285,12 +11407,15 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         x=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zcalendar=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -11509,6 +11634,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the x coordinates.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -11516,6 +11649,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -11523,6 +11664,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -11585,12 +11734,15 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             x=x,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -12381,6 +12533,7 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -12389,6 +12542,7 @@ class FigureWidget(BaseFigureWidget):
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -12638,6 +12792,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -12670,6 +12832,14 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -12762,6 +12932,7 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -12770,6 +12941,7 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
@@ -14293,7 +14465,9 @@ class FigureWidget(BaseFigureWidget):
         unselected=None,
         visible=None,
         xaxes=None,
+        xhoverformat=None,
         yaxes=None,
+        yhoverformat=None,
         row=None,
         col=None,
         **kwargs
@@ -14476,6 +14650,14 @@ class FigureWidget(BaseFigureWidget):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         yaxes
             Sets the list of y axes corresponding to dimensions of
             this splom trace. By default, a splom will match the
@@ -14484,6 +14666,14 @@ class FigureWidget(BaseFigureWidget):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -14535,7 +14725,9 @@ class FigureWidget(BaseFigureWidget):
             unselected=unselected,
             visible=visible,
             xaxes=xaxes,
+            xhoverformat=xhoverformat,
             yaxes=yaxes,
+            yhoverformat=yhoverformat,
             **kwargs
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -14577,19 +14769,25 @@ class FigureWidget(BaseFigureWidget):
         stream=None,
         text=None,
         u=None,
+        uhoverformat=None,
         uid=None,
         uirevision=None,
         usrc=None,
         v=None,
+        vhoverformat=None,
         visible=None,
         vsrc=None,
         w=None,
+        whoverformat=None,
         wsrc=None,
         x=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -14785,6 +14983,13 @@ class FigureWidget(BaseFigureWidget):
             streamtube traces do not support array `text` values.
         u
             Sets the x components of the vector field.
+        uhoverformat
+            Sets the hover text formatting rule for `u`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -14812,6 +15017,13 @@ class FigureWidget(BaseFigureWidget):
             .
         v
             Sets the y components of the vector field.
+        vhoverformat
+            Sets the hover text formatting rule for `v`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -14822,21 +15034,52 @@ class FigureWidget(BaseFigureWidget):
             .
         w
             Sets the z components of the vector field.
+        whoverformat
+            Sets the hover text formatting rule for `w`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         wsrc
             Sets the source reference on Chart Studio Cloud for  w
             .
         x
             Sets the x coordinates of the vector field.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the y coordinates of the vector field.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the z coordinates of the vector field.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -14893,19 +15136,25 @@ class FigureWidget(BaseFigureWidget):
             stream=stream,
             text=text,
             u=u,
+            uhoverformat=uhoverformat,
             uid=uid,
             uirevision=uirevision,
             usrc=usrc,
             v=v,
+            vhoverformat=vhoverformat,
             visible=visible,
             vsrc=vsrc,
             w=w,
+            whoverformat=whoverformat,
             wsrc=wsrc,
             x=x,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -15309,12 +15558,15 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         x=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zcalendar=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -15561,6 +15813,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the x coordinates.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -15568,6 +15828,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -15575,6 +15843,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -15640,12 +15916,15 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             x=x,
             xcalendar=xcalendar,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -16226,10 +16505,12 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         x0=None,
         xaxis=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
+        yhoverformat=None,
         ysrc=None,
         row=None,
         col=None,
@@ -16498,6 +16779,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -16513,6 +16802,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -16592,10 +16889,12 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             **kwargs
         )
@@ -16648,13 +16947,17 @@ class FigureWidget(BaseFigureWidget):
         uid=None,
         uirevision=None,
         value=None,
+        valuehoverformat=None,
         valuesrc=None,
         visible=None,
         x=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
+        zhoverformat=None,
         zsrc=None,
         row=None,
         col=None,
@@ -16897,6 +17200,13 @@ class FigureWidget(BaseFigureWidget):
             `uid` that stays with it as it moves.
         value
             Sets the 4th dimension (value) of the vertices.
+        valuehoverformat
+            Sets the hover text formatting rule for `value`  using
+            d3 formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
             value .
@@ -16907,16 +17217,40 @@ class FigureWidget(BaseFigureWidget):
             visible).
         x
             Sets the X coordinates of the vertices on X axis.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the Y coordinates of the vertices on Y axis.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the Z coordinates of the vertices on Z axis.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -16983,13 +17317,17 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             value=value,
+            valuehoverformat=valuehoverformat,
             valuesrc=valuesrc,
             visible=visible,
             x=x,
+            xhoverformat=xhoverformat,
             xsrc=xsrc,
             y=y,
+            yhoverformat=yhoverformat,
             ysrc=ysrc,
             z=z,
+            zhoverformat=zhoverformat,
             zsrc=zsrc,
             **kwargs
         )
@@ -17052,6 +17390,7 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         x0=None,
         xaxis=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -17059,6 +17398,7 @@ class FigureWidget(BaseFigureWidget):
         y=None,
         y0=None,
         yaxis=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -17269,7 +17609,8 @@ class FigureWidget(BaseFigureWidget):
             there is another bar stacked on this one, then the text
             gets pushed inside. "auto" tries to position `text`
             inside the bar, but if the bar is too small and no bar
-            is stacked on this one the text is moved outside.
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
             textposition .
@@ -17341,6 +17682,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -17371,6 +17720,14 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -17473,6 +17830,7 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xhoverformat=xhoverformat,
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
@@ -17480,6 +17838,7 @@ class FigureWidget(BaseFigureWidget):
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yhoverformat=yhoverformat,
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,

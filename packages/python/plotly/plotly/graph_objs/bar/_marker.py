@@ -22,6 +22,7 @@ class Marker(_BaseTraceHierarchyType):
         "line",
         "opacity",
         "opacitysrc",
+        "pattern",
         "reversescale",
         "showscale",
     }
@@ -389,6 +390,12 @@ class Marker(_BaseTraceHierarchyType):
                     a.bar.marker.colorbar.tickformatstopdefaults),
                     sets the default property values to use for
                     elements of bar.marker.colorbar.tickformatstops
+                ticklabeloverflow
+                    Determines how we handle tick labels that would
+                    overflow either the graph div or the domain of
+                    the axis. The default value for inside tick
+                    labels is *hide past domain*. In other cases
+                    the default is *hide past div*.
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen
@@ -706,6 +713,59 @@ class Marker(_BaseTraceHierarchyType):
     def opacitysrc(self, val):
         self["opacitysrc"] = val
 
+    # pattern
+    # -------
+    @property
+    def pattern(self):
+        """
+        The 'pattern' property is an instance of Pattern
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.bar.marker.Pattern`
+          - A dict of string/value properties that will be passed
+            to the Pattern constructor
+    
+            Supported dict properties:
+                
+                bgcolor
+                    Sets the background color of the pattern fill.
+                    Defaults to a transparent background.
+                bgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  bgcolor .
+                shape
+                    Sets the shape of the pattern fill. By default,
+                    no pattern is used for filling the area.
+                shapesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  shape .
+                size
+                    Sets the size of unit squares of the pattern
+                    fill in pixels, which corresponds to the
+                    interval of repetition of the pattern.
+                sizesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  size .
+                solidity
+                    Sets the solidity of the pattern fill. Solidity
+                    is roughly the fraction of the area filled by
+                    the pattern. Solidity of 0 shows only the
+                    background color without pattern and solidty of
+                    1 shows only the foreground color without
+                    pattern.
+                soliditysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  solidity .
+
+        Returns
+        -------
+        plotly.graph_objs.bar.marker.Pattern
+        """
+        return self["pattern"]
+
+    @pattern.setter
+    def pattern(self, val):
+        self["pattern"] = val
+
     # reversescale
     # ------------
     @property
@@ -830,6 +890,9 @@ class Marker(_BaseTraceHierarchyType):
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
             opacity .
+        pattern
+            :class:`plotly.graph_objects.bar.marker.Pattern`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If
@@ -858,6 +921,7 @@ class Marker(_BaseTraceHierarchyType):
         line=None,
         opacity=None,
         opacitysrc=None,
+        pattern=None,
         reversescale=None,
         showscale=None,
         **kwargs
@@ -944,6 +1008,9 @@ class Marker(_BaseTraceHierarchyType):
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
             opacity .
+        pattern
+            :class:`plotly.graph_objects.bar.marker.Pattern`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If
@@ -1040,6 +1107,10 @@ an instance of :class:`plotly.graph_objs.bar.Marker`"""
         _v = opacitysrc if opacitysrc is not None else _v
         if _v is not None:
             self["opacitysrc"] = _v
+        _v = arg.pop("pattern", None)
+        _v = pattern if pattern is not None else _v
+        if _v is not None:
+            self["pattern"] = _v
         _v = arg.pop("reversescale", None)
         _v = reversescale if reversescale is not None else _v
         if _v is not None:

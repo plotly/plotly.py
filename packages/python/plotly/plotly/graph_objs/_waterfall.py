@@ -65,6 +65,7 @@ class Waterfall(_BaseTraceType):
         "x",
         "x0",
         "xaxis",
+        "xhoverformat",
         "xperiod",
         "xperiod0",
         "xperiodalignment",
@@ -72,6 +73,7 @@ class Waterfall(_BaseTraceType):
         "y",
         "y0",
         "yaxis",
+        "yhoverformat",
         "yperiod",
         "yperiod0",
         "yperiodalignment",
@@ -1196,7 +1198,8 @@ class Waterfall(_BaseTraceType):
         if needed), unless there is another bar stacked on this one,
         then the text gets pushed inside. "auto" tries to position
         `text` inside the bar, but if the bar is too small and no bar
-        is stacked on this one the text is moved outside.
+        is stacked on this one the text is moved outside. If "none", no
+        text appears.
     
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1523,6 +1526,32 @@ class Waterfall(_BaseTraceType):
     def xaxis(self, val):
         self["xaxis"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xperiod
     # -------
     @property
@@ -1675,6 +1704,32 @@ class Waterfall(_BaseTraceType):
     @yaxis.setter
     def yaxis(self, val):
         self["yaxis"] = val
+
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
 
     # yperiod
     # -------
@@ -1963,7 +2018,8 @@ class Waterfall(_BaseTraceType):
             there is another bar stacked on this one, then the text
             gets pushed inside. "auto" tries to position `text`
             inside the bar, but if the bar is too small and no bar
-            is stacked on this one the text is moved outside.
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
             textposition .
@@ -2035,6 +2091,14 @@ class Waterfall(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2065,6 +2129,14 @@ class Waterfall(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2144,6 +2216,7 @@ class Waterfall(_BaseTraceType):
         x=None,
         x0=None,
         xaxis=None,
+        xhoverformat=None,
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
@@ -2151,6 +2224,7 @@ class Waterfall(_BaseTraceType):
         y=None,
         y0=None,
         yaxis=None,
+        yhoverformat=None,
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
@@ -2361,7 +2435,8 @@ class Waterfall(_BaseTraceType):
             there is another bar stacked on this one, then the text
             gets pushed inside. "auto" tries to position `text`
             inside the bar, but if the bar is too small and no bar
-            is stacked on this one the text is moved outside.
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
             textposition .
@@ -2433,6 +2508,14 @@ class Waterfall(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2463,6 +2546,14 @@ class Waterfall(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2736,6 +2827,10 @@ an instance of :class:`plotly.graph_objs.Waterfall`"""
         _v = xaxis if xaxis is not None else _v
         if _v is not None:
             self["xaxis"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xperiod", None)
         _v = xperiod if xperiod is not None else _v
         if _v is not None:
@@ -2764,6 +2859,10 @@ an instance of :class:`plotly.graph_objs.Waterfall`"""
         _v = yaxis if yaxis is not None else _v
         if _v is not None:
             self["yaxis"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("yperiod", None)
         _v = yperiod if yperiod is not None else _v
         if _v is not None:

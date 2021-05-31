@@ -292,6 +292,16 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the x coordinates refer to
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
@@ -309,6 +319,16 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .

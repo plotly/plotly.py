@@ -7,7 +7,6 @@ class ConstrainValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["range", "domain"]),
             **kwargs
         )

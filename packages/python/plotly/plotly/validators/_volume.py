@@ -261,6 +261,14 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that stays with it as it moves.
             value
                 Sets the 4th dimension (value) of the vertices.
+            valuehoverformat
+                Sets the hover text formatting rule for `value`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                By default the values are formatted using
+                generic number format.
             valuesrc
                 Sets the source reference on Chart Studio Cloud
                 for  value .
@@ -272,18 +280,48 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
             x
                 Sets the X coordinates of the vertices on X
                 axis.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
             y
                 Sets the Y coordinates of the vertices on Y
                 axis.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .
             z
                 Sets the Z coordinates of the vertices on Z
                 axis.
+            zhoverformat
+                Sets the hover text formatting rule for `z`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .
