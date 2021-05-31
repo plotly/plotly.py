@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-plotly",
-  "version": "4.14.3",
+  "version": "5.0.0-rc.1",
   "description": "The plotly Jupyter extension",
   "author": "The plotly.py team",
   "license": "MIT",

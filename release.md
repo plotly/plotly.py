@@ -41,6 +41,7 @@ specified below.
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Ensure you're in a Python virtual environment with JupyterLab 3 installed
    + Run `rm -rf node_modules && npm install && npm run build:prod`
  - This the last good time to install the extensions locally and check that everything works in dev mode
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
@@ -149,6 +150,7 @@ specified below.
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Ensure you're in a Python virtual environment with JupyterLab 3 installed
    + Run `rm -rf node_modules && npm install && npm run build:prod`
 
  2) Commit the changes
