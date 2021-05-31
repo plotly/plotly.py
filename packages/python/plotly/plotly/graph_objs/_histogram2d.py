@@ -49,6 +49,7 @@ class Histogram2d(_BaseTraceType):
         "xbins",
         "xcalendar",
         "xgap",
+        "xhoverformat",
         "xsrc",
         "y",
         "yaxis",
@@ -56,6 +57,7 @@ class Histogram2d(_BaseTraceType):
         "ybins",
         "ycalendar",
         "ygap",
+        "yhoverformat",
         "ysrc",
         "z",
         "zauto",
@@ -339,6 +341,12 @@ class Histogram2d(_BaseTraceType):
                     sets the default property values to use for
                     elements of
                     histogram2d.colorbar.tickformatstops
+                ticklabeloverflow
+                    Determines how we handle tick labels that would
+                    overflow either the graph div or the domain of
+                    the axis. The default value for inside tick
+                    labels is *hide past domain*. In other cases
+                    the default is *hide past div*.
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen
@@ -1333,6 +1341,32 @@ class Histogram2d(_BaseTraceType):
     def xgap(self, val):
         self["xgap"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xsrc
     # ----
     @property
@@ -1525,6 +1559,32 @@ class Histogram2d(_BaseTraceType):
     def ygap(self, val):
         self["ygap"] = val
 
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
+
     # ysrc
     # ----
     @property
@@ -1593,10 +1653,11 @@ class Histogram2d(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rule using d3 formatting mini-
-        languages which are very similar to those in Python. See:
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format
+        Sets the hover text formatting rule for `z`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format By default the
+        values are formatted using generic number format.
     
         The 'zhoverformat' property is a string and must be specified as:
           - A string
@@ -1952,6 +2013,14 @@ class Histogram2d(_BaseTraceType):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1976,6 +2045,14 @@ class Histogram2d(_BaseTraceType):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1987,10 +2064,12 @@ class Histogram2d(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -2053,6 +2132,7 @@ class Histogram2d(_BaseTraceType):
         xbins=None,
         xcalendar=None,
         xgap=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         yaxis=None,
@@ -2060,6 +2140,7 @@ class Histogram2d(_BaseTraceType):
         ybins=None,
         ycalendar=None,
         ygap=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zauto=None,
@@ -2310,6 +2391,14 @@ class Histogram2d(_BaseTraceType):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2334,6 +2423,14 @@ class Histogram2d(_BaseTraceType):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2345,10 +2442,12 @@ class Histogram2d(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule using d3 formatting
-            mini-languages which are very similar to those in
-            Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format By
+            default the values are formatted using generic number
+            format.
         zmax
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
@@ -2557,6 +2656,10 @@ an instance of :class:`plotly.graph_objs.Histogram2d`"""
         _v = xgap if xgap is not None else _v
         if _v is not None:
             self["xgap"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xsrc", None)
         _v = xsrc if xsrc is not None else _v
         if _v is not None:
@@ -2585,6 +2688,10 @@ an instance of :class:`plotly.graph_objs.Histogram2d`"""
         _v = ygap if ygap is not None else _v
         if _v is not None:
             self["ygap"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("ysrc", None)
         _v = ysrc if ysrc is not None else _v
         if _v is not None:

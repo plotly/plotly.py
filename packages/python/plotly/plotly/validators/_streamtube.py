@@ -209,6 +209,14 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 support array `text` values.
             u
                 Sets the x components of the vector field.
+            uhoverformat
+                Sets the hover text formatting rule for `u`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                By default the values are formatted using
+                generic number format.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -240,6 +248,14 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for  u .
             v
                 Sets the y components of the vector field.
+            vhoverformat
+                Sets the hover text formatting rule for `v`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                By default the values are formatted using
+                generic number format.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -250,21 +266,59 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for  v .
             w
                 Sets the z components of the vector field.
+            whoverformat
+                Sets the hover text formatting rule for `w`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                By default the values are formatted using
+                generic number format.
             wsrc
                 Sets the source reference on Chart Studio Cloud
                 for  w .
             x
                 Sets the x coordinates of the vector field.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
             y
                 Sets the y coordinates of the vector field.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .
             z
                 Sets the z coordinates of the vector field.
+            zhoverformat
+                Sets the hover text formatting rule for `z`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

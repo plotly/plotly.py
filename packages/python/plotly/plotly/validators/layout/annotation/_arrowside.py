@@ -11,6 +11,5 @@ class ArrowsideValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             extras=kwargs.pop("extras", ["none"]),
             flags=kwargs.pop("flags", ["end", "start"]),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

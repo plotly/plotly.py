@@ -10,7 +10,6 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
             colorscale_path=kwargs.pop(
                 "colorscale_path", "scattergl.marker.line.colorscale"
             ),

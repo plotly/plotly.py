@@ -257,6 +257,12 @@ class Heatmapgl(_BaseTraceType):
                     a.heatmapgl.colorbar.tickformatstopdefaults),
                     sets the default property values to use for
                     elements of heatmapgl.colorbar.tickformatstops
+                ticklabeloverflow
+                    Determines how we handle tick labels that would
+                    overflow either the graph div or the domain of
+                    the axis. The default value for inside tick
+                    labels is *hide past domain*. In other cases
+                    the default is *hide past div*.
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen
@@ -1557,7 +1563,11 @@ class Heatmapgl(_BaseTraceType):
         """
         Construct a new Heatmapgl object
         
-        WebGL version of the heatmap trace type.
+        "heatmapgl" trace is deprecated! Please consider switching to
+        the "heatmap" or "image" trace types. Alternatively you could
+        contribute/sponsor rewriting this trace type based on cartesian
+        features and using regl framework. WebGL version of the heatmap
+        trace type.
 
         Parameters
         ----------

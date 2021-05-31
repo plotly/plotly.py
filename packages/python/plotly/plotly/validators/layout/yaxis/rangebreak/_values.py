@@ -11,6 +11,5 @@ class ValuesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             free_length=kwargs.pop("free_length", True),
             items=kwargs.pop("items", {"valType": "any", "editType": "calc"}),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

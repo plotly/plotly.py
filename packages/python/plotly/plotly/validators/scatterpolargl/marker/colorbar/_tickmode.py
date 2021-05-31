@@ -13,7 +13,6 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
-            role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "linear", "array"]),
             **kwargs
         )

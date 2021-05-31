@@ -8,6 +8,5 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
-            role=kwargs.pop("role", "data"),
             **kwargs
         )

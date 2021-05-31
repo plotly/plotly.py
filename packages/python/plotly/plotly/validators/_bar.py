@@ -172,14 +172,6 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             outsidetextfont
                 Sets the font used for `text` lying outside the
                 bar.
-            r
-                r coordinates in scatter traces are
-                deprecated!Please switch to the "scatterpolar"
-                trace type.Sets the radial coordinatesfor
-                legacy polar chart only.
-            rsrc
-                Sets the source reference on Chart Studio Cloud
-                for  r .
             selected
                 :class:`plotly.graph_objects.bar.Selected`
                 instance or dict with compatible properties
@@ -198,11 +190,6 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             stream
                 :class:`plotly.graph_objects.bar.Stream`
                 instance or dict with compatible properties
-            t
-                t coordinates in scatter traces are
-                deprecated!Please switch to the "scatterpolar"
-                trace type.Sets the angular coordinatesfor
-                legacy polar chart only.
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -230,7 +217,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inside. "auto" tries to position `text` inside
                 the bar, but if the bar is too small and no bar
                 is stacked on this one the text is moved
-                outside.
+                outside. If "none", no text appears.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
                 for  textposition .
@@ -260,9 +247,6 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
                 for  texttemplate .
-            tsrc
-                Sets the source reference on Chart Studio Cloud
-                for  t .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -317,6 +301,16 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             xperiod
                 Only relevant when the axis `type` is "date".
                 Sets the period positioning in milliseconds or
@@ -354,6 +348,16 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
             yperiod
                 Only relevant when the axis `type` is "date".
                 Sets the period positioning in milliseconds or

@@ -193,6 +193,16 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `showupperhalf` or `showlowerhalf` is false,
                 this splom trace will generate one less x-axis
                 and one less y-axis.
+            xhoverformat
+                Sets the hover text formatting rule for `x`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `xaxis.hoverformat`.
             yaxes
                 Sets the list of y axes corresponding to
                 dimensions of this splom trace. By default, a
@@ -202,6 +212,16 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `showupperhalf` or `showlowerhalf` is false,
                 this splom trace will generate one less x-axis
                 and one less y-axis.
+            yhoverformat
+                Sets the hover text formatting rule for `y`
+                using d3 formatting mini-languages which are
+                very similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-time-
+                format#locale_format By default the values are
+                formatted using `yaxis.hoverformat`.
 """,
             ),
             **kwargs

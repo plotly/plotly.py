@@ -47,7 +47,6 @@ if sys.version_info < (3, 7):
     from ._box import BoxValidator
     from ._bar import BarValidator
     from ._barpolar import BarpolarValidator
-    from ._area import AreaValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -101,6 +100,5 @@ else:
             "._box.BoxValidator",
             "._bar.BarValidator",
             "._barpolar.BarpolarValidator",
-            "._area.AreaValidator",
         ],
     )
