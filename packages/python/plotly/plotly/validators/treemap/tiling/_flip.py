@@ -8,6 +8,5 @@ class FlipValidator(_plotly_utils.basevalidators.FlaglistValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             flags=kwargs.pop("flags", ["x", "y"]),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

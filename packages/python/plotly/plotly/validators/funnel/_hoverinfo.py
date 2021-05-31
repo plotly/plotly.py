@@ -21,6 +21,5 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
                     "percent total",
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

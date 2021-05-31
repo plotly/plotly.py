@@ -51,12 +51,15 @@ class Scatter3d(_BaseTraceType):
         "visible",
         "x",
         "xcalendar",
+        "xhoverformat",
         "xsrc",
         "y",
         "ycalendar",
+        "yhoverformat",
         "ysrc",
         "z",
         "zcalendar",
+        "zhoverformat",
         "zsrc",
     }
 
@@ -1540,6 +1543,32 @@ class Scatter3d(_BaseTraceType):
     def xcalendar(self, val):
         self["xcalendar"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xsrc
     # ----
     @property
@@ -1604,6 +1633,32 @@ class Scatter3d(_BaseTraceType):
     def ycalendar(self, val):
         self["ycalendar"] = val
 
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
+
     # ysrc
     # ----
     @property
@@ -1667,6 +1722,32 @@ class Scatter3d(_BaseTraceType):
     @zcalendar.setter
     def zcalendar(self, val):
         self["zcalendar"] = val
+
+    # zhoverformat
+    # ------------
+    @property
+    def zhoverformat(self):
+        """
+        Sets the hover text formatting rule for `z`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `zaxis.hoverformat`.
+    
+        The 'zhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["zhoverformat"]
+
+    @zhoverformat.setter
+    def zhoverformat(self, val):
+        self["zhoverformat"] = val
 
     # zsrc
     # ----
@@ -1900,6 +1981,14 @@ class Scatter3d(_BaseTraceType):
             Sets the x coordinates.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1907,6 +1996,14 @@ class Scatter3d(_BaseTraceType):
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1914,6 +2011,14 @@ class Scatter3d(_BaseTraceType):
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -1963,12 +2068,15 @@ class Scatter3d(_BaseTraceType):
         visible=None,
         x=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         z=None,
         zcalendar=None,
+        zhoverformat=None,
         zsrc=None,
         **kwargs
     ):
@@ -2188,6 +2296,14 @@ class Scatter3d(_BaseTraceType):
             Sets the x coordinates.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2195,6 +2311,14 @@ class Scatter3d(_BaseTraceType):
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2202,6 +2326,14 @@ class Scatter3d(_BaseTraceType):
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
+        zhoverformat
+            Sets the hover text formatting rule for `z`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -2403,6 +2535,10 @@ an instance of :class:`plotly.graph_objs.Scatter3d`"""
         _v = xcalendar if xcalendar is not None else _v
         if _v is not None:
             self["xcalendar"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xsrc", None)
         _v = xsrc if xsrc is not None else _v
         if _v is not None:
@@ -2415,6 +2551,10 @@ an instance of :class:`plotly.graph_objs.Scatter3d`"""
         _v = ycalendar if ycalendar is not None else _v
         if _v is not None:
             self["ycalendar"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("ysrc", None)
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
@@ -2427,6 +2567,10 @@ an instance of :class:`plotly.graph_objs.Scatter3d`"""
         _v = zcalendar if zcalendar is not None else _v
         if _v is not None:
             self["zcalendar"] = _v
+        _v = arg.pop("zhoverformat", None)
+        _v = zhoverformat if zhoverformat is not None else _v
+        if _v is not None:
+            self["zhoverformat"] = _v
         _v = arg.pop("zsrc", None)
         _v = zsrc if zsrc is not None else _v
         if _v is not None:

@@ -1097,8 +1097,9 @@ class Pointcloud(_BaseTraceType):
         """
         Construct a new Pointcloud object
         
-        The data visualized as a point cloud set in `x` and `y` using
-        the WebGl plotting engine.
+        "pointcloud" trace is deprecated! Please consider switching to
+        the "scattergl" trace type. The data visualized as a point
+        cloud set in `x` and `y` using the WebGl plotting engine.
 
         Parameters
         ----------

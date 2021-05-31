@@ -43,7 +43,9 @@ class Splom(_BaseTraceType):
         "unselected",
         "visible",
         "xaxes",
+        "xhoverformat",
         "yaxes",
+        "yhoverformat",
     }
 
     # customdata
@@ -1045,6 +1047,32 @@ class Splom(_BaseTraceType):
     def xaxes(self, val):
         self["xaxes"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # yaxes
     # -----
     @property
@@ -1073,6 +1101,32 @@ class Splom(_BaseTraceType):
     @yaxes.setter
     def yaxes(self, val):
         self["yaxes"] = val
+
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
 
     # type
     # ----
@@ -1250,6 +1304,14 @@ class Splom(_BaseTraceType):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         yaxes
             Sets the list of y axes corresponding to dimensions of
             this splom trace. By default, a splom will match the
@@ -1258,6 +1320,14 @@ class Splom(_BaseTraceType):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         """
 
     def __init__(
@@ -1296,7 +1366,9 @@ class Splom(_BaseTraceType):
         unselected=None,
         visible=None,
         xaxes=None,
+        xhoverformat=None,
         yaxes=None,
+        yhoverformat=None,
         **kwargs
     ):
         """
@@ -1480,6 +1552,14 @@ class Splom(_BaseTraceType):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         yaxes
             Sets the list of y axes corresponding to dimensions of
             this splom trace. By default, a splom will match the
@@ -1488,6 +1568,14 @@ class Splom(_BaseTraceType):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
 
         Returns
         -------
@@ -1654,10 +1742,18 @@ an instance of :class:`plotly.graph_objs.Splom`"""
         _v = xaxes if xaxes is not None else _v
         if _v is not None:
             self["xaxes"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("yaxes", None)
         _v = yaxes if yaxes is not None else _v
         if _v is not None:
             self["yaxes"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
 
         # Read-only literals
         # ------------------

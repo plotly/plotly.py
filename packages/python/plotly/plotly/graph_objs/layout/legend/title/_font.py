@@ -145,7 +145,8 @@ class Font(_BaseLayoutHierarchyType):
         """
         Construct a new Font object
         
-        Sets this legend's title font.
+        Sets this legend's title font. Defaults to `legend.font` with
+        its size increased about 20%.
 
         Parameters
         ----------

@@ -8,6 +8,5 @@ class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

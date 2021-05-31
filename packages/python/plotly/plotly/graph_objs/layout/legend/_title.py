@@ -15,7 +15,8 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def font(self):
         """
-        Sets this legend's title font.
+        Sets this legend's title font. Defaults to `legend.font` with
+        its size increased about 20%.
     
         The 'font' property is an instance of Font
         that may be specified as:
@@ -108,7 +109,8 @@ class Title(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         font
-            Sets this legend's title font.
+            Sets this legend's title font. Defaults to
+            `legend.font` with its size increased about 20%.
         side
             Determines the location of legend's title with respect
             to the legend items. Defaulted to "top" with
@@ -130,7 +132,8 @@ class Title(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.legend.Title`
         font
-            Sets this legend's title font.
+            Sets this legend's title font. Defaults to
+            `legend.font` with its size increased about 20%.
         side
             Determines the location of legend's title with respect
             to the legend items. Defaulted to "top" with

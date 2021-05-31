@@ -8,6 +8,5 @@ class Y0Validator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             implied_edits=kwargs.pop("implied_edits", {"ytype": "scaled"}),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

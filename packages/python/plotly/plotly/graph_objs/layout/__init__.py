@@ -2,7 +2,6 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._activeshape import Activeshape
-    from ._angularaxis import AngularAxis
     from ._annotation import Annotation
     from ._coloraxis import Coloraxis
     from ._colorscale import Colorscale
@@ -17,7 +16,6 @@ if sys.version_info < (3, 7):
     from ._modebar import Modebar
     from ._newshape import Newshape
     from ._polar import Polar
-    from ._radialaxis import RadialAxis
     from ._scene import Scene
     from ._shape import Shape
     from ._slider import Slider
@@ -74,7 +72,6 @@ else:
         ],
         [
             "._activeshape.Activeshape",
-            "._angularaxis.AngularAxis",
             "._annotation.Annotation",
             "._coloraxis.Coloraxis",
             "._colorscale.Colorscale",
@@ -89,7 +86,6 @@ else:
             "._modebar.Modebar",
             "._newshape.Newshape",
             "._polar.Polar",
-            "._radialaxis.RadialAxis",
             "._scene.Scene",
             "._shape.Shape",
             "._slider.Slider",

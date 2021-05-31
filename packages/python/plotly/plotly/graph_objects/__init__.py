@@ -47,7 +47,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Box
     from ..graph_objs import Barpolar
     from ..graph_objs import Bar
-    from ..graph_objs import Area
     from ..graph_objs import Layout
     from ..graph_objs import Frame
     from ..graph_objs import Figure
@@ -122,7 +121,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import box
     from ..graph_objs import barpolar
     from ..graph_objs import bar
-    from ..graph_objs import area
     from ..graph_objs import layout
 else:
     from _plotly_utils.importers import relative_import
@@ -176,7 +174,6 @@ else:
             "..graph_objs.box",
             "..graph_objs.barpolar",
             "..graph_objs.bar",
-            "..graph_objs.area",
             "..graph_objs.layout",
         ],
         [
@@ -226,7 +223,6 @@ else:
             "..graph_objs.Box",
             "..graph_objs.Barpolar",
             "..graph_objs.Bar",
-            "..graph_objs.Area",
             "..graph_objs.Layout",
             "..graph_objs.Frame",
             "..graph_objs.Figure",

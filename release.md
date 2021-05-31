@@ -2,14 +2,14 @@
 # How to release plotly packages
 
 There are 3 Python packages (`plotly`, `plotly-geo` and `chart-studio`) which need to be
-published to PyPI and conda, and 1 JS packages (`plotlywdiget`)
+published to PyPI and conda, and 1 JS packages (`jupyterlab-plotly`)
 which need to be published to NPM. In addition, there are various changelogs, github
 releases and forum announcements to do :)
 
 ## Release process - `plotly` package and extensions
 
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
-`plotlywidget` with matching versions.
+`jupyterlab-plotly` with matching versions.
 
 > Note: it's easier to lock all three versions together, even if it means we occasionally
 > push no-change versions to NPM/PyPI/Conda.
@@ -38,7 +38,7 @@ specified below.
    + this must be done at this point because the README gets baked into PyPI
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
- - `packages/javascript/plotlywidget/package.json`
+ - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build:prod`
@@ -55,7 +55,7 @@ Build and publish the final version of the extensions to NPM. We do this first b
 once we push to PyPI the README will refer to these versions.
 
 ```bash
-cd packages/javascript/plotlywidget
+cd packages/javascript/jupyterlab-plotly
 npm run build && npm publish --access public
 ```
 
@@ -124,7 +124,7 @@ $ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
-    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py` fixing any errors that come up
+    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up
     2. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
     3. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
     4. Commit and push the changes to `master` in that repo
@@ -146,7 +146,7 @@ specified below.
 
  - `packages/python/plotly/plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z-rc.1` (Note the `^` prefix)
- - `packages/javascript/plotlywidget/package.json`
+ - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build:prod`
@@ -161,7 +161,7 @@ The number 1 means that this is the first release candidate, this number can
 be incremented if we need to publish multiple release candidates.
 Note that the `npm` suffix is `-rc.1` and the PyPI suffix is `rc1`.
 
-Publishing `plotly.py` and `plotlywidget` as release candidates
+Publishing `plotly.py` and `jupyterlab-plotly` as release candidates
 allows us to go through the publication process, and test that the
 installed packages work properly before general users will get them by
 default. It also gives us the opportunity to ask specific users to test
@@ -196,7 +196,7 @@ to reflect what is being released, and the version number comes from the tag and
 Now, publish the release candidate of the extensions to NPM.
 
 ```bash
-cd ./packages/javascript/plotlywidget
+cd ./packages/javascript/jupyterlab-plotly
 npm run build && npm publish --access public --tag next
 ```
 

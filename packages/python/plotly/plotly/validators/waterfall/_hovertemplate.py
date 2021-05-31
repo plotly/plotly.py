@@ -8,6 +8,5 @@ class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

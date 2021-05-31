@@ -8,6 +8,5 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "array"}),
-            role=kwargs.pop("role", "data"),
             **kwargs
         )

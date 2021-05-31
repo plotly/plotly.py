@@ -9,7 +9,6 @@ class Data(_BaseLayoutHierarchyType):
     _parent_path_str = "layout.template"
     _path_str = "layout.template.data"
     _valid_props = {
-        "area",
         "bar",
         "barpolar",
         "box",
@@ -57,29 +56,6 @@ class Data(_BaseLayoutHierarchyType):
         "volume",
         "waterfall",
     }
-
-    # area
-    # ----
-    @property
-    def area(self):
-        """
-        The 'area' property is a tuple of instances of
-        Area that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Area
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Area constructor
-    
-            Supported dict properties:
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Area]
-        """
-        return self["area"]
-
-    @area.setter
-    def area(self, val):
-        self["area"] = val
 
     # barpolar
     # --------
@@ -1144,9 +1120,6 @@ class Data(_BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
-        area
-            A tuple of :class:`plotly.graph_objects.Area` instances
-            or dicts with compatible properties
         barpolar
             A tuple of :class:`plotly.graph_objects.Barpolar`
             instances or dicts with compatible properties
@@ -1292,7 +1265,6 @@ class Data(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
-        area=None,
         barpolar=None,
         bar=None,
         box=None,
@@ -1350,9 +1322,6 @@ class Data(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of
             :class:`plotly.graph_objs.layout.template.Data`
-        area
-            A tuple of :class:`plotly.graph_objects.Area` instances
-            or dicts with compatible properties
         barpolar
             A tuple of :class:`plotly.graph_objects.Barpolar`
             instances or dicts with compatible properties
@@ -1527,10 +1496,6 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("area", None)
-        _v = area if area is not None else _v
-        if _v is not None:
-            self["area"] = _v
         _v = arg.pop("barpolar", None)
         _v = barpolar if barpolar is not None else _v
         if _v is not None:

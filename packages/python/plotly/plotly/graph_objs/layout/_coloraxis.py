@@ -286,6 +286,12 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     sets the default property values to use for
                     elements of
                     layout.coloraxis.colorbar.tickformatstops
+                ticklabeloverflow
+                    Determines how we handle tick labels that would
+                    overflow either the graph div or the domain of
+                    the axis. The default value for inside tick
+                    labels is *hide past domain*. In other cases
+                    the default is *hide past div*.
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

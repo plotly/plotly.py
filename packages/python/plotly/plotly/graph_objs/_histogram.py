@@ -54,11 +54,13 @@ class Histogram(_BaseTraceType):
         "xaxis",
         "xbins",
         "xcalendar",
+        "xhoverformat",
         "xsrc",
         "y",
         "yaxis",
         "ybins",
         "ycalendar",
+        "yhoverformat",
         "ysrc",
     }
 
@@ -846,6 +848,10 @@ class Histogram(_BaseTraceType):
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
                     for  opacity .
+                pattern
+                    :class:`plotly.graph_objects.histogram.marker.P
+                    attern` instance or dict with compatible
+                    properties
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.color`is set to a
@@ -1453,6 +1459,32 @@ class Histogram(_BaseTraceType):
     def xcalendar(self, val):
         self["xcalendar"] = val
 
+    # xhoverformat
+    # ------------
+    @property
+    def xhoverformat(self):
+        """
+        Sets the hover text formatting rule for `x`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `xaxis.hoverformat`.
+    
+        The 'xhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["xhoverformat"]
+
+    @xhoverformat.setter
+    def xhoverformat(self, val):
+        self["xhoverformat"] = val
+
     # xsrc
     # ----
     @property
@@ -1609,6 +1641,32 @@ class Histogram(_BaseTraceType):
     @ycalendar.setter
     def ycalendar(self, val):
         self["ycalendar"] = val
+
+    # yhoverformat
+    # ------------
+    @property
+    def yhoverformat(self):
+        """
+        Sets the hover text formatting rule for `y`  using d3
+        formatting mini-languages which are very similar to those in
+        Python. See: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-time-format#locale_format By
+        default the values are formatted using `yaxis.hoverformat`.
+    
+        The 'yhoverformat' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["yhoverformat"]
+
+    @yhoverformat.setter
+    def yhoverformat(self, val):
+        self["yhoverformat"] = val
 
     # ysrc
     # ----
@@ -1872,6 +1930,14 @@ class Histogram(_BaseTraceType):
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1887,6 +1953,14 @@ class Histogram(_BaseTraceType):
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1939,11 +2013,13 @@ class Histogram(_BaseTraceType):
         xaxis=None,
         xbins=None,
         xcalendar=None,
+        xhoverformat=None,
         xsrc=None,
         y=None,
         yaxis=None,
         ybins=None,
         ycalendar=None,
+        yhoverformat=None,
         ysrc=None,
         **kwargs
     ):
@@ -2192,6 +2268,14 @@ class Histogram(_BaseTraceType):
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xhoverformat
+            Sets the hover text formatting rule for `x`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2207,6 +2291,14 @@ class Histogram(_BaseTraceType):
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yhoverformat
+            Sets the hover text formatting rule for `y`  using d3
+            formatting mini-languages which are very similar to
+            those in Python. See: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2420,6 +2512,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = xcalendar if xcalendar is not None else _v
         if _v is not None:
             self["xcalendar"] = _v
+        _v = arg.pop("xhoverformat", None)
+        _v = xhoverformat if xhoverformat is not None else _v
+        if _v is not None:
+            self["xhoverformat"] = _v
         _v = arg.pop("xsrc", None)
         _v = xsrc if xsrc is not None else _v
         if _v is not None:
@@ -2440,6 +2536,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = ycalendar if ycalendar is not None else _v
         if _v is not None:
             self["ycalendar"] = _v
+        _v = arg.pop("yhoverformat", None)
+        _v = yhoverformat if yhoverformat is not None else _v
+        if _v is not None:
+            self["yhoverformat"] = _v
         _v = arg.pop("ysrc", None)
         _v = ysrc if ysrc is not None else _v
         if _v is not None:

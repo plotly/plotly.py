@@ -1,7 +1,6 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._area import Area
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -76,7 +75,6 @@ if sys.version_info < (3, 7):
     from ._violin import Violin
     from ._volume import Volume
     from ._waterfall import Waterfall
-    from . import area
     from . import bar
     from . import barpolar
     from . import box
@@ -130,7 +128,6 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            ".area",
             ".bar",
             ".barpolar",
             ".box",
@@ -180,7 +177,6 @@ else:
             ".waterfall",
         ],
         [
-            "._area.Area",
             "._bar.Bar",
             "._barpolar.Barpolar",
             "._box.Box",

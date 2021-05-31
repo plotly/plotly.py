@@ -8,6 +8,5 @@ class LevelValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

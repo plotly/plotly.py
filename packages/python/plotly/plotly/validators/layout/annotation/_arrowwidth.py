@@ -10,6 +10,5 @@ class ArrowwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc+arraydraw"),
             min=kwargs.pop("min", 0.1),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )
