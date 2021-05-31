@@ -18,7 +18,7 @@ networkx
 squarify
 scikit-image==0.18.1
 scikit-learn
-sphinx
+sphinx==3.5.4
 sphinx_bootstrap_theme
 recommonmark
 pathlib
