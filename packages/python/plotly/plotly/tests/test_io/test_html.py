@@ -34,19 +34,7 @@ def fig1(request):
 
 # HTML
 # ----
-def assert_latest_cdn_connected(html):
-    assert plotly_cdn_url(cdn_ver="latest") in html
-
-
-def assert_locked_version_cdn_connected(html):
-    assert plotly_cdn_url() in html
-
-
-def test_latest_cdn_included(fig1):
-    html_str = pio.to_html(fig1, include_plotlyjs="cdn-latest")
-    assert_latest_cdn_connected(html_str)
 
 
 def test_versioned_cdn_included(fig1):
-    html_str = pio.to_html(fig1, include_plotlyjs="cdn")
-    assert_locked_version_cdn_connected(html_str)
+    assert plotly_cdn_url() in pio.to_html(fig1, include_plotlyjs="cdn")
