@@ -3,14 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [4.14.3] - 2021-01-12
+## UNRELEASED
 
-### Fixed
-- Plotly.js cdn url will now be versioned by default for: 
-  `include_plotlyjs='cdn'` a new `include_plotlyjs='cdn-latest'` option 
-  has the original behaviour. Prevents likelihood of htmls generated with older 
-  `plotly.js` versions breaking with version bumps. 
-  [2961](https://github.com/plotly/plotly.py/pull/2961)
+### Changed
+
+- Plotly.js CDN url will now be versioned by default for HTML exports using `include_plotlyjs='cdn'` and for "connected" renderers.
+
+## [4.14.3] - 2021-01-12
 
 - `px.timeline()` now allows `hover_data` formatting of start and end times [3018](https://github.com/plotly/plotly.py/pull/3018)
 - Small change to packaging of `plotlywidget` extension for JupyterLab 3 [3021](https://github.com/plotly/plotly.py/pull/3021)
