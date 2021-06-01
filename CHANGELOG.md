@@ -5,9 +5,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
 
-### Changed
+### Updated
 
-- Plotly.js CDN url will now be versioned by default for HTML exports using `include_plotlyjs='cdn'` and for "connected" renderers.
+- Updated Plotly.js to version 2.0.0-rc.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - new `marker.pattern` options for `bar`-like trace types
+  - dropped support for IE9 and IE10
+  - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
+  - deprecated `heatmapgl`, `pointcloud` traces as well as all `transform` attributes
+- Combined `plotlywidget` into `jupyterlab-plotly` and packaged them as a federated extension [#3142](https://github.com/plotly/plotly.py/pull/3142) with massive thanks to [@fcollonval](https://github.com/fcollonval) for the contribution
+- Plotly.js CDN url will now be versioned by default for HTML exports using `include_plotlyjs='cdn'` and for "connected" renderers. [#2961](https://github.com/plotly/plotly.py/pull/2961) with thanks to [@adehad](https://github.com/adehad) for the contribution
+- Dropped support for Python older than 3.6 [#3160](https://github.com/plotly/plotly.py/pull/3160)
+- Recommending Kaleido by default over Orca [#3094](https://github.com/plotly/plotly.py/pull/3094)
+- Replaced `retrying` dependency with `tenacity` [#2911](https://github.com/plotly/plotly.py/pull/2911) with thanks to [@jmsmdy](https://github.com/jmsmdy) for the contribution
+
+### Added
+
+- New functions in `plotly.colors`: `get_colorscale()` and `sample_colorscale()` [#3136](https://github.com/plotly/plotly.py/pull/3136) and [#3186](https://github.com/plotly/plotly.py/pull/3186) with thanks to [@CarlAndersson](https://github.com/CarlAndersson) for the contributions
+- Faster JSON encoding when `orjson` is present [#2955](https://github.com/plotly/plotly.py/pull/2955)
+
+### Fixed
+
+- Pandas and Numpy datetime serialization fixes [#3022](https://github.com/plotly/plotly.py/pull/3022)
+- Fixed selected points of histograms in FigureWidget [#2771](https://github.com/plotly/plotly.py/pull/2771) with thanks to [@meffmadd](https://github.com/meffmadd) for the contribution
+
 
 ## [4.14.3] - 2021-01-12
 
