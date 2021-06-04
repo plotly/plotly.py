@@ -331,10 +331,14 @@ class PlotlyRenderer(Renderer):
                 y1 = size
                 markerpath = props["markerstyle"].get("markerpath")
                 if markerpath is None and symbol != "circle":
-                    self.msg += "not sure how to handle this marker without a valid path\n"
+                    self.msg += (
+                        "not sure how to handle this marker without a valid path\n"
+                    )
                     return
                 # marker path to SVG path conversion
-                path = ' '.join([f"{a} {t[0]},{t[1]}" for a, t in zip(markerpath[1], markerpath[0])])
+                path = " ".join(
+                    [f"{a} {t[0]},{t[1]}" for a, t in zip(markerpath[1], markerpath[0])]
+                )
 
                 if symbol == "circle":
                     # symbols like . and o in matplotlib, use circle
@@ -361,7 +365,7 @@ class PlotlyRenderer(Renderer):
                     xanchor=x,
                     yanchor=y,
                     path=path,
-                    **shape
+                    **shape,
                 )
 
             elif single_mode == "lines":
@@ -374,10 +378,10 @@ class PlotlyRenderer(Renderer):
                     xref="paper",
                     yref="paper",
                     x0=x,
-                    y0=y+0.02,
+                    y0=y + 0.02,
                     x1=x1,
-                    y1=y1+0.02,
-                    **shape
+                    y1=y1 + 0.02,
+                    **shape,
                 )
             else:
                 self.msg += "not sure how to handle this element\n"
@@ -442,11 +446,11 @@ class PlotlyRenderer(Renderer):
                     dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
                 )
             else:
-                shape=dict(
-                    line = dict(
+                shape = dict(
+                    line=dict(
                         color=color,
                         width=props["linestyle"]["linewidth"],
-                        dash=mpltools.convert_dash(props["linestyle"]["dasharray"])
+                        dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
                     )
                 )
         if props["markerstyle"]:
@@ -500,7 +504,7 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
-            self.draw_legend_shapes(mode=mode,shape=shape, **props)
+            self.draw_legend_shapes(mode=mode, shape=shape, **props)
         else:
             self.msg += "    Line didn't have 'data' coordinates, " "not drawing\n"
             warnings.warn(

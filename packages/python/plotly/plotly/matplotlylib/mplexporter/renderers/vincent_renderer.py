@@ -6,20 +6,21 @@ from ..exporter import Exporter
 class VincentRenderer(Renderer):
     def open_figure(self, fig, props):
         self.chart = None
-        self.figwidth = int(props['figwidth'] * props['dpi'])
-        self.figheight = int(props['figheight'] * props['dpi'])
+        self.figwidth = int(props["figwidth"] * props["dpi"])
+        self.figheight = int(props["figheight"] * props["dpi"])
 
     def draw_line(self, data, coordinates, style, label, mplobj=None):
         import vincent  # only import if VincentRenderer is used
-        if coordinates != 'data':
+
+        if coordinates != "data":
             warnings.warn("Only data coordinates supported. Skipping this")
-        linedata = {'x': data[:, 0],
-                    'y': data[:, 1]}
-        line = vincent.Line(linedata, iter_idx='x',
-                            width=self.figwidth, height=self.figheight)
+        linedata = {"x": data[:, 0], "y": data[:, 1]}
+        line = vincent.Line(
+            linedata, iter_idx="x", width=self.figwidth, height=self.figheight
+        )
 
         # TODO: respect the other style settings
-        line.scales['color'].range = [style['color']]
+        line.scales["color"].range = [style["color"]]
 
         if self.chart is None:
             self.chart = line
@@ -28,15 +29,16 @@ class VincentRenderer(Renderer):
 
     def draw_markers(self, data, coordinates, style, label, mplobj=None):
         import vincent  # only import if VincentRenderer is used
-        if coordinates != 'data':
+
+        if coordinates != "data":
             warnings.warn("Only data coordinates supported. Skipping this")
-        markerdata = {'x': data[:, 0],
-                      'y': data[:, 1]}
-        markers = vincent.Scatter(markerdata, iter_idx='x',
-                                  width=self.figwidth, height=self.figheight)
+        markerdata = {"x": data[:, 0], "y": data[:, 1]}
+        markers = vincent.Scatter(
+            markerdata, iter_idx="x", width=self.figwidth, height=self.figheight
+        )
 
         # TODO: respect the other style settings
-        markers.scales['color'].range = [style['facecolor']]
+        markers.scales["color"].range = [style["facecolor"]]
 
         if self.chart is None:
             self.chart = markers

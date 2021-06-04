@@ -144,8 +144,9 @@ class Renderer(object):
         """
         pass
 
-    def draw_marked_line(self, data, coordinates, linestyle, markerstyle,
-                         label, mplobj=None):
+    def draw_marked_line(
+        self, data, coordinates, linestyle, markerstyle, label, mplobj=None
+    ):
         """Draw a line that also has markers.
 
         If this isn't reimplemented by a renderer object, by default, it will
@@ -179,12 +180,17 @@ class Renderer(object):
         mplobj : matplotlib object
             the matplotlib plot element which generated this line
         """
-        pathcodes = ['M'] + (data.shape[0] - 1) * ['L']
-        pathstyle = dict(facecolor='none', **style)
-        pathstyle['edgecolor'] = pathstyle.pop('color')
-        pathstyle['edgewidth'] = pathstyle.pop('linewidth')
-        self.draw_path(data=data, coordinates=coordinates,
-                       pathcodes=pathcodes, style=pathstyle, mplobj=mplobj)
+        pathcodes = ["M"] + (data.shape[0] - 1) * ["L"]
+        pathstyle = dict(facecolor="none", **style)
+        pathstyle["edgecolor"] = pathstyle.pop("color")
+        pathstyle["edgewidth"] = pathstyle.pop("linewidth")
+        self.draw_path(
+            data=data,
+            coordinates=coordinates,
+            pathcodes=pathcodes,
+            style=pathstyle,
+            mplobj=mplobj,
+        )
 
     @staticmethod
     def _iter_path_collection(paths, path_transforms, offsets, styles):
@@ -193,26 +199,40 @@ class Renderer(object):
 
         # Before mpl 1.4.0, path_transform can be a false-y value, not a valid
         # transformation matrix.
-        if LooseVersion(mpl.__version__) < LooseVersion('1.4.0'):
+        if LooseVersion(mpl.__version__) < LooseVersion("1.4.0"):
             if path_transforms is None:
                 path_transforms = [np.eye(3)]
 
-        edgecolor = styles['edgecolor']
+        edgecolor = styles["edgecolor"]
         if np.size(edgecolor) == 0:
-            edgecolor = ['none']
-        facecolor = styles['facecolor']
+            edgecolor = ["none"]
+        facecolor = styles["facecolor"]
         if np.size(facecolor) == 0:
-            facecolor = ['none']
+            facecolor = ["none"]
 
-        elements = [paths, path_transforms, offsets,
-                    edgecolor, styles['linewidth'], facecolor]
+        elements = [
+            paths,
+            path_transforms,
+            offsets,
+            edgecolor,
+            styles["linewidth"],
+            facecolor,
+        ]
 
         it = itertools
         return it.islice(py3k.zip(*py3k.map(it.cycle, elements)), N)
 
-    def draw_path_collection(self, paths, path_coordinates, path_transforms,
-                             offsets, offset_coordinates, offset_order,
-                             styles, mplobj=None):
+    def draw_path_collection(
+        self,
+        paths,
+        path_coordinates,
+        path_transforms,
+        offsets,
+        offset_coordinates,
+        offset_order,
+        styles,
+        mplobj=None,
+    ):
         """
         Draw a collection of paths. The paths, offsets, and styles are all
         iterables, and the number of paths is max(len(paths), len(offsets)).
@@ -256,8 +276,7 @@ class Renderer(object):
         if offset_order == "before":
             raise NotImplementedError("offset before transform")
 
-        for tup in self._iter_path_collection(paths, path_transforms,
-                                              offsets, styles):
+        for tup in self._iter_path_collection(paths, path_transforms, offsets, styles):
             (path, path_transform, offset, ec, lw, fc) = tup
             vertices, pathcodes = path
             path_transform = transforms.Affine2D(path_transform)
@@ -265,16 +284,23 @@ class Renderer(object):
             # This is a hack:
             if path_coordinates == "figure":
                 path_coordinates = "points"
-            style = {"edgecolor": utils.export_color(ec),
-                     "facecolor": utils.export_color(fc),
-                     "edgewidth": lw,
-                     "dasharray": "10,0",
-                     "alpha": styles['alpha'],
-                     "zorder": styles['zorder']}
-            self.draw_path(data=vertices, coordinates=path_coordinates,
-                           pathcodes=pathcodes, style=style, offset=offset,
-                           offset_coordinates=offset_coordinates,
-                           mplobj=mplobj)
+            style = {
+                "edgecolor": utils.export_color(ec),
+                "facecolor": utils.export_color(fc),
+                "edgewidth": lw,
+                "dasharray": "10,0",
+                "alpha": styles["alpha"],
+                "zorder": styles["zorder"],
+            }
+            self.draw_path(
+                data=vertices,
+                coordinates=path_coordinates,
+                pathcodes=pathcodes,
+                style=style,
+                offset=offset,
+                offset_coordinates=offset_coordinates,
+                mplobj=mplobj,
+            )
 
     def draw_markers(self, data, coordinates, style, label, mplobj=None):
         """
@@ -296,19 +322,26 @@ class Renderer(object):
         mplobj : matplotlib object
             the matplotlib plot element which generated this marker collection
         """
-        vertices, pathcodes = style['markerpath']
-        pathstyle = dict((key, style[key]) for key in ['alpha', 'edgecolor',
-                                                       'facecolor', 'zorder',
-                                                       'edgewidth'])
-        pathstyle['dasharray'] = "10,0"
+        vertices, pathcodes = style["markerpath"]
+        pathstyle = dict(
+            (key, style[key])
+            for key in ["alpha", "edgecolor", "facecolor", "zorder", "edgewidth"]
+        )
+        pathstyle["dasharray"] = "10,0"
         for vertex in data:
-            self.draw_path(data=vertices, coordinates="points",
-                           pathcodes=pathcodes, style=pathstyle,
-                           offset=vertex, offset_coordinates=coordinates,
-                           mplobj=mplobj)
+            self.draw_path(
+                data=vertices,
+                coordinates="points",
+                pathcodes=pathcodes,
+                style=pathstyle,
+                offset=vertex,
+                offset_coordinates=coordinates,
+                mplobj=mplobj,
+            )
 
-    def draw_text(self, text, position, coordinates, style,
-                  text_type=None, mplobj=None):
+    def draw_text(
+        self, text, position, coordinates, style, text_type=None, mplobj=None
+    ):
         """
         Draw text on the image.
 
@@ -330,8 +363,16 @@ class Renderer(object):
         """
         raise NotImplementedError()
 
-    def draw_path(self, data, coordinates, pathcodes, style,
-                  offset=None, offset_coordinates="data", mplobj=None):
+    def draw_path(
+        self,
+        data,
+        coordinates,
+        pathcodes,
+        style,
+        offset=None,
+        offset_coordinates="data",
+        mplobj=None,
+    ):
         """
         Draw a path.
 

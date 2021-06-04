@@ -14,6 +14,7 @@ class FakeRenderer(Renderer):
     representation, call an external API, etc.)  Here the renderer just
     builds a simple string representation for testing purposes.
     """
+
     def __init__(self):
         self.output = ""
 
@@ -35,12 +36,21 @@ class FakeRenderer(Renderer):
     def close_legend(self, legend):
         self.output += "    closing legend\n"
 
-    def draw_text(self, text, position, coordinates, style,
-                  text_type=None, mplobj=None):
+    def draw_text(
+        self, text, position, coordinates, style, text_type=None, mplobj=None
+    ):
         self.output += "    draw text '{0}' {1}\n".format(text, text_type)
 
-    def draw_path(self, data, coordinates, pathcodes, style,
-                  offset=None, offset_coordinates="data", mplobj=None):
+    def draw_path(
+        self,
+        data,
+        coordinates,
+        pathcodes,
+        style,
+        offset=None,
+        offset_coordinates="data",
+        mplobj=None,
+    ):
         self.output += "    draw path with {0} vertices\n".format(data.shape[0])
 
     def draw_image(self, imdata, extent, coordinates, style, mplobj=None):
@@ -55,14 +65,24 @@ class FullFakeRenderer(FakeRenderer):
     other methods in the class.  They can be defined explicitly for
     more efficient or specialized use within the renderer implementation.
     """
+
     def draw_line(self, data, coordinates, style, label, mplobj=None):
         self.output += "    draw line with {0} points\n".format(data.shape[0])
 
     def draw_markers(self, data, coordinates, style, label, mplobj=None):
         self.output += "    draw {0} markers\n".format(data.shape[0])
 
-    def draw_path_collection(self, paths, path_coordinates, path_transforms,
-                             offsets, offset_coordinates, offset_order,
-                             styles, mplobj=None):
-        self.output += ("    draw path collection "
-                        "with {0} offsets\n".format(offsets.shape[0]))
+    def draw_path_collection(
+        self,
+        paths,
+        path_coordinates,
+        path_transforms,
+        offsets,
+        offset_coordinates,
+        offset_order,
+        styles,
+        mplobj=None,
+    ):
+        self.output += "    draw path collection " "with {0} offsets\n".format(
+            offsets.shape[0]
+        )
