@@ -33,7 +33,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
             PlotlyError,
             "curve_type must be defined as " "'kde' or 'normal'",
             ff.create_distplot,
-            **kwargs
+            **kwargs,
         )
 
     def test_wrong_histdata_format(self):
@@ -1602,6 +1602,36 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         # Check converting custom colors to strings
         test_colors_plot = ff.create_trisurf(x, y, z, simplices, color_func=colors_raw)
         self.assertTrue(isinstance(test_colors_plot["data"][0]["facecolor"][0], str))
+
+    def test_map_face2color_no_crash(self):
+        # map_face2color used by ff.create_trisurf could fail with
+        # IndexError if face is not equal to vmax but normalized
+        # distance of a face between vmin and vmax is equal to
+        # 1.0. This can happen due to floating precision of floats.
+
+        vmin, vmax = -0.8, 0.2
+        face = np.nextafter(vmax, -vmax)  # the last value less than vmax
+
+        x = [0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0]
+        y = [1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+        z = [vmin, vmin, vmin, face, face, face, vmax, vmax, vmax]
+        simplices = [
+            [0, 1, 2],
+            [1, 2, 3],
+            [2, 3, 4],
+            [3, 4, 5],
+            [4, 5, 6],
+            [5, 6, 7],
+            [6, 7, 8],
+        ]
+
+        try:
+            ff.create_trisurf(x, y, z, simplices)
+        except Exception as e:
+            self.fail(
+                "Calling ff.create_trisurf with reasonable inputs"
+                f" raised an exception: {e}"
+            )
 
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
@@ -4302,7 +4332,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 z,
                 interp_mode="cartesian",
                 ncontours=ncontours,
-                **arg_set
+                **arg_set,
             )
             # This test does not work for ilr interpolation
             print(len(fig.data))

@@ -30,7 +30,11 @@ def map_face2color(face, colormap, scale, vmin, vmax):
         face_color = clrs.convert_to_RGB_255(face_color)
         face_color = clrs.label_rgb(face_color)
         return face_color
-    if face == vmax:
+
+    # find the normalized distance t of a triangle face between
+    # vmin and vmax where the distance is between 0 and 1
+    t = (face - vmin) / float((vmax - vmin))
+    if t == 1.0:
         # pick last color in colormap
         face_color = colormap[-1]
         face_color = clrs.convert_to_RGB_255(face_color)
@@ -38,9 +42,6 @@ def map_face2color(face, colormap, scale, vmin, vmax):
         return face_color
     else:
         if scale is None:
-            # find the normalized distance t of a triangle face between
-            # vmin and vmax where the distance is between 0 and 1
-            t = (face - vmin) / float((vmax - vmin))
             low_color_index = int(t / (1.0 / (len(colormap) - 1)))
 
             face_color = clrs.find_intermediate_color(
@@ -52,9 +53,6 @@ def map_face2color(face, colormap, scale, vmin, vmax):
             face_color = clrs.convert_to_RGB_255(face_color)
             face_color = clrs.label_rgb(face_color)
         else:
-            # find the face color for a non-linearly interpolated scale
-            t = (face - vmin) / float((vmax - vmin))
-
             low_color_index = 0
             for k in range(len(scale) - 1):
                 if scale[k] <= t < scale[k + 1]:
