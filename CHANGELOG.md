@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
-- Updated Plotly.js to version 2.0.0-rc.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Updated Plotly.js to version 2.0.0. See the [plotly.js 2.0.0 CHANGELOG](https://github.com/plotly/plotly.js/blob/v2.0.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - new `marker.pattern` options for `bar`-like trace types
   - dropped support for IE9 and IE10
   - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
