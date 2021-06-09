@@ -458,7 +458,13 @@ class EnumeratedValidator(BaseValidator):
         # ----------------------------
         # Look for regular expressions
         for v in self.values:
-            if v and isinstance(v, string_types) and v[0] == "/" and v[-1] == "/":
+            if (
+                v
+                and isinstance(v, string_types)
+                and v[0] == "/"
+                and v[-1] == "/"
+                and len(v) > 1
+            ):
                 # String is a regex with leading and trailing '/' character
                 regex_str = v[1:-1]
                 self.val_regexs.append(re.compile(regex_str))
