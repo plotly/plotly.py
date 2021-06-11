@@ -428,13 +428,12 @@ renderers["databricks"] = DatabricksRenderer()
 renderers["json"] = JsonRenderer()
 
 # Static Image
-img_kwargs = dict(height=450, width=700)
-renderers["png"] = PngRenderer(**img_kwargs)
-jpeg_renderer = JpegRenderer(**img_kwargs)
+renderers["png"] = PngRenderer()
+jpeg_renderer = JpegRenderer()
 renderers["jpeg"] = jpeg_renderer
 renderers["jpg"] = jpeg_renderer
-renderers["svg"] = SvgRenderer(**img_kwargs)
-renderers["pdf"] = PdfRenderer(**img_kwargs)
+renderers["svg"] = SvgRenderer()
+renderers["pdf"] = PdfRenderer()
 
 # External
 renderers["browser"] = BrowserRenderer(config=config)
