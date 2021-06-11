@@ -101,13 +101,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using `pip`:
 
 ```
-pip install jupyterlab>=3 "ipywidgets>=7.6"
+pip install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
 or `conda`:
 
 ```
-conda install jupyterlab>=3 "ipywidgets>=7.6"
+conda install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
 For JupyterLab 2 or earlier, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
