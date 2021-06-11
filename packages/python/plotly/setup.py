@@ -33,6 +33,26 @@ if not os.path.exists(labstatic):
     # Ensure the folder exists when we will look for files in it
     os.makedirs(labstatic)
 
+prebuilt_assets = [
+    (
+        "share/jupyter/labextensions/jupyterlab-plotly",
+        ["jupyterlab_plotly/labextension/package.json",],
+    ),
+    (
+        "share/jupyter/labextensions/jupyterlab-plotly/static",
+        [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+    ),
+    (
+        "share/jupyter/nbextensions/jupyterlab-plotly",
+        [
+            "jupyterlab_plotly/nbextension/extension.js",
+            "jupyterlab_plotly/nbextension/index.js",
+            "jupyterlab_plotly/nbextension/index.js.LICENSE.txt",
+        ],
+    ),
+]
+
+
 if "--skip-npm" in sys.argv or os.environ.get("SKIP_NPM") is not None:
     print("Skipping npm install as requested.")
     skip_npm = True
@@ -68,6 +88,7 @@ def js_prerelease(command, strict=False):
             if not is_repo and all(os.path.exists(t) for t in jsdeps.targets):
                 # sdist, nothing to do
                 command.run(self)
+                self.distribution.data_files.extend(prebuilt_assets)
                 return
 
             try:
@@ -94,26 +115,7 @@ def update_package_data(distribution):
 
     # JS assets will not be present if we are skip npm build
     if not skip_npm:
-        distribution.data_files.extend(
-            [
-                (
-                    "share/jupyter/labextensions/jupyterlab-plotly",
-                    ["jupyterlab_plotly/labextension/package.json",],
-                ),
-                (
-                    "share/jupyter/labextensions/jupyterlab-plotly/static",
-                    [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
-                ),
-                (
-                    "share/jupyter/nbextensions/jupyterlab-plotly",
-                    [
-                        "jupyterlab_plotly/nbextension/extension.js",
-                        "jupyterlab_plotly/nbextension/index.js",
-                        "jupyterlab_plotly/nbextension/index.js.LICENSE.txt",
-                    ],
-                ),
-            ]
-        )
+        distribution.data_files.extend(prebuilt_assets)
 
     # re-init build_py options which load package_data
     build_py.finalize_options()
