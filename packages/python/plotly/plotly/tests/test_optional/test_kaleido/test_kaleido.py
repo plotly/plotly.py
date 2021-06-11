@@ -99,9 +99,5 @@ def test_image_renderer():
 
     renderer = pio.renderers["svg"]
     scope.transform.assert_called_with(
-        fig,
-        format="svg",
-        width=renderer.width,
-        height=renderer.height,
-        scale=renderer.scale,
+        fig, format="svg", width=None, height=None, scale=renderer.scale,
     )
