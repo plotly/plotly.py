@@ -46,7 +46,7 @@
     "@types/plotly.js": "^1.54.10",
     "@types/webpack-env": "^1.13.6",
     "acorn": "^7.2.0",
-    "css-loader": "^3.2.0",
+    "css-loader": "^5.2.6",
     "fs-extra": "^7.0.0",
     "mkdirp": "^0.5.1",
     "npm-run-all": "^4.1.3",
