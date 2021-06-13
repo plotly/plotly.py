@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Updated
+
+- All `plotly.express` figure factory functions now support faceting [2646](https://github.com/plotly/plotly.py/issues/2646)
+
 
 ## UNRELEASED
 
