@@ -209,8 +209,8 @@ def test_px_defaults():
 
 
 def assert_orderings(days_order, days_check, times_order, times_check):
-    symbol_sequence = ["circle", "diamond", "square", "cross"]
-    color_sequence = ["red", "blue"]
+    symbol_sequence = ["circle", "diamond", "square", "cross", "circle", "diamond"]
+    color_sequence = ["red", "blue", "red", "blue", "red", "blue", "red", "blue"]
     fig = px.scatter(
         px.data.tips(),
         x="total_bill",
@@ -229,7 +229,7 @@ def assert_orderings(days_order, days_check, times_order, times_check):
             assert days_check[col] in trace.hovertemplate
 
     for row in range(len(times_check)):
-        for trace in fig.select_traces(row=2 - row):
+        for trace in fig.select_traces(row=len(times_check) - row):
             assert times_check[row] in trace.hovertemplate
 
     for trace in fig.data:
@@ -241,13 +241,10 @@ def assert_orderings(days_order, days_check, times_order, times_check):
                 assert trace.marker.color == color_sequence[i]
 
 
-def test_noisy_orthogonal_orderings():
-    assert_orderings(
-        ["x", "Sun", "Sat", "y", "Fri", "z"],  # add extra noise, missing Thur
-        ["Sun", "Sat", "Fri", "Thur"],  # Thur is at the back
-        ["a", "Lunch", "b"],  # add extra noise, missing Dinner
-        ["Lunch", "Dinner"],  # Dinner is at the back
-    )
+@pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "x"]))
+@pytest.mark.parametrize("times", permutations(["Lunch", "x"]))
+def test_orthogonal_and_missing_orderings(days, times):
+    assert_orderings(days, list(days) + ["Thur"], times, list(times) + ["Dinner"])
 
 
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "Thur"]))

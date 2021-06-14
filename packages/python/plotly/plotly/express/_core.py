@@ -1838,6 +1838,7 @@ def get_orderings(args, grouper, grouped):
                 if col not in orders:
                     orders[col] = list(uniques)
                 else:
+                    orders[col] = list(orders[col])
                     for val in uniques:
                         if val not in orders[col]:
                             orders[col].append(val)
@@ -1849,7 +1850,6 @@ def get_orderings(args, grouper, grouped):
                 group_names,
                 key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
             )
-
     return orders, group_names, group_values
 
 
@@ -1877,17 +1877,19 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
     col_labels = []
     row_labels = []
-
     for m in grouped_mappings:
-        if m.grouper:
+        if m.grouper not in sorted_group_values:
+            m.val_map[""] = m.sequence[0]
+        else:
+            sorted_values = orders[m.grouper]
             if m.facet == "col":
                 prefix = get_label(args, args["facet_col"]) + "="
-                col_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
+                col_labels = [prefix + str(s) for s in sorted_values]
             if m.facet == "row":
                 prefix = get_label(args, args["facet_row"]) + "="
-                row_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
-            for val in sorted_group_values[m.grouper]:
-                if val not in m.val_map:
+                row_labels = [prefix + str(s) for s in sorted_values]
+            for val in sorted_values:
+                if val not in m.val_map:  # always False if it's an IdentityMap
                     m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
 
     subplot_type = _subplot_type_for_trace_type(constructor().type)
@@ -1943,8 +1945,6 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
             for i, m in enumerate(grouped_mappings):
                 val = group_name[i]
-                if val not in m.val_map:
-                    m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
                 try:
                     m.updater(trace, m.val_map[val])  # covers most cases
                 except ValueError:
