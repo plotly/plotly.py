@@ -552,8 +552,10 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
         axis["categoryarray"] = (
             orders[args[letter]]
             if isinstance(axis, go.layout.XAxis)
-            else list(reversed(orders[args[letter]]))
+            else list(reversed(orders[args[letter]]))  # top down for Y axis
         )
+        if "range" not in axis:
+            axis["range"] = [-0.5, len(orders[args[letter]]) - 0.5]
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
