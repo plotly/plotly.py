@@ -1984,7 +1984,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     row = m.val_map[val]
                 else:
                     if (
-                        bool(args.get("marginal_x", False))  # there is a marginal
+                        args.get("marginal_x", None) is not None  # there is a marginal
                         and trace_spec.marginal != "x"  # and we're not it
                     ):
                         row = 2
@@ -2068,10 +2068,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         nrows = math.ceil(ncols / facet_col_wrap)
         ncols = min(ncols, facet_col_wrap)
 
-    if args.get("marginal_x"):
+    if args.get("marginal_x", None) is not None:
         nrows += 1
 
-    if args.get("marginal_y"):
+    if args.get("marginal_y", None) is not None:
         ncols += 1
 
     fig = init_figure(
@@ -2118,7 +2118,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
-        if bool(args.get("marginal_x", False)):
+        if args.get("marginal_x", None) is not None:
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -2131,7 +2131,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         else:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.03
 
-        if bool(args.get("marginal_y", False)):
+        if args.get("marginal_y", None) is not None:
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
