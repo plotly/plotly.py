@@ -400,10 +400,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         if hover_is_dict and not attr_value[col]:
                             continue
                         if col in [
-                            args.get("x", None),
-                            args.get("y", None),
-                            args.get("z", None),
-                            args.get("base", None),
+                            args.get("x"),
+                            args.get("y"),
+                            args.get("z"),
+                            args.get("base"),
                         ]:
                             continue
                         try:
@@ -1286,8 +1286,8 @@ def build_dataframe(args, constructor):
 
     # now we handle special cases like wide-mode or x-xor-y specification
     # by rearranging args to tee things up for process_args_into_dataframe to work
-    no_x = args.get("x", None) is None
-    no_y = args.get("y", None) is None
+    no_x = args.get("x") is None
+    no_y = args.get("y") is None
     wide_x = False if no_x else _is_col_list(df_input, args["x"])
     wide_y = False if no_y else _is_col_list(df_input, args["y"])
 
@@ -1314,9 +1314,9 @@ def build_dataframe(args, constructor):
             if var_name in [None, "value", "index"] or var_name in df_input:
                 var_name = "variable"
             if constructor == go.Funnel:
-                wide_orientation = args.get("orientation", None) or "h"
+                wide_orientation = args.get("orientation") or "h"
             else:
-                wide_orientation = args.get("orientation", None) or "v"
+                wide_orientation = args.get("orientation") or "v"
             args["orientation"] = wide_orientation
             args["wide_cross"] = None
         elif wide_x != wide_y:
@@ -1347,7 +1347,7 @@ def build_dataframe(args, constructor):
     if constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types:
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
-                if args.get(ax, None) is None:
+                if args.get(ax) is None:
                     args[ax] = df_input.index if df_provided else Range()
                     if constructor == go.Bar:
                         missing_bar_dim = ax
@@ -1371,7 +1371,7 @@ def build_dataframe(args, constructor):
                 )
 
     no_color = False
-    if type(args.get("color", None)) == str and args["color"] == NO_COLOR:
+    if type(args.get("color")) == str and args["color"] == NO_COLOR:
         no_color = True
         args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
@@ -1787,17 +1787,17 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[other_position] = None
 
     # If both marginals and faceting are specified, faceting wins
-    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
+    if args.get("facet_col") is not None and args.get("marginal_y") is not None:
         args["marginal_y"] = None
 
-    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
+    if args.get("facet_row") is not None and args.get("marginal_x") is not None:
         args["marginal_x"] = None
 
     # facet_col_wrap only works if no marginals or row faceting is used
     if (
-        args.get("marginal_x", None) is not None
-        or args.get("marginal_y", None) is not None
-        or args.get("facet_row", None) is not None
+        args.get("marginal_x") is not None
+        or args.get("marginal_y") is not None
+        or args.get("facet_row") is not None
     ):
         args["facet_col_wrap"] = 0
 
@@ -1984,7 +1984,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     row = m.val_map[val]
                 else:
                     if (
-                        args.get("marginal_x", None) is not None  # there is a marginal
+                        args.get("marginal_x") is not None  # there is a marginal
                         and trace_spec.marginal != "x"  # and we're not it
                     ):
                         row = 2
@@ -2068,10 +2068,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         nrows = math.ceil(ncols / facet_col_wrap)
         ncols = min(ncols, facet_col_wrap)
 
-    if args.get("marginal_x", None) is not None:
+    if args.get("marginal_x") is not None:
         nrows += 1
 
-    if args.get("marginal_y", None) is not None:
+    if args.get("marginal_y") is not None:
         ncols += 1
 
     fig = init_figure(
@@ -2118,7 +2118,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
-        if args.get("marginal_x", None) is not None:
+        if args.get("marginal_x") is not None:
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -2127,11 +2127,11 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif facet_col_wrap:
-            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
+            vertical_spacing = args.get("facet_row_spacing") or 0.07
         else:
-            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
+            vertical_spacing = args.get("facet_row_spacing") or 0.03
 
-        if args.get("marginal_y", None) is not None:
+        if args.get("marginal_y") is not None:
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -2140,7 +2140,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
+            horizontal_spacing = args.get("facet_col_spacing") or 0.02
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None
@@ -2148,10 +2148,10 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
         if facet_col_wrap:
-            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
+            vertical_spacing = args.get("facet_row_spacing") or 0.07
         else:
-            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
-        horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
+            vertical_spacing = args.get("facet_row_spacing") or 0.03
+        horizontal_spacing = args.get("facet_col_spacing") or 0.02
 
     if facet_col_wrap:
         subplot_labels = [None] * nrows * ncols
