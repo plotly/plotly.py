@@ -1816,43 +1816,41 @@ def infer_config(args, constructor, trace_patch, layout_patch):
 
 def get_orderings(args, grouper, grouped):
     """
-    `orders` is the user-supplied ordering (with the remaining data-frame-supplied
-    ordering appended if the column is used for grouping). It includes anything the user
-    gave, for any variable, including values not present in the dataset. It is used
-    downstream to set e.g. `categoryarray` for cartesian axes
+    `orders` is the user-supplied ordering with the remaining data-frame-supplied
+    ordering appended if the column is used for grouping. It includes anything the user
+    gave, for any variable, including values not present in the dataset. It's a dict
+    where the keys are e.g. "x" or "color"
 
-    `group_names` is the set of groups, ordered by the order above
-
-    `group_values` is a subset of `orders` in both keys and values. It contains a key
-     for every grouped mapping and its values are the sorted *data* values for these
-     mappings.
+    `sorted_group_names` is the set of groups, ordered by the order above. It's a list
+    of tuples like [("value1", ""), ("value2", "")] where each tuple contains the name
+    of a single dimension-group
     """
+
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
-    group_names = []
-    group_values = {}
+    for col in grouper:
+        if col != one_group:
+            uniques = args["data_frame"][col].unique()
+            if col not in orders:
+                orders[col] = list(uniques)
+            else:
+                orders[col] = list(orders[col])
+                for val in uniques:
+                    if val not in orders[col]:
+                        orders[col].append(val)
+
+    sorted_group_names = []
     for group_name in grouped.groups:
         if len(grouper) == 1:
             group_name = (group_name,)
-        group_names.append(group_name)
-        for col in grouper:
-            if col != one_group:
-                uniques = args["data_frame"][col].unique()
-                if col not in orders:
-                    orders[col] = list(uniques)
-                else:
-                    orders[col] = list(orders[col])
-                    for val in uniques:
-                        if val not in orders[col]:
-                            orders[col].append(val)
-                group_values[col] = sorted(uniques, key=orders[col].index)
+        sorted_group_names.append(group_name)
 
     for i, col in reversed(list(enumerate(grouper))):
         if col != one_group:
-            group_names = sorted(
-                group_names,
+            sorted_group_names = sorted(
+                sorted_group_names,
                 key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
             )
-    return orders, group_names, group_values
+    return orders, sorted_group_names
 
 
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
@@ -1873,15 +1871,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     grouped = args["data_frame"].groupby(grouper, sort=False)
 
-    orders, sorted_group_names, sorted_group_values = get_orderings(
-        args, grouper, grouped
-    )
+    orders, sorted_group_names = get_orderings(args, grouper, grouped)
 
     col_labels = []
     row_labels = []
     nrows = ncols = 1
     for m in grouped_mappings:
-        if m.grouper not in sorted_group_values:
+        if m.grouper not in orders:
             m.val_map[""] = m.sequence[0]
         else:
             sorted_values = orders[m.grouper]
