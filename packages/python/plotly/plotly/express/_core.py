@@ -1829,14 +1829,11 @@ def get_orderings(args, grouper, grouped):
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
     for col in grouper:
         if col != one_group:
-            uniques = args["data_frame"][col].unique()
+            uniques = list(args["data_frame"][col].unique())
             if col not in orders:
-                orders[col] = list(uniques)
+                orders[col] = uniques
             else:
-                orders[col] = list(orders[col])
-                for val in uniques:
-                    if val not in orders[col]:
-                        orders[col].append(val)
+                orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
     sorted_group_names = []
     for group_name in grouped.groups:
