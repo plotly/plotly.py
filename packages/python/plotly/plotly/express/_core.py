@@ -2065,8 +2065,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         layout_patch["legend"]["itemsizing"] = "constant"
 
     if facet_col_wrap:
-        nrows = 1 + ncols // facet_col_wrap
-        ncols = ncols if ncols < facet_col_wrap else facet_col_wrap
+        nrows = math.ceil(ncols / facet_col_wrap)
+        ncols = min(ncols, facet_col_wrap)
 
     if args.get("marginal_x"):
         nrows += 1
