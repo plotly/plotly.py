@@ -1779,7 +1779,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             else args["geojson"].__geo_interface__
         )
 
-    # Compute marginal attribute
+    # Compute marginal attribute: copy to appropriate marginal_*
     if "marginal" in args:
         position = "marginal_x" if args["orientation"] == "v" else "marginal_y"
         other_position = "marginal_x" if args["orientation"] == "h" else "marginal_y"
@@ -1879,6 +1879,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
     col_labels = []
     row_labels = []
+    nrows = ncols = 1
     for m in grouped_mappings:
         if m.grouper not in sorted_group_values:
             m.val_map[""] = m.sequence[0]
@@ -1887,9 +1888,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             if m.facet == "col":
                 prefix = get_label(args, args["facet_col"]) + "="
                 col_labels = [prefix + str(s) for s in sorted_values]
+                ncols = len(col_labels)
             if m.facet == "row":
                 prefix = get_label(args, args["facet_row"]) + "="
                 row_labels = [prefix + str(s) for s in sorted_values]
+                nrows = len(row_labels)
             for val in sorted_values:
                 if val not in m.val_map:  # always False if it's an IdentityMap
                     m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
@@ -1899,8 +1902,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_names_by_frame = {}
     frames = OrderedDict()
     trendline_rows = []
-    nrows = ncols = 1
     trace_name_labels = None
+    facet_col_wrap = args.get("facet_col_wrap", 0)
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
         mapping_labels = OrderedDict()
@@ -1981,14 +1984,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     row = m.val_map[val]
                 else:
                     if (
-                        bool(args.get("marginal_x", False))
-                        and trace_spec.marginal != "x"
+                        bool(args.get("marginal_x", False))  # there is a marginal
+                        and trace_spec.marginal != "x"  # and we're not it
                     ):
                         row = 2
                     else:
                         row = 1
 
-                facet_col_wrap = args.get("facet_col_wrap", 0)
                 # Find col for trace, handling facet_col and marginal_y
                 if m.facet == "col":
                     col = m.val_map[val]
@@ -2001,11 +2003,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     else:
                         col = 1
 
-                nrows = max(nrows, row)
                 if row > 1:
                     trace._subplot_row = row
 
-                ncols = max(ncols, col)
                 if col > 1:
                     trace._subplot_col = col
             if (
@@ -2063,6 +2063,16 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         and args["template"].layout.legend.itemsizing is None
     ):
         layout_patch["legend"]["itemsizing"] = "constant"
+
+    if facet_col_wrap:
+        nrows = 1 + ncols // facet_col_wrap
+        ncols = ncols if ncols < facet_col_wrap else facet_col_wrap
+
+    if args.get("marginal_x"):
+        nrows += 1
+
+    if args.get("marginal_y"):
+        ncols += 1
 
     fig = init_figure(
         args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels
