@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to use hover text and formatting in Python with Plotly.
     display_as: file_settings
@@ -248,9 +248,41 @@ print("user_defined hovertemplate:", fig.data[0].hovertemplate)
 fig.show()
 ```
 
+### Hover Templates with Mixtures of Period data
+
+When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=["2020-01-01", "2020-04-01", "2020-07-01"],
+    y=[1000, 1500, 1700],
+    xperiod="M3",
+    xperiodalignment="middle",
+    xhoverformat="Q%q",
+    hovertemplate="%{y}%{_xother}"
+))
+
+fig.add_trace(go.Scatter(
+    x=["2020-01-01", "2020-02-01", "2020-03-01",
+      "2020-04-01", "2020-05-01", "2020-06-01",
+      "2020-07-01", "2020-08-01", "2020-09-01"],
+    y=[1100,1050,1200,1300,1400,1700,1500,1400,1600],
+    xperiod="M1",
+    xperiodalignment="middle",
+    hovertemplate="%{y}%{_xother}"
+))
+
+fig.update_layout(hovermode="x unified")
+fig.show()
+```
+
 ### Advanced Hover Template
 
-The following example shows how to format hover template. [Here](https://plotly.com/python/v3/hover-text-and-formatting/#dash-example) is an example to see how to format hovertemplate in Dash.
+The following example shows how to format a hover template.
 
 ```python
 import plotly.graph_objects as go

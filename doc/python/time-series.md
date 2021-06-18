@@ -203,9 +203,43 @@ fig.update_xaxes(showgrid=True, ticklabelmode="period")
 fig.show()
 ```
 
+### Hover Templates with Mixtures of Period data
+
+When displaying periodic data with mixed-sized periods (i.e. quarterly and monthly) in conjunction with [`x` or `x unified` hovermodes and using `hovertemplate`](https://plotly.com/python/hover-text-and-formatting/), the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=["2020-01-01", "2020-04-01", "2020-07-01"],
+    y=[1000, 1500, 1700],
+    xperiod="M3",
+    xperiodalignment="middle",
+    xhoverformat="Q%q",
+    hovertemplate="%{y}%{_xother}"
+))
+
+fig.add_trace(go.Scatter(
+    x=["2020-01-01", "2020-02-01", "2020-03-01",
+      "2020-04-01", "2020-05-01", "2020-06-01",
+      "2020-07-01", "2020-08-01", "2020-09-01"],
+    y=[1100,1050,1200,1300,1400,1700,1500,1400,1600],
+    xperiod="M1",
+    xperiodalignment="middle",
+    hovertemplate="%{y}%{_xother}"
+))
+
+fig.update_layout(hovermode="x unified")
+fig.show()
+```
+
+<!-- #region tags=[] -->
 ### Time Series Plot with Custom Date Range
 
 The data range can be set manually using either `datetime.datetime` objects, or date strings.
+<!-- #endregion -->
 
 ```python
 # Using plotly.express
