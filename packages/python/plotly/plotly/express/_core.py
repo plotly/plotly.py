@@ -30,6 +30,7 @@ renameable_group_attrables = [
     "color",  # renamed to marker.color or line.color in infer_config
     "symbol",  # renamed to marker.symbol in infer_config
     "line_dash",  # renamed to line.dash in infer_config
+    "pattern_shape",  # renamed to marker.pattern.shape in infer_config
 ]
 all_attrables = (
     direct_attrables + array_attrables + group_attrables + renameable_group_attrables
@@ -51,6 +52,8 @@ class PxDefaults(object):
         "symbol_map",
         "line_dash_sequence",
         "line_dash_map",
+        "pattern_shape_sequence",
+        "pattern_shape_map",
         "size_max",
         "category_orders",
         "labels",
@@ -70,6 +73,8 @@ class PxDefaults(object):
         self.symbol_map = {}
         self.line_dash_sequence = None
         self.line_dash_map = {}
+        self.pattern_shape_sequence = None
+        self.pattern_shape_map = {}
         self.size_max = 20
         self.category_orders = {}
         self.labels = {}
@@ -206,7 +211,7 @@ def make_mapping(args, variable):
             updater=(lambda trace, v: v),
             facet="row" if variable == "facet_row" else "col",
         )
-    (parent, variable) = variable.split(".")
+    (parent, variable, *other_variables) = variable.split(".")
     vprefix = variable
     arg_name = variable
     if variable == "color":
@@ -214,6 +219,9 @@ def make_mapping(args, variable):
     if variable == "dash":
         arg_name = "line_dash"
         vprefix = "line_dash"
+    if variable == "pattern":
+        arg_name = "pattern_shape"
+        vprefix = "pattern_shape"
     if args[vprefix + "_map"] == "identity":
         val_map = IdentityMap()
     else:
@@ -224,7 +232,9 @@ def make_mapping(args, variable):
         grouper=args[arg_name],
         val_map=val_map,
         sequence=args[vprefix + "_sequence"],
-        updater=lambda trace, v: trace.update({parent: {variable: v}}),
+        updater=lambda trace, v: trace.update(
+            {parent: {".".join([variable] + other_variables): v}}
+        ),
         facet=None,
     )
 
@@ -951,6 +961,16 @@ def apply_default_cascade(args):
                 "dashdot",
                 "longdashdot",
             ]
+
+    if "pattern_shape_sequence" in args:
+        if args["pattern_shape_sequence"] is None and args["template"].data.bar:
+            args["pattern_shape_sequence"] = [
+                bar.marker.pattern.shape for bar in args["template"].data.bar
+            ]
+        if not args["pattern_shape_sequence"] or not any(
+            args["pattern_shape_sequence"]
+        ):
+            args["pattern_shape_sequence"] = ["", "/", "\\", "x", "+", "."]
 
 
 def _check_name_not_reserved(field_name, reserved_names):
@@ -1691,13 +1711,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     else:
         show_colorbar = False
 
-    # Compute line_dash grouping attribute
     if "line_dash" in args:
         grouped_attrs.append("line.dash")
 
-    # Compute symbol grouping attribute
     if "symbol" in args:
         grouped_attrs.append("marker.symbol")
+
+    if "pattern_shape" in args:
+        grouped_attrs.append("marker.pattern.shape")
 
     if "orientation" in args:
         has_x = args["x"] is not None
@@ -1949,8 +1970,14 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     # this catches some odd cases like marginals
                     if (
                         trace_spec != trace_specs[0]
-                        and trace_spec.constructor in [go.Violin, go.Box, go.Histogram]
-                        and m.variable == "symbol"
+                        and (
+                            trace_spec.constructor in [go.Violin, go.Box]
+                            and m.variable in ["symbol", "pattern"]
+                        )
+                        or (
+                            trace_spec.constructor in [go.Histogram]
+                            and m.variable in ["symbol"]
+                        )
                     ):
                         pass
                     elif (

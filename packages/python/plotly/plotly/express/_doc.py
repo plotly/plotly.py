@@ -182,6 +182,11 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign symbols to marks.",
     ],
+    pattern_shape=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to assign pattern shapes to marks.",
+    ],
     size=[
         colref_type,
         colref_desc,
@@ -282,6 +287,18 @@ docs = dict(
         "list of str",
         "Strings should define valid plotly.js dash-patterns.",
         "When `line_dash` is set, values in that column are assigned dash-patterns by cycling through `line_dash_sequence` in the order described in `category_orders`, unless the value of `line_dash` is a key in `line_dash_map`.",
+    ],
+    pattern_shape_map=[
+        "dict with str keys and str values (default `{}`)",
+        "Strings values define plotly.js patterns-shapes.",
+        "Used to override `pattern_shape_sequences` to assign a specific patterns-shapes to lines corresponding with specific values.",
+        "Keys in `pattern_shape_map` should be values in the column denoted by `pattern_shape`.",
+        "Alternatively, if the values of `pattern_shape` are valid patterns-shapes names, the string `'identity'` may be passed to cause them to be used directly.",
+    ],
+    pattern_shape_sequence=[
+        "list of str",
+        "Strings should define valid plotly.js patterns-shapes.",
+        "When `pattern_shape` is set, values in that column are assigned patterns-shapes by cycling through `pattern_shape_sequence` in the order described in `category_orders`, unless the value of `pattern_shape` is a key in `pattern_shape_map`.",
     ],
     color_discrete_sequence=[
         "list of str",
