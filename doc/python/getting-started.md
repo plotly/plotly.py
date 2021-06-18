@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -34,7 +34,6 @@ jupyter:
     - /python/pytables/
 ---
 
-<!-- #region -->
 
 ### Overview
 
@@ -72,7 +71,6 @@ This package contains everything you need to write figures to standalone HTML fi
 
 > Note: **No internet connection, account, or payment is required to use plotly.py.** Prior to version 4, this library could operate in either an "online" or "offline" mode. The documentation tended to emphasize the online mode, where graphs get published to the Chart Studio web service. In version 4, all "online" functionality was removed from the `plotly` package and is now available as the separate, optional, `chart-studio` package (See below). **plotly.py version 4 is "offline" only, and does not include any functionality for uploading figures or data to cloud services.**
 
-<!-- #endregion -->
 
 ```python
 import plotly.graph_objects as go
@@ -93,7 +91,56 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'getting-started', width='100%', height=630)
 ```
 
-<!-- #region -->
+#### JupyterLab Support
+
+For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
+packages using `pip`:
+
+```
+$ pip install "jupyterlab>=3" "ipywidgets>=7.6"
+```
+
+or `conda`:
+
+```
+$ conda install "jupyterlab>=3" "ipywidgets>=7.6"
+```
+
+These packages contain everything you need to run JupyterLab...
+
+```
+$ jupyter lab
+```
+
+and display plotly figures inline using the `plotly_mimetype` renderer...
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
+fig.show()
+```
+
+or using `FigureWidget` objects.
+
+```python
+import plotly.graph_objects as go
+fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
+fig
+```
+
+The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
+
+```
+# JupyterLab 2.x renderer support
+jupyter labextension install jupyterlab-plotly@4.14.3 @jupyter-widgets/jupyterlab-manager
+```
+
+Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
+
+
+See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
+
+
 
 #### Jupyter Notebook Support
 
@@ -118,7 +165,6 @@ $ jupyter notebook
 
 and display plotly figures inline using the notebook renderer...
 
-<!-- #endregion -->
 
 ```python
 import plotly.graph_objects as go
@@ -134,64 +180,8 @@ fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
 
-<!-- #region -->
-
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
-#### JupyterLab Support
-
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
-packages using `pip`:
-
-```
-$ pip install jupyterlab "ipywidgets>=7.6"
-```
-
-or `conda`:
-
-```
-$ conda install jupyterlab "ipywidgets>=7.6"
-```
-
-For JupyterLab 2 or earlier, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.14.3
-
-# OPTIONAL: Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.3
-```
-
-These packages contain everything you need to run JupyterLab...
-
-```
-$ jupyter lab
-```
-
-and display plotly figures inline using the `plotly_mimetype` renderer...
-
-<!-- #endregion -->
-
-```python
-import plotly.graph_objects as go
-fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
-fig.show()
-```
-
-or using `FigureWidget` objects (if the "OPTIONAL" step above was executed).
-
-```python
-import plotly.graph_objects as go
-fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
-fig
-```
-
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
-
-<!-- #region -->
-
-See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
 ### Static Image Export
 
@@ -283,5 +273,3 @@ Once you've installed, you can use our documentation in three main ways:
 For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 
 We also encourage you to join the [Plotly Community Forum](http://community.plotly.com/) if you want help with anything related to `plotly`.
-
-<!-- #endregion -->
