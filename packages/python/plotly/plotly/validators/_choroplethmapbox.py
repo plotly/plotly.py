@@ -140,6 +140,16 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
+            legendrank
+                Sets the legend rank for this trace. Items and
+                groups with smaller ranks are presented on
+                top/left side while with `*reversed*
+                `legend.traceorder` they are on bottom/right
+                side. The default legendrank is 1000, so that
+                you can use ranks less than 1000 to place
+                certain items before all unranked items, and
+                ranks greater than 1000 to go after all
+                unranked items.
             locations
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.

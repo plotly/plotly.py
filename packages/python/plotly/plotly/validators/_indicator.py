@@ -40,6 +40,16 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for  ids .
+            legendrank
+                Sets the legend rank for this trace. Items and
+                groups with smaller ranks are presented on
+                top/left side while with `*reversed*
+                `legend.traceorder` they are on bottom/right
+                side. The default legendrank is 1000, so that
+                you can use ranks less than 1000 to place
+                certain items before all unranked items, and
+                ranks greater than 1000 to go after all
+                unranked items.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text

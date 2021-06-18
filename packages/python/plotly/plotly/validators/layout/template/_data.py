@@ -77,6 +77,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 A tuple of
                 :class:`plotly.graph_objects.Histogram`
                 instances or dicts with compatible properties
+            icicle
+                A tuple of :class:`plotly.graph_objects.Icicle`
+                instances or dicts with compatible properties
             image
                 A tuple of :class:`plotly.graph_objects.Image`
                 instances or dicts with compatible properties

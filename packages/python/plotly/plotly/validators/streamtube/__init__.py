@@ -37,6 +37,7 @@ if sys.version_info < (3, 7):
     from ._maxdisplayed import MaxdisplayedValidator
     from ._lightposition import LightpositionValidator
     from ._lighting import LightingValidator
+    from ._legendrank import LegendrankValidator
     from ._legendgroup import LegendgroupValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -99,6 +100,7 @@ else:
             "._maxdisplayed.MaxdisplayedValidator",
             "._lightposition.LightpositionValidator",
             "._lighting.LightingValidator",
+            "._legendrank.LegendrankValidator",
             "._legendgroup.LegendgroupValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

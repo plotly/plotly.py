@@ -11,11 +11,30 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             bgcolor
-                Sets the background color of the pattern fill.
-                Defaults to a transparent background.
+                When there is no colorscale sets the color of
+                background pattern fill. Defaults to a
+                `marker.color` background when `fillmode` is
+                "overlay". Otherwise, defaults to a transparent
+                background.
             bgcolorsrc
                 Sets the source reference on Chart Studio Cloud
                 for  bgcolor .
+            fgcolor
+                When there is no colorscale sets the color of
+                foreground pattern fill. Defaults to a
+                `marker.color` background when `fillmode` is
+                "replace". Otherwise, defaults to dark grey or
+                white to increase contrast with the `bgcolor`.
+            fgcolorsrc
+                Sets the source reference on Chart Studio Cloud
+                for  fgcolor .
+            fgopacity
+                Sets the opacity of the foreground pattern
+                fill. Defaults to a 0.5 when `fillmode` is
+                "overlay". Otherwise, defaults to 1.
+            fillmode
+                Determines whether `marker.color` should be
+                used as a default to `bgcolor` or a `fgcolor`.
             shape
                 Sets the shape of the pattern fill. By default,
                 no pattern is used for filling the area.

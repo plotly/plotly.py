@@ -28,6 +28,7 @@ class Sunburst(_BaseTraceType):
         "labels",
         "labelssrc",
         "leaf",
+        "legendrank",
         "level",
         "marker",
         "maxdepth",
@@ -601,6 +602,31 @@ class Sunburst(_BaseTraceType):
     def leaf(self, val):
         self["leaf"] = val
 
+    # legendrank
+    # ----------
+    @property
+    def legendrank(self):
+        """
+        Sets the legend rank for this trace. Items and groups with
+        smaller ranks are presented on top/left side while with
+        `*reversed* `legend.traceorder` they are on bottom/right side.
+        The default legendrank is 1000, so that you can use ranks less
+        than 1000 to place certain items before all unranked items, and
+        ranks greater than 1000 to go after all unranked items.
+    
+        The 'legendrank' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendrank"]
+
+    @legendrank.setter
+    def legendrank(self, val):
+        self["legendrank"] = val
+
     # level
     # -----
     @property
@@ -964,9 +990,10 @@ class Sunburst(_BaseTraceType):
             Supported dict properties:
                 
                 color
-                    sets the color of the root node for a sunburst
-                    or a treemap trace. this has no effect when a
-                    colorscale is used to set the markers.
+                    sets the color of the root node for a
+                    sunburst/treemap/icicle trace. this has no
+                    effect when a colorscale is used to set the
+                    markers.
 
         Returns
         -------
@@ -1468,6 +1495,14 @@ class Sunburst(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -1622,6 +1657,7 @@ class Sunburst(_BaseTraceType):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legendrank=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -1764,6 +1800,14 @@ class Sunburst(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -2004,6 +2048,10 @@ an instance of :class:`plotly.graph_objs.Sunburst`"""
         _v = leaf if leaf is not None else _v
         if _v is not None:
             self["leaf"] = _v
+        _v = arg.pop("legendrank", None)
+        _v = legendrank if legendrank is not None else _v
+        if _v is not None:
+            self["legendrank"] = _v
         _v = arg.pop("level", None)
         _v = level if level is not None else _v
         if _v is not None:

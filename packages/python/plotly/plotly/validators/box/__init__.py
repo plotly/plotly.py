@@ -59,6 +59,7 @@ if sys.version_info < (3, 7):
     from ._lowerfencesrc import LowerfencesrcValidator
     from ._lowerfence import LowerfenceValidator
     from ._line import LineValidator
+    from ._legendrank import LegendrankValidator
     from ._legendgroup import LegendgroupValidator
     from ._jitter import JitterValidator
     from ._idssrc import IdssrcValidator
@@ -144,6 +145,7 @@ else:
             "._lowerfencesrc.LowerfencesrcValidator",
             "._lowerfence.LowerfenceValidator",
             "._line.LineValidator",
+            "._legendrank.LegendrankValidator",
             "._legendgroup.LegendgroupValidator",
             "._jitter.JitterValidator",
             "._idssrc.IdssrcValidator",
