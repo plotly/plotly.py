@@ -34,6 +34,8 @@ jupyter:
     thumbnail: thumbnail/multiple-transforms.jpg
 ---
 
+> **Note** `transforms` are deprecated in `plotly` v5 and will be removed in a future version.
+>
 #### Filter and Group By
 
 ```python

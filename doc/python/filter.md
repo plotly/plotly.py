@@ -33,6 +33,8 @@ jupyter:
     thumbnail: thumbnail/filter.jpg
 ---
 
+> **Note** `transforms` are deprecated in `plotly` v5 and will be removed in a future version
+
 #### Basic Example
 
 ```python

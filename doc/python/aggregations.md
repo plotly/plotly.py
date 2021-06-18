@@ -33,6 +33,8 @@ jupyter:
     thumbnail: thumbnail/aggregations.jpg
 ---
 
+> **Note** `transforms` are deprecated in `plotly` v5 and will be removed in a future version.
+
 #### Introduction
 
 Aggregates are a type of transform that can be applied to values in a given expression. Available aggregations are:
