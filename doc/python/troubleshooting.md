@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to troubleshoot import and rendering problems in Plotly with
       Python.
@@ -37,7 +37,7 @@ jupyter:
 <!-- #region -->
 ### Version Problems
 
-In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
+In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (5.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is compatible with `plotly` version 4.x but *not* with version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
 
 ### Import Problems
 
@@ -47,6 +47,8 @@ Most `import` problems or `AttributeError`s can be traced back to having multipl
 $ conda uninstall plotly
 $ pip remove plotly
 ```
+
+> Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
 
 ### Dash Problems
 
@@ -62,36 +64,47 @@ IFrame(snippet_url + 'renderers', width='100%', height=630)
 ```
 
 <!-- #region -->
-
 ### JupyterLab Problems
 
-In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There is one extension: `plotlywidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1 or above but not 0.x.
+In order to use `plotly` in JupyterLab, you *must have the `jupyterlab-plotly` extension installed* as detailed in the [Getting Started guide](/python/getting-started). When you install `plotly`, this extension is automatically made available to any JupyterLab 3.x installation in the same Python environment. 
 
-To list your current extensions, run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
+To list your current extensions, run the following command in a terminal shell **from the same environment as JupyterLab is launched**:
 
 ```bash
+# Check that jupyterlab-plotly is installed
 $ jupyter labextension list
+```
+
+Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1 or above but not 0.x.
+
+If automatic installation of the extension is not working in your environment, or if you are using JupyterLab 1.x or 2.0, you may install it manually using the following command, which requires `node` to be installed.
+
+```bash
+# Manually reinstall the extension
+$ jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyterlab-plotly
 ```
 
 If you have [installed additional python environments](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) (or kernels) to use with JupyterLab, or if you are using a centrally hosted JupyterLab installation, you need to make sure that the extensions are installed in the python environment used to launch JupyterLab (the "server" environment). If you accidentally installed the extensions (and run the command above) in one of the additional python environments ("processing" environments), then it is possible for the command above to list the correct extensions but for them to not be available in the JupyterLab front-end you have loaded in your browser. To check if this is the problem, you can [look at the active extension list through your browser via the JupyterLab Extension Manager](https://jupyterlab.readthedocs.io/en/stable/user/extensions.html#using-the-extension-manager), which will always list the extensions in the "server" environment. To summarize: if you use JupyterLab with multiple python environments, the extensions must be installed in the "server" environment, and the plotly python library must be installed in each "processing" environment that you intend to use.
 
-> Version 4.14.3 or earlier needed two extensions (`jupyterlab-plotly` and `plotlywidget`) to be installed manually running:
+> Note that version 4.14.3 of `plotly` or earlier needed two extensions (`jupyterlab-plotly` and `plotlywidget`) to be installed manually running, and that `plotlywidget` requires `@jupyter-widgets/jupyterlab-manager` to be installed:
 
 ```bash
-$ jupyter labextension install jupyterlab-plotly @jupyter-widgets/jupyterlab-manager plotlywidget
+# Instructions for `plotly` 4.x
+$ jupyter labextension install jupyterlab-plotly plotlywidget @jupyter-widgets/jupyterlab-manager 
 ```
 
-#### JupyterLab 2 and earlier
-
-If you have the correct version of the extensions installed and active in your active JupyterLab sessions and are still seeing problems, the issue may clear up if you rebuild JupyterLab. This shouldn't be required in principle but many users have resolved their issues this way. To rebuild JupyterLab, shut down JupyterLab and run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
+If you have the correct version(s) of the extension(s) installed and active in your active JupyterLab sessions and are still seeing problems, the issue may clear up if you rebuild JupyterLab. This shouldn't be required in principle but some users have resolved their issues this way. To rebuild JupyterLab, shut down JupyterLab and run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
 
 ```bash
+# rebuilding JupyterLab
 $ jupyter lab build
 ```
 
 To uninstall your Plotly extensions prior to reinstalling them, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
 
 ```bash
+# uninstalling extensions to reinstall
+$ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
 
