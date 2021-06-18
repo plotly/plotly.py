@@ -24,6 +24,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "histogram": "Histogram",
                 "histogram2d": "Histogram2d",
                 "histogram2dcontour": "Histogram2dContour",
+                "icicle": "Icicle",
                 "image": "Image",
                 "indicator": "Indicator",
                 "isosurface": "Isosurface",

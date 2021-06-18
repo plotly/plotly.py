@@ -55,6 +55,16 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Tilted labels with "labelangle" may be
                 positioned better inside margins when
                 `labelposition` is set to "bottom".
+            legendrank
+                Sets the legend rank for this trace. Items and
+                groups with smaller ranks are presented on
+                top/left side while with `*reversed*
+                `legend.traceorder` they are on bottom/right
+                side. The default legendrank is 1000, so that
+                you can use ranks less than 1000 to place
+                certain items before all unranked items, and
+                ranks greater than 1000 to go after all
+                unranked items.
             line
                 :class:`plotly.graph_objects.parcoords.Line`
                 instance or dict with compatible properties

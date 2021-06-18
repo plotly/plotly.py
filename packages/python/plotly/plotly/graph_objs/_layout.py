@@ -80,6 +80,7 @@ class Layout(_BaseLayoutType):
         "dragmode",
         "editrevision",
         "extendfunnelareacolors",
+        "extendiciclecolors",
         "extendpiecolors",
         "extendsunburstcolors",
         "extendtreemapcolors",
@@ -97,6 +98,7 @@ class Layout(_BaseLayoutType):
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "iciclecolorway",
         "imagedefaults",
         "images",
         "legend",
@@ -1070,6 +1072,33 @@ class Layout(_BaseLayoutType):
     def extendfunnelareacolors(self, val):
         self["extendfunnelareacolors"] = val
 
+    # extendiciclecolors
+    # ------------------
+    @property
+    def extendiciclecolors(self):
+        """
+        If `true`, the icicle slice colors (whether given by
+        `iciclecolorway` or inherited from `colorway`) will be extended
+        to three times its original length by first repeating every
+        color 20% lighter then each color 20% darker. This is intended
+        to reduce the likelihood of reusing the same color when you
+        have many slices, but you can set `false` to disable. Colors
+        provided in the trace, using `marker.colors`, are never
+        extended.
+    
+        The 'extendiciclecolors' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["extendiciclecolors"]
+
+    @extendiciclecolors.setter
+    def extendiciclecolors(self, val):
+        self["extendiciclecolors"] = val
+
     # extendpiecolors
     # ---------------
     @property
@@ -1707,6 +1736,30 @@ class Layout(_BaseLayoutType):
     @hovermode.setter
     def hovermode(self, val):
         self["hovermode"] = val
+
+    # iciclecolorway
+    # --------------
+    @property
+    def iciclecolorway(self):
+        """
+        Sets the default icicle slice colors. Defaults to the main
+        `colorway` used for trace colors. If you specify a new list
+        here it can still be extended with lighter and darker colors,
+        see `extendiciclecolors`.
+    
+        The 'iciclecolorway' property is a colorlist that may be specified
+        as a tuple, list, one-dimensional numpy array, or pandas Series of valid
+        color strings
+
+        Returns
+        -------
+        list
+        """
+        return self["iciclecolorway"]
+
+    @iciclecolorway.setter
+    def iciclecolorway(self, val):
+        self["iciclecolorway"] = val
 
     # images
     # ------
@@ -4828,6 +4881,15 @@ class Layout(_BaseLayoutType):
             of reusing the same color when you have many slices,
             but you can set `false` to disable. Colors provided in
             the trace, using `marker.colors`, are never extended.
+        extendiciclecolors
+            If `true`, the icicle slice colors (whether given by
+            `iciclecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -4929,6 +4991,11 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        iciclecolorway
+            Sets the default icicle slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendiciclecolors`.
         images
             A tuple of :class:`plotly.graph_objects.layout.Image`
             instances or dicts with compatible properties
@@ -5167,6 +5234,7 @@ class Layout(_BaseLayoutType):
         dragmode=None,
         editrevision=None,
         extendfunnelareacolors=None,
+        extendiciclecolors=None,
         extendpiecolors=None,
         extendsunburstcolors=None,
         extendtreemapcolors=None,
@@ -5184,6 +5252,7 @@ class Layout(_BaseLayoutType):
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        iciclecolorway=None,
         images=None,
         imagedefaults=None,
         legend=None,
@@ -5357,6 +5426,15 @@ class Layout(_BaseLayoutType):
             of reusing the same color when you have many slices,
             but you can set `false` to disable. Colors provided in
             the trace, using `marker.colors`, are never extended.
+        extendiciclecolors
+            If `true`, the icicle slice colors (whether given by
+            `iciclecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -5458,6 +5536,11 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        iciclecolorway
+            Sets the default icicle slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendiciclecolors`.
         images
             A tuple of :class:`plotly.graph_objects.layout.Image`
             instances or dicts with compatible properties
@@ -5703,6 +5786,7 @@ class Layout(_BaseLayoutType):
             "dragmode",
             "editrevision",
             "extendfunnelareacolors",
+            "extendiciclecolors",
             "extendpiecolors",
             "extendsunburstcolors",
             "extendtreemapcolors",
@@ -5720,6 +5804,7 @@ class Layout(_BaseLayoutType):
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "iciclecolorway",
             "imagedefaults",
             "images",
             "legend",
@@ -5876,6 +5961,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = extendfunnelareacolors if extendfunnelareacolors is not None else _v
         if _v is not None:
             self["extendfunnelareacolors"] = _v
+        _v = arg.pop("extendiciclecolors", None)
+        _v = extendiciclecolors if extendiciclecolors is not None else _v
+        if _v is not None:
+            self["extendiciclecolors"] = _v
         _v = arg.pop("extendpiecolors", None)
         _v = extendpiecolors if extendpiecolors is not None else _v
         if _v is not None:
@@ -5944,6 +6033,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = hovermode if hovermode is not None else _v
         if _v is not None:
             self["hovermode"] = _v
+        _v = arg.pop("iciclecolorway", None)
+        _v = iciclecolorway if iciclecolorway is not None else _v
+        if _v is not None:
+            self["iciclecolorway"] = _v
         _v = arg.pop("images", None)
         _v = images if images is not None else _v
         if _v is not None:

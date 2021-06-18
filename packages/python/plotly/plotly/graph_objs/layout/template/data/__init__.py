@@ -19,6 +19,7 @@ if sys.version_info < (3, 7):
     from ._histogram import Histogram
     from ._histogram2d import Histogram2d
     from ._histogram2dcontour import Histogram2dContour
+    from ._icicle import Icicle
     from ._image import Image
     from ._indicator import Indicator
     from ._isosurface import Isosurface
@@ -72,6 +73,7 @@ else:
             "._histogram.Histogram",
             "._histogram2d.Histogram2d",
             "._histogram2dcontour.Histogram2dContour",
+            "._icicle.Icicle",
             "._image.Image",
             "._indicator.Indicator",
             "._isosurface.Isosurface",

@@ -31,6 +31,7 @@ if sys.version_info < (3, 7):
     from ._meta import MetaValidator
     from ._lightposition import LightpositionValidator
     from ._lighting import LightingValidator
+    from ._legendrank import LegendrankValidator
     from ._legendgroup import LegendgroupValidator
     from ._ksrc import KsrcValidator
     from ._k import KValidator
@@ -104,6 +105,7 @@ else:
             "._meta.MetaValidator",
             "._lightposition.LightpositionValidator",
             "._lighting.LightingValidator",
+            "._legendrank.LegendrankValidator",
             "._legendgroup.LegendgroupValidator",
             "._ksrc.KsrcValidator",
             "._k.KValidator",

@@ -29,6 +29,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Isosurface
     from ..graph_objs import Indicator
     from ..graph_objs import Image
+    from ..graph_objs import Icicle
     from ..graph_objs import Histogram2dContour
     from ..graph_objs import Histogram2d
     from ..graph_objs import Histogram
@@ -103,6 +104,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import isosurface
     from ..graph_objs import indicator
     from ..graph_objs import image
+    from ..graph_objs import icicle
     from ..graph_objs import histogram2dcontour
     from ..graph_objs import histogram2d
     from ..graph_objs import histogram
@@ -156,6 +158,7 @@ else:
             "..graph_objs.isosurface",
             "..graph_objs.indicator",
             "..graph_objs.image",
+            "..graph_objs.icicle",
             "..graph_objs.histogram2dcontour",
             "..graph_objs.histogram2d",
             "..graph_objs.histogram",
@@ -205,6 +208,7 @@ else:
             "..graph_objs.Isosurface",
             "..graph_objs.Indicator",
             "..graph_objs.Image",
+            "..graph_objs.Icicle",
             "..graph_objs.Histogram2dContour",
             "..graph_objs.Histogram2d",
             "..graph_objs.Histogram",

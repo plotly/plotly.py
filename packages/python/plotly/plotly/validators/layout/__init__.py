@@ -43,6 +43,7 @@ if sys.version_info < (3, 7):
     from ._legend import LegendValidator
     from ._imagedefaults import ImagedefaultsValidator
     from ._images import ImagesValidator
+    from ._iciclecolorway import IciclecolorwayValidator
     from ._hovermode import HovermodeValidator
     from ._hoverlabel import HoverlabelValidator
     from ._hoverdistance import HoverdistanceValidator
@@ -60,6 +61,7 @@ if sys.version_info < (3, 7):
     from ._extendtreemapcolors import ExtendtreemapcolorsValidator
     from ._extendsunburstcolors import ExtendsunburstcolorsValidator
     from ._extendpiecolors import ExtendpiecolorsValidator
+    from ._extendiciclecolors import ExtendiciclecolorsValidator
     from ._extendfunnelareacolors import ExtendfunnelareacolorsValidator
     from ._editrevision import EditrevisionValidator
     from ._dragmode import DragmodeValidator
@@ -131,6 +133,7 @@ else:
             "._legend.LegendValidator",
             "._imagedefaults.ImagedefaultsValidator",
             "._images.ImagesValidator",
+            "._iciclecolorway.IciclecolorwayValidator",
             "._hovermode.HovermodeValidator",
             "._hoverlabel.HoverlabelValidator",
             "._hoverdistance.HoverdistanceValidator",
@@ -148,6 +151,7 @@ else:
             "._extendtreemapcolors.ExtendtreemapcolorsValidator",
             "._extendsunburstcolors.ExtendsunburstcolorsValidator",
             "._extendpiecolors.ExtendpiecolorsValidator",
+            "._extendiciclecolors.ExtendiciclecolorsValidator",
             "._extendfunnelareacolors.ExtendfunnelareacolorsValidator",
             "._editrevision.EditrevisionValidator",
             "._dragmode.DragmodeValidator",

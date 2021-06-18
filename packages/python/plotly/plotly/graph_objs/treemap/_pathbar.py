@@ -20,9 +20,7 @@ class Pathbar(_BaseTraceHierarchyType):
     
         The 'edgeshape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['>', '<', '|', '\\']
-          - A string that matches one of the following regular expressions:
-                ['']
+                ['>', '<', '|', '/', '\\']
 
         Returns
         -------

@@ -11,6 +11,10 @@ class Pattern(_BaseTraceHierarchyType):
     _valid_props = {
         "bgcolor",
         "bgcolorsrc",
+        "fgcolor",
+        "fgcolorsrc",
+        "fgopacity",
+        "fillmode",
         "shape",
         "shapesrc",
         "size",
@@ -24,8 +28,10 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def bgcolor(self):
         """
-        Sets the background color of the pattern fill. Defaults to a
-        transparent background.
+        When there is no colorscale sets the color of background
+        pattern fill. Defaults to a `marker.color` background when
+        `fillmode` is "overlay". Otherwise, defaults to a transparent
+        background.
     
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -100,6 +106,132 @@ class Pattern(_BaseTraceHierarchyType):
     def bgcolorsrc(self, val):
         self["bgcolorsrc"] = val
 
+    # fgcolor
+    # -------
+    @property
+    def fgcolor(self):
+        """
+        When there is no colorscale sets the color of foreground
+        pattern fill. Defaults to a `marker.color` background when
+        `fillmode` is "replace". Otherwise, defaults to dark grey or
+        white to increase contrast with the `bgcolor`.
+    
+        The 'fgcolor' property is a color and may be specified as:
+          - A hex string (e.g. '#ff0000')
+          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+          - A named CSS color:
+                aliceblue, antiquewhite, aqua, aquamarine, azure,
+                beige, bisque, black, blanchedalmond, blue,
+                blueviolet, brown, burlywood, cadetblue,
+                chartreuse, chocolate, coral, cornflowerblue,
+                cornsilk, crimson, cyan, darkblue, darkcyan,
+                darkgoldenrod, darkgray, darkgrey, darkgreen,
+                darkkhaki, darkmagenta, darkolivegreen, darkorange,
+                darkorchid, darkred, darksalmon, darkseagreen,
+                darkslateblue, darkslategray, darkslategrey,
+                darkturquoise, darkviolet, deeppink, deepskyblue,
+                dimgray, dimgrey, dodgerblue, firebrick,
+                floralwhite, forestgreen, fuchsia, gainsboro,
+                ghostwhite, gold, goldenrod, gray, grey, green,
+                greenyellow, honeydew, hotpink, indianred, indigo,
+                ivory, khaki, lavender, lavenderblush, lawngreen,
+                lemonchiffon, lightblue, lightcoral, lightcyan,
+                lightgoldenrodyellow, lightgray, lightgrey,
+                lightgreen, lightpink, lightsalmon, lightseagreen,
+                lightskyblue, lightslategray, lightslategrey,
+                lightsteelblue, lightyellow, lime, limegreen,
+                linen, magenta, maroon, mediumaquamarine,
+                mediumblue, mediumorchid, mediumpurple,
+                mediumseagreen, mediumslateblue, mediumspringgreen,
+                mediumturquoise, mediumvioletred, midnightblue,
+                mintcream, mistyrose, moccasin, navajowhite, navy,
+                oldlace, olive, olivedrab, orange, orangered,
+                orchid, palegoldenrod, palegreen, paleturquoise,
+                palevioletred, papayawhip, peachpuff, peru, pink,
+                plum, powderblue, purple, red, rosybrown,
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
+          - A list or array of any of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["fgcolor"]
+
+    @fgcolor.setter
+    def fgcolor(self, val):
+        self["fgcolor"] = val
+
+    # fgcolorsrc
+    # ----------
+    @property
+    def fgcolorsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for  fgcolor .
+    
+        The 'fgcolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["fgcolorsrc"]
+
+    @fgcolorsrc.setter
+    def fgcolorsrc(self, val):
+        self["fgcolorsrc"] = val
+
+    # fgopacity
+    # ---------
+    @property
+    def fgopacity(self):
+        """
+        Sets the opacity of the foreground pattern fill. Defaults to a
+        0.5 when `fillmode` is "overlay". Otherwise, defaults to 1.
+    
+        The 'fgopacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["fgopacity"]
+
+    @fgopacity.setter
+    def fgopacity(self, val):
+        self["fgopacity"] = val
+
+    # fillmode
+    # --------
+    @property
+    def fillmode(self):
+        """
+        Determines whether `marker.color` should be used as a default
+        to `bgcolor` or a `fgcolor`.
+    
+        The 'fillmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['replace', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self["fillmode"]
+
+    @fillmode.setter
+    def fillmode(self, val):
+        self["fillmode"] = val
+
     # shape
     # -----
     @property
@@ -110,9 +242,7 @@ class Pattern(_BaseTraceHierarchyType):
     
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['', '\\', 'x', '-', '|', '+', '.']
-          - A string that matches one of the following regular expressions:
-                ['']
+                ['', '/', '\\', 'x', '-', '|', '+', '.']
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -237,11 +367,29 @@ class Pattern(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         bgcolor
-            Sets the background color of the pattern fill. Defaults
-            to a transparent background.
+            When there is no colorscale sets the color of
+            background pattern fill. Defaults to a `marker.color`
+            background when `fillmode` is "overlay". Otherwise,
+            defaults to a transparent background.
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
             bgcolor .
+        fgcolor
+            When there is no colorscale sets the color of
+            foreground pattern fill. Defaults to a `marker.color`
+            background when `fillmode` is "replace". Otherwise,
+            defaults to dark grey or white to increase contrast
+            with the `bgcolor`.
+        fgcolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            fgcolor .
+        fgopacity
+            Sets the opacity of the foreground pattern fill.
+            Defaults to a 0.5 when `fillmode` is "overlay".
+            Otherwise, defaults to 1.
+        fillmode
+            Determines whether `marker.color` should be used as a
+            default to `bgcolor` or a `fgcolor`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
@@ -271,6 +419,10 @@ class Pattern(_BaseTraceHierarchyType):
         arg=None,
         bgcolor=None,
         bgcolorsrc=None,
+        fgcolor=None,
+        fgcolorsrc=None,
+        fgopacity=None,
+        fillmode=None,
         shape=None,
         shapesrc=None,
         size=None,
@@ -282,6 +434,8 @@ class Pattern(_BaseTraceHierarchyType):
         """
         Construct a new Pattern object
         
+        Sets the pattern within the marker.
+
         Parameters
         ----------
         arg
@@ -289,11 +443,29 @@ class Pattern(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.bar.marker.Pattern`
         bgcolor
-            Sets the background color of the pattern fill. Defaults
-            to a transparent background.
+            When there is no colorscale sets the color of
+            background pattern fill. Defaults to a `marker.color`
+            background when `fillmode` is "overlay". Otherwise,
+            defaults to a transparent background.
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
             bgcolor .
+        fgcolor
+            When there is no colorscale sets the color of
+            foreground pattern fill. Defaults to a `marker.color`
+            background when `fillmode` is "replace". Otherwise,
+            defaults to dark grey or white to increase contrast
+            with the `bgcolor`.
+        fgcolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            fgcolor .
+        fgopacity
+            Sets the opacity of the foreground pattern fill.
+            Defaults to a 0.5 when `fillmode` is "overlay".
+            Otherwise, defaults to 1.
+        fillmode
+            Determines whether `marker.color` should be used as a
+            default to `bgcolor` or a `fgcolor`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
@@ -358,6 +530,22 @@ an instance of :class:`plotly.graph_objs.bar.marker.Pattern`"""
         _v = bgcolorsrc if bgcolorsrc is not None else _v
         if _v is not None:
             self["bgcolorsrc"] = _v
+        _v = arg.pop("fgcolor", None)
+        _v = fgcolor if fgcolor is not None else _v
+        if _v is not None:
+            self["fgcolor"] = _v
+        _v = arg.pop("fgcolorsrc", None)
+        _v = fgcolorsrc if fgcolorsrc is not None else _v
+        if _v is not None:
+            self["fgcolorsrc"] = _v
+        _v = arg.pop("fgopacity", None)
+        _v = fgopacity if fgopacity is not None else _v
+        if _v is not None:
+            self["fgopacity"] = _v
+        _v = arg.pop("fillmode", None)
+        _v = fillmode if fillmode is not None else _v
+        if _v is not None:
+            self["fillmode"] = _v
         _v = arg.pop("shape", None)
         _v = shape if shape is not None else _v
         if _v is not None:
