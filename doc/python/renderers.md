@@ -38,15 +38,17 @@ jupyter:
 
 Plotly's Python graphing library, `plotly.py`, gives you a wide range of options for how and where to display your figures.
 
-In general, there are three different approaches you can take in order to display figures:
+In general, there are five different approaches you can take in order to display `plotly` figures:
 
- 1. Using the renderers framework in the context of a script or notebook
+ 1. Using the `renderers` framework in the context of a script or notebook
  2. Using [Dash](https://dash.plot.ly) in a web app context
  3. Using a `FigureWidget` in an `ipywidgets` context
+ 4. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser
+ 5. By [rendering the figure to a static representation](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS
 
-Each of these approaches is discussed below.
+Each of the first three approaches is discussed below.
 
-### Displaying Figures Using The renderers Framework
+### Displaying Figures Using The `renderers` Framework
 
 The renderers framework is a flexible approach for displaying `plotly.py` figures in a variety of contexts.  To display a figure using the renderers framework, you call the `.show()` method on a graph object figure, or pass the figure to the `plotly.io.show` function. With either approach, `plotly.py` will display the figure using the current default renderer(s).
 
@@ -80,19 +82,6 @@ Next, we will show how to configure the default renderer.  After that, we will d
 
 > Note: The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
 
-
-### Displaying figures in Dash
-
-[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
-
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
-
-
-```python hide_code=true
-from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'renderers', width='100%', height=630)
-```
 
 #### Setting The Default Renderer
 The current and available renderers are configured using the `plotly.io.renderers` configuration object.  Display this object to see the current default renderer and the list of all available renderers.
@@ -241,9 +230,27 @@ fig = go.Figure(
 fig.show(renderer="png", width=800, height=300)
 ```
 
+### Displaying figures in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'renderers', width='100%', height=630)
+```
+
 ## Displaying Figures Using `ipywidgets`
 Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (just like `plotly.graph_objects.Figure`), so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an `ipywidgets` object, which means that you can display it alongside other `ipywidgets` to build user interfaces right in the notebook.
 
 See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for more information on integrating `plotly.py` figures with `ipywidgets`.
 
 It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `show()` figure method or the `plotly.io.show` function on `FigureWidget` objects.
+
+
+## Rendering Performance
+
+No matter the approach chosen to display a figure (including HTML and static image export), 
