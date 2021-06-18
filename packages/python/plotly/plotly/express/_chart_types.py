@@ -200,7 +200,9 @@ density_heatmap.__doc__ = make_docstring(
         z=[
             "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
         ],
-        histfunc=["The arguments to this function are the values of `z`.",],
+        histfunc=[
+            "The arguments to this function are the values of `z`.",
+        ],
     ),
 )
 
@@ -308,6 +310,7 @@ def bar(
     x=None,
     y=None,
     color=None,
+    pattern_shape=None,
     facet_row=None,
     facet_col=None,
     facet_col_wrap=0,
@@ -329,6 +332,8 @@ def bar(
     color_discrete_sequence=None,
     color_discrete_map=None,
     color_continuous_scale=None,
+    pattern_shape_sequence=None,
+    pattern_shape_map=None,
     range_color=None,
     color_continuous_midpoint=None,
     opacity=None,
@@ -410,6 +415,7 @@ def histogram(
     x=None,
     y=None,
     color=None,
+    pattern_shape=None,
     facet_row=None,
     facet_col=None,
     facet_col_wrap=0,
@@ -423,6 +429,8 @@ def histogram(
     labels=None,
     color_discrete_sequence=None,
     color_discrete_map=None,
+    pattern_shape_sequence=None,
+    pattern_shape_map=None,
     marginal=None,
     opacity=None,
     orientation=None,
@@ -451,7 +459,9 @@ def histogram(
         args=locals(),
         constructor=go.Histogram,
         trace_patch=dict(
-            histnorm=histnorm, histfunc=histfunc, cumulative=dict(enabled=cumulative),
+            histnorm=histnorm,
+            histfunc=histfunc,
+            cumulative=dict(enabled=cumulative),
         ),
         layout_patch=dict(barmode=barmode, barnorm=barnorm),
     )
@@ -511,7 +521,11 @@ def violin(
         args=locals(),
         constructor=go.Violin,
         trace_patch=dict(
-            points=points, box=dict(visible=box), scalegroup=True, x0=" ", y0=" ",
+            points=points,
+            box=dict(visible=box),
+            scalegroup=True,
+            x0=" ",
+            y0=" ",
         ),
         layout_patch=dict(violinmode=violinmode),
     )
@@ -892,6 +906,7 @@ def bar_polar(
     r=None,
     theta=None,
     color=None,
+    pattern_shape=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -903,6 +918,8 @@ def bar_polar(
     color_discrete_sequence=None,
     color_discrete_map=None,
     color_continuous_scale=None,
+    pattern_shape_sequence=None,
+    pattern_shape_map=None,
     range_color=None,
     color_continuous_midpoint=None,
     barnorm=None,
