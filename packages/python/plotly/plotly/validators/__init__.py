@@ -29,6 +29,7 @@ if sys.version_info < (3, 7):
     from ._isosurface import IsosurfaceValidator
     from ._indicator import IndicatorValidator
     from ._image import ImageValidator
+    from ._icicle import IcicleValidator
     from ._histogram2dcontour import Histogram2DcontourValidator
     from ._histogram2d import Histogram2DValidator
     from ._histogram import HistogramValidator
@@ -85,6 +86,7 @@ else:
             "._isosurface.IsosurfaceValidator",
             "._indicator.IndicatorValidator",
             "._image.ImageValidator",
+            "._icicle.IcicleValidator",
             "._histogram2dcontour.Histogram2DcontourValidator",
             "._histogram2d.Histogram2DValidator",
             "._histogram.HistogramValidator",

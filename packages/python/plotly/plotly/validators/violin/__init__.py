@@ -38,6 +38,7 @@ if sys.version_info < (3, 7):
     from ._meanline import MeanlineValidator
     from ._marker import MarkerValidator
     from ._line import LineValidator
+    from ._legendrank import LegendrankValidator
     from ._legendgroup import LegendgroupValidator
     from ._jitter import JitterValidator
     from ._idssrc import IdssrcValidator
@@ -100,6 +101,7 @@ else:
             "._meanline.MeanlineValidator",
             "._marker.MarkerValidator",
             "._line.LineValidator",
+            "._legendrank.LegendrankValidator",
             "._legendgroup.LegendgroupValidator",
             "._jitter.JitterValidator",
             "._idssrc.IdssrcValidator",

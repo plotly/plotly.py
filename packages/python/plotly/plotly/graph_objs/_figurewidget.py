@@ -24,12 +24,12 @@ class FigureWidget(BaseFigureWidget):
                              'cone', 'contour', 'contourcarpet',
                              'densitymapbox', 'funnel', 'funnelarea',
                              'heatmap', 'heatmapgl', 'histogram',
-                             'histogram2d', 'histogram2dcontour', 'image',
-                             'indicator', 'isosurface', 'mesh3d', 'ohlc',
-                             'parcats', 'parcoords', 'pie', 'pointcloud',
-                             'sankey', 'scatter', 'scatter3d',
-                             'scattercarpet', 'scattergeo', 'scattergl',
-                             'scattermapbox', 'scatterpolar',
+                             'histogram2d', 'histogram2dcontour', 'icicle',
+                             'image', 'indicator', 'isosurface', 'mesh3d',
+                             'ohlc', 'parcats', 'parcoords', 'pie',
+                             'pointcloud', 'sankey', 'scatter',
+                             'scatter3d', 'scattercarpet', 'scattergeo',
+                             'scattergl', 'scattermapbox', 'scatterpolar',
                              'scatterpolargl', 'scatterternary', 'splom',
                              'streamtube', 'sunburst', 'surface', 'table',
                              'treemap', 'violin', 'volume', 'waterfall']
@@ -182,6 +182,17 @@ class FigureWidget(BaseFigureWidget):
                         you can set `false` to disable. Colors provided
                         in the trace, using `marker.colors`, are never
                         extended.
+                    extendiciclecolors
+                        If `true`, the icicle slice colors (whether
+                        given by `iciclecolorway` or inherited from
+                        `colorway`) will be extended to three times its
+                        original length by first repeating every color
+                        20% lighter then each color 20% darker. This is
+                        intended to reduce the likelihood of reusing
+                        the same color when you have many slices, but
+                        you can set `false` to disable. Colors provided
+                        in the trace, using `marker.colors`, are never
+                        extended.
                     extendpiecolors
                         If `true`, the pie slice colors (whether given
                         by `piecolorway` or inherited from `colorway`)
@@ -293,6 +304,12 @@ class FigureWidget(BaseFigureWidget):
                         spikelines are enabled by default perpendicular
                         to the specified axis. If false, hover
                         interactions are disabled.
+                    iciclecolorway
+                        Sets the default icicle slice colors. Defaults
+                        to the main `colorway` used for trace colors.
+                        If you specify a new list here it can still be
+                        extended with lighter and darker colors, see
+                        `extendiciclecolors`.
                     images
                         A tuple of
                         :class:`plotly.graph_objects.layout.Image`
@@ -597,6 +614,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -766,6 +784,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -1041,6 +1067,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1109,6 +1136,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1227,6 +1255,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.barpolar.Marker` instance
             or dict with compatible properties
@@ -1376,6 +1412,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1429,6 +1466,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         jitter=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         lowerfence=None,
         lowerfencesrc=None,
@@ -1628,6 +1666,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -1963,6 +2009,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             jitter=jitter,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             lowerfence=lowerfence,
             lowerfencesrc=lowerfencesrc,
@@ -2043,6 +2090,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         increasing=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -2141,6 +2189,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.candlestick.Line` instance
             or dict with compatible properties
@@ -2321,6 +2377,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             increasing=increasing,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -2373,6 +2430,7 @@ class FigureWidget(BaseFigureWidget):
         font=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -2464,6 +2522,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2584,6 +2650,7 @@ class FigureWidget(BaseFigureWidget):
             font=font,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -2623,6 +2690,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -2774,6 +2842,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map. Values "ISO-3",
@@ -2927,6 +3003,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             locationmode=locationmode,
             locations=locations,
             locationssrc=locationssrc,
@@ -2977,6 +3054,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -3127,6 +3205,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -3278,6 +3364,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             locations=locations,
             locationssrc=locationssrc,
             marker=marker,
@@ -3330,6 +3417,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -3498,6 +3586,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -3719,6 +3815,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -3784,6 +3881,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -3966,6 +4064,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.contour.Line` instance or
             dict with compatible properties
@@ -4216,6 +4322,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -4290,6 +4397,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -4431,6 +4539,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.contourcarpet.Line`
             instance or dict with compatible properties
@@ -4594,6 +4710,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -4643,6 +4760,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendrank=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -4791,6 +4909,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -4942,6 +5068,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lon=lon,
             lonsrc=lonsrc,
             meta=meta,
@@ -4992,6 +5119,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -5148,6 +5276,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.funnel.Marker` instance or
             dict with compatible properties
@@ -5413,6 +5549,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -5480,6 +5617,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -5615,6 +5753,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -5761,6 +5907,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -5809,6 +5956,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -5989,6 +6137,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -6233,6 +6389,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -6296,6 +6453,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -6401,6 +6559,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -6572,6 +6738,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -6629,6 +6796,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -6803,6 +6971,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -6996,6 +7172,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -7052,6 +7229,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -7240,6 +7418,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.histogram2d.Marker`
             instance or dict with compatible properties
@@ -7459,6 +7645,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -7524,6 +7711,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -7719,6 +7907,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.histogram2dcontour.Line`
             instance or dict with compatible properties
@@ -7943,6 +8139,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -7984,6 +8181,371 @@ class FigureWidget(BaseFigureWidget):
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
+    def add_icicle(
+        self,
+        branchvalues=None,
+        count=None,
+        customdata=None,
+        customdatasrc=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextfont=None,
+        labels=None,
+        labelssrc=None,
+        leaf=None,
+        legendrank=None,
+        level=None,
+        marker=None,
+        maxdepth=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        outsidetextfont=None,
+        parents=None,
+        parentssrc=None,
+        pathbar=None,
+        root=None,
+        sort=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textinfo=None,
+        textposition=None,
+        textsrc=None,
+        texttemplate=None,
+        texttemplatesrc=None,
+        tiling=None,
+        uid=None,
+        uirevision=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Icicle trace
+        
+        Visualize hierarchal data from leaves (and/or outer branches)
+        towards root with rectangles. The icicle sectors are determined
+        by the entries in "labels" or "ids" and in "parents".
+
+        Parameters
+        ----------
+        branchvalues
+            Determines how the items in `values` are summed. When
+            set to "total", items in `values` are taken to be value
+            of all its descendants. When set to "remainder", items
+            in `values` corresponding to the root and the branches
+            sectors are taken to be the extra part not part of the
+            sum of the values at their leaves.
+        count
+            Determines default for `values` when it is not
+            provided, by inferring a 1 for each of the "leaves"
+            and/or "branches", otherwise 0.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on Chart Studio Cloud for
+            customdata .
+        domain
+            :class:`plotly.graph_objects.icicle.Domain` instance or
+            dict with compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on Chart Studio Cloud for
+            hoverinfo .
+        hoverlabel
+            :class:`plotly.graph_objects.icicle.Hoverlabel`
+            instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format for
+            details on the formatting syntax. Dates are formatted
+            using d3-time-format's syntax %{variable|d3-time-
+            format}, for example "Day: %{2019-01-01|%A}".
+            https://github.com/d3/d3-time-format#locale_format for
+            details on the date formatting syntax. The variables
+            available in `hovertemplate` are the ones emitted as
+            event data described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `currentPath`, `root`,
+            `entry`, `percentRoot`, `percentEntry` and
+            `percentParent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            hovertemplate .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on Chart Studio Cloud for
+            hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on Chart Studio Cloud for
+            ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the
+            sector.
+        labels
+            Sets the labels of each of the sectors.
+        labelssrc
+            Sets the source reference on Chart Studio Cloud for
+            labels .
+        leaf
+            :class:`plotly.graph_objects.icicle.Leaf` instance or
+            dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
+        level
+            Sets the level from which this trace hierarchy is
+            rendered. Set `level` to `''` to start from the root
+            node in the hierarchy. Must be an "id" if `ids` is
+            filled in, otherwise plotly attempts to find a matching
+            item in `labels`.
+        marker
+            :class:`plotly.graph_objects.icicle.Marker` instance or
+            dict with compatible properties
+        maxdepth
+            Sets the number of rendered sectors from any given
+            `level`. Set `maxdepth` to "-1" to render all the
+            levels in the hierarchy.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on Chart Studio Cloud for
+            meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        outsidetextfont
+            Sets the font used for `textinfo` lying outside the
+            sector. This option refers to the root of the hierarchy
+            presented on top left corner of a treemap graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
+        parents
+            Sets the parent sectors for each of the sectors. Empty
+            string items '' are understood to reference the root
+            node in the hierarchy. If `ids` is filled, `parents`
+            items are understood to be "ids" themselves. When `ids`
+            is not set, plotly attempts to find matching items in
+            `labels`, but beware they must be unique.
+        parentssrc
+            Sets the source reference on Chart Studio Cloud for
+            parents .
+        pathbar
+            :class:`plotly.graph_objects.icicle.Pathbar` instance
+            or dict with compatible properties
+        root
+            :class:`plotly.graph_objects.icicle.Root` instance or
+            dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
+        stream
+            :class:`plotly.graph_objects.icicle.Stream` instance or
+            dict with compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textposition
+            Sets the positions of the `text` elements.
+        textsrc
+            Sets the source reference on Chart Studio Cloud for
+            text .
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format for
+            details on the formatting syntax. Dates are formatted
+            using d3-time-format's syntax %{variable|d3-time-
+            format}, for example "Day: %{2019-01-01|%A}".
+            https://github.com/d3/d3-time-format#locale_format for
+            details on the date formatting syntax. Every attributes
+            that can be specified per-point (the ones that are
+            `arrayOk: true`) are available. variables
+            `currentPath`, `root`, `entry`, `percentRoot`,
+            `percentEntry`, `percentParent`, `label` and `value`.
+        texttemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            texttemplate .
+        tiling
+            :class:`plotly.graph_objects.icicle.Tiling` instance or
+            dict with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values associated with each of the sectors.
+            Use with `branchvalues` to determine how the values are
+            summed.
+        valuessrc
+            Sets the source reference on Chart Studio Cloud for
+            values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
+
+        Returns
+        -------
+        FigureWidget
+        """
+        from plotly.graph_objs import Icicle
+
+        new_trace = Icicle(
+            branchvalues=branchvalues,
+            count=count,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            domain=domain,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
+            ids=ids,
+            idssrc=idssrc,
+            insidetextfont=insidetextfont,
+            labels=labels,
+            labelssrc=labelssrc,
+            leaf=leaf,
+            legendrank=legendrank,
+            level=level,
+            marker=marker,
+            maxdepth=maxdepth,
+            meta=meta,
+            metasrc=metasrc,
+            name=name,
+            opacity=opacity,
+            outsidetextfont=outsidetextfont,
+            parents=parents,
+            parentssrc=parentssrc,
+            pathbar=pathbar,
+            root=root,
+            sort=sort,
+            stream=stream,
+            text=text,
+            textfont=textfont,
+            textinfo=textinfo,
+            textposition=textposition,
+            textsrc=textsrc,
+            texttemplate=texttemplate,
+            texttemplatesrc=texttemplatesrc,
+            tiling=tiling,
+            uid=uid,
+            uirevision=uirevision,
+            values=values,
+            valuessrc=valuessrc,
+            visible=visible,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_image(
         self,
         colormodel=None,
@@ -8000,6 +8562,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -8109,6 +8672,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -8252,6 +8823,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -8286,6 +8858,7 @@ class FigureWidget(BaseFigureWidget):
         gauge=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         mode=None,
@@ -8341,6 +8914,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -8430,6 +9011,7 @@ class FigureWidget(BaseFigureWidget):
             gauge=gauge,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
@@ -8472,6 +9054,7 @@ class FigureWidget(BaseFigureWidget):
         isomax=None,
         isomin=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -8646,6 +9229,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.isosurface.Lighting`
             instance or dict with compatible properties
@@ -8836,6 +9427,7 @@ class FigureWidget(BaseFigureWidget):
             isomax=isomax,
             isomin=isomin,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -8909,6 +9501,7 @@ class FigureWidget(BaseFigureWidget):
         k=None,
         ksrc=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -9151,6 +9744,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.mesh3d.Lighting` instance
             or dict with compatible properties
@@ -9352,6 +9953,7 @@ class FigureWidget(BaseFigureWidget):
             k=k,
             ksrc=ksrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -9404,6 +10006,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         increasing=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -9502,6 +10105,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.ohlc.Line` instance or
             dict with compatible properties
@@ -9681,6 +10292,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             increasing=increasing,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -9934,6 +10546,7 @@ class FigureWidget(BaseFigureWidget):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legendrank=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -9997,6 +10610,14 @@ class FigureWidget(BaseFigureWidget):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.parcoords.Line` instance
             or dict with compatible properties
@@ -10081,6 +10702,7 @@ class FigureWidget(BaseFigureWidget):
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
+            legendrank=legendrank,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -10119,6 +10741,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -10273,6 +10896,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.pie.Marker` instance or
             dict with compatible properties
@@ -10447,6 +11078,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -10492,6 +11124,7 @@ class FigureWidget(BaseFigureWidget):
         indices=None,
         indicessrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -10572,6 +11205,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -10722,6 +11363,7 @@ class FigureWidget(BaseFigureWidget):
             indices=indices,
             indicessrc=indicessrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -10760,6 +11402,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -10824,6 +11467,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         link
             The links of the Sankey plot.
         meta
@@ -10923,6 +11574,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             link=link,
             meta=meta,
             metasrc=metasrc,
@@ -10965,6 +11617,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -11159,6 +11812,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -11437,6 +12098,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -11502,6 +12164,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -11636,6 +12299,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -11835,6 +12506,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -11897,6 +12569,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -12042,6 +12715,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scattercarpet.Line`
             instance or dict with compatible properties
@@ -12219,6 +12900,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -12269,6 +12951,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         locationmode=None,
         locations=None,
@@ -12417,6 +13100,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
@@ -12593,6 +13284,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             locationmode=locationmode,
             locations=locations,
@@ -12645,6 +13337,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -12811,6 +13504,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scattergl.Line` instance
             or dict with compatible properties
@@ -13050,6 +13751,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -13114,6 +13816,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         lon=None,
         lonsrc=None,
@@ -13245,6 +13948,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -13406,6 +14117,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             lon=lon,
             lonsrc=lonsrc,
@@ -13455,6 +14167,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -13609,6 +14322,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scatterpolar.Line`
             instance or dict with compatible properties
@@ -13790,6 +14511,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -13843,6 +14565,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -13996,6 +14719,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -14175,6 +14906,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -14234,6 +14966,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meta=None,
@@ -14399,6 +15132,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -14570,6 +15311,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meta=meta,
@@ -14615,6 +15357,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -14731,6 +15474,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         marker
             :class:`plotly.graph_objects.splom.Marker` instance or
             dict with compatible properties
@@ -14881,6 +15632,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -14927,6 +15679,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -15094,6 +15847,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.streamtube.Lighting`
             instance or dict with compatible properties
@@ -15300,6 +16061,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
@@ -15361,6 +16123,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legendrank=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -15502,6 +16265,14 @@ class FigureWidget(BaseFigureWidget):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -15669,6 +16440,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legendrank=legendrank,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -15723,6 +16495,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -15897,6 +16670,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -16087,6 +16868,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -16138,6 +16920,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -16210,6 +16993,14 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -16291,6 +17082,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -16321,6 +17113,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextfont=None,
         labels=None,
         labelssrc=None,
+        legendrank=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -16452,6 +17245,14 @@ class FigureWidget(BaseFigureWidget):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             labels .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -16622,6 +17423,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextfont=insidetextfont,
             labels=labels,
             labelssrc=labelssrc,
+            legendrank=legendrank,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -16673,6 +17475,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         jitter=None,
         legendgroup=None,
+        legendrank=None,
         line=None,
         marker=None,
         meanline=None,
@@ -16818,6 +17621,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         line
             :class:`plotly.graph_objects.violin.Line` instance or
             dict with compatible properties
@@ -17063,6 +17874,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             jitter=jitter,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             line=line,
             marker=marker,
             meanline=meanline,
@@ -17131,6 +17943,7 @@ class FigureWidget(BaseFigureWidget):
         isomax=None,
         isomin=None,
         legendgroup=None,
+        legendrank=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -17306,6 +18119,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         lighting
             :class:`plotly.graph_objects.volume.Lighting` instance
             or dict with compatible properties
@@ -17507,6 +18328,7 @@ class FigureWidget(BaseFigureWidget):
             isomax=isomax,
             isomin=isomin,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -17568,6 +18390,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendrank=None,
         measure=None,
         measuresrc=None,
         meta=None,
@@ -17736,6 +18559,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         measure
             An array containing types of values. By default the
             values are considered as 'relative'. However; it is
@@ -18014,6 +18845,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendrank=legendrank,
             measure=measure,
             measuresrc=measuresrc,
             meta=meta,

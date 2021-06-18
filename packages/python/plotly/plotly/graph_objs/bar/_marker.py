@@ -718,6 +718,8 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def pattern(self):
         """
+        Sets the pattern within the marker.
+    
         The 'pattern' property is an instance of Pattern
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.bar.marker.Pattern`
@@ -727,11 +729,30 @@ class Marker(_BaseTraceHierarchyType):
             Supported dict properties:
                 
                 bgcolor
-                    Sets the background color of the pattern fill.
-                    Defaults to a transparent background.
+                    When there is no colorscale sets the color of
+                    background pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "overlay". Otherwise, defaults to a transparent
+                    background.
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  bgcolor .
+                fgcolor
+                    When there is no colorscale sets the color of
+                    foreground pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "replace". Otherwise, defaults to dark grey or
+                    white to increase contrast with the `bgcolor`.
+                fgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  fgcolor .
+                fgopacity
+                    Sets the opacity of the foreground pattern
+                    fill. Defaults to a 0.5 when `fillmode` is
+                    "overlay". Otherwise, defaults to 1.
+                fillmode
+                    Determines whether `marker.color` should be
+                    used as a default to `bgcolor` or a `fgcolor`.
                 shape
                     Sets the shape of the pattern fill. By default,
                     no pattern is used for filling the area.
@@ -891,8 +912,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             opacity .
         pattern
-            :class:`plotly.graph_objects.bar.marker.Pattern`
-            instance or dict with compatible properties
+            Sets the pattern within the marker.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If
@@ -1009,8 +1029,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             opacity .
         pattern
-            :class:`plotly.graph_objects.bar.marker.Pattern`
-            instance or dict with compatible properties
+            Sets the pattern within the marker.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If

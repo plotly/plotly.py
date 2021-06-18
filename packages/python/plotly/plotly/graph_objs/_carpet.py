@@ -27,6 +27,7 @@ class Carpet(_BaseTraceType):
         "font",
         "ids",
         "idssrc",
+        "legendrank",
         "meta",
         "metasrc",
         "name",
@@ -940,6 +941,31 @@ class Carpet(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendrank
+    # ----------
+    @property
+    def legendrank(self):
+        """
+        Sets the legend rank for this trace. Items and groups with
+        smaller ranks are presented on top/left side while with
+        `*reversed* `legend.traceorder` they are on bottom/right side.
+        The default legendrank is 1000, so that you can use ranks less
+        than 1000 to place certain items before all unranked items, and
+        ranks greater than 1000 to go after all unranked items.
+    
+        The 'legendrank' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendrank"]
+
+    @legendrank.setter
+    def legendrank(self, val):
+        self["legendrank"] = val
+
     # meta
     # ----
     @property
@@ -1344,6 +1370,14 @@ class Carpet(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1441,6 +1475,7 @@ class Carpet(_BaseTraceType):
         font=None,
         ids=None,
         idssrc=None,
+        legendrank=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -1532,6 +1567,14 @@ class Carpet(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1712,6 +1755,10 @@ an instance of :class:`plotly.graph_objs.Carpet`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legendrank", None)
+        _v = legendrank if legendrank is not None else _v
+        if _v is not None:
+            self["legendrank"] = _v
         _v = arg.pop("meta", None)
         _v = meta if meta is not None else _v
         if _v is not None:
