@@ -11,9 +11,10 @@ class RootValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             color
-                sets the color of the root node for a sunburst
-                or a treemap trace. this has no effect when a
-                colorscale is used to set the markers.
+                sets the color of the root node for a
+                sunburst/treemap/icicle trace. this has no
+                effect when a colorscale is used to set the
+                markers.
 """,
             ),
             **kwargs

@@ -15,6 +15,7 @@ if sys.version_info < (3, 7):
     from ._name import NameValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
+    from ._legendrank import LegendrankValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._font import FontValidator
@@ -54,6 +55,7 @@ else:
             "._name.NameValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
+            "._legendrank.LegendrankValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._font.FontValidator",

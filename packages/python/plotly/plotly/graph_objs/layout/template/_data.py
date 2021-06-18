@@ -27,6 +27,7 @@ class Data(_BaseLayoutHierarchyType):
         "histogram",
         "histogram2d",
         "histogram2dcontour",
+        "icicle",
         "image",
         "indicator",
         "isosurface",
@@ -470,6 +471,29 @@ class Data(_BaseLayoutHierarchyType):
     @histogram.setter
     def histogram(self, val):
         self["histogram"] = val
+
+    # icicle
+    # ------
+    @property
+    def icicle(self):
+        """
+        The 'icicle' property is a tuple of instances of
+        Icicle that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Icicle
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Icicle constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Icicle]
+        """
+        return self["icicle"]
+
+    @icicle.setter
+    def icicle(self, val):
+        self["icicle"] = val
 
     # image
     # -----
@@ -1176,6 +1200,9 @@ class Data(_BaseLayoutHierarchyType):
         histogram
             A tuple of :class:`plotly.graph_objects.Histogram`
             instances or dicts with compatible properties
+        icicle
+            A tuple of :class:`plotly.graph_objects.Icicle`
+            instances or dicts with compatible properties
         image
             A tuple of :class:`plotly.graph_objects.Image`
             instances or dicts with compatible properties
@@ -1283,6 +1310,7 @@ class Data(_BaseLayoutHierarchyType):
         histogram2dcontour=None,
         histogram2d=None,
         histogram=None,
+        icicle=None,
         image=None,
         indicator=None,
         isosurface=None,
@@ -1377,6 +1405,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         histogram
             A tuple of :class:`plotly.graph_objects.Histogram`
+            instances or dicts with compatible properties
+        icicle
+            A tuple of :class:`plotly.graph_objects.Icicle`
             instances or dicts with compatible properties
         image
             A tuple of :class:`plotly.graph_objects.Image`
@@ -1568,6 +1599,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = histogram if histogram is not None else _v
         if _v is not None:
             self["histogram"] = _v
+        _v = arg.pop("icicle", None)
+        _v = icicle if icicle is not None else _v
+        if _v is not None:
+            self["icicle"] = _v
         _v = arg.pop("image", None)
         _v = image if image is not None else _v
         if _v is not None:

@@ -7,6 +7,10 @@ if sys.version_info < (3, 7):
     from ._size import SizeValidator
     from ._shapesrc import ShapesrcValidator
     from ._shape import ShapeValidator
+    from ._fillmode import FillmodeValidator
+    from ._fgopacity import FgopacityValidator
+    from ._fgcolorsrc import FgcolorsrcValidator
+    from ._fgcolor import FgcolorValidator
     from ._bgcolorsrc import BgcolorsrcValidator
     from ._bgcolor import BgcolorValidator
 else:
@@ -22,6 +26,10 @@ else:
             "._size.SizeValidator",
             "._shapesrc.ShapesrcValidator",
             "._shape.ShapeValidator",
+            "._fillmode.FillmodeValidator",
+            "._fgopacity.FgopacityValidator",
+            "._fgcolorsrc.FgcolorsrcValidator",
+            "._fgcolor.FgcolorValidator",
             "._bgcolorsrc.BgcolorsrcValidator",
             "._bgcolor.BgcolorValidator",
         ],
