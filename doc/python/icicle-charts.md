@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,14 +20,14 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to make Icicle Charts.
     display_as: basic
     language: python
     layout: base
     name: Icicle Charts
-    order: 13.5
+    order: 17
     page_type: u-guide
     permalink: python/icicle-charts/
     thumbnail: thumbnail/icicle.png
@@ -222,7 +222,7 @@ import plotly.graph_objects as go
 
 import pandas as pd
 
-df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/icicle-coffee-flavors-complete.csv')
+df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
 df2 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
 
 fig = go.Figure()
@@ -258,7 +258,7 @@ If you want all the text labels to have the same size, you can use the `uniformt
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/icicle-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(go.Icicle(
         ids = df.ids,
