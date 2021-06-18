@@ -1481,6 +1481,56 @@ def treemap(
 treemap.__doc__ = make_docstring(treemap)
 
 
+def icicle(
+    data_frame=None,
+    names=None,
+    values=None,
+    parents=None,
+    path=None,
+    ids=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    branchvalues=None,
+    maxdepth=None,
+):
+    """
+    An icicle plot represents hierarchial data with adjoined rectangular
+    sectors that all cascade from root down to leaf in one direction.
+    """
+    if color_discrete_sequence is not None:
+        layout_patch = {"iciclecolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
+    if path is not None and (ids is not None or parents is not None):
+        raise ValueError(
+            "Either `path` should be provided, or `ids` and `parents`."
+            "These parameters are mutually exclusive and cannot be passed together."
+        )
+    if path is not None and branchvalues is None:
+        branchvalues = "total"
+    return make_figure(
+        args=locals(),
+        constructor=go.Icicle,
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+        layout_patch=layout_patch,
+    )
+
+
+icicle.__doc__ = make_docstring(icicle)
+
+
 def funnel(
     data_frame=None,
     x=None,

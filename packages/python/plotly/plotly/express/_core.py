@@ -438,6 +438,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 elif trace_spec.constructor in [
                     go.Sunburst,
                     go.Treemap,
+                    go.Icicle,
                     go.Pie,
                     go.Funnelarea,
                 ]:
@@ -490,6 +491,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if trace_spec.constructor in [
                     go.Sunburst,
                     go.Treemap,
+                    go.Icicle,
                     go.Pie,
                     go.Funnelarea,
                 ]:
@@ -1517,7 +1519,7 @@ def _check_dataframe_all_leaves(df):
 
 def process_dataframe_hierarchy(args):
     """
-    Build dataframe for sunburst or treemap when the path argument is provided.
+    Build dataframe for sunburst, treemap, or icicle when the path argument is provided.
     """
     df = args["data_frame"]
     path = args["path"][::-1]
@@ -1683,7 +1685,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                 if args["color"] and _is_continuous(args["data_frame"], args["color"]):
                     attrs.append("color")
                     args["color_is_continuous"] = True
-                elif constructor in [go.Sunburst, go.Treemap]:
+                elif constructor in [go.Sunburst, go.Treemap, go.Icicle]:
                     attrs.append("color")
                     args["color_is_continuous"] = False
                 else:
@@ -1704,7 +1706,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             and args["color"]
             and constructor not in [go.Pie, go.Funnelarea]
             and (
-                constructor not in [go.Treemap, go.Sunburst]
+                constructor not in [go.Treemap, go.Sunburst, go.Icicle]
                 or args.get("color_is_continuous")
             )
         )
@@ -1877,7 +1879,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     apply_default_cascade(args)
 
     args = build_dataframe(args, constructor)
-    if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
+    if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
     if constructor == "timeline":
         constructor = go.Bar
@@ -1949,6 +1951,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
+                go.Icicle,
             ]:
                 trace.update(
                     legendgroup=trace_name,
