@@ -178,18 +178,29 @@ def initialize_template(
         }
     ]
 
+    pattern = dict(fillmode="overlay", solidity=0.2, size=10)
+
     # Bar outline
     # Changing marker line color also affects error color,
     # so reset default error colors
     template.data.bar = [
         {
-            "marker": {"line": {"width": 0.5, "color": panel_background_clr}},
+            "marker": {
+                "line": {"width": 0.5, "color": panel_background_clr},
+                "pattern": pattern,
+            },
             "error_x": {"color": font_clr},
             "error_y": {"color": font_clr},
         }
     ]
     template.data.barpolar = [
-        {"marker": {"line": {"width": 0.5, "color": panel_background_clr}}}
+        {
+            "marker": {
+                "line": {"width": 0.5, "color": panel_background_clr},
+                "pattern": pattern,
+            }
+        }
     ]
+    template.data.histogram = [{"marker": {"pattern": pattern}}]
 
     return template
