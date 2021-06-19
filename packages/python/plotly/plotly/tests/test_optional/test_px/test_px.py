@@ -1,4 +1,5 @@
 import plotly.express as px
+import plotly.io as pio
 import pandas as pd
 import numpy as np
 import pytest
@@ -82,7 +83,6 @@ def test_labels():
 
 def test_px_templates():
     try:
-        import plotly.io as pio
         import plotly.graph_objects as go
 
         tips = px.data.tips()
@@ -193,6 +193,7 @@ def test_px_templates():
     finally:
         # reset defaults to prevent all other tests from failing if this one does
         px.defaults.reset()
+        pio.templates.default = "plotly"
 
 
 def test_px_defaults():
@@ -207,6 +208,7 @@ def test_px_defaults():
     finally:
         # reset defaults to prevent all other tests from failing if this one does
         px.defaults.reset()
+        pio.templates.default = "plotly"
 
 
 def assert_orderings(days_order, days_check, times_order, times_check):
@@ -298,7 +300,7 @@ def test_render_mode():
 
 
 def test_category_orders():
-
+    assert pio.templates.default == "plotly"
     df = pd.DataFrame(dict(x=["b", "d"], y=[1, 2]))
 
     fig = px.bar(
