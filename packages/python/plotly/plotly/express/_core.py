@@ -541,21 +541,21 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
     log_key = "log_" + letter
     range_key = "range_" + letter
     if log_key in args and args[log_key]:
-        axis["type"] = "log"
+        axis.type = "log"
         if range_key in args and args[range_key]:
-            axis["range"] = [math.log(r, 10) for r in args[range_key]]
+            axis.range = [math.log(r, 10) for r in args[range_key]]
     elif range_key in args and args[range_key]:
-        axis["range"] = args[range_key]
+        axis.range = args[range_key]
 
     if args[letter] in orders:
-        axis["categoryorder"] = "array"
-        axis["categoryarray"] = (
+        axis.categoryorder = "array"
+        axis.categoryarray = (
             orders[args[letter]]
             if isinstance(axis, go.layout.XAxis)
             else list(reversed(orders[args[letter]]))  # top down for Y axis
         )
-        if "range" not in axis:
-            axis["range"] = [-0.5, len(orders[args[letter]]) - 0.5]
+        if axis.range is None:
+            axis.range = [-0.5, len(orders[args[letter]]) - 0.5]
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
@@ -2067,9 +2067,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     if args.get("marginal_y") is not None:
         ncols += 1
 
-    fig = init_figure(
-        args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels
-    )
+    fig = init_figure(args, subplot_type, nrows, ncols, col_labels, row_labels)
 
     # Position traces in subplots
     for frame in frame_list:
@@ -2100,7 +2098,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     return fig
 
 
-def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
+def init_figure(args, subplot_type, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
     specs = [[dict(type=subplot_type or "domain")] * ncols for _ in range(nrows)]
 

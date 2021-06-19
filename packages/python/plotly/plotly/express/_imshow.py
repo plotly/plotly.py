@@ -523,7 +523,7 @@ def imshow(
             "facet_col" if labels.get("facet_col") is None else labels["facet_col"]
         )
         col_labels = ["%s=%d" % (slice_label, i) for i in facet_slices]
-    fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
+    fig = init_figure(args, "xy", nrows, ncols, col_labels, [])
     for attr_name in ["height", "width"]:
         if args[attr_name]:
             layout[attr_name] = args[attr_name]

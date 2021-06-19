@@ -1,4 +1,5 @@
 import plotly.express as px
+import pandas as pd
 import numpy as np
 import pytest
 from itertools import permutations
@@ -294,3 +295,24 @@ def test_render_mode():
     fig = px.density_contour(df, x="gdpPercap", y="lifeExp", trendline="ols")
     assert fig.data[0].type == "histogram2dcontour"
     assert fig.data[1].type == "scatter"
+
+
+def test_category_orders():
+
+    df = pd.DataFrame(dict(x=["b", "d"], y=[1, 2]))
+
+    fig = px.bar(
+        df,
+        x="x",
+        y="y",
+        color="x",
+        facet_col="x",
+        category_orders=dict(x=["a", "b", "c", "d", "e"]),
+    )
+
+    assert len(fig.layout.annotations) == 5  # 5 facets
+    assert fig.layout.xaxis.range[0] == -0.5  # range includes a
+    assert fig.layout.xaxis.range[1] == 4.5  # range includes e
+    # colors leave room for and c
+    assert fig.data[0].marker.color == fig.layout.template.layout.colorway[1]
+    assert fig.data[1].marker.color == fig.layout.template.layout.colorway[3]
