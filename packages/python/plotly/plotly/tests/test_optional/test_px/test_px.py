@@ -1,4 +1,5 @@
 import plotly.express as px
+import plotly.io as pio
 import numpy as np
 import pytest
 from itertools import permutations
@@ -81,7 +82,6 @@ def test_labels():
 
 def test_px_templates():
     try:
-        import plotly.io as pio
         import plotly.graph_objects as go
 
         tips = px.data.tips()
@@ -192,6 +192,7 @@ def test_px_templates():
     finally:
         # reset defaults to prevent all other tests from failing if this one does
         px.defaults.reset()
+        pio.templates.default = "plotly"
 
 
 def test_px_defaults():
@@ -206,6 +207,7 @@ def test_px_defaults():
     finally:
         # reset defaults to prevent all other tests from failing if this one does
         px.defaults.reset()
+        pio.templates.default = "plotly"
 
 
 def assert_orderings(days_order, days_check, times_order, times_check):
