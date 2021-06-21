@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -94,6 +94,21 @@ fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1,2]))
 fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2,1]))
 fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1,2]))
 fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1]))
+fig.show()
+```
+
+*New in v5.0*
+
+The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1], legendrank=4))
+fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2,1], legendrank=2))
+fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1,2], legendrank=1))
+fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1,2], legendrank=3))
 fig.show()
 ```
 
