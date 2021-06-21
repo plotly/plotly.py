@@ -3,23 +3,36 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## UNRELEASED
+## [5.0.0] - 2021-06-21
 
-### Updated
+### Updated/Changed
 
-- Updated Plotly.js to version 2.0.0. See the [plotly.js 2.0.0 CHANGELOG](https://github.com/plotly/plotly.js/blob/v2.0.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
-  - new `marker.pattern` options for `bar`-like trace types
-  - dropped support for IE9 and IE10
-  - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
-  - deprecated `heatmapgl`, `pointcloud` traces as well as all `transform` attributes
+Items in this section may be considered backwards-incompatible changes for the purposes of [Semantic Versioning](http://semver.org/) but we expect the vast majority of users to be able to upgrade to version 5.0 without encountering any issues.
+
+- **Dropped support for Python older than 3.6** [#3160](https://github.com/plotly/plotly.py/pull/3160)
+- Updated Plotly.js to from version 1.58.4 to version 2.1.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+    - dropped support for IE9 and IE10
+    - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
+    - modebar no longer has `hovermode` or `showspikes` buttons by default (can be added back with `layout.modebar.add=v1hovermode`)
+    - "Aa" text no longer appears on legend items unless `mode="text"`
+    - In `bar` traces, `textposition` now defaults to `"auto"`
+    - Font size for legend and colorbar titles now matches axis title font size (slightly bigger)
+    - deprecated `heatmapgl`, `pointcloud` traces as well as all `transform` attributes
 - Combined `plotlywidget` into `jupyterlab-plotly` and packaged them as a federated extension [#3142](https://github.com/plotly/plotly.py/pull/3142) with massive thanks to [@fcollonval](https://github.com/fcollonval) for the contribution
+  - In addition to this change, large Plotly.js bundles are now lazily loaded on-demand by JupyterLab
 - Plotly.js CDN url will now be versioned by default for HTML exports using `include_plotlyjs='cdn'` and for "connected" renderers. [#2961](https://github.com/plotly/plotly.py/pull/2961) with thanks to [@adehad](https://github.com/adehad) for the contribution
-- Dropped support for Python older than 3.6 [#3160](https://github.com/plotly/plotly.py/pull/3160)
 - Recommending Kaleido by default over Orca [#3094](https://github.com/plotly/plotly.py/pull/3094)
 - Replaced `retrying` dependency with `tenacity` [#2911](https://github.com/plotly/plotly.py/pull/2911) with thanks to [@jmsmdy](https://github.com/jmsmdy) for the contribution
+- Plotly Express now always takes into account every value in `category_orders` when computing discrete mappings (color, symbol, line-dash, pattern-shapes) as well as facets [#3247](https://github.com/plotly/plotly.py/pull/3247)
 
 ### Added
 
+- Additions due to bumping Plotly.js from 1.58.4 to 2.1.0 (see [changelog]((https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18))):
+  - New `icicle` trace type, with thanks to [@Kully](https://github.com/Kully) and [@mtwichan](https://github.com/mtwichan) of [Zyphr](https://www.zyphr.ca/) for their contribution!
+  - New `marker.pattern` options for `bar`-like trace types with thanks to [@s417-lama](https://github.com/s417-lama) for the contribution!
+  - New `legendrank` attribute to control rank of traces within legends
+- Plotly Express' `px.bar()`, `px.histogram()` and `px.bar_polar()` now support the `pattern_shape` argument [#3252](https://github.com/plotly/plotly.py/pull/3252)
+- New Plotly Express `px.icicle()` function, with thanks to [@Kully](https://github.com/Kully) and [@mtwichan](https://github.com/mtwichan) of [Zyphr](https://www.zyphr.ca/) for their contribution! [#3256](https://github.com/plotly/plotly.py/pull/3256)
 - New functions in `plotly.colors`: `get_colorscale()` and `sample_colorscale()` [#3136](https://github.com/plotly/plotly.py/pull/3136) and [#3186](https://github.com/plotly/plotly.py/pull/3186) with thanks to [@CarlAndersson](https://github.com/CarlAndersson) for the contributions
 - Faster JSON encoding when `orjson` is present [#2955](https://github.com/plotly/plotly.py/pull/2955)
 
@@ -27,6 +40,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Pandas and Numpy datetime serialization fixes [#3022](https://github.com/plotly/plotly.py/pull/3022)
 - Fixed selected points of histograms in FigureWidget [#2771](https://github.com/plotly/plotly.py/pull/2771) with thanks to [@meffmadd](https://github.com/meffmadd) for the contribution
+- Static image export now honors `layout.(width|height)`[#3240](https://github.com/plotly/plotly.py/pull/3240)
+- Improvements to "matplotlylib" conversion utility in `plotly.tools.mpl_to_plotly()` with thanks to [@fdion](https://github.com/fdion) [#3143](https://github.com/plotly/plotly.py/pull/3143)
 
 
 ## [4.14.3] - 2021-01-12
