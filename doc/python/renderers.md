@@ -40,11 +40,11 @@ Plotly's Python graphing library, `plotly.py`, gives you a wide range of options
 
 In general, there are five different approaches you can take in order to display `plotly` figures:
 
- 1. Using the `renderers` framework in the context of a script or notebook
+ 1. Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
  2. Using [Dash](https://dash.plot.ly) in a web app context
- 3. Using a `FigureWidget` in an `ipywidgets` context
- 4. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser
- 5. By [rendering the figure to a static representation](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS
+ 3. Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ 4. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
+ 5. By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
 Each of the first three approaches is discussed below.
 
@@ -251,6 +251,10 @@ See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for
 It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `show()` figure method or the `plotly.io.show` function on `FigureWidget` objects.
 
 
-## Rendering Performance
+## Performance
 
-No matter the approach chosen to display a figure (including HTML and static image export), 
+No matter the approach chosen to display a figure, [the figure data structure](https://plotly.com/python/figure-structure/) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](https://plotly.com/python/interactive-html-export/) or [to Kaleido for static image export](https://plotly.com/python/static-image-export/)). 
+
+The default JSON serialization mechanism can be slow for figures with many data points or with large `numpy` arrays or data frames. **If [the `orjson` package](https://github.com/ijl/orjson) is installed**, `plotly` will use that instead of the built-in `json` package, which can lead to **5-10x** speedups for large figures.
+
+Once a figure is serialized to JSON, it must be rendered by a browser, either immediately in the user's browser, at some later point if the figure is exported to HTML, or immediately in Kaleido's internal headless browser for static image export. Rendering time is generally proportional to the total number of data points in the figure, the number of traces and the number of subplots. In situations where rendering performance is slow, we recommend considering [the use of `plotly` WebGL traces](/python/webgl-vs-svg/) to exploit GPU-accelerated rendering in the browser, or [using the Datashader library to do Python-side rendering](/python/datashader/) before using `px.imshow()` to render the figure.
