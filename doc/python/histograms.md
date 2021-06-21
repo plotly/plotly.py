@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -36,12 +36,12 @@ jupyter:
     thumbnail: thumbnail/histogram.jpg
 ---
 
-In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...). Also, the data to be binned can be numerical data but also categorical or date data.
+In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...).
 
-If you're looking instead for bar charts, i.e. representing data with rectangular
+If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](/python/bar-charts/).
 
-## Histogram with Plotly Express
+## Histograms with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
@@ -68,6 +68,30 @@ By default, the number of bins is chosen so that this number is comparable to th
 import plotly.express as px
 df = px.data.tips()
 fig = px.histogram(df, x="total_bill", nbins=20)
+fig.show()
+```
+
+### Histograms on Date Data
+
+Plotly histograms will automatically bin date data in addition to numerical data:
+
+```python
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.histogram(df, x="date")
+fig.update_layout(bargap=0.2)
+fig.show()
+```
+
+### Histograms on Categorical Data
+
+Plotly histograms will automatically bin numerical or date data but can also be used on raw categorical data, as in the following example, where the X-axis value is the categorical "day" variable:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="day", category_orders=dict(day=["Thur", "Fri", "Sat", "Sun"]))
 fig.show()
 ```
 
@@ -144,6 +168,25 @@ For each bin of `x`, one can compute a function of data using `histfunc`. The ar
 import plotly.express as px
 df = px.data.tips()
 fig = px.histogram(df, x="total_bill", y="tip", histfunc='avg')
+fig.show()
+```
+
+The default `histfunc` is `sum` if `y` is given, and works with categorical as well as binned numeric data on the `x` axis:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="day", y="total_bill", category_orders=dict(day=["Thur", "Fri", "Sat", "Sun"]))
+fig.show()
+```
+
+Histograms afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.histogram(df, x="sex", y="total_bill", color="sex", pattern_shape="smoker")
 fig.show()
 ```
 

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -47,7 +47,7 @@ fig.show()
 ```
 
 
-#### Bar chart with Long Format Data
+#### Bar charts with Long Format Data
 
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
@@ -69,7 +69,7 @@ fig.show()
 long_df
 ```
 
-#### Bar chart with Wide Format Data
+#### Bar charts with Wide Format Data
 Wide-form data has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
 
 ```python
@@ -85,7 +85,7 @@ fig.show()
 wide_df
 ```
 
-### Bar chart in Dash
+### Bar charts in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
@@ -98,9 +98,9 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bar-charts', width='100%', height=630)
 ```
 
-### Customize bar chart with Plotly Express
+### Customize bar charts with Plotly Express
 
-The bar plot can be customized using keyword arguments.
+The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](/python/discrete-color/), as above.
 
 ```python
 import plotly.express as px
@@ -122,13 +122,25 @@ fig = px.bar(df, x="sex", y="total_bill", color='time')
 fig.show()
 ```
 
+The default stacked bar chart behavior can be changed to grouped (also known as clustered) using the `barmode` argument:
+
 ```python
-# Change the default stacking
 import plotly.express as px
 df = px.data.tips()
 fig = px.bar(df, x="sex", y="total_bill",
              color='smoker', barmode='group',
              height=400)
+fig.show()
+```
+
+Bar charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.bar(df, x="medal", y="count", color="nation", 
+             pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
 fig.show()
 ```
 
