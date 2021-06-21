@@ -33,13 +33,7 @@ jupyter:
     thumbnail: thumbnail/icicle.png
 ---
 
-Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst](https://plotly.com/python/sunburst-charts/) and [Treemap](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
-
-Main arguments:
-
-1. `labels` (`names` in `px.icicle` since `labels` is reserved for overriding columns names): sets the labels of icicle sectors.
-2. `parents`: sets the parent sectors of icicle sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
-3. `values`: sets the values associated with icicle sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
+Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](https://plotly.com/python/sunburst-charts/) and [Treemaps](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
 
 ### Basic Icicle Plot with plotly.express
 
@@ -60,6 +54,8 @@ fig =px.icicle(
     parents='parent',
     values='value',
 )
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -71,7 +67,9 @@ Hierarchical data are often stored as a rectangular dataframe, with different co
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=['day', 'time', 'sex'], values='total_bill')
+fig = px.icicle(df, path=[px.Constant("all"), 'day', 'time', 'sex'], values='total_bill')
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -83,10 +81,11 @@ If a color argument is passed, the color of a node is computed as the average of
 import plotly.express as px
 import numpy as np
 df = px.data.gapminder().query("year == 2007")
-fig = px.icicle(df, path=['continent', 'country'], values='pop',
+fig = px.icicle(df, path=[px.Constant("world"), 'continent', 'country'], values='pop',
                   color='lifeExp', hover_data=['iso_alpha'],
                   color_continuous_scale='RdBu',
                   color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -97,7 +96,9 @@ When the argument of color corresponds to non-numerical data, discrete colors ar
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                values='total_bill', color='day')
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -106,7 +107,9 @@ In the example below the color of **Saturday** and **Sunday** sectors is the sam
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                values='total_bill', color='time')
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -117,8 +120,10 @@ For more information about discrete colors, see the [dedicated page](https://plo
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
-                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                values='total_bill', color='time',
+                color_discrete_map={'(?)':'lightgrey', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -138,14 +143,23 @@ sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
 df = pd.DataFrame(
     dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
 )
+df["all"] = "all" # in order to have a single root node
 print(df)
-fig = px.icicle(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig = px.icicle(df, path=['all', 'regions', 'sectors', 'vendors'], values='sales')
+fig.update_traces(root_color='lightgrey')
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
 ### Basic Icicle Plot with go.Icicle
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Icicle` class from `plotly.graph_objects`](/python/graph-objects/).
+
+Main arguments:
+
+1. `labels` (`names` in `px.icicle` since `labels` is reserved for overriding columns names): sets the labels of icicle sectors.
+2. `parents`: sets the parent sectors of icicle sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
+3. `values`: sets the values associated with icicle sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
 
 ```python
 import plotly.graph_objects as go
@@ -154,11 +168,10 @@ fig =go.Figure(go.Icicle(
     labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
     parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
     values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
+    root_color="lightgrey"
 ))
-# Update layout for tight margin
-# See https://plotly.com/python/creating-and-updating-figures/
-fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -168,27 +181,28 @@ fig.show()
 import plotly.graph_objects as go
 
 fig =go.Figure(go.Icicle(
- ids=[
+ ids=["Sports",
     "North America", "Europe", "Australia", "North America - Football", "Soccer",
     "North America - Rugby", "Europe - Football", "Rugby",
     "Europe - American Football","Australia - Football", "Association",
     "Australian Rules", "Autstralia - American Football", "Australia - Rugby",
     "Rugby League", "Rugby Union"
   ],
-  labels= [
+  labels= ["Sports",
     "North<br>America", "Europe", "Australia", "Football", "Soccer", "Rugby",
     "Football", "Rugby", "American<br>Football", "Football", "Association",
     "Australian<br>Rules", "American<br>Football", "Rugby", "Rugby<br>League",
     "Rugby<br>Union"
   ],
-  parents=[
-    "", "", "", "North America", "North America", "North America", "Europe",
+  parents=["",
+    "Sports", "Sports", "Sports", "North America", "North America", "North America", "Europe",
     "Europe", "Europe","Australia", "Australia - Football", "Australia - Football",
     "Australia - Football", "Australia - Football", "Australia - Rugby",
     "Australia - Rugby"
   ],
+    root_color="lightgrey"
 ))
-fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -207,8 +221,9 @@ fig =go.Figure(go.Icicle(
     parents=["",    "Eve",  "Eve",  "Seth", "Seth", "Eve",  "Eve",  "Awan",  "Eve" ],
     values=[  65,    14,     12,     10,     2,      6,      6,      4,       4],
     branchvalues="total",
+    root_color="lightgrey"
 ))
-fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -222,30 +237,18 @@ import plotly.graph_objects as go
 
 import pandas as pd
 
-df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
-df2 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure()
 
 fig.add_trace(go.Icicle(
-    ids=df1.ids,
-    labels=df1.labels,
-    parents=df1.parents,
-    domain=dict(column=0)
+    ids=df.ids,
+    labels=df.labels,
+    parents=df.parents,
+    root_color="lightgrey"
 ))
 
-fig.add_trace(go.Icicle(
-    ids=df2.ids,
-    labels=df2.labels,
-    parents=df2.parents,
-    domain=dict(column=1),
-    maxdepth=2
-))
-
-fig.update_layout(
-    grid= dict(columns=2, rows=1),
-    margin = dict(t=0, l=0, r=0, b=0)
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -254,17 +257,24 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
+*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+
 ```python
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(go.Icicle(
-        ids = df.ids,
-        labels = df.labels,
-        parents = df.parents))
-fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
+    ids = df.ids,
+    labels = df.labels,
+    parents = df.parents,
+    root_color="lightgrey"
+))
+fig.update_layout(
+    uniformtext=dict(minsize=10, mode='hide'),
+    margin = dict(t=50, l=25, r=25, b=25)
+)
 fig.show()
 ```
 
@@ -344,7 +354,7 @@ fig.add_trace(go.Icicle(
     maxdepth=2
     ), 1, 2)
 
-fig.update_layout(margin=dict(t=10, b=10, r=10, l=10))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -353,14 +363,16 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Icicle(
     labels = labels,
     parents = parents,
-    marker_colors = ["pink", "royalblue", "lightgray", "purple", "cyan", "lightgray", "lightblue"]))
+    marker_colors = ["pink", "royalblue", "lightgray", "purple", 
+                     "cyan", "lightgray", "lightblue", "lightgreen"]))
 
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -369,31 +381,37 @@ This example uses iciclecolorway attribute, which should be set in layout.
 ```python
 import plotly.graph_objects as go
 
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+values = [0, 11, 12, 13, 14, 15, 20, 30]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Icicle(
     labels = labels,
-    parents = parents
+    parents = parents,
+    values=values,
+    root_color="lightblue"
 ))
 
-fig.update_layout(iciclecolorway = ["pink", "lightgray"])
-
+fig.update_layout(
+    iciclecolorway = ["pink", "lightgray"],
+    margin = dict(t=50, l=25, r=25, b=25)
+)
 fig.show()
 ```
 
 ```python
 import plotly.graph_objects as go
 
-values = ["11", "12", "13", "14", "15", "20", "30"]
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+values = [0, 11, 12, 13, 14, 15, 20, 30]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Icicle(
     labels = labels,
     values = values,
     parents = parents,
     marker_colorscale = 'Blues'))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -402,56 +420,50 @@ fig.show()
 
 As mentioned above, Icicle charts can grow in one of four directions. Icicle charts have a `tiling` attribute and this has two attributes: `orientation` and `flip`. `orientation` takes either `h` (horiztonal) or `v` (vertical) and `flip` takes either `x` or `y`. You can use these two attributes in combination to create each of the four cardinal directions: left, right, top, bottom.
 
-NB. A "flame chart" refers to an Icicle chart that is pointing upwards.
-
-**Up Direction**
+**Up Direction (Flame Chart)**
 
 ```python
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(
     go.Icicle(
         ids = df.ids,
         labels = df.labels,
         parents = df.parents,
+        root_color="lightgrey",
         tiling = dict(
             orientation='v',
             flip='y'
         )
     )
 )
-
-fig.update_layout(
-    margin = {'t':0, 'l':0, 'r':0, 'b':0}
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
-**Down Direction**
+**Down Direction (Icicle)**
 
 ```python
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(
     go.Icicle(
         ids = df.ids,
         labels = df.labels,
         parents = df.parents,
+        root_color="lightgrey",
         tiling = dict(
             orientation='v'
         )
     )
 )
-
-fig.update_layout(
-    margin = {'t':0, 'l':0, 'r':0, 'b':0}
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -461,22 +473,20 @@ fig.show()
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(
     go.Icicle(
         ids = df.ids,
         labels = df.labels,
         parents = df.parents,
+        root_color="lightgrey",
         tiling = dict(
             orientation='h'
         )
     )
 )
-
-fig.update_layout(
-    margin = {'t':0, 'l':0, 'r':0, 'b':0}
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -486,118 +496,23 @@ fig.show()
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(
     go.Icicle(
         ids = df.ids,
         labels = df.labels,
         parents = df.parents,
+        root_color="lightgrey",
         tiling = dict(
             orientation='h',
             flip='x'
         )
     )
 )
-
-fig.update_layout(
-    margin = {'t':0, 'l':0, 'r':0, 'b':0}
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
-
-### Pad
-
-Similar to [treemaps](https://plotly.com/python/treemaps/), the space between each Icicle slice can be set with `pad`, one of the sub-attributes of the `tiling` attribute.
-
-
-```python
-import plotly.graph_objs as go
-from plotly.subplots import make_subplots
-import pandas as pd
-
-df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
-
-pad_values = [0, 2, 4, 6]
-num_of_cols = 4
-
-fig = make_subplots(
-    rows = 1, cols = 4,
-    column_titles=[f'pad: {pad_values[i]}' for i in range(num_of_cols)],
-    specs = [
-        [
-            dict(type = 'icicle', rowspan = 1) for i in range(num_of_cols)
-        ]
-    ]
-)
-
-fig.add_trace(
-    go.Icicle(
-        ids = df1.ids,
-        labels = df1.labels,
-        parents = df1.parents,
-        pathbar = dict(side = 'bottom'),
-        root = dict(color = 'DodgerBlue'),
-        tiling = dict(
-            pad = pad_values[0]
-        )
-    ),
-    col = 1,
-    row = 1
-)
-
-fig.add_trace(
-    go.Icicle(
-        ids = df1.ids,
-        labels = df1.labels,
-        parents = df1.parents,
-        pathbar = dict(side = 'bottom'),
-        root = dict(color = 'DodgerBlue'),
-        tiling = dict(
-            pad = pad_values[1]
-        )
-    ),
-    col = 2,
-    row = 1
-)
-
-fig.add_trace(
-    go.Icicle(
-        ids = df1.ids,
-        labels = df1.labels,
-        parents = df1.parents,
-        pathbar = dict(side = 'bottom'),
-        root = dict(color = 'DodgerBlue'),
-        tiling = dict(
-            pad = pad_values[2]
-        )
-    ),
-    col = 3,
-    row = 1
-)
-
-fig.add_trace(
-    go.Icicle(
-        ids = df1.ids,
-        labels = df1.labels,
-        parents = df1.parents,
-        pathbar = dict(side = 'bottom'),
-        root = dict(color = 'DodgerBlue'),
-        tiling = dict(
-            pad = pad_values[3]
-        )
-    ),
-    col = 4,
-    row = 1
-)
-
-fig.update_layout(
-    margin = dict(l=0, r=0)
-)
-
-fig.show()
-```
-
 
 #### Reference
 

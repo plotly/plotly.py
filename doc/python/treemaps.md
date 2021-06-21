@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/treemap.png
 ---
 
-[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Same as [Sunburst](https://plotly.com/python/sunburst-charts/) the hierarchy is defined by [labels](https://plotly.com/python/reference/treemap/#treemap-labels) (`names` for `px.treemap`) and [parents](https://plotly.com/python/reference/treemap/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
+[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. The input data format is the same as for [Sunburst Charts](https://plotly.com/python/sunburst-charts/) and [Icicle Charts](https://plotly.com/python/icicle-charts/): the hierarchy is defined by [labels](https://plotly.com/python/reference/treemap/#treemap-labels) (`names` for `px.treemap`) and [parents](https://plotly.com/python/reference/treemap/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
 
 ### Basic Treemap with plotly.express
 
@@ -47,6 +47,8 @@ fig = px.treemap(
     names = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
     parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
 )
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -57,7 +59,9 @@ Hierarchical data are often stored as a rectangular dataframe, with different co
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=['day', 'time', 'sex'], values='total_bill')
+fig = px.treemap(df, path=[px.Constant("all"), 'day', 'time', 'sex'], values='total_bill')
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -71,11 +75,11 @@ If a `color` argument is passed, the color of a node is computed as the average 
 import plotly.express as px
 import numpy as np
 df = px.data.gapminder().query("year == 2007")
-df["world"] = "world" # in order to have a single root node
-fig = px.treemap(df, path=['world', 'continent', 'country'], values='pop',
+fig = px.treemap(df, path=[px.Constant("world"), 'continent', 'country'], values='pop',
                   color='lifeExp', hover_data=['iso_alpha'],
                   color_continuous_scale='RdBu',
                   color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -86,8 +90,9 @@ When the argument of `color` corresponds to non-numerical data, discrete colors 
 ```python
 import plotly.express as px
 df = px.data.tips()
-df["all"] = "all" # in order to have a single root node
-fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='day')
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                 values='total_bill', color='day')
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -96,8 +101,9 @@ In the example below the color of Saturday and Sunday sectors is the same as Din
 ```python
 import plotly.express as px
 df = px.data.tips()
-df["all"] = "all" # in order to have a single root node
-fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='time')
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                 values='total_bill', color='time')
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -108,8 +114,10 @@ For more information about discrete colors, see the [dedicated page](/python/dis
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
-                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+                 values='total_bill', color='time',
+                  color_discrete_map={'(?)':'lightgrey', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -132,6 +140,8 @@ df = pd.DataFrame(
 df["all"] = "all" # in order to have a single root node
 print(df)
 fig = px.treemap(df, path=['all', 'regions', 'sectors', 'vendors'], values='sales')
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -144,9 +154,11 @@ import plotly.graph_objects as go
 
 fig = go.Figure(go.Treemap(
     labels = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
-    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
+    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+    root_color="lightgrey"
 ))
 
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -179,8 +191,8 @@ fig.add_trace(go.Treemap(
     parents = parents,
     values =  [10, 14, 12, 10, 2, 6, 6, 1, 4],
     textinfo = "label+value+percent parent+percent entry+percent root",
-    ),
-              row = 1, col = 1)
+    root_color="lightgrey"
+),row = 1, col = 1)
 
 fig.add_trace(go.Treemap(
     branchvalues = "total",
@@ -188,11 +200,10 @@ fig.add_trace(go.Treemap(
     parents = parents,
     values = [65, 14, 12, 10, 2, 6, 6, 1, 4],
     textinfo = "label+value+percent parent+percent entry",
-    outsidetextfont = {"size": 20, "color": "darkblue"},
-    marker = {"line": {"width": 2}},
-    pathbar = {"visible": False}),
-              row = 1, col = 2)
+    root_color="lightgrey"
+),row = 1, col = 2)
 
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -205,14 +216,19 @@ There are three different ways to change the color of the sectors in Treemap:
 ```python
 import plotly.graph_objects as go
 
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+values = [0, 11, 12, 13, 14, 15, 20, 30]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Treemap(
     labels = labels,
+    values = values,
     parents = parents,
-    marker_colors = ["pink", "royalblue", "lightgray", "purple", "cyan", "lightgray", "lightblue"]))
+    marker_colors = ["pink", "royalblue", "lightgray", "purple", 
+                     "cyan", "lightgray", "lightblue", "lightgreen"]
+))
 
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -221,31 +237,39 @@ This example uses `treemapcolorway` attribute, which should be set in layout.
 ```python
 import plotly.graph_objects as go
 
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+values = [0, 11, 12, 13, 14, 15, 20, 30]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Treemap(
     labels = labels,
-    parents = parents
+    values = values,
+    parents = parents,
+    root_color="lightblue"
 ))
 
-fig.update_layout(treemapcolorway = ["pink", "lightgray"])
-
+fig.update_layout(
+    treemapcolorway = ["pink", "lightgray"],
+    margin = dict(t=50, l=25, r=25, b=25)
+)
 fig.show()
 ```
 
 ```python
 import plotly.graph_objects as go
 
-values = ["11", "12", "13", "14", "15", "20", "30"]
-labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
-parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
+values = [0, 11, 12, 13, 14, 15, 20, 30]
+labels = ["container", "A1", "A2", "A3", "A4", "A5", "B1", "B2"]
+parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 
 fig = go.Figure(go.Treemap(
     labels = labels,
     values = values,
     parents = parents,
-    marker_colorscale = 'Blues'))
+    marker_colorscale = 'Blues'
+))
+
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -326,7 +350,7 @@ fig.add_trace(go.Treemap(
     maxdepth=2
     ), 1, 2)
 
-fig.update_layout(margin=dict(t=10, b=10, r=10, l=10))
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
@@ -336,37 +360,22 @@ The following example uses hierarchical data that includes layers and grouping. 
 
 ```python
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 import pandas as pd
 
-df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
-df2 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
-fig = make_subplots(
-    rows = 1, cols = 2,
-    column_widths = [0.4, 0.4],
-    specs = [[{'type': 'treemap', 'rowspan': 1}, {'type': 'treemap'}]]
-)
+fig = go.Figure()
 
-fig.add_trace(
-    go.Treemap(
-        ids = df1.ids,
-        labels = df1.labels,
-        parents = df1.parents),
-    col = 1, row = 1)
+fig.add_trace(go.Treemap(
+    ids = df.ids,
+    labels = df.labels,
+    parents = df.parents,
+    maxdepth=3,
+    root_color="lightgrey"
+))
 
-fig.add_trace(
-    go.Treemap(
-        ids = df2.ids,
-        labels = df2.labels,
-        parents = df2.parents,
-        maxdepth = 3),
-    col = 2, row = 1)
-
-fig.update_layout(
-    margin = {'t':0, 'l':0, 'r':0, 'b':0}
-)
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
 fig.show()
 ```
@@ -375,17 +384,25 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
+*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+
 ```python
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/96c0bd/sunburst-coffee-flavors-complete.csv')
 
 fig = go.Figure(go.Treemap(
-        ids = df.ids,
-        labels = df.labels,
-        parents = df.parents))
-fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
+    ids = df.ids,
+    labels = df.labels,
+    parents = df.parents,
+    pathbar_textfont_size=15,
+    root_color="lightgrey"
+))
+fig.update_layout(
+    uniformtext=dict(minsize=10, mode='hide'),
+    margin = dict(t=50, l=25, r=25, b=25)
+)
 fig.show()
 ```
 
