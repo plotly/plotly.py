@@ -37,6 +37,7 @@ plotly's high-level API for rapid figure generation. ::
     pie
     treemap
     sunburst
+    icicle
     funnel
     funnel_area
     scatter_matrix

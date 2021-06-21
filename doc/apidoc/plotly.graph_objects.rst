@@ -116,6 +116,7 @@ Specialized Traces
    Scatterternary
    Sunburst
    Treemap
+   Icicle
    Sankey
    Splom
    Parcats
