@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -130,6 +130,15 @@ fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group")
 fig.show()
 ```
 
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.bar(df, x="medal", y="count", color="nation", 
+             pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
+fig.show()
+```
+
 **Read more about [facet plots](/python/facet-plots/).**
 
 ```python
@@ -239,6 +248,17 @@ import plotly.express as px
 import numpy as np
 df = px.data.gapminder().query("year == 2007")
 fig = px.treemap(df, path=[px.Constant('world'), 'continent', 'country'], values='pop',
+                  color='lifeExp', hover_data=['iso_alpha'])
+fig.show()
+```
+
+**Read more about [treemaps](/python/icicle-charts/).**
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.icicle(df, path=[px.Constant('world'), 'continent', 'country'], values='pop',
                   color='lifeExp', hover_data=['iso_alpha'])
 fig.show()
 ```
