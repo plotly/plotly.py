@@ -33,6 +33,8 @@ jupyter:
     thumbnail: thumbnail/icicle.png
 ---
 
+*New in v5.0*
+
 Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](https://plotly.com/python/sunburst-charts/) and [Treemaps](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
 
 ### Basic Icicle Plot with plotly.express
@@ -96,7 +98,7 @@ When the argument of color corresponds to non-numerical data, discrete colors ar
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                 values='total_bill', color='day')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -107,7 +109,7 @@ In the example below the color of **Saturday** and **Sunday** sectors is the sam
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                 values='total_bill', color='time')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -120,7 +122,7 @@ For more information about discrete colors, see the [dedicated page](https://plo
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.icicle(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                 values='total_bill', color='time',
                 color_discrete_map={'(?)':'lightgrey', 'Lunch':'gold', 'Dinner':'darkblue'})
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
@@ -369,7 +371,7 @@ parents = ["", "container", "A1", "A2", "A3", "A4", "container", "B1"]
 fig = go.Figure(go.Icicle(
     labels = labels,
     parents = parents,
-    marker_colors = ["pink", "royalblue", "lightgray", "purple", 
+    marker_colors = ["pink", "royalblue", "lightgray", "purple",
                      "cyan", "lightgray", "lightblue", "lightgreen"]))
 
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))

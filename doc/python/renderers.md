@@ -253,7 +253,9 @@ It is important to note that `FigureWidget` does not use the renderers framework
 
 ## Performance
 
-No matter the approach chosen to display a figure, [the figure data structure](https://plotly.com/python/figure-structure/) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](https://plotly.com/python/interactive-html-export/) or [to Kaleido for static image export](https://plotly.com/python/static-image-export/)). 
+No matter the approach chosen to display a figure, [the figure data structure](https://plotly.com/python/figure-structure/) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](https://plotly.com/python/interactive-html-export/) or [to Kaleido for static image export](https://plotly.com/python/static-image-export/)).
+
+*New in v5.0*
 
 The default JSON serialization mechanism can be slow for figures with many data points or with large `numpy` arrays or data frames. **If [the `orjson` package](https://github.com/ijl/orjson) is installed**, `plotly` will use that instead of the built-in `json` package, which can lead to **5-10x** speedups for large figures.
 
