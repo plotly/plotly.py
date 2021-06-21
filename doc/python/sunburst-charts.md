@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to make Sunburst Charts.
     display_as: basic
@@ -33,13 +33,7 @@ jupyter:
     thumbnail: thumbnail/sunburst.gif
 ---
 
-Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` (`names` in `px.sunburst`) and in `parents`. The root starts from the center and children are added to the outer rings.
-
-Main arguments:
-
-1. `labels` (`names` in `px.sunburst` since `labels` is reserved for overriding columns names): sets the labels of sunburst sectors.
-2. `parents`: sets the parent sectors of sunburst sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
-3. `values`: sets the values associated with sunburst sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
+Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](https://plotly.com/python/icicle-charts/) and [Treemaps](https://plotly.com/python/treemaps/), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
 
 ### Basic Sunburst Plot with plotly.express
 
@@ -145,6 +139,12 @@ fig.show()
 ### Basic Sunburst Plot with go.Sunburst
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](/python/graph-objects/).
+
+Main arguments:
+
+1. `labels` (`names` in `px.sunburst` since `labels` is reserved for overriding columns names): sets the labels of sunburst sectors.
+2. `parents`: sets the parent sectors of sunburst sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
+3. `values`: sets the values associated with sunburst sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
 
 ```python
 import plotly.graph_objects as go
@@ -283,6 +283,8 @@ fig.show()
 ### Controlling text fontsize with uniformtext
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+*Note: animated transitions are currently not implemented when `uniformtext` is used.*
 
 ```python
 import plotly.graph_objects as go
