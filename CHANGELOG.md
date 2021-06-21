@@ -23,7 +23,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 - Plotly.js CDN url will now be versioned by default for HTML exports using `include_plotlyjs='cdn'` and for "connected" renderers. [#2961](https://github.com/plotly/plotly.py/pull/2961) with thanks to [@adehad](https://github.com/adehad) for the contribution
 - Recommending Kaleido by default over Orca [#3094](https://github.com/plotly/plotly.py/pull/3094)
 - Replaced `retrying` dependency with `tenacity` [#2911](https://github.com/plotly/plotly.py/pull/2911) with thanks to [@jmsmdy](https://github.com/jmsmdy) for the contribution
-- Plotly Express now always takes into account every value in `category_orders` when computing discrete mappings (color, symbol, line-dash, pattern-shapes) as well as facets [#3247](https://github.com/plotly/plotly.py/pull/3247)
+- Plotly Express now always takes into account every value in `category_orders` when computing discrete mappings (color, symbol, line-dash, pattern-shapes) as well as facets, even those values which are absent in the data [#3247](https://github.com/plotly/plotly.py/pull/3247)
 
 ### Added
 
