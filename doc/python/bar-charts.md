@@ -133,13 +133,16 @@ fig = px.bar(df, x="sex", y="total_bill",
 fig.show()
 ```
 
+*New in v5.0*
+
+
 Bar charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
 
 ```python
 import plotly.express as px
 df = px.data.medals_long()
 
-fig = px.bar(df, x="medal", y="count", color="nation", 
+fig = px.bar(df, x="medal", y="count", color="nation",
              pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
 fig.show()
 ```
@@ -347,8 +350,8 @@ for key in data:
         ])
     ))
 
-fig.update_xaxes( 
-    tickvals=np.cumsum(widths)-widths/2, 
+fig.update_xaxes(
+    tickvals=np.cumsum(widths)-widths/2,
     ticktext= ["%s<br>%d" % (l, w) for l, w in zip(labels, widths)]
 )
 

@@ -34,6 +34,8 @@ jupyter:
     thumbnail: thumbnail/pattern.png
 ---
 
+*New in v5.0*
+
 [Bar charts](/python/bar-charts/), [histograms](/python/histograms/) and [polar bar charts](/python/wind-rose-charts/) have large markers which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
 
 * to double-encode variables (i.e. using both color and pattern) to improve accessibility for visually-impaired end-users

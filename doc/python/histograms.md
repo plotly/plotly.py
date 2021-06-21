@@ -179,6 +179,7 @@ df = px.data.tips()
 fig = px.histogram(df, x="day", y="total_bill", category_orders=dict(day=["Thur", "Fri", "Sat", "Sun"]))
 fig.show()
 ```
+*New in v5.0*
 
 Histograms afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
 
