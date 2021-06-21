@@ -11,7 +11,7 @@ releases and forum announcements to do :)
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
 `jupyterlab-plotly` with matching versions.
 
-> Note: it's easier to lock all three versions together, even if it means we occasionally
+> Note: it's easier to lock the JS extension and Python versions together, even if it means we occasionally
 > push no-change versions to NPM/PyPI/Conda.
 
 ### Finalize changelog
