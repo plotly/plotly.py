@@ -99,7 +99,9 @@ fig.show()
 
 *New in v5.0*
 
-The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
+The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. 
+
+The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
 
 ```python
 import plotly.graph_objects as go
