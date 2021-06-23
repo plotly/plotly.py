@@ -13,7 +13,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 - Updated Plotly.js to from version 1.58.4 to version 2.1.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
     - dropped support for IE9 and IE10
     - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
-    - modebar no longer has `hovermode` or `showspikes` buttons by default (can be added back with `layout.modebar.add=v1hovermode`)
+    - modebar no longer has hovermode or spikeline buttons by default (can be added back with `fig.update_layout(modebar_add=["v1hovermode", "toggleSpikeLines"])`)
     - "Aa" text no longer appears on legend items unless `mode="text"`
     - In `bar` traces, `textposition` now defaults to `"auto"`
     - Font size for legend and colorbar titles now matches axis title font size (slightly bigger)
