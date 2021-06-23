@@ -241,7 +241,7 @@ def make_subplots(
     shared_xaxes=False,
     shared_yaxes=False,
     start_cell="top-left",
-    print_grid=None,
+    print_grid=False,
     **kwargs
 ):
     """Return an instance of plotly.graph_objs.Figure
@@ -354,7 +354,7 @@ def make_subplots(
         Choose the starting cell in the subplot grid used to set the
         domains of the subplots.
 
-    print_grid (kwarg, boolean, default=True):
+    print_grid (kwarg, boolean, default=False):
         If True, prints a tab-delimited string representation of
         your plot grid.
 
