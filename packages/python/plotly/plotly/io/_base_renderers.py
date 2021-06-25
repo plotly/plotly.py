@@ -670,7 +670,9 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
         html = html.encode("utf8")
 
     if isinstance(using, tuple):
-        using = [i for i in webbrowser._browsers.keys() if any(j in i for j in using)][0]
+        using = [i for i in webbrowser._browsers.keys() if any(j in i for j in using)][
+            0
+        ]
 
     class OneShotRequestHandler(BaseHTTPRequestHandler):
         def do_GET(self):
