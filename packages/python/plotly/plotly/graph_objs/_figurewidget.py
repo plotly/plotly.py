@@ -614,6 +614,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -784,6 +785,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.bar.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -950,13 +954,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -990,13 +1000,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -1067,6 +1083,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -1136,6 +1153,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -1255,6 +1273,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.barpolar.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1412,6 +1433,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -1466,6 +1488,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         jitter=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         lowerfence=None,
@@ -1666,6 +1689,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.box.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1894,13 +1920,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -1935,13 +1967,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2009,6 +2047,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             jitter=jitter,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             lowerfence=lowerfence,
@@ -2090,6 +2129,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         increasing=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         low=None,
@@ -2189,6 +2229,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.candlestick.Legendgrouptit
+            le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2294,13 +2337,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2326,13 +2375,19 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -2377,6 +2432,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             increasing=increasing,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             low=low,
@@ -2430,6 +2486,7 @@ class FigureWidget(BaseFigureWidget):
         font=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -2522,6 +2579,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.carpet.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2650,6 +2710,7 @@ class FigureWidget(BaseFigureWidget):
             font=font,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -2690,6 +2751,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         locationmode=None,
         locations=None,
@@ -2842,6 +2904,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.choropleth.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -3003,6 +3068,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             locationmode=locationmode,
             locations=locations,
@@ -3054,6 +3120,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         locations=None,
         locationssrc=None,
@@ -3205,6 +3272,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.choroplethmapbox.Legendgro
+            uptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -3364,6 +3434,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             locations=locations,
             locationssrc=locationssrc,
@@ -3417,6 +3488,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -3586,6 +3658,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.cone.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -3674,10 +3749,11 @@ class FigureWidget(BaseFigureWidget):
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rule for `u`  using d3
+            Sets the hover text formatting rulefor `u`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         uid
@@ -3708,10 +3784,11 @@ class FigureWidget(BaseFigureWidget):
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rule for `v`  using d3
+            Sets the hover text formatting rulefor `v`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         visible
@@ -3725,10 +3802,11 @@ class FigureWidget(BaseFigureWidget):
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rule for `w`  using d3
+            Sets the hover text formatting rulefor `w`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         wsrc
@@ -3738,13 +3816,19 @@ class FigureWidget(BaseFigureWidget):
             Sets the x coordinates of the vector field and of the
             displayed cones.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -3752,13 +3836,19 @@ class FigureWidget(BaseFigureWidget):
             Sets the y coordinates of the vector field and of the
             displayed cones.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -3766,13 +3856,19 @@ class FigureWidget(BaseFigureWidget):
             Sets the z coordinates of the vector field and of the
             displayed cones.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -3815,6 +3911,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -3881,6 +3978,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         meta=None,
@@ -4064,6 +4162,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -4163,13 +4264,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -4209,13 +4316,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -4249,10 +4362,11 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -4322,6 +4436,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             meta=meta,
@@ -4397,6 +4512,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         meta=None,
@@ -4539,6 +4655,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.contourcarpet.Legendgroupt
+            itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -4710,6 +4829,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             meta=meta,
@@ -4760,6 +4880,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lon=None,
         lonsrc=None,
@@ -4909,6 +5030,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.densitymapbox.Legendgroupt
+            itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -5068,6 +5192,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lon=lon,
             lonsrc=lonsrc,
@@ -5119,6 +5244,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -5276,6 +5402,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.funnel.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -5437,13 +5566,19 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -5475,13 +5610,19 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -5549,6 +5690,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -5617,6 +5759,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -5753,6 +5896,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -5907,6 +6053,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -5956,6 +6103,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -6137,6 +6285,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.heatmap.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -6229,13 +6380,19 @@ class FigureWidget(BaseFigureWidget):
         xgap
             Sets the horizontal gap (in pixels) between bricks.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -6277,13 +6434,19 @@ class FigureWidget(BaseFigureWidget):
         ygap
             Sets the vertical gap (in pixels) between bricks.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -6317,10 +6480,11 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -6389,6 +6553,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -6453,6 +6618,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -6559,6 +6725,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -6738,6 +6907,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -6796,6 +6966,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -6971,6 +7142,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.histogram.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -7090,13 +7264,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -7113,13 +7293,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -7172,6 +7358,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -7229,6 +7416,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -7418,6 +7606,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.histogram2d.Legendgrouptit
+            le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -7524,13 +7715,19 @@ class FigureWidget(BaseFigureWidget):
         xgap
             Sets the horizontal gap (in pixels) between bricks.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -7556,13 +7753,19 @@ class FigureWidget(BaseFigureWidget):
         ygap
             Sets the vertical gap (in pixels) between bricks.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -7574,10 +7777,11 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -7645,6 +7849,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -7711,6 +7916,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -7907,6 +8113,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.histogram2dcontour.Legendg
+            rouptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -8020,13 +8229,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -8050,13 +8265,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -8068,10 +8289,11 @@ class FigureWidget(BaseFigureWidget):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -8139,6 +8361,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -8201,6 +8424,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legendgrouptitle=None,
         legendrank=None,
         level=None,
         marker=None,
@@ -8335,6 +8559,9 @@ class FigureWidget(BaseFigureWidget):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legendgrouptitle
+            :class:`plotly.graph_objects.icicle.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -8514,6 +8741,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             level=level,
             marker=marker,
@@ -8562,6 +8790,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -8672,6 +8901,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.image.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -8823,6 +9055,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -8858,6 +9091,7 @@ class FigureWidget(BaseFigureWidget):
         gauge=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -8914,6 +9148,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.indicator.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -9011,6 +9248,7 @@ class FigureWidget(BaseFigureWidget):
             gauge=gauge,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -9054,6 +9292,7 @@ class FigureWidget(BaseFigureWidget):
         isomax=None,
         isomin=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -9229,6 +9468,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.isosurface.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -9331,10 +9573,11 @@ class FigureWidget(BaseFigureWidget):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rule for `value`  using
+            Sets the hover text formatting rulefor `value`  using
             d3 formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         valuesrc
@@ -9348,39 +9591,57 @@ class FigureWidget(BaseFigureWidget):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -9427,6 +9688,7 @@ class FigureWidget(BaseFigureWidget):
             isomax=isomax,
             isomin=isomin,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -9501,6 +9763,7 @@ class FigureWidget(BaseFigureWidget):
         k=None,
         ksrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -9744,6 +10007,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -9855,13 +10121,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -9872,13 +10144,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -9889,13 +10167,19 @@ class FigureWidget(BaseFigureWidget):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -9953,6 +10237,7 @@ class FigureWidget(BaseFigureWidget):
             k=k,
             ksrc=ksrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -10006,6 +10291,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         increasing=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         low=None,
@@ -10105,6 +10391,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -10209,13 +10498,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -10241,13 +10536,19 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -10292,6 +10593,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             increasing=increasing,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             low=low,
@@ -10338,6 +10640,7 @@ class FigureWidget(BaseFigureWidget):
         hoveron=None,
         hovertemplate=None,
         labelfont=None,
+        legendgrouptitle=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -10432,6 +10735,9 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            instance or dict with compatible properties
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -10520,6 +10826,7 @@ class FigureWidget(BaseFigureWidget):
             hoveron=hoveron,
             hovertemplate=hovertemplate,
             labelfont=labelfont,
+            legendgrouptitle=legendgrouptitle,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -10546,6 +10853,7 @@ class FigureWidget(BaseFigureWidget):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         meta=None,
@@ -10610,6 +10918,9 @@ class FigureWidget(BaseFigureWidget):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -10702,6 +11013,7 @@ class FigureWidget(BaseFigureWidget):
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             meta=meta,
@@ -10741,6 +11053,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -10896,6 +11209,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.pie.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -11078,6 +11394,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -11124,6 +11441,7 @@ class FigureWidget(BaseFigureWidget):
         indices=None,
         indicessrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -11205,6 +11523,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.pointcloud.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -11363,6 +11684,7 @@ class FigureWidget(BaseFigureWidget):
             indices=indices,
             indicessrc=indicessrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -11402,6 +11724,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         link=None,
         meta=None,
@@ -11467,6 +11790,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -11536,9 +11862,10 @@ class FigureWidget(BaseFigureWidget):
             `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See
+            mini-languages which are very similar to those in
+            Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            reference/blob/master/Formatting.md#d3_format.
         valuesuffix
             Adds a unit to follow the value in the hover tooltip.
             Add a space if a separation is necessary from the
@@ -11574,6 +11901,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             link=link,
             meta=meta,
@@ -11617,6 +11945,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -11812,6 +12141,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatter.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -11982,13 +12314,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -12022,13 +12360,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -12098,6 +12442,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -12164,6 +12509,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -12299,6 +12645,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatter3d.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -12432,13 +12781,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -12447,13 +12802,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -12462,13 +12823,19 @@ class FigureWidget(BaseFigureWidget):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -12506,6 +12873,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -12569,6 +12937,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -12715,6 +13084,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scattercarpet.Legendgroupt
+            itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -12900,6 +13272,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -12951,6 +13324,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         locationmode=None,
@@ -13100,6 +13474,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scattergeo.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -13284,6 +13661,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             locationmode=locationmode,
@@ -13337,6 +13715,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -13504,6 +13883,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scattergl.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -13638,13 +14020,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -13678,13 +14066,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -13751,6 +14145,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -13816,6 +14211,7 @@ class FigureWidget(BaseFigureWidget):
         lat=None,
         latsrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         lon=None,
@@ -13948,6 +14344,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scattermapbox.Legendgroupt
+            itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -14117,6 +14516,7 @@ class FigureWidget(BaseFigureWidget):
             lat=lat,
             latsrc=latsrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             lon=lon,
@@ -14167,6 +14567,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -14322,6 +14723,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatterpolar.Legendgroupti
+            tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -14511,6 +14915,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -14565,6 +14970,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -14719,6 +15125,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -14906,6 +15315,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -14966,6 +15376,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -15132,6 +15543,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatterternary.Legendgroup
+            title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -15311,6 +15725,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -15357,6 +15772,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         marker=None,
         meta=None,
@@ -15474,6 +15890,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.splom.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -15576,13 +15995,19 @@ class FigureWidget(BaseFigureWidget):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         yaxes
             Sets the list of y axes corresponding to dimensions of
             this splom trace. By default, a splom will match the
@@ -15592,13 +16017,19 @@ class FigureWidget(BaseFigureWidget):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -15632,6 +16063,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             marker=marker,
             meta=meta,
@@ -15679,6 +16111,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -15847,6 +16280,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.streamtube.Legendgrouptitl
+            e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -15925,10 +16361,11 @@ class FigureWidget(BaseFigureWidget):
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rule for `u`  using d3
+            Sets the hover text formatting rulefor `u`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         uid
@@ -15959,10 +16396,11 @@ class FigureWidget(BaseFigureWidget):
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rule for `v`  using d3
+            Sets the hover text formatting rulefor `v`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         visible
@@ -15976,10 +16414,11 @@ class FigureWidget(BaseFigureWidget):
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rule for `w`  using d3
+            Sets the hover text formatting rulefor `w`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         wsrc
@@ -15988,39 +16427,57 @@ class FigureWidget(BaseFigureWidget):
         x
             Sets the x coordinates of the vector field.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the y coordinates of the vector field.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the z coordinates of the vector field.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -16061,6 +16518,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -16123,6 +16581,7 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legendgrouptitle=None,
         legendrank=None,
         level=None,
         marker=None,
@@ -16265,6 +16724,9 @@ class FigureWidget(BaseFigureWidget):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendgrouptitle
+            :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -16440,6 +16902,7 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             level=level,
             marker=marker,
@@ -16495,6 +16958,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -16670,6 +17134,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.surface.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -16787,13 +17254,19 @@ class FigureWidget(BaseFigureWidget):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -16802,13 +17275,19 @@ class FigureWidget(BaseFigureWidget):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -16817,13 +17296,19 @@ class FigureWidget(BaseFigureWidget):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -16868,6 +17353,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -16920,6 +17406,7 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         meta=None,
         metasrc=None,
@@ -16993,6 +17480,9 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.table.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -17082,6 +17572,7 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             meta=meta,
             metasrc=metasrc,
@@ -17113,6 +17604,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextfont=None,
         labels=None,
         labelssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         level=None,
         marker=None,
@@ -17245,6 +17737,9 @@ class FigureWidget(BaseFigureWidget):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             labels .
+        legendgrouptitle
+            :class:`plotly.graph_objects.treemap.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -17423,6 +17918,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextfont=insidetextfont,
             labels=labels,
             labelssrc=labelssrc,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             level=level,
             marker=marker,
@@ -17475,6 +17971,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         jitter=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -17621,6 +18118,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.violin.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -17795,13 +18295,19 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -17818,13 +18324,19 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -17874,6 +18386,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             jitter=jitter,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             line=line,
             marker=marker,
@@ -17943,6 +18456,7 @@ class FigureWidget(BaseFigureWidget):
         isomax=None,
         isomin=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         lighting=None,
         lightposition=None,
@@ -18119,6 +18633,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.volume.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -18232,10 +18749,11 @@ class FigureWidget(BaseFigureWidget):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rule for `value`  using
+            Sets the hover text formatting rulefor `value`  using
             d3 formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         valuesrc
@@ -18249,39 +18767,57 @@ class FigureWidget(BaseFigureWidget):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `zaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `zaxis.hoverformat`.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -18328,6 +18864,7 @@ class FigureWidget(BaseFigureWidget):
             isomax=isomax,
             isomin=isomin,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             lighting=lighting,
             lightposition=lightposition,
@@ -18390,6 +18927,7 @@ class FigureWidget(BaseFigureWidget):
         insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         measure=None,
         measuresrc=None,
@@ -18559,6 +19097,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.waterfall.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -18730,13 +19271,19 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -18768,13 +19315,19 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -18845,6 +19398,7 @@ class FigureWidget(BaseFigureWidget):
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             measure=measure,
             measuresrc=measuresrc,

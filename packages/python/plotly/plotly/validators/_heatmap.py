@@ -135,6 +135,10 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
+            legendgrouptitle
+                :class:`plotly.graph_objects.heatmap.Legendgrou
+                ptitle` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
@@ -239,15 +243,21 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the horizontal gap (in pixels) between
                 bricks.
             xhoverformat
-                Sets the hover text formatting rule for `x`
+                Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `xaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `xaxis.hoverformat`.
             xperiod
                 Only relevant when the axis `type` is "date".
                 Sets the period positioning in milliseconds or
@@ -295,15 +305,21 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the vertical gap (in pixels) between
                 bricks.
             yhoverformat
-                Sets the hover text formatting rule for `y`
+                Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `yaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `yaxis.hoverformat`.
             yperiod
                 Only relevant when the axis `type` is "date".
                 Sets the period positioning in milliseconds or
@@ -341,13 +357,13 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Defaults to `false` when `zmin` and `zmax` are
                 set by the user.
             zhoverformat
-                Sets the hover text formatting rule for `z`
+                Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                By default the values are formatted using
-                generic number format.
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-reference
+                /blob/master/Formatting.md#d3_format.By default
+                the values are formatted using generic number
+                format.
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if

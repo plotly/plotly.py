@@ -20,6 +20,7 @@ class Parcats(_BaseTraceType):
         "hoveron",
         "hovertemplate",
         "labelfont",
+        "legendgrouptitle",
         "line",
         "meta",
         "metasrc",
@@ -402,6 +403,34 @@ class Parcats(_BaseTraceType):
     @labelfont.setter
     def labelfont(self, val):
         self["labelfont"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.parcats.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.parcats.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # line
     # ----
@@ -885,6 +914,9 @@ class Parcats(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            instance or dict with compatible properties
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -960,6 +992,7 @@ class Parcats(_BaseTraceType):
         hoveron=None,
         hovertemplate=None,
         labelfont=None,
+        legendgrouptitle=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -1055,6 +1088,9 @@ class Parcats(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            instance or dict with compatible properties
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -1192,6 +1228,10 @@ an instance of :class:`plotly.graph_objs.Parcats`"""
         _v = labelfont if labelfont is not None else _v
         if _v is not None:
             self["labelfont"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

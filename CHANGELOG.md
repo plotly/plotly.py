@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+- Updated Plotly.js to from version 2.1.0 to version 2.2.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#220----2021-06-28) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - new `<trace>.legendgrouptitle` attribute for legend group titles
+  - new `%h` text formatting directive for half-years
+  - performance improvements and bug fixes
+
 
 ## [5.0.0] - 2021-06-21
 

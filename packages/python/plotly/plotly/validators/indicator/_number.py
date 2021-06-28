@@ -18,10 +18,10 @@ class NumberValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets a suffix appearing next to the number.
             valueformat
                 Sets the value formatting rule using d3
-                formatting mini-language which is similar to
-                those of Python. See
+                formatting mini-languages which are very
+                similar to those in Python. For numbers, see:
                 https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                reference/blob/master/Formatting.md#d3_format.
 """,
             ),
             **kwargs

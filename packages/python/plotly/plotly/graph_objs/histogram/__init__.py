@@ -5,6 +5,7 @@ if sys.version_info < (3, 7):
     from ._error_x import ErrorX
     from ._error_y import ErrorY
     from ._hoverlabel import Hoverlabel
+    from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
     from ._selected import Selected
     from ._stream import Stream
@@ -12,6 +13,7 @@ if sys.version_info < (3, 7):
     from ._xbins import XBins
     from ._ybins import YBins
     from . import hoverlabel
+    from . import legendgrouptitle
     from . import marker
     from . import selected
     from . import unselected
@@ -20,12 +22,13 @@ else:
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".hoverlabel", ".marker", ".selected", ".unselected"],
+        [".hoverlabel", ".legendgrouptitle", ".marker", ".selected", ".unselected"],
         [
             "._cumulative.Cumulative",
             "._error_x.ErrorX",
             "._error_y.ErrorY",
             "._hoverlabel.Hoverlabel",
+            "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
             "._selected.Selected",
             "._stream.Stream",
