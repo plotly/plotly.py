@@ -17,6 +17,7 @@ class Sankey(_BaseTraceType):
         "hoverlabel",
         "ids",
         "idssrc",
+        "legendgrouptitle",
         "legendrank",
         "link",
         "meta",
@@ -269,6 +270,34 @@ class Sankey(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self["idssrc"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.sankey.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.sankey.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -789,9 +818,9 @@ class Sankey(_BaseTraceType):
     def valueformat(self):
         """
         Sets the value formatting rule using d3 formatting mini-
-        language which is similar to those of Python. See
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format
+        languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format.
     
         The 'valueformat' property is a string and must be specified as:
           - A string
@@ -899,6 +928,9 @@ class Sankey(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -968,9 +1000,10 @@ class Sankey(_BaseTraceType):
             `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See
+            mini-languages which are very similar to those in
+            Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            reference/blob/master/Formatting.md#d3_format.
         valuesuffix
             Adds a unit to follow the value in the hover tooltip.
             Add a space if a separation is necessary from the
@@ -993,6 +1026,7 @@ class Sankey(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legendgrouptitle=None,
         legendrank=None,
         link=None,
         meta=None,
@@ -1059,6 +1093,9 @@ class Sankey(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             ids .
+        legendgrouptitle
+            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1128,9 +1165,10 @@ class Sankey(_BaseTraceType):
             `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See
+            mini-languages which are very similar to those in
+            Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            reference/blob/master/Formatting.md#d3_format.
         valuesuffix
             Adds a unit to follow the value in the hover tooltip.
             Add a space if a separation is necessary from the
@@ -1206,6 +1244,10 @@ an instance of :class:`plotly.graph_objs.Sankey`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

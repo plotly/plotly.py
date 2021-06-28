@@ -346,7 +346,7 @@ fig.show()
 
 #### Grouped Legend Items
 
-Grouping legend items together by setting the `legendgroup` attribute of traces causes their legend entries to be next to each other, and clicking on any legend entry in the group will show or hide the whole group.
+Grouping legend items together by setting the `legendgroup` attribute of traces causes their legend entries to be next to each other, and clicking on any legend entry in the group will show or hide the whole group. The `legendgrouptitle` attribute can be used to give titles to groups.
 
 ```python
 import plotly.graph_objects as go
@@ -357,6 +357,7 @@ fig.add_trace(go.Scatter(
     x=[1, 2, 3],
     y=[2, 1, 3],
     legendgroup="group",  # this can be any string, not just "group"
+    legendgrouptitle_text="First Group Title",
     name="first legend group",
     mode="markers",
     marker=dict(color="Crimson", size=10)
@@ -375,6 +376,7 @@ fig.add_trace(go.Scatter(
     x=[1, 2, 3],
     y=[4, 9, 2],
     legendgroup="group2",
+    legendgrouptitle_text="Second Group Title",
     name="second legend group",
     mode="markers",
     marker=dict(color="MediumPurple", size=10)

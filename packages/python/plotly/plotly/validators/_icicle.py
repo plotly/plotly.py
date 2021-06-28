@@ -114,6 +114,10 @@ class IcicleValidator(_plotly_utils.basevalidators.CompoundValidator):
             leaf
                 :class:`plotly.graph_objects.icicle.Leaf`
                 instance or dict with compatible properties
+            legendgrouptitle
+                :class:`plotly.graph_objects.icicle.Legendgroup
+                title` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on

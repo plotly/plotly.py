@@ -90,6 +90,10 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             labelfont
                 Sets the font for the `dimension` labels.
+            legendgrouptitle
+                :class:`plotly.graph_objects.parcats.Legendgrou
+                ptitle` instance or dict with compatible
+                properties
             line
                 :class:`plotly.graph_objects.parcats.Line`
                 instance or dict with compatible properties
