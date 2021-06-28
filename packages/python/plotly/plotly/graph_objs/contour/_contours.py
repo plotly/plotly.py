@@ -122,9 +122,9 @@ class Contours(_BaseTraceHierarchyType):
     def labelformat(self):
         """
         Sets the contour label formatting rule using d3 formatting
-        mini-language which is very similar to Python, see:
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format.
     
         The 'labelformat' property is a string and must be specified as:
           - A string
@@ -322,9 +322,10 @@ class Contours(_BaseTraceHierarchyType):
             default family and size come from `layout.font`.
         labelformat
             Sets the contour label formatting rule using d3
-            formatting mini-language which is very similar to
-            Python, see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.
         operation
             Sets the constraint operation. "=" keeps regions equal
             to `value` "<" and "<=" keep regions less than `value`
@@ -404,9 +405,10 @@ class Contours(_BaseTraceHierarchyType):
             default family and size come from `layout.font`.
         labelformat
             Sets the contour label formatting rule using d3
-            formatting mini-language which is very similar to
-            Python, see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.
         operation
             Sets the constraint operation. "=" keeps regions equal
             to `value` "<" and "<=" keep regions less than `value`

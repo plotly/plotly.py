@@ -27,6 +27,7 @@ if sys.version_info < (3, 7):
     from ._marker import MarkerValidator
     from ._level import LevelValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._leaf import LeafValidator
     from ._labelssrc import LabelssrcValidator
     from ._labels import LabelsValidator
@@ -79,6 +80,7 @@ else:
             "._marker.MarkerValidator",
             "._level.LevelValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._leaf.LeafValidator",
             "._labelssrc.LabelssrcValidator",
             "._labels.LabelsValidator",

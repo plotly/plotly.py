@@ -47,6 +47,7 @@ if sys.version_info < (3, 7):
     from ._measuresrc import MeasuresrcValidator
     from ._measure import MeasureValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
     from ._insidetextfont import InsidetextfontValidator
     from ._insidetextanchor import InsidetextanchorValidator
@@ -123,6 +124,7 @@ else:
             "._measuresrc.MeasuresrcValidator",
             "._measure.MeasureValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
             "._insidetextfont.InsidetextfontValidator",
             "._insidetextanchor.InsidetextanchorValidator",

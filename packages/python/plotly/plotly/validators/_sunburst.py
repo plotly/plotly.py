@@ -125,6 +125,10 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             leaf
                 :class:`plotly.graph_objects.sunburst.Leaf`
                 instance or dict with compatible properties
+            legendgrouptitle
+                :class:`plotly.graph_objects.sunburst.Legendgro
+                uptitle` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on

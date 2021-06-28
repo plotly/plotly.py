@@ -153,6 +153,10 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
+            legendgrouptitle
+                :class:`plotly.graph_objects.volume.Legendgroup
+                title` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
@@ -278,13 +282,13 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
             value
                 Sets the 4th dimension (value) of the vertices.
             valuehoverformat
-                Sets the hover text formatting rule for `value`
+                Sets the hover text formatting rulefor `value`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                By default the values are formatted using
-                generic number format.
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-reference
+                /blob/master/Formatting.md#d3_format.By default
+                the values are formatted using generic number
+                format.
             valuesrc
                 Sets the source reference on Chart Studio Cloud
                 for  value .
@@ -297,15 +301,21 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the X coordinates of the vertices on X
                 axis.
             xhoverformat
-                Sets the hover text formatting rule for `x`
+                Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `xaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
@@ -313,15 +323,21 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the Y coordinates of the vertices on Y
                 axis.
             yhoverformat
-                Sets the hover text formatting rule for `y`
+                Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `yaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .
@@ -329,15 +345,21 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the Z coordinates of the vertices on Z
                 axis.
             zhoverformat
-                Sets the hover text formatting rule for `z`
+                Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `zaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

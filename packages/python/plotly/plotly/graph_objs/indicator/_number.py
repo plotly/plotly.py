@@ -104,9 +104,9 @@ class Number(_BaseTraceHierarchyType):
     def valueformat(self):
         """
         Sets the value formatting rule using d3 formatting mini-
-        language which is similar to those of Python. See
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format
+        languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format.
     
         The 'valueformat' property is a string and must be specified as:
           - A string
@@ -135,9 +135,10 @@ class Number(_BaseTraceHierarchyType):
             Sets a suffix appearing next to the number.
         valueformat
             Sets the value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See
+            mini-languages which are very similar to those in
+            Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            reference/blob/master/Formatting.md#d3_format.
         """
 
     def __init__(
@@ -160,9 +161,10 @@ class Number(_BaseTraceHierarchyType):
             Sets a suffix appearing next to the number.
         valueformat
             Sets the value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See
+            mini-languages which are very similar to those in
+            Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format
+            reference/blob/master/Formatting.md#d3_format.
 
         Returns
         -------

@@ -30,10 +30,10 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.font`.
             labelformat
                 Sets the contour label formatting rule using d3
-                formatting mini-language which is very similar
-                to Python, see:
+                formatting mini-languages which are very
+                similar to those in Python. For numbers, see:
                 https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                reference/blob/master/Formatting.md#d3_format.
             operation
                 Sets the constraint operation. "=" keeps
                 regions equal to `value` "<" and "<=" keep

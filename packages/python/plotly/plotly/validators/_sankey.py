@@ -51,6 +51,10 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for  ids .
+            legendgrouptitle
+                :class:`plotly.graph_objects.sankey.Legendgroup
+                title` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
@@ -129,10 +133,10 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that stays with it as it moves.
             valueformat
                 Sets the value formatting rule using d3
-                formatting mini-language which is similar to
-                those of Python. See
+                formatting mini-languages which are very
+                similar to those in Python. For numbers, see:
                 https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                reference/blob/master/Formatting.md#d3_format.
             valuesuffix
                 Adds a unit to follow the value in the hover
                 tooltip. Add a space if a separation is
