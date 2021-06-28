@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.7
   plotly:
-    description: Cufflinks is a third-party wrapper library around Plotly, inspired
-      by the Pandas .plot() API.
+    description: Plotly Express can be used as a Pandas .plot() backend.
     display_as: file_settings
     language: python
     layout: base
