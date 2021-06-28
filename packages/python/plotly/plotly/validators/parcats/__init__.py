@@ -11,6 +11,7 @@ if sys.version_info < (3, 7):
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._line import LineValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._labelfont import LabelfontValidator
     from ._hovertemplate import HovertemplateValidator
     from ._hoveron import HoveronValidator
@@ -39,6 +40,7 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._line.LineValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._labelfont.LabelfontValidator",
             "._hovertemplate.HovertemplateValidator",
             "._hoveron.HoveronValidator",

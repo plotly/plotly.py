@@ -397,10 +397,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the hover text formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
         numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format We add
-        one item to d3's date formatter: "%{n}f" for fractional seconds
-        with n digits. For example, *2016-10-13 09:15:23.456* with
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
         tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'hoverformat' property is a string and must be specified as:
@@ -951,10 +952,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
         numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format We add
-        one item to d3's date formatter: "%{n}f" for fractional seconds
-        with n digits. For example, *2016-10-13 09:15:23.456* with
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
         tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
@@ -1417,10 +1419,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format We add one item to d3's date
-            formatter: "%{n}f" for fractional seconds with n
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         layer
@@ -1505,10 +1508,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format We add one item to d3's date
-            formatter: "%{n}f" for fractional seconds with n
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
@@ -1705,10 +1709,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format We add one item to d3's date
-            formatter: "%{n}f" for fractional seconds with n
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         layer
@@ -1793,10 +1798,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format We add one item to d3's date
-            formatter: "%{n}f" for fractional seconds with n
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops

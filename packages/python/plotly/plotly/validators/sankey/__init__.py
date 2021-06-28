@@ -16,6 +16,7 @@ if sys.version_info < (3, 7):
     from ._meta import MetaValidator
     from ._link import LinkValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._hoverlabel import HoverlabelValidator
@@ -46,6 +47,7 @@ else:
             "._meta.MetaValidator",
             "._link.LinkValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._hoverlabel.HoverlabelValidator",

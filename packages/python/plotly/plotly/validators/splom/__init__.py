@@ -23,6 +23,7 @@ if sys.version_info < (3, 7):
     from ._meta import MetaValidator
     from ._marker import MarkerValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -67,6 +68,7 @@ else:
             "._meta.MetaValidator",
             "._marker.MarkerValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

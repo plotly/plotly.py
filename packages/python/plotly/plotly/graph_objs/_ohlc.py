@@ -25,6 +25,7 @@ class Ohlc(_BaseTraceType):
         "idssrc",
         "increasing",
         "legendgroup",
+        "legendgrouptitle",
         "legendrank",
         "line",
         "low",
@@ -451,6 +452,34 @@ class Ohlc(_BaseTraceType):
     @legendgroup.setter
     def legendgroup(self, val):
         self["legendgroup"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.ohlc.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.ohlc.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -981,12 +1010,16 @@ class Ohlc(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rule for `x`  using d3
-        formatting mini-languages which are very similar to those in
-        Python. See: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format By
-        default the values are formatted using `xaxis.hoverformat`.
+        Sets the hover text formatting rulefor `x`  using d3 formatting
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
+        the values are formatted using `xaxis.hoverformat`.
     
         The 'xhoverformat' property is a string and must be specified as:
           - A string
@@ -1119,12 +1152,16 @@ class Ohlc(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rule for `y`  using d3
-        formatting mini-languages which are very similar to those in
-        Python. See: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format By
-        default the values are formatted using `yaxis.hoverformat`.
+        Sets the hover text formatting rulefor `y`  using d3 formatting
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
+        the values are formatted using `yaxis.hoverformat`.
     
         The 'yhoverformat' property is a string and must be specified as:
           - A string
@@ -1202,6 +1239,9 @@ class Ohlc(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1306,13 +1346,19 @@ class Ohlc(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -1338,13 +1384,19 @@ class Ohlc(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         """
 
     def __init__(
@@ -1366,6 +1418,7 @@ class Ohlc(_BaseTraceType):
         idssrc=None,
         increasing=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         low=None,
@@ -1465,6 +1518,9 @@ class Ohlc(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1569,13 +1625,19 @@ class Ohlc(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -1601,13 +1663,19 @@ class Ohlc(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
 
         Returns
         -------
@@ -1706,6 +1774,10 @@ an instance of :class:`plotly.graph_objs.Ohlc`"""
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
             self["legendgroup"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

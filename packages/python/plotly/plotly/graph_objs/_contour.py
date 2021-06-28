@@ -32,6 +32,7 @@ class Contour(_BaseTraceType):
         "ids",
         "idssrc",
         "legendgroup",
+        "legendgrouptitle",
         "legendrank",
         "line",
         "meta",
@@ -287,14 +288,15 @@ class Contour(_BaseTraceType):
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see:
                     https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format
+                    reference/blob/master/Formatting.md#d3_format.
                     And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format We add one item to d3's
-                    date formatter: "%{n}f" for fractional seconds
-                    with n digits. For example, *2016-10-13
-                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
-                    would display "09~15~23.46"
+                    format#locale_format. We add two items to d3's
+                    date formatter: "%h" for half of the year as a
+                    decimal number as well as "%{n}f" for
+                    fractional seconds with n digits. For example,
+                    *2016-10-13 09:15:23.456* with tickformat
+                    "%H~%M~%S.%2f" would display "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.contour
                     .colorbar.Tickformatstop` instances or dicts
@@ -506,10 +508,10 @@ class Contour(_BaseTraceType):
                     `layout.font`.
                 labelformat
                     Sets the contour label formatting rule using d3
-                    formatting mini-language which is very similar
-                    to Python, see:
+                    formatting mini-languages which are very
+                    similar to those in Python. For numbers, see:
                     https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format
+                    reference/blob/master/Formatting.md#d3_format.
                 operation
                     Sets the constraint operation. "=" keeps
                     regions equal to `value` "<" and "<=" keep
@@ -1006,6 +1008,34 @@ class Contour(_BaseTraceType):
     @legendgroup.setter
     def legendgroup(self, val):
         self["legendgroup"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.contour.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.contour.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -1517,12 +1547,16 @@ class Contour(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rule for `x`  using d3
-        formatting mini-languages which are very similar to those in
-        Python. See: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format By
-        default the values are formatted using `xaxis.hoverformat`.
+        Sets the hover text formatting rulefor `x`  using d3 formatting
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
+        the values are formatted using `xaxis.hoverformat`.
     
         The 'xhoverformat' property is a string and must be specified as:
           - A string
@@ -1744,12 +1778,16 @@ class Contour(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rule for `y`  using d3
-        formatting mini-languages which are very similar to those in
-        Python. See: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-time-format#locale_format By
-        default the values are formatted using `yaxis.hoverformat`.
+        Sets the hover text formatting rulefor `y`  using d3 formatting
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format. And for dates
+        see: https://github.com/d3/d3-time-format#locale_format. We add
+        two items to d3's date formatter: "%h" for half of the year as
+        a decimal number as well as "%{n}f" for fractional seconds with
+        n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
+        the values are formatted using `yaxis.hoverformat`.
     
         The 'yhoverformat' property is a string and must be specified as:
           - A string
@@ -1924,10 +1962,10 @@ class Contour(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rule for `z`  using d3
-        formatting mini-languages which are very similar to those in
-        Python. See: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format By default the
+        Sets the hover text formatting rulefor `z`  using d3 formatting
+        mini-languages which are very similar to those in Python. For
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format.By default the
         values are formatted using generic number format.
     
         The 'zhoverformat' property is a string and must be specified as:
@@ -2160,6 +2198,9 @@ class Contour(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2259,13 +2300,19 @@ class Contour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2305,13 +2352,19 @@ class Contour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2345,10 +2398,11 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -2395,6 +2449,7 @@ class Contour(_BaseTraceType):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         meta=None,
@@ -2578,6 +2633,9 @@ class Contour(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2677,13 +2735,19 @@ class Contour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rule for `x`  using d3
+            Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `xaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2723,13 +2787,19 @@ class Contour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rule for `y`  using d3
+            Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format And for
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format. And for
             dates see: https://github.com/d3/d3-time-
-            format#locale_format By default the values are
-            formatted using `yaxis.hoverformat`.
+            format#locale_format. We add two items to d3's date
+            formatter: "%h" for half of the year as a decimal
+            number as well as "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
+            default the values are formatted using
+            `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2763,10 +2833,11 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax`  Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rule for `z`  using d3
+            Sets the hover text formatting rulefor `z`  using d3
             formatting mini-languages which are very similar to
-            those in Python. See: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format By
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format.By
             default the values are formatted using generic number
             format.
         zmax
@@ -2911,6 +2982,10 @@ an instance of :class:`plotly.graph_objs.Contour`"""
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
             self["legendgroup"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

@@ -64,6 +64,10 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for  ids .
+            legendgrouptitle
+                :class:`plotly.graph_objects.table.Legendgroupt
+                itle` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on

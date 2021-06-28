@@ -5,6 +5,7 @@ if sys.version_info < (3, 7):
     from ._error_y import ErrorY
     from ._hoverlabel import Hoverlabel
     from ._insidetextfont import Insidetextfont
+    from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
     from ._outsidetextfont import Outsidetextfont
     from ._selected import Selected
@@ -12,6 +13,7 @@ if sys.version_info < (3, 7):
     from ._textfont import Textfont
     from ._unselected import Unselected
     from . import hoverlabel
+    from . import legendgrouptitle
     from . import marker
     from . import selected
     from . import unselected
@@ -20,12 +22,13 @@ else:
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".hoverlabel", ".marker", ".selected", ".unselected"],
+        [".hoverlabel", ".legendgrouptitle", ".marker", ".selected", ".unselected"],
         [
             "._error_x.ErrorX",
             "._error_y.ErrorY",
             "._hoverlabel.Hoverlabel",
             "._insidetextfont.Insidetextfont",
+            "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
             "._outsidetextfont.Outsidetextfont",
             "._selected.Selected",

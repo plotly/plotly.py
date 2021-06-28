@@ -30,6 +30,7 @@ if sys.version_info < (3, 7):
     from ._low import LowValidator
     from ._line import LineValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
     from ._increasing import IncreasingValidator
     from ._idssrc import IdssrcValidator
@@ -82,6 +83,7 @@ else:
             "._low.LowValidator",
             "._line.LineValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
             "._increasing.IncreasingValidator",
             "._idssrc.IdssrcValidator",
