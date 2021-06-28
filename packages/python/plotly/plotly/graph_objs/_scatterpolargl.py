@@ -26,6 +26,7 @@ class Scatterpolargl(_BaseTraceType):
         "ids",
         "idssrc",
         "legendgroup",
+        "legendgrouptitle",
         "legendrank",
         "line",
         "marker",
@@ -550,6 +551,34 @@ class Scatterpolargl(_BaseTraceType):
     @legendgroup.setter
     def legendgroup(self, val):
         self["legendgroup"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scatterpolargl.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.scatterpolargl.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -1587,6 +1616,9 @@ class Scatterpolargl(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1761,6 +1793,7 @@ class Scatterpolargl(_BaseTraceType):
         ids=None,
         idssrc=None,
         legendgroup=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         marker=None,
@@ -1917,6 +1950,9 @@ class Scatterpolargl(_BaseTraceType):
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2171,6 +2207,10 @@ an instance of :class:`plotly.graph_objs.Scatterpolargl`"""
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
             self["legendgroup"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

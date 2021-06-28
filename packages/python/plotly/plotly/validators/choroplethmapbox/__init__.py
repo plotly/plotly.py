@@ -27,6 +27,7 @@ if sys.version_info < (3, 7):
     from ._locationssrc import LocationssrcValidator
     from ._locations import LocationsValidator
     from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -79,6 +80,7 @@ else:
             "._locationssrc.LocationssrcValidator",
             "._locations.LocationsValidator",
             "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

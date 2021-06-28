@@ -19,6 +19,7 @@ class Parcoords(_BaseTraceType):
         "labelangle",
         "labelfont",
         "labelside",
+        "legendgrouptitle",
         "legendrank",
         "line",
         "meta",
@@ -136,14 +137,15 @@ class Parcoords(_BaseTraceType):
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see:
                     https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format
+                    reference/blob/master/Formatting.md#d3_format.
                     And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format We add one item to d3's
-                    date formatter: "%{n}f" for fractional seconds
-                    with n digits. For example, *2016-10-13
-                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
-                    would display "09~15~23.46"
+                    format#locale_format. We add two items to d3's
+                    date formatter: "%h" for half of the year as a
+                    decimal number as well as "%{n}f" for
+                    fractional seconds with n digits. For example,
+                    *2016-10-13 09:15:23.456* with tickformat
+                    "%H~%M~%S.%2f" would display "09~15~23.46"
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`.
@@ -381,6 +383,34 @@ class Parcoords(_BaseTraceType):
     @labelside.setter
     def labelside(self, val):
         self["labelside"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.parcoords.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.parcoords.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -841,6 +871,9 @@ class Parcoords(_BaseTraceType):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -920,6 +953,7 @@ class Parcoords(_BaseTraceType):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legendgrouptitle=None,
         legendrank=None,
         line=None,
         meta=None,
@@ -985,6 +1019,9 @@ class Parcoords(_BaseTraceType):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legendgrouptitle
+            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1123,6 +1160,10 @@ an instance of :class:`plotly.graph_objs.Parcoords`"""
         _v = labelside if labelside is not None else _v
         if _v is not None:
             self["labelside"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

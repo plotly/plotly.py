@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+
+## [5.1.0] - 2021-06-28
+
+- Updated Plotly.js to from version 2.1.0 to version 2.2.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#220----2021-06-28) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - new `<trace>.legendgrouptitle` attribute for legend group titles
+  - new `%h` text formatting directive for half-years
+  - performance improvements and bug fixes
+
 
 ## [5.0.0] - 2021-06-21
 
@@ -13,7 +23,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 - Updated Plotly.js to from version 1.58.4 to version 2.1.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
     - dropped support for IE9 and IE10
     - dropped support for long-deprecated `graph_objects` like `area` traces and `scatter.(t|r)` and `layout.(radial|angular)axis` attributes
-    - modebar no longer has `hovermode` or `showspikes` buttons by default (can be added back with `layout.modebar.add=v1hovermode`)
+    - modebar no longer has hovermode or spikeline buttons by default (can be added back with `fig.update_layout(modebar_add=["v1hovermode", "toggleSpikeLines"])`)
     - "Aa" text no longer appears on legend items unless `mode="text"`
     - In `bar` traces, `textposition` now defaults to `"auto"`
     - Font size for legend and colorbar titles now matches axis title font size (slightly bigger)
