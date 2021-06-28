@@ -5,6 +5,7 @@ if sys.version_info < (3, 7):
     from ._hoverlabel import Hoverlabel
     from ._insidetextfont import Insidetextfont
     from ._leaf import Leaf
+    from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
     from ._outsidetextfont import Outsidetextfont
     from ._pathbar import Pathbar
@@ -13,6 +14,7 @@ if sys.version_info < (3, 7):
     from ._textfont import Textfont
     from ._tiling import Tiling
     from . import hoverlabel
+    from . import legendgrouptitle
     from . import marker
     from . import pathbar
 else:
@@ -20,12 +22,13 @@ else:
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".hoverlabel", ".marker", ".pathbar"],
+        [".hoverlabel", ".legendgrouptitle", ".marker", ".pathbar"],
         [
             "._domain.Domain",
             "._hoverlabel.Hoverlabel",
             "._insidetextfont.Insidetextfont",
             "._leaf.Leaf",
+            "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
             "._outsidetextfont.Outsidetextfont",
             "._pathbar.Pathbar",

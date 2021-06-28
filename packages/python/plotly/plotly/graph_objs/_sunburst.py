@@ -28,6 +28,7 @@ class Sunburst(_BaseTraceType):
         "labels",
         "labelssrc",
         "leaf",
+        "legendgrouptitle",
         "legendrank",
         "level",
         "marker",
@@ -601,6 +602,34 @@ class Sunburst(_BaseTraceType):
     @leaf.setter
     def leaf(self, val):
         self["leaf"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.sunburst.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
 
     # legendrank
     # ----------
@@ -1495,6 +1524,9 @@ class Sunburst(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendgrouptitle
+            :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -1657,6 +1689,7 @@ class Sunburst(_BaseTraceType):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legendgrouptitle=None,
         legendrank=None,
         level=None,
         marker=None,
@@ -1800,6 +1833,9 @@ class Sunburst(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legendgrouptitle
+            :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
+            instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
@@ -2048,6 +2084,10 @@ an instance of :class:`plotly.graph_objs.Sunburst`"""
         _v = leaf if leaf is not None else _v
         if _v is not None:
             self["leaf"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
         _v = arg.pop("legendrank", None)
         _v = legendrank if legendrank is not None else _v
         if _v is not None:

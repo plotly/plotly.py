@@ -139,6 +139,10 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
+            legendgrouptitle
+                :class:`plotly.graph_objects.streamtube.Legendg
+                rouptitle` instance or dict with compatible
+                properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
@@ -226,13 +230,13 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
             u
                 Sets the x components of the vector field.
             uhoverformat
-                Sets the hover text formatting rule for `u`
+                Sets the hover text formatting rulefor `u`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                By default the values are formatted using
-                generic number format.
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-reference
+                /blob/master/Formatting.md#d3_format.By default
+                the values are formatted using generic number
+                format.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -265,13 +269,13 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
             v
                 Sets the y components of the vector field.
             vhoverformat
-                Sets the hover text formatting rule for `v`
+                Sets the hover text formatting rulefor `v`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                By default the values are formatted using
-                generic number format.
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-reference
+                /blob/master/Formatting.md#d3_format.By default
+                the values are formatted using generic number
+                format.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -283,58 +287,76 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
             w
                 Sets the z components of the vector field.
             whoverformat
-                Sets the hover text formatting rule for `w`
+                Sets the hover text formatting rulefor `w`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                By default the values are formatted using
-                generic number format.
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-reference
+                /blob/master/Formatting.md#d3_format.By default
+                the values are formatted using generic number
+                format.
             wsrc
                 Sets the source reference on Chart Studio Cloud
                 for  w .
             x
                 Sets the x coordinates of the vector field.
             xhoverformat
-                Sets the hover text formatting rule for `x`
+                Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `xaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .
             y
                 Sets the y coordinates of the vector field.
             yhoverformat
-                Sets the hover text formatting rule for `y`
+                Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `yaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for  y .
             z
                 Sets the z coordinates of the vector field.
             zhoverformat
-                Sets the hover text formatting rule for `z`
+                Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
-                very similar to those in Python. See:
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
+                very similar to those in Python. For numbers,
+                see: https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format.
                 And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format By default the values are
-                formatted using `zaxis.hoverformat`.
+                format#locale_format. We add two items to d3's
+                date formatter: "%h" for half of the year as a
+                decimal number as well as "%{n}f" for
+                fractional seconds with n digits. For example,
+                *2016-10-13 09:15:23.456* with tickformat
+                "%H~%M~%S.%2f" would display *09~15~23.46*By
+                default the values are formatted using
+                `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .
