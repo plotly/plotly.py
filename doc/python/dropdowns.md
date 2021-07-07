@@ -353,7 +353,8 @@ import pandas as pd
 
 # Load dataset
 df = pd.read_csv(
-    "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+    "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv",
+    index_col=0)
 df.columns = [col.replace("AAPL.", "") for col in df.columns]
 
 # Initialize figure
