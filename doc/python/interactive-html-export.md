@@ -41,7 +41,7 @@ Plotly figures are interactive when viewed in a web browser: you can hover over 
 <!-- #region -->
 ### Saving to an HTML file
 
-Any figure can be saved an HTML file using the `write_html` method. These HTML files can be opened in any web browser to access the fully interactive figure.
+Any figure can be saved as an HTML file using the `write_html` method. These HTML files can be opened in any web browser to access the fully interactive figure.
 
 ```python
 import plotly.express as px
