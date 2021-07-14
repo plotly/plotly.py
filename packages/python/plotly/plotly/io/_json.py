@@ -5,6 +5,7 @@ import json
 import decimal
 import datetime
 from pathlib import Path
+from collections.abc import Mapping
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
 from _plotly_utils.optional_imports import get_module
@@ -279,8 +280,8 @@ def from_json_plotly(value, engine=None):
 
     Parameters
     ----------
-    value: str or bytes
-        A JSON string or bytes object
+    value: str or bytes or Mapping
+        A JSON string or bytes or dict-like object
 
     engine: str (default None)
         The JSON decoding engine to use. One of:
@@ -304,7 +305,9 @@ def from_json_plotly(value, engine=None):
 
     # Validate value
     # --------------
-    if not isinstance(value, (string_types, bytes)):
+    if isinstance(value, Mapping):
+        value = json.dumps(value)
+    elif not isinstance(value, (string_types, bytes)):
         raise ValueError(
             """
 from_json_plotly requires a string or bytes argument but received value of type {typ}
@@ -340,12 +343,12 @@ from_json_plotly requires a string or bytes argument but received value of type 
 
 def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
     """
-    Construct a figure from a JSON string
+    Construct a figure from a JSON string or dictionary-like object
 
     Parameters
     ----------
-    value: str or bytes
-        String or bytes object containing the JSON representation of a figure
+    value: str or bytes or Mapping
+        String or bytes or dict-like object containing the JSON representation of a figure
 
     output_type: type or str (default 'Figure')
         The output figure type or type name.
