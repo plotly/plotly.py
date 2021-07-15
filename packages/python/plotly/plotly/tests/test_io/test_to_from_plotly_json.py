@@ -1,6 +1,7 @@
 import pytest
 import plotly.io.json as pio
 import plotly.graph_objects as go
+import plotly.express as px
 import numpy as np
 import pandas as pd
 import json
@@ -201,4 +202,10 @@ def test_datetime_arrays(datetime_array, engine, pretty):
     array_str = to_json_test(dt_values)
     expected = build_test_dict_string(array_str)
     assert result == expected
+    check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_object_array(engine, pretty):
+    fig = px.scatter(px.data.tips(), x="total_bill", y="tip", custom_data=["sex"])
+    result = fig.to_plotly_json()
     check_roundtrip(result, engine=engine, pretty=pretty)

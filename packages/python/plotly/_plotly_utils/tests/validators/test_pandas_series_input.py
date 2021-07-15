@@ -149,10 +149,13 @@ def test_color_validator_object(color_validator, color_object_pandas):
     res = color_validator.validate_coerce(color_object_pandas)
 
     # Check type
-    assert isinstance(res, list)
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
 
     # Check values
-    assert res == color_object_pandas.tolist()
+    np.testing.assert_array_equal(res, color_object_pandas)
 
 
 def test_color_validator_categorical(color_validator, color_categorical_pandas):
@@ -161,10 +164,13 @@ def test_color_validator_categorical(color_validator, color_categorical_pandas):
 
     # Check type
     assert color_categorical_pandas.dtype == "category"
-    assert isinstance(res, list)
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
 
     # Check values
-    assert res == color_categorical_pandas.tolist()
+    np.testing.assert_array_equal(res, np.array(color_categorical_pandas))
 
 
 def test_data_array_validator_dates_series(
@@ -174,10 +180,13 @@ def test_data_array_validator_dates_series(
     res = data_array_validator.validate_coerce(datetime_pandas)
 
     # Check type
-    assert isinstance(res, list)
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
 
     # Check values
-    assert res == dates_array.tolist()
+    np.testing.assert_array_equal(res, dates_array)
 
 
 def test_data_array_validator_dates_dataframe(
@@ -188,7 +197,10 @@ def test_data_array_validator_dates_dataframe(
     res = data_array_validator.validate_coerce(df)
 
     # Check type
-    assert isinstance(res, list)
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
 
     # Check values
-    assert res == dates_array.reshape(len(dates_array), 1).tolist()
+    np.testing.assert_array_equal(res, dates_array.reshape(len(dates_array), 1))
