@@ -126,7 +126,10 @@ def test_color_validator_object(color_validator, color_object_xarray):
     res = color_validator.validate_coerce(color_object_xarray)
 
     # Check type
-    assert isinstance(res, list)
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
 
     # Check values
-    assert res == list(color_object_xarray)
+    np.testing.assert_array_equal(res, color_object_xarray)

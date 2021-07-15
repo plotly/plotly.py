@@ -135,7 +135,7 @@ def test_acceptance_aok(val, validator_aok_re):
     # Values should be accepted and returned unchanged
     coerce_val = validator_aok_re.validate_coerce(val)
     if isinstance(val, (np.ndarray, pd.Series)):
-        assert coerce_val == list(np.array(val))
+        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
     elif isinstance(val, (list, tuple)):
         assert validator_aok_re.present(coerce_val) == tuple(val)
     else:
