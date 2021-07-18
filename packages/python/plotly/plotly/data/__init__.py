@@ -18,12 +18,12 @@ def gapminder(datetimes=False, centroids=False, year=None):
         If `year` is an integer, the dataset will be filtered for that year
     """
     df = _get_dataset("gapminder")
+    if year:
+        df = df.query("year == %d" % year)
     if datetimes:
         df["year"] = (df["year"].astype(str) + "-01-01").astype("datetime64[ns]")
     if not centroids:
         df.drop(["centroid_lat", "centroid_lon"], axis=1, inplace=True)
-    if year:
-        df = df.query("year == %d" % year)
     return df
 
 
