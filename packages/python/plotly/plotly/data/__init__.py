@@ -19,11 +19,11 @@ def gapminder(datetimes=False, centroids=False, year=None):
     """
     df = _get_dataset("gapminder")
     if year:
-        df = df.query("year == %d" % year)
+        df = df[df["year"] == year]
     if datetimes:
         df["year"] = (df["year"].astype(str) + "-01-01").astype("datetime64[ns]")
     if not centroids:
-        df.drop(["centroid_lat", "centroid_lon"], axis=1, inplace=True)
+        df = df.drop(["centroid_lat", "centroid_lon"], axis=1)
     return df
 
 
