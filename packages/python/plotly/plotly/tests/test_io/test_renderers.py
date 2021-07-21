@@ -225,8 +225,6 @@ def test_notebook_connected_show(fig1, name, connected):
 def test_browser_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     renderer_obj = pio.renderers[renderer]
-    # scan through webbrowser._browsers.keys() and assign the browser name registered with os
-    renderer_obj.using = [i for i in webbrowser._browsers.keys() if renderer in i][0]
 
     # Setup mocks
     mock_get = MagicMock(name="test get")
