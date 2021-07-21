@@ -679,6 +679,8 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
         for browser_key in using:
             try:
                 browser = webbrowser.get(browser_key)
+                if browser is not None:
+                    break
             except webbrowser.Error:
                 pass
 
