@@ -437,9 +437,11 @@ renderers["pdf"] = PdfRenderer()
 
 # External
 renderers["browser"] = BrowserRenderer(config=config)
-renderers["firefox"] = BrowserRenderer(config=config, using="firefox")
-renderers["chrome"] = BrowserRenderer(config=config, using="chrome")
-renderers["chromium"] = BrowserRenderer(config=config, using="chromium")
+renderers["firefox"] = BrowserRenderer(config=config, using=("firefox"))
+renderers["chrome"] = BrowserRenderer(config=config, using=("chrome", "google-chrome"))
+renderers["chromium"] = BrowserRenderer(
+    config=config, using=("chromium", "chromium-browser")
+)
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
 renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
