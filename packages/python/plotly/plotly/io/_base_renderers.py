@@ -670,9 +670,14 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
         html = html.encode("utf8")
 
     if isinstance(using, tuple):
-        using = [i for i in webbrowser._browsers.keys() if any(j in i for j in using)][
-            0
-        ]
+        try:
+            using = [i for i in webbrowser._browsers.keys() if i in using][0]
+        except IndexError:
+            raise ValueError(
+                """
+Unable to find the given browser.
+Try one among the following 'chrome', 'chromium', 'firefox' or 'default' """
+            )
 
     class OneShotRequestHandler(BaseHTTPRequestHandler):
         def do_GET(self):
