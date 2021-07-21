@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
   - Fixed regression introduced in version 5.0.0 where pandas/numpy arrays with `dtype` of Object were being converted to `list` values when added to a Figure ([#3292](https://github.com/plotly/plotly.py/issues/3292), [#3293](https://github.com/plotly/plotly.py/pull/3293))
+  - Better detection of Chrome and Chromium browsers in the Renderers framework, especially on Linux ([#3278](https://github.com/plotly/plotly.py/pull/3278)) with thanks to [@c-chaitanya](https://github.com/c-chaitanya) for the contribution
 
 ## [5.1.0] - 2021-06-28
 
