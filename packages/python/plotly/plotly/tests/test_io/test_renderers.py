@@ -249,7 +249,11 @@ def test_browser_renderer_show(fig1, renderer):
         pio.show(fig1)
 
     # check get args
-    mock_get.assert_called_once_with(renderer_obj.using)
+    if isinstance(renderer_obj.using, tuple):
+        for using in renderer_obj.using:
+            mock_get.assert_called_with(using)
+    else:
+        mock_get.assert_called_once_with(renderer_obj.using)
 
     # check open args
     mock_call_args = mock_browser.open.call_args
