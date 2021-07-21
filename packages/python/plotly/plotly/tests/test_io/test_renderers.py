@@ -226,9 +226,8 @@ def test_browser_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     renderer_obj = pio.renderers[renderer]
     using = renderer_obj.using
-    if isinstance(renderer_obj.using, tuple):
-        using = renderer_obj.using[0]
-        renderer_obj.using = using
+    if not isinstance(renderer_obj.using, tuple):
+        using = (using,)
 
     # Setup mocks
     mock_get = MagicMock(name="test get")
@@ -253,7 +252,7 @@ def test_browser_renderer_show(fig1, renderer):
         pio.show(fig1)
 
     # check get args
-    mock_get.assert_called_once_with(using)
+    mock_get.assert_any_call(using[0])
 
     # check open args
     mock_call_args = mock_browser.open.call_args
