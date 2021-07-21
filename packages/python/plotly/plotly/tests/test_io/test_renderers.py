@@ -221,12 +221,13 @@ def test_notebook_connected_show(fig1, name, connected):
 
 # Browser
 # -------
-@pytest.mark.parametrize("renderer", ["browser", "chrome", "firefox"])
+@pytest.mark.parametrize("renderer", ["browser", "chrome", "chromium", "firefox"])
 def test_browser_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     renderer_obj = pio.renderers[renderer]
-    # scan through webbrowser._browsers.keys() and assign the browser name registered with os
-    renderer_obj.using = [i for i in webbrowser._browsers.keys() if renderer in i][0]
+    using = renderer_obj.using
+    if not isinstance(renderer_obj.using, tuple):
+        using = (using,)
 
     # Setup mocks
     mock_get = MagicMock(name="test get")
@@ -251,7 +252,7 @@ def test_browser_renderer_show(fig1, renderer):
         pio.show(fig1)
 
     # check get args
-    mock_get.assert_called_once_with(renderer_obj.using)
+    mock_get.assert_any_call(using[0])
 
     # check open args
     mock_call_args = mock_browser.open.call_args

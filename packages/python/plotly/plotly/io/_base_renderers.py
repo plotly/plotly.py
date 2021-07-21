@@ -669,15 +669,23 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     if isinstance(html, six.string_types):
         html = html.encode("utf8")
 
-    if isinstance(using, tuple):
-        try:
-            using = [i for i in webbrowser._browsers.keys() if i in using][0]
-        except IndexError:
-            raise ValueError(
-                """
-Unable to find the given browser.
-Try one among the following 'chrome', 'chromium', 'firefox' or 'default' """
-            )
+    browser = None
+
+    if using is None:
+        browser = webbrowser.get(None)
+    else:
+        if not isinstance(using, tuple):
+            using = (using,)
+        for browser_key in using:
+            try:
+                browser = webbrowser.get(browser_key)
+                if browser is not None:
+                    break
+            except webbrowser.Error:
+                pass
+
+        if browser is None:
+            raise ValueError("Can't locate a browser with key in " + str(using))
 
     class OneShotRequestHandler(BaseHTTPRequestHandler):
         def do_GET(self):
@@ -694,7 +702,7 @@ Try one among the following 'chrome', 'chromium', 'firefox' or 'default' """
             pass
 
     server = HTTPServer(("127.0.0.1", 0), OneShotRequestHandler)
-    webbrowser.get(using).open(
+    browser.open(
         "http://127.0.0.1:%s" % server.server_port, new=new, autoraise=autoraise
     )
 
