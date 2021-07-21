@@ -672,7 +672,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     browser = None
 
     if using is None:
-        browser = webbrowser.get()
+        browser = webbrowser.get(None)
     else:
         if not isinstance(using, tuple):
             using = (using,)
