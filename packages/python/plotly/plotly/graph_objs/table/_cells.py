@@ -162,8 +162,8 @@ class Cells(_BaseTraceHierarchyType):
         """
         Sets the cell value formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
     
         The 'format' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -403,8 +403,7 @@ class Cells(_BaseTraceHierarchyType):
             Sets the cell value formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
             format .
@@ -480,8 +479,7 @@ class Cells(_BaseTraceHierarchyType):
             Sets the cell value formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
             format .

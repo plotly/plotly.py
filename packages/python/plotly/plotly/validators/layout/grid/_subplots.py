@@ -12,9 +12,9 @@ class SubplotsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 {
+                    "editType": "plot",
                     "valType": "enumerated",
                     "values": ["/^x([2-9]|[1-9][0-9]+)?y([2-9]|[1-9][0-9]+)?$/", ""],
-                    "editType": "plot",
                 },
             ),
             **kwargs

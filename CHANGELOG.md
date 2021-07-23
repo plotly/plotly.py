@@ -4,15 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
 
+### Updated
+
+- Updated Plotly.js to from version 2.2.0 to version 2.3.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#230----2021-07-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - new projections in `geo` subplots from a more recent version of d3-geo
+  - new number-formatting directives from a more recent version of d3-format
+  - performance improvements and bug fixes
 
 ### Added
+
   - Extra flags were added to the `gapminder` and `stocks` dataset to facilitate testing, documentation and demos [#3305](https://github.com/plotly/plotly.py/issues/3305)
 
 ### Fixed
+
   - Fixed regression introduced in version 5.0.0 where pandas/numpy arrays with `dtype` of Object were being converted to `list` values when added to a Figure ([#3292](https://github.com/plotly/plotly.py/issues/3292), [#3293](https://github.com/plotly/plotly.py/pull/3293))
   - Better detection of Chrome and Chromium browsers in the Renderers framework, especially on Linux ([#3278](https://github.com/plotly/plotly.py/pull/3278)) with thanks to [@c-chaitanya](https://github.com/c-chaitanya) for the contribution
 
 ## [5.1.0] - 2021-06-28
+
+### Updated
 
 - Updated Plotly.js to from version 2.1.0 to version 2.2.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#220----2021-06-28) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - new `<trace>.legendgrouptitle` attribute for legend group titles

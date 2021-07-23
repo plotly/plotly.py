@@ -619,17 +619,17 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -737,17 +737,17 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     scene.xaxis.Tickformatstop` instances or dicts
@@ -943,17 +943,17 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -1061,17 +1061,17 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     scene.yaxis.Tickformatstop` instances or dicts
@@ -1267,17 +1267,17 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -1385,17 +1385,17 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     scene.zaxis.Tickformatstop` instances or dicts

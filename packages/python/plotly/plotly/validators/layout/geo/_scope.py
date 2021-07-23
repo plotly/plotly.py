@@ -10,13 +10,13 @@ class ScopeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values",
                 [
-                    "world",
-                    "usa",
-                    "europe",
-                    "asia",
                     "africa",
+                    "asia",
+                    "europe",
                     "north america",
                     "south america",
+                    "usa",
+                    "world",
                 ],
             ),
             **kwargs

@@ -15,8 +15,8 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "any", "editType": "colorbars"},
-                    {"valType": "any", "editType": "colorbars"},
+                    {"editType": "colorbars", "valType": "any"},
+                    {"editType": "colorbars", "valType": "any"},
                 ],
             ),
             **kwargs

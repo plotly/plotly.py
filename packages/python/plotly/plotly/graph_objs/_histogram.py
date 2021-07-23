@@ -596,14 +596,14 @@ class Histogram(_BaseTraceType):
         underscore before or after "(x|y)other" will add a space on
         that side, only when this field is shown. Numbers are formatted
         using d3-format's syntax %{variable:d3-format}, for example
-        "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        The variables available in `hovertemplate` are the ones emitted
-        as event data described at this link
+        "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. The variables available in `hovertemplate`
+        are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available. variable
@@ -892,9 +892,9 @@ class Histogram(_BaseTraceType):
                     color space, use`marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
-                    Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
-                    ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
-                    arth,Electric,Viridis,Cividis.
+                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
+                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1501,9 +1501,9 @@ class Histogram(_BaseTraceType):
     
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['gregorian', 'chinese', 'coptic', 'discworld',
-                'ethiopian', 'hebrew', 'islamic', 'julian', 'mayan',
-                'nanakshahi', 'nepali', 'persian', 'jalali', 'taiwan',
+                ['chinese', 'coptic', 'discworld', 'ethiopian',
+                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
+                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
                 'thai', 'ummalqura']
 
         Returns
@@ -1523,14 +1523,15 @@ class Histogram(_BaseTraceType):
         """
         Sets the hover text formatting rulefor `x`  using d3 formatting
         mini-languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format. And for dates
-        see: https://github.com/d3/d3-time-format#locale_format. We add
-        two items to d3's date formatter: "%h" for half of the year as
-        a decimal number as well as "%{n}f" for fractional seconds with
-        n digits. For example, *2016-10-13 09:15:23.456* with
-        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
-        the values are formatted using `xaxis.hoverformat`.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
+        dates see: https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format. We add two items to d3's date
+        formatter: "%h" for half of the year as a decimal number as
+        well as "%{n}f" for fractional seconds with n digits. For
+        example, *2016-10-13 09:15:23.456* with tickformat
+        "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
+        are formatted using `xaxis.hoverformat`.
     
         The 'xhoverformat' property is a string and must be specified as:
           - A string
@@ -1688,9 +1689,9 @@ class Histogram(_BaseTraceType):
     
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['gregorian', 'chinese', 'coptic', 'discworld',
-                'ethiopian', 'hebrew', 'islamic', 'julian', 'mayan',
-                'nanakshahi', 'nepali', 'persian', 'jalali', 'taiwan',
+                ['chinese', 'coptic', 'discworld', 'ethiopian',
+                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
+                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
                 'thai', 'ummalqura']
 
         Returns
@@ -1710,14 +1711,15 @@ class Histogram(_BaseTraceType):
         """
         Sets the hover text formatting rulefor `y`  using d3 formatting
         mini-languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format. And for dates
-        see: https://github.com/d3/d3-time-format#locale_format. We add
-        two items to d3's date formatter: "%h" for half of the year as
-        a decimal number as well as "%{n}f" for fractional seconds with
-        n digits. For example, *2016-10-13 09:15:23.456* with
-        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
-        the values are formatted using `yaxis.hoverformat`.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
+        dates see: https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format. We add two items to d3's date
+        formatter: "%h" for half of the year as a decimal number as
+        well as "%{n}f" for fractional seconds with n digits. For
+        example, *2016-10-13 09:15:23.456* with tickformat
+        "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
+        are formatted using `yaxis.hoverformat`.
     
         The 'yhoverformat' property is a string and must be specified as:
           - A string
@@ -1855,15 +1857,15 @@ class Histogram(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -2016,16 +2018,15 @@ class Histogram(_BaseTraceType):
             Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `xaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2045,16 +2046,15 @@ class Histogram(_BaseTraceType):
             Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `yaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2224,15 +2224,15 @@ class Histogram(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -2385,16 +2385,15 @@ class Histogram(_BaseTraceType):
             Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `xaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `xaxis.hoverformat`.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2414,16 +2413,15 @@ class Histogram(_BaseTraceType):
             Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `yaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `yaxis.hoverformat`.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
