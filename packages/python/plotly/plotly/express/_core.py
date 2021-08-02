@@ -2,7 +2,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
 from ._special_inputs import IdentityMap, Constant, Range
-from .trendline_functions import ols, lowess, ma, ewma
+from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
@@ -17,7 +17,9 @@ from plotly.subplots import (
 )
 
 NO_COLOR = "px_no_color_constant"
-trendline_functions = dict(lowess=lowess, ma=ma, ewma=ewma, ols=ols)
+trendline_functions = dict(
+    lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
+)
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (

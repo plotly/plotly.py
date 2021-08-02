@@ -11,8 +11,9 @@ from datetime import datetime
         ("ols", None),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
-        ("ma", dict(window=2)),
-        ("ewma", dict(alpha=0.5)),
+        ("rolling", dict(window=2)),
+        ("expanding", None),
+        ("ewm", dict(alpha=0.5)),
     ],
 )
 def test_trendline_results_passthrough(mode, options):
@@ -48,8 +49,9 @@ def test_trendline_results_passthrough(mode, options):
         ("ols", None),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
-        ("ma", dict(window=2)),
-        ("ewma", dict(alpha=0.5)),
+        ("rolling", dict(window=2)),
+        ("expanding", None),
+        ("ewm", dict(alpha=0.5)),
     ],
 )
 def test_trendline_enough_values(mode, options):
@@ -102,8 +104,9 @@ def test_trendline_enough_values(mode, options):
         ("ols", dict(add_constant=False, log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
-        ("ma", dict(window=2)),
-        ("ewma", dict(alpha=0.5)),
+        ("rolling", dict(window=2)),
+        ("expanding", None),
+        ("ewm", dict(alpha=0.5)),
     ],
 )
 def test_trendline_nan_values(mode, options):
@@ -173,9 +176,10 @@ def test_ols_trendline_slopes():
         ("ols", None),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
-        ("ma", dict(window=2)),
-        ("ma", dict(window="10d")),
-        ("ewma", dict(alpha=0.5)),
+        ("rolling", dict(window=2)),
+        ("rolling", dict(window="10d")),
+        ("expanding", None),
+        ("ewm", dict(alpha=0.5)),
     ],
 )
 def test_trendline_on_timeseries(mode, options):
