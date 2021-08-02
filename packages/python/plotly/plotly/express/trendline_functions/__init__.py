@@ -66,9 +66,9 @@ def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
             fit_results.params[0],
         )
     elif not add_constant:
-        hover_header += "%s = %g * %s<br>" % (y_label, fit_results.params[0], x_label,)
+        hover_header += "%s = %g * %s<br>" % (y_label, fit_results.params[0], x_label)
     else:
-        hover_header += "%s = %g<br>" % (y_label, fit_results.params[0],)
+        hover_header += "%s = %g<br>" % (y_label, fit_results.params[0])
     hover_header += "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
     return y_out, hover_header, fit_results
 
@@ -91,27 +91,48 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     return y_out, hover_header, None
 
 
-def ma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Moving Average (MA) trendline function
-
-    Requires `pandas` to be installed.
-
-    The `trendline_options` dict is passed as keyword arguments into the
-    `pandas.Series.rolling` function.
-    """
-    y_out = pd.Series(y, index=x_raw).rolling(**trendline_options).mean()[non_missing]
-    hover_header = "<b>MA trendline</b><br><br>"
+def _pandas(mode, trendline_options, x_raw, y, non_missing):
+    modes = dict(rolling="Rolling", ewm="Exponentially Weighted", expanding="Expanding")
+    function_name = trendline_options.pop("function", "mean")
+    function_args = trendline_options.pop("function_args", dict())
+    series = pd.Series(y, index=x_raw)
+    agg = getattr(series, mode)  # e.g. series.rolling
+    agg_obj = agg(**trendline_options)  # e.g. series.rolling(**opts)
+    function = getattr(agg_obj, function_name)  # e.g. series.rolling(**opts).mean
+    y_out = function(**function_args)  # e.g. series.rolling(**opts).mean(**opts)
+    y_out = y_out[non_missing]
+    hover_header = "<b>%s %s trendline</b><br><br>" % (modes[mode], function_name)
     return y_out, hover_header, None
 
 
-def ewma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Exponentially Weighted Moving Average (EWMA) trendline function
+def rolling(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Rolling trendline function
 
-    Requires `pandas` to be installed.
-
-    The `trendline_options` dict is passed as keyword arguments into the
-    `pandas.Series.ewma` function.
+    The value of the `function` key of the `trendline_options` dict is the function to
+    use (defaults to `mean`) and the value of the `function_args` key are taken to be
+    its arguments as a dict. The remainder of  the `trendline_options` dict is passed as
+    keyword arguments into the `pandas.Series.rolling` function.
     """
-    y_out = pd.Series(y, index=x_raw).ewm(**trendline_options).mean()[non_missing]
-    hover_header = "<b>EWMA trendline</b><br><br>"
-    return y_out, hover_header, None
+    return _pandas("rolling", trendline_options, x_raw, y, non_missing)
+
+
+def expanding(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Expanding trendline function
+
+    The value of the `function` key of the `trendline_options` dict is the function to
+    use (defaults to `mean`) and the value of the `function_args` key are taken to be
+    its arguments as a dict. The remainder of  the `trendline_options` dict is passed as
+    keyword arguments into the `pandas.Series.expanding` function.
+    """
+    return _pandas("expanding", trendline_options, x_raw, y, non_missing)
+
+
+def ewm(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Exponentially weighted trendline function
+
+    The value of the `function` key of the `trendline_options` dict is the function to
+    use (defaults to `mean`) and the value of the `function_args` key are taken to be
+    its arguments as a dict. The remainder of  the `trendline_options` dict is passed as
+    keyword arguments into the `pandas.Series.ewm` function.
+    """
+    return _pandas("ewm", trendline_options, x_raw, y, non_missing)
