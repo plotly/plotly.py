@@ -41,7 +41,7 @@ This page shows examples of how to configure [2-dimensional Cartesian axes](/pyt
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
 - `'linear'` (see the [linear axes tutorial](/python/axes/))
-- `'log'` (see the [log plot tutorial](/python/log-plots/))
+- `'log'` (see the [log plot tutorial](/python/log-plot/))
 - `'date'` (see the [tutorial on timeseries](/python/time-series/))
 - `'category'` see below
 - `'multicategory'` see below
@@ -61,6 +61,39 @@ It is possible to force the axis type by setting explicitly `xaxis_type`. In the
 import plotly.express as px
 fig = px.bar(x=["a", "a", "b", 3], y = [1,2,3,4])
 fig.update_xaxes(type='category')
+fig.show()
+```
+
+### Categorical Axes and Trace Types
+
+Every cartesian trace type is compatible with categorical axes, not just `bar`.
+
+Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
+fig.update_traces(marker_size=10)
+fig.show()
+```
+
+[Box plots]() and [violin plots]() are often shown with one categorical and one continuous axis.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+
+fig = px.box(df, x="sex", y="total_bill", color="smoker")
+fig.show()
+```
+
+```python
+import plotly.express as px
+df = px.data.tips()
+
+fig = px.violin(df, x="sex", y="total_bill", color="smoker")
 fig.show()
 ```
 
