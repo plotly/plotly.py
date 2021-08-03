@@ -93,6 +93,7 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 def _pandas(mode, trendline_options, x_raw, y, non_missing):
     modes = dict(rolling="Rolling", ewm="Exponentially Weighted", expanding="Expanding")
+    trendline_options = trendline_options.copy()
     function_name = trendline_options.pop("function", "mean")
     function_args = trendline_options.pop("function_args", dict())
     series = pd.Series(y, index=x_raw)
