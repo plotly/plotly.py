@@ -325,6 +325,10 @@ docs = dict(
         "Setting this value is recommended when using `plotly.express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
     size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
+    markers=[
+        "boolean (default `False`)",
+        "If `True`, markers are shown on lines.",
+    ],
     log_x=[
         "boolean (default `False`)",
         "If `True`, the x-axis is log-scaled in cartesian coordinates.",
