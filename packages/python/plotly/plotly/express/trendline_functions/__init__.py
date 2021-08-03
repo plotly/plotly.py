@@ -128,7 +128,7 @@ def expanding(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def ewm(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Exponentially weighted trendline function
+    """Exponentially Weighted Moment (EWM) trendline function
 
     The value of the `function` key of the `trendline_options` dict is the function to
     use (defaults to `mean`) and the value of the `function_args` key are taken to be
