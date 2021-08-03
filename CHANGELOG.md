@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
   - Extra flags were added to the `gapminder` and `stocks` dataset to facilitate testing, documentation and demos [#3305](https://github.com/plotly/plotly.py/issues/3305)
+  - All line-like Plotly Express functions now accept `markers` argument to display markers, and all but `line_mapbox` accept `symbol` to map a field to the symbol attribute, similar to scatter-like functions [#3326](https://github.com/plotly/plotly.py/issues/3326)
 
 ### Fixed
   - Fixed regression introduced in version 5.0.0 where pandas/numpy arrays with `dtype` of Object were being converted to `list` values when added to a Figure ([#3292](https://github.com/plotly/plotly.py/issues/3292), [#3293](https://github.com/plotly/plotly.py/pull/3293))

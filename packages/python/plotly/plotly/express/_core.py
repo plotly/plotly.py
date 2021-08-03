@@ -1782,8 +1782,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
-    if "line_group" in args:
-        trace_patch["mode"] = "lines" + ("+markers+text" if args["text"] else "")
+    if "line_group" in args:  # px.line, px.line_*, px.area
+        modes = set(["lines"])
+        if args.get("text") or args.get("symbol") or args.get("markers"):
+            modes.add("markers")
+        if args.get("text"):
+            modes.add("text")
+        trace_patch["mode"] = "+".join(modes)
     elif constructor != go.Splom and (
         "symbol" in args or constructor == go.Scattermapbox
     ):

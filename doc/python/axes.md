@@ -51,7 +51,7 @@ Other kinds of subplots and axes are described in other tutorials:
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
 - `'linear'` as described in this page
-- `'log'` (see the [log plot tutorial](/python/log-plots/))
+- `'log'` (see the [log plot tutorial](/python/log-plot/))
 - `'date'` (see the [tutorial on timeseries](/python/time-series/))
 - `'category'` (see the [categorical axes tutorial](/python/categorical-axes/))
 - `'multicategory'` (see the [categorical axes tutorial](/python/categorical-axes/))

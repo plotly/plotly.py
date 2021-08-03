@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -34,13 +34,11 @@ jupyter:
     thumbnail: thumbnail/line-plot.jpg
 ---
 
-### Line Plot with plotly.express
+### Line Plots with plotly.express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
 
 For more examples of line plots, see the [line and scatter notebook](https://plotly.com/python/line-and-scatter/).
-
-#### Simple Line Plot with plotly.express
 
 ```python
 import plotly.express as px
@@ -50,7 +48,7 @@ fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
 fig.show()
 ```
 
-### Line Plot with column encoding color
+### Line Plots with column encoding color
 
 ```python
 import plotly.express as px
@@ -60,26 +58,87 @@ fig = px.line(df, x="year", y="lifeExp", color='country')
 fig.show()
 ```
 
-```python
-import plotly.express as px
-
-df = px.data.gapminder().query("continent != 'Asia'") # remove Asia for visibility
-fig = px.line(df, x="year", y="lifeExp", color="continent",
-              line_group="country", hover_name="country")
-fig.show()
-```
-
-### Line chart in Dash
+### Line charts in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+```python hide_code=true tags=[]
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'line-charts', width='100%', height=630)
+```
+
+### Data Order in Line Charts
+
+Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**. 
+
+This makes it possible to make charts like the one below, but also means that it may be required to explicitly sort data before passing it to Plotly to avoid lines moving "backwards" across the chart.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    x = [1, 3, 2, 4],
+    y = [1, 2, 3, 4]
+))
+fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig.show()
+
+df = df.sort_values(by="x")
+fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig.show()
+```
+
+### Connected Scatterplots
+
+In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy 
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("country in ['Canada', 'Botswana']")
+
+fig = px.line(df, x="lifeExp", y="gdpPercap", color="country", text="year")
+fig.update_traces(textposition="bottom right")
+fig.show()
+```
+
+### Line charts with markers
+
+The `markers` argument can be set to `True` to show markers on lines.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', markers=True)
+fig.show()
+```
+
+The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', symbol="country")
+fig.show()
+```
+
+### Line plots on Date axes
+
+Line plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or date axes. Line plots on date axes are often called [time-series charts](https://plotly.com/python/time-series/).
+
+Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
+
+```python
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+fig.show()
 ```
 
 ### Sparklines with Plotly Express
