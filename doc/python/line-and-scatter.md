@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/line-and-scatter.jpg
 ---
 
-## Scatter plot with Plotly Express
+## Scatter plots with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
@@ -55,9 +55,9 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length")
 fig.show()
 ```
 
-#### Set size and color with column names
+#### Setting size and color with column names
 
-Note that `color` and `size` data are added to hover information. You can add other columns to hover data with the `hover_data` argument of `px.scatter`.
+Scatter plots with variable-sized circular markers are often known as [bubble charts](https://plotly.com/python/bubble-charts/). Note that `color` and `size` data are added to hover information. You can add other columns to hover data with the `hover_data` argument of `px.scatter`.
 
 ```python
 import plotly.express as px
@@ -67,7 +67,16 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
 fig.show()
 ```
 
-## Scatter plot in Dash
+The `symbol` argument can be mapped to a column as well. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol="species")
+fig.show()
+```
+
+## Scatter plots in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
@@ -80,7 +89,22 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'line-and-scatter', width='100%', height=630)
 ```
 
-## Line plot with Plotly Express
+### Scatter plots and Categorical Axes
+
+Scatters plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
+
+Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
+fig.update_traces(marker_size=10)
+fig.show()
+```
+
+## Line plots with Plotly Express
 
 ```python
 import plotly.express as px
@@ -99,7 +123,39 @@ fig = px.line(df, x='year', y='lifeExp', color='country')
 fig.show()
 ```
 
-## Scatter and line plot with go.Scatter
+The `markers` argument can be set to `True` to show markers on lines.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', markers=True)
+fig.show()
+```
+
+The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', symbol="country")
+fig.show()
+```
+
+### Line plots on Date axes
+
+Line plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or date axes. Line plots on date axes are often called [time-series charts](https://plotly.com/python/time-series/).
+
+Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
+
+```python
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+fig.show()
+```
+
+## Scatter and line plots with go.Scatter
 
 If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
 
