@@ -155,6 +155,42 @@ fig = px.line(df, x='date', y="GOOG")
 fig.show()
 ```
 
+### Data Order in Scatter and Line Charts
+
+Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**. 
+
+This makes it possible to make charts like the one below, but also means that it may be required to explicitly sort data before passing it to Plotly to avoid lines moving "backwards" across the chart.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    x = [1, 3, 2, 4],
+    y = [1, 2, 3, 4]
+))
+fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig.show()
+
+df = df.sort_values(by="x")
+fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig.show()
+```
+
+### Connected Scatterplots
+
+In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy 
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("country in ['Canada', 'Botswana']")
+
+fig = px.line(df, x="lifeExp", y="gdpPercap", color="country", text="year")
+fig.update_traces(textposition="bottom right")
+fig.show()
+```
+
 ## Scatter and line plots with go.Scatter
 
 If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
