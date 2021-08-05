@@ -347,6 +347,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             )
 
                     # preserve original values of "x" in case they're dates
+                    # otherwise numpy/pandas can mess with the timezones
+                    # NB this means trendline functions must output one-to-one with the input series
+                    # i.e. we can't do resampling, because then the X values might not line up!
                     non_missing = np.logical_not(
                         np.logical_or(np.isnan(y), np.isnan(x))
                     )
@@ -867,21 +870,23 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             result.append(trace_spec)
 
     # Add trendline trace specifications
-    if "trendline" in args and args["trendline"]:
-        trace_spec = TraceSpec(
-            constructor=go.Scattergl
-            if constructor == go.Scattergl  # could be contour
-            else go.Scatter,
-            attrs=["trendline"],
-            trace_patch=dict(mode="lines"),
-            marginal=None,
-        )
-        if args["trendline_color_override"]:
-            trace_spec.trace_patch["line"] = dict(
-                color=args["trendline_color_override"]
-            )
-        result.append(trace_spec)
+    if args.get("trendline") and args.get("trendline_scope", "trace") == "trace":
+        result.append(make_trendline_spec(args, constructor))
     return result
+
+
+def make_trendline_spec(args, constructor):
+    trace_spec = TraceSpec(
+        constructor=go.Scattergl
+        if constructor == go.Scattergl  # could be contour
+        else go.Scatter,
+        attrs=["trendline"],
+        trace_patch=dict(mode="lines"),
+        marginal=None,
+    )
+    if args["trendline_color_override"]:
+        trace_spec.trace_patch["line"] = dict(color=args["trendline_color_override"])
+    return trace_spec
 
 
 def one_group(x):
@@ -2126,6 +2131,27 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
     fig.frames = frame_list if len(frames) > 1 else []
+
+    if args.get("trendline") and args.get("trendline_scope", "trace") == "overall":
+        trendline_spec = make_trendline_spec(args, constructor)
+        trendline_trace = trendline_spec.constructor(
+            name="Overall Trendline", legendgroup="Overall Trendline", showlegend=False
+        )
+        if "line" not in trendline_spec.trace_patch:  # no color override
+            for m in grouped_mappings:
+                if m.variable == "color":
+                    next_color = m.sequence[len(m.val_map) % len(m.sequence)]
+                    trendline_spec.trace_patch["line"] = dict(color=next_color)
+        patch, fit_results = make_trace_kwargs(
+            args, trendline_spec, args["data_frame"], {}, sizeref
+        )
+        trendline_trace.update(patch)
+        fig.add_trace(
+            trendline_trace, row="all", col="all", exclude_empty_subplots=True
+        )
+        fig.update_traces(selector=-1, showlegend=True)
+        if fit_results is not None:
+            trendline_rows.append(dict(px_fit_results=fit_results))
 
     fig._px_trendlines = pd.DataFrame(trendline_rows)
 
