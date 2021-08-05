@@ -30,6 +30,13 @@ def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     respect to the base 10 logarithm of the input. Note that this means no zeros can
     be present in the input.
     """
+    valid_options = ["add_constant", "log_x", "log_y"]
+    for k in trendline_options.keys():
+        if k not in valid_options:
+            raise ValueError(
+                "OLS trendline_options keys must be one of [%s] but got '%s'"
+                % (", ".join(valid_options), k)
+            )
 
     import statsmodels.api as sm
 
@@ -83,6 +90,15 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     - `frac` (`float`, default `0.6666666`): the `frac` parameter from the
     `statsmodels.api.nonparametric.lowess` function
     """
+
+    valid_options = ["frac"]
+    for k in trendline_options.keys():
+        if k not in valid_options:
+            raise ValueError(
+                "LOWESS trendline_options keys must be one of [%s] but got '%s'"
+                % (", ".join(valid_options), k)
+            )
+
     import statsmodels.api as sm
 
     frac = trendline_options.get("frac", 0.6666666)
