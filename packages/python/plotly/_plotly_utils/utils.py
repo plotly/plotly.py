@@ -127,6 +127,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal,
             self.encode_as_pil,
+            self.encode_as_NAType,
         )
         for encoding_method in encoding_methods:
             try:
@@ -134,6 +135,14 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             except NotEncodable:
                 pass
         return _json.JSONEncoder.default(self, obj)
+
+    @staticmethod
+    def encode_as_NAType(obj):
+        from pandas._libs.missing import NAType
+        if isinstance(obj, NAType):
+            return None
+        else:
+            raise NotEncodable
 
     @staticmethod
     def encode_as_plotly(obj):
