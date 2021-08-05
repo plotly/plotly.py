@@ -325,7 +325,10 @@ docs = dict(
         "Setting this value is recommended when using `plotly.express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
     size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
-    markers=["boolean (default `False`)", "If `True`, markers are shown on lines.",],
+    markers=[
+        "boolean (default `False`)",
+        "If `True`, markers are shown on lines.",
+    ],
     log_x=[
         "boolean (default `False`)",
         "If `True`, the x-axis is log-scaled in cartesian coordinates.",
@@ -419,6 +422,10 @@ docs = dict(
         "str",
         "Valid CSS color.",
         "If provided, and if `trendline` is set, all trendlines will be drawn in this color rather than in the same color as the traces from which they draw their inputs.",
+    ],
+    trendline_scope=[
+        "str (one of `'trace'` or `'overall'`, default `'trace'`)",
+        "If `'trace'`, then one trendline is drawn per trace (i.e. per color, symbol, facet, animation frame etc) and if `'overall'` then one trendline is computed for the entire dataset, and replicated across all facets.",
     ],
     render_mode=[
         "str",

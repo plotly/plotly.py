@@ -200,3 +200,42 @@ def test_trendline_on_timeseries(mode, options):
     assert type(fig.data[1].x[0]) == datetime
     assert np.all(fig.data[0].x == fig.data[1].x)
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
+
+
+def test_overall_trendline():
+    df = px.data.tips()
+    fig1 = px.scatter(df, x="total_bill", y="tip", trendline="ols")
+    assert len(fig1.data) == 2
+    assert "trendline" in fig1.data[1].hovertemplate
+    results1 = px.get_trendline_results(fig1)
+    params1 = results1["px_fit_results"].iloc[0].params
+
+    fig2 = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        color="sex",
+        trendline="ols",
+        trendline_scope="overall",
+    )
+    assert len(fig2.data) == 3
+    assert "trendline" in fig2.data[2].hovertemplate
+    results2 = px.get_trendline_results(fig2)
+    params2 = results2["px_fit_results"].iloc[0].params
+
+    assert np.all(np.array_equal(params1, params2))
+
+    fig3 = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        facet_row="sex",
+        trendline="ols",
+        trendline_scope="overall",
+    )
+    assert len(fig3.data) == 4
+    assert "trendline" in fig3.data[3].hovertemplate
+    results3 = px.get_trendline_results(fig3)
+    params3 = results3["px_fit_results"].iloc[0].params
+
+    assert np.all(np.array_equal(params1, params3))
