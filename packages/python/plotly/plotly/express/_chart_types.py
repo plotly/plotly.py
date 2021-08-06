@@ -522,6 +522,7 @@ def ecdf(
     line_shape="hv",
     ecdfnorm="probability",
     ecdfmode="standard",
+    render_mode="auto",
     log_x=False,
     log_y=False,
     range_x=None,
@@ -579,7 +580,8 @@ def kde(
     marginal=None,
     opacity=None,
     orientation=None,
-    bw_method=None,  # TODO use this
+    bw_method=None,
+    render_mode="auto",
     log_x=False,
     log_y=False,
     range_x=None,
@@ -590,8 +592,8 @@ def kde(
     height=None,
 ):
     """
-    In a Kernel Density Estimation (KDE) plot, rows of `data_frame`
-    are used as inputs to a KDE smoothing function which is rendered as a line.
+    In a Kernel Density Estimation (KDE) plot, rows of `data_frame` are used as inputs
+    to a KDE smoothing function and a line is drawn with one point pre row of input.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
 
