@@ -660,6 +660,12 @@ def configure_cartesian_axes(args, fig, orders):
     if "is_timeline" in args:
         fig.update_xaxes(type="date")
 
+    if "ecdfmode" in args:
+        if args["orientation"] == "v":
+            fig.update_yaxes(rangemode="tozero")
+        else:
+            fig.update_xaxes(rangemode="tozero")
+
 
 def configure_ternary_axes(args, fig, orders):
     fig.update_ternaries(
@@ -1313,7 +1319,7 @@ def build_dataframe(args, constructor):
     value_name = None  # will likely be "value" in wide_mode
     hist2d_types = [go.Histogram2d, go.Histogram2dContour]
     hist1d_orientation = (
-        constructor == go.Histogram or "complementary" in args or "kernel" in args
+        constructor == go.Histogram or "ecdfmode" in args or "kernel" in args
     )
     if constructor in cartesians:
         if wide_x and wide_y:
@@ -1802,11 +1808,15 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if (
         "line_group" in args or "line_dash" in args
     ):  # px.line, px.line_*, px.area, px.ecdf, px, kde
-        modes = set(["lines"])
+        modes = set()
+        if args.get("lines", True):
+            modes.add("lines")
         if args.get("text") or args.get("symbol") or args.get("markers"):
             modes.add("markers")
         if args.get("text"):
             modes.add("text")
+        if len(modes) == 0:
+            modes.add("lines")
         trace_patch["mode"] = "+".join(modes)
     elif constructor != go.Splom and (
         "symbol" in args or constructor == go.Scattermapbox
@@ -1856,13 +1866,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if "trendline_options" in args and args["trendline_options"] is None:
         args["trendline_options"] = dict()
 
-    if "norm" in args:
-        if args.get("norm", None) not in [None, "percent", "probability"]:
+    if "ecdfnorm" in args:
+        if args.get("ecdfnorm", None) not in [None, "percent", "probability"]:
             raise ValueError(
-                "`norm` must be one of None, 'percent' or 'probability'. "
-                + "'%s' was provided." % args["norm"]
+                "`ecdfnorm` must be one of None, 'percent' or 'probability'. "
+                + "'%s' was provided." % args["ecdfnorm"]
             )
-        args["histnorm"] = args["norm"]
+        args["histnorm"] = args["ecdfnorm"]
 
     # Compute applicable grouping attributes
     for k in group_attrables:
@@ -2078,18 +2088,22 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             ):
                 trace.update(marker=dict(color=trace.line.color))
 
-            if "complementary" in args:  # ECDF
+            if "ecdfmode" in args:
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
-                group = group.sort_values(by=base)
-                group_sum = group[var].sum()
+                ascending = args.get("ecdfmode", "standard") != "reversed"
+                group = group.sort_values(by=base, ascending=ascending)
+                group_sum = group[var].sum()  # compute here before next line mutates
                 group[var] = group[var].cumsum()
-                if args["complementary"]:
+                if not ascending:
+                    group = group.sort_values(by=base, ascending=True)
+
+                if args.get("ecdfmode", "standard") == "complementary":
                     group[var] = group_sum - group[var]
 
-                if args["norm"] == "probability":
+                if args["ecdfnorm"] == "probability":
                     group[var] = group[var] / group_sum
-                elif args["norm"] == "percent":
+                elif args["ecdfnorm"] == "percent":
                     group[var] = 100.0 * group[var] / group_sum
 
             patch, fit_results = make_trace_kwargs(
