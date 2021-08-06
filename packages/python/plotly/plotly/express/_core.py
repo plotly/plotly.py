@@ -1874,6 +1874,9 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             )
         args["histnorm"] = args["ecdfnorm"]
 
+    if "bw_method" in args:
+        args["histnorm"] = "density"
+
     # Compute applicable grouping attributes
     for k in group_attrables:
         if k in args:
