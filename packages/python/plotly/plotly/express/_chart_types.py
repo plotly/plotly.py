@@ -579,10 +579,7 @@ def kde(
     marginal=None,
     opacity=None,
     orientation=None,
-    kdenorm=None,  # TODO use this
-    kernel=None,  # TODO use this
     bw_method=None,  # TODO use this
-    bw_adjust=None,  # TODO use this
     log_x=False,
     log_y=False,
     range_x=None,
