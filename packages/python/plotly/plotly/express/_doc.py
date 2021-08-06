@@ -591,10 +591,11 @@ docs = dict(
         "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
         "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
     ],
-    kernel=["TODO"],  # kde
-    kdenorm=["TODO"],  # kde
-    bw_method=["TODO"],  # kde
-    bw_adjust=["TODO"],  # kde
+    bw_method=[
+        "str, scalar or callable (default `'scott'`)",
+        "If str, must be one of `'scott'` or `'silverman'`.",
+        "Passed to `scipy.stats.gaussian_kde`.",
+    ],
 )
 
 
