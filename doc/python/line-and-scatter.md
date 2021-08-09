@@ -208,7 +208,7 @@ fig.show()
 import plotly.graph_objects as go
 import pandas as pd
 
-data= pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_usa_states.csv")
+data= pd.read_csv("https://plotly.github.io/datasets/2014_usa_states.csv")
 
 fig = go.Figure(data=go.Scatter(x=data['Postal'],
                                 y=data['Population'],
