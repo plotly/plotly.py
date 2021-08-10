@@ -6,7 +6,7 @@
 ###################################################
 
 ## python 2 to 3 compatibility ##
-six
+six>=1.15.0
 
 ## retrying requests ##
 tenacity>=6.2.0
