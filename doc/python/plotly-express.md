@@ -40,6 +40,18 @@ The `plotly.express` module (usually imported as `px`) contains functions that c
 
 Plotly Express provides [more than 30 functions for creating different types of figures](https://plotly.com/python-api-reference/plotly.express.html). The API for these functions was carefully designed to be as consistent and easy to learn as possible, making it easy to switch from a scatter plot to a bar chart to a histogram to a sunburst chart throughout a data exploration session. *Scroll down for a gallery of Plotly Express plots, each made in a single function call.*
 
+Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/) that gives a good introduction to Plotly Express and [Dash](https://dash.plotly.com/):
+
+```python hide_code=true
+%%html
+<div align="center">
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/FpCgG85g2Hw"
+title="YouTube video player"
+frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+```
+
 Plotly Express currently includes the following functions:
 
 * **Basics**: [`scatter`](/python/line-and-scatter/), [`line`](/python/line-charts/), [`area`](/python/filled-area-plots/), [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/), [`timeline`](https://plotly.com/python/gantt/)
@@ -134,7 +146,7 @@ fig.show()
 import plotly.express as px
 df = px.data.medals_long()
 
-fig = px.bar(df, x="medal", y="count", color="nation", 
+fig = px.bar(df, x="medal", y="count", color="nation",
              pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
 fig.show()
 ```
