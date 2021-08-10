@@ -47,7 +47,7 @@ Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/
 <div align="center">
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/FpCgG85g2Hw"
-title="YouTube video player"
+title="Data Visualization as The First and Last Mile of Data Science: Plotly Express and Dash | SciPy 2021"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 ```
