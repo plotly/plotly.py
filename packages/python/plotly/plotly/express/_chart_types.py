@@ -519,7 +519,6 @@ def ecdf(
     marginal=None,
     opacity=None,
     orientation=None,
-    line_shape="hv",
     ecdfnorm="probability",
     ecdfmode="standard",
     render_mode="auto",
