@@ -1825,6 +1825,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
 
     if "line_shape" in args:
         trace_patch["line"] = dict(shape=args["line_shape"])
+    elif "ecdfmode" in args:
+        trace_patch["line"] = dict(
+            shape="vh" if args["ecdfmode"] == "reversed" else "hv"
+        )
 
     if "geojson" in args:
         trace_patch["featureidkey"] = args["featureidkey"]
