@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make violin plots in Python with Plotly.
     display_as: statistical
@@ -36,15 +36,18 @@ jupyter:
     thumbnail: thumbnail/violin.jpg
 ---
 
+<!-- #region -->
 ## Violin Plot with Plotly Express
 
 A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](https://plotly.com/python/box-plots/), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
 
-See also the [list of other statistical charts](https://plotly.com/python/statistical-charts/).
+Alternatives to violin plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+
 
 ### Basic Violin Plot with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+<!-- #endregion -->
 
 ```python
 import plotly.express as px
