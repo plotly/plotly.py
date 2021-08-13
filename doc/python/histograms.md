@@ -454,6 +454,21 @@ fig.update_layout(
 fig.show()
 ```
 
+### Sort Histogram by Category Order
+
+Histogram bars can also be sorted based on the ordering logic of the categorical values using the [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) attribute of the x-axis. Sorting of histogram bars using `categoryorder` also works with multiple traces on the same x-axis. In the following examples, the histogram bars are sorted based on the total numerical values.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+fig1 = px.histogram(df, x="day").update_xaxes(categoryorder='total ascending')
+fig2 = px.histogram(df, x="day", color="smoker").update_xaxes(categoryorder='total descending')
+fig1.show()
+fig2.show()
+```
+
 #### Reference
 
 See [function reference for `px.histogram()`](https://plotly.com/python-api-reference/generated/plotly.express.histogram) or https://plotly.com/python/reference/histogram/ for more information and chart attribute options!
