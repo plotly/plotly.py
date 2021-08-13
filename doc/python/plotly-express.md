@@ -43,10 +43,10 @@ Plotly Express provides [more than 30 functions for creating different types of 
 Plotly Express currently includes the following functions:
 
 * **Basics**: [`scatter`](/python/line-and-scatter/), [`line`](/python/line-charts/), [`area`](/python/filled-area-plots/), [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/), [`timeline`](https://plotly.com/python/gantt/)
-* **Part-of-Whole**: [`pie`](/python/pie-charts/), [`sunburst`](/python/sunburst-charts/), [`treemap`](/python/treemaps/), [`funnel_area`](/python/funnel-charts/)
-* **1D Distributions**: [`histogram`](/python/histograms/), [`box`](/python/box-plots/), [`violin`](/python/violin/), [`strip`](/python/strip-charts/)
+* **Part-of-Whole**: [`pie`](/python/pie-charts/), [`sunburst`](/python/sunburst-charts/), [`treemap`](/python/treemaps/), [`icicle`](/python/icicle-charts/), [`funnel_area`](/python/funnel-charts/)
+* **1D Distributions**: [`histogram`](/python/histograms/), [`box`](/python/box-plots/), [`violin`](/python/violin/), [`strip`](/python/strip-charts/), [`ecdf`](/python/ecdf-charts/)
 * **2D Distributions**: [`density_heatmap`](/python/2D-Histogram/), [`density_contour`](/python/2d-histogram-contour/)
-* **Matrix Input**: [`imshow`](/python/imshow/)
+* **Matrix or Image Input**: [`imshow`](/python/imshow/)
 * **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
 * **Multidimensional**: [`scatter_matrix`](/python/splom/), [`parallel_coordinates`](/python/parallel-coordinates-plot/), [`parallel_categories`](/python/parallel-categories-diagram/)
 * **Tile Maps**: [`scatter_mapbox`](/python/scattermapbox/), [`line_mapbox`](/python/lines-on-mapbox/), [`choropleth_mapbox`](/python/mapbox-county-choropleth/), [`density_mapbox`](/python/mapbox-density-heatmaps/)
@@ -61,8 +61,8 @@ The Plotly Express API in general offers the following features:
 * **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](https://plotly.com/python/creating-and-updating-figures/#updating-figures).
 * **Sensible, Overridable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
 * **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
-* **Automatic Trace and Layout configuration**: PX functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](/python/figure-structure).
-* **Automatic Figure Labelling**: PX functions label axes, legends and colorbars based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
+* **Automatic Trace and Layout configuration**: PX functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](https://plotly.com/python/legend/) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](/python/figure-structure).
+* **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](https://plotly.com/python/figure-labels/) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
 * **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).
 * **Styling Control**: PX functions [read styling information from the default figure template](/python/styling-plotly-express/), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](/python/styling-plotly-express/) to precisely control categorical variables.
 * **Uniform Color Handling**: PX functions automatically switch between [continuous](/python/colorscales/) and [categorical color](/python/discrete-color/) based on the input type.
@@ -71,6 +71,7 @@ The Plotly Express API in general offers the following features:
 * **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](/python/pandas-backend/) so you can call them via `df.plot()`.
 * **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](/python/linear-fits/).
 * **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](/python/animations/).
+* **Automatic WebGL switching**: for sufficiently large scatter plots, PX will automatically [use WebGL for hardware-accelerated rendering](https://plotly.com/python/webgl-vs-svg/).
 
 
 ### Plotly Express in Dash
@@ -101,7 +102,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
 fig.show()
 ```
 
-**Read more about [trendlines](/python/linear-fits/) and [templates](/python/templates/).**
+**Read more about [trendlines](/python/linear-fits/) and [templates](/python/templates/) and [marginal distribution plots](https://plotly.com/python/marginal-plots/).**
 
 ```python
 import plotly.express as px
@@ -218,6 +219,33 @@ fig = px.area(df, x="year", y="pop", color="continent", line_group="country")
 fig.show()
 ```
 
+**Read more about [timeline/Gantt charts](/python/gantt/).**
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame([
+    dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Resource="Alex"),
+    dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource="Alex"),
+    dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Resource="Max")
+])
+
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Resource", color="Resource")
+fig.show()
+```
+
+**Read more about [funnel charts](/python/funnel-charts/).**
+
+```python
+import plotly.express as px
+data = dict(
+    number=[39, 27.4, 20.6, 11, 2],
+    stage=["Website visit", "Downloads", "Potential customers", "Requested price", "Invoice sent"])
+fig = px.funnel(data, x='number', y='stage')
+fig.show()
+```
+
 ### Part to Whole Charts
 
 **Read more about [pie charts](/python/pie-charts/).**
@@ -252,7 +280,7 @@ fig = px.treemap(df, path=[px.Constant('world'), 'continent', 'country'], values
 fig.show()
 ```
 
-**Read more about [treemaps](/python/icicle-charts/).**
+**Read more about [icicle charts](/python/icicle-charts/).**
 
 ```python
 import plotly.express as px
@@ -292,6 +320,17 @@ fig = px.violin(df, y="tip", x="smoker", color="sex", box=True, points="all", ho
 fig.show()
 ```
 
+**Read more about [Empirical Cumulative Distribution Function (ECDF) charts](https://plotly.com/python/ecdf-charts/).**
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.ecdf(df, x="total_bill", color="sex")
+fig.show()
+```
+
+**Read more about [strip charts](https://plotly.com/python/strip-charts/).**
+
 ```python
 import plotly.express as px
 df = px.data.tips()
@@ -305,13 +344,6 @@ fig.show()
 import plotly.express as px
 df = px.data.iris()
 fig = px.density_contour(df, x="sepal_width", y="sepal_length")
-fig.show()
-```
-
-```python
-import plotly.express as px
-df = px.data.iris()
-fig = px.density_contour(df, x="sepal_width", y="sepal_length", color="species", marginal_x="rug", marginal_y="histogram")
 fig.show()
 ```
 
@@ -330,24 +362,25 @@ fig.show()
 
 ```python
 import plotly.express as px
-
-fig = px.imshow([[1, 20, 30],
-                 [20, 1, 60],
-                 [30, 60, 1]])
+data=[[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]]
+fig = px.imshow(data,
+                labels=dict(x="Day of Week", y="Time of Day", color="Productivity"),
+                x=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                y=['Morning', 'Afternoon', 'Evening']
+               )
+fig.update_xaxes(side="top")
 fig.show()
 ```
 
 ```python
 import plotly.express as px
-import numpy as np
-img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]],
-                    [[0, 255, 0], [0, 0, 255], [255, 0, 0]]
-                   ], dtype=np.uint8)
-fig = px.imshow(img_rgb)
+from skimage import io
+img = io.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg')
+fig = px.imshow(img)
 fig.show()
 ```
 
-#### Maps
+#### Tile Maps
 
 **Read more about [tile maps](/python/mapbox-layers/) and [point on tile maps](/python/scattermapbox/).**
 
@@ -374,6 +407,8 @@ fig = px.choropleth_mapbox(df, geojson=geojson, color="Bergeron",
                            mapbox_style="carto-positron", zoom=9)
 fig.show()
 ```
+
+### Outline Maps
 
 **Read more about [outline symbol maps](/python/scatter-plots-on-maps/).**
 
