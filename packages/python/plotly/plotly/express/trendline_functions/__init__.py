@@ -11,6 +11,8 @@ exposed as part of the public API for documentation purposes.
 import pandas as pd
 import numpy as np
 
+__all__ = ["ols", "lowess", "rolling", "ewm", "expanding"]
+
 
 def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     """Ordinary Least Squares (OLS) trendline function

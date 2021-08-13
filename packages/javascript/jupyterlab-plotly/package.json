@@ -22,7 +22,7 @@
     "style/*.*"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:nbextension && npm run build:labextension:dev",
+    "build:dev": "npm run build:lib && npm run build:nbextension && npm run build:labextension:dev",
     "build:prod": "npm run build:lib && npm run build:nbextension && npm run build:labextension",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
