@@ -15,8 +15,8 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "any", "editType": "plot"},
-                    {"valType": "any", "editType": "plot"},
+                    {"editType": "plot", "valType": "any"},
+                    {"editType": "plot", "valType": "any"},
                 ],
             ),
             **kwargs

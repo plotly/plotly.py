@@ -10,10 +10,10 @@ class ZmaxValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "calc"},
-                    {"valType": "number", "editType": "calc"},
-                    {"valType": "number", "editType": "calc"},
-                    {"valType": "number", "editType": "calc"},
+                    {"editType": "calc", "valType": "number"},
+                    {"editType": "calc", "valType": "number"},
+                    {"editType": "calc", "valType": "number"},
+                    {"editType": "calc", "valType": "number"},
                 ],
             ),
             **kwargs

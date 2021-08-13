@@ -15,14 +15,14 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 "items",
                 [
                     {
-                        "valType": "any",
                         "editType": "plot",
                         "impliedEdits": {"^autorange": False},
+                        "valType": "any",
                     },
                     {
-                        "valType": "any",
                         "editType": "plot",
                         "impliedEdits": {"^autorange": False},
+                        "valType": "any",
                     },
                 ],
             ),

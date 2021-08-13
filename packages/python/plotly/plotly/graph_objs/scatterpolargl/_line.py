@@ -78,8 +78,8 @@ class Line(_BaseTraceHierarchyType):
     
         The 'dash' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
-                'longdashdot']
+                ['dash', 'dashdot', 'dot', 'longdash', 'longdashdot',
+                'solid']
 
         Returns
         -------

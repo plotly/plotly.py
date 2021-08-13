@@ -123,8 +123,8 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the contour label formatting rule using d3 formatting
         mini-languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
     
         The 'labelformat' property is a string and must be specified as:
           - A string
@@ -324,8 +324,7 @@ class Contours(_BaseTraceHierarchyType):
             Sets the contour label formatting rule using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         operation
             Sets the constraint operation. "=" keeps regions equal
             to `value` "<" and "<=" keep regions less than `value`
@@ -407,8 +406,7 @@ class Contours(_BaseTraceHierarchyType):
             Sets the contour label formatting rule using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         operation
             Sets the constraint operation. "=" keeps regions equal
             to `value` "<" and "<=" keep regions less than `value`
