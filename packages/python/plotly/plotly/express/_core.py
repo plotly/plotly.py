@@ -2,6 +2,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
 from ._special_inputs import IdentityMap, Constant, Range
+from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
@@ -16,6 +17,9 @@ from plotly.subplots import (
 )
 
 NO_COLOR = "px_no_color_constant"
+trendline_functions = dict(
+    lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
+)
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -313,12 +317,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
                 if (
-                    attr_value in ["ols", "lowess"]
-                    and args["x"]
+                    args["x"]
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
-                    import statsmodels.api as sm
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
@@ -345,37 +347,27 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             )
 
                     # preserve original values of "x" in case they're dates
-                    trace_patch["x"] = sorted_trace_data[args["x"]][
-                        np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
-                    ]
-
-                    if attr_value == "lowess":
-                        # missing ='drop' is the default value for lowess but not for OLS (None)
-                        # we force it here in case statsmodels change their defaults
-                        trendline = sm.nonparametric.lowess(y, x, missing="drop")
-                        trace_patch["y"] = trendline[:, 1]
-                        hover_header = "<b>LOWESS trendline</b><br><br>"
-                    elif attr_value == "ols":
-                        fit_results = sm.OLS(
-                            y, sm.add_constant(x), missing="drop"
-                        ).fit()
-                        trace_patch["y"] = fit_results.predict()
-                        hover_header = "<b>OLS trendline</b><br>"
-                        if len(fit_results.params) == 2:
-                            hover_header += "%s = %g * %s + %g<br>" % (
-                                args["y"],
-                                fit_results.params[1],
-                                args["x"],
-                                fit_results.params[0],
-                            )
-                        else:
-                            hover_header += "%s = %g<br>" % (
-                                args["y"],
-                                fit_results.params[0],
-                            )
-                        hover_header += (
-                            "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
-                        )
+                    # otherwise numpy/pandas can mess with the timezones
+                    # NB this means trendline functions must output one-to-one with the input series
+                    # i.e. we can't do resampling, because then the X values might not line up!
+                    non_missing = np.logical_not(
+                        np.logical_or(np.isnan(y), np.isnan(x))
+                    )
+                    trace_patch["x"] = sorted_trace_data[args["x"]][non_missing]
+                    trendline_function = trendline_functions[attr_value]
+                    y_out, hover_header, fit_results = trendline_function(
+                        args["trendline_options"],
+                        sorted_trace_data[args["x"]],
+                        x,
+                        y,
+                        args["x"],
+                        args["y"],
+                        non_missing,
+                    )
+                    assert len(y_out) == len(
+                        trace_patch["x"]
+                    ), "missing-data-handling failure in trendline code"
+                    trace_patch["y"] = y_out
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
             elif attr_name.startswith("error"):
@@ -878,19 +870,23 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             result.append(trace_spec)
 
     # Add trendline trace specifications
-    if "trendline" in args and args["trendline"]:
-        trace_spec = TraceSpec(
-            constructor=go.Scattergl if constructor == go.Scattergl else go.Scatter,
-            attrs=["trendline"],
-            trace_patch=dict(mode="lines"),
-            marginal=None,
-        )
-        if args["trendline_color_override"]:
-            trace_spec.trace_patch["line"] = dict(
-                color=args["trendline_color_override"]
-            )
-        result.append(trace_spec)
+    if args.get("trendline") and args.get("trendline_scope", "trace") == "trace":
+        result.append(make_trendline_spec(args, constructor))
     return result
+
+
+def make_trendline_spec(args, constructor):
+    trace_spec = TraceSpec(
+        constructor=go.Scattergl
+        if constructor == go.Scattergl  # could be contour
+        else go.Scatter,
+        attrs=["trendline"],
+        trace_patch=dict(mode="lines"),
+        marginal=None,
+    )
+    if args["trendline_color_override"]:
+        trace_spec.trace_patch["line"] = dict(color=args["trendline_color_override"])
+    return trace_spec
 
 
 def one_group(x):
@@ -1827,6 +1823,16 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     ):
         args["facet_col_wrap"] = 0
 
+    if "trendline" in args and args["trendline"] is not None:
+        if args["trendline"] not in trendline_functions:
+            raise ValueError(
+                "Value '%s' for `trendline` must be one of %s"
+                % (args["trendline"], trendline_functions.keys())
+            )
+
+    if "trendline_options" in args and args["trendline_options"] is None:
+        args["trendline_options"] = dict()
+
     # Compute applicable grouping attributes
     for k in group_attrables:
         if k in args:
@@ -2125,6 +2131,27 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
     fig.frames = frame_list if len(frames) > 1 else []
+
+    if args.get("trendline") and args.get("trendline_scope", "trace") == "overall":
+        trendline_spec = make_trendline_spec(args, constructor)
+        trendline_trace = trendline_spec.constructor(
+            name="Overall Trendline", legendgroup="Overall Trendline", showlegend=False
+        )
+        if "line" not in trendline_spec.trace_patch:  # no color override
+            for m in grouped_mappings:
+                if m.variable == "color":
+                    next_color = m.sequence[len(m.val_map) % len(m.sequence)]
+                    trendline_spec.trace_patch["line"] = dict(color=next_color)
+        patch, fit_results = make_trace_kwargs(
+            args, trendline_spec, args["data_frame"], {}, sizeref
+        )
+        trendline_trace.update(patch)
+        fig.add_trace(
+            trendline_trace, row="all", col="all", exclude_empty_subplots=True
+        )
+        fig.update_traces(selector=-1, showlegend=True)
+        if fit_results is not None:
+            trendline_rows.append(dict(px_fit_results=fit_results))
 
     fig._px_trendlines = pd.DataFrame(trendline_rows)
 

@@ -402,14 +402,28 @@ docs = dict(
     ],
     trendline=[
         "str",
-        "One of `'ols'` or `'lowess'`.",
+        "One of `'ols'`, `'lowess'`, `'rolling'`, `'expanding'` or `'ewm'`.",
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
+        "If `'rolling`', a Rolling (e.g. rolling average, rolling median) line will be drawn for each discrete-color/symbol group.",
+        "If `'expanding`', an Expanding (e.g. expanding average, expanding sum) line will be drawn for each discrete-color/symbol group.",
+        "If `'ewm`', an Exponentially Weighted Moment (e.g. exponentially-weighted moving average) line will be drawn for each discrete-color/symbol group.",
+        "See the docstrings for the functions in `plotly.express.trendline_functions` for more details on these functions and how",
+        "to configure them with the `trendline_options` argument.",
+    ],
+    trendline_options=[
+        "dict",
+        "Options passed as the first argument to the function from `plotly.express.trendline_functions` ",
+        "named in the `trendline` argument.",
     ],
     trendline_color_override=[
         "str",
         "Valid CSS color.",
-        "If provided, and if `trendline` is set, all trendlines will be drawn in this color.",
+        "If provided, and if `trendline` is set, all trendlines will be drawn in this color rather than in the same color as the traces from which they draw their inputs.",
+    ],
+    trendline_scope=[
+        "str (one of `'trace'` or `'overall'`, default `'trace'`)",
+        "If `'trace'`, then one trendline is drawn per trace (i.e. per color, symbol, facet, animation frame etc) and if `'overall'` then one trendline is computed for the entire dataset, and replicated across all facets.",
     ],
     render_mode=[
         "str",
