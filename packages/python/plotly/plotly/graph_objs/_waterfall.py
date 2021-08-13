@@ -434,14 +434,14 @@ class Waterfall(_BaseTraceType):
         underscore before or after "(x|y)other" will add a space on
         that side, only when this field is shown. Numbers are formatted
         using d3-format's syntax %{variable:d3-format}, for example
-        "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        The variables available in `hovertemplate` are the ones emitted
-        as event data described at this link
+        "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. The variables available in `hovertemplate`
+        are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available. variables
@@ -1326,15 +1326,14 @@ class Waterfall(_BaseTraceType):
         Variables are inserted using %{variable}, for example "y:
         %{y}". Numbers are formatted using d3-format's syntax
         %{variable:d3-format}, for example "Price: %{y:$.2f}".
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        Every attributes that can be specified per-point (the ones that
-        are `arrayOk: true`) are available. variables `initial`,
-        `delta`, `final` and `label`.
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. Every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `initial`, `delta`, `final` and `label`.
     
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1592,14 +1591,15 @@ class Waterfall(_BaseTraceType):
         """
         Sets the hover text formatting rulefor `x`  using d3 formatting
         mini-languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format. And for dates
-        see: https://github.com/d3/d3-time-format#locale_format. We add
-        two items to d3's date formatter: "%h" for half of the year as
-        a decimal number as well as "%{n}f" for fractional seconds with
-        n digits. For example, *2016-10-13 09:15:23.456* with
-        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
-        the values are formatted using `xaxis.hoverformat`.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
+        dates see: https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format. We add two items to d3's date
+        formatter: "%h" for half of the year as a decimal number as
+        well as "%{n}f" for fractional seconds with n digits. For
+        example, *2016-10-13 09:15:23.456* with tickformat
+        "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
+        are formatted using `xaxis.hoverformat`.
     
         The 'xhoverformat' property is a string and must be specified as:
           - A string
@@ -1775,14 +1775,15 @@ class Waterfall(_BaseTraceType):
         """
         Sets the hover text formatting rulefor `y`  using d3 formatting
         mini-languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format. And for dates
-        see: https://github.com/d3/d3-time-format#locale_format. We add
-        two items to d3's date formatter: "%h" for half of the year as
-        a decimal number as well as "%{n}f" for fractional seconds with
-        n digits. For example, *2016-10-13 09:15:23.456* with
-        tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By default
-        the values are formatted using `yaxis.hoverformat`.
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
+        dates see: https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format. We add two items to d3's date
+        formatter: "%h" for half of the year as a decimal number as
+        well as "%{n}f" for fractional seconds with n digits. For
+        example, *2016-10-13 09:15:23.456* with tickformat
+        "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
+        are formatted using `yaxis.hoverformat`.
     
         The 'yhoverformat' property is a string and must be specified as:
           - A string
@@ -1953,15 +1954,15 @@ class Waterfall(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -2116,16 +2117,17 @@ class Waterfall(_BaseTraceType):
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
-            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. Every attributes
-            that can be specified per-point (the ones that are
-            `arrayOk: true`) are available. variables `initial`,
-            `delta`, `final` and `label`.
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `initial`, `delta`, `final`
+            and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
@@ -2179,16 +2181,15 @@ class Waterfall(_BaseTraceType):
             Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `xaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2223,16 +2224,15 @@ class Waterfall(_BaseTraceType):
             Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `yaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y
@@ -2401,15 +2401,15 @@ class Waterfall(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -2564,16 +2564,17 @@ class Waterfall(_BaseTraceType):
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
-            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. Every attributes
-            that can be specified per-point (the ones that are
-            `arrayOk: true`) are available. variables `initial`,
-            `delta`, `final` and `label`.
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `initial`, `delta`, `final`
+            and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
@@ -2627,16 +2628,15 @@ class Waterfall(_BaseTraceType):
             Sets the hover text formatting rulefor `x`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `xaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `xaxis.hoverformat`.
         xperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the x
@@ -2671,16 +2671,15 @@ class Waterfall(_BaseTraceType):
             Sets the hover text formatting rulefor `y`  using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display *09~15~23.46*By
-            default the values are formatted using
-            `yaxis.hoverformat`.
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `yaxis.hoverformat`.
         yperiod
             Only relevant when the axis `type` is "date". Sets the
             period positioning in milliseconds or "M<n>" on the y

@@ -10,6 +10,6 @@ class GroupsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             free_length=kwargs.pop("free_length", True),
             implied_edits=kwargs.pop("implied_edits", {"x": [], "y": []}),
-            items=kwargs.pop("items", {"valType": "number", "editType": "calc"}),
+            items=kwargs.pop("items", {"editType": "calc", "valType": "number"}),
             **kwargs
         )

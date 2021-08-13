@@ -12,8 +12,8 @@ class BoundsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "any", "editType": "calc"},
-                    {"valType": "any", "editType": "calc"},
+                    {"editType": "calc", "valType": "any"},
+                    {"editType": "calc", "valType": "any"},
                 ],
             ),
             **kwargs

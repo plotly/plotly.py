@@ -266,17 +266,17 @@ class Coloraxis(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     coloraxis.colorbar.Tickformatstop` instances or
@@ -395,9 +395,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use`cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
-        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
-        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
-        ridis,Cividis.
+        following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
+        Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
+        YlGnBu,YlOrRd.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -522,9 +522,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys,YlGnBu,Greens,YlOrR
-            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
-            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+            string of the following list: Blackbody,Bluered,Blues,C
+            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
+            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -595,9 +595,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys,YlGnBu,Greens,YlOrR
-            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
-            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+            string of the following list: Blackbody,Bluered,Blues,C
+            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
+            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and

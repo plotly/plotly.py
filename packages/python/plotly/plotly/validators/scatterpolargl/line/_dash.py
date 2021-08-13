@@ -8,7 +8,7 @@ class DashValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop(
-                "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
+                "values", ["dash", "dashdot", "dot", "longdash", "longdashdot", "solid"]
             ),
             **kwargs
         )

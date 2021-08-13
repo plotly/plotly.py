@@ -10,6 +10,11 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            distance
+                For satellite projection type only. Sets the
+                distance from the center of the sphere to the
+                point of view as a proportion of the sphere’s
+                radius.
             parallels
                 For conic projection types only. Sets the
                 parallels (tangent, secant) where the cone
@@ -22,6 +27,9 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Zooms in or out on the map view. A scale of 1
                 corresponds to the largest zoom level that fits
                 the map's lon and lat ranges.
+            tilt
+                For satellite projection type only. Sets the
+                tilt angle of perspective projection.
             type
                 Sets the projection type.
 """,

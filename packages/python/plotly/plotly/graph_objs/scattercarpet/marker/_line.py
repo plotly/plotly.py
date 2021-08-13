@@ -251,9 +251,9 @@ class Line(_BaseTraceHierarchyType):
         'rgb(255,0,0)']]`. To control the bounds of the colorscale in
         color space, use`marker.line.cmin` and `marker.line.cmax`.
         Alternatively, `colorscale` may be a palette name string of the
-        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
-        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
-        ridis,Cividis.
+        following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
+        Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
+        YlGnBu,YlOrRd.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -443,9 +443,9 @@ class Line(_BaseTraceHierarchyType):
             To control the bounds of the colorscale in color space,
             use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys,YlGnBu,Greens,YlOrR
-            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
-            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+            string of the following list: Blackbody,Bluered,Blues,C
+            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
+            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             color .
@@ -550,9 +550,9 @@ class Line(_BaseTraceHierarchyType):
             To control the bounds of the colorscale in color space,
             use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys,YlGnBu,Greens,YlOrR
-            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
-            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+            string of the following list: Blackbody,Bluered,Blues,C
+            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
+            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             color .

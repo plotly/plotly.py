@@ -300,17 +300,17 @@ class Marker(_BaseTraceHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.sunburs
                     t.marker.colorbar.Tickformatstop` instances or
@@ -451,9 +451,9 @@ class Marker(_BaseTraceHierarchyType):
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use`marker.cmin` and
         `marker.cmax`. Alternatively, `colorscale` may be a palette
-        name string of the following list: Greys,YlGnBu,Greens,YlOrRd,B
-        luered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbod
-        y,Earth,Electric,Viridis,Cividis.
+        name string of the following list: Blackbody,Bluered,Blues,Civi
+        dis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow
+        ,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -653,10 +653,10 @@ class Marker(_BaseTraceHierarchyType):
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`marker.cmin` and
             `marker.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Greys,YlGnBu
-            ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,P
-            ortland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividi
-            s.
+            palette name string of the following list: Blackbody,Bl
+            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
+            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
+            d.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             colors .
@@ -758,10 +758,10 @@ class Marker(_BaseTraceHierarchyType):
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`marker.cmin` and
             `marker.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Greys,YlGnBu
-            ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,P
-            ortland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividi
-            s.
+            palette name string of the following list: Blackbody,Bl
+            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
+            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
+            d.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             colors .

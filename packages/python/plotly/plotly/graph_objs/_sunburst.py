@@ -309,14 +309,14 @@ class Sunburst(_BaseTraceType):
         underscore before or after "(x|y)other" will add a space on
         that side, only when this field is shown. Numbers are formatted
         using d3-format's syntax %{variable:d3-format}, for example
-        "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        The variables available in `hovertemplate` are the ones emitted
-        as event data described at this link
+        "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. The variables available in `hovertemplate`
+        are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available. variables
@@ -758,9 +758,9 @@ class Sunburst(_BaseTraceType):
                     color space, use`marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
-                    Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
-                    ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
-                    arth,Electric,Viridis,Cividis.
+                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
+                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
                     for  colors .
@@ -1244,16 +1244,15 @@ class Sunburst(_BaseTraceType):
         Variables are inserted using %{variable}, for example "y:
         %{y}". Numbers are formatted using d3-format's syntax
         %{variable:d3-format}, for example "Price: %{y:$.2f}".
-        https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        Every attributes that can be specified per-point (the ones that
-        are `arrayOk: true`) are available. variables `currentPath`,
-        `root`, `entry`, `percentRoot`, `percentEntry`,
-        `percentParent`, `label` and `value`.
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. Every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `currentPath`, `root`, `entry`, `percentRoot`,
+        `percentEntry`, `percentParent`, `label` and `value`.
     
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1466,15 +1465,15 @@ class Sunburst(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -1617,17 +1616,18 @@ class Sunburst(_BaseTraceType):
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
-            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. Every attributes
-            that can be specified per-point (the ones that are
-            `arrayOk: true`) are available. variables
-            `currentPath`, `root`, `entry`, `percentRoot`,
-            `percentEntry`, `percentParent`, `label` and `value`.
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `currentPath`, `root`,
+            `entry`, `percentRoot`, `percentEntry`,
+            `percentParent`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
@@ -1775,15 +1775,15 @@ class Sunburst(_BaseTraceType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -1926,17 +1926,18 @@ class Sunburst(_BaseTraceType):
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
-            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. Every attributes
-            that can be specified per-point (the ones that are
-            `arrayOk: true`) are available. variables
-            `currentPath`, `root`, `entry`, `percentRoot`,
-            `percentEntry`, `percentParent`, `label` and `value`.
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `currentPath`, `root`,
+            `entry`, `percentRoot`, `percentEntry`,
+            `percentParent`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
