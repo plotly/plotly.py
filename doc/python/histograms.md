@@ -36,14 +36,19 @@ jupyter:
     thumbnail: thumbnail/histogram.jpg
 ---
 
-In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...).
+<!-- #region -->
+In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
-If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
+
+Alternatives to violin plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+
+> If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](/python/bar-charts/).
 
 ## Histograms with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+<!-- #endregion -->
 
 ```python
 import plotly.express as px
@@ -160,7 +165,7 @@ fig = px.histogram(df, x="total_bill", color="sex")
 fig.show()
 ```
 
-#### Using histfunc
+#### Aggregating with other functions than `count`
 
 For each bin of `x`, one can compute a function of data using `histfunc`. The argument of `histfunc` is the dataframe column given as the `y` argument. Below the plot shows that the average tip increases with the total bill.
 
@@ -193,7 +198,7 @@ fig.show()
 
 #### Visualizing the distribution
 
-With the `marginal` keyword, a subplot is drawn alongside the histogram, visualizing the distribution. See [the distplot page](https://plotly.com/python/distplot/)for more examples of combined statistical representations.
+With the `marginal` keyword, a [marginal](https://plotly.com/python/marginal-plots/) is drawn alongside the histogram, visualizing the distribution. See [the distplot page](https://plotly.com/python/distplot/) for more examples of combined statistical representations.
 
 ```python
 import plotly.express as px
