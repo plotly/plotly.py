@@ -67,6 +67,15 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
 fig.show()
 ```
 
+Color can be [continuous](https://plotly.com/python/colorscales/) as follows, or [discrete/categorical](https://plotly.com/python/discrete-color/) as above.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color='petal_length')
+fig.show()
+```
+
 The `symbol` argument can be mapped to a column as well. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
 
 ```python
@@ -101,6 +110,53 @@ df = px.data.medals_long()
 
 fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
 fig.update_traces(marker_size=10)
+fig.show()
+```
+
+### Error Bars
+
+Scatter plots support [error bars](https://plotly.com/python/error-bars/).
+
+```python
+import plotly.express as px
+df = px.data.iris()
+df["e"] = df["sepal_width"]/100
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
+                 error_x="e", error_y="e")
+fig.show()
+```
+
+### Marginal Distribution Plots
+
+Scatter plots support [marginal distribution plots](https://plotly.com/python/marginal-plots/)
+
+```python
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_length", y="sepal_width", marginal_x="histogram", marginal_y="rug")
+fig.show()
+```
+
+### Facetting
+
+Scatter plots support [faceting](https://plotly.com/python/facet-plots/).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="smoker", facet_col="sex", facet_row="time")
+fig.show()
+```
+
+### Linear Regression and Other Trendlines
+
+Scatter plots support [linear and non-linear trendlines](https://plotly.com/python/linear-fits/).
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", trendline="ols")
 fig.show()
 ```
 

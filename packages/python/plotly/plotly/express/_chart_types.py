@@ -489,6 +489,72 @@ histogram.__doc__ = make_docstring(
 )
 
 
+def ecdf(
+    data_frame=None,
+    x=None,
+    y=None,
+    color=None,
+    text=None,
+    line_dash=None,
+    symbol=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
+    hover_name=None,
+    hover_data=None,
+    animation_frame=None,
+    animation_group=None,
+    markers=False,
+    lines=True,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    line_dash_sequence=None,
+    line_dash_map=None,
+    symbol_sequence=None,
+    symbol_map=None,
+    marginal=None,
+    opacity=None,
+    orientation=None,
+    ecdfnorm="probability",
+    ecdfmode="standard",
+    render_mode="auto",
+    log_x=False,
+    log_y=False,
+    range_x=None,
+    range_y=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a Empirical Cumulative Distribution Function (ECDF) plot, rows of `data_frame`
+    are sorted by the value `x` (or `y` if `orientation` is `'h'`) and their cumulative
+    count (or the cumulative sum of `y` if supplied and `orientation` is `h`) is drawn
+    as a line.
+    """
+    return make_figure(args=locals(), constructor=go.Scatter)
+
+
+ecdf.__doc__ = make_docstring(
+    ecdf,
+    append_dict=dict(
+        x=[
+            "If `orientation` is `'h'`, the cumulative sum of this argument is plotted rather than the cumulative count."
+        ]
+        + _wide_mode_xy_append,
+        y=[
+            "If `orientation` is `'v'`, the cumulative sum of this argument is plotted rather than the cumulative count."
+        ]
+        + _wide_mode_xy_append,
+    ),
+)
+
+
 def violin(
     data_frame=None,
     x=None,

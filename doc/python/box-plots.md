@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to make Box Plots in Python with Plotly.
     display_as: statistical
@@ -36,13 +36,18 @@ jupyter:
     thumbnail: thumbnail/box.jpg
 ---
 
-A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
+<!-- #region -->
+A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
+
+
+Alternatives to box plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [violin plots](https://plotly.com/python/violin/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
 
 ## Box Plot with `plotly.express`
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
+<!-- #endregion -->
 
 ```python
 import plotly.express as px

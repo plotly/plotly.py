@@ -325,7 +325,11 @@ docs = dict(
         "Setting this value is recommended when using `plotly.express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
     size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
-    markers=["boolean (default `False`)", "If `True`, markers are shown on lines.",],
+    markers=["boolean (default `False`)", "If `True`, markers are shown on lines."],
+    lines=[
+        "boolean (default `True`)",
+        "If `False`, lines are not drawn (forced to `True` if `markers` is `False`).",
+    ],
     log_x=[
         "boolean (default `False`)",
         "If `True`, the x-axis is log-scaled in cartesian coordinates.",
@@ -573,10 +577,26 @@ docs = dict(
         "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
         "levels in the hierarchy.",
     ],
+    ecdfnorm=[
+        "string or `None` (default `'probability'`)",
+        "One of `'probability'` or `'percent'`",
+        "If `None`, values will be raw counts or sums.",
+        "If `'probability', values will be probabilities normalized from 0 to 1.",
+        "If `'percent', values will be percentages normalized from 0 to 100.",
+    ],
+    ecdfmode=[
+        "string (default `'standard'`)",
+        "One of `'standard'`, `'complementary'` or `'reversed'`",
+        "If `'standard'`, the ECDF is plotted such that values represent data at or below the point.",
+        "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
+        "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
+    ],
 )
 
 
-def make_docstring(fn, override_dict={}, append_dict={}):
+def make_docstring(fn, override_dict=None, append_dict=None):
+    override_dict = {} if override_dict is None else override_dict
+    append_dict = {} if append_dict is None else append_dict
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:
