@@ -45,7 +45,7 @@ Most `import` problems or `AttributeError`s can be traced back to having multipl
 
 ```bash
 $ conda uninstall plotly
-$ pip remove plotly
+$ pip uninstall plotly
 ```
 
 > Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
