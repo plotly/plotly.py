@@ -42,7 +42,7 @@ specified below.
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Ensure you're in a Python virtual environment with JupyterLab 3 installed
-   + Run `rm -rf node_modules && npm install && npm run build:prod`
+   + Run `rm -rf node_modules && npm install && npm run clean && npm run build:prod`
  - This the last good time to install the extensions locally and check that everything works in dev mode
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
  - Ensure that the diff in `package-lock.json` seems sane
@@ -50,33 +50,36 @@ specified below.
    + `git commit -a -m "release vX.Y.Z"`
    + `git tag vX.Y.Z`
 
-### Publish JS Extensions to NPM
-
-Build and publish the final version of the extensions to NPM. We do this first because
-once we push to PyPI the README will refer to these versions.
-
-```bash
-cd packages/javascript/jupyterlab-plotly
-npm run build && npm publish --access public
-```
-
-Final checks could be done here if desired.
 
 ### Publishing to PyPI
 
 Build and publish the final version to PyPI.
+
+> NOTE: for some reason, this produces a broken build if `npm run build:prod` isn't '
+> run once before in the `jupyterlab-plotly` directory so don't skip that step above!
 
 ```bash
 (plotly_dev) $ git status # make sure it's not dirty!
 (plotly_dev) $ cd packages/python/plotly
 (plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ rm -f dist/*dirty*
+(plotly_dev) $ rm -f dist/*dirty* # make sure your version is not dirty!
+```
+
+Here you should do some local QA:
+
+```bash
+(plotly_dev) $ pip uninstall plotly
+(plotly_dev) $ pip install dist/plotly-X.Y.X-py2.py3-none-any.whl
+```
+
+Once you're satisfied that things render in Lab and Notebook in Widget and regular mode,
+you can upload to PyPI.
+
+```bash
 (plotly_dev) $ twine upload dist/plotly-X.Y.Z*
 ```
 
-Note: this will intentionally fail if your current git tree is dirty, because we want the tag
-to reflect what is being released, and the version number comes from the tag and the dirty-state.
 
 After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
 ```bash
@@ -84,6 +87,18 @@ $ pip install plotly --upgrade
 ```
 
 And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
+
+### Publish JS Extensions to NPM
+
+Build and publish the final version of the extensions to NPM. We do this right away because
+once we push to PyPI the README will refer to these versions.
+
+> NOTE: this assumes the extension is already built above so don't skip that step above!
+
+```bash
+cd packages/javascript/jupyterlab-plotly
+npm publish --access public
+```
 
 ### Publishing to the plotly conda channel
 
@@ -185,13 +200,22 @@ And, you'll need to be a maintainer on PyPI. Then, from inside the repository:
 (plotly_dev) $ git stash
 (plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ rm -f dist/*dirty*
-(plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
+(plotly_dev) $ rm -f dist/*dirty* # make sure your version is not dirty!
 ```
 
-Note: this will intentionally fail if your current git tree is dirty, because we want the tag
-to reflect what is being released, and the version number comes from the tag and the dirty-state.
+Here you should do some local QA:
 
+```bash
+(plotly_dev) $ pip uninstall plotly
+(plotly_dev) $ pip install dist/plotly-vX.Y.Zrc1-py2.py3-none-any.whl
+```
+
+Once you're satisfied that things render in Lab and Notebook in Widget and regular mode,
+you can upload to PyPI.
+
+```bash
+(plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
+```
 
 ### Publish release candidate of JS Extensions to NPM
 
@@ -199,7 +223,7 @@ Now, publish the release candidate of the extensions to NPM.
 
 ```bash
 cd ./packages/javascript/jupyterlab-plotly
-npm run build && npm publish --access public --tag next
+npm publish --access public --tag next
 ```
 
 The `--tag next` part ensures that users won't install this version unless

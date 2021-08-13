@@ -528,6 +528,7 @@ setup(
         "plotly.express",
         "plotly.express.data",
         "plotly.express.colors",
+        "plotly.express.trendline_functions",
         "plotly.graph_objects",
         "_plotly_utils",
         "_plotly_utils.colors",
