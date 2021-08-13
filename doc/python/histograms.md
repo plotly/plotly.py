@@ -460,13 +460,18 @@ Histogram bars can also be sorted based on the ordering logic of the categorical
 
 ```python
 import plotly.express as px
-import pandas as pd
 
 df = px.data.tips()
-fig1 = px.histogram(df, x="day").update_xaxes(categoryorder='total ascending')
-fig2 = px.histogram(df, x="day", color="smoker").update_xaxes(categoryorder='total descending')
-fig1.show()
-fig2.show()
+fig = px.histogram(df, x="day").update_xaxes(categoryorder='total ascending')
+fig.show()
+```
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.histogram(df, x="day", color="smoker").update_xaxes(categoryorder='total descending')
+fig.show()
 ```
 
 #### Reference
