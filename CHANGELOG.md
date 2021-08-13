@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [5.2.0] - 2021-08-13
+## [5.2.1] - 2021-08-13
 
 ### Updated
 
