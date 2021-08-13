@@ -10,6 +10,6 @@ class ValuesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             free_length=kwargs.pop("free_length", True),
-            items=kwargs.pop("items", {"valType": "any", "editType": "calc"}),
+            items=kwargs.pop("items", {"editType": "calc", "valType": "any"}),
             **kwargs
         )

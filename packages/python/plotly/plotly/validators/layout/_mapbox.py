@@ -63,12 +63,12 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Mapbox GL JS documentation available at
                 https://docs.mapbox.com/mapbox-gl-js/style-spec
                 The built-in plotly.js styles objects are:
-                open-street-map, white-bg, carto-positron,
-                carto-darkmatter, stamen-terrain, stamen-toner,
-                stamen-watercolor  The built-in Mapbox styles
-                are: basic, streets, outdoors, light, dark,
-                satellite, satellite-streets  Mapbox style URLs
-                are of the form:
+                carto-darkmatter, carto-positron, open-street-
+                map, stamen-terrain, stamen-toner, stamen-
+                watercolor, white-bg  The built-in Mapbox
+                styles are: basic, streets, outdoors, light,
+                dark, satellite, satellite-streets  Mapbox
+                style URLs are of the form:
                 mapbox://mapbox.mapbox-<name>-<version>
             uirevision
                 Controls persistence of user-driven changes in

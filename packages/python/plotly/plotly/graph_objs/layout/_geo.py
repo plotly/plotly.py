@@ -727,6 +727,11 @@ class Geo(_BaseLayoutHierarchyType):
     
             Supported dict properties:
                 
+                distance
+                    For satellite projection type only. Sets the
+                    distance from the center of the sphere to the
+                    point of view as a proportion of the sphere’s
+                    radius.
                 parallels
                     For conic projection types only. Sets the
                     parallels (tangent, secant) where the cone
@@ -739,6 +744,9 @@ class Geo(_BaseLayoutHierarchyType):
                     Zooms in or out on the map view. A scale of 1
                     corresponds to the largest zoom level that fits
                     the map's lon and lat ranges.
+                tilt
+                    For satellite projection type only. Sets the
+                    tilt angle of perspective projection.
                 type
                     Sets the projection type.
 
@@ -863,8 +871,8 @@ class Geo(_BaseLayoutHierarchyType):
     
         The 'scope' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['world', 'usa', 'europe', 'asia', 'africa', 'north
-                america', 'south america']
+                ['africa', 'asia', 'europe', 'north america', 'south
+                america', 'usa', 'world']
 
         Returns
         -------

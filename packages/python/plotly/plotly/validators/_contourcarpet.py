@@ -80,10 +80,10 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
-                palette name string of the following list: Grey
-                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
-                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
-                ,Electric,Viridis,Cividis.
+                palette name string of the following list: Blac
+                kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
+                ns,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,R
+                eds,Viridis,YlGnBu,YlOrRd.
             contours
                 :class:`plotly.graph_objects.contourcarpet.Cont
                 ours` instance or dict with compatible

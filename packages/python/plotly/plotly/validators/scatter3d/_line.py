@@ -79,10 +79,10 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To control the bounds of the colorscale in
                 color space, use`line.cmin` and `line.cmax`.
                 Alternatively, `colorscale` may be a palette
-                name string of the following list: Greys,YlGnBu
-                ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
-                ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
-                c,Viridis,Cividis.
+                name string of the following list: Blackbody,Bl
+                uered,Blues,Cividis,Earth,Electric,Greens,Greys
+                ,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viri
+                dis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
                 for  color .

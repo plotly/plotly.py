@@ -135,17 +135,17 @@ class Parcoords(_BaseTraceType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`.
@@ -519,10 +519,10 @@ class Parcoords(_BaseTraceType):
                     To control the bounds of the colorscale in
                     color space, use`line.cmin` and `line.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,YlGnBu
-                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
-                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
-                    c,Viridis,Cividis.
+                    name string of the following list: Blackbody,Bl
+                    uered,Blues,Cividis,Earth,Electric,Greens,Greys
+                    ,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viri
+                    dis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .

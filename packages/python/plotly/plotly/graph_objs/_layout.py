@@ -765,9 +765,9 @@ class Layout(_BaseLayoutType):
     
         The 'calendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['gregorian', 'chinese', 'coptic', 'discworld',
-                'ethiopian', 'hebrew', 'islamic', 'julian', 'mayan',
-                'nanakshahi', 'nepali', 'persian', 'jalali', 'taiwan',
+                ['chinese', 'coptic', 'discworld', 'ethiopian',
+                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
+                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
                 'thai', 'ummalqura']
 
         Returns
@@ -873,10 +873,10 @@ class Layout(_BaseLayoutType):
                     'rgb(255,0,0)']]`. To control the bounds of the
                     colorscale in color space, use`cmin` and
                     `cmax`. Alternatively, `colorscale` may be a
-                    palette name string of the following list: Grey
-                    s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
-                    Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
-                    ,Electric,Viridis,Cividis.
+                    palette name string of the following list: Blac
+                    kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
+                    ns,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,R
+                    eds,Viridis,YlGnBu,YlOrRd.
                 reversescale
                     Reverses the color mapping if true. If true,
                     `cmin` will correspond to the last color in the
@@ -2087,12 +2087,12 @@ class Layout(_BaseLayoutType):
                     Mapbox GL JS documentation available at
                     https://docs.mapbox.com/mapbox-gl-js/style-spec
                     The built-in plotly.js styles objects are:
-                    open-street-map, white-bg, carto-positron,
-                    carto-darkmatter, stamen-terrain, stamen-toner,
-                    stamen-watercolor  The built-in Mapbox styles
-                    are: basic, streets, outdoors, light, dark,
-                    satellite, satellite-streets  Mapbox style URLs
-                    are of the form:
+                    carto-darkmatter, carto-positron, open-street-
+                    map, stamen-terrain, stamen-toner, stamen-
+                    watercolor, white-bg  The built-in Mapbox
+                    styles are: basic, streets, outdoors, light,
+                    dark, satellite, satellite-streets  Mapbox
+                    style URLs are of the form:
                     mapbox://mapbox.mapbox-<name>-<version>
                 uirevision
                     Controls persistence of user-driven changes in
@@ -3925,17 +3925,17 @@ class Layout(_BaseLayoutType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4140,17 +4140,17 @@ class Layout(_BaseLayoutType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     xaxis.Tickformatstop` instances or dicts with
@@ -4418,17 +4418,17 @@ class Layout(_BaseLayoutType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4625,17 +4625,17 @@ class Layout(_BaseLayoutType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format.
-                    And for dates see:
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
-                    format#locale_format. We add two items to d3's
-                    date formatter: "%h" for half of the year as a
-                    decimal number as well as "%{n}f" for
-                    fractional seconds with n digits. For example,
-                    *2016-10-13 09:15:23.456* with tickformat
-                    "%H~%M~%S.%2f" would display "09~15~23.46"
+                    format/tree/v2.2.3#locale_format. We add two
+                    items to d3's date formatter: "%h" for half of
+                    the year as a decimal number as well as "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     yaxis.Tickformatstop` instances or dicts with
