@@ -591,11 +591,6 @@ docs = dict(
         "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
         "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
     ],
-    bw_method=[
-        "str, scalar or callable (default `'scott'`)",
-        "If str, must be one of `'scott'` or `'silverman'`.",
-        "Passed to `scipy.stats.gaussian_kde`.",
-    ],
 )
 
 

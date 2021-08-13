@@ -1318,9 +1318,7 @@ def build_dataframe(args, constructor):
     wide_cross_name = None  # will likely be "index" in wide_mode
     value_name = None  # will likely be "value" in wide_mode
     hist2d_types = [go.Histogram2d, go.Histogram2dContour]
-    hist1d_orientation = (
-        constructor == go.Histogram or "ecdfmode" in args or "bw_method" in args
-    )
+    hist1d_orientation = constructor == go.Histogram or "ecdfmode" in args
     if constructor in cartesians:
         if wide_x and wide_y:
             raise ValueError(
@@ -1807,7 +1805,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             trace_patch["marker"] = dict(opacity=args["opacity"])
     if (
         "line_group" in args or "line_dash" in args
-    ):  # px.line, px.line_*, px.area, px.ecdf, px, kde
+    ):  # px.line, px.line_*, px.area, px.ecdf
         modes = set()
         if args.get("lines", True):
             modes.add("lines")
@@ -1877,9 +1875,6 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                 + "'%s' was provided." % args["ecdfnorm"]
             )
         args["histnorm"] = args["ecdfnorm"]
-
-    if "bw_method" in args:
-        args["histnorm"] = "density"
 
     # Compute applicable grouping attributes
     for k in group_attrables:
@@ -2112,19 +2107,6 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     group[var] = group[var] / group_sum
                 elif args["ecdfnorm"] == "percent":
                     group[var] = 100.0 * group[var] / group_sum
-
-            if "bw_method" in args:
-                from scipy.stats import gaussian_kde
-
-                base = args["x"] if args["orientation"] == "v" else args["y"]
-                var = args["x"] if args["orientation"] == "h" else args["y"]
-                bw = args.get("bw_method")
-                group = group.sort_values(by=base)
-
-                kernel = gaussian_kde(
-                    dataset=group[base], weights=group[var], bw_method=bw
-                )
-                group[var] = kernel.evaluate(group[base])
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
