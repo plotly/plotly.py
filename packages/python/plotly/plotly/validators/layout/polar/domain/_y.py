@@ -10,8 +10,8 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
+                    {"editType": "plot", "max": 1, "min": 0, "valType": "number"},
+                    {"editType": "plot", "max": 1, "min": 0, "valType": "number"},
                 ],
             ),
             **kwargs

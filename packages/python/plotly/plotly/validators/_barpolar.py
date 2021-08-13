@@ -59,17 +59,16 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. Dates are
-                formatted using d3-time-format's syntax
-                %{variable|d3-time-format}, for example "Day:
-                %{2019-01-01|%A}".
+                %{y:$.2f}". https://github.com/d3/d3-format/tre
+                e/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
                 https://github.com/d3/d3-time-
-                format#locale_format for details on the date
-                formatting syntax. The variables available in
-                `hovertemplate` are the ones emitted as event
-                data described at this link
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. The variables
+                available in `hovertemplate` are the ones
+                emitted as event data described at this link
                 https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the

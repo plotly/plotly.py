@@ -11,9 +11,9 @@ class ArgsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "any", "editType": "arraydraw"},
-                    {"valType": "any", "editType": "arraydraw"},
-                    {"valType": "any", "editType": "arraydraw"},
+                    {"editType": "arraydraw", "valType": "any"},
+                    {"editType": "arraydraw", "valType": "any"},
+                    {"editType": "arraydraw", "valType": "any"},
                 ],
             ),
             **kwargs

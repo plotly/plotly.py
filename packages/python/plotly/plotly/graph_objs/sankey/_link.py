@@ -119,10 +119,10 @@ class Link(_BaseTraceHierarchyType):
                     'rgb(255,0,0)']]`. To control the bounds of the
                     colorscale in color space, use`cmin` and
                     `cmax`. Alternatively, `colorscale` may be a
-                    palette name string of the following list: Grey
-                    s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
-                    Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
-                    ,Electric,Viridis,Cividis.
+                    palette name string of the following list: Blac
+                    kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
+                    ns,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,R
+                    eds,Viridis,YlGnBu,YlOrRd.
                 label
                     The label of the links to color based on their
                     concentration within a flow.
@@ -344,14 +344,14 @@ class Link(_BaseTraceHierarchyType):
         underscore before or after "(x|y)other" will add a space on
         that side, only when this field is shown. Numbers are formatted
         using d3-format's syntax %{variable:d3-format}, for example
-        "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format for details on
-        the formatting syntax. Dates are formatted using d3-time-
-        format's syntax %{variable|d3-time-format}, for example "Day:
-        %{2019-01-01|%A}". https://github.com/d3/d3-time-
-        format#locale_format for details on the date formatting syntax.
-        The variables available in `hovertemplate` are the ones emitted
-        as event data described at this link
+        "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. The variables available in `hovertemplate`
+        are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available. variables
@@ -641,15 +641,15 @@ class Link(_BaseTraceHierarchyType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
@@ -764,15 +764,15 @@ class Link(_BaseTraceHierarchyType):
             only when this field is shown. Numbers are formatted
             using d3-format's syntax %{variable:d3-format}, for
             example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format for
-            details on the formatting syntax. Dates are formatted
-            using d3-time-format's syntax %{variable|d3-time-
-            format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-time-format#locale_format for
-            details on the date formatting syntax. The variables
-            available in `hovertemplate` are the ones emitted as
-            event data described at this link
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)

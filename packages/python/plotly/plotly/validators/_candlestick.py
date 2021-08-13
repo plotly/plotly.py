@@ -191,18 +191,17 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format.
-                And for dates see:
+                see: https://github.com/d3/d3-format/tree/v1.4.
+                5#d3-format. And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format. We add two items to d3's
-                date formatter: "%h" for half of the year as a
-                decimal number as well as "%{n}f" for
-                fractional seconds with n digits. For example,
-                *2016-10-13 09:15:23.456* with tickformat
-                "%H~%M~%S.%2f" would display *09~15~23.46*By
-                default the values are formatted using
-                `xaxis.hoverformat`.
+                format/tree/v2.2.3#locale_format. We add two
+                items to d3's date formatter: "%h" for half of
+                the year as a decimal number as well as "%{n}f"
+                for fractional seconds with n digits. For
+                example, *2016-10-13 09:15:23.456* with
+                tickformat "%H~%M~%S.%2f" would display
+                *09~15~23.46*By default the values are
+                formatted using `xaxis.hoverformat`.
             xperiod
                 Only relevant when the axis `type` is "date".
                 Sets the period positioning in milliseconds or
@@ -235,18 +234,17 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format.
-                And for dates see:
+                see: https://github.com/d3/d3-format/tree/v1.4.
+                5#d3-format. And for dates see:
                 https://github.com/d3/d3-time-
-                format#locale_format. We add two items to d3's
-                date formatter: "%h" for half of the year as a
-                decimal number as well as "%{n}f" for
-                fractional seconds with n digits. For example,
-                *2016-10-13 09:15:23.456* with tickformat
-                "%H~%M~%S.%2f" would display *09~15~23.46*By
-                default the values are formatted using
-                `yaxis.hoverformat`.
+                format/tree/v2.2.3#locale_format. We add two
+                items to d3's date formatter: "%h" for half of
+                the year as a decimal number as well as "%{n}f"
+                for fractional seconds with n digits. For
+                example, *2016-10-13 09:15:23.456* with
+                tickformat "%H~%M~%S.%2f" would display
+                *09~15~23.46*By default the values are
+                formatted using `yaxis.hoverformat`.
 """,
             ),
             **kwargs

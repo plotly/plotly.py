@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
 
+### Updated
+
+- Updated Plotly.js to from version 2.2.0 to version 2.3.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#231----2021-07-30) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - new projections in `geo` subplots from a more recent version of d3-geo
+  - new number-formatting directives from a more recent version of d3-format
+  - performance improvements and bug fixes
 
 ### Added
   - Extra flags were added to the `gapminder` and `stocks` dataset to facilitate testing, documentation and demos [#3305](https://github.com/plotly/plotly.py/issues/3305)

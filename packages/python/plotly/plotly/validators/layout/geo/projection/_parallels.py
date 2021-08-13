@@ -12,8 +12,8 @@ class ParallelsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
+                    {"editType": "plot", "valType": "number"},
+                    {"editType": "plot", "valType": "number"},
                 ],
             ),
             **kwargs

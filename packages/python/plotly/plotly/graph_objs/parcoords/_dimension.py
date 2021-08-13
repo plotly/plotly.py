@@ -39,16 +39,12 @@ class Dimension(_BaseTraceHierarchyType):
         The 'constraintrange' property is an info array that may be specified as:
     
         * a list or tuple of 2 elements where:
-    (0) The 'constraintrange[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'constraintrange[1]' property is a number and may be specified as:
-          - An int or float
+    (0) The 'constraintrange[0]' property accepts values of any type
+    (1) The 'constraintrange[1]' property accepts values of any type
     
         * a 2D list where:
-    (0) The 'constraintrange[i][0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'constraintrange[i][1]' property is a number and may be specified as:
-          - An int or float
+    (0) The 'constraintrange[i][0]' property accepts values of any type
+    (1) The 'constraintrange[i][1]' property accepts values of any type
 
         Returns
         -------
@@ -190,13 +186,14 @@ class Dimension(_BaseTraceHierarchyType):
         """
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Formatting.md#d3_format. And for dates
-        see: https://github.com/d3/d3-time-format#locale_format. We add
-        two items to d3's date formatter: "%h" for half of the year as
-        a decimal number as well as "%{n}f" for fractional seconds with
-        n digits. For example, *2016-10-13 09:15:23.456* with
-        tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
+        numbers, see:
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
+        dates see: https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format. We add two items to d3's date
+        formatter: "%h" for half of the year as a decimal number as
+        well as "%{n}f" for fractional seconds with n digits. For
+        example, *2016-10-13 09:15:23.456* with tickformat
+        "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -401,14 +398,14 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`.
@@ -505,14 +502,14 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. For numbers, see:
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Formatting.md#d3_format. And for
-            dates see: https://github.com/d3/d3-time-
-            format#locale_format. We add two items to d3's date
-            formatter: "%h" for half of the year as a decimal
-            number as well as "%{n}f" for fractional seconds with n
-            digits. For example, *2016-10-13 09:15:23.456* with
-            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`.

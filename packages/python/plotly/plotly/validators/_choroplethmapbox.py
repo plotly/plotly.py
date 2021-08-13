@@ -48,10 +48,10 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
-                palette name string of the following list: Grey
-                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
-                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
-                ,Electric,Viridis,Cividis.
+                palette name string of the following list: Blac
+                kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
+                ns,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,R
+                eds,Viridis,YlGnBu,YlOrRd.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -100,17 +100,16 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. Dates are
-                formatted using d3-time-format's syntax
-                %{variable|d3-time-format}, for example "Day:
-                %{2019-01-01|%A}".
+                %{y:$.2f}". https://github.com/d3/d3-format/tre
+                e/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
                 https://github.com/d3/d3-time-
-                format#locale_format for details on the date
-                formatting syntax. The variables available in
-                `hovertemplate` are the ones emitted as event
-                data described at this link
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. The variables
+                available in `hovertemplate` are the ones
+                emitted as event data described at this link
                 https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
