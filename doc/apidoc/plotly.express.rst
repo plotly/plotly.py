@@ -32,6 +32,7 @@ plotly's high-level API for rapid figure generation. ::
     bar_polar
     violin
     box
+    ecdf
     strip
     histogram
     pie
