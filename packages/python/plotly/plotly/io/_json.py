@@ -462,7 +462,7 @@ def clean_to_json_compatible(obj, **kwargs):
         return obj
 
     if isinstance(obj, dict):
-        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+        return {str(k): clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
     elif isinstance(obj, (list, tuple)):
         if obj:
             # Must process list recursively even though it may be slow
