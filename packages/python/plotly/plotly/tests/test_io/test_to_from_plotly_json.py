@@ -209,3 +209,9 @@ def test_object_array(engine, pretty):
     fig = px.scatter(px.data.tips(), x="total_bill", y="tip", custom_data=["sex"])
     result = fig.to_plotly_json()
     check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_nonstring_key(engine, pretty):
+    value = build_test_dict({0: 1})
+    result = pio.to_json_plotly(value, engine=engine)
+    check_roundtrip(result, engine=engine, pretty=pretty)
