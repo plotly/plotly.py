@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.2] - ???
+
+### Fixed
+  - Fixed error when using the orjson engine with non-string keys  
+
 ## [5.2.1] - 2021-08-13
 
 ### Updated
