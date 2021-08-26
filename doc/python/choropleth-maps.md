@@ -110,7 +110,7 @@ fig.show()
 
 ### Indexing by GeoJSON Properties
 
-If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
+If the GeoJSON you are using either does not have an `id` field or you wish to use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
 
 In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
 
