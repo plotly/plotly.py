@@ -20,9 +20,9 @@ class Unselected(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.choroplethmapbox.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 opacity
                     Sets the marker opacity of unselected points,
                     applied only when a selection exists.
@@ -50,7 +50,7 @@ class Unselected(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Unselected object
-
+        
         Parameters
         ----------
         arg

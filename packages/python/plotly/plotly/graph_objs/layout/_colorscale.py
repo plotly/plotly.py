@@ -17,7 +17,7 @@ class Colorscale(_BaseLayoutHierarchyType):
         """
         Sets the default diverging colorscale. Note that
         `autocolorscale` must be true for this attribute to work.
-
+    
         The 'diverging' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -63,7 +63,7 @@ class Colorscale(_BaseLayoutHierarchyType):
         Sets the default sequential colorscale for positive values.
         Note that `autocolorscale` must be true for this attribute to
         work.
-
+    
         The 'sequential' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -109,7 +109,7 @@ class Colorscale(_BaseLayoutHierarchyType):
         Sets the default sequential colorscale for negative values.
         Note that `autocolorscale` must be true for this attribute to
         work.
-
+    
         The 'sequentialminus' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -171,7 +171,7 @@ class Colorscale(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Colorscale object
-
+        
         Parameters
         ----------
         arg
