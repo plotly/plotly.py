@@ -21,19 +21,26 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend.
             font
                 Sets the font used to text the legend items.
+            groupclick
+                Determines the behavior on legend group item
+                click. "toggleitem" toggles the visibility of
+                the individual item clicked on the graph.
+                "togglegroup" toggles the visibility of all
+                items in the same legendgroup as the item
+                clicked on the graph.
             itemclick
                 Determines the behavior on legend item click.
                 "toggle" toggles the visibility of the item
                 clicked on the graph. "toggleothers" makes the
                 clicked item the sole visible item on the
-                graph. False disable legend item click
+                graph. False disables legend item click
                 interactions.
             itemdoubleclick
                 Determines the behavior on legend item double-
                 click. "toggle" toggles the visibility of the
                 item clicked on the graph. "toggleothers" makes
                 the clicked item the sole visible item on the
-                graph. False disable legend item double-click
+                graph. False disables legend item double-click
                 interactions.
             itemsizing
                 Determines if the legend items symbols scale

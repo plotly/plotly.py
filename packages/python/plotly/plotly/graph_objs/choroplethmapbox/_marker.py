@@ -20,9 +20,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.choroplethmapbox.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets themarker.linecolor. It accepts either a
                     specific color or an array of numbers that are
@@ -56,7 +56,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the opacity of the locations.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -77,7 +77,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacitysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  opacity .
-    
+
         The 'opacitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -109,7 +109,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg

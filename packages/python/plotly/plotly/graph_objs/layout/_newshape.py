@@ -28,7 +28,7 @@ class Newshape(_BaseLayoutHierarchyType):
         lines in any direction. "ortho" limits the draw to be either
         horizontal or vertical. "horizontal" allows horizontal extend.
         "vertical" allows vertical extend.
-    
+
         The 'drawdirection' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['ortho', 'horizontal', 'vertical', 'diagonal']
@@ -52,7 +52,7 @@ class Newshape(_BaseLayoutHierarchyType):
         if using a fillcolor with alpha greater than half, drag inside
         the active shape starts moving the shape underneath, otherwise
         a new shape could be started over.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -113,7 +113,7 @@ class Newshape(_BaseLayoutHierarchyType):
         Determines the path's interior. For more info please visit
         https://developer.mozilla.org/en-
         US/docs/Web/SVG/Attribute/fill-rule
-    
+
         The 'fillrule' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['evenodd', 'nonzero']
@@ -134,7 +134,7 @@ class Newshape(_BaseLayoutHierarchyType):
     def layer(self):
         """
         Specifies whether new shapes are drawn below or above traces.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['below', 'above']
@@ -159,9 +159,9 @@ class Newshape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.newshape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color. By default uses either
                     dark grey or white to increase contrast with
@@ -190,7 +190,7 @@ class Newshape(_BaseLayoutHierarchyType):
     def opacity(self):
         """
         Sets the opacity of new shapes.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -250,7 +250,7 @@ class Newshape(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Newshape object
-        
+
         Parameters
         ----------
         arg

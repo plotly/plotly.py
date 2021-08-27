@@ -19,7 +19,7 @@ class Line(_BaseTraceHierarchyType):
         an array of numbers that are mapped to the colorscale relative
         to the max and min values of the array or relative to
         `marker.line.cmin` and `marker.line.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,7 +79,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the border line color of the outlier sample points.
         Defaults to marker.color
-    
+
         The 'outliercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -139,7 +139,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the border line width (in px) of the outlier sample
         points.
-    
+
         The 'outlierwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -159,7 +159,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width (in px) of the lines bounding the marker points.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -206,7 +206,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg

@@ -15,6 +15,7 @@ if sys.version_info < (3, 7):
     from ._itemsizing import ItemsizingValidator
     from ._itemdoubleclick import ItemdoubleclickValidator
     from ._itemclick import ItemclickValidator
+    from ._groupclick import GroupclickValidator
     from ._font import FontValidator
     from ._borderwidth import BorderwidthValidator
     from ._bordercolor import BordercolorValidator
@@ -40,6 +41,7 @@ else:
             "._itemsizing.ItemsizingValidator",
             "._itemdoubleclick.ItemdoubleclickValidator",
             "._itemclick.ItemclickValidator",
+            "._groupclick.GroupclickValidator",
             "._font.FontValidator",
             "._borderwidth.BorderwidthValidator",
             "._bordercolor.BordercolorValidator",
