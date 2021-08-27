@@ -41,7 +41,7 @@ class Indicator(_BaseTraceType):
         Sets the horizontal alignment of the `text` within the box.
         Note that this attribute has no effect if an angular gauge is
         displayed: in this case, it is always centered
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -65,7 +65,7 @@ class Indicator(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -86,7 +86,7 @@ class Indicator(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -110,9 +110,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Delta`
           - A dict of string/value properties that will be passed
             to the Delta constructor
-    
+
             Supported dict properties:
-                
+
                 decreasing
                     :class:`plotly.graph_objects.indicator.delta.De
                     creasing` instance or dict with compatible
@@ -158,9 +158,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this indicator
@@ -191,15 +191,15 @@ class Indicator(_BaseTraceType):
     def gauge(self):
         """
         The gauge of the Indicator plot.
-    
+
         The 'gauge' property is an instance of Gauge
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.Gauge`
           - A dict of string/value properties that will be passed
             to the Gauge constructor
-    
+
             Supported dict properties:
-                
+
                 axis
                     :class:`plotly.graph_objects.indicator.gauge.Ax
                     is` instance or dict with compatible properties
@@ -247,7 +247,7 @@ class Indicator(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -267,7 +267,7 @@ class Indicator(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -291,9 +291,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -320,7 +320,7 @@ class Indicator(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -349,7 +349,7 @@ class Indicator(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -368,7 +368,7 @@ class Indicator(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -391,7 +391,7 @@ class Indicator(_BaseTraceType):
         displays the value numerically in text. `delta` displays the
         difference to a reference value in text. Finally, `gauge`
         displays the value graphically on an axis.
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['number', 'delta', 'gauge'] joined with '+' characters
@@ -414,7 +414,7 @@ class Indicator(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -439,9 +439,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Number`
           - A dict of string/value properties that will be passed
             to the Number constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Set the font used to display main number
                 prefix
@@ -475,9 +475,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -508,9 +508,9 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the title. It
                     defaults to `center` except for bullet charts
@@ -537,7 +537,7 @@ class Indicator(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -572,7 +572,7 @@ class Indicator(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -591,7 +591,7 @@ class Indicator(_BaseTraceType):
     def value(self):
         """
         Sets the number to be displayed.
-    
+
         The 'value' property is a number and may be specified as:
           - An int or float
 
@@ -613,7 +613,7 @@ class Indicator(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -771,7 +771,7 @@ class Indicator(_BaseTraceType):
     ):
         """
         Construct a new Indicator object
-        
+
         An indicator is used to visualize a single `value` along with
         some contextual information such as `steps` or a `threshold`,
         using a combination of three visual elements: a number, a

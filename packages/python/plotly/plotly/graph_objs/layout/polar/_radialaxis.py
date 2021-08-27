@@ -71,7 +71,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         line corresponds to a line pointing right (like what
         mathematicians prefer). Defaults to the first `polar.sector`
         angle.
-    
+
         The 'angle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -95,7 +95,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
         `range` is provided, then `autorange` is set to False.
-    
+
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'reversed']
@@ -119,7 +119,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         to a number. Using *convert types* a numeric string in trace
         data may be treated as a number during automatic axis `type`
         detection. Defaults to layout.autotypenumbers.
-    
+
         The 'autotypenumbers' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['convert types', 'strict']
@@ -143,7 +143,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         is a date axis. This does not set the calendar for interpreting
         data on this axis, that's specified in the trace or via the
         global `layout.calendar`
-    
+
         The 'calendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -169,7 +169,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the order in which categories on this axis appear. Only
         has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
-    
+
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -190,7 +190,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         categoryarray .
-    
+
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -224,7 +224,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         numerical order of the values. Similarly, the order can be
         determined by the min, max, sum, mean or median of all the
         values.
-    
+
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
@@ -253,7 +253,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -331,7 +331,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -354,7 +354,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -375,7 +375,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the color of the grid lines.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -434,7 +434,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def gridwidth(self):
         """
         Sets the width (in px) of the grid lines.
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -463,7 +463,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'hoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -489,7 +489,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         subplot's traces, but above the grid lines. Useful when used
         together with scatter-like traces with `cliponaxis` set to
         False to show markers and/or text nodes above this axis.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['above traces', 'below traces']
@@ -510,7 +510,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def linecolor(self):
         """
         Sets the axis line color.
-    
+
         The 'linecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -569,7 +569,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def linewidth(self):
         """
         Sets the width (in px) of the axis line.
-    
+
         The 'linewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -590,7 +590,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -613,7 +613,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -633,24 +633,24 @@ class RadialAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is "log", then
-        you must take the log of your desired range (e.g. to set the
-        range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is "date", it should be date strings, like date data,
-        though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is "category", it
-        should be numbers, using the scale where each category is
-        assigned a serial number from zero in the order it appears.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            Sets the range of this axis. If the axis `type` is "log", then
+            you must take the log of your desired range (e.g. to set the
+            range from 1 to 100, set the range from 0 to 2). If the axis
+            `type` is "date", it should be date strings, like date data,
+            though Date objects and unix milliseconds will be accepted and
+            converted to strings. If the axis `type` is "category", it
+            should be numbers, using the scale where each category is
+            assigned a serial number from zero in the order it appears.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -668,7 +668,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         the input data. If "normal", the range is computed in relation
         to the extrema of the input data (same behavior as for
         cartesian axes).
-    
+
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['tozero', 'nonnegative', 'normal']
@@ -689,7 +689,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -712,7 +712,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -734,7 +734,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -754,7 +754,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def showline(self):
         """
         Determines whether or not a line bounding this axis is drawn.
-    
+
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -774,7 +774,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -797,7 +797,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -818,7 +818,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -840,7 +840,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Determines on which side of radial axis line the tick and tick
         labels appear.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['clockwise', 'counterclockwise']
@@ -869,7 +869,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -890,7 +890,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -912,7 +912,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -971,17 +971,17 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def tickfont(self):
         """
         Sets the tick font.
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1026,7 +1026,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1051,9 +1051,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.polar.radialaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -1106,13 +1106,13 @@ class RadialAxis(_BaseLayoutHierarchyType):
         When used in a template (as layout.template.layout.polar.radial
         axis.tickformatstopdefaults), sets the default property values
         to use for elements of layout.polar.radialaxis.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1131,7 +1131,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1157,7 +1157,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
-    
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'linear', 'array']
@@ -1178,7 +1178,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1201,7 +1201,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -1222,7 +1222,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1245,7 +1245,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1265,7 +1265,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def ticktextsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ticktext .
-    
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1286,7 +1286,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1306,7 +1306,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def tickvalssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  tickvals .
-    
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1326,7 +1326,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1350,9 +1350,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this axis' title font. Note that the
                     title's font used to be customized by the now
@@ -1383,17 +1383,17 @@ class RadialAxis(_BaseLayoutHierarchyType):
         instead. Sets this axis' title font. Note that the title's font
         used to be customized by the now deprecated `titlefont`
         attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.polar.radialaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1415,7 +1415,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        
+
         """
         return self["titlefont"]
 
@@ -1431,7 +1431,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the axis type. By default, plotly attempts to determined
         the axis type by looking into the data of the traces that
         referenced the axis in question.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['-', 'linear', 'log', 'date', 'category']
@@ -1454,7 +1454,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Controls persistence of user-driven changes in axis `range`,
         `autorange`, `angle`, and `title` if in `editable: true`
         configuration. Defaults to `polar<N>.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1475,7 +1475,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -1812,7 +1812,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new RadialAxis object
-        
+
         Parameters
         ----------
         arg

@@ -68,7 +68,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -91,7 +91,7 @@ class Scatterpolargl(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -112,7 +112,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -132,7 +132,7 @@ class Scatterpolargl(_BaseTraceType):
     def dr(self):
         """
         Sets the r coordinate step.
-    
+
         The 'dr' property is a number and may be specified as:
           - An int or float
 
@@ -154,7 +154,7 @@ class Scatterpolargl(_BaseTraceType):
         Sets the theta coordinate step. By default, the `dtheta` step
         equals the subplot's period divided by the length of the `r`
         coordinates.
-    
+
         The 'dtheta' property is a number and may be specified as:
           - An int or float
 
@@ -192,7 +192,7 @@ class Scatterpolargl(_BaseTraceType):
         `stackgroup`s or some traces stacked and some not, if fill-
         linked traces are not already consecutive, the later ones will
         be pushed down in the drawing order.
-    
+
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx',
@@ -216,7 +216,7 @@ class Scatterpolargl(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -277,7 +277,7 @@ class Scatterpolargl(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['r', 'theta', 'text', 'name'] joined with '+' characters
@@ -302,7 +302,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -326,9 +326,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -403,7 +403,7 @@ class Scatterpolargl(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -426,7 +426,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -450,7 +450,7 @@ class Scatterpolargl(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -473,7 +473,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -495,7 +495,7 @@ class Scatterpolargl(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -515,7 +515,7 @@ class Scatterpolargl(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -537,7 +537,7 @@ class Scatterpolargl(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -562,9 +562,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -591,7 +591,7 @@ class Scatterpolargl(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -615,9 +615,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -648,9 +648,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -801,7 +801,7 @@ class Scatterpolargl(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -820,7 +820,7 @@ class Scatterpolargl(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -845,7 +845,7 @@ class Scatterpolargl(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -869,7 +869,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -890,7 +890,7 @@ class Scatterpolargl(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -910,7 +910,7 @@ class Scatterpolargl(_BaseTraceType):
     def r(self):
         """
         Sets the radial coordinates
-    
+
         The 'r' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -932,7 +932,7 @@ class Scatterpolargl(_BaseTraceType):
         Alternate to `r`. Builds a linear space of r coordinates. Use
         with `dr` where `r0` is the starting coordinate and `dr` the
         step.
-    
+
         The 'r0' property accepts values of any type
 
         Returns
@@ -951,7 +951,7 @@ class Scatterpolargl(_BaseTraceType):
     def rsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  r .
-    
+
         The 'rsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -975,9 +975,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scatterpolargl.sel
                     ected.Marker` instance or dict with compatible
@@ -1008,7 +1008,7 @@ class Scatterpolargl(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1028,7 +1028,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1052,9 +1052,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1084,7 +1084,7 @@ class Scatterpolargl(_BaseTraceType):
         polar subplot. If "polar" (the default value), the data refer
         to `layout.polar`. If "polar2", the data refer to
         `layout.polar2`, and so on.
-    
+
         The 'subplot' property is an identifier of a particular
         subplot, of type 'polar', that may be specified as the string 'polar'
         optionally followed by an integer >= 1
@@ -1111,7 +1111,7 @@ class Scatterpolargl(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1133,17 +1133,17 @@ class Scatterpolargl(_BaseTraceType):
     def textfont(self):
         """
         Sets the text font.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1168,7 +1168,7 @@ class Scatterpolargl(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -1190,7 +1190,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1215,7 +1215,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         textposition .
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1235,7 +1235,7 @@ class Scatterpolargl(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1267,7 +1267,7 @@ class Scatterpolargl(_BaseTraceType):
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         variables `r`, `theta` and `text`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1290,7 +1290,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         texttemplate .
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1310,7 +1310,7 @@ class Scatterpolargl(_BaseTraceType):
     def theta(self):
         """
         Sets the angular coordinates
-    
+
         The 'theta' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1332,7 +1332,7 @@ class Scatterpolargl(_BaseTraceType):
         Alternate to `theta`. Builds a linear space of theta
         coordinates. Use with `dtheta` where `theta0` is the starting
         coordinate and `dtheta` the step.
-    
+
         The 'theta0' property accepts values of any type
 
         Returns
@@ -1351,7 +1351,7 @@ class Scatterpolargl(_BaseTraceType):
     def thetasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  theta .
-    
+
         The 'thetasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1372,7 +1372,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the unit of input "theta" values. Has an effect only when
         on "linear" angular axes.
-    
+
         The 'thetaunit' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['radians', 'degrees', 'gradians']
@@ -1394,7 +1394,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1429,7 +1429,7 @@ class Scatterpolargl(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1452,9 +1452,9 @@ class Scatterpolargl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scatterpolargl.uns
                     elected.Marker` instance or dict with
@@ -1482,7 +1482,7 @@ class Scatterpolargl(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1828,7 +1828,7 @@ class Scatterpolargl(_BaseTraceType):
     ):
         """
         Construct a new Scatterpolargl object
-        
+
         The scatterpolargl trace type encompasses line charts, scatter
         charts, and bubble charts in polar coordinates using the WebGL
         plotting engine. The data visualized as scatter point or lines

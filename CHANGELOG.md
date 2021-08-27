@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+
+- Updated Plotly.js to from version 2.3.1 to version 2.4.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#240----2021-08-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Added `legend.groupclick` options
+  - Provide bbox of hover items in event data
+
 ## [5.2.2] - 2021-08-23
 
 ### Fixed

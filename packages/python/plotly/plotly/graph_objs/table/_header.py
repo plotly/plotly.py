@@ -34,7 +34,7 @@ class Header(_BaseTraceHierarchyType):
         an effect only if `text` spans two or more lines (i.e. `text`
         contains one or more <br> HTML tags) or if an explicit width is
         set to override the text width.
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -56,7 +56,7 @@ class Header(_BaseTraceHierarchyType):
     def alignsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  align .
-    
+
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -80,9 +80,9 @@ class Header(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.header.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the cell fill color. It accepts either a
                     specific color or an array of colors or a 2D
@@ -111,11 +111,11 @@ class Header(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.header.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -140,7 +140,7 @@ class Header(_BaseTraceHierarchyType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -164,7 +164,7 @@ class Header(_BaseTraceHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-    
+
         The 'format' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -184,7 +184,7 @@ class Header(_BaseTraceHierarchyType):
     def formatsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  format .
-    
+
         The 'formatsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -204,7 +204,7 @@ class Header(_BaseTraceHierarchyType):
     def height(self):
         """
         The height of cells.
-    
+
         The 'height' property is a number and may be specified as:
           - An int or float
 
@@ -228,16 +228,16 @@ class Header(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.header.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
                 width
-    
+
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
                     for  width .
@@ -258,7 +258,7 @@ class Header(_BaseTraceHierarchyType):
     def prefix(self):
         """
         Prefix for cell values.
-    
+
         The 'prefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -280,7 +280,7 @@ class Header(_BaseTraceHierarchyType):
     def prefixsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  prefix .
-    
+
         The 'prefixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -300,7 +300,7 @@ class Header(_BaseTraceHierarchyType):
     def suffix(self):
         """
         Suffix for cell values.
-    
+
         The 'suffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -322,7 +322,7 @@ class Header(_BaseTraceHierarchyType):
     def suffixsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  suffix .
-    
+
         The 'suffixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -345,7 +345,7 @@ class Header(_BaseTraceHierarchyType):
         `n`th point in column `m`, therefore the `values[m]` vector
         length for all columns must be the same (longer vectors will be
         truncated). Each value must be a finite number or a string.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -365,7 +365,7 @@ class Header(_BaseTraceHierarchyType):
     def valuessrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  values .
-    
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -454,7 +454,7 @@ class Header(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Header object
-        
+
         Parameters
         ----------
         arg

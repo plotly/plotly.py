@@ -2683,8 +2683,18 @@
       "valType": "number"
      }
     },
+    "groupclick": {
+     "description": "Determines the behavior on legend group item click. *toggleitem* toggles the visibility of the individual item clicked on the graph. *togglegroup* toggles the visibility of all items in the same legendgroup as the item clicked on the graph.",
+     "dflt": "togglegroup",
+     "editType": "legend",
+     "valType": "enumerated",
+     "values": [
+      "toggleitem",
+      "togglegroup"
+     ]
+    },
     "itemclick": {
-     "description": "Determines the behavior on legend item click. *toggle* toggles the visibility of the item clicked on the graph. *toggleothers* makes the clicked item the sole visible item on the graph. *false* disable legend item click interactions.",
+     "description": "Determines the behavior on legend item click. *toggle* toggles the visibility of the item clicked on the graph. *toggleothers* makes the clicked item the sole visible item on the graph. *false* disables legend item click interactions.",
      "dflt": "toggle",
      "editType": "legend",
      "valType": "enumerated",
@@ -2695,7 +2705,7 @@
      ]
     },
     "itemdoubleclick": {
-     "description": "Determines the behavior on legend item double-click. *toggle* toggles the visibility of the item clicked on the graph. *toggleothers* makes the clicked item the sole visible item on the graph. *false* disable legend item double-click interactions.",
+     "description": "Determines the behavior on legend item double-click. *toggle* toggles the visibility of the item clicked on the graph. *toggleothers* makes the clicked item the sole visible item on the graph. *false* disables legend item double-click interactions.",
      "dflt": "toggleothers",
      "editType": "legend",
      "valType": "enumerated",

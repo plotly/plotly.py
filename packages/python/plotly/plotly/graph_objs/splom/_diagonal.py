@@ -17,7 +17,7 @@ class Diagonal(_BaseTraceHierarchyType):
         """
         Determines whether or not subplots on the diagonal are
         displayed.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -44,7 +44,7 @@ class Diagonal(_BaseTraceHierarchyType):
     def __init__(self, arg=None, visible=None, **kwargs):
         """
         Construct a new Diagonal object
-        
+
         Parameters
         ----------
         arg
