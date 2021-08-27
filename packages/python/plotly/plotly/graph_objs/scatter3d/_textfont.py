@@ -74,7 +74,7 @@ class Textfont(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  color .
-
+    
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -105,7 +105,7 @@ class Textfont(_BaseTraceHierarchyType):
         "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
         One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
         Narrow", "Raleway", "Times New Roman".
-
+    
         The 'family' property is a string and must be specified as:
           - A non-empty string
 
@@ -144,7 +144,7 @@ class Textfont(_BaseTraceHierarchyType):
     def sizesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  size .
-
+    
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -201,7 +201,7 @@ class Textfont(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Textfont object
-
+        
         Parameters
         ----------
         arg

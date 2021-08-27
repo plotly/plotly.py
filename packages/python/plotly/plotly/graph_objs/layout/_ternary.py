@@ -20,9 +20,9 @@ class Ternary(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -254,9 +254,9 @@ class Ternary(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.ternary.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -484,7 +484,7 @@ class Ternary(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Set the background color of the subplot
-
+    
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -547,9 +547,9 @@ class Ternary(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.ternary.Caxis`
           - A dict of string/value properties that will be passed
             to the Caxis constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -781,9 +781,9 @@ class Ternary(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.ternary.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
+    
             Supported dict properties:
-
+                
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this ternary
@@ -815,7 +815,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The number each triplet should sum to, and the maximum range of
         each axis
-
+    
         The 'sum' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -837,7 +837,7 @@ class Ternary(_BaseLayoutHierarchyType):
         Controls persistence of user-driven changes in axis `min` and
         `title`, if not overridden in the individual axes. Defaults to
         `layout.uirevision`.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -892,7 +892,7 @@ class Ternary(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Ternary object
-
+        
         Parameters
         ----------
         arg

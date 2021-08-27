@@ -57,7 +57,7 @@ class Image(_BaseTraceType):
         described in `z` into colors. If `source` is specified, this
         attribute will be set to `rgba256` otherwise it defaults to
         `rgb`.
-
+    
         The 'colormodel' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['rgb', 'rgba', 'rgba256', 'hsl', 'hsla']
@@ -81,7 +81,7 @@ class Image(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -102,7 +102,7 @@ class Image(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -122,7 +122,7 @@ class Image(_BaseTraceType):
     def dx(self):
         """
         Set the pixel's horizontal size.
-
+    
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -142,7 +142,7 @@ class Image(_BaseTraceType):
     def dy(self):
         """
         Set the pixel's vertical size
-
+    
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -164,7 +164,7 @@ class Image(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'color', 'name', 'text'] joined with '+' characters
@@ -189,7 +189,7 @@ class Image(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -213,9 +213,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -291,7 +291,7 @@ class Image(_BaseTraceType):
         `<extra>` is displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-
+    
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -314,7 +314,7 @@ class Image(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-
+    
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -334,7 +334,7 @@ class Image(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-
+    
         The 'hovertext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -355,7 +355,7 @@ class Image(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-
+    
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -377,7 +377,7 @@ class Image(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -397,7 +397,7 @@ class Image(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -421,9 +421,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
+    
             Supported dict properties:
-
+                
                 font
                     Sets this legend group's title font.
                 text
@@ -450,7 +450,7 @@ class Image(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-
+    
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -479,7 +479,7 @@ class Image(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -498,7 +498,7 @@ class Image(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -519,7 +519,7 @@ class Image(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -540,7 +540,7 @@ class Image(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -561,7 +561,7 @@ class Image(_BaseTraceType):
         """
         Specifies the data URI of the image to be visualized. The URI
         consists of "data:image/[<media subtype>][;base64],<data>"
-
+    
         The 'source' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -586,9 +586,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -615,7 +615,7 @@ class Image(_BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value.
-
+    
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -635,7 +635,7 @@ class Image(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-
+    
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -656,7 +656,7 @@ class Image(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -691,7 +691,7 @@ class Image(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -712,7 +712,7 @@ class Image(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -733,7 +733,7 @@ class Image(_BaseTraceType):
     def x0(self):
         """
         Set the image's x position.
-
+    
         The 'x0' property accepts values of any type
 
         Returns
@@ -755,7 +755,7 @@ class Image(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-
+    
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -777,7 +777,7 @@ class Image(_BaseTraceType):
     def y0(self):
         """
         Set the image's y position.
-
+    
         The 'y0' property accepts values of any type
 
         Returns
@@ -799,7 +799,7 @@ class Image(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-
+    
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -822,7 +822,7 @@ class Image(_BaseTraceType):
         """
         A 2-dimensional array in which each element is an array of 3 or
         4 numbers representing a color.
-
+    
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -841,29 +841,29 @@ class Image(_BaseTraceType):
     @property
     def zmax(self):
         """
-            Array defining the higher bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
-            colormodel, it is [255, 255, 255, 1]. For the `rgba256`
-            colormodel, it is [255, 255, 255, 255]. For the `hsl`
-            colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
-            it is [360, 100, 100, 1].
+        Array defining the higher bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
+        colormodel, it is [255, 255, 255, 1]. For the `rgba256`
+        colormodel, it is [255, 255, 255, 255]. For the `hsl`
+        colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
+        it is [360, 100, 100, 1].
+    
+        The 'zmax' property is an info array that may be specified as:
+    
+        * a list or tuple of 4 elements where:
+    (0) The 'zmax[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'zmax[1]' property is a number and may be specified as:
+          - An int or float
+    (2) The 'zmax[2]' property is a number and may be specified as:
+          - An int or float
+    (3) The 'zmax[3]' property is a number and may be specified as:
+          - An int or float
 
-            The 'zmax' property is an info array that may be specified as:
-
-            * a list or tuple of 4 elements where:
-        (0) The 'zmax[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmax[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmax[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmax[3]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
         return self["zmax"]
 
@@ -876,28 +876,28 @@ class Image(_BaseTraceType):
     @property
     def zmin(self):
         """
-            Array defining the lower bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
-            it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
-            0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
-            `hsla` colormodel, it is [0, 0, 0, 0].
+        Array defining the lower bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
+        it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
+        0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
+        `hsla` colormodel, it is [0, 0, 0, 0].
+    
+        The 'zmin' property is an info array that may be specified as:
+    
+        * a list or tuple of 4 elements where:
+    (0) The 'zmin[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'zmin[1]' property is a number and may be specified as:
+          - An int or float
+    (2) The 'zmin[2]' property is a number and may be specified as:
+          - An int or float
+    (3) The 'zmin[3]' property is a number and may be specified as:
+          - An int or float
 
-            The 'zmin' property is an info array that may be specified as:
-
-            * a list or tuple of 4 elements where:
-        (0) The 'zmin[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmin[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmin[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmin[3]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
         return self["zmin"]
 
@@ -912,7 +912,7 @@ class Image(_BaseTraceType):
         """
         Picks a smoothing algorithm used to smooth `z` data. This only
         applies for image traces that use the `source` attribute.
-
+    
         The 'zsmooth' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fast', False]
@@ -933,7 +933,7 @@ class Image(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-
+    
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1187,7 +1187,7 @@ class Image(_BaseTraceType):
     ):
         """
         Construct a new Image object
-
+        
         Display an image, i.e. data on a 2D regular raster. By default,
         when an image is displayed in a subplot, its y axis will be
         reversed (ie. `autorange: 'reversed'`), constrained to the

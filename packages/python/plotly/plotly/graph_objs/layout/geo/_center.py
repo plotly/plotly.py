@@ -18,7 +18,7 @@ class Center(_BaseLayoutHierarchyType):
         Sets the latitude of the map's center. For all projection
         types, the map's latitude center lies at the middle of the
         latitude range by default.
-
+    
         The 'lat' property is a number and may be specified as:
           - An int or float
 
@@ -41,7 +41,7 @@ class Center(_BaseLayoutHierarchyType):
         longitude center lies at the middle of the longitude range for
         scoped projection and above `projection.rotation.lon`
         otherwise.
-
+    
         The 'lon' property is a number and may be specified as:
           - An int or float
 
@@ -74,7 +74,7 @@ class Center(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, lat=None, lon=None, **kwargs):
         """
         Construct a new Center object
-
+        
         Parameters
         ----------
         arg

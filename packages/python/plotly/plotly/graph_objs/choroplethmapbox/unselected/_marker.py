@@ -17,7 +17,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the marker opacity of unselected points, applied only when
         a selection exists.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -44,7 +44,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, opacity=None, **kwargs):
         """
         Construct a new Marker object
-
+        
         Parameters
         ----------
         arg

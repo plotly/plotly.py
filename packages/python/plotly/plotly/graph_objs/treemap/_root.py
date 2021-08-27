@@ -18,7 +18,7 @@ class Root(_BaseTraceHierarchyType):
         sets the color of the root node for a sunburst/treemap/icicle
         trace. this has no effect when a colorscale is used to set the
         markers.
-
+    
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -85,7 +85,7 @@ class Root(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Root object
-
+        
         Parameters
         ----------
         arg

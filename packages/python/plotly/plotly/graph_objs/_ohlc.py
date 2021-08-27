@@ -64,7 +64,7 @@ class Ohlc(_BaseTraceType):
     def close(self):
         """
         Sets the close values.
-
+    
         The 'close' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -84,7 +84,7 @@ class Ohlc(_BaseTraceType):
     def closesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  close .
-
+    
         The 'closesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -107,7 +107,7 @@ class Ohlc(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -128,7 +128,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -152,9 +152,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
-
+    
             Supported dict properties:
-
+                
                 line
                     :class:`plotly.graph_objects.ohlc.decreasing.Li
                     ne` instance or dict with compatible properties
@@ -175,7 +175,7 @@ class Ohlc(_BaseTraceType):
     def high(self):
         """
         Sets the high values.
-
+    
         The 'high' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -195,7 +195,7 @@ class Ohlc(_BaseTraceType):
     def highsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  high .
-
+    
         The 'highsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -217,7 +217,7 @@ class Ohlc(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -242,7 +242,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -266,9 +266,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -324,7 +324,7 @@ class Ohlc(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-
+    
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -347,7 +347,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-
+    
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -369,7 +369,7 @@ class Ohlc(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -389,7 +389,7 @@ class Ohlc(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -413,9 +413,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
-
+    
             Supported dict properties:
-
+                
                 line
                     :class:`plotly.graph_objects.ohlc.increasing.Li
                     ne` instance or dict with compatible properties
@@ -438,7 +438,7 @@ class Ohlc(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-
+    
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -463,9 +463,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
+    
             Supported dict properties:
-
+                
                 font
                     Sets this legend group's title font.
                 text
@@ -492,7 +492,7 @@ class Ohlc(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-
+    
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -516,9 +516,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
+    
             Supported dict properties:
-
+                
                 dash
                     Sets the dash style of lines. Set to a dash
                     type string ("solid", "dot", "dash",
@@ -549,7 +549,7 @@ class Ohlc(_BaseTraceType):
     def low(self):
         """
         Sets the low values.
-
+    
         The 'low' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -569,7 +569,7 @@ class Ohlc(_BaseTraceType):
     def lowsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  low .
-
+    
         The 'lowsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -598,7 +598,7 @@ class Ohlc(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -617,7 +617,7 @@ class Ohlc(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -638,7 +638,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -659,7 +659,7 @@ class Ohlc(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -679,7 +679,7 @@ class Ohlc(_BaseTraceType):
     def open(self):
         """
         Sets the open values.
-
+    
         The 'open' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -699,7 +699,7 @@ class Ohlc(_BaseTraceType):
     def opensrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  open .
-
+    
         The 'opensrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -724,7 +724,7 @@ class Ohlc(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-
+    
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -744,7 +744,7 @@ class Ohlc(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -768,9 +768,9 @@ class Ohlc(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.ohlc.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -800,7 +800,7 @@ class Ohlc(_BaseTraceType):
         a single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         this trace's sample points.
-
+    
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -822,7 +822,7 @@ class Ohlc(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-
+    
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -843,7 +843,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the width of the open/close tick marks relative to the "x"
         minimal interval.
-
+    
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, 0.5]
 
@@ -864,7 +864,7 @@ class Ohlc(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -899,7 +899,7 @@ class Ohlc(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -920,7 +920,7 @@ class Ohlc(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -942,7 +942,7 @@ class Ohlc(_BaseTraceType):
         """
         Sets the x coordinates. If absent, linear coordinate will be
         generated.
-
+    
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -965,7 +965,7 @@ class Ohlc(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-
+    
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -987,7 +987,7 @@ class Ohlc(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-
+    
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1021,7 +1021,7 @@ class Ohlc(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-
+    
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1045,7 +1045,7 @@ class Ohlc(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the x axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-
+    
         The 'xperiod' property accepts values of any type
 
         Returns
@@ -1068,7 +1068,7 @@ class Ohlc(_BaseTraceType):
         axis. When `x0period` is round number of weeks, the `x0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-
+    
         The 'xperiod0' property accepts values of any type
 
         Returns
@@ -1088,7 +1088,7 @@ class Ohlc(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the x axis.
-
+    
         The 'xperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1109,7 +1109,7 @@ class Ohlc(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-
+    
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1132,7 +1132,7 @@ class Ohlc(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-
+    
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1164,7 +1164,7 @@ class Ohlc(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-
+    
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1452,7 +1452,7 @@ class Ohlc(_BaseTraceType):
     ):
         """
         Construct a new Ohlc object
-
+        
         The ohlc (short for Open-High-Low-Close) is a style of
         financial chart describing open, high, low and close for a
         given `x` coordinate (most likely time). The tip of the lines

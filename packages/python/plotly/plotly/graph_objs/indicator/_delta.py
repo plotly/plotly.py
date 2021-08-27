@@ -28,9 +28,9 @@ class Delta(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the color for increasing value.
                 symbol
@@ -52,17 +52,17 @@ class Delta(_BaseTraceHierarchyType):
     def font(self):
         """
         Set the font used to display the delta
-
+    
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.delta.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -102,9 +102,9 @@ class Delta(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.delta.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the color for increasing value.
                 symbol
@@ -126,7 +126,7 @@ class Delta(_BaseTraceHierarchyType):
     def position(self):
         """
         Sets the position of delta with respect to the number.
-
+    
         The 'position' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'bottom', 'left', 'right']
@@ -148,7 +148,7 @@ class Delta(_BaseTraceHierarchyType):
         """
         Sets the reference value to compute the delta. By default, it
         is set to the current value.
-
+    
         The 'reference' property is a number and may be specified as:
           - An int or float
 
@@ -168,7 +168,7 @@ class Delta(_BaseTraceHierarchyType):
     def relative(self):
         """
         Show relative change
-
+    
         The 'relative' property must be specified as a bool
         (either True, or False)
 
@@ -191,7 +191,7 @@ class Delta(_BaseTraceHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-
+    
         The 'valueformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -247,7 +247,7 @@ class Delta(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Delta object
-
+        
         Parameters
         ----------
         arg

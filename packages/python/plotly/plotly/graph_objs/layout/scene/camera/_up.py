@@ -80,7 +80,7 @@ class Up(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Up object
-
+        
         Sets the (x,y,z) components of the 'up' camera vector. This
         vector determines the up direction of this scene with respect
         to the page. The default is *{x: 0, y: 0, z: 1}* which means

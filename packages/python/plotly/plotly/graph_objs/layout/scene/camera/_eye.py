@@ -80,7 +80,7 @@ class Eye(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Eye object
-
+        
         Sets the (x,y,z) components of the 'eye' camera vector. This
         vector determines the view point about the origin of this
         scene.
