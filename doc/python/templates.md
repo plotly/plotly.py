@@ -93,7 +93,7 @@ for template in ["plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", 
     fig.show()
 ```
 
-#### Specifying a default themes
+#### Specifying default themes
 
 If a theme is not provided to a Plotly Express function or to a graph object figure, then the default theme is used. The default theme starts out as `"plotly"`, but it can be changed by setting the `plotly.io.templates.default` property to the name of a registered theme.
 
