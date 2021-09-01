@@ -68,7 +68,7 @@ $ conda install -c plotly plotly=5.3.1
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
-You'll also likely want `dash` for adding widgets such as sliders, buttons, and dropdowns to your charts (see more below!):
+You'll also likely want `dash` for adding widgets such as sliders, buttons, and dropdowns to your charts (see more below):
 
 ```
 $ pip install dash
@@ -109,6 +109,20 @@ or `conda`:
 
 ```
 $ conda install "jupyterlab>=3" "ipywidgets>=7.6"
+```
+
+You'll ned `jupyter-dash` to add widgets such as sliders, dropdowns, and buttons to Plotly charts in JupyterLab. 
+
+Install [`jupyter-dash`](https://github.com/plotly/jupyter-dash) using `pip`:
+
+```
+$ pip install jupyter-dash
+```
+
+or `conda`:
+
+```
+$ conda install -c conda-forge -c plotly jupyter-dash
 ```
 
 These packages contain everything you need to run JupyterLab...
