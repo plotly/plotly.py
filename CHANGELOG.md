@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+
+- Updated Plotly.js to from version 2.4.1 to version 2.4.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#240----2021-08-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Bug fix for rendering unified hover labels in classic Jupyter Notebooks
+
 ## [5.3.0] - 2021-08-29
 
 ### Updated
