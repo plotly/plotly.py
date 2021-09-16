@@ -38,7 +38,7 @@ def test_deepcopy_figure(fig1):
     fig_copied = copy.deepcopy(fig1)
 
     # Contents should be equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig1)
+    assert fig_copied.to_dict() == fig1.to_dict()
 
     # Identities should be distinct
     assert fig_copied is not fig1
@@ -50,7 +50,7 @@ def test_deepcopy_figure_subplots(fig_subplots):
     fig_copied = copy.deepcopy(fig_subplots)
 
     # Contents should be equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig_subplots)
+    assert fig_copied.to_dict() == fig_subplots.to_dict()
 
     # Subplot metadata should be equal
     assert fig_subplots._grid_ref == fig_copied._grid_ref
@@ -66,7 +66,7 @@ def test_deepcopy_figure_subplots(fig_subplots):
     fig_copied.add_bar(y=[0, 0, 1], row=1, col=2)
 
     # And contents should be still equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig_subplots)
+    assert fig_copied.to_dict() == fig_subplots.to_dict()
 
 
 def test_deepcopy_layout(fig1):
@@ -91,21 +91,21 @@ def test_pickle_figure_round_trip(fig1):
     fig_copied = pickle.loads(pickle.dumps(fig1))
 
     # Contents should be equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig1)
+    assert fig_copied.to_dict() == fig1.to_dict()
 
 
 def test_pickle_figure_subplots_round_trip(fig_subplots):
     fig_copied = pickle.loads(pickle.dumps(fig_subplots))
 
     # Contents should be equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig_subplots)
+    assert fig_copied.to_dict() == fig_subplots.to_dict()
 
     # Should be possible to add new trace to subplot location
     fig_subplots.add_bar(y=[0, 0, 1], row=1, col=2)
     fig_copied.add_bar(y=[0, 0, 1], row=1, col=2)
 
     # And contents should be still equal
-    assert pio.to_json(fig_copied) == pio.to_json(fig_subplots)
+    assert fig_copied.to_dict() == fig_subplots.to_dict()
 
 
 def test_pickle_layout(fig1):

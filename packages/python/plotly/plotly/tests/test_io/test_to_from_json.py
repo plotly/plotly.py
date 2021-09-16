@@ -29,9 +29,8 @@ def fig1(request):
 opts = {
     "separators": (",", ":"),
     "cls": plotly.utils.PlotlyJSONEncoder,
-    "sort_keys": True,
 }
-pretty_opts = {"indent": 2, "cls": plotly.utils.PlotlyJSONEncoder, "sort_keys": True}
+pretty_opts = {"indent": 2, "cls": plotly.utils.PlotlyJSONEncoder}
 
 
 # to_json
