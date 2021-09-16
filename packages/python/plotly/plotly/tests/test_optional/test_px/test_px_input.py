@@ -233,6 +233,19 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
+def test_build_df_protocol():
+    import vaex
+
+    # take out the 'species' columns since the vaex implementation does not cover strings yet
+    iris_pandas = px.data.iris()[["petal_width", "sepal_length"]]
+    iris_vaex = vaex.from_pandas(iris_pandas)
+    args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
+    out = build_dataframe(args, go.Scatter)
+    assert_frame_equal(
+        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+    )
+
+
 def test_timezones():
     df = pd.DataFrame({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
     df["date"] = pd.to_datetime(df["date"])
