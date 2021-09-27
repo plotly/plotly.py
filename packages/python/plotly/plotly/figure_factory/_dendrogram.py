@@ -391,8 +391,8 @@ class _Dendrogram(object):
             except ValueError:
                 y_index = ""
 
-            trace["xaxis"] = "x" + x_index
-            trace["yaxis"] = "y" + y_index
+            trace["xaxis"] = f"x{x_index}"
+            trace["yaxis"] = f"y{y_index}"
 
             trace_list.append(trace)
 
