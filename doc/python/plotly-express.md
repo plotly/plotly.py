@@ -332,7 +332,7 @@ fig = px.violin(df, y="tip", x="smoker", color="sex", box=True, points="all", ho
 fig.show()
 ```
 
-**Read more about [Empirical Cumulative Distribution Function (ECDF) charts](https://plotly.com/python/ecdf-charts/).**
+**Read more about [Empirical Cumulative Distribution Function (ECDF) charts](https://plotly.com/python/ecdf-plots/).**
 
 ```python
 import plotly.express as px
