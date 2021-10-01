@@ -86,7 +86,7 @@ docs = dict(
     ids=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set ids of sectors",
+        "Values from this column or array_like are used to set ids of sectors.",
     ],
     path=[
         colref_list_type,
@@ -192,7 +192,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
-    radius=["int (default is 30)", "Sets the radius of influence of each point."],
+    radius=["int (default 30)", "Sets the radius of influence of each point."],
     hover_name=[
         colref_type,
         colref_desc,
@@ -227,7 +227,7 @@ docs = dict(
     ],
     locationmode=[
         "str",
-        "One of 'ISO-3', 'USA-states', or 'country names'",
+        "One of 'ISO-3', 'USA-states', or 'country names'.",
         "Determines the set of locations used to match entries in `locations` to regions on the map.",
     ],
     facet_row=[
@@ -248,11 +248,11 @@ docs = dict(
     ],
     facet_row_spacing=[
         "float between 0 and 1",
-        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+        "Spacing between facet rows, in paper units. Default is 0.03 (or 0.07 when facet_col_wrap is used).",
     ],
     facet_col_spacing=[
-        "float between 0 and 1",
-        "Spacing between facet columns, in paper units Default is 0.02.",
+        "float between 0 and 1 (default 0.02)",
+        "Spacing between facet columns, in paper units.",
     ],
     animation_frame=[
         colref_type,
@@ -271,7 +271,7 @@ docs = dict(
     ],
     symbol_map=[
         "dict with str keys and str values (default `{}`)",
-        "String values should define plotly.js symbols",
+        "String values should define plotly.js symbols.",
         "Used to override `symbol_sequence` to assign a specific symbols to marks corresponding with specific values.",
         "Keys in `symbol_map` should be values in the column denoted by `symbol`.",
         "Alternatively, if the values of `symbol` are valid symbol names, the string `'identity'` may be passed to cause them to be used directly.",
@@ -308,14 +308,14 @@ docs = dict(
     ],
     color_discrete_map=[
         "dict with str keys and str values (default `{}`)",
-        "String values should define valid CSS-colors",
+        "String values should define valid CSS-colors.",
         "Used to override `color_discrete_sequence` to assign a specific colors to marks corresponding with specific values.",
         "Keys in `color_discrete_map` should be values in the column denoted by `color`.",
         "Alternatively, if the values of `color` are valid colors, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     color_continuous_scale=[
         "list of str",
-        "Strings should define valid CSS-colors",
+        "Strings should define valid CSS-colors.",
         "This list is used to build a continuous color scale when the column denoted by `color` contains numeric data.",
         "Various useful color scales are available in the `plotly.express.colors` submodules, specifically `plotly.express.colors.sequential`, `plotly.express.colors.diverging` and `plotly.express.colors.cyclical`.",
     ],
@@ -426,20 +426,21 @@ docs = dict(
         "If provided, and if `trendline` is set, all trendlines will be drawn in this color rather than in the same color as the traces from which they draw their inputs.",
     ],
     trendline_scope=[
-        "str (one of `'trace'` or `'overall'`, default `'trace'`)",
+        "str (default `'trace'`)",
+        "One of `'trace'` or `'overall'`",
         "If `'trace'`, then one trendline is drawn per trace (i.e. per color, symbol, facet, animation frame etc) and if `'overall'` then one trendline is computed for the entire dataset, and replicated across all facets.",
     ],
     render_mode=[
-        "str",
-        "One of `'auto'`, `'svg'` or `'webgl'`, default `'auto'`",
+        "str (default `'auto'`)",
+        "One of `'auto'`, `'svg'` or `'webgl'`.",
         "Controls the browser API used to draw marks.",
         "`'svg`' is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
         "`'webgl'` is likely necessary for acceptable performance above 1000 points but rasterizes part of the output. ",
         "`'auto'` uses heuristics to choose the mode.",
     ],
     direction=[
-        "str",
-        "One of '`counterclockwise'` or `'clockwise'`. Default is `'clockwise'`",
+        "str (default `'clockwise'`)",
+        "One of '`counterclockwise'` or `'clockwise'`.",
         "Sets the direction in which increasing values of the angular axis are drawn.",
     ],
     start_angle=[
@@ -453,7 +454,7 @@ docs = dict(
     ],
     histnorm=[
         "str (default `None`)",
-        "One of `'percent'`, `'probability'`, `'density'`, or `'probability density'`",
+        "One of `'percent'`, `'probability'`, `'density'`, or `'probability density'`.",
         "If `None`, the output of `histfunc` is used as is.",
         "If `'probability'`, the output of `histfunc` for a given bin is divided by the sum of the output of `histfunc` for all bins.",
         "If `'percent'`, the output of `histfunc` for a given bin is divided by the sum of the output of `histfunc` for all bins and multiplied by 100.",
@@ -476,32 +477,33 @@ docs = dict(
     ],
     barmode=[
         "str (default `'relative'`)",
-        "One of `'group'`, `'overlay'` or `'relative'`",
+        "One of `'group'`, `'overlay'` or `'relative'`.",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
         "In `'overlay'` mode, bars are drawn on top of one another.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
         "str (default `'group'`)",
-        "One of `'group'` or `'overlay'`",
-        "In `'overlay'` mode, boxes are on drawn top of one another.",
+        "One of `'group'` or `'overlay'`.",
+        "In `'overlay'` mode, boxes are drawn on top of one another.",
         "In `'group'` mode, boxes are placed beside each other.",
     ],
     violinmode=[
         "str (default `'group'`)",
-        "One of `'group'` or `'overlay'`",
-        "In `'overlay'` mode, violins are on drawn top of one another.",
+        "One of `'group'` or `'overlay'`.",
+        "In `'overlay'` mode, violins are drawn on top of one another.",
         "In `'group'` mode, violins are placed beside each other.",
     ],
     stripmode=[
         "str (default `'group'`)",
-        "One of `'group'` or `'overlay'`",
-        "In `'overlay'` mode, strips are on drawn top of one another.",
+        "One of `'group'` or `'overlay'`.",
+        "In `'overlay'` mode, strips are drawn on top of one another.",
         "In `'group'` mode, strips are placed beside each other.",
     ],
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
-        "str, one of `'h'` for horizontal or `'v'` for vertical. ",
+        "str",
+        "One of `'h'` for horizontal or `'v'` for vertical.",
         "(default `'v'` if `x` and `y` are provided and both continous or both categorical, ",
         "otherwise `'v'`(`'h'`) if `x`(`y`) is categorical and `y`(`x`) is continuous, ",
         "otherwise `'v'`(`'h'`) if only `x`(`y`) is provided) ",
@@ -511,28 +513,28 @@ docs = dict(
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
     line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
-    fitbounds=["str (default `False`).", "One of `False`, `locations` or `geojson`."],
-    basemap_visible=["bool", "Force the basemap visibility."],
+    fitbounds=["str (default `False`)", "One of `False`, `'locations'` or `'geojson'`."],
+    basemap_visible=["boolean", "Force the basemap visibility."],
     scope=[
         "str (default `'world'`).",
-        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, or `'south america'`"
+        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, or `'south america'`."
         "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`.",
     ],
     projection=[
-        "str ",
-        "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, or `'sinusoidal'`"
+        "str",
+        "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, or `'sinusoidal'`."
         "Default depends on `scope`.",
     ],
     center=[
         "dict",
-        "Dict keys are `'lat'` and `'lon'`",
+        "Dict keys are `'lat'` and `'lon'`.",
         "Sets the center point of the map.",
     ],
     mapbox_style=[
         "str (default `'basic'`, needs Mapbox API token)",
         "Identifier of base map style, some of which require a Mapbox API token to be set using `plotly.express.set_mapbox_access_token()`.",
-        "Allowed values which do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
-        "Allowed values which do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Allowed values that do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
+        "Allowed values that do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
     ],
     points=[
         "str or boolean (default `'outliers'`)",
@@ -558,12 +560,12 @@ docs = dict(
         "boolean (default `False`)",
         "If `True`, histogram values are cumulative.",
     ],
-    nbins=["int", "Positive integer.", "Sets the number of bins."],
-    nbinsx=["int", "Positive integer.", "Sets the number of bins along the x axis."],
-    nbinsy=["int", "Positive integer.", "Sets the number of bins along the y axis."],
+    nbins=["int", "Positive integer", "Sets the number of bins."],
+    nbinsx=["int", "Positive integer", "Sets the number of bins along the x axis."],
+    nbinsy=["int", "Positive integer", "Sets the number of bins along the y axis."],
     branchvalues=[
         "str",
-        "'total' or 'remainder'",
+        "One of `'total'` or `'remainder'`.",
         "Determines how the items in `values` are summed. When"
         "set to 'total', items in `values` are taken to be value"
         "of all its descendants. When set to 'remainder', items"
@@ -574,22 +576,21 @@ docs = dict(
     maxdepth=[
         "int",
         "Positive integer",
-        "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
-        "levels in the hierarchy.",
+        "Sets the number of rendered sectors from any given `level`.",
+        "Set `maxdepth` to -1 to render all the levels in the hierarchy.",
     ],
     ecdfnorm=[
-        "string or `None` (default `'probability'`)",
-        "One of `'probability'` or `'percent'`",
+        "str or `None` (default `'probability'`)",
+        "One of `'probability'` or `'percent'`.",
         "If `None`, values will be raw counts or sums.",
         "If `'probability', values will be probabilities normalized from 0 to 1.",
         "If `'percent', values will be percentages normalized from 0 to 100.",
     ],
     ecdfmode=[
-        "string (default `'standard'`)",
-        "One of `'standard'`, `'complementary'` or `'reversed'`",
+        "str (default `'standard'`)",
+        "One of `'standard'` or `'complementary'`.",
         "If `'standard'`, the ECDF is plotted such that values represent data at or below the point.",
-        "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
-        "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
+        "If `'complementary'`, the ECDF is plotted such that values represent data above the point.",
     ],
 )
 

@@ -1336,10 +1336,7 @@ def build_dataframe(args, constructor):
             var_name = df_input.columns.name
             if var_name in [None, "value", "index"] or var_name in df_input:
                 var_name = "variable"
-            if constructor == go.Funnel:
-                wide_orientation = args.get("orientation") or "h"
-            else:
-                wide_orientation = args.get("orientation") or "v"
+            wide_orientation = args.get("orientation","h" if constructor == go.Funnel else "v")
             args["orientation"] = wide_orientation
             args["wide_cross"] = None
         elif wide_x != wide_y:
@@ -1825,7 +1822,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         trace_patch["line"] = dict(shape=args["line_shape"])
     elif "ecdfmode" in args:
         trace_patch["line"] = dict(
-            shape="vh" if args["ecdfmode"] == "reversed" else "hv"
+            shape="vh" if args.get("orientation","v") == "h" else "hv"
         )
 
     if "geojson" in args:
@@ -2093,12 +2090,14 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             if "ecdfmode" in args:
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
-                ascending = args.get("ecdfmode", "standard") != "reversed"
-                group = group.sort_values(by=base, ascending=ascending)
+                group = group.sort_values(by=base)
+
+                head = group.head(1).copy()
+                head[var] = 0
+                group = pd.concat([head,group])
+
                 group_sum = group[var].sum()  # compute here before next line mutates
                 group[var] = group[var].cumsum()
-                if not ascending:
-                    group = group.sort_values(by=base, ascending=True)
 
                 if args.get("ecdfmode", "standard") == "complementary":
                     group[var] = group_sum - group[var]
@@ -2107,6 +2106,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     group[var] = group[var] / group_sum
                 elif args["ecdfnorm"] == "percent":
                     group[var] = 100.0 * group[var] / group_sum
+
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
