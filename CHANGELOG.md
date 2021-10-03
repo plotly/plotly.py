@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [next] - ???
+
+### Added
+  - dash-bio posts in /doc/python/{alignment-chart.md,circos.md,clustergram.md,molecular-visualizations.md,volacano-plot.md}
+
 ## [5.3.1] - 2021-08-31
 
 ### Updated
