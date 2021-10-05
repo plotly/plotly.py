@@ -7,7 +7,7 @@ import { Message } from "@lumino/messaging";
 
 import { IRenderMime } from "@jupyterlab/rendermime-interfaces";
 
-import type PlotlyType from "plotly.js/dist/plotly";
+import type PlotlyType from "plotly.js-dist/plotly";
 
 import "../style/index.css";
 
@@ -129,9 +129,9 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     // Load plotly asynchronously
     const loadPlotly = async (): Promise<void> => {
       if (RenderedPlotly.Plotly === null) {
-        RenderedPlotly.Plotly = await import("plotly.js/dist/plotly");
+        RenderedPlotly.Plotly = await import("plotly.js-dist/plotly");
         RenderedPlotly._resolveLoadingPlotly();
-      } 
+      }
       return RenderedPlotly.loadingPlotly;
     };
 

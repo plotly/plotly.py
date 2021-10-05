@@ -6,7 +6,7 @@ import {
 
 import _ from "lodash";
 
-import Plotly from "plotly.js/dist/plotly";
+import Plotly from "plotly.js-dist/plotly";
 
 import { MODULE_NAME, MODULE_VERSION } from "./version";
 

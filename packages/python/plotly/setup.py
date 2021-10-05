@@ -68,7 +68,7 @@ def plotly_js_version():
     )
     with open(path, "rt") as f:
         package_json = json.load(f)
-        version = package_json["dependencies"]["plotly.js"]
+        version = package_json["dependencies"]["plotly.js-dist"]
         version = version.replace("^", "")
 
     return version
@@ -366,7 +366,7 @@ class UpdateBundleCommand(Command):
 
 
 class UpdatePlotlyJsCommand(Command):
-    description = "Update project to a new version of plotly.js"
+    description = "Update project to a new version of plotly.js-dist"
     user_options = []
 
     def initialize_options(self):
@@ -412,7 +412,7 @@ class UpdateBundleSchemaDevCommand(Command):
             package_json = json.load(f)
 
         # Replace version with bundle url
-        package_json["dependencies"]["plotly.js"] = archive_url
+        package_json["dependencies"]["plotly.js-dist"] = archive_url
         with open(package_json_path, "w") as f:
             json.dump(package_json, f, indent=2)
 
@@ -424,14 +424,14 @@ class UpdateBundleSchemaDevCommand(Command):
 
 
 class UpdatePlotlyJsDevCommand(Command):
-    description = "Update project to a new development version of plotly.js"
+    description = "Update project to a new development version of plotly.js-dist"
     user_options = [
         ("devrepo=", None, "Repository name"),
         ("devbranch=", None, "branch or pull/number"),
     ]
 
     def initialize_options(self):
-        self.devrepo = "plotly/plotly.js"
+        self.devrepo = "plotly/plotly.js-dist"
         self.devbranch = "master"
 
     def finalize_options(self):
