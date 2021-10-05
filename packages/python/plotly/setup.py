@@ -424,14 +424,14 @@ class UpdateBundleSchemaDevCommand(Command):
 
 
 class UpdatePlotlyJsDevCommand(Command):
-    description = "Update project to a new development version of plotly.js-dist"
+    description = "Update project to a new development version of plotly.js"
     user_options = [
         ("devrepo=", None, "Repository name"),
         ("devbranch=", None, "branch or pull/number"),
     ]
 
     def initialize_options(self):
-        self.devrepo = "plotly/plotly.js-dist"
+        self.devrepo = "plotly/plotly.js"
         self.devbranch = "master"
 
     def finalize_options(self):
