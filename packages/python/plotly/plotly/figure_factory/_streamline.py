@@ -183,8 +183,8 @@ class _Streamline(object):
             self.x = xi.astype(np.int)
             self.y = yi.astype(np.int)
         else:
-            self.val_x = np.int(xi)
-            self.val_y = np.int(yi)
+            self.val_x = int(xi)
+            self.val_y = int(yi)
         a00 = a[self.val_y, self.val_x]
         a01 = a[self.val_y, self.val_x + 1]
         a10 = a[self.val_y + 1, self.val_x]
