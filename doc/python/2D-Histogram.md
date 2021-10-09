@@ -44,23 +44,23 @@ A 2D histogram, also known as a density heatmap, is the 2-dimensional generaliza
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
 
-```python
+<pre><code class="language-python">
 import plotly.express as px
 df = px.data.tips()
 
 fig = px.density_heatmap(df, x="total_bill", y="tip")
 fig.show()
-```
+</code><pre>
 
 The number of bins can be controlled with `nbinsx` and `nbinsy` and the [color scale](/python/colorscales/) with `color_continuous_scale`.
 
-```python
+<pre><code class="language-python">
 import plotly.express as px
 df = px.data.tips()
 
 fig = px.density_heatmap(df, x="total_bill", y="tip", nbinsx=20, nbinsy=20, color_continuous_scale="Viridis")
 fig.show()
-```
+</code><pre>
 
 Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box` and `rug`.
 
