@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+##  TBD
+
+### Fixed
+  - Improve support for type checking by bypassing lazy-loading when type checking.
 
 ##  [5.7.0] - 2022-04-05
 
