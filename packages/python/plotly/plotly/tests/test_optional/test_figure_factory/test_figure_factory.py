@@ -29,7 +29,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "group_labels": ["group"],
             "curve_type": "curve",
         }
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "curve_type must be defined as " "'kde' or 'normal'",
             ff.create_distplot,
@@ -1288,7 +1288,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "be bigger than or equal to the value of vmax."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_trisurf, x, y, z, simplices
         )
 
@@ -1316,7 +1316,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "an rgb color or a hex color."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_trisurf, x, y, z, simplices, colormap="foo"
         )
 
@@ -1327,7 +1327,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "Whoops! The elements in your rgb colors tuples " "cannot exceed 255.0."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             ff.create_trisurf,
@@ -1343,7 +1343,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         pattern3 = "Whoops! The elements in your colors tuples cannot exceed 1.0."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern3,
             ff.create_trisurf,
@@ -1615,7 +1615,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "a scatterplot matrix."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_one_column_dataframe(self):
 
@@ -1627,7 +1627,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "use at least 2 columns."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_valid_diag_choice(self):
 
@@ -1650,7 +1650,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "'color' and 'colorscale are set internally."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_scatterplotmatrix, df, **kwargs
         )
 
@@ -1664,7 +1664,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "names of your dataframe."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_scatterplotmatrix, df, index="grape"
         )
 
@@ -1678,11 +1678,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "either numbers or strings."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
         df = pd.DataFrame([[1, 2], ["a", 4]])
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_same_data_in_index(self):
 
@@ -1694,13 +1694,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "are all numbers or all strings."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_scatterplotmatrix, df, index="apple"
         )
 
         df = pd.DataFrame([[1, 2], ["a", 4]], columns=["apple", "pear"])
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_scatterplotmatrix, df, index="apple"
         )
 
@@ -1723,7 +1723,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         # check: proper 'rgb' color
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern_rgb,
             ff.create_scatterplotmatrix,
@@ -1732,7 +1732,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             index="c",
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern_rgb,
             ff.create_scatterplotmatrix,
@@ -1746,7 +1746,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         # check: proper color tuple
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern_tuple,
             ff.create_scatterplotmatrix,
@@ -1755,7 +1755,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             index="c",
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern_tuple,
             ff.create_scatterplotmatrix,
@@ -1774,7 +1774,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "sequence of increasing numbers."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_scatterplotmatrix,
@@ -1785,7 +1785,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         # check: the endpts are a list of numbers
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_scatterplotmatrix,
@@ -1796,7 +1796,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         # check: endpts is a list of INCREASING numbers
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_scatterplotmatrix,
@@ -1820,7 +1820,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "If colormap is a dictionary, all the names in the index " "must be keys."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_scatterplotmatrix,
@@ -2170,15 +2170,15 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_violin, data, colors="rgb(300, 2, 3)"
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_violin, data, colors=["rgb(300, 2, 3)"]
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_violin,
@@ -2188,15 +2188,15 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         pattern2 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_violin, data, colors=(1.1, 1, 1)
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_violin, data, colors=[(1.1, 1, 1)]
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_violin, data, colors={"apple": (1.1, 1, 1)}
         )
 
@@ -2214,7 +2214,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "numeric data for the violin plot."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_violin,
@@ -2234,13 +2234,13 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "either numbers or dictionaries."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_violin, data)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_violin, data)
 
         data = [1, "foo"]
 
         pattern2 = "If data is a list, it must contain only numbers."
 
-        self.assertRaisesRegexp(PlotlyError, pattern2, ff.create_violin, data)
+        self.assertRaisesRegex(PlotlyError, pattern2, ff.create_violin, data)
 
     def test_dataframe_input(self):
 
@@ -2252,7 +2252,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "Error. You must use a pandas DataFrame if you are using " "a group header."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_violin, data, group_header=True
         )
 
@@ -2266,7 +2266,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "The colors param cannot be a dictionary if you are " "using a colorscale."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_violin,
@@ -2284,7 +2284,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "appear as keys in colors."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             ff.create_violin,
@@ -2306,7 +2306,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "scale is allowed."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_violin,
@@ -2325,7 +2325,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         pattern = "Your group_stats param must be a dictionary."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_violin,
@@ -2344,7 +2344,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "represented as a key in group_stats."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             ff.create_violin,
@@ -3086,7 +3086,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         pattern = "You must input a pandas DataFrame."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_facet_grid, data, "a", "b"
         )
 
@@ -3098,7 +3098,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "trace_type of 'scatter' or 'scattergl'."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_facet_grid, data, "a")
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_facet_grid, data, "a")
 
     def test_valid_col_selection(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=["a", "b"])
@@ -3108,7 +3108,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "dataframe."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_facet_grid, data, "a", "c"
         )
 
@@ -3124,7 +3124,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         pattern = "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_facet_grid,
@@ -3181,7 +3181,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         color_dict = {"bar": "#ffffff"}
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_facet_grid,
@@ -3420,13 +3420,13 @@ class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "Every entry of the data argument (list, tuple, etc) must "
             "be a dictionary."
         )
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_bullet, df)
 
     def test_not_df_or_list(self):
         df = "foo"
 
         pattern = "You must input a pandas DataFrame, or a list of dictionaries."
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_bullet, df)
 
     def test_valid_color_lists_of_2_rgb_colors(self):
         df = [{"title": "Revenue"}]
@@ -3438,11 +3438,11 @@ class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
             "Both 'range_colors' or 'measure_colors' must be a list "
             "of two valid colors."
         )
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_bullet, df, range_colors=range_colors
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_bullet, df, measure_colors=measure_colors
         )
 
@@ -4061,7 +4061,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         def test_fips_values_same_length(self):
             pattern = "fips and values must be the same length"
-            self.assertRaisesRegexp(
+            self.assertRaisesRegex(
                 PlotlyError,
                 pattern,
                 ff.create_choropleth,
@@ -4076,7 +4076,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 "in your order and have no duplicate items"
             )
 
-            self.assertRaisesRegexp(
+            self.assertRaisesRegex(
                 PlotlyError,
                 pattern,
                 ff.create_choropleth,
@@ -4098,7 +4098,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
             pattern = "'scope' must be a list/tuple/sequence"
 
-            self.assertRaisesRegexp(
+            self.assertRaisesRegex(
                 PlotlyError,
                 pattern,
                 ff.create_choropleth,

@@ -16,7 +16,7 @@ class TestColors(TestCase):
             "Plotly scale, an rgb color or a hex color."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_colors, color_string
         )
 
@@ -27,7 +27,7 @@ class TestColors(TestCase):
             "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, colors.validate_colors, color_string2
         )
 
@@ -36,7 +36,7 @@ class TestColors(TestCase):
 
         pattern3 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern3, colors.validate_colors, color_tuple
         )
 
@@ -56,7 +56,7 @@ class TestColors(TestCase):
 
         pattern2 = "You must select either rgb or tuple for your colortype " "variable."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             colors.convert_colors_to_same_type,
@@ -72,7 +72,7 @@ class TestColors(TestCase):
 
         pattern = "You must select either rgb or tuple for your colortype " "variable."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             colors.convert_dict_colors_to_same_type,
@@ -89,7 +89,7 @@ class TestColors(TestCase):
             "You must input a list of scale values that has at least " "two values."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -101,7 +101,7 @@ class TestColors(TestCase):
             "1.0 respectively."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -113,7 +113,7 @@ class TestColors(TestCase):
             "increasing sequence of numbers."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -124,9 +124,7 @@ class TestColors(TestCase):
 
         pattern = "You must input a list of colors that has at least two colors."
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, colors.make_colorscale, color_list
-        )
+        self.assertRaisesRegex(PlotlyError, pattern, colors.make_colorscale, color_list)
 
         # test length of colors and scale
         color_list2 = [(0, 0, 0), (1, 1, 1)]
@@ -134,7 +132,7 @@ class TestColors(TestCase):
 
         pattern2 = "The length of colors and scale must be the same."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, colors.make_colorscale, color_list2, scale
         )
 
@@ -144,7 +142,7 @@ class TestColors(TestCase):
         pattern = "Name argument have to be a string."
         name = colors.sequential.haline
 
-        self.assertRaisesRegexp(PlotlyError, pattern, colors.get_colorscale, name)
+        self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
 
         # test for non-existing colorscale
         pattern = r"Colorscale \S+ is not a built-in scale."
