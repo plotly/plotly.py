@@ -72,7 +72,7 @@ dashbio.VolcanoPlot(
 
 ## VolcanoPlot with Dash
 
-```python
+```python no_display=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-volcano', width='100%', height=630)
