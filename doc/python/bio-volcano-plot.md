@@ -1,5 +1,6 @@
 ---
 jupyter:
+  celltoolbar: Tags
   jupytext:
     notebook_metadata_filter: all
     text_representation:
@@ -20,9 +21,8 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.6
+    version: 3.9.7
   plotly:
-    # description:
     display_as: bio
     language: python
     layout: base
@@ -33,59 +33,23 @@ jupyter:
     thumbnail: thumbnail/volcano-plot.png
 ---
 
-## Default VolcanoPlot
+## VolcanoPlot
 An example of a default VolcanoPlot component without any extra properties.
 
 
 ```python
-from jupyter_dash import JupyterDash
-
 import pandas as pd
-from dash.dependencies import Input, Output
-import dash_bio as dashbio
-from dash import html
-from dash import dcc
+import dash_bio 
 
-app = JupyterDash(__name__)
 
 df = pd.read_csv(
     'https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/' +
     'volcano_data1.csv'
 )
 
-app.layout = html.Div([
-    'Effect sizes',
-    dcc.RangeSlider(
-        id='default-volcanoplot-input',
-        min=-3,
-        max=3,
-        step=0.05,
-        marks={i: {'label': str(i)} for i in range(-3, 3)},
-        value=[-0.5, 1]
-    ),
-    html.Br(),
-    html.Div(
-        dcc.Graph(
-            id='dashbio-default-volcanoplot',
-            figure=dashbio.VolcanoPlot(
-                dataframe=df
-            )
-        )
-    )
-])
-
-@app.callback(
-    Output('dashbio-default-volcanoplot', 'figure'),
-    Input('default-volcanoplot-input', 'value')
+dash_bio.VolcanoPlot(
+    dataframe=df,
 )
-def update_volcanoplot(effects):
-    return dashbio.VolcanoPlot(
-        dataframe=df,
-        genomewideline_value=2.5,
-        effect_size_line=effects
-    )
-
-app.run_server(mode="inline")
 ```
 
 ## Point Sizes And Line Widths
@@ -93,45 +57,25 @@ Change the size of the points on the scatter plot, and the widths of the effect 
 
 
 ```python
-from jupyter_dash import JupyterDash
-
 import pandas as pd
-from dash import dcc
 import dash_bio as dashbio
-
-app = JupyterDash(__name__)
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
 
-app.layout = dcc.Graph(figure=dashbio.VolcanoPlot(
+dashbio.VolcanoPlot(
     dataframe=df,
     point_size=10,
     effect_size_line_width=4,
     genomewideline_width=2
-))
-
-app.run_server(mode="inline")
+)
 ```
 
+## VolcanoPlot with Dash
+
 ```python
-from jupyter_dash import JupyterDash
-
-import pandas as pd
-from dash import dcc
-import dash_bio as dashbio
-
-app = JupyterDash(__name__)
-
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
-
-app.layout = dcc.Graph(figure=dashbio.VolcanoPlot(
-    dataframe=df,
-    point_size=10,
-    effect_size_line_width=4,
-    genomewideline_width=2
-))
-
-app.run_server(mode="inline")
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'bio-volcano', width='100%', height=630)
 ```
 
 ## VolcanoPlot Properties
@@ -180,3 +124,7 @@ app.run_server(mode="inline")
 **xlabel** (_string_; optional): Label of the x axis.
 
 **ylabel** (_string_; default `'-log10(p)'`): Label of the y axis.
+
+```python
+
+```
