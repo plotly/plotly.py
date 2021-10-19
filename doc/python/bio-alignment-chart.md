@@ -32,63 +32,24 @@ jupyter:
     thumbnail: thumbnail/alignment-chart.png
 ---
 
-## Default AlignmentChart
-An example of a default AlignmentChart component without any extra properties
+## Bar Chart for conservation visualization
 
 ```python
-import urllib.request as urlreq
+import plotly.express as px
 
-import dash_bio as dashbio
+df = (pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/gene_conservation.csv')
+        .set_index('0')
+        .loc[['consensus','conservation']]
+        .T)
 
-
-data = urlreq.urlopen(
-    'https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/' +
-    'alignment_viewer_p53.fasta'
-).read().decode('utf-8')
-
-app.layout = dashbio.AlignmentChart(
-    id='my-default-alignment-viewer',
-    data=data
-)
+fig = px.bar(df, labels={ 'index': 'base' }, hover_name='consensus', y='conservation')
+fig.show()
 ```
 
-## Consensus Sequence
-Toggle the display of the consensus sequence at the bottom of the heatmap.
-
-```python
-import urllib.request as urlreq
-
-import dash_bio as dashbio
-
-
-data = urlreq.urlopen('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/alignment_viewer_p53.fasta').read().decode('utf-8')
-
-app.layout = dashbio.AlignmentChart(
-    data=data,
-    showconsensus=False
-)
-```
-
-## Tile Size
-Change the height and/or width of the tiles.
-
-
-```python
-import urllib.request as urlreq
-import dash_bio as dashbio
-
-data = urlreq.urlopen('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/alignment_viewer_p53.fasta').read().decode('utf-8')
-
-app.layout = dashbio.AlignmentChart(
-    data=data,
-    tilewidth=50
-)
-```
-
-## Alignment Chart in `dash_bio`
+## Alignment Chart in dash_bio
 
 ```python
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'bio-circos', width='100%', height=630)
+IFrame(snippet_url + 'bio-alignmentchart', width='100%', height=630)
 ```
