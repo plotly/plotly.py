@@ -32,6 +32,4 @@ pooch
 wget
 nbconvert==5.6.1
 orjson
-jupyter-dash
 dash-bio
-dash
