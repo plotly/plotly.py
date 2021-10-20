@@ -383,6 +383,14 @@ def show(fig, renderer=None, validate=True, **kwargs):
     -------
     None
     """
+    height = kwargs.get("height", None)
+    width = kwargs.get("width", None)
+
+    if height:
+        fig.layout.update(height=height)
+    if width:
+        fig.layout.update(width=width)
+
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Mimetype renderers
