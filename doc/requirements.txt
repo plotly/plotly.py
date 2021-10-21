@@ -1,5 +1,6 @@
 plotly==5.3.1
 jupytext==1.1.1
+jupyter-client<7
 jupyter
 notebook
 pandas==1.0.3
@@ -32,3 +33,4 @@ pooch
 wget
 nbconvert==5.6.1
 orjson
+dash-bio
