@@ -26,7 +26,7 @@ jupyter:
     display_as: bio
     language: python
     layout: base
-    name: Volcano plot
+    name: Manhattan Plot
     order: 1
     page_type: u-guide
     permalink: python/volcano-plot/
