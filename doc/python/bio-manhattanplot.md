@@ -34,8 +34,7 @@ jupyter:
 ---
 
 ## Manhattan Plot
-
-An example of a default ManhattanPlot component without any extra properties.
+ManhattanPlot allows you to visualize genome-wide association studies (GWAS) efficiently. Using WebGL under the hood, you can interactively explore overviews of massive datasets comprising hundreds of thousands of points at once, or take a closer look at a small subset of your data. Hover data and click data are accessible from within the Dash app.
 
 ```python
 import pandas as pd
