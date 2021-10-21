@@ -112,7 +112,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     # Dump to a JSON string and return
     # --------------------------------
     if engine == "json":
-        opts = {"sort_keys": True}
+        opts = {}
         if pretty:
             opts["indent"] = 2
         else:
@@ -124,7 +124,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
     elif engine == "orjson":
         JsonConfig.validate_orjson()
-        opts = orjson.OPT_SORT_KEYS | orjson.OPT_SERIALIZE_NUMPY
+        opts = orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY
 
         if pretty:
             opts |= orjson.OPT_INDENT_2
@@ -462,7 +462,7 @@ def clean_to_json_compatible(obj, **kwargs):
         return obj
 
     if isinstance(obj, dict):
-        return {str(k): clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
     elif isinstance(obj, (list, tuple)):
         if obj:
             # Must process list recursively even though it may be slow
