@@ -29,8 +29,8 @@ jupyter:
     name: Manhattan Plot
     order: 1
     page_type: u-guide
-    permalink: python/volcano-plot/
-    thumbnail: thumbnail/volcano-plot.png
+    permalink: python/manhattan-plot/ 
+    thumbnail: thumbnail/manhttan-plot.png
 ---
 
 ## Manhattan Plot
