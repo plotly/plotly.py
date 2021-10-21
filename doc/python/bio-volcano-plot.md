@@ -34,8 +34,7 @@ jupyter:
 ---
 
 ## VolcanoPlot
-An example of a default VolcanoPlot component without any extra properties.
-
+Volcano Plot interactively identifies clinically meaningful markers in genomic experiments, i.e., markers that are statistically significant and have an effect size greater than some threshold. Specifically, volcano plots depict the negative log-base-10 p-values plotted against their effect size.
 
 ```python
 import pandas as pd
