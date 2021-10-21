@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [next] - ???
 
+### Added
+  - dash-bio posts in /doc/python/{alignment-chart.md,circos.md,clustergram.md,molecular-visualizations.md,volacano-plot.md}
+
 ### Fixed
   - Fixed error when serializing dict with mix of string and non-string keys [#3380](https://github.com/plotly/plotly.py/issues/3380)
 
