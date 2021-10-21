@@ -105,10 +105,10 @@ dash_bio.Clustergram(
 )
 ```
 
-## Circos with Dash
+## Clustergram with Dash
 
 ```python no_display=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'bio-circos', width='100%', height=630)
+IFrame(snippet_url + 'bio-clustergram', width='100%', height=630)
 ```
