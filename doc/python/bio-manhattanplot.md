@@ -30,7 +30,7 @@ jupyter:
     order: 1
     page_type: u-guide
     permalink: python/manhattan-plot/
-    thumbnail: thumbnail/manhttan_plot.png
+    thumbnail: thumbnail/manhattan_plot.png
 ---
 
 ## Manhattan Plot
