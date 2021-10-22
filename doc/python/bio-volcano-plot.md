@@ -30,7 +30,7 @@ jupyter:
     order: 1
     page_type: u-guide
     permalink: python/volcano-plot/
-    thumbnail: thumbnail/volcano-plot.png
+    thumbnail: thumbnail/volcano_plot.png
 ---
 
 ## VolcanoPlot
@@ -38,7 +38,7 @@ Volcano Plot interactively identifies clinically meaningful markers in genomic e
 
 ```python
 import pandas as pd
-import dash_bio 
+import dash_bio
 
 
 df = pd.read_csv(
