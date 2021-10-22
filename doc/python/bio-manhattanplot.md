@@ -29,8 +29,8 @@ jupyter:
     name: Manhattan Plot
     order: 1
     page_type: u-guide
-    permalink: python/manhattan-plot/ 
-    thumbnail: thumbnail/manhttan-plot.png
+    permalink: python/manhattan-plot/
+    thumbnail: thumbnail/manhttan_plot.png
 ---
 
 ## Manhattan Plot
@@ -38,7 +38,7 @@ ManhattanPlot allows you to visualize genome-wide association studies (GWAS) eff
 
 ```python
 import pandas as pd
-import dash_bio 
+import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
@@ -53,7 +53,7 @@ Change the color of the points that are considered significant.
 
 ```python
 import pandas as pd
-import dash_bio 
+import dash_bio
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
