@@ -29,7 +29,7 @@ jupyter:
     order: 1
     page_type: u-guide
     permalink: python/alignment-chart/
-    thumbnail: thumbnail/alignment-chart.png
+    thumbnail: thumbnail/alignment_chart.png
 ---
 
 ## Alignment Viewer (link to dash alignment section below)
