@@ -47,7 +47,7 @@ dash_bio.ManhattanPlot(
 )
 ```
 
-## Highlighted points color, and colors of the suggestive line and the genome-wide line.
+## Highlighted points color, and colors of the suggestive line and the genome-wide line
 Change the color of the points that are considered significant.
 
 ```python
