@@ -40,10 +40,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv(
-    'https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/' +
-    'clustergram_brain_cancer.csv', 
-)
+df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -62,10 +59,7 @@ Change the colors of the dendrogram traces that are used to represent clusters, 
 import pandas as pd
 import dash_bio
 
-df = pd.read_csv(
-    'https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/' +
-    'clustergram_brain_cancer.csv', 
-)
+df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -90,10 +84,7 @@ Change the relative width and height of, respectively, the row and column dendro
 import pandas as pd
 import dash_bio
 
-df = pd.read_csv(
-    'https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/' +
-    'clustergram_brain_cancer.csv', 
-)
+df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
