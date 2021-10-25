@@ -39,7 +39,6 @@ A clustergram is a combination heatmap-dendrogram that is commonly used in gene 
 import pandas as pd
 import dash_bio
 
-
 df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(

@@ -42,7 +42,6 @@ import dash_bio as dashbio
 
 df = pd.read_csv('https://git.io/manhattan_data.csv')
 
-
 dashbio.ManhattanPlot(
     dataframe=df,
 )
@@ -54,7 +53,6 @@ Change the color of the points that are considered significant.
 ```python
 import pandas as pd
 import dash_bio as dashbio
-
 
 df = pd.read_csv('https://git.io/manhattan_data.csv')
 
