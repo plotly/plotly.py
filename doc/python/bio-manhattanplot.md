@@ -38,27 +38,27 @@ ManhattanPlot allows you to visualize genome-wide association studies (GWAS) eff
 
 ```python
 import pandas as pd
-import dash_bio as dashbio
+import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
 
-dashbio.ManhattanPlot(
+dash_bio.ManhattanPlot(
     dataframe=df,
 )
 ```
 
-## Highlighted points color, and colors of the suggestive line and the genome-wide line.
+## Highlighted points color, and colors of the suggestive line and the genome-wide line
 Change the color of the points that are considered significant.
 
 ```python
 import pandas as pd
-import dash_bio as dashbio
+import dash_bio
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
-dashbio.ManhattanPlot(
+dash_bio.ManhattanPlot(
     dataframe=df,
     highlight_color='#00FFAA',
     suggestiveline_color='#AA00AA',

@@ -57,11 +57,11 @@ Change the size of the points on the scatter plot, and the widths of the effect 
 
 ```python
 import pandas as pd
-import dash_bio as dashbio
+import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
 
-dashbio.VolcanoPlot(
+dash_bio.VolcanoPlot(
     dataframe=df,
     point_size=10,
     effect_size_line_width=4,
