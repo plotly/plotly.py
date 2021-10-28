@@ -2,13 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [next] - ???
+## UNRELEASED
 
 ### Fixed
   - Fixed error when serializing dict with mix of string and non-string keys [#3380](https://github.com/plotly/plotly.py/issues/3380)
 
 ### Updated
   - The JSON serialization engines no longer sort their keys [#3380](https://github.com/plotly/plotly.py/issues/3380)
+  - Updated Plotly.js to from version 2.4.2 to version 2.5.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#251----2021-09-16) for more information.
+
 
 ## [5.3.1] - 2021-08-31
 
