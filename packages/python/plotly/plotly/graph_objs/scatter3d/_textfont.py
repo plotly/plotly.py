@@ -73,7 +73,7 @@ class Textfont(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -143,7 +143,7 @@ class Textfont(_BaseTraceHierarchyType):
     @property
     def sizesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  size .
+        Sets the source reference on Chart Studio Cloud for `size`.
     
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -167,7 +167,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
@@ -186,7 +186,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
         """
 
     def __init__(
@@ -212,7 +212,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
@@ -231,7 +231,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
 
         Returns
         -------

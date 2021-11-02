@@ -36,7 +36,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def colorssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  colors .
+        Sets the source reference on Chart Studio Cloud for `colors`.
     
         The 'colorssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -69,13 +69,13 @@ class Marker(_BaseTraceHierarchyType):
                     sector.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the line enclosing
                     each sector.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -98,7 +98,7 @@ class Marker(_BaseTraceHierarchyType):
             colors.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
-            colors .
+            `colors`.
         line
             :class:`plotly.graph_objects.pie.marker.Line` instance
             or dict with compatible properties
@@ -119,7 +119,7 @@ class Marker(_BaseTraceHierarchyType):
             colors.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
-            colors .
+            `colors`.
         line
             :class:`plotly.graph_objects.pie.marker.Line` instance
             or dict with compatible properties

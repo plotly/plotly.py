@@ -298,14 +298,14 @@ class Choropleth(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -438,8 +438,8 @@ class Choropleth(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -557,8 +557,8 @@ class Choropleth(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -593,19 +593,19 @@ class Choropleth(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -620,7 +620,7 @@ class Choropleth(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -682,7 +682,7 @@ class Choropleth(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -724,8 +724,8 @@ class Choropleth(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -767,7 +767,7 @@ class Choropleth(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -909,8 +909,8 @@ class Choropleth(_BaseTraceType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  locations
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `locations`.
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -946,7 +946,7 @@ class Choropleth(_BaseTraceType):
                     Sets the opacity of the locations.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
 
         Returns
         -------
@@ -991,7 +991,7 @@ class Choropleth(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1204,7 +1204,7 @@ class Choropleth(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1437,7 +1437,7 @@ class Choropleth(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1499,7 +1499,7 @@ class Choropleth(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1525,7 +1525,7 @@ class Choropleth(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -1559,19 +1559,19 @@ class Choropleth(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1599,7 +1599,7 @@ class Choropleth(_BaseTraceType):
             `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -1618,7 +1618,7 @@ class Choropleth(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1649,7 +1649,7 @@ class Choropleth(_BaseTraceType):
             Sets the text elements associated with each location.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1701,8 +1701,8 @@ class Choropleth(_BaseTraceType):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1804,7 +1804,7 @@ class Choropleth(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1830,7 +1830,7 @@ class Choropleth(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -1864,19 +1864,19 @@ class Choropleth(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1904,7 +1904,7 @@ class Choropleth(_BaseTraceType):
             `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -1923,7 +1923,7 @@ class Choropleth(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1954,7 +1954,7 @@ class Choropleth(_BaseTraceType):
             Sets the text elements associated with each location.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2006,8 +2006,8 @@ class Choropleth(_BaseTraceType):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

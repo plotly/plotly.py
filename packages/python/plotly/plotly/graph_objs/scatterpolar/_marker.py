@@ -437,14 +437,14 @@ class Marker(_BaseTraceHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -555,7 +555,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -589,13 +589,13 @@ class Marker(_BaseTraceHierarchyType):
                     horizontal, or the bottom for vertical.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 type
                     Sets the type of gradient used to fill the
                     markers
                 typesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  type .
+                    for `type`.
 
         Returns
         -------
@@ -694,7 +694,7 @@ class Marker(_BaseTraceHierarchyType):
                     bow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.line.color`is set to
@@ -707,7 +707,7 @@ class Marker(_BaseTraceHierarchyType):
                     the marker points.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -766,7 +766,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def opacitysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  opacity .
+        Sets the source reference on Chart Studio Cloud for `opacity`.
     
         The 'opacitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -919,7 +919,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def sizesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  size .
+        Sets the source reference on Chart Studio Cloud for `size`.
     
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1050,7 +1050,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def symbolsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  symbol .
+        Sets the source reference on Chart Studio Cloud for `symbol`.
     
         The 'symbolsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1135,7 +1135,7 @@ class Marker(_BaseTraceHierarchyType):
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         gradient
             :class:`plotly.graph_objects.scatterpolar.marker.Gradie
             nt` instance or dict with compatible properties
@@ -1149,7 +1149,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker opacity.
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
-            opacity .
+            `opacity`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If
@@ -1177,7 +1177,7 @@ class Marker(_BaseTraceHierarchyType):
             `sizemin` and `sizemode`.
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
             to appending "-open" to a symbol name. Adding 200 is
@@ -1186,7 +1186,7 @@ class Marker(_BaseTraceHierarchyType):
             open" to a symbol name.
         symbolsrc
             Sets the source reference on Chart Studio Cloud for
-            symbol .
+            `symbol`.
         """
 
     def __init__(
@@ -1292,7 +1292,7 @@ class Marker(_BaseTraceHierarchyType):
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         gradient
             :class:`plotly.graph_objects.scatterpolar.marker.Gradie
             nt` instance or dict with compatible properties
@@ -1306,7 +1306,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker opacity.
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
-            opacity .
+            `opacity`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color`is set to a numerical array. If
@@ -1334,7 +1334,7 @@ class Marker(_BaseTraceHierarchyType):
             `sizemin` and `sizemode`.
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
             to appending "-open" to a symbol name. Adding 200 is
@@ -1343,7 +1343,7 @@ class Marker(_BaseTraceHierarchyType):
             open" to a symbol name.
         symbolsrc
             Sets the source reference on Chart Studio Cloud for
-            symbol .
+            `symbol`.
 
         Returns
         -------

@@ -85,7 +85,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Bu,Reds,Viridis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             line
                 :class:`plotly.graph_objects.scatter3d.marker.L
                 ine` instance or dict with compatible
@@ -125,12 +125,12 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Use with `sizemin` and `sizemode`.
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
             symbol
                 Sets the marker symbol type.
             symbolsrc
                 Sets the source reference on Chart Studio Cloud
-                for  symbol .
+                for `symbol`.
 """,
             ),
             **kwargs

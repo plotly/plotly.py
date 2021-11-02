@@ -398,14 +398,14 @@ class Surface(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -592,8 +592,8 @@ class Surface(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -661,8 +661,8 @@ class Surface(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -697,19 +697,19 @@ class Surface(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -724,7 +724,7 @@ class Surface(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -786,7 +786,7 @@ class Surface(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -828,8 +828,8 @@ class Surface(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -871,7 +871,7 @@ class Surface(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1070,7 +1070,7 @@ class Surface(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1308,7 +1308,7 @@ class Surface(_BaseTraceType):
     def surfacecolorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        surfacecolor .
+        `surfacecolor`.
     
         The 'surfacecolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1352,7 +1352,7 @@ class Surface(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1525,7 +1525,7 @@ class Surface(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1620,7 +1620,7 @@ class Surface(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1715,7 +1715,7 @@ class Surface(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1801,7 +1801,7 @@ class Surface(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hidesurface
             Determines whether or not a surface is drawn. For
             example, set `hidesurface` to False `contours.x.show`
@@ -1814,7 +1814,7 @@ class Surface(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.surface.Hoverlabel`
             instance or dict with compatible properties
@@ -1848,19 +1848,19 @@ class Surface(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1897,7 +1897,7 @@ class Surface(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1944,7 +1944,7 @@ class Surface(_BaseTraceType):
             scale independent of `z`.
         surfacecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            surfacecolor .
+            `surfacecolor`.
         text
             Sets the text elements associated with each z value. If
             trace `hoverinfo` contains a "text" flag and
@@ -1952,7 +1952,7 @@ class Surface(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1998,8 +1998,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -2018,8 +2018,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -2038,8 +2038,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -2181,7 +2181,7 @@ class Surface(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hidesurface
             Determines whether or not a surface is drawn. For
             example, set `hidesurface` to False `contours.x.show`
@@ -2194,7 +2194,7 @@ class Surface(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.surface.Hoverlabel`
             instance or dict with compatible properties
@@ -2228,19 +2228,19 @@ class Surface(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2277,7 +2277,7 @@ class Surface(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2324,7 +2324,7 @@ class Surface(_BaseTraceType):
             scale independent of `z`.
         surfacecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            surfacecolor .
+            `surfacecolor`.
         text
             Sets the text elements associated with each z value. If
             trace `hoverinfo` contains a "text" flag and
@@ -2332,7 +2332,7 @@ class Surface(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2378,8 +2378,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -2398,8 +2398,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -2418,8 +2418,8 @@ class Surface(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

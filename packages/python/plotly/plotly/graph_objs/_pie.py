@@ -113,8 +113,8 @@ class Pie(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -259,8 +259,8 @@ class Pie(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -295,19 +295,19 @@ class Pie(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -322,7 +322,7 @@ class Pie(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -385,7 +385,7 @@ class Pie(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -431,8 +431,8 @@ class Pie(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -474,7 +474,7 @@ class Pie(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -508,7 +508,7 @@ class Pie(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -528,12 +528,12 @@ class Pie(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -624,7 +624,7 @@ class Pie(_BaseTraceType):
     @property
     def labelssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  labels .
+        Sets the source reference on Chart Studio Cloud for `labels`.
     
         The 'labelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -734,7 +734,7 @@ class Pie(_BaseTraceType):
                     to pick the sector colors.
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  colors .
+                    for `colors`.
                 line
                     :class:`plotly.graph_objects.pie.marker.Line`
                     instance or dict with compatible properties
@@ -782,7 +782,7 @@ class Pie(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -858,7 +858,7 @@ class Pie(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -878,12 +878,12 @@ class Pie(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -924,7 +924,7 @@ class Pie(_BaseTraceType):
     @property
     def pullsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  pull .
+        Sets the source reference on Chart Studio Cloud for `pull`.
     
         The 'pullsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1101,7 +1101,7 @@ class Pie(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1121,12 +1121,12 @@ class Pie(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1189,7 +1189,7 @@ class Pie(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
+        `textposition`.
     
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1209,7 +1209,7 @@ class Pie(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1264,7 +1264,7 @@ class Pie(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
+        `texttemplate`.
     
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1338,7 +1338,7 @@ class Pie(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1358,12 +1358,12 @@ class Pie(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1480,7 +1480,7 @@ class Pie(_BaseTraceType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
+        Sets the source reference on Chart Studio Cloud for `values`.
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1539,7 +1539,7 @@ class Pie(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -1558,7 +1558,7 @@ class Pie(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -1594,7 +1594,7 @@ class Pie(_BaseTraceType):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1603,14 +1603,14 @@ class Pie(_BaseTraceType):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1636,7 +1636,7 @@ class Pie(_BaseTraceType):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1670,7 +1670,7 @@ class Pie(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1686,7 +1686,7 @@ class Pie(_BaseTraceType):
             highlight one or more slices.
         pullsrc
             Sets the source reference on Chart Studio Cloud for
-            pull .
+            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -1718,10 +1718,10 @@ class Pie(_BaseTraceType):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -1741,7 +1741,7 @@ class Pie(_BaseTraceType):
             `percent` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -1781,7 +1781,7 @@ class Pie(_BaseTraceType):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1874,7 +1874,7 @@ class Pie(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -1893,7 +1893,7 @@ class Pie(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -1929,7 +1929,7 @@ class Pie(_BaseTraceType):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1938,14 +1938,14 @@ class Pie(_BaseTraceType):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1971,7 +1971,7 @@ class Pie(_BaseTraceType):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2005,7 +2005,7 @@ class Pie(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2021,7 +2021,7 @@ class Pie(_BaseTraceType):
             highlight one or more slices.
         pullsrc
             Sets the source reference on Chart Studio Cloud for
-            pull .
+            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -2053,10 +2053,10 @@ class Pie(_BaseTraceType):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2076,7 +2076,7 @@ class Pie(_BaseTraceType):
             `percent` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -2116,7 +2116,7 @@ class Pie(_BaseTraceType):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as

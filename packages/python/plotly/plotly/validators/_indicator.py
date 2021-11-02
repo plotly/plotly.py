@@ -23,7 +23,7 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             delta
                 :class:`plotly.graph_objects.indicator.Delta`
                 instance or dict with compatible properties
@@ -39,7 +39,7 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgrouptitle
                 :class:`plotly.graph_objects.indicator.Legendgr
                 ouptitle` instance or dict with compatible
@@ -70,7 +70,7 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             mode
                 Determines how the value is displayed on the
                 graph. `number` displays the value numerically

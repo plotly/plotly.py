@@ -100,8 +100,8 @@ class Image(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -187,8 +187,8 @@ class Image(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -223,19 +223,19 @@ class Image(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -250,7 +250,7 @@ class Image(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -313,7 +313,7 @@ class Image(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -353,8 +353,8 @@ class Image(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -396,7 +396,7 @@ class Image(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -497,7 +497,7 @@ class Image(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -634,7 +634,7 @@ class Image(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -932,7 +932,7 @@ class Image(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -970,7 +970,7 @@ class Image(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
@@ -982,7 +982,7 @@ class Image(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -1017,19 +1017,19 @@ class Image(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1056,7 +1056,7 @@ class Image(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1073,7 +1073,7 @@ class Image(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1140,8 +1140,8 @@ class Image(_BaseTraceType):
             This only applies for image traces that use the
             `source` attribute.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1212,7 +1212,7 @@ class Image(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
@@ -1224,7 +1224,7 @@ class Image(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -1259,19 +1259,19 @@ class Image(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1298,7 +1298,7 @@ class Image(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1315,7 +1315,7 @@ class Image(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1382,8 +1382,8 @@ class Image(_BaseTraceType):
             This only applies for image traces that use the
             `source` attribute.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

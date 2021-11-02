@@ -91,8 +91,8 @@ class Sankey(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -190,19 +190,19 @@ class Sankey(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -217,7 +217,7 @@ class Sankey(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -256,7 +256,7 @@ class Sankey(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -356,12 +356,12 @@ class Sankey(_BaseTraceType):
                     sankey.link.colorscales
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 customdata
                     Assigns extra data to each link.
                 customdatasrc
                     Sets the source reference on Chart Studio Cloud
-                    for  customdata .
+                    for `customdata`.
                 hoverinfo
                     Determines which trace information appear when
                     hovering links. If `none` or `skip` are set, no
@@ -408,12 +408,12 @@ class Sankey(_BaseTraceType):
                     `<extra></extra>`.
                 hovertemplatesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  hovertemplate .
+                    for `hovertemplate`.
                 label
                     The shown name of the link.
                 labelsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  label .
+                    for `label`.
                 line
                     :class:`plotly.graph_objects.sankey.link.Line`
                     instance or dict with compatible properties
@@ -422,19 +422,19 @@ class Sankey(_BaseTraceType):
                     represents the source node.
                 sourcesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  source .
+                    for `source`.
                 target
                     An integer number `[0..nodes.length - 1]` that
                     represents the target node.
                 targetsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  target .
+                    for `target`.
                 value
                     A numeric value representing the flow volume
                     value.
                 valuesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  value .
+                    for `value`.
 
         Returns
         -------
@@ -479,7 +479,7 @@ class Sankey(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -541,12 +541,12 @@ class Sankey(_BaseTraceType):
                     some visibility of what is beneath the node.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 customdata
                     Assigns extra data to each node.
                 customdatasrc
                     Sets the source reference on Chart Studio Cloud
-                    for  customdata .
+                    for `customdata`.
                 groups
                     Groups of nodes. Each group is defined by an
                     array with the indices of the nodes it
@@ -597,12 +597,12 @@ class Sankey(_BaseTraceType):
                     `<extra></extra>`.
                 hovertemplatesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  hovertemplate .
+                    for `hovertemplate`.
                 label
                     The shown name of the node.
                 labelsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  label .
+                    for `label`.
                 line
                     :class:`plotly.graph_objects.sankey.node.Line`
                     instance or dict with compatible properties
@@ -614,12 +614,12 @@ class Sankey(_BaseTraceType):
                     The normalized horizontal position of the node.
                 xsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  x .
+                    for `x`.
                 y
                     The normalized vertical position of the node.
                 ysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  y .
+                    for `y`.
 
         Returns
         -------
@@ -905,7 +905,7 @@ class Sankey(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
@@ -925,7 +925,7 @@ class Sankey(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -954,7 +954,7 @@ class Sankey(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1069,7 +1069,7 @@ class Sankey(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
@@ -1089,7 +1089,7 @@ class Sankey(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1118,7 +1118,7 @@ class Sankey(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.

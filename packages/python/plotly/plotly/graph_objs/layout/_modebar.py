@@ -113,7 +113,7 @@ class Modebar(_BaseLayoutHierarchyType):
     @property
     def addsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  add .
+        Sets the source reference on Chart Studio Cloud for `add`.
     
         The 'addsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -309,7 +309,7 @@ class Modebar(_BaseLayoutHierarchyType):
     @property
     def removesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  remove .
+        Sets the source reference on Chart Studio Cloud for `remove`.
     
         The 'removesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -365,7 +365,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "drawcircle", "drawrect", "eraseshape".
         addsrc
             Sets the source reference on Chart Studio Cloud for
-            add .
+            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -394,7 +394,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
-            remove .
+            `remove`.
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and
@@ -439,7 +439,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "drawcircle", "drawrect", "eraseshape".
         addsrc
             Sets the source reference on Chart Studio Cloud for
-            add .
+            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -468,7 +468,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
-            remove .
+            `remove`.
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and

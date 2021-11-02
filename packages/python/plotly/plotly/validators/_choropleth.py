@@ -52,7 +52,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -82,7 +82,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.choropleth.Hoverla
                 bel` instance or dict with compatible
@@ -122,12 +122,12 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -135,7 +135,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -167,7 +167,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 See `locationmode` for more info.
             locationssrc
                 Sets the source reference on Chart Studio Cloud
-                for  locations .
+                for `locations`.
             marker
                 :class:`plotly.graph_objects.choropleth.Marker`
                 instance or dict with compatible properties
@@ -187,7 +187,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -222,7 +222,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 location.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -282,7 +282,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

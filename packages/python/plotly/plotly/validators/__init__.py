@@ -11,6 +11,7 @@ if sys.version_info < (3, 7):
     from ._streamtube import StreamtubeValidator
     from ._splom import SplomValidator
     from ._scatterternary import ScatterternaryValidator
+    from ._scattersmith import ScattersmithValidator
     from ._scatterpolargl import ScatterpolarglValidator
     from ._scatterpolar import ScatterpolarValidator
     from ._scattermapbox import ScattermapboxValidator
@@ -68,6 +69,7 @@ else:
             "._streamtube.StreamtubeValidator",
             "._splom.SplomValidator",
             "._scatterternary.ScatterternaryValidator",
+            "._scattersmith.ScattersmithValidator",
             "._scatterpolargl.ScatterpolarglValidator",
             "._scatterpolar.ScatterpolarValidator",
             "._scattermapbox.ScattermapboxValidator",

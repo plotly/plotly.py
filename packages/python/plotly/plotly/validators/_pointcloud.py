@@ -18,7 +18,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -27,7 +27,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.pointcloud.Hoverla
                 bel` instance or dict with compatible
@@ -39,7 +39,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             indices
                 A sequential value, 0..n, supply it to avoid
                 creating this array inside plotting. If
@@ -53,7 +53,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `Plotly.restyle()` call.
             indicessrc
                 Sets the source reference on Chart Studio Cloud
-                for  indices .
+                for `indices`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -91,7 +91,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -114,7 +114,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 seen in the hover labels.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -161,10 +161,10 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for the performance benefits.
             xboundssrc
                 Sets the source reference on Chart Studio Cloud
-                for  xbounds .
+                for `xbounds`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             xy
                 Faster alternative to specifying `x` and `y`
                 separately. If supplied, it must be a typed
@@ -173,7 +173,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 = y[i]`
             xysrc
                 Sets the source reference on Chart Studio Cloud
-                for  xy .
+                for `xy`.
             y
                 Sets the y coordinates.
             yaxis
@@ -189,10 +189,10 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for the performance benefits.
             yboundssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ybounds .
+                for `ybounds`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
             **kwargs

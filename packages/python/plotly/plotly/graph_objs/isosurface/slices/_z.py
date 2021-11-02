@@ -60,8 +60,8 @@ class Z(_BaseTraceHierarchyType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  locations
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `locations`.
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -114,7 +114,7 @@ class Z(_BaseTraceHierarchyType):
             the axis z except start and end.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         show
             Determines whether or not slice planes about the z
             dimension are drawn.
@@ -150,7 +150,7 @@ class Z(_BaseTraceHierarchyType):
             the axis z except start and end.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         show
             Determines whether or not slice planes about the z
             dimension are drawn.

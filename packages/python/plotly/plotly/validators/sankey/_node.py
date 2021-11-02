@@ -20,12 +20,12 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 some visibility of what is beneath the node.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             customdata
                 Assigns extra data to each node.
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             groups
                 Groups of nodes. Each group is defined by an
                 array with the indices of the nodes it
@@ -76,12 +76,12 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             label
                 The shown name of the node.
             labelsrc
                 Sets the source reference on Chart Studio Cloud
-                for  label .
+                for `label`.
             line
                 :class:`plotly.graph_objects.sankey.node.Line`
                 instance or dict with compatible properties
@@ -93,12 +93,12 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The normalized horizontal position of the node.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 The normalized vertical position of the node.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
             **kwargs

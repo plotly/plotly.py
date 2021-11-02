@@ -49,7 +49,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def alignsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  align .
+        Sets the source reference on Chart Studio Cloud for `align`.
     
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -129,7 +129,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def bgcolorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  bgcolor .
+        Sets the source reference on Chart Studio Cloud for `bgcolor`.
     
         The 'bgcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -210,7 +210,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def bordercolorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        bordercolor .
+        `bordercolor`.
     
         The 'bordercolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -244,7 +244,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -264,12 +264,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -313,8 +313,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def namelengthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  namelength
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `namelength`.
     
         The 'namelengthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -340,19 +340,19 @@ class Hoverlabel(_BaseTraceHierarchyType):
             label text spans more two or more lines
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         bgcolor
             Sets the background color of the hover labels for this
             trace
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bgcolor .
+            `bgcolor`.
         bordercolor
             Sets the border color of the hover labels for this
             trace.
         bordercolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bordercolor .
+            `bordercolor`.
         font
             Sets the font used in hover labels.
         namelength
@@ -365,7 +365,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
             characters and add an ellipsis.
         namelengthsrc
             Sets the source reference on Chart Studio Cloud for
-            namelength .
+            `namelength`.
         """
 
     def __init__(
@@ -397,19 +397,19 @@ class Hoverlabel(_BaseTraceHierarchyType):
             label text spans more two or more lines
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         bgcolor
             Sets the background color of the hover labels for this
             trace
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bgcolor .
+            `bgcolor`.
         bordercolor
             Sets the border color of the hover labels for this
             trace.
         bordercolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bordercolor .
+            `bordercolor`.
         font
             Sets the font used in hover labels.
         namelength
@@ -422,7 +422,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
             characters and add an ellipsis.
         namelengthsrc
             Sets the source reference on Chart Studio Cloud for
-            namelength .
+            `namelength`.
 
         Returns
         -------

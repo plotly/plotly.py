@@ -35,7 +35,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -59,7 +59,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the aggregation data.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         """
 
     def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
@@ -76,7 +76,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the aggregation data.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
 
         Returns
         -------

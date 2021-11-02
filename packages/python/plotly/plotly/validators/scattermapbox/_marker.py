@@ -20,7 +20,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 a zero angle.
             anglesrc
                 Sets the source reference on Chart Studio Cloud
-                for  angle .
+                for `angle`.
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -96,12 +96,12 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Bu,Reds,Viridis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             opacity
                 Sets the marker opacity.
             opacitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  opacity .
+                for `opacity`.
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.color`is set to a
@@ -130,7 +130,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Use with `sizemin` and `sizemode`.
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
             symbol
                 Sets the marker symbol. Full list:
                 https://www.mapbox.com/maki-icons/ Note that
@@ -138,7 +138,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only available for "circle" symbols.
             symbolsrc
                 Sets the source reference on Chart Studio Cloud
-                for  symbol .
+                for `symbol`.
 """,
             ),
             **kwargs

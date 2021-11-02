@@ -72,7 +72,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -81,7 +81,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.streamtube.Hoverla
                 bel` instance or dict with compatible
@@ -123,7 +123,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             ids
@@ -133,7 +133,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -178,7 +178,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -263,7 +263,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that stays with it as it moves.
             usrc
                 Sets the source reference on Chart Studio Cloud
-                for  u .
+                for `u`.
             v
                 Sets the y components of the vector field.
             vhoverformat
@@ -280,7 +280,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
             vsrc
                 Sets the source reference on Chart Studio Cloud
-                for  v .
+                for `v`.
             w
                 Sets the z components of the vector field.
             whoverformat
@@ -292,7 +292,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 using generic number format.
             wsrc
                 Sets the source reference on Chart Studio Cloud
-                for  w .
+                for `w`.
             x
                 Sets the x coordinates of the vector field.
             xhoverformat
@@ -312,7 +312,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y coordinates of the vector field.
             yhoverformat
@@ -332,7 +332,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the z coordinates of the vector field.
             zhoverformat
@@ -352,7 +352,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

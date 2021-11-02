@@ -506,14 +506,14 @@ class Mesh3d(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -677,8 +677,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -743,8 +743,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def facecolorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  facecolor
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `facecolor`.
     
         The 'facecolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -812,8 +812,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -848,19 +848,19 @@ class Mesh3d(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -875,7 +875,7 @@ class Mesh3d(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -937,7 +937,7 @@ class Mesh3d(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -979,8 +979,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1048,7 +1048,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1110,8 +1110,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def intensitysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  intensity
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `intensity`.
     
         The 'intensitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1131,7 +1131,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def isrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  i .
+        Sets the source reference on Chart Studio Cloud for `i`.
     
         The 'isrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1177,7 +1177,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def jsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  j .
+        Sets the source reference on Chart Studio Cloud for `j`.
     
         The 'jsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1223,7 +1223,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def ksrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  k .
+        Sets the source reference on Chart Studio Cloud for `k`.
     
         The 'ksrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1428,7 +1428,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1641,7 +1641,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1740,7 +1740,7 @@ class Mesh3d(_BaseTraceType):
     def vertexcolorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        vertexcolor .
+        `vertexcolor`.
     
         The 'vertexcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1860,7 +1860,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1957,7 +1957,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2054,7 +2054,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2158,7 +2158,7 @@ class Mesh3d(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -2170,7 +2170,7 @@ class Mesh3d(_BaseTraceType):
             "vertexcolor".
         facecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            facecolor .
+            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
@@ -2182,7 +2182,7 @@ class Mesh3d(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -2216,12 +2216,12 @@ class Mesh3d(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2237,7 +2237,7 @@ class Mesh3d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
@@ -2246,10 +2246,10 @@ class Mesh3d(_BaseTraceType):
             Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on Chart Studio Cloud for
-            intensity .
+            `intensity`.
         isrc
-            Sets the source reference on Chart Studio Cloud for  i
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2260,8 +2260,8 @@ class Mesh3d(_BaseTraceType):
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
         jsrc
-            Sets the source reference on Chart Studio Cloud for  j
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2272,8 +2272,8 @@ class Mesh3d(_BaseTraceType):
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
         ksrc
-            Sets the source reference on Chart Studio Cloud for  k
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `k`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2310,7 +2310,7 @@ class Mesh3d(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2348,7 +2348,7 @@ class Mesh3d(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2379,7 +2379,7 @@ class Mesh3d(_BaseTraceType):
             between 0 and 1.
         vertexcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            vertexcolor .
+            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2405,8 +2405,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2427,8 +2427,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2449,8 +2449,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -2617,7 +2617,7 @@ class Mesh3d(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -2629,7 +2629,7 @@ class Mesh3d(_BaseTraceType):
             "vertexcolor".
         facecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            facecolor .
+            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
@@ -2641,7 +2641,7 @@ class Mesh3d(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -2675,12 +2675,12 @@ class Mesh3d(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2696,7 +2696,7 @@ class Mesh3d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
@@ -2705,10 +2705,10 @@ class Mesh3d(_BaseTraceType):
             Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on Chart Studio Cloud for
-            intensity .
+            `intensity`.
         isrc
-            Sets the source reference on Chart Studio Cloud for  i
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2719,8 +2719,8 @@ class Mesh3d(_BaseTraceType):
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
         jsrc
-            Sets the source reference on Chart Studio Cloud for  j
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2731,8 +2731,8 @@ class Mesh3d(_BaseTraceType):
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
         ksrc
-            Sets the source reference on Chart Studio Cloud for  k
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `k`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2769,7 +2769,7 @@ class Mesh3d(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2807,7 +2807,7 @@ class Mesh3d(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2838,7 +2838,7 @@ class Mesh3d(_BaseTraceType):
             between 0 and 1.
         vertexcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            vertexcolor .
+            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2864,8 +2864,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2886,8 +2886,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2908,8 +2908,8 @@ class Mesh3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

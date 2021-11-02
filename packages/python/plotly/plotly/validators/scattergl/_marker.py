@@ -85,7 +85,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Bu,Reds,Viridis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             line
                 :class:`plotly.graph_objects.scattergl.marker.L
                 ine` instance or dict with compatible
@@ -94,7 +94,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker opacity.
             opacitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  opacity .
+                for `opacity`.
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.color`is set to a
@@ -123,7 +123,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Use with `sizemin` and `sizemode`.
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
             symbol
                 Sets the marker symbol type. Adding 100 is
                 equivalent to appending "-open" to a symbol
@@ -133,7 +133,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 open" to a symbol name.
             symbolsrc
                 Sets the source reference on Chart Studio Cloud
-                for  symbol .
+                for `symbol`.
 """,
             ),
             **kwargs

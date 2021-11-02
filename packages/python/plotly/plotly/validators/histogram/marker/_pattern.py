@@ -18,7 +18,7 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 background.
             bgcolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  bgcolor .
+                for `bgcolor`.
             fgcolor
                 When there is no colorscale sets the color of
                 foreground pattern fill. Defaults to a
@@ -27,7 +27,7 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 white to increase contrast with the `bgcolor`.
             fgcolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  fgcolor .
+                for `fgcolor`.
             fgopacity
                 Sets the opacity of the foreground pattern
                 fill. Defaults to a 0.5 when `fillmode` is
@@ -40,14 +40,14 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 no pattern is used for filling the area.
             shapesrc
                 Sets the source reference on Chart Studio Cloud
-                for  shape .
+                for `shape`.
             size
                 Sets the size of unit squares of the pattern
                 fill in pixels, which corresponds to the
                 interval of repetition of the pattern.
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
             solidity
                 Sets the solidity of the pattern fill. Solidity
                 is roughly the fraction of the area filled by
@@ -57,7 +57,7 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 pattern.
             soliditysrc
                 Sets the source reference on Chart Studio Cloud
-                for  solidity .
+                for `solidity`.
 """,
             ),
             **kwargs
