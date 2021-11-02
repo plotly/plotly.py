@@ -44,7 +44,7 @@ Note that the AlignmentChart only returns a chart of the sequence, while Alignme
 import plotly.express as px
 import pandas as pd
 
-df = (pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Genetic/gene_conservation.csv')
+df = (pd.read_csv('https://git.io/gene_conservation.csv')
         .set_index('0')
         .loc[['consensus','conservation']]
         .T
@@ -56,7 +56,7 @@ fig.show()
 
 ## Alignment Chart in dash_bio
 
-```python no_display=true
+```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-alignmentchart', width='100%', height=630)
