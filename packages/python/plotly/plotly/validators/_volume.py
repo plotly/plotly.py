@@ -78,7 +78,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -91,7 +91,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.volume.Hoverlabel`
                 instance or dict with compatible properties
@@ -130,12 +130,12 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -143,7 +143,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             isomax
                 Sets the maximum boundary for iso-surface plot.
             isomin
@@ -188,7 +188,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -251,7 +251,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 elements will be seen in the hover labels.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -289,7 +289,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 using generic number format.
             valuesrc
                 Sets the source reference on Chart Studio Cloud
-                for  value .
+                for `value`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -315,7 +315,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the Y coordinates of the vertices on Y
                 axis.
@@ -336,7 +336,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the Z coordinates of the vertices on Z
                 axis.
@@ -357,7 +357,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

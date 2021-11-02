@@ -123,7 +123,7 @@ class Carpet(_BaseTraceType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -297,14 +297,14 @@ class Carpet(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 title
                     :class:`plotly.graph_objects.carpet.aaxis.Title
                     ` instance or dict with compatible properties
@@ -341,7 +341,7 @@ class Carpet(_BaseTraceType):
     @property
     def asrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  a .
+        Sets the source reference on Chart Studio Cloud for `a`.
     
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -433,7 +433,7 @@ class Carpet(_BaseTraceType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -607,14 +607,14 @@ class Carpet(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 title
                     :class:`plotly.graph_objects.carpet.baxis.Title
                     ` instance or dict with compatible properties
@@ -651,7 +651,7 @@ class Carpet(_BaseTraceType):
     @property
     def bsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  b .
+        Sets the source reference on Chart Studio Cloud for `b`.
     
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -800,8 +800,8 @@ class Carpet(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -929,7 +929,7 @@ class Carpet(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1030,7 +1030,7 @@ class Carpet(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1250,7 +1250,7 @@ class Carpet(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1315,7 +1315,7 @@ class Carpet(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1351,8 +1351,8 @@ class Carpet(_BaseTraceType):
             :class:`plotly.graph_objects.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             A two dimensional array of y coordinates at each carpet
             point.
@@ -1364,8 +1364,8 @@ class Carpet(_BaseTraceType):
             :class:`plotly.graph_objects.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -1386,7 +1386,7 @@ class Carpet(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the a coordinate step. See `a0` for more info.
         db
@@ -1400,7 +1400,7 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1427,7 +1427,7 @@ class Carpet(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1473,8 +1473,8 @@ class Carpet(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             A two dimensional array of y coordinates at each carpet
             point.
@@ -1484,8 +1484,8 @@ class Carpet(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
@@ -1552,8 +1552,8 @@ class Carpet(_BaseTraceType):
             :class:`plotly.graph_objects.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             A two dimensional array of y coordinates at each carpet
             point.
@@ -1565,8 +1565,8 @@ class Carpet(_BaseTraceType):
             :class:`plotly.graph_objects.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -1587,7 +1587,7 @@ class Carpet(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the a coordinate step. See `a0` for more info.
         db
@@ -1601,7 +1601,7 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1628,7 +1628,7 @@ class Carpet(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1674,8 +1674,8 @@ class Carpet(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             A two dimensional array of y coordinates at each carpet
             point.
@@ -1685,8 +1685,8 @@ class Carpet(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------

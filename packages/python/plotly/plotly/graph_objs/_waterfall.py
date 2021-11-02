@@ -230,8 +230,8 @@ class Waterfall(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -345,8 +345,8 @@ class Waterfall(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -381,19 +381,19 @@ class Waterfall(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -408,7 +408,7 @@ class Waterfall(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -471,7 +471,7 @@ class Waterfall(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -517,8 +517,8 @@ class Waterfall(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -560,7 +560,7 @@ class Waterfall(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -644,7 +644,7 @@ class Waterfall(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -664,12 +664,12 @@ class Waterfall(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -786,7 +786,7 @@ class Waterfall(_BaseTraceType):
     @property
     def measuresrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  measure .
+        Sets the source reference on Chart Studio Cloud for `measure`.
     
         The 'measuresrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -834,7 +834,7 @@ class Waterfall(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -922,7 +922,7 @@ class Waterfall(_BaseTraceType):
     @property
     def offsetsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  offset .
+        Sets the source reference on Chart Studio Cloud for `offset`.
     
         The 'offsetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -998,7 +998,7 @@ class Waterfall(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1018,12 +1018,12 @@ class Waterfall(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1184,7 +1184,7 @@ class Waterfall(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1204,12 +1204,12 @@ class Waterfall(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1281,7 +1281,7 @@ class Waterfall(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
+        `textposition`.
     
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1301,7 +1301,7 @@ class Waterfall(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1356,7 +1356,7 @@ class Waterfall(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
+        `texttemplate`.
     
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1503,7 +1503,7 @@ class Waterfall(_BaseTraceType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  width .
+        Sets the source reference on Chart Studio Cloud for `width`.
     
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1687,7 +1687,7 @@ class Waterfall(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1871,7 +1871,7 @@ class Waterfall(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1923,7 +1923,7 @@ class Waterfall(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.waterfall.Decreasing`
             instance or dict with compatible properties
@@ -1938,7 +1938,7 @@ class Waterfall(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.waterfall.Hoverlabel`
             instance or dict with compatible properties
@@ -1973,7 +1973,7 @@ class Waterfall(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -1983,14 +1983,14 @@ class Waterfall(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.waterfall.Increasing`
             instance or dict with compatible properties
@@ -2022,7 +2022,7 @@ class Waterfall(_BaseTraceType):
             or to declare an initial value where needed.
         measuresrc
             Sets the source reference on Chart Studio Cloud for
-            measure .
+            `measure`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2038,7 +2038,7 @@ class Waterfall(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2053,7 +2053,7 @@ class Waterfall(_BaseTraceType):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -2107,10 +2107,10 @@ class Waterfall(_BaseTraceType):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2130,7 +2130,7 @@ class Waterfall(_BaseTraceType):
             and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         totals
             :class:`plotly.graph_objects.waterfall.Totals` instance
             or dict with compatible properties
@@ -2165,7 +2165,7 @@ class Waterfall(_BaseTraceType):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2207,8 +2207,8 @@ class Waterfall(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2250,8 +2250,8 @@ class Waterfall(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
@@ -2370,7 +2370,7 @@ class Waterfall(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.waterfall.Decreasing`
             instance or dict with compatible properties
@@ -2385,7 +2385,7 @@ class Waterfall(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.waterfall.Hoverlabel`
             instance or dict with compatible properties
@@ -2420,7 +2420,7 @@ class Waterfall(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2430,14 +2430,14 @@ class Waterfall(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.waterfall.Increasing`
             instance or dict with compatible properties
@@ -2469,7 +2469,7 @@ class Waterfall(_BaseTraceType):
             or to declare an initial value where needed.
         measuresrc
             Sets the source reference on Chart Studio Cloud for
-            measure .
+            `measure`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2485,7 +2485,7 @@ class Waterfall(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2500,7 +2500,7 @@ class Waterfall(_BaseTraceType):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -2554,10 +2554,10 @@ class Waterfall(_BaseTraceType):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2577,7 +2577,7 @@ class Waterfall(_BaseTraceType):
             and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         totals
             :class:`plotly.graph_objects.waterfall.Totals` instance
             or dict with compatible properties
@@ -2612,7 +2612,7 @@ class Waterfall(_BaseTraceType):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2654,8 +2654,8 @@ class Waterfall(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2697,8 +2697,8 @@ class Waterfall(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------

@@ -69,7 +69,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             histfunc
                 Specifies the binning function used for this
                 histogram trace. If "count", the histogram
@@ -105,7 +105,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.histogram2d.Hoverl
                 abel` instance or dict with compatible
@@ -145,7 +145,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -153,7 +153,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -191,7 +191,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -297,7 +297,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the sample data to be binned on the y
                 axis.
@@ -341,7 +341,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the aggregation data.
             zauto
@@ -376,7 +376,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

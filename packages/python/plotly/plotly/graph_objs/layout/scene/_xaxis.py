@@ -229,7 +229,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def categoryarraysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        categoryarray .
+        `categoryarray`.
     
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1444,7 +1444,7 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1485,7 +1485,7 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  tickvals .
+        Sets the source reference on Chart Studio Cloud for `tickvals`.
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1777,7 +1777,7 @@ class XAxis(_BaseLayoutHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1988,14 +1988,14 @@ class XAxis(_BaseLayoutHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -2121,7 +2121,7 @@ class XAxis(_BaseLayoutHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2332,14 +2332,14 @@ class XAxis(_BaseLayoutHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title

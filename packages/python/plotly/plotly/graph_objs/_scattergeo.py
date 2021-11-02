@@ -110,8 +110,8 @@ class Scattergeo(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -314,8 +314,8 @@ class Scattergeo(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -350,19 +350,19 @@ class Scattergeo(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -377,7 +377,7 @@ class Scattergeo(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -439,7 +439,7 @@ class Scattergeo(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -486,8 +486,8 @@ class Scattergeo(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -529,7 +529,7 @@ class Scattergeo(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -569,7 +569,7 @@ class Scattergeo(_BaseTraceType):
     @property
     def latsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  lat .
+        Sets the source reference on Chart Studio Cloud for `lat`.
     
         The 'latsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -745,8 +745,8 @@ class Scattergeo(_BaseTraceType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  locations
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `locations`.
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -786,7 +786,7 @@ class Scattergeo(_BaseTraceType):
     @property
     def lonsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  lon .
+        Sets the source reference on Chart Studio Cloud for `lon`.
     
         The 'lonsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -889,7 +889,7 @@ class Scattergeo(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 gradient
                     :class:`plotly.graph_objects.scattergeo.marker.
                     Gradient` instance or dict with compatible
@@ -902,7 +902,7 @@ class Scattergeo(_BaseTraceType):
                     Sets the marker opacity.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.color`is set to a
@@ -931,7 +931,7 @@ class Scattergeo(_BaseTraceType):
                     Use with `sizemin` and `sizemode`.
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
                 symbol
                     Sets the marker symbol type. Adding 100 is
                     equivalent to appending "-open" to a symbol
@@ -941,7 +941,7 @@ class Scattergeo(_BaseTraceType):
                     open" to a symbol name.
                 symbolsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  symbol .
+                    for `symbol`.
 
         Returns
         -------
@@ -986,7 +986,7 @@ class Scattergeo(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1228,7 +1228,7 @@ class Scattergeo(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1248,12 +1248,12 @@ class Scattergeo(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1296,7 +1296,7 @@ class Scattergeo(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
+        `textposition`.
     
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1316,7 +1316,7 @@ class Scattergeo(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1371,7 +1371,7 @@ class Scattergeo(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
+        `texttemplate`.
     
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1517,7 +1517,7 @@ class Scattergeo(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1553,7 +1553,7 @@ class Scattergeo(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergeo.Hoverlabel`
             instance or dict with compatible properties
@@ -1587,7 +1587,7 @@ class Scattergeo(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair or item in `locations`. If a single string, the
@@ -1597,19 +1597,19 @@ class Scattergeo(_BaseTraceType):
             be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on Chart Studio Cloud for
-            lat .
+            `lat`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1641,12 +1641,12 @@ class Scattergeo(_BaseTraceType):
             given. See `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on Chart Studio Cloud for
-            lon .
+            `lon`.
         marker
             :class:`plotly.graph_objects.scattergeo.Marker`
             instance or dict with compatible properties
@@ -1665,7 +1665,7 @@ class Scattergeo(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -1710,10 +1710,10 @@ class Scattergeo(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -1733,7 +1733,7 @@ class Scattergeo(_BaseTraceType):
             `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1843,7 +1843,7 @@ class Scattergeo(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1879,7 +1879,7 @@ class Scattergeo(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergeo.Hoverlabel`
             instance or dict with compatible properties
@@ -1913,7 +1913,7 @@ class Scattergeo(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair or item in `locations`. If a single string, the
@@ -1923,19 +1923,19 @@ class Scattergeo(_BaseTraceType):
             be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on Chart Studio Cloud for
-            lat .
+            `lat`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1967,12 +1967,12 @@ class Scattergeo(_BaseTraceType):
             given. See `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on Chart Studio Cloud for
-            lon .
+            `lon`.
         marker
             :class:`plotly.graph_objects.scattergeo.Marker`
             instance or dict with compatible properties
@@ -1991,7 +1991,7 @@ class Scattergeo(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2036,10 +2036,10 @@ class Scattergeo(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2059,7 +2059,7 @@ class Scattergeo(_BaseTraceType):
             `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and

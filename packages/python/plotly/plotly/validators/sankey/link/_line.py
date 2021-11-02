@@ -15,13 +15,13 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `link`.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             width
                 Sets the width (in px) of the `line` around
                 each `link`.
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
 """,
             ),
             **kwargs

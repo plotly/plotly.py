@@ -109,7 +109,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def asrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  a .
+        Sets the source reference on Chart Studio Cloud for `a`.
     
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -242,7 +242,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def bsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  b .
+        Sets the source reference on Chart Studio Cloud for `b`.
     
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -519,14 +519,14 @@ class Contourcarpet(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -744,8 +744,8 @@ class Contourcarpet(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -888,8 +888,8 @@ class Contourcarpet(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -931,7 +931,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1096,7 +1096,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1299,7 +1299,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1574,7 +1574,7 @@ class Contourcarpet(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1607,8 +1607,8 @@ class Contourcarpet(_BaseTraceType):
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1634,8 +1634,8 @@ class Contourcarpet(_BaseTraceType):
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1677,7 +1677,7 @@ class Contourcarpet(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -1691,14 +1691,14 @@ class Contourcarpet(_BaseTraceType):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1732,7 +1732,7 @@ class Contourcarpet(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1761,7 +1761,7 @@ class Contourcarpet(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1822,8 +1822,8 @@ class Contourcarpet(_BaseTraceType):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1901,8 +1901,8 @@ class Contourcarpet(_BaseTraceType):
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1928,8 +1928,8 @@ class Contourcarpet(_BaseTraceType):
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1971,7 +1971,7 @@ class Contourcarpet(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -1985,14 +1985,14 @@ class Contourcarpet(_BaseTraceType):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2026,7 +2026,7 @@ class Contourcarpet(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2055,7 +2055,7 @@ class Contourcarpet(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -2116,8 +2116,8 @@ class Contourcarpet(_BaseTraceType):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

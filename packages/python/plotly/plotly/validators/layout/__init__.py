@@ -21,6 +21,7 @@ if sys.version_info < (3, 7):
     from ._template import TemplateValidator
     from ._sunburstcolorway import SunburstcolorwayValidator
     from ._spikedistance import SpikedistanceValidator
+    from ._smith import SmithValidator
     from ._sliderdefaults import SliderdefaultsValidator
     from ._sliders import SlidersValidator
     from ._showlegend import ShowlegendValidator
@@ -111,6 +112,7 @@ else:
             "._template.TemplateValidator",
             "._sunburstcolorway.SunburstcolorwayValidator",
             "._spikedistance.SpikedistanceValidator",
+            "._smith.SmithValidator",
             "._sliderdefaults.SliderdefaultsValidator",
             "._sliders.SlidersValidator",
             "._showlegend.ShowlegendValidator",

@@ -196,8 +196,8 @@ class Box(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -346,8 +346,8 @@ class Box(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -382,19 +382,19 @@ class Box(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -409,7 +409,7 @@ class Box(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -494,7 +494,7 @@ class Box(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -536,8 +536,8 @@ class Box(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -579,7 +579,7 @@ class Box(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -751,8 +751,8 @@ class Box(_BaseTraceType):
     @property
     def lowerfencesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  lowerfence
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `lowerfence`.
     
         The 'lowerfencesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -842,7 +842,7 @@ class Box(_BaseTraceType):
     @property
     def meansrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  mean .
+        Sets the source reference on Chart Studio Cloud for `mean`.
     
         The 'meansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -883,7 +883,7 @@ class Box(_BaseTraceType):
     @property
     def mediansrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  median .
+        Sets the source reference on Chart Studio Cloud for `median`.
     
         The 'mediansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -931,7 +931,7 @@ class Box(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1028,8 +1028,8 @@ class Box(_BaseTraceType):
     @property
     def notchspansrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  notchspan
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `notchspan`.
     
         The 'notchspansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1180,7 +1180,7 @@ class Box(_BaseTraceType):
     @property
     def q1src(self):
         """
-        Sets the source reference on Chart Studio Cloud for  q1 .
+        Sets the source reference on Chart Studio Cloud for `q1`.
     
         The 'q1src' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1221,7 +1221,7 @@ class Box(_BaseTraceType):
     @property
     def q3src(self):
         """
-        Sets the source reference on Chart Studio Cloud for  q3 .
+        Sets the source reference on Chart Studio Cloud for `q3`.
     
         The 'q3src' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1297,7 +1297,7 @@ class Box(_BaseTraceType):
     @property
     def sdsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  sd .
+        Sets the source reference on Chart Studio Cloud for `sd`.
     
         The 'sdsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1448,7 +1448,7 @@ class Box(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1575,8 +1575,8 @@ class Box(_BaseTraceType):
     @property
     def upperfencesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  upperfence
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `upperfence`.
     
         The 'upperfencesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1851,7 +1851,7 @@ class Box(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2060,7 +2060,7 @@ class Box(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2115,7 +2115,7 @@ class Box(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -2133,7 +2133,7 @@ class Box(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
@@ -2170,19 +2170,19 @@ class Box(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -2215,7 +2215,7 @@ class Box(_BaseTraceType):
             point below 1.5 times the IQR.
         lowerfencesrc
             Sets the source reference on Chart Studio Cloud for
-            lowerfence .
+            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -2227,13 +2227,13 @@ class Box(_BaseTraceType):
             compute the mean for each box using the sample values.
         meansrc
             Sets the source reference on Chart Studio Cloud for
-            mean .
+            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
         mediansrc
             Sets the source reference on Chart Studio Cloud for
-            median .
+            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2249,7 +2249,7 @@ class Box(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For box traces, the name will
@@ -2275,7 +2275,7 @@ class Box(_BaseTraceType):
             1.57 * IQR / sqrt(N), where N is the sample size.
         notchspansrc
             Sets the source reference on Chart Studio Cloud for
-            notchspan .
+            `notchspan`.
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -2300,14 +2300,14 @@ class Box(_BaseTraceType):
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
         q1src
-            Sets the source reference on Chart Studio Cloud for  q1
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
         q3src
-            Sets the source reference on Chart Studio Cloud for  q3
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -2331,8 +2331,8 @@ class Box(_BaseTraceType):
             or `x`) is set, we compute the standard deviation for
             each box using the sample values.
         sdsrc
-            Sets the source reference on Chart Studio Cloud for  sd
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -2358,7 +2358,7 @@ class Box(_BaseTraceType):
             a "text" flag.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2393,7 +2393,7 @@ class Box(_BaseTraceType):
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
-            upperfence .
+            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2452,8 +2452,8 @@ class Box(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -2498,8 +2498,8 @@ class Box(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
@@ -2649,7 +2649,7 @@ class Box(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -2667,7 +2667,7 @@ class Box(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
@@ -2704,19 +2704,19 @@ class Box(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -2749,7 +2749,7 @@ class Box(_BaseTraceType):
             point below 1.5 times the IQR.
         lowerfencesrc
             Sets the source reference on Chart Studio Cloud for
-            lowerfence .
+            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -2761,13 +2761,13 @@ class Box(_BaseTraceType):
             compute the mean for each box using the sample values.
         meansrc
             Sets the source reference on Chart Studio Cloud for
-            mean .
+            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
         mediansrc
             Sets the source reference on Chart Studio Cloud for
-            median .
+            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2783,7 +2783,7 @@ class Box(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For box traces, the name will
@@ -2809,7 +2809,7 @@ class Box(_BaseTraceType):
             1.57 * IQR / sqrt(N), where N is the sample size.
         notchspansrc
             Sets the source reference on Chart Studio Cloud for
-            notchspan .
+            `notchspan`.
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -2834,14 +2834,14 @@ class Box(_BaseTraceType):
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
         q1src
-            Sets the source reference on Chart Studio Cloud for  q1
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
         q3src
-            Sets the source reference on Chart Studio Cloud for  q3
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -2865,8 +2865,8 @@ class Box(_BaseTraceType):
             or `x`) is set, we compute the standard deviation for
             each box using the sample values.
         sdsrc
-            Sets the source reference on Chart Studio Cloud for  sd
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -2892,7 +2892,7 @@ class Box(_BaseTraceType):
             a "text" flag.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2927,7 +2927,7 @@ class Box(_BaseTraceType):
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
-            upperfence .
+            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2986,8 +2986,8 @@ class Box(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -3032,8 +3032,8 @@ class Box(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------

@@ -399,14 +399,14 @@ class Streamtube(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -539,8 +539,8 @@ class Streamtube(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -586,8 +586,8 @@ class Streamtube(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -622,19 +622,19 @@ class Streamtube(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -649,7 +649,7 @@ class Streamtube(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -713,7 +713,7 @@ class Streamtube(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -776,7 +776,7 @@ class Streamtube(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1002,7 +1002,7 @@ class Streamtube(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1193,19 +1193,19 @@ class Streamtube(_BaseTraceType):
                     of the streamtubes
                 xsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  x .
+                    for `x`.
                 y
                     Sets the y components of the starting position
                     of the streamtubes
                 ysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  y .
+                    for `y`.
                 z
                     Sets the z components of the starting position
                     of the streamtubes
                 zsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  z .
+                    for `z`.
 
         Returns
         -------
@@ -1379,7 +1379,7 @@ class Streamtube(_BaseTraceType):
     @property
     def usrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  u .
+        Sets the source reference on Chart Studio Cloud for `u`.
     
         The 'usrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1467,7 +1467,7 @@ class Streamtube(_BaseTraceType):
     @property
     def vsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  v .
+        Sets the source reference on Chart Studio Cloud for `v`.
     
         The 'vsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1532,7 +1532,7 @@ class Streamtube(_BaseTraceType):
     @property
     def wsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  w .
+        Sets the source reference on Chart Studio Cloud for `w`.
     
         The 'wsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1603,7 +1603,7 @@ class Streamtube(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1674,7 +1674,7 @@ class Streamtube(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1745,7 +1745,7 @@ class Streamtube(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1825,7 +1825,7 @@ class Streamtube(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1833,7 +1833,7 @@ class Streamtube(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -1869,7 +1869,7 @@ class Streamtube(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         ids
@@ -1878,7 +1878,7 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1918,7 +1918,7 @@ class Streamtube(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1992,8 +1992,8 @@ class Streamtube(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         usrc
-            Sets the source reference on Chart Studio Cloud for  u
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
@@ -2008,8 +2008,8 @@ class Streamtube(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         vsrc
-            Sets the source reference on Chart Studio Cloud for  v
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
@@ -2019,8 +2019,8 @@ class Streamtube(_BaseTraceType):
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
         wsrc
-            Sets the source reference on Chart Studio Cloud for  w
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
@@ -2037,8 +2037,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
@@ -2055,8 +2055,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
@@ -2073,8 +2073,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -2211,7 +2211,7 @@ class Streamtube(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -2219,7 +2219,7 @@ class Streamtube(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -2255,7 +2255,7 @@ class Streamtube(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         ids
@@ -2264,7 +2264,7 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2304,7 +2304,7 @@ class Streamtube(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2378,8 +2378,8 @@ class Streamtube(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         usrc
-            Sets the source reference on Chart Studio Cloud for  u
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
@@ -2394,8 +2394,8 @@ class Streamtube(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         vsrc
-            Sets the source reference on Chart Studio Cloud for  v
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
@@ -2405,8 +2405,8 @@ class Streamtube(_BaseTraceType):
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
         wsrc
-            Sets the source reference on Chart Studio Cloud for  w
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
@@ -2423,8 +2423,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
@@ -2441,8 +2441,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
@@ -2459,8 +2459,8 @@ class Streamtube(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

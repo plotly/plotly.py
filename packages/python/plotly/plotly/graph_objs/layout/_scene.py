@@ -550,7 +550,7 @@ class Scene(_BaseLayoutHierarchyType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -786,14 +786,14 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -874,7 +874,7 @@ class Scene(_BaseLayoutHierarchyType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -1110,14 +1110,14 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -1198,7 +1198,7 @@ class Scene(_BaseLayoutHierarchyType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -1434,14 +1434,14 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title

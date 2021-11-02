@@ -228,7 +228,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hide slices from several pies/funnelarea charts
             hiddenlabelssrc
                 Sets the source reference on Chart Studio Cloud
-                for  hiddenlabels .
+                for `hiddenlabels`.
             hidesources
                 Determines whether or not a text link citing
                 the data source is placed at the bottom-right
@@ -304,7 +304,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 accessed %{meta[key]}.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
@@ -369,6 +369,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 layout.template.layout.sliderdefaults), sets
                 the default property values to use for elements
                 of layout.sliders
+            smith
+                :class:`plotly.graph_objects.layout.Smith`
+                instance or dict with compatible properties
             spikedistance
                 Sets the default distance (in pixels) to look
                 for data to draw spikelines to (-1 means no

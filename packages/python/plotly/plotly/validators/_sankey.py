@@ -28,7 +28,7 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             domain
                 :class:`plotly.graph_objects.sankey.Domain`
                 instance or dict with compatible properties
@@ -50,7 +50,7 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgrouptitle
                 :class:`plotly.graph_objects.sankey.Legendgroup
                 title` instance or dict with compatible
@@ -83,7 +83,7 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.

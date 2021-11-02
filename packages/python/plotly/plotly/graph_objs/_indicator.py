@@ -84,8 +84,8 @@ class Indicator(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -266,7 +266,7 @@ class Indicator(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -367,7 +367,7 @@ class Indicator(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -651,7 +651,7 @@ class Indicator(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -666,7 +666,7 @@ class Indicator(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -693,7 +693,7 @@ class Indicator(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.
@@ -796,7 +796,7 @@ class Indicator(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -811,7 +811,7 @@ class Indicator(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -838,7 +838,7 @@ class Indicator(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.

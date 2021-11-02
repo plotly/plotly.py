@@ -16,7 +16,7 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array of colors.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
 """,
             ),
             **kwargs

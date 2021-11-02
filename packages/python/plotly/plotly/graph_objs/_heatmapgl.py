@@ -297,14 +297,14 @@ class Heatmapgl(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -437,8 +437,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -524,8 +524,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -560,19 +560,19 @@ class Heatmapgl(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -587,7 +587,7 @@ class Heatmapgl(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -626,7 +626,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -727,7 +727,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -885,7 +885,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1069,7 +1069,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1179,7 +1179,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1351,7 +1351,7 @@ class Heatmapgl(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1413,7 +1413,7 @@ class Heatmapgl(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1425,7 +1425,7 @@ class Heatmapgl(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmapgl.Hoverlabel`
             instance or dict with compatible properties
@@ -1435,7 +1435,7 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1462,7 +1462,7 @@ class Heatmapgl(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1482,7 +1482,7 @@ class Heatmapgl(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1524,8 +1524,8 @@ class Heatmapgl(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1544,8 +1544,8 @@ class Heatmapgl(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1575,8 +1575,8 @@ class Heatmapgl(_BaseTraceType):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1679,7 +1679,7 @@ class Heatmapgl(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1691,7 +1691,7 @@ class Heatmapgl(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmapgl.Hoverlabel`
             instance or dict with compatible properties
@@ -1701,7 +1701,7 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1728,7 +1728,7 @@ class Heatmapgl(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1748,7 +1748,7 @@ class Heatmapgl(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1790,8 +1790,8 @@ class Heatmapgl(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1810,8 +1810,8 @@ class Heatmapgl(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1841,8 +1841,8 @@ class Heatmapgl(_BaseTraceType):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

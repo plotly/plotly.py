@@ -62,8 +62,8 @@ class Parcoords(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -151,13 +151,13 @@ class Parcoords(_BaseTraceType):
                     via `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 values
                     Dimension values. `values[n]` represents the
                     value of the `n`th point in the dataset,
@@ -167,7 +167,7 @@ class Parcoords(_BaseTraceType):
                     number.
                 valuessrc
                     Sets the source reference on Chart Studio Cloud
-                    for  values .
+                    for `values`.
                 visible
                     Shows the dimension when set to `true` (the
                     default). Hides the dimension for `false`.
@@ -274,7 +274,7 @@ class Parcoords(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -525,7 +525,7 @@ class Parcoords(_BaseTraceType):
                     dis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `line.color`is set to a
@@ -580,7 +580,7 @@ class Parcoords(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -838,7 +838,7 @@ class Parcoords(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -856,7 +856,7 @@ class Parcoords(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -900,7 +900,7 @@ class Parcoords(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -986,7 +986,7 @@ class Parcoords(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -1004,7 +1004,7 @@ class Parcoords(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -1048,7 +1048,7 @@ class Parcoords(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.

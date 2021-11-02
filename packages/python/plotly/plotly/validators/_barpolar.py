@@ -17,7 +17,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "overlay" mode instead.
             basesrc
                 Sets the source reference on Chart Studio Cloud
-                for  base .
+                for `base`.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -26,7 +26,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dr
                 Sets the r coordinate step.
             dtheta
@@ -41,7 +41,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.barpolar.Hoverlabe
                 l` instance or dict with compatible properties
@@ -80,12 +80,12 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -93,7 +93,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -131,7 +131,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -140,7 +140,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn (in "thetatunit" units).
             offsetsrc
                 Sets the source reference on Chart Studio Cloud
-                for  offset .
+                for `offset`.
             opacity
                 Sets the opacity of the trace.
             r
@@ -151,7 +151,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dr` the step.
             rsrc
                 Sets the source reference on Chart Studio Cloud
-                for  r .
+                for `r`.
             selected
                 :class:`plotly.graph_objects.barpolar.Selected`
                 instance or dict with compatible properties
@@ -184,7 +184,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace's coordinates.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             theta
                 Sets the angular coordinates
             theta0
@@ -194,7 +194,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `dtheta` the step.
             thetasrc
                 Sets the source reference on Chart Studio Cloud
-                for  theta .
+                for `theta`.
             thetaunit
                 Sets the unit of input "theta" values. Has an
                 effect only when on "linear" angular axes.
@@ -237,7 +237,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 units).
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
 """,
             ),
             **kwargs

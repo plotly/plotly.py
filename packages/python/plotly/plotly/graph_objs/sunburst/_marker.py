@@ -358,14 +358,14 @@ class Marker(_BaseTraceHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -497,7 +497,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def colorssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  colors .
+        Sets the source reference on Chart Studio Cloud for `colors`.
     
         The 'colorssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -530,13 +530,13 @@ class Marker(_BaseTraceHierarchyType):
                     sector. Defaults to the `paper_bgcolor` value.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the line enclosing
                     each sector.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -659,7 +659,7 @@ class Marker(_BaseTraceHierarchyType):
             d.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
-            colors .
+            `colors`.
         line
             :class:`plotly.graph_objects.sunburst.marker.Line`
             instance or dict with compatible properties
@@ -764,7 +764,7 @@ class Marker(_BaseTraceHierarchyType):
             d.
         colorssrc
             Sets the source reference on Chart Studio Cloud for
-            colors .
+            `colors`.
         line
             :class:`plotly.graph_objects.sunburst.marker.Line`
             instance or dict with compatible properties

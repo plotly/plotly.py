@@ -85,7 +85,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             dash
                 Sets the dash style of the lines.
             reversescale

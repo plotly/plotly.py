@@ -147,6 +147,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 A tuple of
                 :class:`plotly.graph_objects.Scatter` instances
                 or dicts with compatible properties
+            scattersmith
+                A tuple of
+                :class:`plotly.graph_objects.Scattersmith`
+                instances or dicts with compatible properties
             scatterternary
                 A tuple of
                 :class:`plotly.graph_objects.Scatterternary`

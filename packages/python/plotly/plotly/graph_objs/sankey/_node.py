@@ -99,7 +99,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -139,8 +139,8 @@ class Node(_BaseTraceHierarchyType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -223,19 +223,19 @@ class Node(_BaseTraceHierarchyType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -250,7 +250,7 @@ class Node(_BaseTraceHierarchyType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -313,7 +313,7 @@ class Node(_BaseTraceHierarchyType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -353,7 +353,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def labelsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  label .
+        Sets the source reference on Chart Studio Cloud for `label`.
     
         The 'labelsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -386,13 +386,13 @@ class Node(_BaseTraceHierarchyType):
                     `node`.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the `line` around
                     each `node`.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -469,7 +469,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -509,7 +509,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -538,12 +538,12 @@ class Node(_BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each node.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
@@ -587,12 +587,12 @@ class Node(_BaseTraceHierarchyType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the node.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
@@ -603,13 +603,13 @@ class Node(_BaseTraceHierarchyType):
         x
             The normalized horizontal position of the node.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             The normalized vertical position of the node.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
@@ -654,12 +654,12 @@ class Node(_BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each node.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
@@ -703,12 +703,12 @@ class Node(_BaseTraceHierarchyType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the node.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
@@ -719,13 +719,13 @@ class Node(_BaseTraceHierarchyType):
         x
             The normalized horizontal position of the node.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             The normalized vertical position of the node.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------

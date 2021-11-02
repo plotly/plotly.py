@@ -14,7 +14,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the close values.
             closesrc
                 Sets the source reference on Chart Studio Cloud
-                for  close .
+                for `close`.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -23,7 +23,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             decreasing
                 :class:`plotly.graph_objects.candlestick.Decrea
                 sing` instance or dict with compatible
@@ -32,7 +32,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the high values.
             highsrc
                 Sets the source reference on Chart Studio Cloud
-                for  high .
+                for `high`.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -41,7 +41,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.candlestick.Hoverl
                 abel` instance or dict with compatible
@@ -50,7 +50,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -58,7 +58,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             increasing
                 :class:`plotly.graph_objects.candlestick.Increa
                 sing` instance or dict with compatible
@@ -88,7 +88,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the low values.
             lowsrc
                 Sets the source reference on Chart Studio Cloud
-                for  low .
+                for `low`.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -105,7 +105,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -115,7 +115,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the open values.
             opensrc
                 Sets the source reference on Chart Studio Cloud
-                for  open .
+                for `open`.
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -139,7 +139,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to this trace's sample points.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -223,7 +223,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"

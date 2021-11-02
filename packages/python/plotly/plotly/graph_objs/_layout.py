@@ -10,6 +10,7 @@ class Layout(_BaseLayoutType):
         "mapbox",
         "polar",
         "scene",
+        "smith",
         "ternary",
         "xaxis",
         "yaxis",
@@ -34,6 +35,7 @@ class Layout(_BaseLayoutType):
             MapboxValidator,
             PolarValidator,
             SceneValidator,
+            SmithValidator,
             TernaryValidator,
             XaxisValidator,
             YaxisValidator,
@@ -45,6 +47,7 @@ class Layout(_BaseLayoutType):
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
+            "smith": SmithValidator,
             "ternary": TernaryValidator,
             "xaxis": XaxisValidator,
             "yaxis": YaxisValidator,
@@ -121,6 +124,7 @@ class Layout(_BaseLayoutType):
         "showlegend",
         "sliderdefaults",
         "sliders",
+        "smith",
         "spikedistance",
         "sunburstcolorway",
         "template",
@@ -1591,7 +1595,7 @@ class Layout(_BaseLayoutType):
     def hiddenlabelssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hiddenlabels .
+        `hiddenlabels`.
     
         The 'hiddenlabelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2189,7 +2193,7 @@ class Layout(_BaseLayoutType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2233,7 +2237,7 @@ class Layout(_BaseLayoutType):
                     "eraseshape".
                 addsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  add .
+                    for `add`.
                 bgcolor
                     Sets the background color of the modebar.
                 color
@@ -2266,7 +2270,7 @@ class Layout(_BaseLayoutType):
                     "zoomout".
                 removesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  remove .
+                    for `remove`.
                 uirevision
                     Controls persistence of user-driven changes
                     related to the modebar, including `hovermode`,
@@ -3088,6 +3092,43 @@ class Layout(_BaseLayoutType):
     def sliderdefaults(self, val):
         self["sliderdefaults"] = val
 
+    # smith
+    # -----
+    @property
+    def smith(self):
+        """
+        The 'smith' property is an instance of Smith
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Smith`
+          - A dict of string/value properties that will be passed
+            to the Smith constructor
+    
+            Supported dict properties:
+                
+                bgcolor
+                    Set the background color of the subplot
+                domain
+                    :class:`plotly.graph_objects.layout.smith.Domai
+                    n` instance or dict with compatible properties
+                imaginaryaxis
+                    :class:`plotly.graph_objects.layout.smith.Imagi
+                    naryaxis` instance or dict with compatible
+                    properties
+                realaxis
+                    :class:`plotly.graph_objects.layout.smith.Reala
+                    xis` instance or dict with compatible
+                    properties
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Smith
+        """
+        return self["smith"]
+
+    @smith.setter
+    def smith(self, val):
+        self["smith"] = val
+
     # spikedistance
     # -------------
     @property
@@ -3835,7 +3876,7 @@ class Layout(_BaseLayoutType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -4230,14 +4271,14 @@ class Layout(_BaseLayoutType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -4328,7 +4369,7 @@ class Layout(_BaseLayoutType):
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -4715,14 +4756,14 @@ class Layout(_BaseLayoutType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -4967,7 +5008,7 @@ class Layout(_BaseLayoutType):
             pies/funnelarea charts
         hiddenlabelssrc
             Sets the source reference on Chart Studio Cloud for
-            hiddenlabels .
+            `hiddenlabels`.
         hidesources
             Determines whether or not a text link citing the data
             source is placed at the bottom-right cored of the
@@ -5036,7 +5077,7 @@ class Layout(_BaseLayoutType):
             %{meta[key]}.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -5095,6 +5136,9 @@ class Layout(_BaseLayoutType):
             layout.template.layout.sliderdefaults), sets the
             default property values to use for elements of
             layout.sliders
+        smith
+            :class:`plotly.graph_objects.layout.Smith` instance or
+            dict with compatible properties
         spikedistance
             Sets the default distance (in pixels) to look for data
             to draw spikelines to (-1 means no cutoff, 0 means no
@@ -5286,6 +5330,7 @@ class Layout(_BaseLayoutType):
         showlegend=None,
         sliders=None,
         sliderdefaults=None,
+        smith=None,
         spikedistance=None,
         sunburstcolorway=None,
         template=None,
@@ -5512,7 +5557,7 @@ class Layout(_BaseLayoutType):
             pies/funnelarea charts
         hiddenlabelssrc
             Sets the source reference on Chart Studio Cloud for
-            hiddenlabels .
+            `hiddenlabels`.
         hidesources
             Determines whether or not a text link citing the data
             source is placed at the bottom-right cored of the
@@ -5581,7 +5626,7 @@ class Layout(_BaseLayoutType):
             %{meta[key]}.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -5640,6 +5685,9 @@ class Layout(_BaseLayoutType):
             layout.template.layout.sliderdefaults), sets the
             default property values to use for elements of
             layout.sliders
+        smith
+            :class:`plotly.graph_objects.layout.Smith` instance or
+            dict with compatible properties
         spikedistance
             Sets the default distance (in pixels) to look for data
             to draw spikelines to (-1 means no cutoff, 0 means no
@@ -5838,6 +5886,7 @@ class Layout(_BaseLayoutType):
             "showlegend",
             "sliderdefaults",
             "sliders",
+            "smith",
             "spikedistance",
             "sunburstcolorway",
             "template",
@@ -6136,6 +6185,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = sliderdefaults if sliderdefaults is not None else _v
         if _v is not None:
             self["sliderdefaults"] = _v
+        _v = arg.pop("smith", None)
+        _v = smith if smith is not None else _v
+        if _v is not None:
+            self["smith"] = _v
         _v = arg.pop("spikedistance", None)
         _v = spikedistance if spikedistance is not None else _v
         if _v is not None:
