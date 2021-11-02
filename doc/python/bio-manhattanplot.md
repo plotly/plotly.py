@@ -40,7 +40,8 @@ ManhattanPlot allows you to visualize genome-wide association studies (GWAS) eff
 import pandas as pd
 import dash_bio
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
+
+df = pd.read_csv('https://git.io/manhattan_data.csv')
 
 
 dash_bio.ManhattanPlot(
@@ -56,7 +57,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
+df = pd.read_csv('https://git.io/manhattan_data.csv')
 
 dash_bio.ManhattanPlot(
     dataframe=df,
@@ -68,7 +69,7 @@ dash_bio.ManhattanPlot(
 
 ## ManhattanPlot with Dash
 
-```python no_display=true
+```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-manhattanplot', width='100%', height=630)
