@@ -89,7 +89,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def asrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  a .
+        Sets the source reference on Chart Studio Cloud for `a`.
     
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -132,7 +132,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def bsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  b .
+        Sets the source reference on Chart Studio Cloud for `b`.
     
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -219,7 +219,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def csrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  c .
+        Sets the source reference on Chart Studio Cloud for `c`.
     
         The 'csrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -262,8 +262,8 @@ class Scatterternary(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -399,8 +399,8 @@ class Scatterternary(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -435,19 +435,19 @@ class Scatterternary(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -462,7 +462,7 @@ class Scatterternary(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -549,7 +549,7 @@ class Scatterternary(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -595,8 +595,8 @@ class Scatterternary(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -638,7 +638,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -860,7 +860,7 @@ class Scatterternary(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 gradient
                     :class:`plotly.graph_objects.scatterternary.mar
                     ker.Gradient` instance or dict with compatible
@@ -876,7 +876,7 @@ class Scatterternary(_BaseTraceType):
                     Sets the marker opacity.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.color`is set to a
@@ -905,7 +905,7 @@ class Scatterternary(_BaseTraceType):
                     Use with `sizemin` and `sizemode`.
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
                 symbol
                     Sets the marker symbol type. Adding 100 is
                     equivalent to appending "-open" to a symbol
@@ -915,7 +915,7 @@ class Scatterternary(_BaseTraceType):
                     open" to a symbol name.
                 symbolsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  symbol .
+                    for `symbol`.
 
         Returns
         -------
@@ -960,7 +960,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1250,7 +1250,7 @@ class Scatterternary(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1270,12 +1270,12 @@ class Scatterternary(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1318,7 +1318,7 @@ class Scatterternary(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
+        `textposition`.
     
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1338,7 +1338,7 @@ class Scatterternary(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1393,7 +1393,7 @@ class Scatterternary(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
+        `texttemplate`.
     
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1536,8 +1536,8 @@ class Scatterternary(_BaseTraceType):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -1545,8 +1545,8 @@ class Scatterternary(_BaseTraceType):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         c
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -1563,8 +1563,8 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
         csrc
-            Sets the source reference on Chart Studio Cloud for  c
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `c`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1572,7 +1572,7 @@ class Scatterternary(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -1595,7 +1595,7 @@ class Scatterternary(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterternary.Hoverlabel`
             instance or dict with compatible properties
@@ -1635,7 +1635,7 @@ class Scatterternary(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
@@ -1645,14 +1645,14 @@ class Scatterternary(_BaseTraceType):
             flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1689,7 +1689,7 @@ class Scatterternary(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -1745,10 +1745,10 @@ class Scatterternary(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -1767,7 +1767,7 @@ class Scatterternary(_BaseTraceType):
             are available. variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1874,8 +1874,8 @@ class Scatterternary(_BaseTraceType):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -1883,8 +1883,8 @@ class Scatterternary(_BaseTraceType):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         c
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -1901,8 +1901,8 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
         csrc
-            Sets the source reference on Chart Studio Cloud for  c
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `c`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1910,7 +1910,7 @@ class Scatterternary(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -1933,7 +1933,7 @@ class Scatterternary(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterternary.Hoverlabel`
             instance or dict with compatible properties
@@ -1973,7 +1973,7 @@ class Scatterternary(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
@@ -1983,14 +1983,14 @@ class Scatterternary(_BaseTraceType):
             flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2027,7 +2027,7 @@ class Scatterternary(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2083,10 +2083,10 @@ class Scatterternary(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2105,7 +2105,7 @@ class Scatterternary(_BaseTraceType):
             are available. variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and

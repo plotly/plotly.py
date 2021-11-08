@@ -83,7 +83,7 @@ class Ohlc(_BaseTraceType):
     @property
     def closesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  close .
+        Sets the source reference on Chart Studio Cloud for `close`.
     
         The 'closesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -126,8 +126,8 @@ class Ohlc(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -194,7 +194,7 @@ class Ohlc(_BaseTraceType):
     @property
     def highsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  high .
+        Sets the source reference on Chart Studio Cloud for `high`.
     
         The 'highsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -240,8 +240,8 @@ class Ohlc(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -276,19 +276,19 @@ class Ohlc(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -303,7 +303,7 @@ class Ohlc(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
                 split
                     Show hover information (open, close, high, low)
                     in separate labels.
@@ -345,8 +345,8 @@ class Ohlc(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -388,7 +388,7 @@ class Ohlc(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -568,7 +568,7 @@ class Ohlc(_BaseTraceType):
     @property
     def lowsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  low .
+        Sets the source reference on Chart Studio Cloud for `low`.
     
         The 'lowsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -616,7 +616,7 @@ class Ohlc(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -698,7 +698,7 @@ class Ohlc(_BaseTraceType):
     @property
     def opensrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  open .
+        Sets the source reference on Chart Studio Cloud for `open`.
     
         The 'opensrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -821,7 +821,7 @@ class Ohlc(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1108,7 +1108,7 @@ class Ohlc(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1194,7 +1194,7 @@ class Ohlc(_BaseTraceType):
             Sets the close values.
         closesrc
             Sets the source reference on Chart Studio Cloud for
-            close .
+            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1202,7 +1202,7 @@ class Ohlc(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.ohlc.Decreasing` instance
             or dict with compatible properties
@@ -1210,7 +1210,7 @@ class Ohlc(_BaseTraceType):
             Sets the high values.
         highsrc
             Sets the source reference on Chart Studio Cloud for
-            high .
+            `high`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1218,7 +1218,7 @@ class Ohlc(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
             or dict with compatible properties
@@ -1226,14 +1226,14 @@ class Ohlc(_BaseTraceType):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
@@ -1259,7 +1259,7 @@ class Ohlc(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on Chart Studio Cloud for
-            low .
+            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1275,7 +1275,7 @@ class Ohlc(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1285,7 +1285,7 @@ class Ohlc(_BaseTraceType):
             Sets the open values.
         opensrc
             Sets the source reference on Chart Studio Cloud for
-            open .
+            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1306,7 +1306,7 @@ class Ohlc(_BaseTraceType):
             are mapped in order to this trace's sample points.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         tickwidth
             Sets the width of the open/close tick marks relative to
             the "x" minimal interval.
@@ -1377,8 +1377,8 @@ class Ohlc(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1471,7 +1471,7 @@ class Ohlc(_BaseTraceType):
             Sets the close values.
         closesrc
             Sets the source reference on Chart Studio Cloud for
-            close .
+            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1479,7 +1479,7 @@ class Ohlc(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.ohlc.Decreasing` instance
             or dict with compatible properties
@@ -1487,7 +1487,7 @@ class Ohlc(_BaseTraceType):
             Sets the high values.
         highsrc
             Sets the source reference on Chart Studio Cloud for
-            high .
+            `high`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1495,7 +1495,7 @@ class Ohlc(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
             or dict with compatible properties
@@ -1503,14 +1503,14 @@ class Ohlc(_BaseTraceType):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
@@ -1536,7 +1536,7 @@ class Ohlc(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on Chart Studio Cloud for
-            low .
+            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1552,7 +1552,7 @@ class Ohlc(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1562,7 +1562,7 @@ class Ohlc(_BaseTraceType):
             Sets the open values.
         opensrc
             Sets the source reference on Chart Studio Cloud for
-            open .
+            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1583,7 +1583,7 @@ class Ohlc(_BaseTraceType):
             are mapped in order to this trace's sample points.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         tickwidth
             Sets the width of the open/close tick marks relative to
             the "x" minimal interval.
@@ -1654,8 +1654,8 @@ class Ohlc(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the

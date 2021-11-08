@@ -153,7 +153,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
+        Sets the source reference on Chart Studio Cloud for `values`.
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -223,7 +223,7 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the dimension values to be plotted.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this dimension is shown on
             the graph. Note that even visible false dimension
@@ -280,7 +280,7 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the dimension values to be plotted.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this dimension is shown on
             the graph. Note that even visible false dimension

@@ -27,12 +27,12 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sankey.link.colorscales
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             customdata
                 Assigns extra data to each link.
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             hoverinfo
                 Determines which trace information appear when
                 hovering links. If `none` or `skip` are set, no
@@ -79,12 +79,12 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             label
                 The shown name of the link.
             labelsrc
                 Sets the source reference on Chart Studio Cloud
-                for  label .
+                for `label`.
             line
                 :class:`plotly.graph_objects.sankey.link.Line`
                 instance or dict with compatible properties
@@ -93,19 +93,19 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 represents the source node.
             sourcesrc
                 Sets the source reference on Chart Studio Cloud
-                for  source .
+                for `source`.
             target
                 An integer number `[0..nodes.length - 1]` that
                 represents the target node.
             targetsrc
                 Sets the source reference on Chart Studio Cloud
-                for  target .
+                for `target`.
             value
                 A numeric value representing the flow volume
                 value.
             valuesrc
                 Sets the source reference on Chart Studio Cloud
-                for  value .
+                for `value`.
 """,
             ),
             **kwargs

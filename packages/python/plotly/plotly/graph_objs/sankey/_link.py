@@ -191,7 +191,7 @@ class Link(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -231,8 +231,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -291,19 +291,19 @@ class Link(_BaseTraceHierarchyType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -318,7 +318,7 @@ class Link(_BaseTraceHierarchyType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -381,7 +381,7 @@ class Link(_BaseTraceHierarchyType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -421,7 +421,7 @@ class Link(_BaseTraceHierarchyType):
     @property
     def labelsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  label .
+        Sets the source reference on Chart Studio Cloud for `label`.
     
         The 'labelsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -454,13 +454,13 @@ class Link(_BaseTraceHierarchyType):
                     `link`.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the `line` around
                     each `link`.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -498,7 +498,7 @@ class Link(_BaseTraceHierarchyType):
     @property
     def sourcesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  source .
+        Sets the source reference on Chart Studio Cloud for `source`.
     
         The 'sourcesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -539,7 +539,7 @@ class Link(_BaseTraceHierarchyType):
     @property
     def targetsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  target .
+        Sets the source reference on Chart Studio Cloud for `target`.
     
         The 'targetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -579,7 +579,7 @@ class Link(_BaseTraceHierarchyType):
     @property
     def valuesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  value .
+        Sets the source reference on Chart Studio Cloud for `value`.
     
         The 'valuesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -615,12 +615,12 @@ class Link(_BaseTraceHierarchyType):
             sankey.link.colorscales
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each link.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -660,12 +660,12 @@ class Link(_BaseTraceHierarchyType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the link.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
@@ -674,18 +674,18 @@ class Link(_BaseTraceHierarchyType):
             represents the source node.
         sourcesrc
             Sets the source reference on Chart Studio Cloud for
-            source .
+            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
         targetsrc
             Sets the source reference on Chart Studio Cloud for
-            target .
+            `target`.
         value
             A numeric value representing the flow volume value.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
         """
 
     def __init__(
@@ -738,12 +738,12 @@ class Link(_BaseTraceHierarchyType):
             sankey.link.colorscales
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each link.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -783,12 +783,12 @@ class Link(_BaseTraceHierarchyType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the link.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
@@ -797,18 +797,18 @@ class Link(_BaseTraceHierarchyType):
             represents the source node.
         sourcesrc
             Sets the source reference on Chart Studio Cloud for
-            source .
+            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
         targetsrc
             Sets the source reference on Chart Studio Cloud for
-            target .
+            `target`.
         value
             A numeric value representing the flow volume value.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
 
         Returns
         -------

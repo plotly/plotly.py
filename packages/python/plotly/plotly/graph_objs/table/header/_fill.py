@@ -76,7 +76,7 @@ class Fill(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -101,7 +101,7 @@ class Fill(_BaseTraceHierarchyType):
             color or an array of colors or a 2D array of colors.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         """
 
     def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
@@ -119,7 +119,7 @@ class Fill(_BaseTraceHierarchyType):
             color or an array of colors or a 2D array of colors.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
 
         Returns
         -------

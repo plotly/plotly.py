@@ -19,6 +19,7 @@ if sys.version_info < (3, 7):
     from ._scene import Scene
     from ._shape import Shape
     from ._slider import Slider
+    from ._smith import Smith
     from ._template import Template
     from ._ternary import Ternary
     from ._title import Title
@@ -39,6 +40,7 @@ if sys.version_info < (3, 7):
     from . import scene
     from . import shape
     from . import slider
+    from . import smith
     from . import template
     from . import ternary
     from . import title
@@ -63,6 +65,7 @@ else:
             ".scene",
             ".shape",
             ".slider",
+            ".smith",
             ".template",
             ".ternary",
             ".title",
@@ -89,6 +92,7 @@ else:
             "._scene.Scene",
             "._shape.Shape",
             "._slider.Slider",
+            "._smith.Smith",
             "._template.Template",
             "._ternary.Ternary",
             "._title.Title",

@@ -11,6 +11,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Streamtube
     from ..graph_objs import Splom
     from ..graph_objs import Scatterternary
+    from ..graph_objs import Scattersmith
     from ..graph_objs import Scatterpolargl
     from ..graph_objs import Scatterpolar
     from ..graph_objs import Scattermapbox
@@ -86,6 +87,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import streamtube
     from ..graph_objs import splom
     from ..graph_objs import scatterternary
+    from ..graph_objs import scattersmith
     from ..graph_objs import scatterpolargl
     from ..graph_objs import scatterpolar
     from ..graph_objs import scattermapbox
@@ -140,6 +142,7 @@ else:
             "..graph_objs.streamtube",
             "..graph_objs.splom",
             "..graph_objs.scatterternary",
+            "..graph_objs.scattersmith",
             "..graph_objs.scatterpolargl",
             "..graph_objs.scatterpolar",
             "..graph_objs.scattermapbox",
@@ -190,6 +193,7 @@ else:
             "..graph_objs.Streamtube",
             "..graph_objs.Splom",
             "..graph_objs.Scatterternary",
+            "..graph_objs.Scattersmith",
             "..graph_objs.Scatterpolargl",
             "..graph_objs.Scatterpolar",
             "..graph_objs.Scattermapbox",

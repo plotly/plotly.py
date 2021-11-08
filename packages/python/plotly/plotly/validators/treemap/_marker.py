@@ -82,7 +82,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Bu,Reds,Viridis,YlGnBu,YlOrRd.
             colorssrc
                 Sets the source reference on Chart Studio Cloud
-                for  colors .
+                for `colors`.
             depthfade
                 Determines if the sector colors are faded
                 towards the background from the leaves up to

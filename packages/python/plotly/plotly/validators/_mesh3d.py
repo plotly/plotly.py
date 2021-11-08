@@ -99,7 +99,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             delaunayaxis
                 Sets the Delaunay axis, which is the axis that
                 is perpendicular to the surface of the Delaunay
@@ -111,7 +111,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and "vertexcolor".
             facecolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  facecolor .
+                for `facecolor`.
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -124,7 +124,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.mesh3d.Hoverlabel`
                 instance or dict with compatible properties
@@ -163,12 +163,12 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             i
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -186,7 +186,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             intensity
                 Sets the intensity values for vertices or cells
                 as defined by `intensitymode`. It can be used
@@ -195,10 +195,10 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines the source of `intensity` values.
             intensitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  intensity .
+                for `intensity`.
             isrc
                 Sets the source reference on Chart Studio Cloud
-                for  i .
+                for `i`.
             j
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -212,7 +212,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 triangle.
             jsrc
                 Sets the source reference on Chart Studio Cloud
-                for  j .
+                for `j`.
             k
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -225,7 +225,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 space, which is the third vertex of a triangle.
             ksrc
                 Sets the source reference on Chart Studio Cloud
-                for  k .
+                for `k`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -266,7 +266,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -307,7 +307,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 elements will be seen in the hover labels.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -343,7 +343,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 0 and 1.
             vertexcolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  vertexcolor .
+                for `vertexcolor`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -374,7 +374,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the Y coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -400,7 +400,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the Z coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -426,7 +426,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

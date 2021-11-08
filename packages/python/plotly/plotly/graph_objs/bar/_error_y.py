@@ -73,8 +73,8 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def arrayminussrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  arrayminus
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `arrayminus`.
     
         The 'arrayminussrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -94,7 +94,7 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def arraysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  array .
+        Sets the source reference on Chart Studio Cloud for `array`.
     
         The 'arraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -377,10 +377,10 @@ class ErrorY(_BaseTraceHierarchyType):
             underlying data.
         arrayminussrc
             Sets the source reference on Chart Studio Cloud for
-            arrayminus .
+            `arrayminus`.
         arraysrc
             Sets the source reference on Chart Studio Cloud for
-            array .
+            `array`.
         color
             Sets the stoke color of the error bars.
         symmetric
@@ -459,10 +459,10 @@ class ErrorY(_BaseTraceHierarchyType):
             underlying data.
         arrayminussrc
             Sets the source reference on Chart Studio Cloud for
-            arrayminus .
+            `arrayminus`.
         arraysrc
             Sets the source reference on Chart Studio Cloud for
-            array .
+            `array`.
         color
             Sets the stoke color of the error bars.
         symmetric

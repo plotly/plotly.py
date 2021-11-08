@@ -49,7 +49,7 @@ class Dimension(_BaseTraceHierarchyType):
     def categoryarraysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        categoryarray .
+        `categoryarray`.
     
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -166,7 +166,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -209,7 +209,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
+        Sets the source reference on Chart Studio Cloud for `values`.
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -256,7 +256,7 @@ class Dimension(_BaseTraceHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -282,7 +282,7 @@ class Dimension(_BaseTraceHierarchyType):
             `categoryarray` Used with `categoryorder`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
@@ -290,7 +290,7 @@ class Dimension(_BaseTraceHierarchyType):
             (longer vectors will be truncated).
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -328,7 +328,7 @@ class Dimension(_BaseTraceHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -354,7 +354,7 @@ class Dimension(_BaseTraceHierarchyType):
             `categoryarray` Used with `categoryorder`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
@@ -362,7 +362,7 @@ class Dimension(_BaseTraceHierarchyType):
             (longer vectors will be truncated).
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.

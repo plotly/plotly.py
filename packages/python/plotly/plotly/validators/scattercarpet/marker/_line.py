@@ -86,7 +86,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 bow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.line.color`is set to
@@ -99,7 +99,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the marker points.
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
 """,
             ),
             **kwargs

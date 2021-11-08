@@ -297,7 +297,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -362,7 +362,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  width .
+        Sets the source reference on Chart Studio Cloud for `width`.
     
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -448,7 +448,7 @@ class Line(_BaseTraceHierarchyType):
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color`is set to a numerical array.
@@ -460,7 +460,7 @@ class Line(_BaseTraceHierarchyType):
             points.
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         """
 
     def __init__(
@@ -555,7 +555,7 @@ class Line(_BaseTraceHierarchyType):
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color`is set to a numerical array.
@@ -567,7 +567,7 @@ class Line(_BaseTraceHierarchyType):
             points.
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
 
         Returns
         -------

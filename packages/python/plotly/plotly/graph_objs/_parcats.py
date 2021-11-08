@@ -107,7 +107,7 @@ class Parcats(_BaseTraceType):
     @property
     def countssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  counts .
+        Sets the source reference on Chart Studio Cloud for `counts`.
     
         The 'countssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -144,7 +144,7 @@ class Parcats(_BaseTraceType):
                     `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the categories
                     in the dimension. By default, plotly uses
@@ -174,7 +174,7 @@ class Parcats(_BaseTraceType):
                     with `categoryorder`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 values
                     Dimension values. `values[n]` represents the
                     category value of the `n`th point in the
@@ -183,7 +183,7 @@ class Parcats(_BaseTraceType):
                     will be truncated).
                 valuessrc
                     Sets the source reference on Chart Studio Cloud
-                    for  values .
+                    for `values`.
                 visible
                     Shows the dimension when set to `true` (the
                     default). Hides the dimension for `false`.
@@ -520,7 +520,7 @@ class Parcats(_BaseTraceType):
                     dis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 hovertemplate
                     Template string used for rendering the
                     information that appear on hover box. Note that
@@ -613,7 +613,7 @@ class Parcats(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -857,7 +857,7 @@ class Parcats(_BaseTraceType):
             observation
         countssrc
             Sets the source reference on Chart Studio Cloud for
-            counts .
+            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -934,7 +934,7 @@ class Parcats(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1031,7 +1031,7 @@ class Parcats(_BaseTraceType):
             observation
         countssrc
             Sets the source reference on Chart Studio Cloud for
-            counts .
+            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -1108,7 +1108,7 @@ class Parcats(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.

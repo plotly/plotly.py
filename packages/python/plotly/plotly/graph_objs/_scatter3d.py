@@ -114,8 +114,8 @@ class Scatter3d(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -154,10 +154,10 @@ class Scatter3d(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 copy_zstyle
@@ -235,10 +235,10 @@ class Scatter3d(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 copy_zstyle
@@ -316,10 +316,10 @@ class Scatter3d(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 symmetric
@@ -402,8 +402,8 @@ class Scatter3d(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -438,19 +438,19 @@ class Scatter3d(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -465,7 +465,7 @@ class Scatter3d(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -527,7 +527,7 @@ class Scatter3d(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -573,8 +573,8 @@ class Scatter3d(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -616,7 +616,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -795,7 +795,7 @@ class Scatter3d(_BaseTraceType):
                     dis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 dash
                     Sets the dash style of the lines.
                 reversescale
@@ -909,7 +909,7 @@ class Scatter3d(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 line
                     :class:`plotly.graph_objects.scatter3d.marker.L
                     ine` instance or dict with compatible
@@ -949,12 +949,12 @@ class Scatter3d(_BaseTraceType):
                     Use with `sizemin` and `sizemode`.
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
                 symbol
                     Sets the marker symbol type.
                 symbolsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  symbol .
+                    for `symbol`.
 
         Returns
         -------
@@ -999,7 +999,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1325,7 +1325,7 @@ class Scatter3d(_BaseTraceType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1347,7 +1347,7 @@ class Scatter3d(_BaseTraceType):
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1390,7 +1390,7 @@ class Scatter3d(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
+        `textposition`.
     
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1410,7 +1410,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1464,7 +1464,7 @@ class Scatter3d(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
+        `texttemplate`.
     
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1637,7 +1637,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
+        Sets the source reference on Chart Studio Cloud for `x`.
     
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1732,7 +1732,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
+        Sets the source reference on Chart Studio Cloud for `y`.
     
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1827,7 +1827,7 @@ class Scatter3d(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
+        Sets the source reference on Chart Studio Cloud for `z`.
     
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1863,7 +1863,7 @@ class Scatter3d(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         error_x
             :class:`plotly.graph_objects.scatter3d.ErrorX` instance
             or dict with compatible properties
@@ -1880,7 +1880,7 @@ class Scatter3d(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter3d.Hoverlabel`
             instance or dict with compatible properties
@@ -1914,7 +1914,7 @@ class Scatter3d(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets text elements associated with each (x,y,z)
             triplet. If a single string, the same string appears
@@ -1924,14 +1924,14 @@ class Scatter3d(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1968,7 +1968,7 @@ class Scatter3d(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2018,10 +2018,10 @@ class Scatter3d(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2040,7 +2040,7 @@ class Scatter3d(_BaseTraceType):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2086,8 +2086,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -2106,8 +2106,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -2126,8 +2126,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -2213,7 +2213,7 @@ class Scatter3d(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         error_x
             :class:`plotly.graph_objects.scatter3d.ErrorX` instance
             or dict with compatible properties
@@ -2230,7 +2230,7 @@ class Scatter3d(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter3d.Hoverlabel`
             instance or dict with compatible properties
@@ -2264,7 +2264,7 @@ class Scatter3d(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets text elements associated with each (x,y,z)
             triplet. If a single string, the same string appears
@@ -2274,14 +2274,14 @@ class Scatter3d(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2318,7 +2318,7 @@ class Scatter3d(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2368,10 +2368,10 @@ class Scatter3d(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2390,7 +2390,7 @@ class Scatter3d(_BaseTraceType):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2436,8 +2436,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -2456,8 +2456,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -2476,8 +2476,8 @@ class Scatter3d(_BaseTraceType):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------

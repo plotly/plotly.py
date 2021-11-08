@@ -55,7 +55,7 @@ class Header(_BaseTraceHierarchyType):
     @property
     def alignsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  align .
+        Sets the source reference on Chart Studio Cloud for `align`.
     
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -89,7 +89,7 @@ class Header(_BaseTraceHierarchyType):
                     array of colors.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
 
         Returns
         -------
@@ -118,7 +118,7 @@ class Header(_BaseTraceHierarchyType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -138,12 +138,12 @@ class Header(_BaseTraceHierarchyType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
     
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -183,7 +183,7 @@ class Header(_BaseTraceHierarchyType):
     @property
     def formatsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  format .
+        Sets the source reference on Chart Studio Cloud for `format`.
     
         The 'formatsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -235,12 +235,12 @@ class Header(_BaseTraceHierarchyType):
     
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
     
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -279,7 +279,7 @@ class Header(_BaseTraceHierarchyType):
     @property
     def prefixsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  prefix .
+        Sets the source reference on Chart Studio Cloud for `prefix`.
     
         The 'prefixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -321,7 +321,7 @@ class Header(_BaseTraceHierarchyType):
     @property
     def suffixsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  suffix .
+        Sets the source reference on Chart Studio Cloud for `suffix`.
     
         The 'suffixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -364,7 +364,7 @@ class Header(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
+        Sets the source reference on Chart Studio Cloud for `values`.
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -392,7 +392,7 @@ class Header(_BaseTraceHierarchyType):
             width.
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         fill
             :class:`plotly.graph_objects.table.header.Fill`
             instance or dict with compatible properties
@@ -406,7 +406,7 @@ class Header(_BaseTraceHierarchyType):
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
-            format .
+            `format`.
         height
             The height of cells.
         line
@@ -416,12 +416,12 @@ class Header(_BaseTraceHierarchyType):
             Prefix for cell values.
         prefixsrc
             Sets the source reference on Chart Studio Cloud for
-            prefix .
+            `prefix`.
         suffix
             Suffix for cell values.
         suffixsrc
             Sets the source reference on Chart Studio Cloud for
-            suffix .
+            `suffix`.
         values
             Header cell values. `values[m][n]` represents the value
             of the `n`th point in column `m`, therefore the
@@ -430,7 +430,7 @@ class Header(_BaseTraceHierarchyType):
             must be a finite number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         """
 
     def __init__(
@@ -468,7 +468,7 @@ class Header(_BaseTraceHierarchyType):
             width.
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         fill
             :class:`plotly.graph_objects.table.header.Fill`
             instance or dict with compatible properties
@@ -482,7 +482,7 @@ class Header(_BaseTraceHierarchyType):
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
-            format .
+            `format`.
         height
             The height of cells.
         line
@@ -492,12 +492,12 @@ class Header(_BaseTraceHierarchyType):
             Prefix for cell values.
         prefixsrc
             Sets the source reference on Chart Studio Cloud for
-            prefix .
+            `prefix`.
         suffix
             Suffix for cell values.
         suffixsrc
             Sets the source reference on Chart Studio Cloud for
-            suffix .
+            `suffix`.
         values
             Header cell values. `values[m][n]` represents the value
             of the `n`th point in column `m`, therefore the
@@ -506,7 +506,7 @@ class Header(_BaseTraceHierarchyType):
             must be a finite number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
 
         Returns
         -------

@@ -22,7 +22,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -63,7 +63,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.scattergeo.Hoverla
                 bel` instance or dict with compatible
@@ -103,7 +103,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets hover text elements associated with each
                 (lon,lat) pair or item in `locations`. If a
@@ -115,7 +115,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -123,13 +123,13 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             lat
                 Sets the latitude coordinates (in degrees
                 North).
             latsrc
                 Sets the source reference on Chart Studio Cloud
-                for  lat .
+                for `lat`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -166,13 +166,13 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 info.
             locationssrc
                 Sets the source reference on Chart Studio Cloud
-                for  locations .
+                for `locations`.
             lon
                 Sets the longitude coordinates (in degrees
                 East).
             lonsrc
                 Sets the source reference on Chart Studio Cloud
-                for  lon .
+                for `lon`.
             marker
                 :class:`plotly.graph_objects.scattergeo.Marker`
                 instance or dict with compatible properties
@@ -192,7 +192,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -241,10 +241,10 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respects to the (x,y) coordinates.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
-                for  textposition .
+                for `textposition`.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -265,7 +265,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `lat`, `lon`, `location` and `text`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

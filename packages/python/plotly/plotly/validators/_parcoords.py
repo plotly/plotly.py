@@ -18,7 +18,7 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dimensions
                 The dimensions (variables) of the parallel
                 coordinates chart. 2..60 dimensions are
@@ -38,7 +38,7 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             labelangle
                 Sets the angle of the labels with respect to
                 the horizontal. For example, a `tickangle` of
@@ -88,7 +88,7 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.

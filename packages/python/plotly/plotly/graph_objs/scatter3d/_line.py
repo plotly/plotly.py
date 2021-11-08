@@ -426,14 +426,14 @@ class Line(_BaseTraceHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -544,7 +544,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
+        Sets the source reference on Chart Studio Cloud for `color`.
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -716,7 +716,7 @@ class Line(_BaseTraceHierarchyType):
             d.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         dash
             Sets the dash style of the lines.
         reversescale
@@ -826,7 +826,7 @@ class Line(_BaseTraceHierarchyType):
             d.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         dash
             Sets the dash style of the lines.
         reversescale

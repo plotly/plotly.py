@@ -22,7 +22,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             asrc
                 Sets the source reference on Chart Studio Cloud
-                for  a .
+                for `a`.
             b
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -35,7 +35,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             bsrc
                 Sets the source reference on Chart Studio Cloud
-                for  b .
+                for `b`.
             carpet
                 An identifier for this carpet, so that
                 `scattercarpet` and `contourcarpet` traces can
@@ -58,7 +58,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             da
                 Sets the a coordinate step. See `a0` for more
                 info.
@@ -75,7 +75,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgrouptitle
                 :class:`plotly.graph_objects.carpet.Legendgroup
                 title` instance or dict with compatible
@@ -106,7 +106,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -159,7 +159,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.xaxis2`, and so on.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -171,7 +171,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
             **kwargs
