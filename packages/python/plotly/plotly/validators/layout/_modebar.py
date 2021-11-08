@@ -26,7 +26,7 @@ class ModebarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "eraseshape".
             addsrc
                 Sets the source reference on Chart Studio Cloud
-                for  add .
+                for `add`.
             bgcolor
                 Sets the background color of the modebar.
             color
@@ -59,7 +59,7 @@ class ModebarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "zoomout".
             removesrc
                 Sets the source reference on Chart Studio Cloud
-                for  remove .
+                for `remove`.
             uirevision
                 Controls persistence of user-driven changes
                 related to the modebar, including `hovermode`,

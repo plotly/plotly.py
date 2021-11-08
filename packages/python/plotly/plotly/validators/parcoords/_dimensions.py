@@ -67,13 +67,13 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 via `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             values
                 Dimension values. `values[n]` represents the
                 value of the `n`th point in the dataset,
@@ -83,7 +83,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 number.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.

@@ -32,13 +32,13 @@ class Marker(_BaseTraceHierarchyType):
                     set.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the lines bounding
                     the marker points.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -76,7 +76,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def opacitysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  opacity .
+        Sets the source reference on Chart Studio Cloud for `opacity`.
     
         The 'opacitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -103,7 +103,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the opacity of the locations.
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
-            opacity .
+            `opacity`.
         """
 
     def __init__(self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs):
@@ -123,7 +123,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the opacity of the locations.
         opacitysrc
             Sets the source reference on Chart Studio Cloud for
-            opacity .
+            `opacity`.
 
         Returns
         -------

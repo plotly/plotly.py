@@ -30,9 +30,10 @@ class FigureWidget(BaseFigureWidget):
                              'pointcloud', 'sankey', 'scatter',
                              'scatter3d', 'scattercarpet', 'scattergeo',
                              'scattergl', 'scattermapbox', 'scatterpolar',
-                             'scatterpolargl', 'scatterternary', 'splom',
-                             'streamtube', 'sunburst', 'surface', 'table',
-                             'treemap', 'violin', 'volume', 'waterfall']
+                             'scatterpolargl', 'scattersmith',
+                             'scatterternary', 'splom', 'streamtube',
+                             'sunburst', 'surface', 'table', 'treemap',
+                             'violin', 'volume', 'waterfall']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -266,7 +267,7 @@ class FigureWidget(BaseFigureWidget):
                         hide slices from several pies/funnelarea charts
                     hiddenlabelssrc
                         Sets the source reference on Chart Studio Cloud
-                        for  hiddenlabels .
+                        for `hiddenlabels`.
                     hidesources
                         Determines whether or not a text link citing
                         the data source is placed at the bottom-right
@@ -342,7 +343,7 @@ class FigureWidget(BaseFigureWidget):
                         accessed %{meta[key]}.
                     metasrc
                         Sets the source reference on Chart Studio Cloud
-                        for  meta .
+                        for `meta`.
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
@@ -407,6 +408,9 @@ class FigureWidget(BaseFigureWidget):
                         layout.template.layout.sliderdefaults), sets
                         the default property values to use for elements
                         of layout.sliders
+                    smith
+                        :class:`plotly.graph_objects.layout.Smith`
+                        instance or dict with compatible properties
                     spikedistance
                         Sets the default distance (in pixels) to look
                         for data to draw spikelines to (-1 means no
@@ -689,7 +693,7 @@ class FigureWidget(BaseFigureWidget):
             instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -705,7 +709,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -723,7 +727,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -758,7 +762,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -768,14 +772,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -814,7 +818,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -829,7 +833,7 @@ class FigureWidget(BaseFigureWidget):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -882,10 +886,10 @@ class FigureWidget(BaseFigureWidget):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -904,7 +908,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -939,7 +943,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -983,8 +987,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -1028,8 +1032,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -1198,7 +1202,7 @@ class FigureWidget(BaseFigureWidget):
             be excluded and drawn in "overlay" mode instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1206,7 +1210,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -1220,7 +1224,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.barpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -1254,19 +1258,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1300,7 +1304,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1309,7 +1313,7 @@ class FigureWidget(BaseFigureWidget):
             "thetatunit" units).
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         r
@@ -1319,8 +1323,8 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
         rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `r`.
         selected
             :class:`plotly.graph_objects.barpolar.Selected`
             instance or dict with compatible properties
@@ -1349,7 +1353,7 @@ class FigureWidget(BaseFigureWidget):
             the this trace's coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         theta
             Sets the angular coordinates
         theta0
@@ -1358,7 +1362,7 @@ class FigureWidget(BaseFigureWidget):
             starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on Chart Studio Cloud for
-            theta .
+            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -1396,7 +1400,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the bar angular width (in "thetaunit" units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -1610,7 +1614,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -1628,7 +1632,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
@@ -1665,19 +1669,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -1710,7 +1714,7 @@ class FigureWidget(BaseFigureWidget):
             point below 1.5 times the IQR.
         lowerfencesrc
             Sets the source reference on Chart Studio Cloud for
-            lowerfence .
+            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -1722,13 +1726,13 @@ class FigureWidget(BaseFigureWidget):
             compute the mean for each box using the sample values.
         meansrc
             Sets the source reference on Chart Studio Cloud for
-            mean .
+            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
         mediansrc
             Sets the source reference on Chart Studio Cloud for
-            median .
+            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1744,7 +1748,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For box traces, the name will
@@ -1770,7 +1774,7 @@ class FigureWidget(BaseFigureWidget):
             1.57 * IQR / sqrt(N), where N is the sample size.
         notchspansrc
             Sets the source reference on Chart Studio Cloud for
-            notchspan .
+            `notchspan`.
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -1795,14 +1799,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
         q1src
-            Sets the source reference on Chart Studio Cloud for  q1
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
         q3src
-            Sets the source reference on Chart Studio Cloud for  q3
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -1826,8 +1830,8 @@ class FigureWidget(BaseFigureWidget):
             or `x`) is set, we compute the standard deviation for
             each box using the sample values.
         sdsrc
-            Sets the source reference on Chart Studio Cloud for  sd
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -1853,7 +1857,7 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1888,7 +1892,7 @@ class FigureWidget(BaseFigureWidget):
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
-            upperfence .
+            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1947,8 +1951,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -1993,8 +1997,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -2178,7 +2182,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the close values.
         closesrc
             Sets the source reference on Chart Studio Cloud for
-            close .
+            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -2186,7 +2190,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.candlestick.Decreasing`
             instance or dict with compatible properties
@@ -2194,7 +2198,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the high values.
         highsrc
             Sets the source reference on Chart Studio Cloud for
-            high .
+            `high`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -2202,7 +2206,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.candlestick.Hoverlabel`
             instance or dict with compatible properties
@@ -2210,14 +2214,14 @@ class FigureWidget(BaseFigureWidget):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
@@ -2243,7 +2247,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the low values.
         lowsrc
             Sets the source reference on Chart Studio Cloud for
-            low .
+            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2259,7 +2263,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2269,7 +2273,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the open values.
         opensrc
             Sets the source reference on Chart Studio Cloud for
-            open .
+            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2290,7 +2294,7 @@ class FigureWidget(BaseFigureWidget):
             are mapped in order to this trace's sample points.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2362,8 +2366,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -2523,8 +2527,8 @@ class FigureWidget(BaseFigureWidget):
             :class:`plotly.graph_objects.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             A two dimensional array of y coordinates at each carpet
             point.
@@ -2536,8 +2540,8 @@ class FigureWidget(BaseFigureWidget):
             :class:`plotly.graph_objects.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -2558,7 +2562,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the a coordinate step. See `a0` for more info.
         db
@@ -2572,7 +2576,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
@@ -2599,7 +2603,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2645,8 +2649,8 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             A two dimensional array of y coordinates at each carpet
             point.
@@ -2656,8 +2660,8 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -2821,7 +2825,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -2847,7 +2851,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -2881,19 +2885,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2921,7 +2925,7 @@ class FigureWidget(BaseFigureWidget):
             `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -2940,7 +2944,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -2971,7 +2975,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each location.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3023,8 +3027,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3196,7 +3200,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array.
@@ -3214,7 +3218,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choroplethmapbox.Hoverlabe
             l` instance or dict with compatible properties
@@ -3249,19 +3253,19 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3282,7 +3286,7 @@ class FigureWidget(BaseFigureWidget):
             their feature `id` field.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         marker
             :class:`plotly.graph_objects.choroplethmapbox.Marker`
             instance or dict with compatible properties
@@ -3301,7 +3305,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -3337,7 +3341,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each location.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3389,8 +3393,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3592,7 +3596,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -3600,7 +3604,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.cone.Hoverlabel` instance
             or dict with compatible properties
@@ -3635,19 +3639,19 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3684,7 +3688,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -3739,7 +3743,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         u
             Sets the x components of the vector field.
         uhoverformat
@@ -3771,8 +3775,8 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         usrc
-            Sets the source reference on Chart Studio Cloud for  u
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
@@ -3787,8 +3791,8 @@ class FigureWidget(BaseFigureWidget):
             a legend item (provided that the legend itself is
             visible).
         vsrc
-            Sets the source reference on Chart Studio Cloud for  v
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
@@ -3798,8 +3802,8 @@ class FigureWidget(BaseFigureWidget):
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
         wsrc
-            Sets the source reference on Chart Studio Cloud for  w
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `w`.
         x
             Sets the x coordinates of the vector field and of the
             displayed cones.
@@ -3817,8 +3821,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates of the vector field and of the
             displayed cones.
@@ -3836,8 +3840,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates of the vector field and of the
             displayed cones.
@@ -3855,8 +3859,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -4075,7 +4079,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -4092,7 +4096,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.contour.Hoverlabel`
             instance or dict with compatible properties
@@ -4130,19 +4134,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4176,7 +4180,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -4205,7 +4209,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -4278,8 +4282,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -4329,8 +4333,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -4364,8 +4368,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -4540,8 +4544,8 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -4567,8 +4571,8 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -4610,7 +4614,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -4624,14 +4628,14 @@ class FigureWidget(BaseFigureWidget):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4665,7 +4669,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -4694,7 +4698,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -4755,8 +4759,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -4942,7 +4946,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -4950,7 +4954,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.densitymapbox.Hoverlabel`
             instance or dict with compatible properties
@@ -4984,7 +4988,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair If a single string, the same string appears over
@@ -4994,19 +4998,19 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on Chart Studio Cloud for
-            lat .
+            `lat`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5026,7 +5030,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on Chart Studio Cloud for
-            lon .
+            `lon`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -5042,7 +5046,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -5054,7 +5058,7 @@ class FigureWidget(BaseFigureWidget):
             trace smoother, but less detailed.
         radiussrc
             Sets the source reference on Chart Studio Cloud for
-            radius .
+            `radius`.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
@@ -5083,7 +5087,7 @@ class FigureWidget(BaseFigureWidget):
             seen in the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -5134,8 +5138,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -5308,7 +5312,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -5320,7 +5324,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.funnel.Hoverlabel`
             instance or dict with compatible properties
@@ -5356,7 +5360,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -5366,14 +5370,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -5412,7 +5416,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -5482,10 +5486,10 @@ class FigureWidget(BaseFigureWidget):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -5505,7 +5509,7 @@ class FigureWidget(BaseFigureWidget):
             `percentPrevious`, `percentTotal`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -5576,8 +5580,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -5619,8 +5623,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -5789,7 +5793,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dlabel
             Sets the label step. See `label0` for more info.
         domain
@@ -5802,7 +5806,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.funnelarea.Hoverlabel`
             instance or dict with compatible properties
@@ -5838,7 +5842,7 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -5847,14 +5851,14 @@ class FigureWidget(BaseFigureWidget):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -5870,7 +5874,7 @@ class FigureWidget(BaseFigureWidget):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5904,7 +5908,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -5935,10 +5939,10 @@ class FigureWidget(BaseFigureWidget):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -5958,7 +5962,7 @@ class FigureWidget(BaseFigureWidget):
             `text` and `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.funnelarea.Title` instance
             or dict with compatible properties
@@ -5989,7 +5993,7 @@ class FigureWidget(BaseFigureWidget):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -6198,7 +6202,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -6210,7 +6214,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmap.Hoverlabel`
             instance or dict with compatible properties
@@ -6248,19 +6252,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -6291,7 +6295,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6314,7 +6318,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -6389,8 +6393,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -6442,8 +6446,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -6479,8 +6483,8 @@ class FigureWidget(BaseFigureWidget):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -6678,7 +6682,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -6690,7 +6694,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmapgl.Hoverlabel`
             instance or dict with compatible properties
@@ -6700,7 +6704,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -6727,7 +6731,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6747,7 +6751,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -6789,8 +6793,8 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -6809,8 +6813,8 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -6840,8 +6844,8 @@ class FigureWidget(BaseFigureWidget):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -7027,7 +7031,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         error_x
             :class:`plotly.graph_objects.histogram.ErrorX` instance
             or dict with compatible properties
@@ -7066,7 +7070,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram.Hoverlabel`
             instance or dict with compatible properties
@@ -7101,19 +7105,19 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7147,7 +7151,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7196,7 +7200,7 @@ class FigureWidget(BaseFigureWidget):
             the this trace's coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -7253,8 +7257,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -7281,8 +7285,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -7500,7 +7504,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -7533,7 +7537,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2d.Hoverlabel`
             instance or dict with compatible properties
@@ -7568,14 +7572,14 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7609,7 +7613,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7702,8 +7706,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -7739,8 +7743,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -7770,8 +7774,8 @@ class FigureWidget(BaseFigureWidget):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -8003,7 +8007,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -8036,7 +8040,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
@@ -8071,14 +8075,14 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -8115,7 +8119,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -8212,8 +8216,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -8247,8 +8251,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -8276,8 +8280,8 @@ class FigureWidget(BaseFigureWidget):
             have the same units as in `z` and if set, `zmax` must
             be set as well.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -8450,7 +8454,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.icicle.Domain` instance or
             dict with compatible properties
@@ -8461,7 +8465,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.icicle.Hoverlabel`
             instance or dict with compatible properties
@@ -8497,7 +8501,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -8506,14 +8510,14 @@ class FigureWidget(BaseFigureWidget):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -8521,7 +8525,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the labels of each of the sectors.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
@@ -8564,7 +8568,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -8586,7 +8590,7 @@ class FigureWidget(BaseFigureWidget):
             `labels`, but beware they must be unique.
         parentssrc
             Sets the source reference on Chart Studio Cloud for
-            parents .
+            `parents`.
         pathbar
             :class:`plotly.graph_objects.icicle.Pathbar` instance
             or dict with compatible properties
@@ -8613,7 +8617,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the positions of the `text` elements.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -8634,7 +8638,7 @@ class FigureWidget(BaseFigureWidget):
             `percentParent`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         tiling
             :class:`plotly.graph_objects.icicle.Tiling` instance or
             dict with compatible properties
@@ -8666,7 +8670,7 @@ class FigureWidget(BaseFigureWidget):
             summed.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -8808,7 +8812,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
@@ -8820,7 +8824,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -8855,19 +8859,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -8894,7 +8898,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -8911,7 +8915,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8978,8 +8982,8 @@ class FigureWidget(BaseFigureWidget):
             This only applies for image traces that use the
             `source` attribute.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -9099,7 +9103,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -9114,7 +9118,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -9141,7 +9145,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.
@@ -9368,7 +9372,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
@@ -9380,7 +9384,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.isosurface.Hoverlabel`
             instance or dict with compatible properties
@@ -9414,19 +9418,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -9467,7 +9471,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -9514,7 +9518,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9547,7 +9551,7 @@ class FigureWidget(BaseFigureWidget):
             are formatted using generic number format.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -9569,8 +9573,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
@@ -9587,8 +9591,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
@@ -9605,8 +9609,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -9849,7 +9853,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -9861,7 +9865,7 @@ class FigureWidget(BaseFigureWidget):
             "vertexcolor".
         facecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            facecolor .
+            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
@@ -9873,7 +9877,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -9907,12 +9911,12 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -9928,7 +9932,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
@@ -9937,10 +9941,10 @@ class FigureWidget(BaseFigureWidget):
             Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on Chart Studio Cloud for
-            intensity .
+            `intensity`.
         isrc
-            Sets the source reference on Chart Studio Cloud for  i
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -9951,8 +9955,8 @@ class FigureWidget(BaseFigureWidget):
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
         jsrc
-            Sets the source reference on Chart Studio Cloud for  j
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -9963,8 +9967,8 @@ class FigureWidget(BaseFigureWidget):
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
         ksrc
-            Sets the source reference on Chart Studio Cloud for  k
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `k`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -10001,7 +10005,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -10039,7 +10043,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -10070,7 +10074,7 @@ class FigureWidget(BaseFigureWidget):
             between 0 and 1.
         vertexcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            vertexcolor .
+            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -10096,8 +10100,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -10118,8 +10122,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -10140,8 +10144,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -10303,7 +10307,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the close values.
         closesrc
             Sets the source reference on Chart Studio Cloud for
-            close .
+            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -10311,7 +10315,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.ohlc.Decreasing` instance
             or dict with compatible properties
@@ -10319,7 +10323,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the high values.
         highsrc
             Sets the source reference on Chart Studio Cloud for
-            high .
+            `high`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -10327,7 +10331,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
             or dict with compatible properties
@@ -10335,14 +10339,14 @@ class FigureWidget(BaseFigureWidget):
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
@@ -10368,7 +10372,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the low values.
         lowsrc
             Sets the source reference on Chart Studio Cloud for
-            low .
+            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -10384,7 +10388,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -10394,7 +10398,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the open values.
         opensrc
             Sets the source reference on Chart Studio Cloud for
-            open .
+            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -10415,7 +10419,7 @@ class FigureWidget(BaseFigureWidget):
             are mapped in order to this trace's sample points.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         tickwidth
             Sets the width of the open/close tick marks relative to
             the "x" minimal interval.
@@ -10486,8 +10490,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -10636,7 +10640,7 @@ class FigureWidget(BaseFigureWidget):
             observation
         countssrc
             Sets the source reference on Chart Studio Cloud for
-            counts .
+            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -10713,7 +10717,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -10842,7 +10846,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -10860,7 +10864,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -10904,7 +10908,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -11064,7 +11068,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -11083,7 +11087,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -11119,7 +11123,7 @@ class FigureWidget(BaseFigureWidget):
             `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -11128,14 +11132,14 @@ class FigureWidget(BaseFigureWidget):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -11161,7 +11165,7 @@ class FigureWidget(BaseFigureWidget):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11195,7 +11199,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -11211,7 +11215,7 @@ class FigureWidget(BaseFigureWidget):
             highlight one or more slices.
         pullsrc
             Sets the source reference on Chart Studio Cloud for
-            pull .
+            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -11243,10 +11247,10 @@ class FigureWidget(BaseFigureWidget):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -11266,7 +11270,7 @@ class FigureWidget(BaseFigureWidget):
             `percent` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -11306,7 +11310,7 @@ class FigureWidget(BaseFigureWidget):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -11446,7 +11450,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -11454,7 +11458,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pointcloud.Hoverlabel`
             instance or dict with compatible properties
@@ -11464,7 +11468,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         indices
             A sequential value, 0..n, supply it to avoid creating
             this array inside plotting. If specified, it must be a
@@ -11476,7 +11480,7 @@ class FigureWidget(BaseFigureWidget):
             it on each `Plotly.restyle()` call.
         indicessrc
             Sets the source reference on Chart Studio Cloud for
-            indices .
+            `indices`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11510,7 +11514,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -11532,7 +11536,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -11574,18 +11578,18 @@ class FigureWidget(BaseFigureWidget):
             benefits.
         xboundssrc
             Sets the source reference on Chart Studio Cloud for
-            xbounds .
+            `xbounds`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xy
             Faster alternative to specifying `x` and `y`
             separately. If supplied, it must be a typed
             `Float32Array` array that represents points such that
             `xy[i * 2] = x[i]` and `xy[i * 2 + 1] = y[i]`
         xysrc
-            Sets the source reference on Chart Studio Cloud for  xy
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `xy`.
         y
             Sets the y coordinates.
         yaxis
@@ -11600,10 +11604,10 @@ class FigureWidget(BaseFigureWidget):
             benefits.
         yboundssrc
             Sets the source reference on Chart Studio Cloud for
-            ybounds .
+            `ybounds`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -11727,7 +11731,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
@@ -11747,7 +11751,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -11776,7 +11780,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -11980,7 +11984,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -12036,7 +12040,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter.Hoverlabel`
             instance or dict with compatible properties
@@ -12076,7 +12080,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -12086,14 +12090,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12130,7 +12134,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -12205,10 +12209,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -12227,7 +12231,7 @@ class FigureWidget(BaseFigureWidget):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -12301,8 +12305,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -12346,8 +12350,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -12528,7 +12532,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         error_x
             :class:`plotly.graph_objects.scatter3d.ErrorX` instance
             or dict with compatible properties
@@ -12545,7 +12549,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter3d.Hoverlabel`
             instance or dict with compatible properties
@@ -12579,7 +12583,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets text elements associated with each (x,y,z)
             triplet. If a single string, the same string appears
@@ -12589,14 +12593,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12633,7 +12637,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -12683,10 +12687,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -12705,7 +12709,7 @@ class FigureWidget(BaseFigureWidget):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -12751,8 +12755,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -12771,8 +12775,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -12791,8 +12795,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -12933,13 +12937,13 @@ class FigureWidget(BaseFigureWidget):
         a
             Sets the a-axis coordinates.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             Sets the b-axis coordinates.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -12954,7 +12958,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -12977,7 +12981,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattercarpet.Hoverlabel`
             instance or dict with compatible properties
@@ -13017,7 +13021,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (a,b)
             point. If a single string, the same string appears over
@@ -13026,14 +13030,14 @@ class FigureWidget(BaseFigureWidget):
             be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13070,7 +13074,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -13114,10 +13118,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -13136,7 +13140,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `a`, `b` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -13331,7 +13335,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -13367,7 +13371,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergeo.Hoverlabel`
             instance or dict with compatible properties
@@ -13401,7 +13405,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair or item in `locations`. If a single string, the
@@ -13411,19 +13415,19 @@ class FigureWidget(BaseFigureWidget):
             be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on Chart Studio Cloud for
-            lat .
+            `lat`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13455,12 +13459,12 @@ class FigureWidget(BaseFigureWidget):
             given. See `locationmode` for more info.
         locationssrc
             Sets the source reference on Chart Studio Cloud for
-            locations .
+            `locations`.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on Chart Studio Cloud for
-            lon .
+            `lon`.
         marker
             :class:`plotly.graph_objects.scattergeo.Marker`
             instance or dict with compatible properties
@@ -13479,7 +13483,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -13524,10 +13528,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -13547,7 +13551,7 @@ class FigureWidget(BaseFigureWidget):
             `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -13737,7 +13741,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -13782,7 +13786,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergl.Hoverlabel`
             instance or dict with compatible properties
@@ -13816,7 +13820,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -13826,14 +13830,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13870,7 +13874,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -13909,10 +13913,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -13931,7 +13935,7 @@ class FigureWidget(BaseFigureWidget):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -14005,8 +14009,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -14050,8 +14054,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -14220,7 +14224,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". "toself" connects the
@@ -14237,7 +14241,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
             instance or dict with compatible properties
@@ -14271,7 +14275,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair If a single string, the same string appears over
@@ -14281,19 +14285,19 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on Chart Studio Cloud for
-            lat .
+            `lat`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14316,7 +14320,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on Chart Studio Cloud for
-            lon .
+            `lon`.
         marker
             :class:`plotly.graph_objects.scattermapbox.Marker`
             instance or dict with compatible properties
@@ -14335,7 +14339,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -14384,7 +14388,7 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -14403,7 +14407,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `lat`, `lon` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -14586,7 +14590,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -14615,7 +14619,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -14655,7 +14659,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -14665,14 +14669,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14709,7 +14713,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -14729,8 +14733,8 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
         rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `r`.
         selected
             :class:`plotly.graph_objects.scatterpolar.Selected`
             instance or dict with compatible properties
@@ -14767,10 +14771,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -14789,7 +14793,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         theta
             Sets the angular coordinates
         theta0
@@ -14798,7 +14802,7 @@ class FigureWidget(BaseFigureWidget):
             starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on Chart Studio Cloud for
-            theta .
+            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -14982,7 +14986,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -15023,7 +15027,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterpolargl.Hoverlabel`
             instance or dict with compatible properties
@@ -15057,7 +15061,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -15067,14 +15071,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15111,7 +15115,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -15131,8 +15135,8 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
         rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `r`.
         selected
             :class:`plotly.graph_objects.scatterpolargl.Selected`
             instance or dict with compatible properties
@@ -15169,10 +15173,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -15191,7 +15195,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         theta
             Sets the angular coordinates
         theta0
@@ -15200,7 +15204,7 @@ class FigureWidget(BaseFigureWidget):
             starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on Chart Studio Cloud for
-            theta .
+            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -15305,6 +15309,388 @@ class FigureWidget(BaseFigureWidget):
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_scattersmith(
+        self,
+        cliponaxis=None,
+        connectgaps=None,
+        customdata=None,
+        customdatasrc=None,
+        fill=None,
+        fillcolor=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        imag=None,
+        imagsrc=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        line=None,
+        marker=None,
+        meta=None,
+        metasrc=None,
+        mode=None,
+        name=None,
+        opacity=None,
+        real=None,
+        realsrc=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        stream=None,
+        subplot=None,
+        text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
+        textsrc=None,
+        texttemplate=None,
+        texttemplatesrc=None,
+        uid=None,
+        uirevision=None,
+        unselected=None,
+        visible=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Scattersmith trace
+        
+        The scattersmith trace type encompasses line charts, scatter
+        charts, text charts, and bubble charts in smith coordinates.
+        The data visualized as scatter point or lines is set in `real`
+        and `imag` (imaginary) coordinates Text (appearing either on
+        the chart or on hover only) is via `text`. Bubble charts are
+        achieved by setting `marker.size` and/or `marker.color` to
+        numerical arrays.
+
+        Parameters
+        ----------
+        cliponaxis
+            Determines whether or not markers and text nodes are
+            clipped about the subplot axes. To show markers and
+            text nodes above axis lines and tick labels, make sure
+            to set `xaxis.layer` and `yaxis.layer` to *below
+            traces*.
+        connectgaps
+            Determines whether or not gaps (i.e. {nan} or missing
+            values) in the provided data arrays are connected.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on Chart Studio Cloud for
+            `customdata`.
+        fill
+            Sets the area to fill with a solid color. Use with
+            `fillcolor` if not "none". scattersmith has a subset of
+            the options available to scatter. "toself" connects the
+            endpoints of the trace (or each segment of the trace if
+            it has gaps) into a closed shape. "tonext" fills the
+            space between two traces if one completely encloses the
+            other (eg consecutive contour lines), and behaves like
+            "toself" if there is no trace before it. "tonext"
+            should not be used if one trace does not enclose the
+            other.
+        fillcolor
+            Sets the fill color. Defaults to a half-transparent
+            variant of the line color, marker color, or marker line
+            color, whichever is available.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on Chart Studio Cloud for
+            `hoverinfo`.
+        hoverlabel
+            :class:`plotly.graph_objects.scattersmith.Hoverlabel`
+            instance or dict with compatible properties
+        hoveron
+            Do the hover effects highlight individual points
+            (markers or line points) or do they highlight filled
+            regions? If the fill is "toself" or "tonext" and there
+            are no markers or text, then the default is "fills",
+            otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovertemplate`.
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a "text" flag.
+        hovertextsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovertext`.
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on Chart Studio Cloud for
+            `ids`.
+        imag
+            Sets the imaginary component of the data, in units of
+            normalized impedance such that real=1, imag=0 is the
+            center of the chart.
+        imagsrc
+            Sets the source reference on Chart Studio Cloud for
+            `imag`.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.scattersmith.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with `*reversed* `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items.
+        line
+            :class:`plotly.graph_objects.scattersmith.Line`
+            instance or dict with compatible properties
+        marker
+            :class:`plotly.graph_objects.scattersmith.Marker`
+            instance or dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on Chart Studio Cloud for
+            `meta`.
+        mode
+            Determines the drawing mode for this scatter trace. If
+            the provided `mode` includes "text" then the `text`
+            elements appear at the coordinates. Otherwise, the
+            `text` elements appear on hover. If there are less than
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        real
+            Sets the real component of the data, in units of
+            normalized impedance such that real=1, imag=0 is the
+            center of the chart.
+        realsrc
+            Sets the source reference on Chart Studio Cloud for
+            `real`.
+        selected
+            :class:`plotly.graph_objects.scattersmith.Selected`
+            instance or dict with compatible properties
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            :class:`plotly.graph_objects.scattersmith.Stream`
+            instance or dict with compatible properties
+        subplot
+            Sets a reference between this trace's data coordinates
+            and a smith subplot. If "smith" (the default value),
+            the data refer to `layout.smith`. If "smith2", the data
+            refer to `layout.smith2`, and so on.
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on Chart Studio Cloud for
+            `textposition`.
+        textsrc
+            Sets the source reference on Chart Studio Cloud for
+            `text`.
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `real`, `imag` and `text`.
+        texttemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            `texttemplate`.
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.scattersmith.Unselected`
+            instance or dict with compatible properties
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
+
+        Returns
+        -------
+        FigureWidget
+        """
+        from plotly.graph_objs import Scattersmith
+
+        new_trace = Scattersmith(
+            cliponaxis=cliponaxis,
+            connectgaps=connectgaps,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            fill=fill,
+            fillcolor=fillcolor,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            hoveron=hoveron,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
+            ids=ids,
+            idssrc=idssrc,
+            imag=imag,
+            imagsrc=imagsrc,
+            legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
+            legendrank=legendrank,
+            line=line,
+            marker=marker,
+            meta=meta,
+            metasrc=metasrc,
+            mode=mode,
+            name=name,
+            opacity=opacity,
+            real=real,
+            realsrc=realsrc,
+            selected=selected,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            stream=stream,
+            subplot=subplot,
+            text=text,
+            textfont=textfont,
+            textposition=textposition,
+            textpositionsrc=textpositionsrc,
+            textsrc=textsrc,
+            texttemplate=texttemplate,
+            texttemplatesrc=texttemplatesrc,
+            uid=uid,
+            uirevision=uirevision,
+            unselected=unselected,
+            visible=visible,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_scatterternary(
         self,
         a=None,
@@ -15376,8 +15762,8 @@ class FigureWidget(BaseFigureWidget):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         asrc
-            Sets the source reference on Chart Studio Cloud for  a
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `a`.
         b
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -15385,8 +15771,8 @@ class FigureWidget(BaseFigureWidget):
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
         bsrc
-            Sets the source reference on Chart Studio Cloud for  b
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `b`.
         c
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -15403,8 +15789,8 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
         csrc
-            Sets the source reference on Chart Studio Cloud for  c
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `c`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -15412,7 +15798,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -15435,7 +15821,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterternary.Hoverlabel`
             instance or dict with compatible properties
@@ -15475,7 +15861,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
@@ -15485,14 +15871,14 @@ class FigureWidget(BaseFigureWidget):
             flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15529,7 +15915,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -15585,10 +15971,10 @@ class FigureWidget(BaseFigureWidget):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -15607,7 +15993,7 @@ class FigureWidget(BaseFigureWidget):
             are available. variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -15773,7 +16159,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         diagonal
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
@@ -15793,7 +16179,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.splom.Hoverlabel` instance
             or dict with compatible properties
@@ -15827,19 +16213,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15873,7 +16259,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -15909,7 +16295,7 @@ class FigureWidget(BaseFigureWidget):
             trace's (x,y) coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -16174,7 +16560,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -16182,7 +16568,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -16218,7 +16604,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         ids
@@ -16227,7 +16613,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16267,7 +16653,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -16341,8 +16727,8 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         usrc
-            Sets the source reference on Chart Studio Cloud for  u
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
@@ -16357,8 +16743,8 @@ class FigureWidget(BaseFigureWidget):
             a legend item (provided that the legend itself is
             visible).
         vsrc
-            Sets the source reference on Chart Studio Cloud for  v
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
@@ -16368,8 +16754,8 @@ class FigureWidget(BaseFigureWidget):
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
         wsrc
-            Sets the source reference on Chart Studio Cloud for  w
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
@@ -16386,8 +16772,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
@@ -16404,8 +16790,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
@@ -16422,8 +16808,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -16582,7 +16968,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.sunburst.Domain` instance
             or dict with compatible properties
@@ -16593,7 +16979,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.sunburst.Hoverlabel`
             instance or dict with compatible properties
@@ -16629,7 +17015,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -16638,14 +17024,14 @@ class FigureWidget(BaseFigureWidget):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -16663,7 +17049,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the labels of each of the sectors.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
@@ -16706,7 +17092,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -16728,7 +17114,7 @@ class FigureWidget(BaseFigureWidget):
             `labels`, but beware they must be unique.
         parentssrc
             Sets the source reference on Chart Studio Cloud for
-            parents .
+            `parents`.
         root
             :class:`plotly.graph_objects.sunburst.Root` instance or
             dict with compatible properties
@@ -16753,7 +17139,7 @@ class FigureWidget(BaseFigureWidget):
             Determines which trace information appear on the graph.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -16774,7 +17160,7 @@ class FigureWidget(BaseFigureWidget):
             `percentParent`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -16803,7 +17189,7 @@ class FigureWidget(BaseFigureWidget):
             summed.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -17014,7 +17400,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hidesurface
             Determines whether or not a surface is drawn. For
             example, set `hidesurface` to False `contours.x.show`
@@ -17027,7 +17413,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.surface.Hoverlabel`
             instance or dict with compatible properties
@@ -17061,19 +17447,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -17110,7 +17496,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -17157,7 +17543,7 @@ class FigureWidget(BaseFigureWidget):
             scale independent of `z`.
         surfacecolorsrc
             Sets the source reference on Chart Studio Cloud for
-            surfacecolor .
+            `surfacecolor`.
         text
             Sets the text elements associated with each z value. If
             trace `hoverinfo` contains a "text" flag and
@@ -17165,7 +17551,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -17211,8 +17597,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         ycalendar
@@ -17231,8 +17617,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the z coordinates.
         zcalendar
@@ -17251,8 +17637,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -17381,14 +17767,14 @@ class FigureWidget(BaseFigureWidget):
             column, as columns have an index base of zero.
         columnordersrc
             Sets the source reference on Chart Studio Cloud for
-            columnorder .
+            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
         columnwidthsrc
             Sets the source reference on Chart Studio Cloud for
-            columnwidth .
+            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -17396,7 +17782,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -17410,7 +17796,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -17420,7 +17806,7 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -17447,7 +17833,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -17606,7 +17992,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.treemap.Domain` instance
             or dict with compatible properties
@@ -17617,7 +18003,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.treemap.Hoverlabel`
             instance or dict with compatible properties
@@ -17653,7 +18039,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -17662,14 +18048,14 @@ class FigureWidget(BaseFigureWidget):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -17677,7 +18063,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the labels of each of the sectors.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
         legendgrouptitle
             :class:`plotly.graph_objects.treemap.Legendgrouptitle`
             instance or dict with compatible properties
@@ -17717,7 +18103,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -17739,7 +18125,7 @@ class FigureWidget(BaseFigureWidget):
             `labels`, but beware they must be unique.
         parentssrc
             Sets the source reference on Chart Studio Cloud for
-            parents .
+            `parents`.
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
@@ -17766,7 +18152,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the positions of the `text` elements.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -17787,7 +18173,7 @@ class FigureWidget(BaseFigureWidget):
             `percentParent`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         tiling
             :class:`plotly.graph_objects.treemap.Tiling` instance
             or dict with compatible properties
@@ -17819,7 +18205,7 @@ class FigureWidget(BaseFigureWidget):
             summed.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -17988,7 +18374,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -18000,7 +18386,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.violin.Hoverlabel`
             instance or dict with compatible properties
@@ -18038,19 +18424,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -18095,7 +18481,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For violin traces, the name
@@ -18188,7 +18574,7 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -18250,8 +18636,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -18278,8 +18664,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -18506,7 +18892,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
@@ -18518,7 +18904,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.volume.Hoverlabel`
             instance or dict with compatible properties
@@ -18552,19 +18938,19 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -18605,7 +18991,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -18663,7 +19049,7 @@ class FigureWidget(BaseFigureWidget):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -18696,7 +19082,7 @@ class FigureWidget(BaseFigureWidget):
             are formatted using generic number format.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -18718,8 +19104,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
@@ -18736,8 +19122,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
@@ -18754,8 +19140,8 @@ class FigureWidget(BaseFigureWidget):
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -18952,7 +19338,7 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         decreasing
             :class:`plotly.graph_objects.waterfall.Decreasing`
             instance or dict with compatible properties
@@ -18967,7 +19353,7 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.waterfall.Hoverlabel`
             instance or dict with compatible properties
@@ -19002,7 +19388,7 @@ class FigureWidget(BaseFigureWidget):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -19012,14 +19398,14 @@ class FigureWidget(BaseFigureWidget):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         increasing
             :class:`plotly.graph_objects.waterfall.Increasing`
             instance or dict with compatible properties
@@ -19051,7 +19437,7 @@ class FigureWidget(BaseFigureWidget):
             or to declare an initial value where needed.
         measuresrc
             Sets the source reference on Chart Studio Cloud for
-            measure .
+            `measure`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -19067,7 +19453,7 @@ class FigureWidget(BaseFigureWidget):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -19082,7 +19468,7 @@ class FigureWidget(BaseFigureWidget):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -19136,10 +19522,10 @@ class FigureWidget(BaseFigureWidget):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -19159,7 +19545,7 @@ class FigureWidget(BaseFigureWidget):
             and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         totals
             :class:`plotly.graph_objects.waterfall.Totals` instance
             or dict with compatible properties
@@ -19194,7 +19580,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -19236,8 +19622,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -19279,8 +19665,8 @@ class FigureWidget(BaseFigureWidget):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -19939,6 +20325,118 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
+            obj.update(patch, overwrite=overwrite, **kwargs)
+
+        return self
+
+    def select_smiths(self, selector=None, row=None, col=None):
+        """
+        Select smith subplot objects from a particular subplot cell
+        and/or smith subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            smith objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all smith objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            smith and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of smith objects to select.
+            To select smith objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all smith objects are selected.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the smith
+            objects that satisfy all of the specified selection criteria
+        """
+
+        return self._select_layout_subplots_by_prefix("smith", selector, row, col)
+
+    def for_each_smith(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all smith objects that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single smith object.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            smith objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all smith objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            smith and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of smith objects to select.
+            To select smith objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all smith objects are selected.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_smiths(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_smiths(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all smith objects
+        that satisfy the specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            smith objects that satisfy the selection criteria.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            smith objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all smith objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            smith and those for which the function returned True will
+            be in the selection.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        row, col: int or None (default None)
+            Subplot row and column index of smith objects to select.
+            To select smith objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all smith objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            smith object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_smiths(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self

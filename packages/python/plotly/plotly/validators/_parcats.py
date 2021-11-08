@@ -27,7 +27,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 represents one observation
             countssrc
                 Sets the source reference on Chart Studio Cloud
-                for  counts .
+                for `counts`.
             dimensions
                 The dimensions (variables) of the parallel
                 categories diagram.
@@ -112,7 +112,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.

@@ -195,14 +195,14 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             tickwidth
                 Sets the tick width (in px).
             title

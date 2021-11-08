@@ -85,7 +85,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that

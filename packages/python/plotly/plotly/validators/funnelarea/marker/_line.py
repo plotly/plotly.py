@@ -15,13 +15,13 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sector. Defaults to the `paper_bgcolor` value.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             width
                 Sets the width (in px) of the line enclosing
                 each sector.
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
 """,
             ),
             **kwargs

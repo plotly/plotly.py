@@ -46,6 +46,7 @@ class Data(_BaseLayoutHierarchyType):
         "scattermapbox",
         "scatterpolar",
         "scatterpolargl",
+        "scattersmith",
         "scatterternary",
         "splom",
         "streamtube",
@@ -909,6 +910,29 @@ class Data(_BaseLayoutHierarchyType):
     def scatter(self, val):
         self["scatter"] = val
 
+    # scattersmith
+    # ------------
+    @property
+    def scattersmith(self):
+        """
+        The 'scattersmith' property is a tuple of instances of
+        Scattersmith that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattersmith
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Scattersmith constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Scattersmith]
+        """
+        return self["scattersmith"]
+
+    @scattersmith.setter
+    def scattersmith(self, val):
+        self["scattersmith"] = val
+
     # scatterternary
     # --------------
     @property
@@ -1257,6 +1281,9 @@ class Data(_BaseLayoutHierarchyType):
         scatter
             A tuple of :class:`plotly.graph_objects.Scatter`
             instances or dicts with compatible properties
+        scattersmith
+            A tuple of :class:`plotly.graph_objects.Scattersmith`
+            instances or dicts with compatible properties
         scatterternary
             A tuple of :class:`plotly.graph_objects.Scatterternary`
             instances or dicts with compatible properties
@@ -1329,6 +1356,7 @@ class Data(_BaseLayoutHierarchyType):
         scatterpolargl=None,
         scatterpolar=None,
         scatter=None,
+        scattersmith=None,
         scatterternary=None,
         splom=None,
         streamtube=None,
@@ -1462,6 +1490,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         scatter
             A tuple of :class:`plotly.graph_objects.Scatter`
+            instances or dicts with compatible properties
+        scattersmith
+            A tuple of :class:`plotly.graph_objects.Scattersmith`
             instances or dicts with compatible properties
         scatterternary
             A tuple of :class:`plotly.graph_objects.Scatterternary`
@@ -1675,6 +1706,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = scatter if scatter is not None else _v
         if _v is not None:
             self["scatter"] = _v
+        _v = arg.pop("scattersmith", None)
+        _v = scattersmith if scattersmith is not None else _v
+        if _v is not None:
+            self["scattersmith"] = _v
         _v = arg.pop("scatterternary", None)
         _v = scatterternary if scatterternary is not None else _v
         if _v is not None:

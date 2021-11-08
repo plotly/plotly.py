@@ -22,7 +22,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             error_x
                 :class:`plotly.graph_objects.scatter3d.ErrorX`
                 instance or dict with compatible properties
@@ -40,7 +40,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.scatter3d.Hoverlab
                 el` instance or dict with compatible properties
@@ -79,7 +79,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets text elements associated with each (x,y,z)
                 triplet. If a single string, the same string
@@ -89,7 +89,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -97,7 +97,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -138,7 +138,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -192,10 +192,10 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respects to the (x,y) coordinates.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
-                for  textposition .
+                for `textposition`.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -215,7 +215,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are `arrayOk: true`) are available.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -269,7 +269,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y coordinates.
             ycalendar
@@ -292,7 +292,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the z coordinates.
             zcalendar
@@ -315,7 +315,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
             **kwargs

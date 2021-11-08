@@ -234,7 +234,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -274,7 +274,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  tickvals .
+        Sets the source reference on Chart Studio Cloud for `tickvals`.
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -317,7 +317,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
+        Sets the source reference on Chart Studio Cloud for `values`.
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -411,12 +411,12 @@ class Dimension(_BaseTraceHierarchyType):
             `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
@@ -425,7 +425,7 @@ class Dimension(_BaseTraceHierarchyType):
             number.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -515,12 +515,12 @@ class Dimension(_BaseTraceHierarchyType):
             `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
@@ -529,7 +529,7 @@ class Dimension(_BaseTraceHierarchyType):
             number.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.

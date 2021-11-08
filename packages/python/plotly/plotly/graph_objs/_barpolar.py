@@ -83,7 +83,7 @@ class Barpolar(_BaseTraceType):
     @property
     def basesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  base .
+        Sets the source reference on Chart Studio Cloud for `base`.
     
         The 'basesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -126,8 +126,8 @@ class Barpolar(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -215,8 +215,8 @@ class Barpolar(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -251,19 +251,19 @@ class Barpolar(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -278,7 +278,7 @@ class Barpolar(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -340,7 +340,7 @@ class Barpolar(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
+        `hovertemplate`.
     
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -382,8 +382,8 @@ class Barpolar(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
     
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -425,7 +425,7 @@ class Barpolar(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -604,7 +604,7 @@ class Barpolar(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 line
                     :class:`plotly.graph_objects.barpolar.marker.Li
                     ne` instance or dict with compatible properties
@@ -612,7 +612,7 @@ class Barpolar(_BaseTraceType):
                     Sets the opacity of the bars.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
                 pattern
                     Sets the pattern within the marker.
                 reversescale
@@ -670,7 +670,7 @@ class Barpolar(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -734,7 +734,7 @@ class Barpolar(_BaseTraceType):
     @property
     def offsetsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  offset .
+        Sets the source reference on Chart Studio Cloud for `offset`.
     
         The 'offsetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -815,7 +815,7 @@ class Barpolar(_BaseTraceType):
     @property
     def rsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  r .
+        Sets the source reference on Chart Studio Cloud for `r`.
     
         The 'rsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -995,7 +995,7 @@ class Barpolar(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
+        Sets the source reference on Chart Studio Cloud for `text`.
     
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1056,7 +1056,7 @@ class Barpolar(_BaseTraceType):
     @property
     def thetasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  theta .
+        Sets the source reference on Chart Studio Cloud for `theta`.
     
         The 'thetasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1229,7 +1229,7 @@ class Barpolar(_BaseTraceType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  width .
+        Sets the source reference on Chart Studio Cloud for `width`.
     
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1261,7 +1261,7 @@ class Barpolar(_BaseTraceType):
             be excluded and drawn in "overlay" mode instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1269,7 +1269,7 @@ class Barpolar(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -1283,7 +1283,7 @@ class Barpolar(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.barpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -1317,19 +1317,19 @@ class Barpolar(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1363,7 +1363,7 @@ class Barpolar(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1372,7 +1372,7 @@ class Barpolar(_BaseTraceType):
             "thetatunit" units).
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         r
@@ -1382,8 +1382,8 @@ class Barpolar(_BaseTraceType):
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
         rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `r`.
         selected
             :class:`plotly.graph_objects.barpolar.Selected`
             instance or dict with compatible properties
@@ -1412,7 +1412,7 @@ class Barpolar(_BaseTraceType):
             the this trace's coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         theta
             Sets the angular coordinates
         theta0
@@ -1421,7 +1421,7 @@ class Barpolar(_BaseTraceType):
             starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on Chart Studio Cloud for
-            theta .
+            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -1459,7 +1459,7 @@ class Barpolar(_BaseTraceType):
             Sets the bar angular width (in "thetaunit" units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         """
 
     def __init__(
@@ -1529,7 +1529,7 @@ class Barpolar(_BaseTraceType):
             be excluded and drawn in "overlay" mode instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1537,7 +1537,7 @@ class Barpolar(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -1551,7 +1551,7 @@ class Barpolar(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.barpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -1585,19 +1585,19 @@ class Barpolar(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1631,7 +1631,7 @@ class Barpolar(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1640,7 +1640,7 @@ class Barpolar(_BaseTraceType):
             "thetatunit" units).
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         r
@@ -1650,8 +1650,8 @@ class Barpolar(_BaseTraceType):
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
         rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `r`.
         selected
             :class:`plotly.graph_objects.barpolar.Selected`
             instance or dict with compatible properties
@@ -1680,7 +1680,7 @@ class Barpolar(_BaseTraceType):
             the this trace's coordinates.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         theta
             Sets the angular coordinates
         theta0
@@ -1689,7 +1689,7 @@ class Barpolar(_BaseTraceType):
             starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on Chart Studio Cloud for
-            theta .
+            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -1727,7 +1727,7 @@ class Barpolar(_BaseTraceType):
             Sets the bar angular width (in "thetaunit" units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
 
         Returns
         -------

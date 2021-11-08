@@ -43,6 +43,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "scattermapbox": "Scattermapbox",
                 "scatterpolar": "Scatterpolar",
                 "scatterpolargl": "Scatterpolargl",
+                "scattersmith": "Scattersmith",
                 "scatterternary": "Scatterternary",
                 "splom": "Splom",
                 "streamtube": "Streamtube",

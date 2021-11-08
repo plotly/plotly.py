@@ -36,7 +36,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -51,7 +51,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.funnel.Hoverlabel`
                 instance or dict with compatible properties
@@ -91,7 +91,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -101,7 +101,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -109,7 +109,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             insidetextanchor
                 Determines if texts are kept at center or
                 start/end points in `textposition` "inside"
@@ -154,7 +154,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -232,10 +232,10 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 outside. If "none", no text appears.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
-                for  textposition .
+                for `textposition`.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -257,7 +257,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `percentTotal`, `label` and `value`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -339,7 +339,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y coordinates.
             y0
@@ -388,7 +388,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
             **kwargs

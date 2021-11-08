@@ -56,7 +56,7 @@ class Table(_BaseTraceType):
                     width is set to override the text width.
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 fill
                     :class:`plotly.graph_objects.table.cells.Fill`
                     instance or dict with compatible properties
@@ -71,7 +71,7 @@ class Table(_BaseTraceType):
                     ormat.
                 formatsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  format .
+                    for `format`.
                 height
                     The height of cells.
                 line
@@ -81,12 +81,12 @@ class Table(_BaseTraceType):
                     Prefix for cell values.
                 prefixsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  prefix .
+                    for `prefix`.
                 suffix
                     Suffix for cell values.
                 suffixsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  suffix .
+                    for `suffix`.
                 values
                     Cell values. `values[m][n]` represents the
                     value of the `n`th point in column `m`,
@@ -96,7 +96,7 @@ class Table(_BaseTraceType):
                     number or a string.
                 valuessrc
                     Sets the source reference on Chart Studio Cloud
-                    for  values .
+                    for `values`.
 
         Returns
         -------
@@ -137,7 +137,7 @@ class Table(_BaseTraceType):
     def columnordersrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        columnorder .
+        `columnorder`.
     
         The 'columnordersrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -180,7 +180,7 @@ class Table(_BaseTraceType):
     def columnwidthsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        columnwidth .
+        `columnwidth`.
     
         The 'columnwidthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -223,8 +223,8 @@ class Table(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
     
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -296,7 +296,7 @@ class Table(_BaseTraceType):
                     width is set to override the text width.
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 fill
                     :class:`plotly.graph_objects.table.header.Fill`
                     instance or dict with compatible properties
@@ -311,7 +311,7 @@ class Table(_BaseTraceType):
                     ormat.
                 formatsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  format .
+                    for `format`.
                 height
                     The height of cells.
                 line
@@ -321,12 +321,12 @@ class Table(_BaseTraceType):
                     Prefix for cell values.
                 prefixsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  prefix .
+                    for `prefix`.
                 suffix
                     Suffix for cell values.
                 suffixsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  suffix .
+                    for `suffix`.
                 values
                     Header cell values. `values[m][n]` represents
                     the value of the `n`th point in column `m`,
@@ -336,7 +336,7 @@ class Table(_BaseTraceType):
                     number or a string.
                 valuessrc
                     Sets the source reference on Chart Studio Cloud
-                    for  values .
+                    for `values`.
 
         Returns
         -------
@@ -379,8 +379,8 @@ class Table(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
     
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -415,19 +415,19 @@ class Table(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -442,7 +442,7 @@ class Table(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -481,7 +481,7 @@ class Table(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
+        Sets the source reference on Chart Studio Cloud for `ids`.
     
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -582,7 +582,7 @@ class Table(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
+        Sets the source reference on Chart Studio Cloud for `meta`.
     
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -751,14 +751,14 @@ class Table(_BaseTraceType):
             column, as columns have an index base of zero.
         columnordersrc
             Sets the source reference on Chart Studio Cloud for
-            columnorder .
+            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
         columnwidthsrc
             Sets the source reference on Chart Studio Cloud for
-            columnwidth .
+            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -766,7 +766,7 @@ class Table(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -780,7 +780,7 @@ class Table(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -790,7 +790,7 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -817,7 +817,7 @@ class Table(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -905,14 +905,14 @@ class Table(_BaseTraceType):
             column, as columns have an index base of zero.
         columnordersrc
             Sets the source reference on Chart Studio Cloud for
-            columnorder .
+            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
         columnwidthsrc
             Sets the source reference on Chart Studio Cloud for
-            columnwidth .
+            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -920,7 +920,7 @@ class Table(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -934,7 +934,7 @@ class Table(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -944,7 +944,7 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -971,7 +971,7 @@ class Table(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.

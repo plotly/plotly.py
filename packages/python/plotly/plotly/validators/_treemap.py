@@ -30,7 +30,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             domain
                 :class:`plotly.graph_objects.treemap.Domain`
                 instance or dict with compatible properties
@@ -42,7 +42,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.treemap.Hoverlabel
                 ` instance or dict with compatible properties
@@ -83,7 +83,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -93,7 +93,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -101,7 +101,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
@@ -109,7 +109,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the labels of each of the sectors.
             labelssrc
                 Sets the source reference on Chart Studio Cloud
-                for  labels .
+                for `labels`.
             legendgrouptitle
                 :class:`plotly.graph_objects.treemap.Legendgrou
                 ptitle` instance or dict with compatible
@@ -153,7 +153,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -176,7 +176,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `labels`, but beware they must be unique.
             parentssrc
                 Sets the source reference on Chart Studio Cloud
-                for  parents .
+                for `parents`.
             pathbar
                 :class:`plotly.graph_objects.treemap.Pathbar`
                 instance or dict with compatible properties
@@ -205,7 +205,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -228,7 +228,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `value`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             tiling
                 :class:`plotly.graph_objects.treemap.Tiling`
                 instance or dict with compatible properties
@@ -264,7 +264,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 how the values are summed.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not

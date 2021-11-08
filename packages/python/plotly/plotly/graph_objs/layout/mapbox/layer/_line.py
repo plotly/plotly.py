@@ -36,7 +36,7 @@ class Line(_BaseLayoutHierarchyType):
     @property
     def dashsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  dash .
+        Sets the source reference on Chart Studio Cloud for `dash`.
     
         The 'dashsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -83,7 +83,7 @@ class Line(_BaseLayoutHierarchyType):
             when `type` is set to "line".
         dashsrc
             Sets the source reference on Chart Studio Cloud for
-            dash .
+            `dash`.
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".
@@ -105,7 +105,7 @@ class Line(_BaseLayoutHierarchyType):
             when `type` is set to "line".
         dashsrc
             Sets the source reference on Chart Studio Cloud for
-            dash .
+            `dash`.
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".

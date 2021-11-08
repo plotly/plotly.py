@@ -66,6 +66,7 @@ if sys.version_info < (3, 7):
     from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
+    from ._scattersmith import Scattersmith
     from ._scatterternary import Scatterternary
     from ._splom import Splom
     from ._streamtube import Streamtube
@@ -114,6 +115,7 @@ if sys.version_info < (3, 7):
     from . import scattermapbox
     from . import scatterpolar
     from . import scatterpolargl
+    from . import scattersmith
     from . import scatterternary
     from . import splom
     from . import streamtube
@@ -168,6 +170,7 @@ else:
             ".scattermapbox",
             ".scatterpolar",
             ".scatterpolargl",
+            ".scattersmith",
             ".scatterternary",
             ".splom",
             ".streamtube",
@@ -245,6 +248,7 @@ else:
             "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",
+            "._scattersmith.Scattersmith",
             "._scatterternary.Scatterternary",
             "._splom.Splom",
             "._streamtube.Streamtube",

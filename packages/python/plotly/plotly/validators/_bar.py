@@ -23,7 +23,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn in "overlay" mode instead.
             basesrc
                 Sets the source reference on Chart Studio Cloud
-                for  base .
+                for `base`.
             cliponaxis
                 Determines whether the text nodes are clipped
                 about the subplot axes. To show the text nodes
@@ -41,7 +41,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -62,7 +62,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.bar.Hoverlabel`
                 instance or dict with compatible properties
@@ -102,7 +102,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -112,7 +112,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -120,7 +120,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             insidetextanchor
                 Determines if texts are kept at center or
                 start/end points in `textposition` "inside"
@@ -164,7 +164,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -180,7 +180,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 line up.
             offsetsrc
                 Sets the source reference on Chart Studio Cloud
-                for  offset .
+                for `offset`.
             opacity
                 Sets the opacity of the trace.
             orientation
@@ -238,10 +238,10 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 outside. If "none", no text appears.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
-                for  textposition .
+                for `textposition`.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -262,7 +262,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `value` and `label`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -301,7 +301,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the bar width (in position axis units).
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
             x
                 Sets the x coordinates.
             x0
@@ -353,7 +353,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y coordinates.
             y0
@@ -405,7 +405,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
             **kwargs

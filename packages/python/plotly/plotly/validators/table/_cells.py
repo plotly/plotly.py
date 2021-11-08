@@ -18,7 +18,7 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 width is set to override the text width.
             alignsrc
                 Sets the source reference on Chart Studio Cloud
-                for  align .
+                for `align`.
             fill
                 :class:`plotly.graph_objects.table.cells.Fill`
                 instance or dict with compatible properties
@@ -33,7 +33,7 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ormat.
             formatsrc
                 Sets the source reference on Chart Studio Cloud
-                for  format .
+                for `format`.
             height
                 The height of cells.
             line
@@ -43,12 +43,12 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Prefix for cell values.
             prefixsrc
                 Sets the source reference on Chart Studio Cloud
-                for  prefix .
+                for `prefix`.
             suffix
                 Suffix for cell values.
             suffixsrc
                 Sets the source reference on Chart Studio Cloud
-                for  suffix .
+                for `suffix`.
             values
                 Cell values. `values[m][n]` represents the
                 value of the `n`th point in column `m`,
@@ -58,7 +58,7 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 number or a string.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
 """,
             ),
             **kwargs

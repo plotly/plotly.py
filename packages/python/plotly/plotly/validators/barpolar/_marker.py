@@ -85,7 +85,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Bu,Reds,Viridis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             line
                 :class:`plotly.graph_objects.barpolar.marker.Li
                 ne` instance or dict with compatible properties
@@ -93,7 +93,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the bars.
             opacitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  opacity .
+                for `opacity`.
             pattern
                 Sets the pattern within the marker.
             reversescale
