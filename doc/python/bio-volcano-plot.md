@@ -40,7 +40,6 @@ Volcano Plot interactively identifies clinically meaningful markers in genomic e
 import pandas as pd
 import dash_bio
 
-
 df = pd.read_csv('https://git.io/volcano_data1.csv')
 
 dash_bio.VolcanoPlot(
@@ -55,7 +54,6 @@ Change the size of the points on the scatter plot, and the widths of the effect 
 ```python
 import pandas as pd
 import dash_bio
-
 
 df = pd.read_csv('https://git.io/volcano_data1.csv')
 

@@ -40,9 +40,7 @@ ManhattanPlot allows you to visualize genome-wide association studies (GWAS) eff
 import pandas as pd
 import dash_bio
 
-
 df = pd.read_csv('https://git.io/manhattan_data.csv')
-
 
 dash_bio.ManhattanPlot(
     dataframe=df,
@@ -55,7 +53,6 @@ Change the color of the points that are considered significant.
 ```python
 import pandas as pd
 import dash_bio
-
 
 df = pd.read_csv('https://git.io/manhattan_data.csv')
 
