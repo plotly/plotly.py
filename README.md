@@ -101,13 +101,13 @@ For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install t
 packages using `pip`:
 
 ```
-$ pip install "jupyterlab>=3" "ipywidgets>=7.6"
+pip install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
 or `conda`:
 
 ```
-$ conda install "jupyterlab>=3" "ipywidgets>=7.6"
+conda install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
 The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
@@ -147,13 +147,13 @@ The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies a
 using pip...
 
 ```
-$ pip install -U kaleido
+pip install -U kaleido
 ```
 
 or conda.
 
 ```
-$ conda install -c conda-forge python-kaleido
+conda install -c conda-forge python-kaleido
 ```
 
 #### Orca
