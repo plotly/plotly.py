@@ -40,12 +40,8 @@ A [Smith Chart](https://en.wikipedia.org/wiki/Smith_chart) is a specialized char
 
 ```python
 import plotly.graph_objects as go
-fig = go.Figure(
-    go.Scattersmith(
-            imag=[0.5, 1, 2, 3], 
-            real=[0.5, 1, 2, 3],
-        )
-)
+
+fig = go.Figure(go.Scattersmith(imag=[0.5, 1, 2, 3], real=[0.5, 1, 2, 3]))
 fig.show()
 ```
 
@@ -53,39 +49,42 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-fig = go.Figure(
-    data=[
-        go.Scattersmith(
-            imag=[1], 
-            real=[1],
-            marker_symbol='x',
-            marker_size=30,
-            marker_color="green",
-            subplot="smith1"
-        ),
-        go.Scattersmith(
-            imag=[1], 
-            real=[1],
-            marker_symbol='x',
-            marker_size=30,
-            marker_color="pink",
-            subplot="smith2"
-        )
-    ], 
-    layout=dict(
-        smith=go.layout.Smith(
-            bgcolor='lightgrey',
-            realaxis_gridcolor='red',
-            imaginaryaxis_gridcolor='blue',
-            domain=dict(x=[0,0.5])
-        ),
-        smith2=go.layout.Smith(
-            realaxis_gridcolor='blue',
-            imaginaryaxis_gridcolor='red',
-            domain=dict(x=[0.5,1])
-        )
+
+fig = go.Figure()
+
+fig.add_trace(go.Scattersmith(
+    imag=[1], 
+    real=[1],
+    marker_symbol='x',
+    marker_size=30,
+    marker_color="green",
+    subplot="smith1"
+))
+
+fig.add_trace(go.Scattersmith(
+    imag=[1], 
+    real=[1],
+    marker_symbol='x',
+    marker_size=30,
+    marker_color="pink",
+    subplot="smith2"
+))
+
+fig.update_layout(
+    smith=dict(
+        realaxis_gridcolor='red',
+        imaginaryaxis_gridcolor='blue',
+        domain=dict(x=[0,0.45])
+    ),
+    smith2=dict(
+        realaxis_gridcolor='blue',
+        imaginaryaxis_gridcolor='red',
+        domain=dict(x=[0.55,1])
     )
 )
+
+fig.update_smiths(bgcolor="lightgrey")
+
 fig.show()
 ```
 
