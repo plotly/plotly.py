@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.11.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.8.11
   plotly:
     description: The structure of a figure - data, traces and layout explained.
     display_as: file_settings
@@ -93,7 +93,7 @@ The second of the three top-level attributes of a figure is `layout`, whose valu
   * Subplots of various types on which can be drawn multiple traces and which are positioned in paper coordinates:
     * `xaxis`, `yaxis`, `xaxis2`, `yaxis3` etc: X and Y cartesian axes, the intersections of which are cartesian subplots
     * `scene`, `scene2`, `scene3` etc: 3d scene subplots
-    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `mapbox`, `mapbox2`, `mabox3` etc: ternary, polar, geo or mapbox subplots
+    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `mapbox`, `mapbox2`, `mabox3`, `smith`, `smith2` etc: ternary, polar, geo, mapbox or smith subplots
   * Non-data marks which can be positioned in paper coordinates, or in data coordinates linked to 2d cartesian subplots:
     * `annotations`: [textual annotations with or without arrows](/python/text-and-annotations/)
     * `shapes`: [lines, rectangles, ellipses or open or closed paths](/python/shapes/)
@@ -151,9 +151,9 @@ The following trace types are compatible with 2d-cartesian subplots via the `xax
 * [`carpet`](/python/carpet-plot/): a special trace type for building [carpet plots](/python/carpet-plot/), in that other traces can use as subplots (see below)
 * [`splom`](/python/splom/): multi-dimensional scatter plots which implicitly refer to many 2-d cartesian subplots at once.
 
-### 3D, Polar and Ternary Trace Types and Subplots
+### 3D, Polar, Ternary and Smith Trace Types and Subplots
 
-Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](/python/3d-charts/), [polar subplots](/python/polar-chart/) and [ternary subplots](/python/ternary-plots/). The following trace types support attributes named `scene`, `polar` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](/python/3d-charts/), [polar subplots](/python/polar-chart/), [ternary subplots](/python/ternary-plots/) and [smith subplots](/python/smith-charts/). The following trace types support attributes named `scene`, `polar`, `smith` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with 3D subplots via the `scene` attribute, which contains special [camera controls](/python/3d-camera-controls/):
 
@@ -170,6 +170,10 @@ The following trace types are compatible with polar subplots via the `polar` att
 The following trace types are compatible with ternary subplots via the `ternary` attribute:
 
 * [`scatterternary`](/python/ternary-plots/), which can be used to draw individual markers, [curves and filled areas](/python/ternary-contour/)
+
+The following trace types are compatible with smith subplots via the `smith` attribute:
+
+* [`scattersmith`](/python/smith-charts/), which can be used to draw individual markers, curves and filled areas
 
 ### Map Trace Types and Subplots
 
