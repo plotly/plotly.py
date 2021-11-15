@@ -40,19 +40,20 @@ A [Smith Chart](https://en.wikipedia.org/wiki/Smith_chart) is a specialized char
 
 ```python
 import plotly.graph_objects as go
-go.Figure(
+fig = go.Figure(
     go.Scattersmith(
             imag=[0.5, 1, 2, 3], 
             real=[0.5, 1, 2, 3],
         )
 )
+fig.show()
 ```
 
 ### Smith Chart Subplots and Styling
 
 ```python
 import plotly.graph_objects as go
-go.Figure(
+fig = go.Figure(
     data=[
         go.Scattersmith(
             imag=[1], 
@@ -79,15 +80,18 @@ go.Figure(
             domain=dict(x=[0,0.5])
         ),
         smith2=go.layout.Smith(
-            bgcolor='lightgrey',
             realaxis_gridcolor='blue',
             imaginaryaxis_gridcolor='red',
             domain=dict(x=[0.5,1])
         )
     )
 )
+fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/scattersmith/ for more information and chart attribute options!
+See https://plotly.com/python/reference/scattersmith/ and https://plotly.com/python/reference/layout/smith/ for more information and chart attribute options!
 
+```python
+
+```
