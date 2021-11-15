@@ -41,10 +41,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv(
-    'https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/' +
-    'volcano_data1.csv'
-)
+df = pd.read_csv('https://git.io/volcano_data1.csv')
 
 dash_bio.VolcanoPlot(
     dataframe=df,
@@ -59,7 +56,8 @@ Change the size of the points on the scatter plot, and the widths of the effect 
 import pandas as pd
 import dash_bio
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
+
+df = pd.read_csv('https://git.io/volcano_data1.csv')
 
 dash_bio.VolcanoPlot(
     dataframe=df,
@@ -71,7 +69,7 @@ dash_bio.VolcanoPlot(
 
 ## VolcanoPlot with Dash
 
-```python no_display=true
+```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-volcano', width='100%', height=630)
