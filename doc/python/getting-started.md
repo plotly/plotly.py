@@ -68,12 +68,6 @@ $ conda install -c plotly plotly=5.3.1
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
-You'll also likely want `dash` for adding widgets such as sliders, buttons, and dropdowns to your charts (see more below):
-
-```
-$ pip install dash
-```
-
 > Note: **No internet connection, account, or payment is required to use plotly.py.** Prior to version 4, this library could operate in either an "online" or "offline" mode. The documentation tended to emphasize the online mode, where graphs get published to the Chart Studio web service. In version 4, all "online" functionality was removed from the `plotly` package and is now available as the separate, optional, `chart-studio` package (See below). **plotly.py version 4 is "offline" only, and does not include any functionality for uploading figures or data to cloud services.**
 
 
@@ -111,7 +105,7 @@ or `conda`:
 $ conda install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
-You'll ned `jupyter-dash` to add widgets such as sliders, dropdowns, and buttons to Plotly charts in JupyterLab. 
+You'll need `jupyter-dash` to add widgets such as sliders, dropdowns, and buttons to Plotly charts in JupyterLab.
 
 Install [`jupyter-dash`](https://github.com/plotly/jupyter-dash) using `pip`:
 
