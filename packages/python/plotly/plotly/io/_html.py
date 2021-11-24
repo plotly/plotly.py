@@ -38,6 +38,7 @@ def to_html(
     default_width="100%",
     default_height="100%",
     validate=True,
+    div_id=None,
 ):
     """
     Convert a figure to an HTML string representation.
@@ -135,7 +136,7 @@ def to_html(
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # ## Generate div id ##
-    plotdivid = "plotly-root"
+    plotdivid = div_id or str(uuid.uuid4())
 
     # ## Serialize figure ##
     jdata = to_json_plotly(fig_dict.get("data", []))
@@ -391,6 +392,7 @@ def write_html(
     default_width="100%",
     default_height="100%",
     auto_open=False,
+    div_id=None,
 ):
     """
     Write a figure to an HTML file representation
@@ -512,6 +514,7 @@ def write_html(
         default_width=default_width,
         default_height=default_height,
         validate=validate,
+        div_id=div_id,
     )
 
     # Check if file is a string
