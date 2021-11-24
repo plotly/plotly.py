@@ -135,7 +135,7 @@ def to_html(
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # ## Generate div id ##
-    plotdivid = str(uuid.uuid4())
+    plotdivid = "plotly-root"
 
     # ## Serialize figure ##
     jdata = to_json_plotly(fig_dict.get("data", []))
