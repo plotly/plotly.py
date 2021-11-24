@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Fixed
+  - Fixed ValueError when `ff.create_annotated_heatmap` passes `rgba()` colors into `to_rgb_color_list` [#3478](https://github.com/plotly/plotly.py/issues/3478)
+
 ## [5.4.0] - 2021-11-15
 
 ### Fixed
