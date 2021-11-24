@@ -41,6 +41,7 @@ def test_versioned_cdn_included(fig1):
 
 
 def test_html_deterministic(fig1):
-    assert pio.to_html(fig1, include_plotlyjs="cdn") == pio.to_html(
-        fig1, include_plotlyjs="cdn"
+    div_id = "plotly-root"
+    assert pio.to_html(fig1, include_plotlyjs="cdn", div_id=div_id) == pio.to_html(
+        fig1, include_plotlyjs="cdn", div_id=div_id
     )
