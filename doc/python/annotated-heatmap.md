@@ -125,7 +125,7 @@ fig.show()
 #### Custom Hovertext
 
 ```python
-# Add Periodic Table Data
+# Periodic Table Data
 symbol = [['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He'],
          ['Li', 'Be', '', '', '', '', '', '', '', '', '', '', 'B', 'C', 'N', 'O', 'F', 'Ne'],
          ['Na', 'Mg', '', '', '', '', '', '', '', '', '', '', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar'],
@@ -181,7 +181,7 @@ z = [[.8, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, 1.],
 # Display element name and atomic mass on hover
 hover=[]
 for x in range(len(symbol)):
-    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j)
+    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j) if i else ''
                       for i, j in zip(element[x], atomic_mass[x])])
 
 # Invert Matrices
@@ -197,7 +197,12 @@ colorscale=[[0.0, 'rgb(255,255,255)'], [.2, 'rgb(255, 255, 153)'],
 # Make Annotated Heatmap
 fig = ff.create_annotated_heatmap(z, annotation_text=symbol, text=hover,
                                  colorscale=colorscale, font_colors=['black'], hoverinfo='text')
-fig.update_layout(title_text='Periodic Table')
+fig.update_layout(
+     title_text='Periodic Table',
+     margin=dict(l=10, r=10, t=10, b=10, pad=10),
+     xaxis=dict(zeroline=False, showgrid=False),
+     yaxis=dict(zeroline=False, showgrid=False, scaleanchor="x"),
+)
 fig.show()
 ```
 
