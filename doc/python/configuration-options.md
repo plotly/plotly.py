@@ -53,7 +53,7 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 
-config = dict({'scrollZoom': True})
+config = {'scrollZoom': True}
 
 fig.add_trace(
     go.Scatter(
