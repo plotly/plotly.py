@@ -254,11 +254,10 @@ class _Quiver(object):
         seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
 
         # Set coordinates to create arrow
-        for index in range(len(self.end_x)):
-            point1_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg1_x)]
-            point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
-            point2_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg2_x)]
-            point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
+        point1_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg1_x)]
+        point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
+        point2_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg2_x)]
+        point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
 
         # Combine lists to create arrow
         empty = [None] * len(self.end_x)
