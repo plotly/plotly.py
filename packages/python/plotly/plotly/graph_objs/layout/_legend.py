@@ -14,6 +14,7 @@ class Legend(_BaseLayoutHierarchyType):
         "borderwidth",
         "font",
         "groupclick",
+        "grouptitlefont",
         "itemclick",
         "itemdoubleclick",
         "itemsizing",
@@ -239,6 +240,53 @@ class Legend(_BaseLayoutHierarchyType):
     @groupclick.setter
     def groupclick(self, val):
         self["groupclick"] = val
+
+    # grouptitlefont
+    # --------------
+    @property
+    def grouptitlefont(self):
+        """
+        Sets the font for group titles in legend. Defaults to
+        `legend.font` with its size increased about 10%.
+    
+        The 'grouptitlefont' property is an instance of Grouptitlefont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.legend.Grouptitlefont`
+          - A dict of string/value properties that will be passed
+            to the Grouptitlefont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.layout.legend.Grouptitlefont
+        """
+        return self["grouptitlefont"]
+
+    @grouptitlefont.setter
+    def grouptitlefont(self, val):
+        self["grouptitlefont"] = val
 
     # itemclick
     # ---------
@@ -602,6 +650,9 @@ class Legend(_BaseLayoutHierarchyType):
             item clicked on the graph. "togglegroup" toggles the
             visibility of all items in the same legendgroup as the
             item clicked on the graph.
+        grouptitlefont
+            Sets the font for group titles in legend. Defaults to
+            `legend.font` with its size increased about 10%.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -681,6 +732,7 @@ class Legend(_BaseLayoutHierarchyType):
         borderwidth=None,
         font=None,
         groupclick=None,
+        grouptitlefont=None,
         itemclick=None,
         itemdoubleclick=None,
         itemsizing=None,
@@ -721,6 +773,9 @@ class Legend(_BaseLayoutHierarchyType):
             item clicked on the graph. "togglegroup" toggles the
             visibility of all items in the same legendgroup as the
             item clicked on the graph.
+        grouptitlefont
+            Sets the font for group titles in legend. Defaults to
+            `legend.font` with its size increased about 10%.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -844,6 +899,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = groupclick if groupclick is not None else _v
         if _v is not None:
             self["groupclick"] = _v
+        _v = arg.pop("grouptitlefont", None)
+        _v = grouptitlefont if grouptitlefont is not None else _v
+        if _v is not None:
+            self["grouptitlefont"] = _v
         _v = arg.pop("itemclick", None)
         _v = itemclick if itemclick is not None else _v
         if _v is not None:

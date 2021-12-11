@@ -36,6 +36,7 @@ if sys.version_info < (3, 7):
     from ._separatethousands import SeparatethousandsValidator
     from ._outlinewidth import OutlinewidthValidator
     from ._outlinecolor import OutlinecolorValidator
+    from ._orientation import OrientationValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
     from ._lenmode import LenmodeValidator
@@ -87,6 +88,7 @@ else:
             "._separatethousands.SeparatethousandsValidator",
             "._outlinewidth.OutlinewidthValidator",
             "._outlinecolor.OutlinecolorValidator",
+            "._orientation.OrientationValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
             "._lenmode.LenmodeValidator",
