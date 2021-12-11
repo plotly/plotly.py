@@ -28,6 +28,10 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "togglegroup" toggles the visibility of all
                 items in the same legendgroup as the item
                 clicked on the graph.
+            grouptitlefont
+                Sets the font for group titles in legend.
+                Defaults to `legend.font` with its size
+                increased about 10%.
             itemclick
                 Determines the behavior on legend item click.
                 "toggle" toggles the visibility of the item
