@@ -40,7 +40,9 @@ class Heatmap(_BaseTraceType):
         "showscale",
         "stream",
         "text",
+        "textfont",
         "textsrc",
+        "texttemplate",
         "transpose",
         "type",
         "uid",
@@ -205,6 +207,8 @@ class Heatmap(_BaseTraceType):
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
                     `tickmode` is set to "auto".
+                orientation
+                    Sets the orientation of the colorbar.
                 outlinecolor
                     Sets the axis line color.
                 outlinewidth
@@ -288,7 +292,10 @@ class Heatmap(_BaseTraceType):
                     labels is *hide past domain*. In other cases
                     the default is *hide past div*.
                 ticklabelposition
-                    Determines where tick labels are drawn.
+                    Determines where tick labels are drawn relative
+                    to the ticks. Left and right options are used
+                    when `orientation` is "h", top and bottom when
+                    `orientation` is "v".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -342,27 +349,34 @@ class Heatmap(_BaseTraceType):
                     Deprecated: Please use
                     heatmap.colorbar.title.side instead. Determines
                     the location of color bar's title with respect
-                    to the color bar. Note that the title's
-                    location used to be set by the now deprecated
-                    `titleside` attribute.
+                    to the color bar. Defaults to "top" when
+                    `orientation` if "v" and  defaults to "right"
+                    when `orientation` if "h". Note that the
+                    title's location used to be set by the now
+                    deprecated `titleside` attribute.
                 x
                     Sets the x position of the color bar (in plot
-                    fraction).
+                    fraction). Defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
                     the "left", "center" or "right" of the color
-                    bar.
+                    bar. Defaults to "left" when `orientation` is
+                    "v" and "center" when `orientation` is "h".
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
                 y
                     Sets the y position of the color bar (in plot
-                    fraction).
+                    fraction). Defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
                     "top", "middle" or "bottom" of the color bar.
+                    Defaults to "middle" when `orientation` is "v"
+                    and "bottom" when `orientation` is "h".
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
@@ -1095,6 +1109,52 @@ class Heatmap(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the text font.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.heatmap.Textfont`
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.heatmap.Textfont
+        """
+        return self["textfont"]
+
+    @textfont.setter
+    def textfont(self, val):
+        self["textfont"] = val
+
     # textsrc
     # -------
     @property
@@ -1114,6 +1174,39 @@ class Heatmap(_BaseTraceType):
     @textsrc.setter
     def textsrc(self, val):
         self["textsrc"] = val
+
+    # texttemplate
+    # ------------
+    @property
+    def texttemplate(self):
+        """
+        Template string used for rendering the information text that
+        appear on points. Note that this will override `textinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. Every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `x`, `y`, `z` and `text`.
+    
+        The 'texttemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["texttemplate"]
+
+    @texttemplate.setter
+    def texttemplate(self, val):
+        self["texttemplate"] = val
 
     # transpose
     # ---------
@@ -2056,9 +2149,27 @@ class Heatmap(_BaseTraceType):
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
+        textfont
+            Sets the text font.
         textsrc
             Sets the source reference on Chart Studio Cloud for
             `text`.
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -2261,7 +2372,9 @@ class Heatmap(_BaseTraceType):
         showscale=None,
         stream=None,
         text=None,
+        textfont=None,
         textsrc=None,
+        texttemplate=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -2479,9 +2592,27 @@ class Heatmap(_BaseTraceType):
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
+        textfont
+            Sets the text font.
         textsrc
             Sets the source reference on Chart Studio Cloud for
             `text`.
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -2806,10 +2937,18 @@ an instance of :class:`plotly.graph_objs.Heatmap`"""
         _v = text if text is not None else _v
         if _v is not None:
             self["text"] = _v
+        _v = arg.pop("textfont", None)
+        _v = textfont if textfont is not None else _v
+        if _v is not None:
+            self["textfont"] = _v
         _v = arg.pop("textsrc", None)
         _v = textsrc if textsrc is not None else _v
         if _v is not None:
             self["textsrc"] = _v
+        _v = arg.pop("texttemplate", None)
+        _v = texttemplate if texttemplate is not None else _v
+        if _v is not None:
+            self["texttemplate"] = _v
         _v = arg.pop("transpose", None)
         _v = transpose if transpose is not None else _v
         if _v is not None:

@@ -72,6 +72,8 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 will be chosen automatically to be less than or
                 equal to `nticks`. Has an effect only if
                 `tickmode` is set to "auto".
+            orientation
+                Sets the orientation of the colorbar.
             outlinecolor
                 Sets the axis line color.
             outlinewidth
@@ -156,7 +158,10 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 labels is *hide past domain*. In other cases
                 the default is *hide past div*.
             ticklabelposition
-                Determines where tick labels are drawn.
+                Determines where tick labels are drawn relative
+                to the ticks. Left and right options are used
+                when `orientation` is "h", top and bottom when
+                `orientation` is "v".
             ticklen
                 Sets the tick length (in px).
             tickmode
@@ -210,27 +215,34 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Deprecated: Please use
                 scatter.marker.colorbar.title.side instead.
                 Determines the location of color bar's title
-                with respect to the color bar. Note that the
-                title's location used to be set by the now
+                with respect to the color bar. Defaults to
+                "top" when `orientation` if "v" and  defaults
+                to "right" when `orientation` if "h". Note that
+                the title's location used to be set by the now
                 deprecated `titleside` attribute.
             x
                 Sets the x position of the color bar (in plot
-                fraction).
+                fraction). Defaults to 1.02 when `orientation`
+                is "v" and 0.5 when `orientation` is "h".
             xanchor
                 Sets this color bar's horizontal position
                 anchor. This anchor binds the `x` position to
                 the "left", "center" or "right" of the color
-                bar.
+                bar. Defaults to "left" when `orientation` is
+                "v" and "center" when `orientation` is "h".
             xpad
                 Sets the amount of padding (in px) along the x
                 direction.
             y
                 Sets the y position of the color bar (in plot
-                fraction).
+                fraction). Defaults to 0.5 when `orientation`
+                is "v" and 1.02 when `orientation` is "h".
             yanchor
                 Sets this color bar's vertical position anchor
                 This anchor binds the `y` position to the
                 "top", "middle" or "bottom" of the color bar.
+                Defaults to "middle" when `orientation` is "v"
+                and "bottom" when `orientation` is "h".
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
