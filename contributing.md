@@ -147,6 +147,7 @@ complete installation and avoid gdal-config errors.
 
 ```bash
 (plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
+(plotly_dev) $ conda install -c conda-forge nodejs
 (plotly_dev) $ conda install fiona
 (plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
 ```
