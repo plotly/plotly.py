@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,10 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.11
   plotly:
-    description: How to set, create and control continuous color scales and color bars
-      in scatter, bar, map and heatmap figures.
+    description: How to set, create and control continuous color scales and color
+      bars in scatter, bar, map and heatmap figures.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187
@@ -512,6 +512,42 @@ fig.add_trace(go.Heatmap(
         tickvals=[2, 50, 100],
         ticktext=["Cool", "Mild", "Hot"],
         ticks="outside"
+    )
+))
+
+fig.show()
+```
+
+### Color Bar Displayed Horizontally
+
+
+By default, color bars are displayed vertically. You can change a color bar to be displayed horizontally by setting `orientation`=`h`.
+
+```python
+import plotly.graph_objects as go
+
+import six.moves.urllib
+import json
+
+# Load heatmap data
+response = six.moves.urllib.request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure()
+
+fig.add_trace(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(
+        title="Surface Heat",
+        titleside="top",
+        tickmode="array",
+        tickvals=[2, 50, 100],
+        ticktext=["Cool", "Mild", "Hot"],
+        ticks="outside",
+        orientation='h'
+        
     )
 ))
 
