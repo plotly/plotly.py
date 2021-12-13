@@ -208,6 +208,25 @@ fig = px.histogram(df, x="total_bill", color="sex", marginal="rug", # can be `bo
 fig.show()
 ```
 
+### Adding bar text
+
+
+You can add text to histogram bars using `fig.update_traces(texttemplate="%{variable}")`, where `variable` is the text to add. In this example, we add the y-axis values to the bars. We get these values following the **Accessing the counts (y-axis) values** example above.
+
+```python
+import plotly.express as px
+import numpy as np
+
+df = px.data.tips()
+
+counts, bins = np.histogram(df.total_bill, bins=range(0, 60, 5))
+bins = 0.5 * (bins[:-1] + bins[1:])
+
+fig = px.bar(x=bins, y=counts, labels={'x':'total_bill', 'y':'count'})
+fig.update_traces(texttemplate="%{y}")
+fig.show()
+```
+
 ## Histograms with go.Histogram
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](/python/graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.

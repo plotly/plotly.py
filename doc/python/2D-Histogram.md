@@ -82,7 +82,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", facet_row="sex", facet_col
 fig.show()
 ```
 
-You can add `z` as text to 2D Histogram points using `fig.update_traces(texttemplate="%{z}")`
+You can add the `z` values as text to 2D Histogram points using `fig.update_traces(texttemplate="%{z}")`
 
 ```python
 import plotly.express as px
