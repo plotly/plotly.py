@@ -82,6 +82,17 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", facet_row="sex", facet_col
 fig.show()
 ```
 
+You can add `z` as text to 2D Histogram points using `fig.update_traces(texttemplate="%{z}")`
+
+```python
+import plotly.express as px
+df = px.data.tips()
+
+fig = px.density_heatmap(df, x="total_bill", y="tip")
+fig.update_traces(texttemplate="%{z}") 
+fig.show()
+```
+
 ### Other aggregation functions than `count`
 
 By passing in a `z` value and a `histfunc`, density heatmaps can perform basic aggregation operations. Here we show average Sepal Length grouped by Petal Length and Petal Width for the Iris dataset.
