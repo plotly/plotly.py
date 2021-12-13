@@ -204,15 +204,16 @@ In this example we add text to heatmap points. We use the values from the `text`
 
 ```python
 import plotly.graph_objects as go
-from plotly import data
 
-df = data.tips()
+fig = go.Figure(data=go.Heatmap(
+                    z=[[1, 20, 30],
+                      [20, 1, 60],
+                      [30, 60, 1]],
+                    text=[['one', 'twenty', 'thirty'],
+                          ['twenty', 'one', 'sixty'],
+                          ['thirty', 'sixty', 'one']],
+                    texttemplate="%{text}"))
 
-fig = go.Figure(go.Histogram2d(
-        x=df.total_bill,
-        y=df.tip,
-        texttemplate= "%{z}"
-    ))
 fig.show()
 ```
 
