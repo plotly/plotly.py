@@ -86,6 +86,22 @@ fig.update_xaxes(side="top")
 fig.show()
 ```
 
+### Adding and customizing text on points
+
+
+You can add text to heatmap points with `.update_traces(texttemplate="%{variable}")`. Here we use the values of the `z` attribute for `variable`. We also customize the font size with `textfont`.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_wide(indexed=True)
+fig = px.imshow(df)
+fig.update_traces(texttemplate="%{z}")
+fig.update_traces(textfont={"size":20})
+
+fig.show()
+```
+
 ### Basic Heatmap with `plotly.graph_objects`
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](/python/graph-objects/).
@@ -200,7 +216,7 @@ fig.show()
 ### Text on Heatmap Points
 
 
-In this example we add text to heatmap points. We use the values from the `text` attribute for the text.
+In this example we add text to heatmap points using `texttemplate`. We use the values from the `text` attribute for the text. We also adjust the font size using `textfont`.
 
 ```python
 import plotly.graph_objects as go
@@ -212,7 +228,8 @@ fig = go.Figure(data=go.Heatmap(
                     text=[['one', 'twenty', 'thirty'],
                           ['twenty', 'one', 'sixty'],
                           ['thirty', 'sixty', 'one']],
-                    texttemplate="%{text}"))
+                    texttemplate="%{text}",
+                    textfont={"size":20}))
 
 fig.show()
 ```
