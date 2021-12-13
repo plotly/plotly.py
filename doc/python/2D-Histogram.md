@@ -238,7 +238,7 @@ fig.show()
 ### Text on 2D Histogram Points
 
 
-In this example we add text to 2D-Histogram points. We use the values from the `z` attribute for the text, adding them following the format **%{variable}**.
+In this example we add text to 2D Histogram points. We use the values from the `z` attribute for the text.
 
 ```python
 import plotly.graph_objects as go
