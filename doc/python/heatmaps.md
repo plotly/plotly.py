@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.11
   plotly:
     description: How to make Heatmaps in Python with Plotly.
     display_as: scientific
@@ -194,6 +194,25 @@ fig.update_layout(
     title='GitHub commits per day',
     xaxis_nticks=36)
 
+fig.show()
+```
+
+### Text on Heatmap Points
+
+
+In this example we add text to heatmap points. We use the values from the `text` attribute for the text.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.tips()
+
+fig = go.Figure(go.Histogram2d(
+        x=df.total_bill,
+        y=df.tip,
+        texttemplate= "%{z}"
+    ))
 fig.show()
 ```
 
