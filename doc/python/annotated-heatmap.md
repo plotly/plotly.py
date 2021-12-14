@@ -72,7 +72,6 @@ fig.show()
 
 ### Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
 
-
 The remaining examples show how to create Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
 
 
@@ -239,12 +238,6 @@ fig = ff.create_annotated_heatmap(z, annotation_text=symbol, text=hover,
                                  colorscale=colorscale, font_colors=['black'], hoverinfo='text')
 fig.update_layout(title_text='Periodic Table')
 fig.show()
-```
-
-#### Annotations with plotly.express
-
-```python
-
 ```
 
 #### Reference
