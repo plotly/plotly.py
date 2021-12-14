@@ -248,7 +248,6 @@ fig.show()
 
 ### Text on 2D Histogram Points
 
-
 In this example we add text to 2D Histogram points. We use the values from the `z` attribute for the text.
 
 ```python

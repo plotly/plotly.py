@@ -210,7 +210,6 @@ fig.show()
 
 ### Adding bar text
 
-
 You can add text to histogram bars using `fig.update_traces(texttemplate="%{variable}")`, where `variable` is the text to add. In this example, we add the y-axis values to the bars. We get these values following the **Accessing the counts (y-axis) values** example above.
 
 ```python
@@ -360,7 +359,6 @@ fig.show()
 ```
 
 ### Histogram Bar Text
-
 
 You can add text to histogram bars using the `texttemplate` argument. In this example we add the x-axis values as text following the format `%{variable}`. We also adjust the size of the text using `textfont_size`.
 

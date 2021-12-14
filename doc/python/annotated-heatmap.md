@@ -36,12 +36,10 @@ jupyter:
 
 ### Annotated Heatmaps with plotly.express and px.imshow
 
-
-These examples use [px.imshow](/python/imshow) to create Annotated Heatmaps. px.imshow is the best way creating heatmaps with z-annotations.
+These examples use [px.imshow](/python/imshow) to create Annotated Heatmaps. px.imshow is the recommended way to create heatmaps with z-annotations.
 
 
 #### Basic Annotated Heatmap for z-annotations
-
 
 After creating a figure with `px.imshow`, you can add z-annotations with `.update_traces(texttemplate="%{z}")`.
 
@@ -57,7 +55,6 @@ fig.show()
 ```
 
 #### Custom Font
-
 
 You can make changes to the font using `textfont`. Here we set the font size to 20.
 
