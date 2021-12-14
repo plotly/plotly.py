@@ -521,7 +521,7 @@ fig.show()
 ### Color Bar Displayed Horizontally
 
 
-By default, color bars are displayed vertically. You can change a color bar to be displayed horizontally by setting `orientation`=`h`.
+By default, color bars are displayed vertically. You can change a color bar to be displayed horizontally by setting the `colorbar` `orientation` attribute to `h`.
 
 ```python
 import plotly.graph_objects as go
@@ -539,17 +539,7 @@ fig = go.Figure()
 
 fig.add_trace(go.Heatmap(
     z=dataset["z"],
-    colorbar=dict(
-        title="Surface Heat",
-        titleside="top",
-        tickmode="array",
-        tickvals=[2, 50, 100],
-        ticktext=["Cool", "Mild", "Hot"],
-        ticks="outside",
-        orientation='h'
-        
-    )
-))
+    colorbar=dict(orientation='h')))
 
 fig.show()
 ```

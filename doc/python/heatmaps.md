@@ -216,7 +216,7 @@ fig.show()
 ### Text on Heatmap Points
 
 
-In this example we add text to heatmap points using `texttemplate`. We use the values from the `text` attribute for the text. We also adjust the font size using `textfont`.
+In this example we add text to heatmap points using `texttemplate`. We use the values of the `text` attribute for the text. We also adjust the font size using `textfont`.
 
 ```python
 import plotly.graph_objects as go
