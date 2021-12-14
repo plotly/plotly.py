@@ -362,9 +362,7 @@ fig.show()
 ### Histogram Bar Text
 
 
-You can add text to histogram bars using the `texttemplate` argument. In this example we add the x-axis values as  text following the format `%{variable}`. We also adjust the size of the text using `textfont_size`.
-
-
+You can add text to histogram bars using the `texttemplate` argument. In this example we add the x-axis values as text following the format `%{variable}`. We also adjust the size of the text using `textfont_size`.
 
 ```python
 import plotly.graph_objects as go
