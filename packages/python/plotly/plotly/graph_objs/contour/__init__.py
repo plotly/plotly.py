@@ -7,6 +7,7 @@ if sys.version_info < (3, 7):
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
     from ._stream import Stream
+    from ._textfont import Textfont
     from . import colorbar
     from . import contours
     from . import hoverlabel
@@ -24,5 +25,6 @@ else:
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",
             "._stream.Stream",
+            "._textfont.Textfont",
         ],
     )
