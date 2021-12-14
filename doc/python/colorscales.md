@@ -520,7 +520,6 @@ fig.show()
 
 ### Color Bar Displayed Horizontally
 
-
 By default, color bars are displayed vertically. You can change a color bar to be displayed horizontally by setting the `colorbar` `orientation` attribute to `h`.
 
 ```python
