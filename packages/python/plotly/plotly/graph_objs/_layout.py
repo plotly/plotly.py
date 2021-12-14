@@ -1688,6 +1688,9 @@ class Layout(_BaseLayoutType):
                 font
                     Sets the default hover label font used by all
                     traces on the graph.
+                grouptitlefont
+                    Sets the font for group titles in hover
+                    (unified modes). Defaults to `hoverlabel.font`.
                 namelength
                     Sets the default length (in number of
                     characters) of the trace name in the hover
@@ -1944,6 +1947,10 @@ class Layout(_BaseLayoutType):
                     "togglegroup" toggles the visibility of all
                     items in the same legendgroup as the item
                     clicked on the graph.
+                grouptitlefont
+                    Sets the font for group titles in legend.
+                    Defaults to `legend.font` with its size
+                    increased about 10%.
                 itemclick
                     Determines the behavior on legend item click.
                     "toggle" toggles the visibility of the item
