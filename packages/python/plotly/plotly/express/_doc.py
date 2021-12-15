@@ -591,6 +591,11 @@ docs = dict(
         "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
         "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
     ],
+    text_auto=[
+        "bool or string (default `False`)",
+        "If `True` or a string, the x or y or z values will be displayed as text, depending on the orientation",
+        "A string like `'.2f'`, it will be interpreted as a `texttemplate` numeric formatting directive.",
+    ],
 )
 
 
