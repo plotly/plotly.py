@@ -54,10 +54,12 @@ fig = px.bar(df, labels={ 'index': 'base' }, hover_name='consensus', y='conserva
 fig.show()
 ```
 
-## Alignment Chart in dash_bio
+## Alignment Chart in Dash Bio
 
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-alignmentchart', width='100%', height=630)
 ```
+Dash Bio's alignment chart comes with conservation and gap plots to understand multiple genomic or proteomic alignments.
+For more information, check out [Dash Bio](https://dash.plotly.com/dash-bio/alignmentchart).
