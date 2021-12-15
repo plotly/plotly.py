@@ -210,18 +210,12 @@ fig.show()
 
 ### Adding bar text
 
-You can add text to histogram bars using `fig.update_traces(texttemplate="%{variable}")`, where `variable` is the text to add. In this example, we add the y-axis values to the bars. We get these values following the **Accessing the counts (y-axis) values** example above.
+You can add text to histogram bars using `fig.update_traces(texttemplate="%{variable}")`, where `variable` is the text to add. In this example, we add the y-axis values to the bars. 
 
 ```python
 import plotly.express as px
-import numpy as np
-
 df = px.data.tips()
-
-counts, bins = np.histogram(df.total_bill, bins=range(0, 60, 5))
-bins = 0.5 * (bins[:-1] + bins[1:])
-
-fig = px.bar(x=bins, y=counts, labels={'x':'total_bill', 'y':'count'})
+fig = px.histogram(df, x="total_bill", y="tip", histfunc='avg', nbins=8)
 fig.update_traces(texttemplate="%{y}")
 fig.show()
 ```
