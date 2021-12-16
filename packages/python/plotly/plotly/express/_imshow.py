@@ -210,8 +210,8 @@ def imshow(
         result if smaller binary strings for natural images.
 
     text_auto: bool or str (default `False`)
-        If `True` or a string, single-channel `img` values will be displayed as text",
-        A string like `'.2f'`, it will be interpreted as a `texttemplate` numeric formatting directive.
+        If `True` or a string, single-channel `img` values will be displayed as text.
+        A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.
 
     Returns
     -------
