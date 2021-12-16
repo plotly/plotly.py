@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.11
   plotly:
     description: How to make Annotated Heatmaps in Python with Plotly.
     display_as: scientific
@@ -34,9 +34,48 @@ jupyter:
     thumbnail: thumbnail/ann_heat.jpg
 ---
 
-#### Simple Annotated Heatmap
+### Annotated Heatmaps with plotly.express and px.imshow
 
-This page details the use of a [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
+These examples use [px.imshow](/python/imshow) to create Annotated Heatmaps. px.imshow is the recommended way to create heatmaps with z-annotations.
+
+
+#### Basic Annotated Heatmap for z-annotations
+
+After creating a figure with `px.imshow`, you can add z-annotations with `.update_traces(texttemplate="%{z}")`.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_wide(indexed=True)
+
+fig = px.imshow(df)
+fig.update_traces(texttemplate="%{z}")
+
+fig.show()
+```
+
+#### Custom Font
+
+You can make changes to the font using `textfont`. Here we set the font size to 20.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_wide(indexed=True)
+
+fig = px.imshow(df)
+fig.update_traces(texttemplate="%{z}")
+fig.update_traces(textfont={"size":20})
+
+fig.show()
+```
+
+### Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
+
+The remaining examples show how to create Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
+
+
+#### Simple Annotated Heatmap
 
 ```python
 import plotly.figure_factory as ff
