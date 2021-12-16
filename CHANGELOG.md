@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## UNRELEASED
 
 ### Updated
-  - Updated Plotly.js to from version 2.6.3 to version 2.8.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#280----2021-12-10) for more information. Notable changes include:
+  - Updated Plotly.js to from version 2.6.3 to version 2.8.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#280----2021-12-10) for more information. Notable changes include:
     - Horizontal color bars
     - texttemplate for histogram-like traces
     - text for heatmap-like traces
