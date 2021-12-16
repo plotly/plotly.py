@@ -391,6 +391,7 @@ def imshow(
                 + "dimension of the img matrix."
             )
 
+        texttemplate = None
         if text_auto is True:
             texttemplate = "%{z}"
         elif text_auto is not False:

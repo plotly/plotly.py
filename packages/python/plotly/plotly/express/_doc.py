@@ -594,7 +594,7 @@ docs = dict(
     text_auto=[
         "bool or string (default `False`)",
         "If `True` or a string, the x or y or z values will be displayed as text, depending on the orientation",
-        "A string like `'.2f'`, it will be interpreted as a `texttemplate` numeric formatting directive.",
+        "A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.",
     ],
 )
 
