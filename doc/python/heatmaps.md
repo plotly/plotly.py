@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.11
   plotly:
     description: How to make Heatmaps in Python with Plotly.
     display_as: scientific
@@ -83,6 +83,21 @@ fig = px.imshow(data,
                 y=['Morning', 'Afternoon', 'Evening']
                )
 fig.update_xaxes(side="top")
+fig.show()
+```
+
+### Adding and customizing text on points
+
+You can add text to heatmap points with `.update_traces(texttemplate="%{variable}")`. Here we use the values of the `z` attribute for `variable`. We also customize the font size with `textfont`.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_wide(indexed=True)
+fig = px.imshow(df)
+fig.update_traces(texttemplate="%{z}")
+fig.update_traces(textfont={"size":20})
+
 fig.show()
 ```
 
@@ -193,6 +208,26 @@ fig = go.Figure(data=go.Heatmap(
 fig.update_layout(
     title='GitHub commits per day',
     xaxis_nticks=36)
+
+fig.show()
+```
+
+### Text on Heatmap Points
+
+In this example we add text to heatmap points using `texttemplate`. We use the values from the `text` attribute for the text. We also adjust the font size using `textfont`.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(data=go.Heatmap(
+                    z=[[1, 20, 30],
+                      [20, 1, 60],
+                      [30, 60, 1]],
+                    text=[['one', 'twenty', 'thirty'],
+                          ['twenty', 'one', 'sixty'],
+                          ['thirty', 'sixty', 'one']],
+                    texttemplate="%{text}",
+                    textfont={"size":20}))
 
 fig.show()
 ```
