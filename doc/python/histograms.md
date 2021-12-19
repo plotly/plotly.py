@@ -8,7 +8,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3 (ipykernel)
+    display_name: Python 3
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.11
+    version: 3.8.11
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -208,15 +208,16 @@ fig = px.histogram(df, x="total_bill", color="sex", marginal="rug", # can be `bo
 fig.show()
 ```
 
-### Adding bar text
+### Adding text labels
 
-You can add text to histogram bars using `fig.update_traces(texttemplate="%{variable}")`, where `variable` is the text to add. In this example, we add the y-axis values to the bars. 
+*New in v5.5*
+
+You can add text to histogram bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.histogram(df, x="total_bill", y="tip", histfunc='avg', nbins=8)
-fig.update_traces(texttemplate="%{y}")
+fig = px.histogram(df, x="total_bill", y="tip", histfunc="avg", nbins=8, text_auto=True)
 fig.show()
 ```
 
