@@ -37,7 +37,9 @@ jupyter:
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-With `px.bar`, each row of the DataFrame is represented as a rectangular mark.
+With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms). 
+
+In the example below, there is only a single row of data per year, so a single bar is displayed per year.
 
 ```python
 import plotly.express as px
@@ -98,20 +100,31 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bar-charts', width='100%', height=630)
 ```
 
-### Customized bar charts with Plotly Express
+### Colored Bars
 
 The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](/python/discrete-color/), as above.
 
 ```python
 import plotly.express as px
-data = px.data.gapminder()
 
-data_canada = data[data.country == 'Canada']
-fig = px.bar(data_canada, x='year', y='pop',
+df = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(df, x='year', y='pop',
              hover_data=['lifeExp', 'gdpPercap'], color='lifeExp',
              labels={'pop':'population of Canada'}, height=400)
 fig.show()
 ```
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.bar(df, x='year', y='pop',
+             hover_data=['lifeExp', 'gdpPercap'], color='country',
+             labels={'pop':'population of Canada'}, height=400)
+fig.show()
+```
+
+### Stacked vs Grouped Bars
 
 When several rows share the same value of `x` (here Female or Male), the rectangles are stacked on top of one another by default.
 
@@ -133,6 +146,88 @@ fig = px.bar(df, x="sex", y="total_bill",
 fig.show()
 ```
 
+### Aggregating into Single Colored Bars
+
+As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram). 
+
+> `px.bar` and `px.histogram` are designed  to be nearly interchangeable in their call signatures, so as to be able to switch between aggregated and disaggregated bar representations.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="sex", y="total_bill",
+             color='smoker', barmode='group',
+             height=400)
+fig.show()
+```
+
+`px.histogram()` will aggregate `y` values by summing them by default, but the `histfunc` argument can be used to set this to `avg` to create what is sometimes called a "barplot" which summarizes the central tendency of a dataset, rather than visually representing the totality of the dataset.
+
+> Warning: when using `histfunc`s other than `"sum"` or `"count"` it can be very misleading to use a `barmode` other than `"group"`, as stacked bars in effect represent the sum of the bar heights, and summing averages is rarely a reasonable thing to visualize.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="sex", y="total_bill",
+             color='smoker', barmode='group',
+             histfunc='avg',
+             height=400)
+fig.show()
+```
+
+### Bar Charts with Text
+
+*New in v5.5*
+
+You can add text to bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.bar(df, x="medal", y="count", color="nation", text_auto=True)
+fig.show()
+```
+
+The `text` argument can be used to display arbitrary text on the bars:
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.bar(df, x="medal", y="count", color="nation", text="nation")
+fig.show()
+```
+
+By default, Plotly will scale and rotate text labels to maximize the number of visible labels, which can result in a variety of text angles and sizes and positions in the same figure. The `textfont`, `textposition` and `textangle` trace attributes can be used to control these.
+
+Here is an example of the default behavior:
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+fig = px.bar(df, y='pop', x='country', text_auto='.2s',
+            title="Default: various text sizes, positions and angles")
+fig.show()
+```
+
+Here is the same data with less variation in text formatting. Note that `textfont_size` will set the *maximum* size. The `layout.uniformtext` attribute can be used to guarantee that all text labels are the same size. See the [documentation on text and annotations](/python/text-and-annotations/) for details.
+
+The `cliponaxis` attribute is set to `False` in the example below to ensure that the outside text on the tallest bar is allowed to render outside of the plotting area.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+fig = px.bar(df, y='pop', x='country', text_auto='.2s',
+            title="Controlled text sizes, positions and angles")
+fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+fig.show()
+```
+
+### Pattern Fills
+
 *New in v5.0*
 
 
@@ -147,21 +242,7 @@ fig = px.bar(df, x="medal", y="count", color="nation",
 fig.show()
 ```
 
-#### Bar Charts with Text
-
-*New in v5.5*
-
-You can add text to bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
-
-```python
-import plotly.express as px
-df = px.data.medals_long()
-
-fig = px.bar(df, x="medal", y="count", color="nation", text_auto=True)
-fig.show()
-```
-
-#### Facetted subplots
+### Facetted subplots
 
 Use the keyword arguments `facet_row` (resp. `facet_col`) to create facetted subplots, where different rows (resp. columns) correspond to different values of the dataframe column specified in `facet_row`.
 
@@ -175,9 +256,7 @@ fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
 fig.show()
 ```
 
-To learn more, see the _link to px.bar reference page_.
-
-#### Basic Bar Chart with plotly.graph_objects
+#### Basic Bar Charts with plotly.graph_objects
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](/python/graph-objects/).
 
