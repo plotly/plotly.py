@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.11
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -98,7 +98,7 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bar-charts', width='100%', height=630)
 ```
 
-### Customize bar charts with Plotly Express
+### Customized bar charts with Plotly Express
 
 The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](/python/discrete-color/), as above.
 
@@ -144,6 +144,20 @@ df = px.data.medals_long()
 
 fig = px.bar(df, x="medal", y="count", color="nation",
              pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
+fig.show()
+```
+
+#### Bar Charts with Text
+
+*New in v5.5*
+
+You can add text to bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.bar(df, x="medal", y="count", color="nation", text_auto=True)
 fig.show()
 ```
 

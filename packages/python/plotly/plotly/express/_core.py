@@ -1794,8 +1794,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if args.get("text_auto", False) is not False:
         if constructor in [go.Histogram2d, go.Histogram2dContour]:
             letter = "z"
-        else:
+        elif constructor == go.Bar:
             letter = "y" if args["orientation"] == "v" else "x"
+        else:
+            letter = "value"
         if args["text_auto"] is True:
             trace_patch["texttemplate"] = "%{" + letter + "}"
         else:
