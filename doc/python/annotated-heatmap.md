@@ -8,7 +8,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.13.4
   kernelspec:
-    display_name: Python 3 (ipykernel)
+    display_name: Python 3
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.11
+    version: 3.8.11
   plotly:
     description: How to make Annotated Heatmaps in Python with Plotly.
     display_as: scientific
@@ -34,9 +34,11 @@ jupyter:
     thumbnail: thumbnail/ann_heat.jpg
 ---
 
-### Annotated Heatmaps with plotly.express and px.imshow
+### Annotated Heatmaps with Plotly Express
 
-These examples use [px.imshow](/python/imshow) to create Annotated Heatmaps. px.imshow is the recommended way to create heatmaps with z-annotations.
+*New in v5.5*
+
+As of version 5.5.0 of `plotly`, the **recommended way to [display annotated heatmaps is to use `px.imshow()`](/python/heatmaps/)** rather than the now-deprecated `create_annotated_heatmap` figure factory documented below for historical reasons.
 
 
 #### Basic Annotated Heatmap for z-annotations
@@ -46,33 +48,19 @@ After creating a figure with `px.imshow`, you can add z-annotations with `.updat
 ```python
 import plotly.express as px
 
-df = px.data.medals_wide(indexed=True)
+z = [[.1, .3, .5, .7, .9],
+     [1, .8, .6, .4, .2],
+     [.2, 0, .5, .7, .9],
+     [.9, .8, .4, .2, 0],
+     [.3, .4, .5, .7, 1]]
 
-fig = px.imshow(df)
-fig.update_traces(texttemplate="%{z}")
-
+fig = px.imshow(z, text_auto=True)
 fig.show()
 ```
 
-#### Custom Font
+### Deprecated Figure Factory
 
-You can make changes to the font using `textfont`. Here we set the font size to 20.
-
-```python
-import plotly.express as px
-
-df = px.data.medals_wide(indexed=True)
-
-fig = px.imshow(df)
-fig.update_traces(texttemplate="%{z}")
-fig.update_traces(textfont={"size":20})
-
-fig.show()
-```
-
-### Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
-
-The remaining examples show how to create Annotated Heatmaps with [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
+The remaining examples show how to create Annotated Heatmaps with the deprecated `create_annotated_heatmap` [figure factory](/python/figure-factories/).
 
 
 #### Simple Annotated Heatmap
@@ -90,38 +78,10 @@ fig = ff.create_annotated_heatmap(z)
 fig.show()
 ```
 
-#### Defined Colorscale
-
-```python
-import plotly.figure_factory as ff
-
-z = [[.1, .3, .5, .7],
-     [1, .8, .6, .4],
-     [.6, .4, .2, .0],
-     [.9, .7, .5, .3]]
-
-fig = ff.create_annotated_heatmap(z, colorscale='Viridis')
-fig.show()
-```
-
-#### Custom Colorscale
-
-```python
-import plotly.figure_factory as ff
-
-z = [[.1, .3, .5, .7],
-     [1.0, .8, .6, .4],
-     [.6, .4, .2, 0.0],
-     [.9, .7, .5, .3]]
-
-colorscale = [[0, 'navy'], [1, 'plum']]
-font_colors = ['white', 'black']
-fig = ff.create_annotated_heatmap(z, colorscale=colorscale, font_colors=font_colors)
-fig.show()
-```
-
 #### Custom Text and X & Y Labels
 set `annotation_text` to a matrix with the same dimensions as `z`
+
+> WARNING: this legacy figure factory requires the `y` array to be provided in reverse order, and will map the `z_text` to the `z` values in reverse order. **The use of the `px.imshow()` version below is highly recommended**
 
 ```python
 import plotly.figure_factory as ff
@@ -138,6 +98,28 @@ z_text = [['Win', 'Lose', 'Win'],
           ['Win', 'Win', 'Lose']]
 
 fig = ff.create_annotated_heatmap(z, x=x, y=y, annotation_text=z_text, colorscale='Viridis')
+fig.show()
+```
+
+Here is the same figure using `px.imshow()`
+
+```python
+import plotly.express as px
+
+x = ['Team A', 'Team B', 'Team C']
+y = ['Game One', 'Game Two', 'Game Three']
+
+z = [[.1, .3, .5],
+     [1.0, .8, .6],
+     [.6, .4, .2]]
+
+z_text = [['Win', 'Lose', 'Win'],
+          ['Lose', 'Lose', 'Win'],
+          ['Win', 'Win', 'Lose']]
+
+fig = px.imshow(z, x=x, y=y, color_continuous_scale='Viridis', aspect="auto")
+fig.update_traces(text=z_text, texttemplate="%{text}")
+fig.update_xaxes(side="top")
 fig.show()
 ```
 
@@ -161,7 +143,20 @@ for i in range(len(fig.layout.annotations)):
 fig.show()
 ```
 
-#### Custom Hovertext
+Here is the same figure using `px.imshow()`
+
+```python
+import plotly.express as px
+import numpy as np
+np.random.seed(1)
+
+z = np.random.randn(20, 20)
+
+fig = px.imshow(z, text_auto=".2f", color_continuous_scale='Greys', aspect="auto")
+fig.show()
+```
+
+Here is a fairly contrived example showing how one can display a periodic table with custom text and hover using `ff.create_annotated_heatmap()` (scroll below to see the `px.imshow()` equivalent).
 
 ```python
 # Add Periodic Table Data
@@ -180,11 +175,11 @@ symbol = [['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 
 
 element = [['Hydrogen', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Helium'],
            ['Lithium', 'Beryllium', '', '', '', '', '', '', '', '', '', '', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon'],
-           ['Sodium', 'Magnesium', '', '', '', '', '', '', '', '', '', '', 'Aluminium', 'Silicon', 'Phosphorus', 'Sulfur', 'Chlorine', ' Argon'],
-           ['Potassium', ' Calcium', ' Scandium', ' Titanium', ' Vanadium', ' Chromium',  'Manganese', 'Iron', 'Cobalt', 'Nickel', 'Copper', 'Zinc', 'Gallium', 'Germanium', 'Arsenic', 'Selenium', 'Bromine', 'Krypton'],
+           ['Sodium', 'Magnesium', '', '', '', '', '', '', '', '', '', '', 'Aluminium', 'Silicon', 'Phosphorus', 'Sulfur', 'Chlorine', 'Argon'],
+           ['Potassium', 'Calcium', 'Scandium', 'Titanium', 'Vanadium', 'Chromium',  'Manganese', 'Iron', 'Cobalt', 'Nickel', 'Copper', 'Zinc', 'Gallium', 'Germanium', 'Arsenic', 'Selenium', 'Bromine', 'Krypton'],
            ['Rubidium', 'Strontium', 'Yttrium', 'Zirconium', 'Niobium', 'Molybdenum', 'Technetium', 'Ruthenium', 'Rhodium', 'Palladium', 'Silver', 'Cadmium', 'Indium', 'Tin', 'Antimony', 'Tellurium', 'Iodine', 'Xenon'],
-           [' Cesium', ' Barium', '',  'Hafnium', 'Tantalum', 'Tungsten', 'Rhenium', 'Osmium', 'Iridium', 'Platinum', 'Gold', 'Mercury', 'Thallium', 'Lead', 'Bismuth', 'Polonium', 'Astatine', 'Radon'],
-           [' Francium', ' Radium', '', 'Rutherfordium','Dubnium','Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium','Roentgenium','Copernicium','Ununtrium','Ununquadium','Ununpentium','Ununhexium','Ununseptium','Ununoctium'],
+           ['Cesium', 'Barium', '',  'Hafnium', 'Tantalum', 'Tungsten', 'Rhenium', 'Osmium', 'Iridium', 'Platinum', 'Gold', 'Mercury', 'Thallium', 'Lead', 'Bismuth', 'Polonium', 'Astatine', 'Radon'],
+           ['Francium', 'Radium', '', 'Rutherfordium','Dubnium','Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium','Roentgenium','Copernicium','Ununtrium','Ununquadium','Ununpentium','Ununhexium','Ununseptium','Ununoctium'],
            ['', '',  'Lanthanum', 'Cerium', 'Praseodymium', 'Neodymium', 'Promethium', 'Samarium', 'Europium', 'Gadolinium', 'Terbium', 'Dysprosium', 'Holmium', 'Erbium', 'Thulium', 'Ytterbium', 'Lutetium', ''],
            ['', '', 'Actinium', 'Thorium', 'Protactinium', 'Uranium', 'Neptunium', 'Plutonium', 'Americium', 'Curium', 'Berkelium', 'Californium', 'Einsteinium','Fermium' ,'Mendelevium', 'Nobelium', 'Lawrencium', '' ],
            ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -204,7 +199,7 @@ atomic_mass = [[ 1.00794, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0
      [.0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0],
      [.0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0]]
 
-z = [[.8, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, 1.],
+color = [[.8, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, 1.],
      [.1, .2, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .7, .8, .8, .8, .9, 1.],
      [.1, .2, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .6, .7, .8, .8, .9, 1],
      [.1, .2, .3, .3, .3, .3, .3, .3, .3, .3, .3, .3, .6, .7, .8, .8, .9, 1.],
@@ -217,26 +212,41 @@ z = [[.8, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, 1.],
      [.1, .1, .1, .3, .3, .3, .5, .5, .5, .7, .7, .7, .9, .9, .9, .0, .0, .0],
      [.2, .2, .2, .4, .4, .4, .6, .6, .6, .8, .8, .8, 1., 1., 1., .0, .0, .0]]
 
-# Display element name and atomic mass on hover
-hover=[]
-for x in range(len(symbol)):
-    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j)
-                      for i, j in zip(element[x], atomic_mass[x])])
-
-# Invert Matrices
-symbol = symbol[::-1]
-hover = hover[::-1]
-z = z[::-1]
-
 # Set Colorscale
 colorscale=[[0.0, 'rgb(255,255,255)'], [.2, 'rgb(255, 255, 153)'],
             [.4, 'rgb(153, 255, 204)'], [.6, 'rgb(179, 217, 255)'],
             [.8, 'rgb(240, 179, 255)'],[1.0, 'rgb(255, 77, 148)']]
 
+# Display element name and atomic mass on hover
+hover=[]
+for x in range(len(symbol)):
+    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j)
+                      for i, j in zip(element[x], atomic_mass[x])])
+    
+import plotly.figure_factory as ff
 # Make Annotated Heatmap
-fig = ff.create_annotated_heatmap(z, annotation_text=symbol, text=hover,
+fig = ff.create_annotated_heatmap(color[::-1], annotation_text=symbol[::-1], text=hover[::-1],
                                  colorscale=colorscale, font_colors=['black'], hoverinfo='text')
 fig.update_layout(title_text='Periodic Table')
+fig.show()
+```
+
+Here is the same output using `px.imshow()` with much less array manipulation:
+
+```python
+import plotly.express as px
+import numpy as np
+
+fig = px.imshow(color, color_continuous_scale=colorscale, aspect="auto",
+               title='Periodic Table')
+fig.update_traces(
+    text=symbol, texttemplate="%{text}", textfont_size=12,
+    customdata=np.moveaxis([element, atomic_mass], 0,-1), 
+    hovertemplate="%{customdata[0]}<br>Atomic Mass: %{customdata[1]:.2f}<extra></extra>"
+)
+fig.update_xaxes(visible=False)
+fig.update_yaxes(visible=False)
+fig.update_coloraxes(showscale=False)
 fig.show()
 ```
 
