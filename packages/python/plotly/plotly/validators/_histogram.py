@@ -39,6 +39,15 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the same axis type) can have compatible bin
                 settings. Note that histogram and histogram2d*
                 trace can share the same `bingroup`
+            cliponaxis
+                Determines whether the text nodes are clipped
+                about the subplot axes. To show the text nodes
+                above axis lines and tick labels, make sure to
+                set `xaxis.layer` and `yaxis.layer` to *below
+                traces*.
+            constraintext
+                Constrain the size of text inside or outside a
+                bar to be no larger than the bar itself.
             cumulative
                 :class:`plotly.graph_objects.histogram.Cumulati
                 ve` instance or dict with compatible properties
@@ -145,6 +154,13 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            insidetextanchor
+                Determines if texts are kept at center or
+                start/end points in `textposition` "inside"
+                mode.
+            insidetextfont
+                Sets the font used for `text` lying inside the
+                bar.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -209,6 +225,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the orientation of the bars. With "v"
                 ("h"), the value of the each bar spans along
                 the vertical (horizontal).
+            outsidetextfont
+                Sets the font used for `text` lying outside the
+                bar.
             selected
                 :class:`plotly.graph_objects.histogram.Selected
                 ` instance or dict with compatible properties
@@ -233,9 +252,46 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all bars. If an array of string,
                 the items are mapped in order to the this
                 trace's coordinates.
+            textangle
+                Sets the angle of the tick labels with respect
+                to the bar. For example, a `tickangle` of -90
+                draws the tick labels vertically. With "auto"
+                the texts may automatically be rotated to fit
+                with the maximum size in bars.
+            textfont
+                Sets the text font.
+            textposition
+                Specifies the location of the `text`. "inside"
+                positions `text` inside, next to the bar end
+                (rotated and scaled if needed). "outside"
+                positions `text` outside, next to the bar end
+                (scaled if needed), unless there is another bar
+                stacked on this one, then the text gets pushed
+                inside. "auto" tries to position `text` inside
+                the bar, but if the bar is too small and no bar
+                is stacked on this one the text is moved
+                outside. If "none", no text appears.
             textsrc
                 Sets the source reference on Chart Studio Cloud
                 for `text`.
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
+                rmat/tree/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
+                https://github.com/d3/d3-time-
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. Every attributes
+                that can be specified per-point (the ones that
+                are `arrayOk: true`) are available. variables
+                `label` and `value`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

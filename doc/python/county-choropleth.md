@@ -41,11 +41,12 @@ This page describes a [legacy "figure factory" method](/python/figure-factories/
 
 
 #### Required Packages
-`geopandas`, `pyshp` and `shapely` must be installed for this figure factory.
+`plotly_geo`, `geopandas`, `pyshp` and `shapely` must be installed for this figure factory to run.
 
 Run the following commands to install the correct versions of the following modules:
 
 ```python
+!pip install plotly-geo==1.0.0
 !pip install geopandas==0.3.0
 !pip install pyshp==1.2.10
 !pip install shapely==1.6.3
