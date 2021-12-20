@@ -67,10 +67,12 @@ dash_bio.ManhattanPlot(
 )
 ```
 
-## ManhattanPlot with Dash
+## Manhattan Plot with Dash Bio
 
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-manhattanplot', width='100%', height=630)
 ```
+Dash Bio's manhattan plot allows for customization according to SNP and gene properties. For more information,
+check out [Dash Bio](https://dash.plotly.com/dash-bio/manhattanplot).
