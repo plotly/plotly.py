@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.11
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -208,6 +208,19 @@ fig = px.histogram(df, x="total_bill", color="sex", marginal="rug", # can be `bo
 fig.show()
 ```
 
+### Adding text labels
+
+*New in v5.5*
+
+You can add text to histogram bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", histfunc="avg", nbins=8, text_auto=True)
+fig.show()
+```
+
 ## Histograms with go.Histogram
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](/python/graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
@@ -336,6 +349,21 @@ fig.update_layout(
     bargap=0.2, # gap between bars of adjacent location coordinates
     bargroupgap=0.1 # gap between bars of the same location coordinates
 )
+
+fig.show()
+```
+
+### Histogram Bar Text
+
+You can add text to histogram bars using the `texttemplate` argument. In this example we add the x-axis values as text following the format `%{variable}`. We also adjust the size of the text using `textfont_size`.
+
+```python
+import plotly.graph_objects as go
+
+numbers = ["5", "10", "3", "10", "5", "8", "5", "5"]
+
+fig = go.Figure()
+fig.add_trace(go.Histogram(x=numbers, name="count", texttemplate="%{x}", textfont_size=20))
 
 fig.show()
 ```

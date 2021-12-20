@@ -28,6 +28,8 @@ if sys.version_info < (3, 7):
     from ._visible import VisibleValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
+    from ._texttemplate import TexttemplateValidator
+    from ._textfont import TextfontValidator
     from ._stream import StreamValidator
     from ._showscale import ShowscaleValidator
     from ._showlegend import ShowlegendValidator
@@ -94,6 +96,8 @@ else:
             "._visible.VisibleValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
+            "._texttemplate.TexttemplateValidator",
+            "._textfont.TextfontValidator",
             "._stream.StreamValidator",
             "._showscale.ShowscaleValidator",
             "._showlegend.ShowlegendValidator",

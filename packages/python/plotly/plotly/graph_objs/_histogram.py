@@ -13,6 +13,8 @@ class Histogram(_BaseTraceType):
         "autobinx",
         "autobiny",
         "bingroup",
+        "cliponaxis",
+        "constraintext",
         "cumulative",
         "customdata",
         "customdatasrc",
@@ -29,6 +31,8 @@ class Histogram(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "insidetextanchor",
+        "insidetextfont",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
@@ -41,12 +45,17 @@ class Histogram(_BaseTraceType):
         "offsetgroup",
         "opacity",
         "orientation",
+        "outsidetextfont",
         "selected",
         "selectedpoints",
         "showlegend",
         "stream",
         "text",
+        "textangle",
+        "textfont",
+        "textposition",
         "textsrc",
+        "texttemplate",
         "type",
         "uid",
         "uirevision",
@@ -161,6 +170,51 @@ class Histogram(_BaseTraceType):
     @bingroup.setter
     def bingroup(self, val):
         self["bingroup"] = val
+
+    # cliponaxis
+    # ----------
+    @property
+    def cliponaxis(self):
+        """
+        Determines whether the text nodes are clipped about the subplot
+        axes. To show the text nodes above axis lines and tick labels,
+        make sure to set `xaxis.layer` and `yaxis.layer` to *below
+        traces*.
+    
+        The 'cliponaxis' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["cliponaxis"]
+
+    @cliponaxis.setter
+    def cliponaxis(self, val):
+        self["cliponaxis"] = val
+
+    # constraintext
+    # -------------
+    @property
+    def constraintext(self):
+        """
+        Constrain the size of text inside or outside a bar to be no
+        larger than the bar itself.
+    
+        The 'constraintext' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'both', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["constraintext"]
+
+    @constraintext.setter
+    def constraintext(self, val):
+        self["constraintext"] = val
 
     # cumulative
     # ----------
@@ -733,6 +787,74 @@ class Histogram(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # insidetextanchor
+    # ----------------
+    @property
+    def insidetextanchor(self):
+        """
+        Determines if texts are kept at center or start/end points in
+        `textposition` "inside" mode.
+    
+        The 'insidetextanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['end', 'middle', 'start']
+
+        Returns
+        -------
+        Any
+        """
+        return self["insidetextanchor"]
+
+    @insidetextanchor.setter
+    def insidetextanchor(self, val):
+        self["insidetextanchor"] = val
+
+    # insidetextfont
+    # --------------
+    @property
+    def insidetextfont(self):
+        """
+        Sets the font used for `text` lying inside the bar.
+    
+        The 'insidetextfont' property is an instance of Insidetextfont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.histogram.Insidetextfont`
+          - A dict of string/value properties that will be passed
+            to the Insidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.histogram.Insidetextfont
+        """
+        return self["insidetextfont"]
+
+    @insidetextfont.setter
+    def insidetextfont(self, val):
+        self["insidetextfont"] = val
+
     # legendgroup
     # -----------
     @property
@@ -1114,6 +1236,52 @@ class Histogram(_BaseTraceType):
     def orientation(self, val):
         self["orientation"] = val
 
+    # outsidetextfont
+    # ---------------
+    @property
+    def outsidetextfont(self):
+        """
+        Sets the font used for `text` lying outside the bar.
+    
+        The 'outsidetextfont' property is an instance of Outsidetextfont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.histogram.Outsidetextfont`
+          - A dict of string/value properties that will be passed
+            to the Outsidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.histogram.Outsidetextfont
+        """
+        return self["outsidetextfont"]
+
+    @outsidetextfont.setter
+    def outsidetextfont(self, val):
+        self["outsidetextfont"] = val
+
     # selected
     # --------
     @property
@@ -1249,6 +1417,105 @@ class Histogram(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
+    # textangle
+    # ---------
+    @property
+    def textangle(self):
+        """
+        Sets the angle of the tick labels with respect to the bar. For
+        example, a `tickangle` of -90 draws the tick labels vertically.
+        With "auto" the texts may automatically be rotated to fit with
+        the maximum size in bars.
+    
+        The 'textangle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180. Numeric values outside this
+        range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self["textangle"]
+
+    @textangle.setter
+    def textangle(self, val):
+        self["textangle"] = val
+
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the text font.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.histogram.Textfont`
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.histogram.Textfont
+        """
+        return self["textfont"]
+
+    @textfont.setter
+    def textfont(self, val):
+        self["textfont"] = val
+
+    # textposition
+    # ------------
+    @property
+    def textposition(self):
+        """
+        Specifies the location of the `text`. "inside" positions `text`
+        inside, next to the bar end (rotated and scaled if needed).
+        "outside" positions `text` outside, next to the bar end (scaled
+        if needed), unless there is another bar stacked on this one,
+        then the text gets pushed inside. "auto" tries to position
+        `text` inside the bar, but if the bar is too small and no bar
+        is stacked on this one the text is moved outside. If "none", no
+        text appears.
+    
+        The 'textposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'auto', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["textposition"]
+
+    @textposition.setter
+    def textposition(self, val):
+        self["textposition"] = val
+
     # textsrc
     # -------
     @property
@@ -1268,6 +1535,39 @@ class Histogram(_BaseTraceType):
     @textsrc.setter
     def textsrc(self, val):
         self["textsrc"] = val
+
+    # texttemplate
+    # ------------
+    @property
+    def texttemplate(self):
+        """
+        Template string used for rendering the information text that
+        appear on points. Note that this will override `textinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}".
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. Every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `label` and `value`.
+    
+        The 'texttemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["texttemplate"]
+
+    @texttemplate.setter
+    def texttemplate(self, val):
+        self["texttemplate"] = val
 
     # uid
     # ---
@@ -1792,6 +2092,14 @@ class Histogram(_BaseTraceType):
             "overlay" and on different axes (of the same axis type)
             can have compatible bin settings. Note that histogram
             and histogram2d* trace can share the same `bingroup`
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
         cumulative
             :class:`plotly.graph_objects.histogram.Cumulative`
             instance or dict with compatible properties
@@ -1889,6 +2197,11 @@ class Histogram(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1948,6 +2261,8 @@ class Histogram(_BaseTraceType):
             Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
         selected
             :class:`plotly.graph_objects.histogram.Selected`
             instance or dict with compatible properties
@@ -1969,9 +2284,43 @@ class Histogram(_BaseTraceType):
             single string, the same string appears over all bars.
             If an array of string, the items are mapped in order to
             the this trace's coordinates.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
+        textfont
+            Sets the text font.
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textsrc
             Sets the source reference on Chart Studio Cloud for
             `text`.
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2067,6 +2416,8 @@ class Histogram(_BaseTraceType):
         autobinx=None,
         autobiny=None,
         bingroup=None,
+        cliponaxis=None,
+        constraintext=None,
         cumulative=None,
         customdata=None,
         customdatasrc=None,
@@ -2083,6 +2434,8 @@ class Histogram(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        insidetextanchor=None,
+        insidetextfont=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2095,12 +2448,17 @@ class Histogram(_BaseTraceType):
         offsetgroup=None,
         opacity=None,
         orientation=None,
+        outsidetextfont=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stream=None,
         text=None,
+        textangle=None,
+        textfont=None,
+        textposition=None,
         textsrc=None,
+        texttemplate=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -2159,6 +2517,14 @@ class Histogram(_BaseTraceType):
             "overlay" and on different axes (of the same axis type)
             can have compatible bin settings. Note that histogram
             and histogram2d* trace can share the same `bingroup`
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
         cumulative
             :class:`plotly.graph_objects.histogram.Cumulative`
             instance or dict with compatible properties
@@ -2256,6 +2622,11 @@ class Histogram(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2315,6 +2686,8 @@ class Histogram(_BaseTraceType):
             Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
         selected
             :class:`plotly.graph_objects.histogram.Selected`
             instance or dict with compatible properties
@@ -2336,9 +2709,43 @@ class Histogram(_BaseTraceType):
             single string, the same string appears over all bars.
             If an array of string, the items are mapped in order to
             the this trace's coordinates.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
+        textfont
+            Sets the text font.
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside. If
+            "none", no text appears.
         textsrc
             Sets the source reference on Chart Studio Cloud for
             `text`.
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2475,6 +2882,14 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = bingroup if bingroup is not None else _v
         if _v is not None:
             self["bingroup"] = _v
+        _v = arg.pop("cliponaxis", None)
+        _v = cliponaxis if cliponaxis is not None else _v
+        if _v is not None:
+            self["cliponaxis"] = _v
+        _v = arg.pop("constraintext", None)
+        _v = constraintext if constraintext is not None else _v
+        if _v is not None:
+            self["constraintext"] = _v
         _v = arg.pop("cumulative", None)
         _v = cumulative if cumulative is not None else _v
         if _v is not None:
@@ -2539,6 +2954,14 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("insidetextanchor", None)
+        _v = insidetextanchor if insidetextanchor is not None else _v
+        if _v is not None:
+            self["insidetextanchor"] = _v
+        _v = arg.pop("insidetextfont", None)
+        _v = insidetextfont if insidetextfont is not None else _v
+        if _v is not None:
+            self["insidetextfont"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2587,6 +3010,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = orientation if orientation is not None else _v
         if _v is not None:
             self["orientation"] = _v
+        _v = arg.pop("outsidetextfont", None)
+        _v = outsidetextfont if outsidetextfont is not None else _v
+        if _v is not None:
+            self["outsidetextfont"] = _v
         _v = arg.pop("selected", None)
         _v = selected if selected is not None else _v
         if _v is not None:
@@ -2607,10 +3034,26 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = text if text is not None else _v
         if _v is not None:
             self["text"] = _v
+        _v = arg.pop("textangle", None)
+        _v = textangle if textangle is not None else _v
+        if _v is not None:
+            self["textangle"] = _v
+        _v = arg.pop("textfont", None)
+        _v = textfont if textfont is not None else _v
+        if _v is not None:
+            self["textfont"] = _v
+        _v = arg.pop("textposition", None)
+        _v = textposition if textposition is not None else _v
+        if _v is not None:
+            self["textposition"] = _v
         _v = arg.pop("textsrc", None)
         _v = textsrc if textsrc is not None else _v
         if _v is not None:
             self["textsrc"] = _v
+        _v = arg.pop("texttemplate", None)
+        _v = texttemplate if texttemplate is not None else _v
+        if _v is not None:
+            self["texttemplate"] = _v
         _v = arg.pop("uid", None)
         _v = uid if uid is not None else _v
         if _v is not None:
