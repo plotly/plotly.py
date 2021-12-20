@@ -3576,6 +3576,10 @@ Invalid property path '{key_path_str}' for layout
         validate: bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
+        div_id: str (default None)
+            If provided, this is the value of the id attribute of the div tag. If None, the
+            id attribute is a UUID.
+
         Returns
         -------
         str
@@ -3687,9 +3691,13 @@ Invalid property path '{key_path_str}' for layout
         validate: bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        auto_open: bool (default True
+        auto_open: bool (default True)
             If True, open the saved file in a web browser after saving.
             This argument only applies if `full_html` is True.
+        div_id: str (default None)
+            If provided, this is the value of the id attribute of the div tag. If None, the
+            id attribute is a UUID.
+
         Returns
         -------
         str
