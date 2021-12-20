@@ -159,7 +159,7 @@ fig.show()
 Here is a fairly contrived example showing how one can display a periodic table with custom text and hover using `ff.create_annotated_heatmap()` (scroll below to see the `px.imshow()` equivalent).
 
 ```python
-# Add Periodic Table Data
+# Periodic Table Data
 symbol = [['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He'],
          ['Li', 'Be', '', '', '', '', '', '', '', '', '', '', 'B', 'C', 'N', 'O', 'F', 'Ne'],
          ['Na', 'Mg', '', '', '', '', '', '', '', '', '', '', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar'],
@@ -220,14 +220,19 @@ colorscale=[[0.0, 'rgb(255,255,255)'], [.2, 'rgb(255, 255, 153)'],
 # Display element name and atomic mass on hover
 hover=[]
 for x in range(len(symbol)):
-    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j)
+    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j) if i else ''
                       for i, j in zip(element[x], atomic_mass[x])])
-    
+
 import plotly.figure_factory as ff
 # Make Annotated Heatmap
 fig = ff.create_annotated_heatmap(color[::-1], annotation_text=symbol[::-1], text=hover[::-1],
                                  colorscale=colorscale, font_colors=['black'], hoverinfo='text')
-fig.update_layout(title_text='Periodic Table')
+fig.update_layout(
+     title_text='Periodic Table',
+     margin=dict(l=10, r=10, t=10, b=10, pad=10),
+     xaxis=dict(zeroline=False, showgrid=False),
+     yaxis=dict(zeroline=False, showgrid=False, scaleanchor="x"),
+)
 fig.show()
 ```
 
