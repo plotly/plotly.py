@@ -5,20 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
 
-### Fixed
-  - Fixed ValueError when `ff.create_annotated_heatmap` passes `rgba()` colors into `to_rgb_color_list` [#3478](https://github.com/plotly/plotly.py/issues/3478)
-
 ### Added
 
   - `text_auto` argument to `px.bar`, `px.histogram`, `px.density_heatmap`, `px.imshow` [#3518](https://github.com/plotly/plotly.py/issues/3518)
   - Deprecated `ff.create_annotated_heatmap`, `ff.create_county_choropleth`, `ff.create_gantt` [#3518](https://github.com/plotly/plotly.py/issues/3518)
-  - `div_id` argument to `pio.to_html` to optionally make its IDs deterministic [#3487](https://github.com/plotly/plotly.py/issues/3487)
-  
+  - `div_id` argument to `pio.to_html`, `pio.write_html`, `fig.to_html` and `fig.write_html` to optionally make its IDs deterministic [#3487](https://github.com/plotly/plotly.py/issues/3487) with thanks to [@Skn0tt](https://github.com/Skn0tt)
+
 ### Updated
   - Updated Plotly.js to from version 2.6.3 to version 2.8.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#280----2021-12-10) for more information. Notable changes include:
     - Horizontal color bars
-    - texttemplate for histogram-like traces
-    - text for heatmap-like traces
+    - `texttemplate` for histogram-like and heatmap-like traces
+
+### Fixed
+  - Fixed ValueError when `ff.create_annotated_heatmap` passes `rgba()` colors into `to_rgb_color_list` [#3478](https://github.com/plotly/plotly.py/issues/3478) with thanks to [@janosh](https://github.com/janosh)
+
 
 ## [5.4.0] - 2021-11-15
 
