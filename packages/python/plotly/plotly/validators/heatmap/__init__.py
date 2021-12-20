@@ -35,7 +35,9 @@ if sys.version_info < (3, 7):
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
     from ._transpose import TransposeValidator
+    from ._texttemplate import TexttemplateValidator
     from ._textsrc import TextsrcValidator
+    from ._textfont import TextfontValidator
     from ._text import TextValidator
     from ._stream import StreamValidator
     from ._showscale import ShowscaleValidator
@@ -108,7 +110,9 @@ else:
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
             "._transpose.TransposeValidator",
+            "._texttemplate.TexttemplateValidator",
             "._textsrc.TextsrcValidator",
+            "._textfont.TextfontValidator",
             "._text.TextValidator",
             "._stream.StreamValidator",
             "._showscale.ShowscaleValidator",

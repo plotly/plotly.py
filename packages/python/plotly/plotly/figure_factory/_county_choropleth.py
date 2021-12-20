@@ -414,6 +414,11 @@ def create_choropleth(
     **layout_options
 ):
     """
+    **deprecated**, use instead
+    :func:`plotly.express.choropleth` with custom GeoJSON.
+
+    This function also requires `shapely`, `geopandas` and `plotly-geo` to be installed.
+
     Returns figure for county choropleth. Uses data from package_data.
 
     :param (list) fips: list of FIPS values which correspond to the con

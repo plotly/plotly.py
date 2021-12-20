@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.8.11
   plotly:
     description: How to make 2D Histograms in Python with Plotly.
     display_as: statistical
@@ -79,6 +79,20 @@ import plotly.express as px
 df = px.data.tips()
 
 fig = px.density_heatmap(df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker")
+fig.show()
+```
+
+### Displaying Text
+
+*New in v5.5*
+
+You can add the `z` values as text using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+
+fig = px.density_heatmap(df, x="total_bill", y="tip", text_auto=True)
 fig.show()
 ```
 
@@ -231,6 +245,25 @@ fig.update_layout(
     hovermode='closest',
 
 )
+
+fig.show()
+```
+
+### Text on 2D Histogram Points
+
+In this example we add text to 2D Histogram points. We use the values from the `z` attribute for the text.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.tips()
+
+fig = go.Figure(go.Histogram2d(
+        x=df.total_bill,
+        y=df.tip,
+        texttemplate= "%{z}"
+    ))
 
 fig.show()
 ```

@@ -18,6 +18,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "lenmode",
         "minexponent",
         "nticks",
+        "orientation",
         "outlinecolor",
         "outlinewidth",
         "separatethousands",
@@ -347,6 +348,27 @@ class ColorBar(_BaseTraceHierarchyType):
     @nticks.setter
     def nticks(self, val):
         self["nticks"] = val
+
+    # orientation
+    # -----------
+    @property
+    def orientation(self):
+        """
+        Sets the orientation of the colorbar.
+    
+        The 'orientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['h', 'v']
+
+        Returns
+        -------
+        Any
+        """
+        return self["orientation"]
+
+    @orientation.setter
+    def orientation(self, val):
+        self["orientation"] = val
 
     # outlinecolor
     # ------------
@@ -880,12 +902,15 @@ class ColorBar(_BaseTraceHierarchyType):
     @property
     def ticklabelposition(self):
         """
-        Determines where tick labels are drawn.
+        Determines where tick labels are drawn relative to the ticks.
+        Left and right options are used when `orientation` is "h", top
+        and bottom when `orientation` is "v".
     
         The 'ticklabelposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', 'outside top', 'inside top',
-                'outside bottom', 'inside bottom']
+                'outside left', 'inside left', 'outside right', 'inside
+                right', 'outside bottom', 'inside bottom']
 
         Returns
         -------
@@ -1131,8 +1156,10 @@ class ColorBar(_BaseTraceHierarchyType):
                     deprecated `titlefont` attribute.
                 side
                     Determines the location of color bar's title
-                    with respect to the color bar. Note that the
-                    title's location used to be set by the now
+                    with respect to the color bar. Defaults to
+                    "top" when `orientation` if "v" and  defaults
+                    to "right" when `orientation` if "h". Note that
+                    the title's location used to be set by the now
                     deprecated `titleside` attribute.
                 text
                     Sets the title of the color bar. Note that
@@ -1207,8 +1234,10 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Deprecated: Please use parcoords.line.colorbar.title.side
         instead. Determines the location of color bar's title with
-        respect to the color bar. Note that the title's location used
-        to be set by the now deprecated `titleside` attribute.
+        respect to the color bar. Defaults to "top" when `orientation`
+        if "v" and  defaults to "right" when `orientation` if "h". Note
+        that the title's location used to be set by the now deprecated
+        `titleside` attribute.
     
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1230,6 +1259,8 @@ class ColorBar(_BaseTraceHierarchyType):
     def x(self):
         """
         Sets the x position of the color bar (in plot fraction).
+        Defaults to 1.02 when `orientation` is "v" and 0.5 when
+        `orientation` is "h".
     
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
@@ -1251,7 +1282,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets this color bar's horizontal position anchor. This anchor
         binds the `x` position to the "left", "center" or "right" of
-        the color bar.
+        the color bar. Defaults to "left" when `orientation` is "v" and
+        "center" when `orientation` is "h".
     
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1293,6 +1325,8 @@ class ColorBar(_BaseTraceHierarchyType):
     def y(self):
         """
         Sets the y position of the color bar (in plot fraction).
+        Defaults to 0.5 when `orientation` is "v" and 1.02 when
+        `orientation` is "h".
     
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
@@ -1314,7 +1348,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets this color bar's vertical position anchor This anchor
         binds the `y` position to the "top", "middle" or "bottom" of
-        the color bar.
+        the color bar. Defaults to "middle" when `orientation` is "v"
+        and "bottom" when `orientation` is "h".
     
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1411,6 +1446,8 @@ class ColorBar(_BaseTraceHierarchyType):
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
             "auto".
+        orientation
+            Sets the orientation of the colorbar.
         outlinecolor
             Sets the axis line color.
         outlinewidth
@@ -1486,7 +1523,10 @@ class ColorBar(_BaseTraceHierarchyType):
             past domain*. In other cases the default is *hide past
             div*.
         ticklabelposition
-            Determines where tick labels are drawn.
+            Determines where tick labels are drawn relative to the
+            ticks. Left and right options are used when
+            `orientation` is "h", top and bottom when `orientation`
+            is "v".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1534,25 +1574,33 @@ class ColorBar(_BaseTraceHierarchyType):
             Deprecated: Please use
             parcoords.line.colorbar.title.side instead. Determines
             the location of color bar's title with respect to the
-            color bar. Note that the title's location used to be
-            set by the now deprecated `titleside` attribute.
+            color bar. Defaults to "top" when `orientation` if "v"
+            and  defaults to "right" when `orientation` if "h".
+            Note that the title's location used to be set by the
+            now deprecated `titleside` attribute.
         x
             Sets the x position of the color bar (in plot
-            fraction).
+            fraction). Defaults to 1.02 when `orientation` is "v"
+            and 0.5 when `orientation` is "h".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
-            or "right" of the color bar.
+            or "right" of the color bar. Defaults to "left" when
+            `orientation` is "v" and "center" when `orientation` is
+            "h".
         xpad
             Sets the amount of padding (in px) along the x
             direction.
         y
             Sets the y position of the color bar (in plot
-            fraction).
+            fraction). Defaults to 0.5 when `orientation` is "v"
+            and 1.02 when `orientation` is "h".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
-            "bottom" of the color bar.
+            "bottom" of the color bar. Defaults to "middle" when
+            `orientation` is "v" and "bottom" when `orientation` is
+            "h".
         ypad
             Sets the amount of padding (in px) along the y
             direction.
@@ -1575,6 +1623,7 @@ class ColorBar(_BaseTraceHierarchyType):
         lenmode=None,
         minexponent=None,
         nticks=None,
+        orientation=None,
         outlinecolor=None,
         outlinewidth=None,
         separatethousands=None,
@@ -1679,6 +1728,8 @@ class ColorBar(_BaseTraceHierarchyType):
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
             "auto".
+        orientation
+            Sets the orientation of the colorbar.
         outlinecolor
             Sets the axis line color.
         outlinewidth
@@ -1754,7 +1805,10 @@ class ColorBar(_BaseTraceHierarchyType):
             past domain*. In other cases the default is *hide past
             div*.
         ticklabelposition
-            Determines where tick labels are drawn.
+            Determines where tick labels are drawn relative to the
+            ticks. Left and right options are used when
+            `orientation` is "h", top and bottom when `orientation`
+            is "v".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1802,25 +1856,33 @@ class ColorBar(_BaseTraceHierarchyType):
             Deprecated: Please use
             parcoords.line.colorbar.title.side instead. Determines
             the location of color bar's title with respect to the
-            color bar. Note that the title's location used to be
-            set by the now deprecated `titleside` attribute.
+            color bar. Defaults to "top" when `orientation` if "v"
+            and  defaults to "right" when `orientation` if "h".
+            Note that the title's location used to be set by the
+            now deprecated `titleside` attribute.
         x
             Sets the x position of the color bar (in plot
-            fraction).
+            fraction). Defaults to 1.02 when `orientation` is "v"
+            and 0.5 when `orientation` is "h".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
-            or "right" of the color bar.
+            or "right" of the color bar. Defaults to "left" when
+            `orientation` is "v" and "center" when `orientation` is
+            "h".
         xpad
             Sets the amount of padding (in px) along the x
             direction.
         y
             Sets the y position of the color bar (in plot
-            fraction).
+            fraction). Defaults to 0.5 when `orientation` is "v"
+            and 1.02 when `orientation` is "h".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
-            "bottom" of the color bar.
+            "bottom" of the color bar. Defaults to "middle" when
+            `orientation` is "v" and "bottom" when `orientation` is
+            "h".
         ypad
             Sets the amount of padding (in px) along the y
             direction.
@@ -1894,6 +1956,10 @@ an instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`"""
         _v = nticks if nticks is not None else _v
         if _v is not None:
             self["nticks"] = _v
+        _v = arg.pop("orientation", None)
+        _v = orientation if orientation is not None else _v
+        if _v is not None:
+            self["orientation"] = _v
         _v = arg.pop("outlinecolor", None)
         _v = outlinecolor if outlinecolor is not None else _v
         if _v is not None:
