@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
 
+### Fixed
+  - Fixed ValueError when `ff.create_annotated_heatmap` passes `rgba()` colors into `to_rgb_color_list` [#3478](https://github.com/plotly/plotly.py/issues/3478)
+
 ### Added
 
   - `text_auto` argument to `px.bar`, `px.histogram`, `px.density_heatmap`, `px.imshow` [#3518](https://github.com/plotly/plotly.py/issues/3518)
@@ -14,7 +17,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - Horizontal color bars
     - texttemplate for histogram-like traces
     - text for heatmap-like traces
-
 
 ## [5.4.0] - 2021-11-15
 
