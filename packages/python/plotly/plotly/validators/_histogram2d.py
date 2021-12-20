@@ -223,6 +223,26 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
             stream
                 :class:`plotly.graph_objects.histogram2d.Stream
                 ` instance or dict with compatible properties
+            textfont
+                Sets the text font.
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
+                rmat/tree/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
+                https://github.com/d3/d3-time-
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. Every attributes
+                that can be specified per-point (the ones that
+                are `arrayOk: true`) are available. variable
+                `z`
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

@@ -1791,6 +1791,18 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     ):
         args["histfunc"] = trace_patch["histfunc"] = "sum"
 
+    if args.get("text_auto", False) is not False:
+        if constructor in [go.Histogram2d, go.Histogram2dContour]:
+            letter = "z"
+        elif constructor == go.Bar:
+            letter = "y" if args["orientation"] == "v" else "x"
+        else:
+            letter = "value"
+        if args["text_auto"] is True:
+            trace_patch["texttemplate"] = "%{" + letter + "}"
+        else:
+            trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
+
     if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"

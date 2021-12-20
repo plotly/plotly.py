@@ -63,8 +63,10 @@ class Title(_BaseLayoutHierarchyType):
     def side(self):
         """
         Determines the location of color bar's title with respect to
-        the color bar. Note that the title's location used to be set by
-        the now deprecated `titleside` attribute.
+        the color bar. Defaults to "top" when `orientation` if "v" and
+        defaults to "right" when `orientation` if "h". Note that the
+        title's location used to be set by the now deprecated
+        `titleside` attribute.
     
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -114,9 +116,11 @@ class Title(_BaseLayoutHierarchyType):
             attribute.
         side
             Determines the location of color bar's title with
-            respect to the color bar. Note that the title's
-            location used to be set by the now deprecated
-            `titleside` attribute.
+            respect to the color bar. Defaults to "top" when
+            `orientation` if "v" and  defaults to "right" when
+            `orientation` if "h". Note that the title's location
+            used to be set by the now deprecated `titleside`
+            attribute.
         text
             Sets the title of the color bar. Note that before the
             existence of `title.text`, the title's contents used to
@@ -140,9 +144,11 @@ class Title(_BaseLayoutHierarchyType):
             attribute.
         side
             Determines the location of color bar's title with
-            respect to the color bar. Note that the title's
-            location used to be set by the now deprecated
-            `titleside` attribute.
+            respect to the color bar. Defaults to "top" when
+            `orientation` if "v" and  defaults to "right" when
+            `orientation` if "h". Note that the title's location
+            used to be set by the now deprecated `titleside`
+            attribute.
         text
             Sets the title of the color bar. Note that before the
             existence of `title.text`, the title's contents used to

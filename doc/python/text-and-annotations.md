@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.8.11
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -116,16 +116,32 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'text-and-annotations', width='100%', height=630)
 ```
 
-### Controlling text fontsize with uniformtext
+### Controlling Text Size with `uniformtext`
 
-For the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+For the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+
+Here is a bar chart with the default behavior which will scale down text to fit.
 
 ```python
 import plotly.express as px
 
-df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
-fig = px.bar(df, y='pop', x='country', text='pop')
-fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+df = px.data.gapminder(year=2007)
+fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country', 
+             title="Default behavior: some text is tiny")
+fig.update_traces(textposition='inside')
+fig.show()
+```
+
+Here is the same figure with uniform text applied: the text for all bars is the same size, with a minimum size of 8. Any text at the minimum size which does not fit in the bar is hidden.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder(year=2007)
+fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country', 
+             title="Uniform Text: min size is 8, hidden if can't fit")
+fig.update_traces(textposition='inside')
 fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
 fig.show()
 ```
@@ -140,9 +156,9 @@ fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
 fig.show()
 ```
 
-### Controlling text fontsize with textfont
+### Controlling Maximum Text Size
 
-The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
 
 ```python
 import plotly.express as px
