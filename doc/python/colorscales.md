@@ -400,10 +400,10 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-import six.moves.urllib
+import urllib
 import json
 
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json"
 )
 
@@ -492,11 +492,11 @@ Like axes, you can customize the color bar ticks, labels, and values with `ticks
 ```python
 import plotly.graph_objects as go
 
-import six.moves.urllib
+import urllib
 import json
 
 # Load heatmap data
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
 dataset = json.load(response)
 
@@ -525,11 +525,11 @@ By default, color bars are displayed vertically. You can change a color bar to b
 ```python
 import plotly.graph_objects as go
 
-import six.moves.urllib
+import urllib
 import json
 
 # Load heatmap data
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
 dataset = json.load(response)
 

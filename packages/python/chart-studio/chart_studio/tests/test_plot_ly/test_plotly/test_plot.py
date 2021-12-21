@@ -7,8 +7,9 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
+import urllib
+
 import requests
-import six
 import sys
 import json as _json
 import warnings
@@ -211,8 +212,8 @@ class TestPlot(PlotlyTestCase):
         self.assertEqual(private_plot_response.status_code, 404)
 
         secret_plot_url = py.add_share_key_to_url(private_plot_url)
-        urlsplit = six.moves.urllib.parse.urlparse(secret_plot_url)
-        secret_plot_json_file = six.moves.urllib.parse.urljoin(
+        urlsplit = urllib.parse.urlparse(secret_plot_url)
+        secret_plot_json_file = urllib.parse.urljoin(
             urlsplit.geturl(), "?.json" + urlsplit.query
         )
         secret_plot_response = requests.get(secret_plot_json_file)

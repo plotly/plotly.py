@@ -85,9 +85,9 @@ import plotly.graph_objects as go
 
 # Load data
 import json
-import six.moves.urllib
+import urllib
 
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/steepest.json")
 
 data = json.load(response)
