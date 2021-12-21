@@ -73,7 +73,7 @@ This package contains everything you need to write figures to standalone HTML fi
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.write_html('first_figure.html', auto_open=True)
 ```
 
@@ -129,7 +129,7 @@ and display plotly figures inline using the `plotly_mimetype` renderer...
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.show()
 ```
 
@@ -137,7 +137,7 @@ or using `FigureWidget` objects.
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 
 import plotly.graph_objects as go
 fig_widget = go.FigureWidget(fig)
@@ -184,7 +184,7 @@ and display plotly figures inline using the notebook renderer...
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.show()
 ```
 
@@ -192,7 +192,7 @@ or using `FigureWidget` objects.
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 
 import plotly.graph_objects as go
 fig_widget = go.FigureWidget(fig)
