@@ -39,7 +39,7 @@ Inside [Jupyter](https://jupyter.org/install) (installable with `pip install "ju
 
 ```python
 import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1,2,3])
+fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.show()
 ```
 
