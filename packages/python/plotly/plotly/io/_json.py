@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-from six import string_types
 import json
 import decimal
 import datetime
@@ -239,7 +238,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
 
     # Try to cast `file` as a pathlib object `path`.
     # ----------------------------------------------
-    if isinstance(file, string_types):
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):
@@ -304,7 +303,7 @@ def from_json_plotly(value, engine=None):
 
     # Validate value
     # --------------
-    if not isinstance(value, (string_types, bytes)):
+    if not isinstance(value, (str, bytes)):
         raise ValueError(
             """
 from_json_plotly requires a string or bytes argument but received value of type {typ}
@@ -427,8 +426,8 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     # Try to cast `file` as a pathlib object `path`.
     # -------------------------
     # ----------------------------------------------
-    file_is_str = isinstance(file, string_types)
-    if isinstance(file, string_types):
+    file_is_str = isinstance(file, str)
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):
@@ -458,7 +457,7 @@ def clean_to_json_compatible(obj, **kwargs):
     # Return immediately if we know we've hit a primitive value
 
     # Bail out fast for simple scalar types
-    if isinstance(obj, (int, float, string_types)):
+    if isinstance(obj, (int, float, str)):
         return obj
 
     if isinstance(obj, dict):

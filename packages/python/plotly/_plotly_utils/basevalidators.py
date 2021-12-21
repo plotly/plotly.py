@@ -10,7 +10,6 @@ import io
 from copy import deepcopy
 import re
 import sys
-from six import string_types
 
 from _plotly_utils.optional_imports import get_module
 
@@ -82,7 +81,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     # ### Process kind ###
     if not kind:
         kind = ()
-    elif isinstance(kind, string_types):
+    elif isinstance(kind, str):
         kind = (kind,)
 
     first_kind = kind[0] if kind else None
@@ -457,13 +456,7 @@ class EnumeratedValidator(BaseValidator):
         # ----------------------------
         # Look for regular expressions
         for v in self.values:
-            if (
-                v
-                and isinstance(v, string_types)
-                and v[0] == "/"
-                and v[-1] == "/"
-                and len(v) > 1
-            ):
+            if v and isinstance(v, str) and v[0] == "/" and v[-1] == "/" and len(v) > 1:
                 # String is a regex with leading and trailing '/' character
                 regex_str = v[1:-1]
                 self.val_regexs.append(re.compile(regex_str))
@@ -511,7 +504,7 @@ class EnumeratedValidator(BaseValidator):
         """
         Return v with any applicable regex replacements applied
         """
-        if isinstance(v, string_types):
+        if isinstance(v, str):
             for repl_args in self.regex_replacements:
                 if repl_args:
                     v = re.sub(repl_args[0], repl_args[1], v)
@@ -584,7 +577,7 @@ class EnumeratedValidator(BaseValidator):
         """
         Return whether a value matches one of the enumeration options
         """
-        is_str = isinstance(e, string_types)
+        is_str = isinstance(e, str)
         for v, regex in zip(self.values, self.val_regexs):
             if is_str and regex:
                 in_values = fullmatch(regex, e) is not None
@@ -671,7 +664,7 @@ class SrcValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif isinstance(v, string_types):
+        elif isinstance(v, str):
             pass
         elif self.chart_studio and isinstance(v, self.chart_studio.grid_objs.Column):
             # Convert to id string
@@ -983,7 +976,7 @@ class StringValidator(BaseValidator):
         Convert a value to a string if it's not None, a string,
         or a unicode (on Python 2).
         """
-        if v is None or isinstance(v, string_types):
+        if v is None or isinstance(v, str):
             return v
         else:
             return str(v)
@@ -1049,7 +1042,7 @@ class StringValidator(BaseValidator):
 
             # If strict, make sure all elements are strings.
             if self.strict:
-                invalid_els = [e for e in v if not isinstance(e, string_types)]
+                invalid_els = [e for e in v if not isinstance(e, str)]
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els)
 
@@ -1091,10 +1084,10 @@ class StringValidator(BaseValidator):
 
         else:
             if self.strict:
-                if not isinstance(v, string_types):
+                if not isinstance(v, str):
                     self.raise_invalid_val(v)
             else:
-                if isinstance(v, string_types):
+                if isinstance(v, str):
                     pass
                 elif isinstance(v, (int, float)):
                     # Convert value to a string
@@ -1433,7 +1426,7 @@ class ColorValidator(BaseValidator):
         if isinstance(v, numbers.Number) and allow_number:
             # If allow_numbers then any number is ok
             return v
-        elif not isinstance(v, string_types):
+        elif not isinstance(v, str):
             # If not allow_numbers then value must be a string
             return None
         else:
@@ -1596,7 +1589,7 @@ class ColorscaleValidator(BaseValidator):
 
         if v is None:
             v_valid = True
-        elif isinstance(v, string_types):
+        elif isinstance(v, str):
             v_lower = v.lower()
             if v_lower in self.named_colorscales:
                 # Convert to color list
@@ -1613,7 +1606,7 @@ class ColorscaleValidator(BaseValidator):
 
         elif is_array(v) and len(v) > 0:
             # If firset element is a string, treat as colorsequence
-            if isinstance(v[0], string_types):
+            if isinstance(v[0], str):
                 invalid_els = [
                     e for e in v if ColorValidator.perform_validate_coerce(e) is None
                 ]
@@ -1633,7 +1626,7 @@ class ColorscaleValidator(BaseValidator):
                         or len(e) != 2
                         or not isinstance(e[0], numbers.Number)
                         or not (0 <= e[0] <= 1)
-                        or not isinstance(e[1], string_types)
+                        or not isinstance(e[1], str)
                         or ColorValidator.perform_validate_coerce(e[1]) is None
                     )
                 ]
@@ -1655,7 +1648,7 @@ class ColorscaleValidator(BaseValidator):
         # Return-type must be immutable
         if v is None:
             return None
-        elif isinstance(v, string_types):
+        elif isinstance(v, str):
             return v
         else:
             return tuple([tuple(e) for e in v])
@@ -1750,7 +1743,7 @@ class SubplotidValidator(BaseValidator):
     def validate_coerce(self, v):
         if v is None:
             pass
-        elif not isinstance(v, string_types):
+        elif not isinstance(v, str):
             self.raise_invalid_val(v)
         else:
             # match = re.fullmatch(self.regex, v)
@@ -1842,7 +1835,7 @@ class FlaglistValidator(BaseValidator):
         return desc
 
     def vc_scalar(self, v):
-        if not isinstance(v, string_types):
+        if not isinstance(v, str):
             return None
 
         # To be generous we accept flags separated on plus ('+'),
@@ -2363,7 +2356,7 @@ class ImageUriValidator(BaseValidator):
     def validate_coerce(self, v):
         if v is None:
             pass
-        elif isinstance(v, string_types):
+        elif isinstance(v, str):
             # Future possibilities:
             #   - Detect filesystem system paths and convert to URI
             #   - Validate either url or data uri
@@ -2495,7 +2488,7 @@ class TitleValidator(CompoundValidator):
         super(TitleValidator, self).__init__(*args, **kwargs)
 
     def validate_coerce(self, v, skip_invalid=False):
-        if isinstance(v, string_types + (int, float)):
+        if isinstance(v, (str, int, float)):
             v = {"text": v}
         return super(TitleValidator, self).validate_coerce(v, skip_invalid=skip_invalid)
 
@@ -2741,7 +2734,7 @@ class BaseTemplateValidator(CompoundValidator):
                 return copy.deepcopy(pio.templates[v])
             # Otherwise, if v is a string, check to see if it consists of
             # multiple template names joined on '+' characters
-            elif isinstance(v, string_types):
+            elif isinstance(v, str):
                 template_names = v.split("+")
                 if all([name in pio.templates for name in template_names]):
                     return pio.templates.merge_templates(*template_names)

@@ -1,7 +1,6 @@
 decorator==4.0.9
 nose==1.3.7
 requests==2.12.4
-six==1.10.0
 pytz==2016.10
 retrying==1.3.3
 pytest==3.5.1

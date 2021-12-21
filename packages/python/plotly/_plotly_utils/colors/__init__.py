@@ -77,7 +77,6 @@ from __future__ import absolute_import
 
 import decimal
 from numbers import Number
-import six
 
 from _plotly_utils import exceptions
 
@@ -367,7 +366,7 @@ def validate_colors(colors, colortype="tuple"):
                     )
             colors[j] = each_color
 
-    if colortype == "rgb" and not isinstance(colors, six.string_types):
+    if colortype == "rgb" and not isinstance(colors, str):
         for j, each_color in enumerate(colors):
             rgb_color = color_parser(each_color, convert_to_RGB_255)
             colors[j] = color_parser(rgb_color, label_rgb)
