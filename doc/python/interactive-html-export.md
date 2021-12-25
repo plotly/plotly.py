@@ -46,7 +46,7 @@ Any figure can be saved as an HTML file using the `write_html` method. These HTM
 ```python
 import plotly.express as px
 
-fig =px.scatter(x=range(10), y=range(10))
+fig = px.scatter(x=range(10), y=range(10))
 fig.write_html("path/to/file.html")
 ```
 <!-- #endregion -->
