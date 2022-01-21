@@ -412,7 +412,6 @@ plotly_renderer = PlotlyRenderer()
 renderers["plotly_mimetype"] = plotly_renderer
 renderers["jupyterlab"] = plotly_renderer
 renderers["nteract"] = plotly_renderer
-renderers["vscode"] = plotly_renderer
 
 # HTML-based
 config = {}
@@ -423,6 +422,7 @@ renderers["azure"] = AzureRenderer(config=config)
 renderers["colab"] = ColabRenderer(config=config)
 renderers["cocalc"] = CoCalcRenderer()
 renderers["databricks"] = DatabricksRenderer()
+renderers["vscode"] = NotebookRenderer(config=config)
 
 # JSON
 renderers["json"] = JsonRenderer()
