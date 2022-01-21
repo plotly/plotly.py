@@ -85,7 +85,7 @@ def test_json_renderer_show_override(fig1):
 # Plotly mimetype
 # ---------------
 plotly_mimetype = "application/vnd.plotly.v1+json"
-plotly_mimetype_renderers = ["plotly_mimetype", "jupyterlab", "vscode", "nteract"]
+plotly_mimetype_renderers = ["plotly_mimetype", "jupyterlab", "nteract"]
 
 
 @pytest.mark.parametrize("renderer", plotly_mimetype_renderers)
@@ -297,7 +297,13 @@ def test_accept_valid_renderer(renderer):
 @pytest.mark.parametrize(
     "renderer",
     plotly_mimetype_renderers
-    + ["notebook", "notebook_connected", "browser", "notebook+plotly_mimetype"],
+    + [
+        "notebook",
+        "notebook_connected",
+        "browser",
+        "notebook+plotly_mimetype",
+        "vscode",
+    ],
 )
 def test_repr_html(renderer):
     pio.renderers.default = renderer
