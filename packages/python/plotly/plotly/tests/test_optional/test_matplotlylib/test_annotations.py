@@ -4,7 +4,9 @@ import pytest
 
 from plotly import optional_imports
 
-matplotlylib = optional_imports.get_module("plotly.matplotlylib")
+# matplotlylib = optional_imports.get_module("plotly.matplotlylib")
+
+import plotly.matplotlylib as matplotlylib
 
 if matplotlylib:
     import matplotlib.pyplot as plt
