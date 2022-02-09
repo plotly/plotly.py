@@ -42,7 +42,7 @@ specified below.
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Ensure you're in a Python virtual environment with JupyterLab 3 installed
-   + Run `rm -rf node_modules && npm install && npm run clean && npm run build:prod`
+   + Run `npm ci && npm run clean && npm run build:prod`
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
  - Ensure that the diff in `package-lock.json` seems sane
  - Commit and tag but *don't push* until after everything is available on NPM/PyPI/Conda (see below):
