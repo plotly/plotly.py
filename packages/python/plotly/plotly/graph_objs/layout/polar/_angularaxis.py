@@ -42,6 +42,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelstep",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -1059,6 +1060,32 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelstep
+    # -------------
+    @property
+    def ticklabelstep(self):
+        """
+        Sets the spacing between tick labels as compared to the spacing
+        between ticks. A value of 1 (default) means each tick gets a
+        label. A value of 2 means shows every 2nd label. A larger value
+        n means only every nth tick is labeled. `tick0` determines
+        which labels are shown. Not implemented for axes with `type`
+        "log" or "multicategory", or when `tickmode` is "array".
+    
+        The 'ticklabelstep' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 9223372036854775807]
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstep"]
+
+    @ticklabelstep.setter
+    def ticklabelstep(self, val):
+        self["ticklabelstep"] = val
+
     # ticklen
     # -------
     @property
@@ -1526,6 +1553,14 @@ class AngularAxis(_BaseLayoutHierarchyType):
             r.angularaxis.tickformatstopdefaults), sets the default
             property values to use for elements of
             layout.polar.angularaxis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1611,6 +1646,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelstep=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -1816,6 +1852,14 @@ class AngularAxis(_BaseLayoutHierarchyType):
             r.angularaxis.tickformatstopdefaults), sets the default
             property values to use for elements of
             layout.polar.angularaxis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2029,6 +2073,10 @@ an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelstep", None)
+        _v = ticklabelstep if ticklabelstep is not None else _v
+        if _v is not None:
+            self["ticklabelstep"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

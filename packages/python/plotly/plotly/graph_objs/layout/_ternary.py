@@ -179,6 +179,16 @@ class Ternary(_BaseLayoutHierarchyType):
                     out.ternary.aaxis.tickformatstopdefaults), sets
                     the default property values to use for elements
                     of layout.ternary.aaxis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -413,6 +423,16 @@ class Ternary(_BaseLayoutHierarchyType):
                     out.ternary.baxis.tickformatstopdefaults), sets
                     the default property values to use for elements
                     of layout.ternary.baxis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -706,6 +726,16 @@ class Ternary(_BaseLayoutHierarchyType):
                     out.ternary.caxis.tickformatstopdefaults), sets
                     the default property values to use for elements
                     of layout.ternary.caxis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
