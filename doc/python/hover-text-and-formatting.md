@@ -313,7 +313,7 @@ for continent_name, continent in continent_data.items():
         x=continent['gdpPercap'],
         y=continent['lifeExp'],
         name=continent_name,
-        text=df_2007['continent'],
+        text=continent['continent'],
         hovertemplate=
         "<b>%{text}</b><br><br>" +
         "GDP per Capita: %{x:$,.0f}<br>" +
