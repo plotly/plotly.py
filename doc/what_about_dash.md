@@ -16,8 +16,8 @@ fig = go.Figure() # or any Plotly Express function e.g. px.bar(...)
 # fig.update_layout( ... )
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 app = dash.Dash()
 app.layout = html.Div([
