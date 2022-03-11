@@ -59,5 +59,5 @@ fig.show()
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
-IFrame(snippet_url + 'bio-alignmentchart', width='100%', height=630)
+IFrame(snippet_url + 'bio-alignmentchart', width='100%', height=1200)
 ```
