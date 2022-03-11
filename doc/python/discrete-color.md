@@ -108,7 +108,7 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
-IFrame(snippet_url + 'discrete-color', width='100%', height=630)
+IFrame(snippet_url + 'discrete-color', width='100%', height=1200)
 ```
 
 ### Color Sequences in Plotly Express
