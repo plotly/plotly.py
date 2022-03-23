@@ -15,7 +15,7 @@ if matplotlylib:
 @pytest.mark.matplotlib
 def test_vertical_bar():
     fig, ax = plt.subplots()
-    ax.bar(left=D["left"], height=D["height"])
+    ax.bar(x=D["left"], height=D["height"])
     renderer = run_fig(fig)
 
     for data_no, data_dict in enumerate(renderer.plotly_fig["data"]):
@@ -35,7 +35,7 @@ def test_vertical_bar():
 @pytest.mark.matplotlib
 def test_horizontal_bar():
     fig, ax = plt.subplots()
-    ax.barh(bottom=D["bottom"], width=D["width"])
+    ax.barh(y=D["bottom"], width=D["width"])
     renderer = run_fig(fig)
 
     for data_no, data_dict in enumerate(renderer.plotly_fig["data"]):
@@ -56,7 +56,7 @@ def test_horizontal_bar():
 def test_h_and_v_bars():
     fig, ax = plt.subplots()
     ax.bar(
-        left=D["multi_left"],
+        x=D["multi_left"],
         height=D["multi_height"],
         width=10,
         color="green",
@@ -64,7 +64,7 @@ def test_h_and_v_bars():
     )
     # changing height 10 -> 14 because ValueError if bargap not in [0, 1]
     ax.barh(
-        bottom=D["multi_bottom"],
+        y=D["multi_bottom"],
         width=D["multi_width"],
         height=14,
         color="red",
