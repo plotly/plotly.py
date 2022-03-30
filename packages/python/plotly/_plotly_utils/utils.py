@@ -174,6 +174,8 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         if obj is pandas.NaT:
             return None
+        if obj is pandas.NA:
+            return None
         else:
             raise NotEncodable
 
