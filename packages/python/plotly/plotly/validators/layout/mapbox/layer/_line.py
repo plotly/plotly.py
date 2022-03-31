@@ -23,5 +23,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to "line".
 """,
             ),
-            **kwargs
+            **kwargs,
         )

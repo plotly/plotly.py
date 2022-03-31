@@ -236,5 +236,5 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 question.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

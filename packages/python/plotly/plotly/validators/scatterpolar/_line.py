@@ -31,5 +31,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line width (in px).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

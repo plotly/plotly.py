@@ -186,5 +186,5 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 position relative to data or plot fraction.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

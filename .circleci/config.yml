@@ -87,7 +87,7 @@ jobs:
       - checkout
       - run:
           name: Install black
-          command: "sudo pip install black==19.10b0"
+          command: "sudo pip install black==22.3.0"
       - run:
           name: Check formatting with black
           command: "black --check ."
@@ -385,7 +385,6 @@ jobs:
           destination: doc/apidoc/_build/
 
 workflows:
-
   code_formatting:
     jobs:
       - check-code-formatting

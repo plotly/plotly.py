@@ -30,5 +30,5 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "median descending",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

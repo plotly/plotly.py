@@ -43,5 +43,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 shows a million or more points.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

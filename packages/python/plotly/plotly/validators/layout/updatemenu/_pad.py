@@ -24,5 +24,5 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the component.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

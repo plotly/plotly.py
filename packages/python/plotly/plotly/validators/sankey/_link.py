@@ -108,5 +108,5 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `value`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

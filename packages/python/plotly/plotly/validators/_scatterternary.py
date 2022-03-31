@@ -316,5 +316,5 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

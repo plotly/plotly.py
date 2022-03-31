@@ -355,5 +355,5 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -98,5 +98,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in `line.color`is set to a numerical array.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

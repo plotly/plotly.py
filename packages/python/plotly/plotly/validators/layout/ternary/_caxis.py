@@ -232,5 +232,5 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `ternary<N>.uirevision`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -25,5 +25,5 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 parallel to the edges.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

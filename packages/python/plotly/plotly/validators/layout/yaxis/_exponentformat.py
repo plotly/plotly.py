@@ -10,5 +10,5 @@ class ExponentformatValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             values=kwargs.pop("values", ["none", "e", "E", "power", "SI", "B"]),
-            **kwargs
+            **kwargs,
         )

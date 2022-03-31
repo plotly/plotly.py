@@ -26,5 +26,5 @@ class UniformtextValidator(_plotly_utils.basevalidators.CompoundValidator):
                 then the `minsize` is used.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

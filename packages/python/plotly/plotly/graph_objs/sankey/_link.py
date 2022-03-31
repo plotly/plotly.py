@@ -38,7 +38,7 @@ class Link(_BaseTraceHierarchyType):
         Sets the `link` color. It can be a single value, or an array
         for specifying color for each `link`. If `link.color` is
         omitted, then by default, a translucent grey link will be used.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -102,9 +102,9 @@ class Link(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.sankey.link.Colorscale
           - A list or tuple of dicts of string/value properties that
             will be passed to the Colorscale constructor
-    
+
             Supported dict properties:
-                
+
                 cmax
                     Sets the upper bound of the color domain.
                 cmin
@@ -167,13 +167,13 @@ class Link(_BaseTraceHierarchyType):
         layout.template.data.sankey.link.colorscaledefaults), sets the
         default property values to use for elements of
         sankey.link.colorscales
-    
+
         The 'colorscaledefaults' property is an instance of Colorscale
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sankey.link.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -192,7 +192,7 @@ class Link(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -212,7 +212,7 @@ class Link(_BaseTraceHierarchyType):
     def customdata(self):
         """
         Assigns extra data to each link.
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -233,7 +233,7 @@ class Link(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -256,7 +256,7 @@ class Link(_BaseTraceHierarchyType):
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
-    
+
         The 'hoverinfo' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'none', 'skip']
@@ -281,9 +281,9 @@ class Link(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.link.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -359,7 +359,7 @@ class Link(_BaseTraceHierarchyType):
         displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -382,7 +382,7 @@ class Link(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -402,7 +402,7 @@ class Link(_BaseTraceHierarchyType):
     def label(self):
         """
         The shown name of the link.
-    
+
         The 'label' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -422,7 +422,7 @@ class Link(_BaseTraceHierarchyType):
     def labelsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `label`.
-    
+
         The 'labelsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -446,9 +446,9 @@ class Link(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.link.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the `line` around each
                     `link`.
@@ -479,7 +479,7 @@ class Link(_BaseTraceHierarchyType):
         """
         An integer number `[0..nodes.length - 1]` that represents the
         source node.
-    
+
         The 'source' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -499,7 +499,7 @@ class Link(_BaseTraceHierarchyType):
     def sourcesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `source`.
-    
+
         The 'sourcesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -520,7 +520,7 @@ class Link(_BaseTraceHierarchyType):
         """
         An integer number `[0..nodes.length - 1]` that represents the
         target node.
-    
+
         The 'target' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -540,7 +540,7 @@ class Link(_BaseTraceHierarchyType):
     def targetsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `target`.
-    
+
         The 'targetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -560,7 +560,7 @@ class Link(_BaseTraceHierarchyType):
     def value(self):
         """
         A numeric value representing the flow volume value.
-    
+
         The 'value' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -580,7 +580,7 @@ class Link(_BaseTraceHierarchyType):
     def valuesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `value`.
-    
+
         The 'valuesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -710,11 +710,11 @@ class Link(_BaseTraceHierarchyType):
         targetsrc=None,
         value=None,
         valuesrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Link object
-        
+
         The links of the Sankey plot.
 
         Parameters

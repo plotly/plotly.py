@@ -21,5 +21,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `opacity`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

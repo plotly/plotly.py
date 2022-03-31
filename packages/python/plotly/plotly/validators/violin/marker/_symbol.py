@@ -487,5 +487,5 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "arrow-bar-right-open",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

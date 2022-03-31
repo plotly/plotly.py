@@ -10,5 +10,5 @@ class TicklabelmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             values=kwargs.pop("values", ["instant", "period"]),
-            **kwargs
+            **kwargs,
         )

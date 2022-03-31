@@ -97,7 +97,7 @@ def make_increasing_ohlc(open, high, low, close, dates, **kwargs):
         y=flat_increase_y,
         mode="lines",
         showlegend=showlegend,
-        **kwargs
+        **kwargs,
     )
     return ohlc_incr
 
@@ -134,7 +134,7 @@ def make_decreasing_ohlc(open, high, low, close, dates, **kwargs):
 
 def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objects trace 
+    **deprecated**, use instead the plotly.graph_objects trace
     :class:`plotly.graph_objects.Ohlc`
 
     :param (list) open: opening values

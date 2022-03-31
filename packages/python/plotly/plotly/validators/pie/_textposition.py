@@ -9,5 +9,5 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             values=kwargs.pop("values", ["inside", "outside", "auto", "none"]),
-            **kwargs
+            **kwargs,
         )

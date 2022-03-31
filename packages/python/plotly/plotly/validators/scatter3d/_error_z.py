@@ -67,5 +67,5 @@ class Error_ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ends of the error bars.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

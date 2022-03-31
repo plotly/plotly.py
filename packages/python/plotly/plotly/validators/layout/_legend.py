@@ -111,5 +111,5 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respect to their middle otherwise.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

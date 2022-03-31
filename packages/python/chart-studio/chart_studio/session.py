@@ -142,7 +142,7 @@ def update_session_plot_options(**kwargs):
 
 
 def get_session_plot_options():
-    """ Returns a copy of the user supplied plot options.
+    """Returns a copy of the user supplied plot options.
     Use `update_plot_options()` to change.
     """
     return copy.deepcopy(_session["plot_options"])

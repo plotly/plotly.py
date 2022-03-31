@@ -281,5 +281,5 @@ class AngularaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis, otherwise false
 """,
             ),
-            **kwargs
+            **kwargs,
         )

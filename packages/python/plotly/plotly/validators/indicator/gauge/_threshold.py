@@ -23,5 +23,5 @@ class ThresholdValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets a treshold value drawn as a line.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

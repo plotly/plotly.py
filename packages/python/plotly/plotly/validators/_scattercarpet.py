@@ -291,5 +291,5 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

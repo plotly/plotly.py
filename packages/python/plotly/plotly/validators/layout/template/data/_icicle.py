@@ -14,5 +14,5 @@ class IcicleValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

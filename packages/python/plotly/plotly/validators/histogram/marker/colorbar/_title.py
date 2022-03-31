@@ -31,5 +31,5 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 been deprecated.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

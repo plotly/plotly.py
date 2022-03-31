@@ -29,5 +29,5 @@ class TilingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the inner padding (in px).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

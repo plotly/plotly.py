@@ -8,5 +8,5 @@ class FillcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             colorscale_path=kwargs.pop("colorscale_path", "contour.colorscale"),
-            **kwargs
+            **kwargs,
         )

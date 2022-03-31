@@ -8,5 +8,5 @@ class SpikemodeValidator(_plotly_utils.basevalidators.FlaglistValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             flags=kwargs.pop("flags", ["toaxis", "across", "marker"]),
-            **kwargs
+            **kwargs,
         )

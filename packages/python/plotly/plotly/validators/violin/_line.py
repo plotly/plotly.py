@@ -17,5 +17,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 violin(s).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

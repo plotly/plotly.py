@@ -61,5 +61,5 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `values`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

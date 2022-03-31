@@ -35,5 +35,5 @@ class GrouptitlefontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs
+            **kwargs,
         )
