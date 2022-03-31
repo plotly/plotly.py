@@ -176,5 +176,5 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis, otherwise false
 """,
             ),
-            **kwargs
+            **kwargs,
         )

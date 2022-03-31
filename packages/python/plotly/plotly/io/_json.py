@@ -142,7 +142,10 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
             pass
 
         cleaned = clean_to_json_compatible(
-            plotly_object, numpy_allowed=True, datetime_allowed=True, modules=modules,
+            plotly_object,
+            numpy_allowed=True,
+            datetime_allowed=True,
+            modules=modules,
         )
         return orjson.dumps(cleaned, option=opts).decode("utf8")
 

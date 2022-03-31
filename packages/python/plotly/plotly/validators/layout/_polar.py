@@ -60,5 +60,5 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.uirevision`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -97,5 +97,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the marker points.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

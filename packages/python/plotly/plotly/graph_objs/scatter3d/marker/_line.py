@@ -34,7 +34,7 @@ class Line(_BaseTraceHierarchyType):
         `colorscale` is unspecified or `autocolorscale` is true, the
         default  palette will be chosen according to whether numbers in
         the `color` array are all positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -59,7 +59,7 @@ class Line(_BaseTraceHierarchyType):
         effect only if in `marker.line.color`is set to a numerical
         array. Defaults to `false` when `marker.line.cmin` and
         `marker.line.cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -82,7 +82,7 @@ class Line(_BaseTraceHierarchyType):
         in `marker.line.color`is set to a numerical array. Value should
         have the same units as in `marker.line.color` and if set,
         `marker.line.cmin` must be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -107,7 +107,7 @@ class Line(_BaseTraceHierarchyType):
         set to a numerical array. Value should have the same units as
         in `marker.line.color`. Has no effect when `marker.line.cauto`
         is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -130,7 +130,7 @@ class Line(_BaseTraceHierarchyType):
         in `marker.line.color`is set to a numerical array. Value should
         have the same units as in `marker.line.color` and if set,
         `marker.line.cmax` must be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -153,7 +153,7 @@ class Line(_BaseTraceHierarchyType):
         an array of numbers that are mapped to the colorscale relative
         to the max and min values of the array or relative to
         `marker.line.cmin` and `marker.line.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -220,7 +220,7 @@ class Line(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -253,7 +253,7 @@ class Line(_BaseTraceHierarchyType):
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -297,7 +297,7 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -321,7 +321,7 @@ class Line(_BaseTraceHierarchyType):
         `marker.line.cmin` will correspond to the last color in the
         array and `marker.line.cmax` will correspond to the first
         color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -341,7 +341,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width (in px) of the lines bounding the marker points.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -452,11 +452,11 @@ class Line(_BaseTraceHierarchyType):
         colorsrc=None,
         reversescale=None,
         width=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg

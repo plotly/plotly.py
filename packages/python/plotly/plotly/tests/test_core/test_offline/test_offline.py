@@ -83,7 +83,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         pio.templates.default = "plotly"
 
     def _read_html(self, file_url):
-        """ Read and return the HTML contents from a file_url
+        """Read and return the HTML contents from a file_url
         in the form e.g. file:///Users/chriddyp/Repos/plotly.py/plotly-temp.html
         """
         with open(file_url.replace("file://", "").replace(" ", "")) as f:

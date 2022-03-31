@@ -509,5 +509,5 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

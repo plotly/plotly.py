@@ -18,5 +18,5 @@ class Args2Validator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "arraydraw", "valType": "any"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

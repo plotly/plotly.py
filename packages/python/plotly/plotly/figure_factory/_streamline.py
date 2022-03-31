@@ -158,7 +158,7 @@ class _Streamline(object):
         # Rescale speed onto axes-coordinates
         self.u = self.u / (self.x[-1] - self.x[0])
         self.v = self.v / (self.y[-1] - self.y[0])
-        self.speed = np.sqrt(self.u ** 2 + self.v ** 2)
+        self.speed = np.sqrt(self.u**2 + self.v**2)
 
         # Rescale u and v for integrations.
         self.u *= len(self.x)

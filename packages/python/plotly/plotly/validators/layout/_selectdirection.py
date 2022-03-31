@@ -8,5 +8,5 @@ class SelectdirectionValidator(_plotly_utils.basevalidators.EnumeratedValidator)
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             values=kwargs.pop("values", ["h", "v", "d", "any"]),
-            **kwargs
+            **kwargs,
         )

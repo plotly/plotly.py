@@ -16,7 +16,7 @@ class Smith(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Set the background color of the subplot
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Smith(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.smith.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this smith subplot
@@ -116,9 +116,9 @@ class Smith(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`
           - A dict of string/value properties that will be passed
             to the Imaginaryaxis constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -238,9 +238,9 @@ class Smith(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.smith.Realaxis`
           - A dict of string/value properties that will be passed
             to the Realaxis constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -381,11 +381,11 @@ class Smith(_BaseLayoutHierarchyType):
         domain=None,
         imaginaryaxis=None,
         realaxis=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Smith object
-        
+
         Parameters
         ----------
         arg

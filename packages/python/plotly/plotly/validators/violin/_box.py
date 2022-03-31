@@ -24,5 +24,5 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inner box plots are as wide as the violins.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

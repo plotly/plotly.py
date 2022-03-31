@@ -8,5 +8,5 @@ class HovermodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "modebar"),
             values=kwargs.pop("values", ["closest", False]),
-            **kwargs
+            **kwargs,
         )

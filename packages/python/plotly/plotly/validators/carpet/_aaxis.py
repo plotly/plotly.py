@@ -236,5 +236,5 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 question.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

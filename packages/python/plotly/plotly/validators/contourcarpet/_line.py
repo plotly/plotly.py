@@ -29,5 +29,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "constraint".
 """,
             ),
-            **kwargs
+            **kwargs,
         )

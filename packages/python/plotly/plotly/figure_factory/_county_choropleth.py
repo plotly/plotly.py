@@ -267,7 +267,7 @@ def _human_format(number):
     units = ["", "K", "M", "G", "T", "P"]
     k = 1000.0
     magnitude = int(floor(log(number, k)))
-    return "%.2f%s" % (number / k ** magnitude, units[magnitude])
+    return "%.2f%s" % (number / k**magnitude, units[magnitude])
 
 
 def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_format):
@@ -411,7 +411,7 @@ def create_choropleth(
     round_legend_values=False,
     exponent_format=False,
     legend_title="",
-    **layout_options
+    **layout_options,
 ):
     """
     **deprecated**, use instead

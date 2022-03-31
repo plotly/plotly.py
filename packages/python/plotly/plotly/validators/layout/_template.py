@@ -18,5 +18,5 @@ class TemplateValidator(_plotly_utils.basevalidators.BaseTemplateValidator):
                 or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

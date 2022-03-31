@@ -22,5 +22,5 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 over this attribute.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -21,5 +21,5 @@ class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for each vertex.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -6,7 +6,7 @@ class StepValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="step",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs
+        **kwargs,
     ):
         super(StepValidator, self).__init__(
             plotly_name=plotly_name,
@@ -15,5 +15,5 @@ class StepValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["month", "year", "day", "hour", "minute", "second", "all"]
             ),
-            **kwargs
+            **kwargs,
         )

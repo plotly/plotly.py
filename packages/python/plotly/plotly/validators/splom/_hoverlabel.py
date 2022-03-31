@@ -47,5 +47,5 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `namelength`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

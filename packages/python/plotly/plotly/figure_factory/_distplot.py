@@ -107,7 +107,7 @@ def create_distplot(
 
 
     Example 2: Two data sets and added rug text
-    
+
     >>> from plotly.figure_factory import create_distplot
     >>> # Add histogram data
     >>> hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
@@ -144,7 +144,7 @@ def create_distplot(
 
 
     Example 3: Plot with normal curve and hide rug plot
-    
+
     >>> from plotly.figure_factory import create_distplot
     >>> import numpy as np
 
@@ -162,7 +162,7 @@ def create_distplot(
 
 
     Example 4: Distplot with Pandas
-    
+
     >>> from plotly.figure_factory import create_distplot
     >>> import numpy as np
     >>> import pandas as pd

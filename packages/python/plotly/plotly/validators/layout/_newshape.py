@@ -39,5 +39,5 @@ class NewshapeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of new shapes.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

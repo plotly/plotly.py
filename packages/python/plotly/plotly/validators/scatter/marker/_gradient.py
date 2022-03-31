@@ -25,5 +25,5 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `type`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

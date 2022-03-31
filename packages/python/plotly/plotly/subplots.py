@@ -61,7 +61,7 @@ def make_subplots(
     x_title=None,
     y_title=None,
     figure=None,
-    **kwargs
+    **kwargs,
 ):
     """
     Return an instance of plotly.graph_objs.Figure with predefined subplots

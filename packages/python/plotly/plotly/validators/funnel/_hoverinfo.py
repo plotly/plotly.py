@@ -21,5 +21,5 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
                     "percent total",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

@@ -78,5 +78,5 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the zoom level of the map (mapbox.zoom).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

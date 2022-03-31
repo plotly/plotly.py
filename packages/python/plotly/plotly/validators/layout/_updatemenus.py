@@ -91,5 +91,5 @@ class UpdatemenusValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 selector.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

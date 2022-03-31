@@ -8,5 +8,5 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc+arraydraw"),
             values=kwargs.pop("values", ["circle", "rect", "path", "line"]),
-            **kwargs
+            **kwargs,
         )
