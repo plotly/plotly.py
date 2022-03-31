@@ -12053,6 +12053,7 @@ class Figure(BaseFigure):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -12181,6 +12182,8 @@ class Figure(BaseFigure):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -12549,6 +12552,7 @@ class Figure(BaseFigure):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,

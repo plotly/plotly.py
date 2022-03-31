@@ -19,6 +19,7 @@ class Scatter(_BaseTraceType):
         "error_y",
         "fill",
         "fillcolor",
+        "fillpattern",
         "groupnorm",
         "hoverinfo",
         "hoverinfosrc",
@@ -467,6 +468,80 @@ class Scatter(_BaseTraceType):
     @fillcolor.setter
     def fillcolor(self, val):
         self["fillcolor"] = val
+
+    # fillpattern
+    # -----------
+    @property
+    def fillpattern(self):
+        """
+        Sets the pattern within the marker.
+
+        The 'fillpattern' property is an instance of Fillpattern
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scatter.Fillpattern`
+          - A dict of string/value properties that will be passed
+            to the Fillpattern constructor
+
+            Supported dict properties:
+
+                bgcolor
+                    When there is no colorscale sets the color of
+                    background pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "overlay". Otherwise, defaults to a transparent
+                    background.
+                bgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `bgcolor`.
+                fgcolor
+                    When there is no colorscale sets the color of
+                    foreground pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "replace". Otherwise, defaults to dark grey or
+                    white to increase contrast with the `bgcolor`.
+                fgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `fgcolor`.
+                fgopacity
+                    Sets the opacity of the foreground pattern
+                    fill. Defaults to a 0.5 when `fillmode` is
+                    "overlay". Otherwise, defaults to 1.
+                fillmode
+                    Determines whether `marker.color` should be
+                    used as a default to `bgcolor` or a `fgcolor`.
+                shape
+                    Sets the shape of the pattern fill. By default,
+                    no pattern is used for filling the area.
+                shapesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shape`.
+                size
+                    Sets the size of unit squares of the pattern
+                    fill in pixels, which corresponds to the
+                    interval of repetition of the pattern.
+                sizesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `size`.
+                solidity
+                    Sets the solidity of the pattern fill. Solidity
+                    is roughly the fraction of the area filled by
+                    the pattern. Solidity of 0 shows only the
+                    background color without pattern and solidty of
+                    1 shows only the foreground color without
+                    pattern.
+                soliditysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `solidity`.
+
+        Returns
+        -------
+        plotly.graph_objs.scatter.Fillpattern
+        """
+        return self["fillpattern"]
+
+    @fillpattern.setter
+    def fillpattern(self, val):
+        self["fillpattern"] = val
 
     # groupnorm
     # ---------
@@ -2169,6 +2244,8 @@ class Scatter(_BaseTraceType):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -2514,6 +2591,7 @@ class Scatter(_BaseTraceType):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -2642,6 +2720,8 @@ class Scatter(_BaseTraceType):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -3046,6 +3126,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = fillcolor if fillcolor is not None else _v
         if _v is not None:
             self["fillcolor"] = _v
+        _v = arg.pop("fillpattern", None)
+        _v = fillpattern if fillpattern is not None else _v
+        if _v is not None:
+            self["fillpattern"] = _v
         _v = arg.pop("groupnorm", None)
         _v = groupnorm if groupnorm is not None else _v
         if _v is not None:
