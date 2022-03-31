@@ -67,8 +67,8 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true tags=[]
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'line-charts', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'line-charts', width='100%', height=1200)
 ```
 
 ### Data Order in Line Charts
