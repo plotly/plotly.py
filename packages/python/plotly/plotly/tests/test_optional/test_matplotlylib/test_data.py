@@ -74,7 +74,7 @@ def test_bar_data():
         )
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_bars_data():
     fig, ax = plt.subplots()
     ax.bar(D["x1"], D["y1"], color="r")
