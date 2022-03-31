@@ -1948,7 +1948,8 @@ def test_make_subplots_spacing_error():
         "The resulting plot would have 51 rows \(rows=51\)\.$",
     ]:
         with pytest.raises(
-            ValueError, match=match,
+            ValueError,
+            match=match,
         ):
             fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
     for match in [
@@ -1959,7 +1960,8 @@ def test_make_subplots_spacing_error():
         "The resulting plot would have 51 columns \(cols=51\)\.$",
     ]:
         with pytest.raises(
-            ValueError, match=match,
+            ValueError,
+            match=match,
         ):
             fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
     # Check it's not raised when it's not beyond the maximum

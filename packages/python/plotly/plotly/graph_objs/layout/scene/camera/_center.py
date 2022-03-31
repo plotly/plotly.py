@@ -80,7 +80,7 @@ class Center(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Center object
-        
+
         Sets the (x,y,z) components of the 'center' camera vector This
         vector determines the translation (x,y,z) space about the
         center of this scene. By default, there is no such translation.

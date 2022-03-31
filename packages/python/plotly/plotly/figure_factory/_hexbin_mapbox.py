@@ -341,7 +341,7 @@ def create_hexbin_mapbox(
     original_data_marker=None,
 ):
     """
-    Returns a figure aggregating scattered points into connected hexagons 
+    Returns a figure aggregating scattered points into connected hexagons
     """
     args = build_dataframe(args=locals(), constructor=None)
 

@@ -11,5 +11,5 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop("values", ["radial", "horizontal", "vertical", "none"]),
-            **kwargs
+            **kwargs,
         )

@@ -50,5 +50,5 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in separate labels.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

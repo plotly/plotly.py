@@ -14,5 +14,5 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

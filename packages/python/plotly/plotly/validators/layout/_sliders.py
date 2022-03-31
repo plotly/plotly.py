@@ -106,5 +106,5 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 "middle" or "bottom" of the range selector.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

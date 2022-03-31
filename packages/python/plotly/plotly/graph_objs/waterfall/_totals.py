@@ -20,9 +20,9 @@ class Totals(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.waterfall.totals.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the marker color of all intermediate sums
                     and total values.
@@ -54,7 +54,7 @@ class Totals(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Totals object
-        
+
         Parameters
         ----------
         arg

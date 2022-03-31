@@ -6,7 +6,7 @@ class FacenormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="facenormalsepsilon",
         parent_name="isosurface.lighting",
-        **kwargs
+        **kwargs,
     ):
         super(FacenormalsepsilonValidator, self).__init__(
             plotly_name=plotly_name,
@@ -14,5 +14,5 @@ class FacenormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
-            **kwargs
+            **kwargs,
         )

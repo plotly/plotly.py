@@ -83,7 +83,12 @@ def test_sunburst_treemap_colorscales():
         )
         assert np.all([col in color_seq for col in fig.data[0].marker.colors])
         # Numerical color arg passed, fall back to continuous
-        fig = func(names=labels, parents=parents, values=values, color=values,)
+        fig = func(
+            names=labels,
+            parents=parents,
+            values=values,
+            color=values,
+        )
         assert [
             el[0] == px.colors.sequential.Viridis
             for i, el in enumerate(fig.layout.coloraxis.colorscale)
@@ -264,7 +269,14 @@ def test_sunburst_treemap_column_parent():
     ]
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
-    df = pd.DataFrame(dict(id=vendors, sectors=sectors, parent=regions, values=values,))
+    df = pd.DataFrame(
+        dict(
+            id=vendors,
+            sectors=sectors,
+            parent=regions,
+            values=values,
+        )
+    )
     path = ["parent", "sectors", "id"]
     # One column of the path is a reserved name - this is ok and should not raise
     px.sunburst(df, path=path, values="values")
@@ -324,7 +336,11 @@ def test_pie_funnelarea_colorscale():
     ):
         # Discrete colorscale, no color arg passed
         color_seq = px.colors.sequential.Reds
-        fig = func(names=labels, values=values, color_discrete_sequence=color_seq,)
+        fig = func(
+            names=labels,
+            values=values,
+            color_discrete_sequence=color_seq,
+        )
         assert list(fig.layout[colorway]) == color_seq
         # Discrete colorscale, color arg passed
         color_seq = px.colors.sequential.Reds

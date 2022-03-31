@@ -32,7 +32,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         accessToken are only required when `style` (e.g with values :
         basic, streets, outdoors, light, dark, satellite, satellite-
         streets ) and/or a layout layer references the Mapbox server.
-    
+
         The 'accesstoken' property is a string and must be specified as:
           - A non-empty string
 
@@ -53,7 +53,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         Sets the bearing angle of the map in degrees counter-clockwise
         from North (mapbox.bearing).
-    
+
         The 'bearing' property is a number and may be specified as:
           - An int or float
 
@@ -77,9 +77,9 @@ class Mapbox(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
-    
+
             Supported dict properties:
-                
+
                 lat
                     Sets the latitude of the center of the map (in
                     degrees North).
@@ -107,9 +107,9 @@ class Mapbox(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this mapbox subplot
@@ -144,9 +144,9 @@ class Mapbox(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.mapbox.Layer
           - A list or tuple of dicts of string/value properties that
             will be passed to the Layer constructor
-    
+
             Supported dict properties:
-                
+
                 below
                     Determines if the layer will be inserted before
                     the layer with the specified ID. If omitted or
@@ -277,13 +277,13 @@ class Mapbox(_BaseLayoutHierarchyType):
         When used in a template (as
         layout.template.layout.mapbox.layerdefaults), sets the default
         property values to use for elements of layout.mapbox.layers
-    
+
         The 'layerdefaults' property is an instance of Layer
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Layer`
           - A dict of string/value properties that will be passed
             to the Layer constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -303,7 +303,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         Sets the pitch angle of the map (in degrees, where 0 means
         perpendicular to the surface of the map) (mapbox.pitch).
-    
+
         The 'pitch' property is a number and may be specified as:
           - An int or float
 
@@ -342,7 +342,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         in Mapbox styles are: basic, streets, outdoors, light, dark,
         satellite, satellite-streets  Mapbox style URLs are of the
         form: mapbox://mapbox.mapbox-<name>-<version>
-    
+
         The 'style' property accepts values of any type
 
         Returns
@@ -363,7 +363,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         Controls persistence of user-driven changes in the view:
         `center`, `zoom`, `bearing`, `pitch`. Defaults to
         `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -382,7 +382,7 @@ class Mapbox(_BaseLayoutHierarchyType):
     def zoom(self):
         """
         Sets the zoom level of the map (mapbox.zoom).
-    
+
         The 'zoom' property is a number and may be specified as:
           - An int or float
 
@@ -477,11 +477,11 @@ class Mapbox(_BaseLayoutHierarchyType):
         style=None,
         uirevision=None,
         zoom=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Mapbox object
-        
+
         Parameters
         ----------
         arg

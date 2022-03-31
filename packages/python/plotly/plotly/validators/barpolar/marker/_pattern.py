@@ -60,5 +60,5 @@ class PatternValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `solidity`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -9,5 +9,5 @@ class AutorangeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "axrange"),
             implied_edits=kwargs.pop("implied_edits", {}),
             values=kwargs.pop("values", [True, False, "reversed"]),
-            **kwargs
+            **kwargs,
         )

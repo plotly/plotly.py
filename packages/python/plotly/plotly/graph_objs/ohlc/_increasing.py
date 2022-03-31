@@ -20,9 +20,9 @@ class Increasing(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.ohlc.increasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -56,7 +56,7 @@ class Increasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, line=None, **kwargs):
         """
         Construct a new Increasing object
-        
+
         Parameters
         ----------
         arg

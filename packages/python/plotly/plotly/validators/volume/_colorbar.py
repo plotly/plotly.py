@@ -257,5 +257,5 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 direction.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

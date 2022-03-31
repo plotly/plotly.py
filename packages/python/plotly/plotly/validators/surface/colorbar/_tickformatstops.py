@@ -47,5 +47,5 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 the same as "tickformat"
 """,
             ),
-            **kwargs
+            **kwargs,
         )

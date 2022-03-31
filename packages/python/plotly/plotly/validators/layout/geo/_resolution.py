@@ -9,5 +9,5 @@ class ResolutionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             coerce_number=kwargs.pop("coerce_number", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             values=kwargs.pop("values", [110, 50]),
-            **kwargs
+            **kwargs,
         )

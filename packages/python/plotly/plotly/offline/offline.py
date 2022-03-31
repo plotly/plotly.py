@@ -417,7 +417,7 @@ def plot(
     auto_play=True,
     animation_opts=None,
 ):
-    """ Create a plotly graph locally as an HTML document or string.
+    """Create a plotly graph locally as an HTML document or string.
 
     Example:
     ```

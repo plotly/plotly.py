@@ -17,5 +17,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `color`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

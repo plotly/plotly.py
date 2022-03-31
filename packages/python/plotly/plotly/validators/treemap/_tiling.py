@@ -37,5 +37,5 @@ class TilingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 increase squares in treemap layouts.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -141,5 +141,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `symbol`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

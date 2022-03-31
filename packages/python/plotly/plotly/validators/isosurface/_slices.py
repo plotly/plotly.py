@@ -21,5 +21,5 @@ class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Z` instance or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )
