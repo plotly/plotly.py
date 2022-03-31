@@ -12,7 +12,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_line_data():
     fig, ax = plt.subplots()
     ax.plot(D["x1"], D["y1"])
@@ -31,7 +31,7 @@ def test_line_data():
         )
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_lines_data():
     fig, ax = plt.subplots()
     ax.plot(D["x1"], D["y1"])
@@ -63,7 +63,7 @@ def test_lines_data():
         )
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_bar_data():
     fig, ax = plt.subplots()
     ax.bar(D["x1"], D["y1"])
@@ -74,7 +74,7 @@ def test_bar_data():
         )
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_bars_data():
     fig, ax = plt.subplots()
     ax.bar(D["x1"], D["y1"], color="r")
