@@ -24,5 +24,5 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plot fraction).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

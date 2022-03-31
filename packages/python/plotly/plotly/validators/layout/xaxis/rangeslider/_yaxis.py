@@ -25,5 +25,5 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 subplot is used.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

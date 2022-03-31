@@ -75,5 +75,5 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 bound.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

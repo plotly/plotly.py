@@ -36,7 +36,9 @@ if not os.path.exists(labstatic):
 prebuilt_assets = [
     (
         "share/jupyter/labextensions/jupyterlab-plotly",
-        ["jupyterlab_plotly/labextension/package.json",],
+        [
+            "jupyterlab_plotly/labextension/package.json",
+        ],
     ),
     (
         "share/jupyter/labextensions/jupyterlab-plotly/static",
@@ -548,7 +550,9 @@ setup(
             "labextension/static/*",
         ],
     },
-    data_files=[("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),],
+    data_files=[
+        ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
+    ],
     install_requires=["tenacity>=6.2.0", "six"],
     zip_safe=False,
     cmdclass=dict(

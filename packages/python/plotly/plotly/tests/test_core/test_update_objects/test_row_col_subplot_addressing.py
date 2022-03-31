@@ -155,11 +155,23 @@ def _sort_row_col_lists(rows, cols):
 @pytest.mark.parametrize(
     "test_input,expected",
     [
-        (("all", [2, 4, 5], False), zip(*product(range(1, NROWS + 1), [2, 4, 5])),),
-        (([1, 3], "all", False), zip(*product([1, 3], range(1, NCOLS + 1))),),
-        (([1, 3], "all", True), zip(*product([1, 3], range(1, NCOLS + 1))),),
+        (
+            ("all", [2, 4, 5], False),
+            zip(*product(range(1, NROWS + 1), [2, 4, 5])),
+        ),
+        (
+            ([1, 3], "all", False),
+            zip(*product([1, 3], range(1, NCOLS + 1))),
+        ),
+        (
+            ([1, 3], "all", True),
+            zip(*product([1, 3], range(1, NCOLS + 1))),
+        ),
         (([1, 3], [2, 4, 5], False), [(1, 3), (2, 4)]),
-        (([1, 3], [2, 4, 5], True), zip(*product([1, 3], [2, 4, 5])),),
+        (
+            ([1, 3], [2, 4, 5], True),
+            zip(*product([1, 3], [2, 4, 5])),
+        ),
     ],
 )
 def test_select_subplot_coordinates(subplot_fig_fixture, test_input, expected):

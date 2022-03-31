@@ -59,5 +59,5 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 selector.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

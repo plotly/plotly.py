@@ -19,7 +19,7 @@ class Stream:
         ssl_enabled=False,
         ssl_verification_enabled=True,
     ):
-        """ Initialize a stream object and an HTTP or HTTPS connection
+        """Initialize a stream object and an HTTP or HTTPS connection
         with chunked Transfer-Encoding to server:port with optional headers.
         """
         self.maxtries = 5
@@ -35,7 +35,7 @@ class Stream:
         self._connect()
 
     def write(self, data, reconnect_on=("", 200, 502)):
-        """ Send `data` to the server in chunk-encoded form.
+        """Send `data` to the server in chunk-encoded form.
         Check the connection before writing and reconnect
         if disconnected and if the response status code is in `reconnect_on`.
 
@@ -140,7 +140,7 @@ class Stream:
         return context
 
     def _connect(self):
-        """ Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
+        """Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
         to server:port with optional headers.
         """
         server = self._server
@@ -184,7 +184,7 @@ class Stream:
         time.sleep(0.5)
 
     def close(self):
-        """ Close the connection to server.
+        """Close the connection to server.
 
         If available, return a http_client.HTTPResponse object.
 
@@ -206,7 +206,7 @@ class Stream:
         return self._getresponse()
 
     def _getresponse(self):
-        """ Read from recv and return a HTTPResponse object if possible.
+        """Read from recv and return a HTTPResponse object if possible.
         Either
         1 - The client has succesfully closed the connection: Return ''
         2 - The server has already closed the connection: Return the response
@@ -244,7 +244,7 @@ class Stream:
         return response
 
     def _isconnected(self):
-        """ Return True if the socket is still connected
+        """Return True if the socket is still connected
         to the server, False otherwise.
 
         This check is done in 3 steps:
@@ -314,7 +314,7 @@ class Stream:
                 raise e
 
     def _reconnect(self):
-        """ Connect if disconnected.
+        """Connect if disconnected.
         Retry self.maxtries times with delays
         """
         if not self._isconnected():
@@ -340,8 +340,7 @@ class Stream:
         self._closed = False
 
     def _reset_retries(self):
-        """ Reset the connect counters and delays
-        """
+        """Reset the connect counters and delays"""
         self._tries = 0
         self._delay = 1
 

@@ -38,5 +38,5 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 either its x or y domain, but not both.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -57,5 +57,5 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
             },
             plotly_name=plotly_name,
             parent_name=parent_name,
-            **kwargs
+            **kwargs,
         )

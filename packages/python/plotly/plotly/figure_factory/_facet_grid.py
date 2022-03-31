@@ -222,7 +222,7 @@ def _facet_grid_color_categorical(
                 type=trace_type,
                 name=group[0],
                 marker=dict(color=colormap[group[0]]),
-                **kwargs_trace
+                **kwargs_trace,
             )
             if x:
                 trace["x"] = group[1][x]
@@ -243,7 +243,7 @@ def _facet_grid_color_categorical(
                     type=trace_type,
                     name=color_val,
                     marker=dict(color=colormap[color_val]),
-                    **kwargs_trace
+                    **kwargs_trace,
                 )
                 if x:
                     trace["x"] = data_by_color[x]
@@ -298,7 +298,7 @@ def _facet_grid_color_categorical(
                             type=trace_type,
                             name=color_val,
                             marker=dict(color=colormap[color_val]),
-                            **kwargs_trace
+                            **kwargs_trace,
                         )
                         new_x = group_filtered[x]
                         new_y = group_filtered[y]
@@ -308,7 +308,7 @@ def _facet_grid_color_categorical(
                             name=color_val,
                             marker=dict(color=colormap[color_val]),
                             showlegend=False,
-                            **kwargs_trace
+                            **kwargs_trace,
                         )
                         new_x = group[x]
                         new_y = group[y]
@@ -388,7 +388,7 @@ def _facet_grid_color_numerical(
         trace = dict(
             type=trace_type,
             marker=dict(color=df[color_name], colorscale=colormap, showscale=True),
-            **kwargs_trace
+            **kwargs_trace,
         )
         if x:
             trace["x"] = df[x]
@@ -411,7 +411,7 @@ def _facet_grid_color_numerical(
                     showscale=True,
                     colorbar=dict(x=1.15),
                 ),
-                **kwargs_trace
+                **kwargs_trace,
             )
             if x:
                 trace["x"] = group[1][x]
@@ -465,7 +465,7 @@ def _facet_grid_color_numerical(
                             showscale=(row_count == 0),
                             colorbar=dict(x=1.15),
                         ),
-                        **kwargs_trace
+                        **kwargs_trace,
                     )
 
                 else:
@@ -543,7 +543,7 @@ def _facet_grid(
         trace = dict(
             type=trace_type,
             marker=dict(color=marker_color, line=kwargs_marker["line"]),
-            **kwargs_trace
+            **kwargs_trace,
         )
 
         if x:
@@ -562,7 +562,7 @@ def _facet_grid(
             trace = dict(
                 type=trace_type,
                 marker=dict(color=marker_color, line=kwargs_marker["line"]),
-                **kwargs_trace
+                **kwargs_trace,
             )
 
             if x:
@@ -609,7 +609,7 @@ def _facet_grid(
                 trace = dict(
                     type=trace_type,
                     marker=dict(color=marker_color, line=kwargs_marker["line"]),
-                    **kwargs_trace
+                    **kwargs_trace,
                 )
                 if x:
                     trace["x"] = group[x]
@@ -670,7 +670,7 @@ def create_facet_grid(
     show_boxes=True,
     ggplot2=False,
     binsize=1,
-    **kwargs
+    **kwargs,
 ):
     """
     Returns figure for facet grid; **this function is deprecated**, since
@@ -678,7 +678,7 @@ def create_facet_grid(
 
     >>> import plotly.express as px
     >>> tips = px.data.tips()
-    >>> fig = px.scatter(tips, 
+    >>> fig = px.scatter(tips,
     ...     x='total_bill',
     ...     y='tip',
     ...     facet_row='sex',

@@ -64,5 +64,5 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 refers to the height of the plotting area only.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

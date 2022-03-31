@@ -36,7 +36,7 @@ class Marker(_BaseTraceHierarchyType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -60,7 +60,7 @@ class Marker(_BaseTraceHierarchyType):
         `marker.cmin` and `marker.cmax`  Has an effect only if colorsis
         set to a numerical array. Defaults to `false` when
         `marker.cmin` and `marker.cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -82,7 +82,7 @@ class Marker(_BaseTraceHierarchyType):
         Sets the upper bound of the color domain. Has an effect only if
         colorsis set to a numerical array. Value should have the same
         units as colors and if set, `marker.cmin` must be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -106,7 +106,7 @@ class Marker(_BaseTraceHierarchyType):
         effect only if colorsis set to a numerical array. Value should
         have the same units as colors. Has no effect when
         `marker.cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -128,7 +128,7 @@ class Marker(_BaseTraceHierarchyType):
         Sets the lower bound of the color domain. Has an effect only if
         colorsis set to a numerical array. Value should have the same
         units as colors and if set, `marker.cmax` must be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -153,7 +153,7 @@ class Marker(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -179,9 +179,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sunburst.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -446,7 +446,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the color of each sector of this trace. If not specified,
         the default trace color set is used to pick the sector colors.
-    
+
         The 'colors' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -476,7 +476,7 @@ class Marker(_BaseTraceHierarchyType):
         name string of the following list: Blackbody,Bluered,Blues,Civi
         dis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow
         ,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -520,7 +520,7 @@ class Marker(_BaseTraceHierarchyType):
     def colorssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `colors`.
-    
+
         The 'colorssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -544,9 +544,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sunburst.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the line enclosing each
                     sector. Defaults to the `paper_bgcolor` value.
@@ -579,7 +579,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsis set to a numerical array. If true, `marker.cmin` will
         correspond to the last color in the array and `marker.cmax`
         will correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -600,7 +600,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Determines whether or not a colorbar is displayed for this
         trace. Has an effect only if colorsis set to a numerical array.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -713,11 +713,11 @@ class Marker(_BaseTraceHierarchyType):
         line=None,
         reversescale=None,
         showscale=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg

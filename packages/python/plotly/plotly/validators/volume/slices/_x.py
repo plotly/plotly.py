@@ -30,5 +30,5 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the x dimension are drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -21,5 +21,5 @@ class ConnectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

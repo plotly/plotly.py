@@ -9,5 +9,5 @@ class AlignValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
             values=kwargs.pop("values", ["left", "right", "auto"]),
-            **kwargs
+            **kwargs,
         )

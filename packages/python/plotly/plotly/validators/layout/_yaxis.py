@@ -483,5 +483,5 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -80,7 +80,7 @@ class Aspectratio(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Aspectratio object
-        
+
         Sets this scene's axis aspectratio.
 
         Parameters

@@ -54,5 +54,5 @@ class ColorscalesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

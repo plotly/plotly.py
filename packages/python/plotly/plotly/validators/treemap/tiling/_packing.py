@@ -11,5 +11,5 @@ class PackingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 "values",
                 ["squarify", "binary", "dice", "slice", "slice-dice", "dice-slice"],
             ),
-            **kwargs
+            **kwargs,
         )
