@@ -377,6 +377,9 @@ jobs:
             fi
             cd ../..
 
+      - store_artifacts:
+          path: doc/build
+          destination: doc/build
 workflows:
   code_formatting:
     jobs:
