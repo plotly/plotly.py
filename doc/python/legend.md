@@ -466,7 +466,7 @@ fig.show()
 
 #### Group click toggle behavior
 
-You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it togges the visibility of all items in the same group as the item clicked on.
+You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it toggles the visibility of all items in the same group as the item clicked on.
 
 ```python
 import plotly.graph_objects as go
