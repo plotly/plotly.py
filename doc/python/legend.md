@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.0
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -132,6 +132,25 @@ fig.show()
 ### Legend Positioning
 
 Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](/python/figure-structure/). Note that the plot margins will grow so as to accommodate the legend. The legend may also be placed within the plotting area.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    yanchor="top",
+    y=0.99,
+    xanchor="left",
+    x=0.01
+))
+
+fig.show()
+```
+
+### Legend Groups
 
 ```python
 import plotly.express as px
@@ -443,6 +462,60 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(title="Try Clicking on the Legend Items!")
 fig.show()
+```
+
+#### Group click toggle behavior
+
+You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it togges the visibility of all items in the same group as the item clicked on.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 1, 3],
+    legendgroup="group",  # this can be any string, not just "group"
+    legendgrouptitle_text="First Group Title",
+    name="first legend group",
+    mode="markers",
+    marker=dict(color="Crimson", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 2, 2],
+    legendgroup="group",
+    name="first legend group - average",
+    mode="lines",
+    line=dict(color="Crimson")
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[4, 9, 2],
+    legendgroup="group2",
+    legendgrouptitle_text="Second Group Title",
+    name="second legend group",
+    mode="markers",
+    marker=dict(color="MediumPurple", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[5, 5, 5],
+    legendgroup="group2",
+    name="second legend group - average",
+    mode="lines",
+    line=dict(color="MediumPurple")
+))
+
+fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(legend=dict(groupclick="toggleitem"))
+
+fig.show()
+
 ```
 
 ### Legend items for continuous fields (2D and 3D)
