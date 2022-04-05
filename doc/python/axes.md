@@ -293,6 +293,8 @@ fig.show()
 
 ##### Step for tick labels
 
+*New in v5.6*
+
 You can set a step for tick labels with `ticklabelstep`. In this example, we hide labels between every `2` ticks on the y axes. Similarly, this can be used with `fig.update_xaxes` for x axes: `fig.update_xaxes(ticklabelstep=2)`.
 
 ```python

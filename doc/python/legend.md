@@ -99,7 +99,7 @@ fig.show()
 
 *New in v5.0*
 
-The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. 
+The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list.
 
 The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
 
@@ -446,6 +446,8 @@ fig.show()
 ```
 
 #### Group click toggle behavior
+
+*New in v5.3*
 
 You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it toggles the visibility of all items in the same group as the item clicked on.
 
