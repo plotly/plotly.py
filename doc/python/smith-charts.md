@@ -33,6 +33,8 @@ jupyter:
     thumbnail: thumbnail/contourcarpet.jpg
 ---
 
+*New in v5.4*
+
 A [Smith Chart](https://en.wikipedia.org/wiki/Smith_chart) is a specialized chart for visualizing [complex numbers](https://en.wikipedia.org/wiki/Complex_number): numbers with both a real and imaginary part.
 
 
@@ -53,7 +55,7 @@ import plotly.graph_objects as go
 fig = go.Figure()
 
 fig.add_trace(go.Scattersmith(
-    imag=[1], 
+    imag=[1],
     real=[1],
     marker_symbol='x',
     marker_size=30,
@@ -62,7 +64,7 @@ fig.add_trace(go.Scattersmith(
 ))
 
 fig.add_trace(go.Scattersmith(
-    imag=[1], 
+    imag=[1],
     real=[1],
     marker_symbol='x',
     marker_size=30,
