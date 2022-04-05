@@ -223,7 +223,7 @@ def make_mapping(args, variable):
     if variable == "dash":
         arg_name = "line_dash"
         vprefix = "line_dash"
-    if variable == "pattern":
+    if variable in ["pattern", "shape"]:
         arg_name = "pattern_shape"
         vprefix = "pattern_shape"
     if args[vprefix + "_map"] == "identity":
@@ -1739,7 +1739,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         grouped_attrs.append("marker.symbol")
 
     if "pattern_shape" in args:
-        grouped_attrs.append("marker.pattern.shape")
+        if constructor in [go.Scatter]:
+            grouped_attrs.append("fillpattern.shape")
+        else:
+            grouped_attrs.append("marker.pattern.shape")
 
     if "orientation" in args:
         has_x = args["x"] is not None

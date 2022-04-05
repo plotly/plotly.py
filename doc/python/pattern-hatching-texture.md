@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.7
   plotly:
     description: How to use patterns (also known as hatching or texture) with bar
       charts.
@@ -36,22 +36,30 @@ jupyter:
 
 *New in v5.0*
 
-[Bar charts](/python/bar-charts/), [histograms](/python/histograms/) and [polar bar charts](/python/wind-rose-charts/) have large markers which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
+[Bar charts](/python/bar-charts/), [histograms](/python/histograms/), [polar bar charts](/python/wind-rose-charts/) and [area charts](/python/filled-area-plots/) have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
 
 * to double-encode variables (i.e. using both color and pattern) to improve accessibility for visually-impaired end-users
 * to encode an additional variable beyond just using color
 * to make charts that are easier to print in black and white
 
 
-### Patterned Bar Charts with Plotly Express
+### Patterned Charts with Plotly Express
 
-the `px.bar()`, `px.histogram()` and `px.bar_polar()` functions support the `pattern_shape` argument. In the chart below, we double-encode `nation` using color and pattern:
+the `px.bar()`, `px.histogram()`, `px.bar_polar()` and `px.area()` functions support the `pattern_shape` argument. In the chart below, we double-encode `nation` using color and pattern:
 
 ```python
 import plotly.express as px
 df = px.data.medals_long()
 
 fig = px.bar(df, x="medal", y="count", color="nation", pattern_shape="nation")
+fig.show()
+```
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.area(df, x="medal", y="count", color="nation", pattern_shape="nation")
 fig.show()
 ```
 
