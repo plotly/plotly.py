@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+##  [5.7.0] - UNRELEASED
+
+### Added
+  - added `pattern_shape` options to `px.area()` [#3668](https://github.com/plotly/plotly.py/issues/3668)
+
+### Updated
+  - Updated Plotly.js to from version 2.9.0 to version 2.11.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2111----2022-03-15) for more information. Notable changes include:
+    - Add `fillpattern` options to `scatter` trace
+    - Various JS-specific improvements such as MathJax 3.0 support
+
 ##  [5.6.0] - 2022-02-09
 
 ### Updated
