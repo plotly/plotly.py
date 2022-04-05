@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-##  [5.7.0] - UNRELEASED
+##  [5.7.0] - 2022-04-05
 
 ### Added
   - added `pattern_shape` options to `px.area()` [#3668](https://github.com/plotly/plotly.py/issues/3668)
