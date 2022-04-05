@@ -30,5 +30,5 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the y dimension are drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

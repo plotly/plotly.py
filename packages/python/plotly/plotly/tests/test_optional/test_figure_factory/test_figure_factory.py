@@ -33,7 +33,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
             PlotlyError,
             "curve_type must be defined as " "'kde' or 'normal'",
             ff.create_distplot,
-            **kwargs
+            **kwargs,
         )
 
     def test_wrong_histdata_format(self):
@@ -4302,7 +4302,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 z,
                 interp_mode="cartesian",
                 ncontours=ncontours,
-                **arg_set
+                **arg_set,
             )
             # This test does not work for ilr interpolation
             print(len(fig.data))
@@ -4420,13 +4420,19 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
         fig2 = ff.create_hexbin_mapbox(
-            lat=lat, lon=lon, nx_hexagon=1, color=color, agg_func=np.mean,
+            lat=lat,
+            lon=lon,
+            nx_hexagon=1,
+            color=color,
+            agg_func=np.mean,
         )
 
         assert np.array_equal(fig2.data[0].z, np.ones(5))
 
         fig3 = ff.create_hexbin_mapbox(
-            lat=np.random.randn(1000), lon=np.random.randn(1000), nx_hexagon=20,
+            lat=np.random.randn(1000),
+            lon=np.random.randn(1000),
+            nx_hexagon=20,
         )
 
         assert fig3.data[0].z.sum() == 1000
@@ -4466,7 +4472,11 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             min_count=0,
         )
         fig4 = ff.create_hexbin_mapbox(
-            lat=lat, lon=lon, nx_hexagon=nx_hexagon, color=color, agg_func=np.sum,
+            lat=lat,
+            lon=lon,
+            nx_hexagon=nx_hexagon,
+            color=color,
+            agg_func=np.sum,
         )
         fig5 = ff.create_hexbin_mapbox(
             data_frame=df,

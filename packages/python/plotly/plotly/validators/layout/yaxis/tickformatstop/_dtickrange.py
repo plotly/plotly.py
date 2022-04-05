@@ -6,7 +6,7 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         self,
         plotly_name="dtickrange",
         parent_name="layout.yaxis.tickformatstop",
-        **kwargs
+        **kwargs,
     ):
         super(DtickrangeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -19,5 +19,5 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "ticks", "valType": "any"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

@@ -84,7 +84,7 @@ class Font(_BaseTraceHierarchyType):
         "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
         One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
         Narrow", "Raleway", "Times New Roman".
-    
+
         The 'family' property is a string and must be specified as:
           - A non-empty string
 
@@ -144,7 +144,7 @@ class Font(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Font object
-        
+
         Sets this axis' title font. Note that the title's font used to
         be set by the now deprecated `titlefont` attribute.
 

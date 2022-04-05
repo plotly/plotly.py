@@ -37,6 +37,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "tickformatstops",
         "ticklabeloverflow",
         "ticklabelposition",
+        "ticklabelstep",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -64,7 +65,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def bgcolor(self):
         """
         Sets the color of padded area.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -123,7 +124,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def bordercolor(self):
         """
         Sets the axis line color.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -182,7 +183,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) or the border enclosing this color bar.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -221,7 +222,7 @@ class ColorBar(_BaseTraceHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -244,7 +245,7 @@ class ColorBar(_BaseTraceHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -267,7 +268,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the length of the color bar This measure excludes the
         padding of both ends. That is, the color bar length is this
         length minus the padding on both ends.
-    
+
         The 'len' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -289,7 +290,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Determines whether this color bar's length (i.e. the measure in
         the color variation direction) is set in units of plot
         "fraction" or in *pixels. Use `len` to set the value.
-    
+
         The 'lenmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fraction', 'pixels']
@@ -311,7 +312,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -334,7 +335,7 @@ class ColorBar(_BaseTraceHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -355,7 +356,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def orientation(self):
         """
         Sets the orientation of the colorbar.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['h', 'v']
@@ -376,7 +377,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def outlinecolor(self):
         """
         Sets the axis line color.
-    
+
         The 'outlinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -435,7 +436,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def outlinewidth(self):
         """
         Sets the width (in px) of the axis line.
-    
+
         The 'outlinewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -455,7 +456,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -478,7 +479,7 @@ class ColorBar(_BaseTraceHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -499,7 +500,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -522,7 +523,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -543,7 +544,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -565,7 +566,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets the thickness of the color bar This measure excludes the
         size of the padding, ticks and labels.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -587,7 +588,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Determines whether this color bar's thickness (i.e. the measure
         in the constant color direction) is set in units of plot
         "fraction" or in "pixels". Use `thickness` to set the value.
-    
+
         The 'thicknessmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fraction', 'pixels']
@@ -616,7 +617,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -637,7 +638,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -659,7 +660,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -718,17 +719,17 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickfont(self):
         """
         Sets the color bar's tick label font
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.barpolar.marker.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -773,7 +774,7 @@ class ColorBar(_BaseTraceHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -798,9 +799,9 @@ class ColorBar(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.barpolar.marker.colorbar.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -854,13 +855,13 @@ class ColorBar(_BaseTraceHierarchyType):
         r.colorbar.tickformatstopdefaults), sets the default property
         values to use for elements of
         barpolar.marker.colorbar.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.barpolar.marker.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -882,7 +883,7 @@ class ColorBar(_BaseTraceHierarchyType):
         the graph div or the domain of the axis. The default value for
         inside tick labels is *hide past domain*. In other cases the
         default is *hide past div*.
-    
+
         The 'ticklabeloverflow' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['allow', 'hide past div', 'hide past domain']
@@ -905,7 +906,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Determines where tick labels are drawn relative to the ticks.
         Left and right options are used when `orientation` is "h", top
         and bottom when `orientation` is "v".
-    
+
         The 'ticklabelposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', 'outside top', 'inside top',
@@ -922,13 +923,39 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
 
+    # ticklabelstep
+    # -------------
+    @property
+    def ticklabelstep(self):
+        """
+        Sets the spacing between tick labels as compared to the spacing
+        between ticks. A value of 1 (default) means each tick gets a
+        label. A value of 2 means shows every 2nd label. A larger value
+        n means only every nth tick is labeled. `tick0` determines
+        which labels are shown. Not implemented for axes with `type`
+        "log" or "multicategory", or when `tickmode` is "array".
+
+        The 'ticklabelstep' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 9223372036854775807]
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstep"]
+
+    @ticklabelstep.setter
+    def ticklabelstep(self, val):
+        self["ticklabelstep"] = val
+
     # ticklen
     # -------
     @property
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -954,7 +981,7 @@ class ColorBar(_BaseTraceHierarchyType):
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
-    
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'linear', 'array']
@@ -975,7 +1002,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -998,7 +1025,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -1019,7 +1046,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1042,7 +1069,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1062,7 +1089,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticktextsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ticktext`.
-    
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1083,7 +1110,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1103,7 +1130,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickvalssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `tickvals`.
-    
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1123,7 +1150,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1147,9 +1174,9 @@ class ColorBar(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.barpolar.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this color bar's title font. Note that the
                     title's font used to be set by the now
@@ -1187,17 +1214,17 @@ class ColorBar(_BaseTraceHierarchyType):
         instead. Sets this color bar's title font. Note that the
         title's font used to be set by the now deprecated `titlefont`
         attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.barpolar.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1219,7 +1246,7 @@ class ColorBar(_BaseTraceHierarchyType):
 
         Returns
         -------
-        
+
         """
         return self["titlefont"]
 
@@ -1238,14 +1265,14 @@ class ColorBar(_BaseTraceHierarchyType):
         if "v" and  defaults to "right" when `orientation` if "h". Note
         that the title's location used to be set by the now deprecated
         `titleside` attribute.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['right', 'top', 'bottom']
 
         Returns
         -------
-        
+
         """
         return self["titleside"]
 
@@ -1261,7 +1288,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the x position of the color bar (in plot fraction).
         Defaults to 1.02 when `orientation` is "v" and 0.5 when
         `orientation` is "h".
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -1284,7 +1311,7 @@ class ColorBar(_BaseTraceHierarchyType):
         binds the `x` position to the "left", "center" or "right" of
         the color bar. Defaults to "left" when `orientation` is "v" and
         "center" when `orientation` is "h".
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -1305,7 +1332,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def xpad(self):
         """
         Sets the amount of padding (in px) along the x direction.
-    
+
         The 'xpad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1327,7 +1354,7 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the y position of the color bar (in plot fraction).
         Defaults to 0.5 when `orientation` is "v" and 1.02 when
         `orientation` is "h".
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -1350,7 +1377,7 @@ class ColorBar(_BaseTraceHierarchyType):
         binds the `y` position to the "top", "middle" or "bottom" of
         the color bar. Defaults to "middle" when `orientation` is "v"
         and "bottom" when `orientation` is "h".
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'middle', 'bottom']
@@ -1371,7 +1398,7 @@ class ColorBar(_BaseTraceHierarchyType):
     def ypad(self):
         """
         Sets the amount of padding (in px) along the y direction.
-    
+
         The 'ypad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1527,6 +1554,14 @@ class ColorBar(_BaseTraceHierarchyType):
             ticks. Left and right options are used when
             `orientation` is "h", top and bottom when `orientation`
             is "v".
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1642,6 +1677,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformatstopdefaults=None,
         ticklabeloverflow=None,
         ticklabelposition=None,
+        ticklabelstep=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -1661,11 +1697,11 @@ class ColorBar(_BaseTraceHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new ColorBar object
-        
+
         Parameters
         ----------
         arg
@@ -1809,6 +1845,14 @@ class ColorBar(_BaseTraceHierarchyType):
             ticks. Left and right options are used when
             `orientation` is "h", top and bottom when `orientation`
             is "v".
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2032,6 +2076,10 @@ an instance of :class:`plotly.graph_objs.barpolar.marker.ColorBar`"""
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:
             self["ticklabelposition"] = _v
+        _v = arg.pop("ticklabelstep", None)
+        _v = ticklabelstep if ticklabelstep is not None else _v
+        if _v is not None:
+            self["ticklabelstep"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

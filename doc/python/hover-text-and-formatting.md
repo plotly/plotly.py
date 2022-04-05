@@ -93,8 +93,8 @@ Change the hovermode below and try hovering over the points:
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 ```
 
 #### Selecting a hovermode in a figure created with `plotly.graph_objects`

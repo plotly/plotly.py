@@ -62,5 +62,5 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 default). Hides the dimension for `false`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

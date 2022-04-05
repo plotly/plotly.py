@@ -20,9 +20,9 @@ class Template(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.template.Data`
           - A dict of string/value properties that will be passed
             to the Data constructor
-    
+
             Supported dict properties:
-                
+
                 barpolar
                     A tuple of
                     :class:`plotly.graph_objects.Barpolar`
@@ -221,7 +221,7 @@ class Template(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.Layout`
           - A dict of string/value properties that will be passed
             to the Layout constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -250,7 +250,7 @@ class Template(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, data=None, layout=None, **kwargs):
         """
         Construct a new Template object
-        
+
         Default attributes to be applied to the plot. This should be a
         dict with format: `{'layout': layoutTemplate, 'data':
         {trace_type: [traceTemplate, ...], ...}}` where

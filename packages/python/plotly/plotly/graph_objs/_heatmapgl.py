@@ -68,7 +68,7 @@ class Heatmapgl(_BaseTraceType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -93,7 +93,7 @@ class Heatmapgl(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -119,9 +119,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -273,6 +273,16 @@ class Heatmapgl(_BaseTraceType):
                     to the ticks. Left and right options are used
                     when `orientation` is "h", top and bottom when
                     `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -383,7 +393,7 @@ class Heatmapgl(_BaseTraceType):
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -430,7 +440,7 @@ class Heatmapgl(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -451,7 +461,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -471,7 +481,7 @@ class Heatmapgl(_BaseTraceType):
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -491,7 +501,7 @@ class Heatmapgl(_BaseTraceType):
     def dy(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -513,7 +523,7 @@ class Heatmapgl(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -538,7 +548,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -562,9 +572,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -619,7 +629,7 @@ class Heatmapgl(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -639,7 +649,7 @@ class Heatmapgl(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -663,9 +673,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -692,7 +702,7 @@ class Heatmapgl(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -721,7 +731,7 @@ class Heatmapgl(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -740,7 +750,7 @@ class Heatmapgl(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -761,7 +771,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -782,7 +792,7 @@ class Heatmapgl(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -804,7 +814,7 @@ class Heatmapgl(_BaseTraceType):
         Reverses the color mapping if true. If true, `zmin` will
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -825,7 +835,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -849,9 +859,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -878,7 +888,7 @@ class Heatmapgl(_BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -898,7 +908,7 @@ class Heatmapgl(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -918,7 +928,7 @@ class Heatmapgl(_BaseTraceType):
     def transpose(self):
         """
         Transposes the z data.
-    
+
         The 'transpose' property must be specified as a bool
         (either True, or False)
 
@@ -939,7 +949,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -974,7 +984,7 @@ class Heatmapgl(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -995,7 +1005,7 @@ class Heatmapgl(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1016,7 +1026,7 @@ class Heatmapgl(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1038,7 +1048,7 @@ class Heatmapgl(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1060,7 +1070,7 @@ class Heatmapgl(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1082,7 +1092,7 @@ class Heatmapgl(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1105,7 +1115,7 @@ class Heatmapgl(_BaseTraceType):
         default behavior when `x` is provided). If "scaled", the
         heatmap's x coordinates are given by "x0" and "dx" (the default
         behavior when `x` is not provided).
-    
+
         The 'xtype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -1126,7 +1136,7 @@ class Heatmapgl(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1148,7 +1158,7 @@ class Heatmapgl(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1170,7 +1180,7 @@ class Heatmapgl(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1192,7 +1202,7 @@ class Heatmapgl(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1215,7 +1225,7 @@ class Heatmapgl(_BaseTraceType):
         default behavior when `y` is provided) If "scaled", the
         heatmap's y coordinates are given by "y0" and "dy" (the default
         behavior when `y` is not provided)
-    
+
         The 'ytype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -1236,7 +1246,7 @@ class Heatmapgl(_BaseTraceType):
     def z(self):
         """
         Sets the z data.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1259,7 +1269,7 @@ class Heatmapgl(_BaseTraceType):
         respect to the input data (here in `z`) or the bounds set in
         `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
         are set by the user.
-    
+
         The 'zauto' property must be specified as a bool
         (either True, or False)
 
@@ -1280,7 +1290,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the upper bound of the color domain. Value should have the
         same units as in `z` and if set, `zmin` must be set as well.
-    
+
         The 'zmax' property is a number and may be specified as:
           - An int or float
 
@@ -1302,7 +1312,7 @@ class Heatmapgl(_BaseTraceType):
         Sets the mid-point of the color domain by scaling `zmin` and/or
         `zmax` to be equidistant to this point. Value should have the
         same units as in `z`. Has no effect when `zauto` is `false`.
-    
+
         The 'zmid' property is a number and may be specified as:
           - An int or float
 
@@ -1323,7 +1333,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the lower bound of the color domain. Value should have the
         same units as in `z` and if set, `zmax` must be set as well.
-    
+
         The 'zmin' property is a number and may be specified as:
           - An int or float
 
@@ -1343,7 +1353,7 @@ class Heatmapgl(_BaseTraceType):
     def zsmooth(self):
         """
         Picks a smoothing algorithm use to smooth `z` data.
-    
+
         The 'zsmooth' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fast', False]
@@ -1364,7 +1374,7 @@ class Heatmapgl(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `z`.
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1639,11 +1649,11 @@ class Heatmapgl(_BaseTraceType):
         zmin=None,
         zsmooth=None,
         zsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Heatmapgl object
-        
+
         "heatmapgl" trace is deprecated! Please consider switching to
         the "heatmap" or "image" trace types. Alternatively you could
         contribute/sponsor rewriting this trace type based on cartesian

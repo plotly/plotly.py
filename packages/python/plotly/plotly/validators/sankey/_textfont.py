@@ -33,5 +33,5 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs
+            **kwargs,
         )

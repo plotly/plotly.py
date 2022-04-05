@@ -110,5 +110,5 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the default visibility of the base layers.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -20,5 +20,5 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the x axis.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

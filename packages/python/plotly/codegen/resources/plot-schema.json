@@ -365,6 +365,11 @@
    "noBlank": true,
    "valType": "string"
   },
+  "typesetMath": {
+   "description": "Determines whether math should be typeset or not, when MathJax (either v2 or v3) is present on the page.",
+   "dflt": true,
+   "valType": "boolean"
+  },
   "watermark": {
    "description": "watermark the images with the company's logo",
    "dflt": false,
@@ -1411,6 +1416,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -3790,6 +3802,13 @@
       },
       "role": "object"
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "plot",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -4367,6 +4386,13 @@
        }
       },
       "role": "object"
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "plot",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -8076,6 +8102,13 @@
       },
       "role": "object"
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "plot",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -8452,6 +8485,13 @@
        }
       },
       "role": "object"
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "plot",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -8835,6 +8875,13 @@
        }
       },
       "role": "object"
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "plot",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -10451,6 +10498,13 @@
       "inside bottom"
      ]
     },
+    "ticklabelstep": {
+     "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+     "dflt": 1,
+     "editType": "ticks",
+     "min": 1,
+     "valType": "integer"
+    },
     "ticklen": {
      "description": "Sets the tick length (in px).",
      "dflt": 5,
@@ -11307,6 +11361,13 @@
       "outside bottom",
       "inside bottom"
      ]
+    },
+    "ticklabelstep": {
+     "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+     "dflt": 1,
+     "editType": "ticks",
+     "min": 1,
+     "valType": "integer"
     },
     "ticklen": {
      "description": "Sets the tick length (in px).",
@@ -12358,6 +12419,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -13866,6 +13934,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -17991,6 +18066,13 @@
        "inside bottom"
       ]
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -18976,6 +19058,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -19991,6 +20080,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -21024,6 +21120,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -22399,6 +22502,13 @@
        "inside bottom"
       ]
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -23343,6 +23453,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -24631,6 +24748,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -26335,6 +26459,13 @@
        "inside bottom"
       ]
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -27491,6 +27622,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "calc",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -29014,6 +29152,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -30191,6 +30336,13 @@
        "inside bottom"
       ]
      },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
+     },
      "ticklen": {
       "description": "Sets the tick length (in px).",
       "dflt": 5,
@@ -31319,6 +31471,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -32956,6 +33115,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -34333,6 +34499,13 @@
        },
        "role": "object"
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "plot",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -35230,6 +35403,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "calc",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -36439,6 +36619,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -38403,6 +38590,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -39352,6 +39546,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -42073,6 +42274,99 @@
      "editType": "style",
      "valType": "color"
     },
+    "fillpattern": {
+     "bgcolor": {
+      "arrayOk": true,
+      "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+      "editType": "style",
+      "valType": "color"
+     },
+     "bgcolorsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "description": "Sets the pattern within the marker.",
+     "editType": "style",
+     "fgcolor": {
+      "arrayOk": true,
+      "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+      "editType": "style",
+      "valType": "color"
+     },
+     "fgcolorsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "fgopacity": {
+      "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+      "editType": "style",
+      "max": 1,
+      "min": 0,
+      "valType": "number"
+     },
+     "fillmode": {
+      "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+      "dflt": "replace",
+      "editType": "style",
+      "valType": "enumerated",
+      "values": [
+       "replace",
+       "overlay"
+      ]
+     },
+     "role": "object",
+     "shape": {
+      "arrayOk": true,
+      "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+      "dflt": "",
+      "editType": "style",
+      "valType": "enumerated",
+      "values": [
+       "",
+       "/",
+       "\\",
+       "x",
+       "-",
+       "|",
+       "+",
+       "."
+      ]
+     },
+     "shapesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "size": {
+      "arrayOk": true,
+      "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+      "dflt": 8,
+      "editType": "style",
+      "min": 0,
+      "valType": "number"
+     },
+     "sizesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "solidity": {
+      "arrayOk": true,
+      "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+      "dflt": 0.3,
+      "editType": "style",
+      "max": 1,
+      "min": 0,
+      "valType": "number"
+     },
+     "soliditysrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
+      "editType": "none",
+      "valType": "string"
+     }
+    },
     "groupnorm": {
      "description": "Only relevant when `stackgroup` is used, and only the first `groupnorm` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the normalization for the sum of this `stackgroup`. With *fraction*, the value of each trace at each location is divided by the sum of all trace values at that location. *percent* is the same but multiplied by 100 to show percentages. If there are multiple subplots, or multiple `stackgroup`s on one subplot, each will be normalized within its own set.",
      "dflt": "",
@@ -42725,6 +43019,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -44915,6 +45216,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -45496,6 +45804,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -46931,6 +47246,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -48759,6 +49081,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -50734,6 +51063,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -52627,6 +52963,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -53788,6 +54131,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -55620,6 +55970,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "calc",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -57427,6 +57784,13 @@
         "outside bottom",
         "inside bottom"
        ]
+      },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
       },
       "ticklen": {
        "description": "Sets the tick length (in px).",
@@ -59262,6 +59626,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -61050,6 +61421,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -62441,6 +62819,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "colorbars",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -63888,6 +64273,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -64753,6 +65145,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "calc",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",
@@ -67089,6 +67488,13 @@
         "inside bottom"
        ]
       },
+      "ticklabelstep": {
+       "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+       "dflt": 1,
+       "editType": "colorbars",
+       "min": 1,
+       "valType": "integer"
+      },
       "ticklen": {
        "description": "Sets the tick length (in px).",
        "dflt": 5,
@@ -69377,6 +69783,13 @@
        "outside bottom",
        "inside bottom"
       ]
+     },
+     "ticklabelstep": {
+      "description": "Sets the spacing between tick labels as compared to the spacing between ticks. A value of 1 (default) means each tick gets a label. A value of 2 means shows every 2nd label. A larger value n means only every nth tick is labeled. `tick0` determines which labels are shown. Not implemented for axes with `type` *log* or *multicategory*, or when `tickmode` is *array*.",
+      "dflt": 1,
+      "editType": "calc",
+      "min": 1,
+      "valType": "integer"
      },
      "ticklen": {
       "description": "Sets the tick length (in px).",

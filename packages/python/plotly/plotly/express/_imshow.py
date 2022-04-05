@@ -50,7 +50,7 @@ def _infer_zmax_from_type(img):
         elif im_max <= 65535 * rtol:
             return 65535
         else:
-            return 2 ** 32
+            return 2**32
 
 
 def imshow(

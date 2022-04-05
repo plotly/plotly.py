@@ -20,5 +20,5 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the padding form the top (in px).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

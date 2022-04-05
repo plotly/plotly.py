@@ -49,5 +49,5 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 generate by this splom trace.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

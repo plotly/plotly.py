@@ -20,5 +20,5 @@ class TextinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
                     "value",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

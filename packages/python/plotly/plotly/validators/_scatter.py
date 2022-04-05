@@ -72,6 +72,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 transparent variant of the line color, marker
                 color, or marker line color, whichever is
                 available.
+            fillpattern
+                Sets the pattern within the marker.
             groupnorm
                 Only relevant when `stackgroup` is used, and
                 only the first `groupnorm` found in the
@@ -449,5 +451,5 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `y`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

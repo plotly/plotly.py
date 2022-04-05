@@ -36,5 +36,5 @@ class DeltaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ormat.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

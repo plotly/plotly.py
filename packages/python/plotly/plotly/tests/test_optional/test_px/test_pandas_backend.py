@@ -12,7 +12,10 @@ import pytest
     "pandas_fn,px_fn",
     [
         (lambda df: df.plot(), px.line),
-        (lambda df: df.plot.scatter("A", "B"), lambda df: px.scatter(df, "A", "B"),),
+        (
+            lambda df: df.plot.scatter("A", "B"),
+            lambda df: px.scatter(df, "A", "B"),
+        ),
         (lambda df: df.plot.line(), px.line),
         (lambda df: df.plot.area(), px.area),
         (lambda df: df.plot.bar(), px.bar),

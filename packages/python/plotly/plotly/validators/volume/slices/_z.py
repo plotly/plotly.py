@@ -30,5 +30,5 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the z dimension are drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

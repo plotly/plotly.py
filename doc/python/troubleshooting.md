@@ -41,7 +41,9 @@ In order to follow the examples in this documentation site, you should have the 
 
 ### Import Problems
 
-Most `import` problems or `AttributeError`s can be traced back to having multiple versions of `plotly` installed, for example once with `conda` and once with `pip`. It's often worthwhile to uninstall with both methods before following the [Getting Started](/python/getting-started) instructions from scratch with one or the other. You can run the following commands in a terminal to fully remove `plotly` before installing again:
+It's very important that you not have a file named `plotly.py` in the same directory as the Python script you're running, and this includes not naming the script itself `plotly.py`, otherwise importing `plotly` can fail with mysterious error messages.
+
+Beyond this, most `import` problems or `AttributeError`s can be traced back to having multiple versions of `plotly` installed, for example once with `conda` and once with `pip`. It's often worthwhile to uninstall with both methods before following the [Getting Started](/python/getting-started) instructions from scratch with one or the other. You can run the following commands in a terminal to fully remove `plotly` before installing again:
 
 ```bash
 $ conda uninstall plotly
@@ -59,8 +61,8 @@ This is an example of a `plotly` graph correctly rendering inside `dash`:
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'renderers', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'renderers', width='100%', height=1200)
 ```
 
 <!-- #region -->

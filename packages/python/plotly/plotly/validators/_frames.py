@@ -35,5 +35,5 @@ class FramesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 respective traces in the data attribute
 """,
             ),
-            **kwargs
+            **kwargs,
         )

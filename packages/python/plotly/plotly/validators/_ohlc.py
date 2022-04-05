@@ -243,5 +243,5 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

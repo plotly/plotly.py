@@ -90,7 +90,7 @@ class Waterfall(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same alignmentgroup. This controls whether bars
         compute their positional range dependently or independently.
-    
+
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -111,7 +111,7 @@ class Waterfall(_BaseTraceType):
     def base(self):
         """
         Sets where the bar base is drawn (in position axis units).
-    
+
         The 'base' property is a number and may be specified as:
           - An int or float
 
@@ -134,7 +134,7 @@ class Waterfall(_BaseTraceType):
         axes. To show the text nodes above axis lines and tick labels,
         make sure to set `xaxis.layer` and `yaxis.layer` to *below
         traces*.
-    
+
         The 'cliponaxis' property must be specified as a bool
         (either True, or False)
 
@@ -158,9 +158,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Connector`
           - A dict of string/value properties that will be passed
             to the Connector constructor
-    
+
             Supported dict properties:
-                
+
                 line
                     :class:`plotly.graph_objects.waterfall.connecto
                     r.Line` instance or dict with compatible
@@ -187,7 +187,7 @@ class Waterfall(_BaseTraceType):
         """
         Constrain the size of text inside or outside a bar to be no
         larger than the bar itself.
-    
+
         The 'constraintext' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'outside', 'both', 'none']
@@ -211,7 +211,7 @@ class Waterfall(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -232,7 +232,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -256,9 +256,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.waterfall.decreasi
                     ng.Marker` instance or dict with compatible
@@ -280,7 +280,7 @@ class Waterfall(_BaseTraceType):
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -300,7 +300,7 @@ class Waterfall(_BaseTraceType):
     def dy(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -322,7 +322,7 @@ class Waterfall(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['name', 'x', 'y', 'text', 'initial', 'delta', 'final'] joined with '+' characters
@@ -347,7 +347,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -371,9 +371,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -449,7 +449,7 @@ class Waterfall(_BaseTraceType):
         `<extra>` is displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -472,7 +472,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -496,7 +496,7 @@ class Waterfall(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -519,7 +519,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -541,7 +541,7 @@ class Waterfall(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -561,7 +561,7 @@ class Waterfall(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -585,9 +585,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.waterfall.increasi
                     ng.Marker` instance or dict with compatible
@@ -610,7 +610,7 @@ class Waterfall(_BaseTraceType):
         """
         Determines if texts are kept at center or start/end points in
         `textposition` "inside" mode.
-    
+
         The 'insidetextanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['end', 'middle', 'start']
@@ -631,17 +631,17 @@ class Waterfall(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `text` lying inside the bar.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.waterfall.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -666,7 +666,7 @@ class Waterfall(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -689,7 +689,7 @@ class Waterfall(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -714,9 +714,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -743,7 +743,7 @@ class Waterfall(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -767,7 +767,7 @@ class Waterfall(_BaseTraceType):
         'total' to compute the sums. Also 'absolute' could be applied
         to reset the computed total or to declare an initial value
         where needed.
-    
+
         The 'measure' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -787,7 +787,7 @@ class Waterfall(_BaseTraceType):
     def measuresrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `measure`.
-    
+
         The 'measuresrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -816,7 +816,7 @@ class Waterfall(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -835,7 +835,7 @@ class Waterfall(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -856,7 +856,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -879,7 +879,7 @@ class Waterfall(_BaseTraceType):
         Shifts the position where the bar is drawn (in position axis
         units). In "group" barmode, traces that set "offset" will be
         excluded and drawn in "overlay" mode instead.
-    
+
         The 'offset' property is a number and may be specified as:
           - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
@@ -902,7 +902,7 @@ class Waterfall(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same offsetgroup where bars of the same position
         coordinate will line up.
-    
+
         The 'offsetgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -923,7 +923,7 @@ class Waterfall(_BaseTraceType):
     def offsetsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `offset`.
-    
+
         The 'offsetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -943,7 +943,7 @@ class Waterfall(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -964,7 +964,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the orientation of the bars. With "v" ("h"), the value of
         the each bar spans along the vertical (horizontal).
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -985,17 +985,17 @@ class Waterfall(_BaseTraceType):
     def outsidetextfont(self):
         """
         Sets the font used for `text` lying outside the bar.
-    
+
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.waterfall.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1020,7 +1020,7 @@ class Waterfall(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1046,7 +1046,7 @@ class Waterfall(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1066,7 +1066,7 @@ class Waterfall(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1090,9 +1090,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1124,7 +1124,7 @@ class Waterfall(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1149,7 +1149,7 @@ class Waterfall(_BaseTraceType):
         example, a `tickangle` of -90 draws the tick labels vertically.
         With "auto" the texts may automatically be rotated to fit with
         the maximum size in bars.
-    
+
         The 'textangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -1171,17 +1171,17 @@ class Waterfall(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `text`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.waterfall.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1206,7 +1206,7 @@ class Waterfall(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1229,7 +1229,7 @@ class Waterfall(_BaseTraceType):
         Determines which trace information appear on the graph. In the
         case of having multiple waterfalls, totals are computed
         separately (per trace).
-    
+
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'initial', 'delta', 'final'] joined with '+' characters
@@ -1259,7 +1259,7 @@ class Waterfall(_BaseTraceType):
         `text` inside the bar, but if the bar is too small and no bar
         is stacked on this one the text is moved outside. If "none", no
         text appears.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'outside', 'auto', 'none']
@@ -1282,7 +1282,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `textposition`.
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1302,7 +1302,7 @@ class Waterfall(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1334,7 +1334,7 @@ class Waterfall(_BaseTraceType):
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         variables `initial`, `delta`, `final` and `label`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1357,7 +1357,7 @@ class Waterfall(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `texttemplate`.
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1381,9 +1381,9 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Totals`
           - A dict of string/value properties that will be passed
             to the Totals constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.waterfall.totals.M
                     arker` instance or dict with compatible
@@ -1406,7 +1406,7 @@ class Waterfall(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1441,7 +1441,7 @@ class Waterfall(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1462,7 +1462,7 @@ class Waterfall(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1483,7 +1483,7 @@ class Waterfall(_BaseTraceType):
     def width(self):
         """
         Sets the bar width (in position axis units).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -1504,7 +1504,7 @@ class Waterfall(_BaseTraceType):
     def widthsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `width`.
-    
+
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1524,7 +1524,7 @@ class Waterfall(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1546,7 +1546,7 @@ class Waterfall(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1568,7 +1568,7 @@ class Waterfall(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1600,7 +1600,7 @@ class Waterfall(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1624,7 +1624,7 @@ class Waterfall(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the x axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'xperiod' property accepts values of any type
 
         Returns
@@ -1647,7 +1647,7 @@ class Waterfall(_BaseTraceType):
         axis. When `x0period` is round number of weeks, the `x0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'xperiod0' property accepts values of any type
 
         Returns
@@ -1667,7 +1667,7 @@ class Waterfall(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the x axis.
-    
+
         The 'xperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1688,7 +1688,7 @@ class Waterfall(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1708,7 +1708,7 @@ class Waterfall(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1730,7 +1730,7 @@ class Waterfall(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1752,7 +1752,7 @@ class Waterfall(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1784,7 +1784,7 @@ class Waterfall(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1808,7 +1808,7 @@ class Waterfall(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the y axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'yperiod' property accepts values of any type
 
         Returns
@@ -1831,7 +1831,7 @@ class Waterfall(_BaseTraceType):
         axis. When `y0period` is round number of weeks, the `y0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'yperiod0' property accepts values of any type
 
         Returns
@@ -1851,7 +1851,7 @@ class Waterfall(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the y axis.
-    
+
         The 'yperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1872,7 +1872,7 @@ class Waterfall(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2327,11 +2327,11 @@ class Waterfall(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Waterfall object
-        
+
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is

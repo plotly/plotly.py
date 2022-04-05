@@ -63,5 +63,5 @@ class StepsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 in the slider.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

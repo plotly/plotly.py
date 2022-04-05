@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.0
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -133,8 +133,8 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'axes', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'axes', width='100%', height=1200)
 ```
 
 #### Moving Tick Labels Inside the Plot
@@ -287,6 +287,20 @@ df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
 fig.update_xaxes(ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10)
 fig.update_yaxes(ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, col=1)
+
+fig.show()
+```
+
+##### Step for tick labels
+
+You can set a step for tick labels with `ticklabelstep`. In this example, we hide labels between every `2` ticks on the y axes. Similarly, this can be used with `fig.update_xaxes` for x axes: `fig.update_xaxes(ticklabelstep=2)`.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_yaxes(ticklabelstep=2)
 
 fig.show()
 ```

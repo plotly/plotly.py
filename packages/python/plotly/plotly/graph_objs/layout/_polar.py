@@ -31,9 +31,9 @@ class Polar(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`
           - A dict of string/value properties that will be passed
             to the AngularAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -239,6 +239,16 @@ class Polar(_BaseLayoutHierarchyType):
                     sets the default property values to use for
                     elements of
                     layout.polar.angularaxis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -312,7 +322,7 @@ class Polar(_BaseLayoutHierarchyType):
         Sets the gap between bars of adjacent location coordinates.
         Values are unitless, they represent fractions of the minimum
         difference in bar positions in the data.
-    
+
         The 'bargap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -336,7 +346,7 @@ class Polar(_BaseLayoutHierarchyType):
         top of one another With "overlay", the bars are plotted over
         one another, you might need to an "opacity" to see multiple
         bars.
-    
+
         The 'barmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['stack', 'overlay']
@@ -357,7 +367,7 @@ class Polar(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Set the background color of the subplot
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -420,9 +430,9 @@ class Polar(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.polar.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this polar subplot
@@ -458,7 +468,7 @@ class Polar(_BaseLayoutHierarchyType):
         "category". Note that `radialaxis.angle` is snapped to the
         angle of the closest vertex when `gridshape` is "circular" (so
         that radial axis scale is the same as the data scale).
-    
+
         The 'gridshape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['circular', 'linear']
@@ -480,7 +490,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         Sets the fraction of the radius to cut out of the polar
         subplot.
-    
+
         The 'hole' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -504,9 +514,9 @@ class Polar(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.polar.RadialAxis`
           - A dict of string/value properties that will be passed
             to the RadialAxis constructor
-    
+
             Supported dict properties:
-                
+
                 angle
                     Sets the angle (in degrees) from which the
                     radial axis is drawn. Note that by default,
@@ -733,6 +743,16 @@ class Polar(_BaseLayoutHierarchyType):
                     sets the default property values to use for
                     elements of
                     layout.polar.radialaxis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -813,22 +833,22 @@ class Polar(_BaseLayoutHierarchyType):
     @property
     def sector(self):
         """
-        Sets angular span of this polar subplot with two angles (in
-        degrees). Sector are assumed to be spanned in the
-        counterclockwise direction with 0 corresponding to rightmost
-        limit of the polar subplot.
-    
-        The 'sector' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'sector[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'sector[1]' property is a number and may be specified as:
-          - An int or float
+            Sets angular span of this polar subplot with two angles (in
+            degrees). Sector are assumed to be spanned in the
+            counterclockwise direction with 0 corresponding to rightmost
+            limit of the polar subplot.
 
-        Returns
-        -------
-        list
+            The 'sector' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'sector[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'sector[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["sector"]
 
@@ -844,7 +864,7 @@ class Polar(_BaseLayoutHierarchyType):
         Controls persistence of user-driven changes in axis attributes,
         if not overridden in the individual axes. Defaults to
         `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -919,11 +939,11 @@ class Polar(_BaseLayoutHierarchyType):
         radialaxis=None,
         sector=None,
         uirevision=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Polar object
-        
+
         Parameters
         ----------
         arg

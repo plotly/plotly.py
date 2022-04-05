@@ -67,7 +67,10 @@ def test_baseplotlytypes_cannot_match_subset():
     # should return False because "undefined" keys in sel return None, and are
     # compared (because "key in sel" returned True, it's value was None)
     obj = go.layout.Annotation(x=1, y=2, text="pat metheny")
-    sel = go.layout.Annotation(x=1, y=2,)
+    sel = go.layout.Annotation(
+        x=1,
+        y=2,
+    )
     assert BaseFigure._selector_matches(obj, sel) == False
 
 

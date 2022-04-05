@@ -223,7 +223,7 @@ def make_mapping(args, variable):
     if variable == "dash":
         arg_name = "line_dash"
         vprefix = "line_dash"
-    if variable == "pattern":
+    if variable in ["pattern", "shape"]:
         arg_name = "pattern_shape"
         vprefix = "pattern_shape"
     if args[vprefix + "_map"] == "identity":
@@ -328,7 +328,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
-                        x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
+                        x = x.astype(int) / 10**9  # convert to unix epoch seconds
                     elif x.dtype.type == np.object_:
                         try:
                             x = x.astype(np.float64)
@@ -1739,7 +1739,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         grouped_attrs.append("marker.symbol")
 
     if "pattern_shape" in args:
-        grouped_attrs.append("marker.pattern.shape")
+        if constructor in [go.Scatter]:
+            grouped_attrs.append("fillpattern.shape")
+        else:
+            grouped_attrs.append("marker.pattern.shape")
 
     if "orientation" in args:
         has_x = args["x"] is not None

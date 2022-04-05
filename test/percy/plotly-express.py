@@ -420,14 +420,20 @@ sample_geojson = {
     ],
 }
 fig = px.choropleth_mapbox(
-    geojson=sample_geojson, locations=["the_polygon"], color=[10], zoom=6,
+    geojson=sample_geojson,
+    locations=["the_polygon"],
+    color=[10],
+    zoom=6,
 )
 fig.write_html(os.path.join(dir_name, "choropleth_mapbox.html"), auto_play=False)
 
 
 carshare = px.data.carshare()
 fig = px.density_mapbox(
-    carshare, lat="centroid_lat", lon="centroid_lon", z="peak_hour",
+    carshare,
+    lat="centroid_lat",
+    lon="centroid_lon",
+    z="peak_hour",
 )
 fig.write_html(os.path.join(dir_name, "density_mapbox.html"), auto_play=False)
 

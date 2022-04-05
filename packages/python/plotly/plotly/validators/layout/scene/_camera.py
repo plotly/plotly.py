@@ -32,5 +32,5 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that the z axis points up.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -84,7 +84,7 @@ class Font(_BaseLayoutHierarchyType):
         "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
         One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
         Narrow", "Raleway", "Times New Roman".
-    
+
         The 'family' property is a string and must be specified as:
           - A non-empty string
 
@@ -144,7 +144,7 @@ class Font(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Font object
-        
+
         Sets the font used to text the legend items.
 
         Parameters

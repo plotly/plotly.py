@@ -4,7 +4,7 @@ import pytest
 
 
 def error_substr(s, r):
-    """ remove a part of the error message we don't want to compare """
+    """remove a part of the error message we don't want to compare"""
     return s.replace(r, "")
 
 
@@ -436,7 +436,7 @@ def form_error_string(call, exception, subs):
     replacement is only performed once on the exception string so the
     replacement of multiple occurences of a pattern is specified by repeating a
     (pattern,relacement) pair in the list.
-    returns modified exception string 
+    returns modified exception string
     """
     raised = False
     try:

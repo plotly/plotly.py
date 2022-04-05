@@ -37,7 +37,7 @@ class Line(_BaseTraceHierarchyType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -61,7 +61,7 @@ class Line(_BaseTraceHierarchyType):
         set in `line.cmin` and `line.cmax`  Has an effect only if in
         `line.color`is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -84,7 +84,7 @@ class Line(_BaseTraceHierarchyType):
         in `line.color`is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmin` must
         be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -108,7 +108,7 @@ class Line(_BaseTraceHierarchyType):
         effect only if in `line.color`is set to a numerical array.
         Value should have the same units as in `line.color`. Has no
         effect when `line.cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -131,7 +131,7 @@ class Line(_BaseTraceHierarchyType):
         in `line.color`is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmax` must
         be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -154,7 +154,7 @@ class Line(_BaseTraceHierarchyType):
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to `line.cmin`
         and `line.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -221,7 +221,7 @@ class Line(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -247,9 +247,9 @@ class Line(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.parcats.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -402,6 +402,16 @@ class Line(_BaseTraceHierarchyType):
                     to the ticks. Left and right options are used
                     when `orientation` is "h", top and bottom when
                     `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -513,7 +523,7 @@ class Line(_BaseTraceHierarchyType):
         be a palette name string of the following list: Blackbody,Bluer
         ed,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Por
         tland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -557,7 +567,7 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -600,7 +610,7 @@ class Line(_BaseTraceHierarchyType):
         is displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -624,7 +634,7 @@ class Line(_BaseTraceHierarchyType):
         `line.color`is set to a numerical array. If true, `line.cmin`
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -646,7 +656,7 @@ class Line(_BaseTraceHierarchyType):
         Sets the shape of the paths. If `linear`, paths are composed of
         straight lines. If `hspline`, paths are composed of horizontal
         curved splines
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'hspline']
@@ -669,7 +679,7 @@ class Line(_BaseTraceHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace. Has an effect only if in `line.color`is set to a
         numerical array.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -816,11 +826,11 @@ class Line(_BaseTraceHierarchyType):
         reversescale=None,
         shape=None,
         showscale=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg

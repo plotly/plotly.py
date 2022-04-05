@@ -24,5 +24,5 @@ class NumberValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ormat.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

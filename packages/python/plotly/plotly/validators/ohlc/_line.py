@@ -25,5 +25,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `decreasing.line.width`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

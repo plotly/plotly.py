@@ -18,5 +18,5 @@ class ConstraintrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "plot", "valType": "any"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

@@ -10,5 +10,5 @@ class TicklabeloverflowValidator(_plotly_utils.basevalidators.EnumeratedValidato
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             values=kwargs.pop("values", ["allow", "hide past div", "hide past domain"]),
-            **kwargs
+            **kwargs,
         )

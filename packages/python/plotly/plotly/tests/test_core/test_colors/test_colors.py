@@ -209,5 +209,6 @@ class TestColors(TestCase):
         self.assertEqual(expected_output, output)
 
         self.assertEqual(
-            colors.sample_colorscale("TuRbId_r", 12), colors.sequential.turbid_r,
+            colors.sample_colorscale("TuRbId_r", 12),
+            colors.sequential.turbid_r,
         )

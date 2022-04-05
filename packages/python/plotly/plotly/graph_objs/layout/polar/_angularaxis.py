@@ -42,6 +42,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelstep",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -66,7 +67,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         to a number. Using *convert types* a numeric string in trace
         data may be treated as a number during automatic axis `type`
         detection. Defaults to layout.autotypenumbers.
-    
+
         The 'autotypenumbers' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['convert types', 'strict']
@@ -89,7 +90,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the order in which categories on this axis appear. Only
         has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
-    
+
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -110,7 +111,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `categoryarray`.
-    
+
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -144,7 +145,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         numerical order of the values. Similarly, the order can be
         determined by the min, max, sum, mean or median of all the
         values.
-    
+
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
@@ -173,7 +174,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -232,7 +233,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def direction(self):
         """
         Sets the direction corresponding to positive angles.
-    
+
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['counterclockwise', 'clockwise']
@@ -272,7 +273,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -295,7 +296,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -316,7 +317,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the color of the grid lines.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -375,7 +376,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def gridwidth(self):
         """
         Sets the width (in px) of the grid lines.
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -404,7 +405,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'hoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -430,7 +431,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         subplot's traces, but above the grid lines. Useful when used
         together with scatter-like traces with `cliponaxis` set to
         False to show markers and/or text nodes above this axis.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['above traces', 'below traces']
@@ -451,7 +452,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def linecolor(self):
         """
         Sets the axis line color.
-    
+
         The 'linecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -510,7 +511,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def linewidth(self):
         """
         Sets the width (in px) of the axis line.
-    
+
         The 'linewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -531,7 +532,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -554,7 +555,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -576,7 +577,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Set the angular period. Has an effect only when
         `angularaxis.type` is "category".
-    
+
         The 'period' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -601,7 +602,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         due East (like what mathematicians prefer). In turn, polar with
         `direction` set to "clockwise" get a rotation of 90 which
         corresponds to due North (like on a compass),
-    
+
         The 'rotation' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -623,7 +624,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -646,7 +647,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -668,7 +669,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -688,7 +689,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def showline(self):
         """
         Determines whether or not a line bounding this axis is drawn.
-    
+
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -708,7 +709,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -731,7 +732,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -752,7 +753,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -774,7 +775,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the format unit of the formatted "theta" values. Has an
         effect only when `angularaxis.type` is "linear".
-    
+
         The 'thetaunit' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['radians', 'degrees']
@@ -803,7 +804,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -824,7 +825,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -846,7 +847,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -905,17 +906,17 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickfont(self):
         """
         Sets the tick font.
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -960,7 +961,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -985,9 +986,9 @@ class AngularAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -1040,13 +1041,13 @@ class AngularAxis(_BaseLayoutHierarchyType):
         When used in a template (as layout.template.layout.polar.angula
         raxis.tickformatstopdefaults), sets the default property values
         to use for elements of layout.polar.angularaxis.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1059,13 +1060,39 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelstep
+    # -------------
+    @property
+    def ticklabelstep(self):
+        """
+        Sets the spacing between tick labels as compared to the spacing
+        between ticks. A value of 1 (default) means each tick gets a
+        label. A value of 2 means shows every 2nd label. A larger value
+        n means only every nth tick is labeled. `tick0` determines
+        which labels are shown. Not implemented for axes with `type`
+        "log" or "multicategory", or when `tickmode` is "array".
+
+        The 'ticklabelstep' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 9223372036854775807]
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstep"]
+
+    @ticklabelstep.setter
+    def ticklabelstep(self, val):
+        self["ticklabelstep"] = val
+
     # ticklen
     # -------
     @property
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1091,7 +1118,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
-    
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'linear', 'array']
@@ -1112,7 +1139,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1135,7 +1162,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -1156,7 +1183,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1179,7 +1206,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1199,7 +1226,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def ticktextsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ticktext`.
-    
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1220,7 +1247,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1240,7 +1267,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickvalssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `tickvals`.
-    
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1260,7 +1287,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1283,7 +1310,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         determine the unit in which axis value are shown. If *category,
         use `period` to set the number of integer coordinates around
         polar axis.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['-', 'linear', 'category']
@@ -1305,7 +1332,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Controls persistence of user-driven changes in axis `rotation`.
         Defaults to `polar<N>.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1326,7 +1353,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -1526,6 +1553,14 @@ class AngularAxis(_BaseLayoutHierarchyType):
             r.angularaxis.tickformatstopdefaults), sets the default
             property values to use for elements of
             layout.polar.angularaxis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1611,6 +1646,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelstep=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -1624,11 +1660,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
         type=None,
         uirevision=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new AngularAxis object
-        
+
         Parameters
         ----------
         arg
@@ -1816,6 +1852,14 @@ class AngularAxis(_BaseLayoutHierarchyType):
             r.angularaxis.tickformatstopdefaults), sets the default
             property values to use for elements of
             layout.polar.angularaxis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2029,6 +2073,10 @@ an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelstep", None)
+        _v = ticklabelstep if ticklabelstep is not None else _v
+        if _v is not None:
+            self["ticklabelstep"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

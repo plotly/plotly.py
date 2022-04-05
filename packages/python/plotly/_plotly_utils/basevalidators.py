@@ -428,7 +428,7 @@ class EnumeratedValidator(BaseValidator):
         values,
         array_ok=False,
         coerce_number=False,
-        **kwargs
+        **kwargs,
     ):
         super(EnumeratedValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -960,7 +960,7 @@ class StringValidator(BaseValidator):
         strict=False,
         array_ok=False,
         values=None,
-        **kwargs
+        **kwargs,
     ):
         super(StringValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -1399,7 +1399,7 @@ class ColorValidator(BaseValidator):
         return invalid_els
 
     def vc_scalar(self, v):
-        """ Helper to validate/coerce a scalar color """
+        """Helper to validate/coerce a scalar color"""
         return ColorValidator.perform_validate_coerce(
             v, allow_number=self.numbers_allowed()
         )
@@ -1949,7 +1949,7 @@ class InfoArrayValidator(BaseValidator):
         items,
         free_length=None,
         dimensions=None,
-        **kwargs
+        **kwargs,
     ):
         super(InfoArrayValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -2704,7 +2704,7 @@ class BaseTemplateValidator(CompoundValidator):
             parent_name=parent_name,
             data_class_str=data_class_str,
             data_docs=data_docs,
-            **kwargs
+            **kwargs,
         )
 
     def description(self):

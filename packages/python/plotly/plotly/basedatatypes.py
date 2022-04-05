@@ -290,7 +290,7 @@ def _indexing_combinations(dims, alls, product=False):
 
 
 def _is_select_subplot_coordinates_arg(*args):
-    """ Returns true if any args are lists or the string 'all' """
+    """Returns true if any args are lists or the string 'all'"""
     return any((a == "all") or isinstance(a, list) for a in args)
 
 
@@ -381,7 +381,7 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
 
 
 def _generator(i):
-    """ "cast" an iterator to a generator """
+    """ "cast" an iterator to a generator"""
     for x in i:
         yield x
 
@@ -1315,7 +1315,7 @@ class BaseFigure(object):
         col=None,
         secondary_y=None,
         overwrite=False,
-        **kwargs
+        **kwargs,
     ):
         """
         Perform a property update operation on all traces that satisfy the
@@ -1481,15 +1481,15 @@ class BaseFigure(object):
         # filter down (select) which graph objects, by applying the filters
         # successively
         def _filter_row(obj):
-            """ Filter objects in rows by column """
+            """Filter objects in rows by column"""
             return (col is None) or (xref_to_col.get(obj.xref, None) == col)
 
         def _filter_col(obj):
-            """ Filter objects in columns by row """
+            """Filter objects in columns by row"""
             return (row is None) or (yref_to_row.get(obj.yref, None) == row)
 
         def _filter_sec_y(obj):
-            """ Filter objects on secondary y axes """
+            """Filter objects on secondary y axes"""
             return (secondary_y is None) or (
                 yref_to_secondary_y.get(obj.yref, None) == secondary_y
             )
@@ -2367,7 +2367,9 @@ Please use the add_trace method with the row and col parameters.
         # _get_subplot_coordinates, because some coordinates given by
         # the _indexing_combinations function might be invalid.
         t = _indexing_combinations(
-            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
+            [rows, cols],
+            list(self._get_subplot_rows_columns()),
+            product=product,
         )
         t = list(t)
         # remove rows and cols where the subplot is "None"
@@ -2915,7 +2917,7 @@ Invalid property path '{key_path_str}' for layout
                 restyle_data=restyle_changes,
                 relayout_data=relayout_changes,
                 trace_indexes=trace_indexes,
-                **msg_kwargs
+                **msg_kwargs,
             )
 
         # Dispatch changes
@@ -3996,7 +3998,7 @@ Invalid property path '{key_path_str}' for layout
         shape_type,
         exclude_empty_subplots=True,
         annotation=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
@@ -4033,7 +4035,7 @@ Invalid property path '{key_path_str}' for layout
             row=row,
             col=col,
             exclude_empty_subplots=exclude_empty_subplots,
-            **_combine_dicts([shape_args, shape_kwargs])
+            **_combine_dicts([shape_args, shape_kwargs]),
         )
         if augmented_annotation is not None:
             self.add_annotation(
@@ -4061,7 +4063,8 @@ Invalid property path '{key_path_str}' for layout
                     lambda x: x is not None,
                     [
                         self._make_axis_spanning_layout_object(
-                            direction, self.layout[layout_obj][n],
+                            direction,
+                            self.layout[layout_obj][n],
                         )
                         for n in range(n_layout_objs_before, n_layout_objs_after)
                     ],
@@ -4078,7 +4081,7 @@ Invalid property path '{key_path_str}' for layout
         col="all",
         exclude_empty_subplots=True,
         annotation=None,
-        **kwargs
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
@@ -4087,7 +4090,7 @@ Invalid property path '{key_path_str}' for layout
             "vline",
             exclude_empty_subplots=exclude_empty_subplots,
             annotation=annotation,
-            **kwargs
+            **kwargs,
         )
         return self
 
@@ -4095,12 +4098,18 @@ Invalid property path '{key_path_str}' for layout
 
     def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
         self._process_multiple_axis_spanning_shapes(
-            dict(type="line", x0=0, x1=1, y0=y, y1=y,),
+            dict(
+                type="line",
+                x0=0,
+                x1=1,
+                y0=y,
+                y1=y,
+            ),
             row,
             col,
             "hline",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            **kwargs,
         )
         return self
 
@@ -4115,7 +4124,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "vrect",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            **kwargs,
         )
         return self
 
@@ -4130,15 +4139,15 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hrect",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            **kwargs,
         )
         return self
 
     add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
 
     def _has_subplots(self):
-        """ Returns True if figure contains subplots, otherwise it contains a
-        single plot and so this returns False. """
+        """Returns True if figure contains subplots, otherwise it contains a
+        single plot and so this returns False."""
         return self._grid_ref is not None
 
     def _subplot_not_empty(self, xref, yref, selector="all"):

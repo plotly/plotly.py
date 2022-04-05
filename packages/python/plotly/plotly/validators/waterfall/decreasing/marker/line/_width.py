@@ -6,7 +6,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="width",
         parent_name="waterfall.decreasing.marker.line",
-        **kwargs
+        **kwargs,
     ):
         super(WidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -14,5 +14,5 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "style"),
             min=kwargs.pop("min", 0),
-            **kwargs
+            **kwargs,
         )

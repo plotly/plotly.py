@@ -67,7 +67,7 @@ class Scattersmith(_BaseTraceType):
         about the subplot axes. To show markers and text nodes above
         axis lines and tick labels, make sure to set `xaxis.layer` and
         `yaxis.layer` to *below traces*.
-    
+
         The 'cliponaxis' property must be specified as a bool
         (either True, or False)
 
@@ -88,7 +88,7 @@ class Scattersmith(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -111,7 +111,7 @@ class Scattersmith(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -132,7 +132,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -160,7 +160,7 @@ class Scattersmith(_BaseTraceType):
         lines), and behaves like "toself" if there is no trace before
         it. "tonext" should not be used if one trace does not enclose
         the other.
-    
+
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'toself', 'tonext']
@@ -183,7 +183,7 @@ class Scattersmith(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -244,7 +244,7 @@ class Scattersmith(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['real', 'imag', 'text', 'name'] joined with '+' characters
@@ -269,7 +269,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -293,9 +293,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -351,7 +351,7 @@ class Scattersmith(_BaseTraceType):
         line points) or do they highlight filled regions? If the fill
         is "toself" or "tonext" and there are no markers or text, then
         the default is "fills", otherwise it is "points".
-    
+
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['points', 'fills'] joined with '+' characters
@@ -395,7 +395,7 @@ class Scattersmith(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -418,7 +418,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -442,7 +442,7 @@ class Scattersmith(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -465,7 +465,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -487,7 +487,7 @@ class Scattersmith(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -507,7 +507,7 @@ class Scattersmith(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -529,7 +529,7 @@ class Scattersmith(_BaseTraceType):
         Sets the imaginary component of the data, in units of
         normalized impedance such that real=1, imag=0 is the center of
         the chart.
-    
+
         The 'imag' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -549,7 +549,7 @@ class Scattersmith(_BaseTraceType):
     def imagsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `imag`.
-    
+
         The 'imagsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -571,7 +571,7 @@ class Scattersmith(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -596,9 +596,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -625,7 +625,7 @@ class Scattersmith(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -649,9 +649,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -692,9 +692,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -852,7 +852,7 @@ class Scattersmith(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -871,7 +871,7 @@ class Scattersmith(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -896,7 +896,7 @@ class Scattersmith(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -920,7 +920,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -941,7 +941,7 @@ class Scattersmith(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -962,7 +962,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the real component of the data, in units of normalized
         impedance such that real=1, imag=0 is the center of the chart.
-    
+
         The 'real' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -982,7 +982,7 @@ class Scattersmith(_BaseTraceType):
     def realsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `real`.
-    
+
         The 'realsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1006,9 +1006,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scattersmith.selec
                     ted.Marker` instance or dict with compatible
@@ -1039,7 +1039,7 @@ class Scattersmith(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1059,7 +1059,7 @@ class Scattersmith(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1083,9 +1083,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1115,7 +1115,7 @@ class Scattersmith(_BaseTraceType):
         smith subplot. If "smith" (the default value), the data refer
         to `layout.smith`. If "smith2", the data refer to
         `layout.smith2`, and so on.
-    
+
         The 'subplot' property is an identifier of a particular
         subplot, of type 'smith', that may be specified as the string 'smith'
         optionally followed by an integer >= 1
@@ -1142,7 +1142,7 @@ class Scattersmith(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1164,17 +1164,17 @@ class Scattersmith(_BaseTraceType):
     def textfont(self):
         """
         Sets the text font.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scattersmith.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1199,7 +1199,7 @@ class Scattersmith(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1221,7 +1221,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1246,7 +1246,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `textposition`.
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1266,7 +1266,7 @@ class Scattersmith(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1298,7 +1298,7 @@ class Scattersmith(_BaseTraceType):
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         variables `real`, `imag` and `text`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1321,7 +1321,7 @@ class Scattersmith(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `texttemplate`.
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1342,7 +1342,7 @@ class Scattersmith(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1377,7 +1377,7 @@ class Scattersmith(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1400,9 +1400,9 @@ class Scattersmith(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattersmith.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scattersmith.unsel
                     ected.Marker` instance or dict with compatible
@@ -1430,7 +1430,7 @@ class Scattersmith(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1756,11 +1756,11 @@ class Scattersmith(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Scattersmith object
-        
+
         The scattersmith trace type encompasses line charts, scatter
         charts, text charts, and bubble charts in smith coordinates.
         The data visualized as scatter point or lines is set in `real`

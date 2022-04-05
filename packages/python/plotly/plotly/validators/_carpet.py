@@ -174,5 +174,5 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `y`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )
