@@ -153,7 +153,6 @@ to features in the release.
 
 ## Release *Candidate* process - `plotly` package
 
-
 ### Bump to release candidate version
 
  1) Manually update the versions to `X.Y.Z-rc.1` in the files
