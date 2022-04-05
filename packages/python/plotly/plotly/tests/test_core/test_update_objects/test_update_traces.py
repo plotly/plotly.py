@@ -290,7 +290,7 @@ class TestSelectForEachUpdateTraces(TestCase):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         # Save off original figure
         fig_orig = copy.deepcopy(self.fig)
@@ -304,7 +304,7 @@ class TestSelectForEachUpdateTraces(TestCase):
             row=row,
             col=col,
             secondary_y=secondary_y,
-            **kwargs
+            **kwargs,
         )
 
         # Check chaining support

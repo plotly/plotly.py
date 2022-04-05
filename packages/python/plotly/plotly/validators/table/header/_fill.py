@@ -19,5 +19,5 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `color`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

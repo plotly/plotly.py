@@ -189,5 +189,5 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instances or dicts with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -19,7 +19,7 @@ class Marker(_BaseTraceHierarchyType):
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -82,9 +82,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.box.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets themarker.linecolor. It accepts either a
                     specific color or an array of numbers that are
@@ -118,7 +118,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the marker opacity.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -138,7 +138,7 @@ class Marker(_BaseTraceHierarchyType):
     def outliercolor(self):
         """
         Sets the color of the outlier sample points.
-    
+
         The 'outliercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -197,7 +197,7 @@ class Marker(_BaseTraceHierarchyType):
     def size(self):
         """
         Sets the marker size (in px).
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -220,7 +220,7 @@ class Marker(_BaseTraceHierarchyType):
         appending "-open" to a symbol name. Adding 200 is equivalent to
         appending "-dot" to a symbol name. Adding 300 is equivalent to
         appending "-open-dot" or "dot-open" to a symbol name.
-    
+
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [0, '0', 'circle', 100, '100', 'circle-open', 200, '200',
@@ -358,11 +358,11 @@ class Marker(_BaseTraceHierarchyType):
         outliercolor=None,
         size=None,
         symbol=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg

@@ -65,7 +65,11 @@ def test_newdatain_hover_data():
         {"comment": (":.1f", pd.Series([1.234, 45.3455, 5666.234]))},
     ]
     for hover_dict in hover_dicts:
-        fig = px.scatter(x=[1, 2, 3], y=[3, 4, 5], hover_data=hover_dict,)
+        fig = px.scatter(
+            x=[1, 2, 3],
+            y=[3, 4, 5],
+            hover_data=hover_dict,
+        )
         assert (
             fig.data[0].hovertemplate
             == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]:.1f}<extra></extra>"

@@ -65,7 +65,7 @@ class Scattercarpet(_BaseTraceType):
     def a(self):
         """
         Sets the a-axis coordinates.
-    
+
         The 'a' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -85,7 +85,7 @@ class Scattercarpet(_BaseTraceType):
     def asrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `a`.
-    
+
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -105,7 +105,7 @@ class Scattercarpet(_BaseTraceType):
     def b(self):
         """
         Sets the b-axis coordinates.
-    
+
         The 'b' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -125,7 +125,7 @@ class Scattercarpet(_BaseTraceType):
     def bsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `b`.
-    
+
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -147,7 +147,7 @@ class Scattercarpet(_BaseTraceType):
         An identifier for this carpet, so that `scattercarpet` and
         `contourcarpet` traces can specify a carpet plot on which they
         lie
-    
+
         The 'carpet' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -169,7 +169,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -192,7 +192,7 @@ class Scattercarpet(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -213,7 +213,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -241,7 +241,7 @@ class Scattercarpet(_BaseTraceType):
         lines), and behaves like "toself" if there is no trace before
         it. "tonext" should not be used if one trace does not enclose
         the other.
-    
+
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'toself', 'tonext']
@@ -264,7 +264,7 @@ class Scattercarpet(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -325,7 +325,7 @@ class Scattercarpet(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['a', 'b', 'text', 'name'] joined with '+' characters
@@ -350,7 +350,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -374,9 +374,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -432,7 +432,7 @@ class Scattercarpet(_BaseTraceType):
         line points) or do they highlight filled regions? If the fill
         is "toself" or "tonext" and there are no markers or text, then
         the default is "fills", otherwise it is "points".
-    
+
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['points', 'fills'] joined with '+' characters
@@ -476,7 +476,7 @@ class Scattercarpet(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -499,7 +499,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -523,7 +523,7 @@ class Scattercarpet(_BaseTraceType):
         points. If an array of strings, the items are mapped in order
         to the the data points in (a,b). To be seen, trace `hoverinfo`
         must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -546,7 +546,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -568,7 +568,7 @@ class Scattercarpet(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -588,7 +588,7 @@ class Scattercarpet(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -610,7 +610,7 @@ class Scattercarpet(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -635,9 +635,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -664,7 +664,7 @@ class Scattercarpet(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -688,9 +688,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -731,9 +731,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -891,7 +891,7 @@ class Scattercarpet(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -910,7 +910,7 @@ class Scattercarpet(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -935,7 +935,7 @@ class Scattercarpet(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -959,7 +959,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -980,7 +980,7 @@ class Scattercarpet(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1004,9 +1004,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scattercarpet.sele
                     cted.Marker` instance or dict with compatible
@@ -1037,7 +1037,7 @@ class Scattercarpet(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1057,7 +1057,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1081,9 +1081,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1115,7 +1115,7 @@ class Scattercarpet(_BaseTraceType):
         to the the data points in (a,b). If trace `hoverinfo` contains
         a "text" flag and "hovertext" is not set, these elements will
         be seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1137,17 +1137,17 @@ class Scattercarpet(_BaseTraceType):
     def textfont(self):
         """
         Sets the text font.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scattercarpet.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1172,7 +1172,7 @@ class Scattercarpet(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1194,7 +1194,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1219,7 +1219,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `textposition`.
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1239,7 +1239,7 @@ class Scattercarpet(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1271,7 +1271,7 @@ class Scattercarpet(_BaseTraceType):
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         variables `a`, `b` and `text`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1294,7 +1294,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `texttemplate`.
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1315,7 +1315,7 @@ class Scattercarpet(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1350,7 +1350,7 @@ class Scattercarpet(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1373,9 +1373,9 @@ class Scattercarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattercarpet.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scattercarpet.unse
                     lected.Marker` instance or dict with compatible
@@ -1403,7 +1403,7 @@ class Scattercarpet(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1427,7 +1427,7 @@ class Scattercarpet(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1452,7 +1452,7 @@ class Scattercarpet(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1778,11 +1778,11 @@ class Scattercarpet(_BaseTraceType):
         visible=None,
         xaxis=None,
         yaxis=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Scattercarpet object
-        
+
         Plots a scatter trace on either the first carpet axis or the
         carpet axis with a matching `carpet` attribute.
 

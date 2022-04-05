@@ -25,7 +25,6 @@ if missing_ipywidgets:
             # ipywidgets import error raised on construction, not import
             FigureWidget()
 
-
 else:
 
     def test_import_figurewidget_with_ipywidgets():

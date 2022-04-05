@@ -206,7 +206,9 @@ density_heatmap.__doc__ = make_docstring(
         z=[
             "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
         ],
-        histfunc=["The arguments to this function are the values of `z`.",],
+        histfunc=[
+            "The arguments to this function are the values of `z`.",
+        ],
     ),
 )
 
@@ -271,6 +273,7 @@ def area(
     y=None,
     line_group=None,
     color=None,
+    pattern_shape=None,
     symbol=None,
     hover_name=None,
     hover_data=None,
@@ -287,6 +290,8 @@ def area(
     labels=None,
     color_discrete_sequence=None,
     color_discrete_map=None,
+    pattern_shape_sequence=None,
+    pattern_shape_map=None,
     symbol_sequence=None,
     symbol_map=None,
     markers=False,
@@ -473,7 +478,9 @@ def histogram(
         args=locals(),
         constructor=go.Histogram,
         trace_patch=dict(
-            histnorm=histnorm, histfunc=histfunc, cumulative=dict(enabled=cumulative),
+            histnorm=histnorm,
+            histfunc=histfunc,
+            cumulative=dict(enabled=cumulative),
         ),
         layout_patch=dict(barmode=barmode, barnorm=barnorm),
     )
@@ -599,7 +606,11 @@ def violin(
         args=locals(),
         constructor=go.Violin,
         trace_patch=dict(
-            points=points, box=dict(visible=box), scalegroup=True, x0=" ", y0=" ",
+            points=points,
+            box=dict(visible=box),
+            scalegroup=True,
+            x0=" ",
+            y0=" ",
         ),
         layout_patch=dict(violinmode=violinmode),
     )

@@ -24,5 +24,5 @@ class TicklabelpositionValidator(_plotly_utils.basevalidators.EnumeratedValidato
                     "inside bottom",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

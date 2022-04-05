@@ -34,5 +34,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 open" to a symbol name.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

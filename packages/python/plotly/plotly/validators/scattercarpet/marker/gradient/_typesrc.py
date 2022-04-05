@@ -6,11 +6,11 @@ class TypesrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="typesrc",
         parent_name="scattercarpet.marker.gradient",
-        **kwargs
+        **kwargs,
     ):
         super(TypesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
-            **kwargs
+            **kwargs,
         )

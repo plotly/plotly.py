@@ -1452,7 +1452,8 @@ Install using conda:
 
 
 @tenacity.retry(
-    wait=tenacity.wait_random(min=5, max=10), stop=tenacity.stop_after_delay(60000),
+    wait=tenacity.wait_random(min=5, max=10),
+    stop=tenacity.stop_after_delay(60000),
 )
 def request_image_with_retrying(**kwargs):
     """

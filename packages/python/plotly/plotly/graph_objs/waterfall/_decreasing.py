@@ -20,9 +20,9 @@ class Decreasing(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.waterfall.decreasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the marker color of all decreasing values.
                 line
@@ -53,7 +53,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Decreasing object
-        
+
         Parameters
         ----------
         arg

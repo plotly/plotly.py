@@ -28,5 +28,5 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 longitude/latitude.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

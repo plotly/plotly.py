@@ -45,7 +45,7 @@ class Marker(_BaseTraceHierarchyType):
         or `autocolorscale` is true, the default  palette will be
         chosen according to whether numbers in the `color` array are
         all positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -70,7 +70,7 @@ class Marker(_BaseTraceHierarchyType):
         only if in `marker.color`is set to a numerical array. Defaults
         to `false` when `marker.cmin` and `marker.cmax` are set by the
         user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -93,7 +93,7 @@ class Marker(_BaseTraceHierarchyType):
         in `marker.color`is set to a numerical array. Value should have
         the same units as in `marker.color` and if set, `marker.cmin`
         must be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -117,7 +117,7 @@ class Marker(_BaseTraceHierarchyType):
         effect only if in `marker.color`is set to a numerical array.
         Value should have the same units as in `marker.color`. Has no
         effect when `marker.cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -140,7 +140,7 @@ class Marker(_BaseTraceHierarchyType):
         in `marker.color`is set to a numerical array. Value should have
         the same units as in `marker.color` and if set, `marker.cmax`
         must be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -163,7 +163,7 @@ class Marker(_BaseTraceHierarchyType):
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -230,7 +230,7 @@ class Marker(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -256,9 +256,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scattergl.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -411,6 +411,16 @@ class Marker(_BaseTraceHierarchyType):
                     to the ticks. Left and right options are used
                     when `orientation` is "h", top and bottom when
                     `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -522,7 +532,7 @@ class Marker(_BaseTraceHierarchyType):
         may be a palette name string of the following list: Blackbody,B
         luered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic
         ,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -566,7 +576,7 @@ class Marker(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -590,9 +600,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scattergl.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -698,7 +708,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the marker opacity.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -719,7 +729,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacitysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `opacity`.
-    
+
         The 'opacitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -742,7 +752,7 @@ class Marker(_BaseTraceHierarchyType):
         `marker.color`is set to a numerical array. If true,
         `marker.cmin` will correspond to the last color in the array
         and `marker.cmax` will correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -764,7 +774,7 @@ class Marker(_BaseTraceHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace. Has an effect only if in `marker.color`is set to a
         numerical array.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -784,7 +794,7 @@ class Marker(_BaseTraceHierarchyType):
     def size(self):
         """
         Sets the marker size (in px).
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -807,7 +817,7 @@ class Marker(_BaseTraceHierarchyType):
         Has an effect only if `marker.size` is set to a numerical
         array. Sets the minimum size (in px) of the rendered marker
         points.
-    
+
         The 'sizemin' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -829,7 +839,7 @@ class Marker(_BaseTraceHierarchyType):
         Has an effect only if `marker.size` is set to a numerical
         array. Sets the rule for which the data in `size` is converted
         to pixels.
-    
+
         The 'sizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['diameter', 'area']
@@ -852,7 +862,7 @@ class Marker(_BaseTraceHierarchyType):
         Has an effect only if `marker.size` is set to a numerical
         array. Sets the scale factor used to determine the rendered
         size of marker points. Use with `sizemin` and `sizemode`.
-    
+
         The 'sizeref' property is a number and may be specified as:
           - An int or float
 
@@ -872,7 +882,7 @@ class Marker(_BaseTraceHierarchyType):
     def sizesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `size`.
-    
+
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -895,7 +905,7 @@ class Marker(_BaseTraceHierarchyType):
         appending "-open" to a symbol name. Adding 200 is equivalent to
         appending "-dot" to a symbol name. Adding 300 is equivalent to
         appending "-open-dot" or "dot-open" to a symbol name.
-    
+
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [0, '0', 'circle', 100, '100', 'circle-open', 200, '200',
@@ -1003,7 +1013,7 @@ class Marker(_BaseTraceHierarchyType):
     def symbolsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `symbol`.
-    
+
         The 'symbolsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1160,11 +1170,11 @@ class Marker(_BaseTraceHierarchyType):
         sizesrc=None,
         symbol=None,
         symbolsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg

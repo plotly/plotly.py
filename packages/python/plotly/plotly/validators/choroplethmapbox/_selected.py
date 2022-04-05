@@ -18,5 +18,5 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

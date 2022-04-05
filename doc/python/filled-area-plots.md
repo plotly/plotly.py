@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.9.7
   plotly:
     description: How to make filled area plots in Python with Plotly.
     display_as: basic
@@ -44,8 +44,7 @@ This example shows how to fill the area enclosed by traces.
 ```python
 import plotly.express as px
 df = px.data.gapminder()
-fig = px.area(df, x="year", y="pop", color="continent",
-	      line_group="country")
+fig = px.area(df, x="year", y="pop", color="continent", line_group="country")
 fig.show()
 ```
 
@@ -58,15 +57,32 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'filled-area-plots', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 ```
 
+### Pattern Fills
+
+*New in v5.0*
+
+Area charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+
+```python
+import plotly.express as px
+df = px.data.medals_long()
+
+fig = px.area(df, x="medal", y="count", color="nation",
+             pattern_shape="nation", pattern_shape_sequence=[".", "x", "+"])
+fig.show()
+```
+
+<!-- #region tags=[] -->
 ### Filled area chart with plotly.graph_objects
 
 #### Basic Overlaid Area Chart
+<!-- #endregion -->
 
-```python
+```python tags=[]
 import plotly.graph_objects as go
 
 fig = go.Figure()

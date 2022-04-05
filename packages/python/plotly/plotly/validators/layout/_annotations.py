@@ -330,5 +330,5 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 many pixels.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

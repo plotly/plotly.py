@@ -28,5 +28,5 @@ class YcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "ummalqura",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

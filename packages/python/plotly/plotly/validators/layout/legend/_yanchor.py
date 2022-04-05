@@ -8,5 +8,5 @@ class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "legend"),
             values=kwargs.pop("values", ["auto", "top", "middle", "bottom"]),
-            **kwargs
+            **kwargs,
         )

@@ -56,7 +56,7 @@ def create_annotated_heatmap(
     font_colors=None,
     showscale=False,
     reversescale=False,
-    **kwargs
+    **kwargs,
 ):
     """
     **deprecated**, use instead
@@ -120,7 +120,7 @@ def create_annotated_heatmap(
             colorscale=colorscale,
             showscale=showscale,
             reversescale=reversescale,
-            **kwargs
+            **kwargs,
         )
         layout = dict(
             annotations=annotations,
@@ -134,7 +134,7 @@ def create_annotated_heatmap(
             colorscale=colorscale,
             showscale=showscale,
             reversescale=reversescale,
-            **kwargs
+            **kwargs,
         )
         layout = dict(
             annotations=annotations,

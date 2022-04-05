@@ -11,5 +11,5 @@ class StartarrowheadValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             max=kwargs.pop("max", 8),
             min=kwargs.pop("min", 0),
-            **kwargs
+            **kwargs,
         )

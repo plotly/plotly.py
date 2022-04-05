@@ -10,5 +10,5 @@ class SpikedashValidator(_plotly_utils.basevalidators.StringValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs
+            **kwargs,
         )

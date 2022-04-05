@@ -59,7 +59,7 @@ def create_dendrogram(
     >>> fig.show()
 
     Example 2: Dendrogram to put on the left of the heatmap
-    
+
     >>> from plotly.figure_factory import create_dendrogram
 
     >>> import numpy as np
@@ -71,7 +71,7 @@ def create_dendrogram(
     >>> dendro.show()
 
     Example 3: Dendrogram with Pandas
-    
+
     >>> from plotly.figure_factory import create_dendrogram
 
     >>> import numpy as np

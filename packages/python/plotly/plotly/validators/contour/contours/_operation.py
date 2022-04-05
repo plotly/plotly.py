@@ -27,5 +27,5 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     ")[",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

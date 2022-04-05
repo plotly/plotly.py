@@ -6,7 +6,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
         self,
         plotly_name="title",
         parent_name="scatterpolargl.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TitleValidator, self).__init__(
             plotly_name=plotly_name,
@@ -34,5 +34,5 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 been deprecated.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -15,5 +15,5 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ne` instance or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

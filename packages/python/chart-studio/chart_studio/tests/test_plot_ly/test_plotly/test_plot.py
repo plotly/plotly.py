@@ -320,7 +320,7 @@ generate_conflicting_plot_options_in_tools_dot_set_config()
 
 
 def generate_conflicting_plot_options_with_json_writes_of_config():
-    """ if the user wrote their own options in the config file,
+    """if the user wrote their own options in the config file,
     then we'll raise the error when the call plot or iplot through
     _plot_option_logic
     """
@@ -347,7 +347,7 @@ generate_conflicting_plot_options_with_json_writes_of_config()
 
 
 def generate_private_sharing_and_public_world_readable_precedence():
-    """ Test that call signature arguments applied through _plot_option_logic
+    """Test that call signature arguments applied through _plot_option_logic
     overwrite options supplied through py.sign_in which overwrite options
     set through tls.set_config
     """

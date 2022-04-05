@@ -39,5 +39,5 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ellipsis.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

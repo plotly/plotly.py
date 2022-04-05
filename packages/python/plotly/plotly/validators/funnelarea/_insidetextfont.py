@@ -44,5 +44,5 @@ class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `size`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -241,7 +241,7 @@ def make_subplots(
     shared_yaxes=False,
     start_cell="top-left",
     print_grid=None,
-    **kwargs
+    **kwargs,
 ):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
@@ -471,7 +471,7 @@ def make_subplots(
         shared_yaxes=shared_yaxes,
         start_cell=start_cell,
         print_grid=print_grid,
-        **kwargs
+        **kwargs,
     )
 
 

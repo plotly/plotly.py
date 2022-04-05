@@ -12,5 +12,5 @@ class ConstraintowardValidator(_plotly_utils.basevalidators.EnumeratedValidator)
             values=kwargs.pop(
                 "values", ["left", "center", "right", "top", "middle", "bottom"]
             ),
-            **kwargs
+            **kwargs,
         )

@@ -24,5 +24,5 @@ class ColorscaleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 must be true for this attribute to work.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

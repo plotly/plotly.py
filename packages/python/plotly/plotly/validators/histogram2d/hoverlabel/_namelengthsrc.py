@@ -6,11 +6,11 @@ class NamelengthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="namelengthsrc",
         parent_name="histogram2d.hoverlabel",
-        **kwargs
+        **kwargs,
     ):
         super(NamelengthsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
-            **kwargs
+            **kwargs,
         )

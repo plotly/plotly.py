@@ -8,5 +8,5 @@ class ThetaunitValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             values=kwargs.pop("values", ["radians", "degrees", "gradians"]),
-            **kwargs
+            **kwargs,
         )

@@ -20,5 +20,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

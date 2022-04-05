@@ -113,5 +113,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 colorsis set to a numerical array.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

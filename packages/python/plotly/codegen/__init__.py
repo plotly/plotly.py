@@ -337,9 +337,9 @@ else:
         f.write(graph_objects_init_source)
 
     # ### Run black code formatter on output directories ###
-    subprocess.call(["black", "--target-version=py27", validators_pkgdir])
-    subprocess.call(["black", "--target-version=py27", graph_objs_pkgdir])
-    subprocess.call(["black", "--target-version=py27", graph_objects_path])
+    subprocess.call(["black", "--target-version=py36", validators_pkgdir])
+    subprocess.call(["black", "--target-version=py36", graph_objs_pkgdir])
+    subprocess.call(["black", "--target-version=py36", graph_objects_path])
 
 
 if __name__ == "__main__":

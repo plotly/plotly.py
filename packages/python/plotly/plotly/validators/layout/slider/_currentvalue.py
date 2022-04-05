@@ -31,5 +31,5 @@ class CurrentvalueValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the length of the slider.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

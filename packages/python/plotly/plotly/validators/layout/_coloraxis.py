@@ -69,5 +69,5 @@ class ColoraxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 displayed for this trace.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

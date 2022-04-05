@@ -58,13 +58,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==5.5.0
+$ pip install plotly==5.7.0
 ```
 
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.5.0
+$ conda install -c plotly plotly=5.7.0
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
@@ -86,8 +86,8 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'getting-started', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'getting-started', width='100%', height=1200)
 ```
 
 #### JupyterLab Support
@@ -148,7 +148,7 @@ The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**,
 
 ```
 # JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.5.0 @jupyter-widgets/jupyterlab-manager
+jupyter labextension install jupyterlab-plotly@5.7.0 @jupyter-widgets/jupyterlab-manager
 ```
 
 Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.

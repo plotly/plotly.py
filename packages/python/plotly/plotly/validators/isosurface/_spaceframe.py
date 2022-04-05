@@ -25,5 +25,5 @@ class SpaceframeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 filled with values less than 1.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

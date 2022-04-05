@@ -6,7 +6,7 @@ class TicklabelpositionValidator(_plotly_utils.basevalidators.EnumeratedValidato
         self,
         plotly_name="ticklabelposition",
         parent_name="splom.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TicklabelpositionValidator, self).__init__(
             plotly_name=plotly_name,
@@ -27,5 +27,5 @@ class TicklabelpositionValidator(_plotly_utils.basevalidators.EnumeratedValidato
                     "inside bottom",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

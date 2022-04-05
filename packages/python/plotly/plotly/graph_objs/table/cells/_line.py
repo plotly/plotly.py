@@ -74,7 +74,7 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -113,7 +113,7 @@ class Line(_BaseTraceHierarchyType):
     def widthsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `width`.
-    
+
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -149,7 +149,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg

@@ -301,7 +301,10 @@ class TestJSONEncoder(TestCase):
 
     def test_encode_customdata_datetime_inhomogenous_dataframe(self):
         df = pd.DataFrame(
-            dict(t=pd.to_datetime(["2010-01-01", "2010-01-02"]), v=np.arange(2),)
+            dict(
+                t=pd.to_datetime(["2010-01-01", "2010-01-02"]),
+                v=np.arange(2),
+            )
         )
         # 2D customdata
         fig = Figure(
