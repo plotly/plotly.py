@@ -86,7 +86,9 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf_old = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
+    assert gdf.equals(gdf_old)
 
     f = 51515
     singlerow = pd.DataFrame(
@@ -103,7 +105,9 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf_old = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
+    assert gdf.equals(gdf_old)
 
     f = 2270
     singlerow = pd.DataFrame(
@@ -120,19 +124,25 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf_old = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
+    assert gdf.equals(gdf_old)
 
     row_2198 = gdf[gdf["FIPS"] == 2198]
     row_2198.index = [max(gdf.index) + 1]
     row_2198.loc[row_2198.index[0], "FIPS"] = 2201
     row_2198.loc[row_2198.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2198, sort=True)
+    gdf_old = gdf.append(row_2198, sort=True)
+    gdf = pd.concat([gdf, row_2198], sort=True)
+    assert gdf.equals(gdf_old)
 
     row_2105 = gdf[gdf["FIPS"] == 2105]
     row_2105.index = [max(gdf.index) + 1]
     row_2105.loc[row_2105.index[0], "FIPS"] = 2232
     row_2105.loc[row_2105.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2105, sort=True)
+    gdf_old = gdf.append(row_2105, sort=True)
+    gdf = pd.concat([gdf, row_2105], sort=True)
+    assert gdf.equals(gdf_old)
     gdf = gdf.rename(columns={"NAME": "COUNTY_NAME"})
 
     gdf_reduced = gdf[["FIPS", "STATEFP", "COUNTY_NAME", "geometry"]]
