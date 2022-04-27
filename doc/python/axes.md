@@ -380,6 +380,39 @@ fig.update_layout(title_text="Apple Stock Price")
 fig.show()
 ```
 
+#### Adding minor ticks
+You can add minor ticks to an axis by specifying with `minor`. This takes a `dict` of properties for the minor ticks. 
+
+In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the outside `minor = {'ticks':'outside'}`. On the xaxis we've spcified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the xaxis minor ticks using `showgrid`.
+
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex")
+
+
+fig.update_layout(
+    xaxis = dict(
+        minor = {
+                "ticklen": 6,
+                "tickcolor": "black",
+                "showgrid" : True
+            },
+    )
+)
+
+fig.update_layout(
+    yaxis = dict(
+        minor = {'ticks':'outside'}
+    )
+)
+
+fig.show()
+```
+
 ### Axis lines: grid and zerolines
 
 ##### Toggling Axis grid lines
@@ -459,6 +492,19 @@ df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
 fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+
+fig.show()
+```
+
+By default grid lines are `solid`. Set the `griddash` property to change them. In this example we display the x-axis grid lines as `dot`. It can also be set to `dash`, `longdash`, `dashdot`, or `longdashdot`.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink', griddash='dot')
 fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
 
 fig.show()
