@@ -497,7 +497,7 @@ fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
 fig.show()
 ```
 
-By default grid lines are `solid`. Set the `griddash` property to change them. In this example we display the x-axis grid lines as `dot`. It can also be set to `dash`, `longdash`, `dashdot`, or `longdashdot`.
+By default grid lines are `solid`. Set the `griddash` property to change this style. In this example we display the x-axis grid lines as `dot`. It can also be set to `dash`, `longdash`, `dashdot`, or `longdashdot`.
 
 ```python
 import plotly.express as px
