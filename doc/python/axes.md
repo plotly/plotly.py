@@ -383,7 +383,7 @@ fig.show()
 #### Adding minor ticks
 You can add minor ticks to an axis by specifying with the `minor` property. This takes a `dict` of properties to apply to minor ticks. 
 
-In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the outside: `minor = {'ticks':'outside'}`. On the x-axis we've spcified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
+In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the outside: `minor = {"ticks":"outside"}`. On the x-axis we've spcified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
 
 
 ```python
@@ -394,21 +394,8 @@ df = px.data.tips()
 fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 
-fig.update_layout(
-    xaxis = dict(
-        minor = {
-                "ticklen": 6,
-                "tickcolor": "black",
-                "showgrid" : True
-            },
-    )
-)
-
-fig.update_layout(
-    yaxis = dict(
-        minor = {'ticks':'outside'}
-    )
-)
+fig.update_xaxes(minor = {"ticklen": 6, "tickcolor": "black", "showgrid" : True})
+fig.update_yaxes(minor = {"ticks":"outside"})
 
 fig.show()
 ```
