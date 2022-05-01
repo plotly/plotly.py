@@ -3,8 +3,6 @@ from __future__ import absolute_import
 import collections
 from collections import OrderedDict
 import re
-import six
-from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
@@ -1202,7 +1200,7 @@ class BaseFigure(object):
             return True
         # If selector is a string then put it at the 'type' key of a dictionary
         # to select objects where "type":selector
-        if isinstance(selector, six.string_types):
+        if isinstance(selector, str):
             selector = dict(type=selector)
         # If selector is a dict, compare the fields
         if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
@@ -1224,7 +1222,7 @@ class BaseFigure(object):
                     return False
             return True
         # If selector is a function, call it with the obj as the argument
-        elif six.callable(selector):
+        elif callable(selector):
             return selector(obj)
         else:
             raise TypeError(
@@ -1825,7 +1823,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         tuple[str | int]
         """
         if (
-            isinstance(key_path_str, string_types)
+            isinstance(key_path_str, str)
             and "." not in key_path_str
             and "[" not in key_path_str
             and "_" not in key_path_str
@@ -5764,7 +5762,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # ----------------------------------
         # e.g. ('xaxis', 'range') or 'xaxis.range'
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             return prop
         else:
             # Unwrap to scalar string
@@ -5822,7 +5820,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Convert prop to prop tuple
         # --------------------------
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             # Let parent handle non-scalar non-string cases
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
             return
@@ -5859,42 +5857,9 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        if six.PY2:
-
-            def get_attrs(obj):
-                import types
-
-                if not hasattr(obj, "__dict__"):
-                    return []
-                if not isinstance(obj.__dict__, (dict, types.DictProxyType)):
-                    raise TypeError("%s.__dict__ is not a dictionary" "" % obj.__name__)
-                return obj.__dict__.keys()
-
-            def dir2(obj):
-                attrs = set()
-                if not hasattr(obj, "__bases__"):
-                    # obj is an instance
-                    if not hasattr(obj, "__class__"):
-                        # slots
-                        return sorted(get_attrs(obj))
-                    klass = obj.__class__
-                    attrs.update(get_attrs(klass))
-                else:
-                    # obj is a class
-                    klass = obj
-
-                for cls in klass.__bases__:
-                    attrs.update(get_attrs(cls))
-                    attrs.update(dir2(cls))
-                attrs.update(get_attrs(obj))
-                return list(attrs)
-
-            return dir2(self) + sorted(self._subplotid_props)
-        else:
-
-            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
-                self._subplotid_props
-            )
+        return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
+            self._subplotid_props
+        )
 
 
 class BaseTraceHierarchyType(BasePlotlyType):

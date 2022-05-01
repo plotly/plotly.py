@@ -26,7 +26,6 @@ requirements:
   run:
     - python
     - tenacity >=6.2.0
-    - six
 
 test:
   imports:

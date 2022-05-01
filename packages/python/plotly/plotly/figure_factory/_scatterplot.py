@@ -1,7 +1,5 @@
 from __future__ import absolute_import
 
-import six
-
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
@@ -1045,11 +1043,7 @@ def create_scatterplotmatrix(
     # Validate colormap
     if isinstance(colormap, dict):
         colormap = clrs.validate_colors_dict(colormap, "rgb")
-    elif (
-        isinstance(colormap, six.string_types)
-        and "rgb" not in colormap
-        and "#" not in colormap
-    ):
+    elif isinstance(colormap, str) and "rgb" not in colormap and "#" not in colormap:
         if colormap not in clrs.PLOTLY_SCALES.keys():
             raise exceptions.PlotlyError(
                 "If 'colormap' is a string, it must be the name "
