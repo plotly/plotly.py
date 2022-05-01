@@ -13,7 +13,6 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import tenacity
-from six import string_types
 
 import _plotly_utils.utils
 import plotly
@@ -77,7 +76,7 @@ def validate_coerce_format(fmt):
         return None
 
     # Check format type
-    if not isinstance(fmt, string_types) or not fmt:
+    if not isinstance(fmt, str) or not fmt:
         raise_format_value_error(fmt)
 
     # Make lower case
@@ -491,7 +490,7 @@ The port property must be an integer, but received value of type {typ}.
         if val is None:
             self._props.pop("executable", None)
         else:
-            if not isinstance(val, string_types):
+            if not isinstance(val, str):
                 raise ValueError(
                     """
 The executable property must be a string, but received value of type {typ}.
@@ -499,7 +498,7 @@ The executable property must be a string, but received value of type {typ}.
                         typ=type(val), val=val
                     )
                 )
-            if isinstance(val, string_types):
+            if isinstance(val, str):
                 val = [val]
             self._props["executable_list"] = val
 
@@ -685,7 +684,7 @@ The default_scale property must be a number, but received value of type {typ}.
         if val is None:
             self._props.pop("topojson", None)
         else:
-            if not isinstance(val, string_types):
+            if not isinstance(val, str):
                 raise ValueError(
                     """
 The topojson property must be a string, but received value of type {typ}.
@@ -718,7 +717,7 @@ The topojson property must be a string, but received value of type {typ}.
         if val is None:
             self._props.pop("mathjax", None)
         else:
-            if not isinstance(val, string_types):
+            if not isinstance(val, str):
                 raise ValueError(
                     """
 The mathjax property must be a string, but received value of type {typ}.
@@ -748,7 +747,7 @@ The mathjax property must be a string, but received value of type {typ}.
         if val is None:
             self._props.pop("mapbox_access_token", None)
         else:
-            if not isinstance(val, string_types):
+            if not isinstance(val, str):
                 raise ValueError(
                     """
 The mapbox_access_token property must be a string, \
@@ -1746,7 +1745,7 @@ def write_image(
 
     # Try to cast `file` as a pathlib object `path`.
     # ----------------------------------------------
-    if isinstance(file, string_types):
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):

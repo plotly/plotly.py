@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
 import decimal
-import six
 
 from plotly import exceptions
 from plotly.colors import (

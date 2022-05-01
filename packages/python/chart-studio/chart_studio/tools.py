@@ -9,9 +9,9 @@ Functions that USERS will possibly want access to.
 """
 from __future__ import absolute_import
 
+import urllib
 import warnings
 
-import six
 import copy
 
 from _plotly_utils import optional_imports
@@ -102,13 +102,13 @@ def set_credentials_file(
         )
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
-    if isinstance(username, six.string_types):
+    if isinstance(username, str):
         credentials["username"] = username
-    if isinstance(api_key, six.string_types):
+    if isinstance(api_key, str):
         credentials["api_key"] = api_key
-    if isinstance(proxy_username, six.string_types):
+    if isinstance(proxy_username, str):
         credentials["proxy_username"] = proxy_username
-    if isinstance(proxy_password, six.string_types):
+    if isinstance(proxy_password, str):
         credentials["proxy_password"] = proxy_password
     if isinstance(stream_ids, (list, tuple)):
         credentials["stream_ids"] = stream_ids
@@ -173,23 +173,23 @@ def set_config_file(
     )
 
     settings = get_config_file()
-    if isinstance(plotly_domain, six.string_types):
+    if isinstance(plotly_domain, str):
         settings["plotly_domain"] = plotly_domain
     elif plotly_domain is not None:
         raise TypeError("plotly_domain should be a string")
-    if isinstance(plotly_streaming_domain, six.string_types):
+    if isinstance(plotly_streaming_domain, str):
         settings["plotly_streaming_domain"] = plotly_streaming_domain
     elif plotly_streaming_domain is not None:
         raise TypeError("plotly_streaming_domain should be a string")
-    if isinstance(plotly_api_domain, six.string_types):
+    if isinstance(plotly_api_domain, str):
         settings["plotly_api_domain"] = plotly_api_domain
     elif plotly_api_domain is not None:
         raise TypeError("plotly_api_domain should be a string")
-    if isinstance(plotly_ssl_verification, (six.string_types, bool)):
+    if isinstance(plotly_ssl_verification, (str, bool)):
         settings["plotly_ssl_verification"] = plotly_ssl_verification
     elif plotly_ssl_verification is not None:
         raise TypeError("plotly_ssl_verification should be a boolean")
-    if isinstance(plotly_proxy_authorization, (six.string_types, bool)):
+    if isinstance(plotly_proxy_authorization, (str, bool)):
         settings["plotly_proxy_authorization"] = plotly_proxy_authorization
     elif plotly_proxy_authorization is not None:
         raise TypeError("plotly_proxy_authorization should be a boolean")
@@ -208,7 +208,7 @@ def set_config_file(
         settings.pop("sharing")
     elif world_readable is not None:
         raise TypeError("Input should be a boolean")
-    if isinstance(sharing, six.string_types):
+    if isinstance(sharing, str):
         settings["sharing"] = sharing
     elif sharing is not None:
         raise TypeError("sharing should be a string")
@@ -260,12 +260,12 @@ def _get_embed_url(file_owner_or_url, file_id=None):
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url)
             )
-        urlsplit = six.moves.urllib.parse.urlparse(url)
+        urlsplit = urllib.parse.urlparse(url)
         file_owner = urlsplit.path.split("/")[1].split("~")[1]
         file_id = urlsplit.path.split("/")[2]
 
         # to check for share_key we check urlsplit.query
-        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        query_dict = urllib.parse.parse_qs(urlsplit.query)
         if query_dict:
             share_key = query_dict["share_key"][-1]
         else:
