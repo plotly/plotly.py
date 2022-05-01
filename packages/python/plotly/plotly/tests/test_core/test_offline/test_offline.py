@@ -81,6 +81,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def tearDown(self):
         pio.templates.default = "plotly"
+        super().tearDown()
 
     def _read_html(self, file_url):
         """Read and return the HTML contents from a file_url
