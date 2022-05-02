@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.0
   plotly:
     description: How to plot date and time in python.
     display_as: financial
@@ -132,6 +132,26 @@ fig.update_xaxes(
     dtick="M1",
     tickformat="%b\n%Y",
     ticklabelmode="period")
+fig.show()
+```
+
+### Adding Minor Ticks
+
+_new in 5.8_
+
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks.
+
+In this example, we've added minor ticks to the inside of the x-axis and turned on gridlines.
+
+```python
+import pandas as pd
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+
+fig.update_xaxes(minor = {"ticks": "inside", "showgrid" : True})
+
 fig.show()
 ```
 
