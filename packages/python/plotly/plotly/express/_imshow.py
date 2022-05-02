@@ -50,7 +50,7 @@ def _infer_zmax_from_type(img):
         elif im_max <= 65535 * rtol:
             return 65535
         else:
-            return 2**32
+            return 2 ** 32
 
 
 def imshow(
@@ -351,7 +351,7 @@ def imshow(
         binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
-    if img.dtype == np.bool:
+    if img.dtype == bool:
         img = 255 * img.astype(np.uint8)
 
     if range_color is not None:
