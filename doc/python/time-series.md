@@ -141,7 +141,7 @@ _new in 5.8_
 
 You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks.
 
-In this example, we've added minor ticks to the inside of the x-axis and turned on gridlines.
+In this example, we've added minor ticks to the inside of the x-axis and turned on grid lines.
 
 ```python
 import pandas as pd
