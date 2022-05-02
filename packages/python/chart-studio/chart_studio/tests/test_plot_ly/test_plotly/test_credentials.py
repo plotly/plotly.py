@@ -78,7 +78,7 @@ class TestSignIn(PlotlyTestCase):
         self.users_current_mock.side_effect = exceptions.PlotlyRequestError(
             "msg", 400, "foobar"
         )
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             _plotly_utils.exceptions.PlotlyError, "Sign in failed"
         ):
             py.sign_in("foo", "bar")

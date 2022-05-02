@@ -73,9 +73,7 @@ class TestPlot(PlotlyTestCase):
 
         kwargs = {"filename": "invalid-sharing-argument", "sharing": "privste"}
 
-        with self.assertRaisesRegexp(
-            PlotlyError, "The 'sharing' argument only accepts"
-        ):
+        with self.assertRaisesRegex(PlotlyError, "The 'sharing' argument only accepts"):
             py.plot(self.simple_figure, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_1(self):
@@ -88,7 +86,7 @@ class TestPlot(PlotlyTestCase):
             "sharing": "public",
         }
 
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             PlotlyError, "setting your plot privacy to both public and private."
         ):
             py.plot(self.simple_figure, **kwargs)
@@ -103,7 +101,7 @@ class TestPlot(PlotlyTestCase):
             "sharing": "secret",
         }
 
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             PlotlyError, "setting your plot privacy to both public and private."
         ):
             py.plot(self.simple_figure, **kwargs)
