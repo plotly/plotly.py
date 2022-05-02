@@ -381,10 +381,14 @@ fig.show()
 ```
 
 #### Adding minor ticks
-You can add minor ticks to an axis by specifying with the `minor` property. This takes a `dict` of properties to apply to minor ticks. 
+
+_new in 5.8_
+
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. 
 
 In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the outside: `minor = {"ticks":"outside"}`. On the x-axis we've spcified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
 
+Note: Minor ticks and grid lines are not supported on multi-categorical, log, or 3D axes, or on color bars, ternary plots, polar charts, or geo.
 
 ```python
 import plotly.express as px
@@ -395,7 +399,7 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 
 fig.update_xaxes(minor = {"ticklen": 6, "tickcolor": "black", "showgrid" : True})
-fig.update_yaxes(minor = {"ticks":"outside"})
+fig.update_yaxes(minor = {"ticks": "outside"})
 
 fig.show()
 ```
@@ -483,6 +487,8 @@ fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
 
 fig.show()
 ```
+
+_new in 5.8_
 
 By default grid lines are `solid`. Set the `griddash` property to change this style. In this example we display the x-axis grid lines as `dot`. It can also be set to `dash`, `longdash`, `dashdot`, or `longdashdot`.
 
