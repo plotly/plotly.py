@@ -1634,7 +1634,7 @@ def process_dataframe_hierarchy(args):
         df_tree["parent"] = df_tree["parent"].str.rstrip("/")
         if cols:
             df_tree[cols] = dfg[cols]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_all_trees = pd.concat([df_all_trees, df_tree], ignore_index=True)
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
