@@ -139,7 +139,7 @@ fig.show()
 
 _new in 5.8_
 
-You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks.
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. Available properties include: `tickmode`, `tickvals`, `tickcolor`, `ticklen`, `tickwidth`, `dtick`, `tick0`, `nticks`, `ticks`, `showgrid`, `gridcolor`, `griddash`, and `gridwidth`.
 
 In this example, we've added minor ticks to the inside of the x-axis and turned on grid lines.
 
