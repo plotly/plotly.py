@@ -64,7 +64,9 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. In this example we set the tick length with `ticklen`, add the ticks on the inside with `"ticks": "inside"`, and turn grid lines on with `showgrid: True`.
+You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. Available properties include: `tickmode`, `tickvals`, `tickcolor`, `ticklen`, `tickwidth`, `dtick`, `tick0`, `nticks`, `ticks`, `showgrid`, `gridcolor`, `griddash`, and `gridwidth`. 
+
+In this example we set the tick length with `ticklen`, add the ticks on the inside with `"ticks": "inside"`, and turn grid lines on with `showgrid: True`.
 
 ```python
 import plotly.express as px
