@@ -828,13 +828,7 @@ export class FigureView extends DOMWidgetView {
 
     // MathJax v2 configuration
     // ---------------------
-    if (
-      (window as any).MathJax &&
-      (window as any).MathJax.Hub &&
-      (window as any).MathJax.Hub.Config
-    ) {
-      (window as any).MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
-    }
+    (window as any)?.MathJax?.Hub?.Config?.({ SVG: { font: "STIX-Web" } });
 
     // Get message ids
     // ---------------------
