@@ -388,7 +388,7 @@ You can position and style minor ticks on a Cartesian axis using `minor`. This t
 
 In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the outside: `minor = {"ticks":"outside"}`. On the x-axis we've spcified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
 
-Note: Minor ticks and grid lines are not currently supported on color bars, ternary plots, polar charts, geo plots, or on multi-categorical, log, or 3D axes.
+Note: Minor ticks and grid lines are not currently supported on color bars, ternary plots, polar charts, geo plots, or on multi-categorical, or 3D axes.
 
 ```python
 import plotly.express as px
