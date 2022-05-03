@@ -10,7 +10,7 @@ import math
 import pandas as pd
 import numpy as np
 
-from plotly.subplots import (
+from plotly._subplots import (
     make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,

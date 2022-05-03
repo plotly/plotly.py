@@ -22,7 +22,7 @@ from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
 
 from . import shapeannotation
-from . import subplots
+from . import _subplots
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -4096,7 +4096,15 @@ Invalid property path '{key_path_str}' for layout
 
     add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
 
-    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
+    def add_hline(
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
         self._process_multiple_axis_spanning_shapes(
             dict(
                 type="line",
@@ -4109,6 +4117,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hline",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4116,7 +4125,14 @@ Invalid property path '{key_path_str}' for layout
     add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
 
     def add_vrect(
-        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
@@ -4124,6 +4140,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "vrect",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4131,7 +4148,14 @@ Invalid property path '{key_path_str}' for layout
     add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
 
     def add_hrect(
-        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        y0,
+        y1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
@@ -4139,6 +4163,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hrect",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4215,7 +4240,7 @@ Invalid property path '{key_path_str}' for layout
             make_subplots_args["cols"] = cols
         if self._has_subplots():
             raise ValueError("This figure already has subplots.")
-        return subplots.make_subplots(figure=self, **make_subplots_args)
+        return _subplots.make_subplots(figure=self, **make_subplots_args)
 
 
 class BasePlotlyType(object):
