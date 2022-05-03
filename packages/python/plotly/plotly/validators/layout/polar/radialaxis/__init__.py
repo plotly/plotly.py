@@ -41,6 +41,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._layer import LayerValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
@@ -98,6 +99,7 @@ else:
             "._layer.LayerValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
