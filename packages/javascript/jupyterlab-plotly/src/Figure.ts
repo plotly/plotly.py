@@ -826,9 +826,13 @@ export class FigureView extends DOMWidgetView {
     this.model.on("change:_py2js_update", this.do_update, this);
     this.model.on("change:_py2js_animate", this.do_animate, this);
 
-    // MathJax configuration
+    // MathJax v2 configuration
     // ---------------------
-    if ((window as any).MathJax) {
+    if (
+      (window as any).MathJax &&
+      (window as any).MathJax.Hub &&
+      (window as any).MathJax.Hub.Config
+    ) {
       (window as any).MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
     }
 
