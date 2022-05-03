@@ -85,8 +85,8 @@ class Selected(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scattermapbox.Selected 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scattermapbox.Selected
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scattermapbox.Selected`"""
             )
 
