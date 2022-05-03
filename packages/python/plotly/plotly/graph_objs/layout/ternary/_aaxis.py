@@ -13,6 +13,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         "dtick",
         "exponentformat",
         "gridcolor",
+        "griddash",
         "gridwidth",
         "hoverformat",
         "layer",
@@ -234,6 +235,32 @@ class Aaxis(_BaseLayoutHierarchyType):
     @gridcolor.setter
     def gridcolor(self, val):
         self["gridcolor"] = val
+
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is a string and must be specified as:
+          - One of the following strings:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
+                'longdashdot']
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
 
     # gridwidth
     # ---------
@@ -1264,6 +1291,11 @@ class Aaxis(_BaseLayoutHierarchyType):
             script). If "SI", 1G. If "B", 1B.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -1433,6 +1465,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         dtick=None,
         exponentformat=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         hoverformat=None,
         layer=None,
@@ -1517,6 +1550,11 @@ class Aaxis(_BaseLayoutHierarchyType):
             script). If "SI", 1G. If "B", 1B.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -1725,6 +1763,10 @@ an instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:
