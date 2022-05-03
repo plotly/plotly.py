@@ -1934,6 +1934,20 @@
       "editType": "plot",
       "valType": "color"
      },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
      "gridwidth": {
       "description": "Sets the graticule's stroke width (in px).",
       "dflt": 1,
@@ -1982,6 +1996,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the graticule's stroke width (in px).",
@@ -3577,6 +3605,20 @@
       "editType": "plot",
       "valType": "color"
      },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
       "dflt": 1,
@@ -4136,6 +4178,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -7445,6 +7501,20 @@
       "editType": "plot",
       "valType": "color"
      },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
       "dflt": 1,
@@ -7623,6 +7693,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -7890,6 +7974,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -8274,6 +8372,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -8664,6 +8776,20 @@
       "dflt": "#eee",
       "editType": "plot",
       "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "plot",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "gridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -9771,6 +9897,20 @@
      "editType": "ticks",
      "valType": "color"
     },
+    "griddash": {
+     "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+     "dflt": "solid",
+     "editType": "ticks",
+     "valType": "string",
+     "values": [
+      "solid",
+      "dot",
+      "dash",
+      "longdash",
+      "dashdot",
+      "longdashdot"
+     ]
+    },
     "gridwidth": {
      "description": "Sets the width (in px) of the grid lines.",
      "dflt": 1,
@@ -9822,6 +9962,113 @@
      "editType": "ticks",
      "min": 0,
      "valType": "number"
+    },
+    "minor": {
+     "dtick": {
+      "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*",
+      "editType": "ticks",
+      "impliedEdits": {
+       "tickmode": "linear"
+      },
+      "valType": "any"
+     },
+     "editType": "ticks",
+     "gridcolor": {
+      "description": "Sets the color of the grid lines.",
+      "dflt": "#eee",
+      "editType": "ticks",
+      "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "ticks",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
+     "gridwidth": {
+      "description": "Sets the width (in px) of the grid lines.",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     },
+     "nticks": {
+      "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+      "dflt": 5,
+      "editType": "ticks",
+      "min": 0,
+      "valType": "integer"
+     },
+     "role": "object",
+     "showgrid": {
+      "description": "Determines whether or not grid lines are drawn. If *true*, the grid lines are drawn at every tick mark.",
+      "editType": "ticks",
+      "valType": "boolean"
+     },
+     "tick0": {
+      "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "editType": "ticks",
+      "impliedEdits": {
+       "tickmode": "linear"
+      },
+      "valType": "any"
+     },
+     "tickcolor": {
+      "description": "Sets the tick color.",
+      "dflt": "#444",
+      "editType": "ticks",
+      "valType": "color"
+     },
+     "ticklen": {
+      "description": "Sets the tick length (in px).",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     },
+     "tickmode": {
+      "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+      "editType": "ticks",
+      "impliedEdits": {},
+      "valType": "enumerated",
+      "values": [
+       "auto",
+       "linear",
+       "array"
+      ]
+     },
+     "ticks": {
+      "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+      "editType": "ticks",
+      "valType": "enumerated",
+      "values": [
+       "outside",
+       "inside",
+       ""
+      ]
+     },
+     "tickvals": {
+      "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+      "editType": "ticks",
+      "valType": "data_array"
+     },
+     "tickvalssrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `tickvals`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "tickwidth": {
+      "description": "Sets the tick width (in px).",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     }
     },
     "mirror": {
      "description": "Determines if the axis lines or/and ticks are mirrored to the opposite side of the plotting area. If *true*, the axis lines are mirrored. If *ticks*, the axis lines and ticks are mirrored. If *false*, mirroring is disable. If *all*, axis lines are mirrored on all shared-axes subplots. If *allticks*, axis lines and ticks are mirrored on all shared-axes subplots.",
@@ -10889,6 +11136,20 @@
      "editType": "ticks",
      "valType": "color"
     },
+    "griddash": {
+     "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+     "dflt": "solid",
+     "editType": "ticks",
+     "valType": "string",
+     "values": [
+      "solid",
+      "dot",
+      "dash",
+      "longdash",
+      "dashdot",
+      "longdashdot"
+     ]
+    },
     "gridwidth": {
      "description": "Sets the width (in px) of the grid lines.",
      "dflt": 1,
@@ -10940,6 +11201,113 @@
      "editType": "ticks",
      "min": 0,
      "valType": "number"
+    },
+    "minor": {
+     "dtick": {
+      "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*",
+      "editType": "ticks",
+      "impliedEdits": {
+       "tickmode": "linear"
+      },
+      "valType": "any"
+     },
+     "editType": "ticks",
+     "gridcolor": {
+      "description": "Sets the color of the grid lines.",
+      "dflt": "#eee",
+      "editType": "ticks",
+      "valType": "color"
+     },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "ticks",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
+     "gridwidth": {
+      "description": "Sets the width (in px) of the grid lines.",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     },
+     "nticks": {
+      "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+      "dflt": 5,
+      "editType": "ticks",
+      "min": 0,
+      "valType": "integer"
+     },
+     "role": "object",
+     "showgrid": {
+      "description": "Determines whether or not grid lines are drawn. If *true*, the grid lines are drawn at every tick mark.",
+      "editType": "ticks",
+      "valType": "boolean"
+     },
+     "tick0": {
+      "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "editType": "ticks",
+      "impliedEdits": {
+       "tickmode": "linear"
+      },
+      "valType": "any"
+     },
+     "tickcolor": {
+      "description": "Sets the tick color.",
+      "dflt": "#444",
+      "editType": "ticks",
+      "valType": "color"
+     },
+     "ticklen": {
+      "description": "Sets the tick length (in px).",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     },
+     "tickmode": {
+      "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+      "editType": "ticks",
+      "impliedEdits": {},
+      "valType": "enumerated",
+      "values": [
+       "auto",
+       "linear",
+       "array"
+      ]
+     },
+     "ticks": {
+      "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+      "editType": "ticks",
+      "valType": "enumerated",
+      "values": [
+       "outside",
+       "inside",
+       ""
+      ]
+     },
+     "tickvals": {
+      "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+      "editType": "ticks",
+      "valType": "data_array"
+     },
+     "tickvalssrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `tickvals`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "tickwidth": {
+      "description": "Sets the tick width (in px).",
+      "editType": "ticks",
+      "min": 0,
+      "valType": "number"
+     }
     },
     "mirror": {
      "description": "Determines if the axis lines or/and ticks are mirrored to the opposite side of the plotting area. If *true*, the axis lines are mirrored. If *ticks*, the axis lines and ticks are mirrored. If *false*, mirroring is disable. If *all*, axis lines are mirrored on all shared-axes subplots. If *allticks*, axis lines and ticks are mirrored on all shared-axes subplots.",
@@ -16599,6 +16967,20 @@
       "editType": "calc",
       "valType": "color"
      },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "calc",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
      "gridwidth": {
       "description": "Sets the width (in px) of the axis line.",
       "dflt": 1,
@@ -16655,6 +17037,20 @@
       "editType": "calc",
       "min": 0,
       "valType": "integer"
+     },
+     "minorgriddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "calc",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "minorgridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -17133,6 +17529,20 @@
       "editType": "calc",
       "valType": "color"
      },
+     "griddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "calc",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
      "gridwidth": {
       "description": "Sets the width (in px) of the axis line.",
       "dflt": 1,
@@ -17189,6 +17599,20 @@
       "editType": "calc",
       "min": 0,
       "valType": "integer"
+     },
+     "minorgriddash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "solid",
+      "editType": "calc",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
      },
      "minorgridwidth": {
       "description": "Sets the width (in px) of the grid lines.",
@@ -68075,7 +68499,7 @@
      },
      "role": "object",
      "squarifyratio": {
-      "description": "When using *squarify* `packing` algorithm, according to https://github.com/d3/d3-hierarchy/blob/master/README.md#squarify_ratio this option specifies the desired aspect ratio of the generated rectangles. The ratio must be specified as a number greater than or equal to one. Note that the orientation of the generated rectangles (tall or wide) is not implied by the ratio; for example, a ratio of two will attempt to produce a mixture of rectangles whose width:height ratio is either 2:1 or 1:2. When using *squarify*, unlike d3 which uses the Golden Ratio i.e. 1.618034, Plotly applies 1 to increase squares in treemap layouts.",
+      "description": "When using *squarify* `packing` algorithm, according to https://github.com/d3/d3-hierarchy/blob/v3.1.1/README.md#squarify_ratio this option specifies the desired aspect ratio of the generated rectangles. The ratio must be specified as a number greater than or equal to one. Note that the orientation of the generated rectangles (tall or wide) is not implied by the ratio; for example, a ratio of two will attempt to produce a mixture of rectangles whose width:height ratio is either 2:1 or 1:2. When using *squarify*, unlike d3 which uses the Golden Ratio i.e. 1.618034, Plotly applies 1 to increase squares in treemap layouts.",
       "dflt": 1,
       "editType": "plot",
       "min": 1,
