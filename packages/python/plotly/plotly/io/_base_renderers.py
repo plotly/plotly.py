@@ -236,7 +236,7 @@ _window_plotly_config = """\
 window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 
 _mathjax_config = """\
-if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
 
 
 class HtmlRenderer(MimetypeRenderer):
