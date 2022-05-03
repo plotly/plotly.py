@@ -932,6 +932,7 @@ export class FigureView extends DOMWidgetView {
         // Plotly.js to size the figure to fill the available element
         this.perform_render();
         break;
+      case "after-show":
       case "resize":
         this.autosizeFigure();
         break;

@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+##  UNRELEASED
+
+### Fixed
+  - Improve support for type checking by bypassing lazy-loading when type checking.
+
+### Updated
+  - Updated Plotly.js to from version 2.11.1 to version 2.12.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2120----2022-05-02) for more information. Notable changes include:
+    - Add `minor` ticks to cartesian axes
+    - Add `griddash` option to most axes
 
 ##  [5.7.0] - 2022-04-05
 

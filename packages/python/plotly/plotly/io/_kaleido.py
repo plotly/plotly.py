@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-from six import string_types
 import os
 import json
 from pathlib import Path
@@ -231,7 +230,7 @@ def write_image(
     """
     # Try to cast `file` as a pathlib object `path`.
     # ----------------------------------------------
-    if isinstance(file, string_types):
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):

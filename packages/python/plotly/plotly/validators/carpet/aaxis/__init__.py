@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._type import TypeValidator
     from ._title import TitleValidator
     from ._tickvalssrc import TickvalssrcValidator
@@ -31,6 +32,7 @@ if sys.version_info < (3, 7):
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._minorgridwidth import MinorgridwidthValidator
+    from ._minorgriddash import MinorgriddashValidator
     from ._minorgridcount import MinorgridcountValidator
     from ._minorgridcolor import MinorgridcolorValidator
     from ._minexponent import MinexponentValidator
@@ -40,6 +42,7 @@ if sys.version_info < (3, 7):
     from ._labelprefix import LabelprefixValidator
     from ._labelpadding import LabelpaddingValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._fixedrange import FixedrangeValidator
     from ._exponentformat import ExponentformatValidator
@@ -93,6 +96,7 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._minorgridwidth.MinorgridwidthValidator",
+            "._minorgriddash.MinorgriddashValidator",
             "._minorgridcount.MinorgridcountValidator",
             "._minorgridcolor.MinorgridcolorValidator",
             "._minexponent.MinexponentValidator",
@@ -102,6 +106,7 @@ else:
             "._labelprefix.LabelprefixValidator",
             "._labelpadding.LabelpaddingValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._fixedrange.FixedrangeValidator",
             "._exponentformat.ExponentformatValidator",

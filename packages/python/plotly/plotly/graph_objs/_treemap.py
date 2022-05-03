@@ -1314,7 +1314,7 @@ class Treemap(_BaseTraceType):
                 squarifyratio
                     When using "squarify" `packing` algorithm,
                     according to https://github.com/d3/d3-hierarchy
-                    /blob/master/README.md#squarify_ratio this
+                    /blob/v3.1.1/README.md#squarify_ratio this
                     option specifies the desired aspect ratio of
                     the generated rectangles. The ratio must be
                     specified as a number greater than or equal to

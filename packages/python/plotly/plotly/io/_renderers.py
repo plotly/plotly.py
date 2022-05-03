@@ -3,7 +3,6 @@ from __future__ import absolute_import, division
 import textwrap
 from copy import copy
 
-import six
 import os
 from distutils.version import LooseVersion
 
@@ -211,7 +210,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         list of str
         """
         # Validate value
-        if not isinstance(renderers_string, six.string_types):
+        if not isinstance(renderers_string, str):
             raise ValueError("Renderer must be specified as a string")
 
         renderer_names = renderers_string.split("+")
