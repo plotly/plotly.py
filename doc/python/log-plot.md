@@ -66,7 +66,7 @@ _new in 5.8_
 
 You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. Available properties include: `tickmode`, `tickvals`, `tickcolor`, `ticklen`, `tickwidth`, `dtick`, `tick0`, `nticks`, `ticks`, `showgrid`, `gridcolor`, `griddash`, and `gridwidth`. 
 
-In this example we set the tick length with `ticklen`, add the ticks on the inside with `"ticks": "inside"`, and turn grid lines on with `showgrid: True`.
+In this example we set the tick length with `ticklen`, add the ticks on the inside with `ticks="inside"`, and turn grid lines on with `howgrid=True`.
 
 ```python
 import plotly.express as px
@@ -75,7 +75,7 @@ df = px.data.gapminder().query("year == 2007")
 fig = px.scatter(df, x="gdpPercap", y="lifeExp", hover_name="country",
                  log_x=True, range_x=[1,100000], range_y=[0,100])
 
-fig.update_xaxes(minor = {"ticks": "inside", "ticklen": 6, "showgrid": True})
+fig.update_xaxes(minor=dict(ticks="inside", ticklen=6, showgrid=True))# {"ticks": "inside", "ticklen": 6, "showgrid": True})
 
 fig.show()
 ```
