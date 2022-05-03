@@ -1181,7 +1181,7 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
-        from plotly.subplots import _get_subplot_ref_for_trace
+        from plotly._subplots import _get_subplot_ref_for_trace
 
         # functions for filtering
         def _filter_by_subplot_ref(trace):
@@ -2313,7 +2313,7 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
-        from plotly.subplots import _set_trace_grid_reference
+        from plotly._subplots import _set_trace_grid_reference
 
         grid_ref = self._validate_get_grid_ref()
         return _set_trace_grid_reference(
@@ -2413,7 +2413,7 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
-        from plotly.subplots import _get_grid_subplot
+        from plotly._subplots import _get_grid_subplot
 
         return _get_grid_subplot(self, row, col, secondary_y)
 
