@@ -56,6 +56,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._overlaying import OverlayingValidator
     from ._nticks import NticksValidator
     from ._mirror import MirrorValidator
+    from ._minor import MinorValidator
     from ._minexponent import MinexponentValidator
     from ._matches import MatchesValidator
     from ._linewidth import LinewidthValidator
@@ -63,6 +64,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._layer import LayerValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._fixedrange import FixedrangeValidator
     from ._exponentformat import ExponentformatValidator
@@ -142,6 +144,7 @@ else:
             "._overlaying.OverlayingValidator",
             "._nticks.NticksValidator",
             "._mirror.MirrorValidator",
+            "._minor.MinorValidator",
             "._minexponent.MinexponentValidator",
             "._matches.MatchesValidator",
             "._linewidth.LinewidthValidator",
@@ -149,6 +152,7 @@ else:
             "._layer.LayerValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._fixedrange.FixedrangeValidator",
             "._exponentformat.ExponentformatValidator",
