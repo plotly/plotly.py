@@ -398,7 +398,7 @@ df = px.data.tips()
 fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 
-fig.update_xaxes(minor = {"ticklen": 6, "tickcolor": "black", "showgrid" : True})
+fig.update_xaxes(minor = {"ticklen": 6, "tickcolor": "black", "showgrid": True})
 fig.update_yaxes(minor = {"ticks": "outside"})
 
 fig.show()
