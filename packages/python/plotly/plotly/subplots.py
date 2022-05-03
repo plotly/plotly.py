@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import plotly.graph_objects as go
-from . import _subplots as sub
+from . import _subplots as _sub
+from ._subplots import SubplotXY, SubplotDomain, SubplotRef  # noqa: F401
 
 
 def make_subplots(
@@ -301,7 +302,7 @@ def make_subplots(
     Figure(...)
     """
 
-    return sub.make_subplots(
+    return _sub.make_subplots(
         rows,
         cols,
         shared_xaxes,
