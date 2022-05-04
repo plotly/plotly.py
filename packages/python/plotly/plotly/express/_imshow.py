@@ -80,7 +80,7 @@ def imshow(
     binary_compression_level=4,
     binary_format="png",
     text_auto=False,
-):
+) -> go.Figure:
     """
     Display an image, i.e. data on a 2D regular raster.
 
