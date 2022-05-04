@@ -210,8 +210,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.contourcarpet.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.contourcarpet.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.contourcarpet.Line`"""
             )
 
