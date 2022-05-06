@@ -359,10 +359,8 @@ jobs:
               cd ../packages/python/plotly
               pip install -e .
               cd ../../../doc
-            fi
-            cd apidoc
-            make html
-            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              cd apidoc
+              make html
               cd _build/html
               touch .nojekyll
               git init
@@ -375,7 +373,6 @@ jobs:
               rm -rf .git
               cd ../..
             fi
-            cd ../..
 
       - store_artifacts:
           path: doc/build
