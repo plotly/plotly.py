@@ -115,7 +115,29 @@ Turbo = [
     "#b11901",
     "#7a0402",
 ]
-from .plotlyjs import Blackbody, Bluered, Electric, Hot, Jet, Rainbow  # noqa: F401
+
+Cividis_r = Cividis[::-1]
+Inferno_r = Inferno[::-1]
+Magma_r = Magma[::-1]
+Plasma_r = Plasma[::-1]
+Plotly3_r = Plotly3[::-1]
+Turbo_r = Turbo[::-1]
+Viridis_r = Viridis[::-1]
+
+from .plotlyjs import (  # noqa: F401
+    Blackbody,
+    Bluered,
+    Electric,
+    Hot,
+    Jet,
+    Rainbow,
+    Blackbody_r,
+    Bluered_r,
+    Electric_r,
+    Hot_r,
+    Jet_r,
+    Rainbow_r,
+)
 
 from .colorbrewer import (  # noqa: F401
     Blues,
@@ -137,6 +159,25 @@ from .colorbrewer import (  # noqa: F401
     YlGnBu,
     YlOrBr,
     YlOrRd,
+    Blues_r,
+    BuGn_r,
+    BuPu_r,
+    GnBu_r,
+    Greens_r,
+    Greys_r,
+    OrRd_r,
+    Oranges_r,
+    PuBu_r,
+    PuBuGn_r,
+    PuRd_r,
+    Purples_r,
+    RdBu_r,
+    RdPu_r,
+    Reds_r,
+    YlGn_r,
+    YlGnBu_r,
+    YlOrBr_r,
+    YlOrRd_r,
 )
 
 from .cmocean import (  # noqa: F401
@@ -153,6 +194,19 @@ from .cmocean import (  # noqa: F401
     speed,
     amp,
     tempo,
+    turbid_r,
+    thermal_r,
+    haline_r,
+    solar_r,
+    ice_r,
+    gray_r,
+    deep_r,
+    dense_r,
+    algae_r,
+    matter_r,
+    speed_r,
+    amp_r,
+    tempo_r,
 )
 
 from .carto import (  # noqa: F401
@@ -177,14 +231,27 @@ from .carto import (  # noqa: F401
     Sunsetdark,
     Agsunset,
     Brwnyl,
+    Burg_r,
+    Burgyl_r,
+    Redor_r,
+    Oryel_r,
+    Peach_r,
+    Pinkyl_r,
+    Mint_r,
+    Blugrn_r,
+    Darkmint_r,
+    Emrld_r,
+    Aggrnyl_r,
+    Bluyl_r,
+    Teal_r,
+    Tealgrn_r,
+    Purp_r,
+    Purpor_r,
+    Sunset_r,
+    Magenta_r,
+    Sunsetdark_r,
+    Agsunset_r,
+    Brwnyl_r,
 )
-
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
-
 
 __all__ = ["swatches"]
