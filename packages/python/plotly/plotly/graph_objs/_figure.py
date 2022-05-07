@@ -21785,7 +21785,7 @@ class Figure(BaseFigure):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "Figure":
         """
         Create and add a new annotation to the figure's layout
 
@@ -22334,7 +22334,7 @@ class Figure(BaseFigure):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "Figure":
         """
         Create and add a new image to the figure's layout
 
@@ -22665,7 +22665,7 @@ class Figure(BaseFigure):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "Figure":
         """
         Create and add a new shape to the figure's layout
 

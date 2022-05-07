@@ -21791,7 +21791,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new annotation to the figure's layout
 
@@ -22340,7 +22340,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new image to the figure's layout
 
@@ -22671,7 +22671,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new shape to the figure's layout
 
