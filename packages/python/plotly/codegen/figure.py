@@ -644,6 +644,7 @@ class {fig_classname}({base_classname}):\n"""
             node.child_datatypes,
             prepend_extras=["arg"],
             append_extras=["row", "col", "secondary_y", "exclude_empty_subplots"],
+            output_type=fig_classname,
         )
 
         prepend_extras = [
