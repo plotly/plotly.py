@@ -249,6 +249,34 @@ jobs:
       - store_artifacts:
           path: packages/python/plotly/dist
 
+  full_build:
+    docker:
+      - image: cimg/node:12.13.0
+        environment:
+          LANG: en_US.UTF-8
+    resource_class: large
+
+    steps:
+      - checkout
+
+      - run:
+          name: Create conda environment
+          command: |
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+            chmod +x miniconda.sh
+            ./miniconda.sh -b -p $HOME/miniconda
+            $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
+
+      - run:
+          name: Build JS
+          command: |
+            cd packages/javascript/jupyterlab-plotly
+            rm -rf node_modules && npm install && npm run build:prod
+            cd ../../python/plotly
+            conda activate env
+            python setup.py sdist bdist_wheel
+            conda build recipe/
+
   build-doc:
     resource_class: xlarge
     docker:
@@ -384,6 +412,9 @@ workflows:
   dev_build:
     jobs:
       - plotlyjs_dev_build
+  release_build:
+    jobs:
+      - full_build
 
   build:
     jobs:
