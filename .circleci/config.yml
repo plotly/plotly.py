@@ -251,7 +251,7 @@ jobs:
 
   full_build:
     docker:
-      - image: cimg/node:12.13.0
+      - image: continuumio/miniconda3
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -262,17 +262,12 @@ jobs:
       - run:
           name: Create conda environment
           command: |
-            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-            chmod +x miniconda.sh
-            ./miniconda.sh -b -p $HOME/miniconda
-            $HOME/miniconda/bin/conda init bash
-            $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
-            $HOME/miniconda/bin/conda install -n env -c conda-forge jupyterlab
+            conda create -n env --yes python=3.9 conda-build conda-verify
+            conda install -n env -c conda-forge jupyterlab
       - run:
           name: NPM Build
           command: |
-            export PATH=$HOME/minconda3/bin:$PATH
-            $HOME/miniconda/bin/conda activate env
+            conda activate env
             cd packages/javascript/jupyterlab-plotly
             rm -rf node_modules && npm install && npm run build:prod
 
