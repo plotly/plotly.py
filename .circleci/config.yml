@@ -268,6 +268,7 @@ jobs:
       - run:
           name: NPM Build
           command: |
+            eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/javascript/jupyterlab-plotly
             rm -rf node_modules && npm install && npm run build:prod
