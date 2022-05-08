@@ -266,13 +266,15 @@ jobs:
             conda install -n env -c conda-forge jupyterlab
             conda install -c conda-forge nodejs=12
             conda init bash
+
       - run:
-          name: NPM Build
+          name: initial NPM Build
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/javascript/jupyterlab-plotly
-            rm -rf node_modules && npm install && npm run build:prod
+            npm install
+            npm run build:prod
 
       - run:
           name: PyPI Build
@@ -282,6 +284,10 @@ jobs:
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
 
+      - store_artifacts:
+          path: packages/python/plotly/dist
+          destination: dist
+
       - run:
           name: Conda Build
           command: |
@@ -289,6 +295,20 @@ jobs:
             conda activate env
             cd packages/python/plotly
             conda build recipe/
+
+      - store_artifacts:
+          path: /opt/conda/envs/env/conda-bld/noarch/
+          destination: conda_dist
+
+      - run:
+          name: NPM Pack
+          command: |
+            cd packages/javascript/jupyterlab-plotly
+            npm pack
+
+      - store_artifacts:
+          path: packages/javascript/jupyterlab-plotly/jupyterlab-plotly-*.tgz
+          destination: npm_build
 
   build-doc:
     resource_class: xlarge
