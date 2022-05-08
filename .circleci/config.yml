@@ -267,24 +267,28 @@ jobs:
             ./miniconda.sh -b -p $HOME/miniconda
             $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
             $HOME/miniconda/bin/conda install -c conda-forge jupyterlab
+            $HOME/miniconda/bin/conda init bash
 
       - run:
           name: NPM Build
           command: |
+            $HOME/miniconda/bin/conda activate env
             cd packages/javascript/jupyterlab-plotly
-            $HOME/miniconda/bin/conda run -n env   rm -rf node_modules && npm install && npm run build:prod
+            rm -rf node_modules && npm install && npm run build:prod
 
       - run:
           name: PyPI Build
           command: |
+            $HOME/miniconda/bin/conda activate env
             cd packages/python/plotly
-            $HOME/miniconda/bin/conda run -n env   python setup.py sdist bdist_wheel
+            python setup.py sdist bdist_wheel
 
       - run:
           name: Conda Build
           command: |
+            $HOME/miniconda/bin/conda activate env
             cd packages/python/plotly
-            $HOME/miniconda/bin/conda run -n env   conda build recipe/
+            conda build recipe/
 
   build-doc:
     resource_class: xlarge
