@@ -271,6 +271,7 @@ jobs:
       - run:
           name: NPM Build
           command: |
+            source $HOME/miniconda/etc/profile.d/conda.sh
             $HOME/miniconda/bin/conda activate env
             cd packages/javascript/jupyterlab-plotly
             rm -rf node_modules && npm install && npm run build:prod
