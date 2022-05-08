@@ -266,15 +266,27 @@ jobs:
             chmod +x miniconda.sh
             ./miniconda.sh -b -p $HOME/miniconda
             $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
+            $HOME/miniconda/bin/conda install -c conda-forge jupyterlab
 
       - run:
-          name: Build JS
+          name: NPM Build
           command: |
+            conda activate env
             cd packages/javascript/jupyterlab-plotly
             rm -rf node_modules && npm install && npm run build:prod
-            cd ../../python/plotly
+
+      - run:
+          name: PyPI Build
+          command: |
             conda activate env
+            cd packages/python/plotly
             python setup.py sdist bdist_wheel
+
+      - run:
+          name: Conda Build
+          command: |
+            conda activate env
+            cd packages/python/plotly
             conda build recipe/
 
   build-doc:
