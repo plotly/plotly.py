@@ -277,14 +277,16 @@ jobs:
       - run:
           name: PyPI Build
           command: |
-            $HOME/miniconda/bin/conda activate env
+            eval "$(conda shell.bash hook)"
+            conda activate env
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
 
       - run:
           name: Conda Build
           command: |
-            $HOME/miniconda/bin/conda activate env
+            eval "$(conda shell.bash hook)"
+            conda activate env
             cd packages/python/plotly
             conda build recipe/
 
