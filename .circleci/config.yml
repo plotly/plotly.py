@@ -265,10 +265,9 @@ jobs:
             wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
             chmod +x miniconda.sh
             ./miniconda.sh -b -p $HOME/miniconda
-            $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
-            $HOME/miniconda/bin/conda install -c conda-forge jupyterlab
             $HOME/miniconda/bin/conda init bash
-
+            $HOME/miniconda/bin/conda create -n env --yes python=3.9 conda-build conda-verify
+            $HOME/miniconda/bin/conda install -n env -c conda-forge jupyterlab
       - run:
           name: NPM Build
           command: |
