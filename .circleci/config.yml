@@ -264,6 +264,8 @@ jobs:
           command: |
             conda create -n env --yes python=3.9 conda-build conda-verify
             conda install -n env -c conda-forge jupyterlab
+            conda init bash
+            conda activate env
       - run:
           name: NPM Build
           command: |
