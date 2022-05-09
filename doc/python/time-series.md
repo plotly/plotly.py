@@ -155,6 +155,25 @@ fig.update_xaxes(minor=dict(ticks="inside", showgrid=True))
 fig.show()
 ```
 
+#### Monthly Period Labels With Weekly Minor Ticks
+
+_new in 5.8_
+
+You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*3.6e6` (the number of milliseconds in a week) and setting `tick0="2016-07-04"` (the first Monday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
+
+```python
+import pandas as pd
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+df = df.loc[(df["Date"] >= "2016-07-01") & (df["Date"] <= "2016-12-01")]
+
+fig = px.line(df, x='Date', y='AAPL.High')
+fig.update_xaxes(ticks= "outside", ticklabelmode= "period", tickcolor= "black", tickwidth=2, ticklen=10, minor=dict(ticks="outside", dtick=7*24*3.6e6,  tick0="2016-07-04", griddash='dot', gridcolor='pink'))
+
+fig.show()
+```
+
 ### Summarizing Time-series Data with Histograms
 
 Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
