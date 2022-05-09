@@ -387,9 +387,10 @@ class Pointcloud(_BaseTraceType):
                     properties
                 color
                     Sets the marker fill color. It accepts a
-                    specific color.If the color is not fully opaque
-                    and there are hundreds of thousandsof points,
-                    it may cause slower zooming and panning.
+                    specific color. If the color is not fully
+                    opaque and there are hundreds of thousands of
+                    points, it may cause slower zooming and
+                    panning.
                 opacity
                     Sets the marker opacity. The default value is
                     `1` (fully opaque). If the markers are not

@@ -24,7 +24,7 @@ class Marker(_BaseTraceHierarchyType):
             Supported dict properties:
 
                 color
-                    Sets themarker.linecolor. It accepts either a
+                    Sets the marker.line color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
