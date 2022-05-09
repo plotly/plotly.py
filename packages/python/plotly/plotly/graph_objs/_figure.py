@@ -3372,7 +3372,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -3392,7 +3392,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3590,7 +3590,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -3741,7 +3741,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -3767,7 +3767,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3956,7 +3956,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -4125,13 +4125,13 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -4163,7 +4163,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4615,7 +4615,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -4640,7 +4640,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4947,7 +4947,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -5159,7 +5159,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -5202,7 +5202,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -5346,7 +5346,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -5511,7 +5511,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -5537,7 +5537,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -5725,7 +5725,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -6770,7 +6770,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -6790,7 +6790,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -7082,7 +7082,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -7275,7 +7275,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -7295,7 +7295,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -7451,7 +7451,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -8161,7 +8161,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         bingroup
@@ -8186,7 +8186,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -8462,7 +8462,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -8678,7 +8678,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -8708,7 +8708,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -8994,7 +8994,7 @@ class Figure(BaseFigure):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -10054,7 +10054,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -10063,7 +10063,7 @@ class Figure(BaseFigure):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -10095,7 +10095,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -10536,14 +10536,14 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `intensity`) or
-            the bounds set in `cmin` and `cmax`  Defaults to
-            `false` when `cmin` and `cmax` are set by the user.
+            the bounds set in `cmin` and `cmax` Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
@@ -10576,7 +10576,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -17252,13 +17252,13 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -17290,7 +17290,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -18086,13 +18086,13 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here z or surfacecolor)
-            or the bounds set in `cmin` and `cmax`  Defaults to
+            or the bounds set in `cmin` and `cmax` Defaults to
             `false` when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -18124,7 +18124,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -19269,9 +19269,9 @@ class Figure(BaseFigure):
             linked together
         scalemode
             Sets the metric by which the width of each violin is
-            determined."width" means each violin has the same (max)
-            width*count* means the violins are scaled by the number
-            of sample points makingup each violin.
+            determined. "width" means each violin has the same
+            (max) width "count" means the violins are scaled by the
+            number of sample points making up each violin.
         selected
             :class:`plotly.graph_objects.violin.Selected` instance
             or dict with compatible properties
@@ -19578,7 +19578,7 @@ class Figure(BaseFigure):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -19587,7 +19587,7 @@ class Figure(BaseFigure):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -19619,7 +19619,7 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl

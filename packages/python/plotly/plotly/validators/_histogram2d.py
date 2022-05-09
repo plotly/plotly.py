@@ -27,7 +27,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             bingroup
@@ -55,7 +55,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`zmin` and
+                colorscale in color space, use `zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
