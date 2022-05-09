@@ -5,7 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ##  UNRELEASED
 
 ### Fixed
-  - Improve support for type checking by bypassing lazy-loading when type checking.
+
+  - Improve support for type checking and IDE auto-completion by bypassing lazy-loading when type checking. [#3425](https://github.com/plotly/plotly.py/pull/3425) with thanks to [@JP-Ellis](https://github.com/JP-Ellis)
+  - Resolved various deprecation warning messages and compatibility issues with upstream dependencies and Python 3.11, plus removed dependency on `six`, with thanks to [@maresb](https://github.com/maresb), [@hugovk](https://github.com/hugovk), [@tirkarthi](https://github.com/tirkarthi), [@martinRenou](https://github.com/martinRenou), and [@BjoernLudwigPTB](https://github.com/BjoernLudwigPTB)
+  - Better support for MathJax 3 [#3706](https://github.com/plotly/plotly.py/pull/3706)
+
+### Added
+
+  - Type annotations for Plotly Express functions and chainable `go.Figure` methods, for better IDE auto-completion [#3708](https://github.com/plotly/plotly.py/pull/3708)
 
 ### Updated
   - Updated Plotly.js to from version 2.11.1 to version 2.12.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v2.12.1/CHANGELOG.md#2121----2022-05-09) for more information. Notable changes include:
