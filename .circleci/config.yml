@@ -295,9 +295,11 @@ jobs:
             conda activate env
             cd packages/python/plotly
             conda build recipe/
+            mkdir conda_dist
+            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 conda_dist
 
       - store_artifacts:
-          path: /opt/conda/envs/env/conda-bld/noarch/
+          path: packages/python/plotly/conda_dist
           destination: conda_dist
 
       - run:
@@ -305,10 +307,12 @@ jobs:
           command: |
             cd packages/javascript/jupyterlab-plotly
             npm pack
+            mkdir npm_dist
+            mv jupyterlab-plotly*.tgz npm_dist
 
       - store_artifacts:
-          path: packages/javascript/jupyterlab-plotly/jupyterlab-plotly-*.tgz
-          destination: npm_build
+          path: packages/javascript/jupyterlab-plotly/npm_dist
+          destination: npm_dist
 
   build-doc:
     resource_class: xlarge
