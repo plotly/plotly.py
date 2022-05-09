@@ -275,6 +275,7 @@ jobs:
             cd packages/javascript/jupyterlab-plotly
             npm install
             npm run build:prod
+            git status
 
       - run:
           name: PyPI Build
