@@ -781,7 +781,7 @@ class Box(_BaseTraceType):
             Supported dict properties:
 
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to

@@ -22,7 +22,7 @@ class ColorscalesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`cmin` and
+                colorscale in color space, use `cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
