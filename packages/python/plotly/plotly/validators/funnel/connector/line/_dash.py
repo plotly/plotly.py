@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class DashValidator(_plotly_utils.basevalidators.StringValidator):
+class DashValidator(_plotly_utils.basevalidators.DashValidator):
     def __init__(
         self, plotly_name="dash", parent_name="funnel.connector.line", **kwargs
     ):

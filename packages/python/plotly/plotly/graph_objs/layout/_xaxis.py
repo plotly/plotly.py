@@ -671,11 +671,11 @@ class XAxis(_BaseLayoutHierarchyType):
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
 
-        The 'griddash' property is a string and must be specified as:
-          - One of the following strings:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
-                'longdashdot']
-          - A number that will be converted to a string
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------
@@ -1735,11 +1735,11 @@ class XAxis(_BaseLayoutHierarchyType):
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
 
-        The 'spikedash' property is a string and must be specified as:
-          - One of the following strings:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
-                'longdashdot']
-          - A number that will be converted to a string
+        The 'spikedash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------
