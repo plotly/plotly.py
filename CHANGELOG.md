@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
   - Improve support for type checking and IDE auto-completion by bypassing lazy-loading when type checking. [#3425](https://github.com/plotly/plotly.py/pull/3425) with thanks to [@JP-Ellis](https://github.com/JP-Ellis)
-  - line-dash-style validators are now correctly used everywhere so that values like `10px 2px` are accepted [#3722](https://github.com/plotly/plotly.py/pull/3722)
+  - line dash-style validators are now correctly used everywhere so that values like `10px 2px` are accepted [#3722](https://github.com/plotly/plotly.py/pull/3722)
   - Resolved various deprecation warning messages and compatibility issues with upstream dependencies and Python 3.11, plus removed dependency on `six`, with thanks to [@maresb](https://github.com/maresb), [@hugovk](https://github.com/hugovk), [@tirkarthi](https://github.com/tirkarthi), [@martinRenou](https://github.com/martinRenou), and [@BjoernLudwigPTB](https://github.com/BjoernLudwigPTB)
   - Better support for MathJax 3 [#3706](https://github.com/plotly/plotly.py/pull/3706)
 
