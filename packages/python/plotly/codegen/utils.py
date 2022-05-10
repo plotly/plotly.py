@@ -180,25 +180,6 @@ CUSTOM_VALIDATOR_DATATYPES = {
     "frame.layout": "plotly.validators.LayoutValidator",
 }
 
-# Add custom dash validators
-CUSTOM_VALIDATOR_DATATYPES.update(
-    {
-        prop: "_plotly_utils.basevalidators.DashValidator"
-        for prop in [
-            "scatter.line.dash",
-            "histogram2dcontour.line.dash",
-            "scattergeo.line.dash",
-            "scatterpolar.line.dash",
-            "ohlc.line.dash",
-            "ohlc.decreasing.line.dash",
-            "ohlc.increasing.line.dash",
-            "contourcarpet.line.dash",
-            "contour.line.dash",
-            "scatterternary.line.dash",
-            "scattercarpet.line.dash",
-        ]
-    }
-)
 
 # Mapping from property string (as found in plot-schema.json) to a custom
 # class name. If not included here, names are converted to TitleCase and
@@ -435,9 +416,11 @@ class PlotlyNode:
         str
         """
         if self.path_str in CUSTOM_VALIDATOR_DATATYPES:
-            validator_base = f"{CUSTOM_VALIDATOR_DATATYPES[self.path_str]}"
+            validator_base = CUSTOM_VALIDATOR_DATATYPES[self.path_str]
         elif self.plotly_name.endswith("src") and self.datatype == "string":
-            validator_base = f"_plotly_utils.basevalidators." f"SrcValidator"
+            validator_base = "_plotly_utils.basevalidators.SrcValidator"
+        elif self.plotly_name.endswith("dash") and self.datatype == "string":
+            validator_base = "_plotly_utils.basevalidators.DashValidator"
         elif self.plotly_name == "title" and self.datatype == "compound":
             validator_base = "_plotly_utils.basevalidators.TitleValidator"
         else:

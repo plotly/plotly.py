@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class MinorgriddashValidator(_plotly_utils.basevalidators.StringValidator):
+class MinorgriddashValidator(_plotly_utils.basevalidators.DashValidator):
     def __init__(
         self, plotly_name="minorgriddash", parent_name="carpet.aaxis", **kwargs
     ):
