@@ -159,7 +159,7 @@ fig.show()
 
 _new in 5.8_
 
-You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*60*60*1000` (the number of milliseconds in a week) and setting `tick0="2016-07-043"` (the first Sunday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
+You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*60*60*1000` (the number of milliseconds in a week) and setting `tick0="2016-07-03"` (the first Sunday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
 
 ```python
 import pandas as pd
