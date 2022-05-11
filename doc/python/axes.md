@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.0
+    version: 3.9.7
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -386,11 +386,9 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks on a Cartesian axis using `minor`. This takes a `dict` of properties to apply to minor ticks. Available properties include: `tickmode`, `tickvals`, `tickcolor`, `ticklen`, `tickwidth`, `dtick`, `tick0`, `nticks`, `ticks`, `showgrid`, `gridcolor`, `griddash`, and `gridwidth`.
+You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
 
 In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the inside: `ticks="inside"`. On the x-axis we've specified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
-
-Note: Minor ticks and grid lines are not currently supported on color bars, ternary plots, polar charts, geo plots, or on multi-categorical, or 3D axes.
 
 ```python
 import plotly.express as px
@@ -401,7 +399,7 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 
 fig.update_xaxes(minor=dict(ticklen=6, tickcolor="black", showgrid=True))
-fig.update_yaxes(minor=dict(ticks="inside"))
+fig.update_yaxes(minor_ticks="inside")
 
 fig.show()
 ```
@@ -492,15 +490,14 @@ fig.show()
 
 _new in 5.8_
 
-By default grid lines are `solid`. Set the `griddash` property to change this style. In this example we display the x-axis grid lines as `dot`. It can also be set to `dash`, `longdash`, `dashdot`, or `longdashdot`.
+By default grid lines are `solid`. Set the `griddash` property to change this style. In this example we display the x-axis grid lines as `dash` and the minor grid lines as `dot`. Other allowable values are `longdash`, `dashdot`, or `longdashdot`.
 
 ```python
 import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink', griddash='dot')
-fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+fig.update_xaxes(gridcolor='black', griddash='dash', minor_griddash="dot")
 
 fig.show()
 ```
