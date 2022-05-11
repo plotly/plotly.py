@@ -80,7 +80,7 @@ def imshow(
     binary_compression_level=4,
     binary_format="png",
     text_auto=False,
-):
+) -> go.Figure:
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -351,7 +351,7 @@ def imshow(
         binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
-    if img.dtype == np.bool:
+    if img.dtype == bool:
         img = 255 * img.astype(np.uint8)
 
     if range_color is not None:

@@ -143,15 +143,42 @@ Light24 = [
     "#E48F72",
 ]
 
-from .colorbrewer import Set1, Pastel1, Dark2, Set2, Pastel2, Set3  # noqa: F401
-from .carto import Antique, Bold, Pastel, Prism, Safe, Vivid  # noqa: F401
+Alphabet_r = Alphabet[::-1]
+D3_r = D3[::-1]
+Dark24_r = Dark24[::-1]
+G10_r = G10[::-1]
+Light24_r = Light24[::-1]
+Plotly_r = Plotly[::-1]
+T10_r = T10[::-1]
 
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
+from .colorbrewer import (  # noqa: F401
+    Set1,
+    Pastel1,
+    Dark2,
+    Set2,
+    Pastel2,
+    Set3,
+    Set1_r,
+    Pastel1_r,
+    Dark2_r,
+    Set2_r,
+    Pastel2_r,
+    Set3_r,
+)
+from .carto import (  # noqa: F401
+    Antique,
+    Bold,
+    Pastel,
+    Prism,
+    Safe,
+    Vivid,
+    Antique_r,
+    Bold_r,
+    Pastel_r,
+    Prism_r,
+    Safe_r,
+    Vivid_r,
+)
 
 
 __all__ = ["swatches"]

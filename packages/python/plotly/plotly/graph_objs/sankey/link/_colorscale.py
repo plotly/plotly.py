@@ -60,7 +60,7 @@ class Colorscale(_BaseTraceHierarchyType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        bounds of the colorscale in color space, use `cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
@@ -196,7 +196,7 @@ class Colorscale(_BaseTraceHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -256,7 +256,7 @@ class Colorscale(_BaseTraceHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -305,8 +305,8 @@ class Colorscale(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.link.Colorscale 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.link.Colorscale
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.link.Colorscale`"""
             )
 

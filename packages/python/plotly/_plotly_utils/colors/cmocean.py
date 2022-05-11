@@ -276,9 +276,21 @@ curl = [
     "rgb(51, 13, 53)",
 ]
 
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
+algae_r = algae[::-1]
+amp_r = amp[::-1]
+balance_r = balance[::-1]
+curl_r = curl[::-1]
+deep_r = deep[::-1]
+delta_r = delta[::-1]
+dense_r = dense[::-1]
+gray_r = gray[::-1]
+haline_r = haline[::-1]
+ice_r = ice[::-1]
+matter_r = matter[::-1]
+oxy_r = oxy[::-1]
+phase_r = phase[::-1]
+solar_r = solar[::-1]
+speed_r = speed[::-1]
+tempo_r = tempo[::-1]
+thermal_r = thermal[::-1]
+turbid_r = turbid[::-1]

@@ -9,39 +9,37 @@ from __future__ import absolute_import
 
 import copy
 
-import six
-
 import _plotly_utils.exceptions
 
 
 _session = {"credentials": {}, "config": {}, "plot_options": {}}
 
 CREDENTIALS_KEYS = {
-    "username": six.string_types,
-    "api_key": six.string_types,
-    "proxy_username": six.string_types,
-    "proxy_password": six.string_types,
+    "username": str,
+    "api_key": str,
+    "proxy_username": str,
+    "proxy_password": str,
     "stream_ids": list,
 }
 
 CONFIG_KEYS = {
-    "plotly_domain": six.string_types,
-    "plotly_streaming_domain": six.string_types,
-    "plotly_api_domain": six.string_types,
+    "plotly_domain": str,
+    "plotly_streaming_domain": str,
+    "plotly_api_domain": str,
     "plotly_ssl_verification": bool,
     "plotly_proxy_authorization": bool,
     "world_readable": bool,
     "auto_open": bool,
-    "sharing": six.string_types,
+    "sharing": str,
 }
 
 PLOT_OPTIONS = {
-    "filename": six.string_types,
-    "fileopt": six.string_types,
+    "filename": str,
+    "fileopt": str,
     "validate": bool,
     "world_readable": bool,
     "auto_open": bool,
-    "sharing": six.string_types,
+    "sharing": str,
 }
 
 SHARING_OPTIONS = ["public", "private", "secret"]

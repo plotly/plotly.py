@@ -16,11 +16,44 @@ from .colorbrewer import (  # noqa: F401
     RdYlBu,
     RdYlGn,
     Spectral,
+    BrBG_r,
+    PRGn_r,
+    PiYG_r,
+    PuOr_r,
+    RdBu_r,
+    RdGy_r,
+    RdYlBu_r,
+    RdYlGn_r,
+    Spectral_r,
 )
-from .cmocean import balance, delta, curl, oxy  # noqa: F401
-from .carto import Armyrose, Fall, Geyser, Temps, Tealrose, Tropic, Earth  # noqa: F401
+from .cmocean import (  # noqa: F401
+    balance,
+    delta,
+    curl,
+    oxy,
+    balance_r,
+    delta_r,
+    curl_r,
+    oxy_r,
+)
+from .carto import (  # noqa: F401
+    Armyrose,
+    Fall,
+    Geyser,
+    Temps,
+    Tealrose,
+    Tropic,
+    Earth,
+    Armyrose_r,
+    Fall_r,
+    Geyser_r,
+    Temps_r,
+    Tealrose_r,
+    Tropic_r,
+    Earth_r,
+)
 
-from .plotlyjs import Picnic, Portland  # noqa: F401
+from .plotlyjs import Picnic, Portland, Picnic_r, Portland_r  # noqa: F401
 
 from ._swatches import _swatches, _swatches_continuous
 
@@ -37,13 +70,6 @@ def swatches_continuous(template=None):
 
 
 swatches_continuous.__doc__ = _swatches_continuous.__doc__
-
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
 
 
 __all__ = ["swatches"]

@@ -84,7 +84,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assertEqual(annot.yref, "paper")
 
         # Not valid to add annotation by row/col
-        with self.assertRaisesRegexp(Exception, "make_subplots"):
+        with self.assertRaisesRegex(Exception, "make_subplots"):
             fig.add_annotation(text="B", row=1, col=1)
 
     def test_add_annotations(self):
@@ -124,7 +124,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assertEqual(annot.yref, "y4")
 
         # Try to add to (2, 2), which not a valid
-        with self.assertRaisesRegexp(ValueError, "of type polar"):
+        with self.assertRaisesRegex(ValueError, "of type polar"):
             self.fig.add_annotation(text="D", row=2, col=2)
 
     def test_select_annotations_no_grid(self):

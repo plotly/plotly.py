@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
     from ._zmin import ZminValidator
     from ._zmid import ZmidValidator

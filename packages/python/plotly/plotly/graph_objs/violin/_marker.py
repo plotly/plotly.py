@@ -15,7 +15,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets themarkercolor. It accepts either a specific color or an
+        Sets the marker color. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
@@ -86,7 +86,7 @@ class Marker(_BaseTraceHierarchyType):
             Supported dict properties:
 
                 color
-                    Sets themarker.linecolor. It accepts either a
+                    Sets the marker.line color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -327,8 +327,8 @@ class Marker(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
+            Sets the marker color. It accepts either a specific
+            color or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
@@ -369,8 +369,8 @@ class Marker(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.violin.Marker`
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
+            Sets the marker color. It accepts either a specific
+            color or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
@@ -411,8 +411,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.violin.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.violin.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.violin.Marker`"""
             )
 

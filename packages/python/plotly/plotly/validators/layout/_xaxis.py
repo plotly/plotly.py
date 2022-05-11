@@ -135,6 +135,11 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 able. If true, then zoom is disabled.
             gridcolor
                 Sets the color of the grid lines.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the grid lines.
             hoverformat
@@ -178,6 +183,9 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Hide SI prefix for 10^n if |n| is below this
                 number. This only has an effect when
                 `tickformat` is "SI" or "B".
+            minor
+                :class:`plotly.graph_objects.layout.xaxis.Minor
+                ` instance or dict with compatible properties
             mirror
                 Determines if the axis lines or/and ticks are
                 mirrored to the opposite side of the plotting

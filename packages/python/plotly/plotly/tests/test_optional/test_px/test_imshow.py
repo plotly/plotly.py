@@ -48,14 +48,14 @@ def test_automatic_zmax_from_dtype():
         np.uint8: 2**8 - 1,
         np.uint16: 2**16 - 1,
         np.float: 1,
-        np.bool: 255,
+        bool: 255,
     }
     for key, val in dtypes_dict.items():
         img = np.array([0, 1], dtype=key)
         img = np.dstack((img,) * 3)
         fig = px.imshow(img, binary_string=False)
         # For uint8 in "infer" mode we don't pass zmin/zmax unless specified
-        if key in [np.uint8, np.bool]:
+        if key in [np.uint8, bool]:
             assert fig.data[0]["zmax"] is None
         else:
             assert fig.data[0]["zmax"] == (val, val, val, 255)

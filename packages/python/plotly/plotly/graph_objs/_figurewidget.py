@@ -593,6 +593,589 @@ class FigureWidget(BaseFigureWidget):
         """
         super(FigureWidget, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
+    def update(self, dict1=None, overwrite=False, **kwargs) -> "FigureWidget":
+        """
+
+        Update the properties of the figure with a dict and/or with
+        keyword arguments.
+
+        This recursively updates the structure of the figure
+        object with the values in the input dict / keyword arguments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Examples
+        --------
+        >>> import plotly.graph_objs as go
+        >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
+        >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
+            {'data': [{'type': 'scatter',
+               'uid': 'e86a7c7a-346a-11e8-8aa8-a0999b0c017b',
+               'y': array([4, 5, 6], dtype=int32)}],
+             'layout': {}}
+
+        >>> fig = go.Figure(layout={'xaxis':
+        ...                         {'color': 'green',
+        ...                          'range': [0, 1]}})
+        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}}) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
+            {'data': [],
+             'layout': {'xaxis':
+                        {'color': 'pink',
+                         'range': [0, 1]}}}
+
+        Returns
+        -------
+        BaseFigure
+            Updated figure
+
+        """
+        return super(FigureWidget, self).update(dict1, overwrite, **kwargs)
+
+    def update_traces(
+        self,
+        patch=None,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        overwrite=False,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Perform a property update operation on all traces that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all traces that
+            satisfy the selection criteria.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
+
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        **kwargs
+            Additional property updates to apply to each selected trace. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+
+        """
+        return super(FigureWidget, self).update_traces(
+            patch, selector, row, col, secondary_y, overwrite, **kwargs
+        )
+
+    def update_layout(self, dict1=None, overwrite=False, **kwargs) -> "FigureWidget":
+        """
+
+        Update the properties of the figure's layout with a dict and/or with
+        keyword arguments.
+
+        This recursively updates the structure of the original
+        layout with the values in the input dict / keyword arguments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Returns
+        -------
+        BaseFigure
+            The Figure object that the update_layout method was called on
+
+        """
+        return super(FigureWidget, self).update_layout(dict1, overwrite, **kwargs)
+
+    def for_each_trace(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ) -> "FigureWidget":
+        """
+
+        Apply a function to all traces that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single trace object.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
+
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+
+        """
+        return super(FigureWidget, self).for_each_trace(
+            fn, selector, row, col, secondary_y
+        )
+
+    def add_trace(
+        self, trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False
+    ) -> "FigureWidget":
+        """
+
+        Add a trace to the figure
+
+        Parameters
+        ----------
+        trace : BaseTraceType or dict
+            Either:
+              - An instances of a trace classe from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - or a dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all columns in the specified row(s).
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
+              * The trace argument is a 2D cartesian trace
+                (scatter, bar, etc.)
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
+        Returns
+        -------
+        BaseFigure
+            The Figure that add_trace was called on
+
+        Examples
+        --------
+
+        >>> from plotly import subplots
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+
+        >>> fig = go.Figure()
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
+
+
+        Add two Scatter traces to vertically stacked subplots
+
+        >>> fig = subplots.make_subplots(rows=2)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) # doctest: +ELLIPSIS
+        Figure(...)
+
+        """
+        return super(FigureWidget, self).add_trace(
+            trace, row, col, secondary_y, exclude_empty_subplots
+        )
+
+    def add_traces(
+        self,
+        data,
+        rows=None,
+        cols=None,
+        secondary_ys=None,
+        exclude_empty_subplots=False,
+    ) -> "FigureWidget":
+        """
+
+        Add traces to the figure
+
+        Parameters
+        ----------
+        data : list[BaseTraceType or dict]
+            A list of trace specifications to be added.
+            Trace specifications may be either:
+
+              - Instances of trace classes from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+
+        rows : None, list[int], or int (default None)
+            List of subplot row indexes (starting from 1) for the traces to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to row number
+
+        cols : None or list[int] (default None)
+            List of subplot column indexes (starting from 1) for the traces
+            to be added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to column number
+
+
+        secondary_ys: None or list[boolean] (default None)
+            List of secondary_y booleans for traces to be added. See the
+            docstring for `add_trace` for more info.
+
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
+
+        Returns
+        -------
+        BaseFigure
+            The Figure that add_traces was called on
+
+        Examples
+        --------
+
+        >>> from plotly import subplots
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+
+        >>> fig = go.Figure()
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])]) # doctest: +ELLIPSIS
+        Figure(...)
+
+        Add two Scatter traces to vertically stacked subplots
+
+        >>> fig = subplots.make_subplots(rows=2)
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
+        ...                 rows=[1, 2], cols=[1, 1]) # doctest: +ELLIPSIS
+        Figure(...)
+
+        """
+        return super(FigureWidget, self).add_traces(
+            data, rows, cols, secondary_ys, exclude_empty_subplots
+        )
+
+    def add_vline(
+        self,
+        x,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a vertical line to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x: float or int
+            A number representing the x coordinate of the vertical line.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the line. Example positions are "bottom left", "right top",
+            "right", "bottom". If an annotation is added but annotation_position is
+            not specified, this defaults to "top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_vline(
+            x, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_hline(
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a horizontal line to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y: float or int
+            A number representing the y coordinate of the horizontal line.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the line. Example positions are "bottom left", "right top",
+            "right", "bottom". If an annotation is added but annotation_position is
+            not specified, this defaults to "top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_hline(
+            y, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_vrect(
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x0: float or int
+            A number representing the x coordinate of one side of the rectangle.
+        x1: float or int
+            A number representing the x coordinate of the other side of the rectangle.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the rectangle. Example positions are "outside top left", "inside
+            bottom", "right", "inside left", "inside" ("outside" is not supported). If
+            an annotation is added but annotation_position is not specified this
+            defaults to "inside top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_vrect(
+            x0, x1, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_hrect(
+        self,
+        y0,
+        y1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y0: float or int
+            A number representing the y coordinate of one side of the rectangle.
+        y1: float or int
+            A number representing the y coordinate of the other side of the rectangle.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the rectangle. Example positions are "outside top left", "inside
+            bottom", "right", "inside left", "inside" ("outside" is not supported). If
+            an annotation is added but annotation_position is not specified this
+            defaults to "inside top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_hrect(
+            y0, y1, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def set_subplots(
+        self, rows=None, cols=None, **make_subplots_args
+    ) -> "FigureWidget":
+        """
+
+        Add subplots to this figure. If the figure already contains subplots,
+        then this throws an error. Accepts any keyword arguments that
+        plotly.subplots.make_subplots accepts.
+
+        """
+        return super(FigureWidget, self).set_subplots(rows, cols, **make_subplots_args)
+
     def add_bar(
         self,
         alignmentgroup=None,
@@ -670,7 +1253,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Bar trace
 
@@ -1187,7 +1770,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Barpolar trace
 
@@ -1554,7 +2137,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Box trace
 
@@ -2163,7 +2746,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Candlestick trace
 
@@ -2504,7 +3087,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Carpet trace
 
@@ -2779,7 +3362,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Choropleth trace
 
@@ -2793,7 +3376,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -2813,7 +3396,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3011,7 +3594,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -3148,7 +3731,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Choroplethmapbox trace
 
@@ -3162,7 +3745,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -3188,7 +3771,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3377,7 +3960,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -3527,7 +4110,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Cone trace
 
@@ -3546,13 +4129,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -3584,7 +4167,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4018,7 +4601,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Contour trace
 
@@ -4036,7 +4619,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -4061,7 +4644,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4368,7 +4951,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -4551,7 +5134,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Contourcarpet trace
 
@@ -4580,7 +5163,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -4623,7 +5206,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4767,7 +5350,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -4918,7 +5501,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Densitymapbox trace
 
@@ -4932,7 +5515,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -4958,7 +5541,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -5146,7 +5729,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -5300,7 +5883,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Funnel trace
 
@@ -5793,7 +6376,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Funnelarea trace
 
@@ -6163,7 +6746,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Heatmap trace
 
@@ -6191,7 +6774,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -6211,7 +6794,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -6503,7 +7086,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -6680,7 +7263,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Heatmapgl trace
 
@@ -6696,7 +7279,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -6716,7 +7299,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -6872,7 +7455,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -7038,7 +7621,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Histogram trace
 
@@ -7553,7 +8136,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Histogram2d trace
 
@@ -7582,7 +8165,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         bingroup
@@ -7607,7 +8190,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -7883,7 +8466,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -8070,7 +8653,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Histogram2dContour trace
 
@@ -8099,7 +8682,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -8129,7 +8712,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -8415,7 +8998,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -8585,7 +9168,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Icicle trace
 
@@ -8946,7 +9529,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Image trace
 
@@ -9237,7 +9820,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Indicator trace
 
@@ -9458,7 +10041,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Isosurface trace
 
@@ -9475,7 +10058,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -9484,7 +10067,7 @@ class FigureWidget(BaseFigureWidget):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -9516,7 +10099,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -9923,7 +10506,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Mesh3d trace
 
@@ -9957,14 +10540,14 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `intensity`) or
-            the bounds set in `cmin` and `cmax`  Defaults to
-            `false` when `cmin` and `cmax` are set by the user.
+            the bounds set in `cmin` and `cmax` Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
@@ -9997,7 +10580,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -10447,7 +11030,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Ohlc trace
 
@@ -10774,7 +11357,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Parcats trace
 
@@ -10988,7 +11571,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Parcoords trace
 
@@ -11207,7 +11790,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Pie trace
 
@@ -11592,7 +12175,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Pointcloud trace
 
@@ -11864,7 +12447,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Sankey trace
 
@@ -12115,7 +12698,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scatter trace
 
@@ -12672,7 +13255,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scatter3d trace
 
@@ -13088,7 +13671,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scattercarpet trace
 
@@ -13477,7 +14060,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scattergeo trace
 
@@ -13883,7 +14466,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scattergl trace
 
@@ -14361,7 +14944,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scattermapbox trace
 
@@ -14723,7 +15306,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scatterpolar trace
 
@@ -15126,7 +15709,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scatterpolargl trace
 
@@ -15523,7 +16106,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scattersmith trace
 
@@ -15908,7 +16491,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Scatterternary trace
 
@@ -16301,7 +16884,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Splom trace
 
@@ -16653,7 +17236,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Streamtube trace
 
@@ -16673,13 +17256,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -16711,7 +17294,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -17103,7 +17686,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Sunburst trace
 
@@ -17487,7 +18070,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Surface trace
 
@@ -17507,13 +18090,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here z or surfacecolor)
-            or the bounds set in `cmin` and `cmax`  Defaults to
+            or the bounds set in `cmin` and `cmax` Defaults to
             `false` when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -17545,7 +18128,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -17908,7 +18491,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Table trace
 
@@ -18126,7 +18709,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Treemap trace
 
@@ -18505,7 +19088,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Violin trace
 
@@ -18690,9 +19273,9 @@ class FigureWidget(BaseFigureWidget):
             linked together
         scalemode
             Sets the metric by which the width of each violin is
-            determined."width" means each violin has the same (max)
-            width*count* means the violins are scaled by the number
-            of sample points makingup each violin.
+            determined. "width" means each violin has the same
+            (max) width "count" means the violins are scaled by the
+            number of sample points making up each violin.
         selected
             :class:`plotly.graph_objects.violin.Selected` instance
             or dict with compatible properties
@@ -18982,7 +19565,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Volume trace
 
@@ -18999,7 +19582,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -19008,7 +19591,7 @@ class FigureWidget(BaseFigureWidget):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -19040,7 +19623,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -19462,7 +20045,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Add a new Waterfall trace
 
@@ -19964,7 +20547,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("coloraxis", selector, row, col)
 
-    def for_each_coloraxis(self, fn, selector=None, row=None, col=None):
+    def for_each_coloraxis(
+        self, fn, selector=None, row=None, col=None
+    ) -> "FigureWidget":
         """
         Apply a function to all coloraxis objects that satisfy the
         specified selection criteria
@@ -19991,7 +20576,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_coloraxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20000,7 +20585,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_coloraxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
@@ -20037,7 +20622,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_coloraxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20076,7 +20661,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("geo", selector, row, col)
 
-    def for_each_geo(self, fn, selector=None, row=None, col=None):
+    def for_each_geo(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all geo objects that satisfy the
         specified selection criteria
@@ -20103,7 +20688,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
             fn(obj)
@@ -20112,7 +20697,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_geos(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -20149,7 +20734,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20188,7 +20773,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("mapbox", selector, row, col)
 
-    def for_each_mapbox(self, fn, selector=None, row=None, col=None):
+    def for_each_mapbox(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all mapbox objects that satisfy the
         specified selection criteria
@@ -20215,7 +20800,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20224,7 +20809,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_mapboxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -20261,7 +20846,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20300,7 +20885,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("polar", selector, row, col)
 
-    def for_each_polar(self, fn, selector=None, row=None, col=None):
+    def for_each_polar(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all polar objects that satisfy the
         specified selection criteria
@@ -20327,7 +20912,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
             fn(obj)
@@ -20336,7 +20921,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_polars(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -20373,7 +20958,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20412,7 +20997,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("scene", selector, row, col)
 
-    def for_each_scene(self, fn, selector=None, row=None, col=None):
+    def for_each_scene(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all scene objects that satisfy the
         specified selection criteria
@@ -20439,7 +21024,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20448,7 +21033,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_scenes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -20485,7 +21070,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20524,7 +21109,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("smith", selector, row, col)
 
-    def for_each_smith(self, fn, selector=None, row=None, col=None):
+    def for_each_smith(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all smith objects that satisfy the
         specified selection criteria
@@ -20551,7 +21136,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_smiths(selector=selector, row=row, col=col):
             fn(obj)
@@ -20560,7 +21145,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_smiths(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all smith objects
         that satisfy the specified selection criteria
@@ -20597,7 +21182,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_smiths(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20636,7 +21221,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("ternary", selector, row, col)
 
-    def for_each_ternary(self, fn, selector=None, row=None, col=None):
+    def for_each_ternary(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all ternary objects that satisfy the
         specified selection criteria
@@ -20663,7 +21248,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
             fn(obj)
@@ -20672,7 +21257,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_ternaries(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -20709,7 +21294,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20748,7 +21333,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("xaxis", selector, row, col)
 
-    def for_each_xaxis(self, fn, selector=None, row=None, col=None):
+    def for_each_xaxis(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all xaxis objects that satisfy the
         specified selection criteria
@@ -20775,7 +21360,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20784,7 +21369,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_xaxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -20821,7 +21406,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20874,7 +21459,9 @@ class FigureWidget(BaseFigureWidget):
             "yaxis", selector, row, col, secondary_y=secondary_y
         )
 
-    def for_each_yaxis(self, fn, selector=None, row=None, col=None, secondary_y=None):
+    def for_each_yaxis(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ) -> "FigureWidget":
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
@@ -20913,7 +21500,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_yaxes(
             selector=selector, row=row, col=col, secondary_y=secondary_y
@@ -20931,7 +21518,7 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
@@ -20980,7 +21567,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_yaxes(
             selector=selector, row=row, col=col, secondary_y=secondary_y
@@ -21078,7 +21665,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="annotations",
@@ -21093,7 +21680,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_annotations(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all annotations that satisfy the
         specified selection criteria
@@ -21140,7 +21727,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="annotations",
@@ -21204,7 +21791,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new annotation to the figure's layout
 
@@ -21655,7 +22242,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="images",
@@ -21670,7 +22257,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_layout_images(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all images that satisfy the
         specified selection criteria
@@ -21717,7 +22304,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="images",
@@ -21753,7 +22340,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new image to the figure's layout
 
@@ -21980,7 +22567,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="shapes",
@@ -21995,7 +22582,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_shapes(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all shapes that satisfy the
         specified selection criteria
@@ -22042,7 +22629,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="shapes",
@@ -22084,7 +22671,7 @@ class FigureWidget(BaseFigureWidget):
         secondary_y=None,
         exclude_empty_subplots=None,
         **kwargs,
-    ):
+    ) -> "FigureWidget":
         """
         Create and add a new shape to the figure's layout
 

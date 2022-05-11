@@ -127,6 +127,11 @@ class Smith(_BaseLayoutHierarchyType):
                     Individual pieces can override this.
                 gridcolor
                     Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the grid lines.
                 hoverformat
@@ -249,6 +254,11 @@ class Smith(_BaseLayoutHierarchyType):
                     Individual pieces can override this.
                 gridcolor
                     Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the grid lines.
                 hoverformat
@@ -424,8 +434,8 @@ class Smith(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Smith 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Smith
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Smith`"""
             )
 

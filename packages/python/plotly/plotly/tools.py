@@ -12,7 +12,6 @@ from __future__ import absolute_import
 import json
 import warnings
 
-import six
 import re
 import os
 
@@ -512,7 +511,7 @@ def _replace_newline(obj):
         for index, entry in enumerate(obj):
             l += [_replace_newline(entry)]
         return l
-    elif isinstance(obj, six.string_types):
+    elif isinstance(obj, str):
         s = obj.replace("\n", "<br>")
         if s != obj:
             warnings.warn(

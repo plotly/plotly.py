@@ -204,10 +204,10 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 same names will be linked together
             scalemode
                 Sets the metric by which the width of each
-                violin is determined."width" means each violin
-                has the same (max) width*count* means the
+                violin is determined. "width" means each violin
+                has the same (max) width "count" means the
                 violins are scaled by the number of sample
-                points makingup each violin.
+                points making up each violin.
             selected
                 :class:`plotly.graph_objects.violin.Selected`
                 instance or dict with compatible properties

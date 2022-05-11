@@ -10,7 +10,7 @@ import math
 import pandas as pd
 import numpy as np
 
-from plotly.subplots import (
+from plotly._subplots import (
     make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
@@ -1634,7 +1634,7 @@ def process_dataframe_hierarchy(args):
         df_tree["parent"] = df_tree["parent"].str.rstrip("/")
         if cols:
             df_tree[cols] = dfg[cols]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_all_trees = pd.concat([df_all_trees, df_tree], ignore_index=True)
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:

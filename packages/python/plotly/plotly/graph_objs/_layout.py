@@ -837,14 +837,14 @@ class Layout(_BaseLayoutType):
                     palette (`autocolorscale: true`) or the palette
                     determined by `colorscale`. In case
                     `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
+                    is true, the default palette will be chosen
                     according to whether numbers in the `color`
                     array are all positive, all negative or mixed.
                 cauto
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     corresponding trace color array(s)) or the
-                    bounds set in `cmin` and `cmax`  Defaults to
+                    bounds set in `cmin` and `cmax` Defaults to
                     `false` when `cmin` and `cmax` are set by the
                     user.
                 cmax
@@ -875,7 +875,7 @@ class Layout(_BaseLayoutType):
                     lowest (0) and highest (1) values are required.
                     For example, `[[0, 'rgb(0,0,255)'], [1,
                     'rgb(255,0,0)']]`. To control the bounds of the
-                    colorscale in color space, use`cmin` and
+                    colorscale in color space, use `cmin` and
                     `cmax`. Alternatively, `colorscale` may be a
                     palette name string of the following list: Blac
                     kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -3975,6 +3975,11 @@ class Layout(_BaseLayoutType):
                     able. If true, then zoom is disabled.
                 gridcolor
                     Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the grid lines.
                 hoverformat
@@ -4018,6 +4023,9 @@ class Layout(_BaseLayoutType):
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
                     `tickformat` is "SI" or "B".
+                minor
+                    :class:`plotly.graph_objects.layout.xaxis.Minor
+                    ` instance or dict with compatible properties
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
@@ -4478,6 +4486,11 @@ class Layout(_BaseLayoutType):
                     able. If true, then zoom is disabled.
                 gridcolor
                     Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the grid lines.
                 hoverformat
@@ -4521,6 +4534,9 @@ class Layout(_BaseLayoutType):
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
                     `tickformat` is "SI" or "B".
+                minor
+                    :class:`plotly.graph_objects.layout.yaxis.Minor
+                    ` instance or dict with compatible properties
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
@@ -5948,8 +5964,8 @@ class Layout(_BaseLayoutType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Layout 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Layout
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Layout`"""
             )
 

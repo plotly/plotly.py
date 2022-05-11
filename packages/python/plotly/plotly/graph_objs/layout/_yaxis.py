@@ -27,6 +27,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "exponentformat",
         "fixedrange",
         "gridcolor",
+        "griddash",
         "gridwidth",
         "hoverformat",
         "layer",
@@ -34,6 +35,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "linewidth",
         "matches",
         "minexponent",
+        "minor",
         "mirror",
         "nticks",
         "overlaying",
@@ -657,6 +659,32 @@ class YAxis(_BaseLayoutHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
+
     # gridwidth
     # ---------
     @property
@@ -860,6 +888,118 @@ class YAxis(_BaseLayoutHierarchyType):
     @minexponent.setter
     def minexponent(self, val):
         self["minexponent"] = val
+
+    # minor
+    # -----
+    @property
+    def minor(self):
+        """
+        The 'minor' property is an instance of Minor
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Minor`
+          - A dict of string/value properties that will be passed
+            to the Minor constructor
+
+            Supported dict properties:
+
+                dtick
+                    Sets the step in-between ticks on this axis.
+                    Use with `tick0`. Must be a positive number, or
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
+                    are set every 10^(n*dtick) where n is the tick
+                    number. For example, to set a tick mark at 1,
+                    10, 100, 1000, ... set dtick to 1. To set tick
+                    marks at 1, 100, 10000, ... set dtick to 2. To
+                    set tick marks at 1, 5, 25, 125, 625, 3125, ...
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
+                    is a positive number, gives ticks linearly
+                    spaced in value (but not position). For example
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
+                    at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
+                    milliseconds. For example, to set the interval
+                    between ticks to one day, set `dtick` to
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
+                    months. `n` must be a positive integer. To set
+                    ticks on the 15th of every third month, set
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
+                gridcolor
+                    Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
+                gridwidth
+                    Sets the width (in px) of the grid lines.
+                nticks
+                    Specifies the maximum number of ticks for the
+                    particular axis. The actual number of ticks
+                    will be chosen automatically to be less than or
+                    equal to `nticks`. Has an effect only if
+                    `tickmode` is set to "auto".
+                showgrid
+                    Determines whether or not grid lines are drawn.
+                    If True, the grid lines are drawn at every tick
+                    mark.
+                tick0
+                    Sets the placement of the first tick on this
+                    axis. Use with `dtick`. If the axis `type` is
+                    "log", then you must take the log of your
+                    starting tick (e.g. to set the starting tick to
+                    100, set the `tick0` to 2) except when
+                    `dtick`=*L<f>* (see `dtick` for more info). If
+                    the axis `type` is "date", it should be a date
+                    string, like date data. If the axis `type` is
+                    "category", it should be a number, using the
+                    scale where each category is assigned a serial
+                    number from zero in the order it appears.
+                tickcolor
+                    Sets the tick color.
+                ticklen
+                    Sets the tick length (in px).
+                tickmode
+                    Sets the tick mode for this axis. If "auto",
+                    the number of ticks is set via `nticks`. If
+                    "linear", the placement of the ticks is
+                    determined by a starting position `tick0` and a
+                    tick step `dtick` ("linear" is the default
+                    value if `tick0` and `dtick` are provided). If
+                    "array", the placement of the ticks is set via
+                    `tickvals` and the tick text is `ticktext`.
+                    ("array" is the default value if `tickvals` is
+                    provided).
+                ticks
+                    Determines whether ticks are drawn or not. If
+                    "", this axis' ticks are not drawn. If
+                    "outside" ("inside"), this axis' are drawn
+                    outside (inside) the axis lines.
+                tickvals
+                    Sets the values at which ticks on this axis
+                    appear. Only has an effect if `tickmode` is set
+                    to "array". Used with `ticktext`.
+                tickvalssrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `tickvals`.
+                tickwidth
+                    Sets the tick width (in px).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.yaxis.Minor
+        """
+        return self["minor"]
+
+    @minor.setter
+    def minor(self, val):
+        self["minor"] = val
 
     # mirror
     # ------
@@ -1466,11 +1606,11 @@ class YAxis(_BaseLayoutHierarchyType):
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
 
-        The 'spikedash' property is a string and must be specified as:
-          - One of the following strings:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
-                'longdashdot']
-          - A number that will be converted to a string
+        The 'spikedash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------
@@ -2543,6 +2683,11 @@ class YAxis(_BaseLayoutHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -2582,6 +2727,9 @@ class YAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minor
+            :class:`plotly.graph_objects.layout.yaxis.Minor`
+            instance or dict with compatible properties
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2882,6 +3030,7 @@ class YAxis(_BaseLayoutHierarchyType):
         exponentformat=None,
         fixedrange=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         hoverformat=None,
         layer=None,
@@ -2889,6 +3038,7 @@ class YAxis(_BaseLayoutHierarchyType):
         linewidth=None,
         matches=None,
         minexponent=None,
+        minor=None,
         mirror=None,
         nticks=None,
         overlaying=None,
@@ -3064,6 +3214,11 @@ class YAxis(_BaseLayoutHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -3103,6 +3258,9 @@ class YAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minor
+            :class:`plotly.graph_objects.layout.yaxis.Minor`
+            instance or dict with compatible properties
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -3400,8 +3558,8 @@ class YAxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.YAxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.YAxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.YAxis`"""
             )
 
@@ -3484,6 +3642,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:
@@ -3512,6 +3674,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = minexponent if minexponent is not None else _v
         if _v is not None:
             self["minexponent"] = _v
+        _v = arg.pop("minor", None)
+        _v = minor if minor is not None else _v
+        if _v is not None:
+            self["minor"] = _v
         _v = arg.pop("mirror", None)
         _v = mirror if mirror is not None else _v
         if _v is not None:

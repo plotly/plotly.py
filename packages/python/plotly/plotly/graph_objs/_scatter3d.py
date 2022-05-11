@@ -724,9 +724,9 @@ class Scatter3d(_BaseTraceType):
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `line.colorscale`. Has an effect
-                    only if in `line.color`is set to a numerical
+                    only if in `line.color` is set to a numerical
                     array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default  palette
+                    `autocolorscale` is true, the default palette
                     will be chosen according to whether numbers in
                     the `color` array are all positive, all
                     negative or mixed.
@@ -734,13 +734,13 @@ class Scatter3d(_BaseTraceType):
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `line.color`) or the bounds set in
-                    `line.cmin` and `line.cmax`  Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    `line.cmin` and `line.cmax` Has an effect only
+                    if in `line.color` is set to a numerical array.
                     Defaults to `false` when `line.cmin` and
                     `line.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmin` must be set as well.
@@ -748,22 +748,22 @@ class Scatter3d(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `line.cmin` and/or `line.cmax` to be
                     equidistant to this point. Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    if in `line.color` is set to a numerical array.
                     Value should have the same units as in
                     `line.color`. Has no effect when `line.cauto`
                     is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmax` must be set as well.
                 color
-                    Sets thelinecolor. It accepts either a specific
-                    color or an array of numbers that are mapped to
-                    the colorscale relative to the max and min
-                    values of the array or relative to `line.cmin`
-                    and `line.cmax` if set.
+                    Sets the line color. It accepts either a
+                    specific color or an array of numbers that are
+                    mapped to the colorscale relative to the max
+                    and min values of the array or relative to
+                    `line.cmin` and `line.cmax` if set.
                 coloraxis
                     Sets a reference to a shared color axis.
                     References to these shared color axes are
@@ -779,7 +779,7 @@ class Scatter3d(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `line.color`is set to a numerical array. The
+                    `line.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -787,7 +787,7 @@ class Scatter3d(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`line.cmin` and `line.cmax`.
+                    color space, use `line.cmin` and `line.cmax`.
                     Alternatively, `colorscale` may be a palette
                     name string of the following list: Blackbody,Bl
                     uered,Blues,Cividis,Earth,Electric,Greens,Greys
@@ -800,14 +800,14 @@ class Scatter3d(_BaseTraceType):
                     Sets the dash style of the lines.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `line.color`is set to a
+                    effect only if in `line.color` is set to a
                     numerical array. If true, `line.cmin` will
                     correspond to the last color in the array and
                     `line.cmax` will correspond to the first color.
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `line.color`is set to a numerical array.
+                    in `line.color` is set to a numerical array.
                 width
                     Sets the line width (in px).
 
@@ -838,23 +838,23 @@ class Scatter3d(_BaseTraceType):
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. In case `colorscale` is
                     unspecified or `autocolorscale` is true, the
-                    default  palette will be chosen according to
+                    default palette will be chosen according to
                     whether numbers in the `color` array are all
                     positive, all negative or mixed.
                 cauto
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax`  Has an effect
-                    only if in `marker.color`is set to a numerical
+                    `marker.cmin` and `marker.cmax` Has an effect
+                    only if in `marker.color` is set to a numerical
                     array. Defaults to `false` when `marker.cmin`
                     and `marker.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
@@ -862,18 +862,18 @@ class Scatter3d(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if in `marker.color`is set to a numerical
+                    only if in `marker.color` is set to a numerical
                     array. Value should have the same units as in
                     `marker.color`. Has no effect when
                     `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -893,7 +893,7 @@ class Scatter3d(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `marker.color`is set to a numerical array. The
+                    `marker.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -901,7 +901,7 @@ class Scatter3d(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -923,7 +923,7 @@ class Scatter3d(_BaseTraceType):
                     color and use its alpha channel.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. If true, `marker.cmin` will
                     correspond to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -931,7 +931,7 @@ class Scatter3d(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `marker.color`is set to a numerical array.
+                    in `marker.color` is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -2500,8 +2500,8 @@ class Scatter3d(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Scatter3d 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Scatter3d
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Scatter3d`"""
             )
 

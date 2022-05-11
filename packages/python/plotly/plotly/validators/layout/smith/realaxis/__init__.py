@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._tickwidth import TickwidthValidator
     from ._tickvalssrc import TickvalssrcValidator
@@ -24,6 +25,7 @@ if sys.version_info < (3, 7):
     from ._layer import LayerValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._color import ColorValidator
 else:
@@ -56,6 +58,7 @@ else:
             "._layer.LayerValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._color.ColorValidator",
         ],
