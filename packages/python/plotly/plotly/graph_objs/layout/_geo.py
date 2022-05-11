@@ -593,6 +593,11 @@ class Geo(_BaseLayoutHierarchyType):
                     step.
                 gridcolor
                     Sets the graticule's stroke color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the graticule's stroke width (in px).
                 range
@@ -633,6 +638,11 @@ class Geo(_BaseLayoutHierarchyType):
                     step.
                 gridcolor
                     Sets the graticule's stroke color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the graticule's stroke width (in px).
                 range
@@ -1416,8 +1426,8 @@ class Geo(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Geo 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Geo
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Geo`"""
             )
 

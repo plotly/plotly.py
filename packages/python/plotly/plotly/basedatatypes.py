@@ -3,8 +3,6 @@ from __future__ import absolute_import
 import collections
 from collections import OrderedDict
 import re
-import six
-from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
@@ -24,7 +22,7 @@ from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
 
 from . import shapeannotation
-from . import subplots
+from . import _subplots
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -1183,7 +1181,7 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
-        from plotly.subplots import _get_subplot_ref_for_trace
+        from plotly._subplots import _get_subplot_ref_for_trace
 
         # functions for filtering
         def _filter_by_subplot_ref(trace):
@@ -1202,7 +1200,7 @@ class BaseFigure(object):
             return True
         # If selector is a string then put it at the 'type' key of a dictionary
         # to select objects where "type":selector
-        if isinstance(selector, six.string_types):
+        if isinstance(selector, str):
             selector = dict(type=selector)
         # If selector is a dict, compare the fields
         if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
@@ -1224,7 +1222,7 @@ class BaseFigure(object):
                     return False
             return True
         # If selector is a function, call it with the obj as the argument
-        elif six.callable(selector):
+        elif callable(selector):
             return selector(obj)
         else:
             raise TypeError(
@@ -1825,7 +1823,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         tuple[str | int]
         """
         if (
-            isinstance(key_path_str, string_types)
+            isinstance(key_path_str, str)
             and "." not in key_path_str
             and "[" not in key_path_str
             and "_" not in key_path_str
@@ -2315,7 +2313,7 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
-        from plotly.subplots import _set_trace_grid_reference
+        from plotly._subplots import _set_trace_grid_reference
 
         grid_ref = self._validate_get_grid_ref()
         return _set_trace_grid_reference(
@@ -2415,7 +2413,7 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
-        from plotly.subplots import _get_grid_subplot
+        from plotly._subplots import _get_grid_subplot
 
         return _get_grid_subplot(self, row, col, secondary_y)
 
@@ -4098,7 +4096,15 @@ Invalid property path '{key_path_str}' for layout
 
     add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
 
-    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
+    def add_hline(
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
         self._process_multiple_axis_spanning_shapes(
             dict(
                 type="line",
@@ -4111,6 +4117,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hline",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4118,7 +4125,14 @@ Invalid property path '{key_path_str}' for layout
     add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
 
     def add_vrect(
-        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
@@ -4126,6 +4140,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "vrect",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4133,7 +4148,14 @@ Invalid property path '{key_path_str}' for layout
     add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
 
     def add_hrect(
-        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        y0,
+        y1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
@@ -4141,6 +4163,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hrect",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs,
         )
         return self
@@ -4217,7 +4240,7 @@ Invalid property path '{key_path_str}' for layout
             make_subplots_args["cols"] = cols
         if self._has_subplots():
             raise ValueError("This figure already has subplots.")
-        return subplots.make_subplots(figure=self, **make_subplots_args)
+        return _subplots.make_subplots(figure=self, **make_subplots_args)
 
 
 class BasePlotlyType(object):
@@ -5764,7 +5787,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # ----------------------------------
         # e.g. ('xaxis', 'range') or 'xaxis.range'
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             return prop
         else:
             # Unwrap to scalar string
@@ -5822,7 +5845,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Convert prop to prop tuple
         # --------------------------
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             # Let parent handle non-scalar non-string cases
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
             return
@@ -5859,42 +5882,9 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        if six.PY2:
-
-            def get_attrs(obj):
-                import types
-
-                if not hasattr(obj, "__dict__"):
-                    return []
-                if not isinstance(obj.__dict__, (dict, types.DictProxyType)):
-                    raise TypeError("%s.__dict__ is not a dictionary" "" % obj.__name__)
-                return obj.__dict__.keys()
-
-            def dir2(obj):
-                attrs = set()
-                if not hasattr(obj, "__bases__"):
-                    # obj is an instance
-                    if not hasattr(obj, "__class__"):
-                        # slots
-                        return sorted(get_attrs(obj))
-                    klass = obj.__class__
-                    attrs.update(get_attrs(klass))
-                else:
-                    # obj is a class
-                    klass = obj
-
-                for cls in klass.__bases__:
-                    attrs.update(get_attrs(cls))
-                    attrs.update(dir2(cls))
-                attrs.update(get_attrs(obj))
-                return list(attrs)
-
-            return dir2(self) + sorted(self._subplotid_props)
-        else:
-
-            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
-                self._subplotid_props
-            )
+        return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
+            self._subplotid_props
+        )
 
 
 class BaseTraceHierarchyType(BasePlotlyType):

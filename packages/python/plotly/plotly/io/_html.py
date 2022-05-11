@@ -3,8 +3,6 @@ import os
 from pathlib import Path
 import webbrowser
 
-import six
-
 from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
@@ -22,7 +20,7 @@ window.PlotlyConfig = {MathJaxConfig: 'local'};\
 
 _mathjax_config = """\
 <script type="text/javascript">\
-if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
+if (window.MathJax && window.MathJax.Hub && && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
 
@@ -255,7 +253,7 @@ def to_html(
 
     # ## Handle loading/initializing plotly.js ##
     include_plotlyjs_orig = include_plotlyjs
-    if isinstance(include_plotlyjs, six.string_types):
+    if isinstance(include_plotlyjs, str):
         include_plotlyjs = include_plotlyjs.lower()
 
     # Start/end of requirejs block (if any)
@@ -287,9 +285,7 @@ def to_html(
             win_config=_window_plotly_config
         )
 
-    elif isinstance(include_plotlyjs, six.string_types) and include_plotlyjs.endswith(
-        ".js"
-    ):
+    elif isinstance(include_plotlyjs, str) and include_plotlyjs.endswith(".js"):
         load_plotlyjs = """\
         {win_config}
         <script src="{url}"></script>\
@@ -307,7 +303,7 @@ def to_html(
 
     # ## Handle loading/initializing MathJax ##
     include_mathjax_orig = include_mathjax
-    if isinstance(include_mathjax, six.string_types):
+    if isinstance(include_mathjax, str):
         include_mathjax = include_mathjax.lower()
 
     mathjax_template = """\
@@ -323,9 +319,7 @@ def to_html(
             + _mathjax_config
         )
 
-    elif isinstance(include_mathjax, six.string_types) and include_mathjax.endswith(
-        ".js"
-    ):
+    elif isinstance(include_mathjax, str) and include_mathjax.endswith(".js"):
 
         mathjax_script = (
             mathjax_template.format(url=include_mathjax_orig) + _mathjax_config
@@ -526,7 +520,7 @@ def write_html(
     )
 
     # Check if file is a string
-    if isinstance(file, six.string_types):
+    if isinstance(file, str):
         # Use the standard pathlib constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):  # PurePath is the most general pathlib object.

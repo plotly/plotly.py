@@ -249,6 +249,73 @@ jobs:
       - store_artifacts:
           path: packages/python/plotly/dist
 
+  full_build:
+    docker:
+      - image: continuumio/miniconda3
+        environment:
+          LANG: en_US.UTF-8
+    resource_class: large
+
+    steps:
+      - checkout
+
+      - run:
+          name: Create conda environment
+          command: |
+            conda create -n env --yes python=3.9 conda-build conda-verify
+            conda install -n env -c conda-forge jupyterlab nodejs=12
+            conda init bash
+
+      - run:
+          name: initial NPM Build
+          command: |
+            eval "$(conda shell.bash hook)"
+            conda activate env
+            cd packages/javascript/jupyterlab-plotly
+            npm install
+            npm run build:prod
+            git status
+
+      - run:
+          name: PyPI Build
+          command: |
+            eval "$(conda shell.bash hook)"
+            conda activate env
+            cd packages/python/plotly
+            python setup.py sdist bdist_wheel
+
+      - store_artifacts:
+          path: packages/python/plotly/dist
+          destination: dist
+
+      - run:
+          name: Conda Build
+          command: |
+            eval "$(conda shell.bash hook)"
+            conda activate env
+            cd packages/python/plotly
+            conda build recipe/
+            mkdir conda_dist
+            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 conda_dist
+
+      - store_artifacts:
+          path: packages/python/plotly/conda_dist
+          destination: conda_dist
+
+      - run:
+          name: NPM Pack
+          command: |
+            eval "$(conda shell.bash hook)"
+            conda activate env
+            cd packages/javascript/jupyterlab-plotly
+            npm pack
+            mkdir npm_dist
+            mv jupyterlab-plotly*.tgz npm_dist
+
+      - store_artifacts:
+          path: packages/javascript/jupyterlab-plotly/npm_dist
+          destination: npm_dist
+
   build-doc:
     resource_class: xlarge
     docker:
@@ -359,10 +426,8 @@ jobs:
               cd ../packages/python/plotly
               pip install -e .
               cd ../../../doc
-            fi
-            cd apidoc
-            make html
-            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              cd apidoc
+              make html
               cd _build/html
               touch .nojekyll
               git init
@@ -375,7 +440,6 @@ jobs:
               rm -rf .git
               cd ../..
             fi
-            cd ../..
 
       - store_artifacts:
           path: doc/build
@@ -387,6 +451,9 @@ workflows:
   dev_build:
     jobs:
       - plotlyjs_dev_build
+  release_build:
+    jobs:
+      - full_build
 
   build:
     jobs:

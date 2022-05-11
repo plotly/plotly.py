@@ -11,6 +11,7 @@ class Realaxis(_BaseLayoutHierarchyType):
     _valid_props = {
         "color",
         "gridcolor",
+        "griddash",
         "gridwidth",
         "hoverformat",
         "layer",
@@ -156,6 +157,32 @@ class Realaxis(_BaseLayoutHierarchyType):
     @gridcolor.setter
     def gridcolor(self, val):
         self["gridcolor"] = val
+
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
 
     # gridwidth
     # ---------
@@ -778,6 +805,11 @@ class Realaxis(_BaseLayoutHierarchyType):
             background Individual pieces can override this.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -870,6 +902,7 @@ class Realaxis(_BaseLayoutHierarchyType):
         arg=None,
         color=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         hoverformat=None,
         layer=None,
@@ -911,6 +944,11 @@ class Realaxis(_BaseLayoutHierarchyType):
             background Individual pieces can override this.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -1018,8 +1056,8 @@ class Realaxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.smith.Realaxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.smith.Realaxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.smith.Realaxis`"""
             )
 
@@ -1038,6 +1076,10 @@ an instance of :class:`plotly.graph_objs.layout.smith.Realaxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:

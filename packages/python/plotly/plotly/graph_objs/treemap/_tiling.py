@@ -82,7 +82,7 @@ class Tiling(_BaseTraceHierarchyType):
     def squarifyratio(self):
         """
         When using "squarify" `packing` algorithm, according to https:/
-        /github.com/d3/d3-hierarchy/blob/master/README.md#squarify_rati
+        /github.com/d3/d3-hierarchy/blob/v3.1.1/README.md#squarify_rati
         o this option specifies the desired aspect ratio of the
         generated rectangles. The ratio must be specified as a number
         greater than or equal to one. Note that the orientation of the
@@ -122,7 +122,7 @@ class Tiling(_BaseTraceHierarchyType):
             Sets the inner padding (in px).
         squarifyratio
             When using "squarify" `packing` algorithm, according to
-            https://github.com/d3/d3-hierarchy/blob/master/README.m
+            https://github.com/d3/d3-hierarchy/blob/v3.1.1/README.m
             d#squarify_ratio this option specifies the desired
             aspect ratio of the generated rectangles. The ratio
             must be specified as a number greater than or equal to
@@ -158,7 +158,7 @@ class Tiling(_BaseTraceHierarchyType):
             Sets the inner padding (in px).
         squarifyratio
             When using "squarify" `packing` algorithm, according to
-            https://github.com/d3/d3-hierarchy/blob/master/README.m
+            https://github.com/d3/d3-hierarchy/blob/v3.1.1/README.m
             d#squarify_ratio this option specifies the desired
             aspect ratio of the generated rectangles. The ratio
             must be specified as a number greater than or equal to
@@ -191,8 +191,8 @@ class Tiling(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.treemap.Tiling 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.treemap.Tiling
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.treemap.Tiling`"""
             )
 

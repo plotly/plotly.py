@@ -826,11 +826,9 @@ export class FigureView extends DOMWidgetView {
     this.model.on("change:_py2js_update", this.do_update, this);
     this.model.on("change:_py2js_animate", this.do_animate, this);
 
-    // MathJax configuration
+    // MathJax v2 configuration
     // ---------------------
-    if ((window as any).MathJax) {
-      (window as any).MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
-    }
+    (window as any)?.MathJax?.Hub?.Config?.({ SVG: { font: "STIX-Web" } });
 
     // Get message ids
     // ---------------------
@@ -932,6 +930,7 @@ export class FigureView extends DOMWidgetView {
         // Plotly.js to size the figure to fill the available element
         this.perform_render();
         break;
+      case "after-show":
       case "resize":
         this.autosizeFigure();
         break;

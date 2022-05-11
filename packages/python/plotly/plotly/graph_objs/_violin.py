@@ -678,7 +678,7 @@ class Violin(_BaseTraceType):
             Supported dict properties:
 
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -969,9 +969,9 @@ class Violin(_BaseTraceType):
     def scalemode(self):
         """
         Sets the metric by which the width of each violin is
-        determined."width" means each violin has the same (max)
-        width*count* means the violins are scaled by the number of
-        sample points makingup each violin.
+        determined. "width" means each violin has the same (max) width
+        "count" means the violins are scaled by the number of sample
+        points making up each violin.
 
         The 'scalemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1762,9 +1762,9 @@ class Violin(_BaseTraceType):
             linked together
         scalemode
             Sets the metric by which the width of each violin is
-            determined."width" means each violin has the same (max)
-            width*count* means the violins are scaled by the number
-            of sample points makingup each violin.
+            determined. "width" means each violin has the same
+            (max) width "count" means the violins are scaled by the
+            number of sample points making up each violin.
         selected
             :class:`plotly.graph_objects.violin.Selected` instance
             or dict with compatible properties
@@ -2152,9 +2152,9 @@ class Violin(_BaseTraceType):
             linked together
         scalemode
             Sets the metric by which the width of each violin is
-            determined."width" means each violin has the same (max)
-            width*count* means the violins are scaled by the number
-            of sample points makingup each violin.
+            determined. "width" means each violin has the same
+            (max) width "count" means the violins are scaled by the
+            number of sample points making up each violin.
         selected
             :class:`plotly.graph_objects.violin.Selected` instance
             or dict with compatible properties
@@ -2313,8 +2313,8 @@ class Violin(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Violin 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Violin
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Violin`"""
             )
 

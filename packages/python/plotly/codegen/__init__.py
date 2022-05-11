@@ -267,7 +267,7 @@ def perform_codegen():
         root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
     optional_figure_widget_import = f"""
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
         from distutils.version import LooseVersion as _LooseVersion

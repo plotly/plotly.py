@@ -32,9 +32,9 @@ class Line(_BaseTraceHierarchyType):
         """
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
-        `line.colorscale`. Has an effect only if in `line.color`is set
+        `line.colorscale`. Has an effect only if in `line.color` is set
         to a numerical array. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
+        `autocolorscale` is true, the default palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
@@ -58,8 +58,8 @@ class Line(_BaseTraceHierarchyType):
         """
         Determines whether or not the color domain is computed with
         respect to the input data (here in `line.color`) or the bounds
-        set in `line.cmin` and `line.cmax`  Has an effect only if in
-        `line.color`is set to a numerical array. Defaults to `false`
+        set in `line.cmin` and `line.cmax` Has an effect only if in
+        `line.color` is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
 
         The 'cauto' property must be specified as a bool
@@ -81,7 +81,7 @@ class Line(_BaseTraceHierarchyType):
     def cmax(self):
         """
         Sets the upper bound of the color domain. Has an effect only if
-        in `line.color`is set to a numerical array. Value should have
+        in `line.color` is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmin` must
         be set as well.
 
@@ -105,7 +105,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the mid-point of the color domain by scaling `line.cmin`
         and/or `line.cmax` to be equidistant to this point. Has an
-        effect only if in `line.color`is set to a numerical array.
+        effect only if in `line.color` is set to a numerical array.
         Value should have the same units as in `line.color`. Has no
         effect when `line.cauto` is `false`.
 
@@ -128,7 +128,7 @@ class Line(_BaseTraceHierarchyType):
     def cmin(self):
         """
         Sets the lower bound of the color domain. Has an effect only if
-        in `line.color`is set to a numerical array. Value should have
+        in `line.color` is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmax` must
         be set as well.
 
@@ -150,7 +150,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets thelinecolor. It accepts either a specific color or an
+        Sets the line color. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to `line.cmin`
         and `line.cmax` if set.
@@ -512,17 +512,17 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale. Has an effect only if in `line.color`is
+        Sets the colorscale. Has an effect only if in `line.color` is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
         hex, hsl, hsv, or named color string. At minimum, a mapping for
         the lowest (0) and highest (1) values are required. For
         example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
-        control the bounds of the colorscale in color space,
-        use`line.cmin` and `line.cmax`. Alternatively, `colorscale` may
-        be a palette name string of the following list: Blackbody,Bluer
-        ed,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Por
-        tland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+        control the bounds of the colorscale in color space, use
+        `line.cmin` and `line.cmax`. Alternatively, `colorscale` may be
+        a palette name string of the following list: Blackbody,Bluered,
+        Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portla
+        nd,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
 
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -609,7 +609,7 @@ class Line(_BaseTraceHierarchyType):
     def reversescale(self):
         """
         Reverses the color mapping if true. Has an effect only if in
-        `line.color`is set to a numerical array. If true, `line.cmin`
+        `line.color` is set to a numerical array. If true, `line.cmin`
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
 
@@ -632,7 +632,7 @@ class Line(_BaseTraceHierarchyType):
     def showscale(self):
         """
         Determines whether or not a colorbar is displayed for this
-        trace. Has an effect only if in `line.color`is set to a
+        trace. Has an effect only if in `line.color` is set to a
         numerical array.
 
         The 'showscale' property must be specified as a bool
@@ -677,37 +677,37 @@ class Line(_BaseTraceHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `line.colorscale`. Has an effect only if in
-            `line.color`is set to a numerical array. In case
+            `line.color` is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
-            true, the default  palette will be chosen according to
+            true, the default palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `line.color`)
-            or the bounds set in `line.cmin` and `line.cmax`  Has
-            an effect only if in `line.color`is set to a numerical
+            or the bounds set in `line.cmin` and `line.cmax` Has an
+            effect only if in `line.color` is set to a numerical
             array. Defaults to `false` when `line.cmin` and
             `line.cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
         cmid
             Sets the mid-point of the color domain by scaling
             `line.cmin` and/or `line.cmax` to be equidistant to
-            this point. Has an effect only if in `line.color`is set
-            to a numerical array. Value should have the same units
-            as in `line.color`. Has no effect when `line.cauto` is
-            `false`.
+            this point. Has an effect only if in `line.color` is
+            set to a numerical array. Value should have the same
+            units as in `line.color`. Has no effect when
+            `line.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmax` must be set as well.
         color
-            Sets thelinecolor. It accepts either a specific color
+            Sets the line color. It accepts either a specific color
             or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `line.cmin` and `line.cmax` if
@@ -724,18 +724,18 @@ class Line(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
-            `line.color`is set to a numerical array. The colorscale
-            must be an array containing arrays mapping a normalized
-            value to an rgb, rgba, hex, hsl, hsv, or named color
-            string. At minimum, a mapping for the lowest (0) and
-            highest (1) values are required. For example, `[[0,
-            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-            bounds of the colorscale in color space, use`line.cmin`
-            and `line.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Blackbody,Bl
-            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
-            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
-            d.
+            `line.color` is set to a numerical array. The
+            colorscale must be an array containing arrays mapping a
+            normalized value to an rgb, rgba, hex, hsl, hsv, or
+            named color string. At minimum, a mapping for the
+            lowest (0) and highest (1) values are required. For
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+            To control the bounds of the colorscale in color space,
+            use `line.cmin` and `line.cmax`. Alternatively,
+            `colorscale` may be a palette name string of the
+            following list: Blackbody,Bluered,Blues,Cividis,Earth,E
+            lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+            Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
@@ -743,14 +743,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the dash style of the lines.
         reversescale
             Reverses the color mapping if true. Has an effect only
-            if in `line.color`is set to a numerical array. If true,
-            `line.cmin` will correspond to the last color in the
-            array and `line.cmax` will correspond to the first
+            if in `line.color` is set to a numerical array. If
+            true, `line.cmin` will correspond to the last color in
+            the array and `line.cmax` will correspond to the first
             color.
         showscale
             Determines whether or not a colorbar is displayed for
-            this trace. Has an effect only if in `line.color`is set
-            to a numerical array.
+            this trace. Has an effect only if in `line.color` is
+            set to a numerical array.
         width
             Sets the line width (in px).
         """
@@ -787,37 +787,37 @@ class Line(_BaseTraceHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `line.colorscale`. Has an effect only if in
-            `line.color`is set to a numerical array. In case
+            `line.color` is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
-            true, the default  palette will be chosen according to
+            true, the default palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `line.color`)
-            or the bounds set in `line.cmin` and `line.cmax`  Has
-            an effect only if in `line.color`is set to a numerical
+            or the bounds set in `line.cmin` and `line.cmax` Has an
+            effect only if in `line.color` is set to a numerical
             array. Defaults to `false` when `line.cmin` and
             `line.cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
         cmid
             Sets the mid-point of the color domain by scaling
             `line.cmin` and/or `line.cmax` to be equidistant to
-            this point. Has an effect only if in `line.color`is set
-            to a numerical array. Value should have the same units
-            as in `line.color`. Has no effect when `line.cauto` is
-            `false`.
+            this point. Has an effect only if in `line.color` is
+            set to a numerical array. Value should have the same
+            units as in `line.color`. Has no effect when
+            `line.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmax` must be set as well.
         color
-            Sets thelinecolor. It accepts either a specific color
+            Sets the line color. It accepts either a specific color
             or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `line.cmin` and `line.cmax` if
@@ -834,18 +834,18 @@ class Line(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
-            `line.color`is set to a numerical array. The colorscale
-            must be an array containing arrays mapping a normalized
-            value to an rgb, rgba, hex, hsl, hsv, or named color
-            string. At minimum, a mapping for the lowest (0) and
-            highest (1) values are required. For example, `[[0,
-            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-            bounds of the colorscale in color space, use`line.cmin`
-            and `line.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Blackbody,Bl
-            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
-            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
-            d.
+            `line.color` is set to a numerical array. The
+            colorscale must be an array containing arrays mapping a
+            normalized value to an rgb, rgba, hex, hsl, hsv, or
+            named color string. At minimum, a mapping for the
+            lowest (0) and highest (1) values are required. For
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+            To control the bounds of the colorscale in color space,
+            use `line.cmin` and `line.cmax`. Alternatively,
+            `colorscale` may be a palette name string of the
+            following list: Blackbody,Bluered,Blues,Cividis,Earth,E
+            lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+            Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
@@ -853,14 +853,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the dash style of the lines.
         reversescale
             Reverses the color mapping if true. Has an effect only
-            if in `line.color`is set to a numerical array. If true,
-            `line.cmin` will correspond to the last color in the
-            array and `line.cmax` will correspond to the first
+            if in `line.color` is set to a numerical array. If
+            true, `line.cmin` will correspond to the last color in
+            the array and `line.cmax` will correspond to the first
             color.
         showscale
             Determines whether or not a colorbar is displayed for
-            this trace. Has an effect only if in `line.color`is set
-            to a numerical array.
+            this trace. Has an effect only if in `line.color` is
+            set to a numerical array.
         width
             Sets the line width (in px).
 
@@ -885,8 +885,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatter3d.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatter3d.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatter3d.Line`"""
             )
 

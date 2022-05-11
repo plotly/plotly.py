@@ -25,6 +25,7 @@ class Aaxis(_BaseTraceHierarchyType):
         "exponentformat",
         "fixedrange",
         "gridcolor",
+        "griddash",
         "gridwidth",
         "labelpadding",
         "labelprefix",
@@ -34,6 +35,7 @@ class Aaxis(_BaseTraceHierarchyType):
         "minexponent",
         "minorgridcolor",
         "minorgridcount",
+        "minorgriddash",
         "minorgridwidth",
         "nticks",
         "range",
@@ -539,6 +541,32 @@ class Aaxis(_BaseTraceHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
+
     # gridwidth
     # ---------
     @property
@@ -799,6 +827,32 @@ class Aaxis(_BaseTraceHierarchyType):
     @minorgridcount.setter
     def minorgridcount(self, val):
         self["minorgridcount"] = val
+
+    # minorgriddash
+    # -------------
+    @property
+    def minorgriddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'minorgriddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["minorgriddash"]
+
+    @minorgriddash.setter
+    def minorgriddash(self, val):
+        self["minorgriddash"] = val
 
     # minorgridwidth
     # --------------
@@ -1719,6 +1773,11 @@ class Aaxis(_BaseTraceHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the axis line color.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the axis line.
         labelpadding
@@ -1737,6 +1796,11 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the color of the grid lines.
         minorgridcount
             Sets the number of minor grid ticks per major grid tick
+        minorgriddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         minorgridwidth
             Sets the width (in px) of the grid lines.
         nticks
@@ -1888,6 +1952,7 @@ class Aaxis(_BaseTraceHierarchyType):
         exponentformat=None,
         fixedrange=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         labelpadding=None,
         labelprefix=None,
@@ -1897,6 +1962,7 @@ class Aaxis(_BaseTraceHierarchyType):
         minexponent=None,
         minorgridcolor=None,
         minorgridcount=None,
+        minorgriddash=None,
         minorgridwidth=None,
         nticks=None,
         range=None,
@@ -2002,6 +2068,11 @@ class Aaxis(_BaseTraceHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the axis line color.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the axis line.
         labelpadding
@@ -2020,6 +2091,11 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the color of the grid lines.
         minorgridcount
             Sets the number of minor grid ticks per major grid tick
+        minorgriddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         minorgridwidth
             Sets the width (in px) of the grid lines.
         nticks
@@ -2167,8 +2243,8 @@ class Aaxis(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.carpet.Aaxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.carpet.Aaxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
             )
 
@@ -2243,6 +2319,10 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:
@@ -2279,6 +2359,10 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
         _v = minorgridcount if minorgridcount is not None else _v
         if _v is not None:
             self["minorgridcount"] = _v
+        _v = arg.pop("minorgriddash", None)
+        _v = minorgriddash if minorgriddash is not None else _v
+        if _v is not None:
+            self["minorgriddash"] = _v
         _v = arg.pop("minorgridwidth", None)
         _v = minorgridwidth if minorgridwidth is not None else _v
         if _v is not None:

@@ -169,6 +169,11 @@ class Carpet(_BaseTraceType):
                     able. If true, then zoom is disabled.
                 gridcolor
                     Sets the axis line color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the axis line.
                 labelpadding
@@ -189,6 +194,11 @@ class Carpet(_BaseTraceType):
                 minorgridcount
                     Sets the number of minor grid ticks per major
                     grid tick
+                minorgriddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 minorgridwidth
                     Sets the width (in px) of the grid lines.
                 nticks
@@ -479,6 +489,11 @@ class Carpet(_BaseTraceType):
                     able. If true, then zoom is disabled.
                 gridcolor
                     Sets the axis line color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the width (in px) of the axis line.
                 labelpadding
@@ -499,6 +514,11 @@ class Carpet(_BaseTraceType):
                 minorgridcount
                     Sets the number of minor grid ticks per major
                     grid tick
+                minorgriddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 minorgridwidth
                     Sets the width (in px) of the grid lines.
                 nticks
@@ -1709,8 +1729,8 @@ class Carpet(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Carpet 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Carpet
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Carpet`"""
             )
 

@@ -24,7 +24,7 @@ class Marker(_BaseTraceHierarchyType):
             Supported dict properties:
 
                 color
-                    Sets themarker.linecolor. It accepts either a
+                    Sets the marker.line color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -146,8 +146,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.choroplethmapbox.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.choroplethmapbox.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.choroplethmapbox.Marker`"""
             )
 

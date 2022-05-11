@@ -6,7 +6,6 @@ import inspect
 import os
 from os.path import isdir
 
-import six
 from plotly import utils, optional_imports
 from plotly.io import to_json, to_image, write_image, write_html
 from plotly.io._orca import ensure_server
@@ -237,7 +236,7 @@ _window_plotly_config = """\
 window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 
 _mathjax_config = """\
-if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
 
 
 class HtmlRenderer(MimetypeRenderer):
@@ -666,7 +665,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     using, new, autoraise:
         See docstrings in webbrowser.get and webbrowser.open
     """
-    if isinstance(html, six.string_types):
+    if isinstance(html, str):
         html = html.encode("utf8")
 
     browser = None

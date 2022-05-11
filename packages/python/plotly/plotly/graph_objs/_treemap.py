@@ -639,9 +639,9 @@ class Treemap(_BaseTraceType):
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if colorsis set to a numerical
+                    effect only if colors is set to a numerical
                     array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default  palette
+                    `autocolorscale` is true, the default palette
                     will be chosen according to whether numbers in
                     the `color` array are all positive, all
                     negative or mixed.
@@ -649,13 +649,13 @@ class Treemap(_BaseTraceType):
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     colors) or the bounds set in `marker.cmin` and
-                    `marker.cmax`  Has an effect only if colorsis
+                    `marker.cmax` Has an effect only if colors is
                     set to a numerical array. Defaults to `false`
                     when `marker.cmin` and `marker.cmax` are set by
                     the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if colorsis set to a numerical
+                    an effect only if colors is set to a numerical
                     array. Value should have the same units as
                     colors and if set, `marker.cmin` must be set as
                     well.
@@ -663,12 +663,12 @@ class Treemap(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if colorsis set to a numerical array.
+                    only if colors is set to a numerical array.
                     Value should have the same units as colors. Has
                     no effect when `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if colorsis set to a numerical
+                    an effect only if colors is set to a numerical
                     array. Value should have the same units as
                     colors and if set, `marker.cmax` must be set as
                     well.
@@ -691,7 +691,7 @@ class Treemap(_BaseTraceType):
                     used to pick the sector colors.
                 colorscale
                     Sets the colorscale. Has an effect only if
-                    colorsis set to a numerical array. The
+                    colors is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -699,7 +699,7 @@ class Treemap(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -727,7 +727,7 @@ class Treemap(_BaseTraceType):
                     ` instance or dict with compatible properties
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if colorsis set to a numerical
+                    effect only if colors is set to a numerical
                     array. If true, `marker.cmin` will correspond
                     to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -735,7 +735,7 @@ class Treemap(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    colorsis set to a numerical array.
+                    colors is set to a numerical array.
 
         Returns
         -------
@@ -1314,7 +1314,7 @@ class Treemap(_BaseTraceType):
                 squarifyratio
                     When using "squarify" `packing` algorithm,
                     according to https://github.com/d3/d3-hierarchy
-                    /blob/master/README.md#squarify_ratio this
+                    /blob/v3.1.1/README.md#squarify_ratio this
                     option specifies the desired aspect ratio of
                     the generated rectangles. The ratio must be
                     specified as a number greater than or equal to
@@ -2029,8 +2029,8 @@ class Treemap(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Treemap 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Treemap
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Treemap`"""
             )
 

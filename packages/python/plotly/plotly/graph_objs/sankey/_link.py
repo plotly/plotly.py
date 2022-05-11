@@ -117,7 +117,7 @@ class Link(_BaseTraceHierarchyType):
                     lowest (0) and highest (1) values are required.
                     For example, `[[0, 'rgb(0,0,255)'], [1,
                     'rgb(255,0,0)']]`. To control the bounds of the
-                    colorscale in color space, use`cmin` and
+                    colorscale in color space, use `cmin` and
                     `cmax`. Alternatively, `colorscale` may be a
                     palette name string of the following list: Blac
                     kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -831,8 +831,8 @@ class Link(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.Link 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.Link
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.Link`"""
             )
 
