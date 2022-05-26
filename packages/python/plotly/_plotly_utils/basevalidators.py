@@ -1795,8 +1795,6 @@ class FlaglistValidator(BaseValidator):
         self.extras = extras if extras is not None else []
         self.array_ok = array_ok
 
-        self.all_flags = self.flags + self.extras
-
     def description(self):
 
         desc = (
@@ -1835,24 +1833,21 @@ class FlaglistValidator(BaseValidator):
         return desc
 
     def vc_scalar(self, v):
+        if isinstance(v, str):
+            v = v.strip()
+
+        if v in self.extras:
+            return v
+
         if not isinstance(v, str):
             return None
 
         # To be generous we accept flags separated on plus ('+'),
-        # or comma (',')
+        # or comma (',') and we accept whitespace around the flags
         split_vals = [e.strip() for e in re.split("[,+]", v)]
 
         # Are all flags valid names?
-        all_flags_valid = all([f in self.all_flags for f in split_vals])
-
-        # Are any 'extras' flags present?
-        has_extras = any([f in self.extras for f in split_vals])
-
-        # For flaglist to be valid all flags must be valid, and if we have
-        # any extras present, there must be only one flag (the single extras
-        # flag)
-        is_valid = all_flags_valid and (not has_extras or len(split_vals) == 1)
-        if is_valid:
+        if all(f in self.flags for f in split_vals):
             return "+".join(split_vals)
         else:
             return None
