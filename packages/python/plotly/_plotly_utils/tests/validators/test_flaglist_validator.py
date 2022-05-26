@@ -23,7 +23,11 @@ def validator_extra():
 @pytest.fixture()
 def validator_extra_aok():
     return FlaglistValidator(
-        "prop", "parent", flags=FLAGS, extras=EXTRAS, array_ok=True,
+        "prop",
+        "parent",
+        flags=FLAGS,
+        extras=EXTRAS,
+        array_ok=True,
     )
 
 
