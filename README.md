@@ -45,7 +45,6 @@ fig.show()
 
 See the [Python documentation](https://plotly.com/python/) for more examples.
 
-Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-is-here-offline-only-express-first-displayable-anywhere-fc444e5659ee)
 
 ## Overview
 
