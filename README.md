@@ -187,21 +187,6 @@ or conda
 conda install -c plotly plotly-geo=1.0.0
 ```
 
-### Chart Studio support
-
-The `chart-studio` package can be used to upload plotly figures to Plotly's Chart
-Studio Cloud or On-Prem service. This package can be installed using pip...
-
-```
-pip install chart-studio==1.1.0
-```
-
-or conda
-
-```
-conda install -c plotly chart-studio=1.1.0
-```
-
 ## Migration
 
 If you're migrating from plotly.py v3 to v4, please check out the [Version 4 migration guide](https://plotly.com/python/v4-migration/)
