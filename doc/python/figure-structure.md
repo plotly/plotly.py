@@ -87,7 +87,7 @@ The first of the three top-level attributes of a figure is `data`, whose value m
 The second of the three top-level attributes of a figure is `layout`, whose value is referred to in text as "the layout" and must be a dict, containing attributes that control positioning and configuration of non-data-related parts of the figure such as:
 
   * Dimensions and margins, which define the bounds of "paper coordinates" (see below)
-  * Figure-wide defaults: [templates](/python/templates/), [fonts](/python/figure-labels/), colors, hover-label and modebar defaults
+  * Figure-wise defaults: [templates](/python/templates/), [fonts](/python/figure-labels/), colors, hover-label and modebar defaults
   * [Title](/python/figure-labels/) and [legend](/python/legend/) (positionable in container and/or paper coordinates)
   * [Color axes and associated color bars](/python/colorscales/) (positionable in paper coordinates)
   * Subplots of various types on which can be drawn multiple traces and which are positioned in paper coordinates:
