@@ -1960,8 +1960,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     all_same = True  # Variable indicating if grouping can be avoided
     for g in grouper_:
         if g is not one_group:
-            all_same &= (args["data_frame"][g].nunique() == 1)
-        if not all_same: break  # early stopping if not all the same
+            all_same &= args["data_frame"][g].nunique() == 1
+        if not all_same:
+            break  # early stopping if not all the same
 
     if all_same:
         # Do not perform an expensive groupby operation when there are either
