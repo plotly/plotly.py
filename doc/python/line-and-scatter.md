@@ -100,7 +100,7 @@ IFrame(snippet_url + 'line-and-scatter', width='100%', height=1200)
 
 ### Scatter plots and Categorical Axes
 
-Scatters plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
+Scatter plots can be made using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
 
 Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
 
