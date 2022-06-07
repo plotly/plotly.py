@@ -1957,14 +1957,15 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     )
     grouper_ = [x.grouper or one_group for x in grouped_mappings] or [one_group]
 
-    all_same = True  # Variable indicating if grouping can be avoided
+    all_same_group = True  # variable indicating if grouping can be avoided
     for g in grouper_:
         if g is not one_group:
-            all_same &= args["data_frame"][g].nunique() == 1
-        if not all_same:
+            arr = args["data_frame"][g].values
+            all_same_group &= (arr[0] == arr).all(axis=0)
+        if not all_same_group:
             break  # early stopping if not all the same
 
-    if all_same:
+    if all_same_group:
         # Do not perform an expensive groupby operation when there are either
         # no groups to group by, or when the group has only one (i.e., the same) value
         grouper = [g for g in grouper_ if g is not one_group]
@@ -1974,13 +1975,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         sorted_group_names = [tuple(args["data_frame"][g].iloc[0] for g in orders)]
         if len(sorted_group_names):  # check for length to support also empty plots
             assert len(sorted_group_names) == 1  # should be only for 1 variable
-            all_same_group_names = list(sorted_group_names[0])  # convert tuple to list
+            sorted_group_names = list(sorted_group_names[0])  # convert [tuple] to list
             for idx in range(len(grouper_)):
                 # insert "" in the list when no grouping was used
                 if grouper_[idx] is one_group:
-                    all_same_group_names.insert(idx, "")
-            all_same_group_names = tuple(all_same_group_names)  # convert list to tuple
-            sorted_group_names = [all_same_group_names]
+                    sorted_group_names.insert(idx, "")
+            sorted_group_names = [tuple(sorted_group_names)]  # convert list to [tuple]
     else:
         grouper = grouper_
         grouped = args["data_frame"].groupby(grouper, sort=False)
@@ -2015,7 +2015,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_name_labels = None
     facet_col_wrap = args.get("facet_col_wrap", 0)
     for group_name in sorted_group_names:
-        if all_same:
+        if all_same_group:
             # No expensive get_group operation when all data from the same group
             group = args["data_frame"]
         else:
