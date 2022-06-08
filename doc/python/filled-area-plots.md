@@ -63,7 +63,7 @@ IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 
 ### Pattern Fills
 
-*New in v5.0*
+*New in v5.7*
 
 Area charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
 
