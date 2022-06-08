@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.8.1] - 2022-06-08
+
+### Fixed
+
+  - Fixed a syntax error that caused rendering issues in Databricks notebooks and likely elsewhere. [#3763](https://github.com/plotly/plotly.py/pull/3763) with thanks to [@fwetdb](https://github.com/fwetdb)
+
+
 ## [5.8.0] - 2022-05-09
 
 ### Fixed
