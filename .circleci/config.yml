@@ -272,7 +272,7 @@ jobs:
             eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/javascript/jupyterlab-plotly
-            npm install
+            npm ci
             npm run build:prod
             git status
 
@@ -283,10 +283,12 @@ jobs:
             conda activate env
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
+            mkdir pypi_dist
+            tar czf pypi_dist/all.tgz dist
 
       - store_artifacts:
-          path: packages/python/plotly/dist
-          destination: dist
+          path: packages/python/plotly/pypi_dist
+          destination: pypi_dist
 
       - run:
           name: Conda Build
