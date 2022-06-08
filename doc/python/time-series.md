@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.0
+    version: 3.9.7
   plotly:
     description: How to plot date and time in python.
     display_as: financial
@@ -139,9 +139,9 @@ fig.show()
 
 _new in 5.8_
 
-You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. Available properties include: `tickmode`, `tickvals`, `tickcolor`, `ticklen`, `tickwidth`, `dtick`, `tick0`, `nticks`, `ticks`, `showgrid`, `gridcolor`, `griddash`, and `gridwidth`.
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
 
-In this example, we've added minor ticks to the inside of the x-axis and turned on grid lines.
+In this example, we've added minor ticks to the inside of the x-axis and turned on minor grid lines.
 
 ```python
 import pandas as pd
@@ -159,7 +159,7 @@ fig.show()
 
 _new in 5.8_
 
-You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*3.6e6` (the number of milliseconds in a week) and setting `tick0="2016-07-04"` (the first Monday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
+You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*60*60*1000` (the number of milliseconds in a week) and setting `tick0="2016-07-03"` (the first Sunday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
 
 ```python
 import pandas as pd
@@ -169,7 +169,17 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finan
 df = df.loc[(df["Date"] >= "2016-07-01") & (df["Date"] <= "2016-12-01")]
 
 fig = px.line(df, x='Date', y='AAPL.High')
-fig.update_xaxes(ticks= "outside", ticklabelmode= "period", tickcolor= "black", tickwidth=2, ticklen=10, minor=dict(ticks="outside", dtick=7*24*3.6e6,  tick0="2016-07-04", griddash='dot', gridcolor='pink'))
+fig.update_xaxes(ticks= "outside",
+                 ticklabelmode= "period", 
+                 tickcolor= "black", 
+                 ticklen=10, 
+                 minor=dict(
+                     ticklen=4,  
+                     dtick=7*24*60*60*1000,  
+                     tick0="2016-07-03", 
+                     griddash='dot', 
+                     gridcolor='white')
+                )
 
 fig.show()
 ```
