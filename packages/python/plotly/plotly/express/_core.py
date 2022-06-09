@@ -1939,7 +1939,7 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         grouped = df.groupby(grouper, sort=False)
-        group_indices = grouped.groups
+        group_indices = grouped.indices
         sorted_group_names = [g if len(grouper) != 1 else (g,) for g in group_indices]
 
         for i, col in reversed(list(enumerate(grouper))):
@@ -1951,7 +1951,9 @@ def get_groups_and_orders(args, grouper):
                     else -1,
                 )
 
-        groups = {s: grouped.get_group(s) for s in sorted_group_names}
+        groups = {
+            s: grouped.get_group(s if len(s) > 1 else s[0]) for s in sorted_group_names
+        }
     return groups, orders
 
 
@@ -2218,6 +2220,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     fig.update_layout(layout_patch)
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
+    for f in frame_list:
+        f["name"] = str(f["name"])
     fig.frames = frame_list if len(frames) > 1 else []
 
     if args.get("trendline") and args.get("trendline_scope", "trace") == "overall":
