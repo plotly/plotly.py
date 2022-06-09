@@ -1916,10 +1916,17 @@ def get_orderings(args, grouper, grouped, all_same_group):
     of a single dimension-group
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
+    sorted_group_names = []
 
     if all_same_group:
-        sorted_group_names = [("",) * len(grouper)]
-        return orders, sorted_group_names
+        for col in grouper:
+            if col != one_group:
+                single_val = args["data_frame"][col].iloc[0]
+                sorted_group_names.append(single_val)
+                orders[col] = [single_val]
+            else:
+                sorted_group_names.append("")
+        return orders, [tuple(sorted_group_names)]
 
     for col in grouper:
         if col != one_group:
@@ -1929,7 +1936,6 @@ def get_orderings(args, grouper, grouped, all_same_group):
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
-    sorted_group_names = []
     for group_name in grouped.groups:
         if len(grouper) == 1:
             group_name = (group_name,)
