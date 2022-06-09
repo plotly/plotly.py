@@ -1938,7 +1938,8 @@ def get_groups_and_orders(args, grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        group_indices = df.groupby(grouper, sort=False).indices
+        grouped = df.groupby(grouper, sort=False)
+        group_indices = grouped.indices
         sorted_group_names = [g if len(grouper) != 1 else (g,) for g in group_indices]
 
         for i, col in reversed(list(enumerate(grouper))):
@@ -1950,7 +1951,7 @@ def get_groups_and_orders(args, grouper):
                     else -1,
                 )
 
-        groups = {s: df.iloc[group_indices[s]] for s in sorted_group_names}
+        groups = {s: grouped.get_group(s) for s in sorted_group_names}
     return groups, orders
 
 
