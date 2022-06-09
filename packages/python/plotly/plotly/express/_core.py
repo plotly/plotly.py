@@ -1898,7 +1898,6 @@ def infer_config(args, constructor, trace_patch, layout_patch):
 
     # Create grouped mappings
     grouped_mappings = [make_mapping(args, a) for a in grouped_attrs]
-    grouped_mappings = [x for x in grouped_mappings if x.grouper]
 
     # Create trace specs
     trace_specs = make_trace_spec(args, constructor, attrs, trace_patch)
@@ -1918,16 +1917,17 @@ def get_orderings(args, grouper, grouped):
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
 
-    if grouper == [one_group]:
-        sorted_group_names = [("",)]
+    if _all_one_group(grouper):
+        sorted_group_names = [("",) * len(grouper)]
         return orders, sorted_group_names
 
     for col in grouper:
-        uniques = list(args["data_frame"][col].unique())
-        if col not in orders:
-            orders[col] = uniques
-        else:
-            orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
+        if col != one_group:
+            uniques = list(args["data_frame"][col].unique())
+            if col not in orders:
+                orders[col] = uniques
+            else:
+                orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
     sorted_group_names = []
     for group_name in grouped.groups:
@@ -1936,11 +1936,19 @@ def get_orderings(args, grouper, grouped):
         sorted_group_names.append(group_name)
 
     for i, col in reversed(list(enumerate(grouper))):
-        sorted_group_names = sorted(
-            sorted_group_names,
-            key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
-        )
+        if col != one_group:
+            sorted_group_names = sorted(
+                sorted_group_names,
+                key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
+            )
     return orders, sorted_group_names
+
+
+def _all_one_group(grouper):
+    for g in grouper:
+        if g != one_group:
+            return False
+    return True
 
 
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
@@ -1958,12 +1966,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch
     )
-    if len(grouped_mappings):
-        grouper = [x.grouper for x in grouped_mappings]
+    grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
+    grouped = None
+    if not _all_one_group(grouper):
         grouped = args["data_frame"].groupby(grouper, sort=False)
-    else:
-        grouper = [one_group]
-        grouped = None
 
     orders, sorted_group_names = get_orderings(args, grouper, grouped)
 
