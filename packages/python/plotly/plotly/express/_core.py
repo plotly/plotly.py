@@ -1939,7 +1939,7 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         grouped = df.groupby(grouper, sort=False)
-        group_indices = grouped.indices
+        group_indices = grouped.groups
         sorted_group_names = [g if len(grouper) != 1 else (g,) for g in group_indices]
 
         for i, col in reversed(list(enumerate(grouper))):
