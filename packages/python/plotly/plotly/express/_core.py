@@ -1904,7 +1904,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     return trace_specs, grouped_mappings, sizeref, show_colorbar
 
 
-def get_orderings(args, grouper, grouped):
+def get_orderings(args, grouper, grouped, all_same_group):
     """
     `orders` is the user-supplied ordering with the remaining data-frame-supplied
     ordering appended if the column is used for grouping. It includes anything the user
@@ -1917,7 +1917,7 @@ def get_orderings(args, grouper, grouped):
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
 
-    if _all_one_group(grouper):
+    if all_same_group:
         sorted_group_names = [("",) * len(grouper)]
         return orders, sorted_group_names
 
@@ -1944,10 +1944,12 @@ def get_orderings(args, grouper, grouped):
     return orders, sorted_group_names
 
 
-def _all_one_group(grouper):
-    for g in grouper:
+def _all_same_group(args, grouper):
+    for g in set(grouper):
         if g != one_group:
-            return False
+            arr = args["data_frame"][g].values
+            if not (arr[0] == arr).all(axis=0):
+                return False
     return True
 
 
@@ -1968,10 +1970,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     grouped = None
-    if not _all_one_group(grouper):
+    all_same_group = _all_same_group(args, grouper)
+    if not all_same_group:
         grouped = args["data_frame"].groupby(grouper, sort=False)
 
-    orders, sorted_group_names = get_orderings(args, grouper, grouped)
+    orders, sorted_group_names = get_orderings(args, grouper, grouped, all_same_group)
 
     col_labels = []
     row_labels = []
