@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Added
+
+  - `pattern_shape` options now available in `px.timeline()`
+
 ## [5.8.2] - 2022-06-10
 
 ### Fixed
