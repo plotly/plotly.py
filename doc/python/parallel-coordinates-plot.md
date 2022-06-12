@@ -165,7 +165,10 @@ fig = go.Figure(data=
             dict(range = [9,19984],
                  label = 'Assembly Penalty Wt', values = df['assemblyPW']),
             dict(range = [49000,568000],
-                 label = 'Height st Width', values = df['HstW'])])
+                 label = 'Height st Width', values = df['HstW'])]),
+        unselected = dict(
+            line = dict(color = 'red',
+                        opacity = 0.2))
     )
 )
 fig.show()

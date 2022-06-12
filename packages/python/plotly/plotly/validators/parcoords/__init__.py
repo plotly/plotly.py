@@ -2,6 +2,7 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._unselected import UnselectedValidator
     from ._visible import VisibleValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
@@ -31,6 +32,7 @@ else:
         __name__,
         [],
         [
+            "._unselected.UnselectedValidator",
             "._visible.VisibleValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",

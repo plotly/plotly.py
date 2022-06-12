@@ -130,6 +130,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
+            unselected
+                Sets the color of lines in the background,
+                i.e. unselected lines.
 """,
             ),
             **kwargs,
