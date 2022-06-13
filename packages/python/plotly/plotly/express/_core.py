@@ -1964,7 +1964,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
-    if constructor in [go.Pie, go.Funnelarea]:
+    if constructor in [go.Pie]:
         args, trace_patch = process_dataframe_pie(args, trace_patch)
     if constructor == "timeline":
         constructor = go.Bar
