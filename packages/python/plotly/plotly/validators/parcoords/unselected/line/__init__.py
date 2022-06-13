@@ -10,8 +10,5 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._color.ColorValidator",
-            "._opacity.CminValidator"
-        ],
+        ["._color.ColorValidator", "._opacity.CminValidator"],
     )

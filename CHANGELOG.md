@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
   - `unselected` property now available for `go.Parcoords()`. Allows control over color & opacity of unselected lines in line with future plotly.js update [#6216](https://github.com/plotly/plotly.js/pull/6216)
 
-## [5.8.2] - 2022-06-10
+## [5.8.3] - 2022-06-12
 
 ### Added
 

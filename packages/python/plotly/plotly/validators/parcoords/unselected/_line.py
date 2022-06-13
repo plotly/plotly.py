@@ -2,7 +2,9 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-    def __init__(self, plotly_name="line", parent_name="parcoords.unselected", **kwargs):
+    def __init__(
+        self, plotly_name="line", parent_name="parcoords.unselected", **kwargs
+    ):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
