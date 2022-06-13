@@ -1686,6 +1686,22 @@ def process_dataframe_timeline(args):
     return args
 
 
+def process_dataframe_pie(args, trace_patch):
+    names = args.get("names")
+    if names is None:
+        return args, trace_patch
+    order_in = args["category_orders"].get(names, {}).copy()
+    if not order_in:
+        return args, trace_patch
+    df = args["data_frame"]
+    trace_patch["sort"] = False
+    trace_patch["direction"] = "clockwise"
+    uniques = list(df[names].unique())
+    order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
+    args["data_frame"] = df.set_index(names).loc[order].reset_index()
+    return args, trace_patch
+
+
 def infer_config(args, constructor, trace_patch, layout_patch):
     attrs = [k for k in direct_attrables + array_attrables if k in args]
     grouped_attrs = []
@@ -1948,6 +1964,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
+    if constructor in [go.Pie, go.Funnelarea]:
+        args, trace_patch = process_dataframe_pie(args, trace_patch)
     if constructor == "timeline":
         constructor = go.Bar
         args = process_dataframe_timeline(args)
