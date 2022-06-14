@@ -58,13 +58,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==5.8.0
+$ pip install plotly==5.8.2
 ```
 
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.8.0
+$ conda install -c plotly plotly=5.8.2
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
@@ -148,7 +148,7 @@ The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**,
 
 ```
 # JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.8.0 @jupyter-widgets/jupyterlab-manager
+jupyter labextension install jupyterlab-plotly@5.8.2 @jupyter-widgets/jupyterlab-manager
 ```
 
 Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
