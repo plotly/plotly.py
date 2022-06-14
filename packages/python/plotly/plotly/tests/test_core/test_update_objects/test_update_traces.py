@@ -86,6 +86,7 @@ class TestSelectForEachUpdateTraces(TestCase):
         fig.add_parcoords(
             dimensions=[{"values": [1, 2, 3, 2, 1]}, {"values": [3, 2, 1, 3, 2, 1]}],
             line={"color": "purple"},
+            unselected={"line": {"color": "red", "opacity": 0.2}},
             name="I",
             row=3,
             col=1,
@@ -211,6 +212,9 @@ class TestSelectForEachUpdateTraces(TestCase):
         )
         self.assert_select_traces(
             [2, 5, 8, 9], selector={"line.color": "purple"}, test_no_grid=True
+        )
+        self.assert_select_traces(
+            [8], selector={"unselected.line.color": "red"}, test_no_grid=True
         )
 
     def test_select_property_and_grid(self):
