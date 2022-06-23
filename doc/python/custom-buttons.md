@@ -369,27 +369,27 @@ fig.add_trace(
     go.Scatter(x=list(df.index),
                y=list(df.High),
                name="High",
-               line=dict(color="#33CFA5")))
+               line=dict(color="MediumSlateBlue")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=[df.High.mean()] * len(df.index),
                name="High Average",
                visible=False,
-               line=dict(color="#33CFA5", dash="dash")))
+               line=dict(color="MediumSlateBlue", dash="dash")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=list(df.Low),
                name="Low",
-               line=dict(color="#F06A6A")))
+               line=dict(color="DarkOrange")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=[df.Low.mean()] * len(df.index),
                name="Low Average",
                visible=False,
-               line=dict(color="#F06A6A", dash="dash")))
+               line=dict(color="DarkOrange", dash="dash")))
 
 # Add Annotations and Buttons
 high_annotations = [dict(x=-0.05,
