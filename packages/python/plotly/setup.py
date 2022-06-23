@@ -286,7 +286,7 @@ def get_latest_publish_build_info(repo, branch):
 
     url = (
         r"https://circleci.com/api/v1.1/project/github/"
-        r"{repo}/tree/{branch}?limit=10000\&filter=completed"
+        r"{repo}/tree/{branch}?limit=100&filter=completed"
     ).format(repo=repo, branch=branch)
 
     branch_jobs = request_json(url)

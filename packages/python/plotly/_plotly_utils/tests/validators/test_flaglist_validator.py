@@ -4,21 +4,20 @@ from _plotly_utils.basevalidators import FlaglistValidator
 import numpy as np
 
 
+EXTRAS = ["none", "all", True, False, 3]
+FLAGS = ["lines", "markers", "text"]
+
 # Fixtures
 # --------
-@pytest.fixture(params=[None, ["none", "all"]])
+@pytest.fixture(params=[None, EXTRAS])
 def validator(request):
     # Validator with or without extras
-    return FlaglistValidator(
-        "prop", "parent", flags=["lines", "markers", "text"], extras=request.param
-    )
+    return FlaglistValidator("prop", "parent", flags=FLAGS, extras=request.param)
 
 
 @pytest.fixture()
 def validator_extra():
-    return FlaglistValidator(
-        "prop", "parent", flags=["lines", "markers", "text"], extras=["none", "all"]
-    )
+    return FlaglistValidator("prop", "parent", flags=FLAGS, extras=EXTRAS)
 
 
 @pytest.fixture()
@@ -26,8 +25,8 @@ def validator_extra_aok():
     return FlaglistValidator(
         "prop",
         "parent",
-        flags=["lines", "markers", "text"],
-        extras=["none", "all"],
+        flags=FLAGS,
+        extras=EXTRAS,
         array_ok=True,
     )
 
@@ -35,15 +34,15 @@ def validator_extra_aok():
 @pytest.fixture(
     params=[
         "+".join(p)
-        for i in range(1, 4)
-        for p in itertools.permutations(["lines", "markers", "text"], i)
+        for i in range(1, len(FLAGS) + 1)
+        for p in itertools.permutations(FLAGS, i)
     ]
 )
 def flaglist(request):
     return request.param
 
 
-@pytest.fixture(params=["none", "all"])
+@pytest.fixture(params=EXTRAS)
 def extra(request):
     return request.param
 
@@ -69,7 +68,7 @@ def test_coercion(in_val, coerce_val, validator):
 
 
 # ### Rejection by type ###
-@pytest.mark.parametrize("val", [21, (), ["lines"], set(), {}])
+@pytest.mark.parametrize("val", [(), ["lines"], set(), {}])
 def test_rejection_type(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
@@ -79,7 +78,7 @@ def test_rejection_type(val, validator):
 
 # ### Rejection by value ###
 @pytest.mark.parametrize(
-    "val", ["", "line", "markers+line", "lin es", "lin es+markers"]
+    "val", ["", "line", "markers+line", "lin es", "lin es+markers", 21]
 )
 def test_rejection_val(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -144,7 +143,7 @@ def test_acceptance_aok_scalarlist_flaglist(flaglist, validator_extra_aok):
     [
         ["all", "markers", "text+markers"],
         ["lines", "lines+markers", "markers+lines+text"],
-        ["all", "all", "lines+text", "none"],
+        ["all", "all", "lines+text"] + EXTRAS,
     ],
 )
 def test_acceptance_aok_list_flaglist(val, validator_extra_aok):
@@ -158,8 +157,8 @@ def test_acceptance_aok_list_flaglist(val, validator_extra_aok):
     "in_val,expected",
     [
         (
-            ["  lines ", " lines + markers ", "lines ,markers"],
-            ["lines", "lines+markers", "lines+markers"],
+            ["  lines ", " lines + markers ", "lines ,markers", "  all  "],
+            ["lines", "lines+markers", "lines+markers", "all"],
         ),
         (np.array(["text   +lines"]), np.array(["text+lines"], dtype="unicode")),
     ],
