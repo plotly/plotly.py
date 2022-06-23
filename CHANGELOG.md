@@ -2,15 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
 ## UNRELEASED
 
 ### Added
 
   - `pattern_shape` options now available in `px.timeline()` [#3774](https://github.com/plotly/plotly.py/pull/3774)
+  - `facet_*` and `category_orders` now available in `px.pie()` [#3775](https://github.com/plotly/plotly.py/pull/3775)
 
 ### Performance
 
   - `px` methods no longer call `groupby` on the input dataframe when the result would be a single group, and no longer groups by a lambda, for significant speedups [#3765](https://github.com/plotly/plotly.py/pull/3765)
+
+### Updated
+
+  - Allow non-string extras in `flaglist` attributes, to support upcoming changes to `ax.automargin` in plotly.js [plotly.js#6193](https://github.com/plotly/plotly.js/pull/6193), [#3749](https://github.com/plotly/plotly.py/pull/3749)
 
 ## [5.8.2] - 2022-06-10
 
@@ -21,7 +27,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [5.8.1] - 2022-06-08
 
 (no changes, due to a mixup with the build process!)
-
 
 ## [5.8.0] - 2022-05-09
 

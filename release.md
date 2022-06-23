@@ -131,10 +131,11 @@ Publishing to `plotly` conda channel (make sure you have run `conda install anac
 start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
-    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up
-    2. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
-    3. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
-    4. Commit and push the changes to `master` in that repo
+    1. bump the version of Plotly.py in  `_data/pyversion.json`
+    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up
+    3. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
+    4. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
+    5. Commit and push the changes to `master` in that repo
 
 ### Notify Stakeholders
 
