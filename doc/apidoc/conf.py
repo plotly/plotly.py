@@ -22,7 +22,7 @@ import sphinx_bootstrap_theme
 # -- Project information -----------------------------------------------------
 
 project = ""
-copyright = "2020, Plotly"
+copyright = "2022, Plotly"
 author = "Plotly"
 
 # The short X.Y version
