@@ -804,6 +804,7 @@ export class FigureModel extends DOMWidgetModel {
  */
 export class FigureView extends DOMWidgetView {
   viewID: string;
+  resizeEventListener: () => void;
 
   /**
    * The perform_render method is called by processPhosphorMessage
@@ -920,10 +921,10 @@ export class FigureView extends DOMWidgetView {
           xaxis: axisHidden,
           yaxis: axisHidden,
         });
-
-        window.addEventListener("resize", function () {
-          that.autosizeFigure();
-        });
+        this.resizeEventListener = () => {
+          this.autosizeFigure();
+        }
+        window.addEventListener("resize", this.resizeEventListener);
         break;
       case "after-attach":
         // Rendering actual figure in the after-attach event allows
@@ -953,8 +954,10 @@ export class FigureView extends DOMWidgetView {
    * Purge Plotly.js data structures from the notebook output display
    * element when the view is destroyed
    */
-  destroy() {
+   remove() {
+    super.remove();
     Plotly.purge(this.el);
+    window.removeEventListener("resize", this.resizeEventListener);
   }
 
   /**
