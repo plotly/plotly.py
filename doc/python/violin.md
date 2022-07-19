@@ -276,7 +276,7 @@ fig.show()
 
 ### Choosing The Algorithm For Computing Quartiles
 
-By default, quartiles for violin plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
+By default, quartiles for violin plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://jse.amstat.org/v14n3/langford.html](http://jse.amstat.org/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
 
 However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles.
 
