@@ -206,7 +206,7 @@ fig.show()
 #### Adding a Prefix and Suffix
 
 
-On both a `number` and a `delta`, you can add a string to appear before the value using `prefix`. You can add a string to appear after the value with `suffix`. In the following example, we add '$' as a `prefix` and 'm' as `suffix` for both the `number` and `delta`. 
+On both a `number` and a `delta`, you can add a string to appear before the value using `prefix`. You can add a string to appear after the value using `suffix`. In the following example, we add '$' as a `prefix` and 'm' as `suffix` for both the `number` and `delta`. 
 
 Note: `suffix` and `prefix` on `delta` are new in 5.10
 
