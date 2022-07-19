@@ -128,6 +128,9 @@ fig.show()
 ```
 
 ### Automatically Adjust Specific Margins
+
+*New in 5.10*
+
 You can also set `automargin` for specific sides of the figure. Here, we set `automargin` on the `left` and `top` of the figure.
 
 ```python
