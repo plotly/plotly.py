@@ -128,7 +128,7 @@ fig.show()
 ```
 
 ### Automatically Adjust Specific Margins
-You can also set auto-margin for specific sides of the figure. Here, we set `automargin` on the `left` and `top` of the figure.
+You can also set `automargin` for specific sides of the figure. Here, we set `automargin` on the `left` and `top` of the figure.
 
 ```python
 import plotly.graph_objects as go

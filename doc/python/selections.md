@@ -29,7 +29,7 @@ jupyter:
     name: Selections
     order: 26
     permalink: python/selections/
-    thumbnail: thumbnail/make_selection.png
+    thumbnail: thumbnail/make_selection.jpg
 ---
 
 ## Adding Selections
