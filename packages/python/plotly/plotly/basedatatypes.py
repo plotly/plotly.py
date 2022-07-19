@@ -1139,7 +1139,7 @@ class BaseFigure(object):
             Generator that iterates through all of the traces that satisfy
             all of the specified selection criteria
         """
-        if not selector:
+        if not selector and not isinstance(selector, int):
             selector = {}
 
         if row is not None or col is not None or secondary_y is not None:
