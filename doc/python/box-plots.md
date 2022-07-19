@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.0
   plotly:
     description: How to make Box Plots in Python with Plotly.
     display_as: statistical
@@ -90,7 +90,7 @@ fig.show()
 
 ### Choosing The Algorithm For Computing Quartiles
 
-By default, quartiles for box plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
+By default, quartiles for box plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://jse.amstat.org/v14n3/langford.html](http://jse.amstat.org/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
 
 However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles.
 
