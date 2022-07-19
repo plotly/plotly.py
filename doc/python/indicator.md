@@ -61,8 +61,8 @@ In this tutorial we introduce a new trace named "Indicator". The purpose of "ind
       <li> (increasing|decreasing).symbol: symbol displayed on the left of the delta</li>
       <li> font.(family|size): to control the font</li>
       <li> position: position relative to `number` (either top, left, bottom, right)</li>
-      <li> suffix: a string to appear before the delta. 
-      <li> prefix: a string to appear after the delta.
+      <li> prefix: a string to appear before the delta
+      <li> suffix: a string to appear after the delta
     </ol>
     Finally, we can have a simple title for the indicator via `title` with 'text' attribute which is a string, and 'align' which can be set to left, center, and right.
     There are two gauge types: [angular](https://plotly.com/python/gauge-charts/) and [bullet](https://plotly.com/python/bullet-charts/). Here is a combination of both shapes (angular, bullet), and different modes (gauge, delta, and value):
