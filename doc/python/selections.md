@@ -136,6 +136,20 @@ fig.update_layout(dragmode='select',
 fig.show()
 ```
 
+## Selections with Time Series
+
+Selections are also supported on time series figures. Here, we add a rectangular selection with a region between the dates `2019-01-01"` and `"2019-10-01"` on the x axis and between `1` and `1.15` on the y axis.
+
+
+```python
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+fig.add_selection(x0="2019-01-01", y0=1, x1="2019-10-01", y1=1.17)
+fig.show()
+```
+
 ## More on Selections
 
 For more on selections, see the [selections section of the `dcc.Graph` page](https://dash.plotly.com/dash-core-components/graph#selections) in the Dash docs.
