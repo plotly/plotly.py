@@ -138,7 +138,7 @@ fig.show()
 
 ## Selections with Time Series
 
-Selections are also supported on time series figures. Here, we add a rectangular selection with a region between the dates `2019-01-01"` and `"2019-10-01"` on the x axis and between `0.95` and `1.17` on the y axis.
+Selections are also supported on time series figures. Here, we add a rectangular selection with a region between the dates `2019-01-01"` and `"2019-10-01"` on the x axis and between `0.95` and `1.15` on the y axis.
 
 
 ```python
@@ -146,7 +146,7 @@ import plotly.express as px
 
 df = px.data.stocks()
 fig = px.line(df, x='date', y="GOOG")
-fig.add_selection(x0="2019-01-01", y0=0.95, x1="2019-10-01", y1=1.17)
+fig.add_selection(x0="2019-01-01", y0=0.95, x1="2019-10-01", y1=1.15)
 fig.show()
 ```
 
