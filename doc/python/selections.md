@@ -225,33 +225,39 @@ fig.update_layout(
     width = 600,
     bargap = 0,
     hovermode = 'closest',
-    showlegend = False,
-    selections = [{
-      "x0": 0.5,
-      "x1": -0.5,
-      "xref": "x",
-      "y0": 190,
-      "y1": 0,
-      "yref": "y2",
-        "line":dict(color="yellow")
-    }, {
-      "x0": -0.2,
-      "x1": -1.5,
-      "xref": "x",
-      "y0": 2,
-      "y1": -1,
-      "yref": "y",
-        "line":dict(
-        color="yellow"
-    )
-    }, {
-      "path": "M0.75,2.39L0.98,3.38L1.46,3.68L1.80,3.35L2.01,2.51L1.67,1.15L1.18,0.50L0.65,0.66L0.54,0.83L0.49,1.56Z",
-      "xref": "x",
-      "yref": "y",
-            "line":dict(
-        color="yellow"
-    )
-    }]
+    showlegend = False, 
+    selections = [
+        dict(
+            x0 = 0.5,
+            x1 = -0.5,
+            xref = "x",
+            y0 = 190,
+            y1= 0,
+            yref = "y2",
+            line = dict(
+                color="yellow"
+            )
+        ),
+        dict(
+            x0 = -0.2,
+            x1 = -1.5,
+            xref = "x",
+            y0 = 2,
+            y1= -1,
+            yref = "y",
+            line = dict(
+                color="yellow"
+            )
+        ),   
+        dict(
+            path= "M0.75,2.39L0.98,3.38L1.46,3.68L1.80,3.35L2.01,2.51L1.67,1.15L1.18,0.50L0.65,0.66L0.54,0.83L0.49,1.56Z",
+            xref= 'x',
+            yref = 'y',
+            line = dict(
+                color='yellow'
+            )
+        )
+    ]
 )
 
 
