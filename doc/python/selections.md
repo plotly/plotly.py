@@ -38,7 +38,7 @@ jupyter:
 
 You can add persistent selections to a rendered figure using the **Box Select** and **Lasso Select** tools in the mode bar.
 To add multiple selections, select **Shift** when making new selections.
-To clear a selection, double-click it. You can clear all selections by double-clicking any unselected area of the figure.
+To clear a selection, double-click it. On a subplot you can clear all selections by double-clicking any unselected area of the subplot.
 
 
 
