@@ -43,7 +43,7 @@ To clear a selection, double-click it. On a subplot you can clear all selections
 
 
 You can also add selections to a figure that displays when it renders using `fig.add_selection`.
-Here, we add a rectangular selection that connects the points `3.0`, `6.5`, `3.5`, and `5.5`.
+Here, we add a rectangular selection with a region between `3.0` and `6.5` on the x axis and between `3.5` and `5.5` on the y axis.
 
 
 ```python
