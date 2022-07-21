@@ -52,15 +52,15 @@ import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.add_selection(type="rect", x0=3.0, y0=6.5, x1=3.5, y1=5.5)
+fig.add_selection(x0=3.0, y0=6.5, x1=3.5, y1=5.5)
 
 fig.show()
 ```
 
-## Selections using Path
+## Selections Using a Custom SVG
 
 
-In the above example, we added a rectangular selection (`type="rect"`). You can also render a custom SVG for a selection by defining a `path` that can include single or multiple polygons. Here, we create a selection with a single polygon path "M2,6.5L4,7.5L4,6Z". 
+In the above example, we added a rectangular selection. You can also render a custom SVG for a selection by defining a `path` that can include single or multiple polygons. Here, we create a selection with a single polygon path "M2,6.5L4,7.5L4,6Z". 
 
 Please note that multiple polygons e.g. "M0,0L0,10L10,10,L10,0Z M2,2L2,8L8,8,L8,2Z" could be used to subtract certain regions from the selection.
 
@@ -70,7 +70,7 @@ import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.add_selection(type="path", path="M2,6.5L4,7.5L4,6Z")
+fig.add_selection(path="M2,6.5L4,7.5L4,6Z")
 
 fig.show()
 ```
@@ -88,7 +88,7 @@ import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.add_selection(type="rect",
+fig.add_selection(
     x0=2.5, y0=6.5, x1=3.5, y1=5.5,
     line=dict(
         color="Crimson",
@@ -110,7 +110,7 @@ import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.add_selection(type="rect", x0=3.0, y0=6.5, x1=3.5, y1=5.5)
+fig.add_selection(x0=3.0, y0=6.5, x1=3.5, y1=5.5)
 
 fig.update_layout(dragmode='select',
                   activeselection=dict(fillcolor='yellow'))
