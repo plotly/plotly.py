@@ -198,7 +198,7 @@ fig = go.Figure(data=
             dict(range = [1,5],
                  label = 'D', values = [4,2])
         ]),
-        unselected = dict(line = dict(color = 'lightgray', opacity = 0.5))
+        unselected = dict(line = dict(color = 'green', opacity = 0.5))
     )
 )
 fig.show()
