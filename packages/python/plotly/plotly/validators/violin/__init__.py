@@ -28,6 +28,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._selected import SelectedValidator
     from ._scalemode import ScalemodeValidator
     from ._scalegroup import ScalegroupValidator
+    from ._quartilemethod import QuartilemethodValidator
     from ._points import PointsValidator
     from ._pointpos import PointposValidator
     from ._orientation import OrientationValidator
@@ -92,6 +93,7 @@ else:
             "._selected.SelectedValidator",
             "._scalemode.ScalemodeValidator",
             "._scalegroup.ScalegroupValidator",
+            "._quartilemethod.QuartilemethodValidator",
             "._points.PointsValidator",
             "._pointpos.PointposValidator",
             "._orientation.OrientationValidator",

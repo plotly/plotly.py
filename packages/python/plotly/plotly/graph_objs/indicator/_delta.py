@@ -13,8 +13,10 @@ class Delta(_BaseTraceHierarchyType):
         "font",
         "increasing",
         "position",
+        "prefix",
         "reference",
         "relative",
+        "suffix",
         "valueformat",
     }
 
@@ -141,6 +143,27 @@ class Delta(_BaseTraceHierarchyType):
     def position(self, val):
         self["position"] = val
 
+    # prefix
+    # ------
+    @property
+    def prefix(self):
+        """
+        Sets a prefix appearing before the delta.
+
+        The 'prefix' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["prefix"]
+
+    @prefix.setter
+    def prefix(self, val):
+        self["prefix"] = val
+
     # reference
     # ---------
     @property
@@ -182,6 +205,27 @@ class Delta(_BaseTraceHierarchyType):
     def relative(self, val):
         self["relative"] = val
 
+    # suffix
+    # ------
+    @property
+    def suffix(self):
+        """
+        Sets a suffix appearing next to the delta.
+
+        The 'suffix' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["suffix"]
+
+    @suffix.setter
+    def suffix(self, val):
+        self["suffix"] = val
+
     # valueformat
     # -----------
     @property
@@ -221,11 +265,15 @@ class Delta(_BaseTraceHierarchyType):
             ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.
+        prefix
+            Sets a prefix appearing before the delta.
         reference
             Sets the reference value to compute the delta. By
             default, it is set to the current value.
         relative
             Show relative change
+        suffix
+            Sets a suffix appearing next to the delta.
         valueformat
             Sets the value formatting rule using d3 formatting
             mini-languages which are very similar to those in
@@ -240,8 +288,10 @@ class Delta(_BaseTraceHierarchyType):
         font=None,
         increasing=None,
         position=None,
+        prefix=None,
         reference=None,
         relative=None,
+        suffix=None,
         valueformat=None,
         **kwargs,
     ):
@@ -264,11 +314,15 @@ class Delta(_BaseTraceHierarchyType):
             ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.
+        prefix
+            Sets a prefix appearing before the delta.
         reference
             Sets the reference value to compute the delta. By
             default, it is set to the current value.
         relative
             Show relative change
+        suffix
+            Sets a suffix appearing next to the delta.
         valueformat
             Sets the value formatting rule using d3 formatting
             mini-languages which are very similar to those in
@@ -324,6 +378,10 @@ an instance of :class:`plotly.graph_objs.indicator.Delta`"""
         _v = position if position is not None else _v
         if _v is not None:
             self["position"] = _v
+        _v = arg.pop("prefix", None)
+        _v = prefix if prefix is not None else _v
+        if _v is not None:
+            self["prefix"] = _v
         _v = arg.pop("reference", None)
         _v = reference if reference is not None else _v
         if _v is not None:
@@ -332,6 +390,10 @@ an instance of :class:`plotly.graph_objs.indicator.Delta`"""
         _v = relative if relative is not None else _v
         if _v is not None:
             self["relative"] = _v
+        _v = arg.pop("suffix", None)
+        _v = suffix if suffix is not None else _v
+        if _v is not None:
+            self["suffix"] = _v
         _v = arg.pop("valueformat", None)
         _v = valueformat if valueformat is not None else _v
         if _v is not None:
