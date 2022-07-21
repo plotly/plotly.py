@@ -60,7 +60,9 @@ fig.show()
 ## Selections using Path
 
 
-In the above example, we added a rectangular selection (`type="rect"`). You can also render a custom SVG for a selection by setting `type="path"` and defining a `path`. Here, we create a selection with the path "M2,6.5L4,7.5L4,6Z"
+In the above example, we added a rectangular selection (`type="rect"`). You can also render a custom SVG for a selection by defining a `path` that can include single or multiple polygons. Here, we create a selection with a single polygon path "M2,6.5L4,7.5L4,6Z". 
+
+Please note that multiple polygons e.g. "M0,0L0,10L10,10,L10,0Z M2,2L2,8L8,8,L8,2Z" could be used to subtract certain regions from the selection.
 
 ```python
 import plotly.express as px
