@@ -125,6 +125,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 different index, you can still preserve user-
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
+            unselected
+                :class:`plotly.graph_objects.parcoords.Unselect
+                ed` instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not

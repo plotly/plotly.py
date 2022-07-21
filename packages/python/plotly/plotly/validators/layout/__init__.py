@@ -29,6 +29,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._shapedefaults import ShapedefaultsValidator
     from ._shapes import ShapesValidator
     from ._separators import SeparatorsValidator
+    from ._selectiondefaults import SelectiondefaultsValidator
+    from ._selections import SelectionsValidator
     from ._selectionrevision import SelectionrevisionValidator
     from ._selectdirection import SelectdirectionValidator
     from ._scene import SceneValidator
@@ -37,6 +39,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._piecolorway import PiecolorwayValidator
     from ._paper_bgcolor import Paper_BgcolorValidator
     from ._newshape import NewshapeValidator
+    from ._newselection import NewselectionValidator
     from ._modebar import ModebarValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
@@ -86,6 +89,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
     from ._activeshape import ActiveshapeValidator
+    from ._activeselection import ActiveselectionValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -120,6 +124,8 @@ else:
             "._shapedefaults.ShapedefaultsValidator",
             "._shapes.ShapesValidator",
             "._separators.SeparatorsValidator",
+            "._selectiondefaults.SelectiondefaultsValidator",
+            "._selections.SelectionsValidator",
             "._selectionrevision.SelectionrevisionValidator",
             "._selectdirection.SelectdirectionValidator",
             "._scene.SceneValidator",
@@ -128,6 +134,7 @@ else:
             "._piecolorway.PiecolorwayValidator",
             "._paper_bgcolor.Paper_BgcolorValidator",
             "._newshape.NewshapeValidator",
+            "._newselection.NewselectionValidator",
             "._modebar.ModebarValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
@@ -177,5 +184,6 @@ else:
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
             "._activeshape.ActiveshapeValidator",
+            "._activeselection.ActiveselectionValidator",
         ],
     )
