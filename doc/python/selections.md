@@ -57,6 +57,22 @@ fig.add_selection(type="rect", x0=3.0, y0=6.5, x1=3.5, y1=5.5)
 fig.show()
 ```
 
+## Selections using Path
+
+
+In the above example, we added a rectangular selection (`type="rect"`). You can also render a custom SVG for a selection by setting `type="path"` and defining a `path`. Here, we create a selection with the path "M2,6.5L4,7.5L4,6Z"
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.add_selection(type="path", path="M2,6.5L4,7.5L4,6Z")
+
+fig.show()
+```
+
 ## Styling Selections
 
 
@@ -84,7 +100,7 @@ fig.show()
 
 ## Fill Color for Active Selections
 
-You can style the active selection with `activeselection`. A selection is active when it is selected or created. In this example, we set active selections to appear with a `fillcolor` of `yellow`.
+You can style the active selection with `activeselection`. In this example, we set active selections (when created or clicked) to appear with a `fillcolor` of `yellow`.
 
 ```python
 import plotly.express as px
