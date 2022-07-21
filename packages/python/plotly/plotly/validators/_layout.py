@@ -10,6 +10,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            activeselection
+                :class:`plotly.graph_objects.layout.Activeselec
+                tion` instance or dict with compatible
+                properties
             activeshape
                 :class:`plotly.graph_objects.layout.Activeshape
                 ` instance or dict with compatible properties
@@ -308,6 +312,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
+            newselection
+                :class:`plotly.graph_objects.layout.Newselectio
+                n` instance or dict with compatible properties
             newshape
                 :class:`plotly.graph_objects.layout.Newshape`
                 instance or dict with compatible properties
@@ -338,6 +345,15 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             selectionrevision
                 Controls persistence of user-driven changes in
                 selected points from all traces.
+            selections
+                A tuple of
+                :class:`plotly.graph_objects.layout.Selection`
+                instances or dicts with compatible properties
+            selectiondefaults
+                When used in a template (as
+                layout.template.layout.selectiondefaults), sets
+                the default property values to use for elements
+                of layout.selections
             separators
                 Sets the decimal and thousand separators. For
                 example, *. * puts a '.' before decimals and a

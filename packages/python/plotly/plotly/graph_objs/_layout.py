@@ -61,6 +61,7 @@ class Layout(_BaseLayoutType):
     _parent_path_str = ""
     _path_str = "layout"
     _valid_props = {
+        "activeselection",
         "activeshape",
         "annotationdefaults",
         "annotations",
@@ -110,6 +111,7 @@ class Layout(_BaseLayoutType):
         "meta",
         "metasrc",
         "modebar",
+        "newselection",
         "newshape",
         "paper_bgcolor",
         "piecolorway",
@@ -117,7 +119,9 @@ class Layout(_BaseLayoutType):
         "polar",
         "scene",
         "selectdirection",
+        "selectiondefaults",
         "selectionrevision",
+        "selections",
         "separators",
         "shapedefaults",
         "shapes",
@@ -147,6 +151,35 @@ class Layout(_BaseLayoutType):
         "xaxis",
         "yaxis",
     }
+
+    # activeselection
+    # ---------------
+    @property
+    def activeselection(self):
+        """
+        The 'activeselection' property is an instance of Activeselection
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Activeselection`
+          - A dict of string/value properties that will be passed
+            to the Activeselection constructor
+
+            Supported dict properties:
+
+                fillcolor
+                    Sets the color filling the active selection'
+                    interior.
+                opacity
+                    Sets the opacity of the active selection.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Activeselection
+        """
+        return self["activeselection"]
+
+    @activeselection.setter
+    def activeselection(self, val):
+        self["activeselection"] = val
 
     # activeshape
     # -----------
@@ -2295,6 +2328,42 @@ class Layout(_BaseLayoutType):
     def modebar(self, val):
         self["modebar"] = val
 
+    # newselection
+    # ------------
+    @property
+    def newselection(self):
+        """
+        The 'newselection' property is an instance of Newselection
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Newselection`
+          - A dict of string/value properties that will be passed
+            to the Newselection constructor
+
+            Supported dict properties:
+
+                line
+                    :class:`plotly.graph_objects.layout.newselectio
+                    n.Line` instance or dict with compatible
+                    properties
+                mode
+                    Describes how a new selection is created. If
+                    `immediate`, a new selection is created after
+                    first mouse up. If `gradual`, a new selection
+                    is not created after first mouse. By adding to
+                    and subtracting from the initial selection,
+                    this option allows declaring extra outlines of
+                    the selection.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Newselection
+        """
+        return self["newselection"]
+
+    @newselection.setter
+    def newselection(self, val):
+        self["newselection"] = val
+
     # newshape
     # --------
     @property
@@ -2681,6 +2750,134 @@ class Layout(_BaseLayoutType):
     def selectionrevision(self, val):
         self["selectionrevision"] = val
 
+    # selections
+    # ----------
+    @property
+    def selections(self):
+        """
+        The 'selections' property is a tuple of instances of
+        Selection that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.Selection
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Selection constructor
+
+            Supported dict properties:
+
+                line
+                    :class:`plotly.graph_objects.layout.selection.L
+                    ine` instance or dict with compatible
+                    properties
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                opacity
+                    Sets the opacity of the selection.
+                path
+                    For `type` "path" - a valid SVG path similar to
+                    `shapes.path` in data coordinates. Allowed
+                    segments are: M, L and Z.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                type
+                    Specifies the selection type to be drawn. If
+                    "rect", a rectangle is drawn linking
+                    (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`) and
+                    (`x0`,`y1`). If "path", draw a custom SVG path
+                    using `path`.
+                x0
+                    Sets the selection's starting x position.
+                x1
+                    Sets the selection's end x position.
+                xref
+                    Sets the selection's x coordinate axis. If set
+                    to a x axis id (e.g. "x" or "x2"), the `x`
+                    position refers to a x coordinate. If set to
+                    "paper", the `x` position refers to the
+                    distance from the left of the plotting area in
+                    normalized coordinates where 0 (1) corresponds
+                    to the left (right). If set to a x axis ID
+                    followed by "domain" (separated by a space),
+                    the position behaves like for "paper", but
+                    refers to the distance in fractions of the
+                    domain length from the left of the domain of
+                    that axis: e.g., *x2 domain* refers to the
+                    domain of the second x  axis and a x position
+                    of 0.5 refers to the point between the left and
+                    the right of the domain of the second x axis.
+                y0
+                    Sets the selection's starting y position.
+                y1
+                    Sets the selection's end y position.
+                yref
+                    Sets the selection's x coordinate axis. If set
+                    to a y axis id (e.g. "y" or "y2"), the `y`
+                    position refers to a y coordinate. If set to
+                    "paper", the `y` position refers to the
+                    distance from the bottom of the plotting area
+                    in normalized coordinates where 0 (1)
+                    corresponds to the bottom (top). If set to a y
+                    axis ID followed by "domain" (separated by a
+                    space), the position behaves like for "paper",
+                    but refers to the distance in fractions of the
+                    domain length from the bottom of the domain of
+                    that axis: e.g., *y2 domain* refers to the
+                    domain of the second y  axis and a y position
+                    of 0.5 refers to the point between the bottom
+                    and the top of the domain of the second y axis.
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.Selection]
+        """
+        return self["selections"]
+
+    @selections.setter
+    def selections(self, val):
+        self["selections"] = val
+
+    # selectiondefaults
+    # -----------------
+    @property
+    def selectiondefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.selectiondefaults), sets the default
+        property values to use for elements of layout.selections
+
+        The 'selectiondefaults' property is an instance of Selection
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Selection`
+          - A dict of string/value properties that will be passed
+            to the Selection constructor
+
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Selection
+        """
+        return self["selectiondefaults"]
+
+    @selectiondefaults.setter
+    def selectiondefaults(self, val):
+        self["selectiondefaults"] = val
+
     # separators
     # ----------
     @property
@@ -2833,11 +3030,7 @@ class Layout(_BaseLayoutType):
                     domain* refers to the domain of the second x
                     axis and a x position of 0.5 refers to the
                     point between the left and the right of the
-                    domain of the second x axis. If the axis `type`
-                    is "log", then you must take the log of your
-                    desired range. If the axis `type` is "date",
-                    then you must convert the date to unix time in
-                    milliseconds.
+                    domain of the second x axis.
                 xsizemode
                     Sets the shapes's sizing mode along the x axis.
                     If set to "scaled", `x0`, `x1` and x
@@ -2865,21 +3058,21 @@ class Layout(_BaseLayoutType):
                     certain data value. No effect when `ysizemode`
                     not set to "pixel".
                 yref
-                    Sets the annotation's y coordinate axis. If set
-                    to a y axis id (e.g. "y" or "y2"), the `y`
-                    position refers to a y coordinate. If set to
-                    "paper", the `y` position refers to the
-                    distance from the bottom of the plotting area
-                    in normalized coordinates where 0 (1)
-                    corresponds to the bottom (top). If set to a y
-                    axis ID followed by "domain" (separated by a
-                    space), the position behaves like for "paper",
-                    but refers to the distance in fractions of the
-                    domain length from the bottom of the domain of
-                    that axis: e.g., *y2 domain* refers to the
-                    domain of the second y  axis and a y position
-                    of 0.5 refers to the point between the bottom
-                    and the top of the domain of the second y axis.
+                    Sets the shape's y coordinate axis. If set to a
+                    y axis id (e.g. "y" or "y2"), the `y` position
+                    refers to a y coordinate. If set to "paper",
+                    the `y` position refers to the distance from
+                    the bottom of the plotting area in normalized
+                    coordinates where 0 (1) corresponds to the
+                    bottom (top). If set to a y axis ID followed by
+                    "domain" (separated by a space), the position
+                    behaves like for "paper", but refers to the
+                    distance in fractions of the domain length from
+                    the bottom of the domain of that axis: e.g.,
+                    *y2 domain* refers to the domain of the second
+                    y  axis and a y position of 0.5 refers to the
+                    point between the bottom and the top of the
+                    domain of the second y axis.
                 ysizemode
                     Sets the shapes's sizing mode along the y axis.
                     If set to "scaled", `y0`, `y1` and y
@@ -4856,6 +5049,9 @@ class Layout(_BaseLayoutType):
     @property
     def _prop_descriptions(self):
         return """\
+        activeselection
+            :class:`plotly.graph_objects.layout.Activeselection`
+            instance or dict with compatible properties
         activeshape
             :class:`plotly.graph_objects.layout.Activeshape`
             instance or dict with compatible properties
@@ -5124,6 +5320,9 @@ class Layout(_BaseLayoutType):
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
+        newselection
+            :class:`plotly.graph_objects.layout.Newselection`
+            instance or dict with compatible properties
         newshape
             :class:`plotly.graph_objects.layout.Newshape` instance
             or dict with compatible properties
@@ -5153,6 +5352,15 @@ class Layout(_BaseLayoutType):
         selectionrevision
             Controls persistence of user-driven changes in selected
             points from all traces.
+        selections
+            A tuple of
+            :class:`plotly.graph_objects.layout.Selection`
+            instances or dicts with compatible properties
+        selectiondefaults
+            When used in a template (as
+            layout.template.layout.selectiondefaults), sets the
+            default property values to use for elements of
+            layout.selections
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
@@ -5310,6 +5518,7 @@ class Layout(_BaseLayoutType):
     def __init__(
         self,
         arg=None,
+        activeselection=None,
         activeshape=None,
         annotations=None,
         annotationdefaults=None,
@@ -5359,6 +5568,7 @@ class Layout(_BaseLayoutType):
         meta=None,
         metasrc=None,
         modebar=None,
+        newselection=None,
         newshape=None,
         paper_bgcolor=None,
         piecolorway=None,
@@ -5367,6 +5577,8 @@ class Layout(_BaseLayoutType):
         scene=None,
         selectdirection=None,
         selectionrevision=None,
+        selections=None,
+        selectiondefaults=None,
         separators=None,
         shapes=None,
         shapedefaults=None,
@@ -5405,6 +5617,9 @@ class Layout(_BaseLayoutType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Layout`
+        activeselection
+            :class:`plotly.graph_objects.layout.Activeselection`
+            instance or dict with compatible properties
         activeshape
             :class:`plotly.graph_objects.layout.Activeshape`
             instance or dict with compatible properties
@@ -5673,6 +5888,9 @@ class Layout(_BaseLayoutType):
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
+        newselection
+            :class:`plotly.graph_objects.layout.Newselection`
+            instance or dict with compatible properties
         newshape
             :class:`plotly.graph_objects.layout.Newshape` instance
             or dict with compatible properties
@@ -5702,6 +5920,15 @@ class Layout(_BaseLayoutType):
         selectionrevision
             Controls persistence of user-driven changes in selected
             points from all traces.
+        selections
+            A tuple of
+            :class:`plotly.graph_objects.layout.Selection`
+            instances or dicts with compatible properties
+        selectiondefaults
+            When used in a template (as
+            layout.template.layout.selectiondefaults), sets the
+            default property values to use for elements of
+            layout.selections
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
@@ -5866,6 +6093,7 @@ class Layout(_BaseLayoutType):
         # Override _valid_props for instance so that instance can mutate set
         # to support subplot properties (e.g. xaxis2)
         self._valid_props = {
+            "activeselection",
             "activeshape",
             "annotationdefaults",
             "annotations",
@@ -5915,6 +6143,7 @@ class Layout(_BaseLayoutType):
             "meta",
             "metasrc",
             "modebar",
+            "newselection",
             "newshape",
             "paper_bgcolor",
             "piecolorway",
@@ -5922,7 +6151,9 @@ class Layout(_BaseLayoutType):
             "polar",
             "scene",
             "selectdirection",
+            "selectiondefaults",
             "selectionrevision",
+            "selections",
             "separators",
             "shapedefaults",
             "shapes",
@@ -5976,6 +6207,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("activeselection", None)
+        _v = activeselection if activeselection is not None else _v
+        if _v is not None:
+            self["activeselection"] = _v
         _v = arg.pop("activeshape", None)
         _v = activeshape if activeshape is not None else _v
         if _v is not None:
@@ -6172,6 +6407,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = modebar if modebar is not None else _v
         if _v is not None:
             self["modebar"] = _v
+        _v = arg.pop("newselection", None)
+        _v = newselection if newselection is not None else _v
+        if _v is not None:
+            self["newselection"] = _v
         _v = arg.pop("newshape", None)
         _v = newshape if newshape is not None else _v
         if _v is not None:
@@ -6204,6 +6443,14 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = selectionrevision if selectionrevision is not None else _v
         if _v is not None:
             self["selectionrevision"] = _v
+        _v = arg.pop("selections", None)
+        _v = selections if selections is not None else _v
+        if _v is not None:
+            self["selections"] = _v
+        _v = arg.pop("selectiondefaults", None)
+        _v = selectiondefaults if selectiondefaults is not None else _v
+        if _v is not None:
+            self["selectiondefaults"] = _v
         _v = arg.pop("separators", None)
         _v = separators if separators is not None else _v
         if _v is not None:
