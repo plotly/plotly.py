@@ -176,7 +176,7 @@ fig.show()
 
 *New in 5.10*
 
-The color and opacity of unselected lines can be set with `unselected`. Here, we set the color to `lightgray` and the opacity to `0.5`.
+The color and opacity of unselected lines can be set with `unselected`. By setting `opacity=0`, you can hide the unselected lines. Here, we set the color to `lightgray` and the opacity to `0.5`.
 
 ```python
 import plotly.graph_objects as go
