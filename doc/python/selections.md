@@ -32,7 +32,7 @@ jupyter:
     thumbnail: thumbnail/make_selection.jpg
 ---
 
-## Adding Selections to Cartesian subplots
+## Adding Selections to Cartesian Subplots
 
 *New in 5.10*
 
