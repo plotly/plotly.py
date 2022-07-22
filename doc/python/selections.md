@@ -100,24 +100,6 @@ fig.show()
 
 ```
 
-## Fill Color for Active Selections
-
-You can style the active selection with `activeselection`. In this example, we set active selections (when created or clicked) to appear with a `fillcolor` of `yellow`.
-
-```python
-import plotly.express as px
-
-df = px.data.iris()
-
-fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.add_selection(x0=3.0, y0=6.5, x1=3.5, y1=5.5)
-
-fig.update_layout(dragmode='select',
-                  activeselection=dict(fillcolor='yellow'))
-
-fig.show()
-```
-
 ## Styling New Selections
 
 You can style new selections made on the figure by setting properties on `newselection`.
@@ -132,6 +114,24 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length")
 
 fig.update_layout(dragmode='select',
                   newselection=dict(line=dict(color='blue')))
+
+fig.show()
+```
+
+## Fill Color for Active Selections
+
+You can style the active selection with `activeselection`. In this example, we set active selections (when created or clicked) to appear with a `fillcolor` of `yellow`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.add_selection(x0=3.0, y0=6.5, x1=3.5, y1=5.5)
+
+fig.update_layout(dragmode='select',
+                  activeselection=dict(fillcolor='yellow'))
 
 fig.show()
 ```
