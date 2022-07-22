@@ -150,7 +150,7 @@ fig.add_selection(x0="2019-01-01", y0=0.95, x1="2019-10-01", y1=1.15)
 fig.show()
 ```
 
-## Selections on Subplots
+## Referencing Selections on Multiple Cartesian Subplots
 
 
 You can add selections to subplots by specifying axis ids using `xaxis` and `yaxis`. Here, we add one selection on the plot with axis ids `x` and `y2` and two selections to the the plot with axis ids `x` and `y`.
