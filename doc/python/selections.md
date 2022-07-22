@@ -153,7 +153,7 @@ fig.show()
 ## Referencing Selections on a Scatterplot Matrix
 
 
-You can add selections to a scatteplot matrix  by specifying `xref` and/or `yref`. Here, we add one selection on the plot with axis ids `x2` and `y2` and another on the plot with ids `x3` and `y`.
+You can add selections to a scatterplot matrix  by specifying `xref` and/or `yref`. Here, we add one selection on the plot with axis ids `x2` and `y2` and another on the plot with ids `x3` and `y`.
 
 ```python
 import plotly.express as px
