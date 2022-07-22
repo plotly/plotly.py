@@ -150,6 +150,51 @@ fig.add_selection(x0="2019-01-01", y0=0.95, x1="2019-10-01", y1=1.15)
 fig.show()
 ```
 
+## Referencing Selections on a Scatterplot Matrix
+
+
+You can add selections to a scatteplot matrix  by specifying `xref` and/or `yref`. Here, we add one selection on the plot with axis ids `x2` and `y2` and another on the plot with ids `x3` and `y`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter_matrix(df,
+    dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"],
+    color="species")
+
+fig.update_layout(
+    xaxis = {"matches": "y"},
+    xaxis2 = {"matches": "y2"},
+    xaxis3 = {"matches": "y3"},
+    xaxis4 = {"matches": "y4"},
+    height = 900,
+    width = 750,
+    dragmode = 'select',
+    selections = [
+        dict(
+            x0 = 3,
+            x1 = 4,
+            xref = "x2",
+            y0 = 8,
+            y1= 6,
+            yref = "y"
+        ),
+        dict(
+            x0 = 5,
+            x1 = 1,
+            xref = "x3",
+            y0 = 5,
+            y1= 4,
+            yref = "y",
+        )
+    ]
+)
+
+fig.show()
+```
+
 ## Referencing Selections on Multiple Cartesian Subplots
 
 
