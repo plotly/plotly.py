@@ -615,6 +615,24 @@
      }
     }
    },
+   "activeselection": {
+    "editType": "none",
+    "fillcolor": {
+     "description": "Sets the color filling the active selection' interior.",
+     "dflt": "rgba(0,0,0,0)",
+     "editType": "none",
+     "valType": "color"
+    },
+    "opacity": {
+     "description": "Sets the opacity of the active selection.",
+     "dflt": 0.5,
+     "editType": "none",
+     "max": 1,
+     "min": 0,
+     "valType": "number"
+    },
+    "role": "object"
+   },
    "activeshape": {
     "editType": "none",
     "fillcolor": {
@@ -3420,6 +3438,50 @@
      "editType": "none",
      "valType": "any"
     }
+   },
+   "newselection": {
+    "editType": "none",
+    "line": {
+     "color": {
+      "description": "Sets the line color. By default uses either dark grey or white to increase contrast with background color.",
+      "editType": "none",
+      "valType": "color"
+     },
+     "dash": {
+      "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+      "dflt": "dot",
+      "editType": "none",
+      "valType": "string",
+      "values": [
+       "solid",
+       "dot",
+       "dash",
+       "longdash",
+       "dashdot",
+       "longdashdot"
+      ]
+     },
+     "editType": "none",
+     "role": "object",
+     "width": {
+      "description": "Sets the line width (in px).",
+      "dflt": 1,
+      "editType": "none",
+      "min": 1,
+      "valType": "number"
+     }
+    },
+    "mode": {
+     "description": "Describes how a new selection is created. If `immediate`, a new selection is created after first mouse up. If `gradual`, a new selection is not created after first mouse. By adding to and subtracting from the initial selection, this option allows declaring extra outlines of the selection.",
+     "dflt": "immediate",
+     "editType": "none",
+     "valType": "enumerated",
+     "values": [
+      "immediate",
+      "gradual"
+     ]
+    },
+    "role": "object"
    },
    "newshape": {
     "drawdirection": {
@@ -6845,6 +6907,117 @@
     "editType": "none",
     "valType": "any"
    },
+   "selections": {
+    "items": {
+     "selection": {
+      "editType": "arraydraw",
+      "line": {
+       "color": {
+        "anim": true,
+        "description": "Sets the line color.",
+        "editType": "arraydraw",
+        "valType": "color"
+       },
+       "dash": {
+        "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*).",
+        "dflt": "dot",
+        "editType": "arraydraw",
+        "valType": "string",
+        "values": [
+         "solid",
+         "dot",
+         "dash",
+         "longdash",
+         "dashdot",
+         "longdashdot"
+        ]
+       },
+       "editType": "arraydraw",
+       "role": "object",
+       "width": {
+        "anim": true,
+        "description": "Sets the line width (in px).",
+        "dflt": 1,
+        "editType": "arraydraw",
+        "min": 1,
+        "valType": "number"
+       }
+      },
+      "name": {
+       "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template.",
+       "editType": "arraydraw",
+       "valType": "string"
+      },
+      "opacity": {
+       "description": "Sets the opacity of the selection.",
+       "dflt": 0.7,
+       "editType": "arraydraw",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "path": {
+       "description": "For `type` *path* - a valid SVG path similar to `shapes.path` in data coordinates. Allowed segments are: M, L and Z.",
+       "editType": "arraydraw",
+       "valType": "string"
+      },
+      "role": "object",
+      "templateitemname": {
+       "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`.",
+       "editType": "arraydraw",
+       "valType": "string"
+      },
+      "type": {
+       "description": "Specifies the selection type to be drawn. If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`) and (`x0`,`y1`). If *path*, draw a custom SVG path using `path`.",
+       "editType": "arraydraw",
+       "valType": "enumerated",
+       "values": [
+        "rect",
+        "path"
+       ]
+      },
+      "x0": {
+       "description": "Sets the selection's starting x position.",
+       "editType": "arraydraw",
+       "valType": "any"
+      },
+      "x1": {
+       "description": "Sets the selection's end x position.",
+       "editType": "arraydraw",
+       "valType": "any"
+      },
+      "xref": {
+       "description": "Sets the selection's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis.",
+       "editType": "arraydraw",
+       "valType": "enumerated",
+       "values": [
+        "paper",
+        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"
+       ]
+      },
+      "y0": {
+       "description": "Sets the selection's starting y position.",
+       "editType": "arraydraw",
+       "valType": "any"
+      },
+      "y1": {
+       "description": "Sets the selection's end y position.",
+       "editType": "arraydraw",
+       "valType": "any"
+      },
+      "yref": {
+       "description": "Sets the selection's x coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis.",
+       "editType": "arraydraw",
+       "valType": "enumerated",
+       "values": [
+        "paper",
+        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
+       ]
+      }
+     }
+    },
+    "role": "object"
+   },
    "separators": {
     "description": "Sets the decimal and thousand separators. For example, *. * puts a '.' before decimals and a space between thousands. In English locales, dflt is *.,* but other locales may alter this default.",
     "editType": "plot",
@@ -6975,7 +7148,7 @@
        "valType": "any"
       },
       "xref": {
-       "description": "Sets the shape's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds.",
+       "description": "Sets the shape's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis.",
        "editType": "calc",
        "valType": "enumerated",
        "values": [
@@ -7009,7 +7182,7 @@
        "valType": "any"
       },
       "yref": {
-       "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis.",
+       "description": "Sets the shape's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis.",
        "editType": "calc",
        "valType": "enumerated",
        "values": [
@@ -9717,7 +9890,19 @@
      "description": "Determines whether long tick labels automatically grow the figure margins.",
      "dflt": false,
      "editType": "ticks",
-     "valType": "boolean"
+     "extras": [
+      true,
+      false
+     ],
+     "flags": [
+      "height",
+      "width",
+      "left",
+      "right",
+      "top",
+      "bottom"
+     ],
+     "valType": "flaglist"
     },
     "autorange": {
      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
@@ -10956,7 +11141,19 @@
      "description": "Determines whether long tick labels automatically grow the figure margins.",
      "dflt": false,
      "editType": "ticks",
-     "valType": "boolean"
+     "extras": [
+      true,
+      false
+     ],
+     "flags": [
+      "height",
+      "width",
+      "left",
+      "right",
+      "top",
+      "bottom"
+     ],
+     "valType": "flaglist"
     },
     "autorange": {
      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
@@ -15905,7 +16102,7 @@
      "valType": "string"
     },
     "quartilemethod": {
-     "description": "Sets the method used to compute the sample's Q1 and Q3 quartiles. The *linear* method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://www.amstat.org/publications/jse/v14n3/langford.html). The *exclusive* method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The *inclusive* method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half.",
+     "description": "Sets the method used to compute the sample's Q1 and Q3 quartiles. The *linear* method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://jse.amstat.org/v14n3/langford.html). The *exclusive* method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The *inclusive* method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half.",
      "dflt": "linear",
      "editType": "calc",
      "valType": "enumerated",
@@ -34645,6 +34842,12 @@
        "right"
       ]
      },
+     "prefix": {
+      "description": "Sets a prefix appearing before the delta.",
+      "dflt": "",
+      "editType": "plot",
+      "valType": "string"
+     },
      "reference": {
       "description": "Sets the reference value to compute the delta. By default, it is set to the current value.",
       "editType": "calc",
@@ -34657,6 +34860,12 @@
       "valType": "boolean"
      },
      "role": "object",
+     "suffix": {
+      "description": "Sets a suffix appearing next to the delta.",
+      "dflt": "",
+      "editType": "plot",
+      "valType": "string"
+     },
      "valueformat": {
       "description": "Sets the value formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/tree/v1.4.5#d3-format.",
       "editType": "plot",
@@ -40330,6 +40539,28 @@
      "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves.",
      "editType": "none",
      "valType": "any"
+    },
+    "unselected": {
+     "editType": "plot",
+     "line": {
+      "color": {
+       "description": "Sets the base color of unselected lines. in connection with `unselected.line.opacity`.",
+       "dflt": "#7f7f7f",
+       "editType": "plot",
+       "valType": "color"
+      },
+      "editType": "plot",
+      "opacity": {
+       "description": "Sets the opacity of unselected lines. The default *auto* decreases the opacity smoothly as the number of lines increases. Use *1* to achieve exact `unselected.line.color`.",
+       "dflt": "auto",
+       "editType": "plot",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "role": "object"
+     },
+     "role": "object"
     },
     "visible": {
      "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
@@ -69493,6 +69724,17 @@
       "outliers",
       "suspectedoutliers",
       false
+     ]
+    },
+    "quartilemethod": {
+     "description": "Sets the method used to compute the sample's Q1 and Q3 quartiles. The *linear* method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://jse.amstat.org/v14n3/langford.html). The *exclusive* method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The *inclusive* method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half.",
+     "dflt": "linear",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "linear",
+      "exclusive",
+      "inclusive"
      ]
     },
     "scalegroup": {
