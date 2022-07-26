@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Selections
-    order: 26
+    order: 38
     permalink: python/selections/
     thumbnail: thumbnail/make_selection.jpg
 ---
