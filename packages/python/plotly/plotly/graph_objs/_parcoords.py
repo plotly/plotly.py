@@ -31,6 +31,7 @@ class Parcoords(_BaseTraceType):
         "type",
         "uid",
         "uirevision",
+        "unselected",
         "visible",
     }
 
@@ -797,6 +798,34 @@ class Parcoords(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
+    # unselected
+    # ----------
+    @property
+    def unselected(self):
+        """
+        The 'unselected' property is an instance of Unselected
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.parcoords.Unselected`
+          - A dict of string/value properties that will be passed
+            to the Unselected constructor
+
+            Supported dict properties:
+
+                line
+                    :class:`plotly.graph_objects.parcoords.unselect
+                    ed.Line` instance or dict with compatible
+                    properties
+
+        Returns
+        -------
+        plotly.graph_objs.parcoords.Unselected
+        """
+        return self["unselected"]
+
+    @unselected.setter
+    def unselected(self, val):
+        self["unselected"] = val
+
     # visible
     # -------
     @property
@@ -933,6 +962,9 @@ class Parcoords(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.parcoords.Unselected`
+            instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -964,6 +996,7 @@ class Parcoords(_BaseTraceType):
         tickfont=None,
         uid=None,
         uirevision=None,
+        unselected=None,
         visible=None,
         **kwargs,
     ):
@@ -1081,6 +1114,9 @@ class Parcoords(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.parcoords.Unselected`
+            instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1204,6 +1240,10 @@ an instance of :class:`plotly.graph_objs.Parcoords`"""
         _v = uirevision if uirevision is not None else _v
         if _v is not None:
             self["uirevision"] = _v
+        _v = arg.pop("unselected", None)
+        _v = unselected if unselected is not None else _v
+        if _v is not None:
+            self["unselected"] = _v
         _v = arg.pop("visible", None)
         _v = visible if visible is not None else _v
         if _v is not None:
