@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ##  [5.10.0] - 2022-07-26
 
 ### Updated
-  - Updated Plotly.js to from version 2.12.1 to version 2.13.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2132----2022-07-21) for more information. Notable changes include:
+  - Updated Plotly.js to from version 2.12.1 to version 2.13.3. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2133----2022-07-25) for more information. Notable changes include:
     - Add `selections`, `newselection` and `activeselection` layout attributes to have persistent and editable selections over cartesian subplots
     - Add `unselected.line.color` and `unselected.line.opacity` options to `parcoords` trace
     - Display Plotly's new logo in the modebar
