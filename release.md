@@ -76,7 +76,7 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 
 To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
 
-- `conda uninstally plotly`
+- `conda uninstall plotly`
 - `pip uninstall plotly` (just in case!)
 - `conda install conda_dist/plotly-X.Y.Z.tar.bz2`
 
