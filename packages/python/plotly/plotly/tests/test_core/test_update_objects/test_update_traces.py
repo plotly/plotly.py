@@ -430,7 +430,6 @@ def select_traces_fixture():
 
 def test_select_traces_integer(select_traces_fixture):
     fig = select_traces_fixture
-    
     # check that selecting first trace does indeed only select the first
     tr = list(fig.select_traces(selector=0))
     assert len(tr) == 1
