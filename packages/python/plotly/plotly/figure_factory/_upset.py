@@ -78,3 +78,4 @@ def create_upset(df, include_empty_set = False, max_width = 50):
     fig.update_layout(title = '<b>Intersections<b>', yaxis_range=[-max_y-0.1*max_y-1, max_y+0.1*max_y], xaxis_range = [-0.015*max_string_len**1.3, len(subsets)], showlegend = False, title_x=0.5)
     
     return fig
+    

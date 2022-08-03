@@ -4546,3 +4546,4 @@ class TestUpsetPlot():
         df['Attr 4'] = list(np.random.binomial(1, 0.05, size=1000))
         df['Attr 5'] = list(np.random.binomial(1, 0.1, size=1000))
         fig  = ff.create_upset(df, include_empty_set = True, max_width = 10)
+        

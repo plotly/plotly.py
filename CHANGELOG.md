@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## UNRELEASED
+  - added the upset plot type in figure factory for showing the intersection between non-mutually exclusive characteristics in a population (my forum post can be found here which details more of the functionality: https://community.plotly.com/t/plotly-upset-plot/63858)
+  
 
 ### Updated
   - Updated Plotly.js to from version 2.12.1 to version 2.13.3. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2133----2022-07-25) for more information. Notable changes include:
