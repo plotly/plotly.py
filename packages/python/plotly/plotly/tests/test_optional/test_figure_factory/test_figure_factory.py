@@ -4516,3 +4516,33 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert len(fig6.frames) == n_frames
         assert len(fig7.frames) == n_frames
         assert fig6.data[0].geojson == fig1.data[0].geojson
+
+class TestUpsetPlot():
+
+    def test_defaults(self):
+        df = pd.DataFrame()
+        df['Attr 1'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 2'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 3'] = list(np.random.binomial(1, 0.8, size=1000))
+        df['Attr 4'] = list(np.random.binomial(1, 0.05, size=1000))
+        df['Attr 5'] = list(np.random.binomial(1, 0.1, size=1000))
+        fig  = ff.create_upset(df)
+
+    
+    def test_max_width(self):
+        df = pd.DataFrame()
+        df['Attr 1'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 2'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 3'] = list(np.random.binomial(1, 0.8, size=1000))
+        df['Attr 4'] = list(np.random.binomial(1, 0.05, size=1000))
+        df['Attr 5'] = list(np.random.binomial(1, 0.1, size=1000))
+        fig  = ff.create_upset(df, max_width = 10)
+
+    def test_empty_set_true(self):
+        df = pd.DataFrame()
+        df['Attr 1'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 2'] = list(np.random.binomial(1, 0.3, size=1000))
+        df['Attr 3'] = list(np.random.binomial(1, 0.8, size=1000))
+        df['Attr 4'] = list(np.random.binomial(1, 0.05, size=1000))
+        df['Attr 5'] = list(np.random.binomial(1, 0.1, size=1000))
+        fig  = ff.create_upset(df, include_empty_set = True, max_width = 10)
