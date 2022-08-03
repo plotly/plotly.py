@@ -26,6 +26,7 @@ from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
 from plotly.figure_factory._trisurf import create_trisurf
 from plotly.figure_factory._violin import create_violin
+from plotly.figure_factory._upset import create_upset
 
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
@@ -66,4 +67,5 @@ __all__ = [
     "create_ternary_contour",
     "create_trisurf",
     "create_violin",
+    "create_upset"
 ]
