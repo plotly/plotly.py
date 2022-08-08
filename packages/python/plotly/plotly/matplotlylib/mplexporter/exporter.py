@@ -286,7 +286,7 @@ class Exporter(object):
         }
 
         offset_dict = {"data": "before", "screen": "after"}
-        offset_order = offset_dict[collection.get_offset_position()]
+        offset_order = offset_dict[collection._offset_position]
 
         self.renderer.draw_path_collection(
             paths=processed_paths,
