@@ -227,7 +227,7 @@ IFrame(snippet_url + 'subplots', width='100%', height=1200)
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);" data-user-style="{&quot;boxShadow&quot;:&quot;none&quot;,&quot;width&quot;:&quot;calc(100% - 30px)&quot;,&quot;border&quot;:&quot;thin rgb(229,229,229) solid&quot;}" class="block card ddk-card "><div class="card--content" style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Updates from Chris Parmer and
 Adam Schroeder delivered to your inbox every two months. Includes tips and tricks,
 community apps, and deep dives into the Dash architecture.
-<u><a href="https://go.plotly.com/dash-club?utm_medium=dash_docs&amp;utm_content=installation">Join now</a></u>.</p></div></div></div></div>
+<u><a href="https://go.plotly.com/dash-club?utm_medium=graphing_library_docs&amp;utm_content=subplots">Join now</a></u>.</p></div></div></div></div>
 
 
 #### Customizing Subplot Axes
