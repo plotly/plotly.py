@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.4
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.11
+    version: 3.8.0
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -99,6 +99,12 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bar-charts', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);" data-user-style="{&quot;boxShadow&quot;:&quot;none&quot;,&quot;width&quot;:&quot;calc(100% - 30px)&quot;,&quot;border&quot;:&quot;thin rgb(229,229,229) solid&quot;}" class="block card ddk-card "><div class="card--content" style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Updates from Chris Parmer and
+Adam Schroeder delivered to your inbox every two months. Includes tips and tricks,
+community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_medium=dash_docs&amp;utm_content=installation">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Colored Bars
 
