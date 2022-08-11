@@ -310,6 +310,3 @@ fig.update_layout(
 fig.show()
 ```
 
-## More on Selections
-
-For more on selections, see the [selections section of the `dcc.Graph` page](https://dash.plotly.com/dash-core-components/graph#selections) in the Dash docs.
