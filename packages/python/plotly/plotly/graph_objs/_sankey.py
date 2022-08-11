@@ -339,6 +339,9 @@ class Sankey(_BaseTraceType):
 
             Supported dict properties:
 
+                arrowlen
+                    Sets the length (in px) of the links arrow, if
+                    0 no arrow will be drawn.
                 color
                     Sets the `link` color. It can be a single
                     value, or an array for specifying color for
