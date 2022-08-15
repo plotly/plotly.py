@@ -225,7 +225,7 @@ def to_html(
             else:
                 animation_opts_arg = ""
             then_animate = """.then(function(){{
-                            Plotly.animate('{id}', null{animation_opts});
+                            window.Plotly && Plotly.animate('{id}', null{animation_opts});
                         }})""".format(
                 id=plotdivid, animation_opts=animation_opts_arg
             )
