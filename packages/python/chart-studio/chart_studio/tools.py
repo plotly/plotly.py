@@ -65,16 +65,19 @@ def ensure_local_plotly_files():
             if contents_orig.keys() != contents.keys():
                 utils.save_json_dict(fn, contents)
 
-    else:
-        warnings.warn(
-            "Looks like you don't have 'read-write' permission to "
-            "your 'home' ('~') directory or to our '~/.plotly' "
-            "directory. That means plotly's python api can't setup "
-            "local configuration files. No problem though! You'll "
-            "just have to sign-in using 'plotly.plotly.sign_in()'. "
-            "For help with that: 'help(plotly.plotly.sign_in)'."
-            "\nQuestions? Visit https://support.plotly.com"
-        )
+    # MODE MODIFIED #
+    # unless or until we support online plotly there's no reason to nag the user about
+    # something they can't affect anyway
+    # else:
+    #     warnings.warn(
+    #         "Looks like you don't have 'read-write' permission to "
+    #         "your 'home' ('~') directory or to our '~/.plotly' "
+    #         "directory. That means plotly's python api can't setup "
+    #         "local configuration files. No problem though! You'll "
+    #         "just have to sign-in using 'plotly.plotly.sign_in()'. "
+    #         "For help with that: 'help(plotly.plotly.sign_in)'."
+    #         "\nQuestions? Visit https://support.plotly.com"
+    #     )
 
 
 ### credentials tools ###

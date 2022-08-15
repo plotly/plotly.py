@@ -162,6 +162,12 @@ Unrecognized config options supplied: {bad_config}""".format(
             )
 
         clean_config = config
+
+        # MODE ADDITION #
+        clean_config['showLink'] = False
+        clean_config['displaylogo'] = False
+        clean_config['modeBarButtonsToRemove'] = ['sendDataToCloud']
+
     else:
         clean_config = {}
 

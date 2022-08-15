@@ -493,13 +493,13 @@ validator_packages = [
 
 versioneer_cmds = versioneer.get_cmdclass()
 setup(
-    name="plotly",
+    name="mode-plotly",
     version=versioneer.get_version(),
     use_2to3=False,
     author="Chris P",
     author_email="chris@plot.ly",
-    maintainer="Nicolas Kruchten",
-    maintainer_email="nicolas@plot.ly",
+    maintainer="Mode Analytics",
+    maintainer_email="support@modeanalytics.com",
     url="https://plotly.com/python/",
     project_urls={"Github": "https://github.com/plotly/plotly.py"},
     description="An open-source, interactive data visualization library for Python",
