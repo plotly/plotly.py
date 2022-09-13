@@ -9,6 +9,7 @@ class Link(_BaseTraceHierarchyType):
     _parent_path_str = "sankey"
     _path_str = "sankey.link"
     _valid_props = {
+        "arrowlen",
         "color",
         "colorscaledefaults",
         "colorscales",
@@ -29,6 +30,27 @@ class Link(_BaseTraceHierarchyType):
         "value",
         "valuesrc",
     }
+
+    # arrowlen
+    # --------
+    @property
+    def arrowlen(self):
+        """
+        Sets the length (in px) of the links arrow, if 0 no arrow will
+        be drawn.
+
+        The 'arrowlen' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["arrowlen"]
+
+    @arrowlen.setter
+    def arrowlen(self, val):
+        self["arrowlen"] = val
 
     # color
     # -----
@@ -599,6 +621,9 @@ class Link(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -691,6 +716,7 @@ class Link(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        arrowlen=None,
         color=None,
         colorscales=None,
         colorscaledefaults=None,
@@ -722,6 +748,9 @@ class Link(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.sankey.Link`
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -843,6 +872,10 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("arrowlen", None)
+        _v = arrowlen if arrowlen is not None else _v
+        if _v is not None:
+            self["arrowlen"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

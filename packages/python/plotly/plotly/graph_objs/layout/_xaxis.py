@@ -129,12 +129,15 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether long tick labels automatically grow the
         figure margins.
 
-        The 'automargin' property must be specified as a bool
-        (either True, or False)
+        The 'automargin' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['height', 'width', 'left', 'right', 'top', 'bottom'] joined with '+' characters
+            (e.g. 'height+width')
+            OR exactly one of [True, False] (e.g. 'False')
 
         Returns
         -------
-        bool
+        Any
         """
         return self["automargin"]
 

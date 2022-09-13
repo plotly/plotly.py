@@ -21,6 +21,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._colorscaledefaults import ColorscaledefaultsValidator
     from ._colorscales import ColorscalesValidator
     from ._color import ColorValidator
+    from ._arrowlen import ArrowlenValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -47,5 +48,6 @@ else:
             "._colorscaledefaults.ColorscaledefaultsValidator",
             "._colorscales.ColorscalesValidator",
             "._color.ColorValidator",
+            "._arrowlen.ArrowlenValidator",
         ],
     )

@@ -10,14 +10,16 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._rangefont import Rangefont
     from ._stream import Stream
     from ._tickfont import Tickfont
+    from ._unselected import Unselected
     from . import legendgrouptitle
     from . import line
+    from . import unselected
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".legendgrouptitle", ".line"],
+        [".legendgrouptitle", ".line", ".unselected"],
         [
             "._dimension.Dimension",
             "._domain.Domain",
@@ -27,5 +29,6 @@ else:
             "._rangefont.Rangefont",
             "._stream.Stream",
             "._tickfont.Tickfont",
+            "._unselected.Unselected",
         ],
     )

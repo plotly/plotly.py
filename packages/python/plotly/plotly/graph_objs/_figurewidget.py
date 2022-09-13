@@ -49,6 +49,10 @@ class FigureWidget(BaseFigureWidget):
 
                 Supported dict properties:
 
+                    activeselection
+                        :class:`plotly.graph_objects.layout.Activeselec
+                        tion` instance or dict with compatible
+                        properties
                     activeshape
                         :class:`plotly.graph_objects.layout.Activeshape
                         ` instance or dict with compatible properties
@@ -347,6 +351,9 @@ class FigureWidget(BaseFigureWidget):
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
+                    newselection
+                        :class:`plotly.graph_objects.layout.Newselectio
+                        n` instance or dict with compatible properties
                     newshape
                         :class:`plotly.graph_objects.layout.Newshape`
                         instance or dict with compatible properties
@@ -377,6 +384,15 @@ class FigureWidget(BaseFigureWidget):
                     selectionrevision
                         Controls persistence of user-driven changes in
                         selected points from all traces.
+                    selections
+                        A tuple of
+                        :class:`plotly.graph_objects.layout.Selection`
+                        instances or dicts with compatible properties
+                    selectiondefaults
+                        When used in a template (as
+                        layout.template.layout.selectiondefaults), sets
+                        the default property values to use for elements
+                        of layout.selections
                     separators
                         Sets the decimal and thousand separators. For
                         example, *. * puts a '.' before decimals and a
@@ -2394,17 +2410,17 @@ class FigureWidget(BaseFigureWidget):
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
             for Q1 and 75th percentile for Q3 as computed using
-            method #10 (listed on http://www.amstat.org/publication
-            s/jse/v14n3/langford.html). The "exclusive" method uses
-            the median to divide the ordered dataset into two
-            halves if the sample is odd, it does not include the
-            median in either half - Q1 is then the median of the
-            lower half and Q3 the median of the upper half. The
-            "inclusive" method also uses the median to divide the
-            ordered dataset into two halves but if the sample is
-            odd, it includes the median in both halves - Q1 is then
-            the median of the lower half and Q3 the median of the
-            upper half.
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         sd
             Sets the standard deviation values. There should be as
             many items as the number of boxes desired. This
@@ -11567,6 +11583,7 @@ class FigureWidget(BaseFigureWidget):
         tickfont=None,
         uid=None,
         uirevision=None,
+        unselected=None,
         visible=None,
         row=None,
         col=None,
@@ -11683,6 +11700,9 @@ class FigureWidget(BaseFigureWidget):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.parcoords.Unselected`
+            instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -11727,6 +11747,7 @@ class FigureWidget(BaseFigureWidget):
             tickfont=tickfont,
             uid=uid,
             uirevision=uirevision,
+            unselected=unselected,
             visible=visible,
             **kwargs,
         )
@@ -19058,6 +19079,7 @@ class FigureWidget(BaseFigureWidget):
         orientation=None,
         pointpos=None,
         points=None,
+        quartilemethod=None,
         scalegroup=None,
         scalemode=None,
         selected=None,
@@ -19263,6 +19285,21 @@ class FigureWidget(BaseFigureWidget):
             points. Defaults to "suspectedoutliers" when
             `marker.outliercolor` or `marker.line.outliercolor` is
             set, otherwise defaults to "outliers".
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -19471,6 +19508,7 @@ class FigureWidget(BaseFigureWidget):
             orientation=orientation,
             pointpos=pointpos,
             points=points,
+            quartilemethod=quartilemethod,
             scalegroup=scalegroup,
             scalemode=scalemode,
             selected=selected,
@@ -22480,6 +22518,312 @@ class FigureWidget(BaseFigureWidget):
             exclude_empty_subplots=exclude_empty_subplots,
         )
 
+    def select_selections(self, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Select selections from a particular subplot cell and/or selections
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, int, str, or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selection that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the selections that satisfy
+            all of the specified selection criteria
+        """
+        return self._select_annotations_like(
+            "selections", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def for_each_selection(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
+        """
+        Apply a function to all selections that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single selection object.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selections that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            prop="selections",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def update_selections(
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
+    ) -> "FigureWidget":
+        """
+        Perform a property update operation on all selections that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all selections that
+            satisfy the selection criteria.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selection that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected selection. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            prop="selections",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def add_selection(
+        self,
+        arg=None,
+        line=None,
+        name=None,
+        opacity=None,
+        path=None,
+        templateitemname=None,
+        type=None,
+        x0=None,
+        x1=None,
+        xref=None,
+        y0=None,
+        y1=None,
+        yref=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        exclude_empty_subplots=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+        Create and add a new selection to the figure's layout
+
+        Parameters
+        ----------
+        arg
+            instance of Selection or dict with compatible
+            properties
+        line
+            :class:`plotly.graph_objects.layout.selection.Line`
+            instance or dict with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        opacity
+            Sets the opacity of the selection.
+        path
+            For `type` "path" - a valid SVG path similar to
+            `shapes.path` in data coordinates. Allowed segments
+            are: M, L and Z.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        type
+            Specifies the selection type to be drawn. If "rect", a
+            rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
+            (`x1`,`y1`) and (`x0`,`y1`). If "path", draw a custom
+            SVG path using `path`.
+        x0
+            Sets the selection's starting x position.
+        x1
+            Sets the selection's end x position.
+        xref
+            Sets the selection's x coordinate axis. If set to a x
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            a x coordinate. If set to "paper", the `x` position
+            refers to the distance from the left of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
+        y0
+            Sets the selection's starting y position.
+        y1
+            Sets the selection's end y position.
+        yref
+            Sets the selection's x coordinate axis. If set to a y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            a y coordinate. If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
+        row
+            Subplot row for selection. If 'all', addresses all rows
+            in the specified column(s).
+        col
+            Subplot column for selection. If 'all', addresses all
+            columns in the specified row(s).
+        secondary_y
+            Whether to add selection to secondary y-axis
+        exclude_empty_subplots
+            If True, selection will not be added to subplots
+            without traces.
+
+        Returns
+        -------
+        FigureWidget
+        """
+        from plotly.graph_objs import layout as _layout
+
+        new_obj = _layout.Selection(
+            arg,
+            line=line,
+            name=name,
+            opacity=opacity,
+            path=path,
+            templateitemname=templateitemname,
+            type=type,
+            x0=x0,
+            x1=x1,
+            xref=xref,
+            y0=y0,
+            y1=y1,
+            yref=yref,
+            **kwargs,
+        )
+        return self._add_annotation_like(
+            "selection",
+            "selections",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
+        )
+
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
         """
         Select shapes from a particular subplot cell and/or shapes
@@ -22782,10 +23126,7 @@ class FigureWidget(BaseFigureWidget):
             domain of that axis: e.g., *x2 domain* refers to the
             domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis. If the axis `type` is
-            "log", then you must take the log of your desired
-            range. If the axis `type` is "date", then you must
-            convert the date to unix time in milliseconds.
+            the domain of the second x axis.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -22810,12 +23151,12 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            a y coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top). If set to a y axis ID followed by
+            Sets the shape's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
