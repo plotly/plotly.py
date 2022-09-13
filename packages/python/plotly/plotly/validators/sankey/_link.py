@@ -10,6 +10,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            arrowlen
+                Sets the length (in px) of the links arrow, if
+                0 no arrow will be drawn.
             color
                 Sets the `link` color. It can be a single
                 value, or an array for specifying color for

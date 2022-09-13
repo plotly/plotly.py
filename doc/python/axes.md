@@ -86,7 +86,7 @@ The different groups of Cartesian axes properties are
 - range of the axis
 - domain of the axis
 
-The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/pythone/categorical-axes/) and [axes of type `date`](/python/time-series/).
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/python/categorical-axes/) and [axes of type `date`](/python/time-series/).
 
 
 #### Set and Style Axes Title Labels

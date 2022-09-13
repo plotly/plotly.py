@@ -29,7 +29,7 @@ a link to the plotly.js CHANGELOG.
 
 ### Finalize versions
 
-**Create a branch `git checkout -b release-X.Y.Z`.**
+**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/master`*.**
 
 Manually update the versions to `X.Y.Z` in the files specified below.
 
@@ -76,7 +76,7 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 
 To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
 
-- `conda uninstally plotly`
+- `conda uninstall plotly`
 - `pip uninstall plotly` (just in case!)
 - `conda install conda_dist/plotly-X.Y.Z.tar.bz2`
 

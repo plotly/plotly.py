@@ -40,6 +40,7 @@ class Violin(_BaseTraceType):
         "orientation",
         "pointpos",
         "points",
+        "quartilemethod",
         "scalegroup",
         "scalemode",
         "selected",
@@ -937,6 +938,38 @@ class Violin(_BaseTraceType):
     def points(self, val):
         self["points"] = val
 
+    # quartilemethod
+    # --------------
+    @property
+    def quartilemethod(self):
+        """
+        Sets the method used to compute the sample's Q1 and Q3
+        quartiles. The "linear" method uses the 25th percentile for Q1
+        and 75th percentile for Q3 as computed using method #10 (listed
+        on http://jse.amstat.org/v14n3/langford.html). The "exclusive"
+        method uses the median to divide the ordered dataset into two
+        halves if the sample is odd, it does not include the median in
+        either half - Q1 is then the median of the lower half and Q3
+        the median of the upper half. The "inclusive" method also uses
+        the median to divide the ordered dataset into two halves but if
+        the sample is odd, it includes the median in both halves - Q1
+        is then the median of the lower half and Q3 the median of the
+        upper half.
+
+        The 'quartilemethod' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['linear', 'exclusive', 'inclusive']
+
+        Returns
+        -------
+        Any
+        """
+        return self["quartilemethod"]
+
+    @quartilemethod.setter
+    def quartilemethod(self, val):
+        self["quartilemethod"] = val
+
     # scalegroup
     # ----------
     @property
@@ -1752,6 +1785,21 @@ class Violin(_BaseTraceType):
             points. Defaults to "suspectedoutliers" when
             `marker.outliercolor` or `marker.line.outliercolor` is
             set, otherwise defaults to "outliers".
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -1937,6 +1985,7 @@ class Violin(_BaseTraceType):
         orientation=None,
         pointpos=None,
         points=None,
+        quartilemethod=None,
         scalegroup=None,
         scalemode=None,
         selected=None,
@@ -2142,6 +2191,21 @@ class Violin(_BaseTraceType):
             points. Defaults to "suspectedoutliers" when
             `marker.outliercolor` or `marker.line.outliercolor` is
             set, otherwise defaults to "outliers".
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -2449,6 +2513,10 @@ an instance of :class:`plotly.graph_objs.Violin`"""
         _v = points if points is not None else _v
         if _v is not None:
             self["points"] = _v
+        _v = arg.pop("quartilemethod", None)
+        _v = quartilemethod if quartilemethod is not None else _v
+        if _v is not None:
+            self["quartilemethod"] = _v
         _v = arg.pop("scalegroup", None)
         _v = scalegroup if scalegroup is not None else _v
         if _v is not None:
