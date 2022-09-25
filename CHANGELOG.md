@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+##  UNRELEASED
+
+### Updated
+  - `px` methods now accept data-frame-like objects that support a `to_pandas()` method, such as polars, cudf, vaex etc
+
+
 ##  [5.10.0] - 2022-08-11
 
 ### Updated
