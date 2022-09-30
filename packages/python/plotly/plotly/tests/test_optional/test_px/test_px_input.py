@@ -236,7 +236,7 @@ def test_build_df_with_index():
 def test_build_df_protocol():
     import vaex
 
-    # take out the 'species' columns since the vaex implementation does not cover strings yet
+    # take out the 'species' columns since there are still some issues with strings
     iris_pandas = px.data.iris()[["petal_width", "sepal_length"]]
     iris_vaex = vaex.from_pandas(iris_pandas)
     args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
