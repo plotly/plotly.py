@@ -1304,14 +1304,17 @@ def build_dataframe(args, constructor):
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         if hasattr(args["data_frame"], "__dataframe__"):
-            # Pandas does not implement a `from_dataframe` yet
-            # $ wget https://raw.githubusercontent.com/data-apis/dataframe-api/main/protocol/pandas_implementation.py
-            # $ export PYTHONPATH=`pwd`
-            import pandas_implementation
-
-            args["data_frame"] = pandas_implementation.from_dataframe(
-                args["data_frame"]
-            )
+            try:
+                import pandas.api.interchange
+            except ModuleNotFoundError:
+                raise NotImplementedError(
+                    "The dataframe you provided supports the dataframe interchange"
+                    "protocol, "
+                    "but pandas 1.5.0 or greater is required to consume it."
+                )
+            df_not_pandas = args["data_frame"]
+            df_pandas = pandas.api.interchange.from_dataframe(df_not_pandas)
+            args["data_frame"] = df_pandas
         else:
             args["data_frame"] = pd.DataFrame(args["data_frame"])
     df_input = args["data_frame"]
