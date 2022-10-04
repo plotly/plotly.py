@@ -190,7 +190,6 @@ jobs:
       - run:
           name: Run percy snapshots
           command: |
-            npm i @percy/cli
             npx percy snapshot test/percy/
             rm test/percy/*.html
 
