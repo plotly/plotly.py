@@ -9,7 +9,7 @@ pd = optional_imports.get_module("pandas")
 if pd is None:
     raise ImportError(
         """\
-Plotly express requires pandas to be installed. Install on plotly[express] to create a dependency on pandas.
+Plotly express requires pandas to be installed. Install plotly[express] to create a dependency on pandas.
 """
     )
 
