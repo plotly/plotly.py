@@ -554,6 +554,9 @@ setup(
         ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
     ],
     install_requires=["tenacity>=6.2.0"],
+    extras_require={
+        "express": ["pandas>=1.5.0"],
+    },
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),
