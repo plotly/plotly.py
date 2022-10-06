@@ -75,7 +75,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ## Installation
 
-plotly.py may be installed using `pip`...
+plotly.py may be installed using `pip`:
 
 ```
 pip install plotly==5.10.0
@@ -136,7 +136,7 @@ command line utility (legacy as of `plotly` version 4.9).
 #### Kaleido
 
 The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
-using `pip`...
+using `pip`:
 
 ```
 pip install -U kaleido
@@ -162,7 +162,7 @@ These dependencies can both be installed using conda:
 conda install -c plotly plotly-orca==1.3.1 psutil
 ```
 
-Or, `psutil` can be installed using `pip`...
+Or, `psutil` can be installed using `pip`:
 
 ```
 pip install psutil
@@ -175,7 +175,7 @@ and orca can be installed according to the instructions in the [orca README](htt
 
 Some plotly.py features rely on fairly large geographic shape files. The county
 choropleth figure factory is one such example. These shape files are distributed as a
-separate `plotly-geo` package. This package can be installed using `pip`...
+separate `plotly-geo` package. This package can be installed using `pip`:
 
 ```
 pip install plotly-geo==1.0.0
