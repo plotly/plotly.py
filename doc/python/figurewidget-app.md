@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.5
+    version: 3.8.0
   plotly:
     description: Interactive Data Analysis with Plotly
     display_as: chart_events
@@ -30,8 +30,8 @@ jupyter:
     order: 3
     page_type: example_index
     permalink: python/figurewidget-app/
-    thumbnail: thumbnail/multi-widget.jpg
     redirect_from: /python/slider-widget/
+    thumbnail: thumbnail/multi-widget.jpg
 ---
 
 #### NYC Flights Database

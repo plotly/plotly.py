@@ -1,5 +1,6 @@
 plotly==5.10.0
-jupytext==1.14.1
+jupytext>=1.1.1
+ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
