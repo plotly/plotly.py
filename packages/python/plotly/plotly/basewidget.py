@@ -733,12 +733,11 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Display
     # -------
-    def _ipython_display_(self):
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
         """
         Handle rich display of figures in ipython contexts
         """
-        # Override BaseFigure's display to make sure we display the widget version
-        widgets.DOMWidget._ipython_display_(self)
+        widgets.DOMWidget._repr_mimebundle_(self)
 
     # Callbacks
     # ---------
