@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.0
+    version: 3.8.0
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -176,6 +176,31 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
 
 fig.update_layout(legend=dict(
     orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
+fig.show()
+```
+
+#### Horizontal Legend Entry Width
+
+*New in 5.11*
+
+Set the width of hozitonal legend entries by setting `entrywidth`. Here we set it to `70` pixels. Pixels is the default unit for `entrywidth`, but you can set it to be a fraction of the plot width with `entrywidthmode='fraction`. 
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    orientation="h",
+    entrywidth=70,
     yanchor="bottom",
     y=1.02,
     xanchor="right",
