@@ -733,12 +733,17 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Display
     # -------
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        raise NotImplementedError  # Prefer _repr_mimebundle_
+
     def _ipython_display_(self):
         """
         Handle rich display of figures in ipython contexts
         """
-        # Override BaseFigure's display to make sure we display the widget version
-        widgets.DOMWidget._ipython_display_(self)
+        raise NotImplementedError  # Prefer _repr_mimebundle_
 
     # Callbacks
     # ---------
