@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+  - Support for ipywidgets 8 [#3930](https://github.com/plotly/plotly.py/pull/3930)
+
 ## [5.11.0] - 2022-10-27
 
 ### Updated
