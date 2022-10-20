@@ -609,11 +609,14 @@ class IFrameRenderer(MimetypeRenderer):
 
     def build_filename(self):
         ip = IPython.get_ipython() if IPython else None
-        cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1 if ip else 0
-        filename = "{dirname}/figure_{cell_number}.html".format(
+        if ip:
+            cell_number = next(ip.history_manager.get_tail(1), (0, -1, ""))[1] + 1
+        else:
+            cell_number = 0
+
+        return "{dirname}/figure_{cell_number}.html".format(
             dirname=self.html_directory, cell_number=cell_number
         )
-        return filename
 
     def build_url(self, filename):
         return filename
