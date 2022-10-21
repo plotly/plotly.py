@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.8.0
   plotly:
     description: How to make Mapbox maps in Python with various base layers, with
       or without needing a Mapbox Access token.
@@ -191,6 +191,26 @@ fig.show()
 #### Using a mapbox image layer to display a datashader raster image
 
 See the example in the [plotly and datashader tutorial](/python/datashader).
+
+
+#### Setting Bounds for Panning and Zooming
+
+Set bounds for a map to specify an area outside which a user interacting with the map can't pan or zoom. Here we
+set a maximum longitude of `-180`, a minimum longitude of `-50`, a maximum latitude as `90`, and a minimum latitude of `20`.
+
+```python
+import pandas as pd
+us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+
+import plotly.express as px
+
+fig = px.scatter_mapbox(us_cities, lat="lat", lon="lon", hover_name="City", hover_data=["State", "Population"],
+                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.update_layout(mapbox_bounds={"west":-180, "east":-50, "south":20, "north":90})
+fig.show()
+```
 
 #### Reference
 
