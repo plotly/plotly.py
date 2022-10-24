@@ -8,7 +8,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.8.0
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -332,6 +332,8 @@ Each basic symbol is also represented by a number. Adding 100 to that number is 
 
 In the following figure, hover over a symbol to see its name or number. Set the `marker_symbol` attribute equal to that name or number to change the marker symbol in your figure.
 
+> The `arrow-wide` and `arrow` marker symbols are new in 5.11
+
 ```python
 import plotly.graph_objects as go
 from plotly.validators.scatter.marker import SymbolValidator
@@ -356,6 +358,85 @@ fig.update_layout(title="Mouse over symbols for name & number!",
 fig.show()
 ```
 
+
+### Using a Custom Marker
+
+To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`.
+
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(marker=dict(size=8,
+                              symbol='diamond',
+                              line=dict(width=2,
+                                        color='DarkSlateGrey')),
+                  selector=dict(mode='markers'))
+fig.show()
+
+```
+
+### Setting Marker Angles
+
+
+*New in 5.11*
+
+Change the angle of markers by setting `angle`. Here we set the angle on the `arrow` markers to `45`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(marker=dict(size=12,
+                              symbol='arrow',
+                              angle=45,
+                              line=dict(width=2,
+                                        color='DarkSlateGrey')),
+                  selector=dict(mode='markers'))
+fig.show()
+
+```
+
+### Setting Angle Reference
+
+*New in 5.11*
+
+In the previous example the angle reference is the default `up`, which
+means all makers start at the angle reference point of 0. Set `angleref` to `previous` and a marker will take its angle reference from the previous data point.
+
+```python
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+
+df = px.data.gapminder()
+
+fig = go.Figure()
+
+for x in df.loc[df.continent.isin(["Europe"])].country.unique()[:5]:
+    fil = df.loc[(df.country.str.contains(x))]
+    fig.add_trace(
+        go.Scatter(
+            x=fil["year"],
+            y=fil["pop"],
+            mode="lines+markers",
+            marker=dict(
+                symbol="arrow",
+                size=15,
+                angleref="previous",
+            ),
+            name=x,
+        )
+    )
+fig.show()
+
+```
 
 ### Reference
 
