@@ -110,6 +110,8 @@ class Layout(_BaseLayoutType):
         "margin",
         "meta",
         "metasrc",
+        "minreducedheight",
+        "minreducedwidth",
         "modebar",
         "newselection",
         "newshape",
@@ -254,21 +256,21 @@ class Layout(_BaseLayoutType):
                     same coordinates as `xref`.
                 axref
                     Indicates in what coordinates the tail of the
-                    annotation (ax,ay) is specified. If set to a ax
-                    axis id (e.g. "ax" or "ax2"), the `ax` position
-                    refers to a ax coordinate. If set to "paper",
-                    the `ax` position refers to the distance from
+                    annotation (ax,ay) is specified. If set to a x
+                    axis id (e.g. "x" or "x2"), the `x` position
+                    refers to a x coordinate. If set to "paper",
+                    the `x` position refers to the distance from
                     the left of the plotting area in normalized
                     coordinates where 0 (1) corresponds to the left
-                    (right). If set to a ax axis ID followed by
+                    (right). If set to a x axis ID followed by
                     "domain" (separated by a space), the position
                     behaves like for "paper", but refers to the
                     distance in fractions of the domain length from
-                    the left of the domain of that axis: e.g., *ax2
-                    domain* refers to the domain of the second ax
-                    axis and a ax position of 0.5 refers to the
+                    the left of the domain of that axis: e.g., *x2
+                    domain* refers to the domain of the second x
+                    axis and a x position of 0.5 refers to the
                     point between the left and the right of the
-                    domain of the second ax axis. In order for
+                    domain of the second x axis. In order for
                     absolute positioning of the arrow to work,
                     "axref" must be exactly the same as "xref",
                     otherwise "axref" will revert to "pixel"
@@ -291,33 +293,32 @@ class Layout(_BaseLayoutType):
                     same coordinates as `yref`.
                 ayref
                     Indicates in what coordinates the tail of the
-                    annotation (ax,ay) is specified. If set to a ay
-                    axis id (e.g. "ay" or "ay2"), the `ay` position
-                    refers to a ay coordinate. If set to "paper",
-                    the `ay` position refers to the distance from
+                    annotation (ax,ay) is specified. If set to a y
+                    axis id (e.g. "y" or "y2"), the `y` position
+                    refers to a y coordinate. If set to "paper",
+                    the `y` position refers to the distance from
                     the bottom of the plotting area in normalized
                     coordinates where 0 (1) corresponds to the
-                    bottom (top). If set to a ay axis ID followed
-                    by "domain" (separated by a space), the
-                    position behaves like for "paper", but refers
-                    to the distance in fractions of the domain
-                    length from the bottom of the domain of that
-                    axis: e.g., *ay2 domain* refers to the domain
-                    of the second ay  axis and a ay position of 0.5
-                    refers to the point between the bottom and the
-                    top of the domain of the second ay axis. In
-                    order for absolute positioning of the arrow to
-                    work, "ayref" must be exactly the same as
-                    "yref", otherwise "ayref" will revert to
-                    "pixel" (explained next). For relative
-                    positioning, "ayref" can be set to "pixel", in
-                    which case the "ay" value is specified in
-                    pixels relative to "y". Absolute positioning is
-                    useful for trendline annotations which should
-                    continue to indicate the correct trend when
-                    zoomed. Relative positioning is useful for
-                    specifying the text offset for an annotated
-                    point.
+                    bottom (top). If set to a y axis ID followed by
+                    "domain" (separated by a space), the position
+                    behaves like for "paper", but refers to the
+                    distance in fractions of the domain length from
+                    the bottom of the domain of that axis: e.g.,
+                    *y2 domain* refers to the domain of the second
+                    y  axis and a y position of 0.5 refers to the
+                    point between the bottom and the top of the
+                    domain of the second y axis. In order for
+                    absolute positioning of the arrow to work,
+                    "ayref" must be exactly the same as "yref",
+                    otherwise "ayref" will revert to "pixel"
+                    (explained next). For relative positioning,
+                    "ayref" can be set to "pixel", in which case
+                    the "ay" value is specified in pixels relative
+                    to "y". Absolute positioning is useful for
+                    trendline annotations which should continue to
+                    indicate the correct trend when zoomed.
+                    Relative positioning is useful for specifying
+                    the text offset for an annotated point.
                 bgcolor
                     Sets the background color of the annotation.
                 bordercolor
@@ -681,7 +682,7 @@ class Layout(_BaseLayoutType):
         of one another, with negative values below the axis, positive
         values above With "group", the bars are plotted next to one
         another centered around the shared location. With "overlay",
-        the bars are plotted over one another, you might need to an
+        the bars are plotted over one another, you might need to reduce
         "opacity" to see multiple bars.
 
         The 'barmode' property is an enumeration that may be specified as:
@@ -1339,7 +1340,7 @@ class Layout(_BaseLayoutType):
         top of one another With "group", the bars are plotted next to
         one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
-        need to an "opacity" to see multiple bars.
+        need to reduce "opacity" to see multiple bars.
 
         The 'funnelmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1971,6 +1972,13 @@ class Layout(_BaseLayoutType):
                 borderwidth
                     Sets the width (in px) of the border enclosing
                     the legend.
+                entrywidth
+                    Sets the width (in px or fraction) of the
+                    legend. Use 0 to size the entry based on the
+                    text width, when `entrywidthmode` is set to
+                    "pixels".
+                entrywidthmode
+                    Determines what entrywidth means.
                 font
                     Sets the font used to text the legend items.
                 groupclick
@@ -2097,6 +2105,9 @@ class Layout(_BaseLayoutType):
                 bearing
                     Sets the bearing angle of the map in degrees
                     counter-clockwise from North (mapbox.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.mapbox.Boun
+                    ds` instance or dict with compatible properties
                 center
                     :class:`plotly.graph_objects.layout.mapbox.Cent
                     er` instance or dict with compatible properties
@@ -2247,6 +2258,48 @@ class Layout(_BaseLayoutType):
     @metasrc.setter
     def metasrc(self, val):
         self["metasrc"] = val
+
+    # minreducedheight
+    # ----------------
+    @property
+    def minreducedheight(self):
+        """
+        Minimum height of the plot with margin.automargin applied (in
+        px)
+
+        The 'minreducedheight' property is a number and may be specified as:
+          - An int or float in the interval [2, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minreducedheight"]
+
+    @minreducedheight.setter
+    def minreducedheight(self, val):
+        self["minreducedheight"] = val
+
+    # minreducedwidth
+    # ---------------
+    @property
+    def minreducedwidth(self):
+        """
+        Minimum width of the plot with margin.automargin applied (in
+        px)
+
+        The 'minreducedwidth' property is a number and may be specified as:
+          - An int or float in the interval [2, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minreducedwidth"]
+
+    @minreducedwidth.setter
+    def minreducedwidth(self, val):
+        self["minreducedwidth"] = val
 
     # modebar
     # -------
@@ -2586,7 +2639,7 @@ class Layout(_BaseLayoutType):
                     coordinate are displayed on the graph. With
                     "stack", the bars are stacked on top of one
                     another With "overlay", the bars are plotted
-                    over one another, you might need to an
+                    over one another, you might need to reduce
                     "opacity" to see multiple bars.
                 bgcolor
                     Set the background color of the subplot
@@ -3994,7 +4047,7 @@ class Layout(_BaseLayoutType):
         displayed on the graph. With "group", the bars are plotted next
         to one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
-        need to an "opacity" to see multiple bars.
+        need to reduce "opacity" to see multiple bars.
 
         The 'waterfallmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -5091,7 +5144,7 @@ class Layout(_BaseLayoutType):
             below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
             the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
+            plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
@@ -5230,8 +5283,8 @@ class Layout(_BaseLayoutType):
             stacked on top of one another With "group", the bars
             are plotted next to one another centered around the
             shared location. With "overlay", the bars are plotted
-            over one another, you might need to an "opacity" to see
-            multiple bars.
+            over one another, you might need to reduce "opacity" to
+            see multiple bars.
         geo
             :class:`plotly.graph_objects.layout.Geo` instance or
             dict with compatible properties
@@ -5317,6 +5370,12 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on Chart Studio Cloud for
             `meta`.
+        minreducedheight
+            Minimum height of the plot with margin.automargin
+            applied (in px)
+        minreducedwidth
+            Minimum width of the plot with margin.automargin
+            applied (in px)
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -5501,8 +5560,8 @@ class Layout(_BaseLayoutType):
             displayed on the graph. With "group", the bars are
             plotted next to one another centered around the shared
             location. With "overlay", the bars are plotted over one
-            another, you might need to an "opacity" to see multiple
-            bars.
+            another, you might need to reduce "opacity" to see
+            multiple bars.
         width
             Sets the plot's width (in px).
         xaxis
@@ -5567,6 +5626,8 @@ class Layout(_BaseLayoutType):
         margin=None,
         meta=None,
         metasrc=None,
+        minreducedheight=None,
+        minreducedwidth=None,
         modebar=None,
         newselection=None,
         newshape=None,
@@ -5659,7 +5720,7 @@ class Layout(_BaseLayoutType):
             below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
             the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
+            plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
@@ -5798,8 +5859,8 @@ class Layout(_BaseLayoutType):
             stacked on top of one another With "group", the bars
             are plotted next to one another centered around the
             shared location. With "overlay", the bars are plotted
-            over one another, you might need to an "opacity" to see
-            multiple bars.
+            over one another, you might need to reduce "opacity" to
+            see multiple bars.
         geo
             :class:`plotly.graph_objects.layout.Geo` instance or
             dict with compatible properties
@@ -5885,6 +5946,12 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on Chart Studio Cloud for
             `meta`.
+        minreducedheight
+            Minimum height of the plot with margin.automargin
+            applied (in px)
+        minreducedwidth
+            Minimum width of the plot with margin.automargin
+            applied (in px)
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -6069,8 +6136,8 @@ class Layout(_BaseLayoutType):
             displayed on the graph. With "group", the bars are
             plotted next to one another centered around the shared
             location. With "overlay", the bars are plotted over one
-            another, you might need to an "opacity" to see multiple
-            bars.
+            another, you might need to reduce "opacity" to see
+            multiple bars.
         width
             Sets the plot's width (in px).
         xaxis
@@ -6142,6 +6209,8 @@ class Layout(_BaseLayoutType):
             "margin",
             "meta",
             "metasrc",
+            "minreducedheight",
+            "minreducedwidth",
             "modebar",
             "newselection",
             "newshape",
@@ -6403,6 +6472,14 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = metasrc if metasrc is not None else _v
         if _v is not None:
             self["metasrc"] = _v
+        _v = arg.pop("minreducedheight", None)
+        _v = minreducedheight if minreducedheight is not None else _v
+        if _v is not None:
+            self["minreducedheight"] = _v
+        _v = arg.pop("minreducedwidth", None)
+        _v = minreducedwidth if minreducedwidth is not None else _v
+        if _v is not None:
+            self["minreducedwidth"] = _v
         _v = arg.pop("modebar", None)
         _v = modebar if modebar is not None else _v
         if _v is not None:

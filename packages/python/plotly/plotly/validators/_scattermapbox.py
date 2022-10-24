@@ -17,6 +17,10 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted above all the base layers. To
                 place the scattermapbox layers above every
                 other layer, set `below` to "''".
+            cluster
+                :class:`plotly.graph_objects.scattermapbox.Clus
+                ter` instance or dict with compatible
+                properties
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -133,6 +137,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.scattermapbox.Line
                 ` instance or dict with compatible properties

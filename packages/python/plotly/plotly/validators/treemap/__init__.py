@@ -29,6 +29,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._maxdepth import MaxdepthValidator
     from ._marker import MarkerValidator
     from ._level import LevelValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._labelssrc import LabelssrcValidator
@@ -82,6 +83,7 @@ else:
             "._maxdepth.MaxdepthValidator",
             "._marker.MarkerValidator",
             "._level.LevelValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._labelssrc.LabelssrcValidator",
