@@ -249,7 +249,7 @@ fig.show()
 
 *New in 5.11*
 
-Display clusters of data points by setting `cluster`. Here, we enable it with `enabled=True`. You can also enable it by setting other `cluster` properties. Other available properties include `color` (for setting the color of the clusters), `size` (for setting the size of a cluster step), and `step` (for configuring how many points it takes to create a cluster or advance to the next cluster step.
+Display clusters of data points by setting `cluster`. Here, we enable clusters with `enabled=True`. You can also enable clusters by setting other `cluster` properties. Other available properties include `color` (for setting the color of the clusters), `size` (for setting the size of a cluster step), and `step` (for configuring how many points it takes to create a cluster or advance to the next cluster step.
 
 ```python
 import plotly.express as px
