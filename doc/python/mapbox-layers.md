@@ -193,22 +193,32 @@ fig.show()
 See the example in the [plotly and datashader tutorial](/python/datashader).
 
 
-#### Setting Bounds for Panning and Zooming
+#### Setting Map Bounds
 
 Set bounds for a map to specify an area outside which a user interacting with the map can't pan or zoom. Here we
-set a maximum longitude of `-180`, a minimum longitude of `-50`, a maximum latitude as `90`, and a minimum latitude of `20`.
+set a maximum longitude of `-180`, a minimum longitude of `-50`, a maximum latitude of `90`, and a minimum latitude of `20`.
 
 ```python
-import pandas as pd
-us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
-
 import plotly.express as px
+import pandas as pd
 
-fig = px.scatter_mapbox(us_cities, lat="lat", lon="lon", hover_name="City", hover_data=["State", "Population"],
-                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+us_cities = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv"
+)
+
+fig = px.scatter_mapbox(
+    us_cities,
+    lat="lat",
+    lon="lon",
+    hover_name="City",
+    hover_data=["State", "Population"],
+    color_discrete_sequence=["fuchsia"],
+    zoom=3,
+    height=300,
+)
 fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.update_layout(mapbox_bounds={"west":-180, "east":-50, "south":20, "north":90})
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.update_layout(mapbox_bounds={"west": -180, "east": -50, "south": 20, "north": 90})
 fig.show()
 ```
 
