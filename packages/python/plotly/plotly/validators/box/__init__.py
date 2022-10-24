@@ -60,6 +60,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._lowerfencesrc import LowerfencesrcValidator
     from ._lowerfence import LowerfenceValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
@@ -147,6 +148,7 @@ else:
             "._lowerfencesrc.LowerfencesrcValidator",
             "._lowerfence.LowerfenceValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",

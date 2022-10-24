@@ -93,6 +93,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.parcats.Legendgrou
                 ptitle` instance or dict with compatible
                 properties
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.parcats.Line`
                 instance or dict with compatible properties

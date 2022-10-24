@@ -349,7 +349,7 @@ class Polar(_BaseLayoutHierarchyType):
         Determines how bars at the same location coordinate are
         displayed on the graph. With "stack", the bars are stacked on
         top of one another With "overlay", the bars are plotted over
-        one another, you might need to an "opacity" to see multiple
+        one another, you might need to reduce "opacity" to see multiple
         bars.
 
         The 'barmode' property is an enumeration that may be specified as:
@@ -904,7 +904,7 @@ class Polar(_BaseLayoutHierarchyType):
             Determines how bars at the same location coordinate are
             displayed on the graph. With "stack", the bars are
             stacked on top of one another With "overlay", the bars
-            are plotted over one another, you might need to an
+            are plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot
@@ -971,7 +971,7 @@ class Polar(_BaseLayoutHierarchyType):
             Determines how bars at the same location coordinate are
             displayed on the graph. With "stack", the bars are
             stacked on top of one another With "overlay", the bars
-            are plotted over one another, you might need to an
+            are plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot

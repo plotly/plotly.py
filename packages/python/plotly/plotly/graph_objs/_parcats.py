@@ -21,6 +21,7 @@ class Parcats(_BaseTraceType):
         "hovertemplate",
         "labelfont",
         "legendgrouptitle",
+        "legendwidth",
         "line",
         "meta",
         "metasrc",
@@ -431,6 +432,27 @@ class Parcats(_BaseTraceType):
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -916,6 +938,9 @@ class Parcats(_BaseTraceType):
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -992,6 +1017,7 @@ class Parcats(_BaseTraceType):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -1090,6 +1116,9 @@ class Parcats(_BaseTraceType):
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -1231,6 +1260,10 @@ an instance of :class:`plotly.graph_objs.Parcats`"""
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
             self["legendgrouptitle"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
