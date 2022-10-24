@@ -195,6 +195,8 @@ See the example in the [plotly and datashader tutorial](/python/datashader).
 
 #### Setting Map Bounds
 
+*New in 5.11*
+
 Set bounds for a map to specify an area outside which a user interacting with the map can't pan or zoom. Here we set a maximum longitude of `-180`, a minimum longitude of `-50`, a maximum latitude of `90`, and a minimum latitude of `20`.
 
 ```python
