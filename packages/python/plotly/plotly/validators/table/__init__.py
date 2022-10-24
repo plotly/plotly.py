@@ -9,6 +9,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._name import NameValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._idssrc import IdssrcValidator
@@ -39,6 +40,7 @@ else:
             "._name.NameValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._idssrc.IdssrcValidator",

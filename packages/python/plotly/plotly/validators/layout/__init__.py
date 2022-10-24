@@ -41,6 +41,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._newshape import NewshapeValidator
     from ._newselection import NewselectionValidator
     from ._modebar import ModebarValidator
+    from ._minreducedwidth import MinreducedwidthValidator
+    from ._minreducedheight import MinreducedheightValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._margin import MarginValidator
@@ -136,6 +138,8 @@ else:
             "._newshape.NewshapeValidator",
             "._newselection.NewselectionValidator",
             "._modebar.ModebarValidator",
+            "._minreducedwidth.MinreducedwidthValidator",
+            "._minreducedheight.MinreducedheightValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._margin.MarginValidator",

@@ -10,6 +10,16 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            angle
+                Sets the marker angle in respect to `angleref`.
+            angleref
+                Sets the reference for marker angle. With
+                "previous", angle 0 points along the line from
+                the previous point to this one. With "up",
+                angle 0 points toward the top of the screen.
+            anglesrc
+                Sets the source reference on Chart Studio Cloud
+                for `angle`.
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -130,6 +140,15 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizesrc
                 Sets the source reference on Chart Studio Cloud
                 for `size`.
+            standoff
+                Moves the marker away from the data point in
+                the direction of `angle` (in px). This can be
+                useful for example if you have another marker
+                at this location and you want to point an
+                arrowhead marker at it.
+            standoffsrc
+                Sets the source reference on Chart Studio Cloud
+                for `standoff`.
             symbol
                 Sets the marker symbol type. Adding 100 is
                 equivalent to appending "-open" to a symbol

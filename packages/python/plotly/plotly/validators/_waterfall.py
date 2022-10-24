@@ -144,6 +144,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             measure
                 An array containing types of values. By default
                 the values are considered as 'relative'.
