@@ -249,25 +249,22 @@ fig.show()
 
 *New in 5.11*
 
-Display clusters of data points by setting `cluster`. Here, we enable it with `enabled=True`. Other properties available on `cluster` include `color` (for setting the color of the clusters), `size` (for setting the size of a cluster step), and `step` (for configuring how many points it takes to create a cluster or advance to the next cluster step.
-
+Display clusters of data points by setting `cluster`. Here, we enable it with `enabled=True`. You can also enable it by setting other `cluster` properties. Other available properties include `color` (for setting the color of the clusters), `size` (for setting the size of a cluster step), and `step` (for configuring how many points it takes to create a cluster or advance to the next cluster step.
 
 ```python
 import plotly.express as px
 import pandas as pd
 
 px.set_mapbox_access_token(open(".mapbox_token").read())
-
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_february_us_airport_traffic.csv')
-
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/2011_february_us_airport_traffic.csv"
+)
 fig = px.scatter_mapbox(df, lat="lat", lon="long", size="cnt", zoom=3)
-
 fig.update_traces(cluster=dict(enabled=True))
-
 fig.show()
+
 ```
 
 #### Reference
 
 See [function reference for `px.(scatter_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/ for more information and options!
-
