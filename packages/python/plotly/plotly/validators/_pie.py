@@ -146,6 +146,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             marker
                 :class:`plotly.graph_objects.pie.Marker`
                 instance or dict with compatible properties

@@ -8,7 +8,59 @@ class Line(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "scatterternary"
     _path_str = "scatterternary.line"
-    _valid_props = {"color", "dash", "shape", "smoothing", "width"}
+    _valid_props = {
+        "backoff",
+        "backoffsrc",
+        "color",
+        "dash",
+        "shape",
+        "smoothing",
+        "width",
+    }
+
+    # backoff
+    # -------
+    @property
+    def backoff(self):
+        """
+        Sets the line back off from the end point of the nth line
+        segment (in px). This option is useful e.g. to avoid overlap
+        with arrowhead markers. With "auto" the lines would trim before
+        markers if `marker.angleref` is set to "previous".
+
+        The 'backoff' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["backoff"]
+
+    @backoff.setter
+    def backoff(self, val):
+        self["backoff"] = val
+
+    # backoffsrc
+    # ----------
+    @property
+    def backoffsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `backoff`.
+
+        The 'backoffsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["backoffsrc"]
+
+    @backoffsrc.setter
+    def backoffsrc(self, val):
+        self["backoffsrc"] = val
 
     # color
     # -----
@@ -165,6 +217,15 @@ class Line(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        backoff
+            Sets the line back off from the end point of the nth
+            line segment (in px). This option is useful e.g. to
+            avoid overlap with arrowhead markers. With "auto" the
+            lines would trim before markers if `marker.angleref` is
+            set to "previous".
+        backoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `backoff`.
         color
             Sets the line color.
         dash
@@ -187,6 +248,8 @@ class Line(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        backoff=None,
+        backoffsrc=None,
         color=None,
         dash=None,
         shape=None,
@@ -203,6 +266,15 @@ class Line(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of
             :class:`plotly.graph_objs.scatterternary.Line`
+        backoff
+            Sets the line back off from the end point of the nth
+            line segment (in px). This option is useful e.g. to
+            avoid overlap with arrowhead markers. With "auto" the
+            lines would trim before markers if `marker.angleref` is
+            set to "previous".
+        backoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `backoff`.
         color
             Sets the line color.
         dash
@@ -254,6 +326,14 @@ an instance of :class:`plotly.graph_objs.scatterternary.Line`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("backoff", None)
+        _v = backoff if backoff is not None else _v
+        if _v is not None:
+            self["backoff"] = _v
+        _v = arg.pop("backoffsrc", None)
+        _v = backoffsrc if backoffsrc is not None else _v
+        if _v is not None:
+            self["backoffsrc"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

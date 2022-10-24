@@ -153,6 +153,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             locations
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.
