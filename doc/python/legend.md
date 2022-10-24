@@ -8,7 +8,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.8.0
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -199,20 +199,18 @@ Set the width of hozitonal legend entries by setting `entrywidth`. Here we set i
 import plotly.express as px
 
 df = px.data.gapminder().query("year==2007")
-fig = px.scatter(
-    df,
-    x="gdpPercap",
-    y="lifeExp",
-    color="continent",
-    size="pop",
-    size_max=45,
-    log_x=True,
-)
-fig.update_layout(
-    legend=dict(
-        orientation="h", entrywidth=70, yanchor="bottom", y=1.02, xanchor="right", x=1
-    )
-)
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    orientation="h",
+    entrywidth=70,
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
 fig.show()
 ```
 
