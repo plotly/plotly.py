@@ -34,6 +34,7 @@ class Scatterternary(_BaseTraceType):
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "marker",
         "meta",
@@ -729,6 +730,27 @@ class Scatterternary(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -742,6 +764,16 @@ class Scatterternary(_BaseTraceType):
 
             Supported dict properties:
 
+                backoff
+                    Sets the line back off from the end point of
+                    the nth line segment (in px). This option is
+                    useful e.g. to avoid overlap with arrowhead
+                    markers. With "auto" the lines would trim
+                    before markers if `marker.angleref` is set to
+                    "previous".
+                backoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `backoff`.
                 color
                     Sets the line color.
                 dash
@@ -785,6 +817,16 @@ class Scatterternary(_BaseTraceType):
 
             Supported dict properties:
 
+                angle
+                    Sets the marker angle in respect to `angleref`.
+                angleref
+                    Sets the reference for marker angle. With
+                    "previous", angle 0 points along the line from
+                    the previous point to this one. With "up",
+                    angle 0 points toward the top of the screen.
+                anglesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `angle`.
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -906,6 +948,15 @@ class Scatterternary(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                standoff
+                    Moves the marker away from the data point in
+                    the direction of `angle` (in px). This can be
+                    useful for example if you have another marker
+                    at this location and you want to point an
+                    arrowhead marker at it.
+                standoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `standoff`.
                 symbol
                     Sets the marker symbol type. Adding 100 is
                     equivalent to appending "-open" to a symbol
@@ -1668,6 +1719,9 @@ class Scatterternary(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -1828,6 +1882,7 @@ class Scatterternary(_BaseTraceType):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -2006,6 +2061,9 @@ class Scatterternary(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -2270,6 +2328,10 @@ an instance of :class:`plotly.graph_objs.Scatterternary`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
