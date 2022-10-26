@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.8.0
   plotly:
     description: How to manipulate the graph size, margins and background color.
     display_as: file_settings
@@ -162,6 +162,42 @@ fig.update_layout(
 )
 
 fig.update_yaxes(automargin='left+top')
+
+fig.show()
+```
+
+### Setting a Minimum Plot Size with Automargins
+
+*New in 5.11*
+
+To set a minimum width and height for a plot to be after automargin is applied, use `minreducedwidth` and `minreducedheight`. Here we set both to `250`.
+
+```python
+import plotly.graph_objects as go
+
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=["Apples", "Oranges", "Watermelon", "Pears"],
+    y=[3, 2, 1, 4]
+))
+
+fig.update_layout(
+    autosize=False,
+    minreducedwidth=250,
+    minreducedheight=250,
+    width=450,
+    height=450,
+    yaxis=dict(
+        title_text="Y-axis Title",
+        ticktext=["Label", "Very long label", "Other label", "Very very long label"],
+        tickvals=[1, 2, 3, 4],
+        tickmode="array",
+        titlefont=dict(size=30),
+    )
+)
+
 
 fig.show()
 ```
