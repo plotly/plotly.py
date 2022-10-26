@@ -36,7 +36,7 @@ jupyter:
 ## Basic Dumbbell Plot
 
 
-Dumbbell plots are useful for demonstrating change between two sets of data points, for example, the population change for a selection of countries for two different years
+Dumbbell plots are useful for demonstrating change between two sets of data points, for example, the population change for a selection of countries for two different years.
 
 In this example, we compare life expectancy in 1952 with life expectancy in 2002 for countries in Europe.
 
@@ -107,9 +107,9 @@ fig.show()
 
 *Note: The `arrow`, `angleref`, and `standoff` properties used on the `marker` in this example are new in 5.11*
 
-In this example, we add arrow markers to the plot. The first trace adds the lines connecting the data points and arrow markers. 
+In this example, we add arrow markers to the plot. The first trace adds the lines connecting the data points and arrow markers.
 The second trace adds circle markers. On the first trace, we use `standoff=8` to position the arrow marker back from the data point.
-For the arrow marker to point directly at the circle marker, this value should be half the circle marker size. 
+For the arrow marker to point directly at the circle marker, this value should be half the circle marker size.
 
 ```python
 import pandas as pd
