@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-##  UNRELEASED
+## [5.11.0] - 2022-10-27
 
 ### Updated
   - Updated Plotly.js to from version 2.14.0 to version 2.16.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2161----2022-10-21) for more information. Notable changes include:
@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - Add `minreducedwidth` and `minreducedheight` to layout for increasing control over automargin [[#6307](https://github.com/plotly/plotly.js/pull/6307)]
     - Add `entrywidth` and `entrywidthmode` to legend [[#6202](https://github.com/plotly/plotly.js/pull/6202), [#6324](https://github.com/plotly/plotly.js/pull/6324)]
 
-##  [5.10.0] - 2022-08-11
+## [5.10.0] - 2022-08-11
 
 ### Updated
   - Updated Plotly.js to from version 2.12.1 to version 2.14.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2140----2022-08-10) for more information. Notable changes include:
