@@ -59,9 +59,7 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
 ### Download and QA CI Artifacts
 
-The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress.
-
-The filenames contained within will contain version numbers.
+The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress, which will give you a directory called `output`. The filenames contained within will contain version numbers.
 
 **Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
