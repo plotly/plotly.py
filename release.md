@@ -59,11 +59,9 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
 ### Download and QA CI Artifacts
 
-The `full_build` job in the `release_build` workflow in CircleCI produces three sets of artifacts. Download all three:
+The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress.
 
-1. `pypi_dist/all.tgz`
-2. `conda_dist/plotly-X.Y.Z.tar.bz2`
-3. `npm_dist/jupyterlab-plotly-X.Y.Z.tgz`
+The filenames contained within will contain version numbers.
 
 **Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
@@ -72,13 +70,13 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 - `tar xzf all.tgz`
 - `pip uninstall plotly`
 - `conda uninstall plotly` (just in case!)
-- `pip install dist/plotly-X.Y.X-py2.py3-none-any.whl`
+- `pip install path/to/output/dist/plotly-X.Y.X-py2.py3-none-any.whl`
 
 To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
 
 - `conda uninstall plotly`
 - `pip uninstall plotly` (just in case!)
-- `conda install conda_dist/plotly-X.Y.Z.tar.bz2`
+- `conda install path/to/output/plotly-X.Y.Z.tar.bz2`
 
 It's more complicated to locally install the NPM bundle, as you'll need to have a JupyterLab 2 environment installed... Undocumented for now :see_no_evil:.
 
@@ -94,21 +92,21 @@ you can publish the artifacts. **You will need special credentials from Plotly l
 
 Publishing to PyPI:
 ```bash
-(plotly_dev) $ cd pypi_dist/dist
+(plotly_dev) $ cd path/to/output/dist
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
 
 Publishing to NPM:
 
 ```bash
-(plotly_dev) $ cd npm_dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ npm publish jupyterlab-plotly-X.Y.Z.tgz
 ```
 
 Publishing to `plotly` conda channel (make sure you have run `conda install anaconda-client` to get the `anaconda` command):
 
 ```
-(plotly_dev) $ cd conda_dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ anaconda upload plotly-X.Y.Z.tar.bz2
 ```
 
