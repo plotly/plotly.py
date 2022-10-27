@@ -285,7 +285,7 @@ jobs:
             conda activate env
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
-            mv dist ../../../output
+            cp -R dist ../../../output/dist
 
       - run:
           name: Conda Build
