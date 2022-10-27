@@ -193,7 +193,7 @@ fig.show()
 
 *New in 5.11*
 
-Set the width of hozitonal legend entries by setting `entrywidth`. Here we set it to `70` pixels. Pixels is the default unit for `entrywidth`, but you can set it to be a fraction of the plot width using `entrywidthmode='fraction`.
+Set the width of horizontal legend entries by setting `entrywidth`. Here we set it to `70` pixels. Pixels is the default unit for `entrywidth`, but you can set it to be a fraction of the plot width using `entrywidthmode='fraction`.
 
 ```python
 import plotly.express as px
