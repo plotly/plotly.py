@@ -94,7 +94,6 @@ fig = go.Figure(
 
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
-    width=1000,
     height=1000,
     showlegend=False,
 )
@@ -165,7 +164,6 @@ fig = go.Figure(
 
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
-    width=1000,
     height=1000,
     showlegend=False,
 )
