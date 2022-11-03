@@ -2636,8 +2636,7 @@ class BaseDataValidator(BaseValidator):
             for v_el in v:
 
                 if isinstance(v_el, BaseTraceType):
-                    # Clone input traces
-                    v_el = v_el.to_plotly_json()
+                    v_el = v_el._props
 
                 if isinstance(v_el, dict):
                     type_in_v_el = "type" in v_el
