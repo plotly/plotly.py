@@ -7,7 +7,6 @@ import uuid
 from importlib import import_module
 import copy
 import io
-from copy import deepcopy
 import re
 import sys
 
@@ -2626,10 +2625,6 @@ class BaseDataValidator(BaseValidator):
     def validate_coerce(self, v, skip_invalid=False, _validate=True):
         from plotly.basedatatypes import BaseTraceType
 
-        # Import Histogram2dcontour, this is the deprecated name of the
-        # Histogram2dContour trace.
-        from plotly.graph_objs import Histogram2dcontour
-
         if v is None:
             v = []
         else:
@@ -2645,20 +2640,14 @@ class BaseDataValidator(BaseValidator):
                     v_el = v_el.to_plotly_json()
 
                 if isinstance(v_el, dict):
-                    v_copy = deepcopy(v_el)
-
-                    if "type" in v_copy:
-                        trace_type = v_copy.pop("type")
-                    elif isinstance(v_el, Histogram2dcontour):
-                        trace_type = "histogram2dcontour"
-                    else:
-                        trace_type = "scatter"
+                    type_in_v_el = "type" in v_el
+                    trace_type = v_el.pop("type", "scatter")
 
                     if trace_type not in self.class_strs_map:
                         if skip_invalid:
                             # Treat as scatter trace
                             trace = self.get_trace_class("scatter")(
-                                skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                                skip_invalid=skip_invalid, _validate=_validate, **v_el
                             )
                             res.append(trace)
                         else:
@@ -2666,9 +2655,13 @@ class BaseDataValidator(BaseValidator):
                             invalid_els.append(v_el)
                     else:
                         trace = self.get_trace_class(trace_type)(
-                            skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                            skip_invalid=skip_invalid, _validate=_validate, **v_el
                         )
                         res.append(trace)
+
+                    if type_in_v_el:
+                        # Restore type in v_el
+                        v_el["type"] = trace_type
                 else:
                     if skip_invalid:
                         # Add empty scatter trace
