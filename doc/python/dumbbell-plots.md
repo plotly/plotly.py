@@ -77,7 +77,7 @@ fig = go.Figure(
             mode="lines",
             showlegend=False,
             marker=dict(
-                color='grey'
+                color="grey"
             )
         ),
         go.Scatter(
