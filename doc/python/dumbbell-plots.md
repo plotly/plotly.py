@@ -135,7 +135,7 @@ countries = (
     .sort_values(by=["lifeExp"], ascending=True)["country"]
     .unique()
 )
-    
+
 data = {"line_x": [], "line_y": [], "1952": [], "2002": [], "colors": [], "years": [], "countries": []}
 
 for country in countries:
@@ -149,7 +149,6 @@ for country in countries:
         ]
     )
     data["line_y"].extend([country, country, None]),
-
 
 fig = go.Figure(
     data=[
