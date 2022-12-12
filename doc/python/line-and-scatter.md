@@ -8,7 +8,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.8.0
   plotly:
     description: How to make scatter plots in Python with Plotly.
     display_as: basic
@@ -114,6 +114,44 @@ df = px.data.medals_long()
 
 fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
 fig.update_traces(marker_size=10)
+fig.show()
+```
+
+### Grouped Scatter Points
+
+*New in 5.12*
+
+By default, scatter points at the same location are overlayed on one another. We can see this in the previous example, with the values for Canada for bronze and silver. Set `scattermode='group'` to plot scatter points next to one another, centered around the shared location.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(
+    scattermode='group',
+)
+fig.show()
+```
+
+*New in 5.12*
+
+With `scattermode='group'`, a default scattergap of `0` is used. You can configure the gap between points using `scattergap`. Here we set it to `0.75` to bring the points closer together.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(
+    scattermode='group',
+    scattergap=0.75
+)
+
 fig.show()
 ```
 
