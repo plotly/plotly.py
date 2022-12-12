@@ -278,7 +278,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         if attr_name == "dimensions":
             dims = [
                 (name, column)
-                for (name, column) in trace_data.iteritems()
+                for (name, column) in trace_data.items()
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
