@@ -60,7 +60,7 @@ fig.show()
 
 *New in 5.12*
 
-In this example, we display individual data points with a grouped scatter chart and show grouped averages using a bar chart. We start by creating a bar chart with Plotly Express and then add scatter traces with the `add_trace()` method. 
+In this example, we display individual data points with a grouped scatter chart and show averages using a grouped bar chart. We start by creating a bar chart with Plotly Express and then add scatter traces with the `add_trace()` method. 
 
 ```python
 import plotly.express as px
