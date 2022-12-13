@@ -121,7 +121,7 @@ fig.show()
 
 *New in 5.12*
 
-By default, scatter points at the same location are overlayed on one another. We can see this in the previous example, with the values for Canada for bronze and silver. Set `scattermode='group'` to plot scatter points next to one another, centered around the shared location.
+By default, scatter points at the same location are overlayed. We can see this in the previous example, with the values for Canada for bronze and silver. Set `scattermode='group'` to plot scatter points next to one another, centered around the shared location.
 
 ```python
 import plotly.express as px
@@ -136,7 +136,9 @@ fig.show()
 
 *New in 5.12*
 
-With `scattermode='group'`, a default scattergap of `0` is used. You can configure the gap between points using `scattergap`. Here we set it to `0.75` to bring the points closer together.
+You can configure the gap between points using `scattergap`. Here we set it to `0.75` to bring the points closer together.
+
+If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value.
 
 ```python
 import plotly.express as px
