@@ -430,7 +430,7 @@ def _swap_xy_data(data_obj):
 def byteify(input):
     """Convert unicode strings in JSON object to byte strings"""
     if isinstance(input, dict):
-        return {byteify(key): byteify(value) for key, value in input.iteritems()}
+        return {byteify(key): byteify(value) for key, value in input.items()}
     elif isinstance(input, list):
         return [byteify(element) for element in input]
     elif isinstance(input, unicode):
@@ -1471,7 +1471,7 @@ def _create_or_update(data, filetype):
             else:
                 raise _plotly_utils.exceptions.PlotlyError(
                     """
-'{filename}' is already a {other_filetype} in your account. 
+'{filename}' is already a {other_filetype} in your account.
 While you can overwrite {filetype}s with the same name, you can't overwrite
 files with a different type. Try deleting '{filename}' in your account or
 changing the filename.""".format(
