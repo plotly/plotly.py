@@ -339,6 +339,19 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             polar
                 :class:`plotly.graph_objects.layout.Polar`
                 instance or dict with compatible properties
+            scattergap
+                Sets the gap (in plot fraction) between scatter
+                points of adjacent location coordinates.
+                Defaults to `bargap`.
+            scattermode
+                Determines how scatter points at the same
+                location coordinate are displayed on the graph.
+                With "group", the scatter points are plotted
+                next to one another centered around the shared
+                location. With "overlay", the scatter points
+                are plotted over one another, you might need to
+                reduce "opacity" to see multiple scatter
+                points.
             scene
                 :class:`plotly.graph_objects.layout.Scene`
                 instance or dict with compatible properties
