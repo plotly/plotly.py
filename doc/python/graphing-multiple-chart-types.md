@@ -60,7 +60,7 @@ fig.show()
 
 *New in 5.12*
 
-In this example, we display individual data points with a grouped scatter chart and show averages using a grouped bar chart. We start by creating a bar chart with Plotly Express and then add scatter traces with the `add_trace()` method. 
+In this example, we display individual data points with a grouped scatter chart and show averages using a grouped bar chart. `offsetgroup` links the bar trace for smoker with the scatter trace for smoker, and the bar trace for non-smoker with the scatter trace for non-smoker. If you deselect a trace using the legend, other traces maintain the position of the traces they are linked to.
 
 ```python
 import plotly.express as px
@@ -71,27 +71,49 @@ df = px.data.tips()[px.data.tips()["day"] == "Sun"]
 mean_values_df = df.groupby(by=["sex", "smoker"], as_index=False).mean(
     numeric_only=True
 )
+
+smoker_mean = mean_values_df[mean_values_df.smoker == "Yes"].sort_values(
+    by="tip", ascending=False
+)
+non_smoker_mean = mean_values_df[mean_values_df.smoker == "No"].sort_values(
+    by="tip", ascending=False
+)
+
 smoker = df[df.smoker == "Yes"].sort_values(by="tip", ascending=False)
 non_smoker = df[df.smoker == "No"].sort_values(by="tip", ascending=False)
 
-fig = px.bar(
-    mean_values_df,
-    x="sex",
-    y="tip",
-    color="smoker",
-    barmode="group",
-    height=400,
-    labels={"No": "nakfdnlska"},
-    color_discrete_sequence=["IndianRed", "LightSalmon"],
+fig = go.Figure()
+
+fig.add_trace(
+    go.Bar(
+        x=smoker_mean.sex,
+        y=smoker_mean.tip,
+        name="Average (Smoker)",
+        marker_color="IndianRed",
+        offsetgroup="smoker",
+    )
 )
+
+
+fig.add_trace(
+    go.Bar(
+        x=non_smoker_mean.sex,
+        y=non_smoker_mean.tip,
+        name="Average (Non-Smoker)",
+        marker_color="LightSalmon",
+        offsetgroup="non-smoker",
+    )
+)
+
 
 fig.add_trace(
     go.Scatter(
         x=non_smoker.sex,
         y=non_smoker.tip,
         mode="markers",
-        name="No - Individual tips",
+        name="Individual tips (Non-Smoker)",
         marker=dict(color="LightSteelBlue", size=5),
+        offsetgroup="non-smoker",
     )
 )
 
@@ -100,14 +122,16 @@ fig.add_trace(
         x=smoker.sex,
         y=smoker.tip,
         mode="markers",
-        name="Yes - Individual tips",
+        name="Individual tips (Smoker)",
         marker=dict(color="LightSlateGrey", size=5),
+        offsetgroup="smoker",
     )
 )
 
 fig.update_layout(scattermode="group")
 
 fig.show()
+
 ```
 
 #### Line Chart and a Bar Chart
