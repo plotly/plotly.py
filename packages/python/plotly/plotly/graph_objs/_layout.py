@@ -119,6 +119,8 @@ class Layout(_BaseLayoutType):
         "piecolorway",
         "plot_bgcolor",
         "polar",
+        "scattergap",
+        "scattermode",
         "scene",
         "selectdirection",
         "selectiondefaults",
@@ -2684,6 +2686,53 @@ class Layout(_BaseLayoutType):
     def polar(self, val):
         self["polar"] = val
 
+    # scattergap
+    # ----------
+    @property
+    def scattergap(self):
+        """
+        Sets the gap (in plot fraction) between scatter points of
+        adjacent location coordinates. Defaults to `bargap`.
+
+        The 'scattergap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["scattergap"]
+
+    @scattergap.setter
+    def scattergap(self, val):
+        self["scattergap"] = val
+
+    # scattermode
+    # -----------
+    @property
+    def scattermode(self):
+        """
+        Determines how scatter points at the same location coordinate
+        are displayed on the graph. With "group", the scatter points
+        are plotted next to one another centered around the shared
+        location. With "overlay", the scatter points are plotted over
+        one another, you might need to reduce "opacity" to see multiple
+        scatter points.
+
+        The 'scattermode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['group', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self["scattermode"]
+
+    @scattermode.setter
+    def scattermode(self, val):
+        self["scattermode"] = val
+
     # scene
     # -----
     @property
@@ -4621,6 +4670,14 @@ class Layout(_BaseLayoutType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autoshift
+                    Automatically reposition the axis to avoid
+                    overlap with other axes with the same
+                    `overlaying` value. This repositioning will
+                    account for any `shift` amount applied to other
+                    axes on the same side with `autoshift` is set
+                    to true. Only has an effect if `anchor` is set
+                    to "free".
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -4872,6 +4929,17 @@ class Layout(_BaseLayoutType):
                     horizontal.
                 separatethousands
                     If "true", even 4-digit integers are separated
+                shift
+                    Moves the axis a given number of pixels from
+                    where it would have been otherwise. Accepts
+                    both positive and negative values, which will
+                    shift the axis either right or left,
+                    respectively. If `autoshift` is set to true,
+                    then this defaults to a padding of -3 if `side`
+                    is set to "left". and defaults to +3 if `side`
+                    is set to "right". Defaults to 0 if `autoshift`
+                    is set to false. Only has an effect if `anchor`
+                    is set to "free".
                 showdividers
                     Determines whether or not a dividers are drawn
                     between the category levels of this axis. Only
@@ -5399,6 +5467,17 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
+        scattergap
+            Sets the gap (in plot fraction) between scatter points
+            of adjacent location coordinates. Defaults to `bargap`.
+        scattermode
+            Determines how scatter points at the same location
+            coordinate are displayed on the graph. With "group",
+            the scatter points are plotted next to one another
+            centered around the shared location. With "overlay",
+            the scatter points are plotted over one another, you
+            might need to reduce "opacity" to see multiple scatter
+            points.
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -5635,6 +5714,8 @@ class Layout(_BaseLayoutType):
         piecolorway=None,
         plot_bgcolor=None,
         polar=None,
+        scattergap=None,
+        scattermode=None,
         scene=None,
         selectdirection=None,
         selectionrevision=None,
@@ -5975,6 +6056,17 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
+        scattergap
+            Sets the gap (in plot fraction) between scatter points
+            of adjacent location coordinates. Defaults to `bargap`.
+        scattermode
+            Determines how scatter points at the same location
+            coordinate are displayed on the graph. With "group",
+            the scatter points are plotted next to one another
+            centered around the shared location. With "overlay",
+            the scatter points are plotted over one another, you
+            might need to reduce "opacity" to see multiple scatter
+            points.
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -6218,6 +6310,8 @@ class Layout(_BaseLayoutType):
             "piecolorway",
             "plot_bgcolor",
             "polar",
+            "scattergap",
+            "scattermode",
             "scene",
             "selectdirection",
             "selectiondefaults",
@@ -6508,6 +6602,14 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = polar if polar is not None else _v
         if _v is not None:
             self["polar"] = _v
+        _v = arg.pop("scattergap", None)
+        _v = scattergap if scattergap is not None else _v
+        if _v is not None:
+            self["scattergap"] = _v
+        _v = arg.pop("scattermode", None)
+        _v = scattermode if scattermode is not None else _v
+        if _v is not None:
+            self["scattermode"] = _v
         _v = arg.pop("scene", None)
         _v = scene if scene is not None else _v
         if _v is not None:
