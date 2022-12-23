@@ -262,7 +262,6 @@ fig = go.Figure()
 
 fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6], name="yaxis data"))
 
-
 fig.add_trace(go.Scatter(x=[2, 3, 4], y=[40, 50, 60], name="yaxis2 data", yaxis="y2"))
 
 fig.add_trace(
@@ -313,7 +312,6 @@ import plotly.graph_objects as go
 fig = go.Figure()
 
 fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6], name="yaxis data"))
-
 
 fig.add_trace(go.Scatter(x=[2, 3, 4], y=[40, 50, 60], name="yaxis2 data", yaxis="y2"))
 
