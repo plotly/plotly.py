@@ -730,6 +730,8 @@ class Treemap(_BaseTraceType):
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
                     for `colors`.
+                cornerradius
+                    Sets the maximum rounding of corners (in px).
                 depthfade
                     Determines if the sector colors are faded
                     towards the background from the leaves up to

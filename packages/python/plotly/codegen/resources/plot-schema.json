@@ -11227,6 +11227,12 @@
       "reversed"
      ]
     },
+    "autoshift": {
+     "description": "Automatically reposition the axis to avoid overlap with other axes with the same `overlaying` value. This repositioning will account for any `shift` amount applied to other axes on the same side with `autoshift` is set to true. Only has an effect if `anchor` is set to *free*.",
+     "dflt": false,
+     "editType": "plot",
+     "valType": "boolean"
+    },
     "autotypenumbers": {
      "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
      "dflt": "convert types",
@@ -11731,6 +11737,11 @@
      "dflt": false,
      "editType": "ticks",
      "valType": "boolean"
+    },
+    "shift": {
+     "description": "Moves the axis a given number of pixels from where it would have been otherwise. Accepts both positive and negative values, which will shift the axis either right or left, respectively. If `autoshift` is set to true, then this defaults to a padding of -3 if `side` is set to *left*. and defaults to +3 if `side` is set to *right*. Defaults to 0 if `autoshift` is set to false. Only has an effect if `anchor` is set to *free*.",
+     "editType": "plot",
+     "valType": "number"
     },
     "showdividers": {
      "description": "Determines whether or not a dividers are drawn between the category levels of this axis. Only has an effect on *multicategory* axes.",
@@ -42935,6 +42946,12 @@
   "scatter": {
    "animatable": true,
    "attributes": {
+    "alignmentgroup": {
+     "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently.",
+     "dflt": "",
+     "editType": "calc",
+     "valType": "string"
+    },
     "cliponaxis": {
      "description": "Determines whether or not markers and text nodes are clipped about the subplot axes. To show markers and text nodes above axis lines and tick labels, make sure to set `xaxis.layer` and `yaxis.layer` to *below traces*.",
      "dflt": true,
@@ -44893,6 +44910,12 @@
      "editType": "style",
      "valType": "string"
     },
+    "offsetgroup": {
+     "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up.",
+     "dflt": "",
+     "editType": "calc",
+     "valType": "string"
+    },
     "opacity": {
      "description": "Sets the opacity of the trace.",
      "dflt": 1,
@@ -44902,7 +44925,7 @@
      "valType": "number"
     },
     "orientation": {
-     "description": "Only relevant when `stackgroup` is used, and only the first `orientation` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the stacking direction. With *v* (*h*), the y (x) values of subsequent traces are added. Also affects the default value of `fill`.",
+     "description": "Only relevant in the following cases: 1. when `scattermode` is set to *group*. 2. when `stackgroup` is used, and only the first `orientation` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the stacking direction. With *v* (*h*), the y (x) values of subsequent traces are added. Also affects the default value of `fill`.",
      "editType": "calc",
      "valType": "enumerated",
      "values": [
@@ -45307,6 +45330,25 @@
     "scatter-like",
     "zoomScale"
    ],
+   "layoutAttributes": {
+    "scattergap": {
+     "description": "Sets the gap (in plot fraction) between scatter points of adjacent location coordinates. Defaults to `bargap`.",
+     "editType": "calc",
+     "max": 1,
+     "min": 0,
+     "valType": "number"
+    },
+    "scattermode": {
+     "description": "Determines how scatter points at the same location coordinate are displayed on the graph. With *group*, the scatter points are plotted next to one another centered around the shared location. With *overlay*, the scatter points are plotted over one another, you might need to reduce *opacity* to see multiple scatter points.",
+     "dflt": "overlay",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "group",
+      "overlay"
+     ]
+    }
+   },
    "meta": {
     "description": "The scatter trace type encompasses line charts, scatter charts, text charts, and bubble charts. The data visualized as scatter point or lines is set in `x` and `y`. Text (appearing either on the chart or on hover only) is via `text`. Bubble charts are achieved by setting `marker.size` and/or `marker.color` to numerical arrays."
    },
@@ -69170,6 +69212,13 @@
       "description": "Sets the source reference on Chart Studio Cloud for `colors`.",
       "editType": "none",
       "valType": "string"
+     },
+     "cornerradius": {
+      "description": "Sets the maximum rounding of corners (in px).",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
      },
      "depthfade": {
       "description": "Determines if the sector colors are faded towards the background from the leaves up to the headers. This option is unavailable when a `colorscale` is present, defaults to false when `marker.colors` is set, but otherwise defaults to true. When set to *reversed*, the fading direction is inverted, that is the top elements within hierarchy are drawn with fully saturated colors while the leaves are faded towards the background color.",

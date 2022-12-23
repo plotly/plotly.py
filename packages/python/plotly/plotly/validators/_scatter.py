@@ -10,6 +10,12 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             cliponaxis
                 Determines whether or not markers and text
                 nodes are clipped about the subplot axes. To
@@ -216,17 +222,23 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             opacity
                 Sets the opacity of the trace.
             orientation
-                Only relevant when `stackgroup` is used, and
-                only the first `orientation` found in the
-                `stackgroup` will be used - including if
-                `visible` is "legendonly" but not if it is
-                `false`. Sets the stacking direction. With "v"
-                ("h"), the y (x) values of subsequent traces
-                are added. Also affects the default value of
-                `fill`.
+                Only relevant in the following cases: 1. when
+                `scattermode` is set to "group". 2. when
+                `stackgroup` is used, and only the first
+                `orientation` found in the `stackgroup` will be
+                used - including if `visible` is "legendonly"
+                but not if it is `false`. Sets the stacking
+                direction. With "v" ("h"), the y (x) values of
+                subsequent traces are added. Also affects the
+                default value of `fill`.
             selected
                 :class:`plotly.graph_objects.scatter.Selected`
                 instance or dict with compatible properties
