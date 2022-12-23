@@ -63,10 +63,10 @@ fig.show()
 In this example, we display individual data points with a grouped scatter chart and show averages using a grouped bar chart. `offsetgroup` links the bar trace for smoker with the scatter trace for smoker, and the bar trace for non-smoker with the scatter trace for non-smoker. If you deselect a trace using the legend, other traces maintain the position of the traces they are linked to.
 
 ```python
-import plotly.express as px
 import plotly.graph_objects as go
+from plotly import data
 
-df = px.data.tips()[px.data.tips()["day"] == "Sun"]
+df = data.tips()[data.tips()["day"] == "Sun"]
 
 mean_values_df = df.groupby(by=["sex", "smoker"], as_index=False).mean(
     numeric_only=True
