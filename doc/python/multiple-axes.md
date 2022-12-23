@@ -251,6 +251,8 @@ fig.show()
 
 #### Automatically Shifting Axes
 
+*New in 5.12*
+
 To automatically reposition axes to avoid overlap with other axes with the same `overlaying` value, set `autoshift=True`. For `autoshift` to work on an axis, you'll also need to set `anchor="free"` on that axis.
 
 ```python
@@ -300,6 +302,8 @@ fig.show()
 ```
 
 ### Shift Axes by a Specific Number of Pixels
+
+*New in 5.12*
 
 Set a `shift` value on an axis to shift an axis by that number of pixels. A positive value shifts an axis to the right. A negative value shifts it to the left. Here, we shift `yaxis4` 100 pixels further to the left.
 
