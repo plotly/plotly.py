@@ -136,9 +136,8 @@ fig.show()
 
 *New in 5.12*
 
-You can configure the gap between points using `scattergap`. Here we set it to `0.75` to bring the points closer together.
+You can configure the gap between groups of scatter points using `scattergap`. Here we set it to `0.75`, which brings the points closer together by allocating more space to the gap between groups. If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value. 
 
-If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value.
 
 ```python
 import plotly.express as px
