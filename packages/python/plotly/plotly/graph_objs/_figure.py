@@ -378,6 +378,19 @@ class Figure(BaseFigure):
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
                         instance or dict with compatible properties
+                    scattergap
+                        Sets the gap (in plot fraction) between scatter
+                        points of adjacent location coordinates.
+                        Defaults to `bargap`.
+                    scattermode
+                        Determines how scatter points at the same
+                        location coordinate are displayed on the graph.
+                        With "group", the scatter points are plotted
+                        next to one another centered around the shared
+                        location. With "overlay", the scatter points
+                        are plotted over one another, you might need to
+                        reduce "opacity" to see multiple scatter
+                        points.
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
                         instance or dict with compatible properties
@@ -12794,6 +12807,7 @@ class Figure(BaseFigure):
 
     def add_scatter(
         self,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -12826,6 +12840,7 @@ class Figure(BaseFigure):
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -12880,6 +12895,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -13062,15 +13082,21 @@ class Figure(BaseFigure):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -13297,6 +13323,7 @@ class Figure(BaseFigure):
         from plotly.graph_objs import Scatter
 
         new_trace = Scatter(
+            alignmentgroup=alignmentgroup,
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
@@ -13329,6 +13356,7 @@ class Figure(BaseFigure):
             metasrc=metasrc,
             mode=mode,
             name=name,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             selected=selected,
