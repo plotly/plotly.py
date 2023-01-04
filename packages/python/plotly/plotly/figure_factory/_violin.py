@@ -16,7 +16,7 @@ def calc_stats(data):
     """
     Calculate statistics for use in violin plot.
     """
-    x = np.asarray(data, np.float)
+    x = np.asarray(data, float)
     vals_min = np.min(x)
     vals_max = np.max(x)
     q2 = np.percentile(x, 50, interpolation="linear")
@@ -160,7 +160,7 @@ def violinplot(vals, fillcolor="#1f77b4", rugplot=True):
     """
     Refer to FigureFactory.create_violin() for docstring.
     """
-    vals = np.asarray(vals, np.float)
+    vals = np.asarray(vals, float)
     #  summary statistics
     vals_min = calc_stats(vals)["min"]
     vals_max = calc_stats(vals)["max"]
@@ -231,7 +231,7 @@ def violin_no_colorscale(
     )
     color_index = 0
     for k, gr in enumerate(group_name):
-        vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+        vals = np.asarray(gb.get_group(gr)[data_header], float)
         if color_index >= len(colors):
             color_index = 0
         plot_data, plot_xrange = violinplot(
@@ -319,7 +319,7 @@ def violin_colorscale(
     min_value = min(group_stats_values)
 
     for k, gr in enumerate(group_name):
-        vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+        vals = np.asarray(gb.get_group(gr)[data_header], float)
 
         # find intermediate color from colorscale
         intermed = (group_stats[gr] - min_value) / (max_value - min_value)
@@ -411,7 +411,7 @@ def violin_dict(
     )
 
     for k, gr in enumerate(group_name):
-        vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+        vals = np.asarray(gb.get_group(gr)[data_header], float)
         plot_data, plot_xrange = violinplot(vals, fillcolor=colors[gr], rugplot=rugplot)
         layout = graph_objs.Layout()
 
