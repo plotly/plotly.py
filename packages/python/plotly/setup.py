@@ -512,6 +512,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Topic :: Scientific/Engineering :: Visualization",
+        "License :: OSI Approved :: MIT License",
     ],
     python_requires=">=3.6",
     license="MIT",
