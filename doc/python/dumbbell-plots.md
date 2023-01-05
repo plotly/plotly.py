@@ -94,7 +94,6 @@ fig = go.Figure(
 
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
-    width=1000,
     height=1000,
     showlegend=False,
 )
@@ -109,7 +108,7 @@ fig.show()
 
 In this example, we add arrow markers to the plot. The first trace adds the lines connecting the data points and arrow markers.
 The second trace adds circle markers. On the first trace, we use `standoff=8` to position the arrow marker back from the data point.
-For the arrow marker to point directly at the circle marker, this value should be half the circle marker size.
+For the arrow marker to point directly at the circle marker, this value should be half the circle marker size, which is hardcoded to 16 here.
 
 ```python
 import pandas as pd
@@ -165,7 +164,6 @@ fig = go.Figure(
 
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
-    width=1000,
     height=1000,
     showlegend=False,
 )
