@@ -716,7 +716,10 @@ export class FigureModel extends DOMWidgetModel {
 
   static serializers: ISerializers = {
     ...DOMWidgetModel.serializers,
-    _data: { deserialize: py2js_deserializer, serialize: js2py_serializer },
+    _data: {
+      deserialize: py2js_deserializer,
+      serialize: js2py_serializer,
+    },
     _layout: {
       deserialize: py2js_deserializer,
       serialize: js2py_serializer,
@@ -807,7 +810,7 @@ export class FigureView extends DOMWidgetView {
   resizeEventListener: () => void;
 
   /**
-   * The perform_render method is called by processPhosphorMessage
+   * The perform_render method is called by processLuminoMessage
    * after the widget's DOM element has been attached to the notebook
    * output cell. This happens after the initialize of the
    * FigureModel, and it won't happen at all if the Python FigureWidget
@@ -901,10 +904,10 @@ export class FigureView extends DOMWidgetView {
   }
 
   /**
-   * Respond to phosphorjs events
+   * Respond to Lumino events
    */
-  processPhosphorMessage(msg: any) {
-    super.processPhosphorMessage.apply(this, arguments);
+  _processLuminoMessage(msg: any, _super: any) {
+    _super.apply(this, arguments);
     var that = this;
     switch (msg.type) {
       case "before-attach":
@@ -937,6 +940,21 @@ export class FigureView extends DOMWidgetView {
         this.autosizeFigure();
         break;
     }
+  }
+
+  processPhosphorMessage(msg: any) {
+    this._processLuminoMessage(msg, super["processPhosphorMessage"]);
+
+    var that = this;
+    if (msg.type === "before-attach") {
+      window.addEventListener("resize", function () {
+        that.autosizeFigure();
+      });
+    }
+  }
+
+  processLuminoMessage(msg: any) {
+    this._processLuminoMessage(msg, super["processLuminoMessage"]);
   }
 
   autosizeFigure() {
