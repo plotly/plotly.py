@@ -328,7 +328,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
-                        x = x.astype(np.int64) / 10**9  # convert to unix epoch seconds
+                        # convert to unix epoch seconds
+                        x = x.astype(np.int64) / 10**9
                     elif x.dtype.type == np.object_:
                         try:
                             x = x.astype(np.float64)
