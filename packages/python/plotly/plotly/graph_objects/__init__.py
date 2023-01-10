@@ -273,7 +273,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
             from ..graph_objs._figurewidget import FigureWidget
         else:
             raise ImportError()
-    except ImportError:
+    except Exception:
         from ..missing_ipywidgets import FigureWidget
 else:
     __all__.append("FigureWidget")
@@ -291,7 +291,7 @@ else:
                     return FigureWidget
                 else:
                     raise ImportError()
-            except ImportError:
+            except Exception:
                 from ..missing_ipywidgets import FigureWidget
 
                 return FigureWidget
