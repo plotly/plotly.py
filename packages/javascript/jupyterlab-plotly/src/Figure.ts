@@ -944,13 +944,6 @@ export class FigureView extends DOMWidgetView {
 
   processPhosphorMessage(msg: any) {
     this._processLuminoMessage(msg, super["processPhosphorMessage"]);
-
-    var that = this;
-    if (msg.type === "before-attach") {
-      window.addEventListener("resize", function () {
-        that.autosizeFigure();
-      });
-    }
   }
 
   processLuminoMessage(msg: any) {
