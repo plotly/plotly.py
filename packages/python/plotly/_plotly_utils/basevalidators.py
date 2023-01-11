@@ -1675,11 +1675,14 @@ class AngleValidator(BaseValidator):
     def description(self):
         desc = """\
     The '{plotly_name}' property is a angle (in degrees) that may be
-    specified as a number between -180 and 180. Numeric values outside this
-    range are converted to the equivalent value
+    specified as a number between -180 and 180{array_ok}.
+    Numeric values outside this range are converted to the equivalent value
     (e.g. 270 is converted to -90).
         """.format(
-            plotly_name=self.plotly_name
+            plotly_name=self.plotly_name,
+            array_ok=", or a list, numpy array or other iterable thereof"
+            if self.array_ok
+            else "",
         )
 
         return desc
