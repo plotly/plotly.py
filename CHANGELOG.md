@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
   - Fixed the usage of some deprecated NumPy types which were removed in NumPy 1.24 [[#3997](https://github.com/plotly/plotly.py/pull/3997)]
   - Fixed bug for trendlines with datetime axes [[#3683](https://github.com/plotly/plotly.py/issues/3683)]
+  - `marker.angle` attribute now accepts iterables where appropriate [[#4013](https://github.com/plotly/plotly.py/issues/4013)]
 
 ## [5.11.0] - 2022-10-27
 

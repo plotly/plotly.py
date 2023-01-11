@@ -1065,8 +1065,8 @@ class Sunburst(_BaseTraceType):
         default the first slice starts at 3 o'clock.
 
         The 'rotation' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
