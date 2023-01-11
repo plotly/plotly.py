@@ -1694,6 +1694,8 @@ class AngleValidator(BaseValidator):
             except (ValueError, TypeError, OverflowError):
                 self.raise_invalid_val(v)
             v = v_array  # Always numeric numpy array
+            # Normalize v onto the interval [-180, 180)
+            v = (v + 180) % 360 - 180
         elif self.array_ok and is_simple_array(v):
             # Check numeric
             invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
@@ -1701,7 +1703,7 @@ class AngleValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
-            v = to_scalar_or_list(v)
+            v = [(x + 180) % 360 - 180 for x in to_scalar_or_list(v)]
         elif not isinstance(v, numbers.Number):
             self.raise_invalid_val(v)
         else:
