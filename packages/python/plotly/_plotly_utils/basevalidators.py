@@ -1660,15 +1660,17 @@ class AngleValidator(BaseValidator):
         "description": "A number (in degree) between -180 and 180.",
         "requiredOpts": [],
         "otherOpts": [
-            "dflt"
+            "dflt",
+            "arrayOk"
         ]
     },
     """
 
-    def __init__(self, plotly_name, parent_name, **kwargs):
+    def __init__(self, plotly_name, parent_name, array_ok=False, **kwargs):
         super(AngleValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
@@ -1686,6 +1688,20 @@ class AngleValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
+        elif self.array_ok and is_homogeneous_array(v):
+            try:
+                v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
+            except (ValueError, TypeError, OverflowError):
+                self.raise_invalid_val(v)
+            v = v_array  # Always numeric numpy array
+        elif self.array_ok and is_simple_array(v):
+            # Check numeric
+            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+
+            v = to_scalar_or_list(v)
         elif not isinstance(v, numbers.Number):
             self.raise_invalid_val(v)
         else:
