@@ -312,6 +312,12 @@ jobs:
           command: |
             tar czf output.tgz output
 
+      - run:
+          name: Git Diff
+          command: |
+            git status
+            git diff
+
       - store_artifacts:
           path: output.tgz
 
