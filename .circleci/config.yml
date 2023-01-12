@@ -286,6 +286,7 @@ jobs:
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
             cp -R dist ../../../output/dist
+            git status
 
       - run:
           name: Conda Build
@@ -295,6 +296,7 @@ jobs:
             cd packages/python/plotly
             conda build recipe/
             mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
+            git status
 
       - run:
           name: NPM Pack
