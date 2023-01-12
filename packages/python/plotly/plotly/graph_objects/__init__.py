@@ -53,6 +53,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import Layout
     from ..graph_objs import Frame
     from ..graph_objs import Figure
+    from ..graph_objs import FigureWidget
     from ..graph_objs import Data
     from ..graph_objs import Annotations
     from ..graph_objs import Frames
@@ -235,6 +236,7 @@ else:
             "..graph_objs.Layout",
             "..graph_objs.Frame",
             "..graph_objs.Figure",
+            "..graph_objs.FigureWidget",
             "..graph_objs.Data",
             "..graph_objs.Annotations",
             "..graph_objs.Frames",
@@ -262,38 +264,3 @@ else:
             "..graph_objs.Histogram2dcontour",
         ],
     )
-
-
-if sys.version_info < (3, 7) or TYPE_CHECKING:
-    try:
-        import ipywidgets as _ipywidgets
-        from distutils.version import LooseVersion as _LooseVersion
-
-        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
-        else:
-            raise ImportError()
-    except Exception:
-        from ..missing_ipywidgets import FigureWidget
-else:
-    __all__.append("FigureWidget")
-    orig_getattr = __getattr__
-
-    def __getattr__(import_name):
-        if import_name == "FigureWidget":
-            try:
-                import ipywidgets
-                from distutils.version import LooseVersion
-
-                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
-
-                    return FigureWidget
-                else:
-                    raise ImportError()
-            except Exception:
-                from ..missing_ipywidgets import FigureWidget
-
-                return FigureWidget
-
-        return orig_getattr(import_name)
