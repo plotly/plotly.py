@@ -40,7 +40,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -60,7 +60,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -86,7 +86,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
