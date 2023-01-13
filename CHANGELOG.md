@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## [5.12.0] - 2023-01-12
 
 ### Updated
-  - Support for ipywidgets 8 [#3930](https://github.com/plotly/plotly.py/pull/3930)
+  - Support for ipywidgets 8 [[#3930](https://github.com/plotly/plotly.py/pull/3930)]
   - Updated Plotly.js to from version 2.16.1 to version 2.17.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2170----2022-12-22) for more information. Notable changes include:
     - Add `shift` and `autoshift` to cartesian y axes to help avoid overlapping of multiple axes [[#6334](https://github.com/plotly/plotly.js/pull/6334)],
       with thanks to [Gamma Technologies](https://www.gtisoft.com) for sponsoring the related development!
@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fixed the usage of some deprecated NumPy types which were removed in NumPy 1.24 [[#3997](https://github.com/plotly/plotly.py/pull/3997)]
   - Fixed bug for trendlines with datetime axes [[#3683](https://github.com/plotly/plotly.py/issues/3683)]
   - `marker.angle` attribute now accepts iterables where appropriate [[#4013](https://github.com/plotly/plotly.py/issues/4013)]
+  - `selector=0` now correctly returns the first trace in `.select_traces()` and related methods [[#3817](https://github.com/plotly/plotly.py/issues/3817)]
 
 ## [5.11.0] - 2022-10-27
 
