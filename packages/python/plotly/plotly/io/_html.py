@@ -533,7 +533,8 @@ def write_html(
 
     # Write HTML string
     if path is not None:
-        path.write_text(html_str)
+        # To use a different file encoding, pass a file descriptor
+        path.write_text(html_str, "utf-8")
     else:
         file.write(html_str)
 
