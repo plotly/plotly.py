@@ -396,7 +396,6 @@ fig.add_trace(
 
 fig.update_layout(
     legend=dict(orientation="h"),
-    xaxis=dict(showgrid=True, ticklen=10, tickwidth=3),
     yaxis=dict(
         title=dict(text="Total number of diners"),
         side="left",
@@ -410,6 +409,8 @@ fig.update_layout(
         tickmode="sync",
     ),
 )
+
+fig.show()
 
 ```
 
