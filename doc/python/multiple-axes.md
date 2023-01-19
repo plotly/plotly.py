@@ -354,10 +354,10 @@ fig.show()
 
 ### Sync Axes Ticks
 
+
 *New in 5.13*
 
-
-When you have multiple axes overlayed, each axis by default has its own number of ticks. You can sync the number of ticks on an axis overlayed on another axis by setting `tickmode="sync"`. In this example, we sync the ticks on the `"Total bill amount"` axis with the `"Total number of diners"` axis that it overlays. 
+With overlayed axes, each axis by default has its own number of ticks. You can sync the number of ticks on a cartesian axis with another one it overlays by setting `tickmode="sync"`. In this example, we sync the ticks on the `"Total bill amount"` axis with the `"Total number of diners"` axis that it overlays. 
 
 ```python
 import plotly.graph_objects as go
