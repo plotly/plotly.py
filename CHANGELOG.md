@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+  - Updated Plotly.js to from version 2.17.1 to version 2.18.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2180----2023-01-19) for more information. Notable changes include:
+    - Add `sync` tickmode option [[#6356](https://github.com/plotly/plotly.js/pull/6356), [#6443](https://github.com/plotly/plotly.js/pull/6443)], with thanks to @filipesantiagoAM and @VictorBezak for the contribution!
+
+
 ## [5.12.0] - 2023-01-12
 
 ### Updated
