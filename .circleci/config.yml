@@ -472,5 +472,4 @@ workflows:
       - python_39_optional
       - python_38_orca
       - python_37_percy
-      - python_37_chart_studio
       - build-doc
