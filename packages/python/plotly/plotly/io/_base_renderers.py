@@ -70,7 +70,7 @@ class JsonRenderer(MimetypeRenderer):
 
     def to_mimebundle(self, fig_dict):
         value = json.loads(to_json(fig_dict, validate=False, remove_uids=False))
-        return {"application/json": value}
+        return {"application/json": json.dumps(value)}
 
 
 # Plotly mimetype
@@ -95,7 +95,7 @@ class PlotlyRenderer(MimetypeRenderer):
             to_json(fig_dict, validate=False, remove_uids=False)
         )
 
-        return {"application/vnd.plotly.v1+json": json_compatible_fig_dict}
+        return {"application/vnd.plotly.v1+json": json.dumps(json_compatible_fig_dict)}
 
 
 # Static Image
