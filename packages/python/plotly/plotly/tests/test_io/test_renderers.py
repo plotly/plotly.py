@@ -42,7 +42,9 @@ def fig1(request):
 # ----
 def test_json_renderer_mimetype(fig1):
     pio.renderers.default = "json"
-    expected = {"application/json": json.dumps(json.loads(pio.to_json(fig1, remove_uids=False)))}
+    expected = {
+        "application/json": json.dumps(json.loads(pio.to_json(fig1, remove_uids=False)))
+    }
 
     pio.renderers.render_on_display = False
 
