@@ -4567,7 +4567,9 @@ class Layout(_BaseLayoutType):
                     "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
                     ("array" is the default value if `tickvals` is
-                    provided).
+                    provided). If "sync", the number of ticks will
+                    sync with the overlayed axis set by
+                    `overlaying` property.
                 tickprefix
                     Sets a tick label prefix.
                 ticks
@@ -5089,7 +5091,9 @@ class Layout(_BaseLayoutType):
                     "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
                     ("array" is the default value if `tickvals` is
-                    provided).
+                    provided). If "sync", the number of ticks will
+                    sync with the overlayed axis set by
+                    `overlaying` property.
                 tickprefix
                     Sets a tick label prefix.
                 ticks
