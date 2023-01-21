@@ -2152,11 +2152,13 @@ class YAxis(_BaseLayoutHierarchyType):
         step `dtick` ("linear" is the default value if `tick0` and
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
-        is the default value if `tickvals` is provided).
+        is the default value if `tickvals` is provided). If "sync", the
+        number of ticks will sync with the overlayed axis set by
+        `overlaying` property.
 
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+                ['auto', 'linear', 'array', 'sync']
 
         Returns
         -------
@@ -3016,7 +3018,9 @@ class YAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -3565,7 +3569,9 @@ class YAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks

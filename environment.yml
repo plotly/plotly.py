@@ -1,0 +1,16 @@
+name: plotly
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - anaconda-client
+  - pandas
+  - black
+  - pytest
+  - tenacity
+  - inflect
+  - python=3.10
+  - jupyterlab
+  - ipywidgets
+  - statsmodels
+  - numpy
