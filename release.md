@@ -42,7 +42,7 @@ Manually update the versions to `X.Y.Z` in the files specified below.
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z`
  - `packages/javascript/jupyterlab-plotly/package-lock.json`
-   + Update `"version"` to `X.Y.Z`
+   + Update `"version"` to `X.Y.Z` in two places (to avoid dirty repo after rebuild)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
 
