@@ -191,7 +191,7 @@ layout = dict(
             method = 'restyle',
         ), dict(
             args = ['xbins.size', 'M3'],
-            label = 'Quater',
+            label = 'Quarter',
             method = 'restyle',
         ), dict(
             args = ['xbins.size', 'M6'],
