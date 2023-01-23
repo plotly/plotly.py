@@ -250,11 +250,16 @@ loadings = pca.components_.T * np.sqrt(pca.explained_variance_)
 fig = px.scatter(components, x=0, y=1, color=df['species'])
 
 for i, feature in enumerate(features):
-    fig.add_shape(
-        type='line',
-        x0=0, y0=0,
-        x1=loadings[i, 0],
-        y1=loadings[i, 1]
+    fig.add_annotation(
+        ax=0, ay=0,
+        axref="x", ayref="y",
+        x=loadings[i, 0],
+        y=loadings[i, 1],
+        showarrow=True,
+        arrowsize=2,
+        arrowhead=2,
+        xanchor="right",
+        yanchor="top"
     )
     fig.add_annotation(
         x=loadings[i, 0],
@@ -263,6 +268,7 @@ for i, feature in enumerate(features):
         xanchor="center",
         yanchor="bottom",
         text=feature,
+        yshift=5,
     )
 fig.show()
 ```
