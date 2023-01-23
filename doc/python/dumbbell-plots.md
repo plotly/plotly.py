@@ -55,39 +55,51 @@ countries = (
     .unique()
 )
 
-data = {"x": [], "y": [], "colors": [], "years": []}
+data = {"line_x": [], "line_y": [], "1952": [], "2002": [], "colors": [], "years": [], "countries": []}
 
 for country in countries:
-    data["x"].extend(
+    data["1952"].extend([df.loc[(df.year == 1952) & (df.country == country)]["lifeExp"].values[0]])
+    data["2002"].extend([df.loc[(df.year == 2002) & (df.country == country)]["lifeExp"].values[0]])
+    data["line_x"].extend(
         [
             df.loc[(df.year == 1952) & (df.country == country)]["lifeExp"].values[0],
             df.loc[(df.year == 2002) & (df.country == country)]["lifeExp"].values[0],
             None,
         ]
     )
-    data["y"].extend([country, country, None]),
-    data["colors"].extend(["green", "blue", "brown"]),
-    data["years"].extend(["1952", "2002", None])
+    data["line_y"].extend([country, country, None]),
 
 fig = go.Figure(
     data=[
         go.Scatter(
-            x=data["x"],
-            y=data["y"],
+            x=data["line_x"],
+            y=data["line_y"],
             mode="lines",
+            showlegend=False,
             marker=dict(
-                color="grey",
-            ),
+                color="grey"
+            )
         ),
         go.Scatter(
-            x=data["x"],
-            y=data["y"],
-            mode="markers+text",
+            x=data["1952"],
+            y=countries,
+            mode="markers",
+            name="1952",
             marker=dict(
-                color=data["colors"],
-                size=10,
-            ),
-            hovertemplate="""Country: %{y} <br> Life Expectancy: %{x} <br><extra></extra>""",
+                color="green",
+                size=10
+            )
+            
+        ),
+        go.Scatter(
+            x=data["2002"],
+            y=countries,
+            mode="markers",
+            name="2002",
+            marker=dict(
+                color="blue",
+                size=10
+            )   
         ),
     ]
 )
@@ -95,7 +107,7 @@ fig = go.Figure(
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
     height=1000,
-    showlegend=False,
+    legend_itemclick=False
 )
 
 fig.show()
@@ -124,40 +136,54 @@ countries = (
     .unique()
 )
 
-data = {"x": [], "y": [], "colors": [], "years": []}
+data = {"line_x": [], "line_y": [], "1952": [], "2002": [], "colors": [], "years": [], "countries": []}
 
 for country in countries:
-    data["x"].extend(
+    data["1952"].extend([df.loc[(df.year == 1952) & (df.country == country)]["lifeExp"].values[0]])
+    data["2002"].extend([df.loc[(df.year == 2002) & (df.country == country)]["lifeExp"].values[0]])
+    data["line_x"].extend(
         [
             df.loc[(df.year == 1952) & (df.country == country)]["lifeExp"].values[0],
             df.loc[(df.year == 2002) & (df.country == country)]["lifeExp"].values[0],
             None,
         ]
     )
-    data["y"].extend([country, country, None]),
-    data["colors"].extend(["silver", "lightskyblue", "white"]),
-    data["years"].extend(["1952", "2002", None])
+    data["line_y"].extend([country, country, None]),
 
 fig = go.Figure(
     data=[
         go.Scatter(
-            x=data["x"],
-            y=data["y"],
+            x=data["line_x"],
+            y=data["line_y"],
             mode="markers+lines",
+            showlegend=False,
             marker=dict(
-                symbol="arrow", color="black", size=16, angleref="previous", standoff=8
-            ),
+                symbol="arrow", 
+                color="black", 
+                size=16, 
+                angleref="previous", 
+                standoff=8
+            )
         ),
         go.Scatter(
-            x=data["x"],
-            y=data["y"],
-            text=data["years"],
+            x=data["1952"],
+            y=countries, 
+            name="1952",
             mode="markers",
             marker=dict(
-                color=data["colors"],
+                color="silver",
+                size=16,
+            )
+        ),
+        go.Scatter(
+            x=data["2002"],
+            y=countries,
+            name="2002",
+            mode="markers",
+            marker=dict(
+                color="lightskyblue",
                 size=16,
             ),
-            hovertemplate="""Country: %{y} <br> Life Expectancy: %{x} <br> Year: %{text} <br><extra></extra>""",
         ),
     ]
 )
@@ -165,7 +191,7 @@ fig = go.Figure(
 fig.update_layout(
     title="Life Expectancy in Europe: 1952 and 2002",
     height=1000,
-    showlegend=False,
+    legend_itemclick=False
 )
 
 
