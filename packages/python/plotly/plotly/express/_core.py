@@ -1988,6 +1988,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     layout_patch = layout_patch or {}
     apply_default_cascade(args)
 
+    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
+    if len(args["data_frame"]) == 0:
+        args["facet_row"] = args["facet_col"] = None
+
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
