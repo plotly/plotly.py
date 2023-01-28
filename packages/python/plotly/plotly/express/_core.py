@@ -1875,6 +1875,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
+    if len(args["data_frame"]) == 0:
+        args["facet_row"] = args["facet_col"] = None
+
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col") is not None and args.get("marginal_y") is not None:
         args["marginal_y"] = None
@@ -1987,10 +1991,6 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
     apply_default_cascade(args)
-
-    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
-    if len(args["data_frame"]) == 0:
-        args["facet_row"] = args["facet_col"] = None
 
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
