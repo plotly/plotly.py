@@ -34,6 +34,7 @@ class Bar(_BaseTraceType):
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "marker",
         "meta",
         "metasrc",
@@ -851,6 +852,27 @@ class Bar(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # marker
     # ------
     @property
@@ -1352,8 +1374,8 @@ class Bar(_BaseTraceType):
         the maximum size in bars.
 
         The 'textangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -2244,6 +2266,9 @@ class Bar(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -2508,6 +2533,7 @@ class Bar(_BaseTraceType):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -2688,6 +2714,9 @@ class Bar(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -3056,6 +3085,10 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("marker", None)
         _v = marker if marker is not None else _v
         if _v is not None:

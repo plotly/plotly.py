@@ -278,7 +278,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         if attr_name == "dimensions":
             dims = [
                 (name, column)
-                for (name, column) in trace_data.iteritems()
+                for (name, column) in trace_data.items()
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
@@ -328,7 +328,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
-                        x = x.astype(int) / 10**9  # convert to unix epoch seconds
+                        # convert to unix epoch seconds
+                        x = x.astype(np.int64) / 10**9
                     elif x.dtype.type == np.object_:
                         try:
                             x = x.astype(np.float64)

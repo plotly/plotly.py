@@ -60,8 +60,8 @@ class IcicleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -127,6 +127,9 @@ class IcicleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             level
                 Sets the level from which this trace hierarchy
                 is rendered. Set `level` to `''` to start from
@@ -216,8 +219,8 @@ class IcicleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
-                rmat/tree/v1.4.5#d3-format for details on the
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".

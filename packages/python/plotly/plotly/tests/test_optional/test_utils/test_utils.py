@@ -414,8 +414,8 @@ class TestNumpyIntegerBaseType(TestCase):
         import plotly.graph_objects as go
         from plotly.subplots import make_subplots
 
-        indices_rows = np.array([1], dtype=np.int)
-        indices_cols = np.array([1], dtype=np.int)
+        indices_rows = np.array([1], dtype=int)
+        indices_cols = np.array([1], dtype=int)
         fig = make_subplots(rows=1, cols=1)
         fig.add_trace(go.Scatter(y=[1]), row=indices_rows[0], col=indices_cols[0])
 

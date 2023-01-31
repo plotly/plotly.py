@@ -9,6 +9,8 @@ class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "splom"
     _path_str = "splom.marker"
     _valid_props = {
+        "angle",
+        "anglesrc",
         "autocolorscale",
         "cauto",
         "cmax",
@@ -32,6 +34,48 @@ class Marker(_BaseTraceHierarchyType):
         "symbol",
         "symbolsrc",
     }
+
+    # angle
+    # -----
+    @property
+    def angle(self):
+        """
+        Sets the marker angle in respect to `angleref`.
+
+        The 'angle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180, or a list, numpy array or other iterable thereof.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["angle"]
+
+    @angle.setter
+    def angle(self, val):
+        self["angle"] = val
+
+    # anglesrc
+    # --------
+    @property
+    def anglesrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `angle`.
+
+        The 'anglesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["anglesrc"]
+
+    @anglesrc.setter
+    def anglesrc(self, val):
+        self["anglesrc"] = val
 
     # autocolorscale
     # --------------
@@ -380,8 +424,8 @@ class Marker(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -995,7 +1039,9 @@ class Marker(_BaseTraceHierarchyType):
                 'arrow-bar-up-open', 50, '50', 'arrow-bar-down', 150,
                 '150', 'arrow-bar-down-open', 51, '51', 'arrow-bar-left',
                 151, '151', 'arrow-bar-left-open', 52, '52',
-                'arrow-bar-right', 152, '152', 'arrow-bar-right-open']
+                'arrow-bar-right', 152, '152', 'arrow-bar-right-open', 53,
+                '53', 'arrow', 153, '153', 'arrow-open', 54, '54',
+                'arrow-wide', 154, '154', 'arrow-wide-open']
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -1033,6 +1079,11 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        angle
+            Sets the marker angle in respect to `angleref`.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1149,6 +1200,8 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        angle=None,
+        anglesrc=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -1181,6 +1234,11 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.splom.Marker`
+        angle
+            Sets the marker angle in respect to `angleref`.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1326,6 +1384,14 @@ an instance of :class:`plotly.graph_objs.splom.Marker`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("angle", None)
+        _v = angle if angle is not None else _v
+        if _v is not None:
+            self["angle"] = _v
+        _v = arg.pop("anglesrc", None)
+        _v = anglesrc if anglesrc is not None else _v
+        if _v is not None:
+            self["anglesrc"] = _v
         _v = arg.pop("autocolorscale", None)
         _v = autocolorscale if autocolorscale is not None else _v
         if _v is not None:

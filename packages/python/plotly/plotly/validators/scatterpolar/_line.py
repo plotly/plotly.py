@@ -10,6 +10,16 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            backoff
+                Sets the line back off from the end point of
+                the nth line segment (in px). This option is
+                useful e.g. to avoid overlap with arrowhead
+                markers. With "auto" the lines would trim
+                before markers if `marker.angleref` is set to
+                "previous".
+            backoffsrc
+                Sets the source reference on Chart Studio Cloud
+                for `backoff`.
             color
                 Sets the line color.
             dash
