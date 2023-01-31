@@ -146,8 +146,8 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -364,8 +364,8 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -432,7 +432,9 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "array", the placement of the ticks is set via
                 `tickvals` and the tick text is `ticktext`.
                 ("array" is the default value if `tickvals` is
-                provided).
+                provided). If "sync", the number of ticks will
+                sync with the overlayed axis set by
+                `overlaying` property.
             tickprefix
                 Sets a tick label prefix.
             ticks

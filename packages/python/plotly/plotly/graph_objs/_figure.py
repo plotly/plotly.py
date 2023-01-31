@@ -96,8 +96,8 @@ class Figure(BaseFigure):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     barnorm
                         Sets the normalization for bar traces on the
                         graph. With "fraction", the value of each bar
@@ -254,7 +254,7 @@ class Figure(BaseFigure):
                         another With "group", the bars are plotted next
                         to one another centered around the shared
                         location. With "overlay", the bars are plotted
-                        over one another, you might need to an
+                        over one another, you might need to reduce
                         "opacity" to see multiple bars.
                     geo
                         :class:`plotly.graph_objects.layout.Geo`
@@ -348,6 +348,12 @@ class Figure(BaseFigure):
                     metasrc
                         Sets the source reference on Chart Studio Cloud
                         for `meta`.
+                    minreducedheight
+                        Minimum height of the plot with
+                        margin.automargin applied (in px)
+                    minreducedwidth
+                        Minimum width of the plot with
+                        margin.automargin applied (in px)
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
@@ -372,6 +378,19 @@ class Figure(BaseFigure):
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
                         instance or dict with compatible properties
+                    scattergap
+                        Sets the gap (in plot fraction) between scatter
+                        points of adjacent location coordinates.
+                        Defaults to `bargap`.
+                    scattermode
+                        Determines how scatter points at the same
+                        location coordinate are displayed on the graph.
+                        With "group", the scatter points are plotted
+                        next to one another centered around the shared
+                        location. With "overlay", the scatter points
+                        are plotted over one another, you might need to
+                        reduce "opacity" to see multiple scatter
+                        points.
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
                         instance or dict with compatible properties
@@ -552,8 +571,8 @@ class Figure(BaseFigure):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     width
                         Sets the plot's width (in px).
                     xaxis
@@ -1215,6 +1234,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1395,6 +1415,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -1682,6 +1705,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1752,6 +1776,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1881,6 +1906,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.barpolar.Marker` instance
             or dict with compatible properties
@@ -2032,6 +2060,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -2087,6 +2116,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lowerfence=None,
         lowerfencesrc=None,
@@ -2297,6 +2327,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -2644,6 +2677,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lowerfence=lowerfence,
             lowerfencesrc=lowerfencesrc,
@@ -2726,6 +2760,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -2835,6 +2870,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.candlestick.Line` instance
             or dict with compatible properties
@@ -3027,6 +3065,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -3081,6 +3120,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -3183,6 +3223,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -3305,6 +3348,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -3346,6 +3390,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -3508,6 +3553,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map. Values "ISO-3",
@@ -3663,6 +3711,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locationmode=locationmode,
             locations=locations,
             locationssrc=locationssrc,
@@ -3715,6 +3764,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -3876,6 +3926,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -4029,6 +4082,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locations=locations,
             locationssrc=locationssrc,
             marker=marker,
@@ -4083,6 +4137,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -4262,6 +4317,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -4497,6 +4555,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -4564,6 +4623,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -4759,6 +4819,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contour.Line` instance or
             dict with compatible properties
@@ -5040,6 +5103,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -5118,6 +5182,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -5270,6 +5335,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contourcarpet.Line`
             instance or dict with compatible properties
@@ -5435,6 +5503,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -5486,6 +5555,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -5645,6 +5715,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -5798,6 +5871,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lon=lon,
             lonsrc=lonsrc,
             meta=meta,
@@ -5850,6 +5924,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -6017,6 +6092,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnel.Marker` instance or
             dict with compatible properties
@@ -6294,6 +6372,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6363,6 +6442,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -6509,6 +6589,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -6658,6 +6741,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6708,6 +6792,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -6901,6 +6986,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -7174,6 +7262,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -7241,6 +7330,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -7357,6 +7447,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -7530,6 +7623,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -7593,6 +7687,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -7796,6 +7891,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -8041,6 +8139,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -8104,6 +8203,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -8305,6 +8405,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram2d.Marker`
             instance or dict with compatible properties
@@ -8553,6 +8656,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -8622,6 +8726,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -8830,6 +8935,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.histogram2dcontour.Line`
             instance or dict with compatible properties
@@ -9085,6 +9193,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -9150,6 +9259,7 @@ class Figure(BaseFigure):
         leaf=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -9294,6 +9404,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -9468,6 +9581,7 @@ class Figure(BaseFigure):
             leaf=leaf,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -9517,6 +9631,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -9637,6 +9752,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9782,6 +9900,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -9818,6 +9937,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         mode=None,
@@ -9884,6 +10004,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9975,6 +10098,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
@@ -10019,6 +10143,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -10204,6 +10329,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.isosurface.Lighting`
             instance or dict with compatible properties
@@ -10410,6 +10538,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -10485,6 +10614,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -10738,6 +10868,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.mesh3d.Lighting` instance
             or dict with compatible properties
@@ -10956,6 +11089,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -11010,6 +11144,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -11119,6 +11254,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.ohlc.Line` instance or
             dict with compatible properties
@@ -11310,6 +11448,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -11356,6 +11495,7 @@ class Figure(BaseFigure):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -11453,6 +11593,9 @@ class Figure(BaseFigure):
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -11542,6 +11685,7 @@ class Figure(BaseFigure):
             hovertemplate=hovertemplate,
             labelfont=labelfont,
             legendgrouptitle=legendgrouptitle,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -11570,6 +11714,7 @@ class Figure(BaseFigure):
         labelside=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -11645,6 +11790,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcoords.Line` instance
             or dict with compatible properties
@@ -11734,6 +11882,7 @@ class Figure(BaseFigure):
             labelside=labelside,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -11775,6 +11924,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -11940,6 +12090,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pie.Marker` instance or
             dict with compatible properties
@@ -12117,6 +12270,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -12164,6 +12318,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -12255,6 +12410,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -12407,6 +12565,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -12447,6 +12606,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -12522,6 +12682,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -12623,6 +12786,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             link=link,
             meta=meta,
             metasrc=metasrc,
@@ -12643,6 +12807,7 @@ class Figure(BaseFigure):
 
     def add_scatter(
         self,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -12668,12 +12833,14 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -12728,6 +12895,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -12875,6 +13047,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -12907,15 +13082,21 @@ class Figure(BaseFigure):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -13142,6 +13323,7 @@ class Figure(BaseFigure):
         from plotly.graph_objs import Scatter
 
         new_trace = Scatter(
+            alignmentgroup=alignmentgroup,
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
@@ -13167,12 +13349,14 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
             name=name,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             selected=selected,
@@ -13234,6 +13418,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13379,6 +13564,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -13596,6 +13784,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -13660,6 +13849,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13816,6 +14006,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattercarpet.Line`
             instance or dict with compatible properties
@@ -13995,6 +14188,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -14047,6 +14241,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         locationmode=None,
         locations=None,
@@ -14206,6 +14401,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
@@ -14385,6 +14583,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             locationmode=locationmode,
             locations=locations,
@@ -14439,6 +14638,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -14616,6 +14816,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergl.Line` instance
             or dict with compatible properties
@@ -14868,6 +15071,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -14915,6 +15119,7 @@ class Figure(BaseFigure):
     def add_scattermapbox(
         self,
         below=None,
+        cluster=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -14934,6 +15139,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lon=None,
         lonsrc=None,
@@ -14977,6 +15183,9 @@ class Figure(BaseFigure):
             default, scattermapbox layers are inserted above all
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
+        cluster
+            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -15076,6 +15285,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -15220,6 +15432,7 @@ class Figure(BaseFigure):
 
         new_trace = Scattermapbox(
             below=below,
+            cluster=cluster,
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -15239,6 +15452,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lon=lon,
             lonsrc=lonsrc,
@@ -15290,6 +15504,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15455,6 +15670,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolar.Line`
             instance or dict with compatible properties
@@ -15638,6 +15856,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -15693,6 +15912,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15857,6 +16077,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -16038,6 +16261,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16095,6 +16319,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -16256,6 +16481,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattersmith.Line`
             instance or dict with compatible properties
@@ -16425,6 +16653,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16481,6 +16710,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -16657,6 +16887,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -16830,6 +17063,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16877,6 +17111,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -17004,6 +17239,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.splom.Marker` instance or
             dict with compatible properties
@@ -17166,6 +17404,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -17214,6 +17453,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -17392,6 +17632,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.streamtube.Lighting`
             instance or dict with compatible properties
@@ -17612,6 +17855,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
@@ -17675,6 +17919,7 @@ class Figure(BaseFigure):
         leaf=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -17827,6 +18072,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -17997,6 +18245,7 @@ class Figure(BaseFigure):
             leaf=leaf,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -18053,6 +18302,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -18238,6 +18488,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -18445,6 +18698,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -18498,6 +18752,7 @@ class Figure(BaseFigure):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -18581,6 +18836,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -18664,6 +18922,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -18696,6 +18955,7 @@ class Figure(BaseFigure):
         labelssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -18838,6 +19098,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -19011,6 +19274,7 @@ class Figure(BaseFigure):
             labelssrc=labelssrc,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -19064,6 +19328,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meanline=None,
@@ -19221,6 +19486,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.violin.Line` instance or
             dict with compatible properties
@@ -19493,6 +19761,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meanline=meanline,
@@ -19564,6 +19833,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -19750,6 +20020,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.volume.Lighting` instance
             or dict with compatible properties
@@ -19967,6 +20240,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -20030,6 +20304,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         measure=None,
         measuresrc=None,
         meta=None,
@@ -20209,6 +20484,9 @@ class Figure(BaseFigure):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         measure
             An array containing types of values. By default the
             values are considered as 'relative'. However; it is
@@ -20500,6 +20778,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             measure=measure,
             measuresrc=measuresrc,
             meta=meta,
@@ -21860,19 +22139,19 @@ class Figure(BaseFigure):
             coordinates as `xref`.
         axref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ax axis id
-            (e.g. "ax" or "ax2"), the `ax` position refers to a ax
-            coordinate. If set to "paper", the `ax` position refers
+            annotation (ax,ay) is specified. If set to a x axis id
+            (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
             to the distance from the left of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            left (right). If set to a ax axis ID followed by
+            left (right). If set to a x axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
-            domain of that axis: e.g., *ax2 domain* refers to the
-            domain of the second ax  axis and a ax position of 0.5
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second ax axis. In order for absolute
+            the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
             exactly the same as "xref", otherwise "axref" will
             revert to "pixel" (explained next). For relative
@@ -21893,19 +22172,19 @@ class Figure(BaseFigure):
             coordinates as `yref`.
         ayref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ay axis id
-            (e.g. "ay" or "ay2"), the `ay` position refers to a ay
-            coordinate. If set to "paper", the `ay` position refers
+            annotation (ax,ay) is specified. If set to a y axis id
+            (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
             to the distance from the bottom of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            bottom (top). If set to a ay axis ID followed by
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
-            domain of that axis: e.g., *ay2 domain* refers to the
-            domain of the second ay  axis and a ay position of 0.5
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second ay axis. In order for absolute
+            the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
             exactly the same as "yref", otherwise "ayref" will
             revert to "pixel" (explained next). For relative

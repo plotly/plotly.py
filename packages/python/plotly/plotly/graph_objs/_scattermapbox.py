@@ -10,6 +10,7 @@ class Scattermapbox(_BaseTraceType):
     _path_str = "scattermapbox"
     _valid_props = {
         "below",
+        "cluster",
         "connectgaps",
         "customdata",
         "customdatasrc",
@@ -29,6 +30,7 @@ class Scattermapbox(_BaseTraceType):
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "lon",
         "lonsrc",
@@ -80,6 +82,63 @@ class Scattermapbox(_BaseTraceType):
     @below.setter
     def below(self, val):
         self["below"] = val
+
+    # cluster
+    # -------
+    @property
+    def cluster(self):
+        """
+        The 'cluster' property is an instance of Cluster
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scattermapbox.Cluster`
+          - A dict of string/value properties that will be passed
+            to the Cluster constructor
+
+            Supported dict properties:
+
+                color
+                    Sets the color for each cluster step.
+                colorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `color`.
+                enabled
+                    Determines whether clustering is enabled or
+                    disabled.
+                maxzoom
+                    Sets the maximum zoom level. At zoom levels
+                    equal to or greater than this, points will
+                    never be clustered.
+                opacity
+                    Sets the marker opacity.
+                opacitysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `opacity`.
+                size
+                    Sets the size for each cluster step.
+                sizesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `size`.
+                step
+                    Sets how many points it takes to create a
+                    cluster or advance to the next cluster step.
+                    Use this in conjunction with arrays for `size`
+                    and / or `color`. If an integer, steps start at
+                    multiples of this number. If an array, each
+                    step extends from the given value until one
+                    less than the next value.
+                stepsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `step`.
+
+        Returns
+        -------
+        plotly.graph_objs.scattermapbox.Cluster
+        """
+        return self["cluster"]
+
+    @cluster.setter
+    def cluster(self, val):
+        self["cluster"] = val
 
     # connectgaps
     # -----------
@@ -605,6 +664,27 @@ class Scattermapbox(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -1371,6 +1451,9 @@ class Scattermapbox(_BaseTraceType):
             default, scattermapbox layers are inserted above all
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
+        cluster
+            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -1470,6 +1553,9 @@ class Scattermapbox(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -1601,6 +1687,7 @@ class Scattermapbox(_BaseTraceType):
         self,
         arg=None,
         below=None,
+        cluster=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -1620,6 +1707,7 @@ class Scattermapbox(_BaseTraceType):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lon=None,
         lonsrc=None,
@@ -1664,6 +1752,9 @@ class Scattermapbox(_BaseTraceType):
             default, scattermapbox layers are inserted above all
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
+        cluster
+            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -1763,6 +1854,9 @@ class Scattermapbox(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -1926,6 +2020,10 @@ an instance of :class:`plotly.graph_objs.Scattermapbox`"""
         _v = below if below is not None else _v
         if _v is not None:
             self["below"] = _v
+        _v = arg.pop("cluster", None)
+        _v = cluster if cluster is not None else _v
+        if _v is not None:
+            self["cluster"] = _v
         _v = arg.pop("connectgaps", None)
         _v = connectgaps if connectgaps is not None else _v
         if _v is not None:
@@ -2002,6 +2100,10 @@ an instance of :class:`plotly.graph_objs.Scattermapbox`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

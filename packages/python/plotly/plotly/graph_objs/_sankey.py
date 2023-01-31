@@ -19,6 +19,7 @@ class Sankey(_BaseTraceType):
         "idssrc",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "link",
         "meta",
         "metasrc",
@@ -324,6 +325,27 @@ class Sankey(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # link
     # ----
     @property
@@ -389,8 +411,8 @@ class Sankey(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -578,8 +600,8 @@ class Sankey(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -940,6 +962,9 @@ class Sankey(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -1028,6 +1053,7 @@ class Sankey(_BaseTraceType):
         idssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -1104,6 +1130,9 @@ class Sankey(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -1251,6 +1280,10 @@ an instance of :class:`plotly.graph_objs.Sankey`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("link", None)
         _v = link if link is not None else _v
         if _v is not None:

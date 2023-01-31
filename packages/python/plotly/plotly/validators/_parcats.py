@@ -66,8 +66,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -93,6 +93,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.parcats.Legendgrou
                 ptitle` instance or dict with compatible
                 properties
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.parcats.Line`
                 instance or dict with compatible properties
