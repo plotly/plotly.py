@@ -12,6 +12,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._labelfont import LabelfontValidator
     from ._hovertemplate import HovertemplateValidator
@@ -41,6 +42,7 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._labelfont.LabelfontValidator",
             "._hovertemplate.HovertemplateValidator",

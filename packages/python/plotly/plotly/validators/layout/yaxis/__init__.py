@@ -45,6 +45,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._showgrid import ShowgridValidator
     from ._showexponent import ShowexponentValidator
     from ._showdividers import ShowdividersValidator
+    from ._shift import ShiftValidator
     from ._separatethousands import SeparatethousandsValidator
     from ._scaleratio import ScaleratioValidator
     from ._scaleanchor import ScaleanchorValidator
@@ -80,6 +81,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autoshift import AutoshiftValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -133,6 +135,7 @@ else:
             "._showgrid.ShowgridValidator",
             "._showexponent.ShowexponentValidator",
             "._showdividers.ShowdividersValidator",
+            "._shift.ShiftValidator",
             "._separatethousands.SeparatethousandsValidator",
             "._scaleratio.ScaleratioValidator",
             "._scaleanchor.ScaleanchorValidator",
@@ -168,6 +171,7 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autoshift.AutoshiftValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",

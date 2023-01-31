@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.0
   plotly:
     description: How to design figures with multiple chart types in python.
     display_as: file_settings
@@ -54,6 +54,84 @@ fig = px.line(x=fruits, y=[1,3,2], color=px.Constant("This year"),
              labels=dict(x="Fruit", y="Amount", color="Time Period"))
 fig.add_bar(x=fruits, y=[2,1,3], name="Last year")
 fig.show()
+```
+
+#### Grouped Bar and Scatter Chart
+
+*New in 5.12*
+
+In this example, we display individual data points with a grouped scatter chart and show averages using a grouped bar chart. `offsetgroup` links the bar trace for smoker with the scatter trace for smoker, and the bar trace for non-smoker with the scatter trace for non-smoker. If you deselect a trace using the legend, other traces maintain the position of the traces they are linked to.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.tips()[data.tips()["day"] == "Sun"]
+
+mean_values_df = df.groupby(by=["sex", "smoker"], as_index=False).mean(
+    numeric_only=True
+)
+
+smoker_mean = mean_values_df[mean_values_df.smoker == "Yes"].sort_values(
+    by="tip", ascending=False
+)
+non_smoker_mean = mean_values_df[mean_values_df.smoker == "No"].sort_values(
+    by="tip", ascending=False
+)
+
+smoker = df[df.smoker == "Yes"].sort_values(by="tip", ascending=False)
+non_smoker = df[df.smoker == "No"].sort_values(by="tip", ascending=False)
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Bar(
+        x=smoker_mean.sex,
+        y=smoker_mean.tip,
+        name="Average (Smoker)",
+        marker_color="IndianRed",
+        offsetgroup="smoker",
+    )
+)
+
+
+fig.add_trace(
+    go.Bar(
+        x=non_smoker_mean.sex,
+        y=non_smoker_mean.tip,
+        name="Average (Non-Smoker)",
+        marker_color="LightSalmon",
+        offsetgroup="non-smoker",
+    )
+)
+
+
+fig.add_trace(
+    go.Scatter(
+        x=non_smoker.sex,
+        y=non_smoker.tip,
+        mode="markers",
+        name="Individual tips (Non-Smoker)",
+        marker=dict(color="LightSteelBlue", size=5),
+        offsetgroup="non-smoker",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=smoker.sex,
+        y=smoker.tip,
+        mode="markers",
+        name="Individual tips (Smoker)",
+        marker=dict(color="LightSlateGrey", size=5),
+        offsetgroup="smoker",
+    )
+)
+
+fig.update_layout(scattermode="group")
+
+fig.show()
+
 ```
 
 #### Line Chart and a Bar Chart

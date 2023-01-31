@@ -19,6 +19,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._grouptitlefont import GrouptitlefontValidator
     from ._groupclick import GroupclickValidator
     from ._font import FontValidator
+    from ._entrywidthmode import EntrywidthmodeValidator
+    from ._entrywidth import EntrywidthValidator
     from ._borderwidth import BorderwidthValidator
     from ._bordercolor import BordercolorValidator
     from ._bgcolor import BgcolorValidator
@@ -46,6 +48,8 @@ else:
             "._grouptitlefont.GrouptitlefontValidator",
             "._groupclick.GroupclickValidator",
             "._font.FontValidator",
+            "._entrywidthmode.EntrywidthmodeValidator",
+            "._entrywidth.EntrywidthValidator",
             "._borderwidth.BorderwidthValidator",
             "._bordercolor.BordercolorValidator",
             "._bgcolor.BgcolorValidator",

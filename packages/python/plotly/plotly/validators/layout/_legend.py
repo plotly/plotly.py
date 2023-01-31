@@ -19,6 +19,13 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
             borderwidth
                 Sets the width (in px) of the border enclosing
                 the legend.
+            entrywidth
+                Sets the width (in px or fraction) of the
+                legend. Use 0 to size the entry based on the
+                text width, when `entrywidthmode` is set to
+                "pixels".
+            entrywidthmode
+                Determines what entrywidth means.
             font
                 Sets the font used to text the legend items.
             groupclick
