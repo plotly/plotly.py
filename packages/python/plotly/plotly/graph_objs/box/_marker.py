@@ -8,7 +8,37 @@ class Marker(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "box"
     _path_str = "box.marker"
-    _valid_props = {"color", "line", "opacity", "outliercolor", "size", "symbol"}
+    _valid_props = {
+        "angle",
+        "color",
+        "line",
+        "opacity",
+        "outliercolor",
+        "size",
+        "symbol",
+    }
+
+    # angle
+    # -----
+    @property
+    def angle(self):
+        """
+        Sets the marker angle in respect to `angleref`.
+
+        The 'angle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self["angle"]
+
+    @angle.setter
+    def angle(self, val):
+        self["angle"] = val
 
     # color
     # -----
@@ -309,7 +339,9 @@ class Marker(_BaseTraceHierarchyType):
                 'arrow-bar-up-open', 50, '50', 'arrow-bar-down', 150,
                 '150', 'arrow-bar-down-open', 51, '51', 'arrow-bar-left',
                 151, '151', 'arrow-bar-left-open', 52, '52',
-                'arrow-bar-right', 152, '152', 'arrow-bar-right-open']
+                'arrow-bar-right', 152, '152', 'arrow-bar-right-open', 53,
+                '53', 'arrow', 153, '153', 'arrow-open', 54, '54',
+                'arrow-wide', 154, '154', 'arrow-wide-open']
 
         Returns
         -------
@@ -326,6 +358,8 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        angle
+            Sets the marker angle in respect to `angleref`.
         color
             Sets the marker color. It accepts either a specific
             color or an array of numbers that are mapped to the
@@ -352,6 +386,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        angle=None,
         color=None,
         line=None,
         opacity=None,
@@ -368,6 +403,8 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.box.Marker`
+        angle
+            Sets the marker angle in respect to `angleref`.
         color
             Sets the marker color. It accepts either a specific
             color or an array of numbers that are mapped to the
@@ -423,6 +460,10 @@ an instance of :class:`plotly.graph_objs.box.Marker`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("angle", None)
+        _v = angle if angle is not None else _v
+        if _v is not None:
+            self["angle"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

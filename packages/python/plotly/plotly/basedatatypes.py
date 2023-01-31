@@ -819,18 +819,10 @@ class BaseFigure(object):
 
         renderer_str = pio.renderers.default
         renderers = pio._renderers.renderers
-        renderer_names = renderers._validate_coerce_renderers(renderer_str)
-        renderers_list = [renderers[name] for name in renderer_names]
         from plotly.io._utils import validate_coerce_fig_to_dict
-        from plotly.io._renderers import MimetypeRenderer
 
         fig_dict = validate_coerce_fig_to_dict(self, validate)
-        # Mimetype renderers
-        bundle = {}
-        for renderer in renderers_list:
-            if isinstance(renderer, MimetypeRenderer):
-                bundle.update(renderer.to_mimebundle(fig_dict))
-        return bundle
+        return renderers._build_mime_bundle(fig_dict, renderer_str, **kwargs)
 
     def _ipython_display_(self):
         """
@@ -1139,7 +1131,7 @@ class BaseFigure(object):
             Generator that iterates through all of the traces that satisfy
             all of the specified selection criteria
         """
-        if not selector:
+        if not selector and not isinstance(selector, int):
             selector = {}
 
         if row is not None or col is not None or secondary_y is not None:

@@ -27,6 +27,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._locationssrc import LocationssrcValidator
     from ._locations import LocationsValidator
     from ._locationmode import LocationmodeValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
@@ -80,6 +81,7 @@ else:
             "._locationssrc.LocationssrcValidator",
             "._locations.LocationsValidator",
             "._locationmode.LocationmodeValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",

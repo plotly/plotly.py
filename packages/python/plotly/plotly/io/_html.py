@@ -533,7 +533,8 @@ def write_html(
 
     # Write HTML string
     if path is not None:
-        path.write_text(html_str)
+        # To use a different file encoding, pass a file descriptor
+        path.write_text(html_str, "utf-8")
     else:
         file.write(html_str)
 
@@ -542,7 +543,7 @@ def write_html(
         bundle_path = path.parent / "plotly.min.js"
 
         if not bundle_path.exists():
-            bundle_path.write_text(get_plotlyjs())
+            bundle_path.write_text(get_plotlyjs(), encoding="utf-8")
 
     # Handle auto_open
     if path is not None and full_html and auto_open:
