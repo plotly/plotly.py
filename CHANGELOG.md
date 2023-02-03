@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+  - Updated Plotly.js to from version 2.18.0 to version 2.18.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2181----2023-02-02) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Update of `d3-interpolate` and `d3-color` to v3
+  - Fix for scaling of exports
+  - Fix for hover on IE
+
 ## [5.13.0] - 2023-01-23
 
 ### Updated
