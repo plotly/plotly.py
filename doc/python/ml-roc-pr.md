@@ -216,7 +216,7 @@ precision, recall, thresholds = precision_recall_curve(y, y_score)
 
 fig = px.area(
     x=recall, y=precision,
-    title=f'Precision-Recall Curve (AUC={auc(fpr, tpr):.4f})',
+    title=f'Precision-Recall Curve (AUC={auc(recall, precision):.4f})',
     labels=dict(x='Recall', y='Precision'),
     width=700, height=500
 )
