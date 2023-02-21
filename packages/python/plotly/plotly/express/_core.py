@@ -1295,11 +1295,17 @@ def build_dataframe(args, constructor):
     # make copies of all the fields via dict() and list()
     for field in args:
         if field in array_attrables and args[field] is not None:
-            args[field] = (
-                dict(args[field])
-                if isinstance(args[field], dict)
-                else list(args[field])
-            )
+            if isinstance(args[field], dict):
+                args[field] = dict(args[field])
+            elif (
+                field in ["custom_data", "hover_data"]
+                and isinstance(args[field], str)
+                and "data_frame" in args.keys()
+                and args[field] in args["data_frame"].columns
+            ):
+                args[field] = [args[field]]
+            else:
+                list(args[field])
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
