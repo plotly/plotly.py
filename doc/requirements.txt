@@ -36,3 +36,4 @@ nbconvert==5.6.1
 orjson
 dash-bio
 jinja2<3.1
+parmed<=3.4.4; python_version<"3.8"
