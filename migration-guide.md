@@ -1,5 +1,8 @@
+# Migration to Version 5
+See https://community.plotly.com/t/introducing-plotly-py-5-0-0-a-new-federated-jupyter-extension-icicle-charts-and-bar-chart-patterns/54039
+
 # Migration to Version 4
-See https://plot.ly/python/next/v4-migration/
+See https://plotly.com/python/v4-migration/
 
 # Migration to Version 3
 There are many new and great features in plotly.py 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3.
@@ -50,7 +53,7 @@ FigureWidget({
 ```
 
 ## New add trace methods that handle subplots
-The legacy `append_trace` method for adding traces to subplots has been deprecated in favor of the new `add_trace`, `add_traces`, and `add_*` methods.  Each of these new methods accepts optional row/column information that may be used to add traces to subplots for figures initialized by the `plotly.tools.make_subplots` function. 
+The legacy `append_trace` method for adding traces to subplots has been deprecated in favor of the new `add_trace`, `add_traces`, and `add_*` methods.  Each of these new methods accepts optional row/column information that may be used to add traces to subplots for figures initialized by the `plotly.tools.make_subplots` function.
 
 Let's create a subplot then turn it into a FigureWidget to display in the notebook.
 
@@ -169,7 +172,7 @@ layout = go.Layout(
 ```
 
 ### New Figure.data Assignment
-There are new restriction on the assignment of traces to the `data` property of a figure.  The assigned value must be a list or a tuple of a subset of the traces already present in the figure. Assignment to `data` may be used to reorder and remove existing traces, but it may not currently be used to add new traces.  New traces must be added using the `add_trace`, `add_traces`, or `add_*` methods. 
+There are new restriction on the assignment of traces to the `data` property of a figure.  The assigned value must be a list or a tuple of a subset of the traces already present in the figure. Assignment to `data` may be used to reorder and remove existing traces, but it may not currently be used to add new traces.  New traces must be added using the `add_trace`, `add_traces`, or `add_*` methods.
 
 For example, suppose a figure, `fig`, has 3 traces. The following command is valid and it will move the third trace to be the first, the first trace to be the second, and it will remove the second trace.
 
@@ -191,7 +194,7 @@ import plotly.graph_objs as go
 go.Bar(x=1)
 ```
 
-This should be replaced by: 
+This should be replaced by:
 ```
 import plotly.graph_objs as go
 go.Bar(x=[1])
