@@ -43,32 +43,6 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
-dash_bio.ManhattanPlot(
-    dataframe=df,
-    chrm="CHR",
-    bp="BP",
-    p="P",
-    snp="SNP",
-    gene="GENE",
-    annotation=None,
-    logp=True,
-    title="Manhattan Plot",
-    showgrid=True,
-    xlabel=None,
-    ylabel='-log10(p)',
-    point_size=5,
-    showlegend=True,
-    col=None,
-    suggestiveline_value=-np.log10(1e-8),
-    suggestiveline_color='#636efa',
-    suggestiveline_width=1,
-    genomewideline_value=-np.log10(5e-8),
-    genomewideline_color='#EF553B',
-    genomewideline_width=1,
-    highlight=True,
-    highlight_color="red",
-)
-
 """
 Keyword arguments:
 - dataframe (dataframe; required): A pandas dataframe which must contain at
@@ -141,9 +115,11 @@ Keyword arguments:
 - highlight_color (string; default 'red'): Color of the data points
     highlighted because they are significant. Can be in any color
     format accepted by plotly.graph_objects.
-"""
+""" 
 
-
+dash_bio.ManhattanPlot(
+    dataframe=df,
+)
 ```
 
 ## Highlighted points color, and colors of the suggestive line and the genome-wide line
