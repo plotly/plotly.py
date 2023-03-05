@@ -1297,11 +1297,8 @@ def build_dataframe(args, constructor):
         if field in array_attrables and args[field] is not None:
             if isinstance(args[field], dict):
                 args[field] = dict(args[field])
-            elif (
-                field in ["custom_data", "hover_data"]
-                and isinstance(args[field], str)
-                and "data_frame" in args.keys()
-                and args[field] in args["data_frame"].columns
+            elif field in ["custom_data", "hover_data"] and isinstance(
+                args[field], str
             ):
                 args[field] = [args[field]]
             else:
