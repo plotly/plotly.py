@@ -1305,7 +1305,7 @@ def build_dataframe(args, constructor):
             ):
                 args[field] = [args[field]]
             else:
-                list(args[field])
+                args[field] = list(args[field])
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
