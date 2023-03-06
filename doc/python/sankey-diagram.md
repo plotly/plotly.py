@@ -10,7 +10,7 @@ jupyter:
   kernel_info:
     name: python2
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -210,6 +210,34 @@ fig = go.Figure(go.Sankey(
         "source": [0, 0, 1, 2, 5, 4, 3, 5],
         "target": [5, 3, 4, 3, 0, 2, 2, 3],
         "value": [1, 2, 1, 1, 1, 1, 1, 2]}))
+
+fig.show()
+```
+
+### Sankey Diagram with Arrow Links
+
+*New in 5.10*
+
+Create a Sankey diagram with arrow links by setting the `arrowlen` attribute of `link`:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Sankey(
+    arrangement='snap',
+    node=dict(
+        label=['A', 'B', 'C', 'D', 'E', 'F'],
+        x=[0.2, 0.1, 0.5, 0.7, 0.3, 0.5],
+        y=[0.7, 0.5, 0.2, 0.4, 0.2, 0.3],
+        pad=10  
+    ),
+    link=dict(
+        arrowlen=15,
+        source=[0, 0, 1, 2, 5, 4, 3, 5],
+        target=[5, 3, 4, 3, 0, 2, 2, 3],
+        value=[1, 2, 1, 1, 1, 1, 1, 2]  
+    )
+))
 
 fig.show()
 ```
