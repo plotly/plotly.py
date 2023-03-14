@@ -691,7 +691,7 @@ fig.show()
 
 ```
 
-### Styling Text Labels
+#### Styling Text Labels
 
 Use the `font` property to configure the `color`, `size`, and `family` of the label font. 
 In this example, we change the label color of the first rectangle to "red", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle. 
@@ -733,7 +733,7 @@ fig.show()
 
 ```
 
-### Setting Label Position
+#### Setting Label Position
 
 Set a label's position relative to the shape by setting `textposition`. The default position for lines is `middle`. The default position for other shapes is `middle center`.
 
@@ -787,7 +787,7 @@ fig.show()
 
 ```
 
-### Setting Label Angle
+#### Setting Label Angle
 
 Use `textangle` to rotate a label by setting a value between -180 and 180. The default angle for a label on a line is the angle of the line. The default angle for a label on other shapes is 0. In this example, in the first shape, the label is at 45 degrees, and in the second, the label is at -45 degrees.
 
@@ -809,8 +809,8 @@ fig.add_shape(
     type="rect",
     x0=3,
     y0=0,
-    x1=4.5,
-    y1=1.5,
+    x1=5,
+    y1=2,
     label=dict(text="Text at -45", textangle=-45),
 )
 
@@ -818,7 +818,7 @@ fig.show()
 
 ```
 
-### Setting Label Padding
+#### Setting Label Padding
 
 `padding` adds padding between the label and shape. This example shows one line with padding of 30px and another with the default padding, which is 3px.
 
@@ -849,8 +849,62 @@ fig.add_shape(
     label=dict(text="No label padding"),
 )
 
+
 fig.show()
 
+```
+
+#### Setting Label Anchors
+
+`xanchor` sets a label's horizontal positional anchor and `yanchor` sets its vertical position anchor. 
+Use `xanchor` to bind the `textposition` to the "left", "center" or "right" of the label text and `yanchor` to bind `textposition` to the "top", "middle" or "bottom" of the label text.
+
+In this example, `yanchor`is set to "top", instead of the default of "bottom" for lines, meaning the text displays below the line. 
+
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-09-24",
+    y0=0,
+    x1="2018-12-18",
+    y1=3,
+    line_width=0,
+    label=dict(text="Decline", textposition="top center", font=dict(size=20)),
+    fillcolor="green",
+    opacity=0.25,
+)
+
+
+fig.add_shape(
+    type="line",
+    x0=min(df.index),
+    y0=1,
+    x1=max(df.index),
+    y1=1,
+    line_width=3,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+
+fig.show()
+
+```
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
 ```
 
 ### Reference
