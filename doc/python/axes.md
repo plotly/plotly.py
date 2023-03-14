@@ -156,6 +156,8 @@ fig.show()
 
 #### Specifying Label Aliases 
 
+*New in 5.14*
+
 With `labelalias`, you can specify replacement text for specific tick and hover labels. In this example, the dataset has the weekend days as "Sat" and "Sun". By setting `labelalias=dict(Sun="Sunday", Sat= "Saturday")`, we spell the days out in full. 
 
 ```python
