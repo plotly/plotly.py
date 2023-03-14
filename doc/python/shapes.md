@@ -835,7 +835,7 @@ fig.add_shape(
     x1=5,
     y1=3,
     line_width=3,
-    label=dict(text="Label padding of 30", textposition="start", padding=30),
+    label=dict(text="Label padding of 30", padding=30),
 )
 
 
