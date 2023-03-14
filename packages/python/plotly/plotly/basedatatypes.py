@@ -3862,18 +3862,17 @@ Invalid property path '{key_path_str}' for layout
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
+                # special handling for missing keys that match _subplot_re_match
+                if not key in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
+                    # try _subplot_re_match
+                    match = plotly_obj._subplot_re_match(key)
+                    if match:
+                        # We need to create a subplotid object
+                        plotly_obj[key] = {}
+                        continue
+
                 err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
                 if err is not None:
-                    if isinstance(plotly_obj, BaseLayoutType):
-                        # try _subplot_re_match
-                        match = plotly_obj._subplot_re_match(key)
-                        if match:
-                            # We need to create a subplotid object
-                            plotly_obj[key] = {}
-                            continue
-                    # If no match, raise the error, which should already
-                    # contain the _raise_on_invalid_property_error
-                    # generated message
                     raise err
 
             # Convert update_obj to dict
