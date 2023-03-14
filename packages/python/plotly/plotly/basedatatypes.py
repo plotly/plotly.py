@@ -4777,7 +4777,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._valid_props:
+                if hasattr(obj, '_valid_props') and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False
