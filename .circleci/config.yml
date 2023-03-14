@@ -150,6 +150,15 @@ jobs:
       - test_optional:
           py: "39"
 
+  # Pandas
+
+  python_39_pandas_2_optional:
+    docker:
+      - image: circleci/python:3.9-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "39_pandas_2"
+
   # Orca
   python_38_orca:
     docker:
@@ -470,6 +479,7 @@ workflows:
       - python_37_optional
       - python_38_optional
       - python_39_optional
+      - python_39_pandas_2_optional
       - python_38_orca
       - python_37_percy
       - build-doc
