@@ -800,8 +800,8 @@ fig.add_shape(
     type="rect",
     x0=0,
     y0=0,
-    x1=1.5,
-    y1=1.5,
+    x1=2,
+    y1=2,
     label=dict(text="Text at 45", textangle=45),
 )
 
@@ -899,12 +899,6 @@ fig.add_shape(
 
 fig.show()
 
-```
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
 ```
 
 ### Reference
