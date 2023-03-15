@@ -9,6 +9,7 @@ class Title(_BaseLayoutHierarchyType):
     _parent_path_str = "layout"
     _path_str = "layout.title"
     _valid_props = {
+        "automargin",
         "font",
         "pad",
         "text",
@@ -19,6 +20,36 @@ class Title(_BaseLayoutHierarchyType):
         "yanchor",
         "yref",
     }
+
+    # automargin
+    # ----------
+    @property
+    def automargin(self):
+        """
+        Determines whether the title can automatically push the figure
+        margins. If `yref='paper'` then the margin will expand to
+        ensure that the title doesn’t overlap with the edges of the
+        container. If `yref='container'` then the margins will ensure
+        that the title doesn’t overlap with the plot area, tick labels,
+        and axis titles. If `automargin=true` and the margins need to
+        be expanded, then y will be set to a default 1 and yanchor will
+        be set to an appropriate default to ensure that minimal margin
+        space is needed. Note that when `yref='paper'`, only 1 or 0 are
+        allowed y values. Invalid values will be reset to the default
+        1.
+
+        The 'automargin' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["automargin"]
+
+    @automargin.setter
+    def automargin(self, val):
+        self["automargin"] = val
 
     # font
     # ----
@@ -280,6 +311,19 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        automargin
+            Determines whether the title can automatically push the
+            figure margins. If `yref='paper'` then the margin will
+            expand to ensure that the title doesn’t overlap with
+            the edges of the container. If `yref='container'` then
+            the margins will ensure that the title doesn’t overlap
+            with the plot area, tick labels, and axis titles. If
+            `automargin=true` and the margins need to be expanded,
+            then y will be set to a default 1 and yanchor will be
+            set to an appropriate default to ensure that minimal
+            margin space is needed. Note that when `yref='paper'`,
+            only 1 or 0 are allowed y values. Invalid values will
+            be reset to the default 1.
         font
             Sets the title font. Note that the title's font used to
             be customized by the now deprecated `titlefont`
@@ -332,6 +376,7 @@ class Title(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
+        automargin=None,
         font=None,
         pad=None,
         text=None,
@@ -351,6 +396,19 @@ class Title(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.layout.Title`
+        automargin
+            Determines whether the title can automatically push the
+            figure margins. If `yref='paper'` then the margin will
+            expand to ensure that the title doesn’t overlap with
+            the edges of the container. If `yref='container'` then
+            the margins will ensure that the title doesn’t overlap
+            with the plot area, tick labels, and axis titles. If
+            `automargin=true` and the margins need to be expanded,
+            then y will be set to a default 1 and yanchor will be
+            set to an appropriate default to ensure that minimal
+            margin space is needed. Note that when `yref='paper'`,
+            only 1 or 0 are allowed y values. Invalid values will
+            be reset to the default 1.
         font
             Sets the title font. Note that the title's font used to
             be customized by the now deprecated `titlefont`
@@ -432,6 +490,10 @@ an instance of :class:`plotly.graph_objs.layout.Title`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("automargin", None)
+        _v = automargin if automargin is not None else _v
+        if _v is not None:
+            self["automargin"] = _v
         _v = arg.pop("font", None)
         _v = font if font is not None else _v
         if _v is not None:
