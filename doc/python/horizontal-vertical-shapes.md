@@ -143,7 +143,7 @@ fig.show()
 
 *New in 5.14*
 
-[Text labels on shapes](/python/shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add shapes with text. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
+[Text labels on shapes](/python/shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
 
 
 ```python
@@ -177,7 +177,7 @@ fig.show()
 
 ```
 
-With [text labels on shapes](/python/shapes/#addingtextlabelstoshapes), you can also add text labels to shapes other than lines and rectangles, and can they can be added to shapes drawn by the user. 
+With [text labels on shapes](/python/shapes/#addingtextlabelstoshapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
 
 
 ### Reference
