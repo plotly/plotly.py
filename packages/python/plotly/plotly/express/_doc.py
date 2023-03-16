@@ -18,7 +18,7 @@ docs = dict(
     data_frame=[
         "DataFrame or array-like or dict",
         "This argument needs to be passed for column names (and not keyword names) to be used.",
-        "Array-like and dict are tranformed internally to a pandas DataFrame.",
+        "Array-like and dict are transformed internally to a pandas DataFrame.",
         "Optional: if missing, a DataFrame gets constructed under the hood using the other arguments.",
     ],
     x=[
