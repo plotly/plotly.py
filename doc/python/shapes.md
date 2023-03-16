@@ -862,7 +862,7 @@ fig.add_shape(
     x1=2,
     y1=3,
     line_width=3,
-    label=dict(text="No label padding"),
+    label=dict(text="Default label padding of 3px"),
 )
 
 fig.show()
