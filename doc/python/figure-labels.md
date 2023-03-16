@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.9
   plotly:
     description: How to set the global font, title, legend-entries, and axis-titles
       in python.
@@ -83,6 +83,26 @@ fig.update_layout(
     legend_title_font_color="green"
 )
 fig.update_xaxes(title_font_family="Arial")
+fig.show()
+```
+
+### Set Automargin on the Plot Title
+
+*New in 5.14*
+
+Set `automargin=True` to allow the title to push the figure margins. With `yref` set to `paper`, `automargin=True`  expands the margins to make the title visible, but doesn't push outside the container. With `yref` set to `container`, `automargin=True` expands the margins, but the title doesn't overlap with the plot area, tick labels, and axis titles. 
+
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x="year", y="gdpPercap", color="country")
+
+fig.update_layout(
+    title=dict(text="Population Growth", font=dict(size=50), automargin=True, yref='paper')
+)
+
 fig.show()
 ```
 
