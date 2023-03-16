@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.9
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -676,7 +676,15 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 
-fig.add_shape(type="rect", x0=1, y0=1, x1=2, y1=3, label=dict(text="Text in rectangle"))
+fig.add_shape(
+    type="rect", 
+    fillcolor='turquoise', 
+    x0=1, 
+    y0=1, 
+    x1=2, 
+    y1=3, 
+    label=dict(text="Text in rectangle")
+)
 fig.add_shape(
     type="line",
     x0=3,
@@ -684,7 +692,7 @@ fig.add_shape(
     x1=5,
     y1=0.8,
     line_width=3,
-    label=dict(text="Text above line"),
+    label=dict(text="Text above line")
 )
 
 fig.show()
@@ -694,7 +702,7 @@ fig.show()
 #### Styling Text Labels
 
 Use the `font` property to configure the `color`, `size`, and `family` of the label font. 
-In this example, we change the label color of the first rectangle to "red", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle. 
+In this example, we change the label color of the first rectangle to "DarkOrange", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle. 
 
 ```python
 import plotly.graph_objects as go
@@ -703,11 +711,12 @@ fig = go.Figure()
 
 fig.add_shape(
     type="rect",
+    fillcolor='MediumSlateBlue',
     x0=1,
     y0=1,
     x1=2,
     y1=3,
-    label=dict(text="Text in rectangle", font=dict(color="red")),
+    label=dict(text="Text in rectangle", font=dict(color="DarkOrange")),
 )
 fig.add_shape(
     type="line",
@@ -720,6 +729,7 @@ fig.add_shape(
 )
 fig.add_shape(
     type="rect",
+    fillcolor='Lavender',
     x0=2.5,
     y0=2.5,
     x1=5,
@@ -745,6 +755,7 @@ fig = go.Figure()
 
 fig.add_shape(
     type="rect",
+    fillcolor='Lavender',
     x0=0,
     y0=0,
     x1=1.5,
@@ -754,6 +765,7 @@ fig.add_shape(
 
 fig.add_shape(
     type="rect",
+    fillcolor='Lavender',
     x0=3,
     y0=0,
     x1=4.5,
@@ -764,6 +776,7 @@ fig.add_shape(
 
 fig.add_shape(
     type="line",
+    line_color="MediumSlateBlue",    
     x0=3,
     y0=2,
     x1=5,
@@ -775,6 +788,7 @@ fig.add_shape(
 
 fig.add_shape(
     type="line",
+    line_color="MediumSlateBlue",
     x0=0,
     y0=2,
     x1=2,
@@ -798,6 +812,7 @@ fig = go.Figure()
 
 fig.add_shape(
     type="rect",
+    fillcolor='LightGreen',
     x0=0,
     y0=0,
     x1=2,
@@ -807,6 +822,7 @@ fig.add_shape(
 
 fig.add_shape(
     type="rect",
+    fillcolor='Gold',
     x0=3,
     y0=0,
     x1=5,
@@ -827,9 +843,9 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 
-
 fig.add_shape(
     type="line",
+    line_color="RoyalBlue",
     x0=3,
     y0=0,
     x1=5,
@@ -838,9 +854,9 @@ fig.add_shape(
     label=dict(text="Label padding of 30", padding=30),
 )
 
-
 fig.add_shape(
     type="line",
+    line_color="RoyalBlue",
     x0=0,
     y0=0,
     x1=2,
@@ -849,9 +865,7 @@ fig.add_shape(
     label=dict(text="No label padding"),
 )
 
-
 fig.show()
-
 ```
 
 #### Setting Label Anchors
@@ -880,7 +894,6 @@ fig.add_shape(
     opacity=0.25,
 )
 
-
 fig.add_shape(
     type="line",
     x0=min(df.index),
@@ -898,7 +911,6 @@ fig.add_shape(
 )
 
 fig.show()
-
 ```
 
 ### Reference
