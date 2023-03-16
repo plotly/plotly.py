@@ -696,9 +696,9 @@ def n_colors(lowcolor, highcolor, n_colors, colortype="tuple"):
 
     for index in range(n_colors):
         new_tuple = (
-            lowcolor[0] + (index * incr_0),
-            lowcolor[1] + (index * incr_1),
-            lowcolor[2] + (index * incr_2),
+            min(max(lowcolor[0] + (index * incr_0), 255.0), 0.0),
+            min(max(lowcolor[1] + (index * incr_1), 255.0), 0.0),
+            min(max(lowcolor[2] + (index * incr_2), 255.0), 0.0),
         )
         list_of_colors.append(new_tuple)
 
