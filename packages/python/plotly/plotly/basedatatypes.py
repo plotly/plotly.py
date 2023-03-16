@@ -3863,7 +3863,7 @@ Invalid property path '{key_path_str}' for layout
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
                 # special handling for missing keys that match _subplot_re_match
-                if not key in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
+                if key not in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
                     # try _subplot_re_match
                     match = plotly_obj._subplot_re_match(key)
                     if match:
