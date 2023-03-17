@@ -272,7 +272,7 @@ def to_html(
     elif include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
-        <script src="{cdn_url}"></script>\
+        <script charset="utf-8" src="{cdn_url}"></script>\
     """.format(
             win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
         )
@@ -280,7 +280,7 @@ def to_html(
     elif include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
-        <script src="plotly.min.js"></script>\
+        <script charset="utf-8" src="plotly.min.js"></script>\
     """.format(
             win_config=_window_plotly_config
         )
@@ -288,7 +288,7 @@ def to_html(
     elif isinstance(include_plotlyjs, str) and include_plotlyjs.endswith(".js"):
         load_plotlyjs = """\
         {win_config}
-        <script src="{url}"></script>\
+        <script charset="utf-8" src="{url}"></script>\
     """.format(
             win_config=_window_plotly_config, url=include_plotlyjs_orig
         )
