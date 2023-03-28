@@ -85,6 +85,16 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the axis line.
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             labelpadding
                 Extra padding between label and the axis
             labelprefix

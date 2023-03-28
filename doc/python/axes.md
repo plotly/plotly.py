@@ -154,6 +154,25 @@ fig.update_yaxes(ticklabelposition="inside top", title=None)
 fig.show()
 ```
 
+#### Specifying Label Aliases 
+
+*New in 5.14*
+
+With `labelalias`, you can specify replacement text for specific tick and hover labels. In this example, the dataset has the values of "Sat" and "Sun" in the day column. By setting `labelalias=dict(Sat="Saturday", Sun="Sunday")`, we swap these out for "Saturday" and "Sunday".
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+df = df[df.day.isin(['Sat', 'Sun'])].groupby(by='day', as_index=False).sum(numeric_only=True)
+
+fig = px.bar(df, x="day", y="total_bill")
+fig.update_xaxes(labelalias=dict(Sat="Saturday", Sun="Sunday"))
+
+fig.show()
+```
+
 ##### Set axis title text with Graph Objects
 
 Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `update_xaxes` and `update_yaxes`, with magic underscore notation, to set the axis titles.
