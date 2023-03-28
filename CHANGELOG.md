@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Key errors no longer precalculated when performing updates on plots [[#4101](https://github.com/plotly/plotly.py/pull/4101)]
 
 ### Fixed
-- Fixed an issue with characters displaying incorrectly, by adding `charset="utf-8"` to scripts in `to_html`[[#4114](https://github.com/plotly/plotly.py/pull/4114)]
+- Fixed an issue with characters displaying incorrectly, by adding `charset="utf-8"` to scripts in `to_html` [[#4114](https://github.com/plotly/plotly.py/pull/4114)]
 - Added `packaging` to install requirements, fixing a `No module named 'packaging` error on Python 3.6 [[#4113](https://github.com/plotly/plotly.py/pull/4113)]
 
 ### Added
