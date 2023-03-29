@@ -145,7 +145,6 @@ fig.show()
 
 [Text labels on shapes](/python/shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
 
-
 ```python
 import plotly.express as px
 
