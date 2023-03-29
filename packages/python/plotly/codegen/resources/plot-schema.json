@@ -1200,6 +1200,12 @@
        "B"
       ]
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
+     },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
       "dflt": 1,
@@ -3573,6 +3579,91 @@
       "nonzero"
      ]
     },
+    "label": {
+     "editType": "none",
+     "font": {
+      "color": {
+       "editType": "none",
+       "valType": "color"
+      },
+      "description": "Sets the new shape label text font.",
+      "editType": "none",
+      "family": {
+       "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The Chart Studio Cloud (at https://chart-studio.plotly.com or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+       "editType": "none",
+       "noBlank": true,
+       "strict": true,
+       "valType": "string"
+      },
+      "role": "object",
+      "size": {
+       "editType": "none",
+       "min": 1,
+       "valType": "number"
+      }
+     },
+     "padding": {
+      "description": "Sets padding (in px) between edge of label and edge of new shape.",
+      "dflt": 3,
+      "editType": "none",
+      "min": 0,
+      "valType": "number"
+     },
+     "role": "object",
+     "text": {
+      "description": "Sets the text to display with the new shape.",
+      "dflt": "",
+      "editType": "none",
+      "valType": "string"
+     },
+     "textangle": {
+      "description": "Sets the angle at which the label text is drawn with respect to the horizontal. For lines, angle *auto* is the same angle as the line. For all other shapes, angle *auto* is horizontal.",
+      "dflt": "auto",
+      "editType": "none",
+      "valType": "angle"
+     },
+     "textposition": {
+      "description": "Sets the position of the label text relative to the new shape. Supported values for rectangles, circles and paths are *top left*, *top center*, *top right*, *middle left*, *middle center*, *middle right*, *bottom left*, *bottom center*, and *bottom right*. Supported values for lines are *start*, *middle*, and *end*. Default: *middle center* for rectangles, circles, and paths; *middle* for lines.",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "top left",
+       "top center",
+       "top right",
+       "middle left",
+       "middle center",
+       "middle right",
+       "bottom left",
+       "bottom center",
+       "bottom right",
+       "start",
+       "middle",
+       "end"
+      ]
+     },
+     "xanchor": {
+      "description": "Sets the label's horizontal position anchor This anchor binds the specified `textposition` to the *left*, *center* or *right* of the label text. For example, if `textposition` is set to *top right* and `xanchor` to *right* then the right-most portion of the label text lines up with the right-most edge of the new shape.",
+      "dflt": "auto",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "auto",
+       "left",
+       "center",
+       "right"
+      ]
+     },
+     "yanchor": {
+      "description": "Sets the label's vertical position anchor This anchor binds the specified `textposition` to the *top*, *middle* or *bottom* of the label text. For example, if `textposition` is set to *top right* and `yanchor` to *top* then the top-most portion of the label text lines up with the top-most edge of the new shape.",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "top",
+       "middle",
+       "bottom"
+      ]
+     }
+    },
     "layer": {
      "description": "Specifies whether new shapes are drawn below or above traces.",
      "dflt": "above",
@@ -3753,6 +3844,12 @@
       "dflt": "",
       "editType": "none",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -4327,6 +4424,12 @@
       "dflt": "",
       "editType": "none",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -5425,6 +5528,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "linecolor": {
       "description": "Sets the axis line color.",
       "dflt": "#444",
@@ -5986,6 +6095,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "linecolor": {
       "description": "Sets the axis line color.",
@@ -6549,6 +6664,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "linecolor": {
       "description": "Sets the axis line color.",
       "dflt": "#444",
@@ -7108,6 +7229,91 @@
         "evenodd",
         "nonzero"
        ]
+      },
+      "label": {
+       "editType": "arraydraw",
+       "font": {
+        "color": {
+         "editType": "arraydraw",
+         "valType": "color"
+        },
+        "description": "Sets the shape label text font.",
+        "editType": "calc+arraydraw",
+        "family": {
+         "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The Chart Studio Cloud (at https://chart-studio.plotly.com or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+         "editType": "calc+arraydraw",
+         "noBlank": true,
+         "strict": true,
+         "valType": "string"
+        },
+        "role": "object",
+        "size": {
+         "editType": "calc+arraydraw",
+         "min": 1,
+         "valType": "number"
+        }
+       },
+       "padding": {
+        "description": "Sets padding (in px) between edge of label and edge of shape.",
+        "dflt": 3,
+        "editType": "arraydraw",
+        "min": 0,
+        "valType": "number"
+       },
+       "role": "object",
+       "text": {
+        "description": "Sets the text to display with shape.",
+        "dflt": "",
+        "editType": "arraydraw",
+        "valType": "string"
+       },
+       "textangle": {
+        "description": "Sets the angle at which the label text is drawn with respect to the horizontal. For lines, angle *auto* is the same angle as the line. For all other shapes, angle *auto* is horizontal.",
+        "dflt": "auto",
+        "editType": "calc+arraydraw",
+        "valType": "angle"
+       },
+       "textposition": {
+        "description": "Sets the position of the label text relative to the shape. Supported values for rectangles, circles and paths are *top left*, *top center*, *top right*, *middle left*, *middle center*, *middle right*, *bottom left*, *bottom center*, and *bottom right*. Supported values for lines are *start*, *middle*, and *end*. Default: *middle center* for rectangles, circles, and paths; *middle* for lines.",
+        "editType": "arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "top left",
+         "top center",
+         "top right",
+         "middle left",
+         "middle center",
+         "middle right",
+         "bottom left",
+         "bottom center",
+         "bottom right",
+         "start",
+         "middle",
+         "end"
+        ]
+       },
+       "xanchor": {
+        "description": "Sets the label's horizontal position anchor This anchor binds the specified `textposition` to the *left*, *center* or *right* of the label text. For example, if `textposition` is set to *top right* and `xanchor` to *right* then the right-most portion of the label text lines up with the right-most edge of the shape.",
+        "dflt": "auto",
+        "editType": "calc+arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "auto",
+         "left",
+         "center",
+         "right"
+        ]
+       },
+       "yanchor": {
+        "description": "Sets the label's vertical position anchor This anchor binds the specified `textposition` to the *top*, *middle* or *bottom* of the label text. For example, if `textposition` is set to *top right* and `yanchor` to *top* then the top-most portion of the label text lines up with the top-most edge of the shape.",
+        "editType": "calc+arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "top",
+         "middle",
+         "bottom"
+        ]
+       }
       },
       "layer": {
        "description": "Specifies whether shapes are drawn below or above traces.",
@@ -7761,6 +7967,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
       "dflt": "above traces",
@@ -7953,6 +8165,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -8234,6 +8452,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -8632,6 +8856,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -9037,6 +9267,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
       "dflt": "above traces",
@@ -9425,6 +9661,12 @@
     }
    },
    "title": {
+    "automargin": {
+     "description": "Determines whether the title can automatically push the figure margins. If `yref='paper'` then the margin will expand to ensure that the title doesn’t overlap with the edges of the container. If `yref='container'` then the margins will ensure that the title doesn’t overlap with the plot area, tick labels, and axis titles. If `automargin=true` and the margins need to be expanded, then y will be set to a default 1 and yanchor will be set to an appropriate default to ensure that minimal margin space is needed. Note that when `yref='paper'`, only 1 or 0 are allowed y values. Invalid values will be reset to the default 1.",
+     "dflt": false,
+     "editType": "plot",
+     "valType": "boolean"
+    },
     "editType": "layoutstyle",
     "font": {
      "color": {
@@ -10168,6 +10410,12 @@
      "dflt": "",
      "editType": "none",
      "valType": "string"
+    },
+    "labelalias": {
+     "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+     "dflt": false,
+     "editType": "ticks",
+     "valType": "any"
     },
     "layer": {
      "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -11426,6 +11674,12 @@
      "dflt": "",
      "editType": "none",
      "valType": "string"
+    },
+    "labelalias": {
+     "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+     "dflt": false,
+     "editType": "ticks",
+     "valType": "any"
     },
     "layer": {
      "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -12822,6 +13076,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -14343,6 +14603,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -17301,6 +17567,12 @@
       "min": 0,
       "valType": "number"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
+     },
      "labelpadding": {
       "description": "Extra padding between label and the axis",
       "dflt": 10,
@@ -17862,6 +18134,12 @@
       "editType": "calc",
       "min": 0,
       "valType": "number"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "labelpadding": {
       "description": "Extra padding between label and the axis",
@@ -18567,6 +18845,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -19566,6 +19850,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -20594,6 +20884,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -21640,6 +21936,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -23028,6 +23330,12 @@
        "B"
       ]
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
+     },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
       "dflt": 1,
@@ -23985,6 +24293,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -25292,6 +25606,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -27009,6 +27329,12 @@
        "B"
       ]
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
+     },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
       "dflt": 1,
@@ -28178,6 +28504,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -29720,6 +30052,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -30904,6 +31242,12 @@
        "B"
       ]
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
+     },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
       "dflt": 1,
@@ -32045,6 +32389,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -33701,6 +34051,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -35173,6 +35529,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "plot",
+       "valType": "any"
+      },
       "minexponent": {
        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
        "dflt": 3,
@@ -36013,6 +36375,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -37235,6 +37603,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -39224,6 +39598,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -40186,6 +40566,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -43754,6 +44140,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -46007,6 +46399,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -46595,6 +46993,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -48078,6 +48482,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -49967,6 +50377,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -51992,6 +52408,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -53978,6 +54400,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -55187,6 +55615,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -57069,6 +57503,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -58936,6 +59376,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -60844,6 +61290,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -62682,6 +63134,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -64092,6 +64550,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -65558,6 +66022,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -66430,6 +66900,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -68791,6 +69267,12 @@
         "B"
        ]
       },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
+      },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
        "dflt": 1,
@@ -71129,6 +71611,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",

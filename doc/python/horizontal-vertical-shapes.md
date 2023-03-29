@@ -139,6 +139,47 @@ fig.add_vrect(x0="2018-09-24", x1="2018-12-18", row="all", col=1,
               fillcolor="green", opacity=0.25, line_width=0)
 fig.show()
 ```
+#### Text Labels on Shapes
+
+*New in 5.14*
+
+[Text labels on shapes](/python/shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
+
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+fig = px.line(df)
+fig.add_hline(
+    y=1,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+fig.add_vrect(
+    x0="2018-09-24",
+    x1="2018-12-18",
+    label=dict(
+        text="Decline",
+        textposition="top center",
+        font=dict(size=20, family="Times New Roman"),
+    ),
+    fillcolor="green",
+    opacity=0.25,
+    line_width=0,
+)
+fig.show()
+
+```
+
+With [text labels on shapes](/python/shapes/#addingtextlabelstoshapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
+
+
 ### Reference
 
 More details are available about [layout shapes](/python/shapes/) and [annotations](/python/text-and-annotations). 

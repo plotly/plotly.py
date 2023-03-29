@@ -23271,6 +23271,7 @@ class FigureWidget(BaseFigureWidget):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
         line=None,
         name=None,
@@ -23315,6 +23316,9 @@ class FigureWidget(BaseFigureWidget):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -23477,6 +23481,7 @@ class FigureWidget(BaseFigureWidget):
             editable=editable,
             fillcolor=fillcolor,
             fillrule=fillrule,
+            label=label,
             layer=layer,
             line=line,
             name=name,
