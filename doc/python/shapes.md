@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.9
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -663,6 +663,254 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
                                         'drawrect',
                                         'eraseshape'
                                        ]})
+```
+
+### Adding Text Labels to Shapes
+
+*New in 5.14*
+
+Add a text `label` to a shape by adding a `label` property to a shape with `text`. In this example, we add a `rect` and `line` shape and add a text label to both.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect", 
+    fillcolor='turquoise', 
+    x0=1, 
+    y0=1, 
+    x1=2, 
+    y1=3, 
+    label=dict(text="Text in rectangle")
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=0.8,
+    line_width=3,
+    label=dict(text="Text above line")
+)
+
+fig.show()
+
+```
+
+#### Styling Text Labels
+
+Use the `font` property to configure the `color`, `size`, and `family` of the label font. 
+In this example, we change the label color of the first rectangle to "DarkOrange", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='MediumSlateBlue',
+    x0=1,
+    y0=1,
+    x1=2,
+    y1=3,
+    label=dict(text="Text in rectangle", font=dict(color="DarkOrange")),
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=0.8,
+    line_width=3,
+    label=dict(text="Text above line", font=dict(size=20)),
+)
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=2.5,
+    y0=2.5,
+    x1=5,
+    y1=3.5,
+    label=dict(
+        text="Text in rectangle 2", font=dict(family="Courier New, monospace", size=20)
+    ),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Position
+
+Set a label's position relative to the shape by setting `textposition`. The default position for lines is `middle`. The default position for other shapes is `middle center`.
+
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=0,
+    y0=0,
+    x1=1.5,
+    y1=1.5,
+    label=dict(text="Text at middle center"),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=3,
+    y0=0,
+    x1=4.5,
+    y1=1.5,
+    label=dict(text="Text at top left", textposition="top left"),
+)
+
+
+fig.add_shape(
+    type="line",
+    line_color="MediumSlateBlue",    
+    x0=3,
+    y0=2,
+    x1=5,
+    y1=3,
+    line_width=3,
+    label=dict(text="Text at start", textposition="start"),
+)
+
+
+fig.add_shape(
+    type="line",
+    line_color="MediumSlateBlue",
+    x0=0,
+    y0=2,
+    x1=2,
+    y1=3,
+    line_width=3,
+    label=dict(text="Text at middle"),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Angle
+
+Use `textangle` to rotate a label by setting a value between -180 and 180. The default angle for a label on a line is the angle of the line. The default angle for a label on other shapes is 0. In this example, in the first shape, the label is at 45 degrees, and in the second, the label is at -45 degrees.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='LightGreen',
+    x0=0,
+    y0=0,
+    x1=2,
+    y1=2,
+    label=dict(text="Text at 45", textangle=45),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Gold',
+    x0=3,
+    y0=0,
+    x1=5,
+    y1=2,
+    label=dict(text="Text at -45", textangle=-45),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Padding
+
+`padding` adds padding between the label and shape. This example shows one line with padding of 30px and another with the default padding, which is 3px.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="line",
+    line_color="RoyalBlue",
+    x0=3,
+    y0=0,
+    x1=5,
+    y1=3,
+    line_width=3,
+    label=dict(text="Label padding of 30px", padding=30),
+)
+
+fig.add_shape(
+    type="line",
+    line_color="RoyalBlue",
+    x0=0,
+    y0=0,
+    x1=2,
+    y1=3,
+    line_width=3,
+    label=dict(text="Default label padding of 3px"),
+)
+
+fig.show()
+```
+
+#### Setting Label Anchors
+
+`xanchor` sets a label's horizontal positional anchor and `yanchor` sets its vertical position anchor. 
+Use `xanchor` to bind the `textposition` to the "left", "center" or "right" of the label text and `yanchor` to bind `textposition` to the "top", "middle" or "bottom" of the label text.
+
+In this example, `yanchor`is set to "top", instead of the default of "bottom" for lines, meaning the text displays below the line. 
+
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-09-24",
+    y0=0,
+    x1="2018-12-18",
+    y1=3,
+    line_width=0,
+    label=dict(text="Decline", textposition="top center", font=dict(size=20)),
+    fillcolor="green",
+    opacity=0.25,
+)
+
+fig.add_shape(
+    type="line",
+    x0=min(df.index),
+    y0=1,
+    x1=max(df.index),
+    y1=1,
+    line_width=3,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+
+fig.show()
 ```
 
 ### Reference

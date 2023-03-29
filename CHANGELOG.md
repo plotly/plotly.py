@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.14.0] - 2023-03-29
+
+### Updated
+  - Updated Plotly.js to from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
+    - Add `title.automargin` to enable automatic top and bottom margining for both container and paper referenced titles [[#6428](https://github.com/plotly/plotly.js/pull/6428)],
+   with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
+    - Add `label` attribute to shapes [[#6454](https://github.com/plotly/plotly.js/pull/6454)], with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!
+    - Add `labelalias` to various axes namely cartesian, gl3d, polar, smith, ternary, carpet,
+   indicator and colorbar [[#6481](https://github.com/plotly/plotly.js/pull/6481)],
+   this feature was anonymously sponsored: thank you to our sponsor!
+  - Key errors no longer precalculated when performing updates on plots [[#4101](https://github.com/plotly/plotly.py/pull/4101)]
+
+### Fixed
+- Fixed an issue with characters displaying incorrectly, by adding `charset="utf-8"` to scripts in `to_html` [[#4114](https://github.com/plotly/plotly.py/pull/4114)]
+- Added `packaging` to install requirements, fixing a `No module named 'packaging` error on Python 3.6 [[#4113](https://github.com/plotly/plotly.py/pull/4113)]
+
+### Added
+- Added option to allow passing a column name as a `str` in `hover_data` and `custom_data` in `plotly.express` [[4083](https://github.com/plotly/plotly.py/pull/4083)]
+
 ## [5.13.1] - 2023-02-24
 
 ### Updated
