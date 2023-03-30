@@ -176,7 +176,7 @@ fig.show()
 
 ```
 
-With [text labels on shapes](/python/shapes/#addingtextlabelstoshapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
+With [text labels on shapes](/python/shapes/#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
 
 
 ### Reference
