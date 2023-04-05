@@ -15,7 +15,7 @@ import pytest
 import numpy as np
 import pandas as pd
 import pytz
-from pandas.util.testing import assert_series_equal
+from pandas.testing import assert_series_equal
 import json as _json
 import os
 import base64
