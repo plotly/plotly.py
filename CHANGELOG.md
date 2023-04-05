@@ -2,8 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [5.X.X] - 2023-MM-DD
-- Support for pandas 2.0 [[#4103](https://github.com/plotly/plotly.py/pull/4103)]
+## [5.14.1] - 2023-04-05
+
+### Fixed
+  - Fixed compatibility issue with Pandas 2.0 [[#4103](https://github.com/plotly/plotly.py/pull/4103)]
 
 ## [5.14.0] - 2023-03-29
 
