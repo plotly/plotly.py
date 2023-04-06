@@ -702,6 +702,26 @@ The row_titles argument to make_subplots must be a list or tuple
             else:
                 y_s = grid[r_spanned][c][1] + spec["b"]
                 y_e = grid[r][c][1] + heights[-1 - r] - spec["t"]
+
+            if y_s > 1.0:
+                # round for values very close to one
+                # handles some floating point errors
+                if y_s < 1.01:
+                    y_s = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 'b' values, heights, and "
+                        "number of subplots too large for this subplot gird."
+                    )
+            if y_e > 1.0:
+                if y_e < 1.01:
+                    y_e = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 't' values, heights, and "
+                        "number of subplots too large for this subplot gird."
+                    )
+
             y_domain = [y_s, y_e]
 
             list_of_domains.append(x_domain)
