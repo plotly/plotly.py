@@ -730,6 +730,8 @@ class Treemap(_BaseTraceType):
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
                     for `colors`.
+                cornerradius
+                    Sets the maximum rounding of corners (in px).
                 depthfade
                     Determines if the sector colors are faded
                     towards the background from the leaves up to
@@ -1335,10 +1337,10 @@ class Treemap(_BaseTraceType):
                     Sets the inner padding (in px).
                 squarifyratio
                     When using "squarify" `packing` algorithm,
-                    according to https://github.com/d3/d3-hierarchy
-                    /blob/v3.1.1/README.md#squarify_ratio this
-                    option specifies the desired aspect ratio of
-                    the generated rectangles. The ratio must be
+                    according to https://github.com/d3/d3-
+                    hierarchy/blob/v3.1.1/README.md#squarify_ratio
+                    this option specifies the desired aspect ratio
+                    of the generated rectangles. The ratio must be
                     specified as a number greater than or equal to
                     one. Note that the orientation of the generated
                     rectangles (tall or wide) is not implied by the

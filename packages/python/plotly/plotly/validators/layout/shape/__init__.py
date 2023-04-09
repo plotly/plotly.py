@@ -20,6 +20,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._name import NameValidator
     from ._line import LineValidator
     from ._layer import LayerValidator
+    from ._label import LabelValidator
     from ._fillrule import FillruleValidator
     from ._fillcolor import FillcolorValidator
     from ._editable import EditableValidator
@@ -48,6 +49,7 @@ else:
             "._name.NameValidator",
             "._line.LineValidator",
             "._layer.LayerValidator",
+            "._label.LabelValidator",
             "._fillrule.FillruleValidator",
             "._fillcolor.FillcolorValidator",
             "._editable.EditableValidator",

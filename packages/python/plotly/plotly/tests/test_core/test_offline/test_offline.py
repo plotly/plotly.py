@@ -41,9 +41,11 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script src="{cdn_url}"></script>'.format(cdn_url=plotly_cdn_url())
+cdn_script = '<script charset="utf-8" src="{cdn_url}"></script>'.format(
+    cdn_url=plotly_cdn_url()
+)
 
-directory_script = '<script src="plotly.min.js"></script>'
+directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
 
 mathjax_cdn = "https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"

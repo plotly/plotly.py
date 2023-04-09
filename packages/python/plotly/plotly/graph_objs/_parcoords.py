@@ -138,8 +138,8 @@ class Parcoords(_BaseTraceType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -302,8 +302,8 @@ class Parcoords(_BaseTraceType):
         margins when `labelposition` is set to "bottom".
 
         The 'labelangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
