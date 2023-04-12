@@ -268,7 +268,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         fit information to be used for trendlines
     """
     if "line_close" in args and args["line_close"]:
-        trace_data = trace_data.append(trace_data.iloc[0])
+        trace_data = pd.concat([trace_data, pd.DataFrame(trace_data.iloc[0]).T], axis=0)
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
