@@ -26,6 +26,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._meta import MetaValidator
     from ._lonsrc import LonsrcValidator
     from ._lon import LonValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
@@ -78,6 +79,7 @@ else:
             "._meta.MetaValidator",
             "._lonsrc.LonsrcValidator",
             "._lon.LonValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",

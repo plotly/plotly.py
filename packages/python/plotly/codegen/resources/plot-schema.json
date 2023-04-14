@@ -435,7 +435,8 @@
    "angle": {
     "description": "A number (in degree) between -180 and 180.",
     "otherOpts": [
-     "dflt"
+     "dflt",
+     "arrayOk"
     ],
     "requiredOpts": []
    },
@@ -722,7 +723,7 @@
        "valType": "any"
       },
       "axref": {
-       "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ax axis id (e.g. *ax* or *ax2*), the `ax` position refers to a ax coordinate. If set to *paper*, the `ax` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a ax axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *ax2 domain* refers to the domain of the second ax  axis and a ax position of 0.5 refers to the point between the left and the right of the domain of the second ax axis. In order for absolute positioning of the arrow to work, *axref* must be exactly the same as *xref*, otherwise *axref* will revert to *pixel* (explained next). For relative positioning, *axref* can be set to *pixel*, in which case the *ax* value is specified in pixels relative to *x*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point.",
+       "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis. In order for absolute positioning of the arrow to work, *axref* must be exactly the same as *xref*, otherwise *axref* will revert to *pixel* (explained next). For relative positioning, *axref* can be set to *pixel*, in which case the *ax* value is specified in pixels relative to *x*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point.",
        "dflt": "pixel",
        "editType": "calc",
        "valType": "enumerated",
@@ -737,7 +738,7 @@
        "valType": "any"
       },
       "ayref": {
-       "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ay axis id (e.g. *ay* or *ay2*), the `ay` position refers to a ay coordinate. If set to *paper*, the `ay` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a ay axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *ay2 domain* refers to the domain of the second ay  axis and a ay position of 0.5 refers to the point between the bottom and the top of the domain of the second ay axis. In order for absolute positioning of the arrow to work, *ayref* must be exactly the same as *yref*, otherwise *ayref* will revert to *pixel* (explained next). For relative positioning, *ayref* can be set to *pixel*, in which case the *ay* value is specified in pixels relative to *y*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point.",
+       "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis. In order for absolute positioning of the arrow to work, *ayref* must be exactly the same as *yref*, otherwise *ayref* will revert to *pixel* (explained next). For relative positioning, *ayref* can be set to *pixel*, in which case the *ay* value is specified in pixels relative to *y*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point.",
        "dflt": "pixel",
        "editType": "calc",
        "valType": "enumerated",
@@ -1198,6 +1199,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -2755,6 +2762,22 @@
      "valType": "number"
     },
     "editType": "legend",
+    "entrywidth": {
+     "description": "Sets the width (in px or fraction) of the legend. Use 0 to size the entry based on the text width, when `entrywidthmode` is set to *pixels*.",
+     "editType": "legend",
+     "min": 0,
+     "valType": "number"
+    },
+    "entrywidthmode": {
+     "description": "Determines what entrywidth means.",
+     "dflt": "pixels",
+     "editType": "legend",
+     "valType": "enumerated",
+     "values": [
+      "fraction",
+      "pixels"
+     ]
+    },
     "font": {
      "color": {
       "editType": "legend",
@@ -2988,6 +3011,30 @@
      "dflt": 0,
      "editType": "plot",
      "valType": "number"
+    },
+    "bounds": {
+     "east": {
+      "description": "Sets the maximum longitude of the map (in degrees East) if `west`, `south` and `north` are declared.",
+      "editType": "plot",
+      "valType": "number"
+     },
+     "editType": "plot",
+     "north": {
+      "description": "Sets the maximum latitude of the map (in degrees North) if `east`, `west` and `south` are declared.",
+      "editType": "plot",
+      "valType": "number"
+     },
+     "role": "object",
+     "south": {
+      "description": "Sets the minimum latitude of the map (in degrees North) if `east`, `west` and `north` are declared.",
+      "editType": "plot",
+      "valType": "number"
+     },
+     "west": {
+      "description": "Sets the minimum longitude of the map (in degrees East) if `east`, `south` and `north` are declared.",
+      "editType": "plot",
+      "valType": "number"
+     }
     },
     "center": {
      "editType": "plot",
@@ -3386,6 +3433,20 @@
     "editType": "none",
     "valType": "string"
    },
+   "minreducedheight": {
+    "description": "Minimum height of the plot with margin.automargin applied (in px)",
+    "dflt": 64,
+    "editType": "plot",
+    "min": 2,
+    "valType": "number"
+   },
+   "minreducedwidth": {
+    "description": "Minimum width of the plot with margin.automargin applied (in px)",
+    "dflt": 64,
+    "editType": "plot",
+    "min": 2,
+    "valType": "number"
+   },
    "modebar": {
     "activecolor": {
      "description": "Sets the color of the active or hovered on icons in the modebar.",
@@ -3517,6 +3578,91 @@
       "evenodd",
       "nonzero"
      ]
+    },
+    "label": {
+     "editType": "none",
+     "font": {
+      "color": {
+       "editType": "none",
+       "valType": "color"
+      },
+      "description": "Sets the new shape label text font.",
+      "editType": "none",
+      "family": {
+       "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The Chart Studio Cloud (at https://chart-studio.plotly.com or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+       "editType": "none",
+       "noBlank": true,
+       "strict": true,
+       "valType": "string"
+      },
+      "role": "object",
+      "size": {
+       "editType": "none",
+       "min": 1,
+       "valType": "number"
+      }
+     },
+     "padding": {
+      "description": "Sets padding (in px) between edge of label and edge of new shape.",
+      "dflt": 3,
+      "editType": "none",
+      "min": 0,
+      "valType": "number"
+     },
+     "role": "object",
+     "text": {
+      "description": "Sets the text to display with the new shape.",
+      "dflt": "",
+      "editType": "none",
+      "valType": "string"
+     },
+     "textangle": {
+      "description": "Sets the angle at which the label text is drawn with respect to the horizontal. For lines, angle *auto* is the same angle as the line. For all other shapes, angle *auto* is horizontal.",
+      "dflt": "auto",
+      "editType": "none",
+      "valType": "angle"
+     },
+     "textposition": {
+      "description": "Sets the position of the label text relative to the new shape. Supported values for rectangles, circles and paths are *top left*, *top center*, *top right*, *middle left*, *middle center*, *middle right*, *bottom left*, *bottom center*, and *bottom right*. Supported values for lines are *start*, *middle*, and *end*. Default: *middle center* for rectangles, circles, and paths; *middle* for lines.",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "top left",
+       "top center",
+       "top right",
+       "middle left",
+       "middle center",
+       "middle right",
+       "bottom left",
+       "bottom center",
+       "bottom right",
+       "start",
+       "middle",
+       "end"
+      ]
+     },
+     "xanchor": {
+      "description": "Sets the label's horizontal position anchor This anchor binds the specified `textposition` to the *left*, *center* or *right* of the label text. For example, if `textposition` is set to *top right* and `xanchor` to *right* then the right-most portion of the label text lines up with the right-most edge of the new shape.",
+      "dflt": "auto",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "auto",
+       "left",
+       "center",
+       "right"
+      ]
+     },
+     "yanchor": {
+      "description": "Sets the label's vertical position anchor This anchor binds the specified `textposition` to the *top*, *middle* or *bottom* of the label text. For example, if `textposition` is set to *top right* and `yanchor` to *top* then the top-most portion of the label text lines up with the top-most edge of the new shape.",
+      "editType": "none",
+      "valType": "enumerated",
+      "values": [
+       "top",
+       "middle",
+       "bottom"
+      ]
+     }
     },
     "layer": {
      "description": "Specifies whether new shapes are drawn below or above traces.",
@@ -3698,6 +3844,12 @@
       "dflt": "",
       "editType": "none",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -4272,6 +4424,12 @@
       "dflt": "",
       "editType": "none",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -5370,6 +5528,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "linecolor": {
       "description": "Sets the axis line color.",
       "dflt": "#444",
@@ -5931,6 +6095,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "linecolor": {
       "description": "Sets the axis line color.",
@@ -6494,6 +6664,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "linecolor": {
       "description": "Sets the axis line color.",
       "dflt": "#444",
@@ -7053,6 +7229,91 @@
         "evenodd",
         "nonzero"
        ]
+      },
+      "label": {
+       "editType": "arraydraw",
+       "font": {
+        "color": {
+         "editType": "arraydraw",
+         "valType": "color"
+        },
+        "description": "Sets the shape label text font.",
+        "editType": "calc+arraydraw",
+        "family": {
+         "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The Chart Studio Cloud (at https://chart-studio.plotly.com or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+         "editType": "calc+arraydraw",
+         "noBlank": true,
+         "strict": true,
+         "valType": "string"
+        },
+        "role": "object",
+        "size": {
+         "editType": "calc+arraydraw",
+         "min": 1,
+         "valType": "number"
+        }
+       },
+       "padding": {
+        "description": "Sets padding (in px) between edge of label and edge of shape.",
+        "dflt": 3,
+        "editType": "arraydraw",
+        "min": 0,
+        "valType": "number"
+       },
+       "role": "object",
+       "text": {
+        "description": "Sets the text to display with shape.",
+        "dflt": "",
+        "editType": "arraydraw",
+        "valType": "string"
+       },
+       "textangle": {
+        "description": "Sets the angle at which the label text is drawn with respect to the horizontal. For lines, angle *auto* is the same angle as the line. For all other shapes, angle *auto* is horizontal.",
+        "dflt": "auto",
+        "editType": "calc+arraydraw",
+        "valType": "angle"
+       },
+       "textposition": {
+        "description": "Sets the position of the label text relative to the shape. Supported values for rectangles, circles and paths are *top left*, *top center*, *top right*, *middle left*, *middle center*, *middle right*, *bottom left*, *bottom center*, and *bottom right*. Supported values for lines are *start*, *middle*, and *end*. Default: *middle center* for rectangles, circles, and paths; *middle* for lines.",
+        "editType": "arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "top left",
+         "top center",
+         "top right",
+         "middle left",
+         "middle center",
+         "middle right",
+         "bottom left",
+         "bottom center",
+         "bottom right",
+         "start",
+         "middle",
+         "end"
+        ]
+       },
+       "xanchor": {
+        "description": "Sets the label's horizontal position anchor This anchor binds the specified `textposition` to the *left*, *center* or *right* of the label text. For example, if `textposition` is set to *top right* and `xanchor` to *right* then the right-most portion of the label text lines up with the right-most edge of the shape.",
+        "dflt": "auto",
+        "editType": "calc+arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "auto",
+         "left",
+         "center",
+         "right"
+        ]
+       },
+       "yanchor": {
+        "description": "Sets the label's vertical position anchor This anchor binds the specified `textposition` to the *top*, *middle* or *bottom* of the label text. For example, if `textposition` is set to *top right* and `yanchor` to *top* then the top-most portion of the label text lines up with the top-most edge of the shape.",
+        "editType": "calc+arraydraw",
+        "valType": "enumerated",
+        "values": [
+         "top",
+         "middle",
+         "bottom"
+        ]
+       }
       },
       "layer": {
        "description": "Specifies whether shapes are drawn below or above traces.",
@@ -7706,6 +7967,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
       "dflt": "above traces",
@@ -7898,6 +8165,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -8179,6 +8452,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -8577,6 +8856,12 @@
       "dflt": "",
       "editType": "plot",
       "valType": "string"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
      },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -8982,6 +9267,12 @@
       "editType": "plot",
       "valType": "string"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "plot",
+      "valType": "any"
+     },
      "layer": {
       "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
       "dflt": "above traces",
@@ -9370,6 +9661,12 @@
     }
    },
    "title": {
+    "automargin": {
+     "description": "Determines whether the title can automatically push the figure margins. If `yref='paper'` then the margin will expand to ensure that the title doesn’t overlap with the edges of the container. If `yref='container'` then the margins will ensure that the title doesn’t overlap with the plot area, tick labels, and axis titles. If `automargin=true` and the margins need to be expanded, then y will be set to a default 1 and yanchor will be set to an appropriate default to ensure that minimal margin space is needed. Note that when `yref='paper'`, only 1 or 0 are allowed y values. Invalid values will be reset to the default 1.",
+     "dflt": false,
+     "editType": "plot",
+     "valType": "boolean"
+    },
     "editType": "layoutstyle",
     "font": {
      "color": {
@@ -10113,6 +10410,12 @@
      "dflt": "",
      "editType": "none",
      "valType": "string"
+    },
+    "labelalias": {
+     "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+     "dflt": false,
+     "editType": "ticks",
+     "valType": "any"
     },
     "layer": {
      "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -10950,14 +11253,15 @@
      "valType": "number"
     },
     "tickmode": {
-     "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+     "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided). If *sync*, the number of ticks will sync with the overlayed axis set by `overlaying` property.",
      "editType": "ticks",
      "impliedEdits": {},
      "valType": "enumerated",
      "values": [
       "auto",
       "linear",
-      "array"
+      "array",
+      "sync"
      ]
     },
     "tickprefix": {
@@ -11172,6 +11476,12 @@
       "reversed"
      ]
     },
+    "autoshift": {
+     "description": "Automatically reposition the axis to avoid overlap with other axes with the same `overlaying` value. This repositioning will account for any `shift` amount applied to other axes on the same side with `autoshift` is set to true. Only has an effect if `anchor` is set to *free*.",
+     "dflt": false,
+     "editType": "plot",
+     "valType": "boolean"
+    },
     "autotypenumbers": {
      "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
      "dflt": "convert types",
@@ -11364,6 +11674,12 @@
      "dflt": "",
      "editType": "none",
      "valType": "string"
+    },
+    "labelalias": {
+     "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+     "dflt": false,
+     "editType": "ticks",
+     "valType": "any"
     },
     "layer": {
      "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
@@ -11677,6 +11993,11 @@
      "editType": "ticks",
      "valType": "boolean"
     },
+    "shift": {
+     "description": "Moves the axis a given number of pixels from where it would have been otherwise. Accepts both positive and negative values, which will shift the axis either right or left, respectively. If `autoshift` is set to true, then this defaults to a padding of -3 if `side` is set to *left*. and defaults to +3 if `side` is set to *right*. Defaults to 0 if `autoshift` is set to false. Only has an effect if `anchor` is set to *free*.",
+     "editType": "plot",
+     "valType": "number"
+    },
     "showdividers": {
      "description": "Determines whether or not a dividers are drawn between the category levels of this axis. Only has an effect on *multicategory* axes.",
      "dflt": true,
@@ -11947,14 +12268,15 @@
      "valType": "number"
     },
     "tickmode": {
-     "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+     "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided). If *sync*, the number of ticks will sync with the overlayed axis set by `overlaying` property.",
      "editType": "ticks",
      "impliedEdits": {},
      "valType": "enumerated",
      "values": [
       "auto",
       "linear",
-      "array"
+      "array",
+      "sync"
      ]
     },
     "tickprefix": {
@@ -12615,6 +12937,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -12748,6 +13076,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -13871,7 +14205,7 @@
      "valType": "number"
     },
     "barmode": {
-     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to reduce *opacity* to see multiple bars.",
      "dflt": "group",
      "editType": "calc",
      "valType": "enumerated",
@@ -14130,6 +14464,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -14263,6 +14603,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -15140,7 +15486,7 @@
      "valType": "number"
     },
     "barmode": {
-     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *overlay*, the bars are plotted over one another, you might need to reduce *opacity* to see multiple bars.",
      "dflt": "stack",
      "editType": "calc",
      "valType": "enumerated",
@@ -15424,6 +15770,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the color of line bounding the box(es).",
@@ -15451,6 +15803,13 @@
      "valType": "string"
     },
     "marker": {
+     "angle": {
+      "arrayOk": false,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "calc",
+      "valType": "angle"
+     },
      "color": {
       "arrayOk": false,
       "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
@@ -15993,7 +16352,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      }
     },
@@ -16743,6 +17114,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "editType": "style",
      "role": "object",
@@ -17189,6 +17566,12 @@
       "editType": "calc",
       "min": 0,
       "valType": "number"
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "labelpadding": {
       "description": "Extra padding between label and the axis",
@@ -17752,6 +18135,12 @@
       "min": 0,
       "valType": "number"
      },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
+     },
      "labelpadding": {
       "description": "Extra padding between label and the axis",
       "dflt": 10,
@@ -18239,6 +18628,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "meta": {
      "arrayOk": true,
      "description": "Assigns extra meta information associated with this trace that can be used in various text attributes. Attributes such as trace `name`, graph, axis and colorbar `title.text`, annotation `text` `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. To access the trace `meta` values in an attribute in the same trace, simply use `%{meta[i]}` where `i` is the index or key of the `meta` item in question. To access trace `meta` in layout attributes, use `%{data[n[.meta[i]}` where `i` is the index or key of the `meta` and `n` is the trace index.",
@@ -18450,6 +18845,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -19087,6 +19488,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "locationmode": {
      "description": "Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
      "dflt": "ISO-3",
@@ -19443,6 +19850,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -20074,6 +20487,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "locations": {
      "description": "Sets which features found in *geojson* to plot using their feature `id` field.",
      "editType": "calc",
@@ -20465,6 +20884,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -21090,6 +21515,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "lighting": {
      "ambient": {
       "description": "Ambient light increases overall color visibility but can wash out the image.",
@@ -21505,6 +21936,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -22282,6 +22719,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*.",
@@ -22886,6 +23329,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -23520,6 +23969,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*.",
@@ -23838,6 +24293,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -24469,6 +24930,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "lon": {
      "description": "Sets the longitude coordinates (in degrees East).",
      "editType": "calc",
@@ -25000,6 +25467,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -25133,6 +25606,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -26056,7 +26535,7 @@
      "valType": "number"
     },
     "funnelmode": {
-     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to reduce *opacity* to see multiple bars.",
      "dflt": "stack",
      "editType": "calc",
      "valType": "enumerated",
@@ -26419,6 +26898,12 @@
      "description": "Sets the legend rank for this trace. Items and groups with smaller ranks are presented on top/left side while with `*reversed* `legend.traceorder` they are on bottom/right side. The default legendrank is 1000, so that you can use ranks less than 1000 to place certain items before all unranked items, and ranks greater than 1000 to go after all unranked items.",
      "dflt": 1000,
      "editType": "style",
+     "valType": "number"
+    },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
      "valType": "number"
     },
     "marker": {
@@ -26843,6 +27328,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -27491,6 +27982,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "meta": {
      "arrayOk": true,
      "description": "Assigns extra meta information associated with this trace that can be used in various text attributes. Attributes such as trace `name`, graph, axis and colorbar `title.text`, annotation `text` `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. To access the trace `meta` values in an attribute in the same trace, simply use `%{meta[i]}` where `i` is the index or key of the `meta` item in question. To access trace `meta` in layout attributes, use `%{data[n[.meta[i]}` where `i` is the index or key of the `meta` and `n` is the trace index.",
@@ -28007,6 +28504,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -28614,6 +29117,12 @@
      "description": "Sets the legend rank for this trace. Items and groups with smaller ranks are presented on top/left side while with `*reversed* `legend.traceorder` they are on bottom/right side. The default legendrank is 1000, so that you can use ranks less than 1000 to place certain items before all unranked items, and ranks greater than 1000 to go after all unranked items.",
      "dflt": 1000,
      "editType": "style",
+     "valType": "number"
+    },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
      "valType": "number"
     },
     "meta": {
@@ -29403,6 +29912,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -29536,6 +30051,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -30577,7 +31098,7 @@
      "valType": "number"
     },
     "barmode": {
-     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to reduce *opacity* to see multiple bars.",
      "dflt": "group",
      "editType": "calc",
      "valType": "enumerated",
@@ -30720,6 +31241,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -31355,6 +31882,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "color": {
       "description": "Sets the aggregation data.",
@@ -31856,6 +32389,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -32615,6 +33154,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*.",
@@ -33366,6 +33911,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "level": {
      "anim": true,
      "description": "Sets the level from which this trace hierarchy is rendered. Set `level` to `''` to start from the root node in the hierarchy. Must be an \"id\" if `ids` is filled in, otherwise plotly attempts to find a matching item in `labels`.",
@@ -33499,6 +34050,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -34575,6 +35132,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "meta": {
      "arrayOk": true,
      "description": "Assigns extra meta information associated with this trace that can be used in various text attributes. Attributes such as trace `name`, graph, axis and colorbar `title.text`, annotation `text` `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. To access the trace `meta` values in an attribute in the same trace, simply use `%{meta[i]}` where `i` is the index or key of the `meta` item in question. To access trace `meta` in layout attributes, use `%{data[n[.meta[i]}` where `i` is the index or key of the `meta` and `n` is the trace index.",
@@ -34965,6 +35528,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "plot",
+       "valType": "any"
       },
       "minexponent": {
        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
@@ -35434,6 +36003,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "meta": {
      "arrayOk": true,
      "description": "Assigns extra meta information associated with this trace that can be used in various text attributes. Attributes such as trace `name`, graph, axis and colorbar `title.text`, annotation `text` `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. To access the trace `meta` values in an attribute in the same trace, simply use `%{meta[i]}` where `i` is the index or key of the `meta` item in question. To access trace `meta` in layout attributes, use `%{data[n[.meta[i]}` where `i` is the index or key of the `meta` and `n` is the trace index.",
@@ -35800,6 +36375,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -36461,6 +37042,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "lighting": {
      "ambient": {
       "description": "Ambient light increases overall color visibility but can wash out the image.",
@@ -37016,6 +37603,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -37738,6 +38331,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "lighting": {
      "ambient": {
       "description": "Ambient light increases overall color visibility but can wash out the image.",
@@ -38360,6 +38959,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "dash": {
       "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*). Note that this style setting can also be set per direction via `increasing.line.dash` and `decreasing.line.dash`.",
@@ -38853,6 +39458,12 @@
       "valType": "string"
      }
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. Has an effect only if in `line.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -38986,6 +39597,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -39810,6 +40427,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. Has an effect only if in `line.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -39943,6 +40566,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -41005,6 +41634,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "colors": {
       "description": "Sets the color of each sector. If not specified, the default trace color set is used to pick the sector colors.",
@@ -41129,9 +41764,7 @@
      "description": "Instead of the first slice starting at 12 o'clock, rotate to some other angle.",
      "dflt": 0,
      "editType": "calc",
-     "max": 360,
-     "min": -360,
-     "valType": "number"
+     "valType": "angle"
     },
     "scalegroup": {
      "description": "If there are multiple pie charts that should be sized according to their totals, link them by providing a non-empty group id here shared by every trace in the same group.",
@@ -41597,6 +42230,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
      "blend": {
       "description": "Determines if colors are blended together for a translucency effect in case `opacity` is specified as a value less then `1`. Setting `blend` to `true` reduces zoom/pan speed if used with large numbers of points.",
@@ -42053,6 +42692,12 @@
      "description": "Sets the legend rank for this trace. Items and groups with smaller ranks are presented on top/left side while with `*reversed* `legend.traceorder` they are on bottom/right side. The default legendrank is 1000, so that you can use ranks less than 1000 to place certain items before all unranked items, and ranks greater than 1000 to go after all unranked items.",
      "dflt": 1000,
      "editType": "style",
+     "valType": "number"
+    },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
      "valType": "number"
     },
     "link": {
@@ -42689,6 +43334,12 @@
   "scatter": {
    "animatable": true,
    "attributes": {
+    "alignmentgroup": {
+     "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently.",
+     "dflt": "",
+     "editType": "calc",
+     "valType": "string"
+    },
     "cliponaxis": {
      "description": "Determines whether or not markers and text nodes are clipped about the subplot axes. To show markers and text nodes above axis lines and tick labels, make sure to set `xaxis.layer` and `yaxis.layer` to *below traces*.",
      "dflt": true,
@@ -43251,7 +43902,26 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
+     "backoff": {
+      "arrayOk": true,
+      "description": "Sets the line back off from the end point of the nth line segment (in px). This option is useful e.g. to avoid overlap with arrowhead markers. With *auto* the lines would trim before markers if `marker.angleref` is set to *previous*.",
+      "dflt": "auto",
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "backoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `backoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "color": {
       "anim": true,
       "description": "Sets the line color.",
@@ -43312,6 +43982,30 @@
      }
     },
     "marker": {
+     "angle": {
+      "anim": false,
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "angleref": {
+      "anim": false,
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen.",
+      "dflt": "up",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -43445,6 +44139,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -44060,6 +44760,20 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "anim": true,
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -44540,7 +45254,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -44578,6 +45304,12 @@
      "editType": "style",
      "valType": "string"
     },
+    "offsetgroup": {
+     "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up.",
+     "dflt": "",
+     "editType": "calc",
+     "valType": "string"
+    },
     "opacity": {
      "description": "Sets the opacity of the trace.",
      "dflt": 1,
@@ -44587,7 +45319,7 @@
      "valType": "number"
     },
     "orientation": {
-     "description": "Only relevant when `stackgroup` is used, and only the first `orientation` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the stacking direction. With *v* (*h*), the y (x) values of subsequent traces are added. Also affects the default value of `fill`.",
+     "description": "Only relevant in the following cases: 1. when `scattermode` is set to *group*. 2. when `stackgroup` is used, and only the first `orientation` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the stacking direction. With *v* (*h*), the y (x) values of subsequent traces are added. Also affects the default value of `fill`.",
      "editType": "calc",
      "valType": "enumerated",
      "values": [
@@ -44992,6 +45724,25 @@
     "scatter-like",
     "zoomScale"
    ],
+   "layoutAttributes": {
+    "scattergap": {
+     "description": "Sets the gap (in plot fraction) between scatter points of adjacent location coordinates. Defaults to `bargap`.",
+     "editType": "calc",
+     "max": 1,
+     "min": 0,
+     "valType": "number"
+    },
+    "scattermode": {
+     "description": "Determines how scatter points at the same location coordinate are displayed on the graph. With *group*, the scatter points are plotted next to one another centered around the shared location. With *overlay*, the scatter points are plotted over one another, you might need to reduce *opacity* to see multiple scatter points.",
+     "dflt": "overlay",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "group",
+      "overlay"
+     ]
+    }
+   },
    "meta": {
     "description": "The scatter trace type encompasses line charts, scatter charts, text charts, and bubble charts. The data visualized as scatter point or lines is set in `x` and `y`. Text (appearing either on the chart or on hover only) is via `text`. Bubble charts are achieved by setting `marker.size` and/or `marker.color` to numerical arrays."
    },
@@ -45508,6 +46259,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. Has an effect only if in `line.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
@@ -45641,6 +46398,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -46230,6 +46993,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -47491,7 +48260,26 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
+     "backoff": {
+      "arrayOk": true,
+      "description": "Sets the line back off from the end point of the nth line segment (in px). This option is useful e.g. to avoid overlap with arrowhead markers. With *auto* the lines would trim before markers if `marker.angleref` is set to *previous*.",
+      "dflt": "auto",
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "backoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `backoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "color": {
       "description": "Sets the line color.",
       "editType": "style",
@@ -47540,6 +48328,28 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "angleref": {
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen.",
+      "dflt": "up",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -47672,6 +48482,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -48283,6 +49099,19 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -48763,7 +49592,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -49312,6 +50153,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the line color.",
@@ -49375,6 +50222,29 @@
      "valType": "string"
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "calc",
+      "valType": "angle"
+     },
+     "angleref": {
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen. With *north*, angle 0 points north based on the current map projection.",
+      "dflt": "up",
+      "editType": "calc",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up",
+       "north"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -49507,6 +50377,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -50111,6 +50987,19 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "calc",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -50591,7 +51480,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -51312,6 +52213,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the line color.",
@@ -51356,6 +52263,18 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "calc",
+      "valType": "angle"
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -51488,6 +52407,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -52539,7 +53464,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -52975,6 +53912,74 @@
      "editType": "calc",
      "valType": "string"
     },
+    "cluster": {
+     "color": {
+      "arrayOk": true,
+      "description": "Sets the color for each cluster step.",
+      "editType": "calc",
+      "valType": "color"
+     },
+     "colorsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `color`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "editType": "calc",
+     "enabled": {
+      "description": "Determines whether clustering is enabled or disabled.",
+      "editType": "calc",
+      "valType": "boolean"
+     },
+     "maxzoom": {
+      "description": "Sets the maximum zoom level. At zoom levels equal to or greater than this, points will never be clustered.",
+      "dflt": 24,
+      "editType": "calc",
+      "max": 24,
+      "min": 0,
+      "valType": "number"
+     },
+     "opacity": {
+      "arrayOk": true,
+      "description": "Sets the marker opacity.",
+      "dflt": 1,
+      "editType": "calc",
+      "max": 1,
+      "min": 0,
+      "valType": "number"
+     },
+     "opacitysrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `opacity`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "role": "object",
+     "size": {
+      "arrayOk": true,
+      "description": "Sets the size for each cluster step.",
+      "dflt": 20,
+      "editType": "calc",
+      "min": 0,
+      "valType": "number"
+     },
+     "sizesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "step": {
+      "arrayOk": true,
+      "description": "Sets how many points it takes to create a cluster or advance to the next cluster step. Use this in conjunction with arrays for `size` and / or `color`. If an integer, steps start at multiples of this number. If an array, each step extends from the given value until one less than the next value.",
+      "dflt": -1,
+      "editType": "calc",
+      "min": -1,
+      "valType": "number"
+     },
+     "stepsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `step`.",
+      "editType": "none",
+      "valType": "string"
+     }
+    },
     "connectgaps": {
      "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
      "dflt": false,
@@ -53211,6 +54216,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the line color.",
@@ -53388,6 +54399,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -54376,7 +55393,26 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
+     "backoff": {
+      "arrayOk": true,
+      "description": "Sets the line back off from the end point of the nth line segment (in px). This option is useful e.g. to avoid overlap with arrowhead markers. With *auto* the lines would trim before markers if `marker.angleref` is set to *previous*.",
+      "dflt": "auto",
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "backoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `backoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "color": {
       "description": "Sets the line color.",
       "editType": "style",
@@ -54425,6 +55461,28 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "angleref": {
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen.",
+      "dflt": "up",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -54557,6 +55615,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -55168,6 +56232,19 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -55648,7 +56725,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -56219,6 +57308,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the line color.",
@@ -56263,6 +57358,18 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "calc",
+      "valType": "angle"
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -56395,6 +57502,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "calc",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -57446,7 +58559,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -58029,7 +59154,26 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
+     "backoff": {
+      "arrayOk": true,
+      "description": "Sets the line back off from the end point of the nth line segment (in px). This option is useful e.g. to avoid overlap with arrowhead markers. With *auto* the lines would trim before markers if `marker.angleref` is set to *previous*.",
+      "dflt": "auto",
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "backoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `backoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "color": {
       "description": "Sets the line color.",
       "editType": "style",
@@ -58078,6 +59222,28 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "angleref": {
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen.",
+      "dflt": "up",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -58210,6 +59376,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -58821,6 +59993,19 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -59301,7 +60486,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -59870,7 +61067,26 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
+     "backoff": {
+      "arrayOk": true,
+      "description": "Sets the line back off from the end point of the nth line segment (in px). This option is useful e.g. to avoid overlap with arrowhead markers. With *auto* the lines would trim before markers if `marker.angleref` is set to *previous*.",
+      "dflt": "auto",
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "backoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `backoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "color": {
       "description": "Sets the line color.",
       "editType": "style",
@@ -59919,6 +61135,28 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "angleref": {
+      "description": "Sets the reference for marker angle. With *previous*, angle 0 points along the line from the previous point to this one. With *up*, angle 0 points toward the top of the screen.",
+      "dflt": "up",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "previous",
+       "up"
+      ]
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -60051,6 +61289,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -60662,6 +61906,19 @@
       "editType": "none",
       "valType": "string"
      },
+     "standoff": {
+      "arrayOk": true,
+      "description": "Moves the marker away from the data point in the direction of `angle` (in px). This can be useful for example if you have another marker at this location and you want to point an arrowhead marker at it.",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
+     },
+     "standoffsrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `standoff`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "symbol": {
       "arrayOk": true,
       "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
@@ -61142,7 +62399,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -61713,7 +62982,25 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "marker": {
+     "angle": {
+      "arrayOk": true,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "plot",
+      "valType": "angle"
+     },
+     "anglesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `angle`.",
+      "editType": "none",
+      "valType": "string"
+     },
      "autocolorscale": {
       "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color` is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
       "dflt": true,
@@ -61846,6 +63133,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -62897,7 +64190,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      },
      "symbolsrc": {
@@ -63245,6 +64550,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "colorbars",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -63863,6 +65174,12 @@
      "description": "Sets the legend rank for this trace. Items and groups with smaller ranks are presented on top/left side while with `*reversed* `legend.traceorder` they are on bottom/right side. The default legendrank is 1000, so that you can use ranks less than 1000 to place certain items before all unranked items, and ranks greater than 1000 to go after all unranked items.",
      "dflt": 1000,
      "editType": "style",
+     "valType": "number"
+    },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
      "valType": "number"
     },
     "lighting": {
@@ -64565,6 +65882,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "level": {
      "anim": true,
      "description": "Sets the level from which this trace hierarchy is rendered. Set `level` to `''` to start from the root node in the hierarchy. Must be an \"id\" if `ids` is filled in, otherwise plotly attempts to find a matching item in `labels`.",
@@ -64698,6 +66021,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -65571,6 +66900,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -66481,6 +67816,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "lighting": {
      "ambient": {
       "description": "Ambient light increases overall color visibility but can wash out the image.",
@@ -67374,6 +68715,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "meta": {
      "arrayOk": true,
      "description": "Assigns extra meta information associated with this trace that can be used in various text attributes. Attributes such as trace `name`, graph, axis and colorbar `title.text`, annotation `text` `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. To access the trace `meta` values in an attribute in the same trace, simply use `%{meta[i]}` where `i` is the index or key of the `meta` item in question. To access trace `meta` in layout attributes, use `%{data[n[.meta[i]}` where `i` is the index or key of the `meta` and `n` is the trace index.",
@@ -67780,6 +69127,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "level": {
      "anim": true,
      "description": "Sets the level from which this trace hierarchy is rendered. Set `level` to `''` to start from the root node in the hierarchy. Must be an \"id\" if `ids` is filled in, otherwise plotly attempts to find a matching item in `labels`.",
@@ -67913,6 +69266,12 @@
         "SI",
         "B"
        ]
+      },
+      "labelalias": {
+       "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+       "dflt": false,
+       "editType": "colorbars",
+       "valType": "any"
       },
       "len": {
        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -68337,6 +69696,13 @@
       "description": "Sets the source reference on Chart Studio Cloud for `colors`.",
       "editType": "none",
       "valType": "string"
+     },
+     "cornerradius": {
+      "description": "Sets the maximum rounding of corners (in px).",
+      "dflt": 0,
+      "editType": "plot",
+      "min": 0,
+      "valType": "number"
      },
      "depthfade": {
       "description": "Determines if the sector colors are faded towards the background from the leaves up to the headers. This option is unavailable when a `colorscale` is present, defaults to false when `marker.colors` is set, but otherwise defaults to true. When set to *reversed*, the fading direction is inverted, that is the top elements within hierarchy are drawn with fully saturated colors while the leaves are faded towards the background color.",
@@ -69097,6 +70463,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "line": {
      "color": {
       "description": "Sets the color of line bounding the violin(s).",
@@ -69114,6 +70486,13 @@
      }
     },
     "marker": {
+     "angle": {
+      "arrayOk": false,
+      "description": "Sets the marker angle in respect to `angleref`.",
+      "dflt": 0,
+      "editType": "calc",
+      "valType": "angle"
+     },
      "color": {
       "arrayOk": false,
       "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
@@ -69656,7 +71035,19 @@
        "arrow-bar-right",
        152,
        "152",
-       "arrow-bar-right-open"
+       "arrow-bar-right-open",
+       53,
+       "53",
+       "arrow",
+       153,
+       "153",
+       "arrow-open",
+       54,
+       "54",
+       "arrow-wide",
+       154,
+       "154",
+       "arrow-wide-open"
       ]
      }
     },
@@ -70220,6 +71611,12 @@
        "SI",
        "B"
       ]
+     },
+     "labelalias": {
+      "description": "Replacement text for specific tick or hover labels. For example using {US: 'USA', CA: 'Canada'} changes US to USA and CA to Canada. The labels we would have shown must match the keys exactly, after adding any tickprefix or ticksuffix. labelalias can be used with any axis type, and both keys (if needed) and values (if desired) can include html-like tags or MathJax.",
+      "dflt": false,
+      "editType": "calc",
+      "valType": "any"
      },
      "len": {
       "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
@@ -70879,6 +72276,12 @@
      "description": "Sets the legend rank for this trace. Items and groups with smaller ranks are presented on top/left side while with `*reversed* `legend.traceorder` they are on bottom/right side. The default legendrank is 1000, so that you can use ranks less than 1000 to place certain items before all unranked items, and ranks greater than 1000 to go after all unranked items.",
      "dflt": 1000,
      "editType": "style",
+     "valType": "number"
+    },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
      "valType": "number"
     },
     "lighting": {
@@ -71720,6 +73123,12 @@
      "editType": "style",
      "valType": "number"
     },
+    "legendwidth": {
+     "description": "Sets the width (in px or fraction) of the legend for this trace.",
+     "editType": "style",
+     "min": 0,
+     "valType": "number"
+    },
     "measure": {
      "description": "An array containing types of values. By default the values are considered as 'relative'. However; it is possible to use 'total' to compute the sums. Also 'absolute' could be applied to reset the computed total or to declare an initial value where needed.",
      "dflt": [],
@@ -72157,7 +73566,7 @@
      "valType": "number"
     },
     "waterfallmode": {
-     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+     "description": "Determines how bars at the same location coordinate are displayed on the graph. With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to reduce *opacity* to see multiple bars.",
      "dflt": "group",
      "editType": "calc",
      "valType": "enumerated",

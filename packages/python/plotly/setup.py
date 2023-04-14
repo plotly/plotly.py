@@ -511,7 +511,10 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: Visualization",
+        "License :: OSI Approved :: MIT License",
     ],
     python_requires=">=3.6",
     license="MIT",
@@ -553,7 +556,7 @@ setup(
     data_files=[
         ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
     ],
-    install_requires=["tenacity>=6.2.0"],
+    install_requires=["tenacity>=6.2.0", "packaging"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),

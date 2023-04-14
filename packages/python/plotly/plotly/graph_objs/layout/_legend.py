@@ -12,6 +12,8 @@ class Legend(_BaseLayoutHierarchyType):
         "bgcolor",
         "bordercolor",
         "borderwidth",
+        "entrywidth",
+        "entrywidthmode",
         "font",
         "groupclick",
         "grouptitlefont",
@@ -169,6 +171,49 @@ class Legend(_BaseLayoutHierarchyType):
     @borderwidth.setter
     def borderwidth(self, val):
         self["borderwidth"] = val
+
+    # entrywidth
+    # ----------
+    @property
+    def entrywidth(self):
+        """
+        Sets the width (in px or fraction) of the legend. Use 0 to size
+        the entry based on the text width, when `entrywidthmode` is set
+        to "pixels".
+
+        The 'entrywidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["entrywidth"]
+
+    @entrywidth.setter
+    def entrywidth(self, val):
+        self["entrywidth"] = val
+
+    # entrywidthmode
+    # --------------
+    @property
+    def entrywidthmode(self):
+        """
+        Determines what entrywidth means.
+
+        The 'entrywidthmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['fraction', 'pixels']
+
+        Returns
+        -------
+        Any
+        """
+        return self["entrywidthmode"]
+
+    @entrywidthmode.setter
+    def entrywidthmode(self, val):
+        self["entrywidthmode"] = val
 
     # font
     # ----
@@ -642,6 +687,12 @@ class Legend(_BaseLayoutHierarchyType):
         borderwidth
             Sets the width (in px) of the border enclosing the
             legend.
+        entrywidth
+            Sets the width (in px or fraction) of the legend. Use 0
+            to size the entry based on the text width, when
+            `entrywidthmode` is set to "pixels".
+        entrywidthmode
+            Determines what entrywidth means.
         font
             Sets the font used to text the legend items.
         groupclick
@@ -730,6 +781,8 @@ class Legend(_BaseLayoutHierarchyType):
         bgcolor=None,
         bordercolor=None,
         borderwidth=None,
+        entrywidth=None,
+        entrywidthmode=None,
         font=None,
         groupclick=None,
         grouptitlefont=None,
@@ -765,6 +818,12 @@ class Legend(_BaseLayoutHierarchyType):
         borderwidth
             Sets the width (in px) of the border enclosing the
             legend.
+        entrywidth
+            Sets the width (in px or fraction) of the legend. Use 0
+            to size the entry based on the text width, when
+            `entrywidthmode` is set to "pixels".
+        entrywidthmode
+            Determines what entrywidth means.
         font
             Sets the font used to text the legend items.
         groupclick
@@ -891,6 +950,14 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = borderwidth if borderwidth is not None else _v
         if _v is not None:
             self["borderwidth"] = _v
+        _v = arg.pop("entrywidth", None)
+        _v = entrywidth if entrywidth is not None else _v
+        if _v is not None:
+            self["entrywidth"] = _v
+        _v = arg.pop("entrywidthmode", None)
+        _v = entrywidthmode if entrywidthmode is not None else _v
+        if _v is not None:
+            self["entrywidthmode"] = _v
         _v = arg.pop("font", None)
         _v = font if font is not None else _v
         if _v is not None:

@@ -28,6 +28,7 @@ class Treemap(_BaseTraceType):
         "labelssrc",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "level",
         "marker",
         "maxdepth",
@@ -600,6 +601,27 @@ class Treemap(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # level
     # -----
     @property
@@ -708,6 +730,8 @@ class Treemap(_BaseTraceType):
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
                     for `colors`.
+                cornerradius
+                    Sets the maximum rounding of corners (in px).
                 depthfade
                     Determines if the sector colors are faded
                     towards the background from the leaves up to
@@ -1313,10 +1337,10 @@ class Treemap(_BaseTraceType):
                     Sets the inner padding (in px).
                 squarifyratio
                     When using "squarify" `packing` algorithm,
-                    according to https://github.com/d3/d3-hierarchy
-                    /blob/v3.1.1/README.md#squarify_ratio this
-                    option specifies the desired aspect ratio of
-                    the generated rectangles. The ratio must be
+                    according to https://github.com/d3/d3-
+                    hierarchy/blob/v3.1.1/README.md#squarify_ratio
+                    this option specifies the desired aspect ratio
+                    of the generated rectangles. The ratio must be
                     specified as a number greater than or equal to
                     one. Note that the orientation of the generated
                     rectangles (tall or wide) is not implied by the
@@ -1568,6 +1592,9 @@ class Treemap(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -1728,6 +1755,7 @@ class Treemap(_BaseTraceType):
         labelssrc=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -1871,6 +1899,9 @@ class Treemap(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -2117,6 +2148,10 @@ an instance of :class:`plotly.graph_objs.Treemap`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("level", None)
         _v = level if level is not None else _v
         if _v is not None:
