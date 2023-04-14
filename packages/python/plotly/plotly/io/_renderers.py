@@ -4,7 +4,7 @@ import textwrap
 from copy import copy
 
 import os
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 from plotly import optional_imports
 
@@ -392,7 +392,7 @@ def show(fig, renderer=None, validate=True, **kwargs):
                 "Mime type rendering requires ipython but it is not installed"
             )
 
-        if not nbformat or LooseVersion(nbformat.__version__) < LooseVersion("4.2.0"):
+        if not nbformat or Version(nbformat.__version__) < Version("4.2.0"):
             raise ValueError(
                 "Mime type rendering requires nbformat>=4.2.0 but it is not installed"
             )

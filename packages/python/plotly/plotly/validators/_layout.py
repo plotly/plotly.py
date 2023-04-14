@@ -57,8 +57,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             barnorm
                 Sets the normalization for bar traces on the
                 graph. With "fraction", the value of each bar
@@ -215,7 +215,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 another With "group", the bars are plotted next
                 to one another centered around the shared
                 location. With "overlay", the bars are plotted
-                over one another, you might need to an
+                over one another, you might need to reduce
                 "opacity" to see multiple bars.
             geo
                 :class:`plotly.graph_objects.layout.Geo`
@@ -309,6 +309,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             metasrc
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
+            minreducedheight
+                Minimum height of the plot with
+                margin.automargin applied (in px)
+            minreducedwidth
+                Minimum width of the plot with
+                margin.automargin applied (in px)
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
@@ -333,6 +339,19 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             polar
                 :class:`plotly.graph_objects.layout.Polar`
                 instance or dict with compatible properties
+            scattergap
+                Sets the gap (in plot fraction) between scatter
+                points of adjacent location coordinates.
+                Defaults to `bargap`.
+            scattermode
+                Determines how scatter points at the same
+                location coordinate are displayed on the graph.
+                With "group", the scatter points are plotted
+                next to one another centered around the shared
+                location. With "overlay", the scatter points
+                are plotted over one another, you might need to
+                reduce "opacity" to see multiple scatter
+                points.
             scene
                 :class:`plotly.graph_objects.layout.Scene`
                 instance or dict with compatible properties
@@ -513,8 +532,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             width
                 Sets the plot's width (in px).
             xaxis

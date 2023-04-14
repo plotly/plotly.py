@@ -2,7 +2,76 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-##  [5.10.0] - 2022-08-11
+## [5.14.1] - 2023-04-05
+
+### Fixed
+  - Fixed compatibility issue with Pandas 2.0 [[#4103](https://github.com/plotly/plotly.py/pull/4103)]
+
+## [5.14.0] - 2023-03-29
+
+### Updated
+  - Updated Plotly.js to from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
+    - Add `title.automargin` to enable automatic top and bottom margining for both container and paper referenced titles [[#6428](https://github.com/plotly/plotly.js/pull/6428)],
+   with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
+    - Add `label` attribute to shapes [[#6454](https://github.com/plotly/plotly.js/pull/6454)], with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!
+    - Add `labelalias` to various axes namely cartesian, gl3d, polar, smith, ternary, carpet,
+   indicator and colorbar [[#6481](https://github.com/plotly/plotly.js/pull/6481)],
+   this feature was anonymously sponsored: thank you to our sponsor!
+  - Key errors no longer precalculated when performing updates on plots [[#4101](https://github.com/plotly/plotly.py/pull/4101)]
+
+### Fixed
+- Fixed an issue with characters displaying incorrectly, by adding `charset="utf-8"` to scripts in `to_html` [[#4114](https://github.com/plotly/plotly.py/pull/4114)]
+- Added `packaging` to install requirements, fixing a `No module named 'packaging` error on Python 3.6 [[#4113](https://github.com/plotly/plotly.py/pull/4113)]
+
+### Added
+- Added option to allow passing a column name as a `str` in `hover_data` and `custom_data` in `plotly.express` [[4083](https://github.com/plotly/plotly.py/pull/4083)]
+
+## [5.13.1] - 2023-02-24
+
+### Updated
+  - Updated Plotly.js to from version 2.18.0 to version 2.18.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2182----2023-02-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+  - Updated distutils.Version to packaging.Version [#3897](https://github.com/plotly/plotly.py/pull/3897)] and [#4055](https://github.com/plotly/plotly.py/pull/4055)]
+
+## [5.13.0] - 2023-01-23
+
+### Updated
+  - Updated Plotly.js to from version 2.17.1 to version 2.18.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2180----2023-01-19) for more information. Notable changes include:
+    - Add `sync` tickmode option [[#6356](https://github.com/plotly/plotly.js/pull/6356), [#6443](https://github.com/plotly/plotly.js/pull/6443)], with thanks to @filipesantiagoAM and @VictorBezak for the contribution!
+  - Build process now uses Node 18.x and version 2 lockfile (should be an invisible change for users) [[#4034](https://github.com/plotly/plotly.py/pull/4034)]
+
+### Fixed
+  - `write_html()` now explicitly encodes output as UTF-8 because Plotly.js' bundle contains such characters [[#4021](https://github.com/plotly/plotly.py/pull/4021)] and [[#4022](https://github.com/plotly/plotly.py/pull/4022)]
+  - fixed `iframe` renderer regression from 5.12 and also fixed error when this renderer was used in the very first cell in a notebook [[#4036](https://github.com/plotly/plotly.py/pull/4036)]
+
+
+## [5.12.0] - 2023-01-12
+
+### Updated
+  - Support for ipywidgets 8 [[#3930](https://github.com/plotly/plotly.py/pull/3930)]
+  - Updated Plotly.js to from version 2.16.1 to version 2.17.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2170----2022-12-22) for more information. Notable changes include:
+    - Add `shift` and `autoshift` to cartesian y axes to help avoid overlapping of multiple axes [[#6334](https://github.com/plotly/plotly.js/pull/6334)],
+      with thanks to [Gamma Technologies](https://www.gtisoft.com) for sponsoring the related development!
+    - Introduce group attributes for `scatter` trace i.e. `alignmentgroup`, `offsetgroup`, `scattermode` and `scattergap` [[#6381](https://github.com/plotly/plotly.js/pull/6381)],
+      this feature was anonymously sponsored: thank you to our sponsor!
+    - Add `marker.cornerradius` attribute to `treemap` trace [[#6351](https://github.com/plotly/plotly.js/pull/6351)]
+### Fixed
+  - Fixed the usage of some deprecated NumPy types which were removed in NumPy 1.24 [[#3997](https://github.com/plotly/plotly.py/pull/3997)]
+  - Fixed bug for trendlines with datetime axes [[#3683](https://github.com/plotly/plotly.py/issues/3683)]
+  - `marker.angle` attribute now accepts iterables where appropriate [[#4013](https://github.com/plotly/plotly.py/issues/4013)]
+  - `selector=0` now correctly returns the first trace in `.select_traces()` and related methods [[#3817](https://github.com/plotly/plotly.py/issues/3817)]
+
+## [5.11.0] - 2022-10-27
+
+### Updated
+  - Updated Plotly.js to from version 2.14.0 to version 2.16.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2161----2022-10-21) for more information. Notable changes include:
+    - Add clustering options to `scattermapbox` [[#5827](https://github.com/plotly/plotly.js/pull/5827)],
+      with thanks to @elben10 for the contribution!
+    - Add bounds to mapbox suplots [[6339](https://github.com/plotly/plotly.js/pull/6339)]
+    - Add `angle`, `angleref` and `standoff` to `marker` and add `backoff` to `line`; also introduce new arrow symbols to facilitate drawing networks [[#6297](https://github.com/plotly/plotly.js/pull/6297)]
+    - Add `minreducedwidth` and `minreducedheight` to layout for increasing control over automargin [[#6307](https://github.com/plotly/plotly.js/pull/6307)]
+    - Add `entrywidth` and `entrywidthmode` to legend [[#6202](https://github.com/plotly/plotly.js/pull/6202), [#6324](https://github.com/plotly/plotly.js/pull/6324)]
+
+## [5.10.0] - 2022-08-11
 
 ### Updated
   - Updated Plotly.js to from version 2.12.1 to version 2.14.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2140----2022-08-10) for more information. Notable changes include:

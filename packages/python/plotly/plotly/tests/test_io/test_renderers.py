@@ -311,7 +311,9 @@ def test_repr_html(renderer):
     template = (
         '<div>                        <script type="text/javascript">'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
-        '<script src="' + plotly_cdn_url() + '"></script>                '
+        '<script charset="utf-8" src="'
+        + plotly_cdn_url()
+        + '"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                                    window.PLOTLYENV=window.PLOTLYENV || {};"

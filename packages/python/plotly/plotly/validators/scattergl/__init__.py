@@ -42,6 +42,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._meta import MetaValidator
     from ._marker import MarkerValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
@@ -110,6 +111,7 @@ else:
             "._meta.MetaValidator",
             "._marker.MarkerValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",

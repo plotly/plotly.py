@@ -819,18 +819,10 @@ class BaseFigure(object):
 
         renderer_str = pio.renderers.default
         renderers = pio._renderers.renderers
-        renderer_names = renderers._validate_coerce_renderers(renderer_str)
-        renderers_list = [renderers[name] for name in renderer_names]
         from plotly.io._utils import validate_coerce_fig_to_dict
-        from plotly.io._renderers import MimetypeRenderer
 
         fig_dict = validate_coerce_fig_to_dict(self, validate)
-        # Mimetype renderers
-        bundle = {}
-        for renderer in renderers_list:
-            if isinstance(renderer, MimetypeRenderer):
-                bundle.update(renderer.to_mimebundle(fig_dict))
-        return bundle
+        return renderers._build_mime_bundle(fig_dict, renderer_str, **kwargs)
 
     def _ipython_display_(self):
         """
@@ -1139,7 +1131,7 @@ class BaseFigure(object):
             Generator that iterates through all of the traces that satisfy
             all of the specified selection criteria
         """
-        if not selector:
+        if not selector and not isinstance(selector, int):
             selector = {}
 
         if row is not None or col is not None or secondary_y is not None:
@@ -3870,18 +3862,17 @@ Invalid property path '{key_path_str}' for layout
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
+                # special handling for missing keys that match _subplot_re_match
+                if key not in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
+                    # try _subplot_re_match
+                    match = plotly_obj._subplot_re_match(key)
+                    if match:
+                        # We need to create a subplotid object
+                        plotly_obj[key] = {}
+                        continue
+
                 err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
                 if err is not None:
-                    if isinstance(plotly_obj, BaseLayoutType):
-                        # try _subplot_re_match
-                        match = plotly_obj._subplot_re_match(key)
-                        if match:
-                            # We need to create a subplotid object
-                            plotly_obj[key] = {}
-                            continue
-                    # If no match, raise the error, which should already
-                    # contain the _raise_on_invalid_property_error
-                    # generated message
                     raise err
 
             # Convert update_obj to dict
@@ -4786,7 +4777,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._valid_props:
+                if hasattr(obj, "_valid_props") and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False

@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3 (ipykernel)
+    display_name: Python 3
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.7
+    version: 3.8.8
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -137,6 +137,10 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'axes', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 #### Moving Tick Labels Inside the Plot
 
 The `ticklabelposition` attribute moves tick labels inside the plotting area, and modifies the auto-range behaviour to accommodate the labels.
@@ -147,6 +151,25 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)-1
 fig = px.bar(df, x=df.index, y="GOOG")
 fig.update_yaxes(ticklabelposition="inside top", title=None)
+fig.show()
+```
+
+#### Specifying Label Aliases 
+
+*New in 5.14*
+
+With `labelalias`, you can specify replacement text for specific tick and hover labels. In this example, the dataset has the values of "Sat" and "Sun" in the day column. By setting `labelalias=dict(Sat="Saturday", Sun="Sunday")`, we swap these out for "Saturday" and "Sunday".
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+df = df[df.day.isin(['Sat', 'Sun'])].groupby(by='day', as_index=False).sum(numeric_only=True)
+
+fig = px.bar(df, x="day", y="total_bill")
+fig.update_xaxes(labelalias=dict(Sat="Saturday", Sun="Sunday"))
+
 fig.show()
 ```
 

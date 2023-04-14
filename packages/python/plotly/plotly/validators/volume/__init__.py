@@ -34,6 +34,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._meta import MetaValidator
     from ._lightposition import LightpositionValidator
     from ._lighting import LightingValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
@@ -100,6 +101,7 @@ else:
             "._meta.MetaValidator",
             "._lightposition.LightpositionValidator",
             "._lighting.LightingValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",

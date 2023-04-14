@@ -150,6 +150,15 @@ jobs:
       - test_optional:
           py: "39"
 
+  # Pandas
+
+  python_39_pandas_2_optional:
+    docker:
+      - image: circleci/python:3.9-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "39_pandas_2"
+
   # Orca
   python_38_orca:
     docker:
@@ -190,6 +199,7 @@ jobs:
       - run:
           name: Run percy snapshots
           command: |
+            npm i @percy/cli
             npx percy snapshot test/percy/
             rm test/percy/*.html
 
@@ -263,8 +273,9 @@ jobs:
           name: Create conda environment
           command: |
             conda create -n env --yes python=3.9 conda-build conda-verify
-            conda install -n env -c conda-forge jupyterlab nodejs=12
+            conda install -n env -c conda-forge jupyterlab nodejs=18
             conda init bash
+            mkdir output
 
       - run:
           name: initial NPM Build
@@ -283,12 +294,8 @@ jobs:
             conda activate env
             cd packages/python/plotly
             python setup.py sdist bdist_wheel
-            mkdir pypi_dist
-            tar czf pypi_dist/all.tgz dist
-
-      - store_artifacts:
-          path: packages/python/plotly/pypi_dist
-          destination: pypi_dist
+            cp -R dist ../../../output/dist
+            git status
 
       - run:
           name: Conda Build
@@ -297,12 +304,8 @@ jobs:
             conda activate env
             cd packages/python/plotly
             conda build recipe/
-            mkdir conda_dist
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 conda_dist
-
-      - store_artifacts:
-          path: packages/python/plotly/conda_dist
-          destination: conda_dist
+            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
+            git status
 
       - run:
           name: NPM Pack
@@ -311,12 +314,21 @@ jobs:
             conda activate env
             cd packages/javascript/jupyterlab-plotly
             npm pack
-            mkdir npm_dist
-            mv jupyterlab-plotly*.tgz npm_dist
+            mv jupyterlab-plotly*.tgz ../../../output
+
+      - run:
+          name: Zip output
+          command: |
+            tar czf output.tgz output
+
+      - run:
+          name: Git Diff
+          command: |
+            git status
+            git diff
 
       - store_artifacts:
-          path: packages/javascript/jupyterlab-plotly/npm_dist
-          destination: npm_dist
+          path: output.tgz
 
   build-doc:
     resource_class: xlarge
@@ -467,7 +479,7 @@ workflows:
       - python_37_optional
       - python_38_optional
       - python_39_optional
+      - python_39_pandas_2_optional
       - python_38_orca
       - python_37_percy
-      - python_37_chart_studio
       - build-doc
