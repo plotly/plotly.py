@@ -527,11 +527,12 @@ else:
     # browser
     try:
         import webbrowser
+
         webbrowser.get()
         default_renderer = "browser"
     except Exception:
         # Many things could have gone wrong
-        # There could not be a webbrowser Python module, 
+        # There could not be a webbrowser Python module,
         # or the module may be a dumb placeholder
         pass
 
