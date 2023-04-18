@@ -1234,7 +1234,8 @@ class Heatmap(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `x`, `y`, `z` and `text`.
+        Finally, the template string has access to variables `x`, `y`,
+        `z` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -2214,7 +2215,8 @@ class Heatmap(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -2661,7 +2663,8 @@ class Heatmap(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid

@@ -425,7 +425,9 @@ class Sankey(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `value` and `label`. Anything
+                    Variables `source` and `target` are node
+                    objects.Finally, the template string has access
+                    to variables `value` and `label`. Anything
                     contained in tag `<extra>` is displayed in the
                     secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
@@ -614,9 +616,11 @@ class Sankey(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `value` and `label`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
+                    Variables `sourceLinks` and `targetLinks` are
+                    arrays of link objects.Finally, the template
+                    string has access to variables `value` and
+                    `label`. Anything contained in tag `<extra>` is
+                    displayed in the secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
                     secondary box completely, use an empty tag
                     `<extra></extra>`.

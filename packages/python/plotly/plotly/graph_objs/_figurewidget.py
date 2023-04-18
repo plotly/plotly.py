@@ -1374,11 +1374,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1527,7 +1528,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -3895,8 +3897,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -4286,11 +4289,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4893,7 +4896,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -6050,10 +6054,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious` and `percentTotal`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious` and
+            `percentTotal`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -6206,8 +6210,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious`, `percentTotal`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious`,
+            `percentTotal`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6537,12 +6542,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6664,8 +6669,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -7049,7 +7055,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -7855,8 +7862,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -8001,7 +8009,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8379,11 +8388,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8478,7 +8487,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z`
+            are available. Finally, the template string has access
+            to variable `z`
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8909,11 +8919,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9019,7 +9029,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9361,10 +9372,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -9504,9 +9516,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -9725,8 +9738,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -11586,12 +11600,17 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -12028,12 +12047,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -12182,8 +12201,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14097,7 +14117,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14512,8 +14533,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon`, `location` and
-            `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon`, `location` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15383,7 +15404,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon` and `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15775,7 +15797,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16182,7 +16205,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16584,7 +16608,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `real`, `imag` and `text`.
+            are available. Finally, the template string has access
+            to variables `real`, `imag` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16990,7 +17015,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b`, `c` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17603,9 +17629,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `tubex`, `tubey`, `tubez`,
-            `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `tubex`, `tubey`, `tubez`, `tubeu`,
+            `tubev`, `tubew`, `norm` and `divergence`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -18019,10 +18046,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -18170,9 +18198,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -19058,10 +19087,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -19198,9 +19228,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -20440,9 +20471,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -20603,8 +20635,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.

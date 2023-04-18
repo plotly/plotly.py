@@ -83,6 +83,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `percentInitial`, `percentPrevious`
                 and `percentTotal`. Anything contained in tag
                 `<extra>` is displayed in the secondary box,
@@ -255,7 +256,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variables
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
                 `percentInitial`, `percentPrevious`,
                 `percentTotal`, `label` and `value`.
             texttemplatesrc

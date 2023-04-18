@@ -69,6 +69,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `z`, `color` and `colormodel`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example

@@ -287,9 +287,10 @@ class Image(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `z`, `color` and `colormodel`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `z`, `color` and
+        `colormodel`. Anything contained in tag `<extra>` is displayed
+        in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -1032,8 +1033,9 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -1278,8 +1280,9 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
