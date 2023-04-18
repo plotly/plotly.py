@@ -138,6 +138,7 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variable `z` Anything contained in tag
                 `<extra>` is displayed in the secondary box,
                 for example "<extra>{fullData.name}</extra>".
@@ -244,8 +245,8 @@ class Histogram2DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variable
-                `z`
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variable `z`
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

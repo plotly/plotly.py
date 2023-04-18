@@ -445,9 +445,10 @@ class Waterfall(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `initial`, `delta` and `final`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `initial`, `delta` and
+        `final`. Anything contained in tag `<extra>` is displayed in
+        the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -1355,7 +1356,8 @@ class Waterfall(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `initial`, `delta`, `final` and `label`.
+        Finally, the template string has access to variables `initial`,
+        `delta`, `final` and `label`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1988,9 +1990,10 @@ class Waterfall(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -2151,8 +2154,8 @@ class Waterfall(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2439,9 +2442,10 @@ class Waterfall(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -2602,8 +2606,8 @@ class Waterfall(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.

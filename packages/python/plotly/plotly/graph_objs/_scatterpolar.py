@@ -1373,7 +1373,8 @@ class Scatterpolar(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `r`, `theta` and `text`.
+        Finally, the template string has access to variables `r`,
+        `theta` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1834,7 +1835,8 @@ class Scatterpolar(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2174,7 +2176,8 @@ class Scatterpolar(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.

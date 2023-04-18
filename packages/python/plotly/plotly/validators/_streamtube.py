@@ -114,6 +114,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `tubex`, `tubey`, `tubez`, `tubeu`,
                 `tubev`, `tubew`, `norm` and `divergence`.
                 Anything contained in tag `<extra>` is

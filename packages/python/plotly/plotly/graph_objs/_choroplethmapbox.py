@@ -687,11 +687,11 @@ class Choroplethmapbox(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variable
-        `properties` Anything contained in tag `<extra>` is displayed
-        in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variable `properties` Anything
+        contained in tag `<extra>` is displayed in the secondary box,
+        for example "<extra>{fullData.name}</extra>". To hide the
+        secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -1604,8 +1604,9 @@ class Choroplethmapbox(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -1911,8 +1912,9 @@ class Choroplethmapbox(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
