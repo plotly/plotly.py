@@ -1568,7 +1568,7 @@ because subplot does not have a secondary y-axis""".format(
                     )
                 )
             # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
-            if new_obj.xref is None:
+            if new_obj.xref == None:
                 if secondary_y:
                     xaxis = refs[1].layout_keys[0]
                 else:
@@ -1577,7 +1577,7 @@ because subplot does not have a secondary y-axis""".format(
             else:
                 xref = new_obj.xref
             # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
-            if new_obj.yref is None:
+            if new_obj.yref == None:
                 if secondary_y:
                     yaxis = refs[1].layout_keys[1]
                 else:
