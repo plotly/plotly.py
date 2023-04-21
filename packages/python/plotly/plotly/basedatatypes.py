@@ -4060,10 +4060,13 @@ Invalid property path '{key_path_str}' for layout
             ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
-                # however, in the case of a single plot, xref and yref are not
-                # specified, so we specify them here so the following routines can work
+                # however, in the case of a single plot, xref and yref MAY not be
+                # specified, IF they are not specified we specify them here so the following routines can work
                 # (they need to append " domain" to xref or yref)
-                self.layout[layout_obj][-1].update(xref="x", yref="y")
+                if self.layout[layout_obj][-1].xref is None:
+                    self.layout[layout_obj][-1].update(xref="x")
+                if self.layout[layout_obj][-1].yref is None:
+                    self.layout[layout_obj][-1].update(yref="y")
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
