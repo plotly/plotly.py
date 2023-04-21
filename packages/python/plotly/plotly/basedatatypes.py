@@ -1563,13 +1563,28 @@ is of type {subplot_type}.""".format(
                 raise ValueError(
                     """
 Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-because subplot does not have a secondary y-axis"""
+because subplot does not have a secondary y-axis""".format(
+                        prop_singular=prop_singular, r=row, c=col
+                    )
                 )
-            if secondary_y:
-                xaxis, yaxis = refs[1].layout_keys
+            # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
+            if new_obj.xref is None:
+                if secondary_y:
+                    xaxis = refs[1].layout_keys[0]
+                else:
+                    xaxis = refs[0].layout_keys[0]
+                xref = xaxis.replace("axis", "")
             else:
-                xaxis, yaxis = refs[0].layout_keys
-            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+                xref = new_obj.xref
+            # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
+            if new_obj.yref is None:
+                if secondary_y:
+                    yaxis = refs[1].layout_keys[1]
+                else:
+                    yaxis = refs[0].layout_keys[1]
+                yref = yaxis.replace("axis", "")
+            else:
+                yref = new_obj.yref
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
