@@ -126,6 +126,7 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
 # ------------
 # See plotly/tests/test_orca/test_image_renderers.py
 
+
 # HTML
 # ----
 def assert_full_html(html):
@@ -387,10 +388,12 @@ def test_missing_webbrowser_module(fig1):
     """
     Assert that no errors occur if the webbrowser module is absent
     """
-    removed_webbrowser_module = sys.modules['webbrowser']
-    del sys.modules['webbrowser']
+    removed_webbrowser_module = sys.modules["webbrowser"]
+    del sys.modules["webbrowser"]
     fig1._repr_html_()
-    sys.modules['webbrowser'] = removed_webbrowser_module  # restore everything after this test
+    sys.modules[
+        "webbrowser"
+    ] = removed_webbrowser_module  # restore everything after this test
 
 
 def test_missing_webbrowser_methods(fig1):
@@ -398,6 +401,7 @@ def test_missing_webbrowser_methods(fig1):
     Assert that no errors occur if the webbrowser module does not contain some methods
     """
     import webbrowser
+
     removed_webbrowser_get_method = webbrowser.get
     del webbrowser.get
     fig1._repr_html_()
