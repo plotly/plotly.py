@@ -381,3 +381,24 @@ def test_repr_mimebundle_mixed_renderer(fig1):
     assert set(fig1._repr_mimebundle_().keys()) == set(
         {"application/vnd.plotly.v1+json", "text/html"}
     )
+
+
+def test_missing_webbrowser_module(fig1):
+    """
+    Assert that no errors occur if the webbrowser module is absent
+    """
+    removed_webbrowser_module = sys.modules['webbrowser']
+    del sys.modules['webbrowser']
+    fig1._repr_html_()
+    sys.modules['webbrowser'] = removed_webbrowser_module  # restore everything after this test
+
+
+def test_missing_webbrowser_methods(fig1):
+    """
+    Assert that no errors occur if the webbrowser module does not contain some methods
+    """
+    import webbrowser
+    removed_webbrowser_get_method = webbrowser.get
+    del webbrowser.get
+    fig1._repr_html_()
+    webbrowser.get = removed_webbrowser_get_method  # restore everything after this test
