@@ -5,6 +5,7 @@ from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+import plotly.express as px
 import pytest
 
 
@@ -349,6 +350,61 @@ def test_no_exclude_empty_subplots():
         assert fig.layout[k][1]["xref"] == "x2" and fig.layout[k][1]["yref"] == "y2"
         assert fig.layout[k][2]["xref"] == "x3" and fig.layout[k][2]["yref"] == "y3"
         assert fig.layout[k][3]["xref"] == "x4" and fig.layout[k][3]["yref"] == "y4"
+
+
+def test_supplied_yref_on_single_plot_subplot():
+    ### test a (1,1) subplot figure object from px.scatter
+    fig = px.scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1])
+    fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2"))
+    fig.update_layout(
+        yaxis=dict(title="yaxis1 title"),
+        yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
+    )
+    # add horizontal line on y2. Secondary_y can be True or False
+    fig.add_hline(y=3, yref="y2", secondary_y=True)
+    assert fig.layout["shapes"][0]["yref"] == "y2"
+
+
+def test_supplied_yref_on_non_subplot_figure_object():
+    ### test a non-subplot figure object from go.Figure
+    trace1 = go.Scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1])
+    trace2 = go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2")
+    data = [trace1, trace2]
+    layout = go.Layout(
+        yaxis=dict(title="yaxis1 title"),
+        yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
+    )
+    fig = go.Figure(data=data, layout=layout)
+    # add horizontal line on y2. Secondary_y can be True or False
+    fig.add_hline(y=3, yref="y2", secondary_y=False)
+    assert fig.layout["shapes"][0]["yref"] == "y2"
+
+
+def test_supplied_yref_on_multi_plot_subplot():
+    ### test multiple subploted figure object with subplots.make_subplots
+    fig = make_subplots(
+        rows=1,
+        cols=2,
+        shared_yaxes=False,
+        specs=[[{"secondary_y": True}, {"secondary_y": True}]],
+    )
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3]), row=1, col=1)
+    fig.add_trace(
+        go.Scatter(x=[1, 2, 3], y=[3, 2, 1], yaxis="y2"), row=1, col=1, secondary_y=True
+    )
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], yaxis="y"), row=1, col=2)
+    fig.add_trace(
+        go.Scatter(x=[1, 2, 3], y=[1, 1, 2], yaxis="y2"), row=1, col=2, secondary_y=True
+    )
+    # add a horizontal line on both subplots secondary y.
+    # When using the subplots.make_subplots() method yref parameter should not be supplied to add_hline()
+    # Instead Secondary_y MUST be True to plot on secondary y
+    fig.add_hline(y=2, row=1, col=1, secondary_y=True)
+    fig.add_hline(y=1, row=1, col=2, secondary_y=True)
+    assert fig.layout["shapes"][0]["yref"] == "y2"
+    assert fig.layout["shapes"][0]["xref"] == "x domain"
+    assert fig.layout["shapes"][1]["yref"] == "y4"
+    assert fig.layout["shapes"][1]["xref"] == "x2 domain"
 
 
 @pytest.fixture
