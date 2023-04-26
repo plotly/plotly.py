@@ -1559,6 +1559,7 @@ is of type {subplot_type}.""".format(
                         subplot_type=refs[0].subplot_type,
                     )
                 )
+            '''
             if len(refs) == 1 and secondary_y:
                 raise ValueError(
                     """
@@ -1567,26 +1568,33 @@ because subplot does not have a secondary y-axis""".format(
                         prop_singular=prop_singular, r=row, c=col
                     )
                 )
+            '''
+
             #'''
-            # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
-            if new_obj.xref == None:
-                if secondary_y:
-                    xaxis = refs[1].layout_keys[0]
-                else:
-                    xaxis = refs[0].layout_keys[0]
-                xref = xaxis.replace("axis", "")
-            else:
-                xref = new_obj.xref
-            # If the new_object was created with an xref specified, the specified xref should be used otherwise assign the xref from the layout_keys
-            if new_obj.yref == None:
+            # If the new_object was created with an yref specified, the specified yref should be used otherwise assign the xref from the layout_keys
+            if new_obj.yref == None or new_obj.yref == "y":
+                if len(refs) == 1 and secondary_y:
+                    raise ValueError(
+                        """
+    Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+    because subplot does not have a secondary y-axis""".format(
+                            prop_singular=prop_singular, r=row, c=col
+                        )
+                    )
                 if secondary_y:
                     yaxis = refs[1].layout_keys[1]
+                    xaxis = refs[1].layout_keys[0]
                 else:
                     yaxis = refs[0].layout_keys[1]
+                    xaxis = refs[0].layout_keys[0]
                 yref = yaxis.replace("axis", "")
+                xref = xaxis.replace("axis", "")
             else:
                 yref = new_obj.yref
+                xaxis = refs[0].layout_keys[0]
+                xref = xaxis.replace("axis", "")
             #'''
+
             """
             if secondary_y:
                 xaxis, yaxis = refs[1].layout_keys
@@ -1594,6 +1602,7 @@ because subplot does not have a secondary y-axis""".format(
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             """
+
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
@@ -1615,6 +1624,10 @@ because subplot does not have a secondary y-axis""".format(
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
+        # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
+        # will appear as if user supplied yref params and will force annotation to
+        # be on the axis of the last drawn annotation (they all end up on the same axis)
+        new_obj.update(xref=None, yref=None)
 
         return self
 
