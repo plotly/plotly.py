@@ -388,17 +388,19 @@ def test_supplied_yref_on_multi_plot_subplot():
         shared_yaxes=False,
         specs=[[{"secondary_y": True}, {"secondary_y": True}]],
     )
+    ### Add traces to the first subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3]), row=1, col=1)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[3, 2, 1], yaxis="y2"), row=1, col=1, secondary_y=True
     )
+    ### Add traces to the second subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], yaxis="y"), row=1, col=2)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[1, 1, 2], yaxis="y2"), row=1, col=2, secondary_y=True
     )
-    # add a horizontal line on both subplots secondary y.
-    # When using the subplots.make_subplots() method yref parameter should not be supplied to add_hline()
-    # Instead Secondary_y MUST be True to plot on secondary y
+    # add a horizontal line on both subplots on their respective secondary y.
+    # When using the subplots.make_subplots() method yref parameter should NOT be supplied per docstring instructions.
+    # Instead secondary_y specs and secondary_y parameter MUST be True to plot on secondary y
     fig.add_hline(y=2, row=1, col=1, secondary_y=True)
     fig.add_hline(y=1, row=1, col=2, secondary_y=True)
     assert fig.layout["shapes"][0]["yref"] == "y2"
