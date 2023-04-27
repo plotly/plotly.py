@@ -2743,6 +2743,7 @@
     "role": "object"
    },
    "legend": {
+    "_isSubplotObj": true,
     "bgcolor": {
      "description": "Sets the legend background color. Defaults to `layout.paper_bgcolor`.",
      "editType": "legend",
@@ -2955,6 +2956,12 @@
       "middle",
       "bottom"
      ]
+    },
+    "visible": {
+     "description": "Determines whether or not this legend is visible.",
+     "dflt": true,
+     "editType": "legend",
+     "valType": "boolean"
     },
     "x": {
      "description": "Sets the x position (in normalized coordinates) of the legend. Defaults to *1.02* for vertical legends and defaults to *0* for horizontal legends.",
@@ -12906,6 +12913,12 @@
       "valType": "string"
      }
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -14433,6 +14446,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -15738,6 +15757,12 @@
      "max": 1,
      "min": 0,
      "valType": "number"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -17082,6 +17107,12 @@
       }
      },
      "role": "object"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -18603,6 +18634,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgrouptitle": {
      "editType": "style",
      "font": {
@@ -19456,6 +19493,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -20455,6 +20498,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -21483,6 +21532,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -22687,6 +22742,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -23938,6 +23999,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -24899,6 +24966,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -25435,6 +25508,12 @@
       "editType": "none",
       "valType": "string"
      }
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -26869,6 +26948,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -27950,6 +28035,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -29094,6 +29185,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgrouptitle": {
      "editType": "style",
      "font": {
@@ -29880,6 +29977,12 @@
       "min": 1,
       "valType": "number"
      }
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -31851,6 +31954,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -33123,6 +33232,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -33885,6 +34000,12 @@
       "valType": "number"
      },
      "role": "object"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgrouptitle": {
      "editType": "style",
@@ -35107,6 +35228,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgrouptitle": {
      "editType": "style",
      "font": {
@@ -35977,6 +36104,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgrouptitle": {
      "editType": "style",
@@ -37010,6 +37143,12 @@
      "description": "Sets the minimum boundary for iso-surface plot.",
      "editType": "calc",
      "valType": "number"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -38300,6 +38439,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -38927,6 +39072,12 @@
       }
      },
      "role": "object"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -40402,6 +40553,12 @@
       "bottom"
      ]
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgrouptitle": {
      "editType": "style",
      "font": {
@@ -41603,6 +41760,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -42199,6 +42362,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -42668,6 +42837,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgrouptitle": {
      "editType": "style",
@@ -43870,6 +44045,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -46228,6 +46409,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -48229,6 +48416,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -50121,6 +50314,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `lat`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -52182,6 +52381,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -54185,6 +54390,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -55361,6 +55572,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -57277,6 +57494,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -59122,6 +59345,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `imag`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -61035,6 +61264,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -62950,6 +63185,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `ids`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -65145,6 +65386,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -65856,6 +66103,12 @@
       "valType": "number"
      },
      "role": "object"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgrouptitle": {
      "editType": "style",
@@ -67785,6 +68038,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -68690,6 +68949,12 @@
      "editType": "none",
      "valType": "string"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgrouptitle": {
      "editType": "style",
      "font": {
@@ -69101,6 +69366,12 @@
      "description": "Sets the source reference on Chart Studio Cloud for `labels`.",
      "editType": "none",
      "valType": "string"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgrouptitle": {
      "editType": "style",
@@ -70431,6 +70702,12 @@
      "max": 1,
      "min": 0,
      "valType": "number"
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -72247,6 +72524,12 @@
      "editType": "calc",
      "valType": "number"
     },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
+    },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
      "dflt": "",
@@ -73091,6 +73374,12 @@
       "editType": "none",
       "valType": "string"
      }
+    },
+    "legend": {
+     "description": "Sets the reference to a legend to show this trace in. References to these legends are *legend*, *legend2*, *legend3*, etc. Settings for these legends are set in the layout, under `layout.legend`, `layout.legend2`, etc.",
+     "dflt": "legend",
+     "editType": "style",
+     "valType": "subplotid"
     },
     "legendgroup": {
      "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",

@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Title(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "treemap.marker.colorbar"
