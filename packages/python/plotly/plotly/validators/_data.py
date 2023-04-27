@@ -3,7 +3,6 @@ import _plotly_utils.basevalidators
 
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
     def __init__(self, plotly_name="data", parent_name="", **kwargs):
-
         super(DataValidator, self).__init__(
             class_strs_map={
                 "bar": "Bar",
