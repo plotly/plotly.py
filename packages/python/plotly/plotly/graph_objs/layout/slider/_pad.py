@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Pad(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout.slider"

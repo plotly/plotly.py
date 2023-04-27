@@ -51,6 +51,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._insidetextfont import InsidetextfontValidator
     from ._insidetextanchor import InsidetextanchorValidator
     from ._increasing import IncreasingValidator
@@ -129,6 +130,7 @@ else:
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._insidetextfont.InsidetextfontValidator",
             "._insidetextanchor.InsidetextanchorValidator",
             "._increasing.IncreasingValidator",
