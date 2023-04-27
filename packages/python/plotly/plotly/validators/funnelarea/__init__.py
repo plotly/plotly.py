@@ -28,6 +28,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._labelssrc import LabelssrcValidator
     from ._labels import LabelsValidator
     from ._label0 import Label0Validator
@@ -80,6 +81,7 @@ else:
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._labelssrc.LabelssrcValidator",
             "._labels.LabelsValidator",
             "._label0.Label0Validator",

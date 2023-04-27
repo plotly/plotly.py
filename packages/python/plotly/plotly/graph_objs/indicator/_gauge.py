@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Gauge(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "indicator"
