@@ -5,7 +5,7 @@ from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-import plotly.express as px
+
 import pytest
 
 
@@ -353,8 +353,9 @@ def test_no_exclude_empty_subplots():
 
 
 def test_supplied_yref_on_single_plot_subplot():
-    ### test a (1,1) subplot figure object from px.scatter
-    fig = px.scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1])
+    ### test a (1,1) subplot figure object
+    fig = make_subplots(1, 1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1]))
     fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2"))
     fig.update_layout(
         yaxis=dict(title="yaxis1 title"),
