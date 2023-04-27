@@ -360,7 +360,7 @@ def test_supplied_yref_on_single_plot_subplot():
         yaxis=dict(title="yaxis1 title"),
         yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
     )
-    # add horizontal line on y2. Secondary_y can be True or False
+    # add horizontal line on y2. Secondary_y can be True or False when yref is supplied
     fig.add_hline(y=3, yref="y2", secondary_y=True)
     assert fig.layout["shapes"][0]["yref"] == "y2"
 
@@ -375,7 +375,7 @@ def test_supplied_yref_on_non_subplot_figure_object():
         yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
     )
     fig = go.Figure(data=data, layout=layout)
-    # add horizontal line on y2. Secondary_y can be True or False
+    # add horizontal line on y2. Secondary_y can be True or False when yref is supplied
     fig.add_hline(y=3, yref="y2", secondary_y=False)
     assert fig.layout["shapes"][0]["yref"] == "y2"
 
