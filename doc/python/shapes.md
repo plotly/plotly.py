@@ -943,10 +943,10 @@ fig.add_shape(
 
 fig.add_shape(
     type="rect",
-    fillcolor="MediumSlateBlue",
+    fillcolor="LightGreen",
     x0=1,
-    y0=1,
-    x1=2,
+    y0=1.75,
+    x1=2.25,
     y1=3,
     label=dict(texttemplate="Height: %{height:.3f}", font=dict(color="DarkOrange")),
 )
