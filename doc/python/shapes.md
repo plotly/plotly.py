@@ -919,7 +919,7 @@ fig.show()
 
 Use `texttemplate` to add text with variables to shapes. `texttemplate` uses d3 number and date formatting and supports raw variables, which use the raw data from the shape definition, and some calculated variables. Add a variable with "%{variable}".
 
-This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, and `width`on three other shapes. 
+This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, and `width` on three other shapes. 
 
 For a complete list of available variables, see the [Shape Reference Docs](https://plotly.com/python/reference/layout/shapes/).
 
