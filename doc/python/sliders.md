@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.3'
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.2
+    version: 3.8.16
   plotly:
     description: How to add slider controls to your plots in Python with Plotly.
     display_as: controls
@@ -88,6 +88,21 @@ The method determines which [plotly.js function](https://plot.ly/javascript/plot
 - `"relayout"`: modify **layout** attributes
 - `"animate"`: start or pause an animation
 
+
+#### Relayout Method
+The `"relayout"` method should be used when modifying the layout attributes of the graph.<br>
+**Update One Layout Attribute**<br>
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+# Create figure
+fig = go.Figure()
+
+
+fig.show()
+```
 
 ### Sliders in Plotly Express
 Plotly Express provide sliders, but with implicit animation using the `"animate"` method described above. The animation play button can be omitted by removing `updatemenus` in the `layout`:
