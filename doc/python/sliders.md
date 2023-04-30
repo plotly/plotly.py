@@ -89,9 +89,9 @@ The method determines which [plotly.js function](https://plot.ly/javascript/plot
 - `"animate"`: start or pause an animation
 
 
-#### Relayout Method
-The `"relayout"` method should be used when modifying the layout attributes of the graph.<br>
-**Update One Layout Attribute**<br>
+#### Update Method
+The `"update"` method should be used when modifying the data and layout sections of the graph.
+This example demonstrates how to update the data displayed while simultaneously updating layout attributes such as the annotations.
 
 ```python
 import plotly.graph_objects as go
@@ -100,6 +100,72 @@ import numpy as np
 # Create figure
 fig = go.Figure()
 
+min_val = 0
+max_val = 0
+
+# Add traces, one for each slider step
+start = -1
+for step in np.arange(start, 5, 0.1):
+    x_vec=np.arange(0, 10, 0.01) #np.arange(start, 1, 0.1)
+    y_vec=np.cos(step * np.arange(0, 10, 0.01))
+    fig.add_trace(
+        go.Scatter(
+            visible=False,
+            line=dict(color="#00CED1", width=4),
+            name="𝜈 = " + str(step),
+            x=x_vec,
+            y=y_vec))
+    if step == start:
+        min_val = np.min(y_vec)
+        max_val = np.max(y_vec)
+    else:
+        tmp_min = np.min(y_vec)
+        tmp_max = np.max(y_vec)
+        min_val = min(min_val, tmp_min)
+        max_val = max(max_val, tmp_max)
+    
+# Make 10th trace visible
+fig.data[10].visible = True
+
+# Add Annotations
+annotation_info = [dict(x=1,
+                       y=0,
+                       xref="paper", yref="paper",
+                       text="Min value:<br> %.4f" % min_val,
+                       ax=0, ay=40,
+                       showarrow=False,
+                       xanchor="left", yanchor="bottom"),
+                  dict(x=1,
+                       y=1,
+                       xref="paper", yref="paper",
+                       text="Max value:<br> %.4f" % max_val,
+                       ax=0, ay=-40,
+                       showarrow=False,
+                       xanchor="left", yanchor="top")
+                 ]
+# Create and add slider
+steps = []
+for i in range(len(fig.data)):
+    step = dict(
+        method="update",
+        label=str(i),
+        args=[{"visible": [False] * len(fig.data)},
+              {"title": "Slider switched to step: " + str(i), # layout attribute
+              "annotations": annotation_info}],  # layout attribute
+    )
+    step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+    steps.append(step)
+
+sliders = [dict(
+    active=10,
+    currentvalue={"prefix": "Slider value: "},
+    pad={"t": 30},
+    steps=steps
+)]
+
+fig.update_layout(
+    sliders=sliders
+)
 
 fig.show()
 ```
