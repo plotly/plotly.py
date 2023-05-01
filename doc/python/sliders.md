@@ -172,6 +172,7 @@ fig.show()
 
 #### Relayout Method
 The `"relayout"` method should be used when modifying layout attributes.
+This example demonstrates how to update which groups are in clusters.
 
 ```python
 import plotly.graph_objects as go
