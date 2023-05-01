@@ -170,6 +170,101 @@ fig.update_layout(
 fig.show()
 ```
 
+#### Relayout Method
+The `"relayout"` method should be used when modifying layout attributes.
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+# Create figure
+fig = go.Figure()
+
+x0 = np.random.normal(2, 0.2, 400)
+y0 = np.random.normal(2, 0.3, 400)
+x1 = np.random.normal(3, 0.1, 600)
+y1 = np.random.normal(6, 0.3, 400)
+x2 = np.random.normal(4, 0.4, 200)
+y2 = np.random.normal(4, 0.5, 200)
+
+# Add traces
+fig.add_trace(
+    go.Scatter(
+        x=x0,
+        y=y0,
+        mode="markers",
+        marker=dict(color="DarkOrange")
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=x1,
+        y=y1,
+        mode="markers",
+        marker=dict(color="Crimson")
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=x2,
+        y=y2,
+        mode="markers",
+        marker=dict(color="RebeccaPurple")
+    )
+)
+
+fig.add_shape(type="circle", 
+              xref="x", yref="y", 
+              x0=min(x0), y0=min(y0), 
+              x1=max(x2), y1=max(y1), 
+              line_color="RebeccaPurple",) 
+
+initial_cluster = [dict(type="circle",
+                            xref="x", yref="y",
+                            x0=min(x0), y0=min(y0),
+                            x1=max(x0), y1=max(y0),
+                            line=dict(color="DarkOrange"))]
+cluster2 = [dict(type="circle",
+                            xref="x", yref="y",
+                            x0=min(x0), y0=min(y0),
+                            x1=max(x1), y1=max(y1),
+                            line=dict(color="Crimson"))]
+cluster3 = [dict(type="circle",
+                            xref="x", yref="y",
+                            x0=min(x0), y0=min(y0),
+                            x1=max(x2), y1=max(y1),
+                            line=dict(color="RebeccaPurple"))]
+
+clusters = [initial_cluster, cluster2, cluster3]
+
+# Create and add slider
+steps = []
+for i in range(len(fig.data)):
+    step = dict(
+        method="relayout",
+        label=str(i+1),
+        args=["shapes", clusters[i]],
+    )
+    steps.append(step)
+
+sliders = [dict(
+    active=3,
+    currentvalue={"prefix": "Groups in cluster: "},
+    pad={"t": 50},
+    steps=steps
+)]
+
+fig.update_layout(
+    title_text="Groups",
+    showlegend=False,
+    sliders=sliders
+)
+
+fig.show()
+```
+
 ### Sliders in Plotly Express
 Plotly Express provide sliders, but with implicit animation using the `"animate"` method described above. The animation play button can be omitted by removing `updatemenus` in the `layout`:
 
