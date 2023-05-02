@@ -40,7 +40,7 @@ def color_validator(request):
         "uint16",
         "uint32",
         "uint64",
-        "float16",
+        # "float16",
         "float32",
         "float64",
     ]

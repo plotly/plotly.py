@@ -1682,7 +1682,9 @@ def process_dataframe_timeline(args):
         )
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
-    args["data_frame"][args["x_end"]] = (x_end - x_start).astype("timedelta64[ms]")
+    args["data_frame"][args["x_end"]] = (x_end - x_start).astype(
+        "timedelta64[ns]"
+    ) / np.timedelta64(1, "ms")
     args["x"] = args["x_end"]
     del args["x_end"]
     args["base"] = args["x_start"]
