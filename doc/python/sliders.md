@@ -170,6 +170,48 @@ fig.update_layout(
 fig.show()
 ```
 
+Another example.
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+companies = ['Company A','Company B','Company C','Company D','Company E','Company F','Company G','Company H']
+outcomes = [7.8, 12.3, 20.4, 8.9, -5.7, -16.3, 10.2, -1.5]
+
+# Create figure
+fig = go.Figure()
+
+# Add trace
+fig.add_trace(go.Bar(
+    x=companies,
+    y=outcomes,
+    marker=dict(color = "green")
+))
+
+min_outcome = int(min(outcomes))
+max_outcome = int(max(outcomes))
+
+value = 0
+#args = [{'y':[y for y in outcomes if y>value],
+#        'x':[x for x in companies for y in outcomes if y>value]}]
+steps = [dict(method="update",
+              args=[{'x':[[c for c, o in zip(companies,outcomes) if o>k]]},
+                    {'y':[[[y for y in outcomes if y>k]]]}],
+              label=f"{k}") for k in range(min_outcome, max_outcome)]
+
+sliders = [dict(
+           active=0,
+           currentvalue={"prefix": "Current value: "},
+           steps=steps
+)]
+
+fig.update_layout(title="Companies and outcomes",
+                  sliders=sliders)
+
+fig.show()
+```
+
 #### Relayout Method
 The `"relayout"` method should be used when modifying layout attributes.
 This example demonstrates how to update which groups are in clusters.
