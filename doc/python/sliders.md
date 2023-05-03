@@ -170,11 +170,12 @@ fig.update_layout(
 fig.show()
 ```
 
-Another example.
+This example demonstrates how sliders can be employed to data filtering. Here we show companies, represented with bars, when values of the outcome variable are above the threshold. The change in trace attributes is associated with the change in layout attribute. The title is updated when the value of the threshold is more than zero.
 
 ```python
 import plotly.graph_objects as go
 import numpy as np
+import math
 
 companies = ['Company A','Company B','Company C','Company D','Company E','Company F','Company G','Company H']
 outcomes = [7.8, 12.3, 20.4, 8.9, -5.7, -16.3, 10.2, -1.5]
@@ -189,24 +190,23 @@ fig.add_trace(go.Bar(
     marker=dict(color = "green")
 ))
 
-min_outcome = int(min(outcomes))
-max_outcome = int(max(outcomes))
+min_outcome = math.ceil(min(outcomes))
+max_outcome = math.ceil(max(outcomes))
 
-value = 0
-#args = [{'y':[y for y in outcomes if y>value],
-#        'x':[x for x in companies for y in outcomes if y>value]}]
+titles = ["Companies and outcomes", "Companies with positive outcomes"]
 steps = [dict(method="update",
-              args=[{'x':[[c for c, o in zip(companies,outcomes) if o>k]]},
-                    {'y':[[[y for y in outcomes if y>k]]]}],
+              args=[{'x': [[c for c, o in zip(companies,outcomes) if o>k]], #trace attributes that are updated by each slider step
+                     'y': [[y for y in outcomes if y>k]]}, #trace attributes that are updated by each slider step
+                    {'title': titles[1] if k>0 else titles[0]}], #layout attributes that are updated
               label=f"{k}") for k in range(min_outcome, max_outcome)]
 
 sliders = [dict(
            active=0,
-           currentvalue={"prefix": "Current value: "},
+           currentvalue={"prefix": "threshold: "},
            steps=steps
 )]
 
-fig.update_layout(title="Companies and outcomes",
+fig.update_layout(title=titles[0],
                   sliders=sliders)
 
 fig.show()
@@ -258,12 +258,6 @@ fig.add_trace(
     )
 )
 
-fig.add_shape(type="circle", 
-              xref="x", yref="y", 
-              x0=min(x0), y0=min(y0), 
-              x1=max(x2), y1=max(y1), 
-              line_color="RebeccaPurple",) 
-
 initial_cluster = [dict(type="circle",
                             xref="x", yref="y",
                             x0=min(x0), y0=min(y0),
@@ -280,20 +274,15 @@ cluster3 = [dict(type="circle",
                             x1=max(x2), y1=max(y1),
                             line=dict(color="RebeccaPurple"))]
 
-clusters = [initial_cluster, cluster2, cluster3]
+clusters = [[], initial_cluster, cluster2, cluster3]
 
 # Create and add slider
-steps = []
-for i in range(len(fig.data)):
-    step = dict(
-        method="relayout",
-        label=str(i+1),
-        args=["shapes", clusters[i]],
-    )
-    steps.append(step)
+steps = [dict(method="relayout",
+              args=["shapes", clusters[k]],
+              label=f"{k}") for k in range(len(clusters))]
 
 sliders = [dict(
-    active=3,
+    active=0,
     currentvalue={"prefix": "Groups in cluster: "},
     pad={"t": 50},
     steps=steps
