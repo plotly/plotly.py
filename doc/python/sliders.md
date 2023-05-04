@@ -207,6 +207,7 @@ sliders = [dict(
 )]
 
 fig.update_layout(title=titles[0],
+                  yaxis_title="outcome [mil.]",
                   sliders=sliders)
 
 fig.show()
@@ -278,7 +279,7 @@ clusters = [[], initial_cluster, cluster2, cluster3]
 
 # Create and add slider
 steps = [dict(method="relayout",
-              args=["shapes", clusters[k]],
+              args=["shapes", clusters[k]], 
               label=f"{k}") for k in range(len(clusters))]
 
 sliders = [dict(
