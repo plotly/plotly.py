@@ -109,19 +109,19 @@ If you are running this notebook live, click to [open the output directory](./im
 
 plotly.py can output figures to several raster image formats including **PNG**, ...
 
-```python
+```python .noeval
 fig.write_image("images/fig1.png")
 ```
 
 **JPEG**, ...
 
-```python
+```python .noeval
 fig.write_image("images/fig1.jpeg")
 ```
 
 and **WebP**
 
-```python
+```python .noeval
 fig.write_image("images/fig1.webp")
 ```
 
@@ -130,19 +130,19 @@ fig.write_image("images/fig1.webp")
 
 plotly.py can also output figures in several vector formats including **SVG**, ...
 
-```python
+```python .noeval
 fig.write_image("images/fig1.svg")
 ```
 
 **PDF**, ...
 
-```python
+```python .noeval
 fig.write_image("images/fig1.pdf")
 ```
 
 and **EPS** (requires the poppler library)
 
-```python
+```python .noeval
 fig.write_image("images/fig1.eps")
 ```
 
@@ -199,12 +199,12 @@ Image(img_bytes)
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying that orca should be used:
-```python
+```python .noeval
 fig.to_image(format="png", engine="orca")
 ```
 
 And, here is an example of specifying that Kaleido should be used:
-```python
+```python .noeval
 fig.to_image(format="png", engine="kaleido")
 ```
 
