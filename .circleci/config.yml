@@ -92,7 +92,21 @@ commands:
             cd packages/python/plotly
             . venv/bin/activate
             pytest -x test_init/test_lazy_imports.py
-
+      - run:
+          name: Test PX if Pandas 2
+          command: |
+            if [ "<<parameters.py>>" == "39_pandas_2" ]; then
+              . packages/python/plotly/venv/bin/activate
+              pip install -e ./packages/python/plotly
+              pip install -e ./packages/python/plotly-geo
+              python test/percy/plotly-express.py
+              mkdir test/percy/pandas2
+              mv test/percy/*.html test/percy/pandas2/
+              # 1.1 is the earliest minor with Py3.9 wheels
+              pip install "pandas==1.1.5"
+              python test/percy/plotly-express.py
+              python test/percy/compare-pandas.py
+            fi
   test_orca:
     parameters:
       py:
