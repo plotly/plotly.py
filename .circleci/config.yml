@@ -121,6 +121,7 @@ commands:
           command: |
             npm install electron@1.8.4
             npm install orca
+            sudo apt-get update
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
             echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
       - run:
@@ -433,10 +434,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "doc/requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
@@ -446,26 +444,28 @@ jobs:
             cd doc
             python -m venv venv
             . venv/bin/activate
-            pip install -U pip
+            pip install --upgrade pip wheel
             pip uninstall -y plotly
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd ../../../doc
+              pip install -e ../packages/python/plotly
             fi
-            echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
+            cd ..
+      - run:
+          name: Install orca
+          command: |
             npm install electron@1.8.4
             npm install orca
+            sudo apt-get update
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            cd ..
+            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
 
       - save_cache:
           paths:
             - ./doc/venv
             - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
 
       - run:
           name: make html
