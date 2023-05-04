@@ -263,7 +263,7 @@ jobs:
           name: Run percy snapshots
           command: |
             npm i @percy/cli
-            npx percy snapshot test/percy/
+            npx percy snapshot -c test/percy/snapshots.yml test/percy/
             rm test/percy/*.html
 
   # Chart studio
