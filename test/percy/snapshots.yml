@@ -1,7 +1,7 @@
 version: 2
 static:
   options:
-    waitForTimeout: 3000
+    waitForTimeout: 6000
 snapshot:
   widths:
     - 1280
