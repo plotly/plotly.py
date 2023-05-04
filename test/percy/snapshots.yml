@@ -17,10 +17,6 @@ static:
             c.parentElement.insertBefore(i, c);
             c.parentElement.removeChild(c);
         });
-        // just to know if we're running this code or not!
-        var d = document.createElement('div');
-        d.setAttribute('style', 'position:fixed;left:10px;top:10px;width:10px;height:10px;background-color:#f00;');
-        document.body.appendChild(d);
 snapshot:
   widths:
     - 1280
