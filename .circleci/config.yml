@@ -92,21 +92,6 @@ commands:
             cd packages/python/plotly
             . venv/bin/activate
             pytest -x test_init/test_lazy_imports.py
-      - run:
-          name: Test PX if Pandas 2
-          command: |
-            if [ "<<parameters.py>>" == "39_pandas_2" ]; then
-              . packages/python/plotly/venv/bin/activate
-              pip install -e ./packages/python/plotly
-              pip install -e ./packages/python/plotly-geo
-              python test/percy/plotly-express.py
-              mkdir test/percy/pandas2
-              mv test/percy/*.html test/percy/pandas2/
-              # 1.1 is the earliest minor with Py3.9 wheels
-              pip install "pandas==1.1.5"
-              python test/percy/plotly-express.py
-              python test/percy/compare-pandas.py
-            fi
   test_orca:
     parameters:
       py:
@@ -245,7 +230,7 @@ jobs:
   # Percy
   python_37_percy:
     docker:
-      - image: cimg/python:3.7-browsers
+      - image: cimg/python:3.9-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -267,18 +252,29 @@ jobs:
             pip install --upgrade pip wheel
             pip install -e ./packages/python/plotly
             pip install -e ./packages/python/plotly-geo
-            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt
+            pip install -r ./packages/python/plotly/test_requirements/requirements_39_pandas_2_optional.txt
       - run:
-          name: Build html figures
+          name: Build html figures (Pandas 2)
           command: |
             . venv/bin/activate
             python test/percy/plotly-express.py
+      - run:
+          name: Build html figures (Pandas 1) and compare
+          command: |
+            . venv/bin/activate
+            mkdir test/percy/pandas2
+            mv test/percy/*.html test/percy/pandas2/
+            # 1.1 is the earliest minor with Py3.9 wheels
+            pip install "pandas==1.1.5"
+            python test/percy/plotly-express.py
+            python test/percy/compare-pandas.py
       - run:
           name: Run percy snapshots
           command: |
             npm i @percy/cli
             npx percy snapshot -c test/percy/snapshots.yml test/percy/
             rm test/percy/*.html
+            rm -rf test/percy/pandas2
 
   # Chart studio
   python_37_chart_studio:
