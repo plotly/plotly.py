@@ -109,42 +109,42 @@ If you are running this notebook live, click to [open the output directory](./im
 
 plotly.py can output figures to several raster image formats including **PNG**, ...
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.png")
-```
+~~~
 
 **JPEG**, ...
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.jpeg")
-```
+~~~
 
 and **WebP**
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.webp")
-```
+~~~
 
 #### Vector Formats: SVG and PDF...
 
 
 plotly.py can also output figures in several vector formats including **SVG**, ...
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.svg")
-```
+~~~
 
 **PDF**, ...
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.pdf")
-```
+~~~
 
 and **EPS** (requires the poppler library)
 
-```python .noeval
+~~~python
 fig.write_image("images/fig1.eps")
-```
+~~~
 
 **Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
@@ -199,14 +199,14 @@ Image(img_bytes)
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying that orca should be used:
-```python .noeval
+~~~python
 fig.to_image(format="png", engine="orca")
-```
+~~~
 
 And, here is an example of specifying that Kaleido should be used:
-```python .noeval
+~~~python
 fig.to_image(format="png", engine="kaleido")
-```
+~~~
 
 <!-- #endregion -->
 
