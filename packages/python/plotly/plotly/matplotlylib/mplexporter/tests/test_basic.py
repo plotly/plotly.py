@@ -146,8 +146,8 @@ def test_path():
 
 
 def test_Figure():
-    """ if the fig is not associated with a canvas, FakeRenderer shall
-    not fail. """
+    """if the fig is not associated with a canvas, FakeRenderer shall
+    not fail."""
     fig = plt.Figure()
     ax = fig.add_subplot(111)
     ax.add_patch(plt.Circle((0, 0), 1))
