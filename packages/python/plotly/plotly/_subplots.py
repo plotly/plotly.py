@@ -711,7 +711,7 @@ The row_titles argument to make_subplots must be a list or tuple
                 else:
                     raise Exception(
                         "A combination of the 'b' values, heights, and "
-                        "number of subplots too large for this subplot gird."
+                        "number of subplots too large for this subplot grid."
                     )
             if y_e > 1.0:
                 if y_e < 1.01:
@@ -719,7 +719,7 @@ The row_titles argument to make_subplots must be a list or tuple
                 else:
                     raise Exception(
                         "A combination of the 't' values, heights, and "
-                        "number of subplots too large for this subplot gird."
+                        "number of subplots too large for this subplot grid."
                     )
 
             y_domain = [y_s, y_e]
