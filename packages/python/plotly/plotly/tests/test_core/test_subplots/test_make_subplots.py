@@ -668,7 +668,7 @@ class TestMakeSubplots(TestCase):
         for _ in range(n_subplots):
             specs.append([{"b": padding_size / 2.0, "t": padding_size / 2.0}])
 
-        fig = tls.make_subplots(rows=n_subplots, specs=specs)
+        fig = subplots.make_subplots(rows=n_subplots, specs=specs)
         self.assertTrue(
             all(
                 fig.layout[f"yaxis{i if i > 1 else ''}"]["domain"][0] <= 1.0
