@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.9
   plotly:
     description: How to set, create and control continuous color scales and color
       bars in scatter, bar, map and heatmap figures.
@@ -295,6 +295,41 @@ fig.update_layout(coloraxis_colorbar=dict(
     tickvals=[6,7,8,9],
     ticktext=["1M", "10M", "100M", "1B"],
 ))
+fig.show()
+```
+
+### Using Label Aliases on Colorbars
+
+*New in 5.14*
+
+Using `labelalias` you can replace some labels on the `colorbar` with alternative values. In this example, the `colorbar` has five `tickvals`. Using `labelalias`, instead of displaying all labels as the numbers in `tickvals`, we swap out three of the labels for text.
+
+```python
+import plotly.graph_objects as go
+
+import urllib
+import json
+
+# Load heatmap data
+response = urllib.request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure()
+
+fig.add_trace(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(
+        title="Surface Heat",
+        titleside="top",
+        tickmode="array",
+        tickvals=[2, 25, 50, 75, 100],
+        labelalias={100: "Hot", 50: "Mild", 2: "Cold"},
+        ticks="outside"
+    )
+))
+
 fig.show()
 ```
 

@@ -82,26 +82,49 @@ non_smoker_mean = mean_values_df[mean_values_df.smoker == "No"].sort_values(
 smoker = df[df.smoker == "Yes"].sort_values(by="tip", ascending=False)
 non_smoker = df[df.smoker == "No"].sort_values(by="tip", ascending=False)
 
-fig = go.Figure()
+fig = go.Figure(
+    layout=dict(
+        xaxis=dict(categoryorder="category descending"),
+        yaxis=dict(range=[0, 7]),
+        scattermode="group",
+        legend=dict(groupclick="toggleitem"),
+    )
+)
 
 fig.add_trace(
     go.Bar(
         x=smoker_mean.sex,
         y=smoker_mean.tip,
-        name="Average (Smoker)",
+        name="Average",
         marker_color="IndianRed",
         offsetgroup="smoker",
+        legendgroup="smoker",
+        legendgrouptitle_text="Smoker",
     )
 )
 
 
 fig.add_trace(
+    go.Scatter(
+        x=smoker.sex,
+        y=smoker.tip,
+        mode="markers",
+        name="Individual tips",
+        marker=dict(color="LightSlateGrey", size=5),
+        offsetgroup="smoker",
+        legendgroup="smoker",
+    )
+)
+
+fig.add_trace(
     go.Bar(
         x=non_smoker_mean.sex,
         y=non_smoker_mean.tip,
-        name="Average (Non-Smoker)",
+        name="Average",
         marker_color="LightSalmon",
         offsetgroup="non-smoker",
+        legendgroup="non-smoker",
+        legendgrouptitle_text="Non-Smoker",
     )
 )
 
@@ -111,27 +134,14 @@ fig.add_trace(
         x=non_smoker.sex,
         y=non_smoker.tip,
         mode="markers",
-        name="Individual tips (Non-Smoker)",
+        name="Individual tips",
         marker=dict(color="LightSteelBlue", size=5),
         offsetgroup="non-smoker",
+        legendgroup="non-smoker",
     )
 )
-
-fig.add_trace(
-    go.Scatter(
-        x=smoker.sex,
-        y=smoker.tip,
-        mode="markers",
-        name="Individual tips (Smoker)",
-        marker=dict(color="LightSlateGrey", size=5),
-        offsetgroup="smoker",
-    )
-)
-
-fig.update_layout(scattermode="group")
 
 fig.show()
-
 ```
 
 #### Line Chart and a Bar Chart
