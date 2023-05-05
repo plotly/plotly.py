@@ -403,6 +403,9 @@ def test_missing_webbrowser_methods(fig1):
     import webbrowser
 
     removed_webbrowser_get_method = webbrowser.get
-    del webbrowser.get
-    fig1._repr_html_()
-    webbrowser.get = removed_webbrowser_get_method  # restore everything after this test
+    try:
+        del webbrowser.get
+        fig1._repr_html_()
+    finally:
+        # restore everything after this test
+        webbrowser.get = removed_webbrowser_get_method
