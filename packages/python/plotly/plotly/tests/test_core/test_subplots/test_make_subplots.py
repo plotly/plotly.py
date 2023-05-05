@@ -672,7 +672,7 @@ class TestMakeSubplots(TestCase):
         self.assertTrue(
             all(
                 fig.layout[f"yaxis{i if i > 1 else ''}"]["domain"][0] <= 1.0
-                for i in range(1, n_subplots+1)
+                for i in range(1, n_subplots + 1)
             )
         )
 
