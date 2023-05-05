@@ -671,7 +671,6 @@ The row_titles argument to make_subplots must be a list or tuple
     # Loop through specs -- (r, c) <-> (row, col)
     for r, spec_row in enumerate(specs):
         for c, spec in enumerate(spec_row):
-
             if spec is None:  # skip over None cells
                 continue
 
@@ -702,6 +701,46 @@ The row_titles argument to make_subplots must be a list or tuple
             else:
                 y_s = grid[r_spanned][c][1] + spec["b"]
                 y_e = grid[r][c][1] + heights[-1 - r] - spec["t"]
+
+            if y_s < 0.0:
+                # round for values very close to one
+                # handles some floating point errors
+                if y_s > -0.01:
+                    y_s = 0.0
+                else:
+                    raise Exception(
+                        "A combination of the 'b' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+            if y_s > 1.0:
+                # round for values very close to one
+                # handles some floating point errors
+                if y_s < 1.01:
+                    y_s = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 'b' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
+            if y_e < 0.0:
+                if y_e > -0.01:
+                    y_e = 0.0
+                else:
+                    raise Exception(
+                        "A combination of the 't' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
+            if y_e > 1.0:
+                if y_e < 1.01:
+                    y_e = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 't' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
             y_domain = [y_s, y_e]
 
             list_of_domains.append(x_domain)
@@ -726,7 +765,6 @@ The row_titles argument to make_subplots must be a list or tuple
     insets_ref = [None for inset in range(len(insets))] if insets else None
     if insets:
         for i_inset, inset in enumerate(insets):
-
             r = inset["cell"][0] - 1
             c = inset["cell"][1] - 1
 
@@ -1052,7 +1090,6 @@ def _subplot_type_for_trace_type(trace_type):
 
 
 def _validate_coerce_subplot_type(subplot_type):
-
     # Lowercase subplot_type
     orig_subplot_type = subplot_type
     subplot_type = subplot_type.lower()
@@ -1200,7 +1237,6 @@ def _build_subplot_title_annotations(
 
 
 def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
-
     # Compute rows and columns
     rows = len(specs)
     cols = len(specs[0])
@@ -1257,7 +1293,6 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     # Loop through specs, fill in _tmp
     for r, spec_row in enumerate(specs):
         for c, spec in enumerate(spec_row):
-
             ref = grid_ref[r][c]
             if ref is None:
                 if _tmp[r][c] == "":
@@ -1339,7 +1374,6 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
 
 
 def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=False):
-
     if row <= 0:
         raise Exception(
             "Row value is out of range. " "Note: the starting cell is (1, 1)"
@@ -1461,7 +1495,6 @@ Unexpected subplot type with layout_keys of {}""".format(
 
 
 def _get_subplot_ref_for_trace(trace):
-
     if "domain" in trace:
         return SubplotRef(
             subplot_type="domain",
