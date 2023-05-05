@@ -275,6 +275,8 @@ jobs:
             npx percy snapshot -c test/percy/snapshots.yml test/percy/
             rm test/percy/*.html
             rm -rf test/percy/pandas2
+      - store_artifacts:
+          path: test/percy
 
   # Chart studio
   python_37_chart_studio:
