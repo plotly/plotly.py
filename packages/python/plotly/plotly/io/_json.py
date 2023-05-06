@@ -57,6 +57,23 @@ def coerce_to_strict(const):
         return const
 
 
+_swap = (
+    ("<", "\\u003c"),
+    (">", "\\u003e"),
+    ("/", "\\u002f"),
+    ("\u2028", "\\u2028"),
+    ("\u2029", "\\u2029"),
+)
+
+
+def _safe(json_str):
+    out = json_str
+    for unsafe_char, safe_char in _swap:
+        if unsafe_char in out:
+            out = out.replace(unsafe_char, safe_char)
+    return out
+
+
 def to_json_plotly(plotly_object, pretty=False, engine=None):
     """
     Convert a plotly/Dash object to a JSON string representation
@@ -120,7 +137,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         from _plotly_utils.utils import PlotlyJSONEncoder
 
-        return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
+        return _safe(json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts))
     elif engine == "orjson":
         JsonConfig.validate_orjson()
         opts = orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY
@@ -136,7 +153,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         # Try without cleaning
         try:
-            return orjson.dumps(plotly_object, option=opts).decode("utf8")
+            return _safe(orjson.dumps(plotly_object, option=opts).decode("utf8"))
         except TypeError:
             pass
 
@@ -146,7 +163,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
             datetime_allowed=True,
             modules=modules,
         )
-        return orjson.dumps(cleaned, option=opts).decode("utf8")
+        return _safe(orjson.dumps(cleaned, option=opts).decode("utf8"))
 
 
 def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
