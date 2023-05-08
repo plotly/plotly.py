@@ -89,6 +89,7 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `initial`, `delta` and `final`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example
@@ -126,6 +127,12 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
             insidetextfont
                 Sets the font used for `text` lying inside the
                 bar.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -269,7 +276,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variables
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
                 `initial`, `delta`, `final` and `label`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud

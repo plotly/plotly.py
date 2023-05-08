@@ -74,6 +74,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `currentPath`, `root`, `entry`,
                 `percentRoot`, `percentEntry` and
                 `percentParent`. Anything contained in tag
@@ -110,6 +111,12 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
             labelssrc
                 Sets the source reference on Chart Studio Cloud
                 for `labels`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.treemap.Legendgrou
                 ptitle` instance or dict with compatible
@@ -225,7 +232,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variables
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
                 `currentPath`, `root`, `entry`, `percentRoot`,
                 `percentEntry`, `percentParent`, `label` and
                 `value`.

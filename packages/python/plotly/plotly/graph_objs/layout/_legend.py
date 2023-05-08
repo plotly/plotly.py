@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Legend(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout"
@@ -27,6 +26,7 @@ class Legend(_BaseLayoutHierarchyType):
         "traceorder",
         "uirevision",
         "valign",
+        "visible",
         "x",
         "xanchor",
         "y",
@@ -576,6 +576,26 @@ class Legend(_BaseLayoutHierarchyType):
     def valign(self, val):
         self["valign"] = val
 
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this legend is visible.
+
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["visible"]
+
+    @visible.setter
+    def visible(self, val):
+        self["visible"] = val
+
     # x
     # -
     @property
@@ -747,6 +767,8 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
             Sets the x position (in normalized coordinates) of the
             legend. Defaults to 1.02 for vertical legends and
@@ -796,6 +818,7 @@ class Legend(_BaseLayoutHierarchyType):
         traceorder=None,
         uirevision=None,
         valign=None,
+        visible=None,
         x=None,
         xanchor=None,
         y=None,
@@ -878,6 +901,8 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
             Sets the x position (in normalized coordinates) of the
             legend. Defaults to 1.02 for vertical legends and
@@ -1010,6 +1035,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = valign if valign is not None else _v
         if _v is not None:
             self["valign"] = _v
+        _v = arg.pop("visible", None)
+        _v = visible if visible is not None else _v
+        if _v is not None:
+            self["visible"] = _v
         _v = arg.pop("x", None)
         _v = x if x is not None else _v
         if _v is not None:
