@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Z(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "surface.contours"
