@@ -80,6 +80,11 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                This value here applies when hovering over
+                dimensions. Note that `*categorycount`,
+                "colorcount" and "bandcolorcount" are only
+                available when `hoveron` contains the "color"
+                flagFinally, the template string has access to
                 variables `count`, `probability`, `category`,
                 `categorycount`, `colorcount` and
                 `bandcolorcount`. Anything contained in tag
