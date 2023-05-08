@@ -221,3 +221,25 @@ def test_mixed_string_nonstring_key(engine, pretty):
     value = build_test_dict({0: 1, "a": 2})
     result = pio.to_json_plotly(value, engine=engine)
     check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_sanitize_json(engine):
+    layout = {"title": {"text": "</script>\u2028\u2029"}}
+    fig = go.Figure(layout=layout)
+    fig_json = pio.to_json_plotly(fig, engine=engine)
+    layout_2 = json.loads(fig_json)["layout"]
+    del layout_2["template"]
+
+    assert layout == layout_2
+
+    replacements = {
+        "<": "\\u003c",
+        ">": "\\u003e",
+        "/": "\\u002f",
+        "\u2028": "\\u2028",
+        "\u2029": "\\u2029",
+    }
+
+    for bad, good in replacements.items():
+        assert bad not in fig_json
+        assert good in fig_json
