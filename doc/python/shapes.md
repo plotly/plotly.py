@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.9
+    version: 3.8.8
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -911,6 +911,92 @@ fig.add_shape(
 )
 
 fig.show()
+```
+
+#### Variables in Shape Label Text
+
+*New in 5.15*
+
+Use `texttemplate` to add text with variables to shapes. `texttemplate` uses d3 number and date formatting and supports raw variables, which use the raw data from the shape definition, and some calculated variables. Add a variable with "%{variable}".
+
+This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, and `width` on three other shapes. 
+
+For a complete list of available variables, see the [Shape Reference Docs](https://plotly.com/python/reference/layout/shapes/).
+
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor="MediumSlateBlue",
+    x0=-0.5,
+    y0=-0.5,
+    x1=1,
+    y1=1,
+    label=dict(
+        texttemplate="x0 is %{x0:.3f}, y0 is %{y0:.3f}", font=dict(color="DarkOrange")
+    ),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor="LightGreen",
+    x0=1,
+    y0=1.75,
+    x1=2.25,
+    y1=3,
+    label=dict(texttemplate="Height: %{height:.3f}", font=dict(color="DarkOrange")),
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=0.8,
+    line_width=3,
+    label=dict(texttemplate="Slope: %{slope:.3f}", font=dict(size=20)),
+)
+fig.add_shape(
+    type="rect",
+    fillcolor="Lavender",
+    x0=2.5,
+    y0=2.5,
+    x1=5,
+    y1=3.5,
+    label=dict(
+        texttemplate="Width: %{width:.3f}",
+        font=dict(family="Courier New, monospace", size=20),
+    ),
+)
+
+fig.show()
+
+```
+
+#### Variables in Shape Label Text for New Shapes
+
+*New in 5.15*
+
+Use `texttemplate` to add text with variables to new shapes drawn on the graph. This example figure is configured to allow the user to draw lines and automatically labels each line with its slope. Select **Draw line** in the modebar to try it out.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    layout=go.Layout(newshape=dict(label=dict(texttemplate="Slope: %{slope:.3f}")))
+)
+
+fig.show(
+    config={
+        "modeBarButtonsToAdd": [
+            "drawline",
+        ]
+    }
+)
+
 ```
 
 ### Reference
