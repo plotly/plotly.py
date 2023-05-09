@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Tickfont(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout.smith.realaxis"

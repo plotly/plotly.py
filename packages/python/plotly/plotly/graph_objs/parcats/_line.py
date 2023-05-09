@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "parcats"
@@ -615,11 +614,13 @@ class Line(_BaseTraceHierarchyType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `count` and `probability`. Anything contained in tag `<extra>`
-        is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available.  This value
+        here applies when hovering over lines.Finally, the template
+        string has access to variables `count` and `probability`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -798,11 +799,13 @@ class Line(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count` and `probability`.
-            Anything contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over lines.Finally, the template string has access to
+            variables `count` and `probability`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If
@@ -936,11 +939,13 @@ class Line(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count` and `probability`.
-            Anything contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over lines.Finally, the template string has access to
+            variables `count` and `probability`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If

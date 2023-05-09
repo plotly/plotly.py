@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Heatmapgl(_BaseTraceType):
-
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -22,6 +21,7 @@ class Heatmapgl(_BaseTraceType):
         "hoverlabel",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
         "legendwidth",
@@ -673,6 +673,31 @@ class Heatmapgl(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self["idssrc"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
 
     # legendgrouptitle
     # ----------------
@@ -1490,6 +1515,12 @@ class Heatmapgl(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1652,6 +1683,7 @@ class Heatmapgl(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -1760,6 +1792,12 @@ class Heatmapgl(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1990,6 +2028,10 @@ an instance of :class:`plotly.graph_objs.Heatmapgl`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
