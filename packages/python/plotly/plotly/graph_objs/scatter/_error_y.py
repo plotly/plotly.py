@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class ErrorY(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "scatter"
