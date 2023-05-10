@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Smith(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout"
