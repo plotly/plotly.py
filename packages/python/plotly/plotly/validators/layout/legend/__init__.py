@@ -6,6 +6,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._y import YValidator
     from ._xanchor import XanchorValidator
     from ._x import XValidator
+    from ._visible import VisibleValidator
     from ._valign import ValignValidator
     from ._uirevision import UirevisionValidator
     from ._traceorder import TraceorderValidator
@@ -35,6 +36,7 @@ else:
             "._y.YValidator",
             "._xanchor.XanchorValidator",
             "._x.XValidator",
+            "._visible.VisibleValidator",
             "._valign.ValignValidator",
             "._uirevision.UirevisionValidator",
             "._traceorder.TraceorderValidator",
