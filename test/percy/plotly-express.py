@@ -545,9 +545,4 @@ fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Task")
 fig.write_html(os.path.join(dir_name, "timeline.html"), auto_play=False)
 
 
-px.bar(
-    pd.DataFrame(columns=['A', 'B', 'X']),
-    x = 'A',
-    y = 'X',
-    facet_col = 'B'
-)
+px.bar(pd.DataFrame(columns=["A", "B", "X"]), x="A", y="X", facet_col="B")
