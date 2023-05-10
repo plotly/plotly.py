@@ -1560,8 +1560,13 @@ is of type {subplot_type}.""".format(
                     )
                 )
 
-            # If the new_object was created with an yref specified, the specified yref should be used otherwise assign the xref and yref from the layout_keys
-            if new_obj.yref == None or new_obj.yref == "y":
+            # If the new_object was created with a yref specified that did not include paper or domain, the specified yref should be used otherwise assign the xref and yref from the layout_keys
+            if (
+                new_obj.yref == None
+                or new_obj.yref == "y"
+                or "paper" in new_obj.yref
+                or "domain" in new_obj.yref
+            ):
                 if len(refs) == 1 and secondary_y:
                     raise ValueError(
                         """
