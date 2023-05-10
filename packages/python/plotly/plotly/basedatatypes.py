@@ -4067,12 +4067,10 @@ Invalid property path '{key_path_str}' for layout
                 # however, in the case of a single plot, xref and yref MAY not be
                 # specified, IF they are not specified we specify them here so the following routines can work
                 # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
-                if self.layout[layout_obj][-1].xref == None:
+                if self.layout[layout_obj][-1].xref is None:
                     self.layout[layout_obj][-1].update(xref="x")
-                # self.layout[layout_obj][-1].update(xref="x")
-                if self.layout[layout_obj][-1].yref == None:
+                if self.layout[layout_obj][-1].yref is None:
                     self.layout[layout_obj][-1].update(yref="y")
-                # self.layout[layout_obj][-1].update(yref='y')
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
