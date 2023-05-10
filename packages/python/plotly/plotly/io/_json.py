@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import json
+import types
 import decimal
 import datetime
 from pathlib import Path
@@ -469,6 +470,10 @@ def clean_to_json_compatible(obj, **kwargs):
         if obj:
             # Must process list recursively even though it may be slow
             return [clean_to_json_compatible(v, **kwargs) for v in obj]
+
+    if isinstance(obj, types.FunctionType):
+        obj = f"Function {obj.__name__} not supported as argument. Probably should add ()."
+        return obj
 
     # unpack kwargs
     numpy_allowed = kwargs.get("numpy_allowed", False)

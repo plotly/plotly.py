@@ -1,4 +1,5 @@
 import decimal
+import types
 import json as _json
 import sys
 import re
@@ -127,6 +128,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal,
             self.encode_as_pil,
+            self.encode_as_function,
         )
         for encoding_method in encoding_methods:
             try:
@@ -232,6 +234,13 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             return ImageUriValidator.pil_image_to_uri(obj)
         else:
             raise NotEncodable
+
+    @staticmethod
+    def encode_as_function(obj):
+        """Attempt to convert FunctionType to string for notification about error"""
+        if isinstance(obj, types.FunctionType):
+            return f"Function {obj.__name__} not supported as argument. Probably should add ()."
+        raise NotEncodable
 
 
 class NotEncodable(Exception):

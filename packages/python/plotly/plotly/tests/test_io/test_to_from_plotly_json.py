@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
 import pandas as pd
+import types
 import json
 import datetime
 import sys
@@ -27,6 +28,10 @@ def build_json_opts(pretty=False):
 
 def to_json_test(value, pretty=False):
     return json.dumps(value, **build_json_opts(pretty=pretty))
+
+
+def func_object_as_value():
+    return
 
 
 def isoformat_test(dt_value):
@@ -220,4 +225,10 @@ def test_nonstring_key(engine, pretty):
 def test_mixed_string_nonstring_key(engine, pretty):
     value = build_test_dict({0: 1, "a": 2})
     result = pio.to_json_plotly(value, engine=engine)
+    check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_func_as_value(engine, pretty):
+    value = func_object_as_value
+    result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
     check_roundtrip(result, engine=engine, pretty=pretty)

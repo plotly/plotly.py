@@ -7,7 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
   - Added some rounding to the `make_subplots` function to handle situations where the user-input specs cause the domain to exceed 1 by small amounts https://github.com/plotly/plotly.py/pull/4153
-
+  - Change `np.int` to `int` in validators tests, `numpy.int` was deprecated in [NumPy 1.20](https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations) and was removed in [NumPy 1.24](https://numpy.org/devdocs/release/1.24.0-notes.html#expired-deprecations).
+  - Added notification about using `FunctionType` as invalid argument  [Dash #2522](https://github.com/plotly/dash/issues/2522).
 ## [5.14.1] - 2023-04-05
 
 ### Fixed
