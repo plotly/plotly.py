@@ -120,6 +120,7 @@ class _Upset:
         self.sort_by = sort_by
         self.asc = asc
         self.mode = mode
+        # TODO: Implement max_subsets in code
         self.max_subsets = max_subsets
         self.subset_column = subset_column
         self.subset_order = subset_order
@@ -267,7 +268,6 @@ class _Upset:
             "log_y": self.log_y,
         }
 
-        # TODO: Override default hover info for something more useful
         self.fig = px.bar(
             self.intersect_counts, x="index", y="Counts", text="Counts", **bar_args
         )
@@ -287,6 +287,18 @@ class _Upset:
         Method to add subset points to input fig px.bar chart in the style of UpSet plot.
         Returns updated figure, and list of heights of dots for downstream convenience.
         """
+        # Compute list of intersections
+        intersections = None
+        if self.color is not None:
+            # Pull out full list of possible intersection combinations from first color grouping
+            query = (
+                self.intersect_counts[self.color]
+                == self.intersect_counts[self.color].iloc[0]
+            )
+            intersections = list(self.intersect_counts[query]["Intersections"])
+        else:
+            intersections = list(self.intersect_counts["Intersections"])
+
         # Compute coordinates for bg subset scatter points
         d = len(self.subset_names)
         num_bars = len(self.fig.data[0]["x"])
@@ -301,6 +313,14 @@ class _Upset:
         y_bg_scatter = num_bars * self.switchboard_heights
 
         # Add bg subset scatter points to figure below bar chart
+        labels = np.repeat(
+            [
+                "+".join([x for x, y in zip(self.subset_names, s) if y != 0])
+                for s in intersections
+            ],
+            d,
+        )
+        labels = ["None" if x == "" else x for x in labels]
         self.fig.add_trace(
             go.Scatter(
                 x=x_bg_scatter,
@@ -308,6 +328,8 @@ class _Upset:
                 mode="markers",
                 showlegend=False,
                 marker=dict(size=16, color=self.subset_bgcolor),
+                text=labels,
+                hovertemplate="<b>%{text}</b>",
             )
         )
         self.fig.update_layout(
@@ -315,18 +337,6 @@ class _Upset:
             yaxis=dict(showgrid=True, zeroline=False),
             margin=dict(t=40, l=150),
         )
-
-        # Compute list of intersections
-        intersections = None
-        if self.color is not None:
-            # Pull out full list of possible intersection combinations from first color grouping
-            query = (
-                self.intersect_counts[self.color]
-                == self.intersect_counts[self.color].iloc[0]
-            )
-            intersections = list(self.intersect_counts[query]["Intersections"])
-        else:
-            intersections = list(self.intersect_counts["Intersections"])
 
         # Then fill in subset markers with fg color
         x = 0
@@ -340,7 +350,6 @@ class _Upset:
                     y_subsets += [-y_max / d * y - y_scatter_offset * y_max]
                 y += 1
             x += 1
-            # TODO: Add hover information for subset/intersection description
             self.fig.add_trace(
                 go.Scatter(
                     x=x_subsets,
@@ -348,6 +357,9 @@ class _Upset:
                     mode="markers+lines",
                     showlegend=False,
                     marker=dict(size=16, color=self.subset_fgcolor, showscale=False),
+                    text=["+".join([x for x, y in zip(self.subset_names, s) if y != 0])]
+                    * sum(s),
+                    hovertemplate="<b>%{text}</b>",
                 )
             )
 
