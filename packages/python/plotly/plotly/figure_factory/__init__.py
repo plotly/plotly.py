@@ -25,6 +25,7 @@ from plotly.figure_factory._scatterplot import create_scatterplotmatrix
 from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
 from plotly.figure_factory._trisurf import create_trisurf
+from plotly.figure_factory._upset import create_upset
 from plotly.figure_factory._violin import create_violin
 
 if optional_imports.get_module("pandas") is not None:
@@ -65,5 +66,6 @@ __all__ = [
     "create_table",
     "create_ternary_contour",
     "create_trisurf",
+    "create_upset",
     "create_violin",
 ]
