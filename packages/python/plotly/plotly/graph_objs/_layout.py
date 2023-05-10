@@ -3,10 +3,10 @@ import copy as _copy
 
 
 class Layout(_BaseLayoutType):
-
     _subplotid_prop_names = [
         "coloraxis",
         "geo",
+        "legend",
         "mapbox",
         "polar",
         "scene",
@@ -32,6 +32,7 @@ class Layout(_BaseLayoutType):
         from plotly.validators.layout import (
             ColoraxisValidator,
             GeoValidator,
+            LegendValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -44,6 +45,7 @@ class Layout(_BaseLayoutType):
         return {
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
+            "legend": LegendValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -2041,6 +2043,9 @@ class Layout(_BaseLayoutType):
                 valign
                     Sets the vertical alignment of the symbols with
                     respect to their associated text.
+                visible
+                    Determines whether or not this legend is
+                    visible.
                 x
                     Sets the x position (in normalized coordinates)
                     of the legend. Defaults to 1.02 for vertical
