@@ -7,7 +7,6 @@ import plotly.express as px
 pd = optional_imports.get_module("pandas")
 np = optional_imports.get_module("numpy")
 
-
 CHART_TYPES = ["bar", "box", "violin"]
 
 
@@ -37,7 +36,7 @@ def create_upset(
     return upset_plot, plot_obj
 
 
-def _expand_subset_column(df, subset_column, subset_order):
+def _expand_subset_column(df, subset_column, subset_order=None):
     """
     Takes a column of iterables and expands into binary columns representing inclusion. Also returns subset_names.
     """
@@ -166,30 +165,44 @@ class _Upset:
 
         # Create intersect_counts df depending on if color provided
         color = self.color
-        df = self.df
-        if color is not None:
-            # TODO: Consider refactor using groupby instead of looping over colors
-            for c in df[color].unique():
-                sub_df = df[df[color] == c].drop(columns=[color])
-                if self.x is not None:
-                    # TODO: Check counting code for clustering by x value for distribution plots
-                    new_df = sub_df.groupby(self.x).apply(
-                        lambda x: _transform_upset_data(x.drop(columns=["self.x"]))
-                    )
-                    new_df = new_df.reset_index()[[self.x, "Intersections", "Counts"]]
-                else:
-                    new_df = _transform_upset_data(sub_df)
-                # Sort subgroup in requested order
-                new_df = (
-                    _sort_intersect_counts(new_df, sort_by=self.sort_by, asc=self.asc)
-                    .reset_index(drop=True)
-                    .reset_index()
+        # TODO: Add grouping by x value input
+        if self.color is not None:
+            intersect_df = self.df.groupby(self.color).apply(
+                lambda df: _transform_upset_data(
+                    df.drop(columns=[self.color])
+                ).reset_index(drop=True)
+            )
+
+            # Fill in counts for subsets where count is zero for certain color groups
+            filled_df = (
+                intersect_df.pivot_table(
+                    index="Intersections",
+                    columns=[self.color],
+                    values="Counts",
+                    fill_value=0,
                 )
-                new_df[color] = c
-                self.intersect_counts = pd.concat([self.intersect_counts, new_df])
-            # TODO: Need to saturate each cluster with 0 value for subsets in one but not other...
+                .unstack()
+                .reset_index()
+                .rename(columns={0: "Counts"})
+            )
+
+            # Perform sorting within each color group
+            # WARNING: If sort_by="Counts" it will be ignored here since this won't make sense when using groups
+            self.intersect_counts = (
+                filled_df.groupby(self.color)
+                .apply(
+                    lambda df: _sort_intersect_counts(
+                        df.drop(columns=[self.color]),
+                        sort_by="Intersections",
+                        asc=self.asc,
+                    ).reset_index()
+                )
+                .reset_index()
+                .drop(columns=["index"])
+                .rename(columns={"level_1": "index"})
+            )
         else:
-            self.intersect_counts = _transform_upset_data(df)
+            self.intersect_counts = _transform_upset_data(self.df)
             self.intersect_counts = _sort_intersect_counts(
                 self.intersect_counts, sort_by=self.sort_by, asc=self.asc
             )
@@ -200,12 +213,12 @@ class _Upset:
         # Rescale for percents if requested
         mode = self.mode
         if mode == "Percent":
-            if color is not None:
-                denom = self.intersect_counts.groupby(color).sum().reset_index()
-                denom_dict = dict(zip(denom[color], denom["Counts"]))
+            if self.color is not None:
+                denom = self.intersect_counts.groupby(self.color).sum().reset_index()
+                denom_dict = dict(zip(denom[self.color], denom["Counts"]))
                 self.intersect_counts["Counts"] = round(
                     self.intersect_counts["Counts"]
-                    / self.intersect_counts[color].map(denom_dict),
+                    / self.intersect_counts[self.color].map(denom_dict),
                     2,
                 )
             else:
