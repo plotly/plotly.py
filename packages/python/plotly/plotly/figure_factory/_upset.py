@@ -7,7 +7,7 @@ import plotly.express as px
 pd = optional_imports.get_module("pandas")
 np = optional_imports.get_module("numpy")
 
-CHART_TYPES = ["bar", "box", "violin"]
+VALID_PLOT_TYPES = ["bar", "box", "violin"]
 
 
 def create_upset(
@@ -18,7 +18,7 @@ def create_upset(
     sort_by="Counts",
     asc=False,
     mode="Counts",
-    max_subsets=50,
+    max_subsets=20,
     subset_column=None,
     subset_order=None,
     subset_bgcolor="#C9C9C9",
@@ -30,6 +30,7 @@ def create_upset(
     barmode="group",
     textangle=0,
 ):
+    # TODO: Add docstring and webpage documentation
     plot_obj = _Upset(**locals())
     upset_plot = plot_obj.make_upset_plot()
     # TODO: Create tests for plotter
@@ -52,13 +53,6 @@ def _expand_subset_column(df, subset_column, subset_order=None):
     return new_df, subset_names
 
 
-def _make_binary(t):
-    """
-    Converts tuple of 0,1s to binary number. Used in _transform_upset_data for sort order.
-    """
-    return sum([t[i] * 2**i for i in range(len(t))])
-
-
 def _transform_upset_data(df):
     """
     Takes raw data of binary vectors for set inclusion and produces counts over each.
@@ -70,6 +64,13 @@ def _transform_upset_data(df):
         }
     )
     return intersect_counts
+
+
+def _make_binary(t):
+    """
+    Converts tuple of 0,1s to binary number. Used in _transform_upset_data for sort order.
+    """
+    return sum([t[i] * 2**i for i in range(len(t))])
 
 
 def _sort_intersect_counts(df, sort_by="Counts", asc=True):
@@ -96,10 +97,11 @@ class _Upset:
         x=None,
         color=None,
         title=None,
+        plot_type="bar",
         sort_by="Counts",
         asc=False,
         mode="Counts",
-        max_subsets=50,
+        max_subsets=20,
         subset_column=None,
         subset_order=None,
         subset_bgcolor="#C9C9C9",
@@ -110,6 +112,11 @@ class _Upset:
         log_y=False,
         barmode="group",
         textangle=0,
+        boxmode="group",
+        points="outliers",
+        notched=False,
+        violinmode="group",
+        box=False,
     ):
 
         # Plot inputs and settings
@@ -117,6 +124,7 @@ class _Upset:
         self.x = x
         self.color = color
         self.title = title
+        self.plot_type = plot_type
         self.sort_by = sort_by
         self.asc = asc
         self.mode = mode
@@ -132,8 +140,37 @@ class _Upset:
         self.log_y = log_y
         self.barmode = barmode
         self.textangle = textangle
+        self.boxmode = (boxmode,)
+        self.points = (points,)
+        self.notched = (notched,)
+        self.violinmode = (violinmode,)
+        self.box = box
 
-        # TODO: Refactor code for "common plot args" that can be reused for eventual box/violin plots
+        # Aggregate common plotting args
+        self.common_plot_args = {
+            "color": self.color,
+            "category_orders": self.category_orders,
+            "color_discrete_sequence": self.color_discrete_sequence,
+            "color_discrete_map": self.color_discrete_map,
+            "log_y": self.log_y,
+        }
+
+        # Collect plot specific args
+        self.bar_args = {
+            "barmode": self.barmode,
+        }
+
+        self.box_args = {
+            "boxmode": self.boxmode,
+            "points": self.points,
+            "notched": self.notched,
+        }
+
+        self.violin_args = {
+            "violinmode": self.violinmode,
+            "box": self.box,
+            "points": self.points,
+        }
 
         # Figure-building specific attributes
         self.fig = go.Figure()
@@ -164,6 +201,7 @@ class _Upset:
                 c for c in self.df.columns if c != self.x and c != self.color
             ]
 
+        self.test = self.df.copy()
         # Create intersect_counts df depending on if color provided
         color = self.color
         # TODO: Add grouping by x value input
@@ -258,15 +296,17 @@ class _Upset:
                 f'Invalid input for "mode". Must be either "Counts" or "Percent" but you provided {mode}'
             )
 
+        # Check plot_type is valid
+        plot_type = self.plot_type
+        try:
+            assert plot_type in VALID_PLOT_TYPES
+        except AssertionError:
+            raise ValueError(
+                f'Invalid input for "plot_type". Must be one of "bar", "box", or "violin" but you provided {plot_type}'
+            )
+
     def make_primary_plot(self):
-        bar_args = {
-            "color": self.color,
-            "category_orders": self.category_orders,
-            "color_discrete_sequence": self.color_discrete_sequence,
-            "color_discrete_map": self.color_discrete_map,
-            "barmode": self.barmode,
-            "log_y": self.log_y,
-        }
+        bar_args = {**self.common_plot_args, **self.bar_args}
 
         self.fig = px.bar(
             self.intersect_counts, x="index", y="Counts", text="Counts", **bar_args
@@ -329,7 +369,7 @@ class _Upset:
                 showlegend=False,
                 marker=dict(size=16, color=self.subset_bgcolor),
                 text=labels,
-                hovertemplate="<b>%{text}</b>",
+                hovertemplate="<b>%{text}</b><extra></extra>",
             )
         )
         self.fig.update_layout(
@@ -359,7 +399,7 @@ class _Upset:
                     marker=dict(size=16, color=self.subset_fgcolor, showscale=False),
                     text=["+".join([x for x, y in zip(self.subset_names, s) if y != 0])]
                     * sum(s),
-                    hovertemplate="<b>%{text}</b>",
+                    hovertemplate="<b>%{text}</b><extra></extra>",
                 )
             )
 
@@ -377,15 +417,6 @@ class _Upset:
             .rename(columns={"index": "variable", 0: "value"})
         )
 
-        bar_args = {
-            "color": self.color,
-            "category_orders": self.category_orders,
-            "color_discrete_sequence": self.color_discrete_sequence,
-            "color_discrete_map": self.color_discrete_map,
-            "barmode": self.barmode,
-            "log_y": self.log_y,
-        }
-
         # Create counts px.bar chart
         plot_df = counts_df.melt(id_vars=color) if color is not None else counts_df
         if self.mode == "Percent":
@@ -397,11 +428,19 @@ class _Upset:
                 )
             else:
                 plot_df["value"] = round(plot_df["value"] / plot_df["value"].sum(), 2)
+
+        hover_data = {"variable": False}
+        bar_args = {**self.common_plot_args, **self.bar_args}
         counts_bar = px.bar(
-            plot_df, x="value", y="variable", orientation="h", text="value", **bar_args
+            plot_df,
+            x="value",
+            y="variable",
+            orientation="h",
+            text="value",
+            hover_data=hover_data,
+            **bar_args,
         )
         counts_bar.update_traces(textposition="outside", cliponaxis=False)
-        # TODO: Change hover info to be more useful
 
         # Add subset names as text into plot
         subset_names = self.subset_names
