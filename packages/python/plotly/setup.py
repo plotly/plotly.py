@@ -495,7 +495,6 @@ versioneer_cmds = versioneer.get_cmdclass()
 setup(
     name="plotly",
     version=versioneer.get_version(),
-    use_2to3=False,
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Nicolas Kruchten",
