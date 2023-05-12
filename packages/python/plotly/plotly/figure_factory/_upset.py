@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+from plotly import optional_imports
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -9,7 +9,7 @@ np = optional_imports.get_module("numpy")
 
 VALID_PLOT_TYPES = ["bar", "box", "violin"]
 
-# TODO: Add webpage documentation
+
 def create_upset(
     data_frame,
     x=None,
@@ -470,7 +470,7 @@ class _Upset:
         self.fig.update_layout(
             xaxis=dict(showgrid=False, zeroline=False),
             yaxis=dict(showgrid=True, zeroline=False),
-            margin=dict(t=0, l=0),
+            margin=dict(t=40, l=40),
         )
 
         # Then fill in subset markers with fg color
