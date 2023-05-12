@@ -4071,6 +4071,7 @@ Invalid property path '{key_path_str}' for layout
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
+                yref=shape_kwargs["yref"],
             )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
