@@ -5,7 +5,7 @@ from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-import plotly.express as px
+
 import pytest
 
 
@@ -353,14 +353,15 @@ def test_no_exclude_empty_subplots():
 
 
 def test_supplied_yref_on_single_plot_subplot():
-    ### test a (1,1) subplot figure object from px.scatter
-    fig = px.scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1])
+    ### test a (1,1) subplot figure object
+    fig = make_subplots(1, 1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1]))
     fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2"))
     fig.update_layout(
         yaxis=dict(title="yaxis1 title"),
         yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
     )
-    # add horizontal line on y2. Secondary_y can be True or False
+    # add horizontal line on y2. Secondary_y can be True or False when yref is supplied
     fig.add_hline(y=3, yref="y2", secondary_y=True)
     assert fig.layout["shapes"][0]["yref"] == "y2"
 
@@ -375,7 +376,7 @@ def test_supplied_yref_on_non_subplot_figure_object():
         yaxis2=dict(title="yaxis2 title", overlaying="y", side="right"),
     )
     fig = go.Figure(data=data, layout=layout)
-    # add horizontal line on y2. Secondary_y can be True or False
+    # add horizontal line on y2. Secondary_y can be True or False when yref is supplied
     fig.add_hline(y=3, yref="y2", secondary_y=False)
     assert fig.layout["shapes"][0]["yref"] == "y2"
 
@@ -388,17 +389,19 @@ def test_supplied_yref_on_multi_plot_subplot():
         shared_yaxes=False,
         specs=[[{"secondary_y": True}, {"secondary_y": True}]],
     )
+    ### Add traces to the first subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3]), row=1, col=1)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[3, 2, 1], yaxis="y2"), row=1, col=1, secondary_y=True
     )
+    ### Add traces to the second subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], yaxis="y"), row=1, col=2)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[1, 1, 2], yaxis="y2"), row=1, col=2, secondary_y=True
     )
-    # add a horizontal line on both subplots secondary y.
-    # When using the subplots.make_subplots() method yref parameter should not be supplied to add_hline()
-    # Instead Secondary_y MUST be True to plot on secondary y
+    # add a horizontal line on both subplots on their respective secondary y.
+    # When using the subplots.make_subplots() method yref parameter should NOT be supplied per docstring instructions.
+    # Instead secondary_y specs and secondary_y parameter MUST be True to plot on secondary y
     fig.add_hline(y=2, row=1, col=1, secondary_y=True)
     fig.add_hline(y=1, row=1, col=2, secondary_y=True)
     assert fig.layout["shapes"][0]["yref"] == "y2"

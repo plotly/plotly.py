@@ -1559,20 +1559,14 @@ is of type {subplot_type}.""".format(
                         subplot_type=refs[0].subplot_type,
                     )
                 )
-            '''
-            if len(refs) == 1 and secondary_y:
-                raise ValueError(
-                    """
-Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-because subplot does not have a secondary y-axis""".format(
-                        prop_singular=prop_singular, r=row, c=col
-                    )
-                )
-            '''
 
-            #'''
-            # If the new_object was created with an yref specified, the specified yref should be used otherwise assign the xref from the layout_keys
-            if new_obj.yref == None or new_obj.yref == "y":
+            # If the new_object was created with a yref specified that did not include paper or domain, the specified yref should be used otherwise assign the xref and yref from the layout_keys
+            if (
+                new_obj.yref == None
+                or new_obj.yref == "y"
+                or "paper" in new_obj.yref
+                or "domain" in new_obj.yref
+            ):
                 if len(refs) == 1 and secondary_y:
                     raise ValueError(
                         """
@@ -1582,27 +1576,14 @@ because subplot does not have a secondary y-axis""".format(
                         )
                     )
                 if secondary_y:
-                    yaxis = refs[1].layout_keys[1]
-                    xaxis = refs[1].layout_keys[0]
+                    xaxis, yaxis = refs[1].layout_keys
                 else:
-                    yaxis = refs[0].layout_keys[1]
-                    xaxis = refs[0].layout_keys[0]
-                yref = yaxis.replace("axis", "")
-                xref = xaxis.replace("axis", "")
+                    xaxis, yaxis = refs[0].layout_keys
+                xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             else:
                 yref = new_obj.yref
                 xaxis = refs[0].layout_keys[0]
                 xref = xaxis.replace("axis", "")
-            #'''
-
-            """
-            if secondary_y:
-                xaxis, yaxis = refs[1].layout_keys
-            else:
-                xaxis, yaxis = refs[0].layout_keys
-            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
-            """
-
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
@@ -1625,8 +1606,9 @@ because subplot does not have a secondary y-axis""".format(
 
         self.layout[prop_plural] += (new_obj,)
         # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
-        # will appear as if user supplied yref params and will force annotation to
-        # be on the axis of the last drawn annotation (they all end up on the same axis)
+        # will appear as if user supplied yref params when looping through subplots and
+        # will force annotation to be on the axis of the last drawn annotation
+        # i.e. they all end up on the same axis.
         new_obj.update(xref=None, yref=None)
 
         return self
@@ -4085,13 +4067,11 @@ Invalid property path '{key_path_str}' for layout
                 # self.add_{layout_obj} succeeded)
                 # however, in the case of a single plot, xref and yref MAY not be
                 # specified, IF they are not specified we specify them here so the following routines can work
-                # (they need to append " domain" to xref or yref)
-                if self.layout[layout_obj][-1].xref == None:
+                # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
+                if self.layout[layout_obj][-1].xref is None:
                     self.layout[layout_obj][-1].update(xref="x")
-                # self.layout[layout_obj][-1].update(xref="x")
-                if self.layout[layout_obj][-1].yref == None:
+                if self.layout[layout_obj][-1].yref is None:
                     self.layout[layout_obj][-1].update(yref="y")
-                # self.layout[layout_obj][-1].update(yref='y')
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
