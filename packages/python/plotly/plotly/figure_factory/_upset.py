@@ -9,12 +9,13 @@ np = optional_imports.get_module("numpy")
 
 VALID_PLOT_TYPES = ["bar", "box", "violin"]
 
-
+# TODO: Add webpage documentation
 def create_upset(
     data_frame,
     x=None,
     color=None,
     title=None,
+    plot_type="bar",
     sort_by="Counts",
     asc=False,
     mode="Counts",
@@ -27,10 +28,89 @@ def create_upset(
     color_discrete_sequence=None,
     color_discrete_map=None,
     log_y=False,
+    show_yaxis=False,
     barmode="group",
     textangle=0,
+    boxmode="group",
+    points="outliers",
+    notched=False,
+    violinmode="group",
+    box=False,
 ):
-    # TODO: Add docstring and webpage documentation
+    """
+    Creates an UpSet plot, a scalable alternative to Venn diagrams. The interface supports a flexible range of use cases
+    input data formats.
+
+    :param (pandas.DataFrame) data_frame: a DataFrame either in wide format with subset/intersection inclusion data, or
+    with a column in condensed format; see the tutorial for more details
+    :param (str) x: (optional) column name in data_frame for data point labels, e.g. sample name to cluster intersection
+    observations by
+    :param (str) color: (optional) column name in data_frame for grouping intersection counts, similar to plotly.express
+    inputs
+    :param (str) title: (optional) title for plot
+    :param (str) plot_type: (default="bar") type of plot to visualize intersection count data; must be one of "bar", "box", or "violin";
+    the latter two should only be used if x is provided, in which case they represent the distribution of intersection
+    counts (across color groups)
+    :param (str) sort_by: (default="Counts") order in which counts are displayed; must be one of "Counts" or "Intersections";
+    ignored if color is provided
+    :param (bool) asc: (default=False) sort in ascending order
+    :param (str) mode: (default="Counts") how to represent counts; must be one of "Counts" or "Percent"
+    :param (int) max_subsets: (default=20) maximum number of intersection subsets to display
+    :param (str) subset_column: (optional) if data is formatted in condensed form, input column name here with that data;
+    do not use if data is already formatted in wide format
+    :param (list) subset_order: (optional) if subset_column is provided, use this list of entries to specify order of labels
+    :param (str) subset_bgcolor: (default="#C9C9C9") color for background dots on switchboard
+    :param (str) subset_fgcolor: (default="#000000") color for foreground dots on switchboard
+    :param (dict) category_orders: (optional) specify order for groups in color, as in plotly.express inputs
+    :param (list) color_discrete_sequence: (optional) list of colors to use for color input, as in plotly.express inputs
+    :param (dict) color_discrete_map: (optional) map of color categories to color, as in plotly.express inputs
+    :param (bool) log_y: (default=False) use logarithmic y scale
+    :param (bool) show_yaxis: (default=False) show y-axis tickmarks
+    :param (str) barmode: (default="group") argument passed to plotly.express.bar when selected for plotting
+    :param (int) textangle: (default=0) angle to use when displaying counts above bars in a bar chart
+    :param (str) boxmode: (default="group") argument passed to plotly.express.box when selected for plotting
+    :param (str) points: (default="outliers") argument passed to plotly.express.box when selected for plotting
+    :param (bool) notched: (default=False) argument passed to plotly.express.box when selected for plotting
+    :param (str) violinmode: (default="group") argument passed to plotly.express.violin when selected for plotting
+    :param (bool) box: (default=False) argument passed to plotly.express.violin when selected for plotting
+
+    :rtype (plotly.graph_objects.Figure): returns UpSet plot rendered according to input settings.
+
+    Example 1: Simple Counts
+
+    >>> import plotly.express as px
+    >>> import plotly.figure_factory as ff
+
+    >>> df = px.data.iris()
+    >>> # Create 4 subsets defined by qualitative "large" conditions
+    >>> df['SL'] = df['sepal_length'].apply(lambda x: int(x > 6))
+    >>> df['SW'] = df['sepal_width'].apply(lambda x: int(x > 3))
+    >>> df['PL'] = df['petal_length'].apply(lambda x: int(x > 3))
+    >>> df['PW'] = df['petal_width'].apply(lambda x: int(x > 1))
+
+    >>> df = df[['species', 'SL', 'SW', 'PL', 'PW']]
+    >>> # Only use columns with inclusion in subset (0/1) values for this example
+    >>> fig = ff.create_upset(df.drop(columns=['species']), color_discrete_sequence=['#000000'])
+    >>> fig.show()
+
+    Example 2: Counting by Group
+
+    >>> # Continued from Example 1
+    >>> fig = ff.create_upset(df, color='species', asc=True)
+    >>> fig.show()
+
+    Example 3: Tracking Variance of Counts Across a Category
+
+    >>> # Continued from Example 1
+    >>> import numpy as np
+
+    >>> np.random.seed(100)
+    >>> # Add a dummy variable for "day entry was observed" to track variation of subset counts across the days
+    >>> df['day'] = np.random.randint(0, 5, len(df))
+    >>> fig = ff.create_upset(df.drop(columns=['species']), x='day', plot_type='box', show_yaxis=True)
+    >>> fig.update_layout(yaxis_side="right")
+    >>> fig.show()
+    """
     plot_obj = _Upset(**locals())
     upset_plot = plot_obj.make_upset_plot()
     # TODO: Create tests for plotter
@@ -110,6 +190,7 @@ class _Upset:
         color_discrete_sequence=None,
         color_discrete_map=None,
         log_y=False,
+        show_yaxis=False,
         barmode="group",
         textangle=0,
         boxmode="group",
@@ -128,7 +209,6 @@ class _Upset:
         self.sort_by = sort_by
         self.asc = asc
         self.mode = mode
-        # TODO: Implement max_subsets in code
         self.max_subsets = max_subsets
         self.subset_column = subset_column
         self.subset_order = subset_order
@@ -138,12 +218,13 @@ class _Upset:
         self.color_discrete_sequence = color_discrete_sequence
         self.color_discrete_map = color_discrete_map
         self.log_y = log_y
+        self.show_yaxis = show_yaxis
         self.barmode = barmode
         self.textangle = textangle
-        self.boxmode = (boxmode,)
-        self.points = (points,)
-        self.notched = (notched,)
-        self.violinmode = (violinmode,)
+        self.boxmode = boxmode
+        self.points = points
+        self.notched = notched
+        self.violinmode = violinmode
         self.box = box
 
         # Aggregate common plotting args
@@ -201,22 +282,20 @@ class _Upset:
                 c for c in self.df.columns if c != self.x and c != self.color
             ]
 
-        self.test = self.df.copy()
         # Create intersect_counts df depending on if color provided
-        color = self.color
-        # TODO: Add grouping by x value input
-        if self.color is not None:
-            intersect_df = self.df.groupby(self.color).apply(
-                lambda df: _transform_upset_data(
-                    df.drop(columns=[self.color])
-                ).reset_index(drop=True)
+        groups = [x for x in [self.color, self.x] if x is not None]
+        if len(groups) > 0:
+            intersect_df = self.df.groupby(groups).apply(
+                lambda df: _transform_upset_data(df.drop(columns=groups)).reset_index(
+                    drop=True
+                )
             )
 
             # Fill in counts for subsets where count is zero for certain color groups
             filled_df = (
                 intersect_df.pivot_table(
                     index="Intersections",
-                    columns=[self.color],
+                    columns=groups,
                     values="Counts",
                     fill_value=0,
                 )
@@ -228,18 +307,26 @@ class _Upset:
             # Perform sorting within each color group
             # WARNING: If sort_by="Counts" it will be ignored here since this won't make sense when using groups
             self.intersect_counts = (
-                filled_df.groupby(self.color)
+                filled_df.groupby(groups)
                 .apply(
                     lambda df: _sort_intersect_counts(
-                        df.drop(columns=[self.color]),
+                        df.drop(columns=groups),
                         sort_by="Intersections",
                         asc=self.asc,
                     ).reset_index()
                 )
                 .reset_index()
                 .drop(columns=["index"])
-                .rename(columns={"level_1": "index"})
+                .rename(
+                    columns={"level_1": "index", "level_2": "index"}
+                )  # Not sure how to tell the two apart...
             )
+
+            # Truncate subsets if necessary
+            self.intersect_counts = self.intersect_counts.groupby(groups).head(
+                self.max_subsets
+            )
+
         else:
             self.intersect_counts = _transform_upset_data(self.df)
             self.intersect_counts = _sort_intersect_counts(
@@ -249,8 +336,11 @@ class _Upset:
                 drop=True
             ).reset_index()
 
+            self.intersect_counts = self.intersect_counts.head(self.max_subsets)
+
         # Rescale for percents if requested
         mode = self.mode
+        # TODO: Check this input still works with all the subsetting changes...
         if mode == "Percent":
             if self.color is not None:
                 denom = self.intersect_counts.groupby(self.color).sum().reset_index()
@@ -306,20 +396,34 @@ class _Upset:
             )
 
     def make_primary_plot(self):
-        bar_args = {**self.common_plot_args, **self.bar_args}
+        plot_function = None
+        args = {}
+        update_traces = {}
 
-        self.fig = px.bar(
-            self.intersect_counts, x="index", y="Counts", text="Counts", **bar_args
-        )
-        self.fig.update_traces(
-            textposition="outside", cliponaxis=False, textangle=self.textangle
-        )
+        if self.plot_type == "bar":
+            plot_function = px.bar
+            args = {**self.common_plot_args, **self.bar_args, "text": "Counts"}
+            update_traces = {
+                "textposition": "outside",
+                "cliponaxis": False,
+                "textangle": self.textangle,
+            }
+        elif self.plot_type == "box":
+            plot_function = px.box
+            args = {**self.common_plot_args, **self.box_args}
+        elif self.plot_type == "violin":
+            plot_function = px.violin
+            args = {**self.common_plot_args, **self.violin_args}
+
+        self.fig = plot_function(self.intersect_counts, x="index", y="Counts", **args)
+        self.fig.update_traces(**update_traces)
+
         self.fig.update_layout(
             plot_bgcolor="#FFFFFF",
             xaxis_visible=False,
             xaxis_showticklabels=False,
-            yaxis_visible=False,
-            yaxis_showticklabels=False,
+            yaxis_visible=self.show_yaxis,
+            yaxis_showticklabels=self.show_yaxis,
         )
 
     def make_switchboard(self):
@@ -327,22 +431,13 @@ class _Upset:
         Method to add subset points to input fig px.bar chart in the style of UpSet plot.
         Returns updated figure, and list of heights of dots for downstream convenience.
         """
-        # Compute list of intersections
-        intersections = None
-        if self.color is not None:
-            # Pull out full list of possible intersection combinations from first color grouping
-            query = (
-                self.intersect_counts[self.color]
-                == self.intersect_counts[self.color].iloc[0]
-            )
-            intersections = list(self.intersect_counts[query]["Intersections"])
-        else:
-            intersections = list(self.intersect_counts["Intersections"])
+        # Pull out full list of possible intersection combinations
+        intersections = list(self.intersect_counts["Intersections"].unique())
 
         # Compute coordinates for bg subset scatter points
         d = len(self.subset_names)
-        num_bars = len(self.fig.data[0]["x"])
-        x_bg_scatter = np.repeat(self.fig.data[0]["x"], d)
+        num_bars = len(intersections)
+        x_bg_scatter = np.repeat(range(num_bars), d)
         y_scatter_offset = (
             0.2  # Offsetting ensures bars will hover just above the subset scatterplot
         )
@@ -367,7 +462,7 @@ class _Upset:
                 y=y_bg_scatter,
                 mode="markers",
                 showlegend=False,
-                marker=dict(size=16, color=self.subset_bgcolor),
+                marker=dict(size=16, color=self.subset_bgcolor, showscale=False),
                 text=labels,
                 hovertemplate="<b>%{text}</b><extra></extra>",
             )
@@ -375,7 +470,7 @@ class _Upset:
         self.fig.update_layout(
             xaxis=dict(showgrid=False, zeroline=False),
             yaxis=dict(showgrid=True, zeroline=False),
-            margin=dict(t=40, l=150),
+            margin=dict(t=0, l=0),
         )
 
         # Then fill in subset markers with fg color
@@ -407,18 +502,28 @@ class _Upset:
         """
         Method to add left margin count px.bar chart in style of UpSet plot.
         """
-        # Group and count according to color input
+        # Group and count according to inputs
         color = self.color
-        counts_df = (
-            self.df.groupby(color).sum().reset_index()
-            if color is not None
-            else self.df.sum()
-            .reset_index()
-            .rename(columns={"index": "variable", 0: "value"})
-        )
+        groups = [x for x in [self.color, self.x] if x is not None]
+        # if len(groups) > 0:
+        #     counts_df = self.df.groupby(groups).sum().reset_index()
+        if self.color is not None:
+            counts_df = self.df.groupby(self.color).sum().reset_index()
+            if self.x is not None:
+                counts_df = counts_df.drop(columns=[self.x])
+        else:
+            counts_df = (
+                self.df.sum()
+                .reset_index()
+                .rename(columns={"index": "variable", 0: "value"})
+            )
 
         # Create counts px.bar chart
-        plot_df = counts_df.melt(id_vars=color) if color is not None else counts_df
+        plot_df = (
+            counts_df.melt(id_vars=[self.color])
+            if self.color is not None
+            else counts_df
+        )
         if self.mode == "Percent":
             if color is not None:
                 denom = plot_df.groupby(color).sum().reset_index()
@@ -429,25 +534,24 @@ class _Upset:
             else:
                 plot_df["value"] = round(plot_df["value"] / plot_df["value"].sum(), 2)
 
-        hover_data = {"variable": False}
-        bar_args = {**self.common_plot_args, **self.bar_args}
-        counts_bar = px.bar(
-            plot_df,
-            x="value",
-            y="variable",
-            orientation="h",
-            text="value",
-            hover_data=hover_data,
-            **bar_args,
+        plot_function = px.bar
+        update_traces = {"textposition": "outside", "cliponaxis": False}
+        args = {
+            **self.common_plot_args,
+            **self.bar_args,
+            "text": "value",
+            "hover_data": {"variable": False},
+        }
+
+        counts_fig = plot_function(
+            plot_df, x="value", y="variable", orientation="h", **args
         )
-        counts_bar.update_traces(textposition="outside", cliponaxis=False)
+        counts_fig.update_traces(**update_traces)
 
         # Add subset names as text into plot
-        subset_names = self.subset_names
-        # subset_names = counts_bar.data[0]['y']
-        max_name_len = max([len(s) for s in subset_names])
+        max_name_len = max([len(s) for s in self.subset_names])
         annotation_center = -1 + -0.01 * max_name_len
-        for i, s in enumerate(subset_names):
+        for i, s in enumerate(self.subset_names):
             self.fig.add_annotation(
                 x=annotation_center,
                 y=self.switchboard_heights[i],
@@ -458,11 +562,12 @@ class _Upset:
             )
 
         # Reflect horizontally the bars while preserving labels; Shift heights to match input subset scatter heights
-        for trace in counts_bar.data:
+        for trace in counts_fig.data:
             trace["x"] = -trace["x"] / max(trace["x"])
             trace["y"] = self.switchboard_heights
-        counts_bar.update_traces(base=annotation_center - 1, showlegend=False)
+        # if self.plot_type == 'bar':
+        counts_fig.update_traces(base=annotation_center - 1, showlegend=False)
 
         # Add counts chart traces to main fig
-        for trace in counts_bar.data:
+        for trace in counts_fig.data:
             self.fig.add_trace(trace)
