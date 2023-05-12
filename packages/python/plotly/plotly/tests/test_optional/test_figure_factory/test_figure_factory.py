@@ -4518,7 +4518,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert fig6.data[0].geojson == fig1.data[0].geojson
 
 
-class TestUpset(TestCaseNoTemplate):
+class TestUpset(NumpyTestUtilsMixin, TestCaseNoTemplate):
     # Test compatibilities between using wide format input data vs condensed
     def test_wide_vs_condensed(self):
         np.random.seed(0)
