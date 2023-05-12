@@ -4542,16 +4542,22 @@ class TestUpset(NumpyTestUtilsMixin, TestCaseNoTemplate):
         df["tags"] = df["tags"].apply(lambda x: [y for y in x if y != ""])
 
         fig4 = ff.create_upset(
-            df.drop(columns=["a", "b", "c", "color"]), subset_column="tags"
+            df.drop(columns=["a", "b", "c", "color"]),
+            subset_column="tags",
+            subset_order=["a", "b", "c"],
         )
         fig5 = ff.create_upset(
             df.drop(columns=["a", "b", "c"]),
             subset_column="tags",
+            subset_order=["a", "b", "c"],
             sort_by="Intersections",
             asc=False,
         )
         fig6 = ff.create_upset(
-            df.drop(columns=["a", "b", "c"]), subset_column="tags", color="color"
+            df.drop(columns=["a", "b", "c"]),
+            subset_column="tags",
+            subset_order=["a", "b", "c"],
+            color="color",
         )
 
         for data in zip(fig1.data, fig4.data):
