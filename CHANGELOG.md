@@ -6,7 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
-  - Added some rounding to the `make_subplots` function to handle situations where the user-input specs cause the domain to exceed 1 by small amounts https://github.com/plotly/plotly.py/pull/4153
+  - Added some rounding to the `make_subplots` function to handle situations where the user-input specs cause the domain to exceed 1 by small amounts [[#4153](https://github.com/plotly/plotly.py/pull/4153)]
+  - Sanitize JSON output to prevent an XSS vector when graphs are inserted directly into HTML [[#4196](https://github.com/plotly/plotly.py/pull/4196)]
 
 ### Added
 
@@ -20,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [5.14.0] - 2023-03-29
 
 ### Updated
-  - Updated Plotly.js to from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
+  - Updated Plotly.js from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
     - Add `title.automargin` to enable automatic top and bottom margining for both container and paper referenced titles [[#6428](https://github.com/plotly/plotly.js/pull/6428)],
    with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
     - Add `label` attribute to shapes [[#6454](https://github.com/plotly/plotly.js/pull/6454)], with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!

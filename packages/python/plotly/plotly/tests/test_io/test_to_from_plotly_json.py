@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
+import re
 import sys
 from pytz import timezone
 from _plotly_utils.optional_imports import get_module
@@ -201,6 +202,14 @@ def test_datetime_arrays(datetime_array, engine, pretty):
 
     array_str = to_json_test(dt_values)
     expected = build_test_dict_string(array_str)
+    if orjson:
+        # orjson always serializes datetime64 to ns, but json will return either
+        # full seconds or microseconds, if the rest is zeros.
+        # we don't care about any trailing zeros
+        trailing_zeros = re.compile(r'[.]?0+"')
+        result = trailing_zeros.sub('"', result)
+        expected = trailing_zeros.sub('"', expected)
+
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
 
@@ -221,3 +230,25 @@ def test_mixed_string_nonstring_key(engine, pretty):
     value = build_test_dict({0: 1, "a": 2})
     result = pio.to_json_plotly(value, engine=engine)
     check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_sanitize_json(engine):
+    layout = {"title": {"text": "</script>\u2028\u2029"}}
+    fig = go.Figure(layout=layout)
+    fig_json = pio.to_json_plotly(fig, engine=engine)
+    layout_2 = json.loads(fig_json)["layout"]
+    del layout_2["template"]
+
+    assert layout == layout_2
+
+    replacements = {
+        "<": "\\u003c",
+        ">": "\\u003e",
+        "/": "\\u002f",
+        "\u2028": "\\u2028",
+        "\u2029": "\\u2029",
+    }
+
+    for bad, good in replacements.items():
+        assert bad not in fig_json
+        assert good in fig_json
