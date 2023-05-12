@@ -29,8 +29,7 @@ arbitrarily complex set intersections.
     layout: base
     name: UpSet Plots
     order: 10
-    permalink: python/quiver-plots/
-    thumbnail: thumbnail/quiver-plot.jpg
+    permalink: python/upset-plots/
 ---
 
 [UpSet plots](https://en.wikipedia.org/wiki/UpSet_Plot) allow you to visualize data that counts different intersections
