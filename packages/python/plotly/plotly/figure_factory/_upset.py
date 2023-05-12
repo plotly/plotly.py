@@ -304,6 +304,7 @@ class _Upset:
 
             # Perform sorting within each color group
             # WARNING: If sort_by="Counts" it will be ignored here since this won't make sense when using groups
+            # TODO: Make sensible behavior for sort by "Counts" in this case
             self.intersect_counts = (
                 filled_df.groupby(groups)
                 .apply(
@@ -523,13 +524,18 @@ class _Upset:
         )
         if self.mode == "Percent":
             if color is not None:
-                denom = plot_df.groupby(color).sum().reset_index()
+                denom = (
+                    self.df.groupby(color)
+                    .apply(lambda df: len(df))
+                    .reset_index()
+                    .rename(columns={0: "value"})
+                )
                 denom_dict = dict(zip(denom[color], denom["value"]))
                 plot_df["value"] = round(
                     plot_df["value"] / plot_df[color].map(denom_dict), 2
                 )
             else:
-                plot_df["value"] = round(plot_df["value"] / plot_df["value"].sum(), 2)
+                plot_df["value"] = round(plot_df["value"] / len(self.df), 2)
 
         plot_function = px.bar
         update_traces = {"textposition": "outside", "cliponaxis": False}
@@ -559,10 +565,10 @@ class _Upset:
             )
 
         # Reflect horizontally the bars while preserving labels; Shift heights to match input subset scatter heights
+        max_x = max([max(t["x"]) for t in counts_fig.data])
         for trace in counts_fig.data:
-            trace["x"] = -trace["x"] / max(trace["x"])
+            trace["x"] = -trace["x"] / max_x
             trace["y"] = self.switchboard_heights
-        # if self.plot_type == 'bar':
         counts_fig.update_traces(base=annotation_center - 1, showlegend=False)
 
         # Add counts chart traces to main fig
