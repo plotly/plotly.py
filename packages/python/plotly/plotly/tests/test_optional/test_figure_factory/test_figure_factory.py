@@ -4516,3 +4516,52 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert len(fig6.frames) == n_frames
         assert len(fig7.frames) == n_frames
         assert fig6.data[0].geojson == fig1.data[0].geojson
+
+
+class TestUpset(TestCaseNoTemplate):
+    # Test compatibilities between using wide format input data vs condensed
+    def test_wide_vs_condensed(self):
+        np.random.seed(0)
+
+        a = np.random.randint(0, 2, 1000)
+        b = np.random.randint(0, 2, 1000)
+        c = np.random.randint(0, 2, 1000)
+        color = np.random.randint(0, 3, 1000).astype(str)
+
+        df = pd.DataFrame({"a": a, "b": b, "c": c, "color": color})
+        fig1 = ff.create_upset(df.drop(columns=["color"]))
+        fig2 = ff.create_upset(
+            df.drop(columns=["color"]), sort_by="Intersections", asc=False
+        )
+        fig3 = ff.create_upset(df, color="color")
+
+        for tag in ["a", "b", "c"]:
+            df[tag] = df[tag].map({1: [tag], 0: [""]})
+
+        df["tags"] = df["a"] + df["b"] + df["c"]
+        df["tags"] = df["tags"].apply(lambda x: [y for y in x if y != ""])
+
+        fig4 = ff.create_upset(
+            df.drop(columns=["a", "b", "c", "color"]), subset_column="tags"
+        )
+        fig5 = ff.create_upset(
+            df.drop(columns=["a", "b", "c"]),
+            subset_column="tags",
+            sort_by="Intersections",
+            asc=False,
+        )
+        fig6 = ff.create_upset(
+            df.drop(columns=["a", "b", "c"]), subset_column="tags", color="color"
+        )
+
+        for data in zip(fig1.data, fig4.data):
+            self.assert_fig_equal(data[0], data[1])
+        self.assert_fig_equal(fig1.layout, fig4.layout)
+
+        for data in zip(fig2.data, fig5.data):
+            self.assert_fig_equal(data[0], data[1])
+        self.assert_fig_equal(fig2.layout, fig5.layout)
+
+        for data in zip(fig3.data, fig6.data):
+            self.assert_fig_equal(data[0], data[1])
+        self.assert_fig_equal(fig3.layout, fig6.layout)

@@ -113,8 +113,7 @@ def create_upset(
     """
     plot_obj = _Upset(**locals())
     upset_plot = plot_obj.make_upset_plot()
-    # TODO: Create tests for plotter
-    return upset_plot, plot_obj
+    return upset_plot
 
 
 def _expand_subset_column(df, subset_column, subset_order=None):
@@ -124,7 +123,9 @@ def _expand_subset_column(df, subset_column, subset_order=None):
     subset_names = (
         subset_order
         if subset_order is not None
-        else list(df[subset_column].explode().unique())
+        else [
+            x for x in df[subset_column].explode().unique() if not pd.isnull(x)
+        ]  # Remove empty subset = NaN
     )
     new_df = df.copy()
     for name in subset_names:
@@ -262,9 +263,6 @@ class _Upset:
         # Validate inputs
         self.validate_upset_inputs()
 
-        # DEBUG
-        self.test = None
-
     def make_upset_plot(self):
         # If subset_column provided, expand into standard wider format
         if self.subset_column is not None:
@@ -340,7 +338,6 @@ class _Upset:
 
         # Rescale for percents if requested
         mode = self.mode
-        # TODO: Check this input still works with all the subsetting changes...
         if mode == "Percent":
             if self.color is not None:
                 denom = self.intersect_counts.groupby(self.color).sum().reset_index()
