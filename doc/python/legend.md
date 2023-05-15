@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -628,6 +628,45 @@ fig = go.Figure(
             "y": 0.55,
             "xanchor": "right",
             "yanchor": "middle",
+            "bgcolor": "Gold",
+            "title": {"text": "By continent"},
+        },
+    ),
+)
+
+fig.show()
+
+```
+
+### Positioning Legends
+
+*New in 5.15*
+
+In the previous example, we position the second legend by specifying x and y values. By default, these values are based on the width and height of the plot area. It is also possible to specify values that reference the container width and height by setting "xref=container" and "yref="container" (the default values are "xref=paper" and "yref="paper"). When set to "container", the margin grows so the legend and plot don't overlap. 
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+df_germany = df.loc[(df.country.isin(["Germany"]))]
+df_france = df.loc[(df.country.isin(["France"]))]
+df_uk = df.loc[(df.country.isin(["United Kingdom"]))]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=df_germany.year, y=df_germany.gdpPercap, name="Germany"),
+        go.Scatter(x=df_france.year, y=df_france.gdpPercap, name="France"),
+        go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
+    ],
+    layout=dict(
+        title="GDP Per Capita",
+        legend={
+            "x": 0.9,
+            "y": 0.9,
+            "xref": "container",
+            "yref": "container",
             "bgcolor": "Gold",
             "title": {"text": "By continent"},
         },
