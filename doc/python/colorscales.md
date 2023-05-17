@@ -636,7 +636,7 @@ fig.show()
 
 Colorbars can be positioned by specifying x and y coordinates. By default, the x and y values are "paper" coordinates, which refer to the plot area. You can also use coordinates based on the "container" by setting `xref="container"` or `yref="container"`. The following example uses a container reference for the x position.
 
-See the positioning section of the [the figure data structure page](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates) for more details on "paper" vs "container" coordinates.
+See the positioning section of [the figure data structure page](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates) for more details on "paper" vs "container" coordinates.
 
 ```python
 import plotly.graph_objects as go
