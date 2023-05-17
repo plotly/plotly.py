@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [UNRELEASED]
 
 ### Updated
-  - Updated Plotly.js from version 2.20.0 to version 2.23.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2230----2023-05-12) for more information. Notable changes include:
+  - Updated Plotly.js from version 2.20.0 to version 2.23.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2231----2023-05-16) for more information. Notable changes include:
     - Add `texttemplate` to shape.label for parametric shapes i.e. line, rect and circle [[#6527](https://github.com/plotly/plotly.js/pull/6527)],
    with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!
     - Add strict option to custom bundle command [[#6557](https://github.com/plotly/plotly.js/pull/6557)],
