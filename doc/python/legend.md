@@ -640,9 +640,7 @@ fig.show()
 
 ### Positioning Legends
 
-*New in 5.15*
-
-In the previous example, we position the second legend by specifying x and y values. By default, these values are based on the width and height of the plot area. It is also possible to specify values that reference the container width and height by setting "xref=container" and "yref="container" (the default values are "xref=paper" and "yref="paper"). When set to "container", the margin grows so the legend and plot don't overlap. 
+In the previous example, we position the second legend by specifying x and y values. By default, these values are based on the width and height of the plot area. It is also possible to specify values that reference the container width and height by setting "xref=container" and "yref="container" (the default values are "xref=paper" and "yref="paper"). When set to "container", the margin grows so the legend and plot don't overlap.
 
 ```python
 import plotly.graph_objects as go
