@@ -1562,7 +1562,7 @@ is of type {subplot_type}.""".format(
 
             # If the new_object was created with a yref specified that did not include paper or domain, the specified yref should be used otherwise assign the xref and yref from the layout_keys
             if (
-                new_obj.yref == None
+                new_obj.yref is None
                 or new_obj.yref == "y"
                 or "paper" in new_obj.yref
                 or "domain" in new_obj.yref
@@ -4053,7 +4053,7 @@ Invalid property path '{key_path_str}' for layout
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
-                yref=shape_kwargs["yref"] if "yref" in shape_kwargs.keys() else "y",
+                yref=shape_kwargs.get("yref", "y"),
             )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
