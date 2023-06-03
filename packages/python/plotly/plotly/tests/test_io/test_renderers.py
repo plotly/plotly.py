@@ -398,11 +398,16 @@ def test_missing_webbrowser_module(fig1):
         """
         Mimick an absent webbrowser module
         """
-        if name == 'webbrowser':
+        if name == "webbrowser":
             raise ImportError
         return realimport(name, globals, locals, fromlist, level)
-    
+
     with mock.patch("builtins.__import__", webbrowser_absent_import):
+        # 1: check whether importing webbrowser actually results in an ImportError
+        with pytest.raises(ImportError):
+            import webbrowser
+
+        # 2: check whether the _repr_html_ can handle it regardless
         fig1._repr_html_()
 
 
