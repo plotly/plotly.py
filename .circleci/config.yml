@@ -371,7 +371,7 @@ jobs:
           name: Create conda environment
           command: |
             conda create -n env --yes python=3.9 conda-build conda-verify
-            conda install -n env -c conda-forge jupyterlab nodejs=16
+            conda install -n env -c conda-forge jupyterlab=3 nodejs=16
             conda init bash
             mkdir output
 
