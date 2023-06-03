@@ -86,6 +86,9 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
             valign
                 Sets the vertical alignment of the symbols with
                 respect to their associated text.
+            visible
+                Determines whether or not this legend is
+                visible.
             x
                 Sets the x position (in normalized coordinates)
                 of the legend. Defaults to 1.02 for vertical
