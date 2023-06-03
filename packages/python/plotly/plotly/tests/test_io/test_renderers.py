@@ -390,7 +390,8 @@ def test_missing_webbrowser_module(fig1):
     """
     removed_webbrowser_module = sys.modules["webbrowser"]
     del sys.modules["webbrowser"]
-    import webbrowser
+    with pytest.raises(ImportError):
+        import webbrowser
     fig1._repr_html_()
     sys.modules[
         "webbrowser"
