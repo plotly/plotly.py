@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
   - Added some rounding to the `make_subplots` function to handle situations where the user-input specs cause the domain to exceed 1 by small amounts [[#4153](https://github.com/plotly/plotly.py/pull/4153)]
   - Sanitize JSON output to prevent an XSS vector when graphs are inserted directly into HTML [[#4196](https://github.com/plotly/plotly.py/pull/4196)]
+  - Remove `use_2to3` setuptools arg, which is invalid in the latest Python and setuptools versions [[#4206](https://github.com/plotly/plotly.py/pull/4206)]
+  - Fix [#4066](https://github.com/plotly/plotly.py/issues/4066) JupyterLab v4 giving tiny default graph height [[#4227](https://github.com/plotly/plotly.py/pull/4227)]
 
 ## [5.14.1] - 2023-04-05
 
