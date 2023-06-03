@@ -388,8 +388,12 @@ def test_missing_webbrowser_module(fig1):
     """
     Assert that no errors occur if the webbrowser module is absent
     """
-    with mock.patch("builtins.__import__", side_effect=ImportError):
-        fig1._repr_html_()
+    removed_webbrowser_module = sys.modules["webbrowser"]
+    del sys.modules["webbrowser"]
+    fig1._repr_html_()
+    sys.modules[
+        "webbrowser"
+    ] = removed_webbrowser_module  # restore everything after this test
 
 
 def test_missing_webbrowser_methods(fig1):
