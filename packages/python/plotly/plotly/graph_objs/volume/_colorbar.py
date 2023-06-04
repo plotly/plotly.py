@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class ColorBar(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "volume"
@@ -14,6 +13,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "borderwidth",
         "dtick",
         "exponentformat",
+        "labelalias",
         "len",
         "lenmode",
         "minexponent",
@@ -259,6 +259,30 @@ class ColorBar(_BaseTraceHierarchyType):
     @exponentformat.setter
     def exponentformat(self, val):
         self["exponentformat"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. labelalias
+        can be used with any axis type, and both keys (if needed) and
+        values (if desired) can include html-like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # len
     # ---
@@ -1453,6 +1477,14 @@ class ColorBar(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1653,6 +1685,7 @@ class ColorBar(_BaseTraceHierarchyType):
         borderwidth=None,
         dtick=None,
         exponentformat=None,
+        labelalias=None,
         len=None,
         lenmode=None,
         minexponent=None,
@@ -1744,6 +1777,14 @@ class ColorBar(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1983,6 +2024,10 @@ an instance of :class:`plotly.graph_objs.volume.ColorBar`"""
         _v = exponentformat if exponentformat is not None else _v
         if _v is not None:
             self["exponentformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("len", None)
         _v = len if len is not None else _v
         if _v is not None:

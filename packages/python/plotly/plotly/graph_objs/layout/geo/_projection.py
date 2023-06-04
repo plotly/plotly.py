@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Projection(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout.geo"

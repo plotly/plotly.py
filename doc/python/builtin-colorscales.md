@@ -41,7 +41,7 @@ jupyter:
 Many Plotly Express functions accept a `color_continuous_scale` argument and many trace
 types have a `colorscale` attribute in their schema. Plotly comes with a large number of
 built-in continuous color scales, which can be referred to in Python code when setting the above arguments,
-either by name in a case-insensitive string e.g. `px.scatter(continuous_color_scale="Viridis"`) or by reference e.g.
+either by name in a case-insensitive string e.g. `px.scatter(color_continuous_scale="Viridis"`) or by reference e.g.
 `go.Scatter(marker_colorscale=plotly.colors.sequential.Viridis)`. They can also be reversed by adding `_r` at the end
 e.g. `"Viridis_r"` or `plotly.colors.sequential.Viridis_r`.
 

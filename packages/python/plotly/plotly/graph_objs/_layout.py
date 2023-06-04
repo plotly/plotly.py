@@ -3,10 +3,10 @@ import copy as _copy
 
 
 class Layout(_BaseLayoutType):
-
     _subplotid_prop_names = [
         "coloraxis",
         "geo",
+        "legend",
         "mapbox",
         "polar",
         "scene",
@@ -32,6 +32,7 @@ class Layout(_BaseLayoutType):
         from plotly.validators.layout import (
             ColoraxisValidator,
             GeoValidator,
+            LegendValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -44,6 +45,7 @@ class Layout(_BaseLayoutType):
         return {
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
+            "legend": LegendValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -2041,6 +2043,9 @@ class Layout(_BaseLayoutType):
                 valign
                     Sets the vertical alignment of the symbols with
                     respect to their associated text.
+                visible
+                    Determines whether or not this legend is
+                    visible.
                 x
                     Sets the x position (in normalized coordinates)
                     of the legend. Defaults to 1.02 for vertical
@@ -2451,6 +2456,10 @@ class Layout(_BaseLayoutType):
                     Determines the path's interior. For more info
                     please visit https://developer.mozilla.org/en-
                     US/docs/Web/SVG/Attribute/fill-rule
+                label
+                    :class:`plotly.graph_objects.layout.newshape.La
+                    bel` instance or dict with compatible
+                    properties
                 layer
                     Specifies whether new shapes are drawn below or
                     above traces.
@@ -3031,6 +3040,9 @@ class Layout(_BaseLayoutType):
                     constitute the interior. For more info please
                     visit https://developer.mozilla.org/en-
                     US/docs/Web/SVG/Attribute/fill-rule
+                label
+                    :class:`plotly.graph_objects.layout.shape.Label
+                    ` instance or dict with compatible properties
                 layer
                     Specifies whether shapes are drawn below or
                     above traces.
@@ -3602,6 +3614,22 @@ class Layout(_BaseLayoutType):
 
             Supported dict properties:
 
+                automargin
+                    Determines whether the title can automatically
+                    push the figure margins. If `yref='paper'` then
+                    the margin will expand to ensure that the title
+                    doesn’t overlap with the edges of the
+                    container. If `yref='container'` then the
+                    margins will ensure that the title doesn’t
+                    overlap with the plot area, tick labels, and
+                    axis titles. If `automargin=true` and the
+                    margins need to be expanded, then y will be set
+                    to a default 1 and yanchor will be set to an
+                    appropriate default to ensure that minimal
+                    margin space is needed. Note that when
+                    `yref='paper'`, only 1 or 0 are allowed y
+                    values. Invalid values will be reset to the
+                    default 1.
                 font
                     Sets the title font. Note that the title's font
                     used to be customized by the now deprecated
@@ -4291,6 +4319,16 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4812,6 +4850,16 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above

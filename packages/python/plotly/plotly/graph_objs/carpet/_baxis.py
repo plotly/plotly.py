@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Baxis(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "carpet"
@@ -27,6 +26,7 @@ class Baxis(_BaseTraceHierarchyType):
         "gridcolor",
         "griddash",
         "gridwidth",
+        "labelalias",
         "labelpadding",
         "labelprefix",
         "labelsuffix",
@@ -586,6 +586,30 @@ class Baxis(_BaseTraceHierarchyType):
     @gridwidth.setter
     def gridwidth(self, val):
         self["gridwidth"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. labelalias
+        can be used with any axis type, and both keys (if needed) and
+        values (if desired) can include html-like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # labelpadding
     # ------------
@@ -1780,6 +1804,14 @@ class Baxis(_BaseTraceHierarchyType):
             "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the axis line.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         labelpadding
             Extra padding between label and the axis
         labelprefix
@@ -1954,6 +1986,7 @@ class Baxis(_BaseTraceHierarchyType):
         gridcolor=None,
         griddash=None,
         gridwidth=None,
+        labelalias=None,
         labelpadding=None,
         labelprefix=None,
         labelsuffix=None,
@@ -2075,6 +2108,14 @@ class Baxis(_BaseTraceHierarchyType):
             "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the axis line.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         labelpadding
             Extra padding between label and the axis
         labelprefix
@@ -2327,6 +2368,10 @@ an instance of :class:`plotly.graph_objs.carpet.Baxis`"""
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:
             self["gridwidth"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("labelpadding", None)
         _v = labelpadding if labelpadding is not None else _v
         if _v is not None:

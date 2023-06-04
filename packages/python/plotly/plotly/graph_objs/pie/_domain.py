@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Domain(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "pie"
