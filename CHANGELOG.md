@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fixed issue with shapes and annotations plotting on the wrong y axis when supplied with a specific axis in the `yref` parameter [[#4177](https://github.com/plotly/plotly.py/pull/4177)]
   - Remove `use_2to3` setuptools arg, which is invalid in the latest Python and setuptools versions [[#4206](https://github.com/plotly/plotly.py/pull/4206)]
   - Fix [#4066](https://github.com/plotly/plotly.py/issues/4066) JupyterLab v4 giving tiny default graph height [[#4227](https://github.com/plotly/plotly.py/pull/4227)]
+  - Fixed issue with `colors.n_colors` where generated RGB color values were not being constrained to stay between 0 and 255 [[#4110](https://github.com/plotly/plotly.py/pull/4110)]
 
 ## [5.14.1] - 2023-04-05
 
