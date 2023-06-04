@@ -74,7 +74,7 @@ def test_acceptance_min(val, validator_min):
     assert validator_min.validate_coerce(val) == approx(val)
 
 
-@pytest.mark.parametrize("val", [-2, -123, np.iinfo(np.int).min])
+@pytest.mark.parametrize("val", [-2, -123, np.iinfo(int).min])
 def test_rejection_min(val, validator_min):
     with pytest.raises(ValueError) as validation_failure:
         validator_min.validate_coerce(val)
