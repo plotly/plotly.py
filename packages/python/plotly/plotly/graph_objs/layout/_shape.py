@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Shape(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout"
@@ -12,6 +11,7 @@ class Shape(_BaseLayoutHierarchyType):
         "editable",
         "fillcolor",
         "fillrule",
+        "label",
         "layer",
         "line",
         "name",
@@ -137,6 +137,95 @@ class Shape(_BaseLayoutHierarchyType):
     @fillrule.setter
     def fillrule(self, val):
         self["fillrule"] = val
+
+    # label
+    # -----
+    @property
+    def label(self):
+        """
+        The 'label' property is an instance of Label
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.shape.Label`
+          - A dict of string/value properties that will be passed
+            to the Label constructor
+
+            Supported dict properties:
+
+                font
+                    Sets the shape label text font.
+                padding
+                    Sets padding (in px) between edge of label and
+                    edge of shape.
+                text
+                    Sets the text to display with shape.
+                textangle
+                    Sets the angle at which the label text is drawn
+                    with respect to the horizontal. For lines,
+                    angle "auto" is the same angle as the line. For
+                    all other shapes, angle "auto" is horizontal.
+                textposition
+                    Sets the position of the label text relative to
+                    the shape. Supported values for rectangles,
+                    circles and paths are *top left*, *top center*,
+                    *top right*, *middle left*, *middle center*,
+                    *middle right*, *bottom left*, *bottom center*,
+                    and *bottom right*. Supported values for lines
+                    are "start", "middle", and "end". Default:
+                    *middle center* for rectangles, circles, and
+                    paths; "middle" for lines.
+                texttemplate
+                    Template string used for rendering the shape's
+                    label. Note that this will override `text`.
+                    Variables are inserted using %{variable}, for
+                    example "x0: %{x0}". Numbers are formatted
+                    using d3-format's syntax %{variable:d3-format},
+                    for example "Price: %{x0:$.2f}". See https://gi
+                    thub.com/d3/d3-format/tree/v1.4.5#d3-format for
+                    details on the formatting syntax. Dates are
+                    formatted using d3-time-format's syntax
+                    %{variable|d3-time-format}, for example "Day:
+                    %{x0|%m %b %Y}". See
+                    https://github.com/d3/d3-time-
+                    format/tree/v2.2.3#locale_format for details on
+                    the date formatting syntax. A single
+                    multiplication or division operation may be
+                    applied to numeric variables, and combined with
+                    d3 number formatting, for example "Length in
+                    cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+                    second." For log axes, variable values are
+                    given in log units. For date axes, x/y
+                    coordinate variables and center variables use
+                    datetimes, while all other variable values use
+                    values in ms. Finally, the template string has
+                    access to variables `x0`, `x1`, `y0`, `y1`,
+                    `slope`, `dx`, `dy`, `width`, `height`,
+                    `length`, `xcenter` and `ycenter`.
+                xanchor
+                    Sets the label's horizontal position anchor
+                    This anchor binds the specified `textposition`
+                    to the "left", "center" or "right" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `xanchor` to "right" then the
+                    right-most portion of the label text lines up
+                    with the right-most edge of the shape.
+                yanchor
+                    Sets the label's vertical position anchor This
+                    anchor binds the specified `textposition` to
+                    the "top", "middle" or "bottom" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `yanchor` to "top" then the
+                    top-most portion of the label text lines up
+                    with the top-most edge of the shape.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.shape.Label
+        """
+        return self["label"]
+
+    @label.setter
+    def label(self, val):
+        self["label"] = val
 
     # layer
     # -----
@@ -621,6 +710,9 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -768,6 +860,7 @@ class Shape(_BaseLayoutHierarchyType):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
         line=None,
         name=None,
@@ -809,6 +902,9 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -994,6 +1090,10 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = fillrule if fillrule is not None else _v
         if _v is not None:
             self["fillrule"] = _v
+        _v = arg.pop("label", None)
+        _v = label if label is not None else _v
+        if _v is not None:
+            self["label"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:

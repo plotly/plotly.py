@@ -1559,17 +1559,31 @@ is of type {subplot_type}.""".format(
                         subplot_type=refs[0].subplot_type,
                     )
                 )
-            if len(refs) == 1 and secondary_y:
-                raise ValueError(
-                    """
-Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-because subplot does not have a secondary y-axis"""
-                )
-            if secondary_y:
-                xaxis, yaxis = refs[1].layout_keys
+
+            # If the new_object was created with a yref specified that did not include paper or domain, the specified yref should be used otherwise assign the xref and yref from the layout_keys
+            if (
+                new_obj.yref is None
+                or new_obj.yref == "y"
+                or "paper" in new_obj.yref
+                or "domain" in new_obj.yref
+            ):
+                if len(refs) == 1 and secondary_y:
+                    raise ValueError(
+                        """
+    Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+    because subplot does not have a secondary y-axis""".format(
+                            prop_singular=prop_singular, r=row, c=col
+                        )
+                    )
+                if secondary_y:
+                    xaxis, yaxis = refs[1].layout_keys
+                else:
+                    xaxis, yaxis = refs[0].layout_keys
+                xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             else:
-                xaxis, yaxis = refs[0].layout_keys
-            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+                yref = new_obj.yref
+                xaxis = refs[0].layout_keys[0]
+                xref = xaxis.replace("axis", "")
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
@@ -1591,6 +1605,11 @@ because subplot does not have a secondary y-axis"""
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
+        # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
+        # will appear as if user supplied yref params when looping through subplots and
+        # will force annotation to be on the axis of the last drawn annotation
+        # i.e. they all end up on the same axis.
+        new_obj.update(xref=None, yref=None)
 
         return self
 
@@ -3862,18 +3881,17 @@ Invalid property path '{key_path_str}' for layout
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
+                # special handling for missing keys that match _subplot_re_match
+                if key not in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
+                    # try _subplot_re_match
+                    match = plotly_obj._subplot_re_match(key)
+                    if match:
+                        # We need to create a subplotid object
+                        plotly_obj[key] = {}
+                        continue
+
                 err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
                 if err is not None:
-                    if isinstance(plotly_obj, BaseLayoutType):
-                        # try _subplot_re_match
-                        match = plotly_obj._subplot_re_match(key)
-                        if match:
-                            # We need to create a subplotid object
-                            plotly_obj[key] = {}
-                            continue
-                    # If no match, raise the error, which should already
-                    # contain the _raise_on_invalid_property_error
-                    # generated message
                     raise err
 
             # Convert update_obj to dict
@@ -4035,6 +4053,7 @@ Invalid property path '{key_path_str}' for layout
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
+                yref=shape_kwargs.get("yref", "y"),
             )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
@@ -4046,10 +4065,13 @@ Invalid property path '{key_path_str}' for layout
             ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
-                # however, in the case of a single plot, xref and yref are not
-                # specified, so we specify them here so the following routines can work
-                # (they need to append " domain" to xref or yref)
-                self.layout[layout_obj][-1].update(xref="x", yref="y")
+                # however, in the case of a single plot, xref and yref MAY not be
+                # specified, IF they are not specified we specify them here so the following routines can work
+                # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
+                if self.layout[layout_obj][-1].xref is None:
+                    self.layout[layout_obj][-1].update(xref="x")
+                if self.layout[layout_obj][-1].yref is None:
+                    self.layout[layout_obj][-1].update(yref="y")
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
@@ -4778,7 +4800,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._valid_props:
+                if hasattr(obj, "_valid_props") and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False

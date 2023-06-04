@@ -9,13 +9,12 @@ contribution.
 
 ## Code of Conduct
 
-Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it,
+Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't skip it,
 but the general idea is to be nice.
 
 ## What are the different ways to contribute?
 
-There are many ways to contribute to plotly.py. It helps to understand first
-the structure of the code and of the repository.
+There are many ways to contribute to plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),

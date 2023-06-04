@@ -43,6 +43,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._minexponent import MinexponentValidator
     from ._lenmode import LenmodeValidator
     from ._len import LenValidator
+    from ._labelalias import LabelaliasValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
     from ._borderwidth import BorderwidthValidator
@@ -96,6 +97,7 @@ else:
             "._minexponent.MinexponentValidator",
             "._lenmode.LenmodeValidator",
             "._len.LenValidator",
+            "._labelalias.LabelaliasValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
             "._borderwidth.BorderwidthValidator",

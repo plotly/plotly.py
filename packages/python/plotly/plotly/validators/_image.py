@@ -69,6 +69,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `z`, `color` and `colormodel`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example
@@ -91,6 +92,12 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.image.Legendgroupt
                 itle` instance or dict with compatible

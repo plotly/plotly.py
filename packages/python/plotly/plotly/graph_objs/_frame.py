@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Frame(_BaseFrameHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = ""
