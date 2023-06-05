@@ -694,11 +694,19 @@ def n_colors(lowcolor, highcolor, n_colors, colortype="tuple"):
     incr_2 = diff_2 / (n_colors - 1)
     list_of_colors = []
 
+    def _constrain_color(c):
+        if c > 255.0:
+            return 255.0
+        elif c < 0.0:
+            return 0.0
+        else:
+            return c
+
     for index in range(n_colors):
         new_tuple = (
-            lowcolor[0] + (index * incr_0),
-            lowcolor[1] + (index * incr_1),
-            lowcolor[2] + (index * incr_2),
+            _constrain_color(lowcolor[0] + (index * incr_0)),
+            _constrain_color(lowcolor[1] + (index * incr_1)),
+            _constrain_color(lowcolor[2] + (index * incr_2)),
         )
         list_of_colors.append(new_tuple)
 
