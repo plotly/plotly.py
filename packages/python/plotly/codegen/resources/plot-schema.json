@@ -14302,7 +14302,7 @@
     }
    },
    "meta": {
-    "description": "The data visualized by the span of the bars is set in `y` if `orientation` is set th *v* (the default) and the labels are set in `x`. By setting `orientation` to *h*, the roles are interchanged."
+    "description": "The data visualized by the span of the bars is set in `y` if `orientation` is set to *v* (the default) and the labels are set in `x`. By setting `orientation` to *h*, the roles are interchanged."
    },
    "type": "bar"
   },
@@ -27220,6 +27220,99 @@
        "valType": "string"
       }
      },
+     "pattern": {
+      "bgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "bgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "description": "Sets the pattern within the marker.",
+      "editType": "style",
+      "fgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "fgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "fgopacity": {
+       "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "fillmode": {
+       "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+       "dflt": "replace",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "replace",
+        "overlay"
+       ]
+      },
+      "role": "object",
+      "shape": {
+       "arrayOk": true,
+       "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+       "dflt": "",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "",
+        "/",
+        "\\",
+        "x",
+        "-",
+        "|",
+        "+",
+        "."
+       ]
+      },
+      "shapesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "size": {
+       "arrayOk": true,
+       "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+       "dflt": 8,
+       "editType": "style",
+       "min": 0,
+       "valType": "number"
+      },
+      "sizesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "solidity": {
+       "arrayOk": true,
+       "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+       "dflt": 0.3,
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "soliditysrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
+       "editType": "none",
+       "valType": "string"
+      }
+     },
      "role": "object"
     },
     "meta": {
@@ -34916,6 +35009,99 @@
        "valType": "string"
       }
      },
+     "pattern": {
+      "bgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "bgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "description": "Sets the pattern within the marker.",
+      "editType": "style",
+      "fgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "fgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "fgopacity": {
+       "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "fillmode": {
+       "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+       "dflt": "replace",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "replace",
+        "overlay"
+       ]
+      },
+      "role": "object",
+      "shape": {
+       "arrayOk": true,
+       "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+       "dflt": "",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "",
+        "/",
+        "\\",
+        "x",
+        "-",
+        "|",
+        "+",
+        "."
+       ]
+      },
+      "shapesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "size": {
+       "arrayOk": true,
+       "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+       "dflt": 8,
+       "editType": "style",
+       "min": 0,
+       "valType": "number"
+      },
+      "sizesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "solidity": {
+       "arrayOk": true,
+       "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+       "dflt": 0.3,
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "soliditysrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
+       "editType": "none",
+       "valType": "string"
+      }
+     },
      "reversescale": {
       "description": "Reverses the color mapping if true. Has an effect only if colors is set to a numerical array. If true, `marker.cmin` will correspond to the last color in the array and `marker.cmax` will correspond to the first color.",
       "dflt": false,
@@ -42188,6 +42374,99 @@
       },
       "widthsrc": {
        "description": "Sets the source reference on Chart Studio Cloud for `width`.",
+       "editType": "none",
+       "valType": "string"
+      }
+     },
+     "pattern": {
+      "bgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "bgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "description": "Sets the pattern within the marker.",
+      "editType": "style",
+      "fgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "fgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "fgopacity": {
+       "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "fillmode": {
+       "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+       "dflt": "replace",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "replace",
+        "overlay"
+       ]
+      },
+      "role": "object",
+      "shape": {
+       "arrayOk": true,
+       "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+       "dflt": "",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "",
+        "/",
+        "\\",
+        "x",
+        "-",
+        "|",
+        "+",
+        "."
+       ]
+      },
+      "shapesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "size": {
+       "arrayOk": true,
+       "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+       "dflt": 8,
+       "editType": "style",
+       "min": 0,
+       "valType": "number"
+      },
+      "sizesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "solidity": {
+       "arrayOk": true,
+       "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+       "dflt": 0.3,
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "soliditysrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
        "editType": "none",
        "valType": "string"
       }
@@ -67307,6 +67586,99 @@
        "valType": "string"
       }
      },
+     "pattern": {
+      "bgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "bgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "description": "Sets the pattern within the marker.",
+      "editType": "style",
+      "fgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "fgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "fgopacity": {
+       "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "fillmode": {
+       "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+       "dflt": "replace",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "replace",
+        "overlay"
+       ]
+      },
+      "role": "object",
+      "shape": {
+       "arrayOk": true,
+       "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+       "dflt": "",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "",
+        "/",
+        "\\",
+        "x",
+        "-",
+        "|",
+        "+",
+        "."
+       ]
+      },
+      "shapesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "size": {
+       "arrayOk": true,
+       "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+       "dflt": 8,
+       "editType": "style",
+       "min": 0,
+       "valType": "number"
+      },
+      "sizesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "solidity": {
+       "arrayOk": true,
+       "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+       "dflt": 0.3,
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "soliditysrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
+       "editType": "none",
+       "valType": "string"
+      }
+     },
      "reversescale": {
       "description": "Reverses the color mapping if true. Has an effect only if colors is set to a numerical array. If true, `marker.cmin` will correspond to the last color in the array and `marker.cmax` will correspond to the first color.",
       "dflt": false,
@@ -70645,6 +71017,99 @@
        "editType": "plot",
        "min": 0,
        "valType": "number"
+      }
+     },
+     "pattern": {
+      "bgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of background pattern fill. Defaults to a `marker.color` background when `fillmode` is *overlay*. Otherwise, defaults to a transparent background.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "bgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `bgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "description": "Sets the pattern within the marker.",
+      "editType": "style",
+      "fgcolor": {
+       "arrayOk": true,
+       "description": "When there is no colorscale sets the color of foreground pattern fill. Defaults to a `marker.color` background when `fillmode` is *replace*. Otherwise, defaults to dark grey or white to increase contrast with the `bgcolor`.",
+       "editType": "style",
+       "valType": "color"
+      },
+      "fgcolorsrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `fgcolor`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "fgopacity": {
+       "description": "Sets the opacity of the foreground pattern fill. Defaults to a 0.5 when `fillmode` is *overlay*. Otherwise, defaults to 1.",
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "fillmode": {
+       "description": "Determines whether `marker.color` should be used as a default to `bgcolor` or a `fgcolor`.",
+       "dflt": "replace",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "replace",
+        "overlay"
+       ]
+      },
+      "role": "object",
+      "shape": {
+       "arrayOk": true,
+       "description": "Sets the shape of the pattern fill. By default, no pattern is used for filling the area.",
+       "dflt": "",
+       "editType": "style",
+       "valType": "enumerated",
+       "values": [
+        "",
+        "/",
+        "\\",
+        "x",
+        "-",
+        "|",
+        "+",
+        "."
+       ]
+      },
+      "shapesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `shape`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "size": {
+       "arrayOk": true,
+       "description": "Sets the size of unit squares of the pattern fill in pixels, which corresponds to the interval of repetition of the pattern.",
+       "dflt": 8,
+       "editType": "style",
+       "min": 0,
+       "valType": "number"
+      },
+      "sizesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `size`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "solidity": {
+       "arrayOk": true,
+       "description": "Sets the solidity of the pattern fill. Solidity is roughly the fraction of the area filled by the pattern. Solidity of 0 shows only the background color without pattern and solidty of 1 shows only the foreground color without pattern.",
+       "dflt": 0.3,
+       "editType": "style",
+       "max": 1,
+       "min": 0,
+       "valType": "number"
+      },
+      "soliditysrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `solidity`.",
+       "editType": "none",
+       "valType": "string"
       }
      },
      "reversescale": {
@@ -74486,7 +74951,7 @@
     }
    },
    "meta": {
-    "description": "Draws waterfall trace which is useful graph to displays the contribution of various elements (either positive or negative) in a bar chart. The data visualized by the span of the bars is set in `y` if `orientation` is set th *v* (the default) and the labels are set in `x`. By setting `orientation` to *h*, the roles are interchanged."
+    "description": "Draws waterfall trace which is useful graph to displays the contribution of various elements (either positive or negative) in a bar chart. The data visualized by the span of the bars is set in `y` if `orientation` is set to *v* (the default) and the labels are set in `x`. By setting `orientation` to *h*, the roles are interchanged."
    },
    "type": "waterfall"
   }

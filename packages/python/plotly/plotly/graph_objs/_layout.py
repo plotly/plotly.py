@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Layout(_BaseLayoutType):
+
     _subplotid_prop_names = [
         "coloraxis",
         "geo",
