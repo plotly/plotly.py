@@ -525,13 +525,15 @@ elif ipython and ipython.get_ipython():
 else:
     # If ipython isn't available, try to display figures in the default
     # browser
-    import webbrowser
-
     try:
+        import webbrowser
+
         webbrowser.get()
         default_renderer = "browser"
-    except webbrowser.Error:
-        # Default browser could not be loaded
+    except Exception:
+        # Many things could have gone wrong
+        # There could not be a webbrowser Python module,
+        # or the module may be a dumb placeholder
         pass
 
 renderers.render_on_display = True
