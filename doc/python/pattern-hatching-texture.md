@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.7
+    version: 3.10.11
   plotly:
     description: How to use patterns (also known as hatching or texture) with bar
       charts.
@@ -36,7 +36,7 @@ jupyter:
 
 *New in v5.0*
 
-[Bar charts](/python/bar-charts/), [histograms](/python/histograms/), [polar bar charts](/python/wind-rose-charts/) and [area charts](/python/filled-area-plots/) have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
+[Bar charts](/python/bar-charts/), [histograms](/python/histograms/), [polar bar charts](/python/wind-rose-charts/), [area charts](/python/filled-area-plots/), [pie charts](/python/pie-charts), and [funnel charts](/python/funnel-charts) have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
 
 * to double-encode variables (i.e. using both color and pattern) to improve accessibility for visually-impaired end-users
 * to encode an additional variable beyond just using color
@@ -79,7 +79,7 @@ In the charts above, the first value of the variable assigned `pattern_shape` ge
 
 Here we use `pattern_shape_sequence` to replace the defaults and include a pattern-shape for the first variable:
 
-```python tags=[]
+```python
 import plotly.express as px
 df = px.data.medals_long()
 
