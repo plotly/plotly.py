@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Bar(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -2622,7 +2623,7 @@ class Bar(_BaseTraceType):
         Construct a new Bar object
 
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 

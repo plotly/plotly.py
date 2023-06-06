@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Fill(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "table.cells"

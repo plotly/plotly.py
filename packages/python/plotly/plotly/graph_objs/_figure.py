@@ -1291,7 +1291,7 @@ class Figure(BaseFigure):
         Add a new Bar trace
 
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
@@ -20770,7 +20770,7 @@ class Figure(BaseFigure):
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
-        set in `y` if `orientation` is set th "v" (the default) and the
+        set in `y` if `orientation` is set to "v" (the default) and the
         labels are set in `x`. By setting `orientation` to "h", the
         roles are interchanged.
 

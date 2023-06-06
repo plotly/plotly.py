@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Contour(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""

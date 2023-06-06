@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class X(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "volume.caps"

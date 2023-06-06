@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Treemap(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -775,6 +776,8 @@ class Treemap(_BaseTraceType):
                 pad
                     :class:`plotly.graph_objects.treemap.marker.Pad
                     ` instance or dict with compatible properties
+                pattern
+                    Sets the pattern within the marker.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if colors is set to a numerical
