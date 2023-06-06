@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to make Pie Charts.
     display_as: basic
@@ -298,6 +298,32 @@ fig.add_trace(go.Pie(labels=labels, values=[21, 15, 3, 19, 1], scalegroup='one',
 
 fig.update_layout(title_text='World GDP')
 fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Pie charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color.
+
+```python
+import plotly.graph_objects as go
+
+labels = ["Oxygen", "Hydrogen", "Carbon_Dioxide", "Nitrogen"]
+values = [4500, 2500, 1053, 500]
+colors = ["gold", "mediumturquoise", "darkorange", "lightgreen"]
+fig = go.Figure(
+    data=[
+        go.Pie(
+            labels=labels,
+            values=values,
+            textfont_size=20,
+            marker={"colors": colors, "pattern": {"shape": [".", "x", "+", "-"]}},
+        )
+    ]
+)
+fig.show()
+
 ```
 
 ### See Also: Sunburst charts
