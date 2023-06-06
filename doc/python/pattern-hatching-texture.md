@@ -34,9 +34,9 @@ jupyter:
     thumbnail: thumbnail/pattern.png
 ---
 
-*New in 5.0, with support for pie and sunburst charts in 5.15*
+*New in 5.0, with support for pie, sunburst, icicle, funnelarea, and treemap charts in 5.15*
 
-[Bar charts](/python/bar-charts/), [histograms](/python/histograms/), [polar bar charts](/python/wind-rose-charts/), [area charts](/python/filled-area-plots/), [pie charts](/python/pie-charts), and [sunburst charts](/python/sunburst-charts) have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
+[Bar charts](/python/bar-charts/), [histograms](/python/histograms/), [polar bar charts](/python/wind-rose-charts/), [area charts](/python/filled-area-plots/), [pie charts](/python/pie-charts), [sunburst charts](/python/sunburst-charts), [funnelarea charts](/python/funnel-charts), [icicle charts](/python/icicle-charts/), and [treemap charts](/python/treemaps), have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
 
 * to double-encode variables (i.e. using both color and pattern) to improve accessibility for visually-impaired end-users
 * to encode an additional variable beyond just using color
