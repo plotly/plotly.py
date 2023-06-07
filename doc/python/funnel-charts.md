@@ -211,12 +211,14 @@ from plotly import graph_objects as go
 
 colors = ["gold", "gold", "lightgreen", "lavender"]
 
-fig = go.Figure(go.Funnelarea(
-    labels = ["Interview 1","Interview 2", "Test", "Final Stage"],
-    values = [100, 70, 40, 20],
-    textfont_size=20,
-    marker={"colors":colors, "pattern": {"shape": ["", "/", "", ""]}},
-    ))
+fig = go.Figure(
+    go.Funnelarea(
+        labels=["Interview 1", "Interview 2", "Test", "Final Stage"],
+        values=[100, 70, 40, 20],
+        textfont_size=20,
+        marker=dict(colors=colors, pattern=dict(shape=["", "/", "", ""])),
+    )
+)
 fig.show()
 ```
 
