@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Parcats(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""

@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class YBins(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "histogram2dcontour"

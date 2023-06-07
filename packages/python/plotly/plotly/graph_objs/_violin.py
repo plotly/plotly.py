@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Violin(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""

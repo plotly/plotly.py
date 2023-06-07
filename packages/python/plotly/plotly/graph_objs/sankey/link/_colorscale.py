@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Colorscale(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "sankey.link"
