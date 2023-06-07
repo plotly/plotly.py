@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class YAxis(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout"
@@ -12,6 +11,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "anchor",
         "automargin",
         "autorange",
+        "autoshift",
         "autotypenumbers",
         "calendar",
         "categoryarray",
@@ -30,6 +30,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "griddash",
         "gridwidth",
         "hoverformat",
+        "labelalias",
         "layer",
         "linecolor",
         "linewidth",
@@ -47,6 +48,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "scaleanchor",
         "scaleratio",
         "separatethousands",
+        "shift",
         "showdividers",
         "showexponent",
         "showgrid",
@@ -165,6 +167,30 @@ class YAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autoshift
+    # ---------
+    @property
+    def autoshift(self):
+        """
+        Automatically reposition the axis to avoid overlap with other
+        axes with the same `overlaying` value. This repositioning will
+        account for any `shift` amount applied to other axes on the
+        same side with `autoshift` is set to true. Only has an effect
+        if `anchor` is set to "free".
+
+        The 'autoshift' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["autoshift"]
+
+    @autoshift.setter
+    def autoshift(self, val):
+        self["autoshift"] = val
 
     # autotypenumbers
     # ---------------
@@ -737,6 +763,30 @@ class YAxis(_BaseLayoutHierarchyType):
     @hoverformat.setter
     def hoverformat(self, val):
         self["hoverformat"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. labelalias
+        can be used with any axis type, and both keys (if needed) and
+        values (if desired) can include html-like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # layer
     # -----
@@ -1344,6 +1394,32 @@ class YAxis(_BaseLayoutHierarchyType):
     def separatethousands(self, val):
         self["separatethousands"] = val
 
+    # shift
+    # -----
+    @property
+    def shift(self):
+        """
+        Moves the axis a given number of pixels from where it would
+        have been otherwise. Accepts both positive and negative values,
+        which will shift the axis either right or left, respectively.
+        If `autoshift` is set to true, then this defaults to a padding
+        of -3 if `side` is set to "left". and defaults to +3 if `side`
+        is set to "right". Defaults to 0 if `autoshift` is set to
+        false. Only has an effect if `anchor` is set to "free".
+
+        The 'shift' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["shift"]
+
+    @shift.setter
+    def shift(self, val):
+        self["shift"] = val
+
     # showdividers
     # ------------
     @property
@@ -1730,8 +1806,8 @@ class YAxis(_BaseLayoutHierarchyType):
         labels vertically.
 
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -2100,11 +2176,13 @@ class YAxis(_BaseLayoutHierarchyType):
         step `dtick` ("linear" is the default value if `tick0` and
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
-        is the default value if `tickvals` is provided).
+        is the default value if `tickvals` is provided). If "sync", the
+        number of ticks will sync with the overlayed axis set by
+        `overlaying` property.
 
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+                ['auto', 'linear', 'array', 'sync']
 
         Returns
         -------
@@ -2589,6 +2667,13 @@ class YAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autoshift
+            Automatically reposition the axis to avoid overlap with
+            other axes with the same `overlaying` value. This
+            repositioning will account for any `shift` amount
+            applied to other axes on the same side with `autoshift`
+            is set to true. Only has an effect if `anchor` is set
+            to "free".
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -2705,6 +2790,14 @@ class YAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -2815,6 +2908,15 @@ class YAxis(_BaseLayoutHierarchyType):
             horizontal.
         separatethousands
             If "true", even 4-digit integers are separated
+        shift
+            Moves the axis a given number of pixels from where it
+            would have been otherwise. Accepts both positive and
+            negative values, which will shift the axis either right
+            or left, respectively. If `autoshift` is set to true,
+            then this defaults to a padding of -3 if `side` is set
+            to "left". and defaults to +3 if `side` is set to
+            "right". Defaults to 0 if `autoshift` is set to false.
+            Only has an effect if `anchor` is set to "free".
         showdividers
             Determines whether or not a dividers are drawn between
             the category levels of this axis. Only has an effect on
@@ -2948,7 +3050,9 @@ class YAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -3018,6 +3122,7 @@ class YAxis(_BaseLayoutHierarchyType):
         anchor=None,
         automargin=None,
         autorange=None,
+        autoshift=None,
         autotypenumbers=None,
         calendar=None,
         categoryarray=None,
@@ -3036,6 +3141,7 @@ class YAxis(_BaseLayoutHierarchyType):
         griddash=None,
         gridwidth=None,
         hoverformat=None,
+        labelalias=None,
         layer=None,
         linecolor=None,
         linewidth=None,
@@ -3053,6 +3159,7 @@ class YAxis(_BaseLayoutHierarchyType):
         scaleanchor=None,
         scaleratio=None,
         separatethousands=None,
+        shift=None,
         showdividers=None,
         showexponent=None,
         showgrid=None,
@@ -3120,6 +3227,13 @@ class YAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autoshift
+            Automatically reposition the axis to avoid overlap with
+            other axes with the same `overlaying` value. This
+            repositioning will account for any `shift` amount
+            applied to other axes on the same side with `autoshift`
+            is set to true. Only has an effect if `anchor` is set
+            to "free".
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -3236,6 +3350,14 @@ class YAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -3346,6 +3468,15 @@ class YAxis(_BaseLayoutHierarchyType):
             horizontal.
         separatethousands
             If "true", even 4-digit integers are separated
+        shift
+            Moves the axis a given number of pixels from where it
+            would have been otherwise. Accepts both positive and
+            negative values, which will shift the axis either right
+            or left, respectively. If `autoshift` is set to true,
+            then this defaults to a padding of -3 if `side` is set
+            to "left". and defaults to +3 if `side` is set to
+            "right". Defaults to 0 if `autoshift` is set to false.
+            Only has an effect if `anchor` is set to "free".
         showdividers
             Determines whether or not a dividers are drawn between
             the category levels of this axis. Only has an effect on
@@ -3479,7 +3610,9 @@ class YAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -3585,6 +3718,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autoshift", None)
+        _v = autoshift if autoshift is not None else _v
+        if _v is not None:
+            self["autoshift"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
@@ -3657,6 +3794,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:
@@ -3725,6 +3866,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = separatethousands if separatethousands is not None else _v
         if _v is not None:
             self["separatethousands"] = _v
+        _v = arg.pop("shift", None)
+        _v = shift if shift is not None else _v
+        if _v is not None:
+            self["shift"] = _v
         _v = arg.pop("showdividers", None)
         _v = showdividers if showdividers is not None else _v
         if _v is not None:

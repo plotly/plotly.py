@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Pattern(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "bar.marker"

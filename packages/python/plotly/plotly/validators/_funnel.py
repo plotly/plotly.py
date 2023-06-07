@@ -69,8 +69,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -83,6 +83,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `percentInitial`, `percentPrevious`
                 and `percentTotal`. Anything contained in tag
                 `<extra>` is displayed in the secondary box,
@@ -117,6 +118,12 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
             insidetextfont
                 Sets the font used for `text` lying inside the
                 bar.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -246,8 +253,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
-                rmat/tree/v1.4.5#d3-format for details on the
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -255,7 +262,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variables
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
                 `percentInitial`, `percentPrevious`,
                 `percentTotal`, `label` and `value`.
             texttemplatesrc
@@ -310,9 +318,9 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -359,9 +367,9 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"

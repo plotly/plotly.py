@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "treemap"
@@ -19,6 +18,7 @@ class Marker(_BaseTraceHierarchyType):
         "colors",
         "colorscale",
         "colorssrc",
+        "cornerradius",
         "depthfade",
         "line",
         "pad",
@@ -226,6 +226,16 @@ class Marker(_BaseTraceHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -305,8 +315,8 @@ class Marker(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -536,6 +546,26 @@ class Marker(_BaseTraceHierarchyType):
     def colorssrc(self, val):
         self["colorssrc"] = val
 
+    # cornerradius
+    # ------------
+    @property
+    def cornerradius(self):
+        """
+        Sets the maximum rounding of corners (in px).
+
+        The 'cornerradius' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["cornerradius"]
+
+    @cornerradius.setter
+    def cornerradius(self, val):
+        self["cornerradius"] = val
+
     # depthfade
     # ---------
     @property
@@ -745,6 +775,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             `colors`.
+        cornerradius
+            Sets the maximum rounding of corners (in px).
         depthfade
             Determines if the sector colors are faded towards the
             background from the leaves up to the headers. This
@@ -786,6 +818,7 @@ class Marker(_BaseTraceHierarchyType):
         colors=None,
         colorscale=None,
         colorssrc=None,
+        cornerradius=None,
         depthfade=None,
         line=None,
         pad=None,
@@ -865,6 +898,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             `colors`.
+        cornerradius
+            Sets the maximum rounding of corners (in px).
         depthfade
             Determines if the sector colors are faded towards the
             background from the leaves up to the headers. This
@@ -965,6 +1000,10 @@ an instance of :class:`plotly.graph_objs.treemap.Marker`"""
         _v = colorssrc if colorssrc is not None else _v
         if _v is not None:
             self["colorssrc"] = _v
+        _v = arg.pop("cornerradius", None)
+        _v = cornerradius if cornerradius is not None else _v
+        if _v is not None:
+            self["cornerradius"] = _v
         _v = arg.pop("depthfade", None)
         _v = depthfade if depthfade is not None else _v
         if _v is not None:

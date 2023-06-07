@@ -88,8 +88,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -135,6 +135,12 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             latsrc
                 Sets the source reference on Chart Studio Cloud
                 for `lat`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the

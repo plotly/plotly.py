@@ -34,6 +34,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._selectionrevision import SelectionrevisionValidator
     from ._selectdirection import SelectdirectionValidator
     from ._scene import SceneValidator
+    from ._scattermode import ScattermodeValidator
+    from ._scattergap import ScattergapValidator
     from ._polar import PolarValidator
     from ._plot_bgcolor import Plot_BgcolorValidator
     from ._piecolorway import PiecolorwayValidator
@@ -131,6 +133,8 @@ else:
             "._selectionrevision.SelectionrevisionValidator",
             "._selectdirection.SelectdirectionValidator",
             "._scene.SceneValidator",
+            "._scattermode.ScattermodeValidator",
+            "._scattergap.ScattergapValidator",
             "._polar.PolarValidator",
             "._plot_bgcolor.Plot_BgcolorValidator",
             "._piecolorway.PiecolorwayValidator",

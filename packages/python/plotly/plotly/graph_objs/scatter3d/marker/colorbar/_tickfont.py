@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Tickfont(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "scatter3d.marker.colorbar"
