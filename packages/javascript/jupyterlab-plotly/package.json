@@ -65,7 +65,7 @@
     "@lumino/messaging": "^1.2.3",
     "@lumino/widgets": "^1.8.1",
     "lodash": "^4.17.4",
-    "plotly.js": "^2.24.0"
+    "plotly.js": "^2.24.1"
   },
   "jupyterlab": {
     "extension": "lib/jupyterlab-plugin",
