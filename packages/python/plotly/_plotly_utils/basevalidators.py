@@ -2661,7 +2661,6 @@ class BaseDataValidator(BaseValidator):
                         v_el = dict(type="histogram2dcontour", **v_el._props)
                     else:
                         v_el = v_el._props
-                    
 
                 if isinstance(v_el, dict):
                     type_in_v_el = "type" in v_el
