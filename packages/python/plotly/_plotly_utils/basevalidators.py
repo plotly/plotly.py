@@ -2646,6 +2646,9 @@ class BaseDataValidator(BaseValidator):
     def validate_coerce(self, v, skip_invalid=False, _validate=True):
         from plotly.basedatatypes import BaseTraceType
 
+        # Import Histogram2dcontour, this is the deprecated name of the
+        # Histogram2dContour trace.
+        from plotly.graph_objs import Histogram2dcontour
         if v is None:
             v = []
         else:
