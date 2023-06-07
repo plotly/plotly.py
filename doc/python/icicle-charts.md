@@ -422,7 +422,7 @@ fig.show()
 
 *New in 5.15*
 
-Icicle charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the size and solidity of the pattern.
+Icicle charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
 
 ```python
 import plotly.graph_objects as go
