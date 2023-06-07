@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Caps(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "isosurface"

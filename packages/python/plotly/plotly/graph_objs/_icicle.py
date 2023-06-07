@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Icicle(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -787,6 +788,8 @@ class Icicle(_BaseTraceType):
                 line
                     :class:`plotly.graph_objects.icicle.marker.Line
                     ` instance or dict with compatible properties
+                pattern
+                    Sets the pattern within the marker.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if colors is set to a numerical

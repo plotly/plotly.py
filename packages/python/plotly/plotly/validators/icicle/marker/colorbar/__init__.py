@@ -2,9 +2,11 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._yref import YrefValidator
     from ._ypad import YpadValidator
     from ._yanchor import YanchorValidator
     from ._y import YValidator
+    from ._xref import XrefValidator
     from ._xpad import XpadValidator
     from ._xanchor import XanchorValidator
     from ._x import XValidator
@@ -56,9 +58,11 @@ else:
         __name__,
         [],
         [
+            "._yref.YrefValidator",
             "._ypad.YpadValidator",
             "._yanchor.YanchorValidator",
             "._y.YValidator",
+            "._xref.XrefValidator",
             "._xpad.XpadValidator",
             "._xanchor.XanchorValidator",
             "._x.XValidator",
