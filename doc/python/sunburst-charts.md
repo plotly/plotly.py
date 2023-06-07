@@ -316,9 +316,11 @@ fig = go.Figure(
         values=[65, 14, 12, 10, 2, 6, 6, 4, 4],
         branchvalues="total",
         textfont_size=16,
-        marker={
-            "pattern": {"shape": ["", "/", "/", ".", ".", "/", "/", ".", "/"], "solidity": 0.9}
-        },
+        marker=dict(
+            pattern=dict(
+                shape=["", "/", "/", ".", ".", "/", "/", ".", "/"], solidity=0.9
+            )
+        ),
     )
 )
 
