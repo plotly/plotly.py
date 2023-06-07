@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Histogram2dContour(_BaseTraceType):
-
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -29,6 +28,7 @@ class Histogram2dContour(_BaseTraceType):
         "hovertemplatesrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
@@ -274,6 +274,16 @@ class Histogram2dContour(_BaseTraceType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -353,8 +363,8 @@ class Histogram2dContour(_BaseTraceType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -575,8 +585,8 @@ class Histogram2dContour(_BaseTraceType):
                     Sets the contour label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat.
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format.
                 operation
                     Sets the constraint operation. "=" keeps
                     regions equal to `value` "<" and "<=" keep
@@ -863,11 +873,11 @@ class Histogram2dContour(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variable `z`
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variable `z` Anything contained
+        in tag `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -946,6 +956,31 @@ class Histogram2dContour(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self["idssrc"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
 
     # legendgroup
     # -----------
@@ -1435,7 +1470,8 @@ class Histogram2dContour(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `x`, `y`, `z` and `text`.
+        Finally, the template string has access to variables `x`, `y`,
+        `z` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -2220,11 +2256,11 @@ class Histogram2dContour(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2235,6 +2271,12 @@ class Histogram2dContour(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2330,7 +2372,8 @@ class Histogram2dContour(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2482,6 +2525,7 @@ class Histogram2dContour(_BaseTraceType):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2665,11 +2709,11 @@ class Histogram2dContour(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2680,6 +2724,12 @@ class Histogram2dContour(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2775,7 +2825,8 @@ class Histogram2dContour(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3016,6 +3067,10 @@ an instance of :class:`plotly.graph_objs.Histogram2dContour`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:

@@ -29,6 +29,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
+    from ._labelalias import LabelaliasValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
 else:
@@ -65,6 +66,7 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
+            "._labelalias.LabelaliasValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
         ],

@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "violin"
@@ -26,8 +25,8 @@ class Marker(_BaseTraceHierarchyType):
         Sets the marker angle in respect to `angleref`.
 
         The 'angle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns

@@ -3,7 +3,6 @@ import copy as _copy
 
 
 class ZAxis(_BaseLayoutHierarchyType):
-
     # class properties
     # --------------------
     _parent_path_str = "layout.scene"
@@ -22,6 +21,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         "gridcolor",
         "gridwidth",
         "hoverformat",
+        "labelalias",
         "linecolor",
         "linewidth",
         "minexponent",
@@ -517,6 +517,30 @@ class ZAxis(_BaseLayoutHierarchyType):
     @hoverformat.setter
     def hoverformat(self, val):
         self["hoverformat"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. labelalias
+        can be used with any axis type, and both keys (if needed) and
+        values (if desired) can include html-like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # linecolor
     # ---------
@@ -1071,8 +1095,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         labels vertically.
 
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -1846,6 +1870,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
@@ -2042,6 +2074,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         gridcolor=None,
         gridwidth=None,
         hoverformat=None,
+        labelalias=None,
         linecolor=None,
         linewidth=None,
         minexponent=None,
@@ -2190,6 +2223,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
@@ -2452,6 +2493,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("linecolor", None)
         _v = linecolor if linecolor is not None else _v
         if _v is not None:
