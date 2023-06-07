@@ -2657,7 +2657,11 @@ class BaseDataValidator(BaseValidator):
             for v_el in v:
 
                 if isinstance(v_el, BaseTraceType):
-                    v_el = v_el._props
+                    if isinstance(v_el, Histogram2dcontour):
+                        v_el = dict(type="histogram2dcontour", **v_el._props)
+                    else:
+                        v_el = v_el._props
+                    
 
                 if isinstance(v_el, dict):
                     type_in_v_el = "type" in v_el
