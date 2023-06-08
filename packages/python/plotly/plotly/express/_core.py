@@ -268,7 +268,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         fit information to be used for trendlines
     """
     if "line_close" in args and args["line_close"]:
-        trace_data = trace_data.append(trace_data.iloc[0])
+        trace_data = pd.concat([trace_data, trace_data.iloc[:1]])
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -1307,7 +1307,10 @@ def build_dataframe(args, constructor):
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
+        if hasattr(args["data_frame"], "to_pandas"):
+            args["data_frame"] = args["data_frame"].to_pandas()
+        else:
+            args["data_frame"] = pd.DataFrame(args["data_frame"])
     df_input = args["data_frame"]
 
     # now we handle special cases like wide-mode or x-xor-y specification
@@ -1879,6 +1882,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         other_position = "marginal_x" if args["orientation"] == "h" else "marginal_y"
         args[position] = args["marginal"]
         args[other_position] = None
+
+    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
+    if len(args["data_frame"]) == 0:
+        args["facet_row"] = args["facet_col"] = None
 
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col") is not None and args.get("marginal_y") is not None:

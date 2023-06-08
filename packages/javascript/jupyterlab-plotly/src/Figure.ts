@@ -849,6 +849,9 @@ export class FigureView extends DOMWidgetView {
     // the model is not directly mutated by the Plotly.js library.
     var initialTraces = _.cloneDeep(this.model.get("_data"));
     var initialLayout = _.cloneDeep(this.model.get("_layout"));
+    if (!initialLayout.height) {
+      initialLayout.height = 360;
+    }
     var config = this.model.get("_config");
     config.editSelection = false;
 

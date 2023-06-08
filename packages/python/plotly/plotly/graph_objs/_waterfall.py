@@ -31,6 +31,7 @@ class Waterfall(_BaseTraceType):
         "increasing",
         "insidetextanchor",
         "insidetextfont",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
@@ -445,9 +446,10 @@ class Waterfall(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `initial`, `delta` and `final`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `initial`, `delta` and
+        `final`. Anything contained in tag `<extra>` is displayed in
+        the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -681,6 +683,31 @@ class Waterfall(_BaseTraceType):
     @insidetextfont.setter
     def insidetextfont(self, val):
         self["insidetextfont"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
 
     # legendgroup
     # -----------
@@ -1355,7 +1382,8 @@ class Waterfall(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `initial`, `delta`, `final` and `label`.
+        Finally, the template string has access to variables `initial`,
+        `delta`, `final` and `label`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1988,9 +2016,10 @@ class Waterfall(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -2021,6 +2050,12 @@ class Waterfall(_BaseTraceType):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2151,8 +2186,8 @@ class Waterfall(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2304,6 +2339,7 @@ class Waterfall(_BaseTraceType):
         increasing=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2361,7 +2397,7 @@ class Waterfall(_BaseTraceType):
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
-        set in `y` if `orientation` is set th "v" (the default) and the
+        set in `y` if `orientation` is set to "v" (the default) and the
         labels are set in `x`. By setting `orientation` to "h", the
         roles are interchanged.
 
@@ -2439,9 +2475,10 @@ class Waterfall(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -2472,6 +2509,12 @@ class Waterfall(_BaseTraceType):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2602,8 +2645,8 @@ class Waterfall(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2850,6 +2893,10 @@ an instance of :class:`plotly.graph_objs.Waterfall`"""
         _v = insidetextfont if insidetextfont is not None else _v
         if _v is not None:
             self["insidetextfont"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:

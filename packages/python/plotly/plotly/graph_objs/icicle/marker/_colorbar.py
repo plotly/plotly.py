@@ -55,9 +55,11 @@ class ColorBar(_BaseTraceHierarchyType):
         "x",
         "xanchor",
         "xpad",
+        "xref",
         "y",
         "yanchor",
         "ypad",
+        "yref",
     }
 
     # bgcolor
@@ -1310,12 +1312,16 @@ class ColorBar(_BaseTraceHierarchyType):
     @property
     def x(self):
         """
-        Sets the x position of the color bar (in plot fraction).
-        Defaults to 1.02 when `orientation` is "v" and 0.5 when
-        `orientation` is "h".
+        Sets the x position with respect to `xref` of the color bar (in
+        plot fraction). When `xref` is "paper", defaults to 1.02 when
+        `orientation` is "v" and 0.5 when `orientation` is "h". When
+        `xref` is "container", defaults to 1 when `orientation` is "v"
+        and 0.5 when `orientation` is "h". Must be between 0 and 1 if
+        `xref` is "container" and between "-2" and 3 if `xref` is
+        "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -1371,17 +1377,44 @@ class ColorBar(_BaseTraceHierarchyType):
     def xpad(self, val):
         self["xpad"] = val
 
+    # xref
+    # ----
+    @property
+    def xref(self):
+        """
+        Sets the container `x` refers to. "container" spans the entire
+        `width` of the plot. "paper" refers to the width of the
+        plotting area only.
+
+        The 'xref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["xref"]
+
+    @xref.setter
+    def xref(self, val):
+        self["xref"] = val
+
     # y
     # -
     @property
     def y(self):
         """
-        Sets the y position of the color bar (in plot fraction).
-        Defaults to 0.5 when `orientation` is "v" and 1.02 when
-        `orientation` is "h".
+        Sets the y position with respect to `yref` of the color bar (in
+        plot fraction). When `yref` is "paper", defaults to 0.5 when
+        `orientation` is "v" and 1.02 when `orientation` is "h". When
+        `yref` is "container", defaults to 0.5 when `orientation` is
+        "v" and 1 when `orientation` is "h". Must be between 0 and 1 if
+        `yref` is "container" and between "-2" and 3 if `yref` is
+        "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -1436,6 +1469,29 @@ class ColorBar(_BaseTraceHierarchyType):
     @ypad.setter
     def ypad(self, val):
         self["ypad"] = val
+
+    # yref
+    # ----
+    @property
+    def yref(self):
+        """
+        Sets the container `y` refers to. "container" spans the entire
+        `height` of the plot. "paper" refers to the height of the
+        plotting area only.
+
+        The 'yref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["yref"]
+
+    @yref.setter
+    def yref(self, val):
+        self["yref"] = val
 
     # Self properties description
     # ---------------------------
@@ -1647,9 +1703,14 @@ class ColorBar(_BaseTraceHierarchyType):
             Note that the title's location used to be set by the
             now deprecated `titleside` attribute.
         x
-            Sets the x position of the color bar (in plot
-            fraction). Defaults to 1.02 when `orientation` is "v"
-            and 0.5 when `orientation` is "h".
+            Sets the x position with respect to `xref` of the color
+            bar (in plot fraction). When `xref` is "paper",
+            defaults to 1.02 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". When `xref` is "container",
+            defaults to 1 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". Must be between 0 and 1 if `xref`
+            is "container" and between "-2" and 3 if `xref` is
+            "paper".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -1659,10 +1720,19 @@ class ColorBar(_BaseTraceHierarchyType):
         xpad
             Sets the amount of padding (in px) along the x
             direction.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position of the color bar (in plot
-            fraction). Defaults to 0.5 when `orientation` is "v"
-            and 1.02 when `orientation` is "h".
+            Sets the y position with respect to `yref` of the color
+            bar (in plot fraction). When `yref` is "paper",
+            defaults to 0.5 when `orientation` is "v" and 1.02 when
+            `orientation` is "h". When `yref` is "container",
+            defaults to 0.5 when `orientation` is "v" and 1 when
+            `orientation` is "h". Must be between 0 and 1 if `yref`
+            is "container" and between "-2" and 3 if `yref` is
+            "paper".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
@@ -1672,6 +1742,10 @@ class ColorBar(_BaseTraceHierarchyType):
         ypad
             Sets the amount of padding (in px) along the y
             direction.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
         """
 
     _mapped_properties = {
@@ -1728,9 +1802,11 @@ class ColorBar(_BaseTraceHierarchyType):
         x=None,
         xanchor=None,
         xpad=None,
+        xref=None,
         y=None,
         yanchor=None,
         ypad=None,
+        yref=None,
         **kwargs,
     ):
         """
@@ -1947,9 +2023,14 @@ class ColorBar(_BaseTraceHierarchyType):
             Note that the title's location used to be set by the
             now deprecated `titleside` attribute.
         x
-            Sets the x position of the color bar (in plot
-            fraction). Defaults to 1.02 when `orientation` is "v"
-            and 0.5 when `orientation` is "h".
+            Sets the x position with respect to `xref` of the color
+            bar (in plot fraction). When `xref` is "paper",
+            defaults to 1.02 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". When `xref` is "container",
+            defaults to 1 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". Must be between 0 and 1 if `xref`
+            is "container" and between "-2" and 3 if `xref` is
+            "paper".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -1959,10 +2040,19 @@ class ColorBar(_BaseTraceHierarchyType):
         xpad
             Sets the amount of padding (in px) along the x
             direction.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position of the color bar (in plot
-            fraction). Defaults to 0.5 when `orientation` is "v"
-            and 1.02 when `orientation` is "h".
+            Sets the y position with respect to `yref` of the color
+            bar (in plot fraction). When `yref` is "paper",
+            defaults to 0.5 when `orientation` is "v" and 1.02 when
+            `orientation` is "h". When `yref` is "container",
+            defaults to 0.5 when `orientation` is "v" and 1 when
+            `orientation` is "h". Must be between 0 and 1 if `yref`
+            is "container" and between "-2" and 3 if `yref` is
+            "paper".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
@@ -1972,6 +2062,10 @@ class ColorBar(_BaseTraceHierarchyType):
         ypad
             Sets the amount of padding (in px) along the y
             direction.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
 
         Returns
         -------
@@ -2190,6 +2284,10 @@ an instance of :class:`plotly.graph_objs.icicle.marker.ColorBar`"""
         _v = xpad if xpad is not None else _v
         if _v is not None:
             self["xpad"] = _v
+        _v = arg.pop("xref", None)
+        _v = xref if xref is not None else _v
+        if _v is not None:
+            self["xref"] = _v
         _v = arg.pop("y", None)
         _v = y if y is not None else _v
         if _v is not None:
@@ -2202,6 +2300,10 @@ an instance of :class:`plotly.graph_objs.icicle.marker.ColorBar`"""
         _v = ypad if ypad is not None else _v
         if _v is not None:
             self["ypad"] = _v
+        _v = arg.pop("yref", None)
+        _v = yref if yref is not None else _v
+        if _v is not None:
+            self["yref"] = _v
 
         # Process unknown kwargs
         # ----------------------

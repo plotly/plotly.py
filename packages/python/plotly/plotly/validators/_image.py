@@ -69,6 +69,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `z`, `color` and `colormodel`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example
@@ -91,6 +92,12 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.image.Legendgroupt
                 itle` instance or dict with compatible
@@ -175,7 +182,10 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x0
-                Set the image's x position.
+                Set the image's x position. The left edge of
+                the image (or the right edge if the x axis is
+                reversed or dx is negative) will be found at
+                xmin=x0-dx/2
             xaxis
                 Sets a reference between this trace's x
                 coordinates and a 2D cartesian x axis. If "x"
@@ -183,7 +193,14 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             y0
-                Set the image's y position.
+                Set the image's y position. The top edge of the
+                image (or the bottom edge if the y axis is NOT
+                reversed or if dy is negative) will be found at
+                ymin=y0-dy/2. By default when an image trace is
+                included, the y axis will be reversed so that
+                the image is right-side-up, but you can disable
+                this by setting yaxis.autorange=true or by
+                providing an explicit y axis range.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
