@@ -381,15 +381,13 @@ class _Streamline(object):
         space = np.empty((len(point1_x)))
         space[:] = np.nan
 
-        # Combine arrays into matrix
-        arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
-        arrows_x = np.array(arrows_x)
+        # Combine arrays into array
+        arrows_x = np.array([point1_x, arrow_end_x, point2_x, space])
         arrows_x = arrows_x.flatten("F")
         arrows_x = arrows_x.tolist()
 
-        # Combine arrays into matrix
-        arrows_y = np.matrix([point1_y, arrow_end_y, point2_y, space])
-        arrows_y = np.array(arrows_y)
+        # Combine arrays into array
+        arrows_y = np.array([point1_y, arrow_end_y, point2_y, space])
         arrows_y = arrows_y.flatten("F")
         arrows_y = arrows_y.tolist()
 
