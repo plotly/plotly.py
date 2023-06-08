@@ -4,7 +4,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRELEASED]
 
-
 ### Updated
   - Updated Plotly.js from version 2.20.0 to version 2.24.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2241----2023-06-07) for more information. Notable changes include:
     - Add pattern to pie, funnelarea, sunburst, icicle and treemap traces [[#6601](https://github.com/plotly/plotly.js/pull/6601), [#6619](https://github.com/plotly/plotly.js/pull/6619), [#6622](https://github.com/plotly/plotly.js/pull/6622), [#6626](https://github.com/plotly/plotly.js/pull/6626), [#6627](https://github.com/plotly/plotly.js/pull/6627), [#6628](https://github.com/plotly/plotly.js/pull/6628), [#6629](https://github.com/plotly/plotly.js/pull/6629)], with thanks to @thierryVergult for the contribution!
@@ -17,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
    this feature was anonymously sponsored: thank you to our sponsor!
     - Add `legend.xref` and `legend.yref` to enable container-referenced positioning of legends [[#6589](https://github.com/plotly/plotly.js/pull/6589)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
     - Add `colorbar.xref` and `colorbar.yref` to enable container-referenced positioning of colorbars [[#6593](https://github.com/plotly/plotly.js/pull/6593)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
+  - `px` methods now accept data-frame-like objects that support a `to_pandas()` method, such as polars, cudf, vaex etc
 
 ### Fixed
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Remove `use_2to3` setuptools arg, which is invalid in the latest Python and setuptools versions [[#4206](https://github.com/plotly/plotly.py/pull/4206)]
   - Fix [#4066](https://github.com/plotly/plotly.py/issues/4066) JupyterLab v4 giving tiny default graph height [[#4227](https://github.com/plotly/plotly.py/pull/4227)]
   - Fixed issue with `colors.n_colors` where generated RGB color values were not being constrained to stay between 0 and 255 [[#4110](https://github.com/plotly/plotly.py/pull/4110)]
+  - Fix streamline figure factory with recent versions of Numpy
 
 ## [5.14.1] - 2023-04-05
 
