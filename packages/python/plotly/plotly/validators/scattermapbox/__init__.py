@@ -26,9 +26,11 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._lonsrc import LonsrcValidator
     from ._lon import LonValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._latsrc import LatsrcValidator
     from ._lat import LatValidator
     from ._idssrc import IdssrcValidator
@@ -45,6 +47,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._customdatasrc import CustomdatasrcValidator
     from ._customdata import CustomdataValidator
     from ._connectgaps import ConnectgapsValidator
+    from ._cluster import ClusterValidator
     from ._below import BelowValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -77,9 +80,11 @@ else:
             "._lonsrc.LonsrcValidator",
             "._lon.LonValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._latsrc.LatsrcValidator",
             "._lat.LatValidator",
             "._idssrc.IdssrcValidator",
@@ -96,6 +101,7 @@ else:
             "._customdatasrc.CustomdatasrcValidator",
             "._customdata.CustomdataValidator",
             "._connectgaps.ConnectgapsValidator",
+            "._cluster.ClusterValidator",
             "._below.BelowValidator",
         ],
     )

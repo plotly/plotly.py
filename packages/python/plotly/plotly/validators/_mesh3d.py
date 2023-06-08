@@ -142,8 +142,8 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -226,6 +226,12 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
             ksrc
                 Sets the source reference on Chart Studio Cloud
                 for `k`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -244,6 +250,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             lighting
                 :class:`plotly.graph_objects.mesh3d.Lighting`
                 instance or dict with compatible properties
@@ -361,9 +370,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -387,9 +396,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -413,9 +422,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"

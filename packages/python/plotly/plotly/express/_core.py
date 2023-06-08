@@ -268,7 +268,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         fit information to be used for trendlines
     """
     if "line_close" in args and args["line_close"]:
-        trace_data = trace_data.append(trace_data.iloc[0])
+        trace_data = pd.concat([trace_data, trace_data.iloc[:1]])
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -278,7 +278,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         if attr_name == "dimensions":
             dims = [
                 (name, column)
-                for (name, column) in trace_data.iteritems()
+                for (name, column) in trace_data.items()
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
@@ -328,7 +328,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
-                        x = x.astype(int) / 10**9  # convert to unix epoch seconds
+                        # convert to unix epoch seconds
+                        x = x.astype(np.int64) / 10**9
                     elif x.dtype.type == np.object_:
                         try:
                             x = x.astype(np.float64)
@@ -1294,11 +1295,14 @@ def build_dataframe(args, constructor):
     # make copies of all the fields via dict() and list()
     for field in args:
         if field in array_attrables and args[field] is not None:
-            args[field] = (
-                dict(args[field])
-                if isinstance(args[field], dict)
-                else list(args[field])
-            )
+            if isinstance(args[field], dict):
+                args[field] = dict(args[field])
+            elif field in ["custom_data", "hover_data"] and isinstance(
+                args[field], str
+            ):
+                args[field] = [args[field]]
+            else:
+                args[field] = list(args[field])
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
@@ -1681,7 +1685,9 @@ def process_dataframe_timeline(args):
         )
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
-    args["data_frame"][args["x_end"]] = (x_end - x_start).astype("timedelta64[ms]")
+    args["data_frame"][args["x_end"]] = (x_end - x_start).astype(
+        "timedelta64[ns]"
+    ) / np.timedelta64(1, "ms")
     args["x"] = args["x_end"]
     del args["x_end"]
     args["base"] = args["x_start"]
@@ -1876,6 +1882,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         other_position = "marginal_x" if args["orientation"] == "h" else "marginal_y"
         args[position] = args["marginal"]
         args[other_position] = None
+
+    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
+    if len(args["data_frame"]) == 0:
+        args["facet_row"] = args["facet_col"] = None
 
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col") is not None and args.get("marginal_y") is not None:

@@ -23,8 +23,10 @@ class Image(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "meta",
         "metasrc",
         "name",
@@ -286,9 +288,10 @@ class Image(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `z`, `color` and `colormodel`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `z`, `color` and
+        `colormodel`. Anything contained in tag `<extra>` is displayed
+        in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -411,6 +414,31 @@ class Image(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -463,6 +491,27 @@ class Image(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # meta
     # ----
@@ -732,7 +781,9 @@ class Image(_BaseTraceType):
     @property
     def x0(self):
         """
-        Set the image's x position.
+        Set the image's x position. The left edge of the image (or the
+        right edge if the x axis is reversed or dx is negative) will be
+        found at xmin=x0-dx/2
 
         The 'x0' property accepts values of any type
 
@@ -776,7 +827,12 @@ class Image(_BaseTraceType):
     @property
     def y0(self):
         """
-        Set the image's y position.
+        Set the image's y position. The top edge of the image (or the
+        bottom edge if the y axis is NOT reversed or if dy is negative)
+        will be found at ymin=y0-dy/2. By default when an image trace
+        is included, the y axis will be reversed so that the image is
+        right-side-up, but you can disable this by setting
+        yaxis.autorange=true or by providing an explicit y axis range.
 
         The 'y0' property accepts values of any type
 
@@ -1010,8 +1066,9 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -1030,6 +1087,12 @@ class Image(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1041,6 +1104,9 @@ class Image(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1102,14 +1168,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1161,8 +1236,10 @@ class Image(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -1252,8 +1329,9 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -1272,6 +1350,12 @@ class Image(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1283,6 +1367,9 @@ class Image(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1344,14 +1431,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1474,6 +1570,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -1482,6 +1582,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("meta", None)
         _v = meta if meta is not None else _v
         if _v is not None:

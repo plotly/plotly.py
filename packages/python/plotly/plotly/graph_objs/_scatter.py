@@ -9,6 +9,7 @@ class Scatter(_BaseTraceType):
     _parent_path_str = ""
     _path_str = "scatter"
     _valid_props = {
+        "alignmentgroup",
         "cliponaxis",
         "connectgaps",
         "customdata",
@@ -31,15 +32,18 @@ class Scatter(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "marker",
         "meta",
         "metasrc",
         "mode",
         "name",
+        "offsetgroup",
         "opacity",
         "orientation",
         "selected",
@@ -79,6 +83,29 @@ class Scatter(_BaseTraceType):
         "yperiodalignment",
         "ysrc",
     }
+
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["alignmentgroup"]
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self["alignmentgroup"] = val
 
     # cliponaxis
     # ----------
@@ -857,6 +884,31 @@ class Scatter(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -933,6 +985,27 @@ class Scatter(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -946,6 +1019,16 @@ class Scatter(_BaseTraceType):
 
             Supported dict properties:
 
+                backoff
+                    Sets the line back off from the end point of
+                    the nth line segment (in px). This option is
+                    useful e.g. to avoid overlap with arrowhead
+                    markers. With "auto" the lines would trim
+                    before markers if `marker.angleref` is set to
+                    "previous".
+                backoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `backoff`.
                 color
                     Sets the line color.
                 dash
@@ -995,6 +1078,16 @@ class Scatter(_BaseTraceType):
 
             Supported dict properties:
 
+                angle
+                    Sets the marker angle in respect to `angleref`.
+                angleref
+                    Sets the reference for marker angle. With
+                    "previous", angle 0 points along the line from
+                    the previous point to this one. With "up",
+                    angle 0 points toward the top of the screen.
+                anglesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `angle`.
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -1115,6 +1208,15 @@ class Scatter(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                standoff
+                    Moves the marker away from the data point in
+                    the direction of `angle` (in px). This can be
+                    useful for example if you have another marker
+                    at this location and you want to point an
+                    arrowhead marker at it.
+                standoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `standoff`.
                 symbol
                     Sets the marker symbol type. Adding 100 is
                     equivalent to appending "-open" to a symbol
@@ -1234,6 +1336,29 @@ class Scatter(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["offsetgroup"]
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self["offsetgroup"] = val
+
     # opacity
     # -------
     @property
@@ -1259,8 +1384,9 @@ class Scatter(_BaseTraceType):
     @property
     def orientation(self):
         """
-        Only relevant when `stackgroup` is used, and only the first
-        `orientation` found in the `stackgroup` will be used -
+        Only relevant in the following cases: 1. when `scattermode` is
+        set to "group". 2. when `stackgroup` is used, and only the
+        first `orientation` found in the `stackgroup` will be used -
         including if `visible` is "legendonly" but not if it is
         `false`. Sets the stacking direction. With "v" ("h"), the y (x)
         values of subsequent traces are added. Also affects the default
@@ -2190,6 +2316,11 @@ class Scatter(_BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -2322,6 +2453,12 @@ class Scatter(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2337,6 +2474,9 @@ class Scatter(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -2369,15 +2509,21 @@ class Scatter(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -2581,6 +2727,7 @@ class Scatter(_BaseTraceType):
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -2603,15 +2750,18 @@ class Scatter(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -2666,6 +2816,11 @@ class Scatter(_BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Scatter`
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -2798,6 +2953,12 @@ class Scatter(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2813,6 +2974,9 @@ class Scatter(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -2845,15 +3009,21 @@ class Scatter(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -3086,6 +3256,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("alignmentgroup", None)
+        _v = alignmentgroup if alignmentgroup is not None else _v
+        if _v is not None:
+            self["alignmentgroup"] = _v
         _v = arg.pop("cliponaxis", None)
         _v = cliponaxis if cliponaxis is not None else _v
         if _v is not None:
@@ -3174,6 +3348,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -3186,6 +3364,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
@@ -3210,6 +3392,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = name if name is not None else _v
         if _v is not None:
             self["name"] = _v
+        _v = arg.pop("offsetgroup", None)
+        _v = offsetgroup if offsetgroup is not None else _v
+        if _v is not None:
+            self["offsetgroup"] = _v
         _v = arg.pop("opacity", None)
         _v = opacity if opacity is not None else _v
         if _v is not None:
