@@ -1307,7 +1307,10 @@ def build_dataframe(args, constructor):
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
+        if hasattr(args["data_frame"], "to_pandas"):
+            args["data_frame"] = args["data_frame"].to_pandas()
+        else:
+            args["data_frame"] = pd.DataFrame(args["data_frame"])
     df_input = args["data_frame"]
 
     # now we handle special cases like wide-mode or x-xor-y specification
