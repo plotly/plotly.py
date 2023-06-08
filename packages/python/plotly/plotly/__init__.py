@@ -102,7 +102,8 @@ def plot(data_frame, kind, **kwargs):
     if kind == "line":
         return line(data_frame, **kwargs)
     if kind == "area":
-        return area(data_frame, **kwargs)
+        new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["stacked"]}
+        return area(data_frame, **new_kwargs)
     if kind == "bar":
         return bar(data_frame, **kwargs)
     if kind == "barh":

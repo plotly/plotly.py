@@ -2,9 +2,11 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._yref import YrefValidator
     from ._ypad import YpadValidator
     from ._yanchor import YanchorValidator
     from ._y import YValidator
+    from ._xref import XrefValidator
     from ._xpad import XpadValidator
     from ._xanchor import XanchorValidator
     from ._x import XValidator
@@ -43,6 +45,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._minexponent import MinexponentValidator
     from ._lenmode import LenmodeValidator
     from ._len import LenValidator
+    from ._labelalias import LabelaliasValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
     from ._borderwidth import BorderwidthValidator
@@ -55,9 +58,11 @@ else:
         __name__,
         [],
         [
+            "._yref.YrefValidator",
             "._ypad.YpadValidator",
             "._yanchor.YanchorValidator",
             "._y.YValidator",
+            "._xref.XrefValidator",
             "._xpad.XpadValidator",
             "._xanchor.XanchorValidator",
             "._x.XValidator",
@@ -96,6 +101,7 @@ else:
             "._minexponent.MinexponentValidator",
             "._lenmode.LenmodeValidator",
             "._len.LenValidator",
+            "._labelalias.LabelaliasValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
             "._borderwidth.BorderwidthValidator",

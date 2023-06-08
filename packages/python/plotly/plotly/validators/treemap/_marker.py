@@ -83,6 +83,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             colorssrc
                 Sets the source reference on Chart Studio Cloud
                 for `colors`.
+            cornerradius
+                Sets the maximum rounding of corners (in px).
             depthfade
                 Determines if the sector colors are faded
                 towards the background from the leaves up to
@@ -100,6 +102,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             pad
                 :class:`plotly.graph_objects.treemap.marker.Pad
                 ` instance or dict with compatible properties
+            pattern
+                Sets the pattern within the marker.
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if colors is set to a numerical

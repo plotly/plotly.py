@@ -24,6 +24,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._cmax import CmaxValidator
     from ._cauto import CautoValidator
     from ._autocolorscale import AutocolorscaleValidator
+    from ._anglesrc import AnglesrcValidator
+    from ._angle import AngleValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -53,5 +55,7 @@ else:
             "._cmax.CmaxValidator",
             "._cauto.CautoValidator",
             "._autocolorscale.AutocolorscaleValidator",
+            "._anglesrc.AnglesrcValidator",
+            "._angle.AngleValidator",
         ],
     )

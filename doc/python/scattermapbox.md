@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.0
   plotly:
     description: How to make scatter plots on Mapbox maps in Python.
     display_as: maps
@@ -245,7 +245,26 @@ fig.update_layout(
 fig.show()
 ```
 
+#### Add Clusters
+
+*New in 5.11*
+
+Display clusters of data points by setting `cluster`. Here, we enable clusters with `enabled=True`. You can also enable clusters by setting other `cluster` properties. Other available properties include `color` (for setting the color of the clusters), `size` (for setting the size of a cluster step), and `step` (for configuring how many points it takes to create a cluster or advance to the next cluster step).
+
+```python
+import plotly.express as px
+import pandas as pd
+
+px.set_mapbox_access_token(open(".mapbox_token").read())
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/2011_february_us_airport_traffic.csv"
+)
+fig = px.scatter_mapbox(df, lat="lat", lon="long", size="cnt", zoom=3)
+fig.update_traces(cluster=dict(enabled=True))
+fig.show()
+
+```
+
 #### Reference
 
 See [function reference for `px.(scatter_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/ for more information and options!
-

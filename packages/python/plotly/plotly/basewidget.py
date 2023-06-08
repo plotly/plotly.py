@@ -733,12 +733,29 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Display
     # -------
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        raise NotImplementedError  # Prefer _repr_mimebundle_
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        return {
+            "application/vnd.jupyter.widget-view+json": {
+                "version_major": 2,
+                "version_minor": 0,
+                "model_id": self._model_id,
+            },
+        }
+
     def _ipython_display_(self):
         """
         Handle rich display of figures in ipython contexts
         """
-        # Override BaseFigure's display to make sure we display the widget version
-        widgets.DOMWidget._ipython_display_(self)
+        raise NotImplementedError  # Prefer _repr_mimebundle_
 
     # Callbacks
     # ---------
