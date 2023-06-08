@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [UNRELEASED]
+## [5.15.0] - 2023-06-08
 
 ### Updated
   - Updated Plotly.js from version 2.20.0 to version 2.24.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2241----2023-06-07) for more information. Notable changes include:
@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fix [#4066](https://github.com/plotly/plotly.py/issues/4066) JupyterLab v4 giving tiny default graph height [[#4227](https://github.com/plotly/plotly.py/pull/4227)]
   - Fixed issue with `colors.n_colors` where generated RGB color values were not being constrained to stay between 0 and 255 [[#4110](https://github.com/plotly/plotly.py/pull/4110)]
   - Fix streamline figure factory with recent versions of Numpy
+  - Fix issue with shapes and annotations not drawing on correct axis [[#4177](https://github.com/plotly/plotly.py/pull/4177)]
 
 ## [5.14.1] - 2023-04-05
 
