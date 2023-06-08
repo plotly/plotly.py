@@ -338,12 +338,16 @@ class Parcats(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `count`, `probability`, `category`, `categorycount`,
-        `colorcount` and `bandcolorcount`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available.  This value
+        here applies when hovering over dimensions. Note that
+        `*categorycount`, "colorcount" and "bandcolorcount" are only
+        available when `hoveron` contains the "color" flagFinally, the
+        template string has access to variables `count`, `probability`,
+        `category`, `categorycount`, `colorcount` and `bandcolorcount`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -571,9 +575,11 @@ class Parcats(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `count` and `probability`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
+                    This value here applies when hovering over
+                    lines.Finally, the template string has access
+                    to variables `count` and `probability`.
+                    Anything contained in tag `<extra>` is
+                    displayed in the secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
                     secondary box completely, use an empty tag
                     `<extra></extra>`.
@@ -927,12 +933,17 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -1105,12 +1116,17 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
