@@ -383,13 +383,11 @@ class _Streamline(object):
 
         # Combine arrays into array
         arrows_x = np.array([point1_x, arrow_end_x, point2_x, space])
-        arrows_x = np.array(arrows_x)
         arrows_x = arrows_x.flatten("F")
         arrows_x = arrows_x.tolist()
 
         # Combine arrays into array
         arrows_y = np.array([point1_y, arrow_end_y, point2_y, space])
-        arrows_y = np.array(arrows_y)
         arrows_y = arrows_y.flatten("F")
         arrows_y = arrows_y.tolist()
 
