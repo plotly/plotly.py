@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Font(_BaseTraceHierarchyType):
+
     # class properties
     # --------------------
     _parent_path_str = "scatterternary.hoverlabel"

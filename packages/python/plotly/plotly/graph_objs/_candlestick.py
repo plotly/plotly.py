@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Candlestick(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
