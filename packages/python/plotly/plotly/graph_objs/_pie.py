@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Pie(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -786,6 +787,8 @@ class Pie(_BaseTraceType):
                 line
                     :class:`plotly.graph_objects.pie.marker.Line`
                     instance or dict with compatible properties
+                pattern
+                    Sets the pattern within the marker.
 
         Returns
         -------
