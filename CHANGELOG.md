@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.15.0] - 2023-06-08
+
+### Updated
+  - Updated Plotly.js from version 2.20.0 to version 2.24.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2241----2023-06-07) for more information. Notable changes include:
+    - Add pattern to pie, funnelarea, sunburst, icicle and treemap traces [[#6601](https://github.com/plotly/plotly.js/pull/6601), [#6619](https://github.com/plotly/plotly.js/pull/6619), [#6622](https://github.com/plotly/plotly.js/pull/6622), [#6626](https://github.com/plotly/plotly.js/pull/6626), [#6627](https://github.com/plotly/plotly.js/pull/6627), [#6628](https://github.com/plotly/plotly.js/pull/6628), [#6629](https://github.com/plotly/plotly.js/pull/6629)], with thanks to @thierryVergult for the contribution!
+    - Add `texttemplate` to shape.label for parametric shapes i.e. line, rect and circle [[#6527](https://github.com/plotly/plotly.js/pull/6527)],
+   with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!
+    - Add strict option to custom bundle command [[#6557](https://github.com/plotly/plotly.js/pull/6557)],
+   with thanks to @CallumNZ for the contribution!
+    - Add `legend` references to traces and `legend2`, `legend3`, etc. to layout,
+   also add `visible` to legend i.e. to allow positioning multiple legends on a graph [[#6535](https://github.com/plotly/plotly.js/pull/6535)],
+   this feature was anonymously sponsored: thank you to our sponsor!
+    - Add `legend.xref` and `legend.yref` to enable container-referenced positioning of legends [[#6589](https://github.com/plotly/plotly.js/pull/6589)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
+    - Add `colorbar.xref` and `colorbar.yref` to enable container-referenced positioning of colorbars [[#6593](https://github.com/plotly/plotly.js/pull/6593)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
+  - `px` methods now accept data-frame-like objects that support a `to_pandas()` method, such as polars, cudf, vaex etc
+
+### Fixed
+  - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
+  - Empty pandas dataframe with facet row/column set no longer fails [[#4038](https://github.com/plotly/plotly.py/pull/4038)]
+  - Added some rounding to the `make_subplots` function to handle situations where the user-input specs cause the domain to exceed 1 by small amounts [[#4153](https://github.com/plotly/plotly.py/pull/4153)]
+  - Sanitize JSON output to prevent an XSS vector when graphs are inserted directly into HTML [[#4196](https://github.com/plotly/plotly.py/pull/4196)]
+  - Fixed issue with shapes and annotations plotting on the wrong y axis when supplied with a specific axis in the `yref` parameter [[#4177](https://github.com/plotly/plotly.py/pull/4177)]
+  - Remove `use_2to3` setuptools arg, which is invalid in the latest Python and setuptools versions [[#4206](https://github.com/plotly/plotly.py/pull/4206)]
+  - Fix [#4066](https://github.com/plotly/plotly.py/issues/4066) JupyterLab v4 giving tiny default graph height [[#4227](https://github.com/plotly/plotly.py/pull/4227)]
+  - Fixed issue with `colors.n_colors` where generated RGB color values were not being constrained to stay between 0 and 255 [[#4110](https://github.com/plotly/plotly.py/pull/4110)]
+  - Fix streamline figure factory with recent versions of Numpy
+  - Fix issue with shapes and annotations not drawing on correct axis [[#4177](https://github.com/plotly/plotly.py/pull/4177)]
+
 ## [5.14.1] - 2023-04-05
 
 ### Fixed
@@ -10,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [5.14.0] - 2023-03-29
 
 ### Updated
-  - Updated Plotly.js to from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
+  - Updated Plotly.js from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
     - Add `title.automargin` to enable automatic top and bottom margining for both container and paper referenced titles [[#6428](https://github.com/plotly/plotly.js/pull/6428)],
    with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
     - Add `label` attribute to shapes [[#6454](https://github.com/plotly/plotly.js/pull/6454)], with thanks to the [Volkswagen](https://www.volkswagenag.com) Center of Excellence for Battery Systems for sponsoring development!

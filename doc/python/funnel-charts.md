@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   plotly:
@@ -197,6 +197,28 @@ fig.update_layout(
             {"x0": 0.55, "x1": 1, "y0": 0, "y1": 0.5},
             {"x0": 0.55, "x1": 1, "y0": 0.55, "y1": 1}])
 
+fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Funnel area charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a pattern to the second stage of the funnel.
+
+```python
+from plotly import graph_objects as go
+
+colors = ["gold", "gold", "lightgreen", "lavender"]
+
+fig = go.Figure(
+    go.Funnelarea(
+        labels=["Interview 1", "Interview 2", "Test", "Final Stage"],
+        values=[100, 70, 40, 20],
+        textfont_size=20,
+        marker=dict(colors=colors, pattern=dict(shape=["", "/", "", ""])),
+    )
+)
 fig.show()
 ```
 

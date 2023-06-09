@@ -1231,6 +1231,7 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -1290,7 +1291,7 @@ class Figure(BaseFigure):
         Add a new Bar trace
 
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
@@ -1370,11 +1371,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1400,6 +1402,12 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1523,7 +1531,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1702,6 +1711,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -1773,6 +1783,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -1891,6 +1902,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2057,6 +2074,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -2113,6 +2131,7 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2312,6 +2331,12 @@ class Figure(BaseFigure):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2674,6 +2699,7 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -2757,6 +2783,7 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2855,6 +2882,12 @@ class Figure(BaseFigure):
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3062,6 +3095,7 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -3118,6 +3152,7 @@ class Figure(BaseFigure):
         font=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -3212,6 +3247,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
@@ -3346,6 +3387,7 @@ class Figure(BaseFigure):
             font=font,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -3387,6 +3429,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -3538,6 +3581,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3708,6 +3757,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -3761,6 +3811,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -3891,8 +3942,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -3911,6 +3963,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4079,6 +4137,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -4134,6 +4193,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -4282,11 +4342,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4302,6 +4362,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4552,6 +4618,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -4620,6 +4687,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -4804,6 +4872,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4889,7 +4963,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -5100,6 +5175,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -5179,6 +5255,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -5320,6 +5397,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5500,6 +5583,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -5552,6 +5636,7 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -5700,6 +5785,12 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5868,6 +5959,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -5921,6 +6013,7 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -6046,10 +6139,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious` and `percentTotal`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious` and
+            `percentTotal`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -6077,6 +6170,12 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -6202,8 +6301,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious`, `percentTotal`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious`,
+            `percentTotal`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6369,6 +6469,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -6439,6 +6540,7 @@ class Figure(BaseFigure):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -6533,12 +6635,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6574,6 +6676,12 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -6660,8 +6768,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6738,6 +6847,7 @@ class Figure(BaseFigure):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -6789,6 +6899,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -6971,6 +7082,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7045,7 +7162,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -7259,6 +7377,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -7328,6 +7447,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -7436,6 +7556,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -7621,6 +7747,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -7684,6 +7811,7 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -7851,8 +7979,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -7876,6 +8005,12 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7997,7 +8132,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8136,6 +8272,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -8200,6 +8337,7 @@ class Figure(BaseFigure):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -8375,11 +8513,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8390,6 +8528,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -8474,7 +8618,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z`
+            are available. Finally, the template string has access
+            to variable `z`
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8653,6 +8798,7 @@ class Figure(BaseFigure):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -8723,6 +8869,7 @@ class Figure(BaseFigure):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -8905,11 +9052,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8920,6 +9067,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -9015,7 +9168,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9190,6 +9344,7 @@ class Figure(BaseFigure):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -9257,6 +9412,7 @@ class Figure(BaseFigure):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -9357,10 +9513,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -9393,6 +9550,12 @@ class Figure(BaseFigure):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.icicle.Legendgrouptitle`
             instance or dict with compatible properties
@@ -9500,9 +9663,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -9579,6 +9743,7 @@ class Figure(BaseFigure):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -9629,6 +9794,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -9721,8 +9887,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -9741,6 +9908,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -9816,14 +9989,23 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -9898,6 +10080,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -9935,6 +10118,7 @@ class Figure(BaseFigure):
         gauge=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -9993,6 +10177,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -10096,6 +10286,7 @@ class Figure(BaseFigure):
             gauge=gauge,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -10140,6 +10331,7 @@ class Figure(BaseFigure):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -10314,6 +10506,12 @@ class Figure(BaseFigure):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -10535,6 +10733,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -10611,6 +10810,7 @@ class Figure(BaseFigure):
         jsrc=None,
         k=None,
         ksrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -10853,6 +11053,12 @@ class Figure(BaseFigure):
         ksrc
             Sets the source reference on Chart Studio Cloud for
             `k`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11086,6 +11292,7 @@ class Figure(BaseFigure):
             jsrc=jsrc,
             k=k,
             ksrc=ksrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -11141,6 +11348,7 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -11239,6 +11447,12 @@ class Figure(BaseFigure):
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11445,6 +11659,7 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -11582,12 +11797,17 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -11712,6 +11932,7 @@ class Figure(BaseFigure):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -11779,6 +12000,12 @@ class Figure(BaseFigure):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -11880,6 +12107,7 @@ class Figure(BaseFigure):
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -11921,6 +12149,7 @@ class Figure(BaseFigure):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -12024,12 +12253,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -12075,6 +12304,12 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12178,8 +12413,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -12267,6 +12503,7 @@ class Figure(BaseFigure):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -12315,6 +12552,7 @@ class Figure(BaseFigure):
         idssrc=None,
         indices=None,
         indicessrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -12395,6 +12633,12 @@ class Figure(BaseFigure):
         indicessrc
             Sets the source reference on Chart Studio Cloud for
             `indices`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12562,6 +12806,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             indices=indices,
             indicessrc=indicessrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -12604,6 +12849,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -12671,6 +12917,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -12784,6 +13036,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -12830,6 +13083,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -13032,6 +13286,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13346,6 +13606,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -13415,6 +13676,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -13549,6 +13811,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13781,6 +14049,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -13846,6 +14115,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -13991,6 +14261,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14093,7 +14369,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14185,6 +14462,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -14238,6 +14516,7 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -14386,6 +14665,12 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14508,8 +14793,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon`, `location` and
-            `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon`, `location` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14580,6 +14865,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -14635,6 +14921,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -14801,6 +15088,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15068,6 +15361,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -15136,6 +15430,7 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -15270,6 +15565,12 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15379,7 +15680,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon` and `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15449,6 +15751,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -15501,6 +15804,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -15655,6 +15959,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15771,7 +16081,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15853,6 +16164,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -15909,6 +16221,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -16062,6 +16375,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16178,7 +16497,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16258,6 +16578,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -16316,6 +16637,7 @@ class Figure(BaseFigure):
         idssrc=None,
         imag=None,
         imagsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -16466,6 +16788,12 @@ class Figure(BaseFigure):
         imagsrc
             Sets the source reference on Chart Studio Cloud for
             `imag`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16580,7 +16908,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `real`, `imag` and `text`.
+            are available. Finally, the template string has access
+            to variables `real`, `imag` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16650,6 +16979,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             imag=imag,
             imagsrc=imagsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -16707,6 +17037,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -16872,6 +17203,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16986,7 +17323,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b`, `c` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17060,6 +17398,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -17108,6 +17447,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -17224,6 +17564,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -17401,6 +17747,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -17450,6 +17797,7 @@ class Figure(BaseFigure):
         hovertext=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -17599,9 +17947,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `tubex`, `tubey`, `tubez`,
-            `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `tubex`, `tubey`, `tubez`, `tubeu`,
+            `tubev`, `tubew`, `norm` and `divergence`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -17617,6 +17966,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -17852,6 +18207,7 @@ class Figure(BaseFigure):
             hovertext=hovertext,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -17917,6 +18273,7 @@ class Figure(BaseFigure):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -18015,10 +18372,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -18061,6 +18419,12 @@ class Figure(BaseFigure):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
             instance or dict with compatible properties
@@ -18166,9 +18530,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -18243,6 +18608,7 @@ class Figure(BaseFigure):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -18299,6 +18665,7 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -18473,6 +18840,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -18695,6 +19068,7 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -18750,6 +19124,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -18825,6 +19200,12 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -18920,6 +19301,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -18953,6 +19335,7 @@ class Figure(BaseFigure):
         insidetextfont=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
@@ -19054,10 +19437,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -19087,6 +19471,12 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.treemap.Legendgrouptitle`
             instance or dict with compatible properties
@@ -19194,9 +19584,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -19272,6 +19663,7 @@ class Figure(BaseFigure):
             insidetextfont=insidetextfont,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
@@ -19325,6 +19717,7 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -19471,6 +19864,12 @@ class Figure(BaseFigure):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -19758,6 +20157,7 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -19830,6 +20230,7 @@ class Figure(BaseFigure):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -20005,6 +20406,12 @@ class Figure(BaseFigure):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -20237,6 +20644,7 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -20301,6 +20709,7 @@ class Figure(BaseFigure):
         increasing=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -20361,7 +20770,7 @@ class Figure(BaseFigure):
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
-        set in `y` if `orientation` is set th "v" (the default) and the
+        set in `y` if `orientation` is set to "v" (the default) and the
         labels are set in `x`. By setting `orientation` to "h", the
         roles are interchanged.
 
@@ -20436,9 +20845,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -20469,6 +20879,12 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -20599,8 +21015,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -20775,6 +21191,7 @@ class Figure(BaseFigure):
             increasing=increasing,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -21048,6 +21465,118 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
+            obj.update(patch, overwrite=overwrite, **kwargs)
+
+        return self
+
+    def select_legends(self, selector=None, row=None, col=None):
+        """
+        Select legend subplot objects from a particular subplot cell
+        and/or legend subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the legend
+            objects that satisfy all of the specified selection criteria
+        """
+
+        return self._select_layout_subplots_by_prefix("legend", selector, row, col)
+
+    def for_each_legend(self, fn, selector=None, row=None, col=None) -> "Figure":
+        """
+        Apply a function to all legend objects that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single legend object.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_legends(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ) -> "Figure":
+        """
+        Perform a property update operation on all legend objects
+        that satisfy the specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            legend objects that satisfy the selection criteria.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            legend object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
