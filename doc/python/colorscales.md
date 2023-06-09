@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.9
+    version: 3.10.11
   plotly:
     description: How to set, create and control continuous color scales and color
       bars in scatter, bar, map and heatmap figures.
@@ -626,6 +626,36 @@ fig = go.Figure(go.Heatmap(
         tick0= 0,
         tickmode= 'array',
         tickvals= [0, 1000, 10000, 100000]
+    )
+))
+
+fig.show()
+```
+
+### Positioning Colorbars
+
+Colorbars can be positioned by specifying x and y coordinates. By default, the x and y values are "paper" coordinates, which refer to the plot area. You can also use coordinates based on the "container" by setting `xref="container"` or `yref="container"`. The following example uses a container reference for the x position.
+
+See the positioning section of [the figure data structure page](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates) for more details on "paper" vs "container" coordinates.
+
+```python
+import plotly.graph_objects as go
+
+import urllib
+import json
+
+# Load heatmap data
+response = urllib.request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(
+        x=0.2,
+        xref="container",
+        title="Surface Heat"
     )
 ))
 

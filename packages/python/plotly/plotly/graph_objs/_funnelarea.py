@@ -28,6 +28,7 @@ class Funnelarea(_BaseTraceType):
         "label0",
         "labels",
         "labelssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
@@ -329,11 +330,12 @@ class Funnelarea(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `label`, `color`, `value`, `text` and `percent`. Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `label`, `color`,
+        `value`, `text` and `percent`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -582,6 +584,31 @@ class Funnelarea(_BaseTraceType):
     def labelssrc(self, val):
         self["labelssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -703,6 +730,8 @@ class Funnelarea(_BaseTraceType):
                     :class:`plotly.graph_objects.funnelarea.marker.
                     Line` instance or dict with compatible
                     properties
+                pattern
+                    Sets the pattern within the marker.
 
         Returns
         -------
@@ -1064,7 +1093,8 @@ class Funnelarea(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `label`, `color`, `value`, `text` and `percent`.
+        Finally, the template string has access to variables `label`,
+        `color`, `value`, `text` and `percent`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1323,12 +1353,12 @@ class Funnelarea(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1364,6 +1394,12 @@ class Funnelarea(_BaseTraceType):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1450,8 +1486,9 @@ class Funnelarea(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1515,6 +1552,7 @@ class Funnelarea(_BaseTraceType):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -1610,12 +1648,12 @@ class Funnelarea(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1651,6 +1689,12 @@ class Funnelarea(_BaseTraceType):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1737,8 +1781,9 @@ class Funnelarea(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1888,6 +1933,10 @@ an instance of :class:`plotly.graph_objs.Funnelarea`"""
         _v = labelssrc if labelssrc is not None else _v
         if _v is not None:
             self["labelssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:

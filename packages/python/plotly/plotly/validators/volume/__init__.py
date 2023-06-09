@@ -38,6 +38,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._isomin import IsominValidator
     from ._isomax import IsomaxValidator
     from ._idssrc import IdssrcValidator
@@ -105,6 +106,7 @@ else:
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._isomin.IsominValidator",
             "._isomax.IsomaxValidator",
             "._idssrc.IdssrcValidator",

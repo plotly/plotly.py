@@ -14,6 +14,7 @@ class Label(_BaseLayoutHierarchyType):
         "text",
         "textangle",
         "textposition",
+        "texttemplate",
         "xanchor",
         "yanchor",
     }
@@ -158,6 +159,46 @@ class Label(_BaseLayoutHierarchyType):
     def textposition(self, val):
         self["textposition"] = val
 
+    # texttemplate
+    # ------------
+    @property
+    def texttemplate(self):
+        """
+        Template string used for rendering the shape's label. Note that
+        this will override `text`. Variables are inserted using
+        %{variable}, for example "x0: %{x0}". Numbers are formatted
+        using d3-format's syntax %{variable:d3-format}, for example
+        "Price: %{x0:$.2f}". See
+        https://github.com/d3/d3-format/tree/v1.4.5#d3-format for
+        details on the formatting syntax. Dates are formatted using
+        d3-time-format's syntax %{variable|d3-time-format}, for example
+        "Day: %{x0|%m %b %Y}". See https://github.com/d3/d3-time-
+        format/tree/v2.2.3#locale_format for details on the date
+        formatting syntax. A single multiplication or division
+        operation may be applied to numeric variables, and combined
+        with d3 number formatting, for example "Length in cm:
+        %{x0*2.54}", "%{slope*60:.1f} meters per second." For log axes,
+        variable values are given in log units. For date axes, x/y
+        coordinate variables and center variables use datetimes, while
+        all other variable values use values in ms. Finally, the
+        template string has access to variables `x0`, `x1`, `y0`, `y1`,
+        `slope`, `dx`, `dy`, `width`, `height`, `length`, `xcenter` and
+        `ycenter`.
+
+        The 'texttemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["texttemplate"]
+
+    @texttemplate.setter
+    def texttemplate(self, val):
+        self["texttemplate"] = val
+
     # xanchor
     # -------
     @property
@@ -235,6 +276,30 @@ class Label(_BaseLayoutHierarchyType):
             values for lines are "start", "middle", and "end".
             Default: *middle center* for rectangles, circles, and
             paths; "middle" for lines.
+        texttemplate
+            Template string used for rendering the shape's label.
+            Note that this will override `text`. Variables are
+            inserted using %{variable}, for example "x0: %{x0}".
+            Numbers are formatted using d3-format's syntax
+            %{variable:d3-format}, for example "Price: %{x0:$.2f}".
+            See
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day: %{x0|%m
+            %b %Y}". See https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. A single multiplication or
+            division operation may be applied to numeric variables,
+            and combined with d3 number formatting, for example
+            "Length in cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+            second." For log axes, variable values are given in log
+            units. For date axes, x/y coordinate variables and
+            center variables use datetimes, while all other
+            variable values use values in ms. Finally, the template
+            string has access to variables `x0`, `x1`, `y0`, `y1`,
+            `slope`, `dx`, `dy`, `width`, `height`, `length`,
+            `xcenter` and `ycenter`.
         xanchor
             Sets the label's horizontal position anchor This anchor
             binds the specified `textposition` to the "left",
@@ -259,6 +324,7 @@ class Label(_BaseLayoutHierarchyType):
         text=None,
         textangle=None,
         textposition=None,
+        texttemplate=None,
         xanchor=None,
         yanchor=None,
         **kwargs,
@@ -293,6 +359,30 @@ class Label(_BaseLayoutHierarchyType):
             values for lines are "start", "middle", and "end".
             Default: *middle center* for rectangles, circles, and
             paths; "middle" for lines.
+        texttemplate
+            Template string used for rendering the shape's label.
+            Note that this will override `text`. Variables are
+            inserted using %{variable}, for example "x0: %{x0}".
+            Numbers are formatted using d3-format's syntax
+            %{variable:d3-format}, for example "Price: %{x0:$.2f}".
+            See
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day: %{x0|%m
+            %b %Y}". See https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. A single multiplication or
+            division operation may be applied to numeric variables,
+            and combined with d3 number formatting, for example
+            "Length in cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+            second." For log axes, variable values are given in log
+            units. For date axes, x/y coordinate variables and
+            center variables use datetimes, while all other
+            variable values use values in ms. Finally, the template
+            string has access to variables `x0`, `x1`, `y0`, `y1`,
+            `slope`, `dx`, `dy`, `width`, `height`, `length`,
+            `xcenter` and `ycenter`.
         xanchor
             Sets the label's horizontal position anchor This anchor
             binds the specified `textposition` to the "left",
@@ -361,6 +451,10 @@ an instance of :class:`plotly.graph_objs.layout.shape.Label`"""
         _v = textposition if textposition is not None else _v
         if _v is not None:
             self["textposition"] = _v
+        _v = arg.pop("texttemplate", None)
+        _v = texttemplate if texttemplate is not None else _v
+        if _v is not None:
+            self["texttemplate"] = _v
         _v = arg.pop("xanchor", None)
         _v = xanchor if xanchor is not None else _v
         if _v is not None:
