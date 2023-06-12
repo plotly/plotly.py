@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 import pytest
+import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 
@@ -233,17 +234,22 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
-def test_build_df_protocol():
-    import vaex
+def test_build_df_using_interchange_protocol_mock():
+    class CustomDataFrame:
+        def __dataframe__(self):
+            pass
 
-    # take out the 'species' columns since there are still some issues with strings
-    iris_pandas = px.data.iris()[["petal_width", "sepal_length"]]
-    iris_vaex = vaex.from_pandas(iris_pandas)
-    args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
-    out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(
-        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
-    )
+    input_dataframe = CustomDataFrame()
+    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+
+    iris_pandas = px.data.iris()
+
+    with mock.patch("pandas.__version__", "2.0.2"):
+        with mock.patch(
+            "pandas.api.interchange.from_dataframe", return_value=iris_pandas
+        ) as mock_from_dataframe:
+            build_dataframe(args, go.Scatter)
+        mock_from_dataframe.assert_called_once_with(input_dataframe)
 
 
 def test_timezones():
