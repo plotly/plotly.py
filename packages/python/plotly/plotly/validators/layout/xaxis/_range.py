@@ -26,5 +26,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     },
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

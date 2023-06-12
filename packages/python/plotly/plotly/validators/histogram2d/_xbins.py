@@ -46,5 +46,5 @@ class XbinsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers, and defaults to -0.5.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

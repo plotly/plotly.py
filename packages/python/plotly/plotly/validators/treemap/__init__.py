@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._valuessrc import ValuessrcValidator
     from ._values import ValuesValidator
@@ -28,8 +29,10 @@ if sys.version_info < (3, 7):
     from ._maxdepth import MaxdepthValidator
     from ._marker import MarkerValidator
     from ._level import LevelValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
+    from ._legend import LegendValidator
     from ._labelssrc import LabelssrcValidator
     from ._labels import LabelsValidator
     from ._insidetextfont import InsidetextfontValidator
@@ -81,8 +84,10 @@ else:
             "._maxdepth.MaxdepthValidator",
             "._marker.MarkerValidator",
             "._level.LevelValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
+            "._legend.LegendValidator",
             "._labelssrc.LabelssrcValidator",
             "._labels.LabelsValidator",
             "._insidetextfont.InsidetextfontValidator",

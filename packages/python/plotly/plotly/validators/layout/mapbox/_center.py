@@ -18,5 +18,5 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 degrees East).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

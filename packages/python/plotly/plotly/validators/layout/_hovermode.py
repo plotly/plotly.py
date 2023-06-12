@@ -10,5 +10,5 @@ class HovermodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["x", "y", "closest", False, "x unified", "y unified"]
             ),
-            **kwargs
+            **kwargs,
         )

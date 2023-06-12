@@ -290,7 +290,7 @@ class TestSelectForEachUpdateTraces(TestCase):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         # Save off original figure
         fig_orig = copy.deepcopy(self.fig)
@@ -304,7 +304,7 @@ class TestSelectForEachUpdateTraces(TestCase):
             row=row,
             col=col,
             secondary_y=secondary_y,
-            **kwargs
+            **kwargs,
         )
 
         # Check chaining support
@@ -430,6 +430,10 @@ def select_traces_fixture():
 
 def test_select_traces_integer(select_traces_fixture):
     fig = select_traces_fixture
+    # check that selecting first trace does indeed only select the first
+    tr = list(fig.select_traces(selector=0))
+    assert len(tr) == 1
+    assert tr[0].y[1] == 0
     # check we can index last trace selected
     tr = list(fig.select_traces(selector=-1))[0]
     assert tr.y[1] == 20

@@ -17,7 +17,7 @@ class Diagonal(_BaseTraceHierarchyType):
         """
         Determines whether or not subplots on the diagonal are
         displayed.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -44,7 +44,7 @@ class Diagonal(_BaseTraceHierarchyType):
     def __init__(self, arg=None, visible=None, **kwargs):
         """
         Construct a new Diagonal object
-        
+
         Parameters
         ----------
         arg
@@ -76,8 +76,8 @@ class Diagonal(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.splom.Diagonal 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.splom.Diagonal
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.splom.Diagonal`"""
             )
 

@@ -29,6 +29,10 @@ class NewshapeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines the path's interior. For more info
                 please visit https://developer.mozilla.org/en-
                 US/docs/Web/SVG/Attribute/fill-rule
+            label
+                :class:`plotly.graph_objects.layout.newshape.La
+                bel` instance or dict with compatible
+                properties
             layer
                 Specifies whether new shapes are drawn below or
                 above traces.
@@ -39,5 +43,5 @@ class NewshapeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of new shapes.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

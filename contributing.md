@@ -9,13 +9,12 @@ contribution.
 
 ## Code of Conduct
 
-Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it,
+Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't skip it,
 but the general idea is to be nice.
 
 ## What are the different ways to contribute?
 
-There are many ways to contribute to plotly.py. It helps to understand first
-the structure of the code and of the repository.
+There are many ways to contribute to plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
@@ -24,7 +23,7 @@ the structure of the code and of the repository.
   in `packages/python/plotly/codegen`. Most of the codegen code concerns the generation of docstrings from
   the schema JSON in Plotly.js. Traces and
   Layout classes have a direct correspondence with their Javascript
-  counterpart. Higher-level methods that work on on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
+  counterpart. Higher-level methods that work on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
   `update_layout`, `add_trace`, etc.
 
 - [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level

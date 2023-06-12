@@ -16,7 +16,7 @@ class Uniformtext(_BaseLayoutHierarchyType):
     def minsize(self):
         """
         Sets the minimum text size between traces of the same type.
-    
+
         The 'minsize' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -43,7 +43,7 @@ class Uniformtext(_BaseLayoutHierarchyType):
         Please note that if the size defined by `minsize` is greater
         than the font size defined by trace, then the `minsize` is
         used.
-    
+
         The 'mode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [False, 'hide', 'show']
@@ -80,7 +80,7 @@ class Uniformtext(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, minsize=None, mode=None, **kwargs):
         """
         Construct a new Uniformtext object
-        
+
         Parameters
         ----------
         arg
@@ -121,8 +121,8 @@ class Uniformtext(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Uniformtext 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Uniformtext
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Uniformtext`"""
             )
 

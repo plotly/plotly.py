@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.7
   plotly:
     description: How to make Log plots in Python with Plotly.
     display_as: scientific
@@ -57,6 +57,26 @@ df = px.data.gapminder().query("year == 2007")
 
 fig = px.scatter(df, x="gdpPercap", y="lifeExp", hover_name="country",
                  log_x=True, range_x=[1,100000], range_y=[0,100])
+fig.show()
+```
+
+#### Adding minor ticks
+
+_new in 5.8_
+
+You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+
+In this example we set the tick length with `ticklen`, add the ticks on the inside with `ticks="inside"`, and turn grid lines on with `howgrid=True`.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("year == 2007")
+
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", hover_name="country",
+                 log_x=True, range_x=[1,100000], range_y=[0,100])
+
+fig.update_xaxes(minor=dict(ticks="inside", ticklen=6, showgrid=True))
+
 fig.show()
 ```
 

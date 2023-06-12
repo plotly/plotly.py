@@ -1,7 +1,7 @@
 from __future__ import absolute_import, division
 
-from plotly import exceptions, optional_imports
 import plotly.colors as clrs
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.validators.heatmap import ColorscaleValidator
@@ -56,9 +56,12 @@ def create_annotated_heatmap(
     font_colors=None,
     showscale=False,
     reversescale=False,
-    **kwargs
+    **kwargs,
 ):
     """
+    **deprecated**, use instead
+    :func:`plotly.express.imshow`.
+
     Function that creates annotated heatmaps
 
     This function adds annotations to each cell of the heatmap.
@@ -117,7 +120,7 @@ def create_annotated_heatmap(
             colorscale=colorscale,
             showscale=showscale,
             reversescale=reversescale,
-            **kwargs
+            **kwargs,
         )
         layout = dict(
             annotations=annotations,
@@ -131,7 +134,7 @@ def create_annotated_heatmap(
             colorscale=colorscale,
             showscale=showscale,
             reversescale=reversescale,
-            **kwargs
+            **kwargs,
         )
         layout = dict(
             annotations=annotations,
@@ -147,9 +150,10 @@ def create_annotated_heatmap(
 
 
 def to_rgb_color_list(color_str, default):
-    if "rgb" in color_str:
-        return [int(v) for v in color_str.strip("rgb()").split(",")]
-    elif "#" in color_str:
+    color_str = color_str.strip()
+    if color_str.startswith("rgb"):
+        return [int(v) for v in color_str.strip("rgba()").split(",")]
+    elif color_str.startswith("#"):
         return clrs.hex_to_rgb(color_str)
     else:
         return default

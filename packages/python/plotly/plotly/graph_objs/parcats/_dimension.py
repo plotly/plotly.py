@@ -29,7 +29,7 @@ class Dimension(_BaseTraceHierarchyType):
         Sets the order in which categories in this dimension appear.
         Only has an effect if `categoryorder` is set to "array". Used
         with `categoryorder`.
-    
+
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -49,8 +49,8 @@ class Dimension(_BaseTraceHierarchyType):
     def categoryarraysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        categoryarray .
-    
+        `categoryarray`.
+
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -80,7 +80,7 @@ class Dimension(_BaseTraceHierarchyType):
         for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
         `categoryarray`.
-    
+
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
@@ -103,7 +103,7 @@ class Dimension(_BaseTraceHierarchyType):
         """
         The display index of dimension, from left to right, zero
         indexed, defaults to dimension index.
-    
+
         The 'displayindex' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
 
@@ -123,7 +123,7 @@ class Dimension(_BaseTraceHierarchyType):
     def label(self):
         """
         The shown name of the dimension.
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -147,7 +147,7 @@ class Dimension(_BaseTraceHierarchyType):
         dimension. Only has an effect if `categoryorder` is set to
         "array". Should be an array the same length as `categoryarray`
         Used with `categoryorder`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -166,8 +166,8 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
-    
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -190,7 +190,7 @@ class Dimension(_BaseTraceHierarchyType):
         the `n`th point in the dataset, therefore the `values` vector
         for all dimensions must be the same (longer vectors will be
         truncated).
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -209,8 +209,8 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
-    
+        Sets the source reference on Chart Studio Cloud for `values`.
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -231,7 +231,7 @@ class Dimension(_BaseTraceHierarchyType):
         """
         Shows the dimension when set to `true` (the default). Hides the
         dimension for `false`.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -256,7 +256,7 @@ class Dimension(_BaseTraceHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -282,7 +282,7 @@ class Dimension(_BaseTraceHierarchyType):
             `categoryarray` Used with `categoryorder`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
@@ -290,7 +290,7 @@ class Dimension(_BaseTraceHierarchyType):
             (longer vectors will be truncated).
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -309,11 +309,11 @@ class Dimension(_BaseTraceHierarchyType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Dimension object
-        
+
         The dimensions (variables) of the parallel categories diagram.
 
         Parameters
@@ -328,7 +328,7 @@ class Dimension(_BaseTraceHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -354,7 +354,7 @@ class Dimension(_BaseTraceHierarchyType):
             `categoryarray` Used with `categoryorder`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
@@ -362,7 +362,7 @@ class Dimension(_BaseTraceHierarchyType):
             (longer vectors will be truncated).
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -388,8 +388,8 @@ class Dimension(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.parcats.Dimension 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.parcats.Dimension
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.parcats.Dimension`"""
             )
 

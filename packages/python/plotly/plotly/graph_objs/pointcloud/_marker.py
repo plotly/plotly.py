@@ -19,7 +19,7 @@ class Marker(_BaseTraceHierarchyType):
         effect in case `opacity` is specified as a value less then `1`.
         Setting `blend` to `true` reduces zoom/pan speed if used with
         large numbers of points.
-    
+
         The 'blend' property must be specified as a bool
         (either True, or False)
 
@@ -43,9 +43,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.pointcloud.marker.Border`
           - A dict of string/value properties that will be passed
             to the Border constructor
-    
+
             Supported dict properties:
-                
+
                 arearatio
                     Specifies what fraction of the marker area is
                     covered with the border.
@@ -70,10 +70,10 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker fill color. It accepts a specific color.If the
-        color is not fully opaque and there are hundreds of thousandsof
-        points, it may cause slower zooming and panning.
-    
+        Sets the marker fill color. It accepts a specific color. If the
+        color is not fully opaque and there are hundreds of thousands
+        of points, it may cause slower zooming and panning.
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -136,7 +136,7 @@ class Marker(_BaseTraceHierarchyType):
         hundreds of thousands of points, it may cause slower zooming
         and panning. Opacity fades the color even if `blend` is left on
         `false` even if there is no translucency effect in that case.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -157,7 +157,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the maximum size (in px) of the rendered marker points.
         Effective when the `pointcloud` shows only few points.
-    
+
         The 'sizemax' property is a number and may be specified as:
           - An int or float in the interval [0.1, inf]
 
@@ -178,7 +178,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the minimum size (in px) of the rendered marker points,
         effective when the `pointcloud` shows a million or more points.
-    
+
         The 'sizemin' property is a number and may be specified as:
           - An int or float in the interval [0.1, 2]
 
@@ -207,8 +207,8 @@ class Marker(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         color
             Sets the marker fill color. It accepts a specific
-            color.If the color is not fully opaque and there are
-            hundreds of thousandsof points, it may cause slower
+            color. If the color is not fully opaque and there are
+            hundreds of thousands of points, it may cause slower
             zooming and panning.
         opacity
             Sets the marker opacity. The default value is `1`
@@ -236,11 +236,11 @@ class Marker(_BaseTraceHierarchyType):
         opacity=None,
         sizemax=None,
         sizemin=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
@@ -257,8 +257,8 @@ class Marker(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         color
             Sets the marker fill color. It accepts a specific
-            color.If the color is not fully opaque and there are
-            hundreds of thousandsof points, it may cause slower
+            color. If the color is not fully opaque and there are
+            hundreds of thousands of points, it may cause slower
             zooming and panning.
         opacity
             Sets the marker opacity. The default value is `1`
@@ -297,8 +297,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.pointcloud.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.pointcloud.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.pointcloud.Marker`"""
             )
 

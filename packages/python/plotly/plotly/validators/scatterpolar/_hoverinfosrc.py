@@ -9,5 +9,5 @@ class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
-            **kwargs
+            **kwargs,
         )

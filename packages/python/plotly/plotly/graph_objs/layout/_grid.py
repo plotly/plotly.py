@@ -34,7 +34,7 @@ class Grid(_BaseLayoutHierarchyType):
         the default. But it's also possible to have a different length,
         if you want to leave a row at the end for non-cartesian
         subplots.
-    
+
         The 'columns' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -59,9 +59,9 @@ class Grid(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.grid.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     Sets the horizontal domain of this grid subplot
                     (in plot fraction). The first and last cells
@@ -94,7 +94,7 @@ class Grid(_BaseLayoutHierarchyType):
         per column and one y axis per row. "independent" uses a new xy
         pair for each cell, left-to-right across each row then
         iterating rows according to `roworder`.
-    
+
         The 'pattern' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['independent', 'coupled']
@@ -116,7 +116,7 @@ class Grid(_BaseLayoutHierarchyType):
         """
         Is the first row the top or the bottom? Note that columns are
         always enumerated from left to right.
-    
+
         The 'roworder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top to bottom', 'bottom to top']
@@ -140,7 +140,7 @@ class Grid(_BaseLayoutHierarchyType):
         array or a `yaxes` array, its length is used as the default.
         But it's also possible to have a different length, if you want
         to leave a row at the end for non-cartesian subplots.
-    
+
         The 'rows' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -167,7 +167,7 @@ class Grid(_BaseLayoutHierarchyType):
         within the same row. Non-cartesian subplots and traces that
         support `domain` can place themselves in this grid separately
         using the `gridcell` attribute.
-    
+
         The 'subplots' property is an info array that may be specified as:
         * a 2D list where:
           The 'subplots[i][j]' property is an enumeration that may be specified as:
@@ -197,7 +197,7 @@ class Grid(_BaseLayoutHierarchyType):
         other than "" must be unique. Ignored if `subplots` is present.
         If missing but `yaxes` is present, will generate consecutive
         IDs.
-    
+
         The 'xaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'xaxes[i]' property is an enumeration that may be specified as:
@@ -224,7 +224,7 @@ class Grid(_BaseLayoutHierarchyType):
         Horizontal space between grid cells, expressed as a fraction of
         the total width available to one cell. Defaults to 0.1 for
         coupled-axes grids and 0.2 for independent grids.
-    
+
         The 'xgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -246,7 +246,7 @@ class Grid(_BaseLayoutHierarchyType):
         Sets where the x axis labels and titles go. "bottom" means the
         very bottom of the grid. "bottom plot" is the lowest plot that
         each x axis is used in. "top" and "top plot" are similar.
-    
+
         The 'xside' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['bottom', 'bottom plot', 'top plot', 'top']
@@ -272,7 +272,7 @@ class Grid(_BaseLayoutHierarchyType):
         other than "" must be unique. Ignored if `subplots` is present.
         If missing but `xaxes` is present, will generate consecutive
         IDs.
-    
+
         The 'yaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'yaxes[i]' property is an enumeration that may be specified as:
@@ -299,7 +299,7 @@ class Grid(_BaseLayoutHierarchyType):
         Vertical space between grid cells, expressed as a fraction of
         the total height available to one cell. Defaults to 0.1 for
         coupled-axes grids and 0.3 for independent grids.
-    
+
         The 'ygap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -322,7 +322,7 @@ class Grid(_BaseLayoutHierarchyType):
         very left edge of the grid. *left plot* is the leftmost plot
         that each y axis is used in. "right" and *right plot* are
         similar.
-    
+
         The 'yside' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'left plot', 'right plot', 'right']
@@ -429,11 +429,11 @@ class Grid(_BaseLayoutHierarchyType):
         yaxes=None,
         ygap=None,
         yside=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Grid object
-        
+
         Parameters
         ----------
         arg
@@ -531,8 +531,8 @@ class Grid(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Grid 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Grid
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Grid`"""
             )
 

@@ -188,5 +188,5 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the annotation's z position.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

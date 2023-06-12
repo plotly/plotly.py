@@ -22,8 +22,10 @@ class Heatmapgl(_BaseTraceType):
         "hoverlabel",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "meta",
         "metasrc",
         "name",
@@ -65,10 +67,10 @@ class Heatmapgl(_BaseTraceType):
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
         `colorscale`. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
+        `autocolorscale` is true, the default palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -93,7 +95,7 @@ class Heatmapgl(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -119,9 +121,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -164,6 +166,16 @@ class Heatmapgl(_BaseTraceType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -184,6 +196,8 @@ class Heatmapgl(_BaseTraceType):
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
                     `tickmode` is set to "auto".
+                orientation
+                    Sets the orientation of the colorbar.
                 outlinecolor
                     Sets the axis line color.
                 outlinewidth
@@ -241,8 +255,8 @@ class Heatmapgl(_BaseTraceType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -267,7 +281,20 @@ class Heatmapgl(_BaseTraceType):
                     labels is *hide past domain*. In other cases
                     the default is *hide past div*.
                 ticklabelposition
-                    Determines where tick labels are drawn.
+                    Determines where tick labels are drawn relative
+                    to the ticks. Left and right options are used
+                    when `orientation` is "h", top and bottom when
+                    `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -297,14 +324,14 @@ class Heatmapgl(_BaseTraceType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -321,30 +348,57 @@ class Heatmapgl(_BaseTraceType):
                     Deprecated: Please use
                     heatmapgl.colorbar.title.side instead.
                     Determines the location of color bar's title
-                    with respect to the color bar. Note that the
-                    title's location used to be set by the now
+                    with respect to the color bar. Defaults to
+                    "top" when `orientation` if "v" and  defaults
+                    to "right" when `orientation` if "h". Note that
+                    the title's location used to be set by the now
                     deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction).
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
                     the "left", "center" or "right" of the color
-                    bar.
+                    bar. Defaults to "left" when `orientation` is
+                    "v" and "center" when `orientation` is "h".
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction).
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
                     "top", "middle" or "bottom" of the color bar.
+                    Defaults to "middle" when `orientation` is "v"
+                    and "bottom" when `orientation` is "h".
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -366,12 +420,12 @@ class Heatmapgl(_BaseTraceType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use`zmin` and `zmax`.
+        bounds of the colorscale in color space, use `zmin` and `zmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -418,7 +472,7 @@ class Heatmapgl(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -437,9 +491,9 @@ class Heatmapgl(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -459,7 +513,7 @@ class Heatmapgl(_BaseTraceType):
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -479,7 +533,7 @@ class Heatmapgl(_BaseTraceType):
     def dy(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -501,7 +555,7 @@ class Heatmapgl(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -524,9 +578,9 @@ class Heatmapgl(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -550,9 +604,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -560,19 +614,19 @@ class Heatmapgl(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -587,7 +641,7 @@ class Heatmapgl(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -607,7 +661,7 @@ class Heatmapgl(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -626,8 +680,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -641,6 +695,31 @@ class Heatmapgl(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -651,9 +730,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -680,7 +759,7 @@ class Heatmapgl(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -693,6 +772,27 @@ class Heatmapgl(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # meta
     # ----
@@ -709,7 +809,7 @@ class Heatmapgl(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -727,8 +827,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -749,7 +849,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -770,7 +870,7 @@ class Heatmapgl(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -792,7 +892,7 @@ class Heatmapgl(_BaseTraceType):
         Reverses the color mapping if true. If true, `zmin` will
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -813,7 +913,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -837,9 +937,9 @@ class Heatmapgl(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.heatmapgl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -866,7 +966,7 @@ class Heatmapgl(_BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -885,8 +985,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -906,7 +1006,7 @@ class Heatmapgl(_BaseTraceType):
     def transpose(self):
         """
         Transposes the z data.
-    
+
         The 'transpose' property must be specified as a bool
         (either True, or False)
 
@@ -927,7 +1027,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -962,7 +1062,7 @@ class Heatmapgl(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -983,7 +1083,7 @@ class Heatmapgl(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1004,7 +1104,7 @@ class Heatmapgl(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1026,7 +1126,7 @@ class Heatmapgl(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1048,7 +1148,7 @@ class Heatmapgl(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1069,8 +1169,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
-    
+        Sets the source reference on Chart Studio Cloud for `x`.
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1093,7 +1193,7 @@ class Heatmapgl(_BaseTraceType):
         default behavior when `x` is provided). If "scaled", the
         heatmap's x coordinates are given by "x0" and "dx" (the default
         behavior when `x` is not provided).
-    
+
         The 'xtype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -1114,7 +1214,7 @@ class Heatmapgl(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1136,7 +1236,7 @@ class Heatmapgl(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1158,7 +1258,7 @@ class Heatmapgl(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1179,8 +1279,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
-    
+        Sets the source reference on Chart Studio Cloud for `y`.
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1203,7 +1303,7 @@ class Heatmapgl(_BaseTraceType):
         default behavior when `y` is provided) If "scaled", the
         heatmap's y coordinates are given by "y0" and "dy" (the default
         behavior when `y` is not provided)
-    
+
         The 'ytype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -1224,7 +1324,7 @@ class Heatmapgl(_BaseTraceType):
     def z(self):
         """
         Sets the z data.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1245,9 +1345,9 @@ class Heatmapgl(_BaseTraceType):
         """
         Determines whether or not the color domain is computed with
         respect to the input data (here in `z`) or the bounds set in
-        `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
+        `zmin` and `zmax` Defaults to `false` when `zmin` and `zmax`
         are set by the user.
-    
+
         The 'zauto' property must be specified as a bool
         (either True, or False)
 
@@ -1268,7 +1368,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the upper bound of the color domain. Value should have the
         same units as in `z` and if set, `zmin` must be set as well.
-    
+
         The 'zmax' property is a number and may be specified as:
           - An int or float
 
@@ -1290,7 +1390,7 @@ class Heatmapgl(_BaseTraceType):
         Sets the mid-point of the color domain by scaling `zmin` and/or
         `zmax` to be equidistant to this point. Value should have the
         same units as in `z`. Has no effect when `zauto` is `false`.
-    
+
         The 'zmid' property is a number and may be specified as:
           - An int or float
 
@@ -1311,7 +1411,7 @@ class Heatmapgl(_BaseTraceType):
         """
         Sets the lower bound of the color domain. Value should have the
         same units as in `z` and if set, `zmax` must be set as well.
-    
+
         The 'zmin' property is a number and may be specified as:
           - An int or float
 
@@ -1331,7 +1431,7 @@ class Heatmapgl(_BaseTraceType):
     def zsmooth(self):
         """
         Picks a smoothing algorithm use to smooth `z` data.
-    
+
         The 'zsmooth' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fast', False]
@@ -1351,8 +1451,8 @@ class Heatmapgl(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
-    
+        Sets the source reference on Chart Studio Cloud for `z`.
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1381,7 +1481,7 @@ class Heatmapgl(_BaseTraceType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -1401,7 +1501,7 @@ class Heatmapgl(_BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -1413,7 +1513,7 @@ class Heatmapgl(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1425,7 +1525,7 @@ class Heatmapgl(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmapgl.Hoverlabel`
             instance or dict with compatible properties
@@ -1435,7 +1535,13 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1447,6 +1553,9 @@ class Heatmapgl(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1462,7 +1571,7 @@ class Heatmapgl(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1482,7 +1591,7 @@ class Heatmapgl(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1524,8 +1633,8 @@ class Heatmapgl(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1544,8 +1653,8 @@ class Heatmapgl(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1557,7 +1666,7 @@ class Heatmapgl(_BaseTraceType):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -1575,8 +1684,8 @@ class Heatmapgl(_BaseTraceType):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1595,8 +1704,10 @@ class Heatmapgl(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -1627,11 +1738,11 @@ class Heatmapgl(_BaseTraceType):
         zmin=None,
         zsmooth=None,
         zsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Heatmapgl object
-        
+
         "heatmapgl" trace is deprecated! Please consider switching to
         the "heatmap" or "image" trace types. Alternatively you could
         contribute/sponsor rewriting this trace type based on cartesian
@@ -1647,7 +1758,7 @@ class Heatmapgl(_BaseTraceType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -1667,7 +1778,7 @@ class Heatmapgl(_BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -1679,7 +1790,7 @@ class Heatmapgl(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1691,7 +1802,7 @@ class Heatmapgl(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmapgl.Hoverlabel`
             instance or dict with compatible properties
@@ -1701,7 +1812,13 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -1713,6 +1830,9 @@ class Heatmapgl(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1728,7 +1848,7 @@ class Heatmapgl(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1748,7 +1868,7 @@ class Heatmapgl(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1790,8 +1910,8 @@ class Heatmapgl(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1810,8 +1930,8 @@ class Heatmapgl(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1823,7 +1943,7 @@ class Heatmapgl(_BaseTraceType):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -1841,8 +1961,8 @@ class Heatmapgl(_BaseTraceType):
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------
@@ -1865,8 +1985,8 @@ class Heatmapgl(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Heatmapgl 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Heatmapgl
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Heatmapgl`"""
             )
 
@@ -1929,6 +2049,10 @@ an instance of :class:`plotly.graph_objs.Heatmapgl`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -1937,6 +2061,10 @@ an instance of :class:`plotly.graph_objs.Heatmapgl`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("meta", None)
         _v = meta if meta is not None else _v
         if _v is not None:

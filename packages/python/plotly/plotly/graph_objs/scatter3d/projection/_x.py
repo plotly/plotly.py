@@ -16,7 +16,7 @@ class X(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the projection color.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -37,7 +37,7 @@ class X(_BaseTraceHierarchyType):
         """
         Sets the scale factor determining the size of the projection
         marker points.
-    
+
         The 'scale' property is a number and may be specified as:
           - An int or float in the interval [0, 10]
 
@@ -57,7 +57,7 @@ class X(_BaseTraceHierarchyType):
     def show(self):
         """
         Sets whether or not projections are shown along the x axis.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -89,7 +89,7 @@ class X(_BaseTraceHierarchyType):
     def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new X object
-        
+
         Parameters
         ----------
         arg
@@ -126,8 +126,8 @@ class X(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatter3d.projection.X 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatter3d.projection.X
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatter3d.projection.X`"""
             )
 

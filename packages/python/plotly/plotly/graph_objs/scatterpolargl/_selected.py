@@ -20,9 +20,9 @@ class Selected(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the marker color of selected points.
                 opacity
@@ -50,9 +50,9 @@ class Selected(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatterpolargl.selected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the text font color of selected points.
 
@@ -82,7 +82,7 @@ class Selected(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
         """
         Construct a new Selected object
-        
+
         Parameters
         ----------
         arg
@@ -117,8 +117,8 @@ class Selected(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterpolargl.Selected 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterpolargl.Selected
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterpolargl.Selected`"""
             )
 

@@ -16,17 +16,17 @@ class Number(_BaseTraceHierarchyType):
     def font(self):
         """
         Set the font used to display main number
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.number.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -62,7 +62,7 @@ class Number(_BaseTraceHierarchyType):
     def prefix(self):
         """
         Sets a prefix appearing before the number.
-    
+
         The 'prefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -83,7 +83,7 @@ class Number(_BaseTraceHierarchyType):
     def suffix(self):
         """
         Sets a suffix appearing next to the number.
-    
+
         The 'suffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -107,7 +107,7 @@ class Number(_BaseTraceHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-    
+
         The 'valueformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -145,7 +145,7 @@ class Number(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Number object
-        
+
         Parameters
         ----------
         arg
@@ -185,8 +185,8 @@ class Number(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.Number 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.Number
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.Number`"""
             )
 

@@ -16,5 +16,5 @@ class XaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     "valType": "subplotid",
                 },
             ),
-            **kwargs
+            **kwargs,
         )

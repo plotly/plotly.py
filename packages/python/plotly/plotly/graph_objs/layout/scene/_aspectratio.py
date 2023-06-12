@@ -80,7 +80,7 @@ class Aspectratio(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Aspectratio object
-        
+
         Sets this scene's axis aspectratio.
 
         Parameters
@@ -117,8 +117,8 @@ class Aspectratio(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.scene.Aspectratio 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.scene.Aspectratio
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.Aspectratio`"""
             )
 

@@ -21,7 +21,7 @@ class YBins(_BaseTraceHierarchyType):
         maximum data value. Like `start`, for dates use a date string,
         and for category data `end` is based on the category serial
         numbers.
-    
+
         The 'end' property accepts values of any type
 
         Returns
@@ -51,7 +51,7 @@ class YBins(_BaseTraceHierarchyType):
         and all others discarded. If no `size` is provided,the sample
         data from all traces is combined to determine `size` as
         described above.
-    
+
         The 'size' property accepts values of any type
 
         Returns
@@ -82,7 +82,7 @@ class YBins(_BaseTraceHierarchyType):
         histograms share a subplot, the first explicit `start` is used
         exactly and all others are shifted down (if necessary) to
         differ from that one by an integer number of bins.
-    
+
         The 'start' property accepts values of any type
 
         Returns
@@ -142,7 +142,7 @@ class YBins(_BaseTraceHierarchyType):
     def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
         """
         Construct a new YBins object
-        
+
         Parameters
         ----------
         arg
@@ -208,8 +208,8 @@ class YBins(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram.YBins 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram.YBins
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram.YBins`"""
             )
 

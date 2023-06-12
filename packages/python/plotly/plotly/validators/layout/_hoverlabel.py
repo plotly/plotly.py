@@ -24,6 +24,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             font
                 Sets the default hover label font used by all
                 traces on the graph.
+            grouptitlefont
+                Sets the font for group titles in hover
+                (unified modes). Defaults to `hoverlabel.font`.
             namelength
                 Sets the default length (in number of
                 characters) of the trace name in the hover
@@ -36,5 +39,5 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ellipsis.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -6,12 +6,12 @@ class PlacementValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="placement",
         parent_name="layout.mapbox.layer.symbol",
-        **kwargs
+        **kwargs,
     ):
         super(PlacementValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             values=kwargs.pop("values", ["point", "line", "line-center"]),
-            **kwargs
+            **kwargs,
         )

@@ -8,5 +8,5 @@ class SubplotValidator(_plotly_utils.basevalidators.SubplotidValidator):
             parent_name=parent_name,
             dflt=kwargs.pop("dflt", "mapbox"),
             edit_type=kwargs.pop("edit_type", "calc"),
-            **kwargs
+            **kwargs,
         )

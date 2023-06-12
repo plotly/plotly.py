@@ -10,6 +10,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            activeselection
+                :class:`plotly.graph_objects.layout.Activeselec
+                tion` instance or dict with compatible
+                properties
             activeshape
                 :class:`plotly.graph_objects.layout.Activeshape
                 ` instance or dict with compatible properties
@@ -53,8 +57,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             barnorm
                 Sets the normalization for bar traces on the
                 graph. With "fraction", the value of each bar
@@ -211,7 +215,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 another With "group", the bars are plotted next
                 to one another centered around the shared
                 location. With "overlay", the bars are plotted
-                over one another, you might need to an
+                over one another, you might need to reduce
                 "opacity" to see multiple bars.
             geo
                 :class:`plotly.graph_objects.layout.Geo`
@@ -228,7 +232,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hide slices from several pies/funnelarea charts
             hiddenlabelssrc
                 Sets the source reference on Chart Studio Cloud
-                for  hiddenlabels .
+                for `hiddenlabels`.
             hidesources
                 Determines whether or not a text link citing
                 the data source is placed at the bottom-right
@@ -304,10 +308,19 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 accessed %{meta[key]}.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
+            minreducedheight
+                Minimum height of the plot with
+                margin.automargin applied (in px)
+            minreducedwidth
+                Minimum width of the plot with
+                margin.automargin applied (in px)
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
+            newselection
+                :class:`plotly.graph_objects.layout.Newselectio
+                n` instance or dict with compatible properties
             newshape
                 :class:`plotly.graph_objects.layout.Newshape`
                 instance or dict with compatible properties
@@ -326,6 +339,19 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             polar
                 :class:`plotly.graph_objects.layout.Polar`
                 instance or dict with compatible properties
+            scattergap
+                Sets the gap (in plot fraction) between scatter
+                points of adjacent location coordinates.
+                Defaults to `bargap`.
+            scattermode
+                Determines how scatter points at the same
+                location coordinate are displayed on the graph.
+                With "group", the scatter points are plotted
+                next to one another centered around the shared
+                location. With "overlay", the scatter points
+                are plotted over one another, you might need to
+                reduce "opacity" to see multiple scatter
+                points.
             scene
                 :class:`plotly.graph_objects.layout.Scene`
                 instance or dict with compatible properties
@@ -338,6 +364,15 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             selectionrevision
                 Controls persistence of user-driven changes in
                 selected points from all traces.
+            selections
+                A tuple of
+                :class:`plotly.graph_objects.layout.Selection`
+                instances or dicts with compatible properties
+            selectiondefaults
+                When used in a template (as
+                layout.template.layout.selectiondefaults), sets
+                the default property values to use for elements
+                of layout.selections
             separators
                 Sets the decimal and thousand separators. For
                 example, *. * puts a '.' before decimals and a
@@ -369,6 +404,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 layout.template.layout.sliderdefaults), sets
                 the default property values to use for elements
                 of layout.sliders
+            smith
+                :class:`plotly.graph_objects.layout.Smith`
+                instance or dict with compatible properties
             spikedistance
                 Sets the default distance (in pixels) to look
                 for data to draw spikelines to (-1 means no
@@ -494,8 +532,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             width
                 Sets the plot's width (in px).
             xaxis
@@ -506,5 +544,5 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

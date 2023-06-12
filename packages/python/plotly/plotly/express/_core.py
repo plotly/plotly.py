@@ -10,7 +10,7 @@ import math
 import pandas as pd
 import numpy as np
 
-from plotly.subplots import (
+from plotly._subplots import (
     make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
@@ -223,7 +223,7 @@ def make_mapping(args, variable):
     if variable == "dash":
         arg_name = "line_dash"
         vprefix = "line_dash"
-    if variable == "pattern":
+    if variable in ["pattern", "shape"]:
         arg_name = "pattern_shape"
         vprefix = "pattern_shape"
     if args[vprefix + "_map"] == "identity":
@@ -268,7 +268,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         fit information to be used for trendlines
     """
     if "line_close" in args and args["line_close"]:
-        trace_data = trace_data.append(trace_data.iloc[0])
+        trace_data = pd.concat([trace_data, trace_data.iloc[:1]])
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -278,7 +278,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         if attr_name == "dimensions":
             dims = [
                 (name, column)
-                for (name, column) in trace_data.iteritems()
+                for (name, column) in trace_data.items()
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
@@ -328,7 +328,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
-                        x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
+                        # convert to unix epoch seconds
+                        x = x.astype(np.int64) / 10**9
                     elif x.dtype.type == np.object_:
                         try:
                             x = x.astype(np.float64)
@@ -1294,16 +1295,22 @@ def build_dataframe(args, constructor):
     # make copies of all the fields via dict() and list()
     for field in args:
         if field in array_attrables and args[field] is not None:
-            args[field] = (
-                dict(args[field])
-                if isinstance(args[field], dict)
-                else list(args[field])
-            )
+            if isinstance(args[field], dict):
+                args[field] = dict(args[field])
+            elif field in ["custom_data", "hover_data"] and isinstance(
+                args[field], str
+            ):
+                args[field] = [args[field]]
+            else:
+                args[field] = list(args[field])
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
+        if hasattr(args["data_frame"], "to_pandas"):
+            args["data_frame"] = args["data_frame"].to_pandas()
+        else:
+            args["data_frame"] = pd.DataFrame(args["data_frame"])
     df_input = args["data_frame"]
 
     # now we handle special cases like wide-mode or x-xor-y specification
@@ -1634,7 +1641,7 @@ def process_dataframe_hierarchy(args):
         df_tree["parent"] = df_tree["parent"].str.rstrip("/")
         if cols:
             df_tree[cols] = dfg[cols]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_all_trees = pd.concat([df_all_trees, df_tree], ignore_index=True)
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
@@ -1678,12 +1685,30 @@ def process_dataframe_timeline(args):
         )
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
-    args["data_frame"][args["x_end"]] = (x_end - x_start).astype("timedelta64[ms]")
+    args["data_frame"][args["x_end"]] = (x_end - x_start).astype(
+        "timedelta64[ns]"
+    ) / np.timedelta64(1, "ms")
     args["x"] = args["x_end"]
     del args["x_end"]
     args["base"] = args["x_start"]
     del args["x_start"]
     return args
+
+
+def process_dataframe_pie(args, trace_patch):
+    names = args.get("names")
+    if names is None:
+        return args, trace_patch
+    order_in = args["category_orders"].get(names, {}).copy()
+    if not order_in:
+        return args, trace_patch
+    df = args["data_frame"]
+    trace_patch["sort"] = False
+    trace_patch["direction"] = "clockwise"
+    uniques = list(df[names].unique())
+    order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
+    args["data_frame"] = df.set_index(names).loc[order].reset_index()
+    return args, trace_patch
 
 
 def infer_config(args, constructor, trace_patch, layout_patch):
@@ -1739,7 +1764,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         grouped_attrs.append("marker.symbol")
 
     if "pattern_shape" in args:
-        grouped_attrs.append("marker.pattern.shape")
+        if constructor in [go.Scatter]:
+            grouped_attrs.append("fillpattern.shape")
+        else:
+            grouped_attrs.append("marker.pattern.shape")
 
     if "orientation" in args:
         has_x = args["x"] is not None
@@ -1790,6 +1818,18 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         and args["histfunc"] is None
     ):
         args["histfunc"] = trace_patch["histfunc"] = "sum"
+
+    if args.get("text_auto", False) is not False:
+        if constructor in [go.Histogram2d, go.Histogram2dContour]:
+            letter = "z"
+        elif constructor == go.Bar:
+            letter = "y" if args["orientation"] == "v" else "x"
+        else:
+            letter = "value"
+        if args["text_auto"] is True:
+            trace_patch["texttemplate"] = "%{" + letter + "}"
+        else:
+            trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
 
     if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
@@ -1843,6 +1883,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
+    if len(args["data_frame"]) == 0:
+        args["facet_row"] = args["facet_col"] = None
+
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col") is not None and args.get("marginal_y") is not None:
         args["marginal_y"] = None
@@ -1889,40 +1933,66 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     return trace_specs, grouped_mappings, sizeref, show_colorbar
 
 
-def get_orderings(args, grouper, grouped):
+def get_groups_and_orders(args, grouper):
     """
     `orders` is the user-supplied ordering with the remaining data-frame-supplied
     ordering appended if the column is used for grouping. It includes anything the user
     gave, for any variable, including values not present in the dataset. It's a dict
     where the keys are e.g. "x" or "color"
 
-    `sorted_group_names` is the set of groups, ordered by the order above. It's a list
-    of tuples like [("value1", ""), ("value2", "")] where each tuple contains the name
+    `groups` is the dicts of groups, ordered by the order above. Its keys are
+    tuples like [("value1", ""), ("value2", "")] where each tuple contains the name
     of a single dimension-group
     """
-
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
+
+    # figure out orders and what the single group name would be if there were one
+    single_group_name = []
+    unique_cache = dict()
     for col in grouper:
-        if col != one_group:
-            uniques = list(args["data_frame"][col].unique())
+        if col == one_group:
+            single_group_name.append("")
+        else:
+            if col not in unique_cache:
+                unique_cache[col] = list(args["data_frame"][col].unique())
+            uniques = unique_cache[col]
+            if len(uniques) == 1:
+                single_group_name.append(uniques[0])
             if col not in orders:
                 orders[col] = uniques
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
+    df = args["data_frame"]
+    if len(single_group_name) == len(grouper):
+        # we have a single group, so we can skip all group-by operations!
+        groups = {tuple(single_group_name): df}
+    else:
+        required_grouper = [g for g in grouper if g != one_group]
+        grouped = df.groupby(required_grouper, sort=False)  # skip one_group groupers
+        group_indices = grouped.indices
+        sorted_group_names = [
+            g if len(required_grouper) != 1 else (g,) for g in group_indices
+        ]
 
-    sorted_group_names = []
-    for group_name in grouped.groups:
-        if len(grouper) == 1:
-            group_name = (group_name,)
-        sorted_group_names.append(group_name)
-
-    for i, col in reversed(list(enumerate(grouper))):
-        if col != one_group:
+        for i, col in reversed(list(enumerate(required_grouper))):
             sorted_group_names = sorted(
                 sorted_group_names,
                 key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
             )
-    return orders, sorted_group_names
+
+        # calculate the full group_names by inserting "" in the tuple index for one_group groups
+        full_sorted_group_names = [list(t) for t in sorted_group_names]
+        for i, col in enumerate(grouper):
+            if col == one_group:
+                for g in full_sorted_group_names:
+                    g.insert(i, "")
+        full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
+
+        groups = {
+            sf: grouped.get_group(s if len(s) > 1 else s[0])
+            for sf, s in zip(full_sorted_group_names, sorted_group_names)
+        }
+    return groups, orders
 
 
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
@@ -1933,6 +2003,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
+    if constructor in [go.Pie]:
+        args, trace_patch = process_dataframe_pie(args, trace_patch)
     if constructor == "timeline":
         constructor = go.Bar
         args = process_dataframe_timeline(args)
@@ -1941,9 +2013,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         args, constructor, trace_patch, layout_patch
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
-    grouped = args["data_frame"].groupby(grouper, sort=False)
-
-    orders, sorted_group_names = get_orderings(args, grouper, grouped)
+    groups, orders = get_groups_and_orders(args, grouper)
 
     col_labels = []
     row_labels = []
@@ -1972,8 +2042,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trendline_rows = []
     trace_name_labels = None
     facet_col_wrap = args.get("facet_col_wrap", 0)
-    for group_name in sorted_group_names:
-        group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
+    for group_name, group in groups.items():
         mapping_labels = OrderedDict()
         trace_name_labels = OrderedDict()
         frame_name = ""
@@ -2191,6 +2260,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     fig.update_layout(layout_patch)
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
+    for f in frame_list:
+        f["name"] = str(f["name"])
     fig.frames = frame_list if len(frames) > 1 else []
 
     if args.get("trendline") and args.get("trendline_scope", "trace") == "overall":

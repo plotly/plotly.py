@@ -11,5 +11,5 @@ class SizeminValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             max=kwargs.pop("max", 2),
             min=kwargs.pop("min", 0.1),
-            **kwargs
+            **kwargs,
         )

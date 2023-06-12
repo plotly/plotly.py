@@ -15,20 +15,20 @@ class StartsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of the streamtubes
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y components of the starting position
                 of the streamtubes
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the z components of the starting position
                 of the streamtubes
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

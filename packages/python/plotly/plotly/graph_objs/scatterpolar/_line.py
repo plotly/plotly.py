@@ -8,7 +8,59 @@ class Line(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "scatterpolar"
     _path_str = "scatterpolar.line"
-    _valid_props = {"color", "dash", "shape", "smoothing", "width"}
+    _valid_props = {
+        "backoff",
+        "backoffsrc",
+        "color",
+        "dash",
+        "shape",
+        "smoothing",
+        "width",
+    }
+
+    # backoff
+    # -------
+    @property
+    def backoff(self):
+        """
+        Sets the line back off from the end point of the nth line
+        segment (in px). This option is useful e.g. to avoid overlap
+        with arrowhead markers. With "auto" the lines would trim before
+        markers if `marker.angleref` is set to "previous".
+
+        The 'backoff' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["backoff"]
+
+    @backoff.setter
+    def backoff(self, val):
+        self["backoff"] = val
+
+    # backoffsrc
+    # ----------
+    @property
+    def backoffsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `backoff`.
+
+        The 'backoffsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["backoffsrc"]
+
+    @backoffsrc.setter
+    def backoffsrc(self, val):
+        self["backoffsrc"] = val
 
     # color
     # -----
@@ -16,7 +68,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -78,7 +130,7 @@ class Line(_BaseTraceHierarchyType):
         ("solid", "dot", "dash", "longdash", "dashdot", or
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following dash styles:
                 ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
@@ -103,7 +155,7 @@ class Line(_BaseTraceHierarchyType):
         Determines the line shape. With "spline" the lines are drawn
         using spline interpolation. The other available values
         correspond to step-wise line shapes.
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'spline']
@@ -126,7 +178,7 @@ class Line(_BaseTraceHierarchyType):
         Has an effect only if `shape` is set to "spline" Sets the
         amount of smoothing. 0 corresponds to no smoothing (equivalent
         to a "linear" shape).
-    
+
         The 'smoothing' property is a number and may be specified as:
           - An int or float in the interval [0, 1.3]
 
@@ -146,7 +198,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the line width (in px).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -165,6 +217,15 @@ class Line(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        backoff
+            Sets the line back off from the end point of the nth
+            line segment (in px). This option is useful e.g. to
+            avoid overlap with arrowhead markers. With "auto" the
+            lines would trim before markers if `marker.angleref` is
+            set to "previous".
+        backoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `backoff`.
         color
             Sets the line color.
         dash
@@ -187,22 +248,33 @@ class Line(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        backoff=None,
+        backoffsrc=None,
         color=None,
         dash=None,
         shape=None,
         smoothing=None,
         width=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
             dict of properties compatible with this constructor or
             an instance of
             :class:`plotly.graph_objs.scatterpolar.Line`
+        backoff
+            Sets the line back off from the end point of the nth
+            line segment (in px). This option is useful e.g. to
+            avoid overlap with arrowhead markers. With "auto" the
+            lines would trim before markers if `marker.angleref` is
+            set to "previous".
+        backoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `backoff`.
         color
             Sets the line color.
         dash
@@ -242,8 +314,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterpolar.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterpolar.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterpolar.Line`"""
             )
 
@@ -254,6 +326,14 @@ an instance of :class:`plotly.graph_objs.scatterpolar.Line`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("backoff", None)
+        _v = backoff if backoff is not None else _v
+        if _v is not None:
+            self["backoff"] = _v
+        _v = arg.pop("backoffsrc", None)
+        _v = backoffsrc if backoffsrc is not None else _v
+        if _v is not None:
+            self["backoffsrc"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

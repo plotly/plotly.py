@@ -27,7 +27,7 @@ class Modebar(_BaseLayoutHierarchyType):
         """
         Sets the color of the active or hovered on icons in the
         modebar.
-    
+
         The 'activecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -92,7 +92,7 @@ class Modebar(_BaseLayoutHierarchyType):
         "v1hovermode", "hoverclosest", "hovercompare", "togglehover",
         "togglespikelines", "drawline", "drawopenpath",
         "drawclosedpath", "drawcircle", "drawrect", "eraseshape".
-    
+
         The 'add' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -113,8 +113,8 @@ class Modebar(_BaseLayoutHierarchyType):
     @property
     def addsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  add .
-    
+        Sets the source reference on Chart Studio Cloud for `add`.
+
         The 'addsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -134,7 +134,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the modebar.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -193,7 +193,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def color(self):
         """
         Sets the color of the icons in the modebar.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -252,7 +252,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def orientation(self):
         """
         Sets the orientation of the modebar.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -288,7 +288,7 @@ class Modebar(_BaseLayoutHierarchyType):
         "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
         "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox",
         "zoomin", "zoomout".
-    
+
         The 'remove' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -309,8 +309,8 @@ class Modebar(_BaseLayoutHierarchyType):
     @property
     def removesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  remove .
-    
+        Sets the source reference on Chart Studio Cloud for `remove`.
+
         The 'removesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -333,7 +333,7 @@ class Modebar(_BaseLayoutHierarchyType):
         modebar, including `hovermode`, `dragmode`, and `showspikes` at
         both the root level and inside subplots. Defaults to
         `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -365,7 +365,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "drawcircle", "drawrect", "eraseshape".
         addsrc
             Sets the source reference on Chart Studio Cloud for
-            add .
+            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -394,7 +394,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
-            remove .
+            `remove`.
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and
@@ -414,11 +414,11 @@ class Modebar(_BaseLayoutHierarchyType):
         remove=None,
         removesrc=None,
         uirevision=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Modebar object
-        
+
         Parameters
         ----------
         arg
@@ -439,7 +439,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "drawcircle", "drawrect", "eraseshape".
         addsrc
             Sets the source reference on Chart Studio Cloud for
-            add .
+            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -468,7 +468,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
-            remove .
+            `remove`.
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and
@@ -496,8 +496,8 @@ class Modebar(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Modebar 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Modebar
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Modebar`"""
             )
 

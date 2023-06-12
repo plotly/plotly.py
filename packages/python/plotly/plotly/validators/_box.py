@@ -44,7 +44,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dx
                 Sets the x coordinate step for multi-box traces
                 set using q1/median/q3.
@@ -64,7 +64,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.box.Hoverlabel`
                 instance or dict with compatible properties
@@ -85,8 +85,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -106,12 +106,12 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -119,13 +119,19 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             jitter
                 Sets the amount of jitter in the sample points
                 drawn. If 0, the sample points align along the
                 distribution axis. If 1, the sample points are
                 drawn in a random jitter of width equal to the
                 width of the box(es).
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -143,6 +149,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.box.Line` instance
                 or dict with compatible properties
@@ -156,7 +165,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 below 1.5 times the IQR.
             lowerfencesrc
                 Sets the source reference on Chart Studio Cloud
-                for  lowerfence .
+                for `lowerfence`.
             marker
                 :class:`plotly.graph_objects.box.Marker`
                 instance or dict with compatible properties
@@ -170,13 +179,13 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sample values.
             meansrc
                 Sets the source reference on Chart Studio Cloud
-                for  mean .
+                for `mean`.
             median
                 Sets the median values. There should be as many
                 items as the number of boxes desired.
             mediansrc
                 Sets the source reference on Chart Studio Cloud
-                for  median .
+                for `median`.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -193,7 +202,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover. For box traces,
@@ -223,7 +232,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 / sqrt(N), where N is the sample size.
             notchspansrc
                 Sets the source reference on Chart Studio Cloud
-                for  notchspan .
+                for `notchspan`.
             notchwidth
                 Sets the width of the notches relative to the
                 box' width. For example, with 0, the notches
@@ -251,30 +260,29 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 many items as the number of boxes desired.
             q1src
                 Sets the source reference on Chart Studio Cloud
-                for  q1 .
+                for `q1`.
             q3
                 Sets the Quartile 3 values. There should be as
                 many items as the number of boxes desired.
             q3src
                 Sets the source reference on Chart Studio Cloud
-                for  q3 .
+                for `q3`.
             quartilemethod
                 Sets the method used to compute the sample's Q1
                 and Q3 quartiles. The "linear" method uses the
                 25th percentile for Q1 and 75th percentile for
-                Q3 as computed using method #10 (listed on http
-                ://www.amstat.org/publications/jse/v14n3/langfo
-                rd.html). The "exclusive" method uses the
-                median to divide the ordered dataset into two
-                halves if the sample is odd, it does not
-                include the median in either half - Q1 is then
-                the median of the lower half and Q3 the median
-                of the upper half. The "inclusive" method also
-                uses the median to divide the ordered dataset
-                into two halves but if the sample is odd, it
-                includes the median in both halves - Q1 is then
-                the median of the lower half and Q3 the median
-                of the upper half.
+                Q3 as computed using method #10 (listed on
+                http://jse.amstat.org/v14n3/langford.html). The
+                "exclusive" method uses the median to divide
+                the ordered dataset into two halves if the
+                sample is odd, it does not include the median
+                in either half - Q1 is then the median of the
+                lower half and Q3 the median of the upper half.
+                The "inclusive" method also uses the median to
+                divide the ordered dataset into two halves but
+                if the sample is odd, it includes the median in
+                both halves - Q1 is then the median of the
+                lower half and Q3 the median of the upper half.
             sd
                 Sets the standard deviation values. There
                 should be as many items as the number of boxes
@@ -285,7 +293,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 using the sample values.
             sdsrc
                 Sets the source reference on Chart Studio Cloud
-                for  sd .
+                for `sd`.
             selected
                 :class:`plotly.graph_objects.box.Selected`
                 instance or dict with compatible properties
@@ -314,7 +322,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 flag.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -354,7 +362,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 above 1.5 times the IQR.
             upperfencesrc
                 Sets the source reference on Chart Studio Cloud
-                for  upperfence .
+                for `upperfence`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -390,9 +398,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -422,7 +430,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y sample data or coordinates. See
                 overview for more info.
@@ -444,9 +452,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -476,8 +484,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

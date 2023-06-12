@@ -19,5 +19,5 @@ class FillValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "tonext",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

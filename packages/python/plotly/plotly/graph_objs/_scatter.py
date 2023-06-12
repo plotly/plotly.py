@@ -9,6 +9,7 @@ class Scatter(_BaseTraceType):
     _parent_path_str = ""
     _path_str = "scatter"
     _valid_props = {
+        "alignmentgroup",
         "cliponaxis",
         "connectgaps",
         "customdata",
@@ -19,6 +20,7 @@ class Scatter(_BaseTraceType):
         "error_y",
         "fill",
         "fillcolor",
+        "fillpattern",
         "groupnorm",
         "hoverinfo",
         "hoverinfosrc",
@@ -30,15 +32,18 @@ class Scatter(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "marker",
         "meta",
         "metasrc",
         "mode",
         "name",
+        "offsetgroup",
         "opacity",
         "orientation",
         "selected",
@@ -79,6 +84,29 @@ class Scatter(_BaseTraceType):
         "ysrc",
     }
 
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["alignmentgroup"]
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self["alignmentgroup"] = val
+
     # cliponaxis
     # ----------
     @property
@@ -88,7 +116,7 @@ class Scatter(_BaseTraceType):
         about the subplot axes. To show markers and text nodes above
         axis lines and tick labels, make sure to set `xaxis.layer` and
         `yaxis.layer` to *below traces*.
-    
+
         The 'cliponaxis' property must be specified as a bool
         (either True, or False)
 
@@ -109,7 +137,7 @@ class Scatter(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -132,7 +160,7 @@ class Scatter(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -151,9 +179,9 @@ class Scatter(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -173,7 +201,7 @@ class Scatter(_BaseTraceType):
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -193,7 +221,7 @@ class Scatter(_BaseTraceType):
     def dy(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -217,9 +245,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -231,14 +259,14 @@ class Scatter(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 copy_ystyle
-    
+
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -247,9 +275,9 @@ class Scatter(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -298,9 +326,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -312,10 +340,10 @@ class Scatter(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 symmetric
@@ -326,9 +354,9 @@ class Scatter(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -391,7 +419,7 @@ class Scatter(_BaseTraceType):
         `stackgroup`s or some traces stacked and some not, if fill-
         linked traces are not already consecutive, the later ones will
         be pushed down in the drawing order.
-    
+
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx',
@@ -415,7 +443,7 @@ class Scatter(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -468,6 +496,80 @@ class Scatter(_BaseTraceType):
     def fillcolor(self, val):
         self["fillcolor"] = val
 
+    # fillpattern
+    # -----------
+    @property
+    def fillpattern(self):
+        """
+        Sets the pattern within the marker.
+
+        The 'fillpattern' property is an instance of Fillpattern
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scatter.Fillpattern`
+          - A dict of string/value properties that will be passed
+            to the Fillpattern constructor
+
+            Supported dict properties:
+
+                bgcolor
+                    When there is no colorscale sets the color of
+                    background pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "overlay". Otherwise, defaults to a transparent
+                    background.
+                bgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `bgcolor`.
+                fgcolor
+                    When there is no colorscale sets the color of
+                    foreground pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "replace". Otherwise, defaults to dark grey or
+                    white to increase contrast with the `bgcolor`.
+                fgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `fgcolor`.
+                fgopacity
+                    Sets the opacity of the foreground pattern
+                    fill. Defaults to a 0.5 when `fillmode` is
+                    "overlay". Otherwise, defaults to 1.
+                fillmode
+                    Determines whether `marker.color` should be
+                    used as a default to `bgcolor` or a `fgcolor`.
+                shape
+                    Sets the shape of the pattern fill. By default,
+                    no pattern is used for filling the area.
+                shapesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shape`.
+                size
+                    Sets the size of unit squares of the pattern
+                    fill in pixels, which corresponds to the
+                    interval of repetition of the pattern.
+                sizesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `size`.
+                solidity
+                    Sets the solidity of the pattern fill. Solidity
+                    is roughly the fraction of the area filled by
+                    the pattern. Solidity of 0 shows only the
+                    background color without pattern and solidty of
+                    1 shows only the foreground color without
+                    pattern.
+                soliditysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `solidity`.
+
+        Returns
+        -------
+        plotly.graph_objs.scatter.Fillpattern
+        """
+        return self["fillpattern"]
+
+    @fillpattern.setter
+    def fillpattern(self, val):
+        self["fillpattern"] = val
+
     # groupnorm
     # ---------
     @property
@@ -482,7 +584,7 @@ class Scatter(_BaseTraceType):
         the same but multiplied by 100 to show percentages. If there
         are multiple subplots, or multiple `stackgroup`s on one
         subplot, each will be normalized within its own set.
-    
+
         The 'groupnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['', 'fraction', 'percent']
@@ -505,7 +607,7 @@ class Scatter(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -528,9 +630,9 @@ class Scatter(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -554,9 +656,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -564,19 +666,19 @@ class Scatter(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -591,7 +693,7 @@ class Scatter(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -612,7 +714,7 @@ class Scatter(_BaseTraceType):
         line points) or do they highlight filled regions? If the fill
         is "toself" or "tonext" and there are no markers or text, then
         the default is "fills", otherwise it is "points".
-    
+
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['points', 'fills'] joined with '+' characters
@@ -656,7 +758,7 @@ class Scatter(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -678,8 +780,8 @@ class Scatter(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
-    
+        `hovertemplate`.
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -703,7 +805,7 @@ class Scatter(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -724,9 +826,9 @@ class Scatter(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -748,7 +850,7 @@ class Scatter(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -767,8 +869,8 @@ class Scatter(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -782,6 +884,31 @@ class Scatter(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -790,7 +917,7 @@ class Scatter(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -815,9 +942,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -844,7 +971,7 @@ class Scatter(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -858,6 +985,27 @@ class Scatter(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -868,9 +1016,19 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
+                backoff
+                    Sets the line back off from the end point of
+                    the nth line segment (in px). This option is
+                    useful e.g. to avoid overlap with arrowhead
+                    markers. With "auto" the lines would trim
+                    before markers if `marker.angleref` is set to
+                    "previous".
+                backoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `backoff`.
                 color
                     Sets the line color.
                 dash
@@ -917,30 +1075,40 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
+                angle
+                    Sets the marker angle in respect to `angleref`.
+                angleref
+                    Sets the reference for marker angle. With
+                    "previous", angle 0 points along the line from
+                    the previous point to this one. With "up",
+                    angle 0 points toward the top of the screen.
+                anglesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `angle`.
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. In case `colorscale` is
                     unspecified or `autocolorscale` is true, the
-                    default  palette will be chosen according to
+                    default palette will be chosen according to
                     whether numbers in the `color` array are all
                     positive, all negative or mixed.
                 cauto
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax`  Has an effect
-                    only if in `marker.color`is set to a numerical
+                    `marker.cmin` and `marker.cmax` Has an effect
+                    only if in `marker.color` is set to a numerical
                     array. Defaults to `false` when `marker.cmin`
                     and `marker.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
@@ -948,18 +1116,18 @@ class Scatter(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if in `marker.color`is set to a numerical
+                    only if in `marker.color` is set to a numerical
                     array. Value should have the same units as in
                     `marker.color`. Has no effect when
                     `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -979,7 +1147,7 @@ class Scatter(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `marker.color`is set to a numerical array. The
+                    `marker.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -987,7 +1155,7 @@ class Scatter(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -995,7 +1163,7 @@ class Scatter(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 gradient
                     :class:`plotly.graph_objects.scatter.marker.Gra
                     dient` instance or dict with compatible
@@ -1010,10 +1178,10 @@ class Scatter(_BaseTraceType):
                     Sets the marker opacity.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. If true, `marker.cmin` will
                     correspond to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -1021,7 +1189,7 @@ class Scatter(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `marker.color`is set to a numerical array.
+                    in `marker.color` is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -1039,7 +1207,16 @@ class Scatter(_BaseTraceType):
                     Use with `sizemin` and `sizemode`.
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                standoff
+                    Moves the marker away from the data point in
+                    the direction of `angle` (in px). This can be
+                    useful for example if you have another marker
+                    at this location and you want to point an
+                    arrowhead marker at it.
+                standoffsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `standoff`.
                 symbol
                     Sets the marker symbol type. Adding 100 is
                     equivalent to appending "-open" to a symbol
@@ -1049,7 +1226,7 @@ class Scatter(_BaseTraceType):
                     open" to a symbol name.
                 symbolsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  symbol .
+                    for `symbol`.
 
         Returns
         -------
@@ -1076,7 +1253,7 @@ class Scatter(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1094,8 +1271,8 @@ class Scatter(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1120,7 +1297,7 @@ class Scatter(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -1144,7 +1321,7 @@ class Scatter(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1159,13 +1336,36 @@ class Scatter(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["offsetgroup"]
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self["offsetgroup"] = val
+
     # opacity
     # -------
     @property
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1184,13 +1384,14 @@ class Scatter(_BaseTraceType):
     @property
     def orientation(self):
         """
-        Only relevant when `stackgroup` is used, and only the first
-        `orientation` found in the `stackgroup` will be used -
+        Only relevant in the following cases: 1. when `scattermode` is
+        set to "group". 2. when `stackgroup` is used, and only the
+        first `orientation` found in the `stackgroup` will be used -
         including if `visible` is "legendonly" but not if it is
         `false`. Sets the stacking direction. With "v" ("h"), the y (x)
         values of subsequent traces are added. Also affects the default
         value of `fill`.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -1215,9 +1416,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scatter.selected.M
                     arker` instance or dict with compatible
@@ -1248,7 +1449,7 @@ class Scatter(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1268,7 +1469,7 @@ class Scatter(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1295,7 +1496,7 @@ class Scatter(_BaseTraceType):
         we insert a zero at these locations. With "interpolate" we
         linearly interpolate between existing values, and extrapolate a
         constant beyond the existing values.
-    
+
         The 'stackgaps' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['infer zero', 'interpolate']
@@ -1327,7 +1528,7 @@ class Scatter(_BaseTraceType):
         stacked and some not, if fill-linked traces are not already
         consecutive, the later ones will be pushed down in the drawing
         order.
-    
+
         The 'stackgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1352,9 +1553,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1386,7 +1587,7 @@ class Scatter(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1408,20 +1609,20 @@ class Scatter(_BaseTraceType):
     def textfont(self):
         """
         Sets the text font.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scatter.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1441,12 +1642,12 @@ class Scatter(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
 
         Returns
         -------
@@ -1465,7 +1666,7 @@ class Scatter(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1489,8 +1690,8 @@ class Scatter(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
-    
+        `textposition`.
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1509,8 +1710,8 @@ class Scatter(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1541,7 +1742,7 @@ class Scatter(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1563,8 +1764,8 @@ class Scatter(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
-    
+        `texttemplate`.
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1585,7 +1786,7 @@ class Scatter(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1620,7 +1821,7 @@ class Scatter(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1643,9 +1844,9 @@ class Scatter(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.scatter.unselected
                     .Marker` instance or dict with compatible
@@ -1673,7 +1874,7 @@ class Scatter(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1694,7 +1895,7 @@ class Scatter(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1716,7 +1917,7 @@ class Scatter(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1738,7 +1939,7 @@ class Scatter(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1760,7 +1961,7 @@ class Scatter(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1794,7 +1995,7 @@ class Scatter(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1818,7 +2019,7 @@ class Scatter(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the x axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'xperiod' property accepts values of any type
 
         Returns
@@ -1841,7 +2042,7 @@ class Scatter(_BaseTraceType):
         axis. When `x0period` is round number of weeks, the `x0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'xperiod0' property accepts values of any type
 
         Returns
@@ -1861,7 +2062,7 @@ class Scatter(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the x axis.
-    
+
         The 'xperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1881,8 +2082,8 @@ class Scatter(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
-    
+        Sets the source reference on Chart Studio Cloud for `x`.
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1902,7 +2103,7 @@ class Scatter(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1924,7 +2125,7 @@ class Scatter(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1946,7 +2147,7 @@ class Scatter(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1968,7 +2169,7 @@ class Scatter(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -2002,7 +2203,7 @@ class Scatter(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -2026,7 +2227,7 @@ class Scatter(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the y axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'yperiod' property accepts values of any type
 
         Returns
@@ -2049,7 +2250,7 @@ class Scatter(_BaseTraceType):
         axis. When `y0period` is round number of weeks, the `y0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'yperiod0' property accepts values of any type
 
         Returns
@@ -2069,7 +2270,7 @@ class Scatter(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the y axis.
-    
+
         The 'yperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -2089,8 +2290,8 @@ class Scatter(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
-    
+        Sets the source reference on Chart Studio Cloud for `y`.
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2115,6 +2316,11 @@ class Scatter(_BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -2131,7 +2337,7 @@ class Scatter(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2169,6 +2375,8 @@ class Scatter(_BaseTraceType):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -2187,7 +2395,7 @@ class Scatter(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter.Hoverlabel`
             instance or dict with compatible properties
@@ -2227,7 +2435,7 @@ class Scatter(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2237,14 +2445,20 @@ class Scatter(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2260,6 +2474,9 @@ class Scatter(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -2281,7 +2498,7 @@ class Scatter(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2292,15 +2509,21 @@ class Scatter(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -2356,10 +2579,10 @@ class Scatter(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2378,7 +2601,7 @@ class Scatter(_BaseTraceType):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2452,8 +2675,8 @@ class Scatter(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2497,13 +2720,14 @@ class Scatter(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -2514,6 +2738,7 @@ class Scatter(_BaseTraceType):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -2525,15 +2750,18 @@ class Scatter(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -2571,11 +2799,11 @@ class Scatter(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Scatter object
-        
+
         The scatter trace type encompasses line charts, scatter charts,
         text charts, and bubble charts. The data visualized as scatter
         point or lines is set in `x` and `y`. Text (appearing either on
@@ -2588,6 +2816,11 @@ class Scatter(_BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Scatter`
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -2604,7 +2837,7 @@ class Scatter(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2642,6 +2875,8 @@ class Scatter(_BaseTraceType):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -2660,7 +2895,7 @@ class Scatter(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter.Hoverlabel`
             instance or dict with compatible properties
@@ -2700,7 +2935,7 @@ class Scatter(_BaseTraceType):
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2710,14 +2945,20 @@ class Scatter(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2733,6 +2974,9 @@ class Scatter(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -2754,7 +2998,7 @@ class Scatter(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -2765,15 +3009,21 @@ class Scatter(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -2829,10 +3079,10 @@ class Scatter(_BaseTraceType):
             to the (x,y) coordinates.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2851,7 +3101,7 @@ class Scatter(_BaseTraceType):
             are available.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2925,8 +3175,8 @@ class Scatter(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2970,8 +3220,8 @@ class Scatter(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------
@@ -2994,8 +3244,8 @@ class Scatter(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Scatter 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Scatter
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Scatter`"""
             )
 
@@ -3006,6 +3256,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("alignmentgroup", None)
+        _v = alignmentgroup if alignmentgroup is not None else _v
+        if _v is not None:
+            self["alignmentgroup"] = _v
         _v = arg.pop("cliponaxis", None)
         _v = cliponaxis if cliponaxis is not None else _v
         if _v is not None:
@@ -3046,6 +3300,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = fillcolor if fillcolor is not None else _v
         if _v is not None:
             self["fillcolor"] = _v
+        _v = arg.pop("fillpattern", None)
+        _v = fillpattern if fillpattern is not None else _v
+        if _v is not None:
+            self["fillpattern"] = _v
         _v = arg.pop("groupnorm", None)
         _v = groupnorm if groupnorm is not None else _v
         if _v is not None:
@@ -3090,6 +3348,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -3102,6 +3364,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
@@ -3126,6 +3392,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = name if name is not None else _v
         if _v is not None:
             self["name"] = _v
+        _v = arg.pop("offsetgroup", None)
+        _v = offsetgroup if offsetgroup is not None else _v
+        if _v is not None:
+            self["offsetgroup"] = _v
         _v = arg.pop("opacity", None)
         _v = opacity if opacity is not None else _v
         if _v is not None:

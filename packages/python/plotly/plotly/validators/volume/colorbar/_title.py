@@ -16,8 +16,10 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 deprecated `titlefont` attribute.
             side
                 Determines the location of color bar's title
-                with respect to the color bar. Note that the
-                title's location used to be set by the now
+                with respect to the color bar. Defaults to
+                "top" when `orientation` if "v" and  defaults
+                to "right" when `orientation` if "h". Note that
+                the title's location used to be set by the now
                 deprecated `titleside` attribute.
             text
                 Sets the title of the color bar. Note that
@@ -27,5 +29,5 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 been deprecated.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -17,7 +17,7 @@ class Tiling(_BaseTraceHierarchyType):
         """
         Determines if the positions obtained from solver are flipped on
         each axis.
-    
+
         The 'flip' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y'] joined with '+' characters
@@ -46,7 +46,7 @@ class Tiling(_BaseTraceHierarchyType):
         `tiling.orientation` is "h" and `tiling.flip` is "", the root
         nodes appear at the left. If `tiling.orientation` is "h" and
         `tiling.flip` is "x", the root nodes appear at the right.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -67,7 +67,7 @@ class Tiling(_BaseTraceHierarchyType):
     def pad(self):
         """
         Sets the inner padding (in px).
-    
+
         The 'pad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -107,7 +107,7 @@ class Tiling(_BaseTraceHierarchyType):
     def __init__(self, arg=None, flip=None, orientation=None, pad=None, **kwargs):
         """
         Construct a new Tiling object
-        
+
         Parameters
         ----------
         arg
@@ -151,8 +151,8 @@ class Tiling(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.icicle.Tiling 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.icicle.Tiling
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.icicle.Tiling`"""
             )
 

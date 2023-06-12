@@ -16,7 +16,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the color of the `line` around each `node`.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -75,8 +75,8 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
-    
+        Sets the source reference on Chart Studio Cloud for `color`.
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -96,7 +96,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width (in px) of the `line` around each `node`.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -116,8 +116,8 @@ class Line(_BaseTraceHierarchyType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  width .
-    
+        Sets the source reference on Chart Studio Cloud for `width`.
+
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -140,13 +140,13 @@ class Line(_BaseTraceHierarchyType):
             Sets the color of the `line` around each `node`.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         width
             Sets the width (in px) of the `line` around each
             `node`.
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         """
 
     def __init__(
@@ -154,7 +154,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -165,13 +165,13 @@ class Line(_BaseTraceHierarchyType):
             Sets the color of the `line` around each `node`.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         width
             Sets the width (in px) of the `line` around each
             `node`.
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
 
         Returns
         -------
@@ -194,8 +194,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.node.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.node.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.node.Line`"""
             )
 

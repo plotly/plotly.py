@@ -17,5 +17,5 @@ class RootValidator(_plotly_utils.basevalidators.CompoundValidator):
                 markers.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

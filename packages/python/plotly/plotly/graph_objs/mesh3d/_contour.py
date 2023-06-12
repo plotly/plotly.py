@@ -16,7 +16,7 @@ class Contour(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the color of the contour lines.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -75,7 +75,7 @@ class Contour(_BaseTraceHierarchyType):
     def show(self):
         """
         Sets whether or not dynamic contours are shown on hover
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -95,7 +95,7 @@ class Contour(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width of the contour lines.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [1, 16]
 
@@ -125,7 +125,7 @@ class Contour(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, show=None, width=None, **kwargs):
         """
         Construct a new Contour object
-        
+
         Parameters
         ----------
         arg
@@ -160,8 +160,8 @@ class Contour(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.mesh3d.Contour 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.mesh3d.Contour
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.mesh3d.Contour`"""
             )
 

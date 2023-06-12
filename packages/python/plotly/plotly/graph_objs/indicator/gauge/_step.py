@@ -16,7 +16,7 @@ class Step(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the background color of the arc.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Step(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.step.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the line enclosing each
                     sector.
@@ -111,7 +111,7 @@ class Step(_BaseTraceHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -131,19 +131,19 @@ class Step(_BaseTraceHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            Sets the range of this axis.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -164,7 +164,7 @@ class Step(_BaseTraceHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -186,7 +186,7 @@ class Step(_BaseTraceHierarchyType):
         """
         Sets the thickness of the bar as a fraction of the total
         thickness of the gauge.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -245,11 +245,11 @@ class Step(_BaseTraceHierarchyType):
         range=None,
         templateitemname=None,
         thickness=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Step object
-        
+
         Parameters
         ----------
         arg
@@ -307,8 +307,8 @@ class Step(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.Step 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.gauge.Step
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.gauge.Step`"""
             )
 

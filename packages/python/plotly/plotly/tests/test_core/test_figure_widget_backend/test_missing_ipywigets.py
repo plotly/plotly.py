@@ -6,9 +6,9 @@ from plotly.missing_ipywidgets import FigureWidget as FigureWidgetMissingIPywidg
 
 try:
     import ipywidgets as _ipywidgets
-    from distutils.version import LooseVersion as _LooseVersion
+    from packaging.version import Version as _Version
 
-    if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
+    if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
         missing_ipywidgets = False
     else:
         raise ImportError()
@@ -24,7 +24,6 @@ if missing_ipywidgets:
         with pytest.raises(ImportError):
             # ipywidgets import error raised on construction, not import
             FigureWidget()
-
 
 else:
 

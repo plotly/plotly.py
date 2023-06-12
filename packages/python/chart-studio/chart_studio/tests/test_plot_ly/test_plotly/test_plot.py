@@ -7,8 +7,9 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
+import urllib
+
 import requests
-import six
 import sys
 import json as _json
 import warnings
@@ -72,9 +73,7 @@ class TestPlot(PlotlyTestCase):
 
         kwargs = {"filename": "invalid-sharing-argument", "sharing": "privste"}
 
-        with self.assertRaisesRegexp(
-            PlotlyError, "The 'sharing' argument only accepts"
-        ):
+        with self.assertRaisesRegex(PlotlyError, "The 'sharing' argument only accepts"):
             py.plot(self.simple_figure, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_1(self):
@@ -87,7 +86,7 @@ class TestPlot(PlotlyTestCase):
             "sharing": "public",
         }
 
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             PlotlyError, "setting your plot privacy to both public and private."
         ):
             py.plot(self.simple_figure, **kwargs)
@@ -102,7 +101,7 @@ class TestPlot(PlotlyTestCase):
             "sharing": "secret",
         }
 
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             PlotlyError, "setting your plot privacy to both public and private."
         ):
             py.plot(self.simple_figure, **kwargs)
@@ -211,8 +210,8 @@ class TestPlot(PlotlyTestCase):
         self.assertEqual(private_plot_response.status_code, 404)
 
         secret_plot_url = py.add_share_key_to_url(private_plot_url)
-        urlsplit = six.moves.urllib.parse.urlparse(secret_plot_url)
-        secret_plot_json_file = six.moves.urllib.parse.urljoin(
+        urlsplit = urllib.parse.urlparse(secret_plot_url)
+        secret_plot_json_file = urllib.parse.urljoin(
             urlsplit.geturl(), "?.json" + urlsplit.query
         )
         secret_plot_response = requests.get(secret_plot_json_file)
@@ -319,7 +318,7 @@ generate_conflicting_plot_options_in_tools_dot_set_config()
 
 
 def generate_conflicting_plot_options_with_json_writes_of_config():
-    """ if the user wrote their own options in the config file,
+    """if the user wrote their own options in the config file,
     then we'll raise the error when the call plot or iplot through
     _plot_option_logic
     """
@@ -346,7 +345,7 @@ generate_conflicting_plot_options_with_json_writes_of_config()
 
 
 def generate_private_sharing_and_public_world_readable_precedence():
-    """ Test that call signature arguments applied through _plot_option_logic
+    """Test that call signature arguments applied through _plot_option_logic
     overwrite options supplied through py.sign_in which overwrite options
     set through tls.set_config
     """

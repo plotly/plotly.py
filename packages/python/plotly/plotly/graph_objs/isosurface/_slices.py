@@ -20,9 +20,9 @@ class Slices(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.isosurface.slices.X`
           - A dict of string/value properties that will be passed
             to the X constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `slices`. The
                     default fill value of the `slices` is 1 meaning
@@ -37,7 +37,7 @@ class Slices(_BaseTraceHierarchyType):
                     start and end.
                 locationssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  locations .
+                    for `locations`.
                 show
                     Determines whether or not slice planes about
                     the x dimension are drawn.
@@ -62,9 +62,9 @@ class Slices(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.isosurface.slices.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `slices`. The
                     default fill value of the `slices` is 1 meaning
@@ -79,7 +79,7 @@ class Slices(_BaseTraceHierarchyType):
                     start and end.
                 locationssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  locations .
+                    for `locations`.
                 show
                     Determines whether or not slice planes about
                     the y dimension are drawn.
@@ -104,9 +104,9 @@ class Slices(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.isosurface.slices.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `slices`. The
                     default fill value of the `slices` is 1 meaning
@@ -121,7 +121,7 @@ class Slices(_BaseTraceHierarchyType):
                     start and end.
                 locationssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  locations .
+                    for `locations`.
                 show
                     Determines whether or not slice planes about
                     the z dimension are drawn.
@@ -155,7 +155,7 @@ class Slices(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Slices object
-        
+
         Parameters
         ----------
         arg
@@ -193,8 +193,8 @@ class Slices(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.isosurface.Slices 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.isosurface.Slices
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.isosurface.Slices`"""
             )
 

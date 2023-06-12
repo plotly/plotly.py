@@ -21,10 +21,10 @@ class Error_XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 relative to the underlying data.
             arrayminussrc
                 Sets the source reference on Chart Studio Cloud
-                for  arrayminus .
+                for `arrayminus`.
             arraysrc
                 Sets the source reference on Chart Studio Cloud
-                for  array .
+                for `array`.
             color
                 Sets the stoke color of the error bars.
             copy_zstyle
@@ -69,5 +69,5 @@ class Error_XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ends of the error bars.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

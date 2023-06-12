@@ -9,5 +9,5 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             implied_edits=kwargs.pop("implied_edits", {}),
             values=kwargs.pop("values", ["auto", "linear", "array"]),
-            **kwargs
+            **kwargs,
         )

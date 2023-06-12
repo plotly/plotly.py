@@ -18,7 +18,7 @@ class Increasing(_BaseTraceHierarchyType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -81,9 +81,9 @@ class Increasing(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.candlestick.increasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of line bounding the box(es).
                 width
@@ -117,7 +117,7 @@ class Increasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
         """
         Construct a new Increasing object
-        
+
         Parameters
         ----------
         arg
@@ -153,8 +153,8 @@ class Increasing(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.candlestick.Increasing 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.candlestick.Increasing
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.candlestick.Increasing`"""
             )
 

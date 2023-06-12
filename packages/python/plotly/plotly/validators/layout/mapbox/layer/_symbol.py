@@ -42,5 +42,5 @@ class SymbolValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respects to the (x,y) coordinates.
 """,
             ),
-            **kwargs
+            **kwargs,
         )
