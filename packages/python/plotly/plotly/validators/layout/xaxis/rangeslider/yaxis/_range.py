@@ -6,7 +6,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         self,
         plotly_name="range",
         parent_name="layout.xaxis.rangeslider.yaxis",
-        **kwargs
+        **kwargs,
     ):
         super(RangeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -19,5 +19,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "plot", "valType": "any"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

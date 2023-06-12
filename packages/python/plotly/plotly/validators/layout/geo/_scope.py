@@ -19,5 +19,5 @@ class ScopeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "world",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

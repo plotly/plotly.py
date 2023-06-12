@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -66,6 +67,7 @@ if sys.version_info < (3, 7):
     from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
+    from ._scattersmith import Scattersmith
     from ._scatterternary import Scatterternary
     from ._splom import Splom
     from ._streamtube import Streamtube
@@ -114,6 +116,7 @@ if sys.version_info < (3, 7):
     from . import scattermapbox
     from . import scatterpolar
     from . import scatterpolargl
+    from . import scattersmith
     from . import scatterternary
     from . import splom
     from . import streamtube
@@ -168,6 +171,7 @@ else:
             ".scattermapbox",
             ".scatterpolar",
             ".scatterpolargl",
+            ".scattersmith",
             ".scatterternary",
             ".splom",
             ".streamtube",
@@ -245,6 +249,7 @@ else:
             "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",
+            "._scattersmith.Scattersmith",
             "._scatterternary.Scatterternary",
             "._splom.Splom",
             "._streamtube.Streamtube",
@@ -259,12 +264,12 @@ else:
     )
 
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
-        from distutils.version import LooseVersion as _LooseVersion
+        from packaging.version import Version as _Version
 
-        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
+        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
         else:
             raise ImportError()
@@ -278,9 +283,9 @@ else:
         if import_name == "FigureWidget":
             try:
                 import ipywidgets
-                from distutils.version import LooseVersion
+                from packaging.version import Version
 
-                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+                if Version(ipywidgets.__version__) >= Version("7.0.0"):
                     from ..graph_objs._figurewidget import FigureWidget
 
                     return FigureWidget

@@ -16,7 +16,7 @@ class Bar(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the background color of the arc.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Bar(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.bar.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the line enclosing each
                     sector.
@@ -106,7 +106,7 @@ class Bar(_BaseTraceHierarchyType):
         """
         Sets the thickness of the bar as a fraction of the total
         thickness of the gauge.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -138,7 +138,7 @@ class Bar(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, line=None, thickness=None, **kwargs):
         """
         Construct a new Bar object
-        
+
         Set the appearance of the gauge's value
 
         Parameters
@@ -177,8 +177,8 @@ class Bar(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.Bar 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.gauge.Bar
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.gauge.Bar`"""
             )
 

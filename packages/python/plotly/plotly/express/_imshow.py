@@ -50,7 +50,7 @@ def _infer_zmax_from_type(img):
         elif im_max <= 65535 * rtol:
             return 65535
         else:
-            return 2 ** 32
+            return 2**32
 
 
 def imshow(
@@ -79,7 +79,8 @@ def imshow(
     binary_backend="auto",
     binary_compression_level=4,
     binary_format="png",
-):
+    text_auto=False,
+) -> go.Figure:
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -207,6 +208,10 @@ def imshow(
         compression format used to generate b64 string. 'png' is recommended
         since it uses lossless compression, but 'jpg' (lossy) compression can
         result if smaller binary strings for natural images.
+
+    text_auto: bool or str (default `False`)
+        If `True` or a string, single-channel `img` values will be displayed as text.
+        A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.
 
     Returns
     -------
@@ -346,7 +351,7 @@ def imshow(
         binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
-    if img.dtype == np.bool:
+    if img.dtype == bool:
         img = 255 * img.astype(np.uint8)
 
     if range_color is not None:
@@ -385,8 +390,22 @@ def imshow(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
+
+        texttemplate = None
+        if text_auto is True:
+            texttemplate = "%{z}"
+        elif text_auto is not False:
+            texttemplate = "%{z:" + text_auto + "}"
+
         traces = [
-            go.Heatmap(x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i))
+            go.Heatmap(
+                x=x,
+                y=y,
+                z=img[index_tup],
+                coloraxis="coloraxis1",
+                name=str(i),
+                texttemplate=texttemplate,
+            )
             for i, index_tup in enumerate(itertools.product(*iterables))
         ]
         autorange = True if origin == "lower" else "reversed"
@@ -510,8 +529,8 @@ def imshow(
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
-            "An image of shape %s was provided."
-            "Alternatively, 3- or 4-D single or multichannel datasets can be"
+            "An image of shape %s was provided. "
+            "Alternatively, 3- or 4-D single or multichannel datasets can be "
             "visualized using the `facet_col` or/and `animation_frame` arguments."
             % str(img.shape)
         )

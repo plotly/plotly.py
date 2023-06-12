@@ -15,5 +15,5 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 r` instance or dict with compatible properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

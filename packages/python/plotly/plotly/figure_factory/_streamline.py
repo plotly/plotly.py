@@ -158,7 +158,7 @@ class _Streamline(object):
         # Rescale speed onto axes-coordinates
         self.u = self.u / (self.x[-1] - self.x[0])
         self.v = self.v / (self.y[-1] - self.y[0])
-        self.speed = np.sqrt(self.u ** 2 + self.v ** 2)
+        self.speed = np.sqrt(self.u**2 + self.v**2)
 
         # Rescale u and v for integrations.
         self.u *= len(self.x)
@@ -180,11 +180,11 @@ class _Streamline(object):
         Set up for RK4 function, based on Bokeh's streamline code
         """
         if isinstance(xi, np.ndarray):
-            self.x = xi.astype(np.int)
-            self.y = yi.astype(np.int)
+            self.x = xi.astype(int)
+            self.y = yi.astype(int)
         else:
-            self.val_x = np.int(xi)
-            self.val_y = np.int(yi)
+            self.val_x = int(xi)
+            self.val_y = int(yi)
         a00 = a[self.val_y, self.val_x]
         a01 = a[self.val_y, self.val_x + 1]
         a10 = a[self.val_y + 1, self.val_x]
@@ -381,15 +381,13 @@ class _Streamline(object):
         space = np.empty((len(point1_x)))
         space[:] = np.nan
 
-        # Combine arrays into matrix
-        arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
-        arrows_x = np.array(arrows_x)
+        # Combine arrays into array
+        arrows_x = np.array([point1_x, arrow_end_x, point2_x, space])
         arrows_x = arrows_x.flatten("F")
         arrows_x = arrows_x.tolist()
 
-        # Combine arrays into matrix
-        arrows_y = np.matrix([point1_y, arrow_end_y, point2_y, space])
-        arrows_y = np.array(arrows_y)
+        # Combine arrays into array
+        arrows_y = np.array([point1_y, arrow_end_y, point2_y, space])
         arrows_y = arrows_y.flatten("F")
         arrows_y = arrows_y.tolist()
 

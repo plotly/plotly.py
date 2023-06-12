@@ -44,5 +44,5 @@ class StepsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 the total thickness of the gauge.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

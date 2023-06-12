@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.8
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -40,7 +40,7 @@ jupyter:
 In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
 
-Alternatives to violin plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to histogram plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
 
 > If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](/python/bar-charts/).
@@ -109,9 +109,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'histograms', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'histograms', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Accessing the counts (y-axis) values
 
@@ -205,6 +209,19 @@ import plotly.express as px
 df = px.data.tips()
 fig = px.histogram(df, x="total_bill", color="sex", marginal="rug", # can be `box`, `violin`
                          hover_data=df.columns)
+fig.show()
+```
+
+### Adding text labels
+
+*New in v5.5*
+
+You can add text to histogram bars using the `text_auto` argument. Setting it to `True` will display the values on the bars, and setting it to a `d3-format` formatting string will control the output format.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", histfunc="avg", nbins=8, text_auto=True)
 fig.show()
 ```
 
@@ -336,6 +353,21 @@ fig.update_layout(
     bargap=0.2, # gap between bars of adjacent location coordinates
     bargroupgap=0.1 # gap between bars of the same location coordinates
 )
+
+fig.show()
+```
+
+### Histogram Bar Text
+
+You can add text to histogram bars using the `texttemplate` argument. In this example we add the x-axis values as text following the format `%{variable}`. We also adjust the size of the text using `textfont_size`.
+
+```python
+import plotly.graph_objects as go
+
+numbers = ["5", "10", "3", "10", "5", "8", "5", "5"]
+
+fig = go.Figure()
+fig.add_trace(go.Histogram(x=numbers, name="count", texttemplate="%{x}", textfont_size=20))
 
 fig.show()
 ```

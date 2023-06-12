@@ -14,5 +14,5 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundArrayValidato
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

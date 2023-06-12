@@ -1,8 +1,10 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._error_x import ErrorX
     from ._error_y import ErrorY
+    from ._fillpattern import Fillpattern
     from ._hoverlabel import Hoverlabel
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
@@ -25,6 +27,7 @@ else:
         [
             "._error_x.ErrorX",
             "._error_y.ErrorY",
+            "._fillpattern.Fillpattern",
             "._hoverlabel.Hoverlabel",
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",

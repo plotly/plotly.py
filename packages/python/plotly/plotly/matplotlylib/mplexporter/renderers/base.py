@@ -1,7 +1,7 @@
 import warnings
 import itertools
 from contextlib import contextmanager
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 import numpy as np
 import matplotlib as mpl
@@ -199,7 +199,7 @@ class Renderer(object):
 
         # Before mpl 1.4.0, path_transform can be a false-y value, not a valid
         # transformation matrix.
-        if LooseVersion(mpl.__version__) < LooseVersion("1.4.0"):
+        if Version(mpl.__version__) < Version("1.4.0"):
             if path_transforms is None:
                 path_transforms = [np.eye(3)]
 

@@ -86,7 +86,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     f = 51515
     singlerow = pd.DataFrame(
@@ -103,7 +103,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     f = 2270
     singlerow = pd.DataFrame(
@@ -120,19 +120,19 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     row_2198 = gdf[gdf["FIPS"] == 2198]
     row_2198.index = [max(gdf.index) + 1]
     row_2198.loc[row_2198.index[0], "FIPS"] = 2201
     row_2198.loc[row_2198.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2198, sort=True)
+    gdf = pd.concat([gdf, row_2198], sort=True)
 
     row_2105 = gdf[gdf["FIPS"] == 2105]
     row_2105.index = [max(gdf.index) + 1]
     row_2105.loc[row_2105.index[0], "FIPS"] = 2232
     row_2105.loc[row_2105.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2105, sort=True)
+    gdf = pd.concat([gdf, row_2105], sort=True)
     gdf = gdf.rename(columns={"NAME": "COUNTY_NAME"})
 
     gdf_reduced = gdf[["FIPS", "STATEFP", "COUNTY_NAME", "geometry"]]
@@ -267,7 +267,7 @@ def _human_format(number):
     units = ["", "K", "M", "G", "T", "P"]
     k = 1000.0
     magnitude = int(floor(log(number, k)))
-    return "%.2f%s" % (number / k ** magnitude, units[magnitude])
+    return "%.2f%s" % (number / k**magnitude, units[magnitude])
 
 
 def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_format):
@@ -411,9 +411,14 @@ def create_choropleth(
     round_legend_values=False,
     exponent_format=False,
     legend_title="",
-    **layout_options
+    **layout_options,
 ):
     """
+    **deprecated**, use instead
+    :func:`plotly.express.choropleth` with custom GeoJSON.
+
+    This function also requires `shapely`, `geopandas` and `plotly-geo` to be installed.
+
     Returns figure for county choropleth. Uses data from package_data.
 
     :param (list) fips: list of FIPS values which correspond to the con

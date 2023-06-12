@@ -17,7 +17,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 `categoryorder`.
             categoryarraysrc
                 Sets the source reference on Chart Studio Cloud
-                for  categoryarray .
+                for `categoryarray`.
             categoryorder
                 Specifies the ordering logic for the categories
                 in the dimension. By default, plotly uses
@@ -47,7 +47,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 with `categoryorder`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             values
                 Dimension values. `values[n]` represents the
                 category value of the `n`th point in the
@@ -56,11 +56,11 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 will be truncated).
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

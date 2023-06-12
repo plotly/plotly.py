@@ -16,7 +16,7 @@ class Box(_BaseTraceHierarchyType):
     def fillcolor(self):
         """
         Sets the inner box plot fill color.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Box(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.violin.box.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the inner box plot bounding line color.
                 width
@@ -104,7 +104,7 @@ class Box(_BaseTraceHierarchyType):
         """
         Determines if an miniature box plot is drawn inside the
         violins.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -126,7 +126,7 @@ class Box(_BaseTraceHierarchyType):
         Sets the width of the inner box plots relative to the violins'
         width. For example, with 1, the inner box plots are as wide as
         the violins.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -164,7 +164,7 @@ class Box(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Box object
-        
+
         Parameters
         ----------
         arg
@@ -204,8 +204,8 @@ class Box(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.violin.Box 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.violin.Box
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.violin.Box`"""
             )
 

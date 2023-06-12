@@ -17,5 +17,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 box(es).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

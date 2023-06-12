@@ -17,7 +17,7 @@ class Line(_BaseLayoutHierarchyType):
         """
         Sets the length of dashes and gaps (mapbox.layer.paint.line-
         dasharray). Has an effect only when `type` is set to "line".
-    
+
         The 'dash' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -36,8 +36,8 @@ class Line(_BaseLayoutHierarchyType):
     @property
     def dashsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  dash .
-    
+        Sets the source reference on Chart Studio Cloud for `dash`.
+
         The 'dashsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -58,7 +58,7 @@ class Line(_BaseLayoutHierarchyType):
         """
         Sets the line width (mapbox.layer.paint.line-width). Has an
         effect only when `type` is set to "line".
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float
 
@@ -83,7 +83,7 @@ class Line(_BaseLayoutHierarchyType):
             when `type` is set to "line".
         dashsrc
             Sets the source reference on Chart Studio Cloud for
-            dash .
+            `dash`.
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".
@@ -92,7 +92,7 @@ class Line(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, dash=None, dashsrc=None, width=None, **kwargs):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -105,7 +105,7 @@ class Line(_BaseLayoutHierarchyType):
             when `type` is set to "line".
         dashsrc
             Sets the source reference on Chart Studio Cloud for
-            dash .
+            `dash`.
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".
@@ -131,8 +131,8 @@ class Line(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.mapbox.layer.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Line`"""
             )
 

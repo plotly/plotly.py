@@ -33,7 +33,7 @@ def create_table(
     annotation_offset=0.45,
     height_constant=30,
     hoverinfo="none",
-    **kwargs
+    **kwargs,
 ):
     """
     Function that creates data tables.
@@ -118,7 +118,7 @@ def create_table(
         index,
         index_title,
         annotation_offset,
-        **kwargs
+        **kwargs,
     ).get_table_matrix()
     annotations = _Table(
         table_text,
@@ -127,7 +127,7 @@ def create_table(
         index,
         index_title,
         annotation_offset,
-        **kwargs
+        **kwargs,
     ).make_table_annotations()
 
     trace = dict(
@@ -137,7 +137,7 @@ def create_table(
         colorscale=colorscale,
         showscale=False,
         hoverinfo=hoverinfo,
-        **kwargs
+        **kwargs,
     )
 
     data = [trace]
@@ -179,7 +179,7 @@ class _Table(object):
         index,
         index_title,
         annotation_offset,
-        **kwargs
+        **kwargs,
     ):
         if pd and isinstance(table_text, pd.DataFrame):
             headers = table_text.columns.tolist()

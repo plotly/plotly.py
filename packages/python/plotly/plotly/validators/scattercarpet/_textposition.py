@@ -24,5 +24,5 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "bottom right",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

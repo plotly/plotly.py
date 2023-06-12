@@ -17,7 +17,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the color of the contour level. Has no effect if
         `contours.coloring` is set to "lines".
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,7 +79,7 @@ class Line(_BaseTraceHierarchyType):
         ("solid", "dot", "dash", "longdash", "dashdot", or
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following dash styles:
                 ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
@@ -103,7 +103,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the amount of smoothing for the contour lines, where 0
         corresponds to no smoothing.
-    
+
         The 'smoothing' property is a number and may be specified as:
           - An int or float in the interval [0, 1.3]
 
@@ -125,7 +125,7 @@ class Line(_BaseTraceHierarchyType):
         Sets the contour line width in (in px) Defaults to 0.5 when
         `contours.type` is "levels". Defaults to 2 when `contour.type`
         is "constraint".
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -166,7 +166,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -209,8 +209,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.contour.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.contour.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.contour.Line`"""
             )
 

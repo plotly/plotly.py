@@ -16,7 +16,7 @@ class Rotation(_BaseLayoutHierarchyType):
     def lat(self):
         """
         Rotates the map along meridians (in degrees North).
-    
+
         The 'lat' property is a number and may be specified as:
           - An int or float
 
@@ -37,7 +37,7 @@ class Rotation(_BaseLayoutHierarchyType):
         """
         Rotates the map along parallels (in degrees East). Defaults to
         the center of the `lonaxis.range` values.
-    
+
         The 'lon' property is a number and may be specified as:
           - An int or float
 
@@ -58,7 +58,7 @@ class Rotation(_BaseLayoutHierarchyType):
         """
         Roll the map (in degrees) For example, a roll of 180 makes the
         map appear upside down.
-    
+
         The 'roll' property is a number and may be specified as:
           - An int or float
 
@@ -90,7 +90,7 @@ class Rotation(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, lat=None, lon=None, roll=None, **kwargs):
         """
         Construct a new Rotation object
-        
+
         Parameters
         ----------
         arg
@@ -127,8 +127,8 @@ class Rotation(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.geo.projection.Rotation 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.geo.projection.Rotation
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`"""
             )
 

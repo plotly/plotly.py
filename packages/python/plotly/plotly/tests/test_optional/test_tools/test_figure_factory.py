@@ -165,17 +165,17 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "close": [1, 2],
             "direction": ["inc"],
         }
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
-            **kwargs
+            **kwargs,
         )
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
-            **kwargs
+            **kwargs,
         )
 
         kwargs = {
@@ -185,17 +185,17 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "close": [1, 2],
             "direction": ["d"],
         }
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
-            **kwargs
+            **kwargs,
         )
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
-            **kwargs
+            **kwargs,
         )
 
     def test_high_highest_value(self):
@@ -205,7 +205,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         # highest (or equal) then the data may have been entered incorrectly.
 
         kwargs = {"open": [2, 3], "high": [4, 2], "low": [1, 1], "close": [1, 2]}
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "Oops! Looks like some of "
             "your high values are less "
@@ -214,9 +214,9 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_ohlc,
-            **kwargs
+            **kwargs,
         )
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "Oops! Looks like some of "
             "your high values are less "
@@ -225,7 +225,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_candlestick,
-            **kwargs
+            **kwargs,
         )
 
     def test_low_lowest_value(self):
@@ -237,7 +237,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         # create_ohlc_increase
         kwargs = {"open": [2, 3], "high": [4, 6], "low": [3, 1], "close": [1, 2]}
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "Oops! Looks like some of "
             "your low values are greater "
@@ -246,9 +246,9 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_ohlc,
-            **kwargs
+            **kwargs,
         )
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             "Oops! Looks like some of "
             "your low values are greater "
@@ -257,7 +257,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_candlestick,
-            **kwargs
+            **kwargs,
         )
 
     def test_one_ohlc(self):
@@ -1575,7 +1575,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "dictionaries is being used."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_gantt, df, index_col="foo"
         )
 
@@ -1583,19 +1583,19 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         pattern3 = "You must input either a dataframe or a list of " "dictionaries."
 
-        self.assertRaisesRegexp(PlotlyError, pattern3, ff.create_gantt, df)
+        self.assertRaisesRegex(PlotlyError, pattern3, ff.create_gantt, df)
 
         df = []
 
         pattern4 = "Your list is empty. It must contain at least one " "dictionary."
 
-        self.assertRaisesRegexp(PlotlyError, pattern4, ff.create_gantt, df)
+        self.assertRaisesRegex(PlotlyError, pattern4, ff.create_gantt, df)
 
         df = ["foo"]
 
         pattern5 = "Your list must only include dictionaries."
 
-        self.assertRaisesRegexp(PlotlyError, pattern5, ff.create_gantt, df)
+        self.assertRaisesRegex(PlotlyError, pattern5, ff.create_gantt, df)
 
     def test_gantt_index(self):
 
@@ -1617,7 +1617,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "dictionaries is being used."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_gantt, df, index_col="foo"
         )
 
@@ -1641,7 +1641,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "column are all numbers or all strings."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_gantt, df, index_col="Complete"
         )
 
@@ -1670,7 +1670,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             ff.create_gantt,
@@ -1685,7 +1685,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         pattern2 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             ff.create_gantt,
@@ -1703,7 +1703,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "keys must be all the values in the index column."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern3,
             ff.create_gantt,
@@ -1721,7 +1721,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "assigning colors to particular values in a dictionary."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern4, ff.create_gantt, df, colors=colors_dict_good
         )
 
@@ -1733,7 +1733,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "column."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern5,
             ff.create_gantt,
@@ -1750,7 +1750,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "bounds on the colormap."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern6,
             ff.create_gantt,
@@ -2138,7 +2138,7 @@ class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         pattern = "All elements of your 'x' and 'y' lists must be numbers."
 
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_2d_density, x, y)
+        self.assertRaisesRegex(PlotlyError, pattern, ff.create_2d_density, x, y)
 
         # validate that x and y are the same length
         x2 = [1]
@@ -2146,7 +2146,7 @@ class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         pattern2 = "Both lists 'x' and 'y' must be the same length."
 
-        self.assertRaisesRegexp(PlotlyError, pattern2, ff.create_2d_density, x2, y2)
+        self.assertRaisesRegex(PlotlyError, pattern2, ff.create_2d_density, x2, y2)
 
     def test_2D_density_all_args(self):
 

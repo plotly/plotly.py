@@ -16,7 +16,7 @@ class Transition(_BaseLayoutHierarchyType):
     def duration(self):
         """
         Sets the duration of the slider transition
-    
+
         The 'duration' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -36,7 +36,7 @@ class Transition(_BaseLayoutHierarchyType):
     def easing(self):
         """
         Sets the easing function of the slider transition
-    
+
         The 'easing' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'quad', 'cubic', 'sin', 'exp', 'circle',
@@ -73,7 +73,7 @@ class Transition(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, duration=None, easing=None, **kwargs):
         """
         Construct a new Transition object
-        
+
         Parameters
         ----------
         arg
@@ -106,8 +106,8 @@ class Transition(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.slider.Transition 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.slider.Transition
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.slider.Transition`"""
             )
 

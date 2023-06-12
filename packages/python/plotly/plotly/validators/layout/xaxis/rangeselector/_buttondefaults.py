@@ -6,7 +6,7 @@ class ButtondefaultsValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="buttondefaults",
         parent_name="layout.xaxis.rangeselector",
-        **kwargs
+        **kwargs,
     ):
         super(ButtondefaultsValidator, self).__init__(
             plotly_name=plotly_name,
@@ -17,5 +17,5 @@ class ButtondefaultsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

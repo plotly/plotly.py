@@ -6,7 +6,7 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="categoryorder",
         parent_name="layout.polar.radialaxis",
-        **kwargs
+        **kwargs,
     ):
         super(CategoryorderValidator, self).__init__(
             plotly_name=plotly_name,
@@ -33,5 +33,5 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "median descending",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

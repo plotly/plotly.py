@@ -36,7 +36,9 @@ if not os.path.exists(labstatic):
 prebuilt_assets = [
     (
         "share/jupyter/labextensions/jupyterlab-plotly",
-        ["jupyterlab_plotly/labextension/package.json",],
+        [
+            "jupyterlab_plotly/labextension/package.json",
+        ],
     ),
     (
         "share/jupyter/labextensions/jupyterlab-plotly/static",
@@ -284,7 +286,7 @@ def get_latest_publish_build_info(repo, branch):
 
     url = (
         r"https://circleci.com/api/v1.1/project/github/"
-        r"{repo}/tree/{branch}?limit=10000\&filter=completed"
+        r"{repo}/tree/{branch}?limit=100&filter=completed"
     ).format(repo=repo, branch=branch)
 
     branch_jobs = request_json(url)
@@ -493,7 +495,6 @@ versioneer_cmds = versioneer.get_cmdclass()
 setup(
     name="plotly",
     version=versioneer.get_version(),
-    use_2to3=False,
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Nicolas Kruchten",
@@ -509,7 +510,10 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: Visualization",
+        "License :: OSI Approved :: MIT License",
     ],
     python_requires=">=3.6",
     license="MIT",
@@ -548,8 +552,10 @@ setup(
             "labextension/static/*",
         ],
     },
-    data_files=[("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),],
-    install_requires=["tenacity>=6.2.0", "six"],
+    data_files=[
+        ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
+    ],
+    install_requires=["tenacity>=6.2.0", "packaging"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),

@@ -1,5 +1,4 @@
 import pytest
-from six import string_types
 
 from _plotly_utils.basevalidators import StringValidator
 import numpy as np
@@ -57,7 +56,7 @@ def validator_no_blanks_aok():
     "val", ["bar", 234, np.nan, "HELLO!!!", "world!@#$%^&*()", "", "\u03BC"]
 )
 def test_acceptance(val, validator):
-    expected = str(val) if not isinstance(val, string_types) else val
+    expected = str(val) if not isinstance(val, str) else val
     assert validator.validate_coerce(val) == expected
 
 

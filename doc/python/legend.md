@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.5
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -99,7 +99,7 @@ fig.show()
 
 *New in v5.0*
 
-The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. 
+The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list.
 
 The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
 
@@ -159,9 +159,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'legend', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'legend', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Horizontal Legends
 
@@ -176,6 +180,31 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
 
 fig.update_layout(legend=dict(
     orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
+fig.show()
+```
+
+#### Horizontal Legend Entry Width
+
+*New in 5.11*
+
+Set the width of horizontal legend entries by setting `entrywidth`. Here we set it to `70` pixels. Pixels is the default unit for `entrywidth`, but you can set it to be a fraction of the plot width using `entrywidthmode='fraction`.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    orientation="h",
+    entrywidth=70,
     yanchor="bottom",
     y=1.02,
     xanchor="right",
@@ -445,6 +474,62 @@ fig.update_layout(title="Try Clicking on the Legend Items!")
 fig.show()
 ```
 
+#### Group click toggle behavior
+
+*New in v5.3*
+
+You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it toggles the visibility of all items in the same group as the item clicked on.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 1, 3],
+    legendgroup="group",  # this can be any string, not just "group"
+    legendgrouptitle_text="First Group Title",
+    name="first legend group",
+    mode="markers",
+    marker=dict(color="Crimson", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 2, 2],
+    legendgroup="group",
+    name="first legend group - average",
+    mode="lines",
+    line=dict(color="Crimson")
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[4, 9, 2],
+    legendgroup="group2",
+    legendgrouptitle_text="Second Group Title",
+    name="second legend group",
+    mode="markers",
+    marker=dict(color="MediumPurple", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[5, 5, 5],
+    legendgroup="group2",
+    name="second legend group - average",
+    mode="lines",
+    line=dict(color="MediumPurple")
+))
+
+fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(legend=dict(groupclick="toggleitem"))
+
+fig.show()
+
+```
+
 ### Legend items for continuous fields (2D and 3D)
 
 Traces corresponding to 2D fields (e.g. `go.Heatmap`, `go.Histogram2d`) or 3D fields (e.g. `go.Isosurface`, `go.Volume`, `go.Cone`) can also appear in the legend. They come with legend icons corresponding to each trace type, which are colored using the same colorscale as the trace.
@@ -487,6 +572,107 @@ fig.add_trace(go.Streamtube(
 fig.update_traces(showlegend=True, showscale=False)
 fig.update_layout(width=600, title_text='Exploration of a vector field using several traces')
 fig.show()
+```
+
+### Adding Multiple Legends
+
+*New in 5.15*
+
+By default, all traces appear on one legend. To have multiple legends, specify an alternative legend for a trace using the `legend` property. For a second legend, set `legend="legend2"`. Specify more legends with `legend="legend3"`, `legend="legend4"` and so on.
+
+In this example, the last two scatter traces display on the second legend, "legend2". On the figure's layout, we then position and style this legend to display on the right of the graph below the first legend.
+
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+df_germany = df.loc[(df.country.isin(["Germany"]))]
+df_france = df.loc[(df.country.isin(["France"]))]
+df_uk = df.loc[(df.country.isin(["United Kingdom"]))]
+
+
+df_averages_europe = (
+    df.loc[(df.continent.isin(["Europe"]))].groupby(by="year").mean(numeric_only=True)
+)
+df_averages_americas = (
+    df.loc[(df.continent.isin(["Americas"]))].groupby(by="year").mean(numeric_only=True)
+)
+
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=df_germany.year, y=df_germany.gdpPercap, name="Germany"),
+        go.Scatter(x=df_france.year, y=df_france.gdpPercap, name="France"),
+        go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
+        go.Scatter(
+            x=df_averages_europe.index,
+            y=df_averages_europe.gdpPercap,
+            name="Europe",
+            legend="legend2",
+        ),
+        go.Scatter(
+            x=df_averages_americas.index,
+            y=df_averages_americas.gdpPercap,
+            name="Americas",
+            legend="legend2",
+        ),
+    ],
+    layout=dict(
+        title="GDP Per Capita",
+        legend={"title": "By country", "bgcolor": "Orange",},
+        legend2={
+            "x": 1.155,
+            "y": 0.55,
+            "xanchor": "right",
+            "yanchor": "middle",
+            "bgcolor": "Gold",
+            "title": {"text": "By continent"},
+        },
+    ),
+)
+
+fig.show()
+
+```
+
+### Positioning Legends
+
+In the previous example, we position the second legend by specifying x and y values. By default, these values are based on the width and height of the plot area. It is also possible to specify values that reference the container width and height by setting "xref=container" and "yref="container" (the default values are "xref=paper" and "yref="paper"). When set to "container", the margin grows so the legend and plot don't overlap.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+df_germany = df.loc[(df.country.isin(["Germany"]))]
+df_france = df.loc[(df.country.isin(["France"]))]
+df_uk = df.loc[(df.country.isin(["United Kingdom"]))]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=df_germany.year, y=df_germany.gdpPercap, name="Germany"),
+        go.Scatter(x=df_france.year, y=df_france.gdpPercap, name="France"),
+        go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
+    ],
+    layout=dict(
+        title="GDP Per Capita",
+        legend={
+            "x": 0.9,
+            "y": 0.9,
+            "xref": "container",
+            "yref": "container",
+            "bgcolor": "Gold",
+            "title": {"text": "By continent"},
+        },
+    ),
+)
+
+fig.show()
+
 ```
 
 #### Reference

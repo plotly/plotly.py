@@ -11,5 +11,5 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             no_blank=kwargs.pop("no_blank", True),
             strict=kwargs.pop("strict", True),
-            **kwargs
+            **kwargs,
         )

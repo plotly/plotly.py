@@ -27,7 +27,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         Determines whether or not the range slider range is computed in
         relation to the input data. If `range` is provided, then
         `autorange` is set to False.
-    
+
         The 'autorange' property must be specified as a bool
         (either True, or False)
 
@@ -47,7 +47,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the range slider.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -106,7 +106,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the border color of the range slider.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -165,7 +165,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def borderwidth(self):
         """
         Sets the border width of the range slider.
-    
+
         The 'borderwidth' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -185,24 +185,24 @@ class Rangeslider(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of the range slider. If not set, defaults to the
-        full xaxis range. If the axis `type` is "log", then you must
-        take the log of your desired range. If the axis `type` is
-        "date", it should be date strings, like date data, though Date
-        objects and unix milliseconds will be accepted and converted to
-        strings. If the axis `type` is "category", it should be
-        numbers, using the scale where each category is assigned a
-        serial number from zero in the order it appears.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            Sets the range of the range slider. If not set, defaults to the
+            full xaxis range. If the axis `type` is "log", then you must
+            take the log of your desired range. If the axis `type` is
+            "date", it should be date strings, like date data, though Date
+            objects and unix milliseconds will be accepted and converted to
+            strings. If the axis `type` is "category", it should be
+            numbers, using the scale where each category is assigned a
+            serial number from zero in the order it appears.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -217,7 +217,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
         The height of the range slider as a fraction of the total plot
         area height.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -238,7 +238,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
         Determines whether or not the range slider will be visible. If
         visible, perpendicular axes will be set to `fixedrange`
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -262,9 +262,9 @@ class Rangeslider(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
-    
+
             Supported dict properties:
-                
+
                 range
                     Sets the range of this axis for the
                     rangeslider.
@@ -335,11 +335,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         thickness=None,
         visible=None,
         yaxis=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Rangeslider object
-        
+
         Parameters
         ----------
         arg
@@ -398,8 +398,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
             )
 

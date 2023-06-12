@@ -65,7 +65,11 @@ Checklist
 
 ### Build process
 
-Run `make` to build html pages for the tutorials. This uses `jupytext` to
+This build process requries a free personal public mapbox token to work.
+
+First, create an account at https://account.mapbox.com/auth/signup Once that is done, navigate to https://account.mapbox.com/ and copy your "Default public token" to the file `doc/python/.mapbox_token`
+
+Next, run `make` to build html pages for the tutorials. This uses `jupytext` to
 execute the notebooks and `nbconvert` to convert notebook files to static html
 pages. Note that the CI will build the doc, so you don't have to build it
 yourself, it is enough to check that the markdown file runs correctly in

@@ -6,7 +6,7 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="tickmode",
         parent_name="scatterpolar.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TickmodeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -14,5 +14,5 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             implied_edits=kwargs.pop("implied_edits", {}),
             values=kwargs.pop("values", ["auto", "linear", "array"]),
-            **kwargs
+            **kwargs,
         )

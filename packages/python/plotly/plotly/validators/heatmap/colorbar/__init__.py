@@ -1,9 +1,12 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._yref import YrefValidator
     from ._ypad import YpadValidator
     from ._yanchor import YanchorValidator
     from ._y import YValidator
+    from ._xref import XrefValidator
     from ._xpad import XpadValidator
     from ._xanchor import XanchorValidator
     from ._x import XValidator
@@ -18,6 +21,7 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
+    from ._ticklabelstep import TicklabelstepValidator
     from ._ticklabelposition import TicklabelpositionValidator
     from ._ticklabeloverflow import TicklabeloverflowValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
@@ -36,10 +40,12 @@ if sys.version_info < (3, 7):
     from ._separatethousands import SeparatethousandsValidator
     from ._outlinewidth import OutlinewidthValidator
     from ._outlinecolor import OutlinecolorValidator
+    from ._orientation import OrientationValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
     from ._lenmode import LenmodeValidator
     from ._len import LenValidator
+    from ._labelalias import LabelaliasValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
     from ._borderwidth import BorderwidthValidator
@@ -52,9 +58,11 @@ else:
         __name__,
         [],
         [
+            "._yref.YrefValidator",
             "._ypad.YpadValidator",
             "._yanchor.YanchorValidator",
             "._y.YValidator",
+            "._xref.XrefValidator",
             "._xpad.XpadValidator",
             "._xanchor.XanchorValidator",
             "._x.XValidator",
@@ -69,6 +77,7 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
+            "._ticklabelstep.TicklabelstepValidator",
             "._ticklabelposition.TicklabelpositionValidator",
             "._ticklabeloverflow.TicklabeloverflowValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
@@ -87,10 +96,12 @@ else:
             "._separatethousands.SeparatethousandsValidator",
             "._outlinewidth.OutlinewidthValidator",
             "._outlinecolor.OutlinecolorValidator",
+            "._orientation.OrientationValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
             "._lenmode.LenmodeValidator",
             "._len.LenValidator",
+            "._labelalias.LabelaliasValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
             "._borderwidth.BorderwidthValidator",

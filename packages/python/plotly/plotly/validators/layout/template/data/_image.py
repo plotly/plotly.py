@@ -14,5 +14,5 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

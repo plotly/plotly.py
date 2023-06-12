@@ -20,9 +20,9 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.X`
           - A dict of string/value properties that will be passed
             to the X constructor
-    
+
             Supported dict properties:
-                
+
                 opacity
                     Sets the projection color.
                 scale
@@ -52,9 +52,9 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
-    
+
             Supported dict properties:
-                
+
                 opacity
                     Sets the projection color.
                 scale
@@ -84,9 +84,9 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
-    
+
             Supported dict properties:
-                
+
                 opacity
                     Sets the projection color.
                 scale
@@ -125,7 +125,7 @@ class Projection(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Projection object
-        
+
         Parameters
         ----------
         arg
@@ -163,8 +163,8 @@ class Projection(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatter3d.Projection 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatter3d.Projection
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatter3d.Projection`"""
             )
 

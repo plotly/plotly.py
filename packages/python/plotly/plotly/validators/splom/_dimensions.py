@@ -41,7 +41,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the dimension values to be plotted.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Determines whether or not this dimension is
                 shown on the graph. Note that even visible
@@ -49,5 +49,5 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 generate by this splom trace.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

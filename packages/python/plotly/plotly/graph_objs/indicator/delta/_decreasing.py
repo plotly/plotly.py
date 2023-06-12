@@ -16,7 +16,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the color for increasing value.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -75,7 +75,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def symbol(self):
         """
         Sets the symbol to display for increasing value
-    
+
         The 'symbol' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -104,7 +104,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, symbol=None, **kwargs):
         """
         Construct a new Decreasing object
-        
+
         Parameters
         ----------
         arg
@@ -137,8 +137,8 @@ class Decreasing(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.delta.Decreasing 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.delta.Decreasing
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`"""
             )
 

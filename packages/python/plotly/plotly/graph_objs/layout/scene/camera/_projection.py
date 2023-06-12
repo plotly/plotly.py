@@ -17,7 +17,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
         Sets the projection type. The projection type could be either
         "perspective" or "orthographic". The default is "perspective".
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['perspective', 'orthographic']
@@ -46,7 +46,7 @@ class Projection(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, type=None, **kwargs):
         """
         Construct a new Projection object
-        
+
         Parameters
         ----------
         arg
@@ -79,8 +79,8 @@ class Projection(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.scene.camera.Projection 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.scene.camera.Projection
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`"""
             )
 

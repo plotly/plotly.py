@@ -21,7 +21,7 @@ class Cumulative(_BaseTraceHierarchyType):
         compatibility with various other tools, however it introduces a
         half-bin bias to the results. "exclude" makes the opposite
         half-bin bias, and "half" removes it.
-    
+
         The 'currentbin' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['include', 'exclude', 'half']
@@ -45,7 +45,7 @@ class Cumulative(_BaseTraceHierarchyType):
         (default) we sum all prior bins, so the result increases from
         left to right. If "decreasing" we sum later bins so the result
         decreases from left to right.
-    
+
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['increasing', 'decreasing']
@@ -72,7 +72,7 @@ class Cumulative(_BaseTraceHierarchyType):
         equivalents without "density": "" and "density" both rise to
         the number of data points, and "probability" and *probability
         density* both rise to the number of sample points.
-    
+
         The 'enabled' property must be specified as a bool
         (either True, or False)
 
@@ -120,7 +120,7 @@ class Cumulative(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Cumulative object
-        
+
         Parameters
         ----------
         arg
@@ -171,8 +171,8 @@ class Cumulative(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram.Cumulative 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram.Cumulative
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram.Cumulative`"""
             )
 

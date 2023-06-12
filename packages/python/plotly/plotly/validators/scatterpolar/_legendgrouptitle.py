@@ -18,5 +18,5 @@ class LegendgrouptitleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the title of the legend group.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

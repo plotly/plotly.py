@@ -38,3 +38,10 @@ def fig1(request):
 
 def test_versioned_cdn_included(fig1):
     assert plotly_cdn_url() in pio.to_html(fig1, include_plotlyjs="cdn")
+
+
+def test_html_deterministic(fig1):
+    div_id = "plotly-root"
+    assert pio.to_html(fig1, include_plotlyjs="cdn", div_id=div_id) == pio.to_html(
+        fig1, include_plotlyjs="cdn", div_id=div_id
+    )

@@ -375,7 +375,7 @@ class Writer:
         planes=None,
         colormap=None,
         maxval=None,
-        chunk_limit=2 ** 20,
+        chunk_limit=2**20,
         x_pixels_per_unit=None,
         y_pixels_per_unit=None,
         unit_is_meter=False,
@@ -544,7 +544,7 @@ class Writer:
         if width <= 0 or height <= 0:
             raise ProtocolError("width and height must be greater than zero")
         # http://www.w3.org/TR/PNG/#7Integers-and-byte-order
-        if width > 2 ** 31 - 1 or height > 2 ** 31 - 1:
+        if width > 2**31 - 1 or height > 2**31 - 1:
             raise ProtocolError("width and height cannot exceed 2**31-1")
 
         if alpha and transparent is not None:
@@ -918,7 +918,7 @@ def write_chunk(outfile, tag, data=b""):
     outfile.write(data)
     checksum = zlib.crc32(tag)
     checksum = zlib.crc32(data, checksum)
-    checksum &= 2 ** 32 - 1
+    checksum &= 2**32 - 1
     outfile.write(struct.pack("!I", checksum))
 
 
@@ -1548,7 +1548,7 @@ class Reader:
         # Samples per byte
         spb = 8 // self.bitdepth
         out = bytearray()
-        mask = 2 ** self.bitdepth - 1
+        mask = 2**self.bitdepth - 1
         shifts = [self.bitdepth * i for i in reversed(list(range(spb)))]
         for o in bs:
             out.extend([mask & (o >> i) for i in shifts])
@@ -1632,7 +1632,7 @@ class Reader:
         if len(x) != 8:
             raise FormatError("End of file whilst reading chunk length and type.")
         length, type = struct.unpack("!I4s", x)
-        if length > 2 ** 31 - 1:
+        if length > 2**31 - 1:
             raise FormatError("Chunk %s is too large: %d." % (type, length))
         # Check that all bytes are in valid ASCII range.
         # https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-layout
@@ -1722,7 +1722,7 @@ class Reader:
         self.plte = data
         if len(data) % 3 != 0:
             raise FormatError("PLTE chunk's length should be a multiple of 3.")
-        if len(data) > (2 ** self.bitdepth) * 3:
+        if len(data) > (2**self.bitdepth) * 3:
             raise FormatError("PLTE chunk is too long.")
         if len(data) == 0:
             raise FormatError("Empty PLTE is not allowed.")
@@ -2014,7 +2014,7 @@ class Reader:
 
         width, height, pixels, info = get()
         maxval = 2 ** info["bitdepth"] - 1
-        targetmaxval = 2 ** targetbitdepth - 1
+        targetmaxval = 2**targetbitdepth - 1
         factor = float(targetmaxval) / float(maxval)
         info["bitdepth"] = targetbitdepth
 

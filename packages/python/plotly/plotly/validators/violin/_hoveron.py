@@ -9,5 +9,5 @@ class HoveronValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "style"),
             extras=kwargs.pop("extras", ["all"]),
             flags=kwargs.pop("flags", ["violins", "points", "kde"]),
-            **kwargs
+            **kwargs,
         )

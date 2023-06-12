@@ -21,11 +21,10 @@ import copy
 import json
 import os
 import time
+import urllib
 import warnings
 import webbrowser
 
-import six
-import six.moves
 import json as _json
 
 import _plotly_utils.utils
@@ -431,7 +430,7 @@ def _swap_xy_data(data_obj):
 def byteify(input):
     """Convert unicode strings in JSON object to byte strings"""
     if isinstance(input, dict):
-        return {byteify(key): byteify(value) for key, value in input.iteritems()}
+        return {byteify(key): byteify(value) for key, value in input.items()}
     elif isinstance(input, list):
         return [byteify(element) for element in input]
     elif isinstance(input, unicode):
@@ -513,8 +512,6 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     fid = "{}:{}".format(file_owner, file_id)
     response = v2.plots.content(fid, inline_data=True)
     figure = response.json()
-    if six.PY2:
-        figure = byteify(figure)
     # Fix 'histogramx', 'histogramy', and 'bardir' stuff
     for index, entry in enumerate(figure["data"]):
         try:
@@ -620,7 +617,7 @@ class Stream:
 
         # If no scheme (https/https) is included in the streaming_url, the
         # host will be None. Use streaming_url in this case.
-        host = six.moves.urllib.parse.urlparse(streaming_url).hostname or streaming_url
+        host = urllib.parse.urlparse(streaming_url).hostname or streaming_url
 
         headers = {"Host": host, "plotly-streamtoken": self.stream_id}
         streaming_specs = {
@@ -1380,7 +1377,7 @@ def parse_grid_id_args(grid, grid_url):
     else:
         supplied_arg_name = supplied_arg_names.pop()
         if supplied_arg_name == "grid_url":
-            path = six.moves.urllib.parse.urlparse(grid_url).path
+            path = urllib.parse.urlparse(grid_url).path
             file_owner, file_id = path.replace("/~", "").split("/")[0:2]
             return "{0}:{1}".format(file_owner, file_id)
         else:
@@ -1392,7 +1389,7 @@ def add_share_key_to_url(plot_url, attempt=0):
     Check that share key is enabled and update url to include the secret key
 
     """
-    urlsplit = six.moves.urllib.parse.urlparse(plot_url)
+    urlsplit = urllib.parse.urlparse(plot_url)
     username = urlsplit.path.split("/")[1].split("~")[1]
     idlocal = urlsplit.path.split("/")[2]
     fid = "{}:{}".format(username, idlocal)

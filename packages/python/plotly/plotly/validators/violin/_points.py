@@ -10,5 +10,5 @@ class PointsValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["all", "outliers", "suspectedoutliers", False]
             ),
-            **kwargs
+            **kwargs,
         )
