@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.8
   plotly:
     description: How to set, create and control continuous color scales and color
       bars in scatter, bar, map and heatmap figures.
@@ -307,11 +307,11 @@ Using `labelalias` you can replace some labels on the `colorbar` with alternativ
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request as request
 import json
 
 # Load heatmap data
-response = urllib.request.urlopen(
+response = request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
 dataset = json.load(response)
 
