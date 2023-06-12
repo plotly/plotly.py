@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Image(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -780,7 +781,9 @@ class Image(_BaseTraceType):
     @property
     def x0(self):
         """
-        Set the image's x position.
+        Set the image's x position. The left edge of the image (or the
+        right edge if the x axis is reversed or dx is negative) will be
+        found at xmin=x0-dx/2
 
         The 'x0' property accepts values of any type
 
@@ -824,7 +827,12 @@ class Image(_BaseTraceType):
     @property
     def y0(self):
         """
-        Set the image's y position.
+        Set the image's y position. The top edge of the image (or the
+        bottom edge if the y axis is NOT reversed or if dy is negative)
+        will be found at ymin=y0-dy/2. By default when an image trace
+        is included, the y axis will be reversed so that the image is
+        right-side-up, but you can disable this by setting
+        yaxis.autorange=true or by providing an explicit y axis range.
 
         The 'y0' property accepts values of any type
 
@@ -1160,14 +1168,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1414,14 +1431,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the

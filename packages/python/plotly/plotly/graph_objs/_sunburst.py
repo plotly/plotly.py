@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Sunburst(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -815,6 +816,8 @@ class Sunburst(_BaseTraceType):
                 line
                     :class:`plotly.graph_objects.sunburst.marker.Li
                     ne` instance or dict with compatible properties
+                pattern
+                    Sets the pattern within the marker.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if colors is set to a numerical
