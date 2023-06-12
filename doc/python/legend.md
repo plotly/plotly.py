@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.8
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -580,7 +580,7 @@ fig.show()
 
 By default, all traces appear on one legend. To have multiple legends, specify an alternative legend for a trace using the `legend` property. For a second legend, set `legend="legend2"`. Specify more legends with `legend="legend3"`, `legend="legend4"` and so on.
 
-In this example, the last two scatter traces display on the second legend, "legend2". On the figure's layout, we then position and style this legend to display on the right of the graph below the first legend.
+In this example, the last two scatter traces display on the second legend, "legend2". On the figure's layout, we then position and style each legend.
 
 
 ```python
@@ -622,20 +622,25 @@ fig = go.Figure(
     ],
     layout=dict(
         title="GDP Per Capita",
-        legend={"title": "By country", "bgcolor": "Orange",},
+        legend={
+            "title": "By country",
+            "xref": "container",
+            "yref": "container",
+            "y": 0.65,
+            "bgcolor": "Orange",
+        },
         legend2={
-            "x": 1.155,
-            "y": 0.55,
-            "xanchor": "right",
-            "yanchor": "middle",
+            "title": "By continent",
+            "xref": "container",
+            "yref": "container",
+            "y": 0.85,
             "bgcolor": "Gold",
-            "title": {"text": "By continent"},
+
         },
     ),
 )
 
 fig.show()
-
 ```
 
 ### Positioning Legends
