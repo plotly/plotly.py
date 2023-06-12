@@ -61,7 +61,7 @@ Y, X = np.meshgrid(x, y)
 u = -1 - X**2 + Y
 v = 1 + X - Y**2
 
-fig2 = ff.create_streamline(x, y, u, v, arrow_scale=.1, name='Steamline')
+fig2 = ff.create_streamline(x, y, u, v, arrow_scale=.1, name='Streamline')
 ```
 
 Edit the figures' x and y axes attributes to create subplots:
