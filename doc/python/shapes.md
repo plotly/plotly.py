@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.8
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -919,7 +919,7 @@ fig.show()
 
 Use `texttemplate` to add text with variables to shapes. `texttemplate` uses d3 number and date formatting and supports raw variables, which use the raw data from the shape definition, and some calculated variables. Add a variable with "%{variable}".
 
-This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, and `width` on three other shapes. 
+This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes. 
 
 For a complete list of available variables, see the [Shape Reference Docs](https://plotly.com/python/reference/layout/shapes/).
 
@@ -955,9 +955,12 @@ fig.add_shape(
     x0=3,
     y0=0.5,
     x1=5,
-    y1=0.8,
+    y1=1.5,
     line_width=3,
-    label=dict(texttemplate="Slope: %{slope:.3f}", font=dict(size=20)),
+    label=dict(
+        texttemplate="Slope of %{slope:.3f} and length of %{length:.3f}",
+        font=dict(size=20),
+    ),
 )
 fig.add_shape(
     type="rect",
