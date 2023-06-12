@@ -321,7 +321,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
-
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
                     y = sorted_trace_data[args["y"]].values
@@ -562,7 +561,6 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
-
     if "histogram" in [args["marginal_x"], args["marginal_y"]]:
         fig.layout["barmode"] = "overlay"
 
@@ -885,8 +883,8 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
 def make_trendline_spec(args, constructor):
     trace_spec = TraceSpec(
         constructor=go.Scattergl
-        if constructor == go.Scattergl  # could be contour
-        else go.Scatter,
+        if constructor == go.Scattergl
+        else go.Scatter,  # could be contour
         attrs=["trendline"],
         trace_patch=dict(mode="lines"),
         marginal=None,
@@ -1064,14 +1062,25 @@ def _escape_col_name(df_input, col_name, extra):
     return col_name
 
 
-def to_unindexed_series(x):
+def to_unindexed_series(x, name=None):
     """
-    assuming x is list-like or even an existing pd.Series, return a new pd.Series with
-    no index, without extracting the data from an existing Series via numpy, which
+    assuming x is list-like or even an existing pd.Series, return a new pd.DataFrame
+    with no index, without extracting the data from an existing Series via numpy, which
     seems to mangle datetime columns. Stripping the index from existing pd.Series is
-    required to get things to match up right in the new DataFrame we're building
+    required to get things to match up right in the new DataFrame we're building.
+    It's converted to a frame so that it can be concated easily and it contains
+    `columns` attribute, so `_get_cols` can be used.
     """
-    return pd.Series(x).reset_index(drop=True)
+    return pd.Series(x, name=name).reset_index(drop=True).to_frame()
+
+
+def _get_cols(df_list):
+    """
+    get all the columns in the current df_list.
+    Since this func is called when we raise error, the func is called once.
+    So inefficiency here can be tolerated.
+    """
+    return [column for df in df_list for column in df.columns]
 
 
 def process_args_into_dataframe(args, wide_mode, var_name, value_name):
@@ -1086,9 +1095,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     df_input = args["data_frame"]
     df_provided = df_input is not None
 
-    df_output = pd.DataFrame()
-    constants = dict()
-    ranges = list()
+    # we use append it as list to avoid performance issues in pandas
+    # when dealing with large dataframes.
+    df_outputs = []
+    constants = {}
+    ranges = []
     wide_id_vars = set()
     reserved_names = _get_reserved_col_names(args) if df_provided else set()
 
@@ -1099,7 +1110,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
             )
         else:
-            df_output[df_input.columns] = df_input[df_input.columns]
+            df_outputs.append(df_input[df_input.columns])
 
     # hover_data is a dict
     hover_data_is_dict = (
@@ -1140,7 +1151,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
         # argument_list and field_list ready, iterate over them
         # Core of the loop starts here
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
-            length = len(df_output)
+            length = len(df_outputs[0]) if len(df_outputs) else 0
             if argument is None:
                 continue
             col_name = None
@@ -1181,11 +1192,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                             % (
                                 argument,
                                 len(real_argument),
-                                str(list(df_output.columns)),
+                                str(_get_cols(df_outputs)),
                                 length,
                             )
                         )
-                    df_output[col_name] = to_unindexed_series(real_argument)
+                    df_outputs.append(to_unindexed_series(real_argument, col_name))
                 elif not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1214,13 +1225,13 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         % (
                             field,
                             len(df_input[argument]),
-                            str(list(df_output.columns)),
+                            str(_get_cols(df_outputs)),
                             length,
                         )
                     )
                 else:
                     col_name = str(argument)
-                    df_output[col_name] = to_unindexed_series(df_input[argument])
+                    df_outputs.append(to_unindexed_series(df_input[argument], col_name))
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
@@ -1247,9 +1258,9 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
                         "length of  previously-processed arguments %s is %d"
-                        % (field, len(argument), str(list(df_output.columns)), length)
+                        % (field, len(argument), str(_get_cols(df_outputs)), length)
                     )
-                df_output[str(col_name)] = to_unindexed_series(argument)
+                df_outputs.append(to_unindexed_series(argument, str(col_name)))
 
             # Finally, update argument with column name now that column exists
             assert col_name is not None, (
@@ -1267,12 +1278,14 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
             if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
 
-    for col_name in ranges:
-        df_output[col_name] = range(len(df_output))
+    length = len(df_outputs[0])
+    df_outputs.extend([pd.Series(range(length), name=col_name) for col_name in ranges])
 
-    for col_name in constants:
-        df_output[col_name] = constants[col_name]
+    df_outputs.extend(
+        [pd.Series(constants[col_name], name=col_name) for col_name in constants]
+    )
 
+    df_output = pd.concat(df_outputs, axis=1)
     return df_output, wide_id_vars
 
 
