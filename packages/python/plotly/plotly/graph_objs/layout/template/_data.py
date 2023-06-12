@@ -46,6 +46,7 @@ class Data(_BaseLayoutHierarchyType):
         "scattermapbox",
         "scatterpolar",
         "scatterpolargl",
+        "scattersmith",
         "scatterternary",
         "splom",
         "streamtube",
@@ -68,7 +69,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Barpolar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Barpolar constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -91,7 +92,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Bar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Bar constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -114,7 +115,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Box
           - A list or tuple of dicts of string/value properties that
             will be passed to the Box constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -137,7 +138,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Candlestick
           - A list or tuple of dicts of string/value properties that
             will be passed to the Candlestick constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -160,7 +161,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Carpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Carpet constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -183,7 +184,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Choroplethmapbox constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -206,7 +207,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choropleth
           - A list or tuple of dicts of string/value properties that
             will be passed to the Choropleth constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -229,7 +230,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Cone
           - A list or tuple of dicts of string/value properties that
             will be passed to the Cone constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -252,7 +253,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Contourcarpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Contourcarpet constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -275,7 +276,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Contour
           - A list or tuple of dicts of string/value properties that
             will be passed to the Contour constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -298,7 +299,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Densitymapbox constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -321,7 +322,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnelarea
           - A list or tuple of dicts of string/value properties that
             will be passed to the Funnelarea constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -344,7 +345,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnel
           - A list or tuple of dicts of string/value properties that
             will be passed to the Funnel constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -367,7 +368,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Heatmapgl
           - A list or tuple of dicts of string/value properties that
             will be passed to the Heatmapgl constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -390,7 +391,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Heatmap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Heatmap constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -413,7 +414,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram2dContour
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2dContour constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -436,7 +437,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram2d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2d constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -459,7 +460,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -482,7 +483,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Icicle
           - A list or tuple of dicts of string/value properties that
             will be passed to the Icicle constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -505,7 +506,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Image
           - A list or tuple of dicts of string/value properties that
             will be passed to the Image constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -528,7 +529,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Indicator
           - A list or tuple of dicts of string/value properties that
             will be passed to the Indicator constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -551,7 +552,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Isosurface
           - A list or tuple of dicts of string/value properties that
             will be passed to the Isosurface constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -574,7 +575,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Mesh3d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Mesh3d constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -597,7 +598,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Ohlc
           - A list or tuple of dicts of string/value properties that
             will be passed to the Ohlc constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -620,7 +621,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Parcats
           - A list or tuple of dicts of string/value properties that
             will be passed to the Parcats constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -643,7 +644,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Parcoords
           - A list or tuple of dicts of string/value properties that
             will be passed to the Parcoords constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -666,7 +667,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Pie
           - A list or tuple of dicts of string/value properties that
             will be passed to the Pie constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -689,7 +690,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Pointcloud
           - A list or tuple of dicts of string/value properties that
             will be passed to the Pointcloud constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -712,7 +713,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Sankey
           - A list or tuple of dicts of string/value properties that
             will be passed to the Sankey constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -735,7 +736,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatter3d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter3d constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -758,7 +759,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattercarpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattercarpet constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -781,7 +782,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattergeo
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergeo constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -804,7 +805,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattergl
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergl constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -827,7 +828,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattermapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattermapbox constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -850,7 +851,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterpolargl
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolargl constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -873,7 +874,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterpolar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolar constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -896,7 +897,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatter
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -909,6 +910,29 @@ class Data(_BaseLayoutHierarchyType):
     def scatter(self, val):
         self["scatter"] = val
 
+    # scattersmith
+    # ------------
+    @property
+    def scattersmith(self):
+        """
+        The 'scattersmith' property is a tuple of instances of
+        Scattersmith that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattersmith
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Scattersmith constructor
+
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Scattersmith]
+        """
+        return self["scattersmith"]
+
+    @scattersmith.setter
+    def scattersmith(self, val):
+        self["scattersmith"] = val
+
     # scatterternary
     # --------------
     @property
@@ -919,7 +943,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterternary
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterternary constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -942,7 +966,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Splom
           - A list or tuple of dicts of string/value properties that
             will be passed to the Splom constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -965,7 +989,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Streamtube
           - A list or tuple of dicts of string/value properties that
             will be passed to the Streamtube constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -988,7 +1012,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Sunburst
           - A list or tuple of dicts of string/value properties that
             will be passed to the Sunburst constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1011,7 +1035,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Surface
           - A list or tuple of dicts of string/value properties that
             will be passed to the Surface constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1034,7 +1058,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Table
           - A list or tuple of dicts of string/value properties that
             will be passed to the Table constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1057,7 +1081,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Treemap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Treemap constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1080,7 +1104,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Violin
           - A list or tuple of dicts of string/value properties that
             will be passed to the Violin constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1103,7 +1127,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Volume
           - A list or tuple of dicts of string/value properties that
             will be passed to the Volume constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1126,7 +1150,7 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Waterfall
           - A list or tuple of dicts of string/value properties that
             will be passed to the Waterfall constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1257,6 +1281,9 @@ class Data(_BaseLayoutHierarchyType):
         scatter
             A tuple of :class:`plotly.graph_objects.Scatter`
             instances or dicts with compatible properties
+        scattersmith
+            A tuple of :class:`plotly.graph_objects.Scattersmith`
+            instances or dicts with compatible properties
         scatterternary
             A tuple of :class:`plotly.graph_objects.Scatterternary`
             instances or dicts with compatible properties
@@ -1329,6 +1356,7 @@ class Data(_BaseLayoutHierarchyType):
         scatterpolargl=None,
         scatterpolar=None,
         scatter=None,
+        scattersmith=None,
         scatterternary=None,
         splom=None,
         streamtube=None,
@@ -1339,11 +1367,11 @@ class Data(_BaseLayoutHierarchyType):
         violin=None,
         volume=None,
         waterfall=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Data object
-        
+
         Parameters
         ----------
         arg
@@ -1463,6 +1491,9 @@ class Data(_BaseLayoutHierarchyType):
         scatter
             A tuple of :class:`plotly.graph_objects.Scatter`
             instances or dicts with compatible properties
+        scattersmith
+            A tuple of :class:`plotly.graph_objects.Scattersmith`
+            instances or dicts with compatible properties
         scatterternary
             A tuple of :class:`plotly.graph_objects.Scatterternary`
             instances or dicts with compatible properties
@@ -1515,8 +1546,8 @@ class Data(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.template.Data 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.template.Data
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.template.Data`"""
             )
 
@@ -1675,6 +1706,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = scatter if scatter is not None else _v
         if _v is not None:
             self["scatter"] = _v
+        _v = arg.pop("scattersmith", None)
+        _v = scattersmith if scattersmith is not None else _v
+        if _v is not None:
+            self["scattersmith"] = _v
         _v = arg.pop("scatterternary", None)
         _v = scatterternary if scatterternary is not None else _v
         if _v is not None:

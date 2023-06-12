@@ -1,6 +1,8 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._minor import Minor
     from ._rangebreak import Rangebreak
     from ._tickfont import Tickfont
     from ._tickformatstop import Tickformatstop
@@ -13,6 +15,7 @@ else:
         __name__,
         [".title"],
         [
+            "._minor.Minor",
             "._rangebreak.Rangebreak",
             "._tickfont.Tickfont",
             "._tickformatstop.Tickformatstop",

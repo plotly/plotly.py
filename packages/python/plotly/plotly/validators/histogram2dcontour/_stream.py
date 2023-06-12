@@ -23,5 +23,5 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 studio.plotly.com/settings for more details.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

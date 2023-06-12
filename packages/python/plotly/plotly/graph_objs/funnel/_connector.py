@@ -16,7 +16,7 @@ class Connector(_BaseTraceHierarchyType):
     def fillcolor(self):
         """
         Sets the fill color.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Connector(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.funnel.connector.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -108,7 +108,7 @@ class Connector(_BaseTraceHierarchyType):
     def visible(self):
         """
         Determines if connector regions and lines are drawn.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -139,7 +139,7 @@ class Connector(_BaseTraceHierarchyType):
     def __init__(self, arg=None, fillcolor=None, line=None, visible=None, **kwargs):
         """
         Construct a new Connector object
-        
+
         Parameters
         ----------
         arg
@@ -175,8 +175,8 @@ class Connector(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.funnel.Connector 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.funnel.Connector
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.funnel.Connector`"""
             )
 

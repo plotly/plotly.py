@@ -20,9 +20,9 @@ class Decreasing(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.ohlc.decreasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -56,7 +56,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, line=None, **kwargs):
         """
         Construct a new Decreasing object
-        
+
         Parameters
         ----------
         arg
@@ -88,8 +88,8 @@ class Decreasing(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.ohlc.Decreasing 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.ohlc.Decreasing
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.ohlc.Decreasing`"""
             )
 

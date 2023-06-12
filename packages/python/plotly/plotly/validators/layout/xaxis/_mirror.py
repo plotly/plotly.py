@@ -8,5 +8,5 @@ class MirrorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks+layoutstyle"),
             values=kwargs.pop("values", [True, "ticks", False, "all", "allticks"]),
-            **kwargs
+            **kwargs,
         )

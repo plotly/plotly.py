@@ -16,5 +16,5 @@ class ZmaxValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "calc", "valType": "number"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

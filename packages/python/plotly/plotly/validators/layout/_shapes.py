@@ -24,6 +24,9 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 constitute the interior. For more info please
                 visit https://developer.mozilla.org/en-
                 US/docs/Web/SVG/Attribute/fill-rule
+            label
+                :class:`plotly.graph_objects.layout.shape.Label
+                ` instance or dict with compatible properties
             layer
                 Specifies whether shapes are drawn below or
                 above traces.
@@ -125,11 +128,7 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 domain* refers to the domain of the second x
                 axis and a x position of 0.5 refers to the
                 point between the left and the right of the
-                domain of the second x axis. If the axis `type`
-                is "log", then you must take the log of your
-                desired range. If the axis `type` is "date",
-                then you must convert the date to unix time in
-                milliseconds.
+                domain of the second x axis.
             xsizemode
                 Sets the shapes's sizing mode along the x axis.
                 If set to "scaled", `x0`, `x1` and x
@@ -157,21 +156,21 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 certain data value. No effect when `ysizemode`
                 not set to "pixel".
             yref
-                Sets the annotation's y coordinate axis. If set
-                to a y axis id (e.g. "y" or "y2"), the `y`
-                position refers to a y coordinate. If set to
-                "paper", the `y` position refers to the
-                distance from the bottom of the plotting area
-                in normalized coordinates where 0 (1)
-                corresponds to the bottom (top). If set to a y
-                axis ID followed by "domain" (separated by a
-                space), the position behaves like for "paper",
-                but refers to the distance in fractions of the
-                domain length from the bottom of the domain of
-                that axis: e.g., *y2 domain* refers to the
-                domain of the second y  axis and a y position
-                of 0.5 refers to the point between the bottom
-                and the top of the domain of the second y axis.
+                Sets the shape's y coordinate axis. If set to a
+                y axis id (e.g. "y" or "y2"), the `y` position
+                refers to a y coordinate. If set to "paper",
+                the `y` position refers to the distance from
+                the bottom of the plotting area in normalized
+                coordinates where 0 (1) corresponds to the
+                bottom (top). If set to a y axis ID followed by
+                "domain" (separated by a space), the position
+                behaves like for "paper", but refers to the
+                distance in fractions of the domain length from
+                the bottom of the domain of that axis: e.g.,
+                *y2 domain* refers to the domain of the second
+                y  axis and a y position of 0.5 refers to the
+                point between the bottom and the top of the
+                domain of the second y axis.
             ysizemode
                 Sets the shapes's sizing mode along the y axis.
                 If set to "scaled", `y0`, `y1` and y
@@ -186,5 +185,5 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 position relative to data or plot fraction.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

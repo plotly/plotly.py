@@ -21,7 +21,6 @@ _integer_types = (
 _integer_ranges = {t: (np.iinfo(t).min, np.iinfo(t).max) for t in _integer_types}
 dtype_range = {
     np.bool_: (False, True),
-    np.bool8: (False, True),
     np.float16: (-1, 1),
     np.float32: (-1, 1),
     np.float64: (-1, 1),
@@ -33,9 +32,9 @@ DTYPE_RANGE = dtype_range.copy()
 DTYPE_RANGE.update((d.__name__, limits) for d, limits in dtype_range.items())
 DTYPE_RANGE.update(
     {
-        "uint10": (0, 2 ** 10 - 1),
-        "uint12": (0, 2 ** 12 - 1),
-        "uint14": (0, 2 ** 14 - 1),
+        "uint10": (0, 2**10 - 1),
+        "uint12": (0, 2**12 - 1),
+        "uint14": (0, 2**14 - 1),
         "bool": dtype_range[np.bool_],
         "float": dtype_range[np.float64],
     }

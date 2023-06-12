@@ -80,7 +80,7 @@ class Center(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Center object
-        
+
         Sets the (x,y,z) components of the 'center' camera vector This
         vector determines the translation (x,y,z) space about the
         center of this scene. By default, there is no such translation.
@@ -119,8 +119,8 @@ class Center(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.scene.camera.Center 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.scene.camera.Center
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.camera.Center`"""
             )
 

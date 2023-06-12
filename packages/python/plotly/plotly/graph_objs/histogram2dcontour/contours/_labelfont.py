@@ -84,7 +84,7 @@ class Labelfont(_BaseTraceHierarchyType):
         "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
         One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
         Narrow", "Raleway", "Times New Roman".
-    
+
         The 'family' property is a string and must be specified as:
           - A non-empty string
 
@@ -144,7 +144,7 @@ class Labelfont(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Labelfont object
-        
+
         Sets the font used for labeling the contour levels. The default
         color comes from the lines, if shown. The default family and
         size come from `layout.font`.
@@ -195,8 +195,8 @@ class Labelfont(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram2dcontour.contours.Labelfont 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram2dcontour.contours.Labelfont
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram2dcontour.contours.Labelfont`"""
             )
 

@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._tickwidth import TickwidthValidator
     from ._tickvalssrc import TickvalssrcValidator
@@ -12,6 +13,7 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
+    from ._ticklabelstep import TicklabelstepValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
     from ._tickformat import TickformatValidator
@@ -27,6 +29,7 @@ if sys.version_info < (3, 7):
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
+    from ._labelalias import LabelaliasValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
 else:
@@ -47,6 +50,7 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
+            "._ticklabelstep.TicklabelstepValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
             "._tickformat.TickformatValidator",
@@ -62,6 +66,7 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
+            "._labelalias.LabelaliasValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
         ],

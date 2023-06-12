@@ -16,12 +16,12 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 effect only when `type` is set to "line".
             dashsrc
                 Sets the source reference on Chart Studio Cloud
-                for  dash .
+                for `dash`.
             width
                 Sets the line width (mapbox.layer.paint.line-
                 width). Has an effect only when `type` is set
                 to "line".
 """,
             ),
-            **kwargs
+            **kwargs,
         )

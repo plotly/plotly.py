@@ -18,7 +18,7 @@ class Stream(_BaseTraceHierarchyType):
         Sets the maximum number of points to keep on the plots from an
         incoming stream. If `maxpoints` is set to 50, only the newest
         50 points will be displayed on the plot.
-    
+
         The 'maxpoints' property is a number and may be specified as:
           - An int or float in the interval [0, 10000]
 
@@ -40,7 +40,7 @@ class Stream(_BaseTraceHierarchyType):
         The stream id number links a data trace on a plot with a
         stream. See https://chart-studio.plotly.com/settings for more
         details.
-    
+
         The 'token' property is a string and must be specified as:
           - A non-empty string
 
@@ -73,7 +73,7 @@ class Stream(_BaseTraceHierarchyType):
     def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
         """
         Construct a new Stream object
-        
+
         Parameters
         ----------
         arg
@@ -110,8 +110,8 @@ class Stream(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.funnel.Stream 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.funnel.Stream
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.funnel.Stream`"""
             )
 

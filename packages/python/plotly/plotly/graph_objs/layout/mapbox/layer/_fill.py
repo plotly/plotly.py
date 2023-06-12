@@ -17,7 +17,7 @@ class Fill(_BaseLayoutHierarchyType):
         """
         Sets the fill outline color (mapbox.layer.paint.fill-outline-
         color). Has an effect only when `type` is set to "fill".
-    
+
         The 'outlinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -84,7 +84,7 @@ class Fill(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, outlinecolor=None, **kwargs):
         """
         Construct a new Fill object
-        
+
         Parameters
         ----------
         arg
@@ -117,8 +117,8 @@ class Fill(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`"""
             )
 

@@ -24,19 +24,19 @@ class Step(_BaseLayoutHierarchyType):
     @property
     def args(self):
         """
-        Sets the arguments values to be passed to the Plotly method set
-        in `method` on slide.
-    
-        The 'args' property is an info array that may be specified as:
-    
-        * a list or tuple of up to 3 elements where:
-    (0) The 'args[0]' property accepts values of any type
-    (1) The 'args[1]' property accepts values of any type
-    (2) The 'args[2]' property accepts values of any type
+            Sets the arguments values to be passed to the Plotly method set
+            in `method` on slide.
 
-        Returns
-        -------
-        list
+            The 'args' property is an info array that may be specified as:
+
+            * a list or tuple of up to 3 elements where:
+        (0) The 'args[0]' property accepts values of any type
+        (1) The 'args[1]' property accepts values of any type
+        (2) The 'args[2]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["args"]
 
@@ -56,7 +56,7 @@ class Step(_BaseLayoutHierarchyType):
         manually without losing the benefit of the slider automatically
         binding to the state of the plot through the specification of
         `method` and `args`.
-    
+
         The 'execute' property must be specified as a bool
         (either True, or False)
 
@@ -76,7 +76,7 @@ class Step(_BaseLayoutHierarchyType):
     def label(self):
         """
         Sets the text label to appear on the slider
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -102,7 +102,7 @@ class Step(_BaseLayoutHierarchyType):
         bind automatically to state updates. This may be used to create
         a component interface and attach to slider events manually via
         JavaScript.
-    
+
         The 'method' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['restyle', 'relayout', 'animate', 'update', 'skip']
@@ -129,7 +129,7 @@ class Step(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -157,7 +157,7 @@ class Step(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -179,7 +179,7 @@ class Step(_BaseLayoutHierarchyType):
         """
         Sets the value of the slider step, used to refer to the step
         programatically. Defaults to the slider label if not provided.
-    
+
         The 'value' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -200,7 +200,7 @@ class Step(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this step is included in the slider.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -278,11 +278,11 @@ class Step(_BaseLayoutHierarchyType):
         templateitemname=None,
         value=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Step object
-        
+
         Parameters
         ----------
         arg
@@ -357,8 +357,8 @@ class Step(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.slider.Step 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.slider.Step
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.slider.Step`"""
             )
 

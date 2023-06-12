@@ -18,7 +18,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         Sets the background color of the hover label. By default uses
         the annotation's `bgcolor` made opaque, or white if it was
         transparent.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,7 +79,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         Sets the border color of the hover label. By default uses
         either dark grey or white, for maximum contrast with
         `hoverlabel.bgcolor`.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -139,17 +139,17 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         """
         Sets the hover label text font. By default uses the global
         hover font and size, with color from `hoverlabel.bordercolor`.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.annotation.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -201,7 +201,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, bgcolor=None, bordercolor=None, font=None, **kwargs):
         """
         Construct a new Hoverlabel object
-        
+
         Parameters
         ----------
         arg
@@ -242,8 +242,8 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.annotation.Hoverlabel 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.annotation.Hoverlabel
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.annotation.Hoverlabel`"""
             )
 

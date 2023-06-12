@@ -43,6 +43,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "scattermapbox": "Scattermapbox",
                 "scatterpolar": "Scatterpolar",
                 "scatterpolargl": "Scatterpolargl",
+                "scattersmith": "Scattersmith",
                 "scatterternary": "Scatterternary",
                 "splom": "Splom",
                 "streamtube": "Streamtube",
@@ -56,5 +57,5 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
             },
             plotly_name=plotly_name,
             parent_name=parent_name,
-            **kwargs
+            **kwargs,
         )

@@ -32,7 +32,7 @@ class Pattern(_BaseTraceHierarchyType):
         pattern fill. Defaults to a `marker.color` background when
         `fillmode` is "overlay". Otherwise, defaults to a transparent
         background.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -91,8 +91,8 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def bgcolorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  bgcolor .
-    
+        Sets the source reference on Chart Studio Cloud for `bgcolor`.
+
         The 'bgcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -115,7 +115,7 @@ class Pattern(_BaseTraceHierarchyType):
         pattern fill. Defaults to a `marker.color` background when
         `fillmode` is "replace". Otherwise, defaults to dark grey or
         white to increase contrast with the `bgcolor`.
-    
+
         The 'fgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -174,8 +174,8 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def fgcolorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  fgcolor .
-    
+        Sets the source reference on Chart Studio Cloud for `fgcolor`.
+
         The 'fgcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -196,7 +196,7 @@ class Pattern(_BaseTraceHierarchyType):
         """
         Sets the opacity of the foreground pattern fill. Defaults to a
         0.5 when `fillmode` is "overlay". Otherwise, defaults to 1.
-    
+
         The 'fgopacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -217,7 +217,7 @@ class Pattern(_BaseTraceHierarchyType):
         """
         Determines whether `marker.color` should be used as a default
         to `bgcolor` or a `fgcolor`.
-    
+
         The 'fillmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['replace', 'overlay']
@@ -239,7 +239,7 @@ class Pattern(_BaseTraceHierarchyType):
         """
         Sets the shape of the pattern fill. By default, no pattern is
         used for filling the area.
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['', '/', '\\', 'x', '-', '|', '+', '.']
@@ -260,8 +260,8 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def shapesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  shape .
-    
+        Sets the source reference on Chart Studio Cloud for `shape`.
+
         The 'shapesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -282,7 +282,7 @@ class Pattern(_BaseTraceHierarchyType):
         """
         Sets the size of unit squares of the pattern fill in pixels,
         which corresponds to the interval of repetition of the pattern.
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -302,8 +302,8 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def sizesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  size .
-    
+        Sets the source reference on Chart Studio Cloud for `size`.
+
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -326,7 +326,7 @@ class Pattern(_BaseTraceHierarchyType):
         fraction of the area filled by the pattern. Solidity of 0 shows
         only the background color without pattern and solidty of 1
         shows only the foreground color without pattern.
-    
+
         The 'solidity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -346,8 +346,8 @@ class Pattern(_BaseTraceHierarchyType):
     @property
     def soliditysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  solidity .
-    
+        Sets the source reference on Chart Studio Cloud for `solidity`.
+
         The 'soliditysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -373,7 +373,7 @@ class Pattern(_BaseTraceHierarchyType):
             defaults to a transparent background.
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bgcolor .
+            `bgcolor`.
         fgcolor
             When there is no colorscale sets the color of
             foreground pattern fill. Defaults to a `marker.color`
@@ -382,7 +382,7 @@ class Pattern(_BaseTraceHierarchyType):
             with the `bgcolor`.
         fgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            fgcolor .
+            `fgcolor`.
         fgopacity
             Sets the opacity of the foreground pattern fill.
             Defaults to a 0.5 when `fillmode` is "overlay".
@@ -395,14 +395,14 @@ class Pattern(_BaseTraceHierarchyType):
             pattern is used for filling the area.
         shapesrc
             Sets the source reference on Chart Studio Cloud for
-            shape .
+            `shape`.
         size
             Sets the size of unit squares of the pattern fill in
             pixels, which corresponds to the interval of repetition
             of the pattern.
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
         solidity
             Sets the solidity of the pattern fill. Solidity is
             roughly the fraction of the area filled by the pattern.
@@ -411,7 +411,7 @@ class Pattern(_BaseTraceHierarchyType):
             color without pattern.
         soliditysrc
             Sets the source reference on Chart Studio Cloud for
-            solidity .
+            `solidity`.
         """
 
     def __init__(
@@ -429,11 +429,11 @@ class Pattern(_BaseTraceHierarchyType):
         sizesrc=None,
         solidity=None,
         soliditysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Pattern object
-        
+
         Sets the pattern within the marker.
 
         Parameters
@@ -449,7 +449,7 @@ class Pattern(_BaseTraceHierarchyType):
             defaults to a transparent background.
         bgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            bgcolor .
+            `bgcolor`.
         fgcolor
             When there is no colorscale sets the color of
             foreground pattern fill. Defaults to a `marker.color`
@@ -458,7 +458,7 @@ class Pattern(_BaseTraceHierarchyType):
             with the `bgcolor`.
         fgcolorsrc
             Sets the source reference on Chart Studio Cloud for
-            fgcolor .
+            `fgcolor`.
         fgopacity
             Sets the opacity of the foreground pattern fill.
             Defaults to a 0.5 when `fillmode` is "overlay".
@@ -471,14 +471,14 @@ class Pattern(_BaseTraceHierarchyType):
             pattern is used for filling the area.
         shapesrc
             Sets the source reference on Chart Studio Cloud for
-            shape .
+            `shape`.
         size
             Sets the size of unit squares of the pattern fill in
             pixels, which corresponds to the interval of repetition
             of the pattern.
         sizesrc
             Sets the source reference on Chart Studio Cloud for
-            size .
+            `size`.
         solidity
             Sets the solidity of the pattern fill. Solidity is
             roughly the fraction of the area filled by the pattern.
@@ -487,7 +487,7 @@ class Pattern(_BaseTraceHierarchyType):
             color without pattern.
         soliditysrc
             Sets the source reference on Chart Studio Cloud for
-            solidity .
+            `solidity`.
 
         Returns
         -------
@@ -510,8 +510,8 @@ class Pattern(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram.marker.Pattern 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram.marker.Pattern
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram.marker.Pattern`"""
             )
 

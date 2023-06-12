@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class DashValidator(_plotly_utils.basevalidators.StringValidator):
+class DashValidator(_plotly_utils.basevalidators.DashValidator):
     def __init__(
         self, plotly_name="dash", parent_name="layout.newshape.line", **kwargs
     ):
@@ -12,5 +12,5 @@ class DashValidator(_plotly_utils.basevalidators.StringValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs
+            **kwargs,
         )

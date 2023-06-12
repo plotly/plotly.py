@@ -6,7 +6,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="tickfont",
         parent_name="scatterpolar.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TickfontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -38,5 +38,5 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -17,17 +17,17 @@ class Title(_BaseLayoutHierarchyType):
         """
         Sets this axis' title font. Note that the title's font used to
         be customized by the now deprecated `titlefont` attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.ternary.baxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -65,7 +65,7 @@ class Title(_BaseLayoutHierarchyType):
         Sets the title of this axis. Note that before the existence of
         `title.text`, the title's contents used to be defined as the
         `title` attribute itself. This behavior has been deprecated.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -99,7 +99,7 @@ class Title(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, font=None, text=None, **kwargs):
         """
         Construct a new Title object
-        
+
         Parameters
         ----------
         arg
@@ -137,8 +137,8 @@ class Title(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.ternary.baxis.Title 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.ternary.baxis.Title
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.ternary.baxis.Title`"""
             )
 

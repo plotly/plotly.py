@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yref import YrefValidator
     from ._yanchor import YanchorValidator
     from ._y import YValidator
@@ -10,6 +11,7 @@ if sys.version_info < (3, 7):
     from ._text import TextValidator
     from ._pad import PadValidator
     from ._font import FontValidator
+    from ._automargin import AutomarginValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -26,5 +28,6 @@ else:
             "._text.TextValidator",
             "._pad.PadValidator",
             "._font.FontValidator",
+            "._automargin.AutomarginValidator",
         ],
     )

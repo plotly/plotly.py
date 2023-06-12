@@ -28,5 +28,5 @@ class PathbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 gap.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

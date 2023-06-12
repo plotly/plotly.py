@@ -18,8 +18,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the locations.
             opacitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  opacity .
+                for `opacity`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

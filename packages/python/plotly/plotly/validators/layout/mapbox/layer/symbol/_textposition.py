@@ -6,7 +6,7 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="textposition",
         parent_name="layout.mapbox.layer.symbol",
-        **kwargs
+        **kwargs,
     ):
         super(TextpositionValidator, self).__init__(
             plotly_name=plotly_name,
@@ -27,5 +27,5 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "bottom right",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

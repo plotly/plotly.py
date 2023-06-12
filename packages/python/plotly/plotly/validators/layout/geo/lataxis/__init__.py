@@ -1,10 +1,12 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._tick0 import Tick0Validator
     from ._showgrid import ShowgridValidator
     from ._range import RangeValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._dtick import DtickValidator
 else:
@@ -18,6 +20,7 @@ else:
             "._showgrid.ShowgridValidator",
             "._range.RangeValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._dtick.DtickValidator",
         ],

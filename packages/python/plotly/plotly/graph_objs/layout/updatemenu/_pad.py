@@ -17,7 +17,7 @@ class Pad(_BaseLayoutHierarchyType):
         """
         The amount of padding (in px) along the bottom of the
         component.
-    
+
         The 'b' property is a number and may be specified as:
           - An int or float
 
@@ -38,7 +38,7 @@ class Pad(_BaseLayoutHierarchyType):
         """
         The amount of padding (in px) on the left side of the
         component.
-    
+
         The 'l' property is a number and may be specified as:
           - An int or float
 
@@ -59,7 +59,7 @@ class Pad(_BaseLayoutHierarchyType):
         """
         The amount of padding (in px) on the right side of the
         component.
-    
+
         The 'r' property is a number and may be specified as:
           - An int or float
 
@@ -79,7 +79,7 @@ class Pad(_BaseLayoutHierarchyType):
     def t(self):
         """
         The amount of padding (in px) along the top of the component.
-    
+
         The 't' property is a number and may be specified as:
           - An int or float
 
@@ -115,7 +115,7 @@ class Pad(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, b=None, l=None, r=None, t=None, **kwargs):
         """
         Construct a new Pad object
-        
+
         Sets the padding around the buttons or dropdown menu.
 
         Parameters
@@ -158,8 +158,8 @@ class Pad(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.updatemenu.Pad 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.updatemenu.Pad
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.updatemenu.Pad`"""
             )
 

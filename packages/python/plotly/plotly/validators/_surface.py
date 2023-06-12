@@ -15,14 +15,14 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             cauto
                 Determines whether or not the color domain is
                 computed with respect to the input data (here z
                 or surfacecolor) or the bounds set in `cmin`
-                and `cmax`  Defaults to `false` when `cmin` and
+                and `cmax` Defaults to `false` when `cmin` and
                 `cmax` are set by the user.
             cmax
                 Sets the upper bound of the color domain. Value
@@ -58,7 +58,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`cmin` and
+                colorscale in color space, use `cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -78,7 +78,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             hidesurface
                 Determines whether or not a surface is drawn.
                 For example, set `hidesurface` to False
@@ -92,7 +92,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.surface.Hoverlabel
                 ` instance or dict with compatible properties
@@ -110,8 +110,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -131,12 +131,12 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -144,7 +144,13 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -163,6 +169,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             lighting
                 :class:`plotly.graph_objects.surface.Lighting`
                 instance or dict with compatible properties
@@ -186,7 +195,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -238,7 +247,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 a color scale independent of `z`.
             surfacecolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  surfacecolor .
+                for `surfacecolor`.
             text
                 Sets the text elements associated with each z
                 value. If trace `hoverinfo` contains a "text"
@@ -246,7 +255,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 will be seen in the hover labels.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -287,9 +296,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -300,7 +309,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the y coordinates.
             ycalendar
@@ -310,9 +319,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -323,7 +332,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the z coordinates.
             zcalendar
@@ -333,9 +342,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -346,8 +355,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

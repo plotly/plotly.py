@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._waterfall import WaterfallValidator
     from ._volume import VolumeValidator
     from ._violin import ViolinValidator
@@ -11,6 +12,7 @@ if sys.version_info < (3, 7):
     from ._streamtube import StreamtubeValidator
     from ._splom import SplomValidator
     from ._scatterternary import ScatterternaryValidator
+    from ._scattersmith import ScattersmithValidator
     from ._scatterpolargl import ScatterpolarglValidator
     from ._scatterpolar import ScatterpolarValidator
     from ._scattermapbox import ScattermapboxValidator
@@ -68,6 +70,7 @@ else:
             "._streamtube.StreamtubeValidator",
             "._splom.SplomValidator",
             "._scatterternary.ScatterternaryValidator",
+            "._scattersmith.ScattersmithValidator",
             "._scatterpolargl.ScatterpolarglValidator",
             "._scatterpolar.ScatterpolarValidator",
             "._scattermapbox.ScattermapboxValidator",

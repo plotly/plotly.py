@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zerolinewidth import ZerolinewidthValidator
     from ._zerolinecolor import ZerolinecolorValidator
     from ._zeroline import ZerolineValidator
@@ -44,6 +45,7 @@ if sys.version_info < (3, 7):
     from ._minexponent import MinexponentValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
+    from ._labelalias import LabelaliasValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
     from ._gridcolor import GridcolorValidator
@@ -107,6 +109,7 @@ else:
             "._minexponent.MinexponentValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
+            "._labelalias.LabelaliasValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
             "._gridcolor.GridcolorValidator",
