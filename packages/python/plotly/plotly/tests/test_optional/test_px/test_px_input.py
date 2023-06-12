@@ -14,7 +14,9 @@ def add_interchange_module_for_old_pandas():
     if not hasattr(pd.api, "interchange"):
         pd.api.interchange = mock.MagicMock()
         # to make the following import work: `import pandas.api.interchange`
-        with mock.patch.dict("sys.modules", {"pandas.api.interchange": pd.api.interchange}):
+        with mock.patch.dict(
+            "sys.modules", {"pandas.api.interchange": pd.api.interchange}
+        ):
             yield
     else:
         yield
@@ -246,7 +248,9 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
-def test_build_df_using_interchange_protocol_mock(add_interchange_module_for_old_pandas):
+def test_build_df_using_interchange_protocol_mock(
+    add_interchange_module_for_old_pandas,
+):
     class CustomDataFrame:
         def __dataframe__(self):
             pass
