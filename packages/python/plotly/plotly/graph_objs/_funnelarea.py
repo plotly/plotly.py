@@ -3,6 +3,7 @@ import copy as _copy
 
 
 class Funnelarea(_BaseTraceType):
+
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -729,6 +730,8 @@ class Funnelarea(_BaseTraceType):
                     :class:`plotly.graph_objects.funnelarea.marker.
                     Line` instance or dict with compatible
                     properties
+                pattern
+                    Sets the pattern within the marker.
 
         Returns
         -------
