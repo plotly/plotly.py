@@ -10,5 +10,5 @@ class LocationmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["ISO-3", "USA-states", "country names", "geojson-id"]
             ),
-            **kwargs
+            **kwargs,
         )

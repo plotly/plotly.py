@@ -63,5 +63,5 @@ class RangebreaksValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 the axis.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

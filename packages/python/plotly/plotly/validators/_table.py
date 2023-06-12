@@ -21,14 +21,14 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 columns have an index base of zero.
             columnordersrc
                 Sets the source reference on Chart Studio Cloud
-                for  columnorder .
+                for `columnorder`.
             columnwidth
                 The width of columns expressed as a ratio.
                 Columns fill the available width in proportion
                 of their specified column widths.
             columnwidthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  columnwidth .
+                for `columnwidth`.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -37,7 +37,7 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             domain
                 :class:`plotly.graph_objects.table.Domain`
                 instance or dict with compatible properties
@@ -52,7 +52,7 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.table.Hoverlabel`
                 instance or dict with compatible properties
@@ -63,7 +63,13 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.table.Legendgroupt
                 itle` instance or dict with compatible
@@ -78,6 +84,9 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -94,7 +103,7 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -134,5 +143,5 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -21,7 +21,7 @@ class XBins(_BaseTraceHierarchyType):
         maximum data value. Like `start`, for dates use a date string,
         and for category data `end` is based on the category serial
         numbers.
-    
+
         The 'end' property accepts values of any type
 
         Returns
@@ -47,7 +47,7 @@ class XBins(_BaseTraceHierarchyType):
         data, use milliseconds or "M<n>" for months, as in
         `axis.dtick`. For category data, the number of categories to
         bin together (always defaults to 1).
-    
+
         The 'size' property accepts values of any type
 
         Returns
@@ -75,7 +75,7 @@ class XBins(_BaseTraceHierarchyType):
         Dates behave similarly, and `start` should be a date string.
         For category data, `start` is based on the category serial
         numbers, and defaults to -0.5.
-    
+
         The 'start' property accepts values of any type
 
         Returns
@@ -127,7 +127,7 @@ class XBins(_BaseTraceHierarchyType):
     def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
         """
         Construct a new XBins object
-        
+
         Parameters
         ----------
         arg
@@ -185,8 +185,8 @@ class XBins(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram2d.XBins 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram2d.XBins
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram2d.XBins`"""
             )
 

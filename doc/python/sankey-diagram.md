@@ -5,12 +5,12 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernel_info:
     name: python2
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -22,7 +22,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.8.8
   plotly:
     description: How to make Sankey Diagrams in Python with Plotly.
     display_as: basic
@@ -113,9 +113,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'sankey-diagram', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'sankey-diagram', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Style Sankey Diagram
 This example also uses [hovermode](https://plotly.com/python/reference/layout/#layout-hovermode) to enable multiple tooltips.
@@ -206,6 +210,34 @@ fig = go.Figure(go.Sankey(
         "source": [0, 0, 1, 2, 5, 4, 3, 5],
         "target": [5, 3, 4, 3, 0, 2, 2, 3],
         "value": [1, 2, 1, 1, 1, 1, 1, 2]}))
+
+fig.show()
+```
+
+### Sankey Diagram with Arrow Links
+
+*New in 5.10*
+
+Create a Sankey diagram with arrow links by setting the `arrowlen` attribute of `link`:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Sankey(
+    arrangement='snap',
+    node=dict(
+        label=['A', 'B', 'C', 'D', 'E', 'F'],
+        x=[0.2, 0.1, 0.5, 0.7, 0.3, 0.5],
+        y=[0.7, 0.5, 0.2, 0.4, 0.2, 0.3],
+        pad=10  
+    ),
+    link=dict(
+        arrowlen=15,
+        source=[0, 0, 1, 2, 5, 4, 3, 5],
+        target=[5, 3, 4, 3, 0, 2, 2, 3],
+        value=[1, 2, 1, 1, 1, 1, 1, 2]  
+    )
+))
 
 fig.show()
 ```

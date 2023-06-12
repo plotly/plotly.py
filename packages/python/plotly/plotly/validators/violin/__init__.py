@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._ysrc import YsrcValidator
     from ._yhoverformat import YhoverformatValidator
     from ._yaxis import YaxisValidator
@@ -27,6 +28,7 @@ if sys.version_info < (3, 7):
     from ._selected import SelectedValidator
     from ._scalemode import ScalemodeValidator
     from ._scalegroup import ScalegroupValidator
+    from ._quartilemethod import QuartilemethodValidator
     from ._points import PointsValidator
     from ._pointpos import PointposValidator
     from ._orientation import OrientationValidator
@@ -38,9 +40,11 @@ if sys.version_info < (3, 7):
     from ._meanline import MeanlineValidator
     from ._marker import MarkerValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._jitter import JitterValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -91,6 +95,7 @@ else:
             "._selected.SelectedValidator",
             "._scalemode.ScalemodeValidator",
             "._scalegroup.ScalegroupValidator",
+            "._quartilemethod.QuartilemethodValidator",
             "._points.PointsValidator",
             "._pointpos.PointposValidator",
             "._orientation.OrientationValidator",
@@ -102,9 +107,11 @@ else:
             "._meanline.MeanlineValidator",
             "._marker.MarkerValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._jitter.JitterValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

@@ -11,5 +11,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             colorscale_path=kwargs.pop(
                 "colorscale_path", "funnel.marker.line.colorscale"
             ),
-            **kwargs
+            **kwargs,
         )

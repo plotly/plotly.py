@@ -16,7 +16,7 @@ class Lightposition(_BaseTraceHierarchyType):
     def x(self):
         """
         Numeric vector, representing the X coordinate for each vertex.
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-100000, 100000]
 
@@ -36,7 +36,7 @@ class Lightposition(_BaseTraceHierarchyType):
     def y(self):
         """
         Numeric vector, representing the Y coordinate for each vertex.
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-100000, 100000]
 
@@ -56,7 +56,7 @@ class Lightposition(_BaseTraceHierarchyType):
     def z(self):
         """
         Numeric vector, representing the Z coordinate for each vertex.
-    
+
         The 'z' property is a number and may be specified as:
           - An int or float in the interval [-100000, 100000]
 
@@ -89,7 +89,7 @@ class Lightposition(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Lightposition object
-        
+
         Parameters
         ----------
         arg
@@ -127,8 +127,8 @@ class Lightposition(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.streamtube.Lightposition 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.streamtube.Lightposition
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.streamtube.Lightposition`"""
             )
 

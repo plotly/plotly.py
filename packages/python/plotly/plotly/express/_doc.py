@@ -18,7 +18,7 @@ docs = dict(
     data_frame=[
         "DataFrame or array-like or dict",
         "This argument needs to be passed for column names (and not keyword names) to be used.",
-        "Array-like and dict are tranformed internally to a pandas DataFrame.",
+        "Array-like and dict are transformed internally to a pandas DataFrame.",
         "Optional: if missing, a DataFrame gets constructed under the hood using the other arguments.",
     ],
     x=[
@@ -199,8 +199,8 @@ docs = dict(
         "Values from this column or array_like appear in bold in the hover tooltip.",
     ],
     hover_data=[
-        "list of str or int, or Series or array-like, or dict",
-        "Either a list of names of columns in `data_frame`, or pandas Series,",
+        "str, or list of str or int, or Series or array-like, or dict",
+        "Either a name or list of names of columns in `data_frame`, or pandas Series,",
         "or array_like objects",
         "or a dict with column names as keys, with values True (for default formatting)",
         "False (in order to remove this column from hover information),",
@@ -211,8 +211,8 @@ docs = dict(
         "Values from these columns appear as extra data in the hover tooltip.",
     ],
     custom_data=[
-        colref_list_type,
-        colref_list_desc,
+        "str, or list of str or int, or Series or array-like",
+        "Either name or list of names of columns in `data_frame`, or pandas Series, or array_like objects",
         "Values from these columns are extra data, to be used in widgets or Dash callbacks for example. This data is not user-visible but is included in events emitted by the figure (lasso selection etc.)",
     ],
     text=[
@@ -590,6 +590,11 @@ docs = dict(
         "If `'standard'`, the ECDF is plotted such that values represent data at or below the point.",
         "If `'complementary'`, the CCDF is plotted such that values represent data above the point.",
         "If `'reversed'`, a variant of the CCDF is plotted such that values represent data at or above the point.",
+    ],
+    text_auto=[
+        "bool or string (default `False`)",
+        "If `True` or a string, the x or y or z values will be displayed as text, depending on the orientation",
+        "A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.",
     ],
 )
 

@@ -1,9 +1,11 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._opacity import OpacityValidator
     from ._line import LineValidator
     from ._layer import LayerValidator
+    from ._label import LabelValidator
     from ._fillrule import FillruleValidator
     from ._fillcolor import FillcolorValidator
     from ._drawdirection import DrawdirectionValidator
@@ -17,6 +19,7 @@ else:
             "._opacity.OpacityValidator",
             "._line.LineValidator",
             "._layer.LayerValidator",
+            "._label.LabelValidator",
             "._fillrule.FillruleValidator",
             "._fillcolor.FillcolorValidator",
             "._drawdirection.DrawdirectionValidator",

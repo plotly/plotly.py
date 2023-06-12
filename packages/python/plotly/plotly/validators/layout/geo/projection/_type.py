@@ -97,5 +97,5 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "winkel3",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

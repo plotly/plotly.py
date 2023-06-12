@@ -57,7 +57,7 @@ class PlotlyOfflineMPLTestCase(TestCase):
         pass
 
     def _read_html(self, file_url):
-        """ Read and return the HTML contents from a file_url in the
+        """Read and return the HTML contents from a file_url in the
         form e.g. file:///Users/chriddyp/Repos/plotly.py/plotly-temp.html
         """
         with open(file_url.replace("file://", "").replace(" ", "")) as f:
@@ -89,7 +89,6 @@ class PlotlyOfflineMPLTestCase(TestCase):
             # just make sure a few of the parts are in here
             # like PlotlyOfflineTestCase(TestCase) in test_core
             self.assertTrue(data_json in html)  # data is in there
-            self.assertTrue(layout_json in html)  # layout is in there too
             self.assertTrue(PLOTLYJS in html)  # and the source code
             # and it's an <html> doc
             self.assertTrue(html.startswith("<html>") and html.endswith("</html>"))

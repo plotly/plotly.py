@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -142,6 +142,23 @@ print(df)
 fig = px.treemap(df, path=['all', 'regions', 'sectors', 'vendors'], values='sales')
 fig.update_traces(root_color="lightgrey")
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+fig.show()
+```
+
+### Treemap with Rounded Corners
+
+
+*New in 5.12*
+
+Update treemap sectors to have rounded corners by configuring the `cornerradius` in px.
+
+```python
+import plotly.express as px
+fig = px.treemap(
+    names = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
+)
+fig.update_traces(marker=dict(cornerradius=5))
 fig.show()
 ```
 
@@ -403,6 +420,28 @@ fig.update_layout(
     uniformtext=dict(minsize=10, mode='hide'),
     margin = dict(t=50, l=25, r=25, b=25)
 )
+fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Treemap charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to the root node.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Treemap(
+        labels = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        root_color="lightgrey",
+        textfont_size=20,
+        marker=dict(pattern=dict(shape=["|"], solidity=0.80)),
+    )
+)
+
 fig.show()
 ```
 

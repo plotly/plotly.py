@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yaxis import YaxisValidator
     from ._xaxis import XaxisValidator
     from ._width import WidthValidator
@@ -21,21 +22,29 @@ if sys.version_info < (3, 7):
     from ._template import TemplateValidator
     from ._sunburstcolorway import SunburstcolorwayValidator
     from ._spikedistance import SpikedistanceValidator
+    from ._smith import SmithValidator
     from ._sliderdefaults import SliderdefaultsValidator
     from ._sliders import SlidersValidator
     from ._showlegend import ShowlegendValidator
     from ._shapedefaults import ShapedefaultsValidator
     from ._shapes import ShapesValidator
     from ._separators import SeparatorsValidator
+    from ._selectiondefaults import SelectiondefaultsValidator
+    from ._selections import SelectionsValidator
     from ._selectionrevision import SelectionrevisionValidator
     from ._selectdirection import SelectdirectionValidator
     from ._scene import SceneValidator
+    from ._scattermode import ScattermodeValidator
+    from ._scattergap import ScattergapValidator
     from ._polar import PolarValidator
     from ._plot_bgcolor import Plot_BgcolorValidator
     from ._piecolorway import PiecolorwayValidator
     from ._paper_bgcolor import Paper_BgcolorValidator
     from ._newshape import NewshapeValidator
+    from ._newselection import NewselectionValidator
     from ._modebar import ModebarValidator
+    from ._minreducedwidth import MinreducedwidthValidator
+    from ._minreducedheight import MinreducedheightValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._margin import MarginValidator
@@ -84,6 +93,7 @@ if sys.version_info < (3, 7):
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
     from ._activeshape import ActiveshapeValidator
+    from ._activeselection import ActiveselectionValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -111,21 +121,29 @@ else:
             "._template.TemplateValidator",
             "._sunburstcolorway.SunburstcolorwayValidator",
             "._spikedistance.SpikedistanceValidator",
+            "._smith.SmithValidator",
             "._sliderdefaults.SliderdefaultsValidator",
             "._sliders.SlidersValidator",
             "._showlegend.ShowlegendValidator",
             "._shapedefaults.ShapedefaultsValidator",
             "._shapes.ShapesValidator",
             "._separators.SeparatorsValidator",
+            "._selectiondefaults.SelectiondefaultsValidator",
+            "._selections.SelectionsValidator",
             "._selectionrevision.SelectionrevisionValidator",
             "._selectdirection.SelectdirectionValidator",
             "._scene.SceneValidator",
+            "._scattermode.ScattermodeValidator",
+            "._scattergap.ScattergapValidator",
             "._polar.PolarValidator",
             "._plot_bgcolor.Plot_BgcolorValidator",
             "._piecolorway.PiecolorwayValidator",
             "._paper_bgcolor.Paper_BgcolorValidator",
             "._newshape.NewshapeValidator",
+            "._newselection.NewselectionValidator",
             "._modebar.ModebarValidator",
+            "._minreducedwidth.MinreducedwidthValidator",
+            "._minreducedheight.MinreducedheightValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._margin.MarginValidator",
@@ -174,5 +192,6 @@ else:
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
             "._activeshape.ActiveshapeValidator",
+            "._activeselection.ActiveselectionValidator",
         ],
     )

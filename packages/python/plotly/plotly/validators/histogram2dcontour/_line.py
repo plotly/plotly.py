@@ -26,5 +26,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the contour line width in (in px)
 """,
             ),
-            **kwargs
+            **kwargs,
         )

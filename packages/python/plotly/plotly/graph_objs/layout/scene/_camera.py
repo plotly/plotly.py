@@ -18,19 +18,19 @@ class Camera(_BaseLayoutHierarchyType):
         Sets the (x,y,z) components of the 'center' camera vector This
         vector determines the translation (x,y,z) space about the
         center of this scene. By default, there is no such translation.
-    
+
         The 'center' property is an instance of Center
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.camera.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
-    
+
             Supported dict properties:
-                
+
                 x
-    
+
                 y
-    
+
                 z
 
         Returns
@@ -51,19 +51,19 @@ class Camera(_BaseLayoutHierarchyType):
         Sets the (x,y,z) components of the 'eye' camera vector. This
         vector determines the view point about the origin of this
         scene.
-    
+
         The 'eye' property is an instance of Eye
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.camera.Eye`
           - A dict of string/value properties that will be passed
             to the Eye constructor
-    
+
             Supported dict properties:
-                
+
                 x
-    
+
                 y
-    
+
                 z
 
         Returns
@@ -86,9 +86,9 @@ class Camera(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
-    
+
             Supported dict properties:
-                
+
                 type
                     Sets the projection type. The projection type
                     could be either "perspective" or
@@ -113,19 +113,19 @@ class Camera(_BaseLayoutHierarchyType):
         vector determines the up direction of this scene with respect
         to the page. The default is *{x: 0, y: 0, z: 1}* which means
         that the z axis points up.
-    
+
         The 'up' property is an instance of Up
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.camera.Up`
           - A dict of string/value properties that will be passed
             to the Up constructor
-    
+
             Supported dict properties:
-                
+
                 x
-    
+
                 y
-    
+
                 z
 
         Returns
@@ -167,7 +167,7 @@ class Camera(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Camera object
-        
+
         Parameters
         ----------
         arg
@@ -213,8 +213,8 @@ class Camera(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.scene.Camera 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.scene.Camera
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.Camera`"""
             )
 

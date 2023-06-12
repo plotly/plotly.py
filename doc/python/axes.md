@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.8
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -86,7 +86,7 @@ The different groups of Cartesian axes properties are
 - range of the axis
 - domain of the axis
 
-The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/pythone/categorical-axes/) and [axes of type `date`](/python/time-series/).
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/python/categorical-axes/) and [axes of type `date`](/python/time-series/).
 
 
 #### Set and Style Axes Title Labels
@@ -133,9 +133,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'axes', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'axes', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Moving Tick Labels Inside the Plot
 
@@ -147,6 +151,25 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)-1
 fig = px.bar(df, x=df.index, y="GOOG")
 fig.update_yaxes(ticklabelposition="inside top", title=None)
+fig.show()
+```
+
+#### Specifying Label Aliases 
+
+*New in 5.14*
+
+With `labelalias`, you can specify replacement text for specific tick and hover labels. In this example, the dataset has the values of "Sat" and "Sun" in the day column. By setting `labelalias=dict(Sat="Saturday", Sun="Sunday")`, we swap these out for "Saturday" and "Sunday".
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+df = df[df.day.isin(['Sat', 'Sun'])].groupby(by='day', as_index=False).sum(numeric_only=True)
+
+fig = px.bar(df, x="day", y="total_bill")
+fig.update_xaxes(labelalias=dict(Sat="Saturday", Sun="Sunday"))
+
 fig.show()
 ```
 
@@ -291,6 +314,22 @@ fig.update_yaxes(ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
 fig.show()
 ```
 
+##### Step for tick labels
+
+*New in v5.6*
+
+You can set a step for tick labels with `ticklabelstep`. In this example, we hide labels between every `2` ticks on the y axes. Similarly, this can be used with `fig.update_xaxes` for x axes: `fig.update_xaxes(ticklabelstep=2)`.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_yaxes(ticklabelstep=2)
+
+fig.show()
+```
+
 ##### Toggling axis labels
 
 The axis tick mark labels can be disabled by setting the `showticklabels` axis property to `False`.
@@ -362,6 +401,28 @@ fig.update_yaxes(tickprefix="$")
 
 # Set figure title
 fig.update_layout(title_text="Apple Stock Price")
+
+fig.show()
+```
+
+#### Adding minor ticks
+
+_new in 5.8_
+
+You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+
+In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the inside: `ticks="inside"`. On the x-axis we've specified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex")
+
+
+fig.update_xaxes(minor=dict(ticklen=6, tickcolor="black", showgrid=True))
+fig.update_yaxes(minor_ticks="inside")
 
 fig.show()
 ```
@@ -446,6 +507,20 @@ df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
 fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
 fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+
+fig.show()
+```
+
+_new in 5.8_
+
+By default grid lines are `solid`. Set the `griddash` property to change this style. In this example we display the x-axis grid lines as `dash` and the minor grid lines as `dot`. Other allowable values are `longdash`, `dashdot`, or `longdashdot`.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(gridcolor='black', griddash='dash', minor_griddash="dot")
 
 fig.show()
 ```

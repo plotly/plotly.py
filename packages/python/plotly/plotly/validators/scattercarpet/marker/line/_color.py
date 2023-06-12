@@ -13,5 +13,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             colorscale_path=kwargs.pop(
                 "colorscale_path", "scattercarpet.marker.line.colorscale"
             ),
-            **kwargs
+            **kwargs,
         )

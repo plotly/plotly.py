@@ -10,5 +10,5 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["-", "linear", "log", "date", "category", "multicategory"]
             ),
-            **kwargs
+            **kwargs,
         )

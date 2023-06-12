@@ -16,7 +16,7 @@ class Marker(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the marker color of all decreasing values.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,9 +79,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.waterfall.decreasing.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color of all decreasing values.
                 width
@@ -112,7 +112,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, line=None, **kwargs):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
@@ -146,8 +146,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.waterfall.decreasing.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.waterfall.decreasing.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.waterfall.decreasing.Marker`"""
             )
 

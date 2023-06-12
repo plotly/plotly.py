@@ -27,10 +27,11 @@ Modules:
 """
 from __future__ import absolute_import
 import sys
+from typing import TYPE_CHECKING
 from _plotly_utils.importers import relative_import
 
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from plotly import (
         graph_objs,
         tools,
@@ -101,7 +102,8 @@ def plot(data_frame, kind, **kwargs):
     if kind == "line":
         return line(data_frame, **kwargs)
     if kind == "area":
-        return area(data_frame, **kwargs)
+        new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["stacked"]}
+        return area(data_frame, **new_kwargs)
     if kind == "bar":
         return bar(data_frame, **kwargs)
     if kind == "barh":

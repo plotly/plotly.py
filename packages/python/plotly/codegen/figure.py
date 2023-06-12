@@ -1,19 +1,15 @@
 from io import StringIO
 from os import path as opath
 
-from _plotly_utils.basevalidators import (
-    BaseDataValidator,
-    CompoundValidator,
-    CompoundArrayValidator,
-)
 from codegen.datatypes import (
     reindent_validator_description,
     add_constructor_params,
     add_docstring,
 )
-from codegen.utils import PlotlyNode, write_source_py
+from codegen.utils import write_source_py
 
 import inflect
+from plotly.basedatatypes import BaseFigure
 
 
 def build_figure_py(
@@ -118,6 +114,82 @@ class {fig_classname}({base_classname}):\n"""
     """
     )
 
+    def add_wrapper(wrapped_name, full_params, param_list):
+        buffer.write(
+            f"""
+    def {wrapped_name}(self, {full_params}) -> "{fig_classname}":
+        '''
+        {getattr(BaseFigure, wrapped_name).__doc__}
+        '''
+        return super({fig_classname}, self).{wrapped_name}({param_list})
+    """
+        )
+
+    add_wrapper(
+        "update",
+        "dict1=None, overwrite=False, **kwargs",
+        "dict1, overwrite, **kwargs",
+    )
+
+    add_wrapper(
+        "update_traces",
+        "patch=None, selector=None, row=None, col=None, secondary_y=None, overwrite=False, **kwargs",
+        "patch, selector, row, col, secondary_y, overwrite, **kwargs",
+    )
+
+    add_wrapper(
+        "update_layout",
+        "dict1=None, overwrite=False, **kwargs",
+        "dict1, overwrite, **kwargs",
+    )
+
+    add_wrapper(
+        "for_each_trace",
+        "fn, selector=None, row=None, col=None, secondary_y=None",
+        "fn, selector, row, col, secondary_y",
+    )
+
+    add_wrapper(
+        "add_trace",
+        "trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False",
+        "trace, row, col, secondary_y, exclude_empty_subplots",
+    )
+
+    add_wrapper(
+        "add_traces",
+        "data,rows=None,cols=None,secondary_ys=None,exclude_empty_subplots=False",
+        "data,rows,cols,secondary_ys,exclude_empty_subplots",
+    )
+
+    add_wrapper(
+        "add_vline",
+        'x,row="all",col="all",exclude_empty_subplots=True,annotation=None,**kwargs',
+        "x,row,col,exclude_empty_subplots,annotation,**kwargs",
+    )
+
+    add_wrapper(
+        "add_hline",
+        'y,row="all",col="all",exclude_empty_subplots=True,annotation=None,**kwargs',
+        "y,row,col,exclude_empty_subplots,annotation,**kwargs",
+    )
+
+    add_wrapper(
+        "add_vrect",
+        'x0,x1,row="all",col="all",exclude_empty_subplots=True,annotation=None,**kwargs',
+        "x0,x1,row,col,exclude_empty_subplots,annotation,**kwargs",
+    )
+
+    add_wrapper(
+        "add_hrect",
+        'y0,y1,row="all",col="all",exclude_empty_subplots=True,annotation=None,**kwargs',
+        "y0,y1,row,col,exclude_empty_subplots,annotation,**kwargs",
+    )
+    add_wrapper(
+        "set_subplots",
+        "rows=None, cols=None, **make_subplots_args",
+        "rows, cols, **make_subplots_args",
+    )
+
     # ### add_trace methods for each trace type ###
     for trace_node in trace_nodes:
 
@@ -136,7 +208,10 @@ class {fig_classname}({base_classname}):\n"""
         if include_secondary_y:
             param_extras.append("secondary_y")
         add_constructor_params(
-            buffer, trace_node.child_datatypes, append_extras=param_extras
+            buffer,
+            trace_node.child_datatypes,
+            append_extras=param_extras,
+            output_type=fig_classname,
         )
 
         # #### Docstring ####
@@ -193,7 +268,7 @@ class {fig_classname}({base_classname}):\n"""
         """
         )
 
-        for i, subtype_node in enumerate(trace_node.child_datatypes):
+        for _, subtype_node in enumerate(trace_node.child_datatypes):
             subtype_prop_name = subtype_node.name_property
             buffer.write(
                 f"""
@@ -201,7 +276,7 @@ class {fig_classname}({base_classname}):\n"""
             )
 
         buffer.write(
-            f"""
+            """
             **kwargs)"""
         )
 
@@ -226,7 +301,7 @@ class {fig_classname}({base_classname}):\n"""
         if singular_name == "yaxis":
             secondary_y_1 = ", secondary_y=None"
             secondary_y_2 = ", secondary_y=secondary_y"
-            secondary_y_docstring = f"""
+            secondary_y_docstring = """
         secondary_y: boolean or None (default None)
             * If True, only select yaxis objects associated with the secondary
               y-axis of the subplot.
@@ -283,7 +358,7 @@ class {fig_classname}({base_classname}):\n"""
             '{singular_name}', selector, row, col{secondary_y_2})
 
     def for_each_{singular_name}(
-            self, fn, selector=None, row=None, col=None{secondary_y_1}):
+            self, fn, selector=None, row=None, col=None{secondary_y_1}) -> '{fig_classname}':
         \"\"\"
         Apply a function to all {singular_name} objects that satisfy the
         specified selection criteria
@@ -311,7 +386,7 @@ class {fig_classname}({base_classname}):\n"""
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the {fig_classname} object that the method was called on
         \"\"\"
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col{secondary_y_2}):
@@ -325,7 +400,7 @@ class {fig_classname}({base_classname}):\n"""
             selector=None,
             overwrite=False,
             row=None, col=None{secondary_y_1},
-            **kwargs):
+            **kwargs) -> '{fig_classname}':
         \"\"\"
         Perform a property update operation on all {singular_name} objects
         that satisfy the specified selection criteria
@@ -363,7 +438,7 @@ class {fig_classname}({base_classname}):\n"""
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the {fig_classname} object that the method was called on
         \"\"\"
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col{secondary_y_2}):
@@ -477,7 +552,7 @@ class {fig_classname}({base_classname}):\n"""
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the {fig_classname} object that the method was called on
         \"\"\"
         for obj in self._select_annotations_like(
             prop='{plural_name}',
@@ -498,7 +573,7 @@ class {fig_classname}({base_classname}):\n"""
         col=None,
         secondary_y=None,
         **kwargs
-    ):
+    ) -> '{fig_classname}':
         \"\"\"
         Perform a property update operation on all {plural_name} that satisfy the
         specified selection criteria
@@ -545,7 +620,7 @@ class {fig_classname}({base_classname}):\n"""
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the {fig_classname} object that the method was called on
         \"\"\"
         for obj in self._select_annotations_like(
             prop='{plural_name}',
@@ -569,6 +644,7 @@ class {fig_classname}({base_classname}):\n"""
             node.child_datatypes,
             prepend_extras=["arg"],
             append_extras=["row", "col", "secondary_y", "exclude_empty_subplots"],
+            output_type=fig_classname,
         )
 
         prepend_extras = [
@@ -610,7 +686,7 @@ class {fig_classname}({base_classname}):\n"""
             """
         )
 
-        for i, subtype_node in enumerate(node.child_datatypes):
+        for _, subtype_node in enumerate(node.child_datatypes):
             subtype_prop_name = subtype_node.name_property
             buffer.write(
                 f"""

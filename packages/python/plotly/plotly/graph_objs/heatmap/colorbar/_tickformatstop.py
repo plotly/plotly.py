@@ -15,19 +15,19 @@ class Tickformatstop(_BaseTraceHierarchyType):
     @property
     def dtickrange(self):
         """
-        range [*min*, *max*], where "min", "max" - dtick values which
-        describe some zoom level, it is possible to omit "min" or "max"
-        value by passing "null"
-    
-        The 'dtickrange' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'dtickrange[0]' property accepts values of any type
-    (1) The 'dtickrange[1]' property accepts values of any type
+            range [*min*, *max*], where "min", "max" - dtick values which
+            describe some zoom level, it is possible to omit "min" or "max"
+            value by passing "null"
 
-        Returns
-        -------
-        list
+            The 'dtickrange' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'dtickrange[0]' property accepts values of any type
+        (1) The 'dtickrange[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["dtickrange"]
 
@@ -42,7 +42,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
         """
         Determines whether or not this stop is used. If `false`, this
         stop is ignored even within its `dtickrange`.
-    
+
         The 'enabled' property must be specified as a bool
         (either True, or False)
 
@@ -68,7 +68,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -96,7 +96,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -118,7 +118,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
         """
         string - dtickformat for described zoom level, the same as
         "tickformat"
-    
+
         The 'value' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -178,11 +178,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         name=None,
         templateitemname=None,
         value=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Tickformatstop object
-        
+
         Parameters
         ----------
         arg
@@ -241,8 +241,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.heatmap.colorbar.Tickformatstop 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.heatmap.colorbar.Tickformatstop
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.heatmap.colorbar.Tickformatstop`"""
             )
 

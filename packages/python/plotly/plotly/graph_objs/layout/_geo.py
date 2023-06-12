@@ -49,7 +49,7 @@ class Geo(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Set the background color of the map
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -112,9 +112,9 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
-    
+
             Supported dict properties:
-                
+
                 lat
                     Sets the latitude of the map's center. For all
                     projection types, the map's latitude center
@@ -143,7 +143,7 @@ class Geo(_BaseLayoutHierarchyType):
     def coastlinecolor(self):
         """
         Sets the coastline color.
-    
+
         The 'coastlinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -202,7 +202,7 @@ class Geo(_BaseLayoutHierarchyType):
     def coastlinewidth(self):
         """
         Sets the coastline stroke width (in px).
-    
+
         The 'coastlinewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -222,7 +222,7 @@ class Geo(_BaseLayoutHierarchyType):
     def countrycolor(self):
         """
         Sets line color of the country boundaries.
-    
+
         The 'countrycolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -281,7 +281,7 @@ class Geo(_BaseLayoutHierarchyType):
     def countrywidth(self):
         """
         Sets line width (in px) of the country boundaries.
-    
+
         The 'countrywidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -305,9 +305,9 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this geo subplot .
@@ -363,7 +363,7 @@ class Geo(_BaseLayoutHierarchyType):
         in the `fitbounds` computations. If "geojson", the entire trace
         input `geojson` (if provided) is considered in the `fitbounds`
         computations, Defaults to False.
-    
+
         The 'fitbounds' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [False, 'locations', 'geojson']
@@ -384,7 +384,7 @@ class Geo(_BaseLayoutHierarchyType):
     def framecolor(self):
         """
         Sets the color the frame.
-    
+
         The 'framecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -443,7 +443,7 @@ class Geo(_BaseLayoutHierarchyType):
     def framewidth(self):
         """
         Sets the stroke width (in px) of the frame.
-    
+
         The 'framewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -463,7 +463,7 @@ class Geo(_BaseLayoutHierarchyType):
     def lakecolor(self):
         """
         Sets the color of the lakes.
-    
+
         The 'lakecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -522,7 +522,7 @@ class Geo(_BaseLayoutHierarchyType):
     def landcolor(self):
         """
         Sets the land mass color.
-    
+
         The 'landcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -585,14 +585,19 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Lataxis`
           - A dict of string/value properties that will be passed
             to the Lataxis constructor
-    
+
             Supported dict properties:
-                
+
                 dtick
                     Sets the graticule's longitude/latitude tick
                     step.
                 gridcolor
                     Sets the graticule's stroke color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the graticule's stroke width (in px).
                 range
@@ -625,14 +630,19 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`
           - A dict of string/value properties that will be passed
             to the Lonaxis constructor
-    
+
             Supported dict properties:
-                
+
                 dtick
                     Sets the graticule's longitude/latitude tick
                     step.
                 gridcolor
                     Sets the graticule's stroke color.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 gridwidth
                     Sets the graticule's stroke width (in px).
                 range
@@ -661,7 +671,7 @@ class Geo(_BaseLayoutHierarchyType):
     def oceancolor(self):
         """
         Sets the ocean color
-    
+
         The 'oceancolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -724,9 +734,9 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
-    
+
             Supported dict properties:
-                
+
                 distance
                     For satellite projection type only. Sets the
                     distance from the center of the sphere to the
@@ -768,7 +778,7 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the resolution of the base layers. The values have units
         of km/mm e.g. 110 corresponds to a scale ratio of
         1:110,000,000.
-    
+
         The 'resolution' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [110, 50]
@@ -789,7 +799,7 @@ class Geo(_BaseLayoutHierarchyType):
     def rivercolor(self):
         """
         Sets color of the rivers.
-    
+
         The 'rivercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -848,7 +858,7 @@ class Geo(_BaseLayoutHierarchyType):
     def riverwidth(self):
         """
         Sets the stroke width (in px) of the rivers.
-    
+
         The 'riverwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -868,7 +878,7 @@ class Geo(_BaseLayoutHierarchyType):
     def scope(self):
         """
         Set the scope of the map.
-    
+
         The 'scope' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['africa', 'asia', 'europe', 'north america', 'south
@@ -890,7 +900,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showcoastlines(self):
         """
         Sets whether or not the coastlines are drawn.
-    
+
         The 'showcoastlines' property must be specified as a bool
         (either True, or False)
 
@@ -910,7 +920,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showcountries(self):
         """
         Sets whether or not country boundaries are drawn.
-    
+
         The 'showcountries' property must be specified as a bool
         (either True, or False)
 
@@ -930,7 +940,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showframe(self):
         """
         Sets whether or not a frame is drawn around the map.
-    
+
         The 'showframe' property must be specified as a bool
         (either True, or False)
 
@@ -950,7 +960,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showlakes(self):
         """
         Sets whether or not lakes are drawn.
-    
+
         The 'showlakes' property must be specified as a bool
         (either True, or False)
 
@@ -970,7 +980,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showland(self):
         """
         Sets whether or not land masses are filled in color.
-    
+
         The 'showland' property must be specified as a bool
         (either True, or False)
 
@@ -990,7 +1000,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showocean(self):
         """
         Sets whether or not oceans are filled in color.
-    
+
         The 'showocean' property must be specified as a bool
         (either True, or False)
 
@@ -1010,7 +1020,7 @@ class Geo(_BaseLayoutHierarchyType):
     def showrivers(self):
         """
         Sets whether or not rivers are drawn.
-    
+
         The 'showrivers' property must be specified as a bool
         (either True, or False)
 
@@ -1031,7 +1041,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not boundaries of subunits within countries
         (e.g. states, provinces) are drawn.
-    
+
         The 'showsubunits' property must be specified as a bool
         (either True, or False)
 
@@ -1051,7 +1061,7 @@ class Geo(_BaseLayoutHierarchyType):
     def subunitcolor(self):
         """
         Sets the color of the subunits boundaries.
-    
+
         The 'subunitcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1110,7 +1120,7 @@ class Geo(_BaseLayoutHierarchyType):
     def subunitwidth(self):
         """
         Sets the stroke width (in px) of the subunits boundaries.
-    
+
         The 'subunitwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1131,7 +1141,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Controls persistence of user-driven changes in the view
         (projection and center). Defaults to `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1150,7 +1160,7 @@ class Geo(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Sets the default visibility of the base layers.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -1295,11 +1305,11 @@ class Geo(_BaseLayoutHierarchyType):
         subunitwidth=None,
         uirevision=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Geo object
-        
+
         Parameters
         ----------
         arg
@@ -1416,8 +1426,8 @@ class Geo(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Geo 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Geo
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Geo`"""
             )
 

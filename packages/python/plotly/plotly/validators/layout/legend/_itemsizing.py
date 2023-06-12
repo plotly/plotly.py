@@ -8,5 +8,5 @@ class ItemsizingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "legend"),
             values=kwargs.pop("values", ["trace", "constant"]),
-            **kwargs
+            **kwargs,
         )

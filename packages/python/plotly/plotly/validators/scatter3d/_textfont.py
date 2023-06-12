@@ -14,7 +14,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -36,8 +36,8 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

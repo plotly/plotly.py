@@ -16,7 +16,7 @@ class Textfont(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the text font color of selected points.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -81,7 +81,7 @@ class Textfont(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Textfont object
-        
+
         Parameters
         ----------
         arg
@@ -112,8 +112,8 @@ class Textfont(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.barpolar.selected.Textfont 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.barpolar.selected.Textfont
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.barpolar.selected.Textfont`"""
             )
 

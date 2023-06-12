@@ -22,13 +22,13 @@ import sphinx_bootstrap_theme
 # -- Project information -----------------------------------------------------
 
 project = ""
-copyright = "2020, Plotly"
+copyright = "2022, Plotly"
 author = "Plotly"
 
 # The short X.Y version
 version = ""
 # The full version, including alpha/beta/rc tags
-release = "5.3.1"
+release = "5.15.0"
 
 
 # -- General configuration ---------------------------------------------------

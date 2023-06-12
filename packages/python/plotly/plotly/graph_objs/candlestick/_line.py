@@ -18,7 +18,7 @@ class Line(_BaseTraceHierarchyType):
         Sets the width (in px) of line bounding the box(es). Note that
         this style setting can also be set per direction via
         `increasing.line.width` and `decreasing.line.width`.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -47,7 +47,7 @@ class Line(_BaseTraceHierarchyType):
     def __init__(self, arg=None, width=None, **kwargs):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -81,8 +81,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.candlestick.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.candlestick.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.candlestick.Line`"""
             )
 

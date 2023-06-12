@@ -27,7 +27,17 @@ class TestAddTracesRowsColsDataTypes(TestCase):
         from plotly.subplots import make_subplots
 
         fig2 = make_subplots(1, 2)
-        fig2.add_traces(fig.data, rows=[1,] * len(fig.data), cols=[1,] * len(fig.data))
+        fig2.add_traces(
+            fig.data,
+            rows=[
+                1,
+            ]
+            * len(fig.data),
+            cols=[
+                1,
+            ]
+            * len(fig.data),
+        )
 
         expected_data_length = 4
 

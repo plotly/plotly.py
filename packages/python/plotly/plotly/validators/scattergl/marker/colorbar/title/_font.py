@@ -6,7 +6,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="font",
         parent_name="scattergl.marker.colorbar.title",
-        **kwargs
+        **kwargs,
     ):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -38,5 +38,5 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs
+            **kwargs,
         )

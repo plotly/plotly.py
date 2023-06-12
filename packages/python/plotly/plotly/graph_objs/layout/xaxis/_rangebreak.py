@@ -23,18 +23,18 @@ class Rangebreak(_BaseLayoutHierarchyType):
     @property
     def bounds(self):
         """
-        Sets the lower and upper bounds of this axis rangebreak. Can be
-        used with `pattern`.
-    
-        The 'bounds' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'bounds[0]' property accepts values of any type
-    (1) The 'bounds[1]' property accepts values of any type
+            Sets the lower and upper bounds of this axis rangebreak. Can be
+            used with `pattern`.
 
-        Returns
-        -------
-        list
+            The 'bounds' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'bounds[0]' property accepts values of any type
+        (1) The 'bounds[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["bounds"]
 
@@ -49,7 +49,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         """
         Sets the size of each `values` item. The default is one day in
         milliseconds.
-    
+
         The 'dvalue' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -70,7 +70,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         """
         Determines whether this axis rangebreak is enabled or disabled.
         Please note that `rangebreaks` only work for "date" axis type.
-    
+
         The 'enabled' property must be specified as a bool
         (either True, or False)
 
@@ -96,7 +96,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -126,7 +126,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         'mon'] }   breaks from Saturday to Monday (i.e. skips the
         weekends). - { pattern: 'hour', bounds: [17, 8] }   breaks from
         5pm to 8am (i.e. skips non-work hours).
-    
+
         The 'pattern' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['day of week', 'hour', '']
@@ -154,7 +154,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -177,7 +177,7 @@ class Rangebreak(_BaseLayoutHierarchyType):
         Sets the coordinate values corresponding to the rangebreaks. An
         alternative to `bounds`. Use `dvalue` to set the size of the
         values along the axis.
-    
+
         The 'values' property is an info array that may be specified as:
         * a list of elements where:
           The 'values[i]' property accepts values of any type
@@ -254,11 +254,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         pattern=None,
         templateitemname=None,
         values=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Rangebreak object
-        
+
         Parameters
         ----------
         arg
@@ -332,8 +332,8 @@ class Rangebreak(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.xaxis.Rangebreak 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.xaxis.Rangebreak
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.Rangebreak`"""
             )
 

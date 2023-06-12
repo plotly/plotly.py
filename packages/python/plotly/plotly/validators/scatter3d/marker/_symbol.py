@@ -21,5 +21,5 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "x",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

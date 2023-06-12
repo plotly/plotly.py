@@ -9,7 +9,7 @@ import datetime
 from plotly.express.imshow_utils import rescale_intensity
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
-img_gray = np.arange(100, dtype=np.float).reshape((10, 10))
+img_gray = np.arange(100, dtype=float).reshape((10, 10))
 
 
 def decode_image_string(image_string):
@@ -45,17 +45,17 @@ def test_zmax():
 
 def test_automatic_zmax_from_dtype():
     dtypes_dict = {
-        np.uint8: 2 ** 8 - 1,
-        np.uint16: 2 ** 16 - 1,
-        np.float: 1,
-        np.bool: 255,
+        np.uint8: 2**8 - 1,
+        np.uint16: 2**16 - 1,
+        float: 1,
+        bool: 255,
     }
     for key, val in dtypes_dict.items():
         img = np.array([0, 1], dtype=key)
         img = np.dstack((img,) * 3)
         fig = px.imshow(img, binary_string=False)
         # For uint8 in "infer" mode we don't pass zmin/zmax unless specified
-        if key in [np.uint8, np.bool]:
+        if key in [np.uint8, bool]:
             assert fig.data[0]["zmax"] is None
         else:
             assert fig.data[0]["zmax"] == (val, val, val, 255)
@@ -195,7 +195,9 @@ def test_imshow_xarray_slicethrough():
 
 
 def test_imshow_labels_and_ranges():
-    fig = px.imshow([[1, 2], [3, 4], [5, 6]],)
+    fig = px.imshow(
+        [[1, 2], [3, 4], [5, 6]],
+    )
     assert fig.layout.xaxis.title.text is None
     assert fig.layout.yaxis.title.text is None
     assert fig.layout.coloraxis.colorbar.title.text is None
@@ -384,7 +386,11 @@ def test_facet_col(facet_col, binary_string):
 @pytest.mark.parametrize("binary_string", [False, True])
 def test_animation_frame_grayscale(animation_frame, binary_string):
     img = np.random.randint(255, size=(10, 9, 8)).astype(np.uint8)
-    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    fig = px.imshow(
+        img,
+        animation_frame=animation_frame,
+        binary_string=binary_string,
+    )
     nslices = img.shape[animation_frame]
     assert len(fig.frames) == nslices
 
@@ -393,7 +399,11 @@ def test_animation_frame_grayscale(animation_frame, binary_string):
 @pytest.mark.parametrize("binary_string", [False, True])
 def test_animation_frame_rgb(animation_frame, binary_string):
     img = np.random.randint(255, size=(10, 9, 8, 3)).astype(np.uint8)
-    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    fig = px.imshow(
+        img,
+        animation_frame=animation_frame,
+        binary_string=binary_string,
+    )
     nslices = img.shape[animation_frame]
     assert len(fig.frames) == nslices
 

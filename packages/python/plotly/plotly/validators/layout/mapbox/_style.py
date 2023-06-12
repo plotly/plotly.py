@@ -26,5 +26,5 @@ class StyleValidator(_plotly_utils.basevalidators.AnyValidator):
                     "white-bg",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

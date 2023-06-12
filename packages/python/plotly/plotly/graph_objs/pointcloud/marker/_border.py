@@ -17,7 +17,7 @@ class Border(_BaseTraceHierarchyType):
         """
         Specifies what fraction of the marker area is covered with the
         border.
-    
+
         The 'arearatio' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -39,7 +39,7 @@ class Border(_BaseTraceHierarchyType):
         Sets the stroke color. It accepts a specific color. If the
         color is not fully opaque and there are hundreds of thousands
         of points, it may cause slower zooming and panning.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -110,7 +110,7 @@ class Border(_BaseTraceHierarchyType):
     def __init__(self, arg=None, arearatio=None, color=None, **kwargs):
         """
         Construct a new Border object
-        
+
         Parameters
         ----------
         arg
@@ -147,8 +147,8 @@ class Border(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.pointcloud.marker.Border 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.pointcloud.marker.Border
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.pointcloud.marker.Border`"""
             )
 

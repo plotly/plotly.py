@@ -16,17 +16,17 @@ class Currentvalue(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets the font of the current value label text.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.slider.currentvalue.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -63,7 +63,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         """
         The amount of space, in pixels, between the current value label
         and the slider.
-    
+
         The 'offset' property is a number and may be specified as:
           - An int or float
 
@@ -84,7 +84,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         """
         When currentvalue.visible is true, this sets the prefix of the
         label.
-    
+
         The 'prefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -106,7 +106,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         """
         When currentvalue.visible is true, this sets the suffix of the
         label.
-    
+
         The 'suffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -127,7 +127,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Shows the currently-selected value above the slider.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -148,7 +148,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         """
         The alignment of the value readout relative to the length of
         the slider.
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -195,11 +195,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         suffix=None,
         visible=None,
         xanchor=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Currentvalue object
-        
+
         Parameters
         ----------
         arg
@@ -244,8 +244,8 @@ class Currentvalue(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.slider.Currentvalue 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.slider.Currentvalue
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`"""
             )
 

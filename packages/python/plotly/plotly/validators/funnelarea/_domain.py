@@ -26,5 +26,5 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace (in plot fraction).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

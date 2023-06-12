@@ -8,7 +8,14 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.hoverlabel"
-    _valid_props = {"align", "bgcolor", "bordercolor", "font", "namelength"}
+    _valid_props = {
+        "align",
+        "bgcolor",
+        "bordercolor",
+        "font",
+        "grouptitlefont",
+        "namelength",
+    }
 
     # align
     # -----
@@ -18,7 +25,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         Sets the horizontal alignment of the text content within hover
         label box. Has an effect only if the hover label text spans
         more two or more lines
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'right', 'auto']
@@ -39,7 +46,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of all hover labels on graph
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -98,7 +105,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the border color of all hover labels on graph.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -158,17 +165,17 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         """
         Sets the default hover label font used by all traces on the
         graph.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -198,6 +205,53 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     def font(self, val):
         self["font"] = val
 
+    # grouptitlefont
+    # --------------
+    @property
+    def grouptitlefont(self):
+        """
+        Sets the font for group titles in hover (unified modes).
+        Defaults to `hoverlabel.font`.
+
+        The 'grouptitlefont' property is an instance of Grouptitlefont
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.hoverlabel.Grouptitlefont`
+          - A dict of string/value properties that will be passed
+            to the Grouptitlefont constructor
+
+            Supported dict properties:
+
+                color
+
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        plotly.graph_objs.layout.hoverlabel.Grouptitlefont
+        """
+        return self["grouptitlefont"]
+
+    @grouptitlefont.setter
+    def grouptitlefont(self, val):
+        self["grouptitlefont"] = val
+
     # namelength
     # ----------
     @property
@@ -209,7 +263,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         and an integer >3 will show the whole name if it is less than
         that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
-    
+
         The 'namelength' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
@@ -240,6 +294,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         font
             Sets the default hover label font used by all traces on
             the graph.
+        grouptitlefont
+            Sets the font for group titles in hover (unified
+            modes). Defaults to `hoverlabel.font`.
         namelength
             Sets the default length (in number of characters) of
             the trace name in the hover labels for all traces. -1
@@ -257,12 +314,13 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         bgcolor=None,
         bordercolor=None,
         font=None,
+        grouptitlefont=None,
         namelength=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Hoverlabel object
-        
+
         Parameters
         ----------
         arg
@@ -280,6 +338,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         font
             Sets the default hover label font used by all traces on
             the graph.
+        grouptitlefont
+            Sets the font for group titles in hover (unified
+            modes). Defaults to `hoverlabel.font`.
         namelength
             Sets the default length (in number of characters) of
             the trace name in the hover labels for all traces. -1
@@ -310,8 +371,8 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Hoverlabel 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Hoverlabel
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
             )
 
@@ -338,6 +399,10 @@ an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
         _v = font if font is not None else _v
         if _v is not None:
             self["font"] = _v
+        _v = arg.pop("grouptitlefont", None)
+        _v = grouptitlefont if grouptitlefont is not None else _v
+        if _v is not None:
+            self["grouptitlefont"] = _v
         _v = arg.pop("namelength", None)
         _v = namelength if namelength is not None else _v
         if _v is not None:
