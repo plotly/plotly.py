@@ -1272,12 +1272,12 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
 
     length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
     df_output.update(
-        {col_name: pd.Series(range(length), name=col_name) for col_name in ranges}
+        {col_name: to_unindexed_series(range(length), col_name) for col_name in ranges}
     )
     df_output.update(
         {
             # constant is single value. repeat by len to avoid creating NaN on concating
-            col_name: pd.Series([constants[col_name]] * length, name=col_name)
+            col_name: to_unindexed_series([constants[col_name]] * length, col_name)
             for col_name in constants
         }
     )
