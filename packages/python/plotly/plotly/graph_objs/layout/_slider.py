@@ -42,7 +42,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         Determines which button (by index starting from 0) is
         considered active.
-    
+
         The 'active' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -62,7 +62,7 @@ class Slider(_BaseLayoutHierarchyType):
     def activebgcolor(self):
         """
         Sets the background color of the slider grip while dragging.
-    
+
         The 'activebgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -121,7 +121,7 @@ class Slider(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the slider.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -180,7 +180,7 @@ class Slider(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the slider.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -239,7 +239,7 @@ class Slider(_BaseLayoutHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) of the border enclosing the slider.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -263,9 +263,9 @@ class Slider(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`
           - A dict of string/value properties that will be passed
             to the Currentvalue constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets the font of the current value label text.
                 offset
@@ -300,17 +300,17 @@ class Slider(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets the font of the slider step labels.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.slider.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -348,7 +348,7 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the length of the slider This measure excludes the padding
         of both ends. That is, the slider's length is this length minus
         the padding on both ends.
-    
+
         The 'len' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -369,7 +369,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         Determines whether this slider length is set in units of plot
         "fraction" or in *pixels. Use `len` to set the value.
-    
+
         The 'lenmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fraction', 'pixels']
@@ -390,7 +390,7 @@ class Slider(_BaseLayoutHierarchyType):
     def minorticklen(self):
         """
         Sets the length in pixels of minor step tick marks
-    
+
         The 'minorticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -416,7 +416,7 @@ class Slider(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -437,15 +437,15 @@ class Slider(_BaseLayoutHierarchyType):
     def pad(self):
         """
         Set the padding of the slider component along each side.
-    
+
         The 'pad' property is an instance of Pad
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.slider.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
-    
+
             Supported dict properties:
-                
+
                 b
                     The amount of padding (in px) along the bottom
                     of the component.
@@ -479,9 +479,9 @@ class Slider(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.slider.Step
           - A list or tuple of dicts of string/value properties that
             will be passed to the Step constructor
-    
+
             Supported dict properties:
-                
+
                 args
                     Sets the arguments values to be passed to the
                     Plotly method set in `method` on slide.
@@ -552,13 +552,13 @@ class Slider(_BaseLayoutHierarchyType):
         When used in a template (as
         layout.template.layout.slider.stepdefaults), sets the default
         property values to use for elements of layout.slider.steps
-    
+
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.slider.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -584,7 +584,7 @@ class Slider(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -605,7 +605,7 @@ class Slider(_BaseLayoutHierarchyType):
     def tickcolor(self):
         """
         Sets the color of the border enclosing the slider.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -664,7 +664,7 @@ class Slider(_BaseLayoutHierarchyType):
     def ticklen(self):
         """
         Sets the length in pixels of step tick marks
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -684,7 +684,7 @@ class Slider(_BaseLayoutHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -708,9 +708,9 @@ class Slider(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.slider.Transition`
           - A dict of string/value properties that will be passed
             to the Transition constructor
-    
+
             Supported dict properties:
-                
+
                 duration
                     Sets the duration of the slider transition
                 easing
@@ -733,7 +733,7 @@ class Slider(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not the slider is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -753,7 +753,7 @@ class Slider(_BaseLayoutHierarchyType):
     def x(self):
         """
         Sets the x position (in normalized coordinates) of the slider.
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -775,7 +775,7 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the slider's horizontal position anchor. This anchor binds
         the `x` position to the "left", "center" or "right" of the
         range selector.
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'left', 'center', 'right']
@@ -796,7 +796,7 @@ class Slider(_BaseLayoutHierarchyType):
     def y(self):
         """
         Sets the y position (in normalized coordinates) of the slider.
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -818,7 +818,7 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the slider's vertical position anchor This anchor binds
         the `y` position to the "top", "middle" or "bottom" of the
         range selector.
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'top', 'middle', 'bottom']
@@ -951,11 +951,11 @@ class Slider(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Slider object
-        
+
         Parameters
         ----------
         arg
@@ -1067,8 +1067,8 @@ class Slider(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Slider 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Slider
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Slider`"""
             )
 

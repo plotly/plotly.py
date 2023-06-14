@@ -17,5 +17,5 @@ class TransitionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 transition
 """,
             ),
-            **kwargs
+            **kwargs,
         )

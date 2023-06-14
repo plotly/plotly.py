@@ -17,17 +17,17 @@ class Title(_BaseTraceHierarchyType):
         """
         Sets this color bar's title font. Note that the title's font
         used to be set by the now deprecated `titlefont` attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scatterternary.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -67,7 +67,7 @@ class Title(_BaseTraceHierarchyType):
         defaults to "right" when `orientation` if "h". Note that the
         title's location used to be set by the now deprecated
         `titleside` attribute.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['right', 'top', 'bottom']
@@ -90,7 +90,7 @@ class Title(_BaseTraceHierarchyType):
         Sets the title of the color bar. Note that before the existence
         of `title.text`, the title's contents used to be defined as the
         `title` attribute itself. This behavior has been deprecated.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -131,7 +131,7 @@ class Title(_BaseTraceHierarchyType):
     def __init__(self, arg=None, font=None, side=None, text=None, **kwargs):
         """
         Construct a new Title object
-        
+
         Parameters
         ----------
         arg
@@ -176,8 +176,8 @@ class Title(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterternary.marker.colorbar.Title 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterternary.marker.colorbar.Title
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterternary.marker.colorbar.Title`"""
             )
 

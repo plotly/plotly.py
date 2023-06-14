@@ -16,17 +16,17 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
     def font(self):
         """
         Sets this legend group's title font.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scatterpolargl.legendgrouptitle.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -62,7 +62,7 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
     def text(self):
         """
         Sets the title of the legend group.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -91,7 +91,7 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
     def __init__(self, arg=None, font=None, text=None, **kwargs):
         """
         Construct a new Legendgrouptitle object
-        
+
         Parameters
         ----------
         arg
@@ -124,8 +124,8 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterpolargl.Legendgrouptitle 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterpolargl.Legendgrouptitle
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterpolargl.Legendgrouptitle`"""
             )
 

@@ -55,6 +55,12 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Tilted labels with "labelangle" may be
                 positioned better inside margins when
                 `labelposition` is set to "bottom".
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.parcoords.Legendgr
                 ouptitle` instance or dict with compatible
@@ -69,6 +75,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.parcoords.Line`
                 instance or dict with compatible properties
@@ -125,6 +134,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 different index, you can still preserve user-
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
+            unselected
+                :class:`plotly.graph_objects.parcoords.Unselect
+                ed` instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -132,5 +144,5 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

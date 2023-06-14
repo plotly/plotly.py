@@ -15,7 +15,7 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             coloraxis
@@ -38,7 +38,7 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`zmin` and
+                colorscale in color space, use `zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -79,6 +79,12 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.heatmapgl.Legendgr
                 ouptitle` instance or dict with compatible
@@ -93,6 +99,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -237,5 +246,5 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

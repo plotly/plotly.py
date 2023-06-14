@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.0
   plotly:
     description: How to make scatter plots in Python with Plotly.
     display_as: basic
@@ -94,13 +94,17 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'line-and-scatter', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'line-and-scatter', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Scatter plots and Categorical Axes
 
-Scatters plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
+Scatter plots can be made using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
 
 Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
 
@@ -110,6 +114,39 @@ df = px.data.medals_long()
 
 fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
 fig.update_traces(marker_size=10)
+fig.show()
+```
+
+### Grouped Scatter Points
+
+*New in 5.12*
+
+By default, scatter points at the same location are overlayed. We can see this in the previous example, with the values for Canada for bronze and silver. Set `scattermode='group'` to plot scatter points next to one another, centered around the shared location.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(scattermode="group")
+fig.show()
+```
+
+*New in 5.12*
+
+You can configure the gap between groups of scatter points using `scattergap`. Here we set it to `0.75`, which brings the points closer together by allocating more space to the gap between groups. If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value. 
+
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(scattermode="group", scattergap=0.75)
 fig.show()
 ```
 

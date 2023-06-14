@@ -32,12 +32,12 @@ class Line(_BaseTraceHierarchyType):
         """
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
-        `line.colorscale`. Has an effect only if in `line.color`is set
+        `line.colorscale`. Has an effect only if in `line.color` is set
         to a numerical array. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
+        `autocolorscale` is true, the default palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -58,10 +58,10 @@ class Line(_BaseTraceHierarchyType):
         """
         Determines whether or not the color domain is computed with
         respect to the input data (here in `line.color`) or the bounds
-        set in `line.cmin` and `line.cmax`  Has an effect only if in
-        `line.color`is set to a numerical array. Defaults to `false`
+        set in `line.cmin` and `line.cmax` Has an effect only if in
+        `line.color` is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -81,10 +81,10 @@ class Line(_BaseTraceHierarchyType):
     def cmax(self):
         """
         Sets the upper bound of the color domain. Has an effect only if
-        in `line.color`is set to a numerical array. Value should have
+        in `line.color` is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmin` must
         be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -105,10 +105,10 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the mid-point of the color domain by scaling `line.cmin`
         and/or `line.cmax` to be equidistant to this point. Has an
-        effect only if in `line.color`is set to a numerical array.
+        effect only if in `line.color` is set to a numerical array.
         Value should have the same units as in `line.color`. Has no
         effect when `line.cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -128,10 +128,10 @@ class Line(_BaseTraceHierarchyType):
     def cmin(self):
         """
         Sets the lower bound of the color domain. Has an effect only if
-        in `line.color`is set to a numerical array. Value should have
+        in `line.color` is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmax` must
         be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -150,11 +150,11 @@ class Line(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets thelinecolor. It accepts either a specific color or an
+        Sets the line color. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to `line.cmin`
         and `line.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -221,7 +221,7 @@ class Line(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -247,9 +247,9 @@ class Line(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.parcats.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -292,6 +292,16 @@ class Line(_BaseTraceHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -371,8 +381,8 @@ class Line(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -402,6 +412,16 @@ class Line(_BaseTraceHierarchyType):
                     to the ticks. Left and right options are used
                     when `orientation` is "h", top and bottom when
                     `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -461,9 +481,15 @@ class Line(_BaseTraceHierarchyType):
                     the title's location used to be set by the now
                     deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -473,10 +499,20 @@ class Line(_BaseTraceHierarchyType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -486,6 +522,10 @@ class Line(_BaseTraceHierarchyType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -502,18 +542,18 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale. Has an effect only if in `line.color`is
+        Sets the colorscale. Has an effect only if in `line.color` is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
         hex, hsl, hsv, or named color string. At minimum, a mapping for
         the lowest (0) and highest (1) values are required. For
         example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
-        control the bounds of the colorscale in color space,
-        use`line.cmin` and `line.cmax`. Alternatively, `colorscale` may
-        be a palette name string of the following list: Blackbody,Bluer
-        ed,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Por
-        tland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-    
+        control the bounds of the colorscale in color space, use
+        `line.cmin` and `line.cmax`. Alternatively, `colorscale` may be
+        a palette name string of the following list: Blackbody,Bluered,
+        Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portla
+        nd,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -557,7 +597,7 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -595,12 +635,14 @@ class Line(_BaseTraceHierarchyType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `count` and `probability`. Anything contained in tag `<extra>`
-        is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available.  This value
+        here applies when hovering over lines.Finally, the template
+        string has access to variables `count` and `probability`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -621,10 +663,10 @@ class Line(_BaseTraceHierarchyType):
     def reversescale(self):
         """
         Reverses the color mapping if true. Has an effect only if in
-        `line.color`is set to a numerical array. If true, `line.cmin`
+        `line.color` is set to a numerical array. If true, `line.cmin`
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -646,7 +688,7 @@ class Line(_BaseTraceHierarchyType):
         Sets the shape of the paths. If `linear`, paths are composed of
         straight lines. If `hspline`, paths are composed of horizontal
         curved splines
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'hspline']
@@ -667,9 +709,9 @@ class Line(_BaseTraceHierarchyType):
     def showscale(self):
         """
         Determines whether or not a colorbar is displayed for this
-        trace. Has an effect only if in `line.color`is set to a
+        trace. Has an effect only if in `line.color` is set to a
         numerical array.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -692,37 +734,37 @@ class Line(_BaseTraceHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `line.colorscale`. Has an effect only if in
-            `line.color`is set to a numerical array. In case
+            `line.color` is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
-            true, the default  palette will be chosen according to
+            true, the default palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `line.color`)
-            or the bounds set in `line.cmin` and `line.cmax`  Has
-            an effect only if in `line.color`is set to a numerical
+            or the bounds set in `line.cmin` and `line.cmax` Has an
+            effect only if in `line.color` is set to a numerical
             array. Defaults to `false` when `line.cmin` and
             `line.cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
         cmid
             Sets the mid-point of the color domain by scaling
             `line.cmin` and/or `line.cmax` to be equidistant to
-            this point. Has an effect only if in `line.color`is set
-            to a numerical array. Value should have the same units
-            as in `line.color`. Has no effect when `line.cauto` is
-            `false`.
+            this point. Has an effect only if in `line.color` is
+            set to a numerical array. Value should have the same
+            units as in `line.color`. Has no effect when
+            `line.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmax` must be set as well.
         color
-            Sets thelinecolor. It accepts either a specific color
+            Sets the line color. It accepts either a specific color
             or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `line.cmin` and `line.cmax` if
@@ -739,18 +781,18 @@ class Line(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
-            `line.color`is set to a numerical array. The colorscale
-            must be an array containing arrays mapping a normalized
-            value to an rgb, rgba, hex, hsl, hsv, or named color
-            string. At minimum, a mapping for the lowest (0) and
-            highest (1) values are required. For example, `[[0,
-            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-            bounds of the colorscale in color space, use`line.cmin`
-            and `line.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Blackbody,Bl
-            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
-            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
-            d.
+            `line.color` is set to a numerical array. The
+            colorscale must be an array containing arrays mapping a
+            normalized value to an rgb, rgba, hex, hsl, hsv, or
+            named color string. At minimum, a mapping for the
+            lowest (0) and highest (1) values are required. For
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+            To control the bounds of the colorscale in color space,
+            use `line.cmin` and `line.cmax`. Alternatively,
+            `colorscale` may be a palette name string of the
+            following list: Blackbody,Bluered,Blues,Cividis,Earth,E
+            lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+            Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
@@ -778,16 +820,18 @@ class Line(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count` and `probability`.
-            Anything contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over lines.Finally, the template string has access to
+            variables `count` and `probability`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         reversescale
             Reverses the color mapping if true. Has an effect only
-            if in `line.color`is set to a numerical array. If true,
-            `line.cmin` will correspond to the last color in the
-            array and `line.cmax` will correspond to the first
+            if in `line.color` is set to a numerical array. If
+            true, `line.cmin` will correspond to the last color in
+            the array and `line.cmax` will correspond to the first
             color.
         shape
             Sets the shape of the paths. If `linear`, paths are
@@ -795,8 +839,8 @@ class Line(_BaseTraceHierarchyType):
             composed of horizontal curved splines
         showscale
             Determines whether or not a colorbar is displayed for
-            this trace. Has an effect only if in `line.color`is set
-            to a numerical array.
+            this trace. Has an effect only if in `line.color` is
+            set to a numerical array.
         """
 
     def __init__(
@@ -816,11 +860,11 @@ class Line(_BaseTraceHierarchyType):
         reversescale=None,
         shape=None,
         showscale=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -830,37 +874,37 @@ class Line(_BaseTraceHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `line.colorscale`. Has an effect only if in
-            `line.color`is set to a numerical array. In case
+            `line.color` is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
-            true, the default  palette will be chosen according to
+            true, the default palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `line.color`)
-            or the bounds set in `line.cmin` and `line.cmax`  Has
-            an effect only if in `line.color`is set to a numerical
+            or the bounds set in `line.cmin` and `line.cmax` Has an
+            effect only if in `line.color` is set to a numerical
             array. Defaults to `false` when `line.cmin` and
             `line.cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
         cmid
             Sets the mid-point of the color domain by scaling
             `line.cmin` and/or `line.cmax` to be equidistant to
-            this point. Has an effect only if in `line.color`is set
-            to a numerical array. Value should have the same units
-            as in `line.color`. Has no effect when `line.cauto` is
-            `false`.
+            this point. Has an effect only if in `line.color` is
+            set to a numerical array. Value should have the same
+            units as in `line.color`. Has no effect when
+            `line.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
-            only if in `line.color`is set to a numerical array.
+            only if in `line.color` is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmax` must be set as well.
         color
-            Sets thelinecolor. It accepts either a specific color
+            Sets the line color. It accepts either a specific color
             or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `line.cmin` and `line.cmax` if
@@ -877,18 +921,18 @@ class Line(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
-            `line.color`is set to a numerical array. The colorscale
-            must be an array containing arrays mapping a normalized
-            value to an rgb, rgba, hex, hsl, hsv, or named color
-            string. At minimum, a mapping for the lowest (0) and
-            highest (1) values are required. For example, `[[0,
-            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-            bounds of the colorscale in color space, use`line.cmin`
-            and `line.cmax`. Alternatively, `colorscale` may be a
-            palette name string of the following list: Blackbody,Bl
-            uered,Blues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet
-            ,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrR
-            d.
+            `line.color` is set to a numerical array. The
+            colorscale must be an array containing arrays mapping a
+            normalized value to an rgb, rgba, hex, hsl, hsv, or
+            named color string. At minimum, a mapping for the
+            lowest (0) and highest (1) values are required. For
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+            To control the bounds of the colorscale in color space,
+            use `line.cmin` and `line.cmax`. Alternatively,
+            `colorscale` may be a palette name string of the
+            following list: Blackbody,Bluered,Blues,Cividis,Earth,E
+            lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
+            Bu,Reds,Viridis,YlGnBu,YlOrRd.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
@@ -916,16 +960,18 @@ class Line(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count` and `probability`.
-            Anything contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over lines.Finally, the template string has access to
+            variables `count` and `probability`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         reversescale
             Reverses the color mapping if true. Has an effect only
-            if in `line.color`is set to a numerical array. If true,
-            `line.cmin` will correspond to the last color in the
-            array and `line.cmax` will correspond to the first
+            if in `line.color` is set to a numerical array. If
+            true, `line.cmin` will correspond to the last color in
+            the array and `line.cmax` will correspond to the first
             color.
         shape
             Sets the shape of the paths. If `linear`, paths are
@@ -933,8 +979,8 @@ class Line(_BaseTraceHierarchyType):
             composed of horizontal curved splines
         showscale
             Determines whether or not a colorbar is displayed for
-            this trace. Has an effect only if in `line.color`is set
-            to a numerical array.
+            this trace. Has an effect only if in `line.color` is
+            set to a numerical array.
 
         Returns
         -------
@@ -957,8 +1003,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.parcats.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.parcats.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.parcats.Line`"""
             )
 

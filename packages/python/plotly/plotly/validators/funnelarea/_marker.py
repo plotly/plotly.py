@@ -21,7 +21,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.funnelarea.marker.
                 Line` instance or dict with compatible
                 properties
+            pattern
+                Sets the pattern within the marker.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

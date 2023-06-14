@@ -16,7 +16,7 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmax(self):
         """
         Sets the upper bound of the color domain.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -36,7 +36,7 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmin(self):
         """
         Sets the lower bound of the color domain.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -60,12 +60,12 @@ class Colorscale(_BaseTraceHierarchyType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        bounds of the colorscale in color space, use `cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -110,7 +110,7 @@ class Colorscale(_BaseTraceHierarchyType):
         """
         The label of the links to color based on their concentration
         within a flow.
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -137,7 +137,7 @@ class Colorscale(_BaseTraceHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -165,7 +165,7 @@ class Colorscale(_BaseTraceHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -196,7 +196,7 @@ class Colorscale(_BaseTraceHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -234,11 +234,11 @@ class Colorscale(_BaseTraceHierarchyType):
         label=None,
         name=None,
         templateitemname=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Colorscale object
-        
+
         Parameters
         ----------
         arg
@@ -256,7 +256,7 @@ class Colorscale(_BaseTraceHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -305,8 +305,8 @@ class Colorscale(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.link.Colorscale 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.link.Colorscale
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.link.Colorscale`"""
             )
 

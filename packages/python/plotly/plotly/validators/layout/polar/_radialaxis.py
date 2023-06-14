@@ -105,14 +105,19 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "SI", 1G. If "B", 1B.
             gridcolor
                 Sets the color of the grid lines.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the grid lines.
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -121,6 +126,16 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             layer
                 Sets the layer on which this axis is displayed.
                 If *above traces*, this axis is displayed above
@@ -216,8 +231,8 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -236,6 +251,16 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sets the default property values to use for
                 elements of
                 layout.polar.radialaxis.tickformatstops
+            ticklabelstep
+                Sets the spacing between tick labels as
+                compared to the spacing between ticks. A value
+                of 1 (default) means each tick gets a label. A
+                value of 2 means shows every 2nd label. A
+                larger value n means only every nth tick is
+                labeled. `tick0` determines which labels are
+                shown. Not implemented for axes with `type`
+                "log" or "multicategory", or when `tickmode` is
+                "array".
             ticklen
                 Sets the tick length (in px).
             tickmode
@@ -302,5 +327,5 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis, otherwise false
 """,
             ),
-            **kwargs
+            **kwargs,
         )

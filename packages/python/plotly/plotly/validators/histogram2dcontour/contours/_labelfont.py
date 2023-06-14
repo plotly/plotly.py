@@ -6,7 +6,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="labelfont",
         parent_name="histogram2dcontour.contours",
-        **kwargs
+        **kwargs,
     ):
         super(LabelfontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -38,5 +38,5 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs
+            **kwargs,
         )

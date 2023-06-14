@@ -16,7 +16,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -75,7 +75,7 @@ class Line(_BaseTraceHierarchyType):
     def dash(self):
         """
         Sets the style of the lines.
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['dash', 'dashdot', 'dot', 'longdash', 'longdashdot',
@@ -98,7 +98,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Determines the line shape. The values correspond to step-wise
         line shapes.
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'hv', 'vh', 'hvh', 'vhv']
@@ -119,7 +119,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the line width (in px).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -154,7 +154,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -192,8 +192,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scattergl.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scattergl.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scattergl.Line`"""
             )
 

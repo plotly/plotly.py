@@ -27,8 +27,10 @@ class Icicle(_BaseTraceType):
         "labels",
         "labelssrc",
         "leaf",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "level",
         "marker",
         "maxdepth",
@@ -70,7 +72,7 @@ class Icicle(_BaseTraceType):
         corresponding to the root and the branches sectors are taken to
         be the extra part not part of the sum of the values at their
         leaves.
-    
+
         The 'branchvalues' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['remainder', 'total']
@@ -93,7 +95,7 @@ class Icicle(_BaseTraceType):
         Determines default for `values` when it is not provided, by
         inferring a 1 for each of the "leaves" and/or "branches",
         otherwise 0.
-    
+
         The 'count' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['branches', 'leaves'] joined with '+' characters
@@ -118,7 +120,7 @@ class Icicle(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -139,7 +141,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -163,9 +165,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this icicle trace .
@@ -197,7 +199,7 @@ class Icicle(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'name', 'current path', 'percent root', 'percent entry', 'percent parent'] joined with '+' characters
@@ -222,7 +224,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -246,9 +248,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -319,13 +321,14 @@ class Icicle(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `currentPath`, `root`, `entry`, `percentRoot`, `percentEntry`
-        and `percentParent`. Anything contained in tag `<extra>` is
-        displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `currentPath`, `root`,
+        `entry`, `percentRoot`, `percentEntry` and `percentParent`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -348,7 +351,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -372,7 +375,7 @@ class Icicle(_BaseTraceType):
         an array of string, the items are mapped in order of this
         trace's sectors. To be seen, trace `hoverinfo` must contain a
         "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -395,7 +398,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -417,7 +420,7 @@ class Icicle(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -437,7 +440,7 @@ class Icicle(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -457,17 +460,17 @@ class Icicle(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `textinfo` lying inside the sector.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.icicle.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -492,7 +495,7 @@ class Icicle(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -513,7 +516,7 @@ class Icicle(_BaseTraceType):
     def labels(self):
         """
         Sets the labels of each of the sectors.
-    
+
         The 'labels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -533,7 +536,7 @@ class Icicle(_BaseTraceType):
     def labelssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `labels`.
-    
+
         The 'labelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -557,9 +560,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Leaf`
           - A dict of string/value properties that will be passed
             to the Leaf constructor
-    
+
             Supported dict properties:
-                
+
                 opacity
                     Sets the opacity of the leaves. With colorscale
                     it is defaulted to 1; otherwise it is defaulted
@@ -575,6 +578,31 @@ class Icicle(_BaseTraceType):
     def leaf(self, val):
         self["leaf"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -585,9 +613,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -614,7 +642,7 @@ class Icicle(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -628,6 +656,27 @@ class Icicle(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # level
     # -----
     @property
@@ -637,7 +686,7 @@ class Icicle(_BaseTraceType):
         `level` to `''` to start from the root node in the hierarchy.
         Must be an "id" if `ids` is filled in, otherwise plotly
         attempts to find a matching item in `labels`.
-    
+
         The 'level' property accepts values of any type
 
         Returns
@@ -660,16 +709,16 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if colorsis set to a numerical
+                    effect only if colors is set to a numerical
                     array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default  palette
+                    `autocolorscale` is true, the default palette
                     will be chosen according to whether numbers in
                     the `color` array are all positive, all
                     negative or mixed.
@@ -677,13 +726,13 @@ class Icicle(_BaseTraceType):
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     colors) or the bounds set in `marker.cmin` and
-                    `marker.cmax`  Has an effect only if colorsis
+                    `marker.cmax` Has an effect only if colors is
                     set to a numerical array. Defaults to `false`
                     when `marker.cmin` and `marker.cmax` are set by
                     the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if colorsis set to a numerical
+                    an effect only if colors is set to a numerical
                     array. Value should have the same units as
                     colors and if set, `marker.cmin` must be set as
                     well.
@@ -691,12 +740,12 @@ class Icicle(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if colorsis set to a numerical array.
+                    only if colors is set to a numerical array.
                     Value should have the same units as colors. Has
                     no effect when `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if colorsis set to a numerical
+                    an effect only if colors is set to a numerical
                     array. Value should have the same units as
                     colors and if set, `marker.cmax` must be set as
                     well.
@@ -719,7 +768,7 @@ class Icicle(_BaseTraceType):
                     used to pick the sector colors.
                 colorscale
                     Sets the colorscale. Has an effect only if
-                    colorsis set to a numerical array. The
+                    colors is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -727,7 +776,7 @@ class Icicle(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -739,9 +788,11 @@ class Icicle(_BaseTraceType):
                 line
                     :class:`plotly.graph_objects.icicle.marker.Line
                     ` instance or dict with compatible properties
+                pattern
+                    Sets the pattern within the marker.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if colorsis set to a numerical
+                    effect only if colors is set to a numerical
                     array. If true, `marker.cmin` will correspond
                     to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -749,7 +800,7 @@ class Icicle(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    colorsis set to a numerical array.
+                    colors is set to a numerical array.
 
         Returns
         -------
@@ -768,7 +819,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the number of rendered sectors from any given `level`. Set
         `maxdepth` to "-1" to render all the levels in the hierarchy.
-    
+
         The 'maxdepth' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
 
@@ -797,7 +848,7 @@ class Icicle(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -816,7 +867,7 @@ class Icicle(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -837,7 +888,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -858,7 +909,7 @@ class Icicle(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -882,17 +933,17 @@ class Icicle(_BaseTraceType):
         top left corner of a treemap graph. Please note that if a
         hierarchy has multiple root nodes, this option won't have any
         effect and `insidetextfont` would be used.
-    
+
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.icicle.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -917,7 +968,7 @@ class Icicle(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -943,7 +994,7 @@ class Icicle(_BaseTraceType):
         to be "ids" themselves. When `ids` is not set, plotly attempts
         to find matching items in `labels`, but beware they must be
         unique.
-    
+
         The 'parents' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -963,7 +1014,7 @@ class Icicle(_BaseTraceType):
     def parentssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `parents`.
-    
+
         The 'parentssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -987,9 +1038,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Pathbar`
           - A dict of string/value properties that will be passed
             to the Pathbar constructor
-    
+
             Supported dict properties:
-                
+
                 edgeshape
                     Determines which shape is used for edges
                     between `barpath` labels.
@@ -1027,9 +1078,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Root`
           - A dict of string/value properties that will be passed
             to the Root constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     sets the color of the root node for a
                     sunburst/treemap/icicle trace. this has no
@@ -1053,7 +1104,7 @@ class Icicle(_BaseTraceType):
         """
         Determines whether or not the sectors are reordered from
         largest to smallest.
-    
+
         The 'sort' property must be specified as a bool
         (either True, or False)
 
@@ -1077,9 +1128,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1110,7 +1161,7 @@ class Icicle(_BaseTraceType):
         on the chart. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1130,17 +1181,17 @@ class Icicle(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `textinfo`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.icicle.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1165,7 +1216,7 @@ class Icicle(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1186,7 +1237,7 @@ class Icicle(_BaseTraceType):
     def textinfo(self):
         """
         Determines which trace information appear on the graph.
-    
+
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'current path', 'percent root', 'percent entry', 'percent parent'] joined with '+' characters
@@ -1209,7 +1260,7 @@ class Icicle(_BaseTraceType):
     def textposition(self):
         """
         Sets the positions of the `text` elements.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1232,7 +1283,7 @@ class Icicle(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1263,9 +1314,10 @@ class Icicle(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `currentPath`, `root`, `entry`, `percentRoot`,
-        `percentEntry`, `percentParent`, `label` and `value`.
-    
+        Finally, the template string has access to variables
+        `currentPath`, `root`, `entry`, `percentRoot`, `percentEntry`,
+        `percentParent`, `label` and `value`.
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1288,7 +1340,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `texttemplate`.
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1312,9 +1364,9 @@ class Icicle(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.icicle.Tiling`
           - A dict of string/value properties that will be passed
             to the Tiling constructor
-    
+
             Supported dict properties:
-                
+
                 flip
                     Determines if the positions obtained from
                     solver are flipped on each axis.
@@ -1350,7 +1402,7 @@ class Icicle(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1385,7 +1437,7 @@ class Icicle(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1405,7 +1457,7 @@ class Icicle(_BaseTraceType):
         """
         Sets the values associated with each of the sectors. Use with
         `branchvalues` to determine how the values are summed.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1425,7 +1477,7 @@ class Icicle(_BaseTraceType):
     def valuessrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `values`.
-    
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1447,7 +1499,7 @@ class Icicle(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1530,10 +1582,11 @@ class Icicle(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -1566,6 +1619,12 @@ class Icicle(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.icicle.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1577,6 +1636,9 @@ class Icicle(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -1670,9 +1732,10 @@ class Icicle(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1736,8 +1799,10 @@ class Icicle(_BaseTraceType):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -1765,11 +1830,11 @@ class Icicle(_BaseTraceType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Icicle object
-        
+
         Visualize hierarchal data from leaves (and/or outer branches)
         towards root with rectangles. The icicle sectors are determined
         by the entries in "labels" or "ids" and in "parents".
@@ -1836,10 +1901,11 @@ class Icicle(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -1872,6 +1938,12 @@ class Icicle(_BaseTraceType):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.icicle.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1883,6 +1955,9 @@ class Icicle(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -1976,9 +2051,10 @@ class Icicle(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2041,8 +2117,8 @@ class Icicle(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Icicle 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Icicle
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Icicle`"""
             )
 
@@ -2125,6 +2201,10 @@ an instance of :class:`plotly.graph_objs.Icicle`"""
         _v = leaf if leaf is not None else _v
         if _v is not None:
             self["leaf"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -2133,6 +2213,10 @@ an instance of :class:`plotly.graph_objs.Icicle`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("level", None)
         _v = level if level is not None else _v
         if _v is not None:

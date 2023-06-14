@@ -25,5 +25,5 @@ class SmithValidator(_plotly_utils.basevalidators.CompoundValidator):
                 properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

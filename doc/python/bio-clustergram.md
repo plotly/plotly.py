@@ -40,7 +40,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -60,7 +60,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -86,7 +86,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/clustergram_brain_cancer.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
 dash_bio.Clustergram(
     data=df,
@@ -102,6 +102,6 @@ dash_bio.Clustergram(
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'bio-clustergram', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'bio-clustergram', width='100%', height=1200)
 ```

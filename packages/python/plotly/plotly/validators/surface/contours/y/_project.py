@@ -32,5 +32,5 @@ class ProjectValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the projected lines are shown in permanence.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

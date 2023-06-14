@@ -17,7 +17,7 @@ class Fill(_BaseTraceHierarchyType):
         """
         Sets the cell fill color. It accepts either a specific color or
         an array of colors or a 2D array of colors.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -77,7 +77,7 @@ class Fill(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -107,7 +107,7 @@ class Fill(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
         """
         Construct a new Fill object
-        
+
         Parameters
         ----------
         arg
@@ -142,8 +142,8 @@ class Fill(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.table.header.Fill 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.table.header.Fill
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.table.header.Fill`"""
             )
 

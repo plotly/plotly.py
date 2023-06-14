@@ -23,8 +23,10 @@ class Table(_BaseTraceType):
         "hoverlabel",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "meta",
         "metasrc",
         "name",
@@ -45,9 +47,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Cells`
           - A dict of string/value properties that will be passed
             to the Cells constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
@@ -67,8 +69,8 @@ class Table(_BaseTraceType):
                     Sets the cell value formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat.
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format.
                 formatsrc
                     Sets the source reference on Chart Studio Cloud
                     for `format`.
@@ -117,7 +119,7 @@ class Table(_BaseTraceType):
         a value `2` at position `0` means that column index `0` in the
         data will be rendered as the third column, as columns have an
         index base of zero.
-    
+
         The 'columnorder' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -138,7 +140,7 @@ class Table(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `columnorder`.
-    
+
         The 'columnordersrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -159,7 +161,7 @@ class Table(_BaseTraceType):
         """
         The width of columns expressed as a ratio. Columns fill the
         available width in proportion of their specified column widths.
-    
+
         The 'columnwidth' property is a number and may be specified as:
           - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
@@ -181,7 +183,7 @@ class Table(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `columnwidth`.
-    
+
         The 'columnwidthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -204,7 +206,7 @@ class Table(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -225,7 +227,7 @@ class Table(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -249,9 +251,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this table trace .
@@ -285,9 +287,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Header`
           - A dict of string/value properties that will be passed
             to the Header constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
@@ -307,8 +309,8 @@ class Table(_BaseTraceType):
                     Sets the cell value formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat.
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format.
                 formatsrc
                     Sets the source reference on Chart Studio Cloud
                     for `format`.
@@ -356,7 +358,7 @@ class Table(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -381,7 +383,7 @@ class Table(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -405,9 +407,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -462,7 +464,7 @@ class Table(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -482,7 +484,7 @@ class Table(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -496,6 +498,31 @@ class Table(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -506,9 +533,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -535,7 +562,7 @@ class Table(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -548,6 +575,27 @@ class Table(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # meta
     # ----
@@ -564,7 +612,7 @@ class Table(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -583,7 +631,7 @@ class Table(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -604,7 +652,7 @@ class Table(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -629,9 +677,9 @@ class Table(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.table.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -659,7 +707,7 @@ class Table(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -694,7 +742,7 @@ class Table(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -715,7 +763,7 @@ class Table(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -791,6 +839,12 @@ class Table(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -802,6 +856,9 @@ class Table(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -870,8 +927,10 @@ class Table(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -879,11 +938,11 @@ class Table(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Table object
-        
+
         Table view for detailed data viewing. The data are arranged in
         a grid of rows and columns. Most styling can be specified for
         columns, rows or individual cells. Table is using a column-
@@ -945,6 +1004,12 @@ class Table(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -956,6 +1021,9 @@ class Table(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1027,8 +1095,8 @@ class Table(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Table 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Table
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Table`"""
             )
 
@@ -1095,6 +1163,10 @@ an instance of :class:`plotly.graph_objs.Table`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -1103,6 +1175,10 @@ an instance of :class:`plotly.graph_objs.Table`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("meta", None)
         _v = meta if meta is not None else _v
         if _v is not None:

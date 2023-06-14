@@ -40,7 +40,7 @@ class Node(_BaseTraceHierarchyType):
         through to have a variety of colors. These defaults are not
         fully opaque, to allow some visibility of what is beneath the
         node.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -100,7 +100,7 @@ class Node(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -120,7 +120,7 @@ class Node(_BaseTraceHierarchyType):
     def customdata(self):
         """
         Assigns extra data to each node.
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -141,7 +141,7 @@ class Node(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -163,7 +163,7 @@ class Node(_BaseTraceHierarchyType):
         Groups of nodes. Each group is defined by an array with the
         indices of the nodes it contains. Multiple groups can be
         specified.
-    
+
         The 'groups' property is an info array that may be specified as:
         * a 2D list where:
           The 'groups[i][j]' property is a number and may be specified as:
@@ -188,7 +188,7 @@ class Node(_BaseTraceHierarchyType):
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
-    
+
         The 'hoverinfo' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'none', 'skip']
@@ -213,9 +213,9 @@ class Node(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.node.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -286,12 +286,14 @@ class Node(_BaseTraceHierarchyType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
+        (the ones that are `arrayOk: true`) are available.  Variables
+        `sourceLinks` and `targetLinks` are arrays of link
+        objects.Finally, the template string has access to variables
         `value` and `label`. Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -314,7 +316,7 @@ class Node(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -334,7 +336,7 @@ class Node(_BaseTraceHierarchyType):
     def label(self):
         """
         The shown name of the node.
-    
+
         The 'label' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -354,7 +356,7 @@ class Node(_BaseTraceHierarchyType):
     def labelsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `label`.
-    
+
         The 'labelsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -378,9 +380,9 @@ class Node(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.node.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the `line` around each
                     `node`.
@@ -410,7 +412,7 @@ class Node(_BaseTraceHierarchyType):
     def pad(self):
         """
         Sets the padding (in px) between the `nodes`.
-    
+
         The 'pad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -430,7 +432,7 @@ class Node(_BaseTraceHierarchyType):
     def thickness(self):
         """
         Sets the thickness (in px) of the `nodes`.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [1, inf]
 
@@ -450,7 +452,7 @@ class Node(_BaseTraceHierarchyType):
     def x(self):
         """
         The normalized horizontal position of the node.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -470,7 +472,7 @@ class Node(_BaseTraceHierarchyType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -490,7 +492,7 @@ class Node(_BaseTraceHierarchyType):
     def y(self):
         """
         The normalized vertical position of the node.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -510,7 +512,7 @@ class Node(_BaseTraceHierarchyType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -580,9 +582,11 @@ class Node(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available.  Variables `sourceLinks` and
+            `targetLinks` are arrays of link objects.Finally, the
+            template string has access to variables `value` and
+            `label`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -633,11 +637,11 @@ class Node(_BaseTraceHierarchyType):
         xsrc=None,
         y=None,
         ysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Node object
-        
+
         The nodes of the Sankey plot.
 
         Parameters
@@ -696,9 +700,11 @@ class Node(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available.  Variables `sourceLinks` and
+            `targetLinks` are arrays of link objects.Finally, the
+            template string has access to variables `value` and
+            `label`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -748,8 +754,8 @@ class Node(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.Node 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.Node
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.Node`"""
             )
 

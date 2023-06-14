@@ -27,13 +27,16 @@ class XAxis(_BaseLayoutHierarchyType):
         "exponentformat",
         "fixedrange",
         "gridcolor",
+        "griddash",
         "gridwidth",
         "hoverformat",
+        "labelalias",
         "layer",
         "linecolor",
         "linewidth",
         "matches",
         "minexponent",
+        "minor",
         "mirror",
         "nticks",
         "overlaying",
@@ -71,6 +74,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "ticklabelmode",
         "ticklabeloverflow",
         "ticklabelposition",
+        "ticklabelstep",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -100,7 +104,7 @@ class XAxis(_BaseLayoutHierarchyType):
         If set to an opposite-letter axis id (e.g. `x2`, `y`), this
         axis is bound to the corresponding opposite-letter axis. If set
         to "free", this axis' position is determined by `position`.
-    
+
         The 'anchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['free']
@@ -125,13 +129,16 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether long tick labels automatically grow the
         figure margins.
-    
-        The 'automargin' property must be specified as a bool
-        (either True, or False)
+
+        The 'automargin' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['height', 'width', 'left', 'right', 'top', 'bottom'] joined with '+' characters
+            (e.g. 'height+width')
+            OR exactly one of [True, False] (e.g. 'False')
 
         Returns
         -------
-        bool
+        Any
         """
         return self["automargin"]
 
@@ -147,7 +154,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
         `range` is provided, then `autorange` is set to False.
-    
+
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'reversed']
@@ -171,7 +178,7 @@ class XAxis(_BaseLayoutHierarchyType):
         to a number. Using *convert types* a numeric string in trace
         data may be treated as a number during automatic axis `type`
         detection. Defaults to layout.autotypenumbers.
-    
+
         The 'autotypenumbers' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['convert types', 'strict']
@@ -195,7 +202,7 @@ class XAxis(_BaseLayoutHierarchyType):
         is a date axis. This does not set the calendar for interpreting
         data on this axis, that's specified in the trace or via the
         global `layout.calendar`
-    
+
         The 'calendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -221,7 +228,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the order in which categories on this axis appear. Only
         has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
-    
+
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -242,7 +249,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         `categoryarray`.
-    
+
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -276,7 +283,7 @@ class XAxis(_BaseLayoutHierarchyType):
         numerical order of the values. Similarly, the order can be
         determined by the min, max, sum, mean or median of all the
         values.
-    
+
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
@@ -305,7 +312,7 @@ class XAxis(_BaseLayoutHierarchyType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -368,7 +375,7 @@ class XAxis(_BaseLayoutHierarchyType):
         determines how that happens: by increasing the "range", or by
         decreasing the "domain". Default is "domain" for axes
         containing image traces, "range" otherwise.
-    
+
         The 'constrain' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['range', 'domain']
@@ -394,7 +401,7 @@ class XAxis(_BaseLayoutHierarchyType):
         plot area. Options are "left", "center" (default), and "right"
         for x axes, and "top", "middle" (default), and "bottom" for y
         axes.
-    
+
         The 'constraintoward' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right', 'top', 'middle', 'bottom']
@@ -416,7 +423,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the color of the dividers Only has an effect on
         "multicategory" axes.
-    
+
         The 'dividercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -476,7 +483,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the width (in px) of the dividers Only has an effect on
         "multicategory" axes.
-    
+
         The 'dividerwidth' property is a number and may be specified as:
           - An int or float
 
@@ -495,19 +502,19 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def domain(self):
         """
-        Sets the domain of this axis (in plot fraction).
-    
-        The 'domain' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'domain[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'domain[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            Sets the domain of this axis (in plot fraction).
 
-        Returns
-        -------
-        list
+            The 'domain' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'domain[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'domain[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
         return self["domain"]
 
@@ -540,7 +547,7 @@ class XAxis(_BaseLayoutHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -563,7 +570,7 @@ class XAxis(_BaseLayoutHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -585,7 +592,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
-    
+
         The 'fixedrange' property must be specified as a bool
         (either True, or False)
 
@@ -605,7 +612,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the color of the grid lines.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -658,13 +665,39 @@ class XAxis(_BaseLayoutHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
+
     # gridwidth
     # ---------
     @property
     def gridwidth(self):
         """
         Sets the width (in px) of the grid lines.
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -693,7 +726,7 @@ class XAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'hoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -708,6 +741,30 @@ class XAxis(_BaseLayoutHierarchyType):
     def hoverformat(self, val):
         self["hoverformat"] = val
 
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. labelalias
+        can be used with any axis type, and both keys (if needed) and
+        values (if desired) can include html-like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
+
     # layer
     # -----
     @property
@@ -719,7 +776,7 @@ class XAxis(_BaseLayoutHierarchyType):
         subplot's traces, but above the grid lines. Useful when used
         together with scatter-like traces with `cliponaxis` set to
         False to show markers and/or text nodes above this axis.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['above traces', 'below traces']
@@ -740,7 +797,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def linecolor(self):
         """
         Sets the axis line color.
-    
+
         The 'linecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -799,7 +856,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def linewidth(self):
         """
         Sets the width (in px) of the axis line.
-    
+
         The 'linewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -825,7 +882,7 @@ class XAxis(_BaseLayoutHierarchyType):
         setting axes simultaneously in both a `scaleanchor` and a
         `matches` constraint is currently forbidden. Moreover, note
         that matching axes must have the same `type`.
-    
+
         The 'matches' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
                 ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
@@ -848,7 +905,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -862,6 +919,118 @@ class XAxis(_BaseLayoutHierarchyType):
     def minexponent(self, val):
         self["minexponent"] = val
 
+    # minor
+    # -----
+    @property
+    def minor(self):
+        """
+        The 'minor' property is an instance of Minor
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Minor`
+          - A dict of string/value properties that will be passed
+            to the Minor constructor
+
+            Supported dict properties:
+
+                dtick
+                    Sets the step in-between ticks on this axis.
+                    Use with `tick0`. Must be a positive number, or
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
+                    are set every 10^(n*dtick) where n is the tick
+                    number. For example, to set a tick mark at 1,
+                    10, 100, 1000, ... set dtick to 1. To set tick
+                    marks at 1, 100, 10000, ... set dtick to 2. To
+                    set tick marks at 1, 5, 25, 125, 625, 3125, ...
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
+                    is a positive number, gives ticks linearly
+                    spaced in value (but not position). For example
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
+                    at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
+                    milliseconds. For example, to set the interval
+                    between ticks to one day, set `dtick` to
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
+                    months. `n` must be a positive integer. To set
+                    ticks on the 15th of every third month, set
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
+                gridcolor
+                    Sets the color of the grid lines.
+                griddash
+                    Sets the dash style of lines. Set to a dash
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
+                gridwidth
+                    Sets the width (in px) of the grid lines.
+                nticks
+                    Specifies the maximum number of ticks for the
+                    particular axis. The actual number of ticks
+                    will be chosen automatically to be less than or
+                    equal to `nticks`. Has an effect only if
+                    `tickmode` is set to "auto".
+                showgrid
+                    Determines whether or not grid lines are drawn.
+                    If True, the grid lines are drawn at every tick
+                    mark.
+                tick0
+                    Sets the placement of the first tick on this
+                    axis. Use with `dtick`. If the axis `type` is
+                    "log", then you must take the log of your
+                    starting tick (e.g. to set the starting tick to
+                    100, set the `tick0` to 2) except when
+                    `dtick`=*L<f>* (see `dtick` for more info). If
+                    the axis `type` is "date", it should be a date
+                    string, like date data. If the axis `type` is
+                    "category", it should be a number, using the
+                    scale where each category is assigned a serial
+                    number from zero in the order it appears.
+                tickcolor
+                    Sets the tick color.
+                ticklen
+                    Sets the tick length (in px).
+                tickmode
+                    Sets the tick mode for this axis. If "auto",
+                    the number of ticks is set via `nticks`. If
+                    "linear", the placement of the ticks is
+                    determined by a starting position `tick0` and a
+                    tick step `dtick` ("linear" is the default
+                    value if `tick0` and `dtick` are provided). If
+                    "array", the placement of the ticks is set via
+                    `tickvals` and the tick text is `ticktext`.
+                    ("array" is the default value if `tickvals` is
+                    provided).
+                ticks
+                    Determines whether ticks are drawn or not. If
+                    "", this axis' ticks are not drawn. If
+                    "outside" ("inside"), this axis' are drawn
+                    outside (inside) the axis lines.
+                tickvals
+                    Sets the values at which ticks on this axis
+                    appear. Only has an effect if `tickmode` is set
+                    to "array". Used with `ticktext`.
+                tickvalssrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `tickvals`.
+                tickwidth
+                    Sets the tick width (in px).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.Minor
+        """
+        return self["minor"]
+
+    @minor.setter
+    def minor(self, val):
+        self["minor"] = val
+
     # mirror
     # ------
     @property
@@ -873,7 +1042,7 @@ class XAxis(_BaseLayoutHierarchyType):
         False, mirroring is disable. If "all", axis lines are mirrored
         on all shared-axes subplots. If "allticks", axis lines and
         ticks are mirrored on all shared-axes subplots.
-    
+
         The 'mirror' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, 'ticks', False, 'all', 'allticks']
@@ -897,7 +1066,7 @@ class XAxis(_BaseLayoutHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -922,7 +1091,7 @@ class XAxis(_BaseLayoutHierarchyType):
         visible for both axes. If False, this axis does not overlay any
         same-letter axes. In this case, for axes with overlapping
         domains only the highest-numbered axis will be visible.
-    
+
         The 'overlaying' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['free']
@@ -948,7 +1117,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the position of this axis in the plotting space (in
         normalized coordinates). Only has an effect if `anchor` is set
         to "free".
-    
+
         The 'position' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -967,24 +1136,24 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is "log", then
-        you must take the log of your desired range (e.g. to set the
-        range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is "date", it should be date strings, like date data,
-        though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is "category", it
-        should be numbers, using the scale where each category is
-        assigned a serial number from zero in the order it appears.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            Sets the range of this axis. If the axis `type` is "log", then
+            you must take the log of your desired range (e.g. to set the
+            range from 1 to 100, set the range from 0 to 2). If the axis
+            `type` is "date", it should be date strings, like date data,
+            though Date objects and unix milliseconds will be accepted and
+            converted to strings. If the axis `type` is "category", it
+            should be numbers, using the scale where each category is
+            assigned a serial number from zero in the order it appears.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -1002,9 +1171,9 @@ class XAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.xaxis.Rangebreak
           - A list or tuple of dicts of string/value properties that
             will be passed to the Rangebreak constructor
-    
+
             Supported dict properties:
-                
+
                 bounds
                     Sets the lower and upper bounds of this axis
                     rangebreak. Can be used with `pattern`.
@@ -1076,13 +1245,13 @@ class XAxis(_BaseLayoutHierarchyType):
         layout.template.layout.xaxis.rangebreakdefaults), sets the
         default property values to use for elements of
         layout.xaxis.rangebreaks
-    
+
         The 'rangebreakdefaults' property is an instance of Rangebreak
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangebreak`
           - A dict of string/value properties that will be passed
             to the Rangebreak constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1105,7 +1274,7 @@ class XAxis(_BaseLayoutHierarchyType):
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data. Applies only to
         linear axes.
-    
+
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['normal', 'tozero', 'nonnegative']
@@ -1130,9 +1299,9 @@ class XAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`
           - A dict of string/value properties that will be passed
             to the Rangeselector constructor
-    
+
             Supported dict properties:
-                
+
                 activecolor
                     Sets the background color of the active range
                     selector button.
@@ -1199,9 +1368,9 @@ class XAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`
           - A dict of string/value properties that will be passed
             to the Rangeslider constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range slider
                     range is computed in relation to the input
@@ -1268,7 +1437,7 @@ class XAxis(_BaseLayoutHierarchyType):
         inconsistent constraints via `scaleratio`. Note that setting
         axes simultaneously in both a `scaleanchor` and a `matches`
         constraint is currently forbidden.
-    
+
         The 'scaleanchor' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
                 ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
@@ -1295,7 +1464,7 @@ class XAxis(_BaseLayoutHierarchyType):
         number of pixels as a unit on the linked axis. Use this for
         example to create an elevation profile where the vertical scale
         is exaggerated a fixed amount with respect to the horizontal.
-    
+
         The 'scaleratio' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1315,7 +1484,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -1337,7 +1506,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not a dividers are drawn between the
         category levels of this axis. Only has an effect on
         "multicategory" axes.
-    
+
         The 'showdividers' property must be specified as a bool
         (either True, or False)
 
@@ -1360,7 +1529,7 @@ class XAxis(_BaseLayoutHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -1382,7 +1551,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -1402,7 +1571,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def showline(self):
         """
         Determines whether or not a line bounding this axis is drawn.
-    
+
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -1424,7 +1593,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not spikes (aka droplines) are drawn for
         this axis. Note: This only takes affect when hovermode =
         closest
-    
+
         The 'showspikes' property must be specified as a bool
         (either True, or False)
 
@@ -1444,7 +1613,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -1467,7 +1636,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -1488,7 +1657,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -1510,7 +1679,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether a x (y) axis is positioned at the "bottom"
         ("left") or "top" ("right") of the plotting area.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'bottom', 'left', 'right']
@@ -1531,7 +1700,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def spikecolor(self):
         """
         Sets the spike color. If undefined, will use the series color
-    
+
         The 'spikecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1593,12 +1762,12 @@ class XAxis(_BaseLayoutHierarchyType):
         ("solid", "dot", "dash", "longdash", "dashdot", or
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
-    
-        The 'spikedash' property is a string and must be specified as:
-          - One of the following strings:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot',
-                'longdashdot']
-          - A number that will be converted to a string
+
+        The 'spikedash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------
@@ -1620,7 +1789,7 @@ class XAxis(_BaseLayoutHierarchyType):
         plotted on. If "across", the line is drawn across the entire
         plot area, and supercedes "toaxis". If "marker", then a marker
         dot is drawn on the axis the series is plotted on
-    
+
         The 'spikemode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['toaxis', 'across', 'marker'] joined with '+' characters
@@ -1643,7 +1812,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether spikelines are stuck to the cursor or to the
         closest datapoints.
-    
+
         The 'spikesnap' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['data', 'cursor', 'hovered data']
@@ -1664,7 +1833,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def spikethickness(self):
         """
         Sets the width (in px) of the zero line.
-    
+
         The 'spikethickness' property is a number and may be specified as:
           - An int or float
 
@@ -1692,7 +1861,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -1713,10 +1882,10 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -1735,7 +1904,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1794,17 +1963,17 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickfont(self):
         """
         Sets the tick font.
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1849,7 +2018,7 @@ class XAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1874,9 +2043,9 @@ class XAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.xaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -1930,13 +2099,13 @@ class XAxis(_BaseLayoutHierarchyType):
         layout.template.layout.xaxis.tickformatstopdefaults), sets the
         default property values to use for elements of
         layout.xaxis.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1958,7 +2127,7 @@ class XAxis(_BaseLayoutHierarchyType):
         corresponding ticks and grid lines. Only has an effect for axes
         of `type` "date" When set to "period", tick labels are drawn in
         the middle of the period between ticks.
-    
+
         The 'ticklabelmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['instant', 'period']
@@ -1983,7 +2152,7 @@ class XAxis(_BaseLayoutHierarchyType):
         inside tick labels is *hide past domain*. Otherwise on
         "category" and "multicategory" axes the default is "allow". In
         other cases the default is *hide past div*.
-    
+
         The 'ticklabeloverflow' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['allow', 'hide past div', 'hide past domain']
@@ -2011,7 +2180,7 @@ class XAxis(_BaseLayoutHierarchyType):
         to "boundaries". When used on axes linked by `matches` or
         `scaleanchor`, no extra padding for inside labels would be
         added by autorange, so that the scales could match.
-    
+
         The 'ticklabelposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', 'outside top', 'inside top',
@@ -2028,13 +2197,39 @@ class XAxis(_BaseLayoutHierarchyType):
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
 
+    # ticklabelstep
+    # -------------
+    @property
+    def ticklabelstep(self):
+        """
+        Sets the spacing between tick labels as compared to the spacing
+        between ticks. A value of 1 (default) means each tick gets a
+        label. A value of 2 means shows every 2nd label. A larger value
+        n means only every nth tick is labeled. `tick0` determines
+        which labels are shown. Not implemented for axes with `type`
+        "log" or "multicategory", or when `tickmode` is "array".
+
+        The 'ticklabelstep' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 9223372036854775807]
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstep"]
+
+    @ticklabelstep.setter
+    def ticklabelstep(self, val):
+        self["ticklabelstep"] = val
+
     # ticklen
     # -------
     @property
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -2059,11 +2254,13 @@ class XAxis(_BaseLayoutHierarchyType):
         step `dtick` ("linear" is the default value if `tick0` and
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
-        is the default value if `tickvals` is provided).
-    
+        is the default value if `tickvals` is provided). If "sync", the
+        number of ticks will sync with the overlayed axis set by
+        `overlaying` property.
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+                ['auto', 'linear', 'array', 'sync']
 
         Returns
         -------
@@ -2081,7 +2278,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -2104,7 +2301,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -2129,7 +2326,7 @@ class XAxis(_BaseLayoutHierarchyType):
         `type` "category" or "multicategory". When set to "boundaries",
         ticks and grid lines are drawn half a category to the
         left/bottom of labels.
-    
+
         The 'tickson' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['labels', 'boundaries']
@@ -2150,7 +2347,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -2173,7 +2370,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -2193,7 +2390,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def ticktextsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ticktext`.
-    
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2214,7 +2411,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -2234,7 +2431,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickvalssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `tickvals`.
-    
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2254,7 +2451,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -2278,9 +2475,9 @@ class XAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.xaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this axis' title font. Note that the
                     title's font used to be customized by the now
@@ -2322,17 +2519,17 @@ class XAxis(_BaseLayoutHierarchyType):
         Deprecated: Please use layout.xaxis.title.font instead. Sets
         this axis' title font. Note that the title's font used to be
         customized by the now deprecated `titlefont` attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -2354,7 +2551,7 @@ class XAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        
+
         """
         return self["titlefont"]
 
@@ -2370,7 +2567,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the axis type. By default, plotly attempts to determined
         the axis type by looking into the data of the traces that
         referenced the axis in question.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['-', 'linear', 'log', 'date', 'category',
@@ -2394,7 +2591,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Controls persistence of user-driven changes in axis `range`,
         `autorange`, and `title` if in `editable: true` configuration.
         Defaults to `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -2415,7 +2612,7 @@ class XAxis(_BaseLayoutHierarchyType):
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -2437,7 +2634,7 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not a line is drawn at along the 0 value
         of this axis. If True, the zero line is drawn on top of the
         grid lines.
-    
+
         The 'zeroline' property must be specified as a bool
         (either True, or False)
 
@@ -2457,7 +2654,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def zerolinecolor(self):
         """
         Sets the line color of the zero line.
-    
+
         The 'zerolinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -2516,7 +2713,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def zerolinewidth(self):
         """
         Sets the width (in px) of the zero line.
-    
+
         The 'zerolinewidth' property is a number and may be specified as:
           - An int or float
 
@@ -2645,6 +2842,11 @@ class XAxis(_BaseLayoutHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -2659,6 +2861,14 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -2684,6 +2894,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minor
+            :class:`plotly.graph_objects.layout.xaxis.Minor`
+            instance or dict with compatible properties
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2887,6 +3100,14 @@ class XAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2897,7 +3118,9 @@ class XAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -2982,13 +3205,16 @@ class XAxis(_BaseLayoutHierarchyType):
         exponentformat=None,
         fixedrange=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         hoverformat=None,
+        labelalias=None,
         layer=None,
         linecolor=None,
         linewidth=None,
         matches=None,
         minexponent=None,
+        minor=None,
         mirror=None,
         nticks=None,
         overlaying=None,
@@ -3026,6 +3252,7 @@ class XAxis(_BaseLayoutHierarchyType):
         ticklabelmode=None,
         ticklabeloverflow=None,
         ticklabelposition=None,
+        ticklabelstep=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -3045,11 +3272,11 @@ class XAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new XAxis object
-        
+
         Parameters
         ----------
         arg
@@ -3165,6 +3392,11 @@ class XAxis(_BaseLayoutHierarchyType):
             true, then zoom is disabled.
         gridcolor
             Sets the color of the grid lines.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the width (in px) of the grid lines.
         hoverformat
@@ -3179,6 +3411,14 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. labelalias can be used with
+            any axis type, and both keys (if needed) and values (if
+            desired) can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -3204,6 +3444,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minor
+            :class:`plotly.graph_objects.layout.xaxis.Minor`
+            instance or dict with compatible properties
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -3407,6 +3650,14 @@ class XAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -3417,7 +3668,9 @@ class XAxis(_BaseLayoutHierarchyType):
             the default value if `tick0` and `dtick` are provided).
             If "array", the placement of the ticks is set via
             `tickvals` and the tick text is `ticktext`. ("array" is
-            the default value if `tickvals` is provided).
+            the default value if `tickvals` is provided). If
+            "sync", the number of ticks will sync with the
+            overlayed axis set by `overlaying` property.
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -3499,8 +3752,8 @@ class XAxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.XAxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.XAxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.XAxis`"""
             )
 
@@ -3583,6 +3836,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:
@@ -3591,6 +3848,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:
@@ -3611,6 +3872,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = minexponent if minexponent is not None else _v
         if _v is not None:
             self["minexponent"] = _v
+        _v = arg.pop("minor", None)
+        _v = minor if minor is not None else _v
+        if _v is not None:
+            self["minor"] = _v
         _v = arg.pop("mirror", None)
         _v = mirror if mirror is not None else _v
         if _v is not None:
@@ -3759,6 +4024,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:
             self["ticklabelposition"] = _v
+        _v = arg.pop("ticklabelstep", None)
+        _v = ticklabelstep if ticklabelstep is not None else _v
+        if _v is not None:
+            self["ticklabelstep"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

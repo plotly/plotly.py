@@ -12,5 +12,5 @@ class DrawdirectionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["ortho", "horizontal", "vertical", "diagonal"]
             ),
-            **kwargs
+            **kwargs,
         )

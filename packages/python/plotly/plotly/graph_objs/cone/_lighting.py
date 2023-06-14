@@ -25,7 +25,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Ambient light increases overall color visibility but can wash
         out the image.
-    
+
         The 'ambient' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -46,7 +46,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Represents the extent that incident rays are reflected in a
         range of angles.
-    
+
         The 'diffuse' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -67,7 +67,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Epsilon for face normals calculation avoids math issues arising
         from degenerate geometry.
-    
+
         The 'facenormalsepsilon' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -89,7 +89,7 @@ class Lighting(_BaseTraceHierarchyType):
         Represents the reflectance as a dependency of the viewing
         angle; e.g. paper is reflective when viewing it from the edge
         of the paper (almost 90 degrees), causing shine.
-    
+
         The 'fresnel' property is a number and may be specified as:
           - An int or float in the interval [0, 5]
 
@@ -110,7 +110,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Alters specular reflection; the rougher the surface, the wider
         and less contrasty the shine.
-    
+
         The 'roughness' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -131,7 +131,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Represents the level that incident rays are reflected in a
         single direction, causing shine.
-    
+
         The 'specular' property is a number and may be specified as:
           - An int or float in the interval [0, 2]
 
@@ -152,7 +152,7 @@ class Lighting(_BaseTraceHierarchyType):
         """
         Epsilon for vertex normals calculation avoids math issues
         arising from degenerate geometry.
-    
+
         The 'vertexnormalsepsilon' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -206,11 +206,11 @@ class Lighting(_BaseTraceHierarchyType):
         roughness=None,
         specular=None,
         vertexnormalsepsilon=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Lighting object
-        
+
         Parameters
         ----------
         arg
@@ -261,8 +261,8 @@ class Lighting(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.cone.Lighting 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.cone.Lighting
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.cone.Lighting`"""
             )
 

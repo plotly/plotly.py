@@ -84,7 +84,7 @@ class Font(_BaseLayoutHierarchyType):
         "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
         One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
         Narrow", "Raleway", "Times New Roman".
-    
+
         The 'family' property is a string and must be specified as:
           - A non-empty string
 
@@ -144,7 +144,7 @@ class Font(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Font object
-        
+
         Sets the hover label text font. By default uses the global
         hover font and size, with color from `hoverlabel.bordercolor`.
 
@@ -194,8 +194,8 @@ class Font(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.annotation.hoverlabel.Font 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.annotation.hoverlabel.Font
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.annotation.hoverlabel.Font`"""
             )
 

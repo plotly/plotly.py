@@ -8,8 +8,6 @@ import os
 import json
 from functools import reduce
 
-from six import string_types
-
 try:
     from math import gcd
 except ImportError:
@@ -66,7 +64,7 @@ class TemplatesConfig(object):
         return iter(self._templates)
 
     def __getitem__(self, item):
-        if isinstance(item, string_types):
+        if isinstance(item, str):
             template_names = item.split("+")
         else:
             template_names = [item]

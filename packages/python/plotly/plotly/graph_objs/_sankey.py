@@ -17,8 +17,10 @@ class Sankey(_BaseTraceType):
         "hoverlabel",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "link",
         "meta",
         "metasrc",
@@ -48,7 +50,7 @@ class Sankey(_BaseTraceType):
         perpendicular to the flow. If value is `freeform`, the nodes
         can freely move on the plane. If value is `fixed`, the nodes
         are stationary.
-    
+
         The 'arrangement' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['snap', 'perpendicular', 'freeform', 'fixed']
@@ -72,7 +74,7 @@ class Sankey(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -93,7 +95,7 @@ class Sankey(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -117,9 +119,9 @@ class Sankey(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sankey.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this sankey trace .
@@ -153,7 +155,7 @@ class Sankey(_BaseTraceType):
         But, if `none` is set, click and hover events are still fired.
         Note that this attribute is superseded by `node.hoverinfo` and
         `node.hoverinfo` for nodes and links respectively.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of [] joined with '+' characters
@@ -180,9 +182,9 @@ class Sankey(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sankey.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -237,7 +239,7 @@ class Sankey(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -257,7 +259,7 @@ class Sankey(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -271,6 +273,31 @@ class Sankey(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -281,9 +308,9 @@ class Sankey(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sankey.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -310,7 +337,7 @@ class Sankey(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -324,21 +351,45 @@ class Sankey(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # link
     # ----
     @property
     def link(self):
         """
         The links of the Sankey plot.
-    
+
         The 'link' property is an instance of Link
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sankey.Link`
           - A dict of string/value properties that will be passed
             to the Link constructor
-    
+
             Supported dict properties:
-                
+
+                arrowlen
+                    Sets the length (in px) of the links arrow, if
+                    0 no arrow will be drawn.
                 color
                     Sets the `link` color. It can be a single
                     value, or an array for specifying color for
@@ -386,8 +437,8 @@ class Sankey(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -400,7 +451,9 @@ class Sankey(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `value` and `label`. Anything
+                    Variables `source` and `target` are node
+                    objects.Finally, the template string has access
+                    to variables `value` and `label`. Anything
                     contained in tag `<extra>` is displayed in the
                     secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
@@ -461,7 +514,7 @@ class Sankey(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -480,7 +533,7 @@ class Sankey(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -501,7 +554,7 @@ class Sankey(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -522,15 +575,15 @@ class Sankey(_BaseTraceType):
     def node(self):
         """
         The nodes of the Sankey plot.
-    
+
         The 'node' property is an instance of Node
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sankey.Node`
           - A dict of string/value properties that will be passed
             to the Node constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the `node` color. It can be a single
                     value, or an array for specifying color for
@@ -575,8 +628,8 @@ class Sankey(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -589,9 +642,11 @@ class Sankey(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `value` and `label`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
+                    Variables `sourceLinks` and `targetLinks` are
+                    arrays of link objects.Finally, the template
+                    string has access to variables `value` and
+                    `label`. Anything contained in tag `<extra>` is
+                    displayed in the secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
                     secondary box completely, use an empty tag
                     `<extra></extra>`.
@@ -637,7 +692,7 @@ class Sankey(_BaseTraceType):
     def orientation(self):
         """
         Sets the orientation of the Sankey diagram.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -663,7 +718,7 @@ class Sankey(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -686,9 +741,9 @@ class Sankey(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sankey.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -715,17 +770,17 @@ class Sankey(_BaseTraceType):
     def textfont(self):
         """
         Sets the font for node labels
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sankey.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -762,7 +817,7 @@ class Sankey(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -797,7 +852,7 @@ class Sankey(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -819,7 +874,7 @@ class Sankey(_BaseTraceType):
         languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-    
+
         The 'valueformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -841,7 +896,7 @@ class Sankey(_BaseTraceType):
         """
         Adds a unit to follow the value in the hover tooltip. Add a
         space if a separation is necessary from the value.
-    
+
         The 'valuesuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -864,7 +919,7 @@ class Sankey(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -926,6 +981,12 @@ class Sankey(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -937,6 +998,9 @@ class Sankey(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -1023,8 +1087,10 @@ class Sankey(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -1039,11 +1105,11 @@ class Sankey(_BaseTraceType):
         valueformat=None,
         valuesuffix=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Sankey object
-        
+
         Sankey plots for network flow data analysis. The nodes are
         specified in `nodes` and the links between sources and targets
         in `links`. The colors are set in `nodes[i].color` and
@@ -1090,6 +1156,12 @@ class Sankey(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -1101,6 +1173,9 @@ class Sankey(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -1196,8 +1271,8 @@ class Sankey(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Sankey 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Sankey
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Sankey`"""
             )
 
@@ -1240,6 +1315,10 @@ an instance of :class:`plotly.graph_objs.Sankey`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -1248,6 +1327,10 @@ an instance of :class:`plotly.graph_objs.Sankey`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("link", None)
         _v = link if link is not None else _v
         if _v is not None:

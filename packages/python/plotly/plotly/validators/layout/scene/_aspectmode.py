@@ -9,5 +9,5 @@ class AspectmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             implied_edits=kwargs.pop("implied_edits", {}),
             values=kwargs.pop("values", ["auto", "cube", "data", "manual"]),
-            **kwargs
+            **kwargs,
         )

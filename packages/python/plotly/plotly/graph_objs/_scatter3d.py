@@ -24,9 +24,11 @@ class Scatter3d(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "marker",
         "meta",
@@ -72,7 +74,7 @@ class Scatter3d(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -95,7 +97,7 @@ class Scatter3d(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -116,7 +118,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -140,9 +142,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -161,7 +163,7 @@ class Scatter3d(_BaseTraceType):
                 color
                     Sets the stoke color of the error bars.
                 copy_zstyle
-    
+
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -170,9 +172,9 @@ class Scatter3d(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -221,9 +223,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -242,7 +244,7 @@ class Scatter3d(_BaseTraceType):
                 color
                     Sets the stoke color of the error bars.
                 copy_zstyle
-    
+
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -251,9 +253,9 @@ class Scatter3d(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -302,9 +304,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`
           - A dict of string/value properties that will be passed
             to the ErrorZ constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -330,9 +332,9 @@ class Scatter3d(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -379,7 +381,7 @@ class Scatter3d(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -404,7 +406,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -428,9 +430,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -505,7 +507,7 @@ class Scatter3d(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -528,7 +530,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -552,7 +554,7 @@ class Scatter3d(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y,z) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -575,7 +577,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -597,7 +599,7 @@ class Scatter3d(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -617,7 +619,7 @@ class Scatter3d(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -631,6 +633,31 @@ class Scatter3d(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -639,7 +666,7 @@ class Scatter3d(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -664,9 +691,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -693,7 +720,7 @@ class Scatter3d(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -707,6 +734,27 @@ class Scatter3d(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -717,16 +765,16 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `line.colorscale`. Has an effect
-                    only if in `line.color`is set to a numerical
+                    only if in `line.color` is set to a numerical
                     array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default  palette
+                    `autocolorscale` is true, the default palette
                     will be chosen according to whether numbers in
                     the `color` array are all positive, all
                     negative or mixed.
@@ -734,13 +782,13 @@ class Scatter3d(_BaseTraceType):
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `line.color`) or the bounds set in
-                    `line.cmin` and `line.cmax`  Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    `line.cmin` and `line.cmax` Has an effect only
+                    if in `line.color` is set to a numerical array.
                     Defaults to `false` when `line.cmin` and
                     `line.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmin` must be set as well.
@@ -748,22 +796,22 @@ class Scatter3d(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `line.cmin` and/or `line.cmax` to be
                     equidistant to this point. Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    if in `line.color` is set to a numerical array.
                     Value should have the same units as in
                     `line.color`. Has no effect when `line.cauto`
                     is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmax` must be set as well.
                 color
-                    Sets thelinecolor. It accepts either a specific
-                    color or an array of numbers that are mapped to
-                    the colorscale relative to the max and min
-                    values of the array or relative to `line.cmin`
-                    and `line.cmax` if set.
+                    Sets the line color. It accepts either a
+                    specific color or an array of numbers that are
+                    mapped to the colorscale relative to the max
+                    and min values of the array or relative to
+                    `line.cmin` and `line.cmax` if set.
                 coloraxis
                     Sets a reference to a shared color axis.
                     References to these shared color axes are
@@ -779,7 +827,7 @@ class Scatter3d(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `line.color`is set to a numerical array. The
+                    `line.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -787,7 +835,7 @@ class Scatter3d(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`line.cmin` and `line.cmax`.
+                    color space, use `line.cmin` and `line.cmax`.
                     Alternatively, `colorscale` may be a palette
                     name string of the following list: Blackbody,Bl
                     uered,Blues,Cividis,Earth,Electric,Greens,Greys
@@ -800,14 +848,14 @@ class Scatter3d(_BaseTraceType):
                     Sets the dash style of the lines.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `line.color`is set to a
+                    effect only if in `line.color` is set to a
                     numerical array. If true, `line.cmin` will
                     correspond to the last color in the array and
                     `line.cmax` will correspond to the first color.
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `line.color`is set to a numerical array.
+                    in `line.color` is set to a numerical array.
                 width
                     Sets the line width (in px).
 
@@ -831,30 +879,30 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. In case `colorscale` is
                     unspecified or `autocolorscale` is true, the
-                    default  palette will be chosen according to
+                    default palette will be chosen according to
                     whether numbers in the `color` array are all
                     positive, all negative or mixed.
                 cauto
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax`  Has an effect
-                    only if in `marker.color`is set to a numerical
+                    `marker.cmin` and `marker.cmax` Has an effect
+                    only if in `marker.color` is set to a numerical
                     array. Defaults to `false` when `marker.cmin`
                     and `marker.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
@@ -862,18 +910,18 @@ class Scatter3d(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if in `marker.color`is set to a numerical
+                    only if in `marker.color` is set to a numerical
                     array. Value should have the same units as in
                     `marker.color`. Has no effect when
                     `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -893,7 +941,7 @@ class Scatter3d(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `marker.color`is set to a numerical array. The
+                    `marker.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -901,7 +949,7 @@ class Scatter3d(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -923,7 +971,7 @@ class Scatter3d(_BaseTraceType):
                     color and use its alpha channel.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. If true, `marker.cmin` will
                     correspond to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -931,7 +979,7 @@ class Scatter3d(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `marker.color`is set to a numerical array.
+                    in `marker.color` is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -981,7 +1029,7 @@ class Scatter3d(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1000,7 +1048,7 @@ class Scatter3d(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1025,7 +1073,7 @@ class Scatter3d(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-    
+
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -1049,7 +1097,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1070,7 +1118,7 @@ class Scatter3d(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1094,9 +1142,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     :class:`plotly.graph_objects.scatter3d.projecti
                     on.X` instance or dict with compatible
@@ -1129,7 +1177,7 @@ class Scatter3d(_BaseTraceType):
         a 3D scene. If "scene" (the default value), the (x,y,z)
         coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
-    
+
         The 'scene' property is an identifier of a particular
         subplot, of type 'scene', that may be specified as the string 'scene'
         optionally followed by an integer >= 1
@@ -1152,7 +1200,7 @@ class Scatter3d(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1176,9 +1224,9 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1207,7 +1255,7 @@ class Scatter3d(_BaseTraceType):
         If "-1", the scatter points are not fill with a surface If 0,
         1, 2, the scatter points are filled with a Delaunay surface
         about the x, y, z respectively.
-    
+
         The 'surfaceaxis' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [-1, 0, 1, 2]
@@ -1228,7 +1276,7 @@ class Scatter3d(_BaseTraceType):
     def surfacecolor(self):
         """
         Sets the surface fill color.
-    
+
         The 'surfacecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1292,7 +1340,7 @@ class Scatter3d(_BaseTraceType):
         the this trace's (x,y,z) coordinates. If trace `hoverinfo`
         contains a "text" flag and "hovertext" is not set, these
         elements will be seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1318,11 +1366,11 @@ class Scatter3d(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scatter3d.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
@@ -1344,7 +1392,7 @@ class Scatter3d(_BaseTraceType):
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
@@ -1366,7 +1414,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1391,7 +1439,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `textposition`.
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1411,7 +1459,7 @@ class Scatter3d(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1442,7 +1490,7 @@ class Scatter3d(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1465,7 +1513,7 @@ class Scatter3d(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `texttemplate`.
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1486,7 +1534,7 @@ class Scatter3d(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1521,7 +1569,7 @@ class Scatter3d(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1542,7 +1590,7 @@ class Scatter3d(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1563,7 +1611,7 @@ class Scatter3d(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1583,7 +1631,7 @@ class Scatter3d(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1617,7 +1665,7 @@ class Scatter3d(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1638,7 +1686,7 @@ class Scatter3d(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1658,7 +1706,7 @@ class Scatter3d(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1678,7 +1726,7 @@ class Scatter3d(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1712,7 +1760,7 @@ class Scatter3d(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1733,7 +1781,7 @@ class Scatter3d(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1753,7 +1801,7 @@ class Scatter3d(_BaseTraceType):
     def z(self):
         """
         Sets the z coordinates.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1773,7 +1821,7 @@ class Scatter3d(_BaseTraceType):
     def zcalendar(self):
         """
         Sets the calendar system to use with `z` date data.
-    
+
         The 'zcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1807,7 +1855,7 @@ class Scatter3d(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `zaxis.hoverformat`.
-    
+
         The 'zhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1828,7 +1876,7 @@ class Scatter3d(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `z`.
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1932,6 +1980,12 @@ class Scatter3d(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1947,6 +2001,9 @@ class Scatter3d(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -2148,9 +2205,11 @@ class Scatter3d(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -2186,11 +2245,11 @@ class Scatter3d(_BaseTraceType):
         zcalendar=None,
         zhoverformat=None,
         zsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Scatter3d object
-        
+
         The data visualized as scatter point or lines in 3D dimension
         is set in `x`, `y`, `z`. Text (appearing either on the chart or
         on hover only) is via `text`. Bubble charts are achieved by
@@ -2282,6 +2341,12 @@ class Scatter3d(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2297,6 +2362,9 @@ class Scatter3d(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -2500,8 +2568,8 @@ class Scatter3d(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Scatter3d 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Scatter3d
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Scatter3d`"""
             )
 
@@ -2572,6 +2640,10 @@ an instance of :class:`plotly.graph_objs.Scatter3d`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2584,6 +2656,10 @@ an instance of :class:`plotly.graph_objs.Scatter3d`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

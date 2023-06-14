@@ -43,6 +43,8 @@ As of version 5.5.0 of `plotly`, the **recommended way to [display annotated hea
 
 #### Basic Annotated Heatmap for z-annotations
 
+*New in v5.5*
+
 After creating a figure with `px.imshow`, you can add z-annotations with `.update_traces(texttemplate="%{z}")`.
 
 ```python
@@ -246,7 +248,7 @@ fig = px.imshow(color, color_continuous_scale=colorscale, aspect="auto",
                title='Periodic Table')
 fig.update_traces(
     text=symbol, texttemplate="%{text}", textfont_size=12,
-    customdata=np.moveaxis([element, atomic_mass], 0,-1), 
+    customdata=np.moveaxis([element, atomic_mass], 0,-1),
     hovertemplate="%{customdata[0]}<br>Atomic Mass: %{customdata[1]:.2f}<extra></extra>"
 )
 fig.update_xaxes(visible=False)

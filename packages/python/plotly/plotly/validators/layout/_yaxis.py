@@ -24,6 +24,14 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis is computed in relation to the input data.
                 See `rangemode` for more info. If `range` is
                 provided, then `autorange` is set to False.
+            autoshift
+                Automatically reposition the axis to avoid
+                overlap with other axes with the same
+                `overlaying` value. This repositioning will
+                account for any `shift` amount applied to other
+                axes on the same side with `autoshift` is set
+                to true. Only has an effect if `anchor` is set
+                to "free".
             autotypenumbers
                 Using "strict" a numeric string in trace data
                 is not converted to a number. Using *convert
@@ -135,14 +143,19 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 able. If true, then zoom is disabled.
             gridcolor
                 Sets the color of the grid lines.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the grid lines.
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -151,6 +164,16 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             layer
                 Sets the layer on which this axis is displayed.
                 If *above traces*, this axis is displayed above
@@ -178,6 +201,9 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Hide SI prefix for 10^n if |n| is below this
                 number. This only has an effect when
                 `tickformat` is "SI" or "B".
+            minor
+                :class:`plotly.graph_objects.layout.yaxis.Minor
+                ` instance or dict with compatible properties
             mirror
                 Determines if the axis lines or/and ticks are
                 mirrored to the opposite side of the plotting
@@ -267,6 +293,17 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 horizontal.
             separatethousands
                 If "true", even 4-digit integers are separated
+            shift
+                Moves the axis a given number of pixels from
+                where it would have been otherwise. Accepts
+                both positive and negative values, which will
+                shift the axis either right or left,
+                respectively. If `autoshift` is set to true,
+                then this defaults to a padding of -3 if `side`
+                is set to "left". and defaults to +3 if `side`
+                is set to "right". Defaults to 0 if `autoshift`
+                is set to false. Only has an effect if `anchor`
+                is set to "free".
             showdividers
                 Determines whether or not a dividers are drawn
                 between the category levels of this axis. Only
@@ -348,8 +385,8 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -394,6 +431,16 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes linked by `matches` or `scaleanchor`, no
                 extra padding for inside labels would be added
                 by autorange, so that the scales could match.
+            ticklabelstep
+                Sets the spacing between tick labels as
+                compared to the spacing between ticks. A value
+                of 1 (default) means each tick gets a label. A
+                value of 2 means shows every 2nd label. A
+                larger value n means only every nth tick is
+                labeled. `tick0` determines which labels are
+                shown. Not implemented for axes with `type`
+                "log" or "multicategory", or when `tickmode` is
+                "array".
             ticklen
                 Sets the tick length (in px).
             tickmode
@@ -406,7 +453,9 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "array", the placement of the ticks is set via
                 `tickvals` and the tick text is `ticktext`.
                 ("array" is the default value if `tickvals` is
-                provided).
+                provided). If "sync", the number of ticks will
+                sync with the overlayed axis set by
+                `overlaying` property.
             tickprefix
                 Sets a tick label prefix.
             ticks
@@ -473,5 +522,5 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

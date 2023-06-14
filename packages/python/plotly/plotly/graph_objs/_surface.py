@@ -31,9 +31,11 @@ class Surface(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "lighting",
         "lightposition",
         "meta",
@@ -76,10 +78,10 @@ class Surface(_BaseTraceType):
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
         `colorscale`. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
+        `autocolorscale` is true, the default palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -100,9 +102,9 @@ class Surface(_BaseTraceType):
         """
         Determines whether or not the color domain is computed with
         respect to the input data (here z or surfacecolor) or the
-        bounds set in `cmin` and `cmax`  Defaults to `false` when
-        `cmin` and `cmax` are set by the user.
-    
+        bounds set in `cmin` and `cmax` Defaults to `false` when `cmin`
+        and `cmax` are set by the user.
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -124,7 +126,7 @@ class Surface(_BaseTraceType):
         Sets the upper bound of the color domain. Value should have the
         same units as z or surfacecolor and if set, `cmin` must be set
         as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -147,7 +149,7 @@ class Surface(_BaseTraceType):
         `cmax` to be equidistant to this point. Value should have the
         same units as z or surfacecolor. Has no effect when `cauto` is
         `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -169,7 +171,7 @@ class Surface(_BaseTraceType):
         Sets the lower bound of the color domain. Value should have the
         same units as z or surfacecolor and if set, `cmax` must be set
         as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -194,7 +196,7 @@ class Surface(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -220,9 +222,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -265,6 +267,16 @@ class Surface(_BaseTraceType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -344,8 +356,8 @@ class Surface(_BaseTraceType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -374,6 +386,16 @@ class Surface(_BaseTraceType):
                     to the ticks. Left and right options are used
                     when `orientation` is "h", top and bottom when
                     `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -433,9 +455,15 @@ class Surface(_BaseTraceType):
                     title's location used to be set by the now
                     deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -445,10 +473,20 @@ class Surface(_BaseTraceType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -458,6 +496,10 @@ class Surface(_BaseTraceType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -479,12 +521,12 @@ class Surface(_BaseTraceType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        bounds of the colorscale in color space, use `cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -529,7 +571,7 @@ class Surface(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the `z` data are filled in.
-    
+
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -553,9 +595,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     :class:`plotly.graph_objects.surface.contours.X
                     ` instance or dict with compatible properties
@@ -585,7 +627,7 @@ class Surface(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -606,7 +648,7 @@ class Surface(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -628,7 +670,7 @@ class Surface(_BaseTraceType):
         Determines whether or not a surface is drawn. For example, set
         `hidesurface` to False `contours.x.show` to True and
         `contours.y.show` to True to draw a wire frame plot.
-    
+
         The 'hidesurface' property must be specified as a bool
         (either True, or False)
 
@@ -650,7 +692,7 @@ class Surface(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -675,7 +717,7 @@ class Surface(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -699,9 +741,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -776,7 +818,7 @@ class Surface(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -799,7 +841,7 @@ class Surface(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -819,7 +861,7 @@ class Surface(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -842,7 +884,7 @@ class Surface(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -864,7 +906,7 @@ class Surface(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -884,7 +926,7 @@ class Surface(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -898,6 +940,31 @@ class Surface(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -906,7 +973,7 @@ class Surface(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -931,9 +998,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -960,7 +1027,7 @@ class Surface(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -974,6 +1041,27 @@ class Surface(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # lighting
     # --------
     @property
@@ -984,9 +1072,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
-    
+
             Supported dict properties:
-                
+
                 ambient
                     Ambient light increases overall color
                     visibility but can wash out the image.
@@ -1026,9 +1114,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     Numeric vector, representing the X coordinate
                     for each vertex.
@@ -1064,7 +1152,7 @@ class Surface(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1083,7 +1171,7 @@ class Surface(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1104,7 +1192,7 @@ class Surface(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1130,7 +1218,7 @@ class Surface(_BaseTraceType):
         an overlay of multiple transparent surfaces may not perfectly
         be sorted in depth by the webgl API. This behavior may be
         improved in the near future and is subject to change.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1158,7 +1246,7 @@ class Surface(_BaseTraceType):
         Alternatively, `opacityscale` may be a palette name string of
         the following list: 'min', 'max', 'extremes' and 'uniform'. The
         default is 'uniform'.
-    
+
         The 'opacityscale' property accepts values of any type
 
         Returns
@@ -1179,7 +1267,7 @@ class Surface(_BaseTraceType):
         Reverses the color mapping if true. If true, `cmin` will
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -1202,7 +1290,7 @@ class Surface(_BaseTraceType):
         a 3D scene. If "scene" (the default value), the (x,y,z)
         coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
-    
+
         The 'scene' property is an identifier of a particular
         subplot, of type 'scene', that may be specified as the string 'scene'
         optionally followed by an integer >= 1
@@ -1225,7 +1313,7 @@ class Surface(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1246,7 +1334,7 @@ class Surface(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -1270,9 +1358,9 @@ class Surface(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.surface.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1300,7 +1388,7 @@ class Surface(_BaseTraceType):
         """
         Sets the surface color values, used for setting a color scale
         independent of `z`.
-    
+
         The 'surfacecolor' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1321,7 +1409,7 @@ class Surface(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `surfacecolor`.
-    
+
         The 'surfacecolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1343,7 +1431,7 @@ class Surface(_BaseTraceType):
         Sets the text elements associated with each z value. If trace
         `hoverinfo` contains a "text" flag and "hovertext" is not set,
         these elements will be seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1365,7 +1453,7 @@ class Surface(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1386,7 +1474,7 @@ class Surface(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1421,7 +1509,7 @@ class Surface(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1442,7 +1530,7 @@ class Surface(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1463,7 +1551,7 @@ class Surface(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1483,7 +1571,7 @@ class Surface(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1517,7 +1605,7 @@ class Surface(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1538,7 +1626,7 @@ class Surface(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1558,7 +1646,7 @@ class Surface(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1578,7 +1666,7 @@ class Surface(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1612,7 +1700,7 @@ class Surface(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1633,7 +1721,7 @@ class Surface(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1653,7 +1741,7 @@ class Surface(_BaseTraceType):
     def z(self):
         """
         Sets the z coordinates.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1673,7 +1761,7 @@ class Surface(_BaseTraceType):
     def zcalendar(self):
         """
         Sets the calendar system to use with `z` date data.
-    
+
         The 'zcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1707,7 +1795,7 @@ class Surface(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `zaxis.hoverformat`.
-    
+
         The 'zhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1728,7 +1816,7 @@ class Surface(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `z`.
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1757,13 +1845,13 @@ class Surface(_BaseTraceType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here z or surfacecolor)
-            or the bounds set in `cmin` and `cmax`  Defaults to
+            or the bounds set in `cmin` and `cmax` Defaults to
             `false` when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -1795,7 +1883,7 @@ class Surface(_BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -1873,6 +1961,12 @@ class Surface(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1888,6 +1982,9 @@ class Surface(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -2079,9 +2176,11 @@ class Surface(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -2113,11 +2212,11 @@ class Surface(_BaseTraceType):
         zcalendar=None,
         zhoverformat=None,
         zsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Surface object
-        
+
         The data the describes the coordinates of the surface is set in
         `z`. Data in `z` should be a 2D list. Coordinates in `x` and
         `y` can either be 1D lists or 2D lists (e.g. to graph
@@ -2137,13 +2236,13 @@ class Surface(_BaseTraceType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here z or surfacecolor)
-            or the bounds set in `cmin` and `cmax`  Defaults to
+            or the bounds set in `cmin` and `cmax` Defaults to
             `false` when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -2175,7 +2274,7 @@ class Surface(_BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -2253,6 +2352,12 @@ class Surface(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2268,6 +2373,9 @@ class Surface(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -2454,8 +2562,8 @@ class Surface(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Surface 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Surface
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Surface`"""
             )
 
@@ -2554,6 +2662,10 @@ an instance of :class:`plotly.graph_objs.Surface`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2566,6 +2678,10 @@ an instance of :class:`plotly.graph_objs.Surface`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("lighting", None)
         _v = lighting if lighting is not None else _v
         if _v is not None:

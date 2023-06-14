@@ -18,5 +18,5 @@ class CircleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 effect only when `type` is set to "circle".
 """,
             ),
-            **kwargs
+            **kwargs,
         )

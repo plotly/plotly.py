@@ -34,10 +34,10 @@ class FigureWidget(BaseFigureWidget):
                              'scatterternary', 'splom', 'streamtube',
                              'sunburst', 'surface', 'table', 'treemap',
                              'violin', 'volume', 'waterfall']
-        
+
                 - All remaining properties are passed to the constructor of
                   the specified trace type
-        
+
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
 
         layout
@@ -46,9 +46,13 @@ class FigureWidget(BaseFigureWidget):
               - An instance of :class:`plotly.graph_objs.Layout`
               - A dict of string/value properties that will be passed
                 to the Layout constructor
-        
+
                 Supported dict properties:
-                    
+
+                    activeselection
+                        :class:`plotly.graph_objects.layout.Activeselec
+                        tion` instance or dict with compatible
+                        properties
                     activeshape
                         :class:`plotly.graph_objects.layout.Activeshape
                         ` instance or dict with compatible properties
@@ -92,8 +96,8 @@ class FigureWidget(BaseFigureWidget):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     barnorm
                         Sets the normalization for bar traces on the
                         graph. With "fraction", the value of each bar
@@ -250,7 +254,7 @@ class FigureWidget(BaseFigureWidget):
                         another With "group", the bars are plotted next
                         to one another centered around the shared
                         location. With "overlay", the bars are plotted
-                        over one another, you might need to an
+                        over one another, you might need to reduce
                         "opacity" to see multiple bars.
                     geo
                         :class:`plotly.graph_objects.layout.Geo`
@@ -344,9 +348,18 @@ class FigureWidget(BaseFigureWidget):
                     metasrc
                         Sets the source reference on Chart Studio Cloud
                         for `meta`.
+                    minreducedheight
+                        Minimum height of the plot with
+                        margin.automargin applied (in px)
+                    minreducedwidth
+                        Minimum width of the plot with
+                        margin.automargin applied (in px)
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
+                    newselection
+                        :class:`plotly.graph_objects.layout.Newselectio
+                        n` instance or dict with compatible properties
                     newshape
                         :class:`plotly.graph_objects.layout.Newshape`
                         instance or dict with compatible properties
@@ -365,6 +378,19 @@ class FigureWidget(BaseFigureWidget):
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
                         instance or dict with compatible properties
+                    scattergap
+                        Sets the gap (in plot fraction) between scatter
+                        points of adjacent location coordinates.
+                        Defaults to `bargap`.
+                    scattermode
+                        Determines how scatter points at the same
+                        location coordinate are displayed on the graph.
+                        With "group", the scatter points are plotted
+                        next to one another centered around the shared
+                        location. With "overlay", the scatter points
+                        are plotted over one another, you might need to
+                        reduce "opacity" to see multiple scatter
+                        points.
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
                         instance or dict with compatible properties
@@ -377,6 +403,15 @@ class FigureWidget(BaseFigureWidget):
                     selectionrevision
                         Controls persistence of user-driven changes in
                         selected points from all traces.
+                    selections
+                        A tuple of
+                        :class:`plotly.graph_objects.layout.Selection`
+                        instances or dicts with compatible properties
+                    selectiondefaults
+                        When used in a template (as
+                        layout.template.layout.selectiondefaults), sets
+                        the default property values to use for elements
+                        of layout.selections
                     separators
                         Sets the decimal and thousand separators. For
                         example, *. * puts a '.' before decimals and a
@@ -536,8 +571,8 @@ class FigureWidget(BaseFigureWidget):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     width
                         Sets the plot's width (in px).
                     xaxis
@@ -553,9 +588,9 @@ class FigureWidget(BaseFigureWidget):
               - A list or tuple of instances of plotly.graph_objs.Frame
               - A list or tuple of dicts of string/value properties that
                 will be passed to the Frame constructor
-        
+
                 Supported dict properties:
-                    
+
                     baseframe
                         The name of the frame into which this frame's
                         properties are merged before applying. This is
@@ -593,6 +628,589 @@ class FigureWidget(BaseFigureWidget):
         """
         super(FigureWidget, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
+    def update(self, dict1=None, overwrite=False, **kwargs) -> "FigureWidget":
+        """
+
+        Update the properties of the figure with a dict and/or with
+        keyword arguments.
+
+        This recursively updates the structure of the figure
+        object with the values in the input dict / keyword arguments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Examples
+        --------
+        >>> import plotly.graph_objs as go
+        >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
+        >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
+            {'data': [{'type': 'scatter',
+               'uid': 'e86a7c7a-346a-11e8-8aa8-a0999b0c017b',
+               'y': array([4, 5, 6], dtype=int32)}],
+             'layout': {}}
+
+        >>> fig = go.Figure(layout={'xaxis':
+        ...                         {'color': 'green',
+        ...                          'range': [0, 1]}})
+        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}}) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
+            {'data': [],
+             'layout': {'xaxis':
+                        {'color': 'pink',
+                         'range': [0, 1]}}}
+
+        Returns
+        -------
+        BaseFigure
+            Updated figure
+
+        """
+        return super(FigureWidget, self).update(dict1, overwrite, **kwargs)
+
+    def update_traces(
+        self,
+        patch=None,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        overwrite=False,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Perform a property update operation on all traces that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all traces that
+            satisfy the selection criteria.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
+
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        **kwargs
+            Additional property updates to apply to each selected trace. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+
+        """
+        return super(FigureWidget, self).update_traces(
+            patch, selector, row, col, secondary_y, overwrite, **kwargs
+        )
+
+    def update_layout(self, dict1=None, overwrite=False, **kwargs) -> "FigureWidget":
+        """
+
+        Update the properties of the figure's layout with a dict and/or with
+        keyword arguments.
+
+        This recursively updates the structure of the original
+        layout with the values in the input dict / keyword arguments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Returns
+        -------
+        BaseFigure
+            The Figure object that the update_layout method was called on
+
+        """
+        return super(FigureWidget, self).update_layout(dict1, overwrite, **kwargs)
+
+    def for_each_trace(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ) -> "FigureWidget":
+        """
+
+        Apply a function to all traces that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single trace object.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
+
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+
+        """
+        return super(FigureWidget, self).for_each_trace(
+            fn, selector, row, col, secondary_y
+        )
+
+    def add_trace(
+        self, trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False
+    ) -> "FigureWidget":
+        """
+
+        Add a trace to the figure
+
+        Parameters
+        ----------
+        trace : BaseTraceType or dict
+            Either:
+              - An instances of a trace classe from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - or a dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all columns in the specified row(s).
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
+              * The trace argument is a 2D cartesian trace
+                (scatter, bar, etc.)
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
+        Returns
+        -------
+        BaseFigure
+            The Figure that add_trace was called on
+
+        Examples
+        --------
+
+        >>> from plotly import subplots
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+
+        >>> fig = go.Figure()
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
+
+
+        Add two Scatter traces to vertically stacked subplots
+
+        >>> fig = subplots.make_subplots(rows=2)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) # doctest: +ELLIPSIS
+        Figure(...)
+
+        """
+        return super(FigureWidget, self).add_trace(
+            trace, row, col, secondary_y, exclude_empty_subplots
+        )
+
+    def add_traces(
+        self,
+        data,
+        rows=None,
+        cols=None,
+        secondary_ys=None,
+        exclude_empty_subplots=False,
+    ) -> "FigureWidget":
+        """
+
+        Add traces to the figure
+
+        Parameters
+        ----------
+        data : list[BaseTraceType or dict]
+            A list of trace specifications to be added.
+            Trace specifications may be either:
+
+              - Instances of trace classes from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+
+        rows : None, list[int], or int (default None)
+            List of subplot row indexes (starting from 1) for the traces to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to row number
+
+        cols : None or list[int] (default None)
+            List of subplot column indexes (starting from 1) for the traces
+            to be added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to column number
+
+
+        secondary_ys: None or list[boolean] (default None)
+            List of secondary_y booleans for traces to be added. See the
+            docstring for `add_trace` for more info.
+
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
+
+        Returns
+        -------
+        BaseFigure
+            The Figure that add_traces was called on
+
+        Examples
+        --------
+
+        >>> from plotly import subplots
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+
+        >>> fig = go.Figure()
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])]) # doctest: +ELLIPSIS
+        Figure(...)
+
+        Add two Scatter traces to vertically stacked subplots
+
+        >>> fig = subplots.make_subplots(rows=2)
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
+        ...                 rows=[1, 2], cols=[1, 1]) # doctest: +ELLIPSIS
+        Figure(...)
+
+        """
+        return super(FigureWidget, self).add_traces(
+            data, rows, cols, secondary_ys, exclude_empty_subplots
+        )
+
+    def add_vline(
+        self,
+        x,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a vertical line to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x: float or int
+            A number representing the x coordinate of the vertical line.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the line. Example positions are "bottom left", "right top",
+            "right", "bottom". If an annotation is added but annotation_position is
+            not specified, this defaults to "top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_vline(
+            x, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_hline(
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a horizontal line to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y: float or int
+            A number representing the y coordinate of the horizontal line.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the line. Example positions are "bottom left", "right top",
+            "right", "bottom". If an annotation is added but annotation_position is
+            not specified, this defaults to "top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_hline(
+            y, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_vrect(
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x0: float or int
+            A number representing the x coordinate of one side of the rectangle.
+        x1: float or int
+            A number representing the x coordinate of the other side of the rectangle.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the rectangle. Example positions are "outside top left", "inside
+            bottom", "right", "inside left", "inside" ("outside" is not supported). If
+            an annotation is added but annotation_position is not specified this
+            defaults to "inside top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_vrect(
+            x0, x1, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def add_hrect(
+        self,
+        y0,
+        y1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y0: float or int
+            A number representing the y coordinate of one side of the rectangle.
+        y1: float or int
+            A number representing the y coordinate of the other side of the rectangle.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no data
+            plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the shape based on annotation_position (see
+            below) unless its x or y value has been specified for the annotation
+            passed here. xref and yref are always the same as for the added
+            shape and cannot be overridden.
+        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be anchored
+            to on the rectangle. Example positions are "outside top left", "inside
+            bottom", "right", "inside left", "inside" ("outside" is not supported). If
+            an annotation is added but annotation_position is not specified this
+            defaults to "inside top right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to specify the
+            annotation text "example" you can pass annotation_text="example" as a
+            keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+        """
+        return super(FigureWidget, self).add_hrect(
+            y0, y1, row, col, exclude_empty_subplots, annotation, **kwargs
+        )
+
+    def set_subplots(
+        self, rows=None, cols=None, **make_subplots_args
+    ) -> "FigureWidget":
+        """
+
+        Add subplots to this figure. If the figure already contains subplots,
+        then this throws an error. Accepts any keyword arguments that
+        plotly.subplots.make_subplots accepts.
+
+        """
+        return super(FigureWidget, self).set_subplots(rows, cols, **make_subplots_args)
+
     def add_bar(
         self,
         alignmentgroup=None,
@@ -617,9 +1235,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -669,13 +1289,13 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Bar trace
-        
+
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
@@ -755,11 +1375,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -785,6 +1406,12 @@ class FigureWidget(BaseFigureWidget):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -800,6 +1427,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -905,7 +1535,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1084,9 +1715,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1133,7 +1766,7 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -1154,9 +1787,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1186,11 +1821,11 @@ class FigureWidget(BaseFigureWidget):
         widthsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Barpolar trace
-        
+
         The data visualized by the radial span of the bars is set in
         `r`
 
@@ -1271,6 +1906,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1286,6 +1927,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.barpolar.Marker` instance
             or dict with compatible properties
@@ -1434,9 +2078,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1464,7 +2110,7 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             width=width,
             widthsrc=widthsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -1489,9 +2135,11 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lowerfence=None,
         lowerfencesrc=None,
@@ -1553,11 +2201,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Box trace
-        
+
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2, i.e. the median) is marked by a line
         inside the box. The fences grow outward from the boxes' edges,
@@ -1687,6 +2335,12 @@ class FigureWidget(BaseFigureWidget):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -1702,6 +2356,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -1811,17 +2468,17 @@ class FigureWidget(BaseFigureWidget):
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
             for Q1 and 75th percentile for Q3 as computed using
-            method #10 (listed on http://www.amstat.org/publication
-            s/jse/v14n3/langford.html). The "exclusive" method uses
-            the median to divide the ordered dataset into two
-            halves if the sample is odd, it does not include the
-            median in either half - Q1 is then the median of the
-            lower half and Q3 the median of the upper half. The
-            "inclusive" method also uses the median to divide the
-            ordered dataset into two halves but if the sample is
-            odd, it includes the median in both halves - Q1 is then
-            the median of the lower half and Q3 the median of the
-            upper half.
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         sd
             Sets the standard deviation values. There should be as
             many items as the number of boxes desired. This
@@ -2046,9 +2703,11 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lowerfence=lowerfence,
             lowerfencesrc=lowerfencesrc,
@@ -2107,7 +2766,7 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -2128,9 +2787,11 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -2162,11 +2823,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Candlestick trace
-        
+
         The candlestick is a style of financial chart describing open,
         high, low and close for a given `x` coordinate (most likely
         time). The boxes represent the spread between the `open` and
@@ -2225,6 +2886,12 @@ class FigureWidget(BaseFigureWidget):
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2240,6 +2907,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.candlestick.Line` instance
             or dict with compatible properties
@@ -2429,9 +3099,11 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -2460,7 +3132,7 @@ class FigureWidget(BaseFigureWidget):
             xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -2484,8 +3156,10 @@ class FigureWidget(BaseFigureWidget):
         font=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -2503,11 +3177,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Carpet trace
-        
+
         The data describing carpet axis layout is set in `y` and
         (optionally) also `x`. If only `y` is present, `x` the plot is
         interpreted as a cheater plot and is filled in using the `y`
@@ -2577,6 +3251,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
@@ -2588,6 +3268,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2708,8 +3391,10 @@ class FigureWidget(BaseFigureWidget):
             font=font,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -2724,7 +3409,7 @@ class FigureWidget(BaseFigureWidget):
             y=y,
             yaxis=yaxis,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -2748,9 +3433,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -2778,11 +3465,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Choropleth trace
-        
+
         The data that describes the choropleth value-to-color mapping
         is set in `z`. The geographic locations corresponding to each
         value in `z` are set in `locations`.
@@ -2793,7 +3480,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -2813,7 +3500,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -2898,6 +3585,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2913,6 +3606,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map. Values "ISO-3",
@@ -3011,7 +3707,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -3065,9 +3761,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locationmode=locationmode,
             locations=locations,
             locationssrc=locationssrc,
@@ -3093,7 +3791,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -3117,9 +3815,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -3147,11 +3847,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Choroplethmapbox trace
-        
+
         GeoJSON features to be filled are set in `geojson` The data
         that describes the choropleth value-to-color mapping is set in
         `locations` and `z`.
@@ -3162,7 +3862,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -3188,7 +3888,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3246,8 +3946,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -3266,6 +3967,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3281,6 +3988,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -3377,7 +4087,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -3431,9 +4141,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locations=locations,
             locationssrc=locationssrc,
             marker=marker,
@@ -3459,7 +4171,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -3485,9 +4197,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -3526,11 +4240,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Cone trace
-        
+
         Use cone traces to visualize vector fields.  Specify a vector
         field using 6 1D arrays, 3 position arrays `x`, `y` and `z` and
         3 vector component arrays `u`, `v`, `w`. The cones are drawn
@@ -3546,13 +4260,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -3584,7 +4298,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -3632,11 +4346,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -3652,6 +4366,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -3667,6 +4387,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -3899,9 +4622,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -3938,7 +4663,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -3966,9 +4691,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -4017,11 +4744,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Contour trace
-        
+
         The data from which contour lines are computed is set in `z`.
         Data in `z` must be a 2D list of numbers. Say that `z` has N
         rows and M columns, then by default, these N rows correspond to
@@ -4036,7 +4763,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -4061,7 +4788,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4149,6 +4876,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4164,6 +4897,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contour.Line` instance or
             dict with compatible properties
@@ -4231,7 +4967,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -4368,7 +5105,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -4442,9 +5179,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -4490,7 +5229,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -4520,9 +5259,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -4550,11 +5291,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Contourcarpet trace
-        
+
         Plots contours on either the first carpet axis or the carpet
         axis with a matching `carpet` attribute. Data `z` is
         interpreted as matching that of the corresponding carpet axis.
@@ -4580,7 +5321,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -4623,7 +5364,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -4660,6 +5401,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -4675,6 +5422,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contourcarpet.Line`
             instance or dict with compatible properties
@@ -4767,7 +5517,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -4837,9 +5587,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -4864,7 +5616,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -4888,9 +5640,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -4917,11 +5671,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Densitymapbox trace
-        
+
         Draws a bivariate kernel density estimation with a Gaussian
         kernel from `lon` and `lat` coordinates and optional `z` values
         using a colorscale.
@@ -4932,7 +5686,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         below
@@ -4958,7 +5712,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -5035,6 +5789,12 @@ class FigureWidget(BaseFigureWidget):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5050,6 +5810,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -5146,7 +5909,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -5200,9 +5963,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lon=lon,
             lonsrc=lonsrc,
             meta=meta,
@@ -5227,7 +5992,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -5252,9 +6017,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -5299,11 +6066,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Funnel trace
-        
+
         Visualize stages in a process using length-encoded bars. This
         trace can be used to show data in either a part-to-whole
         representation wherein each item appears in a single stage, or
@@ -5376,10 +6143,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious` and `percentTotal`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious` and
+            `percentTotal`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -5407,6 +6174,12 @@ class FigureWidget(BaseFigureWidget):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5422,6 +6195,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnel.Marker` instance or
             dict with compatible properties
@@ -5529,8 +6305,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious`, `percentTotal`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious`,
+            `percentTotal`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -5696,9 +6473,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -5740,7 +6519,7 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -5765,9 +6544,11 @@ class FigureWidget(BaseFigureWidget):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -5792,11 +6573,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Funnelarea trace
-        
+
         Visualize stages in a process using area-encoded trapezoids.
         This trace can be used to show data in a part-to-whole
         representation similar to a "pie" trace, wherein each item
@@ -5858,12 +6639,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -5899,6 +6680,12 @@ class FigureWidget(BaseFigureWidget):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -5914,6 +6701,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -5982,8 +6772,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6060,9 +6851,11 @@ class FigureWidget(BaseFigureWidget):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6085,7 +6878,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -6110,9 +6903,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -6162,11 +6957,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Heatmap trace
-        
+
         The data that describes the heatmap value-to-color mapping is
         set in `z`. Data in `z` can either be a 2D list of values
         (ragged or not) or a 1D array of values. In the case where `z`
@@ -6191,7 +6986,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -6211,7 +7006,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -6291,6 +7086,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -6306,6 +7107,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -6362,7 +7166,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -6503,7 +7308,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -6576,9 +7381,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -6625,7 +7432,7 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -6644,8 +7451,10 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -6679,11 +7488,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Heatmapgl trace
-        
+
         "heatmapgl" trace is deprecated! Please consider switching to
         the "heatmap" or "image" trace types. Alternatively you could
         contribute/sponsor rewriting this trace type based on cartesian
@@ -6696,7 +7505,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         coloraxis
@@ -6716,7 +7525,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -6751,6 +7560,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -6762,6 +7577,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -6872,7 +7690,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zmax
             Sets the upper bound of the color domain. Value should
@@ -6933,8 +7751,10 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -6965,7 +7785,7 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -6995,9 +7815,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -7037,11 +7859,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Histogram trace
-        
+
         The sample data from which statistics are computed is set in
         `x` for vertically spanning histograms and in `y` for
         horizontally spanning histograms. Binning options are set
@@ -7161,8 +7983,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -7186,6 +8009,12 @@ class FigureWidget(BaseFigureWidget):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7201,6 +8030,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -7304,7 +8136,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -7443,9 +8276,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -7482,7 +8317,7 @@ class FigureWidget(BaseFigureWidget):
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -7506,9 +8341,11 @@ class FigureWidget(BaseFigureWidget):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -7552,11 +8389,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Histogram2d trace
-        
+
         The sample data from which statistics are computed is set in
         `x` and `y` (where `x` and `y` represent marginal
         distributions, binning is set in `xbins` and `ybins` in this
@@ -7582,7 +8419,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         bingroup
@@ -7607,7 +8444,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -7680,11 +8517,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -7695,6 +8532,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -7710,6 +8553,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram2d.Marker`
             instance or dict with compatible properties
@@ -7776,7 +8622,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z`
+            are available. Finally, the template string has access
+            to variable `z`
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -7883,7 +8730,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -7955,9 +8802,11 @@ class FigureWidget(BaseFigureWidget):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -7998,7 +8847,7 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -8024,9 +8873,11 @@ class FigureWidget(BaseFigureWidget):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -8069,11 +8920,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Histogram2dContour trace
-        
+
         The sample data from which statistics are computed is set in
         `x` and `y` (where `x` and `y` represent marginal
         distributions, binning is set in `xbins` and `ybins` in this
@@ -8099,7 +8950,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         autocontour
@@ -8129,7 +8980,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`zmin` and `zmax`.
+            colorscale in color space, use `zmin` and `zmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -8205,11 +9056,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8220,6 +9071,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -8235,6 +9092,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.histogram2dcontour.Line`
             instance or dict with compatible properties
@@ -8312,7 +9172,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8415,7 +9276,7 @@ class FigureWidget(BaseFigureWidget):
         zauto
             Determines whether or not the color domain is computed
             with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax`  Defaults to `false`
+            bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rulefor `z`  using d3
@@ -8487,9 +9348,11 @@ class FigureWidget(BaseFigureWidget):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -8529,7 +9392,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -8553,8 +9416,10 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -8584,11 +9449,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Icicle trace
-        
+
         Visualize hierarchal data from leaves (and/or outer branches)
         towards root with rectangles. The icicle sectors are determined
         by the entries in "labels" or "ids" and in "parents".
@@ -8652,10 +9517,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -8688,6 +9554,12 @@ class FigureWidget(BaseFigureWidget):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.icicle.Legendgrouptitle`
             instance or dict with compatible properties
@@ -8699,6 +9571,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -8792,9 +9667,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -8871,8 +9747,10 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -8900,7 +9778,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -8920,8 +9798,10 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -8945,11 +9825,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Image trace
-        
+
         Display an image, i.e. data on a 2D regular raster. By default,
         when an image is displayed in a subplot, its y axis will be
         reversed (ie. `autorange: 'reversed'`), constrained to the
@@ -9011,8 +9891,9 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -9031,6 +9912,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
@@ -9042,6 +9929,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9103,14 +9993,23 @@ class FigureWidget(BaseFigureWidget):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -9185,8 +10084,10 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -9207,7 +10108,7 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -9221,8 +10122,10 @@ class FigureWidget(BaseFigureWidget):
         gauge=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         mode=None,
@@ -9236,11 +10139,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Indicator trace
-        
+
         An indicator is used to visualize a single `value` along with
         some contextual information such as `steps` or a `threshold`,
         using a combination of three visual elements: a number, a
@@ -9278,6 +10181,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -9289,6 +10198,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9378,8 +10290,10 @@ class FigureWidget(BaseFigureWidget):
             gauge=gauge,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
@@ -9391,7 +10305,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             value=value,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -9421,9 +10335,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -9457,11 +10373,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Isosurface trace
-        
+
         Draws isosurfaces between iso-min and iso-max values with
         coordinates given by four 1-dimensional arrays containing the
         `value`, `x`, `y` and `z` of every vertex of a uniform or non-
@@ -9475,7 +10391,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -9484,7 +10400,7 @@ class FigureWidget(BaseFigureWidget):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -9516,7 +10432,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -9594,6 +10510,12 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -9609,6 +10531,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.isosurface.Lighting`
             instance or dict with compatible properties
@@ -9812,9 +10737,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -9846,7 +10773,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -9887,9 +10814,11 @@ class FigureWidget(BaseFigureWidget):
         jsrc=None,
         k=None,
         ksrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -9922,11 +10851,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Mesh3d trace
-        
+
         Draws sets of triangles with coordinates given by three
         1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`,
         `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-
@@ -9957,14 +10886,14 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `intensity`) or
-            the bounds set in `cmin` and `cmax`  Defaults to
-            `false` when `cmin` and `cmax` are set by the user.
+            the bounds set in `cmin` and `cmax` Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
@@ -9997,7 +10926,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -10128,6 +11057,12 @@ class FigureWidget(BaseFigureWidget):
         ksrc
             Sets the source reference on Chart Studio Cloud for
             `k`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -10143,6 +11078,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.mesh3d.Lighting` instance
             or dict with compatible properties
@@ -10358,9 +11296,11 @@ class FigureWidget(BaseFigureWidget):
             jsrc=jsrc,
             k=k,
             ksrc=ksrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -10391,7 +11331,7 @@ class FigureWidget(BaseFigureWidget):
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -10412,9 +11352,11 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -10446,11 +11388,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Ohlc trace
-        
+
         The ohlc (short for Open-High-Low-Close) is a style of
         financial chart describing open, high, low and close for a
         given `x` coordinate (most likely time). The tip of the lines
@@ -10509,6 +11451,12 @@ class FigureWidget(BaseFigureWidget):
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -10524,6 +11472,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.ohlc.Line` instance or
             dict with compatible properties
@@ -10712,9 +11663,11 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -10743,7 +11696,7 @@ class FigureWidget(BaseFigureWidget):
             xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -10761,6 +11714,7 @@ class FigureWidget(BaseFigureWidget):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -10773,11 +11727,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Parcats trace
-        
+
         Parallel categories diagram for multidimensional categorical
         data.
 
@@ -10847,17 +11801,25 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -10947,6 +11909,7 @@ class FigureWidget(BaseFigureWidget):
             hovertemplate=hovertemplate,
             labelfont=labelfont,
             legendgrouptitle=legendgrouptitle,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -10957,7 +11920,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -10973,8 +11936,10 @@ class FigureWidget(BaseFigureWidget):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -10984,14 +11949,15 @@ class FigureWidget(BaseFigureWidget):
         tickfont=None,
         uid=None,
         uirevision=None,
+        unselected=None,
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Parcoords trace
-        
+
         Parallel coordinates for multidimensional exploratory data
         analysis. The samples are specified in `dimensions`. The colors
         are set in `line.color`.
@@ -11038,6 +12004,12 @@ class FigureWidget(BaseFigureWidget):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
@@ -11049,6 +12021,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcoords.Line` instance
             or dict with compatible properties
@@ -11100,6 +12075,9 @@ class FigureWidget(BaseFigureWidget):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.parcoords.Unselected`
+            instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -11133,8 +12111,10 @@ class FigureWidget(BaseFigureWidget):
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -11144,8 +12124,9 @@ class FigureWidget(BaseFigureWidget):
             tickfont=tickfont,
             uid=uid,
             uirevision=uirevision,
+            unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11172,9 +12153,11 @@ class FigureWidget(BaseFigureWidget):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -11206,11 +12189,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Pie trace
-        
+
         A data visualized by the sectors of the pie is set in `values`.
         The sector labels are set in `labels`. The sector colors are
         set in `marker.colors`
@@ -11274,12 +12257,12 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -11325,6 +12308,12 @@ class FigureWidget(BaseFigureWidget):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11340,6 +12329,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pie.Marker` instance or
             dict with compatible properties
@@ -11425,8 +12417,9 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -11514,9 +12507,11 @@ class FigureWidget(BaseFigureWidget):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -11546,7 +12541,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11561,9 +12556,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         indices=None,
         indicessrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -11591,11 +12588,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Pointcloud trace
-        
+
         "pointcloud" trace is deprecated! Please consider switching to
         the "scattergl" trace type. The data visualized as a point
         cloud set in `x` and `y` using the WebGl plotting engine.
@@ -11640,6 +12637,12 @@ class FigureWidget(BaseFigureWidget):
         indicessrc
             Sets the source reference on Chart Studio Cloud for
             `indices`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -11655,6 +12658,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -11804,9 +12810,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             indices=indices,
             indicessrc=indicessrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -11831,7 +12839,7 @@ class FigureWidget(BaseFigureWidget):
             ybounds=ybounds,
             yboundssrc=yboundssrc,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -11845,8 +12853,10 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -11863,11 +12873,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Sankey trace
-        
+
         Sankey plots for network flow data analysis. The nodes are
         specified in `nodes` and the links between sources and targets
         in `links`. The colors are set in `nodes[i].color` and
@@ -11911,6 +12921,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
@@ -11922,6 +12938,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -12021,8 +13040,10 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             link=link,
             meta=meta,
             metasrc=metasrc,
@@ -12037,12 +13058,13 @@ class FigureWidget(BaseFigureWidget):
             valueformat=valueformat,
             valuesuffix=valuesuffix,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
     def add_scatter(
         self,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -12053,6 +13075,7 @@ class FigureWidget(BaseFigureWidget):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -12064,15 +13087,18 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -12113,11 +13139,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scatter trace
-        
+
         The scatter trace type encompasses line charts, scatter charts,
         text charts, and bubble charts. The data visualized as scatter
         point or lines is set in `x` and `y`. Text (appearing either on
@@ -12127,6 +13153,11 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -12181,6 +13212,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        fillpattern
+            Sets the pattern within the marker.
         groupnorm
             Only relevant when `stackgroup` is used, and only the
             first `groupnorm` found in the `stackgroup` will be
@@ -12257,6 +13290,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12272,6 +13311,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -12304,15 +13346,21 @@ class FigureWidget(BaseFigureWidget):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -12539,6 +13587,7 @@ class FigureWidget(BaseFigureWidget):
         from plotly.graph_objs import Scatter
 
         new_trace = Scatter(
+            alignmentgroup=alignmentgroup,
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
@@ -12549,6 +13598,7 @@ class FigureWidget(BaseFigureWidget):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
@@ -12560,15 +13610,18 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
             name=name,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             selected=selected,
@@ -12606,7 +13659,7 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -12627,9 +13680,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -12667,11 +13722,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scatter3d trace
-        
+
         The data visualized as scatter point or lines in 3D dimension
         is set in `x`, `y`, `z`. Text (appearing either on the chart or
         on hover only) is via `text`. Bubble charts are achieved by
@@ -12760,6 +13815,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -12775,6 +13836,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -12989,9 +14053,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -13027,7 +14093,7 @@ class FigureWidget(BaseFigureWidget):
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -13053,9 +14119,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13083,11 +14151,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scattercarpet trace
-        
+
         Plots a scatter trace on either the first carpet axis or the
         carpet axis with a matching `carpet` attribute.
 
@@ -13197,6 +14265,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13212,6 +14286,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattercarpet.Line`
             instance or dict with compatible properties
@@ -13296,7 +14373,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -13388,9 +14466,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -13415,7 +14495,7 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             xaxis=xaxis,
             yaxis=yaxis,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -13440,9 +14520,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         locationmode=None,
         locations=None,
@@ -13472,11 +14554,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scattergeo trace
-        
+
         The data visualized as scatter point or lines on a geographic
         map is provided either by longitude/latitude pairs in `lon` and
         `lat` respectively or by geographic location IDs or names in
@@ -13587,6 +14669,12 @@ class FigureWidget(BaseFigureWidget):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -13602,6 +14690,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
@@ -13706,8 +14797,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon`, `location` and
-            `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon`, `location` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -13778,9 +14869,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             locationmode=locationmode,
             locations=locations,
@@ -13808,7 +14901,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -13832,9 +14925,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13878,11 +14973,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scattergl trace
-        
+
         The data visualized as scatter point or lines is set in `x` and
         `y` using the WebGL plotting engine. Bubble charts are achieved
         by setting `marker.size` and/or `marker.color` to a numerical
@@ -13997,6 +15092,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14012,6 +15113,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergl.Line` instance
             or dict with compatible properties
@@ -14261,9 +15365,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -14304,13 +15410,14 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scattermapbox(
         self,
         below=None,
+        cluster=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -14327,9 +15434,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lon=None,
         lonsrc=None,
@@ -14356,11 +15465,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scattermapbox trace
-        
+
         The data visualized as scatter point, lines or marker symbols
         on a Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
@@ -14373,6 +15482,9 @@ class FigureWidget(BaseFigureWidget):
             default, scattermapbox layers are inserted above all
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
+        cluster
+            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -14457,6 +15569,12 @@ class FigureWidget(BaseFigureWidget):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14472,6 +15590,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -14563,7 +15684,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon` and `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14616,6 +15738,7 @@ class FigureWidget(BaseFigureWidget):
 
         new_trace = Scattermapbox(
             below=below,
+            cluster=cluster,
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -14632,9 +15755,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lon=lon,
             lonsrc=lonsrc,
@@ -14659,7 +15784,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -14683,9 +15808,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -14718,11 +15845,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scatterpolar trace
-        
+
         The scatterpolar trace type encompasses line charts, scatter
         charts, text charts, and bubble charts in polar coordinates.
         The data visualized as scatter point or lines is set in `r`
@@ -14836,6 +15963,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -14851,6 +15984,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolar.Line`
             instance or dict with compatible properties
@@ -14949,7 +16085,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15031,9 +16168,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -15064,7 +16203,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -15086,9 +16225,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15121,11 +16262,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scatterpolargl trace
-        
+
         The scatterpolargl trace type encompasses line charts, scatter
         charts, and bubble charts in polar coordinates using the WebGL
         plotting engine. The data visualized as scatter point or lines
@@ -15238,6 +16379,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15253,6 +16400,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -15351,7 +16501,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15431,9 +16582,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -15464,7 +16617,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -15488,9 +16641,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         imag=None,
         imagsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15518,11 +16673,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scattersmith trace
-        
+
         The scattersmith trace type encompasses line charts, scatter
         charts, text charts, and bubble charts in smith coordinates.
         The data visualized as scatter point or lines is set in `real`
@@ -15637,6 +16792,12 @@ class FigureWidget(BaseFigureWidget):
         imagsrc
             Sets the source reference on Chart Studio Cloud for
             `imag`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -15652,6 +16813,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattersmith.Line`
             instance or dict with compatible properties
@@ -15748,7 +16912,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `real`, `imag` and `text`.
+            are available. Finally, the template string has access
+            to variables `real`, `imag` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15818,9 +16983,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             imag=imag,
             imagsrc=imagsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -15846,7 +17013,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -15874,9 +17041,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15903,11 +17072,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Scatterternary trace
-        
+
         Provides similar functionality to the "scatter" type but on a
         ternary phase diagram. The data is provided by at least two
         arrays out of `a`, `b`, `c` triplets.
@@ -16038,6 +17207,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16053,6 +17228,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -16149,7 +17327,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b`, `c` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16223,9 +17402,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16250,7 +17431,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -16270,9 +17451,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -16296,11 +17479,11 @@ class FigureWidget(BaseFigureWidget):
         yhoverformat=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Splom trace
-        
+
         Splom traces generate scatter plot matrix visualizations. Each
         splom `dimensions` items correspond to a generated axis. Values
         for each of those dimensions are set in `dimensions[i].values`.
@@ -16385,6 +17568,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16400,6 +17589,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.splom.Marker` instance or
             dict with compatible properties
@@ -16559,9 +17751,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -16583,7 +17777,7 @@ class FigureWidget(BaseFigureWidget):
             xhoverformat=xhoverformat,
             yaxes=yaxes,
             yhoverformat=yhoverformat,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -16607,9 +17801,11 @@ class FigureWidget(BaseFigureWidget):
         hovertext=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -16648,11 +17844,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Streamtube trace
-        
+
         Use a streamtube trace to visualize flow in a vector field.
         Specify a vector field using 6 1D arrays of equal length, 3
         position arrays `x`, `y` and `z` and 3 vector component arrays
@@ -16669,13 +17865,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here u/v/w norm) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -16707,7 +17903,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -16755,9 +17951,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `tubex`, `tubey`, `tubez`,
-            `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `tubex`, `tubey`, `tubez`, `tubeu`,
+            `tubev`, `tubew`, `norm` and `divergence`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -16773,6 +17970,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -16788,6 +17991,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.streamtube.Lighting`
             instance or dict with compatible properties
@@ -17005,9 +18211,11 @@ class FigureWidget(BaseFigureWidget):
             hovertext=hovertext,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
@@ -17044,7 +18252,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -17069,8 +18277,10 @@ class FigureWidget(BaseFigureWidget):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -17098,11 +18308,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Sunburst trace
-        
+
         Visualize hierarchal data spanning outward radially from root
         to leaves. The sunburst sectors are determined by the entries
         in "labels" or "ids" and in "parents".
@@ -17166,10 +18376,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -17212,6 +18423,12 @@ class FigureWidget(BaseFigureWidget):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
             instance or dict with compatible properties
@@ -17223,6 +18440,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -17314,9 +18534,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17391,8 +18612,10 @@ class FigureWidget(BaseFigureWidget):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -17418,7 +18641,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -17446,9 +18669,11 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -17482,11 +18707,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Surface trace
-        
+
         The data the describes the coordinates of the surface is set in
         `z`. Data in `z` should be a 2D list. Coordinates in `x` and
         `y` can either be 1D lists or 2D lists (e.g. to graph
@@ -17503,13 +18728,13 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here z or surfacecolor)
-            or the bounds set in `cmin` and `cmax`  Defaults to
+            or the bounds set in `cmin` and `cmax` Defaults to
             `false` when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -17541,7 +18766,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -17619,6 +18844,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -17634,6 +18865,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -17838,9 +19072,11 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -17872,7 +19108,7 @@ class FigureWidget(BaseFigureWidget):
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -17892,8 +19128,10 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -17903,11 +19141,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Table trace
-        
+
         Table view for detailed data viewing. The data are arranged in
         a grid of rows and columns. Most styling can be specified for
         columns, rows or individual cells. Table is using a column-
@@ -17966,6 +19204,12 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
@@ -17977,6 +19221,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -18058,8 +19305,10 @@ class FigureWidget(BaseFigureWidget):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -18067,7 +19316,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -18090,8 +19339,10 @@ class FigureWidget(BaseFigureWidget):
         insidetextfont=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -18121,11 +19372,11 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Treemap trace
-        
+
         Visualize hierarchal data from leaves (and/or outer branches)
         towards root with rectangles. The treemap sectors are
         determined by the entries in "labels" or "ids" and in
@@ -18190,10 +19441,11 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -18223,6 +19475,12 @@ class FigureWidget(BaseFigureWidget):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.treemap.Legendgrouptitle`
             instance or dict with compatible properties
@@ -18234,6 +19492,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -18327,9 +19588,10 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -18405,8 +19667,10 @@ class FigureWidget(BaseFigureWidget):
             insidetextfont=insidetextfont,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -18434,7 +19698,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -18457,9 +19721,11 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meanline=None,
@@ -18471,6 +19737,7 @@ class FigureWidget(BaseFigureWidget):
         orientation=None,
         pointpos=None,
         points=None,
+        quartilemethod=None,
         scalegroup=None,
         scalemode=None,
         selected=None,
@@ -18500,11 +19767,11 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Violin trace
-        
+
         In vertical (horizontal) violin plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
         violin per distinct x (y) value is drawn If no `x` (`y`) list
@@ -18601,6 +19868,12 @@ class FigureWidget(BaseFigureWidget):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -18616,6 +19889,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.violin.Line` instance or
             dict with compatible properties
@@ -18676,6 +19952,21 @@ class FigureWidget(BaseFigureWidget):
             points. Defaults to "suspectedoutliers" when
             `marker.outliercolor` or `marker.line.outliercolor` is
             set, otherwise defaults to "outliers".
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -18686,9 +19977,9 @@ class FigureWidget(BaseFigureWidget):
             linked together
         scalemode
             Sets the metric by which the width of each violin is
-            determined."width" means each violin has the same (max)
-            width*count* means the violins are scaled by the number
-            of sample points makingup each violin.
+            determined. "width" means each violin has the same
+            (max) width "count" means the violins are scaled by the
+            number of sample points making up each violin.
         selected
             :class:`plotly.graph_objects.violin.Selected` instance
             or dict with compatible properties
@@ -18870,9 +20161,11 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meanline=meanline,
@@ -18884,6 +20177,7 @@ class FigureWidget(BaseFigureWidget):
             orientation=orientation,
             pointpos=pointpos,
             points=points,
+            quartilemethod=quartilemethod,
             scalegroup=scalegroup,
             scalemode=scalemode,
             selected=selected,
@@ -18910,7 +20204,7 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             yhoverformat=yhoverformat,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -18940,9 +20234,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -18977,11 +20273,11 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Volume trace
-        
+
         Draws volume trace between iso-min and iso-max values with
         coordinates given by four 1-dimensional arrays containing the
         `value`, `x`, `y` and `z` of every vertex of a uniform or non-
@@ -18995,7 +20291,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
@@ -19004,7 +20300,7 @@ class FigureWidget(BaseFigureWidget):
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
-            bounds set in `cmin` and `cmax`  Defaults to `false`
+            bounds set in `cmin` and `cmax` Defaults to `false`
             when `cmin` and `cmax` are set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -19036,7 +20332,7 @@ class FigureWidget(BaseFigureWidget):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -19114,6 +20410,12 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -19129,6 +20431,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.volume.Lighting` instance
             or dict with compatible properties
@@ -19343,9 +20648,11 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -19378,7 +20685,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zhoverformat=zhoverformat,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -19406,9 +20713,11 @@ class FigureWidget(BaseFigureWidget):
         increasing=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         measure=None,
         measuresrc=None,
         meta=None,
@@ -19457,15 +20766,15 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Add a new Waterfall trace
-        
+
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
-        set in `y` if `orientation` is set th "v" (the default) and the
+        set in `y` if `orientation` is set to "v" (the default) and the
         labels are set in `x`. By setting `orientation` to "h", the
         roles are interchanged.
 
@@ -19540,9 +20849,10 @@ class FigureWidget(BaseFigureWidget):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -19573,6 +20883,12 @@ class FigureWidget(BaseFigureWidget):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -19588,6 +20904,9 @@ class FigureWidget(BaseFigureWidget):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         measure
             An array containing types of values. By default the
             values are considered as 'relative'. However; it is
@@ -19700,8 +21019,8 @@ class FigureWidget(BaseFigureWidget):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -19876,9 +21195,11 @@ class FigureWidget(BaseFigureWidget):
             increasing=increasing,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             measure=measure,
             measuresrc=measuresrc,
             meta=meta,
@@ -19924,7 +21245,7 @@ class FigureWidget(BaseFigureWidget):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
@@ -19960,7 +21281,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("coloraxis", selector, row, col)
 
-    def for_each_coloraxis(self, fn, selector=None, row=None, col=None):
+    def for_each_coloraxis(
+        self, fn, selector=None, row=None, col=None
+    ) -> "FigureWidget":
         """
         Apply a function to all coloraxis objects that satisfy the
         specified selection criteria
@@ -19987,7 +21310,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_coloraxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -19996,7 +21319,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_coloraxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
@@ -20033,7 +21356,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_coloraxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20072,7 +21395,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("geo", selector, row, col)
 
-    def for_each_geo(self, fn, selector=None, row=None, col=None):
+    def for_each_geo(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all geo objects that satisfy the
         specified selection criteria
@@ -20099,7 +21422,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
             fn(obj)
@@ -20108,7 +21431,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_geos(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -20145,9 +21468,121 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
+            obj.update(patch, overwrite=overwrite, **kwargs)
+
+        return self
+
+    def select_legends(self, selector=None, row=None, col=None):
+        """
+        Select legend subplot objects from a particular subplot cell
+        and/or legend subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the legend
+            objects that satisfy all of the specified selection criteria
+        """
+
+        return self._select_layout_subplots_by_prefix("legend", selector, row, col)
+
+    def for_each_legend(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
+        """
+        Apply a function to all legend objects that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single legend object.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_legends(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ) -> "FigureWidget":
+        """
+        Perform a property update operation on all legend objects
+        that satisfy the specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            legend objects that satisfy the selection criteria.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            legend object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
@@ -20184,7 +21619,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("mapbox", selector, row, col)
 
-    def for_each_mapbox(self, fn, selector=None, row=None, col=None):
+    def for_each_mapbox(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all mapbox objects that satisfy the
         specified selection criteria
@@ -20211,7 +21646,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20220,7 +21655,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_mapboxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -20257,7 +21692,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20296,7 +21731,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("polar", selector, row, col)
 
-    def for_each_polar(self, fn, selector=None, row=None, col=None):
+    def for_each_polar(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all polar objects that satisfy the
         specified selection criteria
@@ -20323,7 +21758,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
             fn(obj)
@@ -20332,7 +21767,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_polars(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -20369,7 +21804,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20408,7 +21843,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("scene", selector, row, col)
 
-    def for_each_scene(self, fn, selector=None, row=None, col=None):
+    def for_each_scene(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all scene objects that satisfy the
         specified selection criteria
@@ -20435,7 +21870,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20444,7 +21879,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_scenes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -20481,7 +21916,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20520,7 +21955,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("smith", selector, row, col)
 
-    def for_each_smith(self, fn, selector=None, row=None, col=None):
+    def for_each_smith(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all smith objects that satisfy the
         specified selection criteria
@@ -20547,7 +21982,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_smiths(selector=selector, row=row, col=col):
             fn(obj)
@@ -20556,7 +21991,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_smiths(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all smith objects
         that satisfy the specified selection criteria
@@ -20593,7 +22028,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_smiths(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20632,7 +22067,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("ternary", selector, row, col)
 
-    def for_each_ternary(self, fn, selector=None, row=None, col=None):
+    def for_each_ternary(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all ternary objects that satisfy the
         specified selection criteria
@@ -20659,7 +22094,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
             fn(obj)
@@ -20668,7 +22103,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_ternaries(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -20705,7 +22140,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20744,7 +22179,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self._select_layout_subplots_by_prefix("xaxis", selector, row, col)
 
-    def for_each_xaxis(self, fn, selector=None, row=None, col=None):
+    def for_each_xaxis(self, fn, selector=None, row=None, col=None) -> "FigureWidget":
         """
         Apply a function to all xaxis objects that satisfy the
         specified selection criteria
@@ -20771,7 +22206,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
             fn(obj)
@@ -20780,7 +22215,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_xaxes(
         self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -20817,7 +22252,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
@@ -20870,7 +22305,9 @@ class FigureWidget(BaseFigureWidget):
             "yaxis", selector, row, col, secondary_y=secondary_y
         )
 
-    def for_each_yaxis(self, fn, selector=None, row=None, col=None, secondary_y=None):
+    def for_each_yaxis(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ) -> "FigureWidget":
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
@@ -20909,7 +22346,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_yaxes(
             selector=selector, row=row, col=col, secondary_y=secondary_y
@@ -20926,8 +22363,8 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
@@ -20976,7 +22413,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self.select_yaxes(
             selector=selector, row=row, col=col, secondary_y=secondary_y
@@ -21074,7 +22511,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="annotations",
@@ -21089,7 +22526,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_annotations(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all annotations that satisfy the
         specified selection criteria
@@ -21136,7 +22573,7 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
             prop="annotations",
@@ -21199,11 +22636,11 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         exclude_empty_subplots=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Create and add a new annotation to the figure's layout
-        
+
         Parameters
         ----------
         arg
@@ -21237,19 +22674,19 @@ class FigureWidget(BaseFigureWidget):
             coordinates as `xref`.
         axref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ax axis id
-            (e.g. "ax" or "ax2"), the `ax` position refers to a ax
-            coordinate. If set to "paper", the `ax` position refers
+            annotation (ax,ay) is specified. If set to a x axis id
+            (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
             to the distance from the left of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            left (right). If set to a ax axis ID followed by
+            left (right). If set to a x axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
-            domain of that axis: e.g., *ax2 domain* refers to the
-            domain of the second ax  axis and a ax position of 0.5
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second ax axis. In order for absolute
+            the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
             exactly the same as "xref", otherwise "axref" will
             revert to "pixel" (explained next). For relative
@@ -21270,19 +22707,19 @@ class FigureWidget(BaseFigureWidget):
             coordinates as `yref`.
         ayref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ay axis id
-            (e.g. "ay" or "ay2"), the `ay` position refers to a ay
-            coordinate. If set to "paper", the `ay` position refers
+            annotation (ax,ay) is specified. If set to a y axis id
+            (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
             to the distance from the bottom of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            bottom (top). If set to a ay axis ID followed by
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
-            domain of that axis: e.g., *ay2 domain* refers to the
-            domain of the second ay  axis and a ay position of 0.5
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second ay axis. In order for absolute
+            the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
             exactly the same as "yref", otherwise "ayref" will
             revert to "pixel" (explained next). For relative
@@ -21550,7 +22987,7 @@ class FigureWidget(BaseFigureWidget):
             yclick=yclick,
             yref=yref,
             yshift=yshift,
-            **kwargs
+            **kwargs,
         )
         return self._add_annotation_like(
             "annotation",
@@ -21651,10 +23088,14 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
+            prop="images",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -21662,7 +23103,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_layout_images(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all images that satisfy the
         specified selection criteria
@@ -21709,10 +23150,14 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
+            prop="images",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -21740,11 +23185,11 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         exclude_empty_subplots=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Create and add a new image to the figure's layout
-        
+
         Parameters
         ----------
         arg
@@ -21869,11 +23314,317 @@ class FigureWidget(BaseFigureWidget):
             y=y,
             yanchor=yanchor,
             yref=yref,
-            **kwargs
+            **kwargs,
         )
         return self._add_annotation_like(
             "image",
             "images",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
+        )
+
+    def select_selections(self, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Select selections from a particular subplot cell and/or selections
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, int, str, or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selection that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the selections that satisfy
+            all of the specified selection criteria
+        """
+        return self._select_annotations_like(
+            "selections", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def for_each_selection(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
+        """
+        Apply a function to all selections that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single selection object.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selections that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            prop="selections",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def update_selections(
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
+    ) -> "FigureWidget":
+        """
+        Perform a property update operation on all selections that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all selections that
+            satisfy the selection criteria.
+        selector: dict, function, int, str or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all selections are
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each selection and those for which the function returned True
+            will be in the selection. If an int N, the Nth selection matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
+        row, col: int or None (default None)
+            Subplot row and column index of selections to select.
+            To select selections by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            selection that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all selections are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select selections associated with the secondary
+              y-axis of the subplot.
+            * If False, only select selections associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter selections based on secondary
+              y-axis.
+
+            To select selections by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected selection. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the FigureWidget object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            prop="selections",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def add_selection(
+        self,
+        arg=None,
+        line=None,
+        name=None,
+        opacity=None,
+        path=None,
+        templateitemname=None,
+        type=None,
+        x0=None,
+        x1=None,
+        xref=None,
+        y0=None,
+        y1=None,
+        yref=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        exclude_empty_subplots=None,
+        **kwargs,
+    ) -> "FigureWidget":
+        """
+        Create and add a new selection to the figure's layout
+
+        Parameters
+        ----------
+        arg
+            instance of Selection or dict with compatible
+            properties
+        line
+            :class:`plotly.graph_objects.layout.selection.Line`
+            instance or dict with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        opacity
+            Sets the opacity of the selection.
+        path
+            For `type` "path" - a valid SVG path similar to
+            `shapes.path` in data coordinates. Allowed segments
+            are: M, L and Z.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        type
+            Specifies the selection type to be drawn. If "rect", a
+            rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
+            (`x1`,`y1`) and (`x0`,`y1`). If "path", draw a custom
+            SVG path using `path`.
+        x0
+            Sets the selection's starting x position.
+        x1
+            Sets the selection's end x position.
+        xref
+            Sets the selection's x coordinate axis. If set to a x
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            a x coordinate. If set to "paper", the `x` position
+            refers to the distance from the left of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
+        y0
+            Sets the selection's starting y position.
+        y1
+            Sets the selection's end y position.
+        yref
+            Sets the selection's x coordinate axis. If set to a y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            a y coordinate. If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
+        row
+            Subplot row for selection. If 'all', addresses all rows
+            in the specified column(s).
+        col
+            Subplot column for selection. If 'all', addresses all
+            columns in the specified row(s).
+        secondary_y
+            Whether to add selection to secondary y-axis
+        exclude_empty_subplots
+            If True, selection will not be added to subplots
+            without traces.
+
+        Returns
+        -------
+        FigureWidget
+        """
+        from plotly.graph_objs import layout as _layout
+
+        new_obj = _layout.Selection(
+            arg,
+            line=line,
+            name=name,
+            opacity=opacity,
+            path=path,
+            templateitemname=templateitemname,
+            type=type,
+            x0=x0,
+            x1=x1,
+            xref=xref,
+            y0=y0,
+            y1=y1,
+            yref=yref,
+            **kwargs,
+        )
+        return self._add_annotation_like(
+            "selection",
+            "selections",
             new_obj,
             row=row,
             col=col,
@@ -21968,10 +23719,14 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
+            prop="shapes",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -21979,7 +23734,7 @@ class FigureWidget(BaseFigureWidget):
 
     def update_shapes(
         self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
-    ):
+    ) -> "FigureWidget":
         """
         Perform a property update operation on all shapes that satisfy the
         specified selection criteria
@@ -22026,10 +23781,14 @@ class FigureWidget(BaseFigureWidget):
         Returns
         -------
         self
-            Returns the Figure object that the method was called on
+            Returns the FigureWidget object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
+            prop="shapes",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -22041,6 +23800,7 @@ class FigureWidget(BaseFigureWidget):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
         line=None,
         name=None,
@@ -22063,11 +23823,11 @@ class FigureWidget(BaseFigureWidget):
         col=None,
         secondary_y=None,
         exclude_empty_subplots=None,
-        **kwargs
-    ):
+        **kwargs,
+    ) -> "FigureWidget":
         """
         Create and add a new shape to the figure's layout
-        
+
         Parameters
         ----------
         arg
@@ -22085,6 +23845,9 @@ class FigureWidget(BaseFigureWidget):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -22175,10 +23938,7 @@ class FigureWidget(BaseFigureWidget):
             domain of that axis: e.g., *x2 domain* refers to the
             domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis. If the axis `type` is
-            "log", then you must take the log of your desired
-            range. If the axis `type` is "date", then you must
-            convert the date to unix time in milliseconds.
+            the domain of the second x axis.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -22203,12 +23963,12 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            a y coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top). If set to a y axis ID followed by
+            Sets the shape's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
@@ -22250,6 +24010,7 @@ class FigureWidget(BaseFigureWidget):
             editable=editable,
             fillcolor=fillcolor,
             fillrule=fillrule,
+            label=label,
             layer=layer,
             line=line,
             name=name,
@@ -22268,7 +24029,7 @@ class FigureWidget(BaseFigureWidget):
             yanchor=yanchor,
             yref=yref,
             ysizemode=ysizemode,
-            **kwargs
+            **kwargs,
         )
         return self._add_annotation_like(
             "shape",

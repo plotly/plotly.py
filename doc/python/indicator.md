@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.9.0
   plotly:
     description: How to make gauge charts in Python with Plotly.
     display_as: financial
@@ -61,6 +61,8 @@ In this tutorial we introduce a new trace named "Indicator". The purpose of "ind
       <li> (increasing|decreasing).symbol: symbol displayed on the left of the delta</li>
       <li> font.(family|size): to control the font</li>
       <li> position: position relative to `number` (either top, left, bottom, right)</li>
+      <li> prefix: a string to appear before the delta
+      <li> suffix: a string to appear after the delta
     </ol>
     Finally, we can have a simple title for the indicator via `title` with 'text' attribute which is a string, and 'align' which can be set to left, center, and right.
     There are two gauge types: [angular](https://plotly.com/python/gauge-charts/) and [bullet](https://plotly.com/python/bullet-charts/). Here is a combination of both shapes (angular, bullet), and different modes (gauge, delta, and value):
@@ -198,6 +200,31 @@ fig.add_trace(go.Indicator(
     delta = {'reference': 400, 'relative': True},
     domain = {'x': [0.6, 1], 'y': [0, 1]}))
 
+fig.show()
+```
+
+#### Adding a Prefix and Suffix
+
+
+On both a `number` and a `delta`, you can add a string to appear before the value using `prefix`. You can add a string to appear after the value using `suffix`. In the following example, we add '$' as a `prefix` and 'm' as `suffix` for both the `number` and `delta`. 
+
+Note: `suffix` and `prefix` on `delta` are new in 5.10
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Indicator(
+    mode = "number+delta",
+    value = 492,
+    number = {"prefix": "$", "suffix": "m"},
+    delta = {"reference": 512, "valueformat": ".0f", "prefix": "$", "suffix": "m"},
+    title = {"text": "Profit"},
+    domain = {'y': [0, 1], 'x': [0.25, 0.75]}))
+
+fig.add_trace(go.Scatter(
+    y = [325, 324, 405, 400, 424, 404, 417, 432, 419, 394, 410, 426, 413, 419, 404, 408, 401, 377, 368, 361, 356, 359, 375, 397, 394, 418, 437, 450, 430, 442, 424, 443, 420, 418, 423, 423, 426, 440, 437, 436, 447, 460, 478, 472, 450, 456, 436, 418, 429, 412, 429, 442, 464, 447, 434, 457, 474, 480, 499, 497, 480, 502, 512, 492]))
+
+fig.update_layout(xaxis = {'range': [0, 62]})
 fig.show()
 ```
 

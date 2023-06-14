@@ -51,6 +51,12 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.sankey.Legendgroup
                 title` instance or dict with compatible
@@ -65,6 +71,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
                 unranked items.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             link
                 The links of the Sankey plot.
             meta
@@ -135,8 +144,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the value formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat.
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format.
             valuesuffix
                 Adds a unit to follow the value in the hover
                 tooltip. Add a space if a separation is
@@ -148,5 +157,5 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

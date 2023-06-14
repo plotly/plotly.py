@@ -15,17 +15,17 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis for the rangeslider.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            Sets the range of this axis for the rangeslider.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -43,7 +43,7 @@ class YAxis(_BaseLayoutHierarchyType):
         zooming in/out. If "auto", the autorange will be used. If
         "fixed", the `range` is used. If "match", the current range of
         the corresponding y-axis on the main subplot is used.
-    
+
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'fixed', 'match']
@@ -77,7 +77,7 @@ class YAxis(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, range=None, rangemode=None, **kwargs):
         """
         Construct a new YAxis object
-        
+
         Parameters
         ----------
         arg
@@ -115,8 +115,8 @@ class YAxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`"""
             )
 

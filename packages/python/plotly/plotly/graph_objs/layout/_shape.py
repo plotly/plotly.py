@@ -12,6 +12,7 @@ class Shape(_BaseLayoutHierarchyType):
         "editable",
         "fillcolor",
         "fillrule",
+        "label",
         "layer",
         "line",
         "name",
@@ -40,7 +41,7 @@ class Shape(_BaseLayoutHierarchyType):
         Determines whether the shape could be activated for edit or
         not. Has no effect when the older editable shapes mode is
         enabled via `config.editable` or `config.edits.shapePosition`.
-    
+
         The 'editable' property must be specified as a bool
         (either True, or False)
 
@@ -61,7 +62,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the color filling the shape's interior. Only applies to
         closed shapes.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -123,7 +124,7 @@ class Shape(_BaseLayoutHierarchyType):
         interior. For more info please visit
         https://developer.mozilla.org/en-
         US/docs/Web/SVG/Attribute/fill-rule
-    
+
         The 'fillrule' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['evenodd', 'nonzero']
@@ -138,13 +139,102 @@ class Shape(_BaseLayoutHierarchyType):
     def fillrule(self, val):
         self["fillrule"] = val
 
+    # label
+    # -----
+    @property
+    def label(self):
+        """
+        The 'label' property is an instance of Label
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.shape.Label`
+          - A dict of string/value properties that will be passed
+            to the Label constructor
+
+            Supported dict properties:
+
+                font
+                    Sets the shape label text font.
+                padding
+                    Sets padding (in px) between edge of label and
+                    edge of shape.
+                text
+                    Sets the text to display with shape.
+                textangle
+                    Sets the angle at which the label text is drawn
+                    with respect to the horizontal. For lines,
+                    angle "auto" is the same angle as the line. For
+                    all other shapes, angle "auto" is horizontal.
+                textposition
+                    Sets the position of the label text relative to
+                    the shape. Supported values for rectangles,
+                    circles and paths are *top left*, *top center*,
+                    *top right*, *middle left*, *middle center*,
+                    *middle right*, *bottom left*, *bottom center*,
+                    and *bottom right*. Supported values for lines
+                    are "start", "middle", and "end". Default:
+                    *middle center* for rectangles, circles, and
+                    paths; "middle" for lines.
+                texttemplate
+                    Template string used for rendering the shape's
+                    label. Note that this will override `text`.
+                    Variables are inserted using %{variable}, for
+                    example "x0: %{x0}". Numbers are formatted
+                    using d3-format's syntax %{variable:d3-format},
+                    for example "Price: %{x0:$.2f}". See https://gi
+                    thub.com/d3/d3-format/tree/v1.4.5#d3-format for
+                    details on the formatting syntax. Dates are
+                    formatted using d3-time-format's syntax
+                    %{variable|d3-time-format}, for example "Day:
+                    %{x0|%m %b %Y}". See
+                    https://github.com/d3/d3-time-
+                    format/tree/v2.2.3#locale_format for details on
+                    the date formatting syntax. A single
+                    multiplication or division operation may be
+                    applied to numeric variables, and combined with
+                    d3 number formatting, for example "Length in
+                    cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+                    second." For log axes, variable values are
+                    given in log units. For date axes, x/y
+                    coordinate variables and center variables use
+                    datetimes, while all other variable values use
+                    values in ms. Finally, the template string has
+                    access to variables `x0`, `x1`, `y0`, `y1`,
+                    `slope`, `dx`, `dy`, `width`, `height`,
+                    `length`, `xcenter` and `ycenter`.
+                xanchor
+                    Sets the label's horizontal position anchor
+                    This anchor binds the specified `textposition`
+                    to the "left", "center" or "right" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `xanchor` to "right" then the
+                    right-most portion of the label text lines up
+                    with the right-most edge of the shape.
+                yanchor
+                    Sets the label's vertical position anchor This
+                    anchor binds the specified `textposition` to
+                    the "top", "middle" or "bottom" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `yanchor` to "top" then the
+                    top-most portion of the label text lines up
+                    with the top-most edge of the shape.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.shape.Label
+        """
+        return self["label"]
+
+    @label.setter
+    def label(self, val):
+        self["label"] = val
+
     # layer
     # -----
     @property
     def layer(self):
         """
         Specifies whether shapes are drawn below or above traces.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['below', 'above']
@@ -169,9 +259,9 @@ class Shape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.shape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -204,7 +294,7 @@ class Shape(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -225,7 +315,7 @@ class Shape(_BaseLayoutHierarchyType):
     def opacity(self):
         """
         Sets the opacity of the shape.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -263,7 +353,7 @@ class Shape(_BaseLayoutHierarchyType):
         components of path strings, we can't use either to separate
         date from time parts. Therefore we'll use underscore for this
         purpose: 2015-02-21_13:45:56.789
-    
+
         The 'path' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -291,7 +381,7 @@ class Shape(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -320,7 +410,7 @@ class Shape(_BaseLayoutHierarchyType):
         (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect
         to the axes' sizing mode. If "path", draw a custom SVG path
         using `path`. with respect to the axes' sizing mode.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['circle', 'rect', 'path', 'line']
@@ -341,7 +431,7 @@ class Shape(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this shape is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -362,7 +452,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's starting x position. See `type` and
         `xsizemode` for more info.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -382,7 +472,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's end x position. See `type` and `xsizemode` for
         more info.
-    
+
         The 'x1' property accepts values of any type
 
         Returns
@@ -405,7 +495,7 @@ class Shape(_BaseLayoutHierarchyType):
         and x coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
         when `xsizemode` not set to "pixel".
-    
+
         The 'xanchor' property accepts values of any type
 
         Returns
@@ -433,11 +523,8 @@ class Shape(_BaseLayoutHierarchyType):
         domain length from the left of the domain of that axis: e.g.,
         *x2 domain* refers to the domain of the second x  axis and a x
         position of 0.5 refers to the point between the left and the
-        right of the domain of the second x axis. If the axis `type` is
-        "log", then you must take the log of your desired range. If the
-        axis `type` is "date", then you must convert the date to unix
-        time in milliseconds.
-    
+        right of the domain of the second x axis.
+
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -467,7 +554,7 @@ class Shape(_BaseLayoutHierarchyType):
         `x0`, `x1` and x coordinates within `path` are pixels relative
         to `xanchor`. This way, the shape can have a fixed width while
         maintaining a position relative to data or plot fraction.
-    
+
         The 'xsizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['scaled', 'pixel']
@@ -489,7 +576,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's starting y position. See `type` and
         `ysizemode` for more info.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -509,7 +596,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's end y position. See `type` and `ysizemode` for
         more info.
-    
+
         The 'y1' property accepts values of any type
 
         Returns
@@ -532,7 +619,7 @@ class Shape(_BaseLayoutHierarchyType):
         and y coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
         when `ysizemode` not set to "pixel".
-    
+
         The 'yanchor' property accepts values of any type
 
         Returns
@@ -550,18 +637,18 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def yref(self):
         """
-        Sets the annotation's y coordinate axis. If set to a y axis id
-        (e.g. "y" or "y2"), the `y` position refers to a y coordinate.
-        If set to "paper", the `y` position refers to the distance from
-        the bottom of the plotting area in normalized coordinates where
-        0 (1) corresponds to the bottom (top). If set to a y axis ID
+        Sets the shape's y coordinate axis. If set to a y axis id (e.g.
+        "y" or "y2"), the `y` position refers to a y coordinate. If set
+        to "paper", the `y` position refers to the distance from the
+        bottom of the plotting area in normalized coordinates where 0
+        (1) corresponds to the bottom (top). If set to a y axis ID
         followed by "domain" (separated by a space), the position
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the bottom of the domain of
         that axis: e.g., *y2 domain* refers to the domain of the second
         y  axis and a y position of 0.5 refers to the point between the
         bottom and the top of the domain of the second y axis.
-    
+
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -591,7 +678,7 @@ class Shape(_BaseLayoutHierarchyType):
         `y0`, `y1` and y coordinates within `path` are pixels relative
         to `yanchor`. This way, the shape can have a fixed height while
         maintaining a position relative to data or plot fraction.
-    
+
         The 'ysizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['scaled', 'pixel']
@@ -624,6 +711,9 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -714,10 +804,7 @@ class Shape(_BaseLayoutHierarchyType):
             domain of that axis: e.g., *x2 domain* refers to the
             domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis. If the axis `type` is
-            "log", then you must take the log of your desired
-            range. If the axis `type` is "date", then you must
-            convert the date to unix time in milliseconds.
+            the domain of the second x axis.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -742,12 +829,12 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            a y coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top). If set to a y axis ID followed by
+            Sets the shape's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
@@ -774,6 +861,7 @@ class Shape(_BaseLayoutHierarchyType):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
         line=None,
         name=None,
@@ -792,11 +880,11 @@ class Shape(_BaseLayoutHierarchyType):
         yanchor=None,
         yref=None,
         ysizemode=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Shape object
-        
+
         Parameters
         ----------
         arg
@@ -815,6 +903,9 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -905,10 +996,7 @@ class Shape(_BaseLayoutHierarchyType):
             domain of that axis: e.g., *x2 domain* refers to the
             domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis. If the axis `type` is
-            "log", then you must take the log of your desired
-            range. If the axis `type` is "date", then you must
-            convert the date to unix time in milliseconds.
+            the domain of the second x axis.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -933,12 +1021,12 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            a y coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top). If set to a y axis ID followed by
+            Sets the shape's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
@@ -979,8 +1067,8 @@ class Shape(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Shape 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Shape
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Shape`"""
             )
 
@@ -1003,6 +1091,10 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = fillrule if fillrule is not None else _v
         if _v is not None:
             self["fillrule"] = _v
+        _v = arg.pop("label", None)
+        _v = label if label is not None else _v
+        if _v is not None:
+            self["label"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:

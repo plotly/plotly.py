@@ -16,7 +16,7 @@ class Marker(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the aggregation data.
-    
+
         The 'color' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -36,7 +36,7 @@ class Marker(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `color`.
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -65,7 +65,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
@@ -99,8 +99,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram2dcontour.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram2dcontour.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram2dcontour.Marker`"""
             )
 

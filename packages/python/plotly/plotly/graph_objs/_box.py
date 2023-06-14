@@ -28,9 +28,11 @@ class Box(_BaseTraceType):
         "ids",
         "idssrc",
         "jitter",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "lowerfence",
         "lowerfencesrc",
@@ -100,7 +102,7 @@ class Box(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same alignmentgroup. This controls whether bars
         compute their positional range dependently or independently.
-    
+
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -124,7 +126,7 @@ class Box(_BaseTraceType):
         drawn as a dashed line inside the box(es). If "sd" the standard
         deviation is also drawn. Defaults to True when `mean` is set.
         Defaults to "sd" when `sd` is set Otherwise defaults to False.
-    
+
         The 'boxmean' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, 'sd', False]
@@ -153,7 +155,7 @@ class Box(_BaseTraceType):
         `marker.outliercolor` or `marker.line.outliercolor` is set.
         Defaults to "all" under the q1/median/q3 signature. Otherwise
         defaults to "outliers".
-    
+
         The 'boxpoints' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'outliers', 'suspectedoutliers', False]
@@ -177,7 +179,7 @@ class Box(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -198,7 +200,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `customdata`.
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -219,7 +221,7 @@ class Box(_BaseTraceType):
         """
         Sets the x coordinate step for multi-box traces set using
         q1/median/q3.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -240,7 +242,7 @@ class Box(_BaseTraceType):
         """
         Sets the y coordinate step for multi-box traces set using
         q1/median/q3.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -262,7 +264,7 @@ class Box(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -323,7 +325,7 @@ class Box(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -348,7 +350,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hoverinfo`.
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -372,9 +374,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -428,7 +430,7 @@ class Box(_BaseTraceType):
         """
         Do the hover effects highlight individual boxes  or sample
         points or both?
-    
+
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['boxes', 'points'] joined with '+' characters
@@ -472,7 +474,7 @@ class Box(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -495,7 +497,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertemplate`.
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -515,7 +517,7 @@ class Box(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -538,7 +540,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `hovertext`.
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -560,7 +562,7 @@ class Box(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -580,7 +582,7 @@ class Box(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `ids`.
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -603,7 +605,7 @@ class Box(_BaseTraceType):
         sample points align along the distribution axis. If 1, the
         sample points are drawn in a random jitter of width equal to
         the width of the box(es).
-    
+
         The 'jitter' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -617,6 +619,31 @@ class Box(_BaseTraceType):
     def jitter(self, val):
         self["jitter"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
@@ -625,7 +652,7 @@ class Box(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -650,9 +677,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -679,7 +706,7 @@ class Box(_BaseTraceType):
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
         ranks greater than 1000 to go after all unranked items.
-    
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -693,6 +720,27 @@ class Box(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -703,9 +751,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of line bounding the box(es).
                 width
@@ -732,7 +780,7 @@ class Box(_BaseTraceType):
         under the q1/median/q3 signature. If `lowerfence` is not
         provided but a sample (in `y` or `x`) is set, we compute the
         lower as the last sample point below 1.5 times the IQR.
-    
+
         The 'lowerfence' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -753,7 +801,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `lowerfence`.
-    
+
         The 'lowerfencesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -777,11 +825,13 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
+                angle
+                    Sets the marker angle in respect to `angleref`.
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -823,7 +873,7 @@ class Box(_BaseTraceType):
         the q1/median/q3 signature. If `mean` is not provided but a
         sample (in `y` or `x`) is set, we compute the mean for each box
         using the sample values.
-    
+
         The 'mean' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -843,7 +893,7 @@ class Box(_BaseTraceType):
     def meansrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `mean`.
-    
+
         The 'meansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -864,7 +914,7 @@ class Box(_BaseTraceType):
         """
         Sets the median values. There should be as many items as the
         number of boxes desired.
-    
+
         The 'median' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -884,7 +934,7 @@ class Box(_BaseTraceType):
     def mediansrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `median`.
-    
+
         The 'mediansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -913,7 +963,7 @@ class Box(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -932,7 +982,7 @@ class Box(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `meta`.
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -955,7 +1005,7 @@ class Box(_BaseTraceType):
         and on hover. For box traces, the name will also be used for
         the position coordinate, if `x` and `x0` (`y` and `y0` if
         horizontal) are missing and the position axis is categorical
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -984,7 +1034,7 @@ class Box(_BaseTraceType):
         https://sites.google.com/site/davidsstatistics/home/notched-
         box-plots for more info. Defaults to False unless `notchwidth`
         or `notchspan` is set.
-    
+
         The 'notched' property must be specified as a bool
         (either True, or False)
 
@@ -1009,7 +1059,7 @@ class Box(_BaseTraceType):
         `notchspan` is not provided but a sample (in `y` or `x`) is
         set, we compute it as 1.57 * IQR / sqrt(N), where N is the
         sample size.
-    
+
         The 'notchspan' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1030,7 +1080,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `notchspan`.
-    
+
         The 'notchspansrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1051,7 +1101,7 @@ class Box(_BaseTraceType):
         """
         Sets the width of the notches relative to the box' width. For
         example, with 0, the notches are as wide as the box(es).
-    
+
         The 'notchwidth' property is a number and may be specified as:
           - An int or float in the interval [0, 0.5]
 
@@ -1073,7 +1123,7 @@ class Box(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same offsetgroup where bars of the same position
         coordinate will line up.
-    
+
         The 'offsetgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1094,7 +1144,7 @@ class Box(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1115,7 +1165,7 @@ class Box(_BaseTraceType):
         """
         Sets the orientation of the box(es). If "v" ("h"), the
         distribution is visualized along the vertical (horizontal).
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -1140,7 +1190,7 @@ class Box(_BaseTraceType):
         the box(es). Positive (negative) values correspond to positions
         to the right (left) for vertical boxes and above (below) for
         horizontal boxes
-    
+
         The 'pointpos' property is a number and may be specified as:
           - An int or float in the interval [-2, 2]
 
@@ -1161,7 +1211,7 @@ class Box(_BaseTraceType):
         """
         Sets the Quartile 1 values. There should be as many items as
         the number of boxes desired.
-    
+
         The 'q1' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1181,7 +1231,7 @@ class Box(_BaseTraceType):
     def q1src(self):
         """
         Sets the source reference on Chart Studio Cloud for `q1`.
-    
+
         The 'q1src' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1202,7 +1252,7 @@ class Box(_BaseTraceType):
         """
         Sets the Quartile 3 values. There should be as many items as
         the number of boxes desired.
-    
+
         The 'q3' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1222,7 +1272,7 @@ class Box(_BaseTraceType):
     def q3src(self):
         """
         Sets the source reference on Chart Studio Cloud for `q3`.
-    
+
         The 'q3src' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1244,16 +1294,16 @@ class Box(_BaseTraceType):
         Sets the method used to compute the sample's Q1 and Q3
         quartiles. The "linear" method uses the 25th percentile for Q1
         and 75th percentile for Q3 as computed using method #10 (listed
-        on http://www.amstat.org/publications/jse/v14n3/langford.html).
-        The "exclusive" method uses the median to divide the ordered
-        dataset into two halves if the sample is odd, it does not
-        include the median in either half - Q1 is then the median of
-        the lower half and Q3 the median of the upper half. The
-        "inclusive" method also uses the median to divide the ordered
-        dataset into two halves but if the sample is odd, it includes
-        the median in both halves - Q1 is then the median of the lower
-        half and Q3 the median of the upper half.
-    
+        on http://jse.amstat.org/v14n3/langford.html). The "exclusive"
+        method uses the median to divide the ordered dataset into two
+        halves if the sample is odd, it does not include the median in
+        either half - Q1 is then the median of the lower half and Q3
+        the median of the upper half. The "inclusive" method also uses
+        the median to divide the ordered dataset into two halves but if
+        the sample is odd, it includes the median in both halves - Q1
+        is then the median of the lower half and Q3 the median of the
+        upper half.
+
         The 'quartilemethod' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'exclusive', 'inclusive']
@@ -1278,7 +1328,7 @@ class Box(_BaseTraceType):
         only under the q1/median/q3 signature. If `sd` is not provided
         but a sample (in `y` or `x`) is set, we compute the standard
         deviation for each box using the sample values.
-    
+
         The 'sd' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1298,7 +1348,7 @@ class Box(_BaseTraceType):
     def sdsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `sd`.
-    
+
         The 'sdsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1322,9 +1372,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.box.selected.Marke
                     r` instance or dict with compatible properties
@@ -1350,7 +1400,7 @@ class Box(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1370,7 +1420,7 @@ class Box(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1394,9 +1444,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1427,7 +1477,7 @@ class Box(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1449,7 +1499,7 @@ class Box(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `text`.
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1470,7 +1520,7 @@ class Box(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1505,7 +1555,7 @@ class Box(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1528,9 +1578,9 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.box.unselected.Mar
                     ker` instance or dict with compatible
@@ -1556,7 +1606,7 @@ class Box(_BaseTraceType):
         under the q1/median/q3 signature. If `upperfence` is not
         provided but a sample (in `y` or `x`) is set, we compute the
         lower as the last sample point above 1.5 times the IQR.
-    
+
         The 'upperfence' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1577,7 +1627,7 @@ class Box(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         `upperfence`.
-    
+
         The 'upperfencesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1599,7 +1649,7 @@ class Box(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1621,7 +1671,7 @@ class Box(_BaseTraceType):
         """
         Sets the width of the whiskers relative to the box' width. For
         example, with 1, the whiskers are as wide as the box(es).
-    
+
         The 'whiskerwidth' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1643,7 +1693,7 @@ class Box(_BaseTraceType):
         Sets the width of the box in data coordinate If 0 (default
         value) the width is automatically selected based on the
         positions of other box traces in the same subplot.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1664,7 +1714,7 @@ class Box(_BaseTraceType):
         """
         Sets the x sample data or coordinates. See overview for more
         info.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1686,7 +1736,7 @@ class Box(_BaseTraceType):
         Sets the x coordinate for single-box traces or the starting
         coordinate for multi-box traces set using q1/median/q3. See
         overview for more info.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1708,7 +1758,7 @@ class Box(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1730,7 +1780,7 @@ class Box(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1764,7 +1814,7 @@ class Box(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1788,7 +1838,7 @@ class Box(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the x axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'xperiod' property accepts values of any type
 
         Returns
@@ -1811,7 +1861,7 @@ class Box(_BaseTraceType):
         axis. When `x0period` is round number of weeks, the `x0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'xperiod0' property accepts values of any type
 
         Returns
@@ -1831,7 +1881,7 @@ class Box(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the x axis.
-    
+
         The 'xperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1852,7 +1902,7 @@ class Box(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `x`.
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1873,7 +1923,7 @@ class Box(_BaseTraceType):
         """
         Sets the y sample data or coordinates. See overview for more
         info.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1895,7 +1945,7 @@ class Box(_BaseTraceType):
         Sets the y coordinate for single-box traces or the starting
         coordinate for multi-box traces set using q1/median/q3. See
         overview for more info.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1917,7 +1967,7 @@ class Box(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1939,7 +1989,7 @@ class Box(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1973,7 +2023,7 @@ class Box(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1997,7 +2047,7 @@ class Box(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the y axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'yperiod' property accepts values of any type
 
         Returns
@@ -2020,7 +2070,7 @@ class Box(_BaseTraceType):
         axis. When `y0period` is round number of weeks, the `y0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'yperiod0' property accepts values of any type
 
         Returns
@@ -2040,7 +2090,7 @@ class Box(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the y axis.
-    
+
         The 'yperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -2061,7 +2111,7 @@ class Box(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for `y`.
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2188,6 +2238,12 @@ class Box(_BaseTraceType):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2203,6 +2259,9 @@ class Box(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -2312,17 +2371,17 @@ class Box(_BaseTraceType):
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
             for Q1 and 75th percentile for Q3 as computed using
-            method #10 (listed on http://www.amstat.org/publication
-            s/jse/v14n3/langford.html). The "exclusive" method uses
-            the median to divide the ordered dataset into two
-            halves if the sample is odd, it does not include the
-            median in either half - Q1 is then the median of the
-            lower half and Q3 the median of the upper half. The
-            "inclusive" method also uses the median to divide the
-            ordered dataset into two halves but if the sample is
-            odd, it includes the median in both halves - Q1 is then
-            the median of the lower half and Q3 the median of the
-            upper half.
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         sd
             Sets the standard deviation values. There should be as
             many items as the number of boxes desired. This
@@ -2524,9 +2583,11 @@ class Box(_BaseTraceType):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lowerfence=None,
         lowerfencesrc=None,
@@ -2585,11 +2646,11 @@ class Box(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Box object
-        
+
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2, i.e. the median) is marked by a line
         inside the box. The fences grow outward from the boxes' edges,
@@ -2722,6 +2783,12 @@ class Box(_BaseTraceType):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2737,6 +2804,9 @@ class Box(_BaseTraceType):
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
             1000 to go after all unranked items.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -2846,17 +2916,17 @@ class Box(_BaseTraceType):
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
             for Q1 and 75th percentile for Q3 as computed using
-            method #10 (listed on http://www.amstat.org/publication
-            s/jse/v14n3/langford.html). The "exclusive" method uses
-            the median to divide the ordered dataset into two
-            halves if the sample is odd, it does not include the
-            median in either half - Q1 is then the median of the
-            lower half and Q3 the median of the upper half. The
-            "inclusive" method also uses the median to divide the
-            ordered dataset into two halves but if the sample is
-            odd, it includes the median in both halves - Q1 is then
-            the median of the lower half and Q3 the median of the
-            upper half.
+            method #10 (listed on
+            http://jse.amstat.org/v14n3/langford.html). The
+            "exclusive" method uses the median to divide the
+            ordered dataset into two halves if the sample is odd,
+            it does not include the median in either half - Q1 is
+            then the median of the lower half and Q3 the median of
+            the upper half. The "inclusive" method also uses the
+            median to divide the ordered dataset into two halves
+            but if the sample is odd, it includes the median in
+            both halves - Q1 is then the median of the lower half
+            and Q3 the median of the upper half.
         sd
             Sets the standard deviation values. There should be as
             many items as the number of boxes desired. This
@@ -3056,8 +3126,8 @@ class Box(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Box 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Box
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Box`"""
             )
 
@@ -3144,6 +3214,10 @@ an instance of :class:`plotly.graph_objs.Box`"""
         _v = jitter if jitter is not None else _v
         if _v is not None:
             self["jitter"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -3156,6 +3230,10 @@ an instance of :class:`plotly.graph_objs.Box`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

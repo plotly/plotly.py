@@ -34,9 +34,9 @@ class Scene(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.scene.Annotation
           - A list or tuple of dicts of string/value properties that
             will be passed to the Annotation constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
@@ -233,13 +233,13 @@ class Scene(_BaseLayoutHierarchyType):
         layout.template.layout.scene.annotationdefaults), sets the
         default property values to use for elements of
         layout.scene.annotations
-    
+
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -265,7 +265,7 @@ class Scene(_BaseLayoutHierarchyType):
         this scene's axes are drawn using the results of "data" except
         when one axis is more than four times the size of the two
         others, where in that case the results of "cube" are used.
-    
+
         The 'aspectmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'cube', 'data', 'manual']
@@ -286,19 +286,19 @@ class Scene(_BaseLayoutHierarchyType):
     def aspectratio(self):
         """
         Sets this scene's axis aspectratio.
-    
+
         The 'aspectratio' property is an instance of Aspectratio
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.Aspectratio`
           - A dict of string/value properties that will be passed
             to the Aspectratio constructor
-    
+
             Supported dict properties:
-                
+
                 x
-    
+
                 y
-    
+
                 z
 
         Returns
@@ -378,9 +378,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.Camera`
           - A dict of string/value properties that will be passed
             to the Camera constructor
-    
+
             Supported dict properties:
-                
+
                 center
                     Sets the (x,y,z) components of the 'center'
                     camera vector This vector determines the
@@ -422,9 +422,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this scene subplot
@@ -455,7 +455,7 @@ class Scene(_BaseLayoutHierarchyType):
     def dragmode(self):
         """
         Determines the mode of drag interactions for this scene.
-    
+
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['orbit', 'turntable', 'zoom', 'pan', False]
@@ -476,7 +476,7 @@ class Scene(_BaseLayoutHierarchyType):
     def hovermode(self):
         """
         Determines the mode of hover interactions for this scene.
-    
+
         The 'hovermode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['closest', False]
@@ -498,7 +498,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         Controls persistence of user-driven changes in camera
         attributes. Defaults to `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -521,9 +521,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
@@ -620,8 +620,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -630,6 +630,16 @@ class Scene(_BaseLayoutHierarchyType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -738,8 +748,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -845,9 +855,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
@@ -944,8 +954,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -954,6 +964,16 @@ class Scene(_BaseLayoutHierarchyType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -1062,8 +1082,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -1169,9 +1189,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.ZAxis`
           - A dict of string/value properties that will be passed
             to the ZAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
@@ -1268,8 +1288,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -1278,6 +1298,16 @@ class Scene(_BaseLayoutHierarchyType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 linecolor
                     Sets the axis line color.
                 linewidth
@@ -1386,8 +1416,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -1554,11 +1584,11 @@ class Scene(_BaseLayoutHierarchyType):
         xaxis=None,
         yaxis=None,
         zaxis=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Scene object
-        
+
         Parameters
         ----------
         arg
@@ -1634,8 +1664,8 @@ class Scene(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Scene 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Scene
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Scene`"""
             )
 

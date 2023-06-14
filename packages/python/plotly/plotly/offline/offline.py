@@ -190,7 +190,7 @@ window.PlotlyConfig = {MathJaxConfig: 'local'};\
 
 _mathjax_config = """\
 <script type="text/javascript">\
-if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
 
@@ -417,7 +417,7 @@ def plot(
     auto_play=True,
     animation_opts=None,
 ):
-    """ Create a plotly graph locally as an HTML document or string.
+    """Create a plotly graph locally as an HTML document or string.
 
     Example:
     ```
