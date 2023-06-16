@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.8
+    version: 3.10.10
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -917,17 +917,26 @@ fig.show()
 
 *New in 5.15*
 
-Use `texttemplate` to add text with variables to shapes. `texttemplate` uses d3 number and date formatting and supports raw variables, which use the raw data from the shape definition, and some calculated variables. Add a variable with "%{variable}".
+Use `texttemplate` to add text with variables to shapes. You have access to raw variables (`x0`, `x1`, `y0`, `y1`), which use raw data values from the shape definition, and the following calculated variables:
 
-This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes. 
+- `xcenter`: (x0 + x1) / 2
+- `ycenter`: (y0 + y1) / 2
+- `dx`: x1 - x0
+- `dy`: y1 - y0
+- `width`: abs(x1 - x0)
+- `height`: abs(y1 - y0)
+- `length` (for lines only): sqrt(dx^2 + dy^2)
+- `slope`: (y1 - y0) / (x1 - x0)
 
-For a complete list of available variables, see the [Shape Reference Docs](https://plotly.com/python/reference/layout/shapes/).
+`texttemplate` supports d3 number and date formatting.
 
+Add a variable with "%{variable}". This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes. 
 
 ```python
 import plotly.graph_objects as go
 
 fig = go.Figure()
+
 
 fig.add_shape(
     type="rect",
@@ -983,14 +992,30 @@ fig.show()
 
 *New in 5.15*
 
-Use `texttemplate` to add text with variables to new shapes drawn on the graph. This example figure is configured to allow the user to draw lines and automatically labels each line with its slope. Select **Draw line** in the modebar to try it out.
+You can also use `texttemplate` to add text with variables to new shapes drawn on the graph.
+
+In this example, we enable drawing lines on the figure by adding `drawline` to `modeBarButtonsToAdd` in `config`. We then define a `texttemplate` for shapes that shows the calculated variable `dy`. Select **Draw line** in the modebar to try it out.
 
 ```python
 import plotly.graph_objects as go
+from plotly import data
+
+df = data.stocks()
 
 fig = go.Figure(
-    layout=go.Layout(newshape=dict(label=dict(texttemplate="Slope: %{slope:.3f}")))
+    data=go.Scatter(
+        x=df.date,
+        y=df.GOOG,
+    ),
+    layout=go.Layout(
+        yaxis=dict(title="Price in USD"),
+        newshape=dict(
+            label=dict(texttemplate="Change: %{dy:.2f}")
+        ),
+        title="Google Share Price 2018/2019",
+    ),
 )
+
 
 fig.show(
     config={
@@ -999,7 +1024,6 @@ fig.show(
         ]
     }
 )
-
 ```
 
 ### Reference
