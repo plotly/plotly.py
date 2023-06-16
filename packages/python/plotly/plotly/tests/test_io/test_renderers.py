@@ -389,6 +389,7 @@ def test_missing_webbrowser_module(fig1):
     Assert that no errors occur if the webbrowser module is absent
     """
     import builtins
+
     realimport = builtins.__import__
 
     def webbrowser_absent_import(name, globals, locals, fromlist, level):
