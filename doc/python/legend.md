@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.8
+    version: 3.10.11
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -671,7 +671,6 @@ fig = go.Figure(
             "xref": "container",
             "yref": "container",
             "bgcolor": "Gold",
-            "title": {"text": "By continent"},
         },
     ),
 )
