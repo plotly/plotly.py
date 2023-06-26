@@ -19,4 +19,3 @@ matplotlib==2.2.3
 scikit-image==0.14.4
 psutil==5.7.0
 kaleido
-vaex
