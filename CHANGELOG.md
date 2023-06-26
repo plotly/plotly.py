@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 - Updated Plotly.js from version 2.24.1 to version 2.24.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2242----2023-06-09) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc
 
 ## [5.15.0] - 2023-06-08
 
@@ -23,7 +24,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - Add `legend.xref` and `legend.yref` to enable container-referenced positioning of legends [[#6589](https://github.com/plotly/plotly.js/pull/6589)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
     - Add `colorbar.xref` and `colorbar.yref` to enable container-referenced positioning of colorbars [[#6593](https://github.com/plotly/plotly.js/pull/6593)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
   - `px` methods now accept data-frame-like objects that support a `to_pandas()` method, such as polars, cudf, vaex etc
-  - `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc
 
 ### Fixed
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
