@@ -20,4 +20,3 @@ scikit-image==0.14.4
 psutil==5.7.0
 kaleido
 orjson==3.8.12
-vaex
