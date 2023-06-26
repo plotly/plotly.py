@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 import pytest
+from packaging import version
 import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
@@ -268,6 +269,10 @@ def test_build_df_using_interchange_protocol_mock(
         mock_from_dataframe.assert_called_once_with(input_dataframe)
 
 
+@pytest.mark.skipif(
+    version.parse(pd.__version__) < version.parse("2.0.2"),
+    reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
+)
 def test_build_df_from_vaex():
     import vaex
 
