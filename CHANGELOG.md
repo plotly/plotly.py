@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - Add `legend.xref` and `legend.yref` to enable container-referenced positioning of legends [[#6589](https://github.com/plotly/plotly.js/pull/6589)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
     - Add `colorbar.xref` and `colorbar.yref` to enable container-referenced positioning of colorbars [[#6593](https://github.com/plotly/plotly.js/pull/6593)], with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
   - `px` methods now accept data-frame-like objects that support a `to_pandas()` method, such as polars, cudf, vaex etc
+  - `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc
 
 ### Fixed
   - Fixed another compatibility issue with Pandas 2.0, just affecting `px.*(line_close=True)` [[#4190](https://github.com/plotly/plotly.py/pull/4190)]
