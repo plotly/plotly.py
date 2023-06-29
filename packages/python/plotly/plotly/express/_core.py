@@ -1324,7 +1324,7 @@ def build_dataframe(args, constructor):
                 #     self.to_pandas(...)
                 if not hasattr(df_not_pandas, "to_pandas"):
                     raise exc
-                df_not_pandas.to_pandas()
+                df_pandas = df_not_pandas.to_pandas()
             args["data_frame"] = df_pandas
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
