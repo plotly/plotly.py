@@ -1314,7 +1314,17 @@ def build_dataframe(args, constructor):
             import pandas.api.interchange
 
             df_not_pandas = args["data_frame"]
-            df_pandas = pandas.api.interchange.from_dataframe(df_not_pandas)
+            try:
+                df_pandas = pandas.api.interchange.from_dataframe(df_not_pandas)
+            except (ImportError, NotImplementedError) as exc:
+                # temporary workaround; developers of third-party libraries themselves
+                # should try a different implementation, if available. For example:
+                # def __dataframe__(self, ...):
+                #   if not some_condition:
+                #     self.to_pandas(...)
+                if not hasattr(df_not_pandas, "to_pandas"):
+                    raise exc
+                df_not_pandas.to_pandas()
             args["data_frame"] = df_pandas
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
