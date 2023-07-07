@@ -178,10 +178,8 @@ Plotly Express uses Pandas internally to process the data. When you provide a No
 
 If you are using a type of DataFrame that doesn't have a `to_pandas` method, but supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed. 
 
-If you are using Polars, you'll need to install `pyarrow`, which is used by its [`to_pandas` method](
+In this example, we use a Polars DataFrame. If you are using Polars, you'll need to install `pyarrow`, which is used by its [`to_pandas` method](
 https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_pandas.html)
-
-In this example, we use a Polars DataFrame.
 
 ```python
 import polars as pl
