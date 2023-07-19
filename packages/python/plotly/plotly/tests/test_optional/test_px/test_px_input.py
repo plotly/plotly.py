@@ -252,9 +252,18 @@ def test_build_df_with_index():
 def test_build_df_using_interchange_protocol_mock(
     add_interchange_module_for_old_pandas,
 ):
+    class InterchangeDataFrame:
+        def column_names(self):
+            return []
+
+        def select_columns_by_name(self, column_names):
+            return self
+
+    interchange_dataframe = InterchangeDataFrame()
+
     class CustomDataFrame:
         def __dataframe__(self):
-            pass
+            return interchange_dataframe
 
     input_dataframe = CustomDataFrame()
     args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
@@ -266,7 +275,7 @@ def test_build_df_using_interchange_protocol_mock(
             "pandas.api.interchange.from_dataframe", return_value=iris_pandas
         ) as mock_from_dataframe:
             build_dataframe(args, go.Scatter)
-        mock_from_dataframe.assert_called_once_with(input_dataframe)
+        mock_from_dataframe.assert_called_once_with(interchange_dataframe)
 
 
 @pytest.mark.skipif(
