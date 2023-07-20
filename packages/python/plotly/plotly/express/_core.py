@@ -1396,7 +1396,7 @@ def build_dataframe(args, constructor):
 
     if needs_interchanging:
         try:
-            if wide_mode:
+            if wide_mode or not hasattr(args["data_frame"], "select_columns_by_name"):
                 args["data_frame"] = pd.api.interchange.from_dataframe(
                     args["data_frame"]
                 )
