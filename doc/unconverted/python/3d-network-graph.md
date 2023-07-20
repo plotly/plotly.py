@@ -32,8 +32,8 @@ Plotly's Python library is free and open source! [Get started](https://plot.ly/p
 #### Network reflecting coappearances of characters in <br>Victor Hugo's novel Les Miserables
 
 
-We define our graph as an `igraph.Graph` object. [Python `igraph`](http://igraph.org/python/)
-is a library for high-performance graph generation  and analysis. Install the Python library with `sudo pip install python-igraph`.
+We define our graph as an `igraph.Graph` object. [`igraph`](http://igraph.org/python/)
+is a library for high-performance graph generation  and analysis. Install the Python library with `sudo pip install igraph`.
 
 ```python
 import igraph as ig
