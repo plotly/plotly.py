@@ -253,29 +253,57 @@ def test_build_df_using_interchange_protocol_mock(
     add_interchange_module_for_old_pandas,
 ):
     class InterchangeDataFrame:
+        def __init__(self, columns):
+            self._columns = columns
+
         def column_names(self):
-            return []
+            return self._columns
 
-        def select_columns_by_name(self, column_names):
-            return self
-
-    interchange_dataframe = InterchangeDataFrame()
+    interchange_dataframe = InterchangeDataFrame(
+        ["petal_width", "sepal_length", "sepal_width"]
+    )
+    interchange_dataframe_reduced = InterchangeDataFrame(
+        ["petal_width", "sepal_length"]
+    )
+    interchange_dataframe.select_columns_by_name = mock.MagicMock(
+        return_value=interchange_dataframe_reduced
+    )
+    interchange_dataframe_reduced.select_columns_by_name = mock.MagicMock(
+        return_value=interchange_dataframe_reduced
+    )
 
     class CustomDataFrame:
         def __dataframe__(self):
             return interchange_dataframe
 
+    class CustomDataFrameReduced:
+        def __dataframe__(self):
+            return interchange_dataframe_reduced
+
     input_dataframe = CustomDataFrame()
-    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+    input_dataframe_reduced = CustomDataFrameReduced()
 
     iris_pandas = px.data.iris()
 
     with mock.patch("pandas.__version__", "2.0.2"):
+        args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
         with mock.patch(
             "pandas.api.interchange.from_dataframe", return_value=iris_pandas
         ) as mock_from_dataframe:
             build_dataframe(args, go.Scatter)
-        mock_from_dataframe.assert_called_once_with(interchange_dataframe)
+        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+        interchange_dataframe.select_columns_by_name.assert_called_with(
+            ["petal_width", "sepal_length"]
+        )
+
+        args = dict(data_frame=input_dataframe_reduced, color=None)
+        with mock.patch(
+            "pandas.api.interchange.from_dataframe",
+            return_value=iris_pandas[["petal_width", "sepal_length"]],
+        ) as mock_from_dataframe:
+            build_dataframe(args, go.Scatter)
+        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+        interchange_dataframe_reduced.select_columns_by_name.assert_not_called()
 
 
 @pytest.mark.skipif(
