@@ -35,7 +35,7 @@ jupyter:
 
 ### Plotly Express works with Column-oriented, Matrix or Geographic Data
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which operates on a variety of types of data and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the **Input Data as Non-Pandas DataFrames** section below for more details.
 
@@ -170,13 +170,11 @@ fig.show()
 
 ### Input Data as Non-Pandas `DataFrame`s
 
-**New in 5.16**
+**New in 5.15**
 
-In the examples above, we've used Pandas DataFrames. You can also provide another type of DataFrame to the `data_frame` argument if that DataFrame has a `to_pandas` method or supports the [Python dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), for example, a [Polars](https://www.pola.rs/) DataFrame.
+In the examples above, we've used Pandas DataFrames. You can also provide another type of DataFrame to the `data_frame` argument if that DataFrame has a `to_pandas` method, for example, a [Polars](https://www.pola.rs/) DataFrame.
 
 Plotly Express uses Pandas internally to process the data. When you provide a Non-Pandas DataFrame to the `data_frame` argument of a Plotly Express function, the entire DataFrame is converted to a Pandas DataFrame.
-
-If you are using a type of DataFrame that doesn't have a `to_pandas` method, but supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed. 
 
 In this example, we use a Polars DataFrame. If you are using Polars, you'll need to install `pyarrow`, which is used by its [`to_pandas` method](
 https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_pandas.html)
