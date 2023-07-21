@@ -326,7 +326,7 @@ fig.show()
 
 The `marker_symbol` attribute allows you to choose from a wide array of symbols to represent markers in your figures.
 
-The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`.
+The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`.
 
 Each basic symbol is also represented by a number. Adding 100 to that number is equivalent to appending the suffix "-open" to a symbol name. Adding 200 is equivalent to appending "-dot" to a symbol name. Adding 300 is equivalent to appending "-open-dot" or "dot-open" to a symbol name.
 

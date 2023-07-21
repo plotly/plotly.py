@@ -27,10 +27,13 @@ class Legend(_BaseLayoutHierarchyType):
         "traceorder",
         "uirevision",
         "valign",
+        "visible",
         "x",
         "xanchor",
+        "xref",
         "y",
         "yanchor",
+        "yref",
     }
 
     # bgcolor
@@ -576,17 +579,41 @@ class Legend(_BaseLayoutHierarchyType):
     def valign(self, val):
         self["valign"] = val
 
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this legend is visible.
+
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["visible"]
+
+    @visible.setter
+    def visible(self, val):
+        self["visible"] = val
+
     # x
     # -
     @property
     def x(self):
         """
-        Sets the x position (in normalized coordinates) of the legend.
-        Defaults to 1.02 for vertical legends and defaults to 0 for
-        horizontal legends.
+        Sets the x position with respect to `xref` (in normalized
+        coordinates) of the legend. When `xref` is "paper", defaults to
+        1.02 for vertical legends and defaults to 0 for horizontal
+        legends. When `xref` is "container", defaults to 1 for vertical
+        legends and defaults to 0 for horizontal legends. Must be
+        between 0 and 1 if `xref` is "container". and between "-2" and
+        3 if `xref` is "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -624,19 +651,45 @@ class Legend(_BaseLayoutHierarchyType):
     def xanchor(self, val):
         self["xanchor"] = val
 
+    # xref
+    # ----
+    @property
+    def xref(self):
+        """
+        Sets the container `x` refers to. "container" spans the entire
+        `width` of the plot. "paper" refers to the width of the
+        plotting area only.
+
+        The 'xref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["xref"]
+
+    @xref.setter
+    def xref(self, val):
+        self["xref"] = val
+
     # y
     # -
     @property
     def y(self):
         """
-        Sets the y position (in normalized coordinates) of the legend.
-        Defaults to 1 for vertical legends, defaults to "-0.1" for
-        horizontal legends on graphs w/o range sliders and defaults to
-        1.1 for horizontal legends on graph with one or multiple range
-        sliders.
+        Sets the y position with respect to `yref` (in normalized
+        coordinates) of the legend. When `yref` is "paper", defaults to
+        1 for vertical legends, defaults to "-0.1" for horizontal
+        legends on graphs w/o range sliders and defaults to 1.1 for
+        horizontal legends on graph with one or multiple range sliders.
+        When `yref` is "container", defaults to 1. Must be between 0
+        and 1 if `yref` is "container" and between "-2" and 3 if `yref`
+        is "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -673,6 +726,29 @@ class Legend(_BaseLayoutHierarchyType):
     @yanchor.setter
     def yanchor(self, val):
         self["yanchor"] = val
+
+    # yref
+    # ----
+    @property
+    def yref(self):
+        """
+        Sets the container `y` refers to. "container" spans the entire
+        `height` of the plot. "paper" refers to the height of the
+        plotting area only.
+
+        The 'yref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["yref"]
+
+    @yref.setter
+    def yref(self, val):
+        self["yref"] = val
 
     # Self properties description
     # ---------------------------
@@ -747,10 +823,17 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
-            Sets the x position (in normalized coordinates) of the
-            legend. Defaults to 1.02 for vertical legends and
-            defaults to 0 for horizontal legends.
+            Sets the x position with respect to `xref` (in
+            normalized coordinates) of the legend. When `xref` is
+            "paper", defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends. When `xref` is
+            "container", defaults to 1 for vertical legends and
+            defaults to 0 for horizontal legends. Must be between 0
+            and 1 if `xref` is "container". and between "-2" and 3
+            if `xref` is "paper".
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -759,12 +842,20 @@ class Legend(_BaseLayoutHierarchyType):
             2/3, anchors legends to the left for `x` values less
             than or equal to 1/3 and anchors legends with respect
             to their center otherwise.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position (in normalized coordinates) of the
-            legend. Defaults to 1 for vertical legends, defaults to
-            "-0.1" for horizontal legends on graphs w/o range
+            Sets the y position with respect to `yref` (in
+            normalized coordinates) of the legend. When `yref` is
+            "paper", defaults to 1 for vertical legends, defaults
+            to "-0.1" for horizontal legends on graphs w/o range
             sliders and defaults to 1.1 for horizontal legends on
-            graph with one or multiple range sliders.
+            graph with one or multiple range sliders. When `yref`
+            is "container", defaults to 1. Must be between 0 and 1
+            if `yref` is "container" and between "-2" and 3 if
+            `yref` is "paper".
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
@@ -773,6 +864,10 @@ class Legend(_BaseLayoutHierarchyType):
             anchors legends to at their top for `y` values greater
             than or equal to 2/3 and anchors legends with respect
             to their middle otherwise.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
         """
 
     def __init__(
@@ -796,10 +891,13 @@ class Legend(_BaseLayoutHierarchyType):
         traceorder=None,
         uirevision=None,
         valign=None,
+        visible=None,
         x=None,
         xanchor=None,
+        xref=None,
         y=None,
         yanchor=None,
+        yref=None,
         **kwargs,
     ):
         """
@@ -878,10 +976,17 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
-            Sets the x position (in normalized coordinates) of the
-            legend. Defaults to 1.02 for vertical legends and
-            defaults to 0 for horizontal legends.
+            Sets the x position with respect to `xref` (in
+            normalized coordinates) of the legend. When `xref` is
+            "paper", defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends. When `xref` is
+            "container", defaults to 1 for vertical legends and
+            defaults to 0 for horizontal legends. Must be between 0
+            and 1 if `xref` is "container". and between "-2" and 3
+            if `xref` is "paper".
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -890,12 +995,20 @@ class Legend(_BaseLayoutHierarchyType):
             2/3, anchors legends to the left for `x` values less
             than or equal to 1/3 and anchors legends with respect
             to their center otherwise.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position (in normalized coordinates) of the
-            legend. Defaults to 1 for vertical legends, defaults to
-            "-0.1" for horizontal legends on graphs w/o range
+            Sets the y position with respect to `yref` (in
+            normalized coordinates) of the legend. When `yref` is
+            "paper", defaults to 1 for vertical legends, defaults
+            to "-0.1" for horizontal legends on graphs w/o range
             sliders and defaults to 1.1 for horizontal legends on
-            graph with one or multiple range sliders.
+            graph with one or multiple range sliders. When `yref`
+            is "container", defaults to 1. Must be between 0 and 1
+            if `yref` is "container" and between "-2" and 3 if
+            `yref` is "paper".
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
@@ -904,6 +1017,10 @@ class Legend(_BaseLayoutHierarchyType):
             anchors legends to at their top for `y` values greater
             than or equal to 2/3 and anchors legends with respect
             to their middle otherwise.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
 
         Returns
         -------
@@ -1010,6 +1127,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = valign if valign is not None else _v
         if _v is not None:
             self["valign"] = _v
+        _v = arg.pop("visible", None)
+        _v = visible if visible is not None else _v
+        if _v is not None:
+            self["visible"] = _v
         _v = arg.pop("x", None)
         _v = x if x is not None else _v
         if _v is not None:
@@ -1018,6 +1139,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = xanchor if xanchor is not None else _v
         if _v is not None:
             self["xanchor"] = _v
+        _v = arg.pop("xref", None)
+        _v = xref if xref is not None else _v
+        if _v is not None:
+            self["xref"] = _v
         _v = arg.pop("y", None)
         _v = y if y is not None else _v
         if _v is not None:
@@ -1026,6 +1151,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = yanchor if yanchor is not None else _v
         if _v is not None:
             self["yanchor"] = _v
+        _v = arg.pop("yref", None)
+        _v = yref if yref is not None else _v
+        if _v is not None:
+            self["yref"] = _v
 
         # Process unknown kwargs
         # ----------------------

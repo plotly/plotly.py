@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.11
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -186,7 +186,7 @@ This example uses the following attributes:
 1.  [values](https://plotly.com/python/reference/treemap/#treemap-values): sets the values associated with each of the sectors.
 2.  [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo): determines which trace information appear on the graph that can be 'text', 'value', 'current path', 'percent root', 'percent entry', and 'percent parent', or any combination of them.
 3.  [pathbar](https://plotly.com/python/reference/treemap/#treemap-pathbar): a main extra feature of treemap to display the current path of the visible portion of the hierarchical map. It may also be useful for zooming out of the graph.
-4.  [branchvalues](https://plotly.com/python/reference/treemap/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eva = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
+4.  [branchvalues](https://plotly.com/python/reference/treemap/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eve = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
     When set to "remainder", items in `values` corresponding to the root and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
 
 ```python
@@ -420,6 +420,28 @@ fig.update_layout(
     uniformtext=dict(minsize=10, mode='hide'),
     margin = dict(t=50, l=25, r=25, b=25)
 )
+fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Treemap charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to the root node.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Treemap(
+        labels = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        root_color="lightgrey",
+        textfont_size=20,
+        marker=dict(pattern=dict(shape=["|"], solidity=0.80)),
+    )
+)
+
 fig.show()
 ```
 

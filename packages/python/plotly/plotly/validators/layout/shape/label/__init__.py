@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yanchor import YanchorValidator
     from ._xanchor import XanchorValidator
+    from ._texttemplate import TexttemplateValidator
     from ._textposition import TextpositionValidator
     from ._textangle import TextangleValidator
     from ._text import TextValidator
@@ -18,6 +19,7 @@ else:
         [
             "._yanchor.YanchorValidator",
             "._xanchor.XanchorValidator",
+            "._texttemplate.TexttemplateValidator",
             "._textposition.TextpositionValidator",
             "._textangle.TextangleValidator",
             "._text.TextValidator",

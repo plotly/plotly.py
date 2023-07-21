@@ -70,6 +70,7 @@ fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
 
 # tight layout
 fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
+fig.show()
 ```
 
 #### 3d scatter plots in Dash

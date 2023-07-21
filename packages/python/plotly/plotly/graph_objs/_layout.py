@@ -7,6 +7,7 @@ class Layout(_BaseLayoutType):
     _subplotid_prop_names = [
         "coloraxis",
         "geo",
+        "legend",
         "mapbox",
         "polar",
         "scene",
@@ -32,6 +33,7 @@ class Layout(_BaseLayoutType):
         from plotly.validators.layout import (
             ColoraxisValidator,
             GeoValidator,
+            LegendValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -44,6 +46,7 @@ class Layout(_BaseLayoutType):
         return {
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
+            "legend": LegendValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -2041,11 +2044,19 @@ class Layout(_BaseLayoutType):
                 valign
                     Sets the vertical alignment of the symbols with
                     respect to their associated text.
+                visible
+                    Determines whether or not this legend is
+                    visible.
                 x
-                    Sets the x position (in normalized coordinates)
-                    of the legend. Defaults to 1.02 for vertical
-                    legends and defaults to 0 for horizontal
-                    legends.
+                    Sets the x position with respect to `xref` (in
+                    normalized coordinates) of the legend. When
+                    `xref` is "paper", defaults to 1.02 for
+                    vertical legends and defaults to 0 for
+                    horizontal legends. When `xref` is "container",
+                    defaults to 1 for vertical legends and defaults
+                    to 0 for horizontal legends. Must be between 0
+                    and 1 if `xref` is "container". and between
+                    "-2" and 3 if `xref` is "paper".
                 xanchor
                     Sets the legend's horizontal position anchor.
                     This anchor binds the `x` position to the
@@ -2055,13 +2066,21 @@ class Layout(_BaseLayoutType):
                     anchors legends to the left for `x` values less
                     than or equal to 1/3 and anchors legends with
                     respect to their center otherwise.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position (in normalized coordinates)
-                    of the legend. Defaults to 1 for vertical
+                    Sets the y position with respect to `yref` (in
+                    normalized coordinates) of the legend. When
+                    `yref` is "paper", defaults to 1 for vertical
                     legends, defaults to "-0.1" for horizontal
                     legends on graphs w/o range sliders and
                     defaults to 1.1 for horizontal legends on graph
-                    with one or multiple range sliders.
+                    with one or multiple range sliders. When `yref`
+                    is "container", defaults to 1. Must be between
+                    0 and 1 if `yref` is "container" and between
+                    "-2" and 3 if `yref` is "paper".
                 yanchor
                     Sets the legend's vertical position anchor This
                     anchor binds the `y` position to the "top",
@@ -2071,6 +2090,10 @@ class Layout(_BaseLayoutType):
                     legends to at their top for `y` values greater
                     than or equal to 2/3 and anchors legends with
                     respect to their middle otherwise.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
