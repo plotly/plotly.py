@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.4
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -657,37 +657,6 @@ fig.update_yaxes(
     constrain='domain'
 )
 
-
-fig.show()
-```
-
-### Fixed Ratio Axes with Compressed domain
-
-If an axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), `constrain` determines how that happens: by increasing the "range" (default), or by decreasing the "domain".
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x = [0,1,1,0,0,1,1,2,2,3,3,2,2,3],
-    y = [0,0,1,1,3,3,2,2,3,3,1,1,0,0]
-))
-
-fig.update_layout(
-    width = 800,
-    height = 500,
-    title = "fixed-ratio axes with compressed axes"
-)
-fig.update_xaxes(
-    range=[-1,4],  # sets the range of xaxis
-    constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
-)
-fig.update_yaxes(
-    scaleanchor = "x",
-    scaleratio = 1,
-)
 
 fig.show()
 ```
