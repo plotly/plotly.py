@@ -37,7 +37,7 @@ jupyter:
 
 Several [Plotly Express](/python/plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
-Here is an example of an animated scatter plot creating using Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
+Here is an example of an animated scatter plot created with Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
 
 ```python
 import plotly.express as px
