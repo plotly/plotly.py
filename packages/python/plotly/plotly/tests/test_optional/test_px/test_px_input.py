@@ -3,8 +3,24 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 import pytest
+from packaging import version
+import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
+
+# Fixtures
+# --------
+@pytest.fixture
+def add_interchange_module_for_old_pandas():
+    if not hasattr(pd.api, "interchange"):
+        pd.api.interchange = mock.MagicMock()
+        # to make the following import work: `import pandas.api.interchange`
+        with mock.patch.dict(
+            "sys.modules", {"pandas.api.interchange": pd.api.interchange}
+        ):
+            yield
+    else:
+        yield
 
 
 def test_numpy():
@@ -231,6 +247,47 @@ def test_build_df_with_index():
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     out = build_dataframe(args, go.Scatter)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
+
+
+def test_build_df_using_interchange_protocol_mock(
+    add_interchange_module_for_old_pandas,
+):
+    class CustomDataFrame:
+        def __dataframe__(self):
+            pass
+
+    input_dataframe = CustomDataFrame()
+    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+
+    iris_pandas = px.data.iris()
+
+    with mock.patch("pandas.__version__", "2.0.2"):
+        with mock.patch(
+            "pandas.api.interchange.from_dataframe", return_value=iris_pandas
+        ) as mock_from_dataframe:
+            build_dataframe(args, go.Scatter)
+        mock_from_dataframe.assert_called_once_with(input_dataframe)
+
+
+@pytest.mark.skipif(
+    version.parse(pd.__version__) < version.parse("2.0.2"),
+    reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
+)
+@pytest.mark.parametrize("test_lib", ["vaex", "polars"])
+def test_build_df_from_vaex_and_polars(test_lib):
+    if test_lib == "vaex":
+        import vaex as lib
+    else:
+        import polars as lib
+
+    # take out the 'species' columns since the vaex implementation does not cover strings yet
+    iris_pandas = px.data.iris()[["petal_width", "sepal_length"]]
+    iris_vaex = lib.from_pandas(iris_pandas)
+    args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
+    out = build_dataframe(args, go.Scatter)
+    assert_frame_equal(
+        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+    )
 
 
 def test_timezones():

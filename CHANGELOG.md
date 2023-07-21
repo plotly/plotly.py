@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## UNRELEASED
+
+### Updated
+- Updated Plotly.js from version 2.24.1 to version 2.24.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2242----2023-06-09) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc. This protocol has priority on `to_pandas` call, but will only be used if pandas>=2.0.2 is installed in the environment.
+
 ## [5.15.0] - 2023-06-08
 
 ### Updated

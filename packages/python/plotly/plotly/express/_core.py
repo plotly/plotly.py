@@ -7,6 +7,7 @@ from .trendline_functions import ols, lowess, rolling, expanding, ewm
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
 import math
+from packaging import version
 import pandas as pd
 import numpy as np
 
@@ -1307,7 +1308,25 @@ def build_dataframe(args, constructor):
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        if hasattr(args["data_frame"], "to_pandas"):
+        if hasattr(args["data_frame"], "__dataframe__") and version.parse(
+            pd.__version__
+        ) >= version.parse("2.0.2"):
+            import pandas.api.interchange
+
+            df_not_pandas = args["data_frame"]
+            try:
+                df_pandas = pandas.api.interchange.from_dataframe(df_not_pandas)
+            except (ImportError, NotImplementedError) as exc:
+                # temporary workaround; developers of third-party libraries themselves
+                # should try a different implementation, if available. For example:
+                # def __dataframe__(self, ...):
+                #   if not some_condition:
+                #     self.to_pandas(...)
+                if not hasattr(df_not_pandas, "to_pandas"):
+                    raise exc
+                df_pandas = df_not_pandas.to_pandas()
+            args["data_frame"] = df_pandas
+        elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
         else:
             args["data_frame"] = pd.DataFrame(args["data_frame"])
