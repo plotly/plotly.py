@@ -33,6 +33,7 @@ class Volume(_BaseTraceType):
         "idssrc",
         "isomax",
         "isomin",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
@@ -487,9 +488,15 @@ class Volume(_BaseTraceType):
                     title's location used to be set by the now
                     deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -499,10 +506,20 @@ class Volume(_BaseTraceType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -512,6 +529,10 @@ class Volume(_BaseTraceType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -968,6 +989,31 @@ class Volume(_BaseTraceType):
     @isomin.setter
     def isomin(self, val):
         self["isomin"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
 
     # legendgroup
     # -----------
@@ -2043,6 +2089,12 @@ class Volume(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2262,6 +2314,7 @@ class Volume(_BaseTraceType):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -2438,6 +2491,12 @@ class Volume(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
@@ -2758,6 +2817,10 @@ an instance of :class:`plotly.graph_objs.Volume`"""
         _v = isomin if isomin is not None else _v
         if _v is not None:
             self["isomin"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:

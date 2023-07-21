@@ -1,6 +1,6 @@
 """
 `plotly.express` is a terse, consistent, high-level wrapper around `plotly.graph_objects`
-for rapid data exploration and figure generation. Learn more at https://plotly.express/
+for rapid data exploration and figure generation. Learn more at https://plotly.com/python/plotly-express/
 """
 from __future__ import absolute_import
 from plotly import optional_imports

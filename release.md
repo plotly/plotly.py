@@ -35,7 +35,7 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
  - `CHANGELOG.md`
    + update the release date
- - `packages/python/plotly/README.md`
+ - `README.md`
    + this must be done at this point because the README gets baked into PyPI
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
@@ -128,7 +128,8 @@ start by doing it first if not. Then merge `master` into `doc-prod` to deploy th
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
     1. bump the version of Plotly.py in  `_data/pyversion.json`
-    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up
+    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
+      - If Plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
     3. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
     4. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
     5. Commit and push the changes to `master` in that repo

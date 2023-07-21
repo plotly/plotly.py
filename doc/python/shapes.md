@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.9
+    version: 3.10.10
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -911,6 +911,119 @@ fig.add_shape(
 )
 
 fig.show()
+```
+
+#### Variables in Shape Label Text
+
+*New in 5.15*
+
+Use `texttemplate` to add text with variables to shapes. You have access to raw variables (`x0`, `x1`, `y0`, `y1`), which use raw data values from the shape definition, and the following calculated variables:
+
+- `xcenter`: (x0 + x1) / 2
+- `ycenter`: (y0 + y1) / 2
+- `dx`: x1 - x0
+- `dy`: y1 - y0
+- `width`: abs(x1 - x0)
+- `height`: abs(y1 - y0)
+- `length` (for lines only): sqrt(dx^2 + dy^2)
+- `slope`: (y1 - y0) / (x1 - x0)
+
+`texttemplate` supports d3 number and date formatting.
+
+Add a variable with "%{variable}". This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+
+fig.add_shape(
+    type="rect",
+    fillcolor="MediumSlateBlue",
+    x0=-0.5,
+    y0=-0.5,
+    x1=1,
+    y1=1,
+    label=dict(
+        texttemplate="x0 is %{x0:.3f}, y0 is %{y0:.3f}", font=dict(color="DarkOrange")
+    ),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor="LightGreen",
+    x0=1,
+    y0=1.75,
+    x1=2.25,
+    y1=3,
+    label=dict(texttemplate="Height: %{height:.3f}", font=dict(color="DarkOrange")),
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=1.5,
+    line_width=3,
+    label=dict(
+        texttemplate="Slope of %{slope:.3f} and length of %{length:.3f}",
+        font=dict(size=20),
+    ),
+)
+fig.add_shape(
+    type="rect",
+    fillcolor="Lavender",
+    x0=2.5,
+    y0=2.5,
+    x1=5,
+    y1=3.5,
+    label=dict(
+        texttemplate="Width: %{width:.3f}",
+        font=dict(family="Courier New, monospace", size=20),
+    ),
+)
+
+fig.show()
+
+```
+
+#### Variables in Shape Label Text for New Shapes
+
+*New in 5.15*
+
+You can also use `texttemplate` to add text with variables to new shapes drawn on the graph.
+
+In this example, we enable drawing lines on the figure by adding `drawline` to `modeBarButtonsToAdd` in `config`. We then define a `texttemplate` for shapes that shows the calculated variable `dy`. Select **Draw line** in the modebar to try it out.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.stocks()
+
+fig = go.Figure(
+    data=go.Scatter(
+        x=df.date,
+        y=df.GOOG,
+    ),
+    layout=go.Layout(
+        yaxis=dict(title="Price in USD"),
+        newshape=dict(
+            label=dict(texttemplate="Change: %{dy:.2f}")
+        ),
+        title="Google Share Price 2018/2019",
+    ),
+)
+
+
+fig.show(
+    config={
+        "modeBarButtonsToAdd": [
+            "drawline",
+        ]
+    }
+)
 ```
 
 ### Reference

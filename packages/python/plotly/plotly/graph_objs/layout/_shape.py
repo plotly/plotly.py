@@ -174,6 +174,33 @@ class Shape(_BaseLayoutHierarchyType):
                     are "start", "middle", and "end". Default:
                     *middle center* for rectangles, circles, and
                     paths; "middle" for lines.
+                texttemplate
+                    Template string used for rendering the shape's
+                    label. Note that this will override `text`.
+                    Variables are inserted using %{variable}, for
+                    example "x0: %{x0}". Numbers are formatted
+                    using d3-format's syntax %{variable:d3-format},
+                    for example "Price: %{x0:$.2f}". See https://gi
+                    thub.com/d3/d3-format/tree/v1.4.5#d3-format for
+                    details on the formatting syntax. Dates are
+                    formatted using d3-time-format's syntax
+                    %{variable|d3-time-format}, for example "Day:
+                    %{x0|%m %b %Y}". See
+                    https://github.com/d3/d3-time-
+                    format/tree/v2.2.3#locale_format for details on
+                    the date formatting syntax. A single
+                    multiplication or division operation may be
+                    applied to numeric variables, and combined with
+                    d3 number formatting, for example "Length in
+                    cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+                    second." For log axes, variable values are
+                    given in log units. For date axes, x/y
+                    coordinate variables and center variables use
+                    datetimes, while all other variable values use
+                    values in ms. Finally, the template string has
+                    access to variables `x0`, `x1`, `y0`, `y1`,
+                    `slope`, `dx`, `dy`, `width`, `height`,
+                    `length`, `xcenter` and `ycenter`.
                 xanchor
                     Sets the label's horizontal position anchor
                     This anchor binds the specified `textposition`
