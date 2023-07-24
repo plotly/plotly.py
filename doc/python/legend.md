@@ -99,7 +99,7 @@ fig.show()
 
 *New in 5.16*
 
-If you have shapes that appear in a legend, these are displayed after all traces:
+If you have shapes that are configured to appear in a legend, these are displayed after all traces:
 
 ```python
 import plotly.graph_objects as go
