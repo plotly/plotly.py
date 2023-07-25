@@ -307,11 +307,11 @@ Using `labelalias` you can replace some labels on the `colorbar` with alternativ
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request as request
 import json
 
 # Load heatmap data
-response = urllib.request.urlopen(
+response = request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
 dataset = json.load(response)
 
