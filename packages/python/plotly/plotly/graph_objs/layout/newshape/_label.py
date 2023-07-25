@@ -91,7 +91,8 @@ class Label(_BaseLayoutHierarchyType):
     @property
     def text(self):
         """
-        Sets the text to display with the new shape.
+        Sets the text to display with the new shape. It is also used
+        for legend item if `name` is not provided.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -262,7 +263,8 @@ class Label(_BaseLayoutHierarchyType):
             Sets padding (in px) between edge of label and edge of
             new shape.
         text
-            Sets the text to display with the new shape.
+            Sets the text to display with the new shape. It is also
+            used for legend item if `name` is not provided.
         textangle
             Sets the angle at which the label text is drawn with
             respect to the horizontal. For lines, angle "auto" is
@@ -345,7 +347,8 @@ class Label(_BaseLayoutHierarchyType):
             Sets padding (in px) between edge of label and edge of
             new shape.
         text
-            Sets the text to display with the new shape.
+            Sets the text to display with the new shape. It is also
+            used for legend item if `name` is not provided.
         textangle
             Sets the angle at which the label text is drawn with
             respect to the horizontal. For lines, angle "auto" is

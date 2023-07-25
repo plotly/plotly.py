@@ -15,10 +15,16 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._type import TypeValidator
     from ._templateitemname import TemplateitemnameValidator
+    from ._showlegend import ShowlegendValidator
     from ._path import PathValidator
     from ._opacity import OpacityValidator
     from ._name import NameValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
+    from ._legendrank import LegendrankValidator
+    from ._legendgrouptitle import LegendgrouptitleValidator
+    from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._layer import LayerValidator
     from ._label import LabelValidator
     from ._fillrule import FillruleValidator
@@ -44,10 +50,16 @@ else:
             "._visible.VisibleValidator",
             "._type.TypeValidator",
             "._templateitemname.TemplateitemnameValidator",
+            "._showlegend.ShowlegendValidator",
             "._path.PathValidator",
             "._opacity.OpacityValidator",
             "._name.NameValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
+            "._legendrank.LegendrankValidator",
+            "._legendgrouptitle.LegendgrouptitleValidator",
+            "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._layer.LayerValidator",
             "._label.LabelValidator",
             "._fillrule.FillruleValidator",

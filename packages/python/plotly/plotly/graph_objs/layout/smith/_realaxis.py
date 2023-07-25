@@ -243,9 +243,12 @@ class Realaxis(_BaseLayoutHierarchyType):
         Replacement text for specific tick or hover labels. For example
         using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
         Canada. The labels we would have shown must match the keys
-        exactly, after adding any tickprefix or ticksuffix. labelalias
-        can be used with any axis type, and both keys (if needed) and
-        values (if desired) can include html-like tags or MathJax.
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
 
         The 'labelalias' property accepts values of any type
 
@@ -854,9 +857,12 @@ class Realaxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -1002,9 +1008,12 @@ class Realaxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
