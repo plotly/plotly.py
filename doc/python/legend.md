@@ -120,13 +120,13 @@ fig.add_shape(
 )
 fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1, 2]))
 fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2, 1]))
-v
+
 fig.show()
 
 ```
 
 The `legendrank` attribute of a trace or shape can be used to control its placement in the legend.
-The default `legendrank` for traces and shapes is 1000. When all traces and shapes have the same `legendrank`, traces appear in the order they appear in the data, followed by shapes in the order they are defined. 
+The default `legendrank` for traces and shapes is 1000. When all traces and shapes have the same `legendrank`, traces appear in the order they appear in the data, followed by shapes in the order they are defined.
 
 Any trace or shape can be pulled up to the top of the legend if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
 
