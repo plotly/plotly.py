@@ -315,7 +315,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-By default, for shapes, legend items are disabled. Set `showlegend=True` on a shape for it to dislay a legend item.
+By default, for shapes, legend items are disabled. Set `showlegend=True` on a shape for it to display a legend item.
 The name that appears for the shape in the legend is the shape's `name` if it is provided. If no `name` is provided, the shape label's `text` is used. If neither is provided, the legend item appears as "shape \<shape number>". For example, "shape 1".
 
 ```python
