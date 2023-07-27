@@ -1331,6 +1331,9 @@ def build_dataframe(args, constructor):
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
             columns = args["data_frame"].columns
+        elif hasattr(args["data_frame"], "toPandas"):
+            args["data_frame"] = args["data_frame"].toPandas()
+            columns = args["data_frame"].columns
         else:
             args["data_frame"] = pd.DataFrame(args["data_frame"])
             columns = args["data_frame"].columns
@@ -1425,9 +1428,14 @@ def build_dataframe(args, constructor):
             # def __dataframe__(self, ...):
             #   if not some_condition:
             #     self.to_pandas(...)
-            if not hasattr(df_not_pandas, "to_pandas"):
+            if not hasattr(df_not_pandas, "to_pandas") or hasattr(
+                df_not_pandas, "toPandas"
+            ):
                 raise exc
-            args["data_frame"] = df_not_pandas.to_pandas()
+            if hasattr(df_not_pandas, "toPandas"):
+                args["data_frame"] = df_not_pandas.toPandas()
+            else:
+                args["data_frame"] = df_not_pandas.to_pandas()
 
     df_input = args["data_frame"]
 
