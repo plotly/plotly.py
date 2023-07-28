@@ -1428,8 +1428,9 @@ def build_dataframe(args, constructor):
             # def __dataframe__(self, ...):
             #   if not some_condition:
             #     self.to_pandas(...)
-            if not hasattr(df_not_pandas, "to_pandas") or hasattr(
-                df_not_pandas, "toPandas"
+            if not (
+                hasattr(df_not_pandas, "to_pandas")
+                or hasattr(df_not_pandas, "toPandas")
             ):
                 raise exc
             if hasattr(df_not_pandas, "toPandas"):
