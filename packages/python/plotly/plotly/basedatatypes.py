@@ -8,6 +8,7 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 import itertools
 from functools import reduce
+import json
 
 from _plotly_utils.utils import (
     _natural_sort_strings,
@@ -17,6 +18,7 @@ from _plotly_utils.utils import (
     display_string_positions,
     chomp_empty_strings,
     find_closest_string,
+    PlotlyJSONEncoder,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -3316,13 +3318,25 @@ Invalid property path '{key_path_str}' for layout
 
     def to_plotly_json(self):
         """
-        Convert figure to a JSON representation as a Python dict
+        Convert figure to a JSON representation as a Python dict.
+
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util when encoding.
 
         Returns
         -------
         dict
         """
         return self.to_dict()
+
+    def to_json_str(self):
+        """
+        Convert to a JSON string representation.
+
+        Returns
+        -------
+        str
+        """
+        return json.dumps(self.to_plotly_json(), cls=PlotlyJSONEncoder)
 
     @staticmethod
     def _to_ordered_dict(d, skip_uid=False):
@@ -5602,6 +5616,16 @@ on_change callbacks are not supported in this case.
         dict
         """
         return deepcopy(self._props if self._props is not None else {})
+
+    def to_json_str(self):
+        """
+        Convert to a JSON string representation.
+
+        Returns
+        -------
+        str
+        """
+        return json.dumps(self.to_plotly_json(), cls=PlotlyJSONEncoder)
 
     @staticmethod
     def _vals_equal(v1, v2):
