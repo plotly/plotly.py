@@ -597,4 +597,6 @@ def imshow(
         fig.update_yaxes(title_text=labels["y"], col=1)
     configure_animation_controls(args, go.Image, fig)
     fig.update_layout(template=args["template"], overwrite=True)
+    if labels["title"]:
+        fig.update_layout(title={'text': labels["title"], 'x':0.485, 'xanchor': 'center'})
     return fig
