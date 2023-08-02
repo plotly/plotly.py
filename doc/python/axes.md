@@ -734,12 +734,11 @@ To use a reversed axis while specifying only an upper or lower bound for the ran
 
 ```python
 import plotly.express as px
+
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_yaxes(range=[9, None],
-                 autorange="reversed"
-                )
+fig.update_yaxes(range=[9, None], autorange="reversed")
 
 fig.show()
 ```
