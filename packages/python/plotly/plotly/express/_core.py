@@ -1431,18 +1431,14 @@ def build_dataframe(args, constructor):
             # def __dataframe__(self, ...):
             #   if not some_condition:
             #     self.to_pandas(...)
-            if not (
-                hasattr(df_not_pandas, "to_pandas")
-                or hasattr(df_not_pandas, "toPandas")
-                or hasattr(df_not_pandas, "to_pandas_df")
-            ):
-                raise exc
             if hasattr(df_not_pandas, "toPandas"):
                 args["data_frame"] = df_not_pandas.toPandas()
             elif hasattr(df_not_pandas, "to_pandas_df"):
                 args["data_frame"] = df_not_pandas.to_pandas_df()
-            else:
+            elif hasattr(df_not_pandas, "to_pandas"):
                 args["data_frame"] = df_not_pandas.to_pandas()
+            else:
+                raise exc
 
     df_input = args["data_frame"]
 
