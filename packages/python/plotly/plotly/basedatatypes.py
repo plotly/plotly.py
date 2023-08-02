@@ -3328,16 +3328,6 @@ Invalid property path '{key_path_str}' for layout
         """
         return self.to_dict()
 
-    def to_json_str(self):
-        """
-        Convert to a JSON string representation.
-
-        Returns
-        -------
-        str
-        """
-        return json.dumps(self.to_plotly_json(), cls=PlotlyJSONEncoder)
-
     @staticmethod
     def _to_ordered_dict(d, skip_uid=False):
         """
@@ -5611,13 +5601,15 @@ on_change callbacks are not supported in this case.
         """
         Return plotly JSON representation of object as a Python dict
 
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util when encoding.
+
         Returns
         -------
         dict
         """
         return deepcopy(self._props if self._props is not None else {})
 
-    def to_json_str(self):
+    def to_json(self):
         """
         Convert to a JSON string representation.
 
