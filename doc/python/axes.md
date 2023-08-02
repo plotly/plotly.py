@@ -544,7 +544,7 @@ fig.show()
 
 #### Setting the Range of Axes Manually
 
-The visible x and y axis range can be configured manually by setting the `range` axis property to a list of two values, the lower and upper boundary.
+The visible x and y axis range can be configured manually by setting the `range` axis property to a list of two values, the lower and upper bound.
 
 Here's an example of manually specifying the x and y axis range for a faceted scatter plot created with Plotly Express.
 
@@ -555,6 +555,41 @@ df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
 fig.update_xaxes(range=[1.5, 4.5])
 fig.update_yaxes(range=[3, 9])
+
+fig.show()
+```
+
+#### Setting only a Lower or Upper Bound for Range
+
+*New in 5.16*
+
+You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange. 
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(range=[None, 4.5])
+fig.update_yaxes(range=[3, None])
+
+fig.show()
+```
+
+#### Setting a Maximum and Minimum Allowed Axis Value
+
+*New in 5.16*
+
+When setting a range manually, you can also set a `maxallowed` or `minallowed` for an axis. With this set, you won't be able to pan further than the min or max allowed. In this example, we've set the minimum allowed on the x-axis to 1 and the maximum allowed on the y-axis to 10.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.update_xaxes(range=[1.5, 4.5], minallowed=1)
+fig.update_yaxes(range=[3, 9], maxallowed=10)
 
 fig.show()
 ```
@@ -693,6 +728,22 @@ fig.update_yaxes(range=[9, 3])
 fig.show()
 ```
 
+*New in 5.16*
+
+To use a reversed axis while specifying only an upper or lower bound for the range, set `autorange="reversed"`:
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_yaxes(range=[9, None],
+                 autorange="reversed"
+                )
+
+fig.show()
+```
+
 ### Axis range for log axis type
 
 If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout).
@@ -714,25 +765,6 @@ x = np.linspace(1, 200, 30)
 fig = go.Figure(go.Scatter(x=x, y=x**3))
 fig.update_xaxes(type="log", range=[np.log10(0.8), np.log10(250)])
 fig.update_yaxes(type="log")
-fig.show()
-```
-
-#### <code>nonnegative</code>, <code>tozero</code>, and <code>normal</code> Rangemode
-
-The axis auto-range calculation logic can be configured using the `rangemode` axis parameter.
-
-If `rangemode` is `"normal"` (the default), the range is computed based on the min and max values of the input data. If `"tozero"`, the range will always include zero. If `"nonnegative"`, the range will not extend below zero, regardless of the input data.
-
-Here is an example of configuring a faceted scatter plot created using Plotly Express to always include zero for both the x and y axes.
-
-```python
-import plotly.express as px
-df = px.data.iris()
-
-fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_xaxes(rangemode="tozero")
-fig.update_yaxes(rangemode="tozero")
-
 fig.show()
 ```
 
@@ -770,6 +802,80 @@ fig = make_subplots(1, 3)
 for i in range(1, 4):
     fig.add_trace(go.Scatter(x=x, y=np.random.random(N)), 1, i)
 fig.update_xaxes(matches='x')
+fig.show()
+```
+
+#### <code>nonnegative</code>, <code>tozero</code>, and <code>normal</code> Rangemode
+
+When you don't specify a range, autorange is used. It's also used for bounds set to `None` when providing a `range`. 
+
+The axis auto-range calculation logic can be configured using the `rangemode` axis parameter.
+
+If `rangemode` is `"normal"` (the default), the range is computed based on the min and max values of the input data. If `"tozero"`, the range will always include zero. If `"nonnegative"`, the range will not extend below zero, regardless of the input data.
+
+Here is an example of configuring a faceted scatter plot created using Plotly Express to always include zero for both the x and y axes.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(rangemode="tozero")
+fig.update_yaxes(rangemode="tozero")
+
+fig.show()
+```
+
+#### Autorange Options
+
+*New in 5.16*
+
+You can further configure how autorange is applied using `autorangeoptions` to specify maximum or minimum values or values to include.
+
+##### Specifying Minimum and Maximum Allowed Values
+
+Using `autorangeoptions.maxallowed`, you can specify an exact value to use as the autorange maximum. With `autorangeoptions.minallowed`, you can specify an exact value to use as the autorange minimum.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.update_yaxes(autorangeoptions=dict(minallowed=3))
+fig.update_xaxes(autorangeoptions=dict(maxallowed=5))
+
+fig.show()
+```
+
+##### Clip Minimum and Maximum 
+
+You can also clip an axis range at a specific maximum or minimum value with `autorangeoptions.clipmax` and `autorangeoptions.clipmin`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.update_yaxes(autorangeoptions=dict(clipmin=5))
+fig.update_xaxes(autorangeoptions=dict(clipmax=4))
+
+fig.show()
+```
+
+##### Specify Values to be Included
+
+Use `autorangeoptions.include` to specify a value that should always be included within the calculated autorange. In this example, we specify that for the autorange calculated on the x-axis, 5 should be included. 
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
+fig.update_xaxes(autorangeoptions=dict(include=5))
+
 fig.show()
 ```
 
