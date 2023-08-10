@@ -6,7 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## UNRELEASED
 
 ### Updated
-- Updated Plotly.js from version 2.24.1 to version 2.24.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2242----2023-06-09) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- Updated Plotly.js from version 2.24.1 to version 2.25.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2251----2023-08-02) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  -  Add "Equal Earth" projection to geo subplots [[#6670](https://github.com/plotly/plotly.js/pull/6670)],
+   with thanks to @apparebit for the contribution!
+  - Add options to include legends for shapes and `newshape` [[#6653](https://github.com/plotly/plotly.js/pull/6653)]
 - `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc. This protocol has priority on `to_pandas` call, but will only be used if pandas>=2.0.2 is installed in the environment.
 - `px` methods now accept data-frame-like objects that support a `toPandas()` method, such as Spark DataFrames, or a `to_pandas_df()` method, such as Vaex DataFrames.
 
