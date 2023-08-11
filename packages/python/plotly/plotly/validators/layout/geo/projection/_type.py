@@ -40,6 +40,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "eckert5",
                     "eckert6",
                     "eisenlohr",
+                    "equal earth",
                     "equirectangular",
                     "fahey",
                     "foucaut",

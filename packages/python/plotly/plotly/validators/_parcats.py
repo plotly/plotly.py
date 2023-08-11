@@ -122,7 +122,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             sortpaths
                 Sets the path sorting algorithm. If `forward`,
