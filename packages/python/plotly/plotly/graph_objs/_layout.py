@@ -2481,11 +2481,49 @@ class Layout(_BaseLayoutType):
                 layer
                     Specifies whether new shapes are drawn below or
                     above traces.
+                legend
+                    Sets the reference to a legend to show new
+                    shape in. References to these legends are
+                    "legend", "legend2", "legend3", etc. Settings
+                    for these legends are set in the layout, under
+                    `layout.legend`, `layout.legend2`, etc.
+                legendgroup
+                    Sets the legend group for new shape. Traces and
+                    shapes part of the same legend group hide/show
+                    at the same time when toggling legend items.
+                legendgrouptitle
+                    :class:`plotly.graph_objects.layout.newshape.Le
+                    gendgrouptitle` instance or dict with
+                    compatible properties
+                legendrank
+                    Sets the legend rank for new shape. Items and
+                    groups with smaller ranks are presented on
+                    top/left side while with "reversed"
+                    `legend.traceorder` they are on bottom/right
+                    side. The default legendrank is 1000, so that
+                    you can use ranks less than 1000 to place
+                    certain items before all unranked items, and
+                    ranks greater than 1000 to go after all
+                    unranked items.
+                legendwidth
+                    Sets the width (in px or fraction) of the
+                    legend for new shape.
                 line
                     :class:`plotly.graph_objects.layout.newshape.Li
                     ne` instance or dict with compatible properties
+                name
+                    Sets new shape name. The name appears as the
+                    legend item.
                 opacity
                     Sets the opacity of new shapes.
+                showlegend
+                    Determines whether or not new shape is shown in
+                    the legend.
+                visible
+                    Determines whether or not new shape is visible.
+                    If "legendonly", the shape is not drawn, but
+                    can appear as a legend item (provided that the
+                    legend itself is visible).
 
         Returns
         -------
@@ -3064,6 +3102,37 @@ class Layout(_BaseLayoutType):
                 layer
                     Specifies whether shapes are drawn below or
                     above traces.
+                legend
+                    Sets the reference to a legend to show this
+                    shape in. References to these legends are
+                    "legend", "legend2", "legend3", etc. Settings
+                    for these legends are set in the layout, under
+                    `layout.legend`, `layout.legend2`, etc.
+                legendgroup
+                    Sets the legend group for this shape. Traces
+                    and shapes part of the same legend group
+                    hide/show at the same time when toggling legend
+                    items.
+                legendgrouptitle
+                    :class:`plotly.graph_objects.layout.shape.Legen
+                    dgrouptitle` instance or dict with compatible
+                    properties
+                legendrank
+                    Sets the legend rank for this shape. Items and
+                    groups with smaller ranks are presented on
+                    top/left side while with "reversed"
+                    `legend.traceorder` they are on bottom/right
+                    side. The default legendrank is 1000, so that
+                    you can use ranks less than 1000 to place
+                    certain items before all unranked items, and
+                    ranks greater than 1000 to go after all
+                    unranked items. When having unranked or equal
+                    rank items shapes would be displayed after
+                    traces i.e. according to their order in data
+                    and layout.
+                legendwidth
+                    Sets the width (in px or fraction) of the
+                    legend for this shape.
                 line
                     :class:`plotly.graph_objects.layout.shape.Line`
                     instance or dict with compatible properties
@@ -3105,6 +3174,9 @@ class Layout(_BaseLayoutType):
                     strings, we can't use either to separate date
                     from time parts. Therefore we'll use underscore
                     for this purpose: 2015-02-21_13:45:56.789
+                showlegend
+                    Determines whether or not this shape is shown
+                    in the legend.
                 templateitemname
                     Used to refer to a named item in this array in
                     the template. Named items from the template
@@ -3132,7 +3204,9 @@ class Layout(_BaseLayoutType):
                     sizing mode.
                 visible
                     Determines whether or not this shape is
-                    visible.
+                    visible. If "legendonly", the shape is not
+                    drawn, but can appear as a legend item
+                    (provided that the legend itself is visible).
                 x0
                     Sets the shape's starting x position. See
                     `type` and `xsizemode` for more info.
@@ -4343,7 +4417,10 @@ class Layout(_BaseLayoutType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.
@@ -4874,7 +4951,10 @@ class Layout(_BaseLayoutType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.

@@ -170,7 +170,7 @@ fig.show()
 
 ### Input Data as Non-Pandas `DataFrame`s
 
-**New in 5.15**
+*New in 5.15*
 
 In the examples above, we've used Pandas DataFrames. You can also provide another type of DataFrame to the `data_frame` argument if that DataFrame has a `to_pandas` method, for example, a [Polars](https://www.pola.rs/) DataFrame.
 
@@ -195,6 +195,13 @@ wide_df = pl.DataFrame(
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
 fig.show()
 ```
+
+*New in 5.16*
+
+As of version 5.16, you can also provide another type of DataFrame to the `data_frame` argument if that DataFrame supports the [Python dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), or has a `toPandas` or `to_pandas_df` method.
+
+Even if the DataFrame that you are using supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed. If you are using an earlier version of Pandas, Plotly Express will look for a `to_pandas`, `toPandas`, and `to_pandas_df` method, and use whichever one is available.
+
 
 ### Input Data as array-like columns: NumPy arrays, lists...
 
