@@ -200,7 +200,7 @@ fig.show()
 
 As of version 5.16, you can also provide another type of DataFrame to the `data_frame` argument if that DataFrame supports the [Python dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), or has a `toPandas` or `to_pandas_df` method.
 
-If you are using a type of DataFrame that doesn't have a `to_pandas`, `toPandas`, or `to_pandas_df` method, but supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed.
+Even if the DataFrame that you are using supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed. If you are using an earlier version of Pandas, Plotly Express will look for a `to_pandas`, `toPandas`, and `to_pandas_df` method, and use whichever one is available.
 
 
 ### Input Data as array-like columns: NumPy arrays, lists...
