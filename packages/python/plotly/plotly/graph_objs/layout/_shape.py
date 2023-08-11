@@ -14,10 +14,16 @@ class Shape(_BaseLayoutHierarchyType):
         "fillrule",
         "label",
         "layer",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
         "line",
         "name",
         "opacity",
         "path",
+        "showlegend",
         "templateitemname",
         "type",
         "visible",
@@ -158,7 +164,8 @@ class Shape(_BaseLayoutHierarchyType):
                     Sets padding (in px) between edge of label and
                     edge of shape.
                 text
-                    Sets the text to display with shape.
+                    Sets the text to display with shape. It is also
+                    used for legend item if `name` is not provided.
                 textangle
                     Sets the angle at which the label text is drawn
                     with respect to the horizontal. For lines,
@@ -248,6 +255,130 @@ class Shape(_BaseLayoutHierarchyType):
     @layer.setter
     def layer(self, val):
         self["layer"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this shape in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this shape. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
+
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.shape.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+
+            Supported dict properties:
+
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.shape.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
+
+    # legendrank
+    # ----------
+    @property
+    def legendrank(self):
+        """
+        Sets the legend rank for this shape. Items and groups with
+        smaller ranks are presented on top/left side while with
+        "reversed" `legend.traceorder` they are on bottom/right side.
+        The default legendrank is 1000, so that you can use ranks less
+        than 1000 to place certain items before all unranked items, and
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
+        The 'legendrank' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendrank"]
+
+    @legendrank.setter
+    def legendrank(self, val):
+        self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        shape.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -368,6 +499,26 @@ class Shape(_BaseLayoutHierarchyType):
     def path(self, val):
         self["path"] = val
 
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not this shape is shown in the legend.
+
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
+
     # templateitemname
     # ----------------
     @property
@@ -430,14 +581,17 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def visible(self):
         """
-        Determines whether or not this shape is visible.
+        Determines whether or not this shape is visible. If
+        "legendonly", the shape is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
 
         Returns
         -------
-        bool
+        Any
         """
         return self["visible"]
 
@@ -717,6 +871,33 @@ class Shape(_BaseLayoutHierarchyType):
         layer
             Specifies whether shapes are drawn below or above
             traces.
+        legend
+            Sets the reference to a legend to show this shape in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this shape. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this shape. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this shape.
         line
             :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
@@ -754,6 +935,9 @@ class Shape(_BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        showlegend
+            Determines whether or not this shape is shown in the
+            legend.
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -777,7 +961,10 @@ class Shape(_BaseLayoutHierarchyType):
             path using `path`. with respect to the axes' sizing
             mode.
         visible
-            Determines whether or not this shape is visible.
+            Determines whether or not this shape is visible. If
+            "legendonly", the shape is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
@@ -863,10 +1050,16 @@ class Shape(_BaseLayoutHierarchyType):
         fillrule=None,
         label=None,
         layer=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
         line=None,
         name=None,
         opacity=None,
         path=None,
+        showlegend=None,
         templateitemname=None,
         type=None,
         visible=None,
@@ -909,6 +1102,33 @@ class Shape(_BaseLayoutHierarchyType):
         layer
             Specifies whether shapes are drawn below or above
             traces.
+        legend
+            Sets the reference to a legend to show this shape in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this shape. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this shape. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this shape.
         line
             :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
@@ -946,6 +1166,9 @@ class Shape(_BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        showlegend
+            Determines whether or not this shape is shown in the
+            legend.
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -969,7 +1192,10 @@ class Shape(_BaseLayoutHierarchyType):
             path using `path`. with respect to the axes' sizing
             mode.
         visible
-            Determines whether or not this shape is visible.
+            Determines whether or not this shape is visible. If
+            "legendonly", the shape is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
@@ -1099,6 +1325,26 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = layer if layer is not None else _v
         if _v is not None:
             self["layer"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
+        _v = arg.pop("legendgroup", None)
+        _v = legendgroup if legendgroup is not None else _v
+        if _v is not None:
+            self["legendgroup"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
+        _v = arg.pop("legendrank", None)
+        _v = legendrank if legendrank is not None else _v
+        if _v is not None:
+            self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
@@ -1115,6 +1361,10 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = path if path is not None else _v
         if _v is not None:
             self["path"] = _v
+        _v = arg.pop("showlegend", None)
+        _v = showlegend if showlegend is not None else _v
+        if _v is not None:
+            self["showlegend"] = _v
         _v = arg.pop("templateitemname", None)
         _v = templateitemname if templateitemname is not None else _v
         if _v is not None:

@@ -220,7 +220,10 @@ class Contour(_BaseTraceType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.
@@ -1072,9 +1075,9 @@ class Contour(_BaseTraceType):
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -1125,10 +1128,12 @@ class Contour(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -1258,7 +1263,7 @@ class Contour(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -2387,20 +2392,23 @@ class Contour(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2424,7 +2432,7 @@ class Contour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         ncontours
             Sets the maximum number of contour levels. The actual
@@ -2852,20 +2860,23 @@ class Contour(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2889,7 +2900,7 @@ class Contour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         ncontours
             Sets the maximum number of contour levels. The actual

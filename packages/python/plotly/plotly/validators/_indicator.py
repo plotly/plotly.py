@@ -53,13 +53,16 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
             legendwidth
                 Sets the width (in px or fraction) of the
                 legend for this trace.
@@ -87,7 +90,7 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 reference value in text. Finally, `gauge`
                 displays the value graphically on an axis.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             number
                 :class:`plotly.graph_objects.indicator.Number`
