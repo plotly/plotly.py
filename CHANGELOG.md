@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## UNRELEASED
 
 ### Updated
-- Updated Plotly.js from version 2.24.1 to version 2.25.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2251----2023-08-02) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Updated Plotly.js from version 2.24.1 to version 2.25.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2252----2023-08-11) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   -  Add "Equal Earth" projection to geo subplots [[#6670](https://github.com/plotly/plotly.js/pull/6670)],
    with thanks to @apparebit for the contribution!
   - Add options to include legends for shapes and `newshape` [[#6653](https://github.com/plotly/plotly.js/pull/6653)]
