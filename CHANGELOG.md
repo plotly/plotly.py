@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## UNRELEASED
+## [5.16.0] - 2023-08-11
 
 ### Updated
 - Updated Plotly.js from version 2.24.1 to version 2.25.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2252----2023-08-11) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Add options to include legends for shapes and `newshape` [[#6653](https://github.com/plotly/plotly.js/pull/6653)]
 - `px` methods now accept data-frame-like objects that support a [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), such as polars, vaex, modin etc. This protocol has priority on `to_pandas` call, but will only be used if pandas>=2.0.2 is installed in the environment.
 - `px` methods now accept data-frame-like objects that support a `toPandas()` method, such as Spark DataFrames, or a `to_pandas_df()` method, such as Vaex DataFrames.
+
+### Fixed
+- Fixed Pandas performance warning issue caused by multiple `frame.insert` [[#4246](https://github.com/plotly/plotly.py/pull/4246)]
 
 ## [5.15.0] - 2023-06-08
 
