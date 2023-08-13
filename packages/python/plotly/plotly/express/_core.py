@@ -1419,9 +1419,17 @@ def build_dataframe(args, constructor):
             else:
                 # Save precious resources by only interchanging columns that are
                 # actually going to be plotted.
-                columns = [
+                necessary_columns = [
                     i for i in args.values() if isinstance(i, str) and i in columns
                 ]
+                for field in args:
+                    if field in array_attrables and isinstance(
+                        args[field], (list, dict)
+                    ):
+                        necessary_columns.extend(
+                            [i for i in args[field] if i in columns]
+                        )
+                columns = list(dict.fromkeys(necessary_columns))
                 args["data_frame"] = pd.api.interchange.from_dataframe(
                     args["data_frame"].select_columns_by_name(columns)
                 )
