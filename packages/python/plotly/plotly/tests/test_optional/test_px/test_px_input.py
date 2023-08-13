@@ -327,6 +327,32 @@ def test_build_df_from_vaex_and_polars(test_lib):
     )
 
 
+@pytest.mark.skipif(
+    version.parse(pd.__version__) < version.parse("2.0.2"),
+    reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
+)
+@pytest.mark.parametrize("test_lib", ["vaex", "polars"])
+def test_build_df_with_hover_data_from_vaex_and_polars(test_lib):
+    if test_lib == "vaex":
+        import vaex as lib
+    else:
+        import polars as lib
+
+    # take out the 'species' columns since the vaex implementation does not cover strings yet
+    iris_pandas = px.data.iris()[["petal_width", "sepal_length", "sepal_width"]]
+    iris_vaex = lib.from_pandas(iris_pandas)
+    args = dict(
+        data_frame=iris_vaex,
+        x="petal_width",
+        y="sepal_length",
+        hover_data=["sepal_width"],
+    )
+    out = build_dataframe(args, go.Scatter)
+    assert_frame_equal(
+        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+    )
+
+
 def test_timezones():
     df = pd.DataFrame({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
     df["date"] = pd.to_datetime(df["date"])
