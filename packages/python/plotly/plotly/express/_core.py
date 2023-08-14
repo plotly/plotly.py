@@ -1423,9 +1423,7 @@ def build_dataframe(args, constructor):
                     i for i in args.values() if isinstance(i, str) and i in columns
                 ]
                 for field in args:
-                    if field in array_attrables and isinstance(
-                        args[field], (list, dict)
-                    ):
+                    if args[field] is not None and field in array_attrables:
                         necessary_columns.extend(
                             [i for i in args[field] if i in columns]
                         )

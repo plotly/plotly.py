@@ -332,7 +332,10 @@ def test_build_df_from_vaex_and_polars(test_lib):
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
 @pytest.mark.parametrize("test_lib", ["vaex", "polars"])
-def test_build_df_with_hover_data_from_vaex_and_polars(test_lib):
+@pytest.mark.parametrize(
+    "hover_data", [["sepal_width"], {"sepal_length": False, "sepal_width": ":.2f"}]
+)
+def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
     if test_lib == "vaex":
         import vaex as lib
     else:
@@ -345,7 +348,7 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib):
         data_frame=iris_vaex,
         x="petal_width",
         y="sepal_length",
-        hover_data=["sepal_width"],
+        hover_data=hover_data,
     )
     out = build_dataframe(args, go.Scatter)
     assert_frame_equal(
