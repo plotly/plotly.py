@@ -293,7 +293,7 @@ def test_build_df_using_interchange_protocol_mock(
         ) as mock_from_dataframe:
             build_dataframe(args, go.Scatter)
         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-        assert set(interchange_dataframe.select_columns_by_name.call_args.args[0]) == {
+        assert set(interchange_dataframe.select_columns_by_name.call_args[0][0]) == {
             "petal_width",
             "sepal_length",
         }
