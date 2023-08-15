@@ -8,6 +8,7 @@ import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 
+
 # Fixtures
 # --------
 @pytest.fixture
@@ -292,9 +293,10 @@ def test_build_df_using_interchange_protocol_mock(
         ) as mock_from_dataframe:
             build_dataframe(args, go.Scatter)
         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-        interchange_dataframe.select_columns_by_name.assert_called_with(
-            ["petal_width", "sepal_length"]
-        )
+        assert set(interchange_dataframe.select_columns_by_name.call_args.args[0]) == {
+            "petal_width",
+            "sepal_length",
+        }
 
         args = dict(data_frame=input_dataframe_reduced, color=None)
         with mock.patch(
