@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## [5.16.1] - 2023-08-16
 
 ### Fixed
 - Fixed issue with necessary columns from complex arguments dropped when interchanging dataframes [[#4324](https://github.com/plotly/plotly.py/pull/4324)]
