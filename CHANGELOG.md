@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fixed issue with necessary columns from complex arguments dropped when interchanging dataframes [[#4324](https://github.com/plotly/plotly.py/pull/4324)]
+- Fixed issue with px.imshow failing when facet_col is an earlier dimension than animation_frame for xarrays [[#4330](https://github.com/plotly/plotly.py/issues/4330)]
+- Fixed issue with px.imshow failing when facet_col has string coordinates in xarrays [[#4329](https://github.com/plotly/plotly.py/issues/4329)]
 
 ## [5.16.0] - 2023-08-11
 
