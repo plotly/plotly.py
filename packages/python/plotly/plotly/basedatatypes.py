@@ -5609,15 +5609,38 @@ on_change callbacks are not supported in this case.
         """
         return deepcopy(self._props if self._props is not None else {})
 
-    def to_json(self):
+    def to_json(self, *args, **kwargs):
         """
         Convert to a JSON string representation.
+
+        Parameters
+        ----------
+        validate: bool (default True)
+            True if the figure should be validated before being converted to
+            JSON, False otherwise.
+
+        pretty: bool (default False)
+            True if JSON representation should be pretty-printed, False if
+            representation should be as compact as possible.
+
+        remove_uids: bool (default True)
+            True if trace UIDs should be omitted from the JSON representation
+
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for an encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
 
         Returns
         -------
         str
+            Representation of figure as a JSON string
         """
-        return json.dumps(self.to_plotly_json(), cls=PlotlyJSONEncoder)
+        import plotly.io as pio
+
+        return pio.to_json(self, *args, **kwargs)
 
     @staticmethod
     def _vals_equal(v1, v2):
