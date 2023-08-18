@@ -296,7 +296,10 @@ class Line(_BaseTraceHierarchyType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.
