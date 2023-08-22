@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Updated
 - Improved json docstrings, added `BasePlotlyType.to_json()` method [[#4301](https://github.com/plotly/plotly.py/pull/4301)]
 
+### Fixed
+- Fixed two issues with px.imshow: [[#4330](https://github.com/plotly/plotly.py/issues/4330)] when facet_col is an earlier dimension than animation_frame for xarrays and [[#4329](https://github.com/plotly/plotly.py/issues/4329)] when facet_col has string coordinates in xarrays [[#4331](https://github.com/plotly/plotly.py/pull/4331)]
+
 ## [5.16.1] - 2023-08-16
 
 ### Fixed
