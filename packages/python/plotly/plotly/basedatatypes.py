@@ -3318,7 +3318,8 @@ Invalid property path '{key_path_str}' for layout
         """
         Convert figure to a JSON representation as a Python dict
 
-        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util when encoding.
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
 
         Returns
         -------
@@ -5599,7 +5600,8 @@ on_change callbacks are not supported in this case.
         """
         Return plotly JSON representation of object as a Python dict
 
-        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util when encoding.
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
 
         Returns
         -------
