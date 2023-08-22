@@ -265,14 +265,18 @@ def imshow(
     if xarray_imported and isinstance(img, xarray.DataArray):
         dims = list(img.dims)
         img_is_xarray = True
+        pop_indexes = []
         if facet_col is not None:
             facet_slices = img.coords[img.dims[facet_col]].values
-            _ = dims.pop(facet_col)
+            pop_indexes.append(facet_col)
             facet_label = img.dims[facet_col]
         if animation_frame is not None:
             animation_slices = img.coords[img.dims[animation_frame]].values
-            _ = dims.pop(animation_frame)
+            pop_indexes.append(animation_frame)
             animation_label = img.dims[animation_frame]
+        # Remove indices in sorted order.
+        for index in sorted(pop_indexes, reverse=True):
+            _ = dims.pop(index)
         y_label, x_label = dims[0], dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -541,7 +545,7 @@ def imshow(
         slice_label = (
             "facet_col" if labels.get("facet_col") is None else labels["facet_col"]
         )
-        col_labels = ["%s=%d" % (slice_label, i) for i in facet_slices]
+        col_labels = [f"{slice_label}={i}" for i in facet_slices]
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     for attr_name in ["height", "width"]:
         if args[attr_name]:
