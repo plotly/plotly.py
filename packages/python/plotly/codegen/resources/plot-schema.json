@@ -2923,13 +2923,15 @@
      },
      "role": "object",
      "side": {
-      "description": "Determines the location of legend's title with respect to the legend items. Defaulted to *top* with `orientation` is *h*. Defaulted to *left* with `orientation` is *v*. The *top left* options could be used to expand legend area in both x and y sides.",
+      "description": "Determines the location of legend's title with respect to the legend items. Defaulted to *top* with `orientation` is *h*. Defaulted to *left* with `orientation` is *v*. The *top left* options could be used to expand top center and top right are for horizontal alignment legend area in both x and y sides.",
       "editType": "legend",
       "valType": "enumerated",
       "values": [
        "top",
        "left",
-       "top left"
+       "top left",
+       "top center",
+       "top right"
       ]
      },
      "text": {
@@ -4407,7 +4409,7 @@
       "valType": "angle"
      },
      "autorange": {
-      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
       "dflt": true,
       "editType": "plot",
       "impliedEdits": {},
@@ -4415,8 +4417,52 @@
       "values": [
        true,
        false,
-       "reversed"
+       "reversed",
+       "min reversed",
+       "max reversed",
+       "min",
+       "max"
       ]
+     },
+     "autorangeoptions": {
+      "clipmax": {
+       "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "clipmin": {
+       "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "editType": "plot",
+      "include": {
+       "arrayOk": true,
+       "description": "Ensure this value is included in autorange.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "includesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "maxallowed": {
+       "description": "Use this value exactly as autorange maximum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "minallowed": {
+       "description": "Use this value exactly as autorange minimum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "role": "object"
      },
      "autotypenumbers": {
       "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
@@ -4577,6 +4623,22 @@
       "min": 0,
       "valType": "number"
      },
+     "maxallowed": {
+      "description": "Determines the maximum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Determines the minimum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
      "minexponent": {
       "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
       "dflt": 3,
@@ -4593,7 +4655,7 @@
      },
      "range": {
       "anim": true,
-      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
       "editType": "plot",
       "impliedEdits": {
        "autorange": false
@@ -5518,7 +5580,7 @@
       }
      },
      "autorange": {
-      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
       "dflt": true,
       "editType": "plot",
       "impliedEdits": {},
@@ -5526,8 +5588,52 @@
       "values": [
        true,
        false,
-       "reversed"
+       "reversed",
+       "min reversed",
+       "max reversed",
+       "min",
+       "max"
       ]
+     },
+     "autorangeoptions": {
+      "clipmax": {
+       "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "clipmin": {
+       "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "editType": "plot",
+      "include": {
+       "arrayOk": true,
+       "description": "Ensure this value is included in autorange.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "includesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "maxallowed": {
+       "description": "Use this value exactly as autorange maximum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "minallowed": {
+       "description": "Use this value exactly as autorange minimum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "role": "object"
      },
      "autotypenumbers": {
       "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
@@ -5670,6 +5776,22 @@
       "min": 0,
       "valType": "number"
      },
+     "maxallowed": {
+      "description": "Determines the maximum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Determines the minimum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
      "minexponent": {
       "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
       "dflt": 3,
@@ -5699,7 +5821,7 @@
      },
      "range": {
       "anim": false,
-      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
       "editType": "plot",
       "impliedEdits": {
        "autorange": false
@@ -6086,7 +6208,7 @@
       }
      },
      "autorange": {
-      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
       "dflt": true,
       "editType": "plot",
       "impliedEdits": {},
@@ -6094,8 +6216,52 @@
       "values": [
        true,
        false,
-       "reversed"
+       "reversed",
+       "min reversed",
+       "max reversed",
+       "min",
+       "max"
       ]
+     },
+     "autorangeoptions": {
+      "clipmax": {
+       "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "clipmin": {
+       "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "editType": "plot",
+      "include": {
+       "arrayOk": true,
+       "description": "Ensure this value is included in autorange.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "includesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "maxallowed": {
+       "description": "Use this value exactly as autorange maximum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "minallowed": {
+       "description": "Use this value exactly as autorange minimum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "role": "object"
      },
      "autotypenumbers": {
       "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
@@ -6238,6 +6404,22 @@
       "min": 0,
       "valType": "number"
      },
+     "maxallowed": {
+      "description": "Determines the maximum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Determines the minimum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
      "minexponent": {
       "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
       "dflt": 3,
@@ -6267,7 +6449,7 @@
      },
      "range": {
       "anim": false,
-      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
       "editType": "plot",
       "impliedEdits": {
        "autorange": false
@@ -6654,7 +6836,7 @@
       }
      },
      "autorange": {
-      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+      "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
       "dflt": true,
       "editType": "plot",
       "impliedEdits": {},
@@ -6662,8 +6844,52 @@
       "values": [
        true,
        false,
-       "reversed"
+       "reversed",
+       "min reversed",
+       "max reversed",
+       "min",
+       "max"
       ]
+     },
+     "autorangeoptions": {
+      "clipmax": {
+       "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "clipmin": {
+       "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "editType": "plot",
+      "include": {
+       "arrayOk": true,
+       "description": "Ensure this value is included in autorange.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "includesrc": {
+       "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+       "editType": "none",
+       "valType": "string"
+      },
+      "maxallowed": {
+       "description": "Use this value exactly as autorange maximum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "minallowed": {
+       "description": "Use this value exactly as autorange minimum.",
+       "editType": "plot",
+       "impliedEdits": {},
+       "valType": "any"
+      },
+      "role": "object"
      },
      "autotypenumbers": {
       "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
@@ -6806,6 +7032,22 @@
       "min": 0,
       "valType": "number"
      },
+     "maxallowed": {
+      "description": "Determines the maximum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Determines the minimum range of this axis.",
+      "editType": "plot",
+      "impliedEdits": {
+       "^autorange": false
+      },
+      "valType": "any"
+     },
      "minexponent": {
       "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
       "dflt": 3,
@@ -6835,7 +7077,7 @@
      },
      "range": {
       "anim": false,
-      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+      "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
       "editType": "plot",
       "impliedEdits": {
        "autorange": false
@@ -10402,7 +10644,7 @@
      "valType": "flaglist"
     },
     "autorange": {
-     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
      "dflt": true,
      "editType": "axrange",
      "impliedEdits": {},
@@ -10410,8 +10652,52 @@
      "values": [
       true,
       false,
-      "reversed"
+      "reversed",
+      "min reversed",
+      "max reversed",
+      "min",
+      "max"
      ]
+    },
+    "autorangeoptions": {
+     "clipmax": {
+      "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "clipmin": {
+      "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "editType": "plot",
+     "include": {
+      "arrayOk": true,
+      "description": "Ensure this value is included in autorange.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "includesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "maxallowed": {
+      "description": "Use this value exactly as autorange maximum.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Use this value exactly as autorange minimum.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "role": "object"
     },
     "autotypenumbers": {
      "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers.",
@@ -10644,6 +10930,22 @@
       "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
      ]
     },
+    "maxallowed": {
+     "description": "Determines the maximum range of this axis.",
+     "editType": "plot",
+     "impliedEdits": {
+      "^autorange": false
+     },
+     "valType": "any"
+    },
+    "minallowed": {
+     "description": "Determines the minimum range of this axis.",
+     "editType": "plot",
+     "impliedEdits": {
+      "^autorange": false
+     },
+     "valType": "any"
+    },
     "minexponent": {
      "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
      "dflt": 3,
@@ -10798,7 +11100,7 @@
     },
     "range": {
      "anim": true,
-     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
      "editType": "axrange",
      "impliedEdits": {
       "autorange": false
@@ -11157,12 +11459,13 @@
     },
     "role": "object",
     "scaleanchor": {
-     "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden.",
+     "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden. Setting `false` allows to remove a default constraint (occasionally, you may need to prevent a default `scaleanchor` constraint from being applied, eg. when having an image trace `yaxis: {scaleanchor: \"x\"}` is set automatically in order for pixels to be rendered as squares, setting `yaxis: {scaleanchor: false}` allows to remove the constraint).",
      "editType": "plot",
      "valType": "enumerated",
      "values": [
       "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
-      "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
+      "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
+      false
      ]
     },
     "scaleratio": {
@@ -11660,7 +11963,7 @@
      "valType": "flaglist"
     },
     "autorange": {
-     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*.",
+     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided and it has a value for both the lower and upper bound, `autorange` is set to *false*. Using *min* applies autorange only to set the minimum. Using *max* applies autorange only to set the maximum. Using *min reversed* applies autorange only to set the minimum on a reversed axis. Using *max reversed* applies autorange only to set the maximum on a reversed axis. Using *reversed* applies autorange on both ends and reverses the axis direction.",
      "dflt": true,
      "editType": "axrange",
      "impliedEdits": {},
@@ -11668,8 +11971,52 @@
      "values": [
       true,
       false,
-      "reversed"
+      "reversed",
+      "min reversed",
+      "max reversed",
+      "min",
+      "max"
      ]
+    },
+    "autorangeoptions": {
+     "clipmax": {
+      "description": "Clip autorange maximum if it goes beyond this value. Has no effect when `autorangeoptions.maxallowed` is provided.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "clipmin": {
+      "description": "Clip autorange minimum if it goes beyond this value. Has no effect when `autorangeoptions.minallowed` is provided.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "editType": "plot",
+     "include": {
+      "arrayOk": true,
+      "description": "Ensure this value is included in autorange.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "includesrc": {
+      "description": "Sets the source reference on Chart Studio Cloud for `include`.",
+      "editType": "none",
+      "valType": "string"
+     },
+     "maxallowed": {
+      "description": "Use this value exactly as autorange maximum.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "minallowed": {
+      "description": "Use this value exactly as autorange minimum.",
+      "editType": "plot",
+      "impliedEdits": {},
+      "valType": "any"
+     },
+     "role": "object"
     },
     "autoshift": {
      "description": "Automatically reposition the axis to avoid overlap with other axes with the same `overlaying` value. This repositioning will account for any `shift` amount applied to other axes on the same side with `autoshift` is set to true. Only has an effect if `anchor` is set to *free*.",
@@ -11908,6 +12255,22 @@
       "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
      ]
     },
+    "maxallowed": {
+     "description": "Determines the maximum range of this axis.",
+     "editType": "plot",
+     "impliedEdits": {
+      "^autorange": false
+     },
+     "valType": "any"
+    },
+    "minallowed": {
+     "description": "Determines the minimum range of this axis.",
+     "editType": "plot",
+     "impliedEdits": {
+      "^autorange": false
+     },
+     "valType": "any"
+    },
     "minexponent": {
      "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*.",
      "dflt": 3,
@@ -12062,7 +12425,7 @@
     },
     "range": {
      "anim": true,
-     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
+     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears. Leaving either or both elements `null` impacts the default `autorange`.",
      "editType": "axrange",
      "impliedEdits": {
       "autorange": false
@@ -12167,12 +12530,13 @@
     },
     "role": "object",
     "scaleanchor": {
-     "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden.",
+     "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden. Setting `false` allows to remove a default constraint (occasionally, you may need to prevent a default `scaleanchor` constraint from being applied, eg. when having an image trace `yaxis: {scaleanchor: \"x\"}` is set automatically in order for pixels to be rendered as squares, setting `yaxis: {scaleanchor: false}` allows to remove the constraint).",
      "editType": "plot",
      "valType": "enumerated",
      "values": [
       "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
-      "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
+      "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
+      false
      ]
     },
     "scaleratio": {
@@ -16738,6 +17102,13 @@
      "editType": "calc",
      "valType": "data_array"
     },
+    "sdmultiple": {
+     "description": "Scales the box size when sizemode=sd Allowing boxes to be drawn across any stddev range For example 1-stddev, 3-stddev, 5-stddev",
+     "dflt": 1,
+     "editType": "calc",
+     "min": 0,
+     "valType": "number"
+    },
     "sdsrc": {
      "description": "Sets the source reference on Chart Studio Cloud for `sd`.",
      "editType": "none",
@@ -16779,6 +17150,21 @@
      "dflt": true,
      "editType": "style",
      "valType": "boolean"
+    },
+    "showwhiskers": {
+     "description": "Determines whether or not whiskers are visible. Defaults to true for `sizemode` *quartiles*, false for *sd*.",
+     "editType": "calc",
+     "valType": "boolean"
+    },
+    "sizemode": {
+     "description": "Sets the upper and lower bound for the boxes quartiles means box is drawn between Q1 and Q3 SD means the box is drawn between Mean +- Standard Deviation Argument sdmultiple (default 1) to scale the box size So it could be drawn 1-stddev, 3-stddev etc",
+     "dflt": "quartiles",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "quartiles",
+      "sd"
+     ]
     },
     "stream": {
      "editType": "calc",

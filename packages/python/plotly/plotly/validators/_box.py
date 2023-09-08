@@ -295,6 +295,10 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 provided but a sample (in `y` or `x`) is set,
                 we compute the standard deviation for each box
                 using the sample values.
+            sdmultiple
+                Scales the box size when sizemode=sd Allowing
+                boxes to be drawn across any stddev range For
+                example 1-stddev, 3-stddev, 5-stddev
             sdsrc
                 Sets the source reference on Chart Studio Cloud
                 for `sd`.
@@ -313,6 +317,17 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             showlegend
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
+            showwhiskers
+                Determines whether or not whiskers are visible.
+                Defaults to true for `sizemode` "quartiles",
+                false for "sd".
+            sizemode
+                Sets the upper and lower bound for the boxes
+                quartiles means box is drawn between Q1 and Q3
+                SD means the box is drawn between Mean +-
+                Standard Deviation Argument sdmultiple (default
+                1) to scale the box size So it could be drawn
+                1-stddev, 3-stddev etc
             stream
                 :class:`plotly.graph_objects.box.Stream`
                 instance or dict with compatible properties

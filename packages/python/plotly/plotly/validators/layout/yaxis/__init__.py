@@ -59,6 +59,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._mirror import MirrorValidator
     from ._minor import MinorValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._matches import MatchesValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
@@ -83,6 +85,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
     from ._autoshift import AutoshiftValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -150,6 +153,8 @@ else:
             "._mirror.MirrorValidator",
             "._minor.MinorValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._matches.MatchesValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
@@ -174,6 +179,7 @@ else:
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
             "._autoshift.AutoshiftValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",
