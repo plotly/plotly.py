@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/).
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/xaxis/).
 
 Other kinds of subplots and axes are described in other tutorials:
 
@@ -154,7 +154,7 @@ fig.update_yaxes(ticklabelposition="inside top", title=None)
 fig.show()
 ```
 
-#### Specifying Label Aliases 
+#### Specifying Label Aliases
 
 *New in 5.14*
 

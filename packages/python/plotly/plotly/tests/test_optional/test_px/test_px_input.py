@@ -8,6 +8,7 @@ import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 
+
 # Fixtures
 # --------
 @pytest.fixture
@@ -252,21 +253,59 @@ def test_build_df_with_index():
 def test_build_df_using_interchange_protocol_mock(
     add_interchange_module_for_old_pandas,
 ):
+    class InterchangeDataFrame:
+        def __init__(self, columns):
+            self._columns = columns
+
+        def column_names(self):
+            return self._columns
+
+    interchange_dataframe = InterchangeDataFrame(
+        ["petal_width", "sepal_length", "sepal_width"]
+    )
+    interchange_dataframe_reduced = InterchangeDataFrame(
+        ["petal_width", "sepal_length"]
+    )
+    interchange_dataframe.select_columns_by_name = mock.MagicMock(
+        return_value=interchange_dataframe_reduced
+    )
+    interchange_dataframe_reduced.select_columns_by_name = mock.MagicMock(
+        return_value=interchange_dataframe_reduced
+    )
+
     class CustomDataFrame:
         def __dataframe__(self):
-            pass
+            return interchange_dataframe
+
+    class CustomDataFrameReduced:
+        def __dataframe__(self):
+            return interchange_dataframe_reduced
 
     input_dataframe = CustomDataFrame()
-    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+    input_dataframe_reduced = CustomDataFrameReduced()
 
     iris_pandas = px.data.iris()
 
     with mock.patch("pandas.__version__", "2.0.2"):
+        args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
         with mock.patch(
             "pandas.api.interchange.from_dataframe", return_value=iris_pandas
         ) as mock_from_dataframe:
             build_dataframe(args, go.Scatter)
-        mock_from_dataframe.assert_called_once_with(input_dataframe)
+        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+        assert set(interchange_dataframe.select_columns_by_name.call_args[0][0]) == {
+            "petal_width",
+            "sepal_length",
+        }
+
+        args = dict(data_frame=input_dataframe_reduced, color=None)
+        with mock.patch(
+            "pandas.api.interchange.from_dataframe",
+            return_value=iris_pandas[["petal_width", "sepal_length"]],
+        ) as mock_from_dataframe:
+            build_dataframe(args, go.Scatter)
+        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+        interchange_dataframe_reduced.select_columns_by_name.assert_not_called()
 
 
 @pytest.mark.skipif(
@@ -284,6 +323,35 @@ def test_build_df_from_vaex_and_polars(test_lib):
     iris_pandas = px.data.iris()[["petal_width", "sepal_length"]]
     iris_vaex = lib.from_pandas(iris_pandas)
     args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
+    out = build_dataframe(args, go.Scatter)
+    assert_frame_equal(
+        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+    )
+
+
+@pytest.mark.skipif(
+    version.parse(pd.__version__) < version.parse("2.0.2"),
+    reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
+)
+@pytest.mark.parametrize("test_lib", ["vaex", "polars"])
+@pytest.mark.parametrize(
+    "hover_data", [["sepal_width"], {"sepal_length": False, "sepal_width": ":.2f"}]
+)
+def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
+    if test_lib == "vaex":
+        import vaex as lib
+    else:
+        import polars as lib
+
+    # take out the 'species' columns since the vaex implementation does not cover strings yet
+    iris_pandas = px.data.iris()[["petal_width", "sepal_length", "sepal_width"]]
+    iris_vaex = lib.from_pandas(iris_pandas)
+    args = dict(
+        data_frame=iris_vaex,
+        x="petal_width",
+        y="sepal_length",
+        hover_data=hover_data,
+    )
     out = build_dataframe(args, go.Scatter)
     assert_frame_equal(
         iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]

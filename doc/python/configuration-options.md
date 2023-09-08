@@ -53,7 +53,7 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 
-config = dict({'scrollZoom': True})
+config = {'scrollZoom': True}
 
 fig.add_trace(
     go.Scatter(
@@ -244,6 +244,8 @@ fig.add_trace(
         y=[1, 3, 1]))
 
 fig.update_layout(modebar_remove=['zoom', 'pan'])
+
+fig.show()
 ```
 
 ### Add optional shape-drawing buttons to modebar
@@ -253,16 +255,19 @@ fig.update_layout(modebar_remove=['zoom', 'pan'])
 Some modebar buttons of Cartesian plots are optional and have to be added explicitly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
 
 ```python
-import plotly.graph_objects as go
 import plotly.express as px
+
 df = px.data.iris()
+
 fig = px.scatter(df, x='petal_width', y='sepal_length', color='species')
+
 fig.update_layout(
     dragmode='drawopenpath',
     newshape_line_color='cyan',
     title_text='Draw a path to separate versicolor and virginica'
 )
-fig.show(config={'modeBarButtonsToAdd':['drawline',
+
+fig.show(config={'modeBarButtonsToAdd': ['drawline',
                                         'drawopenpath',
                                         'drawclosedpath',
                                         'drawcircle',
@@ -276,10 +281,12 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 The `layout.modebar.add` attribute can be used instead of the approach used above:
 
 ```python
-import plotly.graph_objects as go
 import plotly.express as px
+
 df = px.data.iris()
+
 fig = px.scatter(df, x='petal_width', y='sepal_length', color='species')
+
 fig.update_layout(
     dragmode='drawopenpath',
     newshape_line_color='cyan',
@@ -292,6 +299,8 @@ fig.update_layout(
         'eraseshape'
        ]
 )
+
+fig.show()
 ```
 
 ### Double-Click Delay
@@ -304,12 +313,12 @@ import plotly.graph_objects as go
 config = {'doubleClickDelay': 1000}
 
 fig = go.Figure(go.Bar(
-    y = [3, 5, 3, 2],
-    x = ["2019-09-02", "2019-10-10", "2019-11-12", "2019-12-22"],
-    texttemplate = "%{label}",
-    textposition = "inside"))
+    y=[3, 5, 3, 2],
+    x=["2019-09-02", "2019-10-10", "2019-11-12", "2019-12-22"],
+    texttemplate="%{label}",
+    textposition="inside"))
 
-fig.update_layout(xaxis = {'type': 'date'})
+fig.update_layout(xaxis={'type': 'date'})
 
 fig.show(config=config)
 ```
@@ -320,4 +329,4 @@ The same configuration dictionary that you pass to the `config` parameter of the
 
 #### Reference
 
-See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6
+See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
