@@ -194,6 +194,40 @@ def test_imshow_xarray_slicethrough():
     assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
 
 
+def test_imshow_xarray_facet_col_string():
+    img = np.random.random((3, 4, 5))
+    da = xr.DataArray(
+        img, dims=["str_dim", "dim_1", "dim_2"], coords={"str_dim": ["A", "B", "C"]}
+    )
+    fig = px.imshow(da, facet_col="str_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
+def test_imshow_xarray_animation_frame_string():
+    img = np.random.random((3, 4, 5))
+    da = xr.DataArray(
+        img, dims=["str_dim", "dim_1", "dim_2"], coords={"str_dim": ["A", "B", "C"]}
+    )
+    fig = px.imshow(da, animation_frame="str_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
+def test_imshow_xarray_animation_facet_slicethrough():
+    img = np.random.random((3, 4, 5, 6))
+    da = xr.DataArray(img, dims=["dim_0", "dim_1", "dim_2", "dim_3"])
+    fig = px.imshow(da, facet_col="dim_0", animation_frame="dim_1")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_3"
+    assert fig.layout.yaxis.title.text == "dim_2"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_3"]))
+
+
 def test_imshow_labels_and_ranges():
     fig = px.imshow(
         [[1, 2], [3, 4], [5, 6]],
