@@ -11,7 +11,7 @@ commands:
         type: string
     steps:
       - checkout
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
           chrome-version: 116.0.5845.96
       - browser-tools/install-chromedriver
       - run:
