@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.15.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -561,7 +561,7 @@ fig.show()
 
 #### Setting only a Lower or Upper Bound for Range
 
-*New in 5.16*
+*New in 5.17*
 
 You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange. 
 
@@ -578,7 +578,7 @@ fig.show()
 
 #### Setting a Maximum and Minimum Allowed Axis Value
 
-*New in 5.16*
+*New in 5.17*
 
 When setting a range manually, you can also set a `maxallowed` or `minallowed` for an axis. With this set, you won't be able to pan further than the min or max allowed. In this example, we've set the minimum allowed on the x-axis to 1 and the maximum allowed on the y-axis to 10.
 
@@ -728,9 +728,9 @@ fig.update_yaxes(range=[9, 3])
 fig.show()
 ```
 
-*New in 5.16*
+*New in 5.17*
 
-To use a reversed axis while specifying only an upper or lower bound for the range, set `autorange="reversed"`:
+To use a reversed axis while specifying only a lower bound for the range, set `autorange="min reversed"`:
 
 ```python
 import plotly.express as px
@@ -738,7 +738,7 @@ import plotly.express as px
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_yaxes(range=[9, None], autorange="reversed")
+fig.update_yaxes(range=[9, None], autorange="min reversed")
 
 fig.show()
 ```
@@ -827,7 +827,7 @@ fig.show()
 
 #### Autorange Options
 
-*New in 5.16*
+*New in 5.17*
 
 You can further configure how autorange is applied using `autorangeoptions` to specify maximum or minimum values or values to include.
 
