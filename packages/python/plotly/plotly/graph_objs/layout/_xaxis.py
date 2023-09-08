@@ -12,6 +12,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "anchor",
         "automargin",
         "autorange",
+        "autorangeoptions",
         "autotypenumbers",
         "calendar",
         "categoryarray",
@@ -35,6 +36,8 @@ class XAxis(_BaseLayoutHierarchyType):
         "linecolor",
         "linewidth",
         "matches",
+        "maxallowed",
+        "minallowed",
         "minexponent",
         "minor",
         "mirror",
@@ -153,11 +156,19 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to False.
+        `range` is provided and it has a value for both the lower and
+        upper bound, `autorange` is set to False. Using "min" applies
+        autorange only to set the minimum. Using "max" applies
+        autorange only to set the maximum. Using *min reversed* applies
+        autorange only to set the minimum on a reversed axis. Using
+        *max reversed* applies autorange only to set the maximum on a
+        reversed axis. Using "reversed" applies autorange on both ends
+        and reverses the axis direction.
 
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                [True, False, 'reversed']
+                [True, False, 'reversed', 'min reversed', 'max reversed',
+                'min', 'max']
 
         Returns
         -------
@@ -168,6 +179,47 @@ class XAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autorangeoptions
+    # ----------------
+    @property
+    def autorangeoptions(self):
+        """
+        The 'autorangeoptions' property is an instance of Autorangeoptions
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Autorangeoptions`
+          - A dict of string/value properties that will be passed
+            to the Autorangeoptions constructor
+
+            Supported dict properties:
+
+                clipmax
+                    Clip autorange maximum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.maxallowed` is provided.
+                clipmin
+                    Clip autorange minimum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.minallowed` is provided.
+                include
+                    Ensure this value is included in autorange.
+                includesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `include`.
+                maxallowed
+                    Use this value exactly as autorange maximum.
+                minallowed
+                    Use this value exactly as autorange minimum.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.Autorangeoptions
+        """
+        return self["autorangeoptions"]
+
+    @autorangeoptions.setter
+    def autorangeoptions(self, val):
+        self["autorangeoptions"] = val
 
     # autotypenumbers
     # ---------------
@@ -901,6 +953,44 @@ class XAxis(_BaseLayoutHierarchyType):
     def matches(self, val):
         self["matches"] = val
 
+    # maxallowed
+    # ----------
+    @property
+    def maxallowed(self):
+        """
+        Determines the maximum range of this axis.
+
+        The 'maxallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["maxallowed"]
+
+    @maxallowed.setter
+    def maxallowed(self, val):
+        self["maxallowed"] = val
+
+    # minallowed
+    # ----------
+    @property
+    def minallowed(self):
+        """
+        Determines the minimum range of this axis.
+
+        The 'minallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["minallowed"]
+
+    @minallowed.setter
+    def minallowed(self, val):
+        self["minallowed"] = val
+
     # minexponent
     # -----------
     @property
@@ -1147,6 +1237,8 @@ class XAxis(_BaseLayoutHierarchyType):
             converted to strings. If the axis `type` is "category", it
             should be numbers, using the scale where each category is
             assigned a serial number from zero in the order it appears.
+            Leaving either or both elements `null` impacts the default
+            `autorange`.
 
             The 'range' property is an info array that may be specified as:
 
@@ -1439,9 +1531,17 @@ class XAxis(_BaseLayoutHierarchyType):
         constraint encountered will be ignored to avoid possible
         inconsistent constraints via `scaleratio`. Note that setting
         axes simultaneously in both a `scaleanchor` and a `matches`
-        constraint is currently forbidden.
+        constraint is currently forbidden. Setting `false` allows to
+        remove a default constraint (occasionally, you may need to
+        prevent a default `scaleanchor` constraint from being applied,
+        eg. when having an image trace `yaxis: {scaleanchor: "x"}` is
+        set automatically in order for pixels to be rendered as
+        squares, setting `yaxis: {scaleanchor: false}` allows to remove
+        the constraint).
 
         The 'scaleanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [False]
           - A string that matches one of the following regular expressions:
                 ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
                 '^y([2-9]|[1-9][0-9]+)?( domain)?$']
@@ -2746,8 +2846,18 @@ class XAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            ons` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -2896,6 +3006,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -2938,7 +3052,8 @@ class XAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangebreaks
             A tuple of
             :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
@@ -2979,7 +3094,13 @@ class XAxis(_BaseLayoutHierarchyType):
             possible inconsistent constraints via `scaleratio`.
             Note that setting axes simultaneously in both a
             `scaleanchor` and a `matches` constraint is currently
-            forbidden.
+            forbidden. Setting `false` allows to remove a default
+            constraint (occasionally, you may need to prevent a
+            default `scaleanchor` constraint from being applied,
+            eg. when having an image trace `yaxis: {scaleanchor:
+            "x"}` is set automatically in order for pixels to be
+            rendered as squares, setting `yaxis: {scaleanchor:
+            false}` allows to remove the constraint).
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -3196,6 +3317,7 @@ class XAxis(_BaseLayoutHierarchyType):
         anchor=None,
         automargin=None,
         autorange=None,
+        autorangeoptions=None,
         autotypenumbers=None,
         calendar=None,
         categoryarray=None,
@@ -3219,6 +3341,8 @@ class XAxis(_BaseLayoutHierarchyType):
         linecolor=None,
         linewidth=None,
         matches=None,
+        maxallowed=None,
+        minallowed=None,
         minexponent=None,
         minor=None,
         mirror=None,
@@ -3299,8 +3423,18 @@ class XAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            ons` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -3449,6 +3583,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -3491,7 +3629,8 @@ class XAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangebreaks
             A tuple of
             :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
@@ -3532,7 +3671,13 @@ class XAxis(_BaseLayoutHierarchyType):
             possible inconsistent constraints via `scaleratio`.
             Note that setting axes simultaneously in both a
             `scaleanchor` and a `matches` constraint is currently
-            forbidden.
+            forbidden. Setting `false` allows to remove a default
+            constraint (occasionally, you may need to prevent a
+            default `scaleanchor` constraint from being applied,
+            eg. when having an image trace `yaxis: {scaleanchor:
+            "x"}` is set automatically in order for pixels to be
+            rendered as squares, setting `yaxis: {scaleanchor:
+            false}` allows to remove the constraint).
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -3785,6 +3930,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autorangeoptions", None)
+        _v = autorangeoptions if autorangeoptions is not None else _v
+        if _v is not None:
+            self["autorangeoptions"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
@@ -3877,6 +4026,14 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = matches if matches is not None else _v
         if _v is not None:
             self["matches"] = _v
+        _v = arg.pop("maxallowed", None)
+        _v = maxallowed if maxallowed is not None else _v
+        if _v is not None:
+            self["maxallowed"] = _v
+        _v = arg.pop("minallowed", None)
+        _v = minallowed if minallowed is not None else _v
+        if _v is not None:
+            self["minallowed"] = _v
         _v = arg.pop("minexponent", None)
         _v = minexponent if minexponent is not None else _v
         if _v is not None:
