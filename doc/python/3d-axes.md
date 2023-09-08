@@ -70,9 +70,9 @@ fig.show()
 
 ### Setting only a Lower or Upper Bound for Range
 
-*New in 5.16*
+*New in 5.17*
 
-You can also set just a lower or upper bound for `range`. In this case, autorange is used for the other bound. In this example, we apply autorange to the lower bound of the `yaxis` and the upper bound of `zaxis` by setting them to `None`. 
+You can also set just a lower or upper bound for `range`. In this case, autorange is used for the other bound. In this example, we apply autorange to the lower bound of the `yaxis` and the upper bound of `zaxis` by setting them to `None`.
 
 ```python
 import plotly.graph_objects as go
