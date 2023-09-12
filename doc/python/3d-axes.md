@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.15.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -258,8 +258,4 @@ fig = go.Figure(data=[go.Mesh3d(x=(30*np.random.randn(N)),
 fig.update_layout(scene=dict(xaxis_showspikes=False,
                              yaxis_showspikes=False))
 fig.show()
-```
-
-```python
-
 ```
