@@ -743,6 +743,21 @@ fig.update_yaxes(range=[9, None], autorange="min reversed")
 fig.show()
 ```
 
+*New in 5.17*
+
+To use a reversed axis while specifying only an upper bound for the range, set `autorange="max reversed"`:
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_yaxes(range=[None, 3], autorange="max reversed")
+
+fig.show()
+```
+
 ### Axis range for log axis type
 
 If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout).
