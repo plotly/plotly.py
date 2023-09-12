@@ -41,7 +41,7 @@ set the range, title, ticks, color etc. of the axes.
 
 For creating 3D charts, see [this page](https://plotly.com/python/3d-charts/).
 
-Set `range` on an axis to manually configure a range for an axis. If you don't set `range`, it's automatically calculated. In this example, we set a `range` on `xaxis`, `yaxis`, and `zaxis`.
+Set `range` on an axis to manually configure a range for that axis. If you don't set `range`, it's automatically calculated. In this example, we set a `range` on `xaxis`, `yaxis`, and `zaxis`.
 
 ```python
 import plotly.graph_objects as go
