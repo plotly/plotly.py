@@ -1332,6 +1332,12 @@ def build_dataframe(args, constructor):
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
             columns = args["data_frame"].columns
+        elif hasattr(args["data_frame"], "toPandas"):
+            args["data_frame"] = args["data_frame"].toPandas()
+            columns = args["data_frame"].columns
+        elif hasattr(args["data_frame"], "to_pandas_df"):
+            args["data_frame"] = args["data_frame"].to_pandas_df()
+            columns = args["data_frame"].columns
         else:
             args["data_frame"] = pd.DataFrame(args["data_frame"])
             columns = args["data_frame"].columns
@@ -1414,9 +1420,13 @@ def build_dataframe(args, constructor):
             else:
                 # Save precious resources by only interchanging columns that are
                 # actually going to be plotted.
-                columns = [
+                necessary_columns = {
                     i for i in args.values() if isinstance(i, str) and i in columns
-                ]
+                }
+                for field in args:
+                    if args[field] is not None and field in array_attrables:
+                        necessary_columns.update(i for i in args[field] if i in columns)
+                columns = list(necessary_columns)
                 args["data_frame"] = pd.api.interchange.from_dataframe(
                     args["data_frame"].select_columns_by_name(columns)
                 )
@@ -1426,9 +1436,14 @@ def build_dataframe(args, constructor):
             # def __dataframe__(self, ...):
             #   if not some_condition:
             #     self.to_pandas(...)
-            if not hasattr(df_not_pandas, "to_pandas"):
+            if hasattr(df_not_pandas, "toPandas"):
+                args["data_frame"] = df_not_pandas.toPandas()
+            elif hasattr(df_not_pandas, "to_pandas_df"):
+                args["data_frame"] = df_not_pandas.to_pandas_df()
+            elif hasattr(df_not_pandas, "to_pandas"):
+                args["data_frame"] = df_not_pandas.to_pandas()
+            else:
                 raise exc
-            args["data_frame"] = df_not_pandas.to_pandas()
 
     df_input = args["data_frame"]
 
