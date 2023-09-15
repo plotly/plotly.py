@@ -36,6 +36,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
@@ -52,6 +54,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._angle import AngleValidator
 else:
@@ -95,6 +98,8 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
@@ -111,6 +116,7 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._angle.AngleValidator",
         ],
