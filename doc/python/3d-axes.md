@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.15.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.10.4
   plotly:
     description: How to format axes of 3d plots in Python with Plotly.
     display_as: 3d_charts
@@ -41,6 +41,8 @@ set the range, title, ticks, color etc. of the axes.
 
 For creating 3D charts, see [this page](https://plotly.com/python/3d-charts/).
 
+Set `range` on an axis to manually configure a range for that axis. If you don't set `range`, it's automatically calculated. In this example, we set a `range` on `xaxis`, `yaxis`, and `zaxis`.
+
 ```python
 import plotly.graph_objects as go
 import numpy as np
@@ -60,6 +62,37 @@ fig.update_layout(
         xaxis = dict(nticks=4, range=[-100,100],),
                      yaxis = dict(nticks=4, range=[-50,100],),
                      zaxis = dict(nticks=4, range=[-100,100],),),
+    width=700,
+    margin=dict(r=20, l=10, b=10, t=10))
+
+fig.show()
+```
+
+### Setting only a Lower or Upper Bound for Range
+
+*New in 5.17*
+
+You can also set just a lower or upper bound for `range`. In this case, autorange is used for the other bound. In this example, we apply autorange to the lower bound of the `yaxis` and the upper bound of `zaxis` by setting them to `None`.
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+np.random.seed(1)
+
+N = 70
+
+fig = go.Figure(data=[go.Mesh3d(x=(70*np.random.randn(N)),
+                   y=(55*np.random.randn(N)),
+                   z=(40*np.random.randn(N)),
+                   opacity=0.5,
+                   color='rgba(244,22,100,0.6)'
+                  )])
+
+fig.update_layout(
+    scene = dict(
+        xaxis = dict(nticks=4, range=[-100,100],),
+                     yaxis = dict(nticks=4, range=[None, 100],),
+                     zaxis = dict(nticks=4, range=[-100, None],),),
     width=700,
     margin=dict(r=20, l=10, b=10, t=10))
 
@@ -225,8 +258,4 @@ fig = go.Figure(data=[go.Mesh3d(x=(30*np.random.randn(N)),
 fig.update_layout(scene=dict(xaxis_showspikes=False,
                              yaxis_showspikes=False))
 fig.show()
-```
-
-```python
-
 ```
