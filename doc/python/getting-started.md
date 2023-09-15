@@ -64,7 +64,7 @@ $ pip install plotly==5.17.0
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.17.1
+$ conda install -c plotly plotly=5.17.0
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
