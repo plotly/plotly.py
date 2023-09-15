@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from unittest import TestCase
 
 from plotly.utils import PlotlyJSONEncoder, get_by_path, node_generator

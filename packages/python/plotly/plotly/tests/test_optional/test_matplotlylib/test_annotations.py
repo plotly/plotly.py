@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import pytest
 
 from plotly import optional_imports

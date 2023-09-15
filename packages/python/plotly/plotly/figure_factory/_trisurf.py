@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs

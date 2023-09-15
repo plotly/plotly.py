@@ -9,7 +9,7 @@ import io
 from . import utils
 
 import matplotlib
-from matplotlib import transforms, collections
+from matplotlib import transforms
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import base64
 import numbers
 import textwrap
@@ -146,7 +144,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     # --------------------------
     if force_numeric and new_v.dtype.kind not in numeric_kinds:
         raise ValueError(
-            "Input value is not numeric and" "force_numeric parameter set to True"
+            "Input value is not numeric and force_numeric parameter set to True"
         )
 
     if "U" not in kind:
