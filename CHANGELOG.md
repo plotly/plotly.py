@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## [5.17.0] - 2023-09-15
 
 ### Updated
 - Improved json docstrings, added `BasePlotlyType.to_json()` method [[#4301](https://github.com/plotly/plotly.py/pull/4301)]
