@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-
 from collections import OrderedDict
 
 from plotly import exceptions, optional_imports

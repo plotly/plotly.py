@@ -2,19 +2,14 @@
 test__offline
 
 """
-from __future__ import absolute_import
-
+import json
 import os
 from unittest import TestCase
 import pytest
 
-import json as _json
-
 import plotly
 import plotly.io as pio
 from plotly.io._utils import plotly_cdn_url
-
-import json
 
 packages_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(plotly.__file__))))

@@ -5,8 +5,6 @@ test_scatter:
 A module intended for use with Nose.
 
 """
-from __future__ import absolute_import
-
 from plotly.graph_objs import Scatter
 from plotly.exceptions import PlotlyError
 
