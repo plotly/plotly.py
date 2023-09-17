@@ -17,8 +17,13 @@ def create_dendrogram(
     colorscale=None,
     distfun=None,
     linkagefun=lambda x: sch.linkage(x, "complete"),
+    truncate_mode=None,
     hovertext=None,
     color_threshold=None,
+    show_leaf_counts=None,
+    show_contracted=None,
+    leaf_rotation=None,
+    leaf_font_size=None
 ):
     """
     Function that returns a dendrogram Plotly figure object. This is a thin
@@ -55,7 +60,7 @@ def create_dendrogram(
     >>> fig.show()
 
     Example 2: Dendrogram to put on the left of the heatmap
-
+    
     >>> from plotly.figure_factory import create_dendrogram
 
     >>> import numpy as np
@@ -67,7 +72,7 @@ def create_dendrogram(
     >>> dendro.show()
 
     Example 3: Dendrogram with Pandas
-
+    
     >>> from plotly.figure_factory import create_dendrogram
 
     >>> import numpy as np
@@ -100,6 +105,11 @@ def create_dendrogram(
         linkagefun=linkagefun,
         hovertext=hovertext,
         color_threshold=color_threshold,
+        truncate_mode=truncate_mode,
+        show_leaf_counts=show_leaf_counts,
+        show_contracted=show_contracted,
+        leaf_rotation=leaf_rotation,
+        leaf_font_size=leaf_font_size
     )
 
     return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
@@ -122,6 +132,11 @@ class _Dendrogram(object):
         linkagefun=lambda x: sch.linkage(x, "complete"),
         hovertext=None,
         color_threshold=None,
+        truncate_mode=None,
+        show_leaf_counts=None,
+        show_contracted=None,
+        leaf_rotation=None,
+        leaf_font_size=None
     ):
         self.orientation = orientation
         self.labels = labels
@@ -131,6 +146,11 @@ class _Dendrogram(object):
         self.leaves = []
         self.sign = {self.xaxis: 1, self.yaxis: 1}
         self.layout = {self.xaxis: {}, self.yaxis: {}}
+        self.truncate_mode = truncate_mode
+        self.show_leaf_counts= show_leaf_counts
+        self.show_contracted= show_contracted
+        self.leaf_rotation= leaf_rotation
+        self.leaf_font_size = leaf_font_size
 
         if self.orientation in ["left", "bottom"]:
             self.sign[self.xaxis] = 1
@@ -267,7 +287,7 @@ class _Dendrogram(object):
             "ticks": "outside",
             "mirror": "allticks",
             "rangemode": "tozero",
-            "showticklabels": True,
+            "showticklabels": False if self.truncate_mode != None else True,
             "zeroline": False,
             "showgrid": False,
             "showline": True,
@@ -340,7 +360,12 @@ class _Dendrogram(object):
             orientation=self.orientation,
             labels=self.labels,
             no_plot=True,
+            truncate_mode=self.truncate_mode,
             color_threshold=color_threshold,
+            show_leaf_counts=self.show_leaf_counts,
+            show_contracted=self.show_contracted,
+            leaf_rotation=self.leaf_rotation,
+            leaf_font_size=self.leaf_font_size
         )
 
         icoord = scp.array(P["icoord"])
