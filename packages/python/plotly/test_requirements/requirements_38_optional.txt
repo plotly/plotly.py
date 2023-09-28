@@ -1,7 +1,7 @@
 requests==2.25.1
 tenacity==6.2.0
 pandas==1.2.4
-numpy==1.20.2
+numpy==1.22.0
 xarray==0.17.0
 statsmodels
 Pillow==8.2.0
