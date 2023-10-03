@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [UNRELEASED]
+
+### Fixed
+- Repair crash on Matplotlib 3.8 related to get_offset_position [[#4372](https://github.com/plotly/plotly.py/pull/4372)],
+
 ## [5.17.0] - 2023-09-15
 
 ### Updated
