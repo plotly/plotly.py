@@ -7,6 +7,7 @@ import copy
 import io
 import re
 import sys
+import warnings
 
 from _plotly_utils.optional_imports import get_module
 
@@ -100,7 +101,11 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         elif v.dtype.kind == "M":
             # Convert datetime Series/Index to numpy array of datetimes
             if isinstance(v, pd.Series):
-                v = v.dt.to_pydatetime()
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", FutureWarning)
+                    # Series.dt.to_pydatetime will return Index[object]
+                    # https://github.com/pandas-dev/pandas/pull/52459
+                    v = np.array(v.dt.to_pydatetime())
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
@@ -109,7 +114,13 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         if dtype.kind in numeric_kinds:
             v = v.values
         elif dtype.kind == "M":
-            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", FutureWarning)
+                # Series.dt.to_pydatetime will return Index[object]
+                # https://github.com/pandas-dev/pandas/pull/52459
+                v = [
+                    np.array(row.dt.to_pydatetime()).tolist() for i, row in v.iterrows()
+                ]
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array

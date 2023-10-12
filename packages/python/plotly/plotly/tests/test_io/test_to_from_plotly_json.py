@@ -8,6 +8,7 @@ import json
 import datetime
 import re
 import sys
+import warnings
 from pytz import timezone
 from _plotly_utils.optional_imports import get_module
 
@@ -194,7 +195,13 @@ def test_datetime_arrays(datetime_array, engine, pretty):
     if isinstance(datetime_array, list):
         dt_values = [to_str(d) for d in datetime_array]
     elif isinstance(datetime_array, pd.Series):
-        dt_values = [to_str(d) for d in datetime_array.dt.to_pydatetime().tolist()]
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", FutureWarning)
+            # Series.dt.to_pydatetime will return Index[object]
+            # https://github.com/pandas-dev/pandas/pull/52459
+            dt_values = [
+                to_str(d) for d in np.array(datetime_array.dt.to_pydatetime()).tolist()
+            ]
     elif isinstance(datetime_array, pd.DatetimeIndex):
         dt_values = [to_str(d) for d in datetime_array.to_pydatetime().tolist()]
     else:  # numpy datetime64 array
