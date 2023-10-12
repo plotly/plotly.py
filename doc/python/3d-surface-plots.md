@@ -77,7 +77,7 @@ fig.show()
 #### Surface Plot With Contours
 
 
-Display and customize contour data for each axis using the `contours` attribute ([reference](plotly.com/python/reference/surface/#surface-contours)).
+Display and customize contour data for each axis using the `contours` attribute ([reference](https://plotly.com/python/reference/surface/#surface-contours)).
 
 ```python
 import plotly.graph_objects as go
