@@ -420,7 +420,7 @@ class UpdateBundleSchemaDevCommand(Command):
 
         # update plotly.js version in _plotlyjs_version
         rev = build_info["vcs_revision"]
-        date = build_info["committer_date"]
+        date = str(build_info["committer_date"])
         version = "_".join([self.devrepo, self.devbranch, date[:10], rev[:8]])
         overwrite_plotlyjs_version_file(version)
 
