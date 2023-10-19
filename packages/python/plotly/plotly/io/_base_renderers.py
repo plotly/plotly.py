@@ -506,6 +506,31 @@ class ColabRenderer(HtmlRenderer):
         )
 
 
+class DeepnoteRenderer(HtmlRenderer):
+    """
+    Renderer to display interactive figures in Deepnote Notebooks.
+
+    This renderer is enabled by default when running in a Deepnote notebook.
+
+    mime type: 'text/html'
+    """
+
+    def __init__(
+        self, config=None, auto_play=False, post_script=None, animation_opts=None
+    ):
+
+        super(DeepnoteRenderer, self).__init__(
+            connected=True,
+            full_html=True,
+            requirejs=False,
+            global_init=False,
+            config=config,
+            auto_play=auto_play,
+            post_script=post_script,
+            animation_opts=animation_opts,
+        )
+
+
 class IFrameRenderer(MimetypeRenderer):
     """
     Renderer to display interactive figures using an IFrame.  HTML

@@ -177,6 +177,30 @@ def test_colab_renderer_show(fig1):
     assert mock_kwargs == {"raw": True}
 
 
+def test_deepnote_renderer_show(fig1):
+    pio.renderers.default = "deepnote"
+
+    with mock.patch("IPython.display.display") as mock_display:
+        pio.show(fig1)
+
+    # Get display call arguments
+    mock_call_args = mock_display.call_args
+    mock_arg1 = mock_call_args[0][0]
+
+    # Check for html bundle
+    assert list(mock_arg1) == ["text/html"]
+
+    # Check html contents
+    html = mock_arg1["text/html"]
+    assert_full_html(html)
+    assert_html_renderer_connected(html)
+    assert_not_requirejs(html)
+
+    # check kwargs
+    mock_kwargs = mock_call_args[1]
+    assert mock_kwargs == {"raw": True}
+
+
 @pytest.mark.parametrize(
     "name,connected",
     [("notebook", False), ("notebook_connected", True), ("kaggle", True)],
@@ -344,6 +368,7 @@ all_renderers_without_orca = [
     "colab",
     "cocalc",
     "databricks",
+    "deepnote",
     "json",
     "browser",
     "firefox",
