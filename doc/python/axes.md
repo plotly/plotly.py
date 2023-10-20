@@ -561,7 +561,7 @@ fig.show()
 
 #### Exclude Inside Tick Labels from Range
 
-You can use `insiderange` instead of `range` on an axis if you have tick labels positioned on the inside of another axis (`ticklabelposition="inside"`) and you don't want the range to overlap with those labels.
+You can use `insiderange` instead of `range` on an axis if you have tick labels positioned on the inside of another axis and you don't want the range to overlap with those labels.
 
 In this example, we have a y axis with `ticklabelposition="inside"` and by setting `insiderange=['2018-10-01', '2019-01-01']` on the x axis, the data point of `2018-10-01` is displayed after the y axis labels.
 
