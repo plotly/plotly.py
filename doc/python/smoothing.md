@@ -95,7 +95,7 @@ fig.add_trace(go.Scatter(
 
 fig.add_trace(go.Scatter(
     x=x,
-    y=signal.savgol_filter(y,
+    y=signal.savgol_filter(y_noise,
                            53, # window size used for filtering
                            3), # order of fitted polynomial
     mode='markers',
