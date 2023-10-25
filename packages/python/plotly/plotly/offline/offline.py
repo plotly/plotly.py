@@ -3,13 +3,9 @@
     without connecting to a public or private plotly enterprise
     server.
 """
-from __future__ import absolute_import
-
 import os
 import warnings
 import pkgutil
-import plotly
-import plotly.tools
 
 from plotly.optional_imports import get_module
 from plotly import tools
@@ -28,7 +24,6 @@ def download_plotlyjs(download_url):
     """,
         DeprecationWarning,
     )
-    pass
 
 
 def get_plotlyjs_version():
@@ -165,7 +160,7 @@ Unrecognized config options supplied: {bad_config}""".format(
     else:
         clean_config = {}
 
-    plotly_platform_url = plotly.tools.get_config_plotly_server_url()
+    plotly_platform_url = tools.get_config_plotly_server_url()
 
     if not clean_config.get("plotlyServerURL", None):
         clean_config["plotlyServerURL"] = plotly_platform_url
@@ -697,7 +692,7 @@ def plot_mpl(
     plot_mpl(fig, image='png')
     ```
     """
-    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(
         plotly_plot,
         show_link,
@@ -780,7 +775,7 @@ def iplot_mpl(
     iplot_mpl(fig, image='jpeg')
     ```
     """
-    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(
         plotly_plot,
         show_link,

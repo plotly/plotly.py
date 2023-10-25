@@ -5,7 +5,6 @@ A module for converting from mpl language to plotly language.
 
 """
 import math
-import datetime
 
 import warnings
 import matplotlib.dates

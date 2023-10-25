@@ -122,7 +122,6 @@ We can test for the Spark Context's existence with `print sc`.
 <!-- #endregion -->
 
 ```python
-from __future__ import print_function #python 3 support
 print(sc)
 ```
 
