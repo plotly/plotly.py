@@ -177,6 +177,13 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            insiderange
+                Could be used to set the desired inside range
+                of this axis (excluding the labels) when
+                `ticklabelposition` of the anchored axis has
+                "inside". Not implemented for axes with `type`
+                "log". This would be ignored when `range` is
+                provided.
             labelalias
                 Replacement text for specific tick or hover
                 labels. For example using {US: 'USA', CA:
