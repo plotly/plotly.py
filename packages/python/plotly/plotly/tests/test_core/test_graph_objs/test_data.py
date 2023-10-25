@@ -5,7 +5,6 @@ test_data:
 A module intended for use with Nose.
 
 """
-from __future__ import absolute_import
 from unittest import skip
 
 

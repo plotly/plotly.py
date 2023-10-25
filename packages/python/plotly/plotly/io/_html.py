@@ -1,12 +1,10 @@
 import uuid
-import os
 from pathlib import Path
 import webbrowser
 
 from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly import utils
 
 _json = get_module("json")
 
