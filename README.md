@@ -200,3 +200,4 @@ Code and documentation copyright 2019 Plotly, Inc.
 Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/master/LICENSE.txt).
 
 Docs released under the [Creative Commons license](https://github.com/plotly/documentation/blob/source/LICENSE).
+
