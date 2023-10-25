@@ -207,6 +207,13 @@ def is_homogeneous_array(v):
     return False
 
 
+def is_typed_array_spec(v):
+    """
+    Return whether a value is considered to be a typed array spec for plotly.js
+    """
+    return isinstance(v, dict) and "bdata" in v
+
+
 def is_simple_array(v):
     """
     Return whether a value is considered to be an simple array
@@ -403,6 +410,9 @@ class DataArrayValidator(BaseValidator):
 
         if v is None:
             # Pass None through
+            pass
+        elif is_typed_array_spec(v):
+            # Pass typed array spec through
             pass
         elif is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
