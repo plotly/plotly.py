@@ -1,5 +1,3 @@
-import pytest
-
 import plotly.graph_objects as go
 from plotly.basedatatypes import BaseFigure
 

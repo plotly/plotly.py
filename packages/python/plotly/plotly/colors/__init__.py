@@ -12,7 +12,6 @@ Color scales and sequences are available within the following namespaces
 * sequential
 """
 
-from __future__ import absolute_import
 from _plotly_utils.colors import *  # noqa: F401
 
 __all__ = [

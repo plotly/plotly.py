@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import plotly.graph_objects as go
 from . import _subplots as _sub
 from ._subplots import SubplotXY, SubplotDomain, SubplotRef  # noqa: F401
