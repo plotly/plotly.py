@@ -6,6 +6,8 @@
 
 *~
 
+doc/python/raw.githubusercontent.com/
+
 # Don't ignore dataset files
 !*.csv.gz
 
