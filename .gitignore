@@ -1,3 +1,8 @@
+0
+0.html
+iframe_figures/
+packages/python/plotly/plotly/tests/test_orca/images/linux/failed/
+
 *.egg-info
 
 *.pyc
