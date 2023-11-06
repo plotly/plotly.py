@@ -31,6 +31,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "griddash",
         "gridwidth",
         "hoverformat",
+        "insiderange",
         "labelalias",
         "layer",
         "linecolor",
@@ -792,6 +793,32 @@ class XAxis(_BaseLayoutHierarchyType):
     @hoverformat.setter
     def hoverformat(self, val):
         self["hoverformat"] = val
+
+    # insiderange
+    # -----------
+    @property
+    def insiderange(self):
+        """
+            Could be used to set the desired inside range of this axis
+            (excluding the labels) when `ticklabelposition` of the anchored
+            axis has "inside". Not implemented for axes with `type` "log".
+            This would be ignored when `range` is provided.
+
+            The 'insiderange' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'insiderange[0]' property accepts values of any type
+        (1) The 'insiderange[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
+        """
+        return self["insiderange"]
+
+    @insiderange.setter
+    def insiderange(self, val):
+        self["insiderange"] = val
 
     # labelalias
     # ----------
@@ -2974,6 +3001,12 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        insiderange
+            Could be used to set the desired inside range of this
+            axis (excluding the labels) when `ticklabelposition` of
+            the anchored axis has "inside". Not implemented for
+            axes with `type` "log". This would be ignored when
+            `range` is provided.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -3336,6 +3369,7 @@ class XAxis(_BaseLayoutHierarchyType):
         griddash=None,
         gridwidth=None,
         hoverformat=None,
+        insiderange=None,
         labelalias=None,
         layer=None,
         linecolor=None,
@@ -3551,6 +3585,12 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        insiderange
+            Could be used to set the desired inside range of this
+            axis (excluding the labels) when `ticklabelposition` of
+            the anchored axis has "inside". Not implemented for
+            axes with `type` "log". This would be ignored when
+            `range` is provided.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -4006,6 +4046,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("insiderange", None)
+        _v = insiderange if insiderange is not None else _v
+        if _v is not None:
+            self["insiderange"] = _v
         _v = arg.pop("labelalias", None)
         _v = labelalias if labelalias is not None else _v
         if _v is not None:

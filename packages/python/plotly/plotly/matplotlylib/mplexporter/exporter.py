@@ -9,7 +9,7 @@ import io
 from . import utils
 
 import matplotlib
-from matplotlib import transforms, collections
+from matplotlib import transforms
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 
@@ -96,7 +96,7 @@ class Exporter(object):
 
         code = "display"
         if ax is not None:
-            for (c, trans) in [
+            for c, trans in [
                 ("data", ax.transData),
                 ("axes", ax.transAxes),
                 ("figure", ax.figure.transFigure),
@@ -130,7 +130,7 @@ class Exporter(object):
                 self.draw_line(ax, line)
             for text in ax.texts:
                 self.draw_text(ax, text)
-            for (text, ttp) in zip(
+            for text, ttp in zip(
                 [ax.xaxis.label, ax.yaxis.label, ax.title],
                 ["xlabel", "ylabel", "title"],
             ):
@@ -285,8 +285,14 @@ class Exporter(object):
             "zorder": collection.get_zorder(),
         }
 
+        # TODO: When matplotlib's minimum version is bumped to 3.8, this can be
+        # simplified since collection.get_offset_position no longer exists.
         offset_dict = {"data": "before", "screen": "after"}
-        offset_order = offset_dict[collection.get_offset_position()]
+        offset_order = (
+            offset_dict[collection.get_offset_position()]
+            if hasattr(collection, "get_offset_position")
+            else "after"
+        )
 
         self.renderer.draw_path_collection(
             paths=processed_paths,
