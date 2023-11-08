@@ -812,7 +812,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             or (
                 args["render_mode"] == "auto"
                 and len(args["data_frame"]) > 1000
-                and args["line_shape"] != "spline"
+                and args.get("line_shape") != "spline"
                 and args["animation_frame"] is None
             )
         ):
