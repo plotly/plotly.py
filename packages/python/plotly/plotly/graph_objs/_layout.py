@@ -4278,7 +4278,20 @@ class Layout(_BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.xaxis.Autor
+                    angeoptions` instance or dict with compatible
+                    properties
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -4411,6 +4424,13 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                insiderange
+                    Could be used to set the desired inside range
+                    of this axis (excluding the labels) when
+                    `ticklabelposition` of the anchored axis has
+                    "inside". Not implemented for axes with `type`
+                    "log". This would be ignored when `range` is
+                    provided.
                 labelalias
                     Replacement text for specific tick or hover
                     labels. For example using {US: 'USA', CA:
@@ -4447,6 +4467,10 @@ class Layout(_BaseLayoutType):
                     `scaleanchor` and a `matches` constraint is
                     currently forbidden. Moreover, note that
                     matching axes must have the same `type`.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -4492,7 +4516,9 @@ class Layout(_BaseLayoutType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangebreaks
                     A tuple of :class:`plotly.graph_objects.layout.
                     xaxis.Rangebreak` instances or dicts with
@@ -4539,6 +4565,15 @@ class Layout(_BaseLayoutType):
                     constraints via `scaleratio`. Note that setting
                     axes simultaneously in both a `scaleanchor` and
                     a `matches` constraint is currently forbidden.
+                    Setting `false` allows to remove a default
+                    constraint (occasionally, you may need to
+                    prevent a default `scaleanchor` constraint from
+                    being applied, eg. when having an image trace
+                    `yaxis: {scaleanchor: "x"}` is set
+                    automatically in order for pixels to be
+                    rendered as squares, setting `yaxis:
+                    {scaleanchor: false}` allows to remove the
+                    constraint).
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to
@@ -4804,7 +4839,20 @@ class Layout(_BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.yaxis.Autor
+                    angeoptions` instance or dict with compatible
+                    properties
                 autoshift
                     Automatically reposition the axis to avoid
                     overlap with other axes with the same
@@ -4945,6 +4993,13 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                insiderange
+                    Could be used to set the desired inside range
+                    of this axis (excluding the labels) when
+                    `ticklabelposition` of the anchored axis has
+                    "inside". Not implemented for axes with `type`
+                    "log". This would be ignored when `range` is
+                    provided.
                 labelalias
                     Replacement text for specific tick or hover
                     labels. For example using {US: 'USA', CA:
@@ -4981,6 +5036,10 @@ class Layout(_BaseLayoutType):
                     `scaleanchor` and a `matches` constraint is
                     currently forbidden. Moreover, note that
                     matching axes must have the same `type`.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -5026,7 +5085,9 @@ class Layout(_BaseLayoutType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangebreaks
                     A tuple of :class:`plotly.graph_objects.layout.
                     yaxis.Rangebreak` instances or dicts with
@@ -5065,6 +5126,15 @@ class Layout(_BaseLayoutType):
                     constraints via `scaleratio`. Note that setting
                     axes simultaneously in both a `scaleanchor` and
                     a `matches` constraint is currently forbidden.
+                    Setting `false` allows to remove a default
+                    constraint (occasionally, you may need to
+                    prevent a default `scaleanchor` constraint from
+                    being applied, eg. when having an image trace
+                    `yaxis: {scaleanchor: "x"}` is set
+                    automatically in order for pixels to be
+                    rendered as squares, setting `yaxis:
+                    {scaleanchor: false}` allows to remove the
+                    constraint).
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to

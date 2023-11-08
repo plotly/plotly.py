@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from plotly.figure_factory import utils
 from plotly.figure_factory._ohlc import (
     _DEFAULT_INCREASING_COLOR,
