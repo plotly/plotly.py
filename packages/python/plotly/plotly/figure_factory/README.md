@@ -1,5 +1,9 @@
 # Add A Figure Factory to the Plotly [Python Library](https://plot.ly/python/)
 
+Note: we are generally NOT accepting new figure factories anymore. We'll keep this doc around for context and in case we decide to make an exception, but we've found that figure factories expand the scope of the library (and its maintenance burden) beyond what really makes sense, and generates confusion about how these figures relate to the underlying plotly.js objects.
+
+That doesn't mean this pattern is discouraged though, far from it! We encourage you to make more such high-level functions and share them with the community as separate PyPI packages, GitHub Gists, or posts on https://community.plotly.com.
+
 ## What is a Figure Factory?
 In the Python Plotly Library:
 
@@ -61,8 +65,6 @@ If you are making a chart called `foo`, then you must create `_foo.py` in this d
 The inside of the `__init__.py` looks like:
 
 ```
-from __future__ import absolute_import
-
 # Require that numpy exists for figure_factory
 import numpy
 
@@ -78,19 +80,9 @@ Now add the following line to the end of `__init__.py`:
 from plotly.figure_factory._foo import create_foo
 ```
 
-3. Imports
+3. The main function
 
-In `_foo.py` write
-
-```
-from __future__ import absolute_import
-```
-
-at line 1. You can add other imports later if you will need them.
-
-4. The main function
-
-It's now time to write the main function `create_foo` that will be called directly by the user. It has the form:
+It's now time to write the main function `create_foo` that will be called directly by the user. It lives in `_foo.py` and has the form:
 
 ```
 def create_foo(attribute1, attribute2=value, ...):
@@ -101,15 +93,15 @@ def create_foo(attribute1, attribute2=value, ...):
     :param (type) attribute2: description of what 'attribute2' is.
         Default = value
     # ...
-    
+
     Example 1:
     '''
-    
+
     '''
-    
+
     Example 2:
     '''
-    
+
     '''
     """
     # code goes here
@@ -136,15 +128,15 @@ py.iplot(fig, filename='my_figure')
 
 The figure `fig` must be a Plotly Figure, meaning it must have the form `fig = graph_objs.Figure(data=data, layout=layout)`.
 
-5. Useful Tips
+4. Useful Tips
 
 It is often not a good idea to put all your code into your `create_foo()` function. It is best practice to not repeat yourself and this requires taking repeated blocks of code and putting them into a separate function.
 
 It is best to make all other functions besides `create_foo()` secret so a user cannot access them. This is done by placing a `_` before the name of the function, so `_aux_func()` for example.
 
-6. Tests
+5. Tests
 
-Add unit tests in 
+Add unit tests in
 `plotly/tests/test_optional/test_figure_factory/test_figure_factory.py`.
 
 ## Create a Pull Request

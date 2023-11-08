@@ -2,10 +2,36 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## [UNRELEASED]
+
+### Fixed
+- Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
+
+## [5.18.0] - 2023-10-25
+
+### Updated
+- Updated Plotly.js from version 2.26.0 to version 2.27.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2270----2023-10-20) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `insiderange` to cartesian axes to help avoid overlap between visible grid lines and tick labels of the counter axis when they are positioned inside [[#6735](https://github.com/plotly/plotly.js/pull/6735)], this feature was anonymously sponsored: thank you to our sponsor!
+  - Fix column order changes on hover [[#6718](https://github.com/plotly/plotly.js/pull/6718)],
+   with thanks to @bhavinpatel1109 for the contribution!
+  - Fix hover at timestamp '1970-01-01 00:00:00' [[#6752](https://github.com/plotly/plotly.js/pull/6752)],
+   with thanks to @adamjhawley for the contribution!
+  - Fix clearing empty `candlestick` using react [[#6757](https://github.com/plotly/plotly.js/pull/6757)]
+
+### Fixed
+- Repair crash on Matplotlib 3.8 related to get_offset_position [[#4372](https://github.com/plotly/plotly.py/pull/4372)],
+- Handle deprecation of `pandas.Series.dt.to_pydatetime()` calls and suppress the `FutureWarning` they currently emit. [[#4379](https://github.com/plotly/plotly.py/pull/4379)]
+
+## [5.17.0] - 2023-09-15
 
 ### Updated
 - Improved json docstrings, added `BasePlotlyType.to_json()` method [[#4301](https://github.com/plotly/plotly.py/pull/4301)]
+- Updated Plotly.js from version 2.25.2 to version 2.26.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2260----2023-08-24) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+   - Add "min", "max", "min reversed" and "max reversed" autorange options and handle partial ranges (i.e. one end being null), add `autorangeoptions` (`clipmin`, `clipmax`, `minallowed`, `maxallowed`, `include`) as well as `minallowed` and `maxallowed` to cartesian, gl3d and radial axes [[#6547](https://github.com/plotly/plotly.js/pull/6547)]
+   - Add [n]-sigma (std deviations) box plots as an alternative to quartiles [[#6697](https://github.com/plotly/plotly.js/issues/6697)], with thanks to @28raining for the contribution!
+   - Add "top left" & "top center" side options to legend title [[#6711](https://github.com/plotly/plotly.js/pull/6711)], with thanks to @28raining for the contribution!
+   - Add "false" option to `scaleanchor` to allow removing a constraint that is set by default [[#6712](https://github.com/plotly/plotly.js/pull/6712)], with thanks to @lvlte for the contribution!
+
 
 ### Fixed
 - Fixed two issues with px.imshow: [[#4330](https://github.com/plotly/plotly.py/issues/4330)] when facet_col is an earlier dimension than animation_frame for xarrays and [[#4329](https://github.com/plotly/plotly.py/issues/4329)] when facet_col has string coordinates in xarrays [[#4331](https://github.com/plotly/plotly.py/pull/4331)]

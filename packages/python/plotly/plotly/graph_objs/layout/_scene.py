@@ -528,7 +528,20 @@ class Scene(_BaseLayoutHierarchyType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.scene.xaxis
+                    .Autorangeoptions` instance or dict with
+                    compatible properties
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -647,6 +660,10 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -677,7 +694,9 @@ class Scene(_BaseLayoutHierarchyType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangemode
                     If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
@@ -865,7 +884,20 @@ class Scene(_BaseLayoutHierarchyType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.scene.yaxis
+                    .Autorangeoptions` instance or dict with
+                    compatible properties
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -984,6 +1016,10 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -1014,7 +1050,9 @@ class Scene(_BaseLayoutHierarchyType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangemode
                     If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
@@ -1202,7 +1240,20 @@ class Scene(_BaseLayoutHierarchyType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.scene.zaxis
+                    .Autorangeoptions` instance or dict with
+                    compatible properties
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -1321,6 +1372,10 @@ class Scene(_BaseLayoutHierarchyType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -1351,7 +1406,9 @@ class Scene(_BaseLayoutHierarchyType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangemode
                     If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,

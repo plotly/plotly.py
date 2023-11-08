@@ -31,10 +31,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._textsrc import TextsrcValidator
     from ._text import TextValidator
     from ._stream import StreamValidator
+    from ._sizemode import SizemodeValidator
+    from ._showwhiskers import ShowwhiskersValidator
     from ._showlegend import ShowlegendValidator
     from ._selectedpoints import SelectedpointsValidator
     from ._selected import SelectedValidator
     from ._sdsrc import SdsrcValidator
+    from ._sdmultiple import SdmultipleValidator
     from ._sd import SdValidator
     from ._quartilemethod import QuartilemethodValidator
     from ._q3src import Q3SrcValidator
@@ -120,10 +123,13 @@ else:
             "._textsrc.TextsrcValidator",
             "._text.TextValidator",
             "._stream.StreamValidator",
+            "._sizemode.SizemodeValidator",
+            "._showwhiskers.ShowwhiskersValidator",
             "._showlegend.ShowlegendValidator",
             "._selectedpoints.SelectedpointsValidator",
             "._selected.SelectedValidator",
             "._sdsrc.SdsrcValidator",
+            "._sdmultiple.SdmultipleValidator",
             "._sd.SdValidator",
             "._quartilemethod.QuartilemethodValidator",
             "._q3src.Q3SrcValidator",

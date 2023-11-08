@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-
 from collections import OrderedDict
 
 from plotly import exceptions, optional_imports
@@ -391,8 +387,8 @@ class _Dendrogram(object):
             except ValueError:
                 y_index = ""
 
-            trace["xaxis"] = "x" + x_index
-            trace["yaxis"] = "y" + y_index
+            trace["xaxis"] = f"x{x_index}"
+            trace["yaxis"] = f"y{y_index}"
 
             trace_list.append(trace)
 
