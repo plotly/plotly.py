@@ -554,6 +554,7 @@ setup(
     + validator_packages,
     package_data={
         "plotly": [
+            "py.typed",
             "package_data/*",
             "package_data/templates/*",
             "package_data/datasets/*",
