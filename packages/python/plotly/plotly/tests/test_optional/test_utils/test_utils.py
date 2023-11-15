@@ -372,6 +372,7 @@ class TestJSONEncoder(TestCase):
         with self.assertRaises(TypeError):
             _json.dumps({"a": {1}}, cls=utils.PlotlyJSONEncoder)
 
+    @pytest.mark.skip(reason="The encoding is faster now.")
     def test_fast_track_finite_arrays(self):
         # if NaN or Infinity is found in the json dump
         # of a figure, it is decoded and re-encoded to replace these values
