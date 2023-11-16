@@ -2,6 +2,7 @@
 
 <!-- #region -->
 ### What About Dash?
+<div class="what-about-dash">
 
 [Dash](https://dash.plot.ly/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
 
@@ -24,4 +25,5 @@ app.layout = html.Div([
 
 app.run_server(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter
 ```
+</div>
 <!-- #endregion -->
