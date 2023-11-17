@@ -39,15 +39,18 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._selected import SelectedValidator
     from ._orientation import OrientationValidator
     from ._opacity import OpacityValidator
+    from ._offsetgroup import OffsetgroupValidator
     from ._name import NameValidator
     from ._mode import ModeValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._marker import MarkerValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._hovertextsrc import HovertextsrcValidator
@@ -70,6 +73,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._customdata import CustomdataValidator
     from ._connectgaps import ConnectgapsValidator
     from ._cliponaxis import CliponaxisValidator
+    from ._alignmentgroup import AlignmentgroupValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -114,15 +118,18 @@ else:
             "._selected.SelectedValidator",
             "._orientation.OrientationValidator",
             "._opacity.OpacityValidator",
+            "._offsetgroup.OffsetgroupValidator",
             "._name.NameValidator",
             "._mode.ModeValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._marker.MarkerValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._hovertextsrc.HovertextsrcValidator",
@@ -145,5 +152,6 @@ else:
             "._customdata.CustomdataValidator",
             "._connectgaps.ConnectgapsValidator",
             "._cliponaxis.CliponaxisValidator",
+            "._alignmentgroup.AlignmentgroupValidator",
         ],
     )

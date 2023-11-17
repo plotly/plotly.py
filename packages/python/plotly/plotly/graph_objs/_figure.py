@@ -96,8 +96,8 @@ class Figure(BaseFigure):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     barnorm
                         Sets the normalization for bar traces on the
                         graph. With "fraction", the value of each bar
@@ -254,7 +254,7 @@ class Figure(BaseFigure):
                         another With "group", the bars are plotted next
                         to one another centered around the shared
                         location. With "overlay", the bars are plotted
-                        over one another, you might need to an
+                        over one another, you might need to reduce
                         "opacity" to see multiple bars.
                     geo
                         :class:`plotly.graph_objects.layout.Geo`
@@ -348,6 +348,12 @@ class Figure(BaseFigure):
                     metasrc
                         Sets the source reference on Chart Studio Cloud
                         for `meta`.
+                    minreducedheight
+                        Minimum height of the plot with
+                        margin.automargin applied (in px)
+                    minreducedwidth
+                        Minimum width of the plot with
+                        margin.automargin applied (in px)
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
@@ -372,6 +378,19 @@ class Figure(BaseFigure):
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
                         instance or dict with compatible properties
+                    scattergap
+                        Sets the gap (in plot fraction) between scatter
+                        points of adjacent location coordinates.
+                        Defaults to `bargap`.
+                    scattermode
+                        Determines how scatter points at the same
+                        location coordinate are displayed on the graph.
+                        With "group", the scatter points are plotted
+                        next to one another centered around the shared
+                        location. With "overlay", the scatter points
+                        are plotted over one another, you might need to
+                        reduce "opacity" to see multiple scatter
+                        points.
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
                         instance or dict with compatible properties
@@ -552,8 +571,8 @@ class Figure(BaseFigure):
                         "group", the bars are plotted next to one
                         another centered around the shared location.
                         With "overlay", the bars are plotted over one
-                        another, you might need to an "opacity" to see
-                        multiple bars.
+                        another, you might need to reduce "opacity" to
+                        see multiple bars.
                     width
                         Sets the plot's width (in px).
                     xaxis
@@ -1212,9 +1231,11 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1270,7 +1291,7 @@ class Figure(BaseFigure):
         Add a new Bar trace
 
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
@@ -1350,11 +1371,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1380,21 +1402,33 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.bar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -1415,7 +1449,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -1500,7 +1534,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1679,9 +1714,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -1749,9 +1786,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1866,21 +1905,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.barpolar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.barpolar.Marker` instance
             or dict with compatible properties
@@ -1901,7 +1952,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the angular position where the bar is drawn (in
@@ -2029,9 +2080,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -2084,9 +2137,11 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lowerfence=None,
         lowerfencesrc=None,
@@ -2112,10 +2167,13 @@ class Figure(BaseFigure):
         q3src=None,
         quartilemethod=None,
         sd=None,
+        sdmultiple=None,
         sdsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
+        showwhiskers=None,
+        sizemode=None,
         stream=None,
         text=None,
         textsrc=None,
@@ -2282,21 +2340,33 @@ class Figure(BaseFigure):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.box.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.box.Line` instance or dict
             with compatible properties
@@ -2345,7 +2415,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover. For box traces, the name will
             also be used for the position coordinate, if `x` and
             `x0` (`y` and `y0` if horizontal) are missing and the
@@ -2424,6 +2494,10 @@ class Figure(BaseFigure):
             signature. If `sd` is not provided but a sample (in `y`
             or `x`) is set, we compute the standard deviation for
             each box using the sample values.
+        sdmultiple
+            Scales the box size when sizemode=sd Allowing boxes to
+            be drawn across any stddev range For example 1-stddev,
+            3-stddev, 5-stddev
         sdsrc
             Sets the source reference on Chart Studio Cloud for
             `sd`.
@@ -2440,6 +2514,16 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
+        showwhiskers
+            Determines whether or not whiskers are visible.
+            Defaults to true for `sizemode` "quartiles", false for
+            "sd".
+        sizemode
+            Sets the upper and lower bound for the boxes quartiles
+            means box is drawn between Q1 and Q3 SD means the box
+            is drawn between Mean +- Standard Deviation Argument
+            sdmultiple (default 1) to scale the box size So it
+            could be drawn 1-stddev, 3-stddev etc
         stream
             :class:`plotly.graph_objects.box.Stream` instance or
             dict with compatible properties
@@ -2641,9 +2725,11 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lowerfence=lowerfence,
             lowerfencesrc=lowerfencesrc,
@@ -2669,10 +2755,13 @@ class Figure(BaseFigure):
             q3src=q3src,
             quartilemethod=quartilemethod,
             sd=sd,
+            sdmultiple=sdmultiple,
             sdsrc=sdsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
+            showwhiskers=showwhiskers,
+            sizemode=sizemode,
             stream=stream,
             text=text,
             textsrc=textsrc,
@@ -2723,9 +2812,11 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -2820,21 +2911,33 @@ class Figure(BaseFigure):
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.candlestick.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.candlestick.Line` instance
             or dict with compatible properties
@@ -2860,7 +2963,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -3024,9 +3127,11 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -3079,8 +3184,10 @@ class Figure(BaseFigure):
         font=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -3172,17 +3279,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.carpet.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -3200,7 +3319,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -3303,8 +3422,10 @@ class Figure(BaseFigure):
             font=font,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -3343,9 +3464,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -3493,21 +3616,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.choropleth.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map. Values "ISO-3",
@@ -3541,7 +3676,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
@@ -3660,9 +3795,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locationmode=locationmode,
             locations=locations,
             locationssrc=locationssrc,
@@ -3712,9 +3849,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -3841,8 +3980,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `properties` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `properties` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -3861,21 +4001,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.choroplethmapbox.Legendgro
             uptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -3902,7 +4054,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
@@ -4026,9 +4178,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             locations=locations,
             locationssrc=locationssrc,
             marker=marker,
@@ -4080,9 +4234,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -4227,11 +4383,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4247,21 +4403,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -4285,7 +4453,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -4494,9 +4662,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -4561,9 +4731,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -4744,21 +4916,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contour.Line` instance or
             dict with compatible properties
@@ -4779,7 +4963,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         ncontours
             Sets the maximum number of contour levels. The actual
@@ -4826,7 +5010,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -5037,9 +5222,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -5115,9 +5302,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -5255,21 +5444,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.contourcarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.contourcarpet.Line`
             instance or dict with compatible properties
@@ -5290,7 +5491,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         ncontours
             Sets the maximum number of contour levels. The actual
@@ -5432,9 +5633,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -5483,9 +5686,11 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -5630,21 +5835,33 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.densitymapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -5667,7 +5884,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -5795,9 +6012,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lon=lon,
             lonsrc=lonsrc,
             meta=meta,
@@ -5847,9 +6066,11 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -5971,10 +6192,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious` and `percentTotal`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious` and
+            `percentTotal`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -6002,21 +6223,33 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnel.Marker` instance or
             dict with compatible properties
@@ -6037,7 +6270,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -6124,8 +6357,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `percentInitial`,
-            `percentPrevious`, `percentTotal`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `percentInitial`, `percentPrevious`,
+            `percentTotal`, `label` and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6291,9 +6525,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6360,9 +6596,11 @@ class Figure(BaseFigure):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -6453,12 +6691,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6494,21 +6732,33 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -6529,7 +6779,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -6577,8 +6827,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6655,9 +6906,11 @@ class Figure(BaseFigure):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6705,9 +6958,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -6886,21 +7141,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -6918,7 +7185,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -6957,7 +7224,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         transpose
             Transposes the z data.
         uid
@@ -7171,9 +7439,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -7239,8 +7509,10 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -7346,17 +7618,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.heatmapgl.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -7374,7 +7658,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -7528,8 +7812,10 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -7590,9 +7876,11 @@ class Figure(BaseFigure):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -7756,8 +8044,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -7781,21 +8070,33 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -7816,7 +8117,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         nbinsx
             Specifies the maximum number of desired bins. This
@@ -7899,7 +8200,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8038,9 +8340,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -8101,9 +8405,11 @@ class Figure(BaseFigure):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -8275,11 +8581,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8290,21 +8596,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.histogram2d.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram2d.Marker`
             instance or dict with compatible properties
@@ -8325,7 +8643,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         nbinsx
             Specifies the maximum number of desired bins. This
@@ -8371,7 +8689,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z`
+            are available. Finally, the template string has access
+            to variable `z`
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8550,9 +8869,11 @@ class Figure(BaseFigure):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -8619,9 +8940,11 @@ class Figure(BaseFigure):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -8800,11 +9123,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `z` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `z` Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8815,21 +9138,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.histogram2dcontour.Legendg
             rouptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.histogram2dcontour.Line`
             instance or dict with compatible properties
@@ -8853,7 +9188,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         nbinsx
             Specifies the maximum number of desired bins. This
@@ -8907,7 +9242,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `x`, `y`, `z` and `text`.
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `z` and `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9082,9 +9418,11 @@ class Figure(BaseFigure):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -9148,8 +9486,10 @@ class Figure(BaseFigure):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -9247,10 +9587,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -9283,17 +9624,29 @@ class Figure(BaseFigure):
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.icicle.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -9324,7 +9677,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -9387,9 +9740,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -9466,8 +9820,10 @@ class Figure(BaseFigure):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -9515,8 +9871,10 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -9606,8 +9964,9 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -9626,17 +9985,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9654,7 +10025,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -9698,14 +10069,23 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -9780,8 +10160,10 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -9816,8 +10198,10 @@ class Figure(BaseFigure):
         gauge=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         mode=None,
@@ -9873,17 +10257,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9907,7 +10303,7 @@ class Figure(BaseFigure):
             text. Finally, `gauge` displays the value graphically
             on an axis.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         number
             :class:`plotly.graph_objects.indicator.Number` instance
@@ -9973,8 +10369,10 @@ class Figure(BaseFigure):
             gauge=gauge,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
@@ -10016,9 +10414,11 @@ class Figure(BaseFigure):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -10189,21 +10589,33 @@ class Figure(BaseFigure):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.isosurface.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.isosurface.Lighting`
             instance or dict with compatible properties
@@ -10227,7 +10639,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -10407,9 +10819,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -10482,9 +10896,11 @@ class Figure(BaseFigure):
         jsrc=None,
         k=None,
         ksrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -10723,21 +11139,33 @@ class Figure(BaseFigure):
         ksrc
             Sets the source reference on Chart Studio Cloud for
             `k`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.mesh3d.Lighting` instance
             or dict with compatible properties
@@ -10761,7 +11189,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -10953,9 +11381,11 @@ class Figure(BaseFigure):
             jsrc=jsrc,
             k=k,
             ksrc=ksrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -11007,9 +11437,11 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         increasing=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         low=None,
         lowsrc=None,
@@ -11104,21 +11536,33 @@ class Figure(BaseFigure):
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.ohlc.Line` instance or
             dict with compatible properties
@@ -11144,7 +11588,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -11307,9 +11751,11 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             low=low,
             lowsrc=lowsrc,
@@ -11356,6 +11802,7 @@ class Figure(BaseFigure):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -11442,17 +11889,25 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -11473,7 +11928,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         sortpaths
             Sets the path sorting algorithm. If `forward`, sort
@@ -11542,6 +11997,7 @@ class Figure(BaseFigure):
             hovertemplate=hovertemplate,
             labelfont=labelfont,
             legendgrouptitle=legendgrouptitle,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -11568,8 +12024,10 @@ class Figure(BaseFigure):
         labelangle=None,
         labelfont=None,
         labelside=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -11634,17 +12092,29 @@ class Figure(BaseFigure):
             labels below the graph Tilted labels with "labelangle"
             may be positioned better inside margins when
             `labelposition` is set to "bottom".
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcoords.Line` instance
             or dict with compatible properties
@@ -11665,7 +12135,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         rangefont
             Sets the font for the `dimension` range values.
@@ -11732,8 +12202,10 @@ class Figure(BaseFigure):
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             meta=meta,
             metasrc=metasrc,
@@ -11772,9 +12244,11 @@ class Figure(BaseFigure):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -11874,12 +12348,12 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -11925,21 +12399,33 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pie.Marker` instance or
             dict with compatible properties
@@ -11960,7 +12446,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -12025,8 +12511,9 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `percent` and `text`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `percent` and
+            `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -12114,9 +12601,11 @@ class Figure(BaseFigure):
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -12161,9 +12650,11 @@ class Figure(BaseFigure):
         idssrc=None,
         indices=None,
         indicessrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -12240,21 +12731,33 @@ class Figure(BaseFigure):
         indicessrc
             Sets the source reference on Chart Studio Cloud for
             `indices`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.pointcloud.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -12275,7 +12778,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -12404,9 +12907,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             indices=indices,
             indicessrc=indicessrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -12445,8 +12950,10 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         link=None,
         meta=None,
         metasrc=None,
@@ -12511,17 +13018,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sankey.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         link
             The links of the Sankey plot.
         meta
@@ -12541,7 +13060,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         node
             The nodes of the Sankey plot.
@@ -12621,8 +13140,10 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             link=link,
             meta=meta,
             metasrc=metasrc,
@@ -12643,6 +13164,7 @@ class Figure(BaseFigure):
 
     def add_scatter(
         self,
+        alignmentgroup=None,
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
@@ -12665,15 +13187,18 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
         metasrc=None,
         mode=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -12728,6 +13253,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         cliponaxis
             Determines whether or not markers and text nodes are
             clipped about the subplot axes. To show markers and
@@ -12860,21 +13390,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatter.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter.Line` instance or
             dict with compatible properties
@@ -12905,17 +13447,23 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
-            Only relevant when `stackgroup` is used, and only the
-            first `orientation` found in the `stackgroup` will be
-            used - including if `visible` is "legendonly" but not
-            if it is `false`. Sets the stacking direction. With "v"
-            ("h"), the y (x) values of subsequent traces are added.
-            Also affects the default value of `fill`.
+            Only relevant in the following cases: 1. when
+            `scattermode` is set to "group". 2. when `stackgroup`
+            is used, and only the first `orientation` found in the
+            `stackgroup` will be used - including if `visible` is
+            "legendonly" but not if it is `false`. Sets the
+            stacking direction. With "v" ("h"), the y (x) values of
+            subsequent traces are added. Also affects the default
+            value of `fill`.
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -13142,6 +13690,7 @@ class Figure(BaseFigure):
         from plotly.graph_objs import Scatter
 
         new_trace = Scatter(
+            alignmentgroup=alignmentgroup,
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
@@ -13164,15 +13713,18 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
             mode=mode,
             name=name,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             selected=selected,
@@ -13231,9 +13783,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13364,21 +13918,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatter3d.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatter3d.Line` instance
             or dict with compatible properties
@@ -13409,7 +13975,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -13593,9 +14159,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -13657,9 +14225,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -13801,21 +14371,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattercarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattercarpet.Line`
             instance or dict with compatible properties
@@ -13846,7 +14428,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -13900,7 +14482,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -13992,9 +14575,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -14044,9 +14629,11 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         locationmode=None,
         locations=None,
@@ -14191,21 +14778,33 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattergeo.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
@@ -14255,7 +14854,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -14310,8 +14909,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon`, `location` and
-            `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon`, `location` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14382,9 +14981,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             locationmode=locationmode,
             locations=locations,
@@ -14436,9 +15037,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -14601,21 +15204,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattergl.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattergl.Line` instance
             or dict with compatible properties
@@ -14641,7 +15256,7 @@ class Figure(BaseFigure):
         mode
             Determines the drawing mode for this scatter trace.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -14865,9 +15480,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -14915,6 +15532,7 @@ class Figure(BaseFigure):
     def add_scattermapbox(
         self,
         below=None,
+        cluster=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -14931,9 +15549,11 @@ class Figure(BaseFigure):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         lon=None,
         lonsrc=None,
@@ -14977,6 +15597,9 @@ class Figure(BaseFigure):
             default, scattermapbox layers are inserted above all
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
+        cluster
+            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -15061,21 +15684,33 @@ class Figure(BaseFigure):
         latsrc
             Sets the source reference on Chart Studio Cloud for
             `lat`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattermapbox.Line`
             instance or dict with compatible properties
@@ -15109,7 +15744,7 @@ class Figure(BaseFigure):
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -15167,7 +15802,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `lat`, `lon` and `text`.
+            are available. Finally, the template string has access
+            to variables `lat`, `lon` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15220,6 +15856,7 @@ class Figure(BaseFigure):
 
         new_trace = Scattermapbox(
             below=below,
+            cluster=cluster,
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -15236,9 +15873,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             lon=lon,
             lonsrc=lonsrc,
@@ -15287,9 +15926,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15440,21 +16081,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatterpolar.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolar.Line`
             instance or dict with compatible properties
@@ -15485,7 +16138,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -15553,7 +16206,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15635,9 +16289,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -15690,9 +16346,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -15842,21 +16500,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -15887,7 +16557,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -15955,7 +16625,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16035,9 +16706,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16092,9 +16765,11 @@ class Figure(BaseFigure):
         idssrc=None,
         imag=None,
         imagsrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -16241,21 +16916,33 @@ class Figure(BaseFigure):
         imagsrc
             Sets the source reference on Chart Studio Cloud for
             `imag`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattersmith.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scattersmith.Line`
             instance or dict with compatible properties
@@ -16286,7 +16973,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -16352,7 +17039,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `real`, `imag` and `text`.
+            are available. Finally, the template string has access
+            to variables `real`, `imag` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16422,9 +17110,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             imag=imag,
             imagsrc=imagsrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16478,9 +17168,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -16642,21 +17334,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatterternary.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterternary.Line`
             instance or dict with compatible properties
@@ -16687,7 +17391,7 @@ class Figure(BaseFigure):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -16753,7 +17457,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `a`, `b`, `c` and `text`.
+            are available. Finally, the template string has access
+            to variables `a`, `b`, `c` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16827,9 +17532,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meta=meta,
@@ -16874,9 +17581,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -16989,21 +17698,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.splom.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.splom.Marker` instance or
             dict with compatible properties
@@ -17024,7 +17745,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -17163,9 +17884,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -17211,9 +17934,11 @@ class Figure(BaseFigure):
         hovertext=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -17359,9 +18084,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `tubex`, `tubey`, `tubez`,
-            `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `tubex`, `tubey`, `tubez`, `tubeu`,
+            `tubev`, `tubew`, `norm` and `divergence`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
@@ -17377,21 +18103,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.streamtube.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.streamtube.Lighting`
             instance or dict with compatible properties
@@ -17418,7 +18156,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -17609,9 +18347,11 @@ class Figure(BaseFigure):
             hovertext=hovertext,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
@@ -17673,8 +18413,10 @@ class Figure(BaseFigure):
         labels=None,
         labelssrc=None,
         leaf=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -17770,10 +18512,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -17816,17 +18559,29 @@ class Figure(BaseFigure):
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -17857,7 +18612,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -17918,9 +18673,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17995,8 +18751,10 @@ class Figure(BaseFigure):
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -18050,9 +18808,11 @@ class Figure(BaseFigure):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -18223,21 +18983,33 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.surface.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.surface.Lighting` instance
             or dict with compatible properties
@@ -18261,7 +19033,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -18442,9 +19214,11 @@ class Figure(BaseFigure):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -18496,8 +19270,10 @@ class Figure(BaseFigure):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -18570,17 +19346,29 @@ class Figure(BaseFigure):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.table.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -18598,7 +19386,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         stream
             :class:`plotly.graph_objects.table.Stream` instance or
@@ -18662,8 +19450,10 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             meta=meta,
             metasrc=metasrc,
             name=name,
@@ -18694,8 +19484,10 @@ class Figure(BaseFigure):
         insidetextfont=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         level=None,
         marker=None,
         maxdepth=None,
@@ -18794,10 +19586,11 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry` and
-            `percentParent`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry` and `percentParent`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -18827,17 +19620,29 @@ class Figure(BaseFigure):
         labelssrc
             Sets the source reference on Chart Studio Cloud for
             `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.treemap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         level
             Sets the level from which this trace hierarchy is
             rendered. Set `level` to `''` to start from the root
@@ -18868,7 +19673,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -18931,9 +19736,10 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `currentPath`, `root`,
-            `entry`, `percentRoot`, `percentEntry`,
-            `percentParent`, `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `currentPath`, `root`, `entry`,
+            `percentRoot`, `percentEntry`, `percentParent`, `label`
+            and `value`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -19009,8 +19815,10 @@ class Figure(BaseFigure):
             insidetextfont=insidetextfont,
             labels=labels,
             labelssrc=labelssrc,
+            legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             level=level,
             marker=marker,
             maxdepth=maxdepth,
@@ -19061,9 +19869,11 @@ class Figure(BaseFigure):
         ids=None,
         idssrc=None,
         jitter=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meanline=None,
@@ -19206,21 +20016,33 @@ class Figure(BaseFigure):
             If 0, the sample points align along the distribution
             axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.violin.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.violin.Line` instance or
             dict with compatible properties
@@ -19247,7 +20069,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover. For violin traces, the name
             will also be used for the position coordinate, if `x`
             and `x0` (`y` and `y0` if horizontal) are missing and
@@ -19490,9 +20312,11 @@ class Figure(BaseFigure):
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             marker=marker,
             meanline=meanline,
@@ -19561,9 +20385,11 @@ class Figure(BaseFigure):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -19735,21 +20561,33 @@ class Figure(BaseFigure):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.volume.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.volume.Lighting` instance
             or dict with compatible properties
@@ -19773,7 +20611,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -19964,9 +20802,11 @@ class Figure(BaseFigure):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -20027,9 +20867,11 @@ class Figure(BaseFigure):
         increasing=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         measure=None,
         measuresrc=None,
         meta=None,
@@ -20086,7 +20928,7 @@ class Figure(BaseFigure):
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
-        set in `y` if `orientation` is set th "v" (the default) and the
+        set in `y` if `orientation` is set to "v" (the default) and the
         labels are set in `x`. By setting `orientation` to "h", the
         roles are interchanged.
 
@@ -20161,9 +21003,10 @@ class Figure(BaseFigure):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta` and
-            `final`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            are available. Finally, the template string has access
+            to variables `initial`, `delta` and `final`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -20194,21 +21037,33 @@ class Figure(BaseFigure):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.waterfall.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         measure
             An array containing types of values. By default the
             values are considered as 'relative'. However; it is
@@ -20235,7 +21090,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -20321,8 +21176,8 @@ class Figure(BaseFigure):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `initial`, `delta`, `final`
-            and `label`.
+            are available. Finally, the template string has access
+            to variables `initial`, `delta`, `final` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -20497,9 +21352,11 @@ class Figure(BaseFigure):
             increasing=increasing,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
+            legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendwidth=legendwidth,
             measure=measure,
             measuresrc=measuresrc,
             meta=meta,
@@ -20769,6 +21626,118 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
+            obj.update(patch, overwrite=overwrite, **kwargs)
+
+        return self
+
+    def select_legends(self, selector=None, row=None, col=None):
+        """
+        Select legend subplot objects from a particular subplot cell
+        and/or legend subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the legend
+            objects that satisfy all of the specified selection criteria
+        """
+
+        return self._select_layout_subplots_by_prefix("legend", selector, row, col)
+
+    def for_each_legend(self, fn, selector=None, row=None, col=None) -> "Figure":
+        """
+        Apply a function to all legend objects that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single legend object.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_legends(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ) -> "Figure":
+        """
+        Perform a property update operation on all legend objects
+        that satisfy the specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            legend objects that satisfy the selection criteria.
+        selector: dict, function, or None (default None)
+            Dict to use as selection criteria.
+            legend objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all legend objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            legend and those for which the function returned True will
+            be in the selection.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
+        row, col: int or None (default None)
+            Subplot row and column index of legend objects to select.
+            To select legend objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all legend objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            legend object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_legends(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
@@ -21860,19 +22829,19 @@ class Figure(BaseFigure):
             coordinates as `xref`.
         axref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ax axis id
-            (e.g. "ax" or "ax2"), the `ax` position refers to a ax
-            coordinate. If set to "paper", the `ax` position refers
+            annotation (ax,ay) is specified. If set to a x axis id
+            (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
             to the distance from the left of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            left (right). If set to a ax axis ID followed by
+            left (right). If set to a x axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
-            domain of that axis: e.g., *ax2 domain* refers to the
-            domain of the second ax  axis and a ax position of 0.5
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second ax axis. In order for absolute
+            the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
             exactly the same as "xref", otherwise "axref" will
             revert to "pixel" (explained next). For relative
@@ -21893,19 +22862,19 @@ class Figure(BaseFigure):
             coordinates as `yref`.
         ayref
             Indicates in what coordinates the tail of the
-            annotation (ax,ay) is specified. If set to a ay axis id
-            (e.g. "ay" or "ay2"), the `ay` position refers to a ay
-            coordinate. If set to "paper", the `ay` position refers
+            annotation (ax,ay) is specified. If set to a y axis id
+            (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
             to the distance from the bottom of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            bottom (top). If set to a ay axis ID followed by
+            bottom (top). If set to a y axis ID followed by
             "domain" (separated by a space), the position behaves
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
-            domain of that axis: e.g., *ay2 domain* refers to the
-            domain of the second ay  axis and a ay position of 0.5
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second ay axis. In order for absolute
+            the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
             exactly the same as "yref", otherwise "ayref" will
             revert to "pixel" (explained next). For relative
@@ -22986,11 +23955,18 @@ class Figure(BaseFigure):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
         line=None,
         name=None,
         opacity=None,
         path=None,
+        showlegend=None,
         templateitemname=None,
         type=None,
         visible=None,
@@ -23030,9 +24006,39 @@ class Figure(BaseFigure):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below or above
             traces.
+        legend
+            Sets the reference to a legend to show this shape in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this shape. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this shape. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this shape.
         line
             :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
@@ -23070,6 +24076,9 @@ class Figure(BaseFigure):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        showlegend
+            Determines whether or not this shape is shown in the
+            legend.
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -23093,7 +24102,10 @@ class Figure(BaseFigure):
             path using `path`. with respect to the axes' sizing
             mode.
         visible
-            Determines whether or not this shape is visible.
+            Determines whether or not this shape is visible. If
+            "legendonly", the shape is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
@@ -23192,11 +24204,18 @@ class Figure(BaseFigure):
             editable=editable,
             fillcolor=fillcolor,
             fillrule=fillrule,
+            label=label,
             layer=layer,
+            legend=legend,
+            legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
+            legendrank=legendrank,
+            legendwidth=legendwidth,
             line=line,
             name=name,
             opacity=opacity,
             path=path,
+            showlegend=showlegend,
             templateitemname=templateitemname,
             type=type,
             visible=visible,

@@ -10,6 +10,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._layers import LayersValidator
     from ._domain import DomainValidator
     from ._center import CenterValidator
+    from ._bounds import BoundsValidator
     from ._bearing import BearingValidator
     from ._accesstoken import AccesstokenValidator
 else:
@@ -27,6 +28,7 @@ else:
             "._layers.LayersValidator",
             "._domain.DomainValidator",
             "._center.CenterValidator",
+            "._bounds.BoundsValidator",
             "._bearing.BearingValidator",
             "._accesstoken.AccesstokenValidator",
         ],

@@ -21,6 +21,7 @@ class Parcats(_BaseTraceType):
         "hovertemplate",
         "labelfont",
         "legendgrouptitle",
+        "legendwidth",
         "line",
         "meta",
         "metasrc",
@@ -337,12 +338,16 @@ class Parcats(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `count`, `probability`, `category`, `categorycount`,
-        `colorcount` and `bandcolorcount`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available.  This value
+        here applies when hovering over dimensions. Note that
+        `*categorycount`, "colorcount" and "bandcolorcount" are only
+        available when `hoveron` contains the "color" flagFinally, the
+        template string has access to variables `count`, `probability`,
+        `category`, `categorycount`, `colorcount` and `bandcolorcount`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -431,6 +436,27 @@ class Parcats(_BaseTraceType):
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -535,8 +561,8 @@ class Parcats(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -549,9 +575,11 @@ class Parcats(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `count` and `probability`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
+                    This value here applies when hovering over
+                    lines.Finally, the template string has access
+                    to variables `count` and `probability`.
+                    Anything contained in tag `<extra>` is
+                    displayed in the secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
                     secondary box completely, use an empty tag
                     `<extra></extra>`.
@@ -633,7 +661,7 @@ class Parcats(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -905,17 +933,25 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -936,7 +972,7 @@ class Parcats(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         sortpaths
             Sets the path sorting algorithm. If `forward`, sort
@@ -992,6 +1028,7 @@ class Parcats(_BaseTraceType):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -1079,17 +1116,25 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -1110,7 +1155,7 @@ class Parcats(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         sortpaths
             Sets the path sorting algorithm. If `forward`, sort
@@ -1231,6 +1276,10 @@ an instance of :class:`plotly.graph_objs.Parcats`"""
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
             self["legendgrouptitle"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

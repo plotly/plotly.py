@@ -14,6 +14,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "griddash",
         "gridwidth",
         "hoverformat",
+        "labelalias",
         "layer",
         "linecolor",
         "linewidth",
@@ -231,6 +232,33 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     @hoverformat.setter
     def hoverformat(self, val):
         self["hoverformat"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # layer
     # -----
@@ -777,6 +805,17 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -853,6 +892,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         griddash=None,
         gridwidth=None,
         hoverformat=None,
+        labelalias=None,
         layer=None,
         linecolor=None,
         linewidth=None,
@@ -909,6 +949,17 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -1029,6 +1080,10 @@ an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:

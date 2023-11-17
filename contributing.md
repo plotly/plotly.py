@@ -9,13 +9,12 @@ contribution.
 
 ## Code of Conduct
 
-Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it,
+Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't skip it,
 but the general idea is to be nice.
 
 ## What are the different ways to contribute?
 
-There are many ways to contribute to plotly.py. It helps to understand first
-the structure of the code and of the repository.
+There are many ways to contribute to plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
@@ -272,11 +271,11 @@ pytest plotly/tests/test_plotly/test_plot.py::test_function
 
 Running tests with tox is much more powerful, but requires a bit more setup.
 
-You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 2.7` and
+You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 3.9` and
 `Python 3.6`, but only care to check the `core` specs, you would need to ensure that the following variables are exported:
 
 ```
-export PLOTLY_TOX_PYTHON_27=<python binary>
+export PLOTLY_TOX_PYTHON_39=<python binary>
 export PLOTLY_TOX_PYTHON_36=<python binary>
 ```
 
@@ -287,15 +286,15 @@ Where the `<python binary` is going to be specific to your development setup. As
 # tox envs #
 ############
 
-export PLOTLY_TOX_PYTHON_27=python2.7
-export PLOTLY_TOX_PYTHON_34=python3.4
-export TOXENV=py27-core,py34-core
+export PLOTLY_TOX_PYTHON_39=python3.9
+export PLOTLY_TOX_PYTHON_36=python3.6
+export TOXENV=py39-core,py36-core
 ```
 
 Where `TOXENV` is the environment list you want to use when invoking `tox` from the command line. Note that the `PLOTLY_TOX_*` pattern is used to pass in variables for use in the `tox.ini` file. Though this is a little setup, intensive, you'll get the following benefits:
 
 * `tox` will automatically manage a virtual env for each environment you want to test in.
-* You only have to run `tox` and know that the module is working in both `Python 2` and `Python 3`.
+* You only have to run `tox` and know that the module is working in all included Python versions.
 
 Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `packages/python/plotly/pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
 

@@ -420,7 +420,7 @@ class UpdateBundleSchemaDevCommand(Command):
 
         # update plotly.js version in _plotlyjs_version
         rev = build_info["vcs_revision"]
-        date = build_info["committer_date"]
+        date = str(build_info["committer_date"])
         version = "_".join([self.devrepo, self.devbranch, date[:10], rev[:8]])
         overwrite_plotlyjs_version_file(version)
 
@@ -495,7 +495,6 @@ versioneer_cmds = versioneer.get_cmdclass()
 setup(
     name="plotly",
     version=versioneer.get_version(),
-    use_2to3=False,
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Nicolas Kruchten",
@@ -511,7 +510,10 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: Visualization",
+        "License :: OSI Approved :: MIT License",
     ],
     python_requires=">=3.6",
     license="MIT",
@@ -553,7 +555,7 @@ setup(
     data_files=[
         ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
     ],
-    install_requires=["tenacity>=6.2.0"],
+    install_requires=["tenacity>=6.2.0", "packaging"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),

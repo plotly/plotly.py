@@ -34,6 +34,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._selectionrevision import SelectionrevisionValidator
     from ._selectdirection import SelectdirectionValidator
     from ._scene import SceneValidator
+    from ._scattermode import ScattermodeValidator
+    from ._scattergap import ScattergapValidator
     from ._polar import PolarValidator
     from ._plot_bgcolor import Plot_BgcolorValidator
     from ._piecolorway import PiecolorwayValidator
@@ -41,6 +43,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._newshape import NewshapeValidator
     from ._newselection import NewselectionValidator
     from ._modebar import ModebarValidator
+    from ._minreducedwidth import MinreducedwidthValidator
+    from ._minreducedheight import MinreducedheightValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._margin import MarginValidator
@@ -129,6 +133,8 @@ else:
             "._selectionrevision.SelectionrevisionValidator",
             "._selectdirection.SelectdirectionValidator",
             "._scene.SceneValidator",
+            "._scattermode.ScattermodeValidator",
+            "._scattergap.ScattergapValidator",
             "._polar.PolarValidator",
             "._plot_bgcolor.Plot_BgcolorValidator",
             "._piecolorway.PiecolorwayValidator",
@@ -136,6 +142,8 @@ else:
             "._newshape.NewshapeValidator",
             "._newselection.NewselectionValidator",
             "._modebar.ModebarValidator",
+            "._minreducedwidth.MinreducedwidthValidator",
+            "._minreducedheight.MinreducedheightValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._margin.MarginValidator",

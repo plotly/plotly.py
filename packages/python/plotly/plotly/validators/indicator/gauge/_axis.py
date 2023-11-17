@@ -45,6 +45,19 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                 "power", 1x10^9 (with 9 in a super script). If
                 "SI", 1G. If "B", 1B.
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             minexponent
                 Hide SI prefix for 10^n if |n| is below this
                 number. This only has an effect when
@@ -100,8 +113,8 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of

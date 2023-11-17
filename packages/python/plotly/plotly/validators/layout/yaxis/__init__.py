@@ -45,6 +45,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._showgrid import ShowgridValidator
     from ._showexponent import ShowexponentValidator
     from ._showdividers import ShowdividersValidator
+    from ._shift import ShiftValidator
     from ._separatethousands import SeparatethousandsValidator
     from ._scaleratio import ScaleratioValidator
     from ._scaleanchor import ScaleanchorValidator
@@ -58,10 +59,14 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._mirror import MirrorValidator
     from ._minor import MinorValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._matches import MatchesValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
+    from ._labelalias import LabelaliasValidator
+    from ._insiderange import InsiderangeValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
     from ._griddash import GriddashValidator
@@ -80,6 +85,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autoshift import AutoshiftValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -133,6 +140,7 @@ else:
             "._showgrid.ShowgridValidator",
             "._showexponent.ShowexponentValidator",
             "._showdividers.ShowdividersValidator",
+            "._shift.ShiftValidator",
             "._separatethousands.SeparatethousandsValidator",
             "._scaleratio.ScaleratioValidator",
             "._scaleanchor.ScaleanchorValidator",
@@ -146,10 +154,14 @@ else:
             "._mirror.MirrorValidator",
             "._minor.MinorValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._matches.MatchesValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
+            "._labelalias.LabelaliasValidator",
+            "._insiderange.InsiderangeValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
             "._griddash.GriddashValidator",
@@ -168,6 +180,8 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autoshift.AutoshiftValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",

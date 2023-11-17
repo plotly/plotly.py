@@ -35,14 +35,14 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
  - `CHANGELOG.md`
    + update the release date
- - `packages/python/plotly/README.md`
+ - `README.md`
    + this must be done at this point because the README gets baked into PyPI
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z`
  - `packages/javascript/jupyterlab-plotly/package-lock.json`
-   + Update `"version"` to `X.Y.Z`
+   + Update `"version"` to `X.Y.Z` in two places (to avoid dirty repo after rebuild)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
 
@@ -59,26 +59,22 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
 ### Download and QA CI Artifacts
 
-The `full_build` job in the `release_build` workflow in CircleCI produces three sets of artifacts. Download all three:
-
-1. `pypi_dist/all.tgz`
-2. `conda_dist/plotly-X.Y.Z.tar.bz2`
-3. `npm_dist/jupyterlab-plotly-X.Y.Z.tgz`
+The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress, which will give you a directory called `output`. The filenames contained within will contain version numbers.
 
 **Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
-To locally install the PyPI dist, make sure you have an environment with JupyterLab 3 installed:
+To locally install the PyPI dist, make sure you have an environment with JupyterLab 3 installed (maybe one created with `conda create -n condatest python=3.10 jupyterlab ipywidgets pandas`):
 
 - `tar xzf all.tgz`
 - `pip uninstall plotly`
 - `conda uninstall plotly` (just in case!)
-- `pip install dist/plotly-X.Y.X-py2.py3-none-any.whl`
+- `pip install path/to/output/dist/plotly-X.Y.X-py3-none-any.whl`
 
 To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
 
 - `conda uninstall plotly`
 - `pip uninstall plotly` (just in case!)
-- `conda install conda_dist/plotly-X.Y.Z.tar.bz2`
+- `conda install path/to/output/plotly-X.Y.Z.tar.bz2`
 
 It's more complicated to locally install the NPM bundle, as you'll need to have a JupyterLab 2 environment installed... Undocumented for now :see_no_evil:.
 
@@ -94,21 +90,21 @@ you can publish the artifacts. **You will need special credentials from Plotly l
 
 Publishing to PyPI:
 ```bash
-(plotly_dev) $ cd pypi_dist/dist
+(plotly_dev) $ cd path/to/output/dist
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
 
 Publishing to NPM:
 
 ```bash
-(plotly_dev) $ cd npm_dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ npm publish jupyterlab-plotly-X.Y.Z.tgz
 ```
 
 Publishing to `plotly` conda channel (make sure you have run `conda install anaconda-client` to get the `anaconda` command):
 
 ```
-(plotly_dev) $ cd conda_dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ anaconda upload plotly-X.Y.Z.tar.bz2
 ```
 
@@ -132,7 +128,8 @@ start by doing it first if not. Then merge `master` into `doc-prod` to deploy th
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
     1. bump the version of Plotly.py in  `_data/pyversion.json`
-    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up
+    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
+      - If Plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
     3. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
     4. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
     5. Commit and push the changes to `master` in that repo
