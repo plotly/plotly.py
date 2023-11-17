@@ -1929,7 +1929,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             modes.add("text")
         if len(modes) == 0:
             modes.add("lines")
-        trace_patch["mode"] = "+".join(modes)
+        trace_patch["mode"] = "+".join(sorted(modes))
     elif constructor != go.Splom and (
         "symbol" in args or constructor == go.Scattermapbox
     ):

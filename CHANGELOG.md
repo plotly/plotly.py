@@ -5,8 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [UNRELEASED]
 
 ### Fixed
+- Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
-- Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)],
+- Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
 
 ## [5.18.0] - 2023-10-25
 
