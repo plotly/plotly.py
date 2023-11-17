@@ -23,9 +23,11 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._marker import MarkerValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._hovertextsrc import HovertextsrcValidator
@@ -68,9 +70,11 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._marker.MarkerValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._hovertextsrc.HovertextsrcValidator",

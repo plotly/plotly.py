@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from unittest import TestCase
 import inspect
 import copy
@@ -430,6 +429,10 @@ def select_traces_fixture():
 
 def test_select_traces_integer(select_traces_fixture):
     fig = select_traces_fixture
+    # check that selecting first trace does indeed only select the first
+    tr = list(fig.select_traces(selector=0))
+    assert len(tr) == 1
+    assert tr[0].y[1] == 0
     # check we can index last trace selected
     tr = list(fig.select_traces(selector=-1))[0]
     assert tr.y[1] == 20

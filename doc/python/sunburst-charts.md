@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make Sunburst Charts.
     display_as: basic
@@ -298,6 +298,36 @@ fig = go.Figure(go.Sunburst(
         parents = df.parents))
 fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
 fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Sunburst charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Sunburst(
+        labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        values=[65, 14, 12, 10, 2, 6, 6, 4, 4],
+        branchvalues="total",
+        textfont_size=16,
+        marker=dict(
+            pattern=dict(
+                shape=["", "/", "/", ".", ".", "/", "/", ".", "/"], solidity=0.9
+            )
+        ),
+    )
+)
+
+fig.update_layout(margin=dict(t=0, l=0, r=0, b=0))
+
+fig.show()
+
 ```
 
 ### Sunburst chart with a continuous colorscale

@@ -716,7 +716,10 @@ export class FigureModel extends DOMWidgetModel {
 
   static serializers: ISerializers = {
     ...DOMWidgetModel.serializers,
-    _data: { deserialize: py2js_deserializer, serialize: js2py_serializer },
+    _data: {
+      deserialize: py2js_deserializer,
+      serialize: js2py_serializer,
+    },
     _layout: {
       deserialize: py2js_deserializer,
       serialize: js2py_serializer,
@@ -804,9 +807,10 @@ export class FigureModel extends DOMWidgetModel {
  */
 export class FigureView extends DOMWidgetView {
   viewID: string;
+  resizeEventListener: () => void;
 
   /**
-   * The perform_render method is called by processPhosphorMessage
+   * The perform_render method is called by processLuminoMessage
    * after the widget's DOM element has been attached to the notebook
    * output cell. This happens after the initialize of the
    * FigureModel, and it won't happen at all if the Python FigureWidget
@@ -845,6 +849,9 @@ export class FigureView extends DOMWidgetView {
     // the model is not directly mutated by the Plotly.js library.
     var initialTraces = _.cloneDeep(this.model.get("_data"));
     var initialLayout = _.cloneDeep(this.model.get("_layout"));
+    if (!initialLayout.height) {
+      initialLayout.height = 360;
+    }
     var config = this.model.get("_config");
     config.editSelection = false;
 
@@ -900,10 +907,10 @@ export class FigureView extends DOMWidgetView {
   }
 
   /**
-   * Respond to phosphorjs events
+   * Respond to Lumino events
    */
-  processPhosphorMessage(msg: any) {
-    super.processPhosphorMessage.apply(this, arguments);
+  _processLuminoMessage(msg: any, _super: any) {
+    _super.apply(this, arguments);
     var that = this;
     switch (msg.type) {
       case "before-attach":
@@ -921,10 +928,10 @@ export class FigureView extends DOMWidgetView {
           xaxis: axisHidden,
           yaxis: axisHidden,
         });
-
-        window.addEventListener("resize", function () {
-          that.autosizeFigure();
-        });
+        this.resizeEventListener = () => {
+          this.autosizeFigure();
+        }
+        window.addEventListener("resize", this.resizeEventListener);
         break;
       case "after-attach":
         // Rendering actual figure in the after-attach event allows
@@ -936,6 +943,14 @@ export class FigureView extends DOMWidgetView {
         this.autosizeFigure();
         break;
     }
+  }
+
+  processPhosphorMessage(msg: any) {
+    this._processLuminoMessage(msg, super["processPhosphorMessage"]);
+  }
+
+  processLuminoMessage(msg: any) {
+    this._processLuminoMessage(msg, super["processLuminoMessage"]);
   }
 
   autosizeFigure() {
@@ -954,8 +969,10 @@ export class FigureView extends DOMWidgetView {
    * Purge Plotly.js data structures from the notebook output display
    * element when the view is destroyed
    */
-  destroy() {
+   remove() {
+    super.remove();
     Plotly.purge(this.el);
+    window.removeEventListener("resize", this.resizeEventListener);
   }
 
   /**

@@ -65,12 +65,12 @@ class Title(_BaseLayoutHierarchyType):
         Determines the location of legend's title with respect to the
         legend items. Defaulted to "top" with `orientation` is "h".
         Defaulted to "left" with `orientation` is "v". The *top left*
-        options could be used to expand legend area in both x and y
-        sides.
+        options could be used to expand top center and top right are
+        for horizontal alignment legend area in both x and y sides.
 
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['top', 'left', 'top left']
+                ['top', 'left', 'top left', 'top center', 'top right']
 
         Returns
         -------
@@ -116,7 +116,8 @@ class Title(_BaseLayoutHierarchyType):
             to the legend items. Defaulted to "top" with
             `orientation` is "h". Defaulted to "left" with
             `orientation` is "v". The *top left* options could be
-            used to expand legend area in both x and y sides.
+            used to expand top center and top right are for
+            horizontal alignment legend area in both x and y sides.
         text
             Sets the title of the legend.
         """
@@ -139,7 +140,8 @@ class Title(_BaseLayoutHierarchyType):
             to the legend items. Defaulted to "top" with
             `orientation` is "h". Defaulted to "left" with
             `orientation` is "v". The *top left* options could be
-            used to expand legend area in both x and y sides.
+            used to expand top center and top right are for
+            horizontal alignment legend area in both x and y sides.
         text
             Sets the title of the legend.
 

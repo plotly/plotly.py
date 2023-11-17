@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import base64
 import numbers
 import textwrap
@@ -7,9 +5,9 @@ import uuid
 from importlib import import_module
 import copy
 import io
-from copy import deepcopy
 import re
 import sys
+import warnings
 
 from _plotly_utils.optional_imports import get_module
 
@@ -103,7 +101,11 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         elif v.dtype.kind == "M":
             # Convert datetime Series/Index to numpy array of datetimes
             if isinstance(v, pd.Series):
-                v = v.dt.to_pydatetime()
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", FutureWarning)
+                    # Series.dt.to_pydatetime will return Index[object]
+                    # https://github.com/pandas-dev/pandas/pull/52459
+                    v = np.array(v.dt.to_pydatetime())
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
@@ -112,7 +114,13 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         if dtype.kind in numeric_kinds:
             v = v.values
         elif dtype.kind == "M":
-            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", FutureWarning)
+                # Series.dt.to_pydatetime will return Index[object]
+                # https://github.com/pandas-dev/pandas/pull/52459
+                v = [
+                    np.array(row.dt.to_pydatetime()).tolist() for i, row in v.iterrows()
+                ]
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
@@ -147,7 +155,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     # --------------------------
     if force_numeric and new_v.dtype.kind not in numeric_kinds:
         raise ValueError(
-            "Input value is not numeric and" "force_numeric parameter set to True"
+            "Input value is not numeric and force_numeric parameter set to True"
         )
 
     if "U" not in kind:
@@ -1660,24 +1668,29 @@ class AngleValidator(BaseValidator):
         "description": "A number (in degree) between -180 and 180.",
         "requiredOpts": [],
         "otherOpts": [
-            "dflt"
+            "dflt",
+            "arrayOk"
         ]
     },
     """
 
-    def __init__(self, plotly_name, parent_name, **kwargs):
+    def __init__(self, plotly_name, parent_name, array_ok=False, **kwargs):
         super(AngleValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
     The '{plotly_name}' property is a angle (in degrees) that may be
-    specified as a number between -180 and 180. Numeric values outside this
-    range are converted to the equivalent value
+    specified as a number between -180 and 180{array_ok}.
+    Numeric values outside this range are converted to the equivalent value
     (e.g. 270 is converted to -90).
         """.format(
-            plotly_name=self.plotly_name
+            plotly_name=self.plotly_name,
+            array_ok=", or a list, numpy array or other iterable thereof"
+            if self.array_ok
+            else "",
         )
 
         return desc
@@ -1686,6 +1699,22 @@ class AngleValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
+        elif self.array_ok and is_homogeneous_array(v):
+            try:
+                v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
+            except (ValueError, TypeError, OverflowError):
+                self.raise_invalid_val(v)
+            v = v_array  # Always numeric numpy array
+            # Normalize v onto the interval [-180, 180)
+            v = (v + 180) % 360 - 180
+        elif self.array_ok and is_simple_array(v):
+            # Check numeric
+            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+
+            v = [(x + 180) % 360 - 180 for x in to_scalar_or_list(v)]
         elif not isinstance(v, numbers.Number):
             self.raise_invalid_val(v)
         else:
@@ -2641,24 +2670,20 @@ class BaseDataValidator(BaseValidator):
             for v_el in v:
 
                 if isinstance(v_el, BaseTraceType):
-                    # Clone input traces
-                    v_el = v_el.to_plotly_json()
+                    if isinstance(v_el, Histogram2dcontour):
+                        v_el = dict(type="histogram2dcontour", **v_el._props)
+                    else:
+                        v_el = v_el._props
 
                 if isinstance(v_el, dict):
-                    v_copy = deepcopy(v_el)
-
-                    if "type" in v_copy:
-                        trace_type = v_copy.pop("type")
-                    elif isinstance(v_el, Histogram2dcontour):
-                        trace_type = "histogram2dcontour"
-                    else:
-                        trace_type = "scatter"
+                    type_in_v_el = "type" in v_el
+                    trace_type = v_el.pop("type", "scatter")
 
                     if trace_type not in self.class_strs_map:
                         if skip_invalid:
                             # Treat as scatter trace
                             trace = self.get_trace_class("scatter")(
-                                skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                                skip_invalid=skip_invalid, _validate=_validate, **v_el
                             )
                             res.append(trace)
                         else:
@@ -2666,9 +2691,13 @@ class BaseDataValidator(BaseValidator):
                             invalid_els.append(v_el)
                     else:
                         trace = self.get_trace_class(trace_type)(
-                            skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                            skip_invalid=skip_invalid, _validate=_validate, **v_el
                         )
                         res.append(trace)
+
+                    if type_in_v_el:
+                        # Restore type in v_el
+                        v_el["type"] = trace_type
                 else:
                     if skip_invalid:
                         # Add empty scatter trace

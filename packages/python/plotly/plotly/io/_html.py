@@ -1,12 +1,10 @@
 import uuid
-import os
 from pathlib import Path
 import webbrowser
 
 from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly import utils
 
 _json = get_module("json")
 
@@ -272,7 +270,7 @@ def to_html(
     elif include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
-        <script src="{cdn_url}"></script>\
+        <script charset="utf-8" src="{cdn_url}"></script>\
     """.format(
             win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
         )
@@ -280,7 +278,7 @@ def to_html(
     elif include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
-        <script src="plotly.min.js"></script>\
+        <script charset="utf-8" src="plotly.min.js"></script>\
     """.format(
             win_config=_window_plotly_config
         )
@@ -288,7 +286,7 @@ def to_html(
     elif isinstance(include_plotlyjs, str) and include_plotlyjs.endswith(".js"):
         load_plotlyjs = """\
         {win_config}
-        <script src="{url}"></script>\
+        <script charset="utf-8" src="{url}"></script>\
     """.format(
             win_config=_window_plotly_config, url=include_plotlyjs_orig
         )
@@ -533,7 +531,8 @@ def write_html(
 
     # Write HTML string
     if path is not None:
-        path.write_text(html_str)
+        # To use a different file encoding, pass a file descriptor
+        path.write_text(html_str, "utf-8")
     else:
         file.write(html_str)
 
@@ -542,7 +541,7 @@ def write_html(
         bundle_path = path.parent / "plotly.min.js"
 
         if not bundle_path.exists():
-            bundle_path.write_text(get_plotlyjs())
+            bundle_path.write_text(get_plotlyjs(), encoding="utf-8")
 
     # Handle auto_open
     if path is not None and full_html and auto_open:

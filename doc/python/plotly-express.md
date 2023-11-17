@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.4
   plotly:
     description: Plotly Express is a terse, consistent, high-level API for creating
       figures.
@@ -42,8 +42,7 @@ Plotly Express provides [more than 30 functions for creating different types of 
 
 Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/) that gives a good introduction to Plotly Express and [Dash](https://dash.plotly.com/):
 
-```python hide_code=true
-%%html
+```html hide_code=true
 <div align="center">
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/FpCgG85g2Hw"
@@ -72,7 +71,7 @@ The Plotly Express API in general offers the following features:
 
 * **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](https://plotly.com/python/creating-and-updating-figures/#updating-figures).
 * **Sensible, Overridable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
-* **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
+* **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
 * **Automatic Trace and Layout configuration**: PX functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](https://plotly.com/python/legend/) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](/python/figure-structure).
 * **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](https://plotly.com/python/figure-labels/) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
 * **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).

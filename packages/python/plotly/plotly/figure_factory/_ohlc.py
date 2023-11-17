@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from plotly import exceptions
 from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils

@@ -1,5 +1,4 @@
-from __future__ import absolute_import, division
-from unittest import TestCase, SkipTest
+from unittest import TestCase
 import plotly.graph_objs as go
 
 
