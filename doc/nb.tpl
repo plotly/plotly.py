@@ -18,7 +18,6 @@
 {% endblock input_group %}
 
 {% block markdowncell %}
-{{ cell.id }}
 {%- if 'What About Dash?' in cell.source or
     'Sign up for Dash Club' in cell.source or
     'best way to build analytical apps in Python using Plotly figures' in cell.source -%}
