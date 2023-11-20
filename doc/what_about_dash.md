@@ -1,6 +1,6 @@
 
 
-<!-- #region class="what-about-dash" -->
+<!-- #region -->
 ### What About Dash?
 
 [Dash](https://dash.plot.ly/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
