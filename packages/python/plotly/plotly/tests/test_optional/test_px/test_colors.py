@@ -59,5 +59,5 @@ def test_color_categorical_dtype():
     df = px.data.tips()
     df["day"] = df["day"].astype("category")
     px.scatter(
-        df[df.day != df.day.cat.categories[0]], x="total_bill", y="tip", facet_col="day"
+        df[df.day != df.day.cat.categories[0]], x="total_bill", y="tip", color="day"
     )
