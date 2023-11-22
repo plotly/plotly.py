@@ -2042,7 +2042,9 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [g for g in grouper if g != one_group]
-        grouped = df.groupby(required_grouper, sort=False)  # skip one_group groupers
+        grouped = df.groupby(
+            required_grouper, sort=False, observed=True
+        )  # skip one_group groupers
         group_indices = grouped.indices
         sorted_group_names = [
             g if len(required_grouper) != 1 else (g,) for g in group_indices
