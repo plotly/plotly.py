@@ -20,7 +20,8 @@
 {% block markdowncell %}
 {%- if 'What About Dash?' in cell.source or
     'Sign up for Dash Club' in cell.source or
-    'best way to build analytical apps in Python using Plotly figures' in cell.source -%}
+    'best way to build analytical apps in Python using Plotly figures' in cell.source or
+    '### Reference' in cell.source -%}
     <div class="chatbot-exclude">
     {{ super() }}
     </div>
