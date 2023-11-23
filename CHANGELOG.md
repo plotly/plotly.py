@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
 - Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
+- Fix KeyError when using column of `pd.Categorical` dtype with unobserved categories [[#4437](https://github.com/plotly/plotly.py/pull/4437)]
 
 ## [5.18.0] - 2023-10-25
 
