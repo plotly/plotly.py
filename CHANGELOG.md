@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
 - Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
 - Fix KeyError when using column of `pd.Categorical` dtype with unobserved categories [[#4437](https://github.com/plotly/plotly.py/pull/4437)]
+- Fix dataframe interchange in case `column_names` returns an unmaterialized object: generator, iterator, etc. [[#4442]](https://github.com/plotly/plotly.py/pull/4442)
 
 ## [5.18.0] - 2023-10-25
 
