@@ -14,12 +14,12 @@ from pandas.testing import assert_frame_equal
 @pytest.fixture
 def add_interchange_module_for_old_pandas():
     if not hasattr(pd.api, "interchange"):
-        pd.api.interchange = mock.MagicMock()
-        # to make the following import work: `import pandas.api.interchange`
-        with mock.patch.dict(
-            "sys.modules", {"pandas.api.interchange": pd.api.interchange}
-        ):
-            yield
+        with mock.patch.object(pd.api, "interchange", mock.MagicMock(), create=True):
+            # to make the following import work: `import pandas.api.interchange`
+            with mock.patch.dict(
+                "sys.modules", {"pandas.api.interchange": pd.api.interchange}
+            ):
+                yield
     else:
         yield
 
@@ -250,15 +250,24 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
+@pytest.mark.parametrize("column_names_as_generator", [False, True])
 def test_build_df_using_interchange_protocol_mock(
-    add_interchange_module_for_old_pandas,
+    add_interchange_module_for_old_pandas, column_names_as_generator
 ):
     class InterchangeDataFrame:
         def __init__(self, columns):
             self._columns = columns
 
-        def column_names(self):
-            return self._columns
+        if column_names_as_generator:
+
+            def column_names(self):
+                for col in self._columns:
+                    yield col
+
+        else:
+
+            def column_names(self):
+                return self._columns
 
     interchange_dataframe = InterchangeDataFrame(
         ["petal_width", "sepal_length", "sepal_width"]
