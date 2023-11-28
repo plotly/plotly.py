@@ -14,12 +14,12 @@ from pandas.testing import assert_frame_equal
 @pytest.fixture
 def add_interchange_module_for_old_pandas():
     if not hasattr(pd.api, "interchange"):
-        pd.api.interchange = mock.MagicMock()
-        # to make the following import work: `import pandas.api.interchange`
-        with mock.patch.dict(
-            "sys.modules", {"pandas.api.interchange": pd.api.interchange}
-        ):
-            yield
+        with mock.patch.object(pd.api, "interchange", mock.MagicMock(), create=True):
+            # to make the following import work: `import pandas.api.interchange`
+            with mock.patch.dict(
+                "sys.modules", {"pandas.api.interchange": pd.api.interchange}
+            ):
+                yield
     else:
         yield
 
