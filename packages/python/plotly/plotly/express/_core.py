@@ -1327,7 +1327,11 @@ def build_dataframe(args, constructor):
 
             df_not_pandas = args["data_frame"]
             args["data_frame"] = df_not_pandas.__dataframe__()
-            columns = args["data_frame"].column_names()
+            # According interchange protocol: `def column_names(self) -> Iterable[str]:`
+            # so this function can return for example a generator.
+            # The easiest way is to convert `columns` to `pandas.Index` so that the
+            # type is similar to the types in other code branches.
+            columns = pd.Index(args["data_frame"].column_names())
             needs_interchanging = True
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
