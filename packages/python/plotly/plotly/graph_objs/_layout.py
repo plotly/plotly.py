@@ -70,6 +70,7 @@ class Layout(_BaseLayoutType):
         "annotations",
         "autosize",
         "autotypenumbers",
+        "barcornerradius",
         "bargap",
         "bargroupgap",
         "barmode",
@@ -633,6 +634,26 @@ class Layout(_BaseLayoutType):
     @autotypenumbers.setter
     def autotypenumbers(self, val):
         self["autotypenumbers"] = val
+
+    # barcornerradius
+    # ---------------
+    @property
+    def barcornerradius(self):
+        """
+        Sets the rounding of corners. May be an integer number of
+        pixels, or a percentage of bar width(as a string).
+
+        The 'barcornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["barcornerradius"]
+
+    @barcornerradius.setter
+    def barcornerradius(self, val):
+        self["barcornerradius"] = val
 
     # bargap
     # ------
@@ -4414,8 +4435,8 @@ class Layout(_BaseLayoutType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4424,13 +4445,6 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
-                insiderange
-                    Could be used to set the desired inside range
-                    of this axis (excluding the labels) when
-                    `ticklabelposition` of the anchored axis has
-                    "inside". Not implemented for axes with `type`
-                    "log". This would be ignored when `range` is
-                    provided.
                 labelalias
                     Replacement text for specific tick or hover
                     labels. For example using {US: 'USA', CA:
@@ -4667,8 +4681,8 @@ class Layout(_BaseLayoutType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4983,8 +4997,8 @@ class Layout(_BaseLayoutType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4993,13 +5007,6 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
-                insiderange
-                    Could be used to set the desired inside range
-                    of this axis (excluding the labels) when
-                    `ticklabelposition` of the anchored axis has
-                    "inside". Not implemented for axes with `type`
-                    "log". This would be ignored when `range` is
-                    provided.
                 labelalias
                     Replacement text for specific tick or hover
                     labels. For example using {US: 'USA', CA:
@@ -5239,8 +5246,8 @@ class Layout(_BaseLayoutType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -5418,6 +5425,9 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width(as a string).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5882,6 +5892,7 @@ class Layout(_BaseLayoutType):
         annotationdefaults=None,
         autosize=None,
         autotypenumbers=None,
+        barcornerradius=None,
         bargap=None,
         bargroupgap=None,
         barmode=None,
@@ -6007,6 +6018,9 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width(as a string).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -6478,6 +6492,7 @@ class Layout(_BaseLayoutType):
             "annotations",
             "autosize",
             "autotypenumbers",
+            "barcornerradius",
             "bargap",
             "bargroupgap",
             "barmode",
@@ -6614,6 +6629,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
             self["autotypenumbers"] = _v
+        _v = arg.pop("barcornerradius", None)
+        _v = barcornerradius if barcornerradius is not None else _v
+        if _v is not None:
+            self["barcornerradius"] = _v
         _v = arg.pop("bargap", None)
         _v = bargap if bargap is not None else _v
         if _v is not None:

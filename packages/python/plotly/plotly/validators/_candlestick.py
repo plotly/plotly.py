@@ -204,9 +204,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-
-                format/tree/v1.4.5#d3-format. And for dates
-                see: https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-format/tree/v1.4.
+                5#d3-format. And for dates see:
+                https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -247,9 +247,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-
-                format/tree/v1.4.5#d3-format. And for dates
-                see: https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-format/tree/v1.4.
+                5#d3-format. And for dates see:
+                https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"

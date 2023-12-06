@@ -41,6 +41,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `type` detection. This is the default value;
                 however it could be overridden for individual
                 axes.
+            barcornerradius
+                Sets the rounding of corners. May be an integer
+                number of pixels, or a percentage of bar
+                width(as a string).
             bargap
                 Sets the gap (in plot fraction) between bars of
                 adjacent location coordinates.

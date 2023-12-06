@@ -19,6 +19,7 @@ class Marker(_BaseTraceHierarchyType):
         "colorbar",
         "colorscale",
         "colorsrc",
+        "cornerradius",
         "line",
         "opacity",
         "opacitysrc",
@@ -387,8 +388,8 @@ class Marker(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                    ormat. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -615,6 +616,26 @@ class Marker(_BaseTraceHierarchyType):
     @colorsrc.setter
     def colorsrc(self, val):
         self["colorsrc"] = val
+
+    # cornerradius
+    # ------------
+    @property
+    def cornerradius(self):
+        """
+        Sets the rounding of corners. May be an integer number of
+        pixels, or a percentage of bar width(as a string).
+
+        The 'cornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["cornerradius"]
+
+    @cornerradius.setter
+    def cornerradius(self, val):
+        self["cornerradius"] = val
 
     # line
     # ----
@@ -960,6 +981,9 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width(as a string).
         line
             :class:`plotly.graph_objects.bar.marker.Line` instance
             or dict with compatible properties
@@ -995,6 +1019,7 @@ class Marker(_BaseTraceHierarchyType):
         colorbar=None,
         colorscale=None,
         colorsrc=None,
+        cornerradius=None,
         line=None,
         opacity=None,
         opacitysrc=None,
@@ -1077,6 +1102,9 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width(as a string).
         line
             :class:`plotly.graph_objects.bar.marker.Line` instance
             or dict with compatible properties
@@ -1171,6 +1199,10 @@ an instance of :class:`plotly.graph_objs.bar.Marker`"""
         _v = colorsrc if colorsrc is not None else _v
         if _v is not None:
             self["colorsrc"] = _v
+        _v = arg.pop("cornerradius", None)
+        _v = cornerradius if cornerradius is not None else _v
+        if _v is not None:
+            self["cornerradius"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

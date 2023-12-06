@@ -66,7 +66,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
     from ._labelalias import LabelaliasValidator
-    from ._insiderange import InsiderangeValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
     from ._griddash import GriddashValidator
@@ -161,7 +160,6 @@ else:
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
             "._labelalias.LabelaliasValidator",
-            "._insiderange.InsiderangeValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
             "._griddash.GriddashValidator",

@@ -990,6 +990,10 @@ class Bar(_BaseTraceType):
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
+                cornerradius
+                    Sets the rounding of corners. May be an integer
+                    number of pixels, or a percentage of bar
+                    width(as a string).
                 line
                     :class:`plotly.graph_objects.bar.marker.Line`
                     instance or dict with compatible properties

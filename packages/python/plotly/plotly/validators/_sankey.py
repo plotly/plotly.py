@@ -147,8 +147,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the value formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                format.
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
+                ormat.
             valuesuffix
                 Adds a unit to follow the value in the hover
                 tooltip. Add a space if a separation is
