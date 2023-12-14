@@ -64,7 +64,7 @@ The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL
 The accepted values for `layout.mapbox.style` are one of:
 
 - `"white-bg"` yields an empty white canvas which results in no external HTTP requests
-- `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens
+- `"open-street-map"`, `"carto-positron"`, and `"carto-darkmatter"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens. There is currently a known issue with `"stamen-terrain"`, `"stamen-toner"` and `"stamen-watercolor"` tiles, which will be fixed in a future Plotly.py release.
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
 - A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/
