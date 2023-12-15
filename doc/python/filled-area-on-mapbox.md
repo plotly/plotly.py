@@ -60,7 +60,7 @@ fig = go.Figure(go.Scattermapbox(
 
 fig.update_layout(
     mapbox = {
-        'style': "stamen-terrain",
+        'style': "open-street-map",
         'center': {'lon': -73, 'lat': 46 },
         'zoom': 5},
     showlegend = False)
@@ -81,7 +81,7 @@ fig = go.Figure(go.Scattermapbox(
     lat = [30, 6, 6, 30, 30,    None, 20, 30, 30, 20, 20, None, 40, 50, 50, 40, 40]))
 
 fig.update_layout(
-    mapbox = {'style': "stamen-terrain", 'center': {'lon': 30, 'lat': 30}, 'zoom': 2},
+    mapbox = {'style': "open-street-map", 'center': {'lon': 30, 'lat': 30}, 'zoom': 2},
     showlegend = False,
     margin = {'l':0, 'r':0, 'b':0, 't':0})
 
@@ -102,7 +102,7 @@ fig = go.Figure(go.Scattermapbox(
 
 fig.update_layout(
     mapbox = {
-        'style': "stamen-terrain",
+        'style': "open-street-map",
         'center': { 'lon': -73.6, 'lat': 45.5},
         'zoom': 12, 'layers': [{
             'source': {
