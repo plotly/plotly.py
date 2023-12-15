@@ -8,7 +8,7 @@ class AyrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop(
-                "values", ["pixel", "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"]
+                "values", ["pixel", "paper", "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"]
             ),
             **kwargs,
         )
