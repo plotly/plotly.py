@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRELEASED]
 
+### Updated
+- Accept arguments `'c'` and `'s'` when using pandas plotting backend [[#4464]](https://github.com/plotly/plotly.py/pull/4464)
+
 ### Fixed
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
