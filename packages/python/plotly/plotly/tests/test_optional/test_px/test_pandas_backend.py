@@ -61,6 +61,10 @@ def test_pandas_example():
     assert len(fig.data) == 1
 
 
+@pytest.mark.skipif(
+    not hasattr(pd.options.plotting, "backend"),
+    reason="Currently installed pandas doesn't support plotting backends.",
+)
 def test_pandas_invalid_c_kwarg():
     pd.options.plotting.backend = "plotly"
     df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9], "d": [1, 1, 2]})
