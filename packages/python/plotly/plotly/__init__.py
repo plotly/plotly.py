@@ -25,8 +25,9 @@ Modules:
 - exceptions: defines our custom exception classes
 
 """
+from __future__ import annotations
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from _plotly_utils.importers import relative_import
 
 
@@ -74,6 +75,20 @@ else:
     )
 
 
+def _validate_kwarg(
+    df_alias: str, px_alias: str, column_names: list[str], kwargs: dict[str, Any]
+) -> None:
+    if kwargs[df_alias] not in column_names:
+        raise ValueError(
+            "plotly.express.scatter only supports "
+            f"the '{df_alias}' kwarg as a column name"
+        )
+    if px_alias in kwargs:
+        raise ValueError(
+            f"plotly.express.scatter does not support both '{px_alias}' and '{df_alias}' kwargs"
+        )
+
+
 def plot(data_frame, kind, **kwargs):
     """
     Pandas plotting backend function, not meant to be called directly.
@@ -96,7 +111,20 @@ def plot(data_frame, kind, **kwargs):
     )
 
     if kind == "scatter":
-        new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["s", "c"]}
+        new_kwargs = {}
+        for k in kwargs:
+            if k == "c":
+                if kwargs["c"] is None:
+                    continue
+                _validate_kwarg("c", "color", data_frame.columns, kwargs)
+                new_kwargs["color"] = kwargs[k]
+            elif k == "s":
+                if kwargs["s"] is None:
+                    continue
+                _validate_kwarg("s", "size", data_frame.columns, kwargs)
+                new_kwargs["size"] = kwargs[k]
+            else:
+                new_kwargs[k] = kwargs[k]
         return scatter(data_frame, **new_kwargs)
     if kind == "line":
         return line(data_frame, **kwargs)

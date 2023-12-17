@@ -16,6 +16,10 @@ import pytest
             lambda df: df.plot.scatter("A", "B"),
             lambda df: px.scatter(df, "A", "B"),
         ),
+        (
+            lambda df: df.plot.scatter("A", "B", c="C"),
+            lambda df: px.scatter(df, "A", "B", color="C"),
+        ),
         (lambda df: df.plot.line(), px.line),
         (lambda df: df.plot.area(), px.area),
         (lambda df: df.plot.bar(), px.bar),
@@ -55,3 +59,28 @@ def test_pandas_example():
     df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index, columns=list("ABCD"))
     fig = df.iloc[5].plot.bar()
     assert len(fig.data) == 1
+
+
+def test_pandas_invalid_c_kwarg():
+    pd.options.plotting.backend = "plotly"
+    df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9], "d": [1, 1, 2]})
+    with pytest.raises(
+        ValueError,
+        match="plotly.express.scatter does not support both 'color' and 'c' kwargs",
+    ):
+        df.plot.scatter(x="a", y="b", c="c", color="d")
+    with pytest.raises(
+        ValueError,
+        match="plotly.express.scatter only supports the 'c' kwarg as a column name",
+    ):
+        df.plot.scatter(x="a", y="b", c="blue")
+    with pytest.raises(
+        ValueError,
+        match="plotly.express.scatter does not support both 'size' and 's' kwargs",
+    ):
+        df.plot.scatter(x="a", y="b", s="d", size="d")
+    with pytest.raises(
+        ValueError,
+        match="plotly.express.scatter only supports the 's' kwarg as a column name",
+    ):
+        df.plot.scatter(x="a", y="b", s=2)
