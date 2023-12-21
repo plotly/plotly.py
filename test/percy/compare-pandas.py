@@ -5,16 +5,11 @@ import os
 os.chdir(os.path.dirname(__file__))
 
 
-def clean_float(numstr):
-    # round numbers to 3 digits, to remove floating-point differences
-    return round(float(numstr), 3)
-
-
 def get_fig(html):
     # strip off all the rest of the html and js
     fig_str = html[html.index("[{", html.rindex("Plotly.newPlot(")) :]
     fig_str = fig_str[: fig_str.index("}    ") + 1]
-    data, layout, config = json.loads(f"[{fig_str}]", parse_float=clean_float)
+    data, layout, config = json.loads(f"[{fig_str}]")
     fig_dict = dict(data=data, layout=layout, config=config)
     return json.dumps(fig_dict, indent=2).splitlines(keepends=True)
 
