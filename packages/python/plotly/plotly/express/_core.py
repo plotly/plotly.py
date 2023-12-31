@@ -1416,9 +1416,9 @@ def build_dataframe(args, constructor):
             if "y" in args["labels"]:
                 y_value = args["labels"]["y"]
             else:
-                y_value = "y"
+                y_value = "value"
         else:
-            y_value = "y"
+            y_value = "value"
         value_name = _escape_col_name(columns, y_value, [])
         var_name = _escape_col_name(columns, var_name, [])
 
