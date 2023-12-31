@@ -1412,7 +1412,11 @@ def build_dataframe(args, constructor):
                 wide_cross_name = "__x__" if wide_y else "__y__"
 
     if wide_mode:
-        value_name = _escape_col_name(columns, args["labels"]["y"], [])
+        if "y" in args["labels"]:
+            y_value = args["labels"]["y"]
+        else:
+            y_value = "y"
+        value_name = _escape_col_name(columns, y_value, [])
         var_name = _escape_col_name(columns, var_name, [])
 
     if needs_interchanging:
