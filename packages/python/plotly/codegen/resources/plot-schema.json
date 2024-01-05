@@ -479,7 +479,7 @@
     "requiredOpts": []
    },
    "data_array": {
-    "description": "An {array} of data. The value MUST be an {array}, or we ignore it. Note that typed arrays (e.g. Float32Array) are supported.",
+    "description": "An {array} of data. The value must represent an {array} or it will be ignored, but this array can be provided in several forms: (1) a regular {array} object (2) a typed array (e.g. Float32Array) (3) an object with keys dtype, bdata, and optionally shape. In this 3rd form, dtype is one of *f8*, *f4*. *i4*, *u4*, *i2*, *u2*, *i1*, *u1* or *u1c* for Uint8ClampedArray. In addition to shorthand `dtype` above one could also use the following forms: *float64*, *float32*, *int32*, *uint32*, *int16*, *uint16*, *int8*, *uint8* or *uint8c* for Uint8ClampedArray. `bdata` is either a base64-encoded string or the ArrayBuffer of an integer or float typed array. For either multi-dimensional arrays you must also provide its dimensions separated by comma via `shape`. For example using `dtype`: *f4* and `shape`: *5,100* you can declare a 2-D array that has 5 rows and 100 columns containing float32 values i.e. 4 bits per value. `shape` is optional for one dimensional arrays.",
     "otherOpts": [
      "dflt"
     ],
@@ -17275,7 +17275,7 @@
      "role": "object"
     },
     "upperfence": {
-     "description": "Sets the upper fence values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `upperfence` is not provided but a sample (in `y` or `x`) is set, we compute the lower as the last sample point above 1.5 times the IQR.",
+     "description": "Sets the upper fence values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `upperfence` is not provided but a sample (in `y` or `x`) is set, we compute the upper as the last sample point above 1.5 times the IQR.",
      "editType": "calc",
      "valType": "data_array"
     },
@@ -44358,6 +44358,18 @@
      "valType": "string"
     },
     "node": {
+     "align": {
+      "description": "Sets the alignment method used to position the nodes along the horizontal axis.",
+      "dflt": "justify",
+      "editType": "calc",
+      "valType": "enumerated",
+      "values": [
+       "justify",
+       "left",
+       "right",
+       "center"
+      ]
+     },
      "color": {
       "arrayOk": true,
       "description": "Sets the `node` color. It can be a single value, or an array for specifying color for each `node`. If `node.color` is omitted, then the default `Plotly` color palette will be cycled through to have a variety of colors. These defaults are not fully opaque, to allow some visibility of what is beneath the node.",
@@ -58874,19 +58886,6 @@
      },
      "editType": "calc",
      "role": "object",
-     "shape": {
-      "description": "Determines the line shape. The values correspond to step-wise line shapes.",
-      "dflt": "linear",
-      "editType": "calc",
-      "valType": "enumerated",
-      "values": [
-       "linear",
-       "hv",
-       "vh",
-       "hvh",
-       "vhv"
-      ]
-     },
      "width": {
       "description": "Sets the line width (in px).",
       "dflt": 2,

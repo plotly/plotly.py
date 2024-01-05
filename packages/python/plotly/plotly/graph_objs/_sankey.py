@@ -586,6 +586,9 @@ class Sankey(_BaseTraceType):
 
             Supported dict properties:
 
+                align
+                    Sets the alignment method used to position the
+                    nodes along the horizontal axis.
                 color
                     Sets the `node` color. It can be a single
                     value, or an array for specifying color for
