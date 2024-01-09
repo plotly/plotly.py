@@ -62,14 +62,14 @@ You can insert Plotly output and text related to your data into HTML templates u
 <!-- #region -->
 
 ```
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;body&gt;
-&lt;h1&gt;Here's a Plotly graph!&lt;/h1&gt;
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Here's a Plotly graph!</h1>
 {{ fig }}
-&lt;p&gt;And here's some text after the graph.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<p>And here's some text after the graph.</p>
+</body>
+</html>
 ```
 
 
