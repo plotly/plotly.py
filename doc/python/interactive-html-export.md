@@ -55,6 +55,42 @@ fig.write_html("path/to/file.html")
 
 By default, the resulting HTML file is a fully self-contained HTML file which can be uploaded to a web server or shared via email or other file-sharing mechanisms. The downside to this approach is that the file is very large (5Mb+) because it contains an inlined copy of the Plotly.js library required to make the figure interactive. This can be controlled via the `include_plotlyjs` argument (see below).
 
+### Inserting Plotly Output into HTML using a Jinja2 Template
+
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We don't want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja `{{ variable }}`.  In this example, we customize the HTML in the template file by replacing the Jinja variable `{{ fig }}` with our graphic `fig`. 
+
+```
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Here's a Plotly graph!</h1>
+{{ fig }}
+<p>And here's some text after the graph.</p>
+</body>
+</html>
+```
+
+Then use the following Python to replace `{{ fig }}` in the template with HTML that will display the Plotly figure "fig":
+
+```
+import plotly.express as px
+from jinja2 import Template
+
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
+output_html_path=r"/path/to/output.html"
+input_template_path = r"/path/to/template.html"
+
+plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
+#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
+
+with open(output_html_path, "w", encoding="utf-8") as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(plotly_jinja_data))
+```
+
 
 ### HTML export in Dash
 
