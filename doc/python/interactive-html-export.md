@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: Plotly allows you to save interactive HTML versions of your figures
       to your local disk.
@@ -51,6 +51,7 @@ fig.write_html("path/to/file.html")
 ```
 <!-- #endregion -->
 
+<!-- #region -->
 ### Controlling the size of the HTML file
 
 By default, the resulting HTML file is a fully self-contained HTML file which can be uploaded to a web server or shared via email or other file-sharing mechanisms. The downside to this approach is that the file is very large (5Mb+) because it contains an inlined copy of the Plotly.js library required to make the figure interactive. This can be controlled via the `include_plotlyjs` argument (see below).
@@ -72,7 +73,7 @@ You can insert Plotly output and text related to your data into HTML templates u
 
 Then use the following Python to replace `{{ fig }}` in the template with HTML that will display the Plotly figure "fig":
 
-```
+```python
 import plotly.express as px
 from jinja2 import Template
 
@@ -90,7 +91,7 @@ with open(output_html_path, "w", encoding="utf-8") as output_file:
         j2_template = Template(template_file.read())
         output_file.write(j2_template.render(plotly_jinja_data))
 ```
-
+<!-- #endregion -->
 
 ### HTML export in Dash
 
