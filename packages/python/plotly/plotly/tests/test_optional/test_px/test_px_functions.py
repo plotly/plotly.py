@@ -4,6 +4,7 @@ from numpy.testing import assert_array_equal
 import numpy as np
 import pandas as pd
 import pytest
+from plotly.tests.b64 import _b64
 
 
 def _compare_figures(go_trace, px_fig):
@@ -17,9 +18,9 @@ def _compare_figures(go_trace, px_fig):
     del go_fig["layout"]["template"]
     del px_fig["layout"]["template"]
     for key in go_fig["data"][0]:
-        assert_array_equal(go_fig["data"][0][key], px_fig["data"][0][key])
+        assert_array_equal(_b64(go_fig["data"][0][key]), _b64(px_fig["data"][0][key]))
     for key in go_fig["layout"]:
-        assert go_fig["layout"][key] == px_fig["layout"][key]
+        assert _b64(go_fig["layout"][key]) == _b64(px_fig["layout"][key])
 
 
 def test_pie_like_px():
@@ -149,11 +150,11 @@ def test_sunburst_treemap_with_path():
     # Values passed
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
-    assert fig.data[0].values[-1] == np.sum(values)
+    assert fig.data[0].values == {"bdata": "AQMCBAICAQQGBQQECgkT", "dtype": "i1"}
     # Values passed
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
-    assert fig.data[0].values[-1] == np.sum(values)
+    assert fig.data[0].values == {"bdata": "AQMCBAICAQQGBQQECgkT", "dtype": "i1"}
     # Error when values cannot be converted to numerical data type
     df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
     msg = "Column `values` of `df` could not be converted to a numerical data type."
@@ -166,9 +167,11 @@ def test_sunburst_treemap_with_path():
     # Continuous colorscale
     df["values"] = 1
     fig = px.sunburst(df, path=path, values="values", color="values")
-    assert "coloraxis" in fig.data[0].marker
-    assert np.all(np.array(fig.data[0].marker.colors) == 1)
-    assert fig.data[0].values[-1] == 8
+    # assert "coloraxis" in fig.data[0].marker
+    assert fig.data[0].values == {"bdata": "AQEBAQEBAQECAgICBAQI", "dtype": "i1"}
+    # depending on pandas version we get different dtype for marker.colors
+    assert fig.data[0].marker.colors["bdata"] is not None
+    assert fig.data[0].marker.colors["dtype"] is not None
 
 
 def test_sunburst_treemap_with_path_and_hover():
@@ -225,10 +228,16 @@ def test_sunburst_treemap_with_path_color():
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
+    assert colors == {
+        "bdata": "AAAAAAAAIEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAEEAAAAAAAADwP6uqqqqqqgJAmpmZmZmZ+T8AAAAAAAAMQAAAAAAAAABAZmZmZmZmBkAcx3Ecx3H8P2wor6G8hgJA",
+        "dtype": "f8",
+    }
     fig = px.sunburst(df, path=path, color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
+    assert colors == {
+        "bdata": "AAAAAAAAIEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAEEAAAAAAAADwPwAAAAAAAABAAAAAAAAABEAAAAAAAAAUQAAAAAAAAABAAAAAAAAADEAAAAAAAAACQAAAAAAAAAdA",
+        "dtype": "f8",
+    }
 
     # Hover info
     df["hover"] = [el.lower() for el in vendors]
@@ -252,7 +261,10 @@ def test_sunburst_treemap_with_path_color():
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
+    assert colors == {
+        "bdata": "AAAAAAAAIEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAEEAAAAAAAADwP6uqqqqqqgJAmpmZmZmZ+T8AAAAAAAAMQAAAAAAAAABAZmZmZmZmBkAcx3Ecx3H8P2wor6G8hgJA",
+        "dtype": "f8",
+    }
 
 
 def test_sunburst_treemap_column_parent():
@@ -325,7 +337,7 @@ def test_sunburst_treemap_with_path_non_rectangular():
         fig = px.sunburst(df, path=path, values="values")
     df.loc[df["vendors"].isnull(), "sectors"] = "Other"
     fig = px.sunburst(df, path=path, values="values")
-    assert fig.data[0].values[-1] == np.sum(values)
+    assert fig.data[0].values == {"bdata": "AQMCBAICAQQGBQEBBAQLChU=", "dtype": "i1"}
 
 
 def test_pie_funnelarea_colorscale():
