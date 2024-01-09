@@ -72,7 +72,7 @@ You can insert Plotly output and text related to your data into HTML templates u
 
 Then use the following Python to replace `{{ fig }}` in the template with HTML that will display the Plotly figure "fig":
 
-```
+```python
 import plotly.express as px
 from jinja2 import Template
 
