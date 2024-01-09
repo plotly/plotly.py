@@ -51,7 +51,6 @@ fig.write_html("path/to/file.html")
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 ### Controlling the size of the HTML file
 
 By default, the resulting HTML file is a fully self-contained HTML file which can be uploaded to a web server or shared via email or other file-sharing mechanisms. The downside to this approach is that the file is very large (5Mb+) because it contains an inlined copy of the Plotly.js library required to make the figure interactive. This can be controlled via the `include_plotlyjs` argument (see below).
@@ -61,15 +60,17 @@ By default, the resulting HTML file is a fully self-contained HTML file which ca
 You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We don't want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja `{{ variable }}`.  In this example, we customize the HTML in the template file by replacing the Jinja variable `{{ fig }}` with our graphic `fig`. 
 
 ```
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Here's a Plotly graph!</h1>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Here's a Plotly graph!&lt;/h1&gt;
 {{ fig }}
-<p>And here's some text after the graph.</p>
-</body>
-</html>
+&lt;p&gt;And here's some text after the graph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 ```
+
+<!-- #region -->
 
 Then use the following Python to replace `{{ fig }}` in the template with HTML that will display the Plotly figure "fig":
 
