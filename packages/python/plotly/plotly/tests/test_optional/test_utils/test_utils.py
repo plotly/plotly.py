@@ -188,7 +188,7 @@ class TestJSONEncoder(TestCase):
             '"z": [1, "A", "2014-01-05T00:00:00", '
             '"2014-01-05T01:01:01", "2014-01-05T01:01:01.000001"]}'
         )
-        assert js2 == '{"type": "scatter", "x": [1, 2, 3]}'
+        assert js2 == '{"type": "scatter", "x": {"bdata": "AQID", "dtype": "i1"}}'
 
         # Test JSON encoding works
         _json.dumps(data, cls=utils.PlotlyJSONEncoder, sort_keys=True)
