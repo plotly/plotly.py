@@ -245,7 +245,7 @@ fig.show()
 
 ### Node Alignment
 
-*New in 5.18*
+*New in 5.19*
 
 You can set the alignment of nodes using `node.align`. Here are two examples with the same `source` and `target`. The first example has nodes aligned "left" and the second has nodes aligned "right". `node.align` also supports "center" and "justify". "justify" is the default if `node.align` is not set, and is similar to aligning to the "left", except that nodes without outgoing links are moved to the right of the figure. 
 
