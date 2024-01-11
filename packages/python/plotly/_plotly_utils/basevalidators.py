@@ -75,7 +75,7 @@ uint32max = 4294967295
 
 def to_typed_array_spec(v):
     """
-    Convert numpy array to plotly.js typed array sepc
+    Convert numpy array to plotly.js typed array spec
     If not possible return the original value
     """
     v = copy_to_readonly_numpy_array(v)
