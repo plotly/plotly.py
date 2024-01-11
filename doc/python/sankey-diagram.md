@@ -49,7 +49,7 @@ fig = go.Figure(data=[go.Sankey(
       pad = 15,
       thickness = 20,
       line = dict(color = "black", width = 0.5),
-#       label = ["A1", "A2", "A1", "B2", "C1", "C2"],
+      label = ["A1", "A2", "B1", "B2", "C1", "C2"],
       color = "blue"
     ),
     link = dict(
