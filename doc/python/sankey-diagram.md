@@ -229,7 +229,7 @@ fig = go.Figure(go.Sankey(
         label=['A', 'B', 'C', 'D', 'E', 'F'],
         x=[0.2, 0.1, 0.5, 0.7, 0.3, 0.5],
         y=[0.7, 0.5, 0.2, 0.4, 0.2, 0.3],
-        pad=10  ,
+        pad=10,
         align="right",
     ),
     link=dict(
