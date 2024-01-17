@@ -3,13 +3,13 @@ tenacity==8.2.3
 pandas==2.1.4
 numpy==1.26.3
 xarray==2023.12.0
-statsmodels==0.14.1
+statsmodels
 Pillow==10.2.0
 pytest==7.4.4
 pytz==2023.3.post1
-ipython==8.20.0
-ipywidgets==8.1.1
-ipykernel==6.29.0
+ipython[all]==7.22.0
+ipywidgets==8.0.2
+ipykernel==5.5.3
 jupyter==1.0.0
 scipy==1.11.4
 Shapely==2.0.2
