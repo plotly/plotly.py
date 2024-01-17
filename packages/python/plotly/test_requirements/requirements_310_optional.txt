@@ -1,7 +1,7 @@
 requests==2.25.1
 tenacity==6.2.0
-pandas==1.2.4
-numpy==1.21.6
+pandas==1.5.3
+numpy==1.26.3
 xarray==0.17.0
 statsmodels
 Pillow==8.2.0
@@ -11,7 +11,7 @@ ipython[all]==7.22.0
 ipywidgets==8.0.2
 ipykernel==5.5.3
 jupyter==1.0.0
-scipy==1.6.2
+scipy==1.11.4
 Shapely==1.7.1
 geopandas==0.9.0
 pyshp==2.1.3
