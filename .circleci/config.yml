@@ -433,7 +433,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, for example, `3.6.1-browsers`
-      - image: cimg/python:3.7-browsers
+      - image: cimg/python:3.11.6-browsers
 
     steps:
       - add_ssh_keys:
