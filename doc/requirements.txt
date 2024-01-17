@@ -4,7 +4,7 @@ ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
-pandas==1.5.3
+pandas==1.4.4
 statsmodels==0.14.1
 scipy==1.11.4
 patsy==0.5.6
@@ -12,8 +12,8 @@ numpy==1.23.2
 plotly-geo
 igraph
 geopandas==0.8.1
-pyshp==2.3.1
-shapely==2.0.2
+pyshp==2.1.2
+shapely==1.8.5
 psutil
 requests
 networkx
