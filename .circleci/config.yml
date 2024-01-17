@@ -32,7 +32,7 @@ commands:
   test_optional:
     parameters:
       py:
-        default: "36"
+        default: "38"
         type: string
     steps:
       - checkout
@@ -95,7 +95,7 @@ commands:
   test_orca:
     parameters:
       py:
-        default: "36"
+        default: "38"
         type: string
     steps:
       - checkout
@@ -293,7 +293,7 @@ jobs:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_37.txt
+            pip install -r ./test_requirements/requirements_38.txt
       - run:
           name: Tests
           command: |
@@ -318,7 +318,7 @@ jobs:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_37_core.txt black inflect
+            pip install -r ./test_requirements/requirements_38_core.txt black inflect
             pip install jupyterlab~=3.0
       - run:
           name: Update jupyterlab-plotly version
