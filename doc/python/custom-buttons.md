@@ -359,6 +359,7 @@ import pandas as pd
 df = pd.read_csv(
     "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
 df.columns = [col.replace("AAPL.", "") for col in df.columns]
+df = df.set_index('Date')
 
 # Initialize figure
 fig = go.Figure()
