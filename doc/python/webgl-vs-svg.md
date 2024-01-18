@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,20 +20,21 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.5
+    version: 3.10.11
   plotly:
-    description: Using WebGL for increased speed, improved interactivity, and
-      the ability to plot even more data!
+    description: Using WebGL for increased speed, improved interactivity, and the
+      ability to plot even more data!
     display_as: basic
     language: python
     layout: base
     name: WebGL vs SVG
     order: 14
     permalink: python/webgl-vs-svg/
-    thumbnail: thumbnail/webgl.jpg
     redirect_from: python/compare-webgl-svg/
+    thumbnail: thumbnail/webgl.jpg
 ---
 
+<!-- #region -->
 ### SVG and canvas/WebGL: two browser capabilities for rendering
 
 `plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: the SVG API which supports vector rendering, and the Canvas API which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
@@ -58,6 +59,15 @@ In addition to the above limitations, the WebGL-powered version of certain SVG-p
 * Range breaks on time-series axes are not yet supported
 * Axis range heuristics may differ
 
+### Multiple WebGL Contexts
+
+*New in 5.19*
+
+If you encounter WebGL context limits when rendering many WebGL-based figures on one page, you can use [Virtual WebGL](https://github.com/greggman/virtual-webgl).
+
+To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
+
+
 ### WebGL for Scatter Performance
 
 In the examples below we show that it is possible to represent up to around a million points with WebGL-enabled traces.
@@ -71,6 +81,7 @@ The `rendermode` argument to supported Plotly Express functions (e.g. `scatter` 
 > **Note** The default `rendermode` is `"auto"`, in which case Plotly Express will automatically set `rendermode="webgl"` if the input data is more than 1,000 rows long. If WebGL acceleration is *not* desired in this case, `rendermode` can be forced to `"svg"` for vectorized, if slower, rendering.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
+<!-- #endregion -->
 
 ```python
 import plotly.express as px
