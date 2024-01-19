@@ -4310,7 +4310,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
-    def dict_almost_equal(d1, d2, places=7):
+    def dict_almost_equal(self, d1, d2, places=7):
         for k, v1 in d1.items():
             if isinstance(v1, float):
                 if not math.isclose(v1, d2[k], abs_tol=10**-places):
