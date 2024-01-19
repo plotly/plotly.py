@@ -4316,7 +4316,9 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 if not math.isclose(v1, d2[k], abs_tol=10**-places):
                     return False
             elif isinstance(v1, dict):
-                if not dict_almost_equal(v1, d2[k], places=places):
+                if not self.dict_almost_equal(
+                    v1, d2[k], places=places
+                ):  # Add 'self.' here
                     return False
             elif isinstance(v1, list):
                 for item1, item2 in zip(v1, d2[k]):
