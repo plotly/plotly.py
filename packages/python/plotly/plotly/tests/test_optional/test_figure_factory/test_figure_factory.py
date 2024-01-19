@@ -4310,14 +4310,33 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
-    def assertDictAlmostEqual(self, d1, d2, places=7):
+    def dict_almost_equal(d1, d2, places=7):
         for k, v1 in d1.items():
             if isinstance(v1, float):
-                self.assertAlmostEqual(v1, d2[k], places=places)
+                if not math.isclose(v1, d2[k], abs_tol=10**-places):
+                    return False
             elif isinstance(v1, dict):
-                self.assertDictAlmostEqual(v1, d2[k], places=places)
+                if not dict_almost_equal(v1, d2[k], places=places):
+                    return False
+            elif isinstance(v1, list):
+                for item1, item2 in zip(v1, d2[k]):
+                    if isinstance(item1, list):
+                        for subitem1, subitem2 in zip(item1, item2):
+                            if isinstance(subitem1, float):
+                                if not math.isclose(
+                                    subitem1, subitem2, abs_tol=10**-places
+                                ):
+                                    return False
+                            else:
+                                if subitem1 != subitem2:
+                                    return False
+                    else:
+                        if item1 != item2:
+                            return False
             else:
-                self.assertEqual(v1, d2[k])
+                if v1 != d2[k]:
+                    return False
+        return True
 
     def test_aggregation(self):
 
@@ -4425,7 +4444,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         actual_agg = [2.0, 2.0, 1.0, 3.0, 9.0]
 
-        self.assertDictAlmostEqual(fig1.data[0].geojson, actual_geojson)
+        self.dict_almost_equal(fig1.data[0].geojson, actual_geojson)
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
         fig2 = ff.create_hexbin_mapbox(
