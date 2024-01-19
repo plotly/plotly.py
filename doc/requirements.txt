@@ -7,7 +7,7 @@ notebook
 pandas
 statsmodels==0.14.1
 scipy
-patsy==0.5.1
+patsy==0.5.4
 numpy
 plotly-geo
 igraph
