@@ -7,6 +7,7 @@ from packaging import version
 import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
+import sys
 
 
 # Fixtures
