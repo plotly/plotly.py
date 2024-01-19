@@ -328,7 +328,7 @@ def _calculations(
 ):
     # 0-pad FIPS code to ensure exactly 5 digits
     padded_f = str(f).zfill(5)
-    if fips_polygon_map[f].type == "Polygon":
+    if fips_polygon_map[f].geom_type == "Polygon":
         x = fips_polygon_map[f].simplify(simplify_county).exterior.xy[0].tolist()
         y = fips_polygon_map[f].simplify(simplify_county).exterior.xy[1].tolist()
 
@@ -355,18 +355,18 @@ def _calculations(
 
         x_traces[level] = x_traces[level] + x + [np.nan]
         y_traces[level] = y_traces[level] + y + [np.nan]
-    elif fips_polygon_map[f].type == "MultiPolygon":
+    elif fips_polygon_map[f].geom_type == "MultiPolygon":
         x = [
             poly.simplify(simplify_county).exterior.xy[0].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
         y = [
             poly.simplify(simplify_county).exterior.xy[1].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
 
-        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
-        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
+        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f].geoms]
+        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f].geoms]
 
         county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
         state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
@@ -382,7 +382,7 @@ def _calculations(
             + "<br>Value: "
             + str(values[index])
         )
-        t_c = [text for poly in fips_polygon_map[f]]
+        t_c = [text for poly in fips_polygon_map[f].geoms]
         x_centroids = x_c + x_centroids
         y_centroids = y_c + y_centroids
         centroid_text = t_c + centroid_text
@@ -626,9 +626,9 @@ $ conda install -c plotly plotly-geo
             "factory.\n\nRun the following commands to install the correct "
             "versions of the following modules:\n\n"
             "```\n"
-            "$ pip install geopandas==0.3.0\n"
-            "$ pip install pyshp==1.2.10\n"
-            "$ pip install shapely==1.6.3\n"
+            "$ pip install geopandas==0.13.2\n"
+            "$ pip install pyshp==2.3.1\n"
+            "$ pip install shapely==2.0.2\n"
             "```\n"
             "If you are using Windows, follow this post to properly "
             "install geopandas and dependencies:"
@@ -772,7 +772,7 @@ $ conda install -c plotly plotly-geo
         for index, f in enumerate(fips):
             level = values[index]
             try:
-                fips_polygon_map[f].type
+                fips_polygon_map[f].geom_type
 
                 (
                     x_traces,
@@ -806,7 +806,7 @@ $ conda install -c plotly plotly-geo
             level = LEVELS[j]
 
             try:
-                fips_polygon_map[f].type
+                fips_polygon_map[f].geom_type
 
                 (
                     x_traces,
@@ -845,19 +845,19 @@ $ conda install -c plotly plotly-geo
     x_states = []
     y_states = []
     for index, row in df_state.iterrows():
-        if df_state["geometry"][index].type == "Polygon":
+        if df_state["geometry"][index].geom_type == "Polygon":
             x = row.geometry.simplify(simplify_state).exterior.xy[0].tolist()
             y = row.geometry.simplify(simplify_state).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
-        elif df_state["geometry"][index].type == "MultiPolygon":
+        elif df_state["geometry"][index].geom_type == "MultiPolygon":
             x = [
                 poly.simplify(simplify_state).exterior.xy[0].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             y = [
                 poly.simplify(simplify_state).exterior.xy[1].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
