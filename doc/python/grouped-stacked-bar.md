@@ -41,12 +41,7 @@ This page details the use of a [figure factory](/python/figure-factories/). For 
 import plotly.figure_factory as ff
 import plotly.express as px
 
-df = (
-    px.data.tips()
-    .groupby(["day", "sex", "smoker"])
-    [["total_bill", "tip"]].sum()
-    .reset_index()
-)
+df = px.data.tips().groupby(["day", "sex", "smoker"])[["total_bill", "tip"]].sum().reset_index()
 
 fig = ff.create_grouped_stacked_bar(
     df,
@@ -65,12 +60,7 @@ fig.show()
 import plotly.figure_factory as ff
 import plotly.express as px
 
-df = (
-    px.data.tips()
-    .groupby(["day", "sex", "smoker"])
-    [["total_bill", "tip"]].sum()
-    .reset_index()
-)
+df = px.data.tips().groupby(["day", "sex", "smoker"])[["total_bill", "tip"]].sum().reset_index()
 
 fig = ff.create_grouped_stacked_bar(
     df,
