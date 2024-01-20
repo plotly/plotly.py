@@ -1,3 +1,4 @@
+from io import StringIO
 from unittest import TestCase
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
@@ -4516,3 +4517,85 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert len(fig6.frames) == n_frames
         assert len(fig7.frames) == n_frames
         assert fig6.data[0].geojson == fig1.data[0].geojson
+
+class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
+    data = pd.read_csv(StringIO(
+        "loc,prod,type,value,err\n"
+        "L1,P1,R1,4,0.2\n"
+        "L1,P1,R2,4.5,0.2\n"
+        "L1,P1,R3,4.5,0.2\n"
+        "L1,P2,R1,5.6,0.2\n"
+        "L1,P2,R2,5,0.2\n"
+        "L1,P3,R1,3.5,0.2\n"
+        "L1,P3,R2,3.5,0.2\n"
+        "L1,P3,R3,3.5,0.2\n"
+        "L2,P1,R1,2,0.2\n"
+        "L2,P1,R2,2,0.2\n"
+        "L2,P2,R1,2.5,0.2\n"
+        "L2,P2,R2,3,0.2\n"
+        "L2,P3,R2,3.5,0.2\n"
+        "L3,P1,R1,2,0.2\n"
+        "L3,P1,R2,2,0.2\n"
+        "L3,P2,R1,2.5,0.2\n"
+        "L3,P2,R2,3,0.2\n"
+        "L3,P3,R2,3.5,0.2\n"
+    ))
+
+    def test_simple_stack_group(self):
+        fig = ff.create_grouped_stacked_bar(
+            self.data,
+            x="loc",
+            y="value",
+            color="type",
+            stackgroup="prod",
+        )
+
+        assert len(fig.data) == len(self.data.drop_duplicates(["prod", "type"]))
+        assert "yaxis2" in fig.layout
+        assert "yaxis3" in fig.layout
+        assert fig.layout["yaxis2"]["matches"] == "y"
+
+    def test_horizontal_stack_group(self):
+        fig = ff.create_grouped_stacked_bar(
+            self.data,
+            x="value",
+            y="x",
+            color="type",
+            stackgroup="prod",
+            orientation="h",
+        )
+
+        assert len(fig.data) == len(self.data.drop_duplicates(["prod", "type"]))
+        assert "xaxis2" in fig.layout
+        assert "xaxis3" in fig.layout
+        assert fig.layout["xaxis2"]["matches"] == "x"
+
+    def test_advanced_stack_group(self):
+        fig = ff.create_grouped_stacked_bar(
+            self.data,
+            x="loc",
+            y="value",
+            color="type",
+            stackgroup="prod",
+            stackgroupgap=0.33,
+            error_y="err",
+            labels={"loc": "Location", "value": "Revenue", "type": "Type", "prod": "Product"},
+            hover_name="prod",
+            category_orders={
+                "loc": ["L3", "L2", "L1"],
+                "type": ["R1", "R3", "R2"],
+                "prod": ["P3"],
+            },
+            template="ggplot2",
+        )
+
+        assert fig.layout.xaxis.categoryarray == ["L3", "L2", "L1"]
+        type_order = []
+        prod_order = []
+        for t in fig.data:
+            if t.name not in type_order:
+                type_order.append(t.name)
+            if t.legendgroup not in prod_order:
+                prod_order.append(t.legendgroup)
+        assert type_order == ["R1", "R3", "R2"]
+        assert prod_order == ["P3", "P1", "P2"]
