@@ -23,11 +23,11 @@ jupyter:
     version: 3.7.7
   plotly:
     description: How to make a grouped and stacked bar chart in Python with Plotly.
-    display_as: scientific
+    display_as: statistical
     language: python
     layout: base
     name: Grouped Stacked Bar Charts
-    order: 27
+    order: 17
     page_type: u-guide
     permalink: python/grouped-stacked-bar/
     thumbnail: thumbnail/grouped-stacked-bar.jpg
