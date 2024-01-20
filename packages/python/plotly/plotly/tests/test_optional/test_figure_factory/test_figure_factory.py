@@ -4562,7 +4562,7 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
         fig = ff.create_grouped_stacked_bar(
             self.data,
             x="value",
-            y="x",
+            y="loc",
             color="type",
             stack_group="prod",
             orientation="h",
@@ -4599,7 +4599,7 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
             hover_unified=True,
         )
 
-        assert fig.layout.xaxis.categoryarray == ["L3", "L2", "L1"]
+        assert fig.layout.xaxis.categoryarray == ("L3", "L2", "L1")
         type_order = []
         prod_order = []
         for t in fig.data:
