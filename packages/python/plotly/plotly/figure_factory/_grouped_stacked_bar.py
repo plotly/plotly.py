@@ -83,11 +83,17 @@ def create_grouped_stacked_bar(
             return [base_color]
 
         if n_colors == 2:
-            light = colorsys.hls_to_rgb(hls_tuple[0], min(1, max(0.75, hls_tuple[1] + 0.2)), hls_tuple[2])
+            light = colorsys.hls_to_rgb(
+                hls_tuple[0], min(1, max(0.75, hls_tuple[1] + 0.2)), hls_tuple[2]
+            )
             return pyc.sample_colorscale([light, base_color], n_colors)
 
-        light = colorsys.hls_to_rgb(hls_tuple[0], min(1, max(0.8, hls_tuple[1] + 0.2)), hls_tuple[2])
-        dark = colorsys.hls_to_rgb(hls_tuple[0], max(0, min(0.3, hls_tuple[1] - 0.2)), hls_tuple[2])
+        light = colorsys.hls_to_rgb(
+            hls_tuple[0], min(1, max(0.8, hls_tuple[1] + 0.2)), hls_tuple[2]
+        )
+        dark = colorsys.hls_to_rgb(
+            hls_tuple[0], max(0, min(0.3, hls_tuple[1] - 0.2)), hls_tuple[2]
+        )
         return pyc.sample_colorscale([light, base_color, dark], n_colors)
 
     if template is None:
@@ -125,21 +131,18 @@ def create_grouped_stacked_bar(
             color_discrete_sequence[i % len(color_discrete_sequence)],
             n_colors,
         )
-        group_fig = (
-            bar(
-                group_df,
-                color_discrete_sequence=colors,
-                hover_data=hover_data,
-                **args,
-            )
-            .update_traces(
-                offsetgroup=str(i),
-                offset=(i - n_groups / 2) * (group_width + bar_gap) + 1 / 2 * bar_gap,
-                width=group_width,
-                legendgroup=group,
-                legendgrouptitle_text=group,
-                **{f"{value_axis}axis": f"{value_axis}{i + 1}"},
-            )
+        group_fig = bar(
+            group_df,
+            color_discrete_sequence=colors,
+            hover_data=hover_data,
+            **args,
+        ).update_traces(
+            offsetgroup=str(i),
+            offset=(i - n_groups / 2) * (group_width + bar_gap) + 1 / 2 * bar_gap,
+            width=group_width,
+            legendgroup=group,
+            legendgrouptitle_text=group,
+            **{f"{value_axis}axis": f"{value_axis}{i + 1}"},
         )
         if fig is None:
             fig = group_fig
@@ -155,9 +158,7 @@ def create_grouped_stacked_bar(
                     }
                 }
             )
-    fig.update_layout(
-        **{f"{base_axis}axis_type": "category"}
-    )
+    fig.update_layout(**{f"{base_axis}axis_type": "category"})
     if hover_unified:
         fig.update_layout(hovermode="x unified").update_traces(hovertemplate="%{y}")
 
@@ -171,5 +172,5 @@ create_grouped_stacked_bar.__doc__ = make_docstring(
         "stack_group_gap": "Value between 0 and 1. Sets the gap between the stack groups.",
         "bar_gap": "Value between 0 and 1. Sets the gap between the bars within each group.",
         "hover_unified": "Whether to show the hover in a unified format.",
-    }
+    },
 )

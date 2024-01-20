@@ -4518,28 +4518,31 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert len(fig7.frames) == n_frames
         assert fig6.data[0].geojson == fig1.data[0].geojson
 
+
 class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
-    data = pd.read_csv(StringIO(
-        "loc,prod,type,value,err\n"
-        "L1,P1,R1,4,0.2\n"
-        "L1,P1,R2,4.5,0.2\n"
-        "L1,P1,R3,4.5,0.2\n"
-        "L1,P2,R1,5.6,0.2\n"
-        "L1,P2,R2,5,0.2\n"
-        "L1,P3,R1,3.5,0.2\n"
-        "L1,P3,R2,3.5,0.2\n"
-        "L1,P3,R3,3.5,0.2\n"
-        "L2,P1,R1,2,0.2\n"
-        "L2,P1,R2,2,0.2\n"
-        "L2,P2,R1,2.5,0.2\n"
-        "L2,P2,R2,3,0.2\n"
-        "L2,P3,R2,3.5,0.2\n"
-        "L3,P1,R1,2,0.2\n"
-        "L3,P1,R2,2,0.2\n"
-        "L3,P2,R1,2.5,0.2\n"
-        "L3,P2,R2,3,0.2\n"
-        "L3,P3,R2,3.5,0.2\n"
-    ))
+    data = pd.read_csv(
+        StringIO(
+            "loc,prod,type,value,err\n"
+            "L1,P1,R1,4,0.2\n"
+            "L1,P1,R2,4.5,0.2\n"
+            "L1,P1,R3,4.5,0.2\n"
+            "L1,P2,R1,5.6,0.2\n"
+            "L1,P2,R2,5,0.2\n"
+            "L1,P3,R1,3.5,0.2\n"
+            "L1,P3,R2,3.5,0.2\n"
+            "L1,P3,R3,3.5,0.2\n"
+            "L2,P1,R1,2,0.2\n"
+            "L2,P1,R2,2,0.2\n"
+            "L2,P2,R1,2.5,0.2\n"
+            "L2,P2,R2,3,0.2\n"
+            "L2,P3,R2,3.5,0.2\n"
+            "L3,P1,R1,2,0.2\n"
+            "L3,P1,R2,2,0.2\n"
+            "L3,P2,R1,2.5,0.2\n"
+            "L3,P2,R2,3,0.2\n"
+            "L3,P3,R2,3.5,0.2\n"
+        )
+    )
 
     def test_simple_stack_group(self):
         fig = ff.create_grouped_stacked_bar(
@@ -4579,7 +4582,12 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
             stackgroup="prod",
             stackgroupgap=0.33,
             error_y="err",
-            labels={"loc": "Location", "value": "Revenue", "type": "Type", "prod": "Product"},
+            labels={
+                "loc": "Location",
+                "value": "Revenue",
+                "type": "Type",
+                "prod": "Product",
+            },
             hover_name="prod",
             category_orders={
                 "loc": ["L3", "L2", "L1"],
