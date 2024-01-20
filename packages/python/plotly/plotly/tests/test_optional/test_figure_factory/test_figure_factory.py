@@ -4550,7 +4550,7 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
             x="loc",
             y="value",
             color="type",
-            stackgroup="prod",
+            stack_group="prod",
         )
 
         assert len(fig.data) == len(self.data.drop_duplicates(["prod", "type"]))
@@ -4564,7 +4564,7 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
             x="value",
             y="x",
             color="type",
-            stackgroup="prod",
+            stack_group="prod",
             orientation="h",
         )
 
@@ -4579,8 +4579,9 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
             x="loc",
             y="value",
             color="type",
-            stackgroup="prod",
-            stackgroupgap=0.33,
+            stack_group="prod",
+            stack_group_gap=0.33,
+            bar_gap=0.033,
             error_y="err",
             labels={
                 "loc": "Location",
@@ -4595,6 +4596,7 @@ class TestBarStackGroup(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 "prod": ["P3"],
             },
             template="ggplot2",
+            hover_unified=True,
         )
 
         assert fig.layout.xaxis.categoryarray == ["L3", "L2", "L1"]
