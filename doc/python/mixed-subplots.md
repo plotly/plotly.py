@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make mixed subplots in Python with Plotly.
     display_as: multiple_axes
@@ -56,7 +56,7 @@ df = pd.read_csv(
 
 # frequency of Country
 freq = df
-freq = freq.Country.value_counts().reset_index().rename(columns={"index": "x"})
+freq = freq.Country.value_counts().reset_index().rename(columns={"Country": "x"})
 
 # read in 3d volcano surface data
 df_v = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/volcano.csv")
@@ -82,7 +82,7 @@ fig.add_trace(
 
 # Add locations bar chart
 fig.add_trace(
-    go.Bar(x=freq["x"][0:10],y=freq["Country"][0:10], marker=dict(color="crimson"), showlegend=False),
+    go.Bar(x=freq["x"][0:10],y=freq["count"][0:10], marker=dict(color="crimson"), showlegend=False),
     row=1, col=2
 )
 
