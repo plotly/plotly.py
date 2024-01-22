@@ -4427,7 +4427,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         actual_agg = [2.0, 2.0, 1.0, 3.0, 9.0]
 
-        self.assert_dict_almost_equal(self, fig1.data[0].geojson, actual_geojson)
+        self.assert_dict_almost_equal(fig1.data[0].geojson, actual_geojson)
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
         fig2 = ff.create_hexbin_mapbox(
