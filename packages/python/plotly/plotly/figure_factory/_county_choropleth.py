@@ -358,15 +358,15 @@ def _calculations(
     elif fips_polygon_map[f].type == "MultiPolygon":
         x = [
             poly.simplify(simplify_county).exterior.xy[0].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
         y = [
             poly.simplify(simplify_county).exterior.xy[1].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
 
-        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
-        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
+        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f].geoms]
+        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f].geoms]
 
         county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
         state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
