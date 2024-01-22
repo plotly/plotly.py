@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.15.1
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.10.11
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -380,7 +380,7 @@ apple_df = pd.read_csv(
     index_col="Date"
 )
 
-apple_df_2016 = apple_df["2016"]
+apple_df_2016 = apple_df.loc["2016"]
 
 # Create figure and add line
 fig = go.Figure()
