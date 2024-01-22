@@ -4,7 +4,7 @@ ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
-pandas==1.1.5
+pandas==1.2.0
 statsmodels==0.12.1
 scipy==1.5.4
 patsy==0.5.1
