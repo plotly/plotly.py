@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.10.11
   plotly:
     description: How to make 3D Volume Plots in Python with Plotly.
     display_as: 3d_charts
@@ -86,7 +86,7 @@ np.random.seed(0)
 l = 30
 X, Y, Z = np.mgrid[:l, :l, :l]
 vol = np.zeros((l, l, l))
-pts = (l * np.random.rand(3, 15)).astype(np.int)
+pts = (l * np.random.rand(3, 15)).astype(int)
 vol[tuple(indices for indices in pts)] = 1
 from scipy import ndimage
 vol = ndimage.gaussian_filter(vol, 4)
