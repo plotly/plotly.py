@@ -4315,6 +4315,8 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         for i in range(len(list1)):
             if isinstance(list1[i], list):
                 self.compare_list_values(list1[i], list2[i], decimal=decimal)
+            elif isinstance(list1[i], dict):
+                self.compare_dict_values(list1[i], list2[i], decimal=decimal)
             elif isinstance(list1[i], float):
                 np.testing.assert_almost_equal(list1[i], list2[i], decimal=decimal)
             else:
