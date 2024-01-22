@@ -1,12 +1,13 @@
 plotly==5.18.0
-jupytext==1.1.1
+jupytext
 ipywidgets==7.7.2
 jupyter-client<7
+jupytext==1.1.1
 jupyter
 notebook
 pandas
 statsmodels==0.14.1
-scipy
+scipy==1.8.1
 patsy==0.5.4
 numpy
 plotly-geo
@@ -18,7 +19,7 @@ psutil
 requests
 networkx
 squarify
-scikit-image==0.18.1
+scikit-image
 scikit-learn
 sphinx==3.5.4
 sphinx_bootstrap_theme
