@@ -4,11 +4,11 @@ ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
-pandas==1.5.3
-statsmodels
-scipy
+pandas==1.1.5
+statsmodels==1.12.1
+scipy==1.5.4
 patsy==0.5.1
-numpy
+numpy==1.19.5
 plotly-geo
 igraph
 geopandas==0.8.1
@@ -18,7 +18,7 @@ psutil
 requests
 networkx
 squarify
-scikit-image==0.18.1
+scikit-image
 scikit-learn
 sphinx==3.5.4
 sphinx_bootstrap_theme
