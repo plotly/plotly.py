@@ -4,7 +4,7 @@ jupyter-client<7
 jupytext
 jupyter
 notebook
-pandas==2.2.0
+pandas==2.0.3
 statsmodels==0.14.1
 scipy==1.8.1
 patsy==0.5.4
