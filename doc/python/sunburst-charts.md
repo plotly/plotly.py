@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -367,11 +367,11 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
             df_tree['parent'] = 'total'
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_all_trees = pd.concat([df_all_trees, df_tree], ignore_index=True)
     total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
                               color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+    df_all_trees = pd.concat([df_all_trees, pd.DataFrame(total).T], ignore_index=True)
     return df_all_trees
 
 
