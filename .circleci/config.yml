@@ -574,9 +574,11 @@ workflows:
       - python_38_core
       - python_39_core
       - python_310_core
+      - python_311_core
       - python_38_optional
       - python_39_optional
       - python_310_optional
+      - python_311_optional
       - python_39_pandas_2_optional
       - python_38_orca
       - python_39_percy
