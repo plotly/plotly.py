@@ -16,9 +16,9 @@ pyshp==2.1.2
 shapely==1.7.1
 psutil
 requests
-networkx
+networkx==2.6.3
 squarify
-scikit-image
+scikit-image==0.18.1
 scikit-learn
 sphinx==3.5.4
 sphinx_bootstrap_theme
