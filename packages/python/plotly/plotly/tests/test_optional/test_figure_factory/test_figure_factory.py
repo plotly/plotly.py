@@ -4310,6 +4310,17 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
+    def assert_dict_equal(self, dict1, dict2, decimal=7):
+        for k, v in dict1.items():
+            if isinstance(v, dict):
+                assert_dict_almost_equal(v, dict2[k], decimal=decimal)
+            elif isinstance(v, float):
+                np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
+            else:
+                assert (
+                    v == dict2[k]
+                ), f"Values for key {k} are not equal: {v} != {dict2[k]}"
+
     def test_aggregation(self):
 
         lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
