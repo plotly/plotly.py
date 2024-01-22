@@ -144,10 +144,14 @@ def test_graph_object_input(engine, pretty):
 
 def test_numeric_numpy_encoding(numeric_numpy_array, engine, pretty):
     value = build_test_dict(numeric_numpy_array)
+    print("value", value)
     result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
 
+    print("result", result)
     array_str = to_json_test(numeric_numpy_array.tolist())
+    print("array_str", array_str)
     expected = build_test_dict_string(array_str, pretty=pretty)
+    print("expected", expected)
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
 
