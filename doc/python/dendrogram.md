@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.10.11
   plotly:
     description: How to make a dendrogram in Python with Plotly.
     display_as: scientific
@@ -92,7 +92,7 @@ from scipy.spatial.distance import pdist, squareform
 # get data
 data = np.genfromtxt("http://files.figshare.com/2133304/ExpRawData_E_TABM_84_A_AFFY_44.tab",
                      names=True,usecols=tuple(range(1,30)),dtype=float, delimiter="\t")
-data_array = data.view((np.float, len(data.dtype.names)))
+data_array = data.view((float, len(data.dtype.names)))
 data_array = data_array.transpose()
 labels = data.dtype.names
 
