@@ -4313,7 +4313,17 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def assert_dict_almost_equal(self, dict1, dict2, decimal=7):
         for k, v in dict1.items():
             if isinstance(v, dict):
-                assert_dict_almost_equal(self, v, dict2[k], decimal=decimal)
+                self.assert_dict_almost_equal(v, dict2[k], decimal=decimal)
+            elif isinstance(v, list):
+                for i in range(len(v)):
+                    if isinstance(v[i], float):
+                        np.testing.assert_almost_equal(
+                            v[i], dict2[k][i], decimal=decimal
+                        )
+                    else:
+                        assert (
+                            v[i] == dict2[k][i]
+                        ), f"Values at index {i} for key {k} are not equal: {v[i]} != {dict2[k][i]}"
             elif isinstance(v, float):
                 np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
             else:
