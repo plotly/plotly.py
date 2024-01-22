@@ -66,14 +66,17 @@ jupyter-console==6.4.2
 jupyter-server==1.15.6
 jupyter_core==5.7.1
 jupyterlab-widgets==1.1.7
-jupytext==1.1.1
+jupytext==1.16.1
 kaleido==0.2.1
 kiwisolver==1.4.5
 llvmlite==0.41.1
 locket==1.0.0
+markdown-it-py==3.0.0
 MarkupSafe==2.1.4
 matplotlib==3.8.2
 matplotlib-inline==0.1.6
+mdit-py-plugins==0.4.0
+mdurl==0.1.2
 mistune==0.8.4
 mock==5.1.0
 multipledispatch==1.0.0
@@ -88,7 +91,7 @@ numba==0.58.1
 numpy==1.24.4
 orjson==3.9.12
 packaging==23.2
-pandas==2.0.3
+pandas==2.0.0
 pandocfilters==1.5.1
 param==2.0.2
 ParmEd==4.2.2
@@ -156,6 +159,7 @@ testpath==0.6.0
 texttable==1.7.0
 threadpoolctl==3.2.0
 tifffile==2023.12.9
+toml==0.10.2
 toolz==0.12.0
 tornado==6.4
 tqdm==4.66.1
