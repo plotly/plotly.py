@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to make Box Plots in Python with Plotly.
     display_as: statistical
@@ -458,12 +458,12 @@ x_data = ['Carmelo Anthony', 'Dwyane Wade',
 
 N = 50
 
-y0 = (10 * np.random.randn(N) + 30).astype(np.int)
-y1 = (13 * np.random.randn(N) + 38).astype(np.int)
-y2 = (11 * np.random.randn(N) + 33).astype(np.int)
-y3 = (9 * np.random.randn(N) + 36).astype(np.int)
-y4 = (15 * np.random.randn(N) + 31).astype(np.int)
-y5 = (12 * np.random.randn(N) + 40).astype(np.int)
+y0 = (10 * np.random.randn(N) + 30).astype(int)
+y1 = (13 * np.random.randn(N) + 38).astype(int)
+y2 = (11 * np.random.randn(N) + 33).astype(int)
+y3 = (9 * np.random.randn(N) + 36).astype(int)
+y4 = (15 * np.random.randn(N) + 31).astype(int)
+y5 = (12 * np.random.randn(N) + 40).astype(int)
 
 y_data = [y0, y1, y2, y3, y4, y5]
 
