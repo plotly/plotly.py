@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [UNRELEASED]
 
 ### Updated
-- Removed Python 3.6 and Python 3.7 support [[#4490](https://github.com/plotly/plotly.py/pull/4490)]
+- Removed Python 3.6 and Python 3.7 support [[#4492](https://github.com/plotly/plotly.py/pull/4492)]
 
 ### Fixed
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
