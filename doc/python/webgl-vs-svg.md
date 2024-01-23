@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -34,7 +34,6 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-<!-- #region -->
 ### SVG and canvas/WebGL: two browser capabilities for rendering
 
 `plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: the SVG API which supports vector rendering, and the Canvas API which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
@@ -69,6 +68,12 @@ If you encounter WebGL context limits when rendering WebGL-based figures on one 
 
 To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
 
+In a Jupyter notebook environment that supports magic commands, you can load it with the [HTML magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-html):
+
+```
+%%html
+<script src=“https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js”></script>
+```
 
 ### WebGL for Scatter Performance
 
@@ -83,7 +88,6 @@ The `rendermode` argument to supported Plotly Express functions (e.g. `scatter` 
 > **Note** The default `rendermode` is `"auto"`, in which case Plotly Express will automatically set `rendermode="webgl"` if the input data is more than 1,000 rows long. If WebGL acceleration is *not* desired in this case, `rendermode` can be forced to `"svg"` for vectorized, if slower, rendering.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
-<!-- #endregion -->
 
 ```python
 import plotly.express as px
