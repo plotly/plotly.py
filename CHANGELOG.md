@@ -5,13 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [UNRELEASED]
 
 ### Updated
+
 - Updated Plotly.js from version 2.27.0 to version 2.28.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2280----2024-01-05) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `align` option to sankey nodes to control horizontal alignment [[#6800](https://github.com/plotly/plotly.js/pull/6800)],
    with thanks to @adamreeve for the contribution!
   - Add the possibility of loading "virtual-webgl" script for WebGL 1 to help display several WebGL contexts on a page [[#6784](https://github.com/plotly/plotly.js/pull/6784)], with thanks to @greggman for the contribution!
   - Add options to use base64 encoding (`bdata`) and `shape` (for 2 dimensional arrays) to declare various typed arrays i.e. `dtype=(float64|float32|int32|int16|int8|uint32|uint16|uint8)` [[#5230](https://github.com/plotly/plotly.js/pull/5230)]
   -  Adjust stamen styles to point to `stadiamaps.com`, the users may also need to provide their own API_KEY via `config.mapboxAccessToken` [[#6776](https://github.com/plotly/plotly.js/pull/6776), [#6778](https://github.com/plotly/plotly.js/pull/6778)]
-
+- Removed Python 3.6 and Python 3.7 support [[#4492](https://github.com/plotly/plotly.py/pull/4492)]
 
 ### Fixed
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
