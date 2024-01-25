@@ -66,7 +66,7 @@ Most browsers have a limit of between 8 and 16 WebGL contexts per page. Plotly W
 
 If you exceed the browser limit on WebGL contexts, some figures won't render and you'll see an error. In the console in Chrome, for example, you'll see the error: "Too many active WebGL contexts. Oldest context will be lost".
 
-If you encounter WebGL context limits when rendering WebGL-based figures on one page, you can use [Virtual WebGL](https://github.com/greggman/virtual-webgl).
+If you encounter WebGL context limits when using WebGL-based figures, you can use [Virtual WebGL](https://github.com/greggman/virtual-webgl), which virtualizes a single WebGL context into multiple contexts.
 
 To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
 
