@@ -62,7 +62,7 @@ In addition to the above limitations, the WebGL-powered version of certain SVG-p
 
 *New in 5.19*
 
-Most browsers have a limit of between 8 and 16 WebGL contexts per page. Plotly WebGL-based figure may use multiple WebGL contexts, but generally you'll be able to render between 4 and 8 figures on one page.
+Most browsers have a limit of between 8 and 16 WebGL contexts per page. A Plotly WebGL-based figure may use multiple WebGL contexts, but generally you'll be able to render between 4 and 8 figures on one page.
 
 If you exceed the browser limit on WebGL contexts, some figures won't render and you'll see an error. In the console in Chrome, for example, you'll see the error: "Too many active WebGL contexts. Oldest context will be lost".
 
