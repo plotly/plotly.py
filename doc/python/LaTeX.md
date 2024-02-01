@@ -35,7 +35,7 @@ jupyter:
 
 #### LaTeX Typesetting
 
-Figure titles, axis labels and annotations all accept LaTeX directives for rendering mathematical formulas and notation, when the entire label is surrounded by dollar signs `$...$`. This rendering is handled by the [MathJax library](https://www.mathjax.org/) (version 2.7.5), which must be loaded in the environment where figures are being rendered. MathJax is included by default in Jupyter-like environments, but when embedding Plotly figures in other contexts it may be required to ensure that MathJax is separately loaded, for example via a `<script>` tag pointing to a content-delivery network (CDN).
+Figure titles, axis labels and annotations all accept LaTeX directives for rendering mathematical formulas and notation, when the entire label is surrounded by dollar signs `$...$`. This rendering is handled by the [MathJax library](https://www.mathjax.org/) (version 2.7.5), which must be loaded in the environment where figures are being rendered. MathJax is included by default in Jupyter-like environments, and LateX directives work with Jupyter Notebook version 6. LaTeX directives do not work with Jupyter Notebook version 7.  When embedding Plotly figures in other contexts it may be required to ensure that MathJax is separately loaded, for example via a `<script>` tag pointing to a content-delivery network (CDN).
 
 ```python
 import plotly.express as px
