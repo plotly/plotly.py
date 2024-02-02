@@ -80,6 +80,10 @@ class Figure(BaseFigure):
                         `type` detection. This is the default value;
                         however it could be overridden for individual
                         axes.
+                    barcornerradius
+                        Sets the rounding of bar corners. May be an
+                        integer number of pixels, or a percentage of
+                        bar width (as a string ending in %).
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.

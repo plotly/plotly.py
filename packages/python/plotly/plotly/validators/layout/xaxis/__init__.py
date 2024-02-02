@@ -86,6 +86,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autotickangles import AutotickanglesValidator
     from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
@@ -181,6 +182,7 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autotickangles.AutotickanglesValidator",
             "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
