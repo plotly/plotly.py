@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.16.1
   kernel_info:
     name: python2
   kernelspec:
@@ -157,6 +157,32 @@ fig.update_layout(
     paper_bgcolor='black'
 )
 
+fig.show()
+```
+
+### Link Hover Color
+
+Set `link.hovercolor` to change the colors of links on hover. `link.hovercolor` accepts either one color, specified as a string, that will apply to all links, or a list of colors to specify different colors for each link. Here, we use a list to specify a different color for each link:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(data=[go.Sankey(
+    node = dict(
+      pad = 15,
+      thickness = 20,
+      line = dict(color = "black", width = 0.5),
+      label = ["A1", "A2", "B1", "B2", "C1", "C2"],
+      color = "blue"
+    ),
+    link = dict(
+      source = [0, 1, 0, 2, 3, 3],
+      target = [2, 3, 3, 4, 4, 5],
+      value = [8, 4, 2, 8, 4, 2],
+      hovercolor=["midnightblue", "lightskyblue", "gold", "mediumturquoise", "lightgreen", "cyan"],
+  ))])
+
+fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
 fig.show()
 ```
 
