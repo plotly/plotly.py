@@ -207,9 +207,9 @@ fig.update_layout(showlegend=False)
 fig.show()
 ```
 
-#### Text Annotations with Log Axis Type
+#### Text Annotations with Log Axes
 
-If the `x` or `y` positions of an annotation reference a log axis, you need to provide that position as a `log10` value when adding the annotation. In this example, the yaxis is a log axis so we pass the `log10` value of `1000` to the annotation's `y` position.
+If the `x` or `y` positions of an annotation reference a log axis, you need to provide that position as a `log10` value when adding the annotation. In this example, the `yaxis` is a log axis so we pass the `log10` value of `1000` to the annotation's `y` position.
 
 ```python
 import plotly.graph_objects as go
@@ -243,7 +243,6 @@ fig.add_annotation(
 )
 
 fig.show()
-
 ```
 
 ### 3D Annotations
