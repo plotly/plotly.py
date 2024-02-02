@@ -162,6 +162,8 @@ fig.show()
 
 ### Link Hover Color
 
+*New in 5.19*
+
 Set `link.hovercolor` to change the colors of links on hover. `link.hovercolor` accepts either one color, specified as a string, that will apply to all links, or a list of colors to specify different colors for each link. Here, we use a list to specify a different color for each link:
 
 ```python
