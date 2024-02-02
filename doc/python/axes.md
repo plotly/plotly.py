@@ -365,7 +365,7 @@ fig.show()
 
 ##### Auto Tick Angle Options
 
-*New in 5.18*
+*New in 5.19*
 
 If `tickangle` is not explicitly set, its default value is `auto`, meaning if the label needs to be rotated to avoid labels overlapping, it will rotate by either 30 or 90 degrees. Using `autotickangles`, you can also specify a list of angles for `tickangle` to use. If `tickangle` is `auto` and you provide a list of angles to `autotickangles`, the label angle will be set to the first value in the list that prevents overlap. 
 
