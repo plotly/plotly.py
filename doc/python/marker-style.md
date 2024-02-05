@@ -380,7 +380,7 @@ fig.show()
 
 #### Open Marker Colors
 
-In the previous example, each marker has two colors, a marker color (set in Plotly Express with `color="species"`)  and a line color (set on the line with `color="DarkSlateGrey"`. When using open markers, like `"diamond-open"` in the following example, the marker always uses only the marker color. Adding a line color won't update the marker. 
+In the previous example, each marker has two colors, a marker color (set in Plotly Express with `color="species"`)  and a line color (set on the line with `color="DarkSlateGrey"`. All open markers, like "diamond-open" in the following example, have a transparent fill, which means you can specify only one color.  Specify this color using the marker color parameter. This controls the outline color and any dot or cross. For open markers, the line color does nothing.
 
 ```python
 import plotly.express as px
