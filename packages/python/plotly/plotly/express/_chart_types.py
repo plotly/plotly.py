@@ -497,7 +497,7 @@ histogram.__doc__ = make_docstring(
         y=["If `orientation` is `'v'`, these values are used as inputs to `histfunc`."]
         + _wide_mode_xy_append,
         histfunc=[
-            "The arguments to this function are the values of `y`(`x`) if `orientation` is `'v'`(`'h'`).",
+            "The arguments to this function are the values of `y` (`x`) if `orientation` is `'v'` (`'h'`).",
         ],
     ),
 )
