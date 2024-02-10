@@ -10,30 +10,41 @@ from plotly.express._doc import make_docstring
 from plotly.express._chart_types import bar
 
 
-def get_colors(base_color: Union[str, tuple], n_colors: int):
+MIN_L = 0.1
+MAX_L = 0.9
+D_L = 0.1
+
+def get_colors(base_color, n_colors: int):
     """Get a palette of colors derived from base color.
 
     This function leverages the HLS color space.
     """
-    hls_tuple = colorsys.rgb_to_hls(
-        *pyc.convert_colors_to_same_type(base_color, "tuple")[0][0]
-    )
     if n_colors == 1:
         return [base_color]
 
-    if n_colors == 2:
-        light = colorsys.hls_to_rgb(
-            hls_tuple[0], min(1, max(0.75, hls_tuple[1] + 0.2)), hls_tuple[2]
-        )
-        return pyc.sample_colorscale([light, base_color], n_colors)
+    h, l, s = colorsys.rgb_to_hls(
+        *pyc.convert_colors_to_same_type(base_color, "tuple")[0][0]
+    )
 
-    light = colorsys.hls_to_rgb(
-        hls_tuple[0], min(1, max(0.8, hls_tuple[1] + 0.2)), hls_tuple[2]
-    )
-    dark = colorsys.hls_to_rgb(
-        hls_tuple[0], max(0, min(0.3, hls_tuple[1] - 0.2)), hls_tuple[2]
-    )
-    return pyc.sample_colorscale([light, base_color, dark], n_colors)
+    # Create light and dark extrema colors, how far apart on the lightness
+    # scale depends on the number of colors
+    delta_dark = (n_colors - 1) // 2
+    delta_light = (n_colors - 1) - delta_dark + 1
+    l_dark = max(min(MIN_L, l), l - delta_dark * D_L)
+    l_light = min(max(MAX_L, l), l + delta_light * D_L)
+    light = colorsys.hls_to_rgb(h, l_light, s)
+    dark = colorsys.hls_to_rgb(h, l_dark, s)
+
+    # Create the colorscale and ensure that the base color will be sampled
+    # by finding its position in the lightness scale
+    base_weight = (l_light - l) / (l_light - l_dark)
+    colorscale = [[0, light], [base_weight, base_color], [1, dark]]
+    if base_weight == 0:
+        colorscale = colorscale[1:]
+    if base_weight == 1:
+        colorscale = colorscale[:-1]
+
+    return pyc.sample_colorscale(colorscale, n_colors)
 
 
 def create_grouped_stacked_bar(

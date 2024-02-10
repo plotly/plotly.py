@@ -46,7 +46,7 @@ The following types of plots are still difficult to create with Graph Objects or
   * [Tables](/python/figure-factory-table/)
   * [Ternary Contour Plots](/python/ternary-contour/)
   * [Triangulated Surface Plots](/python/trisurf/)
-  * [Groupes Stacked Bar Plots](/python/grouped-stacked-bar)
+  * [Grouped Stacked Bar Plots](/python/grouped-stacked-bar)
 
 Deprecated "legacy" Figure Factories include:
 
