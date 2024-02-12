@@ -80,6 +80,10 @@ class Figure(BaseFigure):
                         `type` detection. This is the default value;
                         however it could be overridden for individual
                         axes.
+                    barcornerradius
+                        Sets the rounding of bar corners. May be an
+                        integer number of pixels, or a percentage of
+                        bar width (as a string ending in %).
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.
@@ -2567,7 +2571,7 @@ class Figure(BaseFigure):
             items as the number of boxes desired. This attribute
             has effect only under the q1/median/q3 signature. If
             `upperfence` is not provided but a sample (in `y` or
-            `x`) is set, we compute the lower as the last sample
+            `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for

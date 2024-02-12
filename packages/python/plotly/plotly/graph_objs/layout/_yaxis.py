@@ -14,6 +14,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "autorange",
         "autorangeoptions",
         "autoshift",
+        "autotickangles",
         "autotypenumbers",
         "calendar",
         "categoryarray",
@@ -245,6 +246,32 @@ class YAxis(_BaseLayoutHierarchyType):
     @autoshift.setter
     def autoshift(self, val):
         self["autoshift"] = val
+
+    # autotickangles
+    # --------------
+    @property
+    def autotickangles(self):
+        """
+        When `tickangle` is set to "auto", it will be set to the first
+        angle in this array that is large enough to prevent label
+        overlap.
+
+        The 'autotickangles' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'autotickangles[i]' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        list
+        """
+        return self["autotickangles"]
+
+    @autotickangles.setter
+    def autotickangles(self, val):
+        self["autotickangles"] = val
 
     # autotypenumbers
     # ---------------
@@ -2815,6 +2842,10 @@ class YAxis(_BaseLayoutHierarchyType):
             applied to other axes on the same side with `autoshift`
             is set to true. Only has an effect if `anchor` is set
             to "free".
+        autotickangles
+            When `tickangle` is set to "auto", it will be set to
+            the first angle in this array that is large enough to
+            prevent label overlap.
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -3285,6 +3316,7 @@ class YAxis(_BaseLayoutHierarchyType):
         autorange=None,
         autorangeoptions=None,
         autoshift=None,
+        autotickangles=None,
         autotypenumbers=None,
         calendar=None,
         categoryarray=None,
@@ -3409,6 +3441,10 @@ class YAxis(_BaseLayoutHierarchyType):
             applied to other axes on the same side with `autoshift`
             is set to true. Only has an effect if `anchor` is set
             to "free".
+        autotickangles
+            When `tickangle` is set to "auto", it will be set to
+            the first angle in this array that is large enough to
+            prevent label overlap.
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -3921,6 +3957,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = autoshift if autoshift is not None else _v
         if _v is not None:
             self["autoshift"] = _v
+        _v = arg.pop("autotickangles", None)
+        _v = autotickangles if autotickangles is not None else _v
+        if _v is not None:
+            self["autotickangles"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:

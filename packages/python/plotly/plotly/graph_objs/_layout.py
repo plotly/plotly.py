@@ -70,6 +70,7 @@ class Layout(_BaseLayoutType):
         "annotations",
         "autosize",
         "autotypenumbers",
+        "barcornerradius",
         "bargap",
         "bargroupgap",
         "barmode",
@@ -633,6 +634,26 @@ class Layout(_BaseLayoutType):
     @autotypenumbers.setter
     def autotypenumbers(self, val):
         self["autotypenumbers"] = val
+
+    # barcornerradius
+    # ---------------
+    @property
+    def barcornerradius(self):
+        """
+        Sets the rounding of bar corners. May be an integer number of
+        pixels, or a percentage of bar width (as a string ending in %).
+
+        The 'barcornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["barcornerradius"]
+
+    @barcornerradius.setter
+    def barcornerradius(self, val):
+        self["barcornerradius"] = val
 
     # bargap
     # ------
@@ -4292,6 +4313,10 @@ class Layout(_BaseLayoutType):
                     :class:`plotly.graph_objects.layout.xaxis.Autor
                     angeoptions` instance or dict with compatible
                     properties
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -4861,6 +4886,10 @@ class Layout(_BaseLayoutType):
                     axes on the same side with `autoshift` is set
                     to true. Only has an effect if `anchor` is set
                     to "free".
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -5418,6 +5447,10 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of bar corners. May be an integer
+            number of pixels, or a percentage of bar width (as a
+            string ending in %).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5882,6 +5915,7 @@ class Layout(_BaseLayoutType):
         annotationdefaults=None,
         autosize=None,
         autotypenumbers=None,
+        barcornerradius=None,
         bargap=None,
         bargroupgap=None,
         barmode=None,
@@ -6007,6 +6041,10 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of bar corners. May be an integer
+            number of pixels, or a percentage of bar width (as a
+            string ending in %).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -6478,6 +6516,7 @@ class Layout(_BaseLayoutType):
             "annotations",
             "autosize",
             "autotypenumbers",
+            "barcornerradius",
             "bargap",
             "bargroupgap",
             "barmode",
@@ -6614,6 +6653,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
             self["autotypenumbers"] = _v
+        _v = arg.pop("barcornerradius", None)
+        _v = barcornerradius if barcornerradius is not None else _v
+        if _v is not None:
+            self["barcornerradius"] = _v
         _v = arg.pop("bargap", None)
         _v = bargap if bargap is not None else _v
         if _v is not None:

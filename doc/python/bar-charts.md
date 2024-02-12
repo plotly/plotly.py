@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -479,6 +479,64 @@ fig.add_trace(go.Bar(x=years, y=[300, 400, 700],
                 marker_color='lightslategrey',
                 name='revenue'
                 ))
+
+fig.show()
+```
+
+### Rounded Bars
+
+*New in 5.19*
+
+You can round the corners on all bar traces in a figure by setting `barcornerradius` on the figure's layout. `barcornerradius` can be a number of pixels or a percentage of the bar width (using a string ending in %, for example "20%").
+
+In this example, we set all bars to have a radius of 15 pixels.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(x=df.nation, y=df.gold, name="Gold"),
+        go.Bar(x=df.nation, y=df.silver, name="Silver"),
+        go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    ],
+    layout=dict(
+        barcornerradius=15,
+    ),
+)
+
+fig.show()
+```
+
+When you don't want all bar traces in a figure to have the same rounded corners, you can instead configure rounded corners on each trace using `marker.cornerradius`. In this example, which uses subplots, the first trace has a corner radius of 30 pixels, the second trace has a bar corner radius of 30% of the bar width, and the third trace has no rounded corners set.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from plotly import data
+
+df = data.medals_wide()
+
+fig = make_subplots(rows=1, cols=3, shared_yaxes=True)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.gold, name="Gold", marker=dict(cornerradius=30)), 1, 1
+)
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.silver, name="Silver", marker=dict(cornerradius="30%")),
+    1,
+    2,
+)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    1,
+    3,
+)
+
 
 fig.show()
 ```

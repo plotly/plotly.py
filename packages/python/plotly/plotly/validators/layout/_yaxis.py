@@ -45,6 +45,10 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes on the same side with `autoshift` is set
                 to true. Only has an effect if `anchor` is set
                 to "free".
+            autotickangles
+                When `tickangle` is set to "auto", it will be
+                set to the first angle in this array that is
+                large enough to prevent label overlap.
             autotypenumbers
                 Using "strict" a numeric string in trace data
                 is not converted to a number. Using *convert
