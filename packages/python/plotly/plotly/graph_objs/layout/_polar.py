@@ -560,6 +560,10 @@ class Polar(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.polar.radia
                     laxis.Autorangeoptions` instance or dict with
                     compatible properties
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
