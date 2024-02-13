@@ -17,7 +17,8 @@ from plotly._subplots import (
     _subplot_type_for_trace_type,
 )
 
-is_pandas_version_ge_2_2_0 = version.parse(pd.__version__) >= version.parse("2.2.0")
+pd_2_2_0_or_later = version.parse(pd.__version__) >= version.parse("2.2.0")
+pd_has_interchange = version.parse(pd.__version__) >= version.parse("2.0.2")
 
 NO_COLOR = "px_no_color_constant"
 trendline_functions = dict(
@@ -1322,9 +1323,7 @@ def build_dataframe(args, constructor):
     df_provided = args["data_frame"] is not None
     needs_interchanging = False
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        if hasattr(args["data_frame"], "__dataframe__") and version.parse(
-            pd.__version__
-        ) >= version.parse("2.0.2"):
+        if hasattr(args["data_frame"], "__dataframe__") and pd_has_interchange:
             import pandas.api.interchange
 
             df_not_pandas = args["data_frame"]
@@ -2075,7 +2074,7 @@ def get_groups_and_orders(args, grouper):
             if len(s) > 1:
                 groups[sf] = grouped.get_group(s)
             else:
-                if is_pandas_version_ge_2_2_0:
+                if pd_2_2_0_or_later:
                     groups[sf] = grouped.get_group((s[0],))
                 else:
                     groups[sf] = grouped.get_group(s[0])
