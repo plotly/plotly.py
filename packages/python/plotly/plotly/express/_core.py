@@ -17,6 +17,8 @@ from plotly._subplots import (
     _subplot_type_for_trace_type,
 )
 
+is_pandas_version_ge_2_2_0 = version.parse(pd.__version__) >= version.parse("2.2.0")
+
 NO_COLOR = "px_no_color_constant"
 trendline_functions = dict(
     lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
@@ -2068,10 +2070,16 @@ def get_groups_and_orders(args, grouper):
                     g.insert(i, "")
         full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
 
-        groups = {
-            sf: grouped.get_group(s if len(s) > 1 else s[0])
-            for sf, s in zip(full_sorted_group_names, sorted_group_names)
-        }
+        groups = {}
+        for sf, s in zip(full_sorted_group_names, sorted_group_names):
+            if len(s) > 1:
+                groups[sf] = grouped.get_group(s)
+            else:
+                if is_pandas_version_ge_2_2_0:
+                    groups[sf] = grouped.get_group((s[0],))
+                else:
+                    groups[sf] = grouped.get_group(s[0])
+
     return groups, orders
 
 
