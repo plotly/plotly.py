@@ -1,6 +1,6 @@
 requests==2.25.1
 tenacity==6.2.0
-pandas==2.0.2
+pandas==2.2.0
 numpy==1.21.6
 xarray==0.17.0
 statsmodels
