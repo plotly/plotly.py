@@ -8,6 +8,7 @@ import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 import sys
+import warnings
 
 
 # Fixtures
@@ -667,3 +668,16 @@ def test_x_or_y(fn):
         assert list(fig.data[0].x) == constant
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "h"
+
+
+def test_no_futurewarning():
+    with warnings.catch_warnings(record=True) as warn_list:
+        _ = px.scatter(
+            x=[15, 20, 29],
+            y=[10, 20, 30],
+            color=["Category 1", "Category 2", "Category 1"],
+        )
+    future_warnings = [
+        warn for warn in warn_list if issubclass(warn.category, FutureWarning)
+    ]
+    assert len(future_warnings) == 0, "FutureWarning(s) raised!"
