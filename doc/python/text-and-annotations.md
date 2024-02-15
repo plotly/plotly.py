@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -203,6 +203,44 @@ fig.add_annotation(x=4, y=4,
             yshift=10)
 
 fig.update_layout(showlegend=False)
+
+fig.show()
+```
+
+#### Text Annotations with Log Axes
+
+If the `x` or `y` positions of an annotation reference a log axis, you need to provide that position as a `log10` value when adding the annotation. In this example, the `yaxis` is a log axis so we pass the `log10` value of `1000` to the annotation's `y` position.
+
+```python
+import plotly.graph_objects as go
+import math
+
+dates = [
+    "2024-01-01",
+    "2024-01-02",
+    "2024-01-03",
+    "2024-01-04",
+    "2024-01-05",
+    "2024-01-06",
+]
+y_values = [1, 30, 70, 100, 1000, 10000000]
+
+fig = go.Figure(
+    data=[go.Scatter(x=dates, y=y_values, mode="lines+markers")],
+    layout=go.Layout(
+        yaxis=dict(
+            type="log",
+        )
+    ),
+)
+
+fig.add_annotation(
+    x="2024-01-05",
+    y=math.log10(1000),
+    text="Log axis annotation",
+    showarrow=True,
+    xanchor="right",
+)
 
 fig.show()
 ```

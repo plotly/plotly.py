@@ -67,7 +67,7 @@ If you basemap in `layout.mapbox.style` uses maps from the [Stadia Maps service]
 The accepted values for `layout.mapbox.style` are one of:
 
 - `"white-bg"` yields an empty white canvas which results in no external HTTP requests
-- `"open-street-map"`, `"carto-positron"`, or `"carto-darkmatter"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens.
+- `"open-street-map"`, `"carto-positron"`, and `"carto-darkmatter"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens.
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
 - `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token. 
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
