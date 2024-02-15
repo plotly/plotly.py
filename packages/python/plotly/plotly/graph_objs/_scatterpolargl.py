@@ -672,9 +672,6 @@ class Scatterpolargl(_BaseTraceType):
                     Sets the line color.
                 dash
                     Sets the style of the lines.
-                shape
-                    Determines the line shape. The values
-                    correspond to step-wise line shapes.
                 width
                     Sets the line width (in px).
 

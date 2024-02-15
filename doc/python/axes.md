@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.15.1
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.10.11
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -359,6 +359,23 @@ df = px.data.tips()
 
 fig = px.histogram(df, x="sex", y="tip", histfunc='sum', facet_col='smoker')
 fig.update_xaxes(tickangle=45, tickfont=dict(family='Rockwell', color='crimson', size=14))
+
+fig.show()
+```
+
+##### Auto Tick Angle Options
+
+*New in 5.19*
+
+If `tickangle` is not explicitly set, its default value is `auto`, meaning if the label needs to be rotated to avoid labels overlapping, it will rotate by either 30 or 90 degrees. Using `autotickangles`, you can also specify a list of angles for `tickangle` to use. If `tickangle` is `auto` and you provide a list of angles to `autotickangles`, the label angle will be set to the first value in the list that prevents overlap. 
+
+```python
+import plotly.express as px
+df = px.data.gapminder()
+df = df.loc[(df.continent=="Asia") & (df.year==1992)]
+fig = px.histogram(df, x=df.country, y=df.gdpPercap)
+
+fig.update_xaxes(autotickangles=[45, 60, 90])
 
 fig.show()
 ```

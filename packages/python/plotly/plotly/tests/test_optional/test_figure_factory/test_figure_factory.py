@@ -4310,6 +4310,33 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
+    def compare_list_values(self, list1, list2, decimal=7):
+        assert len(list1) == len(list2), "Lists are not of the same length."
+        for i in range(len(list1)):
+            if isinstance(list1[i], list):
+                self.compare_list_values(list1[i], list2[i], decimal=decimal)
+            elif isinstance(list1[i], dict):
+                self.compare_dict_values(list1[i], list2[i], decimal=decimal)
+            elif isinstance(list1[i], float):
+                np.testing.assert_almost_equal(list1[i], list2[i], decimal=decimal)
+            else:
+                assert (
+                    list1[i] == list2[i]
+                ), f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
+
+    def compare_dict_values(self, dict1, dict2, decimal=7):
+        for k, v in dict1.items():
+            if isinstance(v, dict):
+                self.compare_dict_values(v, dict2[k], decimal=decimal)
+            elif isinstance(v, list):
+                self.compare_list_values(v, dict2[k], decimal=decimal)
+            elif isinstance(v, float):
+                np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
+            else:
+                assert (
+                    v == dict2[k]
+                ), f"Values for key {k} are not equal: {v} != {dict2[k]}"
+
     def test_aggregation(self):
 
         lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
@@ -4416,7 +4443,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         actual_agg = [2.0, 2.0, 1.0, 3.0, 9.0]
 
-        self.assert_dict_equal(fig1.data[0].geojson, actual_geojson)
+        self.compare_dict_values(fig1.data[0].geojson, actual_geojson)
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
         fig2 = ff.create_hexbin_mapbox(

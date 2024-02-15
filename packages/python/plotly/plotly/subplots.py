@@ -154,7 +154,7 @@ def make_subplots(
                   in fraction of cell height ('to_end': to cell top edge)
 
     column_widths: list of numbers or None (default None)
-        list of length `cols` of the relative widths of each column of suplots.
+        list of length `cols` of the relative widths of each column of subplots.
         Values are normalized internally and used to distribute overall width
         of the figure (excluding padding) among the columns.
 

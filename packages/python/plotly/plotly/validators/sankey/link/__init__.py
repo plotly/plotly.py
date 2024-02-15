@@ -15,6 +15,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._hovertemplate import HovertemplateValidator
     from ._hoverlabel import HoverlabelValidator
     from ._hoverinfo import HoverinfoValidator
+    from ._hovercolorsrc import HovercolorsrcValidator
+    from ._hovercolor import HovercolorValidator
     from ._customdatasrc import CustomdatasrcValidator
     from ._customdata import CustomdataValidator
     from ._colorsrc import ColorsrcValidator
@@ -42,6 +44,8 @@ else:
             "._hovertemplate.HovertemplateValidator",
             "._hoverlabel.HoverlabelValidator",
             "._hoverinfo.HoverinfoValidator",
+            "._hovercolorsrc.HovercolorsrcValidator",
+            "._hovercolor.HovercolorValidator",
             "._customdatasrc.CustomdatasrcValidator",
             "._customdata.CustomdataValidator",
             "._colorsrc.ColorsrcValidator",

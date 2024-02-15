@@ -19,6 +19,7 @@ class Marker(_BaseTraceHierarchyType):
         "colorbar",
         "colorscale",
         "colorsrc",
+        "cornerradius",
         "line",
         "opacity",
         "opacitysrc",
@@ -617,6 +618,29 @@ class Marker(_BaseTraceHierarchyType):
     def colorsrc(self, val):
         self["colorsrc"] = val
 
+    # cornerradius
+    # ------------
+    @property
+    def cornerradius(self):
+        """
+        Sets the rounding of corners. May be an integer number of
+        pixels, or a percentage of bar width (as a string ending in %).
+        Defaults to `layout.barcornerradius`. In stack or relative
+        barmode, the first trace to set cornerradius is used for the
+        whole stack.
+
+        The 'cornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["cornerradius"]
+
+    @cornerradius.setter
+    def cornerradius(self, val):
+        self["cornerradius"] = val
+
     # line
     # ----
     @property
@@ -961,6 +985,12 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width (as a string
+            ending in %). Defaults to `layout.barcornerradius`. In
+            stack or relative barmode, the first trace to set
+            cornerradius is used for the whole stack.
         line
             :class:`plotly.graph_objects.histogram.marker.Line`
             instance or dict with compatible properties
@@ -996,6 +1026,7 @@ class Marker(_BaseTraceHierarchyType):
         colorbar=None,
         colorscale=None,
         colorsrc=None,
+        cornerradius=None,
         line=None,
         opacity=None,
         opacitysrc=None,
@@ -1079,6 +1110,12 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width (as a string
+            ending in %). Defaults to `layout.barcornerradius`. In
+            stack or relative barmode, the first trace to set
+            cornerradius is used for the whole stack.
         line
             :class:`plotly.graph_objects.histogram.marker.Line`
             instance or dict with compatible properties
@@ -1173,6 +1210,10 @@ an instance of :class:`plotly.graph_objs.histogram.Marker`"""
         _v = colorsrc if colorsrc is not None else _v
         if _v is not None:
             self["colorsrc"] = _v
+        _v = arg.pop("cornerradius", None)
+        _v = cornerradius if cornerradius is not None else _v
+        if _v is not None:
+            self["cornerradius"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
