@@ -37,7 +37,6 @@ jupyter:
 
 To plot on Mapbox maps with Plotly, you may need a [Mapbox account and token](https://www.mapbox.com/studio) or a [Stadia Maps account and token](https://www.stadiamaps.com), depending on base map (`mapbox_style`) you use. On this page, we show how to use the "open-street-map" base map, which doesn't require a token, and a "stamen" base map, which requires a Stadia Maps token. See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more examples.
 
-
 ### OpenStreetMap base map (no token needed): density mapbox with `plotly.express`
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
