@@ -1,12 +1,12 @@
-plotly==5.18.0
+plotly==5.19.0
 jupytext==1.1.1
 ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
-pandas==1.0.3
-statsmodels==0.11.1
-scipy==1.3.1
+pandas==1.2.0
+statsmodels==0.12.1
+scipy==1.5.4
 patsy==0.5.1
 numpy==1.19.5
 plotly-geo
@@ -16,7 +16,7 @@ pyshp==2.1.2
 shapely==1.7.1
 psutil
 requests
-networkx
+networkx==2.6.3
 squarify
 scikit-image==0.18.1
 scikit-learn
@@ -25,7 +25,7 @@ sphinx_bootstrap_theme
 recommonmark
 pathlib
 python-frontmatter
-datashader
+datashader==0.14.4
 pyarrow
 cufflinks==0.17.3
 kaleido
@@ -38,3 +38,4 @@ dash-bio
 jinja2<3.1
 parmed<=3.4.4; python_version<"3.8"
 polars
+dask==2022.2.0

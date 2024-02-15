@@ -190,7 +190,7 @@ def make_subplots(
                   in fraction of cell height ('to_end': to cell top edge)
 
     column_widths: list of numbers or None (default None)
-        list of length `cols` of the relative widths of each column of suplots.
+        list of length `cols` of the relative widths of each column of subplots.
         Values are normalized internally and used to distribute overall width
         of the figure (excluding padding) among the columns.
 
@@ -358,7 +358,7 @@ def make_subplots(
     if not isinstance(rows, int) or rows <= 0:
         raise ValueError(
             """
-The 'rows' argument to make_suplots must be an int greater than 0.
+The 'rows' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(rows), val=repr(rows)
             )
@@ -368,7 +368,7 @@ The 'rows' argument to make_suplots must be an int greater than 0.
     if not isinstance(cols, int) or cols <= 0:
         raise ValueError(
             """
-The 'cols' argument to make_suplots must be an int greater than 0.
+The 'cols' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(cols), val=repr(cols)
             )
@@ -399,7 +399,7 @@ The 'start_cell` argument to make_subplots must be one of \
             if not isinstance(item, dict):
                 raise ValueError(
                     """
-Elements of the '{name}' argument to make_suplots must be dictionaries \
+Elements of the '{name}' argument to make_subplots must be dictionaries \
 or None.
     Received value of type {typ}: {val}""".format(
                         name=name, typ=type(item), val=repr(item)
@@ -484,7 +484,7 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
     ):
         raise ValueError(
             """
-The 'insets' argument to make_suplots must be a list of dictionaries.
+The 'insets' argument to make_subplots must be a list of dictionaries.
     Received value of type {typ}: {val}""".format(
                 typ=type(insets), val=repr(insets)
             )
@@ -587,7 +587,7 @@ The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".f
     else:
         raise ValueError(
             """
-The 'column_widths' argument to make_suplots must be a list of numbers of \
+The 'column_widths' argument to make_subplots must be a list of numbers of \
 length {cols}.
     Received value of type {typ}: {val}""".format(
                 cols=cols, typ=type(column_widths), val=repr(column_widths)
@@ -607,7 +607,7 @@ length {cols}.
     else:
         raise ValueError(
             """
-The 'row_heights' argument to make_suplots must be a list of numbers of \
+The 'row_heights' argument to make_subplots must be a list of numbers of \
 length {rows}.
     Received value of type {typ}: {val}""".format(
                 rows=rows, typ=type(row_heights), val=repr(row_heights)

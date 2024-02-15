@@ -17,6 +17,8 @@ from plotly._subplots import (
     _subplot_type_for_trace_type,
 )
 
+pandas_2_2_0 = version.parse(pd.__version__) >= version.parse("2.2.0")
+
 NO_COLOR = "px_no_color_constant"
 trendline_functions = dict(
     lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
@@ -812,6 +814,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             or (
                 args["render_mode"] == "auto"
                 and len(args["data_frame"]) > 1000
+                and args.get("line_shape") != "spline"
                 and args["animation_frame"] is None
             )
         ):
@@ -1326,7 +1329,11 @@ def build_dataframe(args, constructor):
 
             df_not_pandas = args["data_frame"]
             args["data_frame"] = df_not_pandas.__dataframe__()
-            columns = args["data_frame"].column_names()
+            # According interchange protocol: `def column_names(self) -> Iterable[str]:`
+            # so this function can return for example a generator.
+            # The easiest way is to convert `columns` to `pandas.Index` so that the
+            # type is similar to the types in other code branches.
+            columns = pd.Index(args["data_frame"].column_names())
             needs_interchanging = True
         elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
@@ -1928,7 +1935,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             modes.add("text")
         if len(modes) == 0:
             modes.add("lines")
-        trace_patch["mode"] = "+".join(modes)
+        trace_patch["mode"] = "+".join(sorted(modes))
     elif constructor != go.Splom and (
         "symbol" in args or constructor == go.Scattermapbox
     ):
@@ -2041,7 +2048,9 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [g for g in grouper if g != one_group]
-        grouped = df.groupby(required_grouper, sort=False)  # skip one_group groupers
+        grouped = df.groupby(
+            required_grouper, sort=False, observed=True
+        )  # skip one_group groupers
         group_indices = grouped.indices
         sorted_group_names = [
             g if len(required_grouper) != 1 else (g,) for g in group_indices
@@ -2061,10 +2070,15 @@ def get_groups_and_orders(args, grouper):
                     g.insert(i, "")
         full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
 
-        groups = {
-            sf: grouped.get_group(s if len(s) > 1 else s[0])
-            for sf, s in zip(full_sorted_group_names, sorted_group_names)
-        }
+        groups = {}
+        for sf, s in zip(full_sorted_group_names, sorted_group_names):
+            if len(s) > 1:
+                groups[sf] = grouped.get_group(s)
+            else:
+                if pandas_2_2_0:
+                    groups[sf] = grouped.get_group((s[0],))
+                else:
+                    groups[sf] = grouped.get_group(s[0])
     return groups, orders
 
 
