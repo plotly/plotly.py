@@ -270,4 +270,3 @@ From `packages/python/plotly-geo`, build the conda package
 ```
 
 Then upload to the plotly anaconda channel as described above.
-
