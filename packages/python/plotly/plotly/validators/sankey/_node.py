@@ -10,6 +10,9 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            align
+                Sets the alignment method used to position the
+                nodes along the horizontal axis.
             color
                 Sets the `node` color. It can be a single
                 value, or an array for specifying color for
