@@ -88,6 +88,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._barmode import BarmodeValidator
     from ._bargroupgap import BargroupgapValidator
     from ._bargap import BargapValidator
+    from ._barcornerradius import BarcornerradiusValidator
     from ._autotypenumbers import AutotypenumbersValidator
     from ._autosize import AutosizeValidator
     from ._annotationdefaults import AnnotationdefaultsValidator
@@ -187,6 +188,7 @@ else:
             "._barmode.BarmodeValidator",
             "._bargroupgap.BargroupgapValidator",
             "._bargap.BargapValidator",
+            "._barcornerradius.BarcornerradiusValidator",
             "._autotypenumbers.AutotypenumbersValidator",
             "._autosize.AutosizeValidator",
             "._annotationdefaults.AnnotationdefaultsValidator",

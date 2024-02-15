@@ -217,8 +217,8 @@ class CodegenCommand(Command):
         pass
 
     def run(self):
-        if sys.version_info < (3, 6):
-            raise ImportError("Code generation must be executed with Python >= 3.6")
+        if sys.version_info < (3, 8):
+            raise ImportError("Code generation must be executed with Python >= 3.8")
 
         from codegen import perform_codegen
 
@@ -506,16 +506,15 @@ setup(
     long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Scientific/Engineering :: Visualization",
         "License :: OSI Approved :: MIT License",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     license="MIT",
     packages=[
         "jupyterlab_plotly",

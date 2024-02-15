@@ -5709,7 +5709,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # These are used when a layout has multiple instances of subplot types
     # (xaxis2, yaxis3, geo4, etc.)
     #
-    # The base version of each suplot type is defined in the schema and code
+    # The base version of each subplot type is defined in the schema and code
     # generated. So the Layout subclass has statically defined properties
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
