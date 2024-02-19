@@ -234,9 +234,11 @@ class CodegenCommand(Command):
 
         perform_codegen()
 
+
 def overwrite_schema_local(uri):
     path = os.path.join(here, "codegen", "resources", "plot-schema.json")
     shutil.copyfile(uri, path)
+
 
 def overwrite_schema(url):
     import requests
@@ -247,9 +249,11 @@ def overwrite_schema(url):
     with open(path, "wb") as f:
         f.write(req.content)
 
+
 def overwrite_bundle_local(uri):
     path = os.path.join(here, "plotly", "package_data", "plotly.min.js")
     shutil.copyfile(uri, path)
+
 
 def overwrite_bundle(url):
     import requests
@@ -297,6 +301,7 @@ def request_json(url):
     req = requests.get(url)
     return json.loads(req.content.decode("utf-8"))
 
+
 def get_latest_publish_build_info(repo, branch):
 
     url = (
@@ -318,11 +323,13 @@ def get_latest_publish_build_info(repo, branch):
     # Extract build info
     return {p: build[p] for p in ["vcs_revision", "build_num", "committer_date"]}
 
+
 def get_bundle_schema_local(local):
     plotly_archive = os.path.join(local, "plotly.js.tgz")
     plotly_bundle = os.path.join(local, "dist/plotly.min.js")
     plotly_schemas = os.path.join(local, "dist/plot-schema.json")
     return plotly_archive, plotly_bundle, plotly_schemas
+
 
 def get_bundle_schema_urls(build_num):
     url = (
@@ -448,7 +455,9 @@ class UpdateBundleSchemaDevCommand(Command):
             package_json = json.load(f)
 
         # Replace version with bundle url
-        package_json["dependencies"]["plotly.js"] = archive_url if self.local is None else archive_uri
+        package_json["dependencies"]["plotly.js"] = (
+            archive_url if self.local is None else archive_uri
+        )
         with open(package_json_path, "w") as f:
             json.dump(package_json, f, indent=2)
 
@@ -464,7 +473,7 @@ class UpdatePlotlyJsDevCommand(Command):
     user_options = [
         ("devrepo=", None, "Repository name"),
         ("devbranch=", None, "branch or pull/number"),
-        ("local=", None, "local copy of repo, used by itself")
+        ("local=", None, "local copy of repo, used by itself"),
     ]
 
     def initialize_options(self):
