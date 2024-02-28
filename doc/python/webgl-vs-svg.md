@@ -74,7 +74,7 @@ In a Jupyter notebook environment that supports magic commands, you can load it 
 
 ```
 %%html
-<script src=“https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js”></script>
+&lt;script src=&ldquo;https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js&rdquo;&gt;&lt;/script&gt;
 ```
 
 ### WebGL for Scatter Performance
