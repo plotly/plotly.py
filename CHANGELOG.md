@@ -2,16 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [UNRELEASED]
+## [5.19.0] - 2024-02-15
 
 ### Updated
-- Updated Plotly.js from version 2.27.0 to version 2.28.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2280----2024-01-05) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+
+- Updated Plotly.js from version 2.27.0 to version 2.29.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2291----2024-02-12) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `layout.barcornerradius` and `trace.marker.cornerradius` properties to support rounding the corners of bar traces [[#6761](https://github.com/plotly/plotly.js/pull/6761)],
+   with thanks to [Displayr](https://www.displayr.com) for sponsoring development!
+  - Add `autotickangles` to cartesian and radial axes [[#6790](https://github.com/plotly/plotly.js/pull/6790)], with thanks to @my-tien for the contribution!
   - Add `align` option to sankey nodes to control horizontal alignment [[#6800](https://github.com/plotly/plotly.js/pull/6800)],
    with thanks to @adamreeve for the contribution!
   - Add the possibility of loading "virtual-webgl" script for WebGL 1 to help display several WebGL contexts on a page [[#6784](https://github.com/plotly/plotly.js/pull/6784)], with thanks to @greggman for the contribution!
   - Add options to use base64 encoding (`bdata`) and `shape` (for 2 dimensional arrays) to declare various typed arrays i.e. `dtype=(float64|float32|int32|int16|int8|uint32|uint16|uint8)` [[#5230](https://github.com/plotly/plotly.js/pull/5230)]
   -  Adjust stamen styles to point to `stadiamaps.com`, the users may also need to provide their own API_KEY via `config.mapboxAccessToken` [[#6776](https://github.com/plotly/plotly.js/pull/6776), [#6778](https://github.com/plotly/plotly.js/pull/6778)]
-
+- Removed Python 3.6 and Python 3.7 support [[#4492](https://github.com/plotly/plotly.py/pull/4492)]
 
 ### Fixed
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
@@ -19,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
 - Fix KeyError when using column of `pd.Categorical` dtype with unobserved categories [[#4437](https://github.com/plotly/plotly.py/pull/4437)]
 - Fix dataframe interchange in case `column_names` returns an unmaterialized object: generator, iterator, etc. [[#4442]](https://github.com/plotly/plotly.py/pull/4442)
+- Fix issue with `FutureWarning` being displayed when setting the `color` argument in `plotly.express` [[#4519]](https://github.com/plotly/plotly.py/pull/4519)
 
 ## [5.18.0] - 2023-10-25
 

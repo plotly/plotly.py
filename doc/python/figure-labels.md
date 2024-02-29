@@ -124,7 +124,7 @@ IFrame(snippet_url + 'figure-labels', width='100%', height=1200)
 
 ### Manual Labelling with Graph Objects
 
-When using (graph objects)[/python/graph-objects/] rather than [Plotly Express](/python/plotly-express/), you will need to explicitly label traces and axes:
+When using [graph objects](/python/graph-objects/) rather than [Plotly Express](/python/plotly-express/), you will need to explicitly label traces and axes:
 
 ```python
 import plotly.graph_objects as go
