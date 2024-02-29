@@ -181,8 +181,8 @@ class Newshape(_BaseLayoutHierarchyType):
                     %{variable}, for example "x0: %{x0}". Numbers
                     are formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{x0:$.2f}". See https://github.com/d3/d3-
-                    format/tree/v1.4.5#d3-format for details on the
+                    %{x0:$.2f}". See https://github.com/d3/d3-forma
+                    t/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{x0|%m %b %Y}". See

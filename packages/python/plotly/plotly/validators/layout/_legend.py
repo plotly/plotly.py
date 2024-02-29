@@ -39,6 +39,9 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the font for group titles in legend.
                 Defaults to `legend.font` with its size
                 increased about 10%.
+            indentation
+                Sets the indentation (in px) of the legend
+                entries.
             itemclick
                 Determines the behavior on legend item click.
                 "toggle" toggles the visibility of the item

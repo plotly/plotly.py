@@ -65,7 +65,7 @@
     "@lumino/messaging": "^1.2.3",
     "@lumino/widgets": "^1.8.1",
     "lodash": "^4.17.4",
-    "plotly.js": "^2.29.1"
+    "plotly.js": "https://output.circle-artifacts.com/output/job/182a8639-79a0-4984-bb5c-db959dbcdb52/artifacts/0/plotly.js.tgz"
   },
   "jupyterlab": {
     "extension": "lib/jupyterlab-plugin",

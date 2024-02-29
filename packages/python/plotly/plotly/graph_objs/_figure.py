@@ -13179,6 +13179,7 @@ class Figure(BaseFigure):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillgradient=None,
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
@@ -13315,7 +13316,12 @@ class Figure(BaseFigure):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -13705,6 +13711,7 @@ class Figure(BaseFigure):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            fillgradient=fillgradient,
             fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
