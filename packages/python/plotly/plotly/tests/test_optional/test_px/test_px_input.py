@@ -8,6 +8,9 @@ import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 from plotly.tests.b64 import b64, _b64
+import sys
+import warnings
+
 
 # Fixtures
 # --------
@@ -319,7 +322,8 @@ def test_build_df_using_interchange_protocol_mock(
 
 
 @pytest.mark.skipif(
-    version.parse(pd.__version__) < version.parse("2.0.2"),
+    version.parse(pd.__version__) < version.parse("2.0.2")
+    or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
 @pytest.mark.parametrize("test_lib", ["vaex", "polars"])
@@ -340,7 +344,8 @@ def test_build_df_from_vaex_and_polars(test_lib):
 
 
 @pytest.mark.skipif(
-    version.parse(pd.__version__) < version.parse("2.0.2"),
+    version.parse(pd.__version__) < version.parse("2.0.2")
+    or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
 @pytest.mark.parametrize("test_lib", ["vaex", "polars"])
@@ -660,3 +665,16 @@ def test_x_or_y(fn):
         assert fig.data[0].x == _b64(constant)
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "h"
+
+
+def test_no_futurewarning():
+    with warnings.catch_warnings(record=True) as warn_list:
+        _ = px.scatter(
+            x=[15, 20, 29],
+            y=[10, 20, 30],
+            color=["Category 1", "Category 2", "Category 1"],
+        )
+    future_warnings = [
+        warn for warn in warn_list if issubclass(warn.category, FutureWarning)
+    ]
+    assert len(future_warnings) == 0, "FutureWarning(s) raised!"

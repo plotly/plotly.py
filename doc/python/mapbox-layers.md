@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.11
   plotly:
     description: How to make Mapbox maps in Python with various base layers, with
       or without needing a Mapbox Access token.
@@ -55,17 +55,21 @@ Mapbox tile maps are composed of various layers, of three different types:
 
 #### Mapbox Access Tokens and When You Need Them
 
-The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL JS open-source library, which is integrated into Plotly.py. If your basemap in `layout.mapbox.style` uses data from the Mapbox _service_, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided in `layout.mapbox.access_token` (or, if using Plotly Express, via the `px.set_mapbox_access_token()` configuration function).
+The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL JS open-source library, which is integrated into Plotly.py. 
 
-> If your `layout.mapbox.style` does not use data from the Mapbox service, you do _not_ need to register for a Mapbox account.
+If your basemap in `layout.mapbox.style` uses data from the Mapbox _service_, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided in `layout.mapbox.access_token` (or, if using Plotly Express, via the `px.set_mapbox_access_token()` configuration function).
+
+If you basemap in `layout.mapbox.style` uses maps from the [Stadia Maps service](https://www.stadiamaps.com) (see below for details), you'll need to register for a Stadia Maps account and token. 
+
 
 #### Base Maps in `layout.mapbox.style`
 
 The accepted values for `layout.mapbox.style` are one of:
 
 - `"white-bg"` yields an empty white canvas which results in no external HTTP requests
-- `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens
+- `"open-street-map"`, `"carto-positron"`, and `"carto-darkmatter"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens.
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
+- `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token. 
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
 - A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/
 
@@ -88,7 +92,6 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-<!-- #region -->
 
 #### Using `layout.mapbox.layers` to Specify a Base Map
 
@@ -100,7 +103,6 @@ If you have access to your own private tile servers, or wish to use a tile serve
 
 Here is an example of a map which uses a public USGS imagery map, specified in `layout.mapbox.layers`, and which is rendered _below_ the `data` layer.
 
-<!-- #endregion -->
 
 ```python
 import pandas as pd
@@ -126,13 +128,11 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-<!-- #region -->
 
 #### Base Tiles from the USGS, radar overlay from Environment Canada: no token needed
 
 Here is the same example, with in addition, a WMS layer from Environment Canada which displays near-real-time radar imagery in partly-transparent raster tiles, rendered above the `go.Scattermapbox` trace, as is the default:
 
-<!-- #endregion -->
 
 ```python
 import pandas as pd
@@ -165,13 +165,11 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-<!-- #region -->
 
 #### Dark tiles from Mapbox service: free token needed
 
 Here is a map rendered with the `"dark"` style from the Mapbox service, which requires an Access Token:
 
-<!-- #endregion -->
 
 ```python
 token = open(".mapbox_token").read() # you will need your own token

@@ -16,6 +16,8 @@ class Link(_BaseTraceHierarchyType):
         "colorsrc",
         "customdata",
         "customdatasrc",
+        "hovercolor",
+        "hovercolorsrc",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
@@ -268,6 +270,90 @@ class Link(_BaseTraceHierarchyType):
     @customdatasrc.setter
     def customdatasrc(self, val):
         self["customdatasrc"] = val
+
+    # hovercolor
+    # ----------
+    @property
+    def hovercolor(self):
+        """
+        Sets the `link` hover color. It can be a single value, or an
+        array for specifying hover colors for each `link`. If
+        `link.hovercolor` is omitted, then by default, links will
+        become slightly more opaque when hovered over.
+
+        The 'hovercolor' property is a color and may be specified as:
+          - A hex string (e.g. '#ff0000')
+          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+          - A named CSS color:
+                aliceblue, antiquewhite, aqua, aquamarine, azure,
+                beige, bisque, black, blanchedalmond, blue,
+                blueviolet, brown, burlywood, cadetblue,
+                chartreuse, chocolate, coral, cornflowerblue,
+                cornsilk, crimson, cyan, darkblue, darkcyan,
+                darkgoldenrod, darkgray, darkgrey, darkgreen,
+                darkkhaki, darkmagenta, darkolivegreen, darkorange,
+                darkorchid, darkred, darksalmon, darkseagreen,
+                darkslateblue, darkslategray, darkslategrey,
+                darkturquoise, darkviolet, deeppink, deepskyblue,
+                dimgray, dimgrey, dodgerblue, firebrick,
+                floralwhite, forestgreen, fuchsia, gainsboro,
+                ghostwhite, gold, goldenrod, gray, grey, green,
+                greenyellow, honeydew, hotpink, indianred, indigo,
+                ivory, khaki, lavender, lavenderblush, lawngreen,
+                lemonchiffon, lightblue, lightcoral, lightcyan,
+                lightgoldenrodyellow, lightgray, lightgrey,
+                lightgreen, lightpink, lightsalmon, lightseagreen,
+                lightskyblue, lightslategray, lightslategrey,
+                lightsteelblue, lightyellow, lime, limegreen,
+                linen, magenta, maroon, mediumaquamarine,
+                mediumblue, mediumorchid, mediumpurple,
+                mediumseagreen, mediumslateblue, mediumspringgreen,
+                mediumturquoise, mediumvioletred, midnightblue,
+                mintcream, mistyrose, moccasin, navajowhite, navy,
+                oldlace, olive, olivedrab, orange, orangered,
+                orchid, palegoldenrod, palegreen, paleturquoise,
+                palevioletred, papayawhip, peachpuff, peru, pink,
+                plum, powderblue, purple, red, rosybrown,
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
+          - A list or array of any of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["hovercolor"]
+
+    @hovercolor.setter
+    def hovercolor(self, val):
+        self["hovercolor"] = val
+
+    # hovercolorsrc
+    # -------------
+    @property
+    def hovercolorsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `hovercolor`.
+
+        The 'hovercolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["hovercolorsrc"]
+
+    @hovercolorsrc.setter
+    def hovercolorsrc(self, val):
+        self["hovercolorsrc"] = val
 
     # hoverinfo
     # ---------
@@ -647,6 +733,15 @@ class Link(_BaseTraceHierarchyType):
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -726,6 +821,8 @@ class Link(_BaseTraceHierarchyType):
         colorsrc=None,
         customdata=None,
         customdatasrc=None,
+        hovercolor=None,
+        hovercolorsrc=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
@@ -776,6 +873,15 @@ class Link(_BaseTraceHierarchyType):
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -905,6 +1011,14 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
         _v = customdatasrc if customdatasrc is not None else _v
         if _v is not None:
             self["customdatasrc"] = _v
+        _v = arg.pop("hovercolor", None)
+        _v = hovercolor if hovercolor is not None else _v
+        if _v is not None:
+            self["hovercolor"] = _v
+        _v = arg.pop("hovercolorsrc", None)
+        _v = hovercolorsrc if hovercolorsrc is not None else _v
+        if _v is not None:
+            self["hovercolorsrc"] = _v
         _v = arg.pop("hoverinfo", None)
         _v = hoverinfo if hoverinfo is not None else _v
         if _v is not None:
