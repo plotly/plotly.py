@@ -20,6 +20,7 @@ class Scatter(_BaseTraceType):
         "error_y",
         "fill",
         "fillcolor",
+        "fillgradient",
         "fillpattern",
         "groupnorm",
         "hoverinfo",
@@ -442,7 +443,9 @@ class Scatter(_BaseTraceType):
         """
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
-        is available.
+        is available. If fillgradient is specified, fillcolor is
+        ignored except for setting the background color of the hover
+        label, if any.
 
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -495,6 +498,62 @@ class Scatter(_BaseTraceType):
     @fillcolor.setter
     def fillcolor(self, val):
         self["fillcolor"] = val
+
+    # fillgradient
+    # ------------
+    @property
+    def fillgradient(self):
+        """
+        Sets a fill gradient. If not specified, the fillcolor is used
+        instead.
+
+        The 'fillgradient' property is an instance of Fillgradient
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scatter.Fillgradient`
+          - A dict of string/value properties that will be passed
+            to the Fillgradient constructor
+
+            Supported dict properties:
+
+                colorscale
+                    Sets the fill gradient colors as a color scale.
+                    The color scale is interpreted as a gradient
+                    applied in the direction specified by
+                    "orientation", from the lowest to the highest
+                    value of the scatter plot along that axis, or
+                    from the center to the most distant point from
+                    it, if orientation is "radial".
+                start
+                    Sets the gradient start value. It is given as
+                    the absolute position on the axis determined by
+                    the orientiation. E.g., if orientation is
+                    "horizontal", the gradient will be horizontal
+                    and start from the x-position given by start.
+                    If omitted, the gradient starts at the lowest
+                    value of the trace along the respective axis.
+                    Ignored if orientation is "radial".
+                stop
+                    Sets the gradient end value. It is given as the
+                    absolute position on the axis determined by the
+                    orientiation. E.g., if orientation is
+                    "horizontal", the gradient will be horizontal
+                    and end at the x-position given by end. If
+                    omitted, the gradient ends at the highest value
+                    of the trace along the respective axis. Ignored
+                    if orientation is "radial".
+                type
+                    Sets the type/orientation of the color gradient
+                    for the fill. Defaults to "none".
+
+        Returns
+        -------
+        plotly.graph_objs.scatter.Fillgradient
+        """
+        return self["fillgradient"]
+
+    @fillgradient.setter
+    def fillgradient(self, val):
+        self["fillgradient"] = val
 
     # fillpattern
     # -----------
@@ -2376,7 +2435,12 @@ class Scatter(_BaseTraceType):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -2743,6 +2807,7 @@ class Scatter(_BaseTraceType):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillgradient=None,
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
@@ -2879,7 +2944,12 @@ class Scatter(_BaseTraceType):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -3308,6 +3378,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = fillcolor if fillcolor is not None else _v
         if _v is not None:
             self["fillcolor"] = _v
+        _v = arg.pop("fillgradient", None)
+        _v = fillgradient if fillgradient is not None else _v
+        if _v is not None:
+            self["fillgradient"] = _v
         _v = arg.pop("fillpattern", None)
         _v = fillpattern if fillpattern is not None else _v
         if _v is not None:

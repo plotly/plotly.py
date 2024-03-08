@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+
+### Updated
+- Updated Plotly.js from version 2.29.1 to version 2.30.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2300----2024-03-06) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add fill gradients for scatter traces [[#6905](https://github.com/plotly/plotly.js/pull/6905)], with thanks to @lumip for the contribution!
+  - Add `indentation` to legend [[#6874](https://github.com/plotly/plotly.js/pull/6874)], with thanks to @my-tien for the contribution!
+
+
 ## [5.19.0] - 2024-02-15
 
 ### Updated
