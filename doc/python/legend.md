@@ -546,11 +546,6 @@ fig.update_layout(title="Try Clicking on the Legend Items!")
 fig.show()
 ```
 
-```python
-df = data.iris()
-df
-```
-
 #### Indent Legend Entries
 
 *New in 5.20*
