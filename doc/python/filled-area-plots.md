@@ -133,7 +133,7 @@ fig.show()
 
 *New in 5.20*
 
-Scatter traces with a fill, support a `fillgradient`, which is a `dict` of options that define the gradient. Use `fillgradient.colorscale` to define the colorscale for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
+Scatter traces with a fill, support a `fillgradient`, which is a `dict` of options that define the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
 
 In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors. 
 
@@ -147,17 +147,17 @@ fig = go.Figure(
             y=[3, 4, 8, 3],
             fill=None,
             mode="lines",
-            line_color="indigo",
+            line_color="darkblue",
         ),
         go.Scatter(
             x=[1, 2, 3, 4],
             y=[1, 6, 2, 6],
             fill="tonexty",
             mode="lines",
-            line_color="indigo",
+            line_color="darkblue",
             fillgradient=dict(
                 type="horizontal",
-                colorscale=[[0.0, "#FFB3BA"], [0.5, "#FFDFBA"], [1.0, "#BAE1FF"]],
+                colorscale=[(0.0, "darkblue"), (0.5, "royalblue"), (1.0, "cyan")],
             ),
         ),
     ]
