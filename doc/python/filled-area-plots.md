@@ -133,7 +133,7 @@ fig.show()
 
 *New in 5.20*
 
-Scatter traces with a fill, support a `fillgradient`, which is a `dict` of options that define the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
+Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
 
 In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors. 
 
