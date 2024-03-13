@@ -17,6 +17,7 @@ class Legend(_BaseLayoutHierarchyType):
         "font",
         "groupclick",
         "grouptitlefont",
+        "indentation",
         "itemclick",
         "itemdoubleclick",
         "itemsizing",
@@ -335,6 +336,26 @@ class Legend(_BaseLayoutHierarchyType):
     @grouptitlefont.setter
     def grouptitlefont(self, val):
         self["grouptitlefont"] = val
+
+    # indentation
+    # -----------
+    @property
+    def indentation(self):
+        """
+        Sets the indentation (in px) of the legend entries.
+
+        The 'indentation' property is a number and may be specified as:
+          - An int or float in the interval [-15, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["indentation"]
+
+    @indentation.setter
+    def indentation(self, val):
+        self["indentation"] = val
 
     # itemclick
     # ---------
@@ -781,6 +802,8 @@ class Legend(_BaseLayoutHierarchyType):
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
+        indentation
+            Sets the indentation (in px) of the legend entries.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -882,6 +905,7 @@ class Legend(_BaseLayoutHierarchyType):
         font=None,
         groupclick=None,
         grouptitlefont=None,
+        indentation=None,
         itemclick=None,
         itemdoubleclick=None,
         itemsizing=None,
@@ -934,6 +958,8 @@ class Legend(_BaseLayoutHierarchyType):
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
+        indentation
+            Sets the indentation (in px) of the legend entries.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -1088,6 +1114,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = grouptitlefont if grouptitlefont is not None else _v
         if _v is not None:
             self["grouptitlefont"] = _v
+        _v = arg.pop("indentation", None)
+        _v = indentation if indentation is not None else _v
+        if _v is not None:
+            self["indentation"] = _v
         _v = arg.pop("itemclick", None)
         _v = itemclick if itemclick is not None else _v
         if _v is not None:
