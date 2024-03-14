@@ -327,7 +327,7 @@ df_summarized["percent of world population"]=100*df_summarized["pop"]/df_summari
 df_summarized["percent of world GDP"]=100*df_summarized["gdp"]/df_summarized["gdp"].sum()
 
 
-df2 = df_summarized[["continent", 
+df = df_summarized[["continent", 
 "percent of world population",
 "percent of world GDP",
 ]]
@@ -338,12 +338,12 @@ df2 = df_summarized[["continent",
 fig=go.Figure()
 for category in df_summarized["continent"].values:
     fig.add_trace(go.Bar(
-            x=df2.columns[1:],
+            x=df.columns[1:],
             #we need to get a pandas series that contains just the values to graph; 
             #we do so by selecting the right row, selecting the right columns
             #and then tranposing and using iloc to convert to a series
             #here, I assume that the bar element category variable is in column 0
-            y=list(df2.loc[df2["continent"]==category][list(df2.columns[1:])].transpose().iloc[:,0]),
+            y=list(df.loc[df["continent"]==category][list(df.columns[1:])].transpose().iloc[:,0]),
             name=str(category)
 
 
