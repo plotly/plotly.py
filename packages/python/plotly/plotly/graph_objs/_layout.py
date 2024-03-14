@@ -2018,6 +2018,9 @@ class Layout(_BaseLayoutType):
                     Sets the font for group titles in legend.
                     Defaults to `legend.font` with its size
                     increased about 10%.
+                indentation
+                    Sets the indentation (in px) of the legend
+                    entries.
                 itemclick
                     Determines the behavior on legend item click.
                     "toggle" toggles the visibility of the item
