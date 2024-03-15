@@ -63,6 +63,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._hoverinfo import HoverinfoValidator
     from ._groupnorm import GroupnormValidator
     from ._fillpattern import FillpatternValidator
+    from ._fillgradient import FillgradientValidator
     from ._fillcolor import FillcolorValidator
     from ._fill import FillValidator
     from ._error_y import Error_YValidator
@@ -142,6 +143,7 @@ else:
             "._hoverinfo.HoverinfoValidator",
             "._groupnorm.GroupnormValidator",
             "._fillpattern.FillpatternValidator",
+            "._fillgradient.FillgradientValidator",
             "._fillcolor.FillcolorValidator",
             "._fill.FillValidator",
             "._error_y.Error_YValidator",
