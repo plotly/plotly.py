@@ -501,7 +501,7 @@ setup(
     maintainer_email="nicolas@plot.ly",
     url="https://plotly.com/python/",
     project_urls={
-        "Documentation": "https://plotly.com/python/", 
+        "Documentation": "https://plotly.com/python/",
         "Github": "https://github.com/plotly/plotly.py",
         "Changelog": "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md",
     },
