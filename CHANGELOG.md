@@ -24,6 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   -  Adjust stamen styles to point to `stadiamaps.com`, the users may also need to provide their own API_KEY via `config.mapboxAccessToken` [[#6776](https://github.com/plotly/plotly.js/pull/6776), [#6778](https://github.com/plotly/plotly.js/pull/6778)]
 - Removed Python 3.6 and Python 3.7 support [[#4492](https://github.com/plotly/plotly.py/pull/4492)]
 
+### Added
+- New grouped_stacked_bar chart in figure_factory
+
 ### Fixed
 - Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
