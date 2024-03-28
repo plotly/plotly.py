@@ -36,6 +36,15 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
                 for `customdata`.
+            hovercolor
+                Sets the `link` hover color. It can be a single
+                value, or an array for specifying hover colors
+                for each `link`. If `link.hovercolor` is
+                omitted, then by default, links will become
+                slightly more opaque when hovered over.
+            hovercolorsrc
+                Sets the source reference on Chart Studio Cloud
+                for `hovercolor`.
             hoverinfo
                 Determines which trace information appear when
                 hovering links. If `none` or `skip` are set, no

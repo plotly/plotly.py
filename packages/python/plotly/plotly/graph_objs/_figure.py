@@ -80,6 +80,10 @@ class Figure(BaseFigure):
                         `type` detection. This is the default value;
                         however it could be overridden for individual
                         axes.
+                    barcornerradius
+                        Sets the rounding of bar corners. May be an
+                        integer number of pixels, or a percentage of
+                        bar width (as a string ending in %).
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.
@@ -2567,7 +2571,7 @@ class Figure(BaseFigure):
             items as the number of boxes desired. This attribute
             has effect only under the q1/median/q3 signature. If
             `upperfence` is not provided but a sample (in `y` or
-            `x`) is set, we compute the lower as the last sample
+            `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
@@ -13175,6 +13179,7 @@ class Figure(BaseFigure):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillgradient=None,
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
@@ -13311,7 +13316,12 @@ class Figure(BaseFigure):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -13701,6 +13711,7 @@ class Figure(BaseFigure):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            fillgradient=fillgradient,
             fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
