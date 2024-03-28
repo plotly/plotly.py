@@ -100,7 +100,13 @@ def _bullet(
             bar = go.Bar(
                 x=x,
                 y=y,
-                marker=dict(color=inter_colors[sorted(df.iloc[row]["ranges"]).index(sorted(df.iloc[row]["ranges"], key=abs, reverse=True)[idx])]),
+                marker=dict(
+                    color=inter_colors[
+                        sorted(df.iloc[row]["ranges"]).index(
+                            sorted(df.iloc[row]["ranges"], key=abs, reverse=True)[idx]
+                        )
+                    ]
+                ),
                 name="ranges",
                 hoverinfo="x" if orientation == "h" else "y",
                 orientation=orientation,
@@ -132,7 +138,13 @@ def _bullet(
             bar = go.Bar(
                 x=x,
                 y=y,
-                marker=dict(color=inter_colors[sorted(df.iloc[row]["measures"]).index(sorted(df.iloc[row]["measures"], key=abs, reverse=True)[idx])]),
+                marker=dict(
+                    color=inter_colors[
+                        sorted(df.iloc[row]["measures"]).index(
+                            sorted(df.iloc[row]["measures"], key=abs, reverse=True)[idx]
+                        )
+                    ]
+                ),
                 name="measures",
                 hoverinfo="x" if orientation == "h" else "y",
                 orientation=orientation,
