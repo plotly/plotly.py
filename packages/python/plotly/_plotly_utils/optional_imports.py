@@ -33,5 +33,5 @@ def get_module(name, should_load=True):
                 _not_importable.add(name)
                 msg = f"Error importing optional module {name}"
                 logger.exception(msg)
-        else:
-            return None
+
+        return None
