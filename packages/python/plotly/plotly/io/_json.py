@@ -8,9 +8,6 @@ from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output
 from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
-# Ensure `orjson` module is loaded immediately if present (to avoid error on hot reload)
-get_module("orjson", should_load=True)
-
 
 # Orca configuration class
 # ------------------------
@@ -108,7 +105,6 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     --------
     to_json : Convert a plotly Figure to JSON with validation
     """
-
     orjson = get_module("orjson", should_load=True)
 
     # Determine json engine
