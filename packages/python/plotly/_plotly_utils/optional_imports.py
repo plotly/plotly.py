@@ -2,6 +2,7 @@
 Stand-alone module to provide information about whether optional deps exist.
 
 """
+
 from importlib import import_module
 import logging
 import sys
@@ -19,16 +20,18 @@ def get_module(name, should_load=True):
     :return: (module|None) If import succeeds, the module will be returned.
 
     """
-    if name in sys.modules:
-        return sys.modules[name]
     if not should_load:
-        return None
-    if name not in _not_importable:
-        try:
-            return import_module(name)
-        except ImportError:
-            _not_importable.add(name)
-        except Exception:
-            _not_importable.add(name)
-            msg = f"Error importing optional module {name}"
-            logger.exception(msg)
+        return sys.modules.get(name, None)
+
+    else:
+        if name not in _not_importable:
+            try:
+                return import_module(name)
+            except ImportError:
+                _not_importable.add(name)
+            except Exception:
+                _not_importable.add(name)
+                msg = f"Error importing optional module {name}"
+                logger.exception(msg)
+        else:
+            return None
