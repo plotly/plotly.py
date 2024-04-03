@@ -23,15 +23,14 @@ def get_module(name, should_load=True):
     if not should_load:
         return sys.modules.get(name, None)
 
-    else:
-        if name not in _not_importable:
-            try:
-                return import_module(name)
-            except ImportError:
-                _not_importable.add(name)
-            except Exception:
-                _not_importable.add(name)
-                msg = f"Error importing optional module {name}"
-                logger.exception(msg)
+    if name not in _not_importable:
+        try:
+            return import_module(name)
+        except ImportError:
+            _not_importable.add(name)
+        except Exception:
+            _not_importable.add(name)
+            msg = f"Error importing optional module {name}"
+            logger.exception(msg)
 
-        return None
+    return None
