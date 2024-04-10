@@ -303,6 +303,11 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,
