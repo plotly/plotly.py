@@ -53,6 +53,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._imagedefaults import ImagedefaultsValidator
     from ._images import ImagesValidator
     from ._iciclecolorway import IciclecolorwayValidator
+    from ._hoversubplots import HoversubplotsValidator
     from ._hovermode import HovermodeValidator
     from ._hoverlabel import HoverlabelValidator
     from ._hoverdistance import HoverdistanceValidator
@@ -153,6 +154,7 @@ else:
             "._imagedefaults.ImagedefaultsValidator",
             "._images.ImagesValidator",
             "._iciclecolorway.IciclecolorwayValidator",
+            "._hoversubplots.HoversubplotsValidator",
             "._hovermode.HovermodeValidator",
             "._hoverlabel.HoverlabelValidator",
             "._hoverdistance.HoverdistanceValidator",
