@@ -306,8 +306,7 @@ fig.show()
 
 ### Stacked Bar Chart From Aggregating a DataFrame 
 
-Stacked bar charts are a powerful way to present results summarizing categories generated using the Pandas aggregate commands.  DF.agg() which produces a wide format data set with one row for each bar component and a column for each bar, which is the transpose of the orientation of the px.bar wide data frame.  Tranposing and updating the indexes is a somewhat involved option. Here is one straightforward way to aggregate a data set into a summarized form and present the results as a stacked bar.
-
+Stacked bar charts are a powerful way to present results summarizing categories generated using the Pandas aggregate commands. `pandas.DataFrame.agg` produces a wide data set format incompatible with `px.bar`. Transposing and updating the indexes to achieve `px.bar` compatibility is a somewhat involved option. Here is one straightforward alternative, which presents the aggregated data as a stacked bar using plotly.graph_objects.
 ```
 
 from plotly import graph_objects as go
