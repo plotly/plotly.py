@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to use hover text and formatting in Python with Plotly.
     display_as: file_settings
@@ -113,6 +113,38 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(x=t, y=np.sin(t), name='sin(t)'))
 fig.add_trace(go.Scatter(x=t, y=np.cos(t), name='cost(t)'))
 fig.update_layout(hovermode='x unified')
+fig.show()
+```
+
+#### Hover on Subplots
+
+*New in 5.21*
+
+Use `hoversubplots` to define how hover effects expand to additional subplots. With `hoversubplots=axis`, hover effects are included on stacked subplots using the same axis when `hovermode` is set to `x`, `x unified`, `y`, or `y unified`. In the following example, the three stacked scatter plots use the same `xaxis`:
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+from plotly import data
+
+df = data.stocks()
+
+date_range = pd.date_range(start="1/1/2020", end="1/10/2020")
+
+layout = dict(
+    hoversubplots="axis",
+    title="Stock Price Changes",
+    hovermode="x",
+    grid=dict(rows=3, columns=1),
+)
+
+data = [
+    go.Scatter(x=df["date"], y=df["AAPL"], xaxis="x", yaxis="y", name="Apple"),
+    go.Scatter(x=df["date"], y=df["GOOG"], xaxis="x", yaxis="y2", name="Google"),
+    go.Scatter(x=df["date"], y=df["AMZN"], xaxis="x", yaxis="y3", name="Amazon"),
+]
+
+fig = go.Figure(data=data, layout=layout)
 fig.show()
 ```
 
