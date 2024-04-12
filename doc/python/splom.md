@@ -293,9 +293,7 @@ fig.show()
 
 *New in 5.21*
 
-Set `hoversubplots='axis'` with `hovermode` set to `x`, `x unified`, `y`, or `y unified` for hover effects to appear across a column or row.
-
-For more on hover effects see the [Hover Text and Formatting](/python/hover-text-and-formatting/) page.
+Set `hoversubplots='axis'` with `hovermode` set to `x`, `x unified`, `y`, or `y unified` for hover effects to appear across a column or row. For more on hover effects, see the [Hover Text and Formatting](/python/hover-text-and-formatting/) page.
 
 ```python
 import plotly.graph_objects as go
