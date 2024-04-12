@@ -120,7 +120,7 @@ fig.show()
 
 *New in 5.21*
 
-Use `hoversubplots` to define how hover effects expand to additional subplots. With `hoversubplots=axis`, hover effects are included on stacked subplots using the same axis when `hovermode` is set to `x`, `x unified`, `y`, or `y unified`. In the following example, the three stacked scatter plots use the same `xaxis`:
+Use `hoversubplots` to define how hover effects expand to additional subplots. With `hoversubplots=axis`, hover effects are included on stacked subplots using the same axis when `hovermode` is set to `x`, `x unified`, `y`, or `y unified`.
 
 ```python
 import plotly.graph_objects as go
