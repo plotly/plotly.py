@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.11
   plotly:
     description: How to make scatter plots in Python with Plotly.
     display_as: basic
@@ -422,6 +422,48 @@ fig = go.Figure(data=go.Scatter(
         showscale=True
     )
 ))
+
+fig.show()
+```
+
+#### Trace Zorder
+
+*New in 5.21*
+
+For many trace types, including `go.Scatter`, you can define the order traces are drawn in by setting a `zorder`. Traces with a higher `zorder` appear at the front, with traces with a lower `zorder` at the back. In this example, we give our trace for 'France' the highest `zorder`, meaning it is drawn in front of the other two traces:
+
+```python
+import plotly.graph_objects as go
+import plotly.data as data
+
+df = data.gapminder()
+
+df_europe = df[df['continent'] == 'Europe']
+
+trace1 = go.Scatter(x=df_europe[df_europe['country'] == 'France']['year'], 
+                    y=df_europe[df_europe['country'] == 'France']['lifeExp'], 
+                    mode='lines+markers', 
+                    zorder=3,
+                    name='France',
+                    marker=dict(size=15))
+
+trace2 = go.Scatter(x=df_europe[df_europe['country'] == 'Germany']['year'], 
+                    y=df_europe[df_europe['country'] == 'Germany']['lifeExp'], 
+                    mode='lines+markers',
+                    zorder=1,
+                    name='Germany',
+                    marker=dict(size=15))
+
+trace3 = go.Scatter(x=df_europe[df_europe['country'] == 'Spain']['year'], 
+                    y=df_europe[df_europe['country'] == 'Spain']['lifeExp'], 
+                    mode='lines+markers',
+                    zorder=2,
+                    name='Spain',
+                    marker=dict(size=15))
+
+layout = go.Layout(title='Life Expectancy in Europe Over Time')
+
+fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
 
 fig.show()
 ```
