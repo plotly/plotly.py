@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.10.11
   plotly:
     description: How to make 3D Cone plots in Python with Plotly.
     display_as: 3d_charts
@@ -125,6 +125,11 @@ fig.update_layout(scene=dict(aspectratio=dict(x=1, y=1, z=0.8),
 
 fig.show()
 ```
+
+### Sizemode
+
+Earlier examples use `sizemode="absolute"` when adjusting the cone size scaling with `sizeref`. `sizemode` also supports `raw`(new in 5.21) and `scaled`. For more details, see the [Cone Sizemode](https://plotly.com/python/reference/cone/#cone-sizemode) and https://plotly.com/python/reference/cone/#cone and [Cone Sizeref](https://plotly.com/python/reference/cone/#cone-sizeref) reference documentation.
+
 
 #### Reference
 See https://plotly.com/python/reference/ for more information and chart attribute options!
