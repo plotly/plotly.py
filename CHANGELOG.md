@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Updated
-- Updated Plotly.js from version 2.30.0 to version 2.31.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2310----2024-04-10) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Updated Plotly.js from version 2.30.0 to version 2.31.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2311----2024-04-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `zorder` attribute to various cartesian traces for controlling stacking order of SVG traces drawn into a subplot [[#6918](https://github.com/plotly/plotly.js/pull/6918), [#6953](https://github.com/plotly/plotly.js/pull/6953)],
     This feature was anonymously sponsored: thank you to our sponsor!
   - Add "between" option to shape layer for placing them above grid lines and below traces [[#6927](https://github.com/plotly/plotly.js/pull/6927)],
