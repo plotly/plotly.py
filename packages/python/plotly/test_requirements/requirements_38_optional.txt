@@ -5,7 +5,7 @@ numpy==1.20.2
 xarray==0.17.0
 statsmodels
 Pillow==8.2.0
-pytest==6.2.3
+pytest==8.1.1
 pytz==2021.1
 ipython[all]==7.22.0
 ipywidgets==8.0.2
