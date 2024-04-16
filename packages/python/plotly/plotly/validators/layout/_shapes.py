@@ -28,8 +28,9 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 :class:`plotly.graph_objects.layout.shape.Label
                 ` instance or dict with compatible properties
             layer
-                Specifies whether shapes are drawn below or
-                above traces.
+                Specifies whether shapes are drawn below
+                gridlines ("below"), between gridlines and
+                traces ("between") or above traces ("above").
             legend
                 Sets the reference to a legend to show this
                 shape in. References to these legends are

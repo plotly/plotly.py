@@ -59,6 +59,7 @@ class Scattercarpet(_BaseTraceType):
         "visible",
         "xaxis",
         "yaxis",
+        "zorder",
     }
 
     # a
@@ -1548,6 +1549,28 @@ class Scattercarpet(_BaseTraceType):
     def yaxis(self, val):
         self["yaxis"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -1819,6 +1842,11 @@ class Scattercarpet(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -1873,6 +1901,7 @@ class Scattercarpet(_BaseTraceType):
         visible=None,
         xaxis=None,
         yaxis=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2146,6 +2175,11 @@ class Scattercarpet(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -2376,6 +2410,10 @@ an instance of :class:`plotly.graph_objs.Scattercarpet`"""
         _v = yaxis if yaxis is not None else _v
         if _v is not None:
             self["yaxis"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------
