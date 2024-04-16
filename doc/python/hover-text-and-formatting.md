@@ -129,8 +129,6 @@ from plotly import data
 
 df = data.stocks()
 
-date_range = pd.date_range(start="1/1/2020", end="1/10/2020")
-
 layout = dict(
     hoversubplots="axis",
     title="Stock Price Changes",
@@ -145,6 +143,7 @@ data = [
 ]
 
 fig = go.Figure(data=data, layout=layout)
+
 fig.show()
 ```
 
