@@ -274,6 +274,15 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 spikelines are enabled by default perpendicular
                 to the specified axis. If false, hover
                 interactions are disabled.
+            hoversubplots
+                Determines expansion of hover effects to other
+                subplots If "single" just the axis pair of the
+                primary point is included without overlaying
+                subplots. If "overlaying" all subplots using
+                the main axis and occupying the same space are
+                included. If "axis", also include stacked
+                subplots using the same axis when `hovermode`
+                is set to "x", *x unified*, "y" or *y unified*.
             iciclecolorway
                 Sets the default icicle slice colors. Defaults
                 to the main `colorway` used for trace colors.
