@@ -448,7 +448,7 @@ docs = dict(
     ],
     histfunc=[
         "str (default `'count'` if no arguments are provided, else `'sum'`)",
-        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`."
+        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`.",
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
     ],
     histnorm=[
