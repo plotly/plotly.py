@@ -43,5 +43,5 @@ orjson
 dash-bio
 jinja2<3.1
 parmed<=3.4.4; python_version<"3.8"
-polars
 dask==2022.2.0
+polars

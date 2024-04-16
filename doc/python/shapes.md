@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.10
+    version: 3.10.11
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -1103,6 +1103,59 @@ fig.show(
         ]
     }
 )
+```
+
+#### Shape Layer
+
+By default, shapes are drawn above traces. You can also configure them to be drawn between traces and gridlines with `layer="between"` (new in 5.21), or below gridlines with `layer="below"`.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-03-01",
+    y0=0,
+    x1="2018-08-01",
+    y1=3,
+    line_width=0,
+    layer="above",
+    label=dict(text="Above", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-10-01",
+    y0=0,
+    x1="2019-03-01",
+    y1=3,
+    line_width=0,
+    layer="between",
+    label=dict(text="Between", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2019-05-01",
+    y0=0,
+    x1="2019-10-01",
+    y1=3,
+    line_width=0,
+    layer="below",
+    label=dict(text="Below", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.show()
 ```
 
 ### Reference
