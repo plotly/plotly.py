@@ -34,8 +34,9 @@ class NewshapeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 bel` instance or dict with compatible
                 properties
             layer
-                Specifies whether new shapes are drawn below or
-                above traces.
+                Specifies whether new shapes are drawn below
+                gridlines ("below"), between gridlines and
+                traces ("between") or above traces ("above").
             legend
                 Sets the reference to a legend to show new
                 shape in. References to these legends are

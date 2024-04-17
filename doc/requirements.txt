@@ -1,4 +1,4 @@
-plotly==5.20.0
+plotly==5.21.0
 jupytext==1.1.1
 ipywidgets==7.7.2
 jupyter-client<7
@@ -43,5 +43,5 @@ orjson
 dash-bio
 jinja2<3.1
 parmed<=3.4.4; python_version<"3.8"
-polars
 dask==2022.2.0
+polars
