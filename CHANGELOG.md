@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [5.21.0] - 2024-04-17
 
 ### Updated
 - Updated Plotly.js from version 2.30.0 to version 2.31.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2311----2024-04-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     with thanks to @my-tien for the contribution!
   - Add "raw" `sizemode` to cone trace [[#6938](https://github.com/plotly/plotly.js/pull/6938)]
   - Add `layout.hoversubplots` to enable hover effects across multiple cartesian suplots sharing one axis [[#6947](https://github.com/plotly/plotly.js/pull/6947), [#6950](https://github.com/plotly/plotly.js/pull/6950)]
+
+### Fixed
+- Fixed `orjson` loading issue [[#4562](https://github.com/plotly/plotly.py/pull/4562)]
 
 ## [5.20.0] - 2024-03-13
 
