@@ -281,7 +281,7 @@ fig=px.scatter(df,
                custom_data=['country', 'continent', 'pop'], 
 )
 
-# Plotly express does not have a hovertemplate paramter in the graph creation function, so we apply the template with update_traces
+# Plotly express does not have a hovertemplate parameter in the graph creation function, so we apply the template with update_traces
 fig.update_traces(
     hovertemplate = 
                 "<b>%{customdata[0]}</b><br>" +
