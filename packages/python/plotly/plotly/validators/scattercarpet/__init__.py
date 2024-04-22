@@ -2,6 +2,7 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._zorder import ZorderValidator
     from ._yaxis import YaxisValidator
     from ._xaxis import XaxisValidator
     from ._visible import VisibleValidator
@@ -58,6 +59,7 @@ else:
         __name__,
         [],
         [
+            "._zorder.ZorderValidator",
             "._yaxis.YaxisValidator",
             "._xaxis.XaxisValidator",
             "._visible.VisibleValidator",

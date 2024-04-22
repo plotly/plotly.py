@@ -229,7 +229,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "scaled" (i.e unitless) scalar (normalized by
                 the max u/v/w norm in the vector field) or as
                 "absolute" value (in the same units as the
-                vector field).
+                vector field). To display sizes in actual
+                vector length use "raw".
             sizeref
                 Adjusts the cone size scaling. The size of the
                 cones is determined by their u/v/w norm
@@ -239,8 +240,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 x/y/z positions at the average velocity of
                 those two successive positions. All cones in a
                 given trace use the same factor. With
-                `sizemode` set to "scaled", `sizeref` is
-                unitless, its default value is 0.5 With
+                `sizemode` set to "raw", its default value is
+                1. With `sizemode` set to "scaled", `sizeref`
+                is unitless, its default value is 0.5. With
                 `sizemode` set to "absolute", `sizeref` has the
                 same units as the u/v/w vector field, its the
                 default value is half the sample's maximum

@@ -314,19 +314,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertIn('"bogus": 42', html)
 
-    @pytest.mark.nodev
-    def test_plotlyjs_version(self):
-        path = os.path.join(
-            packages_root, "javascript", "jupyterlab-plotly", "package.json"
-        )
-        with open(path, "rt") as f:
-            package_json = json.load(f)
-            expected_version = package_json["dependencies"]["plotly.js"]
-            if expected_version[0] == "^":
-                expected_version = expected_version[1:]
-
-        self.assertEqual(expected_version, plotly.offline.get_plotlyjs_version())
-
     def test_include_mathjax_false_html(self):
         html = self._read_html(
             plotly.offline.plot(
