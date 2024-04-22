@@ -275,7 +275,7 @@ fig=px.scatter(df,
                y='Life Expectancy (years)', 
                color='continent', 
                size=np.sqrt(df['pop']),           
-               # Specifying data to make availabe to the hovertemplate
+               # Specifying data to make available to the hovertemplate
                # The px custom_data parameter has an underscore, whike the analogous graph objects customdata parameter has no underscore.
                # The px custom_data parameter is a list of column names in the data frame, while the graph objects customdata parameter expects a data frame or a numpy array.
                custom_data=['country', 'continent', 'pop'], 
