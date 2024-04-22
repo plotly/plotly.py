@@ -372,8 +372,8 @@ for continent_name, df in continent_data.items():
             name=continent_name,
 
             # The next three parameters specify the hover text
-            # Text supports just one customized field per trace, but is simple to implement
-            text=df['continent'],  
+            # Text supports just one customized field per trace 
+            # and is implemented here with text=df['continent'],  
             # Custom data supports multiple fields through numeric indices in the hovertemplate 
             # If I were not looking for an opportunity to demonstrate the text parameter, 
             # I would likely just add continent as a third customdata field.
