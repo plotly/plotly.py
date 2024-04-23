@@ -138,6 +138,12 @@ class Symbol(_BaseLayoutHierarchyType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.symbol.Textfont

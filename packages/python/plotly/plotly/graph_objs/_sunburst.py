@@ -499,6 +499,22 @@ class Sunburst(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1002,6 +1018,22 @@ class Sunburst(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1233,6 +1265,22 @@ class Sunburst(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
