@@ -287,7 +287,7 @@ fig.show()
 
 This example adds custom fields to a Plotly Express figure using the custom_data parameter and then adds a hover template that applies d3 formats to each element of the customdata[n] array and uses HTML to customize the fonts and spacing. 
 
-```
+```python
 # %%
 import plotly.graph_objects as go
 import plotly.express as px
