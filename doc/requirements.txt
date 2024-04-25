@@ -4,9 +4,9 @@ ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
-pandas==1.2.0
+pandas==2.2.2
 statsmodels==0.12.1
-scipy==1.5.4
+scipy==1.13.0
 patsy==0.5.1
 numpy==1.19.5
 plotly-geo
