@@ -8,7 +8,7 @@ class Textfont(_BaseLayoutHierarchyType):
     # --------------------
     _parent_path_str = "layout.mapbox.layer.symbol"
     _path_str = "layout.mapbox.layer.symbol.textfont"
-    _valid_props = {"color", "family", "size"}
+    _valid_props = {"color", "family", "size", "style", "weight"}
 
     # color
     # -----
@@ -116,6 +116,49 @@ class Textfont(_BaseLayoutHierarchyType):
     def size(self, val):
         self["size"] = val
 
+    # style
+    # -----
+    @property
+    def style(self):
+        """
+        Sets whether a font should be styled with a normal or italic
+        face from its family.
+
+        The 'style' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'italic']
+
+        Returns
+        -------
+        Any
+        """
+        return self["style"]
+
+    @style.setter
+    def style(self, val):
+        self["style"] = val
+
+    # weight
+    # ------
+    @property
+    def weight(self):
+        """
+        Sets the weight (or boldness) of the font.
+
+        The 'weight' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'bold']
+
+        Returns
+        -------
+        Any
+        """
+        return self["weight"]
+
+    @weight.setter
+    def weight(self, val):
+        self["weight"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -139,9 +182,23 @@ class Textfont(_BaseLayoutHierarchyType):
             Sans Narrow", "Raleway", "Times New Roman".
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        weight
+            Sets the weight (or boldness) of the font.
         """
 
-    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        family=None,
+        size=None,
+        style=None,
+        weight=None,
+        **kwargs,
+    ):
         """
         Construct a new Textfont object
 
@@ -173,6 +230,11 @@ class Textfont(_BaseLayoutHierarchyType):
             Sans Narrow", "Raleway", "Times New Roman".
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        weight
+            Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -219,6 +281,14 @@ an instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`"""
         _v = size if size is not None else _v
         if _v is not None:
             self["size"] = _v
+        _v = arg.pop("style", None)
+        _v = style if style is not None else _v
+        if _v is not None:
+            self["style"] = _v
+        _v = arg.pop("weight", None)
+        _v = weight if weight is not None else _v
+        if _v is not None:
+            self["weight"] = _v
 
         # Process unknown kwargs
         # ----------------------
