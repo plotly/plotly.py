@@ -8,7 +8,7 @@ pandas==2.2.2
 statsmodels==0.14.2
 scipy==1.13.0
 patsy==0.5.1
-numpy==1.19.5
+numpy==1.26.4
 plotly-geo
 igraph
 geopandas==0.8.1
