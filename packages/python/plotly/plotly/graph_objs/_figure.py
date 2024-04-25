@@ -14115,8 +14115,7 @@ class Figure(BaseFigure):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            :class:`plotly.graph_objects.scatter3d.Textfont`
-            instance or dict with compatible properties
+            Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
