@@ -31,7 +31,7 @@ sphinx_bootstrap_theme
 recommonmark
 pathlib
 python-frontmatter
-datashader==0.14.4
+datashader==0.16.1
 pyarrow
 cufflinks==0.17.3
 kaleido
@@ -42,6 +42,5 @@ nbconvert==5.6.1
 orjson
 dash-bio
 jinja2<3.1
-parmed<=3.4.4; python_version<"3.8"
-dask==2022.2.0
+dask==2024.4.2
 polars

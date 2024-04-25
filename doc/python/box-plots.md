@@ -458,12 +458,12 @@ x_data = ['Carmelo Anthony', 'Dwyane Wade',
 
 N = 50
 
-y0 = (10 * np.random.randn(N) + 30).astype(np.int)
-y1 = (13 * np.random.randn(N) + 38).astype(np.int)
-y2 = (11 * np.random.randn(N) + 33).astype(np.int)
-y3 = (9 * np.random.randn(N) + 36).astype(np.int)
-y4 = (15 * np.random.randn(N) + 31).astype(np.int)
-y5 = (12 * np.random.randn(N) + 40).astype(np.int)
+y0 = (10 * np.random.randn(N) + 30).astype(int)
+y1 = (13 * np.random.randn(N) + 38).astype(int)
+y2 = (11 * np.random.randn(N) + 33).astype(int)
+y3 = (9 * np.random.randn(N) + 36).astype(int)
+y4 = (15 * np.random.randn(N) + 31).astype(int)
+y5 = (12 * np.random.randn(N) + 40).astype(int)
 
 y_data = [y0, y1, y2, y3, y4, y5]
 
