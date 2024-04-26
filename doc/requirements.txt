@@ -42,5 +42,5 @@ nbconvert==5.6.1
 orjson
 dash-bio
 jinja2<3.1
-dask==2023.12.1
+dask==2023.4.0
 polars
