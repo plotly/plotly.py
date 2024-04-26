@@ -31,7 +31,7 @@ sphinx_bootstrap_theme
 recommonmark
 pathlib
 python-frontmatter
-datashader==0.16.1
+datashader==0.14.4
 pyarrow
 cufflinks==0.17.3
 kaleido
