@@ -195,6 +195,14 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.layout.hoverlabel.Font
@@ -241,6 +249,14 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
