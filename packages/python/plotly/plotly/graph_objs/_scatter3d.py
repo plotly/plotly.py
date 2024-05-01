@@ -1363,6 +1363,8 @@ class Scatter3d(_BaseTraceType):
     @property
     def textfont(self):
         """
+        Sets the text font.
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scatter3d.Textfont`
@@ -1393,11 +1395,30 @@ class Scatter3d(_BaseTraceType):
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `family`.
                 size
 
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -2073,8 +2094,7 @@ class Scatter3d(_BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            :class:`plotly.graph_objects.scatter3d.Textfont`
-            instance or dict with compatible properties
+            Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -2437,8 +2457,7 @@ class Scatter3d(_BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            :class:`plotly.graph_objects.scatter3d.Textfont`
-            instance or dict with compatible properties
+            Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.

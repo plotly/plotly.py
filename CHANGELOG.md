@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.22.0] - 2024-05-01
+
+### Updated
+- Updated Plotly.js from version 2.31.1 to version 2.32.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2320----2024-04-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [#6956]
+  - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [#6967], with thanks to @my-tien for the contribution!
+  - Fix positioning of multi-line axis titles with standoff [#6970], with thanks to @my-tien for the contribution!
+
 ## [5.21.0] - 2024-04-17
 
 ### Updated
