@@ -1,4 +1,4 @@
-plotly==5.21.0
+plotly==5.22.0
 jupytext==1.1.1
 ipywidgets==7.7.2
 jupyter-client<7
@@ -45,3 +45,4 @@ jinja2<3.1
 parmed<=3.4.4; python_version<"3.8"
 dask==2022.2.0
 polars
+geoparse<=2.0.3
