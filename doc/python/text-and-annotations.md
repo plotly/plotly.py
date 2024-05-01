@@ -353,7 +353,7 @@ fig.show()
 
 *New in 5.22*
 
-You can also configure a font's `variant`, `style`, and `weight` on `textfont`. Here, we configure an `italic` style on the first bar, `bold` weight on the second, and`small-caps` as the font variant on the third.
+You can also configure a font's `variant`, `style`, and `weight` on `textfont`. Here, we configure an `italic` style on the first bar, `bold` weight on the second, and `small-caps` as the font variant on the third.
 
 ```python
 import plotly.graph_objects as go
