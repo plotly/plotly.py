@@ -48,8 +48,8 @@ import plotly.express as px
 import pandas as pd
 df = pd.DataFrame(dict(
     r=[1, 5, 2, 2, 3],
-    theta=['processing cost','mechanical properties','chemical stability',
-           'thermal stability', 'device integration']))
+    theta=['Threat of New Entrants','Bargaining Power of Suppliers','Bargaining Power of Buyers',
+           'Threat of Substitute Products', 'Rivalry Among Existing Competitors ']))
 fig = px.line_polar(df, r='r', theta='theta', line_close=True)
 fig.show()
 ```
@@ -75,8 +75,8 @@ import plotly.graph_objects as go
 
 fig = go.Figure(data=go.Scatterpolar(
   r=[1, 5, 2, 2, 3],
-  theta=['processing cost','mechanical properties','chemical stability', 'thermal stability',
-           'device integration'],
+  theta=['Threat of New Entrants','Bargaining Power of Suppliers','Bargaining Power of Buyers',
+           'Threat of Substitute Products', 'Rivalry Among Existing Competitors '],
   fill='toself'
 ))
 
@@ -97,8 +97,8 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-categories = ['processing cost','mechanical properties','chemical stability',
-              'thermal stability', 'device integration']
+categories = ['Threat of New Entrants','Bargaining Power of Suppliers','Bargaining Power of Buyers',
+           'Threat of Substitute Products', 'Rivalry Among Existing Competitors ']
 
 fig = go.Figure()
 
