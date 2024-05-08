@@ -256,11 +256,21 @@ We take advantage of two tools to run tests:
 * [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
 * [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
 
-### Running Tests with `pytest`
+### Extra packages required for testing
 
 Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
+Please also install the tests' dependencies for your version of Python.
+These dependencies are listed in `pip` requirements files in `packages/python/plotly/test_requirements` for several versions of Python
+(and for additional configurations used by our Circle CI tests).
+For example, if you are using Python 3.11, please run:
 
-After you've done that, go ahead and run the test suite!
+```bash
+$ pip install -r packages/python/plotly/test_requirements/requirements_311_optional.txt
+```
+
+### Running Tests with `pytest`
+
+After you have installed everything you need, go ahead and run the test suite!
 
 ```bash
 pytest  packages/python/plotly/plotly/tests/
