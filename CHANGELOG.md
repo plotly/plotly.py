@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.23.0] - TBD
+
+### Updated
+- Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
+
 ## [5.22.0] - 2024-05-01
 
 ### Updated
