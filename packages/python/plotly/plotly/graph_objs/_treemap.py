@@ -494,6 +494,23 @@ class Treemap(_BaseTraceType):
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -505,6 +522,13 @@ class Treemap(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc
@@ -973,6 +997,23 @@ class Treemap(_BaseTraceType):
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -984,6 +1025,13 @@ class Treemap(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc
@@ -1237,6 +1285,23 @@ class Treemap(_BaseTraceType):
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -1248,6 +1313,13 @@ class Treemap(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc
@@ -1417,10 +1489,10 @@ class Treemap(_BaseTraceType):
                     Sets the inner padding (in px).
                 squarifyratio
                     When using "squarify" `packing` algorithm,
-                    according to https://github.com/d3/d3-
-                    hierarchy/blob/v3.1.1/README.md#squarify_ratio
-                    this option specifies the desired aspect ratio
-                    of the generated rectangles. The ratio must be
+                    according to https://github.com/d3/d3-hierarchy
+                    /blob/v3.1.1/README.md#squarify_ratio this
+                    option specifies the desired aspect ratio of
+                    the generated rectangles. The ratio must be
                     specified as a number greater than or equal to
                     one. Note that the orientation of the generated
                     rectangles (tall or wide) is not implied by the
