@@ -284,14 +284,14 @@ class Textfont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'bold']
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        int|numpy.ndarray
         """
         return self["weight"]
 
