@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.15.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.9.0
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -169,7 +169,7 @@ import plotly.express as px
 
 df = px.data.gapminder().query("continent == 'Asia' and year == 2007")
 fig = px.pie(df, values='pop', names='country')
-fig.update_traces(textposition='inside', textfont_size=14)
+fig.update_traces(textposition='inside', textfont_size=14, textfont_shadow='auto', textfont_weight='bold', textfont_lineposition='under')
 fig.show()
 ```
 
