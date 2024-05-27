@@ -397,11 +397,26 @@ class Parcats(_BaseTraceType):
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -569,8 +584,8 @@ class Parcats(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-
-                    format/tree/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-format/tre
+                    e/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -776,11 +791,26 @@ class Parcats(_BaseTraceType):
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
