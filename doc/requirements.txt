@@ -18,7 +18,7 @@ psutil
 requests
 networkx
 squarify
-scikit-image==0.23.2
+scikit-image
 scikit-learn
 sphinx==3.5.4
 sphinxcontrib-applehelp==1.0.2
