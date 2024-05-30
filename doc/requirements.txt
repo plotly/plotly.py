@@ -16,7 +16,7 @@ pyshp==2.3.1
 shapely==2.0.4
 psutil
 requests
-networkx==3.3
+networkx
 squarify
 scikit-image==0.23.2
 scikit-learn
