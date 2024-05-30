@@ -1,0 +1,7 @@
+# Any version of pandas, it just allows plotly express to be imported
+pandas
+black
+sphinx==7.3.7
+sphinx-rtd-theme==2.0.0
+tenacity
+# Do not include plotly here, get it from code
