@@ -438,6 +438,7 @@ jobs:
           name: Git Diff
           command: |
             echo "Running git status..."
+            git --version
             git status
             echo "Running git diff..."
             git diff
