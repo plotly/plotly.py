@@ -437,8 +437,10 @@ jobs:
       - run:
           name: Git Diff
           command: |
+            ls
             git status
             git diff
+            git diff --staged
 
       - store_artifacts:
           path: output.tgz
