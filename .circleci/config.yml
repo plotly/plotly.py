@@ -377,7 +377,7 @@ jobs:
       - image: continuumio/miniconda3
         environment:
           LANG: en_US.UTF-8
-    resource_class: large
+    resource_class: xlarge
 
     steps:
       - checkout
