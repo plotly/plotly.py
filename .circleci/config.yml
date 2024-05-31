@@ -437,11 +437,11 @@ jobs:
       - run:
           name: Git Diff
           command: |
-            ls
-            git --version
+            echo "Running git status..."
             git status
+            echo "Running git diff..."
             git diff
-            git diff --staged
+            echo "done."
 
       - store_artifacts:
           path: output.tgz
