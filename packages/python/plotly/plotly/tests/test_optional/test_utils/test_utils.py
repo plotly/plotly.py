@@ -34,7 +34,7 @@ if matplotlylib:
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
-np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
+np_list = np.array([1, 2, 3, np.nan, np.inf, dt(2014, 1, 5)])
 mixed_list = [
     1,
     "A",
@@ -45,7 +45,7 @@ mixed_list = [
 dt_list = [dt(2014, 1, 5), dt(2014, 1, 5, 1, 1, 1), dt(2014, 1, 5, 1, 1, 1, 1)]
 
 df = pd.DataFrame(
-    columns=["col 1"], data=[1, 2, 3, dt(2014, 1, 5), pd.NaT, np.NaN, np.Inf]
+    columns=["col 1"], data=[1, 2, 3, dt(2014, 1, 5), pd.NaT, np.nan, np.inf]
 )
 
 rng = pd.date_range("1/1/2011", periods=2, freq="H")
@@ -184,7 +184,7 @@ class TestJSONEncoder(TestCase):
 
         assert (
             js1 == '{"type": "scatter3d", "x": [1, 2, 3], '
-            '"y": [1, 2, 3, null, null, null, "2014-01-05T00:00:00"], '
+            '"y": [1, 2, 3, null, null, "2014-01-05T00:00:00"], '
             '"z": [1, "A", "2014-01-05T00:00:00", '
             '"2014-01-05T01:01:01", "2014-01-05T01:01:01.000001"]}'
         )
@@ -195,9 +195,9 @@ class TestJSONEncoder(TestCase):
         _json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
         # Test data wasn't mutated
-        np_array = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
+        np_array = np.array([1, 2, 3, np.nan, np.inf, dt(2014, 1, 5)])
         for k in range(len(np_array)):
-            if k in [3, 4]:
+            if k == 3:
                 # check NaN
                 assert np.isnan(np_list[k]) and np.isnan(np_array[k])
             else:
@@ -237,7 +237,7 @@ class TestJSONEncoder(TestCase):
         # Test that data wasn't mutated
         assert_series_equal(
             df["col 1"],
-            pd.Series([1, 2, 3, dt(2014, 1, 5), pd.NaT, np.NaN, np.Inf], name="col 1"),
+            pd.Series([1, 2, 3, dt(2014, 1, 5), pd.NaT, np.nan, np.inf], name="col 1"),
         )
 
         j2 = _json.dumps(df.index, cls=utils.PlotlyJSONEncoder)
