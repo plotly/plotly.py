@@ -341,7 +341,7 @@ def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
             assert (
                 np.abs(
                     np.max(decode_image_string(fig.data[0].source))
-                    - 255 * img.max() / np.iinfo(dtype).max
+                    - np.int64(255) * img.max() / np.iinfo(dtype).max
                 )
                 < 1
             )
