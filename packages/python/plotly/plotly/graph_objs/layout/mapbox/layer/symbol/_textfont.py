@@ -145,13 +145,13 @@ class Textfont(_BaseLayoutHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'bold']
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
 
         Returns
         -------
-        Any
+        int
         """
         return self["weight"]
 
