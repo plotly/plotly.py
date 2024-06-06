@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.0
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -393,6 +393,57 @@ fig = go.Figure(
 
 fig.show()
 
+```
+
+## Numeric Font Weight
+
+*New in 5.23*
+
+In the previous example, we set a `font-weight` using a keyword value. You can also set `font-weight` using a numeric value.
+
+The font weights available depend on the `font-family` that is set. The `font-weight` 
+If you set a `font-weight` that isn't available for a particular `font-family`, the weight will be rounded to the nearest available value.
+
+In the following example, 
+
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(
+            x=df.nation,
+            y=df.gold,
+            name="Gold",
+            marker=dict(color="Gold"),
+            text="Gold",
+            textfont=dict(weight=400, size=17),
+        ),
+        go.Bar(
+            x=df.nation,
+            y=df.silver,
+            name="Silver",
+            marker=dict(color="MediumTurquoise"),
+            text="Silver",
+            textfont=dict(weight=600, size=17),
+        ),
+            go.Bar(
+            x=df.nation,
+            y=df.bronze,
+            name="Bronze",
+            marker=dict(color="LightGreen"),
+            text="Bronze",
+            textfont=dict(weight=1000, size=17),
+        ),
+    ],
+    layout=dict(barcornerradius=15, showlegend=False),
+)
+
+fig.show()
 ```
 
 ### Styling and Coloring Annotations
