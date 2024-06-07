@@ -1,12 +1,10 @@
 :mod:`{{module}}`.{{objname}}
-{{ underline }}==============
+{{ underline }}=========================================================
 
 
 .. currentmodule:: {{ module }}
 
 .. autosummary::
-   :toctree: generated/
-
    Figure
 
    Figure.show
