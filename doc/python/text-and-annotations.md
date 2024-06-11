@@ -404,8 +404,6 @@ In the previous example, we set a `font-weight` using a keyword value. You can a
 The font weights available depend on the `font-family` that is set. The `font-weight` 
 If you set a `font-weight` that isn't available for a particular `font-family`, the weight will be rounded to the nearest available value.
 
-In the following example, 
-
 
 ```python
 import plotly.graph_objects as go
@@ -421,7 +419,7 @@ fig = go.Figure(
             name="Gold",
             marker=dict(color="Gold"),
             text="Gold",
-            textfont=dict(weight=400, size=17),
+            textfont=dict(weight=900, size=17),
         ),
         go.Bar(
             x=df.nation,
@@ -429,7 +427,7 @@ fig = go.Figure(
             name="Silver",
             marker=dict(color="MediumTurquoise"),
             text="Silver",
-            textfont=dict(weight=600, size=17),
+            textfont=dict(size=17),
         ),
             go.Bar(
             x=df.nation,
@@ -437,7 +435,7 @@ fig = go.Figure(
             name="Bronze",
             marker=dict(color="LightGreen"),
             text="Bronze",
-            textfont=dict(weight=1000, size=17),
+            textfont=dict(size=17),
         ),
     ],
     layout=dict(barcornerradius=15, showlegend=False),
@@ -445,6 +443,9 @@ fig = go.Figure(
 
 fig.show()
 ```
+
+[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. Font weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+
 
 ### Styling and Coloring Annotations
 
