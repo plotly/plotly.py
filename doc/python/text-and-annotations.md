@@ -401,8 +401,7 @@ fig.show()
 
 In the previous example, we set a font `weight` using a keyword value. You can also set font `weight` using a numeric value.
 
-The font weights available depend on the font familiy that is set. 
-If you set a font `weight` that isn't available for a particular font familiy, the weight will be rounded to the nearest available value.
+The font weights that are available depend on the font family that is set. If you set a font `weight` that isn't available for a particular font familiy, the weight will be rounded to the nearest available value.
 
 
 ```python
