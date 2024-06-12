@@ -401,7 +401,7 @@ fig.show()
 
 In the previous example, we set a font `weight` using a keyword value. You can also set font `weight` using a numeric value.
 
-The font weights that are available depend on the font family that is set. If you set a font `weight` that isn't available for a particular font familiy, the weight will be rounded to the nearest available value.
+The font weights that are available depend on the font family that is set. If you set a font `weight` that isn't available for a particular font family, the weight will be rounded to the nearest available value.
 
 
 ```python
@@ -443,7 +443,7 @@ fig = go.Figure(
 fig.show()
 ```
 
-[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. Font weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
 
 
 ## Text Case
