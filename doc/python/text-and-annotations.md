@@ -446,6 +446,111 @@ fig.show()
 [scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. Font weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
 
 
+## Text Case
+
+**New in 5.23**
+
+You can configure text case using the `textfont.textcase` property. In this example, we set `textfont.textcase="upper"` to transform the text on all bars to uppercase.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2007].loc[df[df.year == 2007].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            family="sans serif",
+            size=14,
+            # Here we set textcase to "upper. 
+            # Set to lower" for lowercase text, or "word caps" to capitalize the first letter of each word
+            textcase="upper"
+            
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2007',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Lines
+
+**New in 5.23**
+
+You can add decoration lines to text using the `textfont.lineposition` property. This property accepts `"under"`, `"over"`, and `"through"`, or a combination of these separated by a `+`. 
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2002].loc[df[df.year == 2002].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        marker_color='MediumSlateBlue', 
+        textfont=dict(          
+            lineposition="under" # combine different line positions with a "+" to add more than one: "under+over"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2002',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Shadow
+
+**New in 5.23**
+
+You can apply a shadow effect to text using the `textfont.shadow` property. This property accepts shadow specifications in the same format as the [text-shadow CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow).
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 1997].loc[df[df.year == 1997].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            shadow="1px 1px 2px pink"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 1997',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
 ### Styling and Coloring Annotations
 
 ```python
