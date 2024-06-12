@@ -267,7 +267,7 @@ fig.show()
 
 #### Font Customization
 
-You can customize the font on `go.Scattermapbox` traces with `textfont`. For example, you can set the `font-family`.
+You can customize the font on `go.Scattermapbox` traces with `textfont`. For example, you can set the font `family`.
 
 ```python
 import plotly.graph_objects as go
