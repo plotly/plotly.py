@@ -4,6 +4,10 @@
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
+    # Mean of two of the same elements will just be that element.
+    # This fixes https://github.com/plotly/plotly.py/issues/3065
+    if len(x) == 2 and x[0] == x[1]:
+        return x[0]
     return float(sum(x)) / len(x)
 
 
