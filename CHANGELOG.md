@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 - Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
+- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [#4612].
 
 ## [5.22.0] - 2024-05-01
 
