@@ -132,6 +132,13 @@ $ jupyter lab
 and display plotly figures inline using the `plotly_mimetype` renderer...
 
 ```python
+import plotly.io as pio
+pio.renderers.default='iframe'
+```
+
+then 
+
+```python
 import plotly.express as px
 fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.show()
