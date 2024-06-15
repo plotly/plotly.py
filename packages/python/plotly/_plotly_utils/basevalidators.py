@@ -36,7 +36,7 @@ def to_scalar_or_list(v):
     pd = get_module("pandas", should_load=False)
     if np and np.isscalar(v) and hasattr(v, "item"):
         return v.item()
-    if isinstance(v, (list, tuple)):
+    if is_simple_array(v):
         return [to_scalar_or_list(e) for e in v]
     elif np and isinstance(v, np.ndarray):
         if v.ndim == 0:
@@ -211,7 +211,7 @@ def is_simple_array(v):
     """
     Return whether a value is considered to be an simple array
     """
-    return isinstance(v, (list, tuple))
+    return isinstance(v, (list, tuple, range))
 
 
 def is_array(v):
