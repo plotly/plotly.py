@@ -510,7 +510,10 @@ docs = dict(
         "boolean (default `False`)",
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
-    line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
+    line_shape=[
+        "str (default `'linear'`)",
+        "One of `'linear'`, `'spline'`, `'hv'`, `'vh'`, `'hvh'`, or `'vhv'`",
+    ],
     fitbounds=["str (default `False`).", "One of `False`, `locations` or `geojson`."],
     basemap_visible=["bool", "Force the basemap visibility."],
     scope=[
