@@ -15,7 +15,7 @@ $ pip install pandas
 
 Or install Plotly Express and its dependencies directly with:
 
-$ pip install "plotly[express]"
+$ pip install "plotly[pandas]"
 
 You can also use Plotly Graph Objects to create a large number of charts without installing
 pandas. See examples here: https://plotly.com/python/graph-objects/
