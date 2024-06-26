@@ -9,6 +9,8 @@ from _plotly_utils.basevalidators import (
     ColorValidator,
 )
 
+from plotly.tests.b64 import _b64
+
 
 @pytest.fixture
 def data_array_validator(request):
@@ -91,7 +93,7 @@ def test_numeric_validator_numeric_pandas(number_validator, numeric_pandas):
     res = number_validator.validate_coerce(numeric_pandas)
 
     # Check type
-    assert isinstance(res, np.ndarray)
+    assert isinstance(res, object)
 
     # Check dtype
     assert res.dtype == numeric_pandas.dtype
@@ -104,7 +106,7 @@ def test_integer_validator_numeric_pandas(integer_validator, numeric_pandas):
     res = integer_validator.validate_coerce(numeric_pandas)
 
     # Check type
-    assert isinstance(res, np.ndarray)
+    assert isinstance(res, object)
 
     # Check dtype
     if numeric_pandas.dtype.kind in ("u", "i"):
@@ -122,10 +124,12 @@ def test_data_array_validator(data_array_validator, numeric_pandas):
     res = data_array_validator.validate_coerce(numeric_pandas)
 
     # Check type
-    assert isinstance(res, np.ndarray)
+    assert isinstance(res, object)
+
+    numeric_pandas = _b64(numeric_pandas)
 
     # Check dtype
-    assert res.dtype == numeric_pandas.dtype
+    assert res["dtype"] == numeric_pandas["dtype"]
 
     # Check values
     np.testing.assert_array_equal(res, numeric_pandas)
