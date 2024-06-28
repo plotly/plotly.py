@@ -2,13 +2,24 @@
 `plotly.express` is a terse, consistent, high-level wrapper around `plotly.graph_objects`
 for rapid data exploration and figure generation. Learn more at https://plotly.com/python/plotly-express/
 """
+
 from plotly import optional_imports
 
 pd = optional_imports.get_module("pandas")
 if pd is None:
     raise ImportError(
         """\
-Plotly express requires pandas to be installed."""
+Plotly Express requires pandas to be installed. You can install pandas using pip with:
+
+$ pip install pandas
+
+Or install Plotly Express and its dependencies directly with:
+
+$ pip install "plotly[pandas]"
+
+You can also use Plotly Graph Objects to create a large number of charts without installing
+pandas. See examples here: https://plotly.com/python/graph-objects/
+"""
     )
 
 from ._imshow import imshow
