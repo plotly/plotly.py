@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class WeightValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+class WeightValidator(_plotly_utils.basevalidators.IntegerValidator):
     def __init__(
         self, plotly_name="weight", parent_name="carpet.baxis.title.font", **kwargs
     ):
@@ -9,6 +9,8 @@ class WeightValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
-            values=kwargs.pop("values", ["normal", "bold"]),
+            extras=kwargs.pop("extras", ["normal", "bold"]),
+            max=kwargs.pop("max", 1000),
+            min=kwargs.pop("min", 1),
             **kwargs,
         )

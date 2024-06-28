@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.0
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -393,6 +393,162 @@ fig = go.Figure(
 
 fig.show()
 
+```
+
+## Numeric Font Weight
+
+*New in 5.23*
+
+In the previous example, we set a font `weight` using a keyword value. You can also set font `weight` using a numeric value.
+
+The font weights that are available depend on the font family that is set. If you set a font `weight` that isn't available for a particular font family, the weight will be rounded to the nearest available value.
+
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(
+            x=df.nation,
+            y=df.gold,
+            name="Gold",
+            marker=dict(color="Gold"),
+            text="Gold",
+            textfont=dict(weight=900, size=17),
+        ),
+        go.Bar(
+            x=df.nation,
+            y=df.silver,
+            name="Silver",
+            marker=dict(color="MediumTurquoise"),
+            text="Silver",
+            textfont=dict(size=17),
+        ),
+            go.Bar(
+            x=df.nation,
+            y=df.bronze,
+            name="Bronze",
+            marker=dict(color="LightGreen"),
+            text="Bronze",
+            textfont=dict(size=17),
+        ),
+    ],
+    layout=dict(barcornerradius=15, showlegend=False),
+)
+
+fig.show()
+```
+
+[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+
+
+## Text Case
+
+**New in 5.23**
+
+You can configure text case using the `textfont.textcase` property. In this example, we set `textfont.textcase="upper"` to transform the text on all bars to uppercase.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2007].loc[df[df.year == 2007].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            family="sans serif",
+            size=14,
+            # Here we set textcase to "upper. 
+            # Set to lower" for lowercase text, or "word caps" to capitalize the first letter of each word
+            textcase="upper"
+            
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2007',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Lines
+
+**New in 5.23**
+
+You can add decoration lines to text using the `textfont.lineposition` property. This property accepts `"under"`, `"over"`, and `"through"`, or a combination of these separated by a `+`. 
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2002].loc[df[df.year == 2002].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        marker_color='MediumSlateBlue', 
+        textfont=dict(          
+            lineposition="under" # combine different line positions with a "+" to add more than one: "under+over"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2002',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Shadow
+
+**New in 5.23**
+
+You can apply a shadow effect to text using the `textfont.shadow` property. This property accepts shadow specifications in the same format as the [text-shadow CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow).
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 1997].loc[df[df.year == 1997].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'], 
+        y=grouped['continent'], 
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            shadow="1px 1px 2px pink"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 1997',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
 ```
 
 ### Styling and Coloring Annotations
