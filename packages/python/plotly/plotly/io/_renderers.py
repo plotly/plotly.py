@@ -447,7 +447,7 @@ renderers["sphinx_gallery_png"] = SphinxGalleryOrcaRenderer()
 # Set default renderer
 # --------------------
 # Version 4 renderer configuration
-default_renderer = None
+default_renderer = "iframe"
 
 # Handle the PLOTLY_RENDERER environment variable
 env_renderer = os.environ.get("PLOTLY_RENDERER", None)
