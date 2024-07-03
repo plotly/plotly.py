@@ -248,7 +248,7 @@ docs = dict(
     ],
     facet_row_spacing=[
         "float between 0 and 1",
-        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.07 when facet_col_wrap is used.",
     ],
     facet_col_spacing=[
         "float between 0 and 1",
@@ -433,7 +433,7 @@ docs = dict(
         "str",
         "One of `'auto'`, `'svg'` or `'webgl'`, default `'auto'`",
         "Controls the browser API used to draw marks.",
-        "`'svg`' is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
+        "`'svg'` is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
         "`'webgl'` is likely necessary for acceptable performance above 1000 points but rasterizes part of the output. ",
         "`'auto'` uses heuristics to choose the mode.",
     ],
