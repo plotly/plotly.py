@@ -75,6 +75,7 @@ class Histogram(_BaseTraceType):
         "ycalendar",
         "yhoverformat",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -847,6 +848,14 @@ class Histogram(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.histogram.Insidetextfont
@@ -1329,6 +1338,14 @@ class Histogram(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.histogram.Outsidetextfont
@@ -1534,6 +1551,14 @@ class Histogram(_BaseTraceType):
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -2113,6 +2138,28 @@ class Histogram(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -2479,6 +2526,11 @@ class Histogram(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2549,6 +2601,7 @@ class Histogram(_BaseTraceType):
         ycalendar=None,
         yhoverformat=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2920,6 +2973,11 @@ class Histogram(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -3214,6 +3272,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

@@ -75,6 +75,7 @@ class Funnel(_BaseTraceType):
         "yperiod0",
         "yperiodalignment",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -591,6 +592,22 @@ class Funnel(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1051,6 +1068,22 @@ class Funnel(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1237,6 +1270,22 @@ class Funnel(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1866,6 +1915,28 @@ class Funnel(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -2226,6 +2297,11 @@ class Funnel(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2296,6 +2372,7 @@ class Funnel(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2662,6 +2739,11 @@ class Funnel(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -2956,6 +3038,10 @@ an instance of :class:`plotly.graph_objs.Funnel`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

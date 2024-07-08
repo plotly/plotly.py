@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.23.0] - TBD
+
+### Updated
+- Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
+- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [#4612].
+
+## [5.22.0] - 2024-05-01
+
+### Updated
+- Updated Plotly.js from version 2.31.1 to version 2.32.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2320----2024-04-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [#6956]
+  - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [#6967], with thanks to @my-tien for the contribution!
+  - Fix positioning of multi-line axis titles with standoff [#6970], with thanks to @my-tien for the contribution!
+
+## [5.21.0] - 2024-04-17
+
+### Updated
+- Updated Plotly.js from version 2.30.0 to version 2.31.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2311----2024-04-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `zorder` attribute to various cartesian traces for controlling stacking order of SVG traces drawn into a subplot [[#6918](https://github.com/plotly/plotly.js/pull/6918), [#6953](https://github.com/plotly/plotly.js/pull/6953)],
+    This feature was anonymously sponsored: thank you to our sponsor!
+  - Add "between" option to shape layer for placing them above grid lines and below traces [[#6927](https://github.com/plotly/plotly.js/pull/6927)],
+    with thanks to @my-tien for the contribution!
+  - Add "raw" `sizemode` to cone trace [[#6938](https://github.com/plotly/plotly.js/pull/6938)]
+  - Add `layout.hoversubplots` to enable hover effects across multiple cartesian suplots sharing one axis [[#6947](https://github.com/plotly/plotly.js/pull/6947), [#6950](https://github.com/plotly/plotly.js/pull/6950)]
+
+### Fixed
+- Fixed `orjson` loading issue [[#4562](https://github.com/plotly/plotly.py/pull/4562)]
+
 ## [5.20.0] - 2024-03-13
 
 ### Updated

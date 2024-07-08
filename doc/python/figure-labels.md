@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.9
+    version: 3.10.11
   plotly:
     description: How to set the global font, title, legend-entries, and axis-titles
       in python.
@@ -153,6 +153,60 @@ fig.update_layout(
         family="Courier New, monospace",
         size=18,
         color="RebeccaPurple"
+    )
+)
+
+fig.show()
+```
+
+### Configuring Font Variant, Style, and  Weight
+
+*New in 5.22*
+
+You can configure a `variant`, `style`, and `weight` on `layout.font`. Here, we set the font variant to `small-caps`.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.iris()
+
+setosa_df = df[df["species"] == "setosa"]
+versicolor_df = df[df["species"] == "versicolor"]
+virginica_df = df[df["species"] == "virginica"]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=setosa_df["sepal_width"],
+            y=setosa_df["sepal_length"],
+            mode="markers",
+            name="setosa",
+        ),
+        go.Scatter(
+            x=versicolor_df["sepal_width"],
+            y=versicolor_df["sepal_length"],
+            mode="markers",
+            name="versicolor",
+        ),
+        go.Scatter(
+            x=virginica_df["sepal_width"],
+            y=virginica_df["sepal_length"],
+            mode="markers",
+            name="virginica",
+        ),
+    ],
+    layout=go.Layout(
+        title="Plot Title",
+        xaxis=dict(title="X Axis Title"),
+        yaxis=dict(title="Y Axis Title"),
+        legend=dict(title="Legend Title"),
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="RebeccaPurple",
+            variant="small-caps",
+        )
     )
 )
 

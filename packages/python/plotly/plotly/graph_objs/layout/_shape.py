@@ -240,11 +240,13 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def layer(self):
         """
-        Specifies whether shapes are drawn below or above traces.
+        Specifies whether shapes are drawn below gridlines ("below"),
+        between gridlines and traces ("between") or above traces
+        ("above").
 
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['below', 'above']
+                ['below', 'above', 'between']
 
         Returns
         -------
@@ -869,8 +871,9 @@ class Shape(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.shape.Label`
             instance or dict with compatible properties
         layer
-            Specifies whether shapes are drawn below or above
-            traces.
+            Specifies whether shapes are drawn below gridlines
+            ("below"), between gridlines and traces ("between") or
+            above traces ("above").
         legend
             Sets the reference to a legend to show this shape in.
             References to these legends are "legend", "legend2",
@@ -1100,8 +1103,9 @@ class Shape(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.shape.Label`
             instance or dict with compatible properties
         layer
-            Specifies whether shapes are drawn below or above
-            traces.
+            Specifies whether shapes are drawn below gridlines
+            ("below"), between gridlines and traces ("between") or
+            above traces ("above").
         legend
             Sets the reference to a legend to show this shape in.
             References to these legends are "legend", "legend2",

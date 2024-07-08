@@ -7,6 +7,6 @@ class LayerValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
-            values=kwargs.pop("values", ["below", "above"]),
+            values=kwargs.pop("values", ["below", "above", "between"]),
             **kwargs,
         )
