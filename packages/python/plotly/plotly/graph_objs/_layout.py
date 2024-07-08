@@ -106,6 +106,7 @@ class Layout(_BaseLayoutType):
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "hoversubplots",
         "iciclecolorway",
         "imagedefaults",
         "images",
@@ -1280,6 +1281,14 @@ class Layout(_BaseLayoutType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.layout.Font
@@ -1803,6 +1812,32 @@ class Layout(_BaseLayoutType):
     @hovermode.setter
     def hovermode(self, val):
         self["hovermode"] = val
+
+    # hoversubplots
+    # -------------
+    @property
+    def hoversubplots(self):
+        """
+        Determines expansion of hover effects to other subplots If
+        "single" just the axis pair of the primary point is included
+        without overlaying subplots. If "overlaying" all subplots using
+        the main axis and occupying the same space are included. If
+        "axis", also include stacked subplots using the same axis when
+        `hovermode` is set to "x", *x unified*, "y" or *y unified*.
+
+        The 'hoversubplots' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['single', 'overlaying', 'axis']
+
+        Returns
+        -------
+        Any
+        """
+        return self["hoversubplots"]
+
+    @hoversubplots.setter
+    def hoversubplots(self, val):
+        self["hoversubplots"] = val
 
     # iciclecolorway
     # --------------
@@ -2503,8 +2538,9 @@ class Layout(_BaseLayoutType):
                     bel` instance or dict with compatible
                     properties
                 layer
-                    Specifies whether new shapes are drawn below or
-                    above traces.
+                    Specifies whether new shapes are drawn below
+                    gridlines ("below"), between gridlines and
+                    traces ("between") or above traces ("above").
                 legend
                     Sets the reference to a legend to show new
                     shape in. References to these legends are
@@ -3124,8 +3160,9 @@ class Layout(_BaseLayoutType):
                     :class:`plotly.graph_objects.layout.shape.Label
                     ` instance or dict with compatible properties
                 layer
-                    Specifies whether shapes are drawn below or
-                    above traces.
+                    Specifies whether shapes are drawn below
+                    gridlines ("below"), between gridlines and
+                    traces ("between") or above traces ("above").
                 legend
                     Sets the reference to a legend to show this
                     shape in. References to these legends are
@@ -3846,6 +3883,14 @@ class Layout(_BaseLayoutType):
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -5659,6 +5704,14 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversubplots
+            Determines expansion of hover effects to other subplots
+            If "single" just the axis pair of the primary point is
+            included without overlaying subplots. If "overlaying"
+            all subplots using the main axis and occupying the same
+            space are included. If "axis", also include stacked
+            subplots using the same axis when `hovermode` is set to
+            "x", *x unified*, "y" or *y unified*.
         iciclecolorway
             Sets the default icicle slice colors. Defaults to the
             main `colorway` used for trace colors. If you specify a
@@ -5954,6 +6007,7 @@ class Layout(_BaseLayoutType):
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        hoversubplots=None,
         iciclecolorway=None,
         images=None,
         imagedefaults=None,
@@ -6253,6 +6307,14 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversubplots
+            Determines expansion of hover effects to other subplots
+            If "single" just the axis pair of the primary point is
+            included without overlaying subplots. If "overlaying"
+            all subplots using the main axis and occupying the same
+            space are included. If "axis", also include stacked
+            subplots using the same axis when `hovermode` is set to
+            "x", *x unified*, "y" or *y unified*.
         iciclecolorway
             Sets the default icicle slice colors. Defaults to the
             main `colorway` used for trace colors. If you specify a
@@ -6555,6 +6617,7 @@ class Layout(_BaseLayoutType):
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "hoversubplots",
             "iciclecolorway",
             "imagedefaults",
             "images",
@@ -6800,6 +6863,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = hovermode if hovermode is not None else _v
         if _v is not None:
             self["hovermode"] = _v
+        _v = arg.pop("hoversubplots", None)
+        _v = hoversubplots if hoversubplots is not None else _v
+        if _v is not None:
+            self["hoversubplots"] = _v
         _v = arg.pop("iciclecolorway", None)
         _v = iciclecolorway if iciclecolorway is not None else _v
         if _v is not None:

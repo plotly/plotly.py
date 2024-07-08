@@ -78,6 +78,7 @@ class Heatmap(_BaseTraceType):
         "zmax",
         "zmid",
         "zmin",
+        "zorder",
         "zsmooth",
         "zsrc",
     }
@@ -1238,6 +1239,14 @@ class Heatmap(_BaseTraceType):
                     Narrow", "Raleway", "Times New Roman".
                 size
 
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
+
         Returns
         -------
         plotly.graph_objs.heatmap.Textfont
@@ -2036,6 +2045,28 @@ class Heatmap(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # zsmooth
     # -------
     @property
@@ -2438,6 +2469,11 @@ class Heatmap(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -2516,6 +2552,7 @@ class Heatmap(_BaseTraceType):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
         **kwargs,
@@ -2896,6 +2933,11 @@ class Heatmap(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -3207,6 +3249,10 @@ an instance of :class:`plotly.graph_objs.Heatmap`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
         _v = arg.pop("zsmooth", None)
         _v = zsmooth if zsmooth is not None else _v
         if _v is not None:

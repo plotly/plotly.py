@@ -8,7 +8,7 @@ class Tickfont(_BaseLayoutHierarchyType):
     # --------------------
     _parent_path_str = "layout.scene.zaxis"
     _path_str = "layout.scene.zaxis.tickfont"
-    _valid_props = {"color", "family", "size"}
+    _valid_props = {"color", "family", "size", "style", "variant", "weight"}
 
     # color
     # -----
@@ -116,6 +116,71 @@ class Tickfont(_BaseLayoutHierarchyType):
     def size(self, val):
         self["size"] = val
 
+    # style
+    # -----
+    @property
+    def style(self):
+        """
+        Sets whether a font should be styled with a normal or italic
+        face from its family.
+
+        The 'style' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'italic']
+
+        Returns
+        -------
+        Any
+        """
+        return self["style"]
+
+    @style.setter
+    def style(self, val):
+        self["style"] = val
+
+    # variant
+    # -------
+    @property
+    def variant(self):
+        """
+        Sets the variant of the font.
+
+        The 'variant' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'small-caps', 'all-small-caps',
+                'all-petite-caps', 'petite-caps', 'unicase']
+
+        Returns
+        -------
+        Any
+        """
+        return self["variant"]
+
+    @variant.setter
+    def variant(self, val):
+        self["variant"] = val
+
+    # weight
+    # ------
+    @property
+    def weight(self):
+        """
+        Sets the weight (or boldness) of the font.
+
+        The 'weight' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'bold']
+
+        Returns
+        -------
+        Any
+        """
+        return self["weight"]
+
+    @weight.setter
+    def weight(self, val):
+        self["weight"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -139,9 +204,26 @@ class Tickfont(_BaseLayoutHierarchyType):
             Sans Narrow", "Raleway", "Times New Roman".
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        variant
+            Sets the variant of the font.
+        weight
+            Sets the weight (or boldness) of the font.
         """
 
-    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        family=None,
+        size=None,
+        style=None,
+        variant=None,
+        weight=None,
+        **kwargs,
+    ):
         """
         Construct a new Tickfont object
 
@@ -171,6 +253,13 @@ class Tickfont(_BaseLayoutHierarchyType):
             Sans Narrow", "Raleway", "Times New Roman".
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        variant
+            Sets the variant of the font.
+        weight
+            Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -217,6 +306,18 @@ an instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickfont`"""
         _v = size if size is not None else _v
         if _v is not None:
             self["size"] = _v
+        _v = arg.pop("style", None)
+        _v = style if style is not None else _v
+        if _v is not None:
+            self["style"] = _v
+        _v = arg.pop("variant", None)
+        _v = variant if variant is not None else _v
+        if _v is not None:
+            self["variant"] = _v
+        _v = arg.pop("weight", None)
+        _v = weight if weight is not None else _v
+        if _v is not None:
+            self["weight"] = _v
 
         # Process unknown kwargs
         # ----------------------

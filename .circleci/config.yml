@@ -374,7 +374,7 @@ jobs:
 
   full_build:
     docker:
-      - image: continuumio/miniconda3
+      - image: continuumio/miniconda3:24.3.0-0
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -447,8 +447,8 @@ jobs:
     resource_class: xlarge
     docker:
       # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, for example, `3.6.1-browsers`
-      - image: cimg/python:3.9-browsers
+      # use `-browsers` prefix for selenium tests, for example, `3.9-browsers`
+      - image: cimg/python:3.10-browsers
 
     steps:
       - add_ssh_keys:
@@ -599,3 +599,4 @@ workflows:
       - python_38_orca
       - python_39_percy
       - build-doc
+

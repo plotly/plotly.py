@@ -909,13 +909,21 @@ class IntegerValidator(BaseValidator):
             "dflt",
             "min",
             "max",
+            "extras",
             "arrayOk"
         ]
     },
     """
 
     def __init__(
-        self, plotly_name, parent_name, min=None, max=None, array_ok=False, **kwargs
+        self,
+        plotly_name,
+        parent_name,
+        min=None,
+        max=None,
+        extras=None,
+        array_ok=False,
+        **kwargs,
     ):
         super(IntegerValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -940,6 +948,7 @@ class IntegerValidator(BaseValidator):
         else:
             self.has_min_max = False
 
+        self.extras = extras if extras is not None else []
         self.array_ok = array_ok
 
     def description(self):
@@ -963,6 +972,16 @@ class IntegerValidator(BaseValidator):
                 )
             )
 
+        # Extras
+        if self.extras:
+            desc = (
+                desc
+                + (
+                    """
+        OR exactly one of {extras} (e.g. '{eg_extra}')"""
+                ).format(extras=self.extras, eg_extra=self.extras[-1])
+            )
+
         if self.array_ok:
             desc = (
                 desc
@@ -975,6 +994,8 @@ class IntegerValidator(BaseValidator):
     def validate_coerce(self, v):
         if is_none_or_typed_array_spec(v):
             pass
+        elif v in self.extras:
+            return v
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
             v_array = copy_to_readonly_numpy_array(
@@ -1001,14 +1022,20 @@ class IntegerValidator(BaseValidator):
             v = v_array
         elif self.array_ok and is_simple_array(v):
             # Check integer type
-            invalid_els = [e for e in v if not isinstance(e, int)]
+            invalid_els = [
+                e for e in v if not isinstance(e, int) and e not in self.extras
+            ]
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
             # Check min/max
             if self.has_min_max:
-                invalid_els = [e for e in v if not (self.min_val <= e <= self.max_val)]
+                invalid_els = [
+                    e
+                    for e in v
+                    if not (self.min_val <= e <= self.max_val) and e not in self.extras
+                ]
 
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])
