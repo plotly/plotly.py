@@ -1215,7 +1215,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (
                             field,
                             len(df_input[argument]),
@@ -1253,7 +1253,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (field, len(argument), str(list(df_output.keys())), length)
                     )
                 df_output[str(col_name)] = to_unindexed_series(argument, str(col_name))
