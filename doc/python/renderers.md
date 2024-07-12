@@ -164,7 +164,7 @@ The `plotly_mimetype` renderer creates a specification of the figure (called a M
 These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface. Note that in VSCode Notebooks, the version of Plotly.js that is used to render is provided by the [vscode-python extension](https://code.visualstudio.com/docs/languages/python) and often trails the latest version by several weeks, so the latest features of `plotly` may not be available in VSCode right away. The situation is similar for Nteract.
 
 ##### Static Image Renderers
-A set of renderers is provided for displaying figures as static images.  These renderers all rely on the [orca](https://github.com/plotly/orca) static image export utility. See the [Static Image Export](https://plot.ly/python/static-image-export/) page for more information on getting set up with [orca].
+A set of renderers is provided for displaying figures as static images. See the [Static Image Export](https://plot.ly/python/static-image-export/) page for more information on getting set up.
 
 ###### `png`, `jpeg`, and `svg`
 These renderers display figures as static `.png`, `.jpeg`, and `.svg` files, respectively.  These renderers are useful for user interfaces that do not support inline HTML output, but do support inline static images.  Examples include the [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and the PyCharm [notebook interface](https://www.jetbrains.com/help/pycharm/jupyter-notebook-support.html).
