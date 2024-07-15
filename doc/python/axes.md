@@ -481,9 +481,9 @@ fig.show()
 
 *New in 5.23*
 
-On date or linear axes, use `ticklabelindex` to use..
+On date or linear axes, use `ticklabelindex` to draw a label for a minor tick instead of a major tick.
 
-To draw the label for the minor tick before each major tick, choose `ticklabelindex` -1, like in the following example. 
+To draw the label for the minor tick before each major tick, set `ticklabelindex` -1, like in the following example. 
 
 ```python
 import plotly.express as px
