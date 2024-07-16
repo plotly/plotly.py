@@ -11,9 +11,9 @@ patsy==0.5.6
 numpy==1.26.4
 plotly-geo
 igraph
-geopandas==0.13.0
+geopandas==1.0.1
 pyshp==2.3.1
-shapely==2.0.5
+shapely==2.0.0
 psutil
 requests
 networkx==3.2
