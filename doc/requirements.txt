@@ -1,10 +1,11 @@
 plotly==5.22.0
 jupytext==1.1.1
 ipywidgets==7.7.2
+alias python='python3.12'
 jupyter-client<7
 jupyter
 notebook
-pandas==2.0.3
+pandas==1.5.3
 statsmodels==0.14.2
 scipy==1.13.0
 patsy==0.5.6
