@@ -154,8 +154,8 @@ class Scene(_BaseLayoutHierarchyType):
                     Plotly uses a subset of HTML tags to do things
                     like newline (<br>), bold (<b></b>), italics
                     (<i></i>), hyperlinks (<a href='...'></a>).
-                    Tags <em>, <sup>, <sub> <span> are also
-                    supported.
+                    Tags <em>, <sup>, <sub>, <s>, <u> <span> are
+                    also supported.
                 textangle
                     Sets the angle at which the `text` is drawn
                     with respect to the horizontal.
@@ -583,7 +583,8 @@ class Scene(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -939,7 +940,8 @@ class Scene(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -1295,7 +1297,8 @@ class Scene(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and

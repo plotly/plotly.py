@@ -145,8 +145,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         `categoryarray`. Set `categoryorder` to *total ascending* or
         *total descending* if order should be determined by the
         numerical order of the values. Similarly, the order can be
-        determined by the min, max, sum, mean or median of all the
-        values.
+        determined by the min, max, sum, mean, geometric mean or median
+        of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -154,7 +154,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
                 'array', 'total ascending', 'total descending', 'min
                 ascending', 'min descending', 'max ascending', 'max
                 descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'median ascending', 'median
+                ascending', 'mean descending', 'geometric mean ascending',
+                'geometric mean descending', 'median ascending', 'median
                 descending']
 
         Returns
@@ -985,7 +986,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
@@ -1479,7 +1480,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1796,7 +1798,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid

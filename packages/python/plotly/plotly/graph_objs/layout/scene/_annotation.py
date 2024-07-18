@@ -474,7 +474,7 @@ class Annotation(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
@@ -788,7 +788,7 @@ class Annotation(_BaseLayoutHierarchyType):
         Sets the text associated with this annotation. Plotly uses a
         subset of HTML tags to do things like newline (<br>), bold
         (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>).
-        Tags <em>, <sup>, <sub> <span> are also supported.
+        Tags <em>, <sup>, <sub>, <s>, <u> <span> are also supported.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -1159,8 +1159,8 @@ class Annotation(_BaseLayoutHierarchyType):
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
             (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub> <span>
-            are also supported.
+            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
+            <span> are also supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -1368,8 +1368,8 @@ class Annotation(_BaseLayoutHierarchyType):
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
             (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub> <span>
-            are also supported.
+            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
+            <span> are also supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.

@@ -12,6 +12,7 @@ class Title(_BaseLayoutHierarchyType):
         "automargin",
         "font",
         "pad",
+        "subtitle",
         "text",
         "x",
         "xanchor",
@@ -82,7 +83,7 @@ class Title(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
@@ -163,6 +164,34 @@ class Title(_BaseLayoutHierarchyType):
     @pad.setter
     def pad(self, val):
         self["pad"] = val
+
+    # subtitle
+    # --------
+    @property
+    def subtitle(self):
+        """
+        The 'subtitle' property is an instance of Subtitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.title.Subtitle`
+          - A dict of string/value properties that will be passed
+            to the Subtitle constructor
+
+            Supported dict properties:
+
+                font
+                    Sets the subtitle font.
+                text
+                    Sets the plot's subtitle.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.title.Subtitle
+        """
+        return self["subtitle"]
+
+    @subtitle.setter
+    def subtitle(self, val):
+        self["subtitle"] = val
 
     # text
     # ----
@@ -359,6 +388,9 @@ class Title(_BaseLayoutHierarchyType):
             applies if `xanchor`/`yanchor` is determined
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
+        subtitle
+            :class:`plotly.graph_objects.layout.title.Subtitle`
+            instance or dict with compatible properties
         text
             Sets the plot's title. Note that before the existence
             of `title.text`, the title's contents used to be
@@ -402,6 +434,7 @@ class Title(_BaseLayoutHierarchyType):
         automargin=None,
         font=None,
         pad=None,
+        subtitle=None,
         text=None,
         x=None,
         xanchor=None,
@@ -444,6 +477,9 @@ class Title(_BaseLayoutHierarchyType):
             applies if `xanchor`/`yanchor` is determined
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
+        subtitle
+            :class:`plotly.graph_objects.layout.title.Subtitle`
+            instance or dict with compatible properties
         text
             Sets the plot's title. Note that before the existence
             of `title.text`, the title's contents used to be
@@ -525,6 +561,10 @@ an instance of :class:`plotly.graph_objs.layout.Title`"""
         _v = pad if pad is not None else _v
         if _v is not None:
             self["pad"] = _v
+        _v = arg.pop("subtitle", None)
+        _v = subtitle if subtitle is not None else _v
+        if _v is not None:
+            self["subtitle"] = _v
         _v = arg.pop("text", None)
         _v = text if text is not None else _v
         if _v is not None:
