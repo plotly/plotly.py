@@ -91,9 +91,9 @@ class Font(_BaseLayoutHierarchyType):
         studio.plotly.com or on-premise) generates images on a server,
         where only a select number of fonts are installed and
         supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
-        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
-        Narrow", "Raleway", "Times New Roman".
+        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
+        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
+        "Raleway", "Times New Roman".
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -252,6 +252,7 @@ class Font(_BaseLayoutHierarchyType):
         The 'weight' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
+            OR exactly one of ['normal', 'bold'] (e.g. 'bold')
 
         Returns
         -------
@@ -281,7 +282,7 @@ class Font(_BaseLayoutHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         lineposition
@@ -346,7 +347,7 @@ class Font(_BaseLayoutHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         lineposition
