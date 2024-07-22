@@ -248,7 +248,7 @@ docs = dict(
     ],
     facet_row_spacing=[
         "float between 0 and 1",
-        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.07 when facet_col_wrap is used.",
     ],
     facet_col_spacing=[
         "float between 0 and 1",
@@ -433,7 +433,7 @@ docs = dict(
         "str",
         "One of `'auto'`, `'svg'` or `'webgl'`, default `'auto'`",
         "Controls the browser API used to draw marks.",
-        "`'svg`' is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
+        "`'svg'` is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
         "`'webgl'` is likely necessary for acceptable performance above 1000 points but rasterizes part of the output. ",
         "`'auto'` uses heuristics to choose the mode.",
     ],
@@ -510,7 +510,10 @@ docs = dict(
         "boolean (default `False`)",
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
-    line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
+    line_shape=[
+        "str (default `'linear'`)",
+        "One of `'linear'`, `'spline'`, `'hv'`, `'vh'`, `'hvh'`, or `'vhv'`",
+    ],
     fitbounds=["str (default `False`).", "One of `False`, `locations` or `geojson`."],
     basemap_visible=["bool", "Force the basemap visibility."],
     scope=[
@@ -530,9 +533,10 @@ docs = dict(
     ],
     mapbox_style=[
         "str (default `'basic'`, needs Mapbox API token)",
-        "Identifier of base map style, some of which require a Mapbox API token to be set using `plotly.express.set_mapbox_access_token()`.",
-        "Allowed values which do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
-        "Allowed values which do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Identifier of base map style, some of which require a Mapbox or Stadia Maps API token to be set using `plotly.express.set_mapbox_access_token()`.",
+        "Allowed values which do not require a token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`.",
+        "Allowed values which require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Allowed values which require a Stadia Maps API token are `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
     ],
     points=[
         "str or boolean (default `'outliers'`)",
