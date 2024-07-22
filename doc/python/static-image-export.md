@@ -101,7 +101,7 @@ if not os.path.exists("images"):
     os.mkdir("images")
 ```
 
-If you are running this notebook live, click to [open the output directory](./images) so you can examine the images as they are written.
+If you are running this notebook live, click to open the output directory so you can examine the images as they are written.
 
 
 #### Raster Formats: PNG, JPEG, and WebP
