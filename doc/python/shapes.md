@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.14
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -577,6 +577,72 @@ fig.update_layout(
 )
 
 fig.show()
+```
+
+#### Shifting Shapes on Categorical Axes
+
+*New in 5.23*
+
+When drawing shapes where `xref` or `yref` reference axes of type category or multicategory, you can shift `x0`, `x1`, `y0`, and `y1` away from the center of the category using `x0shift`, `x1shift`, `y0shift`, and `y1shift` by specifying a value between -1 and 1. 
+
+-1 is the center of the previous category, 0 is the center of the referenced category, and 1 is the center of the next category.
+
+In the following example, the `x0` and `x1` values for both shapes reference category values on the x-axis.
+
+In this example, the first shape:
+- Shifts `x0` half way between the center of category "Germany" and the center of the previous category by setting `x0shift=-0.5`
+- Shifts `x1`half way between the center of category "Germany" and the center of the next category by setting `x1shift=0.5`
+
+The second shape:
+- Shifts `x0` back to the center of the previous category by setting `x0shift=-1`
+- Shifts `x1`forward to the center of the next category by setting `x1shift=1`
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 1952")
+
+fig = go.Figure(
+    data=go.Bar(x=df["country"], y=df["lifeExp"], marker_color="LightSalmon"),
+    layout=dict(
+        shapes=[
+            dict(
+                type="rect",
+                x0="Germany",
+                y0=0,
+                x1="Germany",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-0.5,
+                x1shift=0.5,
+                line=dict(color="LightGreen", width=4),
+            ),
+            dict(
+                type="rect",
+                x0="Spain",
+                y0=0,
+                x1="Spain",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-1,
+                x1shift=1,
+                line=dict(color="MediumTurquoise", width=4),
+            ),
+        ]
+    ),
+)
+
+fig.update_layout(
+    title="GDP per Capita in Europe (1972)",
+    xaxis_title="Country",
+    yaxis_title="GDP per Capita",
+)
+
+fig.show()
+
 ```
 
 ### Drawing shapes with a Mouse on Cartesian plots
