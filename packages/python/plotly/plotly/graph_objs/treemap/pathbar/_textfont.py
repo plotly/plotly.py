@@ -13,10 +13,16 @@ class Textfont(_BaseTraceHierarchyType):
         "colorsrc",
         "family",
         "familysrc",
+        "lineposition",
+        "linepositionsrc",
+        "shadow",
+        "shadowsrc",
         "size",
         "sizesrc",
         "style",
         "stylesrc",
+        "textcase",
+        "textcasesrc",
         "variant",
         "variantsrc",
         "weight",
@@ -115,9 +121,9 @@ class Textfont(_BaseTraceHierarchyType):
         studio.plotly.com or on-premise) generates images on a server,
         where only a select number of fonts are installed and
         supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
-        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
-        Narrow", "Raleway", "Times New Roman".
+        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
+        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
+        "Raleway", "Times New Roman".
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -152,6 +158,98 @@ class Textfont(_BaseTraceHierarchyType):
     @familysrc.setter
     def familysrc(self, val):
         self["familysrc"] = val
+
+    # lineposition
+    # ------------
+    @property
+    def lineposition(self):
+        """
+        Sets the kind of decoration line(s) with text, such as an
+        "under", "over" or "through" as well as combinations e.g.
+        "under+over", etc.
+
+        The 'lineposition' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['under', 'over', 'through'] joined with '+' characters
+            (e.g. 'under+over')
+            OR exactly one of ['none'] (e.g. 'none')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self["lineposition"]
+
+    @lineposition.setter
+    def lineposition(self, val):
+        self["lineposition"] = val
+
+    # linepositionsrc
+    # ---------------
+    @property
+    def linepositionsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `lineposition`.
+
+        The 'linepositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["linepositionsrc"]
+
+    @linepositionsrc.setter
+    def linepositionsrc(self, val):
+        self["linepositionsrc"] = val
+
+    # shadow
+    # ------
+    @property
+    def shadow(self):
+        """
+        Sets the shape and color of the shadow behind text. "auto"
+        places minimal shadow and applies contrast text font color. See
+        https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
+        for additional options.
+
+        The 'shadow' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["shadow"]
+
+    @shadow.setter
+    def shadow(self, val):
+        self["shadow"] = val
+
+    # shadowsrc
+    # ---------
+    @property
+    def shadowsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `shadow`.
+
+        The 'shadowsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["shadowsrc"]
+
+    @shadowsrc.setter
+    def shadowsrc(self, val):
+        self["shadowsrc"] = val
 
     # size
     # ----
@@ -235,6 +333,50 @@ class Textfont(_BaseTraceHierarchyType):
     def stylesrc(self, val):
         self["stylesrc"] = val
 
+    # textcase
+    # --------
+    @property
+    def textcase(self):
+        """
+        Sets capitalization of text. It can be used to make text appear
+        in all-uppercase or all-lowercase, or with each word
+        capitalized.
+
+        The 'textcase' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'word caps', 'upper', 'lower']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self["textcase"]
+
+    @textcase.setter
+    def textcase(self, val):
+        self["textcase"] = val
+
+    # textcasesrc
+    # -----------
+    @property
+    def textcasesrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `textcase`.
+
+        The 'textcasesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["textcasesrc"]
+
+    @textcasesrc.setter
+    def textcasesrc(self, val):
+        self["textcasesrc"] = val
+
     # variant
     # -------
     @property
@@ -285,14 +427,15 @@ class Textfont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'bold']
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
+            OR exactly one of ['normal', 'bold'] (e.g. 'bold')
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        int|numpy.ndarray
         """
         return self["weight"]
 
@@ -341,12 +484,27 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         familysrc
             Sets the source reference on Chart Studio Cloud for
             `family`.
+        lineposition
+            Sets the kind of decoration line(s) with text, such as
+            an "under", "over" or "through" as well as combinations
+            e.g. "under+over", etc.
+        linepositionsrc
+            Sets the source reference on Chart Studio Cloud for
+            `lineposition`.
+        shadow
+            Sets the shape and color of the shadow behind text.
+            "auto" places minimal shadow and applies contrast text
+            font color. See https://developer.mozilla.org/en-
+            US/docs/Web/CSS/text-shadow for additional options.
+        shadowsrc
+            Sets the source reference on Chart Studio Cloud for
+            `shadow`.
         size
 
         sizesrc
@@ -358,6 +516,13 @@ class Textfont(_BaseTraceHierarchyType):
         stylesrc
             Sets the source reference on Chart Studio Cloud for
             `style`.
+        textcase
+            Sets capitalization of text. It can be used to make
+            text appear in all-uppercase or all-lowercase, or with
+            each word capitalized.
+        textcasesrc
+            Sets the source reference on Chart Studio Cloud for
+            `textcase`.
         variant
             Sets the variant of the font.
         variantsrc
@@ -377,10 +542,16 @@ class Textfont(_BaseTraceHierarchyType):
         colorsrc=None,
         family=None,
         familysrc=None,
+        lineposition=None,
+        linepositionsrc=None,
+        shadow=None,
+        shadowsrc=None,
         size=None,
         sizesrc=None,
         style=None,
         stylesrc=None,
+        textcase=None,
+        textcasesrc=None,
         variant=None,
         variantsrc=None,
         weight=None,
@@ -414,12 +585,27 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         familysrc
             Sets the source reference on Chart Studio Cloud for
             `family`.
+        lineposition
+            Sets the kind of decoration line(s) with text, such as
+            an "under", "over" or "through" as well as combinations
+            e.g. "under+over", etc.
+        linepositionsrc
+            Sets the source reference on Chart Studio Cloud for
+            `lineposition`.
+        shadow
+            Sets the shape and color of the shadow behind text.
+            "auto" places minimal shadow and applies contrast text
+            font color. See https://developer.mozilla.org/en-
+            US/docs/Web/CSS/text-shadow for additional options.
+        shadowsrc
+            Sets the source reference on Chart Studio Cloud for
+            `shadow`.
         size
 
         sizesrc
@@ -431,6 +617,13 @@ class Textfont(_BaseTraceHierarchyType):
         stylesrc
             Sets the source reference on Chart Studio Cloud for
             `style`.
+        textcase
+            Sets capitalization of text. It can be used to make
+            text appear in all-uppercase or all-lowercase, or with
+            each word capitalized.
+        textcasesrc
+            Sets the source reference on Chart Studio Cloud for
+            `textcase`.
         variant
             Sets the variant of the font.
         variantsrc
@@ -491,6 +684,22 @@ an instance of :class:`plotly.graph_objs.treemap.pathbar.Textfont`"""
         _v = familysrc if familysrc is not None else _v
         if _v is not None:
             self["familysrc"] = _v
+        _v = arg.pop("lineposition", None)
+        _v = lineposition if lineposition is not None else _v
+        if _v is not None:
+            self["lineposition"] = _v
+        _v = arg.pop("linepositionsrc", None)
+        _v = linepositionsrc if linepositionsrc is not None else _v
+        if _v is not None:
+            self["linepositionsrc"] = _v
+        _v = arg.pop("shadow", None)
+        _v = shadow if shadow is not None else _v
+        if _v is not None:
+            self["shadow"] = _v
+        _v = arg.pop("shadowsrc", None)
+        _v = shadowsrc if shadowsrc is not None else _v
+        if _v is not None:
+            self["shadowsrc"] = _v
         _v = arg.pop("size", None)
         _v = size if size is not None else _v
         if _v is not None:
@@ -507,6 +716,14 @@ an instance of :class:`plotly.graph_objs.treemap.pathbar.Textfont`"""
         _v = stylesrc if stylesrc is not None else _v
         if _v is not None:
             self["stylesrc"] = _v
+        _v = arg.pop("textcase", None)
+        _v = textcase if textcase is not None else _v
+        if _v is not None:
+            self["textcase"] = _v
+        _v = arg.pop("textcasesrc", None)
+        _v = textcasesrc if textcasesrc is not None else _v
+        if _v is not None:
+            self["textcasesrc"] = _v
         _v = arg.pop("variant", None)
         _v = variant if variant is not None else _v
         if _v is not None:

@@ -90,7 +90,7 @@ When the argument of `color` corresponds to non-numerical data, discrete colors 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='day')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -101,7 +101,7 @@ In the example below the color of Saturday and Sunday sectors is the same as Din
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='time')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -114,7 +114,7 @@ For more information about discrete colors, see the [dedicated page](/python/dis
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='time',
                   color_discrete_map={'(?)':'lightgrey', 'Lunch':'gold', 'Dinner':'darkblue'})
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
@@ -241,7 +241,7 @@ fig = go.Figure(go.Treemap(
     labels = labels,
     values = values,
     parents = parents,
-    marker_colors = ["pink", "royalblue", "lightgray", "purple", 
+    marker_colors = ["pink", "royalblue", "lightgray", "purple",
                      "cyan", "lightgray", "lightblue", "lightgreen"]
 ))
 
@@ -316,7 +316,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
     """
-    df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
+    df_list = []
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
         dfg = df.groupby(levels[i:]).sum()
@@ -328,11 +328,12 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
             df_tree['parent'] = 'total'
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_list.append(df_tree)
     total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
-                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()), name=0)
+    df_list.append(total)
+    df_all_trees = pd.concat(df_list, ignore_index=True)
     return df_all_trees
 
 

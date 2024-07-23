@@ -37,7 +37,7 @@ Manually update the versions to `X.Y.Z` in the files specified below.
    + update the release date
  - `README.md`
    + this must be done at this point because the README gets baked into PyPI
- - `plotly/_widget_version.py`:
+ - `packages/python/plotly/plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `X.Y.Z`
@@ -65,7 +65,7 @@ The `full_build` job in the `release_build` workflow in CircleCI produces a tarb
 
 To locally install the PyPI dist, make sure you have an environment with JupyterLab 3 installed (maybe one created with `conda create -n condatest python=3.10 jupyterlab ipywidgets pandas`):
 
-- `tar xzf all.tgz`
+- `tar xzf output.tgz`
 - `pip uninstall plotly`
 - `conda uninstall plotly` (just in case!)
 - `pip install path/to/output/dist/plotly-X.Y.X-py3-none-any.whl`
