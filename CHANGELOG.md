@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.23.0] - 2024-07-23
+
+### Updated
+- Updated Plotly.js from version 2.32.0 to version 2.34.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2340----2024-07-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `subtitle` attribute to `layout.title` to enable adding subtitles to plots [[#7012](https://github.com/plotly/plotly.js/pull/7012)]
+  - Introduce "u" and "s" pseudo html tags to add partial underline and strike-through styles to SVG text elements [[#7043](https://github.com/plotly/plotly.js/pull/7043)]
+  - Add geometric mean functionality and 'geometric mean ascending' + 'geometric mean descending' to `category_order` on cartesian axes [[#6223](https://github.com/plotly/plotly.js/pull/6223)],
+   with thanks to @acxz and @prabhathc for the contribution!
+  - Add axis property `ticklabelindex` for drawing the label for each minor tick n positions away from a major tick,
+   with thanks to @my-tien for the contribution! [[#7036](https://github.com/plotly/plotly.js/pull/7036)]
+  - Add property `ticklabelstandoff` and `ticklabelshift` to cartesian axes to adjust positioning of tick labels,
+   with thanks to @my-tien for the contribution! [[#7006](https://github.com/plotly/plotly.js/pull/7006)]
+  - Add `x0shift`, `x1shift`, `y0shift`, `y1shift` to shapes to add control over positioning of shape vertices on (multi-)category axes,
+   with thanks to @my-tien for the contribution! [[#7005](https://github.com/plotly/plotly.js/pull/7005)]
+- Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
+- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [#4612].
+
+
 ## [5.22.0] - 2024-05-01
 
 ### Updated

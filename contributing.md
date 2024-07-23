@@ -125,12 +125,15 @@ learn and become confident about git, like http://try.github.io/.
 
 ### Create a virtual environment for plotly development
 
-You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.:
 
 ```bash
-conda create -n plotly-dev python
+conda create -n plotly-dev python=3.11
 conda activate plotly-dev
 ```
+
+As of May 2024 our dependencies have been tested against Python versions 3.8 to 3.11.
+We will support Python 3.12 and higher versions soon.
 
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
