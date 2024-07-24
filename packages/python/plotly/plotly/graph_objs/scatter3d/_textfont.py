@@ -115,9 +115,9 @@ class Textfont(_BaseTraceHierarchyType):
         studio.plotly.com or on-premise) generates images on a server,
         where only a select number of fonts are installed and
         supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
-        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
-        Narrow", "Raleway", "Times New Roman".
+        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
+        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
+        "Raleway", "Times New Roman".
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -284,14 +284,15 @@ class Textfont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'bold']
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
+            OR exactly one of ['normal', 'bold'] (e.g. 'bold')
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        int|numpy.ndarray
         """
         return self["weight"]
 
@@ -340,7 +341,7 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         familysrc
@@ -413,7 +414,7 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
         familysrc

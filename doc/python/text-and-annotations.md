@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.14
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -122,7 +122,7 @@ IFrame(snippet_url + 'text-and-annotations', width='100%', height=1200)
 
 ### Controlling Text Size with `uniformtext`
 
-For the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+For the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
 
 Here is a bar chart with the default behavior which will scale down text to fit.
@@ -131,7 +131,7 @@ Here is a bar chart with the default behavior which will scale down text to fit.
 import plotly.express as px
 
 df = px.data.gapminder(year=2007)
-fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country', 
+fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country',
              title="Default behavior: some text is tiny")
 fig.update_traces(textposition='inside')
 fig.show()
@@ -143,7 +143,7 @@ Here is the same figure with uniform text applied: the text for all bars is the 
 import plotly.express as px
 
 df = px.data.gapminder(year=2007)
-fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country', 
+fig = px.bar(df, x='continent', y='pop', color="lifeExp", text='country',
              title="Uniform Text: min size is 8, hidden if can't fit")
 fig.update_traces(textposition='inside')
 fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
@@ -162,7 +162,7 @@ fig.show()
 
 ### Controlling Maximum Text Size
 
-The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
 
 ```python
 import plotly.express as px
@@ -353,7 +353,7 @@ fig.show()
 
 *New in 5.22*
 
-You can also configure a font's `variant`, `style`, and `weight` on `textfont`. Here, we configure an `italic` style on the first bar, `bold` weight on the second, and`small-caps` as the font variant on the third.
+You can also configure a font's `variant`, `style`, and `weight` on `textfont`. Here, we configure an `italic` style on the first bar, `bold` weight on the second, and `small-caps` as the font variant on the third.
 
 ```python
 import plotly.graph_objects as go
@@ -393,6 +393,162 @@ fig = go.Figure(
 
 fig.show()
 
+```
+
+## Numeric Font Weight
+
+*New in 5.23*
+
+In the previous example, we set a font `weight` using a keyword value. You can also set font `weight` using a numeric value.
+
+The font weights that are available depend on the font family that is set. If you set a font `weight` that isn't available for a particular font family, the weight will be rounded to the nearest available value.
+
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(
+            x=df.nation,
+            y=df.gold,
+            name="Gold",
+            marker=dict(color="Gold"),
+            text="Gold",
+            textfont=dict(weight=900, size=17),
+        ),
+        go.Bar(
+            x=df.nation,
+            y=df.silver,
+            name="Silver",
+            marker=dict(color="MediumTurquoise"),
+            text="Silver",
+            textfont=dict(size=17),
+        ),
+            go.Bar(
+            x=df.nation,
+            y=df.bronze,
+            name="Bronze",
+            marker=dict(color="LightGreen"),
+            text="Bronze",
+            textfont=dict(size=17),
+        ),
+    ],
+    layout=dict(barcornerradius=15, showlegend=False),
+)
+
+fig.show()
+```
+
+[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+
+
+## Text Case
+
+*New in 5.23*
+
+You can configure text case using the `textfont.textcase` property. In this example, we set `textfont.textcase="upper"` to transform the text on all bars to uppercase.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2007].loc[df[df.year == 2007].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'],
+        y=grouped['continent'],
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            family="sans serif",
+            size=14,
+            # Here we set textcase to "upper.
+            # Set to lower" for lowercase text, or "word caps" to capitalize the first letter of each word
+            textcase="upper"
+
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2007',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Lines
+
+*New in 5.23*
+
+You can add decoration lines to text using the `textfont.lineposition` property. This property accepts `"under"`, `"over"`, and `"through"`, or a combination of these separated by a `+`.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 2002].loc[df[df.year == 2002].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'],
+        y=grouped['continent'],
+        text=grouped['country'],
+        orientation='h',
+        marker_color='MediumSlateBlue',
+        textfont=dict(
+            lineposition="under" # combine different line positions with a "+" to add more than one: "under+over"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 2002',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
+```
+
+## Text Shadow
+
+*New in 5.23*
+
+You can apply a shadow effect to text using the `textfont.shadow` property. This property accepts shadow specifications in the same format as the [text-shadow CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow).
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+grouped = df[df.year == 1997].loc[df[df.year == 1997].groupby('continent')['lifeExp'].idxmax()]
+
+fig = go.Figure(
+    data=go.Bar(
+        x=grouped['lifeExp'],
+        y=grouped['continent'],
+        text=grouped['country'],
+        orientation='h',
+        textfont=dict(
+            shadow="1px 1px 2px pink"
+        )
+    ),
+    layout=go.Layout(
+        title_text='Country with Highest Life Expectancy per Continent, 1997',
+        yaxis=dict(showticklabels=False)
+    )
+)
+
+fig.show()
 ```
 
 ### Styling and Coloring Annotations
@@ -495,6 +651,54 @@ fig.update_layout(
 )
 
 fig.show()
+```
+
+### HTML Tags in Text
+
+The `text` attribute supports the following HTML tags: `<br>`,`<b>`,`<a>`, `<em>`, `<sup>` and `<span>`.
+In version 5.23 and later, `<s>` and `<u>`are also supported.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
+            y=[0, 1, 3, 2, 4, 3, 4, 6, 5],
+            mode="lines+markers",
+            name="Series 1",
+        ),
+        go.Scatter(
+            x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
+            y=[0, 4, 5, 1, 2, 2, 3, 4, 2],
+            mode="lines+markers",
+            name="Series 2",
+        ),
+    ],
+    layout=go.Layout(
+        annotations=[
+            dict(
+                x=2,
+                y=5,
+                text="Text annotation using <b>bolded text</b>, <i>italicized text</i>, <u>underlined text</u>, <br>and a new line",
+                showarrow=True,
+                arrowhead=1,
+            ),
+            dict(
+                x=4,
+                y=4,
+                text="Text annotation with <a href='https://dash.plotly.com'>a link</a>.",
+                showarrow=False,
+                yshift=10,
+            ),
+        ],
+        showlegend=False,
+    ),
+)
+
+fig.show()
+
 ```
 
 ### Positioning Text Annotations Absolutely

@@ -21,9 +21,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
     from ._ticklabelstep import TicklabelstepValidator
+    from ._ticklabelstandoff import TicklabelstandoffValidator
+    from ._ticklabelshift import TicklabelshiftValidator
     from ._ticklabelposition import TicklabelpositionValidator
     from ._ticklabeloverflow import TicklabeloverflowValidator
     from ._ticklabelmode import TicklabelmodeValidator
+    from ._ticklabelindexsrc import TicklabelindexsrcValidator
+    from ._ticklabelindex import TicklabelindexValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
     from ._tickformat import TickformatValidator
@@ -117,9 +121,13 @@ else:
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
             "._ticklabelstep.TicklabelstepValidator",
+            "._ticklabelstandoff.TicklabelstandoffValidator",
+            "._ticklabelshift.TicklabelshiftValidator",
             "._ticklabelposition.TicklabelpositionValidator",
             "._ticklabeloverflow.TicklabeloverflowValidator",
             "._ticklabelmode.TicklabelmodeValidator",
+            "._ticklabelindexsrc.TicklabelindexsrcValidator",
+            "._ticklabelindex.TicklabelindexValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
             "._tickformat.TickformatValidator",
