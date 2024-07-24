@@ -71,8 +71,6 @@ def b64(v):
         if v.ndim > 1:
             arrObj["shape"] = str(v.shape)[1:-1]
 
-        print(arrObj)
-
         return arrObj
 
     return v
