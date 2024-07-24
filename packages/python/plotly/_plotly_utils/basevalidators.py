@@ -288,7 +288,7 @@ def is_typed_array_spec(v):
     """
     Return whether a value is considered to be a typed array spec for plotly.js
     """
-    return isinstance(v, dict) and "bdata" in v
+    return isinstance(v, dict) and "bdata" in v and "dtype" in v
 
 
 def is_none_or_typed_array_spec(v):
