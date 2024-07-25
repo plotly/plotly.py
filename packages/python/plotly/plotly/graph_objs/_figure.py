@@ -23106,8 +23106,8 @@ class Figure(BaseFigure):
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
             (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub> <span>
-            are also supported.
+            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
+            <span> are also supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -24097,12 +24097,16 @@ class Figure(BaseFigure):
         type=None,
         visible=None,
         x0=None,
+        x0shift=None,
         x1=None,
+        x1shift=None,
         xanchor=None,
         xref=None,
         xsizemode=None,
         y0=None,
+        y0shift=None,
         y1=None,
+        y1shift=None,
         yanchor=None,
         yref=None,
         ysizemode=None,
@@ -24236,9 +24240,19 @@ class Figure(BaseFigure):
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -24273,9 +24287,19 @@ class Figure(BaseFigure):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -24347,12 +24371,16 @@ class Figure(BaseFigure):
             type=type,
             visible=visible,
             x0=x0,
+            x0shift=x0shift,
             x1=x1,
+            x1shift=x1shift,
             xanchor=xanchor,
             xref=xref,
             xsizemode=xsizemode,
             y0=y0,
+            y0shift=y0shift,
             y1=y1,
+            y1shift=y1shift,
             yanchor=yanchor,
             yref=yref,
             ysizemode=ysizemode,

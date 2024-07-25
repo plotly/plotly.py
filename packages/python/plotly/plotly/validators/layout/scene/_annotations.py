@@ -127,8 +127,8 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Plotly uses a subset of HTML tags to do things
                 like newline (<br>), bold (<b></b>), italics
                 (<i></i>), hyperlinks (<a href='...'></a>).
-                Tags <em>, <sup>, <sub> <span> are also
-                supported.
+                Tags <em>, <sup>, <sub>, <s>, <u> <span> are
+                also supported.
             textangle
                 Sets the angle at which the `text` is drawn
                 with respect to the horizontal.

@@ -26,7 +26,7 @@ author = "Plotly"
 # The short X.Y version
 version = ""
 # The full version, including alpha/beta/rc tags
-release = "5.22.0"
+release = "5.23.0"
 
 
 # -- General configuration ---------------------------------------------------
