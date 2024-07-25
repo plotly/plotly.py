@@ -88,7 +88,8 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 descending* if order should be determined by
                 the numerical order of the values. Similarly,
                 the order can be determined by the min, max,
-                sum, mean or median of all the values.
+                sum, mean, geometric mean or median of all the
+                values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -446,6 +447,20 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 out.yaxis.tickformatstopdefaults), sets the
                 default property values to use for elements of
                 layout.yaxis.tickformatstops
+            ticklabelindex
+                Only for axes with `type` "date" or "linear".
+                Instead of drawing the major tick label, draw
+                the label for the minor tick that is n
+                positions away from the major tick. E.g. to
+                always draw the label for the minor tick before
+                each major tick, choose `ticklabelindex` -1.
+                This is useful for date axes with
+                `ticklabelmode` "period" if you want to label
+                the period that ends with each major tick
+                instead of the period that begins there.
+            ticklabelindexsrc
+                Sets the source reference on Chart Studio Cloud
+                for `ticklabelindex`.
             ticklabelmode
                 Determines where tick labels are drawn with
                 respect to their corresponding ticks and grid
@@ -473,6 +488,24 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes linked by `matches` or `scaleanchor`, no
                 extra padding for inside labels would be added
                 by autorange, so that the scales could match.
+            ticklabelshift
+                Shifts the tick labels by the specified number
+                of pixels in parallel to the axis. Positive
+                values move the labels in the positive
+                direction of the axis.
+            ticklabelstandoff
+                Sets the standoff distance (in px) between the
+                axis tick labels and their default position. A
+                positive `ticklabelstandoff` moves the labels
+                farther away from the plot area if
+                `ticklabelposition` is "outside", and deeper
+                into the plot area if `ticklabelposition` is
+                "inside". A negative `ticklabelstandoff` works
+                in the opposite direction, moving outside ticks
+                towards the plot area and inside ticks towards
+                the outside. If the negative value is large
+                enough, inside ticks can even end up outside
+                and vice versa.
             ticklabelstep
                 Sets the spacing between tick labels as
                 compared to the spacing between ticks. A value
