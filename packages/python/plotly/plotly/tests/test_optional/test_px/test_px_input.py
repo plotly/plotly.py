@@ -10,6 +10,7 @@ from pandas.testing import assert_frame_equal
 from plotly.tests.b64 import b64, _b64
 import sys
 import warnings
+import time
 
 
 # Fixtures
@@ -137,6 +138,26 @@ def test_name_heuristics():
     assert np.all(fig.data[0].y == b64(np.array([0, 1])))
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
+def test_performance_b64():
+    rand_arr_1 = np.array(np.random.random(100000))
+    rand_arr_2 = np.array(np.random.random(100000))
+    b64_arr_1 = b64(rand_arr_1)
+    b64_arr_2 = b64(rand_arr_2)
+
+    # Test the performance of the base64 arrays
+    b64_start = time.time()
+    df_b64 = pd.DataFrame(dict(x=b64_arr_1, y=b64_arr_2))
+    fig = px.scatter(df_b64, x="x", y="y")
+    b64_time_elapsed = time.time() - b64_start
+
+    # Test the performance of the raw arrays
+    raw_start = time.time()
+    df_raw = pd.DataFrame(dict(x=rand_arr_1, y=rand_arr_2))
+    fig = px.scatter(df_raw, x="x", y="y")
+    raw_time_elapsed = time.time() - raw_start
+
+    # b64 should be faster than raw
+    assert b64_time_elapsed < raw_time_elapsed
 
 def test_repeated_name():
     iris = px.data.iris()
