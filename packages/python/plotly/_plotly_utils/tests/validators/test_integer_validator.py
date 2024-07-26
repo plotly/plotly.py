@@ -38,7 +38,7 @@ def validator_extras():
 
 @pytest.fixture
 def validator_extras_aok():
-    return IntegerValidator("prop", "parent", min=-2, max=10, array_ok=True, extras=[['normal', 'bold'], ['italics']])
+    return IntegerValidator("prop", "parent", min=-2, max=10, array_ok=True, extras=['normal', 'bold', 'italics'])
 
 # ### Acceptance ###
 @pytest.mark.parametrize("val", [1, -19, 0, -1234])
@@ -69,7 +69,7 @@ def test_acceptance_extras(val, validator_extras):
     assert validator_extras.validate_coerce(val) == val
 
 # Test extras for array_ok
-@pytest.mark.parametrize("val", [['normal', 'bold'], ['italics']])
+@pytest.mark.parametrize("val", [[10, 'normal', 'bold'], ['italics'], [10, -2], [5]])
 def test_acceptance_extras_array(val, validator_extras_aok):
     assert validator_extras_aok.validate_coerce(val) == val
 
