@@ -32,6 +32,9 @@ def validator_max():
 def validator_aok(request):
     return IntegerValidator("prop", "parent", min=-2, max=10, array_ok=True)
 
+@pytest.fixture
+def validator_extras():
+    return IntegerValidator("prop", "parent", extras=['normal', 'bold'])
 
 # ### Acceptance ###
 @pytest.mark.parametrize("val", [1, -19, 0, -1234])
@@ -56,6 +59,18 @@ def test_rejection_by_value(val, validator):
 def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
 
+# With extras
+@pytest.mark.parametrize("val", ['normal', 'bold'])
+def test_acceptance_extras(val, validator_extras):
+    assert validator_extras.validate_coerce(val) == val
+
+# Test rejection by extras
+@pytest.mark.parametrize("val", ['italic', 'bolditalic'])
+def test_rejection_extras(val, validator_extras):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_extras.validate_coerce(val)
+
+    assert "Invalid value" in str(validation_failure.value)
 
 @pytest.mark.parametrize(
     "val", [-1.01, -10, 2.1, 3, np.iinfo(int).max, np.iinfo(int).min]
