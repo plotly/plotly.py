@@ -34,7 +34,11 @@ def validator_aok(request):
 
 @pytest.fixture
 def validator_extras():
-    return IntegerValidator("prop", "parent", extras=['normal', 'bold'])
+    return IntegerValidator("prop", "parent", min=-2, max=10, extras=['normal', 'bold'])
+
+@pytest.fixture
+def validator_extras_aok():
+    return IntegerValidator("prop", "parent", min=-2, max=10, array_ok=True, extras=[['normal', 'bold'], ['italics']])
 
 # ### Acceptance ###
 @pytest.mark.parametrize("val", [1, -19, 0, -1234])
@@ -60,12 +64,17 @@ def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
 
 # With extras
-@pytest.mark.parametrize("val", ['normal', 'bold'])
+@pytest.mark.parametrize("val", ['normal', 'bold', 10, -2])
 def test_acceptance_extras(val, validator_extras):
     assert validator_extras.validate_coerce(val) == val
 
+# Test extras for array_ok
+@pytest.mark.parametrize("val", [['normal', 'bold'], ['italics']])
+def test_acceptance_extras_array(val, validator_extras_aok):
+    assert validator_extras_aok.validate_coerce(val) == val
+
 # Test rejection by extras
-@pytest.mark.parametrize("val", ['italic', 'bolditalic'])
+@pytest.mark.parametrize("val", ['italic', 'bolditalic', -3, 11])
 def test_rejection_extras(val, validator_extras):
     with pytest.raises(ValueError) as validation_failure:
         validator_extras.validate_coerce(val)
