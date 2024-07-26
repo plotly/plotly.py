@@ -168,5 +168,5 @@ fig.show()
 See [function reference for `px.(line_map)`](https://plotly.com/python-api-reference/generated/plotly.express.line_map) or
 https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
 
-See Mapbox-based tile maps, see [function reference for `px.(line_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or
+For Mapbox-based tile maps, see [function reference for `px.(line_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or
 https://plotly.com/python/reference/scattermapbox/.
