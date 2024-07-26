@@ -138,6 +138,7 @@ def test_name_heuristics():
     assert np.all(fig.data[0].y == b64(np.array([0, 1])))
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
+
 def test_performance_b64():
     rand_arr_1 = np.array(np.random.random(100000))
     rand_arr_2 = np.array(np.random.random(100000))
@@ -159,6 +160,7 @@ def test_performance_b64():
     # b64 should be faster than raw
     assert b64_time_elapsed < raw_time_elapsed
 
+
 def test_size_performance_b64():
     rand_arr_1 = np.array(np.random.random(100000))
     rand_arr_2 = np.array(np.random.random(100000))
@@ -173,7 +175,7 @@ def test_size_performance_b64():
     fig_raw = px.scatter(df_raw, x="x", y="y")
     size_raw = fig_raw.to_json().encode("utf-8").__sizeof__()
 
-    assert size_b64 < size_raw    
+    assert size_b64 < size_raw
 
 
 def test_repeated_name():
