@@ -27,7 +27,7 @@
   padding-top: 8px;
 }
 
-code {
+.rst-content code.literal {
   color: #2c3e50 !important;
 }
 
@@ -97,10 +97,41 @@ h6 {
   font-weight: 500;
 }
 
+.wy-nav-side {
+  background-color: #0e1012;
+}
+
+.wy-side-nav-search {
+  background-color: #0e1012 !important;
+}
+
+/*
+
 a {
   color: #506784 !important;
 }
 
 a:hover {
   color: #0d67bf !important;
+}
+
+*/
+
+a.icon img.logo {
+  margin-top: 0 !important ;
+}
+
+.wy-side-nav-search .wy-dropdown > a img.logo, .wy-side-nav-search > a img.logo {
+  width: 275px;
+}
+
+.wy-table-responsive table td {
+  white-space: normal;
+}
+
+/* https://github.com/readthedocs/sphinx_rtd_theme/issues/468 */
+/* adds scrollbar to sidenav */
+.wy-side-scroll {
+  width: auto;
+  overflow-y: auto;
 }
