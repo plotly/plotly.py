@@ -51,7 +51,7 @@ Making choropleth Mapbox maps requires two main types of input:
 
 The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth_mapbox` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
 
-**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
+**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases. Note also that Plotly requires that the GeoJSON file format follows the 2008 specification, which is **not** the latest one.
 
 #### GeoJSON with `feature.id`
 
