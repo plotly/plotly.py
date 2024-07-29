@@ -242,7 +242,10 @@ jobs:
       - run:
         name: Check that numpy is not installed
         command: |
-          pip list | grep numpy > /dev/null 2>&1 && { exit 1 } || { exit 0 }
+          if pip list | grep numpy > /dev/null 2>&1
+          then exit 1
+          else exit 0
+          fi
       - test_optional:
           py: "312_no_numpy"
 
