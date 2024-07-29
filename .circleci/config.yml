@@ -239,6 +239,10 @@ jobs:
     docker:
       - image: cimg/python:3.12-browsers
     steps:
+      - run:
+        name: Check that numpy is not installed
+        command: |
+          pip list | grep numpy > /dev/null 2>&1 && { exit 1 } || { exit 0 }
       - test_optional:
           py: "312_no_numpy"
 
