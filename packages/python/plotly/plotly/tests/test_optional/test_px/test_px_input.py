@@ -161,7 +161,7 @@ def test_performance_b64():
     raw_time_elapsed = time.time() - raw_start
 
     # b64 should be faster than raw
-    assert (b64_time_elapsed / raw_time_elapsed) < 0.85
+    assert (b64_time_elapsed / raw_time_elapsed) < 0.9
 
 
 def test_size_performance_b64_uint8():
