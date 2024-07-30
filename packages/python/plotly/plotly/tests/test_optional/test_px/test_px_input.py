@@ -165,8 +165,8 @@ def test_performance_b64():
 
 
 def test_size_performance_b64_uint8():
-    rand_arr_1 = np.random.randint(0, high=254, size=100000, dtype='uint8')
-    rand_arr_2 = np.random.randint(0, high=254, size=100000, dtype='uint8')
+    rand_arr_1 = np.random.randint(0, high=254, size=100000, dtype="uint8")
+    rand_arr_2 = np.random.randint(0, high=254, size=100000, dtype="uint8")
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
 
@@ -182,8 +182,8 @@ def test_size_performance_b64_uint8():
 
 
 def test_size_performance_b64_float32():
-    rand_arr_1 = np.random.random(100000).astype('float32')
-    rand_arr_2 = np.random.random(100000).astype('float32')
+    rand_arr_1 = np.random.random(100000).astype("float32")
+    rand_arr_2 = np.random.random(100000).astype("float32")
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
 
