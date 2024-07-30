@@ -36,7 +36,7 @@ jupyter:
 
 ### Lines on maps using Plotly Express
 
-To draw a line on a map, you either can use `px.line_map()` in Plotly Express, or `Scattermap` traces. Here's an example of drawing a line on a tile-based map using Plotly Express.
+To draw a line on a map, you either can use `px.line_map` in Plotly Express, or `go.Scattermap` in Plotly Graph Objects. Here's an example of drawing a line on a tile-based map using Plotly Express.
 
 ```python
 import pandas as pd
@@ -56,7 +56,7 @@ fig.show()
 
 ### Lines on maps from GeoPandas
 
-Given a GeoPandas geo-data frame with `linestring` or `multilinestring` features, one can extra point data and use `px.line_map()`.
+Given a GeoPandas geo-data frame with `linestring` or `multilinestring` features, one can extra point data and use `px.line_map`.
 
 ```python
 import plotly.express as px
@@ -133,7 +133,7 @@ The earlier examples using `px.line_map` and `go.Scattermap` use Maplibre for re
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
-To draw a line on your map, you either can use [`px.line_mapbox()`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox.html) in Plotly Express, or [`Scattermapbox`](https://plotly.com/python/reference/scattermapbox/) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
+To draw a line on your map, you either can use [`px.line_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox.html) in Plotly Express, or [`Scattermapbox`](https://plotly.com/python/reference/scattermapbox/) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
 
 Here's an example of using `Scattermapbox`.
 
@@ -165,8 +165,8 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_map)`](https://plotly.com/python-api-reference/generated/plotly.express.line_map) or
+See [function reference for `px.line_map`](https://plotly.com/python-api-reference/generated/plotly.express.line_map) or
 https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.(line_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or
+For Mapbox-based tile maps, see [function reference for `px.line_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or
 https://plotly.com/python/reference/scattermapbox/.

@@ -41,7 +41,7 @@ Other kinds of subplots and axes are described in other tutorials:
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
 - [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
 - [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
-- [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/layout/mapbox/)
+- [Map axes](/python/map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
 - [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
 **See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
@@ -453,10 +453,10 @@ fig.show()
 *New in 5.23*
 
 You can adjust tick label positions by moving them a number of pixels away from the axis using `ticklabelstandoff` or along the axis using `ticklabelshift`.
- 
+
 In this example, `ticklabelshift=25` shifts the labels 25 pixels to the right along the x-axis. By providing a negative value, we could move the labels 25 pixels to the left, (`ticklabelshift=-25`).
 
-Here, `ticklabelstandoff=15` moves the labels further 15 pixels away from the x-axis. A negative value here would move them close to the axis. 
+Here, `ticklabelstandoff=15` moves the labels further 15 pixels away from the x-axis. A negative value here would move them close to the axis.
 
 ```python
 import plotly.express as px
@@ -483,7 +483,7 @@ fig.show()
 
 On date or linear axes, use `ticklabelindex` to draw a label for a minor tick instead of a major tick.
 
-To draw the label for the minor tick before each major tick, set `ticklabelindex` -1, like in the following example. 
+To draw the label for the minor tick before each major tick, set `ticklabelindex` -1, like in the following example.
 
 ```python
 import plotly.express as px

@@ -36,7 +36,7 @@ jupyter:
 
 There are three different ways to show a filled area on a tile-based map:
 
-- Using a [Scattermap](https://plotly.com/python/reference/scattermap/) trace and set `fill` attribute to 'toself'
+- Using a [Scattermap](https://plotly.com/python/reference/scattermap/) trace and setting the `fill` attribute to 'toself'
 - Using a map layout (i.e. by minimally using an empty [Scattermap](https://plotly.com/python/reference/scattermap/) trace) and adding a GeoJSON layer
 - Using the [Choroplethmap](https://plotly.com/python/tile-county-choropleth/) trace type
 
