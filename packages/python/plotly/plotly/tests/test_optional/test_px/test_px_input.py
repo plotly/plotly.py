@@ -150,12 +150,14 @@ def test_performance_b64():
     b64_start = time.time()
     df_b64 = pd.DataFrame(dict(x=b64_arr_1, y=b64_arr_2))
     fig = px.scatter(df_b64, x="x", y="y", width=800, height=800)
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
     b64_time_elapsed = time.time() - b64_start
 
     # Test the performance of the raw arrays
     raw_start = time.time()
     df_raw = pd.DataFrame(dict(x=rand_arr_1, y=rand_arr_2))
     fig = px.scatter(df_raw, x="x", y="y", width=800, height=800)
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
     raw_time_elapsed = time.time() - raw_start
 
     # b64 should be faster than raw
