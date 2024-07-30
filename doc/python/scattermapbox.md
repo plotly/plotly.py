@@ -30,8 +30,8 @@ jupyter:
     order: 9
     page_type: u-guide
     permalink: python/tile-scatter-maps/
-    thumbnail: thumbnail/scatter-mapbox.jpg
     redirect_from: python/scattermapbox/
+    thumbnail: thumbnail/scatter-mapbox.jpg
 ---
 
 ### Basic example with Plotly Express
@@ -354,10 +354,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_map)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
+See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.(scatter_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/.
-
-```python
-
-```
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/.

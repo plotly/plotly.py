@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/choropleth.jpg
 ---
 
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](/python/mapbox-county-choropleth).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](/python/tile-county-choropleth).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` function or the lower-level `go.Choropleth` graph object.
 
