@@ -4,7 +4,7 @@ pandas==0.24.2
 numpy==1.19.5
 xarray==0.10.9
 statsmodels==0.10.2
-pillow==6.2.0
+pillow==10.3.0
 pytest==3.5.1
 pytz==2016.10
 ipython[all]==5.4.0
