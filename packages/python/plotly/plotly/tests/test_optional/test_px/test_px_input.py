@@ -12,6 +12,7 @@ import sys
 import warnings
 import time
 
+np.random.seed(0)
 
 # Fixtures
 # --------
