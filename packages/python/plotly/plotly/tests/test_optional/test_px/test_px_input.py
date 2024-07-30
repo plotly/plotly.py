@@ -141,8 +141,8 @@ def test_name_heuristics():
 
 
 def test_performance_b64():
-    rand_arr_1 = np.array(np.random.random(100000))
-    rand_arr_2 = np.array(np.random.random(100000))
+    rand_arr_1 = np.random.random(100000).tolist()
+    rand_arr_2 = np.random.random(100000).tolist()
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
 
