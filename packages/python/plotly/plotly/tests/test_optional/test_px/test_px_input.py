@@ -163,8 +163,8 @@ def test_performance_b64():
 
 
 def test_size_performance_b64():
-    rand_arr_1 = np.array(np.random.random(100000))
-    rand_arr_2 = np.array(np.random.random(100000))
+    rand_arr_1 = np.random.random(100000)
+    rand_arr_2 = np.random.random(100000)
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
 
