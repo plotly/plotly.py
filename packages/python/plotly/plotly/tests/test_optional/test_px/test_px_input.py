@@ -164,9 +164,26 @@ def test_performance_b64():
     assert (b64_time_elapsed / raw_time_elapsed) < 0.85
 
 
-def test_size_performance_b64():
-    rand_arr_1 = np.random.random(100000)
-    rand_arr_2 = np.random.random(100000)
+def test_size_performance_b64_uint8():
+    rand_arr_1 = np.random.randint(0, high=254, size=100000, dtype='uint8')
+    rand_arr_2 = np.random.randint(0, high=254, size=100000, dtype='uint8')
+    b64_arr_1 = b64(rand_arr_1)
+    b64_arr_2 = b64(rand_arr_2)
+
+    # Compare the size of figures with b64 arrays and raw arrays
+    df_b64 = pd.DataFrame(dict(x=b64_arr_1, y=b64_arr_2))
+    fig_b64 = px.scatter(df_b64, x="x", y="y")
+    size_b64 = fig_b64.to_json().encode("utf-8").__sizeof__()
+    df_raw = pd.DataFrame(dict(x=rand_arr_1, y=rand_arr_2))
+    fig_raw = px.scatter(df_raw, x="x", y="y")
+    size_raw = fig_raw.to_json().encode("utf-8").__sizeof__()
+
+    assert size_b64 < size_raw
+
+
+def test_size_performance_b64_float32():
+    rand_arr_1 = np.random.random(100000).astype('float32')
+    rand_arr_2 = np.random.random(100000).astype('float32')
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
 
