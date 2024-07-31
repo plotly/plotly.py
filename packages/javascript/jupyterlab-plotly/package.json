@@ -41,8 +41,8 @@
     "watch:nbextension": "webpack --watch"
   },
   "devDependencies": {
-    "@jupyterlab/builder": "^3.0.0",
-    "@lumino/application": "^1.6.0",
+    "@jupyterlab/builder": "^4.0.0",
+    "@lumino/application": "^1.6.0 || ^2.0.0",
     "@types/plotly.js": "^1.54.10",
     "@types/webpack-env": "^1.13.6",
     "acorn": "^7.2.0",
@@ -60,7 +60,7 @@
     "webpack-cli": "^4.0.0"
   },
   "dependencies": {
-    "@jupyter-widgets/base": ">=2.0.0 <7.0.0",
+    "@jupyter-widgets/base": "^6.0.0",
     "@jupyterlab/rendermime-interfaces": "^1.3.0 || ^2.0.0 || ^3.0.0",
     "@lumino/messaging": "^1.2.3 || ^2.0.0",
     "@lumino/widgets": "^1.8.1 || ^2.0.0",

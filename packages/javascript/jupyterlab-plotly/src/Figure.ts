@@ -1670,13 +1670,16 @@ function py2js_deserializer(v: any, widgetManager?: any) {
       // when saving widget state to a notebook.
       // @ts-ignore
       var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
+      // @ts-ignore
       var buffer = _.has(v, "value") ? v.value.buffer : v.buffer.buffer;
       res = new typedarray_type(buffer);
     } else {
       // Deserialize object properties recursively
       res = {};
+      // @ts-ignore
       for (var p in v) {
-        if (v.hasOwnProperty(p)) {
+      // @ts-ignore
+      if (v.hasOwnProperty(p)) {
           res[p] = py2js_deserializer(v[p]);
         }
       }
