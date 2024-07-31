@@ -44,4 +44,4 @@ def test_size_performance_b64_uint8():
     fig_raw = go.Scatter(x=raw_arr_1, y=raw_arr_2)
     size_raw = fig_raw.to_json().__sizeof__()
 
-    assert size_b64 / size_raw < .85
+    assert size_b64 / size_raw < 0.85
