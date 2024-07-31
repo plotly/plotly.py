@@ -188,8 +188,6 @@ def test_size_performance_b64_float32():
     raw_arr_2 = rand_arr_2.tolist()
     b64_arr_1 = b64(rand_arr_1)
     b64_arr_2 = b64(rand_arr_2)
-    print(rand_arr_1)
-    print(rand_arr_2)
 
     # Compare the size of figures with b64 arrays and raw arrays
     fig_b64 = px.scatter(x=b64_arr_1, y=b64_arr_2)
