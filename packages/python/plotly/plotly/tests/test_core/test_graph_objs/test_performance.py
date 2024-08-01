@@ -31,8 +31,8 @@ def test_performance_b64():
 
 
 def test_size_performance_b64_uint8():
-    rand_arr_1 = np.random.random(100000).astype("uint8")
-    rand_arr_2 = np.random.random(100000).astype("uint8")
+    rand_arr_1 = (np.random.random(100000) * 256).astype("uint8")
+    rand_arr_2 = (np.random.random(100000) * 256).astype("uint8")
     raw_arr_1 = rand_arr_1.tolist()
     raw_arr_2 = rand_arr_2.tolist()
     b64_arr_1 = b64(rand_arr_1)
