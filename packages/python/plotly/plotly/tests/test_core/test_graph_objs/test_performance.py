@@ -5,24 +5,29 @@ from plotly.tests.b64 import b64
 
 np.random.seed(1)
 
+
 def test_performance_scatter3d():
     N = 10000
 
     x = np.random.randn(N)
-    y = np.random.randn(N).astype('float32')
-    z = np.random.randint(size=N, low=0, high=256, dtype='uint8')
-    c = np.random.randint(size=N, low=-10, high=10, dtype='int8')
+    y = np.random.randn(N).astype("float32")
+    z = np.random.randint(size=N, low=0, high=256, dtype="uint8")
+    c = np.random.randint(size=N, low=-10, high=10, dtype="int8")
 
     # Test the performance with lists
     list_start = time.time()
-    fig = go.Figure(data=[go.Scatter3d(
-        x=x.tolist(),
-        y=y.tolist(),
-        z=z.tolist(),
-        marker=dict(color=c.tolist()),
-        mode='markers',
-        opacity=0.2
-    )])
+    fig = go.Figure(
+        data=[
+            go.Scatter3d(
+                x=x.tolist(),
+                y=y.tolist(),
+                z=z.tolist(),
+                marker=dict(color=c.tolist()),
+                mode="markers",
+                opacity=0.2,
+            )
+        ]
+    )
     list_time_elapsed = time.time() - list_start
 
     # Test the performance with base64 arrays
@@ -32,13 +37,14 @@ def test_performance_scatter3d():
         y=b64(y),
         z=b64(z),
         marker=dict(color=b64(c)),
-        mode='markers',
-        opacity=0.2
+        mode="markers",
+        opacity=0.2,
     )
     b64_time_elapsed = time.time() - b64_start
 
     # b64 should be faster than raw
     assert (b64_time_elapsed / list_time_elapsed) < 0.75
+
 
 def test_performance_b64_float64():
     np_arr_1 = np.random.random(10000)
