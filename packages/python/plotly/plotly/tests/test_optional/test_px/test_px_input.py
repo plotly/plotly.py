@@ -141,61 +141,49 @@ def test_name_heuristics():
 
 
 def test_performance_b64():
-    rand_arr_1 = np.random.random(1000000)
-    rand_arr_2 = np.random.random(1000000)
-    raw_arr_1 = rand_arr_1.tolist()
-    raw_arr_2 = rand_arr_2.tolist()
-    b64_arr_1 = b64(rand_arr_1)
-    b64_arr_2 = b64(rand_arr_2)
+    np_arr_1 = np.random.random(1000000)
+    np_arr_2 = np.random.random(1000000)
 
     # Test the performance of the base64 arrays
-    b64_start = time.time()
-    fig = px.scatter(x=b64_arr_1, y=b64_arr_2, width=800, height=800)
+    np_arr_start = time.time()
+    fig = px.scatter(x=np_arr_1, y=np_arr_2, width=800, height=800)
     fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
-    b64_time_elapsed = time.time() - b64_start
+    np_arr_time_elapsed = time.time() - np_arr_start
 
     # Test the performance of the raw arrays
-    raw_start = time.time()
-    fig = px.scatter(x=raw_arr_1, y=raw_arr_2, width=800, height=800)
+    list_start = time.time()
+    fig = px.scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist(), width=800, height=800)
     fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
-    raw_time_elapsed = time.time() - raw_start
+    list_time_elapsed = time.time() - list_start
 
     # b64 should be faster than raw
-    assert (b64_time_elapsed / raw_time_elapsed) < 0.7
+    assert (np_arr_time_elapsed / list_time_elapsed) < 0.7
 
 
 def test_size_performance_b64_uint8():
-    rand_arr_1 = np.random.randint(0, high=254, size=100000, dtype="uint8")
-    rand_arr_2 = np.random.randint(0, high=254, size=100000, dtype="uint8")
-    raw_arr_1 = rand_arr_1.tolist()
-    raw_arr_2 = rand_arr_2.tolist()
-    b64_arr_1 = b64(rand_arr_1)
-    b64_arr_2 = b64(rand_arr_2)
+    np_arr_1 = np.random.randint(0, high=254, size=100000, dtype="uint8")
+    np_arr_2 = np.random.randint(0, high=254, size=100000, dtype="uint8")
 
     # Compare the size of figures with b64 arrays and raw arrays
-    fig_b64 = px.scatter(x=b64_arr_1, y=b64_arr_2)
-    size_b64 = fig_b64.to_json().__sizeof__()
-    fig_raw = px.scatter(x=raw_arr_1, y=raw_arr_2)
-    size_raw = fig_raw.to_json().__sizeof__()
+    fig_np_arr = px.scatter(x=np_arr_1, y=np_arr_2)
+    size_np_arr = fig_np_arr.to_json().__sizeof__()
+    fig_list = px.scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
+    size_list = fig_list.to_json().__sizeof__()
 
-    assert size_b64 / size_raw < 0.85
+    assert size_list - size_np_arr > 250000
 
 
 def test_size_performance_b64_float32():
-    rand_arr_1 = np.random.random(100000).astype("float32")
-    rand_arr_2 = np.random.random(100000).astype("float32")
-    raw_arr_1 = rand_arr_1.tolist()
-    raw_arr_2 = rand_arr_2.tolist()
-    b64_arr_1 = b64(rand_arr_1)
-    b64_arr_2 = b64(rand_arr_2)
+    np_arr_1 = np.random.random(100000).astype("float32")
+    np_arr_2 = np.random.random(100000).astype("float32")
 
     # Compare the size of figures with b64 arrays and raw arrays
-    fig_b64 = px.scatter(x=b64_arr_1, y=b64_arr_2)
-    size_b64 = fig_b64.to_json().__sizeof__()
-    fig_raw = px.scatter(x=raw_arr_1, y=raw_arr_2)
-    size_raw = fig_raw.to_json().__sizeof__()
+    fig_np_arr = px.scatter(x=np_arr_1, y=np_arr_2)
+    size_np_arr = fig_np_arr.to_json().__sizeof__()
+    fig_list = px.scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
+    size_list = fig_list.to_json().__sizeof__()
 
-    assert size_b64 / size_raw < 0.85
+    assert size_list - size_np_arr > 250000
 
 
 def test_repeated_name():
