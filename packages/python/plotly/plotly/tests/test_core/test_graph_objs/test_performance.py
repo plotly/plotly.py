@@ -8,13 +8,13 @@ import plotly.io as pio
 from plotly.tests.b64 import b64, _b64
 
 
-def test_performance_b64():
-    rand_arr_1 = np.random.random(100000)
-    rand_arr_2 = np.random.random(100000)
-    raw_arr_1 = rand_arr_1.tolist()
-    raw_arr_2 = rand_arr_2.tolist()
-    b64_arr_1 = b64(rand_arr_1)
-    b64_arr_2 = b64(rand_arr_2)
+def test_performance_b64_float64():
+    np_arr_1 = np.random.random(100000)
+    np_arr_2 = np.random.random(100000)
+    list_1 = np_arr_1.tolist()
+    list_2 = np_arr_2.tolist()
+    b64_arr_1 = b64(np_arr_1)
+    b64_arr_2 = b64(np_arr_2)
 
     # Test the performance of the base64 arrays
     b64_start = time.time()
@@ -23,7 +23,7 @@ def test_performance_b64():
 
     # Test the performance of the raw arrays
     raw_start = time.time()
-    fig = go.Scatter(x=raw_arr_1, y=raw_arr_2)
+    fig = go.Scatter(x=list_1, y=list_2)
     raw_time_elapsed = time.time() - raw_start
 
     # b64 should be faster than raw
