@@ -38,7 +38,7 @@ def test_performance_scatter3d():
     b64_time_elapsed = time.time() - b64_start
 
     # b64 should be faster than raw
-    assert (b64_time_elapsed / list_time_elapsed) < 0.85
+    assert (b64_time_elapsed / list_time_elapsed) < 0.75
 
 def test_performance_b64_float64():
     np_arr_1 = np.random.random(10000)
@@ -55,7 +55,7 @@ def test_performance_b64_float64():
     list_time_elapsed = time.time() - list_start
 
     # b64 should be faster than raw
-    assert (b64_time_elapsed / list_time_elapsed) < 0.85
+    assert (b64_time_elapsed / list_time_elapsed) < 0.75
 
 
 def test_size_performance_b64_uint8():
@@ -71,4 +71,4 @@ def test_size_performance_b64_uint8():
     size_list = fig_list.to_json().__sizeof__()
 
     # b64 should be smaller than raw
-    assert size_b64 / size_list < 0.85
+    assert size_b64 / size_list < 0.75
