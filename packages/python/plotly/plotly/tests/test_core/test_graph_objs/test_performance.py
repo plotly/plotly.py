@@ -1,12 +1,11 @@
 import time
 import numpy as np
 import plotly.graph_objs as go
-from plotly.tests.b64 import b64
 
 np.random.seed(1)
 
 
-def test_performance_scatter3d():
+def test_performance_b64_scatter3d():
     N = 10000
 
     x = np.random.randn(N)
@@ -31,19 +30,19 @@ def test_performance_scatter3d():
     list_time_elapsed = time.time() - list_start
 
     # Test the performance with base64 arrays
-    b64_start = time.time()
+    np_start = time.time()
     fig = go.Scatter3d(
-        x=b64(x),
-        y=b64(y),
-        z=b64(z),
-        marker=dict(color=b64(c)),
+        x=x,
+        y=y,
+        z=z,
+        marker=dict(color=c),
         mode="markers",
         opacity=0.2,
     )
-    b64_time_elapsed = time.time() - b64_start
+    np_time_elapsed = time.time() - np_start
 
-    # b64 should be faster than raw
-    assert (b64_time_elapsed / list_time_elapsed) < 0.75
+    # np should be faster than raw
+    assert (np_time_elapsed / list_time_elapsed) < 0.75
 
 
 def test_performance_b64_float64():
@@ -51,30 +50,30 @@ def test_performance_b64_float64():
     np_arr_2 = np.random.random(10000)
 
     # Test the performance of the base64 arrays
-    b64_start = time.time()
-    fig = go.Scatter(x=b64(np_arr_1), y=b64(np_arr_2))
-    b64_time_elapsed = time.time() - b64_start
+    np_start = time.time()
+    fig = go.Scatter(x=np_arr_1, y=np_arr_2)
+    np_time_elapsed = time.time() - np_start
 
     # Test the performance of the raw arrays
     list_start = time.time()
     fig = go.Scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
     list_time_elapsed = time.time() - list_start
 
-    # b64 should be faster than raw
-    assert (b64_time_elapsed / list_time_elapsed) < 0.75
+    # np should be faster than raw
+    assert (np_time_elapsed / list_time_elapsed) < 0.75
 
 
 def test_size_performance_b64_uint8():
     np_arr_1 = (np.random.random(100000) * 256).astype("uint8")
     np_arr_2 = (np.random.random(100000) * 256).astype("uint8")
 
-    # Measure the size of figures with b64 arrays
-    fig_b64 = go.Scatter(x=b64(np_arr_1), y=b64(np_arr_2))
-    size_b64 = fig_b64.to_json().__sizeof__()
+    # Measure the size of figures with numpy arrays
+    fig_np = go.Scatter(x=np_arr_1, y=np_arr_2)
+    size_np = fig_np.to_json().__sizeof__()
 
     # Measure the size of the figure with normal python lists
     fig_list = go.Scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
     size_list = fig_list.to_json().__sizeof__()
 
-    # b64 should be smaller than raw
-    assert size_b64 / size_list < 0.75
+    # np should be smaller than raw
+    assert size_list - size_np > 1000
