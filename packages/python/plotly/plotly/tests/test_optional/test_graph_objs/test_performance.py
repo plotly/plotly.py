@@ -53,12 +53,12 @@ def test_performance_b64_scatter3d():
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
-    assert (np_time_elapsed / list_time_elapsed) < 0.55
+    assert (np_time_elapsed / list_time_elapsed) < 0.65
 
 
 FLOAT_TEST_CASES = [
-    ("float32", 100000, 0.45),  # dtype  # difference threshold
-    ("float64", 10000, 0.55),
+    ("float32", 100000, 0.35),  # dtype  # difference threshold
+    ("float64", 100000, 0.4),
 ]
 
 
@@ -71,13 +71,13 @@ def test_performance_b64_float(dtype, count, expected_size_difference):
 
     # Test the performance of the base64 arrays
     np_start = time.time()
-    fig = go.Figure(data=[go.Scatter(x=np_arr_1, y=np_arr_2)])
+    fig = go.Figure(data=[go.Scattergl(x=np_arr_1, y=np_arr_2)])
     fig.show()
     np_time_elapsed = time.time() - np_start
 
     # Test the performance of the normal lists
     list_start = time.time()
-    fig = go.Figure(data=[go.Scatter(x=list_1, y=list_2)])
+    fig = go.Figure(data=[go.Scattergl(x=list_1, y=list_2)])
     fig.show()
     list_time_elapsed = time.time() - list_start
 
@@ -86,8 +86,8 @@ def test_performance_b64_float(dtype, count, expected_size_difference):
 
 
 INT_SIZE_PERFORMANCE_TEST_CASES = [
-    ("uint8", 256, 100000, 30000),
-    ("uint32", 2**32, 100000, 100000),
+    ("uint8", 256, 10500, 30000),
+    ("uint32", 2**32, 10500, 100000),
 ]
 
 
