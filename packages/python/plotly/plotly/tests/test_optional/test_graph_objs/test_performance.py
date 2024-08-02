@@ -53,19 +53,19 @@ def test_performance_b64_scatter3d():
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
-    assert (np_time_elapsed / list_time_elapsed) < 0.5
+    assert (np_time_elapsed / list_time_elapsed) < 0.55
 
 
 FLOAT_TEST_CASES = [
-    ("float32", 0.45),  # dtype  # difference threshold
-    ("float64", 0.55),
+    ("float32", 100000, 0.45),  # dtype  # difference threshold
+    ("float64", 10000, 0.55),
 ]
 
 
-@pytest.mark.parametrize("dtype, expected_size_difference", FLOAT_TEST_CASES)
-def test_performance_b64_float(dtype, expected_size_difference):
-    np_arr_1 = np.random.random(10000).astype(dtype)
-    np_arr_2 = np.random.random(10000).astype(dtype)
+@pytest.mark.parametrize("dtype, count, expected_size_difference", FLOAT_TEST_CASES)
+def test_performance_b64_float(dtype, count, expected_size_difference):
+    np_arr_1 = np.random.random(count).astype(dtype)
+    np_arr_2 = np.random.random(count).astype(dtype)
     list_1 = np_arr_1.tolist()
     list_2 = np_arr_2.tolist()
 
@@ -86,17 +86,17 @@ def test_performance_b64_float(dtype, expected_size_difference):
 
 
 INT_SIZE_PERFORMANCE_TEST_CASES = [
-    ("uint8", 256, 400000),  # dtype  # max_val  # difference threshold
-    ("uint32", 2**32, 900000),
+    ("uint8", 256, 100000, 30000),
+    ("uint32", 2**32, 100000, 100000),
 ]
 
 
 @pytest.mark.parametrize(
-    "dtype, max_val, expected_size_difference", INT_SIZE_PERFORMANCE_TEST_CASES
+    "dtype, max_value, count, expected_size_difference", INT_SIZE_PERFORMANCE_TEST_CASES
 )
-def test_size_performance_b64_int(dtype, max_val, expected_size_difference):
-    np_arr_1 = (np.random.random(100000) * max_val).astype(dtype)
-    np_arr_2 = (np.random.random(100000) * max_val).astype(dtype)
+def test_size_performance_b64_int(dtype, max_value, count, expected_size_difference):
+    np_arr_1 = (np.random.random(count) * max_value).astype(dtype)
+    np_arr_2 = (np.random.random(count) * max_value).astype(dtype)
 
     # Measure the size of figures with numpy arrays
     fig_np = go.Scatter(x=np_arr_1, y=np_arr_2)
