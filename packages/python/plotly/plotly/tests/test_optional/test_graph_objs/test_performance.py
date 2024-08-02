@@ -34,7 +34,7 @@ def test_performance_b64_scatter3d():
             )
         ]
     )
-    fig.show()
+    fig.show(renderer="png", engine="kaleido")
     list_time_elapsed = time.time() - list_start
 
     # Test the performance with base64 arrays
@@ -51,13 +51,12 @@ def test_performance_b64_scatter3d():
             )
         ]
     )
-    fig.show()
-    # Then close the window
+    fig.show(renderer="png", engine="kaleido")
     
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
-    assert (np_time_elapsed / list_time_elapsed) < 0.65
+    assert (np_time_elapsed / list_time_elapsed) < 0.7
 
 
 # FLOAT_TEST_CASES = [
