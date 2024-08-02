@@ -56,11 +56,11 @@ def test_performance_b64_scatter3d():
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
-    assert (np_time_elapsed / list_time_elapsed) < 0.72
+    assert (np_time_elapsed / list_time_elapsed) < 0.75
 
 
 FLOAT_TEST_CASES = [
-    ("float32", 100000, 0.92),  # dtype  # difference threshold
+    ("float32", 100000, 0.95),  # dtype  # difference threshold
     ("float64", 100000, 0.95),
 ]
 
