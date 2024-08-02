@@ -19,7 +19,7 @@ commands:
             cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
+            pip install --upgrade pip wheel setuptools
             pip install -r ./test_requirements/requirements_<<parameters.py>>_core.txt
       - run:
           name: Test core
