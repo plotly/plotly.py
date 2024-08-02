@@ -5,10 +5,10 @@ import plotly.io as pio
 import pytest
 
 np.random.seed(1)
-
+pio.renderers.default = 'png'
 
 def test_performance_b64_scatter3d():
-    N = 10000
+    N = 50000
     print(pio.renderers)
 
     x = np.random.randn(N)
@@ -34,7 +34,7 @@ def test_performance_b64_scatter3d():
             )
         ]
     )
-    fig.show(renderer="png", engine="kaleido")
+    fig.show(engine="kaleido")
     list_time_elapsed = time.time() - list_start
 
     # Test the performance with base64 arrays
@@ -51,7 +51,7 @@ def test_performance_b64_scatter3d():
             )
         ]
     )
-    fig.show(renderer="png", engine="kaleido")
+    fig.show(engine="kaleido")
     
     np_time_elapsed = time.time() - np_start
 
@@ -59,55 +59,55 @@ def test_performance_b64_scatter3d():
     assert (np_time_elapsed / list_time_elapsed) < 0.7
 
 
-# FLOAT_TEST_CASES = [
-#     ("float32", 100000, 0.35),  # dtype  # difference threshold
-#     ("float64", 100000, 0.4),
-# ]
+FLOAT_TEST_CASES = [
+    ("float32", 100000, 0.9),  # dtype  # difference threshold
+    ("float64", 100000, 0.9),
+]
 
 
-# @pytest.mark.parametrize("dtype, count, expected_size_difference", FLOAT_TEST_CASES)
-# def test_performance_b64_float(dtype, count, expected_size_difference):
-#     np_arr_1 = np.random.random(count).astype(dtype)
-#     np_arr_2 = np.random.random(count).astype(dtype)
-#     list_1 = np_arr_1.tolist()
-#     list_2 = np_arr_2.tolist()
+@pytest.mark.parametrize("dtype, count, expected_size_difference", FLOAT_TEST_CASES)
+def test_performance_b64_float(dtype, count, expected_size_difference):
+    np_arr_1 = np.random.random(count).astype(dtype)
+    np_arr_2 = np.random.random(count).astype(dtype)
+    list_1 = np_arr_1.tolist()
+    list_2 = np_arr_2.tolist()
 
-#     # Test the performance of the base64 arrays
-#     np_start = time.time()
-#     fig = go.Figure(data=[go.Scattergl(x=np_arr_1, y=np_arr_2)])
-#     fig.show()
-#     np_time_elapsed = time.time() - np_start
+    # Test the performance of the base64 arrays
+    np_start = time.time()
+    fig = go.Figure(data=[go.Scattergl(x=np_arr_1, y=np_arr_2)])
+    fig.show(engine="kaleido")
+    np_time_elapsed = time.time() - np_start
 
-#     # Test the performance of the normal lists
-#     list_start = time.time()
-#     fig = go.Figure(data=[go.Scattergl(x=list_1, y=list_2)])
-#     fig.show()
-#     list_time_elapsed = time.time() - list_start
+    # Test the performance of the normal lists
+    list_start = time.time()
+    fig = go.Figure(data=[go.Scattergl(x=list_1, y=list_2)])
+    fig.show(engine="kaleido")
+    list_time_elapsed = time.time() - list_start
 
-#     # np should be faster than lists
-#     assert (np_time_elapsed / list_time_elapsed) < expected_size_difference
-
-
-# INT_SIZE_PERFORMANCE_TEST_CASES = [
-#     ("uint8", 256, 10500, 30000),
-#     ("uint32", 2**32, 10500, 100000),
-# ]
+    # np should be faster than lists
+    assert (np_time_elapsed / list_time_elapsed) < expected_size_difference
 
 
-# @pytest.mark.parametrize(
-#     "dtype, max_value, count, expected_size_difference", INT_SIZE_PERFORMANCE_TEST_CASES
-# )
-# def test_size_performance_b64_int(dtype, max_value, count, expected_size_difference):
-#     np_arr_1 = (np.random.random(count) * max_value).astype(dtype)
-#     np_arr_2 = (np.random.random(count) * max_value).astype(dtype)
+INT_SIZE_PERFORMANCE_TEST_CASES = [
+    ("uint8", 256, 10500, 30000),
+    ("uint32", 2**32, 10500, 100000),
+]
 
-#     # Measure the size of figures with numpy arrays
-#     fig_np = go.Scatter(x=np_arr_1, y=np_arr_2)
-#     size_np = fig_np.to_json().__sizeof__()
 
-#     # Measure the size of the figure with normal python lists
-#     fig_list = go.Scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
-#     size_list = fig_list.to_json().__sizeof__()
+@pytest.mark.parametrize(
+    "dtype, max_value, count, expected_size_difference", INT_SIZE_PERFORMANCE_TEST_CASES
+)
+def test_size_performance_b64_int(dtype, max_value, count, expected_size_difference):
+    np_arr_1 = (np.random.random(count) * max_value).astype(dtype)
+    np_arr_2 = (np.random.random(count) * max_value).astype(dtype)
 
-#     # np should be smaller than lists
-#     assert size_list - size_np > expected_size_difference
+    # Measure the size of figures with numpy arrays
+    fig_np = go.Scatter(x=np_arr_1, y=np_arr_2)
+    size_np = fig_np.to_json().__sizeof__()
+
+    # Measure the size of the figure with normal python lists
+    fig_list = go.Scatter(x=np_arr_1.tolist(), y=np_arr_2.tolist())
+    size_list = fig_list.to_json().__sizeof__()
+
+    # np should be smaller than lists
+    assert size_list - size_np > expected_size_difference

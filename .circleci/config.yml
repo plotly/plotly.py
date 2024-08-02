@@ -52,19 +52,19 @@ commands:
             cd packages/python/plotly-geo
             . ../plotly/venv/bin/activate
             pip install -e .
-      # - run:
-      #     name: Test core
-      #     command: |
-      #       cd packages/python/plotly
-      #       . venv/bin/activate
-      #       pytest plotly/tests/test_core
-      #     no_output_timeout: 20m
+      - run:
+          name: Test core
+          command: |
+            cd packages/python/plotly
+            . venv/bin/activate
+            pytest plotly/tests/test_core
+          no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            pytest plotly/tests/test_optional/test_graph_objs/test_performance.py -v -s
+            pytest plotly/tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
@@ -81,7 +81,7 @@ commands:
             pytest plotly/tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
             cd packages/python/plotly
             . venv/bin/activate
@@ -585,18 +585,18 @@ workflows:
 
   build:
     jobs:
-      # - python_38_core
-      # - python_39_core
-      # - python_310_core
-      # - python_311_core
-      # - python_312_core
+      - python_38_core
+      - python_39_core
+      - python_310_core
+      - python_311_core
+      - python_312_core
       - python_38_optional
       - python_39_optional
       - python_310_optional
       - python_311_optional
       - python_312_optional
-      # - python_39_pandas_2_optional
-      # - python_38_orca
-      # - python_39_percy
+      - python_39_pandas_2_optional
+      - python_38_orca
+      - python_39_percy
       - build-doc
 
