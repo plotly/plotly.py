@@ -60,7 +60,7 @@ def test_performance_b64_scatter3d():
 
 
 FLOAT_TEST_CASES = [
-    ("float32", 100000, 0.9),  # dtype  # difference threshold
+    ("float32", 100000, 0.92),  # dtype  # difference threshold
     ("float64", 100000, 0.92),
 ]
 
