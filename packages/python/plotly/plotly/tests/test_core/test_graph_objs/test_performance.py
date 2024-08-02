@@ -20,44 +20,49 @@ def test_performance_b64_scatter3d():
     z_list = z.tolist()
     c_list = c.tolist()
     list_start = time.time()
-    fig = go.Figure(data=[go.Scatter3d(
-        x=x_list,
-        y=y_list,
-        z=z_list,
-        marker=dict(color=c_list),
-        mode="markers",
-        opacity=0.2,
-    )])
+    fig = go.Figure(
+        data=[
+            go.Scatter3d(
+                x=x_list,
+                y=y_list,
+                z=z_list,
+                marker=dict(color=c_list),
+                mode="markers",
+                opacity=0.2,
+            )
+        ]
+    )
     fig.show()
     list_time_elapsed = time.time() - list_start
 
     # Test the performance with base64 arrays
     np_start = time.time()
-    fig = go.Figure(data=[go.Scatter3d(
-        x=x,
-        y=y,
-        z=z,
-        marker=dict(color=c),
-        mode="markers",
-        opacity=0.2,
-    )])
+    fig = go.Figure(
+        data=[
+            go.Scatter3d(
+                x=x,
+                y=y,
+                z=z,
+                marker=dict(color=c),
+                mode="markers",
+                opacity=0.2,
+            )
+        ]
+    )
     fig.show()
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
     assert (np_time_elapsed / list_time_elapsed) < 0.5
 
+
 FLOAT_TEST_CASES = [
-    (
-        "float32", # dtype
-        0.45 # difference threshold
-    ),
-    (
-        'float64',
-        0.55
-    )
+    ("float32", 0.45),  # dtype  # difference threshold
+    ("float64", 0.55),
 ]
-@pytest.mark.parametrize('dtype, expected_size_difference', FLOAT_TEST_CASES)
+
+
+@pytest.mark.parametrize("dtype, expected_size_difference", FLOAT_TEST_CASES)
 def test_performance_b64_float(dtype, expected_size_difference):
     np_arr_1 = np.random.random(10000).astype(dtype)
     np_arr_2 = np.random.random(10000).astype(dtype)
@@ -81,18 +86,14 @@ def test_performance_b64_float(dtype, expected_size_difference):
 
 
 INT_SIZE_PERFORMANCE_TEST_CASES = [
-    (
-        "uint8", # dtype
-        256, # max_val
-        400000 # difference threshold
-    ),
-    (
-        'uint32',
-        2**32,
-        900000
-    )
+    ("uint8", 256, 400000),  # dtype  # max_val  # difference threshold
+    ("uint32", 2**32, 900000),
 ]
-@pytest.mark.parametrize('dtype, max_val, expected_size_difference', INT_SIZE_PERFORMANCE_TEST_CASES)
+
+
+@pytest.mark.parametrize(
+    "dtype, max_val, expected_size_difference", INT_SIZE_PERFORMANCE_TEST_CASES
+)
 def test_size_performance_b64_int(dtype, max_val, expected_size_difference):
     np_arr_1 = (np.random.random(100000) * max_val).astype(dtype)
     np_arr_2 = (np.random.random(100000) * max_val).astype(dtype)
