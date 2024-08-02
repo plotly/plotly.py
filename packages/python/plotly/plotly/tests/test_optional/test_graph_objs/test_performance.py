@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import plotly.graph_objs as go
+import plotly.io as pio
 import pytest
 
 np.random.seed(1)
@@ -50,6 +51,9 @@ def test_performance_b64_scatter3d():
         ]
     )
     fig.show()
+    # Then close the window
+    print(pio.renderers)
+    
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
