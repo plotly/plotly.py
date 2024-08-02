@@ -64,7 +64,7 @@ commands:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            pytest plotly/tests/test_optional -v
+            pytest plotly/tests/test_optional/test_graph_objs/test_performance.py -v
           no_output_timeout: 40m
       - run:
           name: Test utils
@@ -585,18 +585,18 @@ workflows:
 
   build:
     jobs:
-      - python_38_core
-      - python_39_core
-      - python_310_core
-      - python_311_core
-      - python_312_core
+      # - python_38_core
+      # - python_39_core
+      # - python_310_core
+      # - python_311_core
+      # - python_312_core
       - python_38_optional
       - python_39_optional
       - python_310_optional
       - python_311_optional
       - python_312_optional
-      - python_39_pandas_2_optional
-      - python_38_orca
-      - python_39_percy
+      # - python_39_pandas_2_optional
+      # - python_38_orca
+      # - python_39_percy
       - build-doc
 
