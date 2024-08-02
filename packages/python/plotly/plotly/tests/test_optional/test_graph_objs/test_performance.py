@@ -5,7 +5,8 @@ import plotly.io as pio
 import pytest
 
 np.random.seed(1)
-pio.renderers.default = 'png'
+pio.renderers.default = "png"
+
 
 def test_performance_b64_scatter3d():
     N = 50000
@@ -52,7 +53,7 @@ def test_performance_b64_scatter3d():
         ]
     )
     fig.show(engine="kaleido")
-    
+
     np_time_elapsed = time.time() - np_start
 
     # np should be faster than lists
