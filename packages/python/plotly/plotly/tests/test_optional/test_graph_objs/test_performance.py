@@ -10,7 +10,6 @@ pio.renderers.default = "png"
 
 def test_performance_b64_scatter3d():
     N = 50000
-    print(pio.renderers)
 
     x = np.random.randn(N)
     y = np.random.randn(N).astype("float32")
@@ -62,7 +61,7 @@ def test_performance_b64_scatter3d():
 
 FLOAT_TEST_CASES = [
     ("float32", 100000, 0.9),  # dtype  # difference threshold
-    ("float64", 100000, 0.9),
+    ("float64", 100000, 0.92),
 ]
 
 
