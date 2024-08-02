@@ -9,6 +9,7 @@ np.random.seed(1)
 
 def test_performance_b64_scatter3d():
     N = 10000
+    print(pio.renderers)
 
     x = np.random.randn(N)
     y = np.random.randn(N).astype("float32")
@@ -52,7 +53,6 @@ def test_performance_b64_scatter3d():
     )
     fig.show()
     # Then close the window
-    print(pio.renderers)
     
     np_time_elapsed = time.time() - np_start
 
