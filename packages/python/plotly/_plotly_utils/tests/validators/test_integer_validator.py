@@ -3,6 +3,7 @@
 import pytest
 from pytest import approx
 from _plotly_utils.basevalidators import IntegerValidator
+from plotly.tests.b64 import b64
 import numpy as np
 import pandas as pd
 
@@ -108,6 +109,12 @@ def test_acceptance_aok_scalars(val, validator_aok):
 
 @pytest.mark.parametrize("val", [[1, 0], [1], [-2, 1, 8], np.array([3, 2, -1, 5])])
 def test_acceptance_aok_list(val, validator_aok):
+    assert np.array_equal(validator_aok.validate_coerce(val), val)
+
+
+# Test base64 encoded arrays with array_ok=True
+@pytest.mark.parametrize("val", [b64(np.array([1, 0], dtype="int16")), b64([1, 0])])
+def test_acceptance_aok_base64(val, validator_aok):
     assert np.array_equal(validator_aok.validate_coerce(val), val)
 
 
