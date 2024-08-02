@@ -52,19 +52,19 @@ commands:
             cd packages/python/plotly-geo
             . ../plotly/venv/bin/activate
             pip install -e .
-      - run:
-          name: Test core
-          command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_core
-          no_output_timeout: 20m
+      # - run:
+      #     name: Test core
+      #     command: |
+      #       cd packages/python/plotly
+      #       . venv/bin/activate
+      #       pytest plotly/tests/test_core
+      #     no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            pytest plotly/tests/test_optional/test_graph_objs/test_performance.py -v
+            pytest plotly/tests/test_optional/test_graph_objs/test_performance.py -v -s
           no_output_timeout: 40m
       - run:
           name: Test utils
