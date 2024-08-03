@@ -30,8 +30,8 @@ jupyter:
     order: 5
     page_type: u-guide
     permalink: python/density-heatmaps/
-    thumbnail: thumbnail/mapbox-density.png
     redirect_from: python/mapbox-density-heatmaps/
+    thumbnail: thumbnail/mapbox-density.png
 ---
 
 ### Density map with `plotly.express`
@@ -51,28 +51,6 @@ fig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=
 fig.show()
 ```
 
-<!-- #region -->
-### Stamen Terrain base map (Stadia Maps token needed): density heatmap with `plotly.express`
-
-Some base maps require a token. To use "stamen" base maps, you'll need a [Stadia Maps](https://www.stadiamaps.com) token, which you can provide to the `mapbox_accesstoken` parameter on `fig.update_layout`. Here, we have the token saved in a file called `.mapbox_token`, load it in to the variable `token`, and then pass it to `mapbox_accesstoken`.
-
-```python
-import plotly.express as px
-import pandas as pd
-
-token = open(".mapbox_token").read() # you will need your own token
-
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
-
-fig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
-                        center=dict(lat=0, lon=180), zoom=0,
-                        map_style="stamen-terrain")
-fig.update_layout(mapbox_accesstoken=token)
-fig.show()
-```
-
-<!-- #endregion -->
-
 ### Density map with `plotly.graph_objects`
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Densitymap` class from `plotly.graph_objects`](/python/graph-objects/).
@@ -88,28 +66,6 @@ fig.update_layout(map_style="open-street-map", map_center_lon=180)
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
-
-<!-- #region -->
-### Stamen Terrain base map (Stadia Maps token needed): density heatmap with `plotly.graph_objects`
-
-Some base maps require a token. To use "stamen" base maps, you'll need a [Stadia Maps](https://www.stadiamaps.com) token, which you can provide to the `mapbox_accesstoken` parameter on `fig.update_layout`. Here, we have the token saved in a file called `.mapbox_token`, load it in to the variable `token`, and then pass it to `mapbox_accesstoken`.
-
-
-```python
-import plotly.graph_objects as go
-import pandas as pd
-
-token = open(".mapbox_token").read() # you will need your own token
-
-quakes = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
-
-fig = go.Figure(go.Densitymap(lat=quakes.Latitude, lon=quakes.Longitude, z=quakes.Magnitude,
-                                 radius=10))
-fig.update_layout(map_style="stamen-terrain", map_center_lon=180, mapbox_accesstoken=token)
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.show()
-```
-<!-- #endregion -->
 
 <!-- #region -->
 ### Mapbox Maps
@@ -130,6 +86,31 @@ fig = px.density_mapbox(df, lat='Latitude', lon='Longitude', z='Magnitude', radi
                         mapbox_style="open-street-map")
 fig.show()
 ```
+
+<!-- #endregion -->
+
+<!-- #region -->
+<!-- #region -->
+#### Stamen Terrain base map (Stadia Maps token needed): density heatmap with `plotly.express`
+
+Some base maps require a token. To use "stamen" base maps, you'll need a [Stadia Maps](https://www.stadiamaps.com) token, which you can provide to the `mapbox_accesstoken` parameter on `fig.update_layout`. Here, we have the token saved in a file called `.mapbox_token`, load it in to the variable `token`, and then pass it to `mapbox_accesstoken`.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+token = open(".mapbox_token").read() # you will need your own token
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
+
+fig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
+                        center=dict(lat=0, lon=180), zoom=0,
+                        map_style="stamen-terrain")
+fig.update_layout(mapbox_accesstoken=token)
+fig.show()
+```
+
+<!-- #endregion -->
 
 <!-- #endregion -->
 

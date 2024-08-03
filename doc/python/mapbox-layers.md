@@ -204,7 +204,7 @@ fig.show()
 <!-- #region -->
 #### Stamen Watercolor using a Custom Style URL
 
-Here's an example of using a custom style URL that points to the Stadia Maps service to use the `stamen_watercolor` base map.
+Here's an example of using a custom style URL that points to the [Stadia Maps](https://docs.stadiamaps.com/map-styles/stamen-watercolor) service to use the `stamen_watercolor` base map.
 
 ```python
 import pandas as pd
