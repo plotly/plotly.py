@@ -1,4 +1,4 @@
-requests==2.31.0
+requests==2.32.2
 tenacity==8.2.3
 pandas
 numpy
