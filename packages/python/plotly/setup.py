@@ -538,12 +538,12 @@ validator_packages = [
 
 versioneer_cmds = versioneer.get_cmdclass()
 setup(
-    name="plotly",
+    name="mode-plotly",
     version=versioneer.get_version(),
     author="Chris P",
     author_email="chris@plot.ly",
-    maintainer="Nicolas Kruchten",
-    maintainer_email="nicolas@plot.ly",
+    maintainer="Mode Analytics",
+    maintainer_email="support@modeanalytics.com",
     url="https://plotly.com/python/",
     project_urls={
         "Documentation": "https://plotly.com/python/",
