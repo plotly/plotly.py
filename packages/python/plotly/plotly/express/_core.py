@@ -2376,6 +2376,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
+    # store args in figure metadata
+    fig._aux["px"] = dict(args=args)
     return fig
 
 
