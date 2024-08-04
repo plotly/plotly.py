@@ -219,10 +219,10 @@ class _Dendrogram(object):
         else:
             rgb_colorscale = colorscale
 
-        for i in range(len(default_colors.keys())):
-            k = list(default_colors.keys())[i]  # PY3 won't index keys
-            if i < len(rgb_colorscale):
-                default_colors[k] = rgb_colorscale[i]
+        for i, k in enumerate(default_colors.keys()):
+            if i >= len(rgb_colorscale):
+                break
+            default_colors[k] = rgb_colorscale[i]
 
         # add support for cyclic format colors as introduced in scipy===1.5.0
         # before this, the colors were named 'r', 'b', 'y' etc., now they are
@@ -244,13 +244,7 @@ class _Dendrogram(object):
             ("C9", "c"),
         ]
         for nc, oc in new_old_color_map:
-            try:
-                default_colors[nc] = default_colors[oc]
-            except KeyError:
-                # it could happen that the old color isn't found (if a custom
-                # colorscale was specified), in this case we set it to an
-                # arbitrary default.
-                default_colors[n] = "rgb(0,116,217)"
+            default_colors[nc] = default_colors[oc]
 
         return default_colors
 
