@@ -2302,6 +2302,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     layout_patch["legend"] = dict(tracegroupgap=0)
     if trace_name_labels:
         layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
+    elif "showlegend" in trace_patch.keys():
+        if trace_patch["showlegend"] and constructor == go.Pie:
+            layout_patch["legend"]["title_text"] = args["names"]
     if args["title"]:
         layout_patch["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
