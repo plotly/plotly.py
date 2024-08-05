@@ -1,7 +1,7 @@
 import pytest
 from _plotly_utils.basevalidators import BaseDataValidator
 from plotly.graph_objs import Scatter, Bar, Box
-
+import numpy as np
 
 # Fixtures
 # --------
@@ -116,6 +116,19 @@ def test_rejection_element_tracetype(validator):
         validator.validate_coerce(val)
 
     assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_b64(validator):
+    val = [dict(type="scatter", x=np.array([1, 2, 3]))]
+    res = validator.validate_coerce(val)
+    res_present = validator.present(res)
+
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+
+    assert isinstance(res_present[0], Scatter)
+    assert res_present[0].type == "scatter"
+    assert res_present[0].x == {"bdata": "AQID", "dtype": "i1"}
 
 
 def test_skip_invalid(validator_nouid):
