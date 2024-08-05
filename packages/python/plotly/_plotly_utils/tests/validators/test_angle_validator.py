@@ -59,6 +59,7 @@ def test_aok_base64_array(validator_aok):
     assert coerce_val["bdata"] == "AQID"
     assert coerce_val["dtype"] == "i1"
 
+
 # ### Test coercion above 180 ###
 @pytest.mark.parametrize(
     "val,expected",

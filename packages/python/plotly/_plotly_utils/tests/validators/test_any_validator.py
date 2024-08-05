@@ -51,8 +51,9 @@ def test_acceptance_array(val, validator_aok):
         assert coerce_val == val
         assert validator_aok.present(coerce_val) == val
 
+
 def test_base64_array(validator_aok):
     val = b64(np.array([1, 2, 3], dtype="int64"))
     coerce_val = validator_aok.validate_coerce(val)
-    assert coerce_val['bdata'] == "AQID"
-    assert coerce_val['dtype'] == "i1"
+    assert coerce_val["bdata"] == "AQID"
+    assert coerce_val["dtype"] == "i1"
