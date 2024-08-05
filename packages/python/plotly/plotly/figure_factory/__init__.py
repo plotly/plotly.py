@@ -28,6 +28,7 @@ from plotly.figure_factory._violin import create_violin
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
     from plotly.figure_factory._hexbin_mapbox import create_hexbin_mapbox
+    from plotly.figure_factory._grouped_stacked_bar import create_grouped_stacked_bar
 else:
 
     def create_choropleth(*args, **kwargs):
@@ -35,6 +36,9 @@ else:
 
     def create_hexbin_mapbox(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_hexbin_mapbox`")
+
+    def create_grouped_stacked_bar(*args, **kwargs):
+        raise ImportError("Please install pandas to use `create_grouped_stacked_bar`")
 
 
 if optional_imports.get_module("skimage") is not None:
@@ -55,6 +59,7 @@ __all__ = [
     "create_distplot",
     "create_facet_grid",
     "create_gantt",
+    "create_grouped_stacked_bar",
     "create_hexbin_mapbox",
     "create_ohlc",
     "create_quiver",
