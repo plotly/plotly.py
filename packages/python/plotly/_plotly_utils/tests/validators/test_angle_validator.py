@@ -3,6 +3,7 @@ import pytest
 # from ..basevalidators import AngleValidator
 from _plotly_utils.basevalidators import AngleValidator
 import numpy as np
+from plotly.tests.b64 import b64
 
 
 # Fixtures
@@ -50,6 +51,13 @@ def test_aok_acceptance(val, validator_aok):
     assert validator_aok.validate_coerce(tuple(val)) == val
     assert np.array_equal(validator_aok.validate_coerce(np.array(val)), np.array(val))
 
+
+# Test base64 array
+def test_aok_base64_array(validator_aok):
+    val = b64(np.array([1, 2, 3], dtype="int64"))
+    coerce_val = validator_aok.validate_coerce(val)
+    assert coerce_val["bdata"] == "AQID"
+    assert coerce_val["dtype"] == "i1"
 
 # ### Test coercion above 180 ###
 @pytest.mark.parametrize(
