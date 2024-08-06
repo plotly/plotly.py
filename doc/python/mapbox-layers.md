@@ -222,6 +222,8 @@ fig.show()
 <!-- #region -->
 ### Mapbox
 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+
 #### How Layers Work in Mapbox Tile Maps
 
 Mapbox tile maps are composed of various layers, of three different types:
