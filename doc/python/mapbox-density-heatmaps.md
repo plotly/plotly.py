@@ -70,6 +70,8 @@ fig.show()
 <!-- #region -->
 ### Mapbox Maps
 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+
 The earlier examples using `px.density_mapbox` and `go.Densitymap` use Maplibre for rendering. These traces were introduced in Plotly.py 5.24. These trace types are now the recommended way to make tile-based density heatmaps. There are also traces that use Mapbox: `density_mapbox` and `go.Densitymapbox`.
 
 To use these trace types, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
@@ -90,7 +92,6 @@ fig.show()
 <!-- #endregion -->
 
 <!-- #region -->
-<!-- #region -->
 #### Stamen Terrain base map (Stadia Maps token needed): density heatmap with `plotly.express`
 
 Some base maps require a token. To use "stamen" base maps, you'll need a [Stadia Maps](https://www.stadiamaps.com) token, which you can provide to the `mapbox_accesstoken` parameter on `fig.update_layout`. Here, we have the token saved in a file called `.mapbox_token`, load it in to the variable `token`, and then pass it to `mapbox_accesstoken`.
@@ -110,7 +111,6 @@ fig.update_layout(mapbox_accesstoken=token)
 fig.show()
 ```
 
-<!-- #endregion -->
 
 <!-- #endregion -->
 
