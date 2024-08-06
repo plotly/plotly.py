@@ -531,6 +531,13 @@ docs = dict(
         "Dict keys are `'lat'` and `'lon'`",
         "Sets the center point of the map.",
     ],
+    map_style=[
+        "str (default `'basic'`, needs Map API token)",
+        "Identifier of base map style, some of which require a Map or Stadia Maps API token to be set using `plotly.express.set_map_access_token()`.",
+        "Allowed values which do not require a token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`.",
+        "Allowed values which require a Map API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Allowed values which require a Stadia Maps API token are `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
+    ],
     mapbox_style=[
         "str (default `'basic'`, needs Mapbox API token)",
         "Identifier of base map style, some of which require a Mapbox or Stadia Maps API token to be set using `plotly.express.set_mapbox_access_token()`.",
