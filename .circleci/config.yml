@@ -81,7 +81,7 @@ commands:
             pytest plotly/tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
             cd packages/python/plotly
             . venv/bin/activate
