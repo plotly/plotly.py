@@ -65,13 +65,9 @@ import plotly.express as px
 # Trick to create rapidly a figure with map axes
 fig = px.scatter_map(dff[:1], lat='Lat', lon='Lon', zoom=12)
 # Add the datashader image as a tile map layer image
-fig.update_layout(map_style="carto-darkmatter",
-                 map_layers = [
-                {
-                    "sourcetype": "image",
-                    "source": img,
-                    "coordinates": coordinates
-                }]
+fig.update_layout(
+    map_style="carto-darkmatter",
+    map_layers=[{"sourcetype": "image", "source": img, "coordinates": coordinates}],
 )
 fig.show()
 ```
