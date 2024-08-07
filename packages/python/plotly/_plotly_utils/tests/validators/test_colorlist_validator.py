@@ -49,6 +49,7 @@ def test_acceptance_aok(val, validator):
     assert isinstance(coerce_val, list)
     assert validator.present(coerce_val) == tuple(val)
 
+
 # Test that it doesn't use a base64 array
 # Numpy v2 has a StrDType but we don't want to convert it yet.
 # Change this test if you add support for it.
