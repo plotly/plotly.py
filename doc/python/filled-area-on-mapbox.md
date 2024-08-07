@@ -139,7 +139,7 @@ fig.show()
 
 > Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
-The earlier examples using `go.Scattermap` use Maplibre for rendering. These traces were introduced in Plotly.py 5.24 and is now the recommended way to draw filled areas on tile-based maps. There is also a trace that uses Mapbox, called `go.Scattermapbox`.
+The earlier examples using `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. This trace was introduced in Plotly.py 5.24 and is now the recommended way to draw filled areas on tile-based maps. There is also a trace that uses [Mapbox](https://docs.mapbox.com), called `go.Scattermapbox`.
 
 To use the `Scattermapbox` trace type, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 

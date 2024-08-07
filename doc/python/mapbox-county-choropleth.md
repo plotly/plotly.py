@@ -220,9 +220,9 @@ fig.show()
 
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
-The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use Maplibre for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create tile-based choropleth maps. There are also choropleth traces that use Mapbox: `px.choropleth_mapbox` and `go.Choroplethmapbox`
+The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create tile-based choropleth maps. There are also choropleth traces that use [Mapbox](https://docs.mapbox.com): `px.choropleth_mapbox` and `go.Choroplethmapbox`
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
