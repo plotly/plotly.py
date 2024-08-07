@@ -92,7 +92,7 @@ for feature, name in zip(geo_df.geometry, geo_df.name):
         names = np.append(names, None)
 
 fig = px.line_map(lat=lats, lon=lons, hover_name=names,
-                     map="open-street-map", zoom=1)
+                     map_style="open-street-map", zoom=1)
 fig.show()
 ```
 
@@ -129,7 +129,7 @@ fig.show()
 
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `px.line_map` and `go.Scattermap` use Maplibre for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to draw lines on tile-based maps. There are also traces that use Mapbox: `px.line_mapbox` and `go.Scattermapbox`
 

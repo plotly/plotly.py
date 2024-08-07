@@ -480,7 +480,6 @@ fig = go.Figure(go.Scattermap(
 
 fig.update_layout(
     map = {
-        'accesstoken': token,
         'style': "outdoors", 'zoom': 1},
     showlegend = False)
 
