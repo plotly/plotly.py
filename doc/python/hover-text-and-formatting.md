@@ -371,7 +371,7 @@ fig.show()
 
 ### Advanced Hover Template
 
-This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the customdata array using the df[["col_i", "col_j"]] subsetting notation.  It then references those variables using e.g. %{customdata[0]} in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.
+This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the `customdata` array using the `df[["col_i", "col_j"]]` subsetting notation.  It then references those variables using e.g. `%{customdata[0]}` in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.
 
 ```python
 import plotly.graph_objects as go
