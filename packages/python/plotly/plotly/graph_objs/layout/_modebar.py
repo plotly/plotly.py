@@ -279,15 +279,15 @@ class Modebar(_BaseLayoutHierarchyType):
         "lasso", "lasso2d", "orbitRotation", "orbitrotation", "pan",
         "pan2d", "pan3d", "reset", "resetCameraDefault3d",
         "resetCameraLastSave3d", "resetGeo", "resetSankeyGroup",
-        "resetScale2d", "resetViewMapbox", "resetViews",
-        "resetcameradefault", "resetcameralastsave",
+        "resetScale2d", "resetViewMap", "resetViewMapbox",
+        "resetViews", "resetcameradefault", "resetcameralastsave",
         "resetsankeygroup", "resetscale", "resetview", "resetviews",
         "select", "select2d", "sendDataToCloud", "senddatatocloud",
         "tableRotation", "tablerotation", "toImage", "toggleHover",
         "toggleSpikelines", "togglehover", "togglespikelines",
         "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
-        "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox",
-        "zoomin", "zoomout".
+        "zoomInMap", "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
+        "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
 
         The 'remove' property is a string and must be specified as:
           - A string
@@ -381,17 +381,17 @@ class Modebar(_BaseLayoutHierarchyType):
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
             "resetCameraLastSave3d", "resetGeo",
-            "resetSankeyGroup", "resetScale2d", "resetViewMapbox",
-            "resetViews", "resetcameradefault",
+            "resetSankeyGroup", "resetScale2d", "resetViewMap",
+            "resetViewMapbox", "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
             "select2d", "sendDataToCloud", "senddatatocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",
-            "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox",
-            "zoomOut2d", "zoomOutGeo", "zoomOutMapbox", "zoomin",
-            "zoomout".
+            "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMap",
+            "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
+            "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
             `remove`.
@@ -455,17 +455,17 @@ class Modebar(_BaseLayoutHierarchyType):
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
             "resetCameraLastSave3d", "resetGeo",
-            "resetSankeyGroup", "resetScale2d", "resetViewMapbox",
-            "resetViews", "resetcameradefault",
+            "resetSankeyGroup", "resetScale2d", "resetViewMap",
+            "resetViewMapbox", "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
             "select2d", "sendDataToCloud", "senddatatocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",
-            "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox",
-            "zoomOut2d", "zoomOutGeo", "zoomOutMapbox", "zoomin",
-            "zoomout".
+            "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMap",
+            "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
+            "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
         removesrc
             Sets the source reference on Chart Studio Cloud for
             `remove`.
