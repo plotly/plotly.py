@@ -114,37 +114,40 @@ def test_acceptance_aok_list(val, validator_aok):
 
 # Test base64 encoded arrays with array_ok=True
 INT_BASE64_TEST_CASES = [
+    # Note: we decided not to support int64 in plotly.js,
+    # so the the max / min value are limited to int32 and the 
+    # dtype is cast to int32 in the output
     (
-        b64(np.array([1, 2, 3], dtype="int64")),
-        {"bdata": "AQID", "dtype": "i1"},
+        b64(np.array([-900000000, 900000000, 3], dtype="int64")),
+        {"bdata": "ABdbygDppDUDAAAA", "dtype": "i4"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="int32")),
-        {"bdata": "AQAAAAIAAAADAAAA", "dtype": "i4"},
+        b64(np.array([-900000000, 900000000, 3], dtype="int32")),
+        {"bdata": "ABdbygDppDUDAAAA", "dtype": "i4"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="int16")),
-        {"bdata": "AQACAAMA", "dtype": "i2"},
+        b64(np.array([32767, -32767, 3], dtype="int16")),
+        {"bdata": "/38BgAMA", "dtype": "i2"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="int8")),
-        {"bdata": "AQID", "dtype": "i1"},
+        b64(np.array([127, -127, 3], dtype="int8")),
+        {"bdata": "f4ED", "dtype": "i1"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="uint64")),
-        {"bdata": "AQID", "dtype": "u1"},
+        b64(np.array([900000000, 2, 3], dtype="uint64")),
+        {"bdata": "AOmkNQIAAAADAAAA", "dtype": "u4"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="uint32")),
-        {"bdata": "AQAAAAIAAAADAAAA", "dtype": "u4"},
+        b64(np.array([900000000, 2, 3], dtype="uint32")),
+        {"bdata": "AOmkNQIAAAADAAAA", "dtype": "u4"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="uint16")),
-        {"bdata": "AQACAAMA", "dtype": "u2"},
+        b64(np.array([32767, 0, 3], dtype="uint16")),
+        {"bdata": "/38AAAMA", "dtype": "u2"},
     ),
     (
-        b64(np.array([1, 2, 3], dtype="uint8")),
-        {"bdata": "AQID", "dtype": "u1"},
+        b64(np.array([127, 2, 3], dtype="uint8")),
+        {"bdata": "fwID", "dtype": "u1"},
     ),
 ]
 @pytest.mark.parametrize("val, expected", INT_BASE64_TEST_CASES)
