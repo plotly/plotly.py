@@ -42,7 +42,7 @@ There are three different ways to show a filled area on a tile-based map:
 
 ## Filled `Scattermap` Trace
 
-The following example uses Scattermap and sets fill = 'toself'
+The following example uses `Scattermap` and sets `fill = 'toself'`
 
 ```python
 import plotly.graph_objects as go
@@ -137,7 +137,7 @@ fig.show()
 <!-- #region -->
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `go.Scattermap` use Maplibre for rendering. These traces were introduced in Plotly.py 5.24 and is now the recommended way to draw filled areas on tile-based maps. There is also a trace that uses Mapbox, called `go.Scattermapbox`.
 
