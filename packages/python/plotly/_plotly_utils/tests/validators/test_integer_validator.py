@@ -115,7 +115,7 @@ def test_acceptance_aok_list(val, validator_aok):
 # Test base64 encoded arrays with array_ok=True
 INT_BASE64_TEST_CASES = [
     # Note: we decided not to support int64 in plotly.js,
-    # so the the max / min value are limited to int32 and the 
+    # so the the max / min value are limited to int32 and the
     # dtype is cast to int32 in the output
     (
         b64(np.array([-900000000, 900000000, 3], dtype="int64")),
@@ -150,6 +150,8 @@ INT_BASE64_TEST_CASES = [
         {"bdata": "fwID", "dtype": "u1"},
     ),
 ]
+
+
 @pytest.mark.parametrize("val, expected", INT_BASE64_TEST_CASES)
 def test_acceptance_aok_base64(val, expected, validator_aok):
     assert np.array_equal(validator_aok.validate_coerce(val), expected)

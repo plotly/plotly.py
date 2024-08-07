@@ -94,12 +94,14 @@ def test_acceptance_aok(val, validator_aok):
     else:
         assert coerce_val == val
 
+
 # Test base64 array
 def test_aok_base64_array(validator_aok):
     val = b64(np.array([1, 2, 3], dtype="int64"))
     coerce_val = validator_aok.validate_coerce(val)
     assert coerce_val["bdata"] == "AQID"
     assert coerce_val["dtype"] == "i1"
+
 
 # ### Rejection by value ###
 @pytest.mark.parametrize("val", [True, 0, 1, 23, np.inf, set()])

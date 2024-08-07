@@ -151,11 +151,11 @@ def test_acceptance_aok_list(val, validator_aok):
 # Numpy v2 has a StrDType but we don't want to convert it yet.
 # Change this test if you add support for it.
 def test_aok_base64_array(validator_aok):
-    val = b64(np.array(['a', 'b', 'c'], dtype=np.dtypes.StrDType))
+    val = b64(np.array(["a", "b", "c"], dtype=np.dtypes.StrDType))
     coerce_val = validator_aok.validate_coerce(val)
-    assert coerce_val[0] == 'a'
-    assert coerce_val[1] == 'b'
-    assert coerce_val[2] == 'c'
+    assert coerce_val[0] == "a"
+    assert coerce_val[1] == "b"
+    assert coerce_val[2] == "c"
 
 
 # ### Rejection by type ###
