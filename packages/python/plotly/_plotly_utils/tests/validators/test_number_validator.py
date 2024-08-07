@@ -4,6 +4,7 @@ from pytest import approx
 from _plotly_utils.basevalidators import NumberValidator
 import numpy as np
 import pandas as pd
+from plotly.tests.b64 import b64
 
 # Fixtures
 # --------
@@ -106,6 +107,14 @@ def test_acceptance_aok_list(val, validator_aok):
     assert np.array_equal(
         validator_aok.validate_coerce(val), np.array(val, dtype="float")
     )
+
+
+# Test base64 array
+def test_acceptance_aok_base64(validator_aok):
+    val = b64(np.array([1, 2, 3], dtype="int64"))
+    coerce_val = validator_aok.validate_coerce(val)
+    assert coerce_val["bdata"] == "AQID"
+    assert coerce_val["dtype"] == "i1"
 
 
 # ### Coerce ###
