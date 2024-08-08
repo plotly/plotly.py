@@ -950,7 +950,8 @@ class IntegerValidator(BaseValidator):
                 invalid_els = [
                     e
                     for e in v
-                    if not (self.min_val <= e <= self.max_val) and e not in self.extras
+                    if not (isinstance(e, int) and self.min_val <= e <= self.max_val)
+                    and e not in self.extras
                 ]
 
                 if invalid_els:
