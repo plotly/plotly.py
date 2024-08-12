@@ -1,6 +1,7 @@
 import pytest
 from _plotly_utils.basevalidators import ColorValidator
 import numpy as np
+from plotly.tests.b64 import b64
 
 
 # Fixtures
@@ -129,6 +130,19 @@ def test_acceptance_aok(val, validator_aok):
         assert validator_aok.present(coerce_val) == tuple(val)
     else:
         assert coerce_val == val
+
+
+# Test that it doesn't use a base64 array
+# Numpy v2 has a StrDType but we don't want to convert it yet.
+# Change this test if you add support for it.
+def test_acceptance_aok_base64_array(validator_aok):
+    val = b64(np.array(["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure"]))
+    coerce_val = validator_aok.validate_coerce(val)
+    assert coerce_val[0] == "aliceblue"
+    assert coerce_val[1] == "antiquewhite"
+    assert coerce_val[2] == "aqua"
+    assert coerce_val[3] == "aquamarine"
+    assert coerce_val[4] == "azure"
 
 
 @pytest.mark.parametrize(
