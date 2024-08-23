@@ -28,12 +28,16 @@ class Shape(_BaseLayoutHierarchyType):
         "type",
         "visible",
         "x0",
+        "x0shift",
         "x1",
+        "x1shift",
         "xanchor",
         "xref",
         "xsizemode",
         "y0",
+        "y0shift",
         "y1",
+        "y1shift",
         "yanchor",
         "yref",
         "ysizemode",
@@ -621,6 +625,29 @@ class Shape(_BaseLayoutHierarchyType):
     def x0(self, val):
         self["x0"] = val
 
+    # x0shift
+    # -------
+    @property
+    def x0shift(self):
+        """
+        Shifts `x0` away from the center of the category when `xref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'x0shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["x0shift"]
+
+    @x0shift.setter
+    def x0shift(self, val):
+        self["x0shift"] = val
+
     # x1
     # --
     @property
@@ -640,6 +667,29 @@ class Shape(_BaseLayoutHierarchyType):
     @x1.setter
     def x1(self, val):
         self["x1"] = val
+
+    # x1shift
+    # -------
+    @property
+    def x1shift(self):
+        """
+        Shifts `x1` away from the center of the category when `xref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'x1shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["x1shift"]
+
+    @x1shift.setter
+    def x1shift(self, val):
+        self["x1shift"] = val
 
     # xanchor
     # -------
@@ -745,6 +795,29 @@ class Shape(_BaseLayoutHierarchyType):
     def y0(self, val):
         self["y0"] = val
 
+    # y0shift
+    # -------
+    @property
+    def y0shift(self):
+        """
+        Shifts `y0` away from the center of the category when `yref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'y0shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["y0shift"]
+
+    @y0shift.setter
+    def y0shift(self, val):
+        self["y0shift"] = val
+
     # y1
     # --
     @property
@@ -764,6 +837,29 @@ class Shape(_BaseLayoutHierarchyType):
     @y1.setter
     def y1(self, val):
         self["y1"] = val
+
+    # y1shift
+    # -------
+    @property
+    def y1shift(self):
+        """
+        Shifts `y1` away from the center of the category when `yref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'y1shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["y1shift"]
+
+    @y1shift.setter
+    def y1shift(self, val):
+        self["y1shift"] = val
 
     # yanchor
     # -------
@@ -971,9 +1067,19 @@ class Shape(_BaseLayoutHierarchyType):
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -1008,9 +1114,19 @@ class Shape(_BaseLayoutHierarchyType):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -1067,12 +1183,16 @@ class Shape(_BaseLayoutHierarchyType):
         type=None,
         visible=None,
         x0=None,
+        x0shift=None,
         x1=None,
+        x1shift=None,
         xanchor=None,
         xref=None,
         xsizemode=None,
         y0=None,
+        y0shift=None,
         y1=None,
+        y1shift=None,
         yanchor=None,
         yref=None,
         ysizemode=None,
@@ -1203,9 +1323,19 @@ class Shape(_BaseLayoutHierarchyType):
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -1240,9 +1370,19 @@ class Shape(_BaseLayoutHierarchyType):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -1385,10 +1525,18 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = x0 if x0 is not None else _v
         if _v is not None:
             self["x0"] = _v
+        _v = arg.pop("x0shift", None)
+        _v = x0shift if x0shift is not None else _v
+        if _v is not None:
+            self["x0shift"] = _v
         _v = arg.pop("x1", None)
         _v = x1 if x1 is not None else _v
         if _v is not None:
             self["x1"] = _v
+        _v = arg.pop("x1shift", None)
+        _v = x1shift if x1shift is not None else _v
+        if _v is not None:
+            self["x1shift"] = _v
         _v = arg.pop("xanchor", None)
         _v = xanchor if xanchor is not None else _v
         if _v is not None:
@@ -1405,10 +1553,18 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = y0 if y0 is not None else _v
         if _v is not None:
             self["y0"] = _v
+        _v = arg.pop("y0shift", None)
+        _v = y0shift if y0shift is not None else _v
+        if _v is not None:
+            self["y0shift"] = _v
         _v = arg.pop("y1", None)
         _v = y1 if y1 is not None else _v
         if _v is not None:
             self["y1"] = _v
+        _v = arg.pop("y1shift", None)
+        _v = y1shift if y1shift is not None else _v
+        if _v is not None:
+            self["y1shift"] = _v
         _v = arg.pop("yanchor", None)
         _v = yanchor if yanchor is not None else _v
         if _v is not None:
