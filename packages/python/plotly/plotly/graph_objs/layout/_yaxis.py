@@ -76,9 +76,13 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelindex",
+        "ticklabelindexsrc",
         "ticklabelmode",
         "ticklabeloverflow",
         "ticklabelposition",
+        "ticklabelshift",
+        "ticklabelstandoff",
         "ticklabelstep",
         "ticklen",
         "tickmode",
@@ -385,8 +389,8 @@ class YAxis(_BaseLayoutHierarchyType):
         `categoryarray`. Set `categoryorder` to *total ascending* or
         *total descending* if order should be determined by the
         numerical order of the values. Similarly, the order can be
-        determined by the min, max, sum, mean or median of all the
-        values.
+        determined by the min, max, sum, mean, geometric mean or median
+        of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -394,7 +398,8 @@ class YAxis(_BaseLayoutHierarchyType):
                 'array', 'total ascending', 'total descending', 'min
                 ascending', 'min descending', 'max ascending', 'max
                 descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'median ascending', 'median
+                ascending', 'mean descending', 'geometric mean ascending',
+                'geometric mean descending', 'median ascending', 'median
                 descending']
 
         Returns
@@ -2067,15 +2072,30 @@ class YAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -2206,6 +2226,55 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelindex
+    # --------------
+    @property
+    def ticklabelindex(self):
+        """
+        Only for axes with `type` "date" or "linear". Instead of
+        drawing the major tick label, draw the label for the minor tick
+        that is n positions away from the major tick. E.g. to always
+        draw the label for the minor tick before each major tick,
+        choose `ticklabelindex` -1. This is useful for date axes with
+        `ticklabelmode` "period" if you want to label the period that
+        ends with each major tick instead of the period that begins
+        there.
+
+        The 'ticklabelindex' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|numpy.ndarray
+        """
+        return self["ticklabelindex"]
+
+    @ticklabelindex.setter
+    def ticklabelindex(self, val):
+        self["ticklabelindex"] = val
+
+    # ticklabelindexsrc
+    # -----------------
+    @property
+    def ticklabelindexsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `ticklabelindex`.
+
+        The 'ticklabelindexsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["ticklabelindexsrc"]
+
+    @ticklabelindexsrc.setter
+    def ticklabelindexsrc(self, val):
+        self["ticklabelindexsrc"] = val
+
     # ticklabelmode
     # -------------
     @property
@@ -2284,6 +2353,56 @@ class YAxis(_BaseLayoutHierarchyType):
     @ticklabelposition.setter
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
+
+    # ticklabelshift
+    # --------------
+    @property
+    def ticklabelshift(self):
+        """
+        Shifts the tick labels by the specified number of pixels in
+        parallel to the axis. Positive values move the labels in the
+        positive direction of the axis.
+
+        The 'ticklabelshift' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelshift"]
+
+    @ticklabelshift.setter
+    def ticklabelshift(self, val):
+        self["ticklabelshift"] = val
+
+    # ticklabelstandoff
+    # -----------------
+    @property
+    def ticklabelstandoff(self):
+        """
+        Sets the standoff distance (in px) between the axis tick labels
+        and their default position. A positive `ticklabelstandoff`
+        moves the labels farther away from the plot area if
+        `ticklabelposition` is "outside", and deeper into the plot area
+        if `ticklabelposition` is "inside". A negative
+        `ticklabelstandoff` works in the opposite direction, moving
+        outside ticks towards the plot area and inside ticks towards
+        the outside. If the negative value is large enough, inside
+        ticks can even end up outside and vice versa.
+
+        The 'ticklabelstandoff' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstandoff"]
+
+    @ticklabelstandoff.setter
+    def ticklabelstandoff(self, val):
+        self["ticklabelstandoff"] = val
 
     # ticklabelstep
     # -------------
@@ -2631,15 +2750,30 @@ class YAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -2896,7 +3030,8 @@ class YAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -3217,6 +3352,19 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.template.layout.yaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.yaxis.tickformatstops
+        ticklabelindex
+            Only for axes with `type` "date" or "linear". Instead
+            of drawing the major tick label, draw the label for the
+            minor tick that is n positions away from the major
+            tick. E.g. to always draw the label for the minor tick
+            before each major tick, choose `ticklabelindex` -1.
+            This is useful for date axes with `ticklabelmode`
+            "period" if you want to label the period that ends with
+            each major tick instead of the period that begins
+            there.
+        ticklabelindexsrc
+            Sets the source reference on Chart Studio Cloud for
+            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3240,6 +3388,21 @@ class YAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelshift
+            Shifts the tick labels by the specified number of
+            pixels in parallel to the axis. Positive values move
+            the labels in the positive direction of the axis.
+        ticklabelstandoff
+            Sets the standoff distance (in px) between the axis
+            tick labels and their default position. A positive
+            `ticklabelstandoff` moves the labels farther away from
+            the plot area if `ticklabelposition` is "outside", and
+            deeper into the plot area if `ticklabelposition` is
+            "inside". A negative `ticklabelstandoff` works in the
+            opposite direction, moving outside ticks towards the
+            plot area and inside ticks towards the outside. If the
+            negative value is large enough, inside ticks can even
+            end up outside and vice versa.
         ticklabelstep
             Sets the spacing between tick labels as compared to the
             spacing between ticks. A value of 1 (default) means
@@ -3394,9 +3557,13 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelindex=None,
+        ticklabelindexsrc=None,
         ticklabelmode=None,
         ticklabeloverflow=None,
         ticklabelposition=None,
+        ticklabelshift=None,
+        ticklabelstandoff=None,
         ticklabelstep=None,
         ticklen=None,
         tickmode=None,
@@ -3495,7 +3662,8 @@ class YAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -3816,6 +3984,19 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.template.layout.yaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.yaxis.tickformatstops
+        ticklabelindex
+            Only for axes with `type` "date" or "linear". Instead
+            of drawing the major tick label, draw the label for the
+            minor tick that is n positions away from the major
+            tick. E.g. to always draw the label for the minor tick
+            before each major tick, choose `ticklabelindex` -1.
+            This is useful for date axes with `ticklabelmode`
+            "period" if you want to label the period that ends with
+            each major tick instead of the period that begins
+            there.
+        ticklabelindexsrc
+            Sets the source reference on Chart Studio Cloud for
+            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3839,6 +4020,21 @@ class YAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelshift
+            Shifts the tick labels by the specified number of
+            pixels in parallel to the axis. Positive values move
+            the labels in the positive direction of the axis.
+        ticklabelstandoff
+            Sets the standoff distance (in px) between the axis
+            tick labels and their default position. A positive
+            `ticklabelstandoff` moves the labels farther away from
+            the plot area if `ticklabelposition` is "outside", and
+            deeper into the plot area if `ticklabelposition` is
+            "inside". A negative `ticklabelstandoff` works in the
+            opposite direction, moving outside ticks towards the
+            plot area and inside ticks towards the outside. If the
+            negative value is large enough, inside ticks can even
+            end up outside and vice versa.
         ticklabelstep
             Sets the spacing between tick labels as compared to the
             spacing between ticks. A value of 1 (default) means
@@ -4221,6 +4417,14 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelindex", None)
+        _v = ticklabelindex if ticklabelindex is not None else _v
+        if _v is not None:
+            self["ticklabelindex"] = _v
+        _v = arg.pop("ticklabelindexsrc", None)
+        _v = ticklabelindexsrc if ticklabelindexsrc is not None else _v
+        if _v is not None:
+            self["ticklabelindexsrc"] = _v
         _v = arg.pop("ticklabelmode", None)
         _v = ticklabelmode if ticklabelmode is not None else _v
         if _v is not None:
@@ -4233,6 +4437,14 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:
             self["ticklabelposition"] = _v
+        _v = arg.pop("ticklabelshift", None)
+        _v = ticklabelshift if ticklabelshift is not None else _v
+        if _v is not None:
+            self["ticklabelshift"] = _v
+        _v = arg.pop("ticklabelstandoff", None)
+        _v = ticklabelstandoff if ticklabelstandoff is not None else _v
+        if _v is not None:
+            self["ticklabelstandoff"] = _v
         _v = arg.pop("ticklabelstep", None)
         _v = ticklabelstep if ticklabelstep is not None else _v
         if _v is not None:

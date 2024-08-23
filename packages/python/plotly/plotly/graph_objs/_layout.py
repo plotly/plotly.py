@@ -434,8 +434,8 @@ class Layout(_BaseLayoutType):
                     Plotly uses a subset of HTML tags to do things
                     like newline (<br>), bold (<b></b>), italics
                     (<i></i>), hyperlinks (<a href='...'></a>).
-                    Tags <em>, <sup>, <sub> <span> are also
-                    supported.
+                    Tags <em>, <sup>, <sub>, <s>, <u> <span> are
+                    also supported.
                 textangle
                     Sets the angle at which the `text` is drawn
                     with respect to the horizontal.
@@ -1275,15 +1275,30 @@ class Layout(_BaseLayoutType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -3271,9 +3286,21 @@ class Layout(_BaseLayoutType):
                 x0
                     Sets the shape's starting x position. See
                     `type` and `xsizemode` for more info.
+                x0shift
+                    Shifts `x0` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 x1
                     Sets the shape's end x position. See `type` and
                     `xsizemode` for more info.
+                x1shift
+                    Shifts `x1` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 xanchor
                     Only relevant in conjunction with `xsizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3313,9 +3340,21 @@ class Layout(_BaseLayoutType):
                 y0
                     Sets the shape's starting y position. See
                     `type` and `ysizemode` for more info.
+                y0shift
+                    Shifts `y0` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 y1
                     Sets the shape's end y position. See `type` and
                     `ysizemode` for more info.
+                y1shift
+                    Shifts `y1` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 yanchor
                     Only relevant in conjunction with `ysizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3796,6 +3835,10 @@ class Layout(_BaseLayoutType):
                     `xanchor`/`yanchor` is determined
                     automatically. Padding is muted if the
                     respective anchor value is "middle*/*center".
+                subtitle
+                    :class:`plotly.graph_objects.layout.title.Subti
+                    tle` instance or dict with compatible
+                    properties
                 text
                     Sets the plot's title. Note that before the
                     existence of `title.text`, the title's contents
@@ -3878,15 +3921,30 @@ class Layout(_BaseLayoutType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -4404,7 +4462,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -4759,6 +4818,20 @@ class Layout(_BaseLayoutType):
                     out.xaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.xaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -4786,6 +4859,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value
@@ -4977,7 +5068,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -5335,6 +5427,20 @@ class Layout(_BaseLayoutType):
                     out.yaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.yaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -5362,6 +5468,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value

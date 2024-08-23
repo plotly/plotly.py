@@ -1,11 +1,11 @@
 jupytext
-plotly==5.22.0
+plotly==5.23.0
 jupyter
 notebook
-pandas==1.2.0
-statsmodels==0.12.1
+pandas==2.2.2
+statsmodels==0.14.2
 scipy
-patsy==0.5.1
+patsy==0.5.6
 numpy
 plotly-geo
 psutil

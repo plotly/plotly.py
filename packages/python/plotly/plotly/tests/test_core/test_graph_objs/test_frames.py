@@ -52,7 +52,18 @@ class FramesTest(TestCase):
 
         # It's OK if this needs to change, but we should check *something*.
         self.assertEqual(
-            set(matches), {"color", "family", "size", "weight", "variant", "style"}
+            set(matches),
+            {
+                "color",
+                "family",
+                "size",
+                "weight",
+                "variant",
+                "style",
+                "textcase",
+                "lineposition",
+                "shadow",
+            },
         )
 
     def test_deeply_nested_data_attributes(self):

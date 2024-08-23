@@ -58,13 +58,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==5.22.0
+$ pip install plotly==5.23.0
 ```
 
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.22.0
+$ conda install -c plotly plotly=5.23.0
 ```
 This package contains everything you need to write figures to standalone HTML files.
 

@@ -374,7 +374,7 @@ jobs:
 
   full_build:
     docker:
-      - image: continuumio/miniconda3
+      - image: continuumio/miniconda3:24.3.0-0
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -599,3 +599,4 @@ workflows:
       - python_38_orca
       - python_39_percy
       - build-doc
+
