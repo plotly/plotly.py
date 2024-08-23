@@ -343,10 +343,10 @@ class _Dendrogram(object):
             color_threshold=color_threshold,
         )
 
-        icoord = scp.array(P["icoord"])
-        dcoord = scp.array(P["dcoord"])
-        ordered_labels = scp.array(P["ivl"])
-        color_list = scp.array(P["color_list"])
+        icoord = np.array(P["icoord"])
+        dcoord = np.array(P["dcoord"])
+        ordered_labels = np.array(P["ivl"])
+        color_list = np.array(P["color_list"])
         colors = self.get_color_dict(colorscale)
 
         trace_list = []

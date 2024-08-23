@@ -2,6 +2,7 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._zorder import ZorderValidator
     from ._ysrc import YsrcValidator
     from ._yperiodalignment import YperiodalignmentValidator
     from ._yperiod0 import Yperiod0Validator
@@ -63,6 +64,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._hoverinfo import HoverinfoValidator
     from ._groupnorm import GroupnormValidator
     from ._fillpattern import FillpatternValidator
+    from ._fillgradient import FillgradientValidator
     from ._fillcolor import FillcolorValidator
     from ._fill import FillValidator
     from ._error_y import Error_YValidator
@@ -81,6 +83,7 @@ else:
         __name__,
         [],
         [
+            "._zorder.ZorderValidator",
             "._ysrc.YsrcValidator",
             "._yperiodalignment.YperiodalignmentValidator",
             "._yperiod0.Yperiod0Validator",
@@ -142,6 +145,7 @@ else:
             "._hoverinfo.HoverinfoValidator",
             "._groupnorm.GroupnormValidator",
             "._fillpattern.FillpatternValidator",
+            "._fillgradient.FillgradientValidator",
             "._fillcolor.FillcolorValidator",
             "._fill.FillValidator",
             "._error_y.Error_YValidator",

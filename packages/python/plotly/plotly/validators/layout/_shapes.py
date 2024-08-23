@@ -28,8 +28,9 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 :class:`plotly.graph_objects.layout.shape.Label
                 ` instance or dict with compatible properties
             layer
-                Specifies whether shapes are drawn below or
-                above traces.
+                Specifies whether shapes are drawn below
+                gridlines ("below"), between gridlines and
+                traces ("between") or above traces ("above").
             legend
                 Sets the reference to a legend to show this
                 shape in. References to these legends are
@@ -138,9 +139,21 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             x0
                 Sets the shape's starting x position. See
                 `type` and `xsizemode` for more info.
+            x0shift
+                Shifts `x0` away from the center of the
+                category when `xref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             x1
                 Sets the shape's end x position. See `type` and
                 `xsizemode` for more info.
+            x1shift
+                Shifts `x1` away from the center of the
+                category when `xref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             xanchor
                 Only relevant in conjunction with `xsizemode`
                 set to "pixel". Specifies the anchor point on
@@ -180,9 +193,21 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             y0
                 Sets the shape's starting y position. See
                 `type` and `ysizemode` for more info.
+            y0shift
+                Shifts `y0` away from the center of the
+                category when `yref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             y1
                 Sets the shape's end y position. See `type` and
                 `ysizemode` for more info.
+            y1shift
+                Shifts `y1` away from the center of the
+                category when `yref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             yanchor
                 Only relevant in conjunction with `ysizemode`
                 set to "pixel". Specifies the anchor point on

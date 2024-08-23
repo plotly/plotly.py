@@ -233,6 +233,11 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `rgba256` colormodel, it is [0, 0, 0, 0]. For
                 the `hsl` colormodel, it is [0, 0, 0]. For the
                 `hsla` colormodel, it is [0, 0, 0, 0].
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
             zsmooth
                 Picks a smoothing algorithm used to smooth `z`
                 data. This only applies for image traces that

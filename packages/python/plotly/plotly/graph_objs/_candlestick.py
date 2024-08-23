@@ -58,6 +58,7 @@ class Candlestick(_BaseTraceType):
         "xsrc",
         "yaxis",
         "yhoverformat",
+        "zorder",
     }
 
     # close
@@ -1234,6 +1235,28 @@ class Candlestick(_BaseTraceType):
     def yhoverformat(self, val):
         self["yhoverformat"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -1465,6 +1488,11 @@ class Candlestick(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -1518,6 +1546,7 @@ class Candlestick(_BaseTraceType):
         xsrc=None,
         yaxis=None,
         yhoverformat=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -1757,6 +1786,11 @@ class Candlestick(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -1983,6 +2017,10 @@ an instance of :class:`plotly.graph_objs.Candlestick`"""
         _v = yhoverformat if yhoverformat is not None else _v
         if _v is not None:
             self["yhoverformat"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

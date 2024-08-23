@@ -377,7 +377,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 attribute has effect only under the
                 q1/median/q3 signature. If `upperfence` is not
                 provided but a sample (in `y` or `x`) is set,
-                we compute the lower as the last sample point
+                we compute the upper as the last sample point
                 above 1.5 times the IQR.
             upperfencesrc
                 Sets the source reference on Chart Studio Cloud
@@ -504,6 +504,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

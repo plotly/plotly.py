@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.10.11
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -543,6 +543,40 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.show()
+```
+
+#### Indent Legend Entries
+
+*New in 5.20*
+
+To indent legend entries, set `indenation` on `layout.legend` to a number of pixels. In the following example, we indent legend entries by 10 pixels. 
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.iris()
+
+fig = go.Figure(
+    [
+        go.Scatter(
+            x=df[df["species"] == species]["sepal_width"],
+            y=df[df["species"] == species]["sepal_length"],
+            mode="markers",
+            name=species,
+        )
+        for species in df["species"].unique()
+    ],
+    layout=dict(
+        legend=dict(
+            title="Species",
+            indentation=10
+        )
+    ),
+)
+
+
 fig.show()
 ```
 

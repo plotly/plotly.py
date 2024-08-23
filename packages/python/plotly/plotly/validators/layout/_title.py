@@ -39,6 +39,10 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 `xanchor`/`yanchor` is determined
                 automatically. Padding is muted if the
                 respective anchor value is "middle*/*center".
+            subtitle
+                :class:`plotly.graph_objects.layout.title.Subti
+                tle` instance or dict with compatible
+                properties
             text
                 Sets the plot's title. Note that before the
                 existence of `title.text`, the title's contents

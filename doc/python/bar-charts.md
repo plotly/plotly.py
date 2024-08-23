@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -304,6 +304,56 @@ fig.update_layout(barmode='stack')
 fig.show()
 ```
 
+### Stacked Bar Chart From Aggregating a DataFrame 
+
+Stacked bar charts are a powerful way to present results summarizing categories generated using the Pandas aggregate commands. `pandas.DataFrame.agg` produces a wide data set format incompatible with `px.bar`. Transposing and updating the indexes to achieve `px.bar` compatibility is a somewhat involved option. Here is one straightforward alternative, which presents the aggregated data as a stacked bar using plotly.graph_objects.
+
+```python
+from plotly import graph_objects as go
+import pandas as pd
+
+# Get one year of gapminder data
+url = 'https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv'
+df = pd.read_csv(url)
+df = df[df['year']==2007]
+df["gdp"]=df["pop"]*df['gdpPercap']
+
+
+# Build the summary of interest
+df_summarized = df.groupby("continent", observed=True).agg("sum").reset_index()
+
+df_summarized["percent of world population"]=100*df_summarized["pop"]/df_summarized["pop"].sum()
+df_summarized["percent of world GDP"]=100*df_summarized["gdp"]/df_summarized["gdp"].sum()
+
+
+df = df_summarized[["continent", 
+"percent of world population",
+"percent of world GDP",
+]]
+
+# We now have a wide data frame, but it's in the opposite orientation from the one that px is designed to deal with.
+# Transposing it and rebuilding the indexes is an option, but iterating through the DF using graph objects is more succinct. 
+
+fig=go.Figure()
+for category in df_summarized["continent"].values:
+    fig.add_trace(go.Bar(
+            x=df.columns[1:],
+            # We need to get a pandas series that contains just the values to graph; 
+            # We do so by selecting the right row, selecting the right columns
+            # and then transposing and using iloc to convert to a series
+            # Here, we assume that the bar element category variable is in column 0
+            y=list(df.loc[df["continent"]==category][list(df.columns[1:])].transpose().iloc[:,0]),
+            name=str(category)
+
+
+        )
+)
+fig.update_layout(barmode="stack")
+
+fig.show()
+```
+
+
 ### Bar Chart with Hover Text
 
 ```python
@@ -479,6 +529,64 @@ fig.add_trace(go.Bar(x=years, y=[300, 400, 700],
                 marker_color='lightslategrey',
                 name='revenue'
                 ))
+
+fig.show()
+```
+
+### Rounded Bars
+
+*New in 5.19*
+
+You can round the corners on all bar traces in a figure by setting `barcornerradius` on the figure's layout. `barcornerradius` can be a number of pixels or a percentage of the bar width (using a string ending in %, for example "20%").
+
+In this example, we set all bars to have a radius of 15 pixels.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(x=df.nation, y=df.gold, name="Gold"),
+        go.Bar(x=df.nation, y=df.silver, name="Silver"),
+        go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    ],
+    layout=dict(
+        barcornerradius=15,
+    ),
+)
+
+fig.show()
+```
+
+When you don't want all bar traces in a figure to have the same rounded corners, you can instead configure rounded corners on each trace using `marker.cornerradius`. In this example, which uses subplots, the first trace has a corner radius of 30 pixels, the second trace has a bar corner radius of 30% of the bar width, and the third trace has no rounded corners set.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from plotly import data
+
+df = data.medals_wide()
+
+fig = make_subplots(rows=1, cols=3, shared_yaxes=True)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.gold, name="Gold", marker=dict(cornerradius=30)), 1, 1
+)
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.silver, name="Silver", marker=dict(cornerradius="30%")),
+    1,
+    2,
+)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    1,
+    3,
+)
+
 
 fig.show()
 ```

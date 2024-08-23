@@ -53,3 +53,11 @@ def test_r_colorscales():
                 assert scale.replace("_r", "") in scale_names
             else:
                 assert scale + "_r" in scale_names
+
+
+def test_color_categorical_dtype():
+    df = px.data.tips()
+    df["day"] = df["day"].astype("category")
+    px.scatter(
+        df[df.day != df.day.cat.categories[0]], x="total_bill", y="tip", color="day"
+    )

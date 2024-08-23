@@ -62,6 +62,7 @@ class Contourcarpet(_BaseTraceType):
         "zmax",
         "zmid",
         "zmin",
+        "zorder",
         "zsrc",
     }
 
@@ -1674,6 +1675,28 @@ class Contourcarpet(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # zsrc
     # ----
     @property
@@ -1938,6 +1961,11 @@ class Contourcarpet(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsrc
             Sets the source reference on Chart Studio Cloud for
             `z`.
@@ -1998,6 +2026,7 @@ class Contourcarpet(_BaseTraceType):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsrc=None,
         **kwargs,
     ):
@@ -2246,6 +2275,11 @@ class Contourcarpet(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsrc
             Sets the source reference on Chart Studio Cloud for
             `z`.
@@ -2491,6 +2525,10 @@ an instance of :class:`plotly.graph_objs.Contourcarpet`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
         _v = arg.pop("zsrc", None)
         _v = zsrc if zsrc is not None else _v
         if _v is not None:

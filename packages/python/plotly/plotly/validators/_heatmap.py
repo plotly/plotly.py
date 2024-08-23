@@ -409,6 +409,11 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the lower bound of the color domain. Value
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
             zsmooth
                 Picks a smoothing algorithm use to smooth `z`
                 data.

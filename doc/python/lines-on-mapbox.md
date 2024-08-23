@@ -51,7 +51,7 @@ import plotly.express as px
 
 fig = px.line_mapbox(us_cities, lat="lat", lon="lon", color="State", zoom=3, height=300)
 
-fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=4, mapbox_center_lat = 41,
+fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=4, mapbox_center_lat = 41,
     margin={"r":0,"t":0,"l":0,"b":0})
 
 fig.show()
@@ -95,7 +95,7 @@ for feature, name in zip(geo_df.geometry, geo_df.name):
         names = np.append(names, None)
 
 fig = px.line_mapbox(lat=lats, lon=lons, hover_name=names,
-                     mapbox_style="stamen-terrain", zoom=1)
+                     mapbox_style="open-street-map", zoom=1)
 fig.show()
 ```
 
@@ -123,7 +123,7 @@ fig.update_layout(
     margin ={'l':0,'t':0,'b':0,'r':0},
     mapbox = {
         'center': {'lon': 10, 'lat': 10},
-        'style': "stamen-terrain",
+        'style': "open-street-map",
         'center': {'lon': -20, 'lat': -20},
         'zoom': 1})
 

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.0
   plotly:
     description: How to make scatter plots on Mapbox maps in Python.
     display_as: maps
@@ -263,6 +263,65 @@ fig = px.scatter_mapbox(df, lat="lat", lon="long", size="cnt", zoom=3)
 fig.update_traces(cluster=dict(enabled=True))
 fig.show()
 
+```
+
+#### Font Customization
+
+You can customize the font on `go.Scattermapbox` traces with `textfont`. For example, you can set the font `family`.
+
+```python
+import plotly.graph_objects as go
+
+token = open(".mapbox_token").read() # you need your own token
+
+fig = go.Figure(go.Scattermapbox(
+    mode = "markers+text+lines",
+    lon = [-75, -80, -50], lat = [45, 20, -20],
+    marker = {'size': 20, 'symbol': ["bus", "harbor", "airport"]},
+    text = ["Bus", "Harbor", "airport"], textposition = "bottom right",
+    textfont = dict(size=18, color="black", family="Open Sans Bold")
+    ))
+
+fig.update_layout(
+    mapbox = {
+        'accesstoken': token,
+        'style': "outdoors", 'zoom': 0.7},
+    showlegend = False,)
+
+fig.show()
+```
+
+`go.Scattermapbox` supports the following values for `textfont.family`: 
+
+'Metropolis Black Italic', 'Metropolis Black', 'Metropolis Bold Italic', 'Metropolis Bold', 'Metropolis Extra Bold Italic', 'Metropolis Extra Bold', 'Metropolis Extra Light Italic', 'Metropolis Extra Light', 'Metropolis Light Italic', 'Metropolis Light', 'Metropolis Medium Italic', 'Metropolis Medium', 'Metropolis Regular Italic', 'Metropolis Regular', 'Metropolis Semi Bold Italic', 'Metropolis Semi Bold', 'Metropolis Thin Italic', 'Metropolis Thin', 'Open Sans Bold Italic', 'Open Sans Bold', 'Open Sans Extrabold Italic', 'Open Sans Extrabold', 'Open Sans Italic', 'Open Sans Light Italic', 'Open Sans Light', 'Open Sans Regular', 'Open Sans Semibold Italic', 'Open Sans Semibold', 'Klokantech Noto Sans Bold', 'Klokantech Noto Sans CJK Bold', 'Klokantech Noto Sans CJK Regular', 'Klokantech Noto Sans Italic', and 'Klokantech Noto Sans Regular'.
+
+
+##### Font Weight
+
+*New in 5.23*
+
+You can specify a numeric font weight on `go.Scattermapbox` with `textfont.weight`.
+
+```python
+import plotly.graph_objects as go
+
+token = open(".mapbox_token").read() # you need your own token
+
+fig = go.Figure(go.Scattermapbox(
+    mode = "markers+text+lines",
+    lon = [-75, -80, -50], lat = [45, 20, -20],
+    marker = dict(size=20, symbol=["bus", "harbor", "airport"]),
+    text = ["Bus", "Harbor", "airport"], textposition = "bottom right",
+    textfont = dict(size=18, color="black", weight=900)
+    ))
+
+fig.update_layout(
+    mapbox = dict(
+        accesstoken=token,
+        style="outdoors", zoom=0.7),
+    showlegend = False,)
+
+fig.show()
 ```
 
 #### Reference

@@ -1,7 +1,9 @@
 import os
 import sys
+import time
 import platform
 import json
+import shutil
 
 from setuptools import setup, Command
 from setuptools.command.egg_info import egg_info
@@ -137,10 +139,10 @@ class NPM(Command):
     ]
 
     def initialize_options(self):
-        pass
+        self.local = None
 
     def finalize_options(self):
-        pass
+        self.set_undefined_options("updateplotlyjsdev", ("local", "local"))
 
     def get_npm_name(self):
         npmName = "npm"
@@ -187,6 +189,14 @@ class NPM(Command):
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
+            if self.local is not None:
+                plotly_archive = os.path.join(self.local, "plotly.js.tgz")
+                check_call(
+                    [npmName, "install", plotly_archive],
+                    cwd=node_root,
+                    stdout=sys.stdout,
+                    stderr=sys.stderr,
+                )
             check_call(
                 [npmName, "run", "build:prod"],
                 cwd=node_root,
@@ -217,12 +227,17 @@ class CodegenCommand(Command):
         pass
 
     def run(self):
-        if sys.version_info < (3, 6):
-            raise ImportError("Code generation must be executed with Python >= 3.6")
+        if sys.version_info < (3, 8):
+            raise ImportError("Code generation must be executed with Python >= 3.8")
 
         from codegen import perform_codegen
 
         perform_codegen()
+
+
+def overwrite_schema_local(uri):
+    path = os.path.join(here, "codegen", "resources", "plot-schema.json")
+    shutil.copyfile(uri, path)
 
 
 def overwrite_schema(url):
@@ -233,6 +248,11 @@ def overwrite_schema(url):
     path = os.path.join(here, "codegen", "resources", "plot-schema.json")
     with open(path, "wb") as f:
         f.write(req.content)
+
+
+def overwrite_bundle_local(uri):
+    path = os.path.join(here, "plotly", "package_data", "plotly.min.js")
+    shutil.copyfile(uri, path)
 
 
 def overwrite_bundle(url):
@@ -302,6 +322,13 @@ def get_latest_publish_build_info(repo, branch):
 
     # Extract build info
     return {p: build[p] for p in ["vcs_revision", "build_num", "committer_date"]}
+
+
+def get_bundle_schema_local(local):
+    plotly_archive = os.path.join(local, "plotly.js.tgz")
+    plotly_bundle = os.path.join(local, "dist/plotly.min.js")
+    plotly_schemas = os.path.join(local, "dist/plot-schema.json")
+    return plotly_archive, plotly_bundle, plotly_schemas
 
 
 def get_bundle_schema_urls(build_num):
@@ -390,23 +417,37 @@ class UpdateBundleSchemaDevCommand(Command):
     def initialize_options(self):
         self.devrepo = None
         self.devbranch = None
+        self.local = None
 
     def finalize_options(self):
         self.set_undefined_options("updateplotlyjsdev", ("devrepo", "devrepo"))
         self.set_undefined_options("updateplotlyjsdev", ("devbranch", "devbranch"))
+        self.set_undefined_options("updateplotlyjsdev", ("local", "local"))
 
     def run(self):
-        build_info = get_latest_publish_build_info(self.devrepo, self.devbranch)
+        if self.local is None:
+            build_info = get_latest_publish_build_info(self.devrepo, self.devbranch)
 
-        archive_url, bundle_url, schema_url = get_bundle_schema_urls(
-            build_info["build_num"]
-        )
+            archive_url, bundle_url, schema_url = get_bundle_schema_urls(
+                build_info["build_num"]
+            )
 
-        # Update bundle in package data
-        overwrite_bundle(bundle_url)
+            # Update bundle in package data
+            overwrite_bundle(bundle_url)
 
-        # Update schema in package data
-        overwrite_schema(schema_url)
+            # Update schema in package data
+            overwrite_schema(schema_url)
+        else:
+            # this info could be more informative but
+            # it doesn't seem as useful in a local context
+            # and requires dependencies and programming.
+            build_info = {"vcs_revision": "local", "committer_date": str(time.time())}
+            self.devrepo = self.local
+            self.devbranch = ""
+
+            archive_uri, bundle_uri, schema_uri = get_bundle_schema_local(self.local)
+            overwrite_bundle_local(bundle_uri)
+            overwrite_schema_local(schema_uri)
 
         # Update plotly.js url in package.json
         package_json_path = os.path.join(node_root, "package.json")
@@ -414,7 +455,9 @@ class UpdateBundleSchemaDevCommand(Command):
             package_json = json.load(f)
 
         # Replace version with bundle url
-        package_json["dependencies"]["plotly.js"] = archive_url
+        package_json["dependencies"]["plotly.js"] = (
+            archive_url if self.local is None else archive_uri
+        )
         with open(package_json_path, "w") as f:
             json.dump(package_json, f, indent=2)
 
@@ -430,11 +473,13 @@ class UpdatePlotlyJsDevCommand(Command):
     user_options = [
         ("devrepo=", None, "Repository name"),
         ("devbranch=", None, "branch or pull/number"),
+        ("local=", None, "local copy of repo, used by itself"),
     ]
 
     def initialize_options(self):
         self.devrepo = "plotly/plotly.js"
         self.devbranch = "master"
+        self.local = None
 
     def finalize_options(self):
         pass
@@ -500,22 +545,25 @@ setup(
     maintainer="Nicolas Kruchten",
     maintainer_email="nicolas@plot.ly",
     url="https://plotly.com/python/",
-    project_urls={"Github": "https://github.com/plotly/plotly.py"},
+    project_urls={
+        "Documentation": "https://plotly.com/python/",
+        "Github": "https://github.com/plotly/plotly.py",
+        "Changelog": "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md",
+    },
     description="An open-source, interactive data visualization library for Python",
     long_description=readme(),
     long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Scientific/Engineering :: Visualization",
         "License :: OSI Approved :: MIT License",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     license="MIT",
     packages=[
         "jupyterlab_plotly",

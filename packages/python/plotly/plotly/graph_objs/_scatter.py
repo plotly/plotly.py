@@ -20,6 +20,7 @@ class Scatter(_BaseTraceType):
         "error_y",
         "fill",
         "fillcolor",
+        "fillgradient",
         "fillpattern",
         "groupnorm",
         "hoverinfo",
@@ -82,6 +83,7 @@ class Scatter(_BaseTraceType):
         "yperiod0",
         "yperiodalignment",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -442,7 +444,9 @@ class Scatter(_BaseTraceType):
         """
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
-        is available.
+        is available. If fillgradient is specified, fillcolor is
+        ignored except for setting the background color of the hover
+        label, if any.
 
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -495,6 +499,62 @@ class Scatter(_BaseTraceType):
     @fillcolor.setter
     def fillcolor(self, val):
         self["fillcolor"] = val
+
+    # fillgradient
+    # ------------
+    @property
+    def fillgradient(self):
+        """
+        Sets a fill gradient. If not specified, the fillcolor is used
+        instead.
+
+        The 'fillgradient' property is an instance of Fillgradient
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.scatter.Fillgradient`
+          - A dict of string/value properties that will be passed
+            to the Fillgradient constructor
+
+            Supported dict properties:
+
+                colorscale
+                    Sets the fill gradient colors as a color scale.
+                    The color scale is interpreted as a gradient
+                    applied in the direction specified by
+                    "orientation", from the lowest to the highest
+                    value of the scatter plot along that axis, or
+                    from the center to the most distant point from
+                    it, if orientation is "radial".
+                start
+                    Sets the gradient start value. It is given as
+                    the absolute position on the axis determined by
+                    the orientiation. E.g., if orientation is
+                    "horizontal", the gradient will be horizontal
+                    and start from the x-position given by start.
+                    If omitted, the gradient starts at the lowest
+                    value of the trace along the respective axis.
+                    Ignored if orientation is "radial".
+                stop
+                    Sets the gradient end value. It is given as the
+                    absolute position on the axis determined by the
+                    orientiation. E.g., if orientation is
+                    "horizontal", the gradient will be horizontal
+                    and end at the x-position given by end. If
+                    omitted, the gradient ends at the highest value
+                    of the trace along the respective axis. Ignored
+                    if orientation is "radial".
+                type
+                    Sets the type/orientation of the color gradient
+                    for the fill. Defaults to "none".
+
+        Returns
+        -------
+        plotly.graph_objs.scatter.Fillgradient
+        """
+        return self["fillgradient"]
+
+    @fillgradient.setter
+    def fillgradient(self, val):
+        self["fillgradient"] = val
 
     # fillpattern
     # -----------
@@ -1638,18 +1698,58 @@ class Scatter(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -2307,6 +2407,28 @@ class Scatter(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -2376,7 +2498,12 @@ class Scatter(_BaseTraceType):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -2727,6 +2854,11 @@ class Scatter(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2743,6 +2875,7 @@ class Scatter(_BaseTraceType):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillgradient=None,
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
@@ -2804,6 +2937,7 @@ class Scatter(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2879,7 +3013,12 @@ class Scatter(_BaseTraceType):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -3230,6 +3369,11 @@ class Scatter(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -3308,6 +3452,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = fillcolor if fillcolor is not None else _v
         if _v is not None:
             self["fillcolor"] = _v
+        _v = arg.pop("fillgradient", None)
+        _v = fillgradient if fillgradient is not None else _v
+        if _v is not None:
+            self["fillgradient"] = _v
         _v = arg.pop("fillpattern", None)
         _v = fillpattern if fillpattern is not None else _v
         if _v is not None:
@@ -3552,6 +3700,10 @@ an instance of :class:`plotly.graph_objs.Scatter`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

@@ -96,7 +96,7 @@ def numeric_numpy_array(request):
 
 @pytest.fixture(scope="module")
 def object_numpy_array(request):
-    return np.array(["a", 1, [2, 3]])
+    return np.array(["a", 1, [2, 3]], dtype="object")
 
 
 @pytest.fixture(scope="module")

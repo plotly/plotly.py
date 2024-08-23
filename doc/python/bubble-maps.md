@@ -85,7 +85,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_
 df.head()
 
 df['text'] = df['name'] + '<br>Population ' + (df['pop']/1e6).astype(str)+' million'
-limits = [(0,2),(3,10),(11,20),(21,50),(50,3000)]
+limits = [(0,3),(3,11),(11,21),(21,50),(50,3000)]
 colors = ["royalblue","crimson","lightseagreen","orange","lightgrey"]
 cities = []
 scale = 5000

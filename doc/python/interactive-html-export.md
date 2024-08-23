@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: Plotly allows you to save interactive HTML versions of your figures
       to your local disk.
@@ -55,6 +55,50 @@ fig.write_html("path/to/file.html")
 
 By default, the resulting HTML file is a fully self-contained HTML file which can be uploaded to a web server or shared via email or other file-sharing mechanisms. The downside to this approach is that the file is very large (5Mb+) because it contains an inlined copy of the Plotly.js library required to make the figure interactive. This can be controlled via the `include_plotlyjs` argument (see below).
 
+### Inserting Plotly Output into HTML using a Jinja2 Template
+
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We don't want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja `{{ variable }}`.  In this example, we customize the HTML in the template file by replacing the Jinja variable `{{ fig }}` with our graphic `fig`.
+
+<!-- #region -->
+
+```
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8" /&gt;   &lt;!--It is necessary to use the UTF-8 encoding with plotly graphics to get e.g. negative signs to render correctly --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;Here's a Plotly graph!&lt;/h1&gt;
+{{ fig }}
+&lt;p&gt;And here's some text after the graph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+
+Then use the following Python to replace `{{ fig }}` in the template with HTML that will display the Plotly figure "fig":
+
+```python
+import plotly.express as px
+from jinja2 import Template
+
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
+output_html_path=r"/path/to/output.html"
+input_template_path = r"/path/to/template.html"
+
+plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
+#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
+
+with open(output_html_path, "w", encoding="utf-8") as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(plotly_jinja_data))
+```
+<!-- #endregion -->
 
 ### HTML export in Dash
 
