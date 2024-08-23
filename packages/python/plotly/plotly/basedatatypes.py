@@ -2493,7 +2493,7 @@ Please use the add_trace method with the row and col parameters.
 
     def _init_child_props(self, child):
         """
-        Initialize the properites dict for a child trace or layout
+        Initialize the properties dict for a child trace or layout
 
         Note: this method must match the name/signature of one on
         BasePlotlyType
@@ -3632,12 +3632,7 @@ Invalid property path '{key_path_str}' for layout
 
             If 'directory', a script tag is included that references an external
             plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file. If `file` is a string to a local file path
-            and `full_html` is True then
-
-            If 'directory', a script tag is included that references an external
-            plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file.  If `file` is a string to a local file
+            directory as the HTML file. If `file` is a string to a local file
             path and `full_html` is True, then the plotly.min.js bundle is copied
             into the directory of the resulting HTML file. If a file named
             plotly.min.js already exists in the output directory then this file
@@ -3712,8 +3707,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        str
-            Representation of figure as an HTML div string
+        None
         """
         import plotly.io as pio
 
@@ -5709,7 +5703,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # These are used when a layout has multiple instances of subplot types
     # (xaxis2, yaxis3, geo4, etc.)
     #
-    # The base version of each suplot type is defined in the schema and code
+    # The base version of each subplot type is defined in the schema and code
     # generated. So the Layout subclass has statically defined properties
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.

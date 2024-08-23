@@ -77,7 +77,12 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the fill color. Defaults to a half-
                 transparent variant of the line color, marker
                 color, or marker line color, whichever is
-                available.
+                available. If fillgradient is specified,
+                fillcolor is ignored except for setting the
+                background color of the hover label, if any.
+            fillgradient
+                Sets a fill gradient. If not specified, the
+                fillcolor is used instead.
             fillpattern
                 Sets the pattern within the marker.
             groupnorm
@@ -474,6 +479,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

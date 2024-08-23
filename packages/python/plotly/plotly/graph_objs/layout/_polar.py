@@ -67,7 +67,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -560,6 +561,10 @@ class Polar(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.polar.radia
                     laxis.Autorangeoptions` instance or dict with
                     compatible properties
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -599,7 +604,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and

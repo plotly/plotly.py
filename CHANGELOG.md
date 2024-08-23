@@ -2,11 +2,80 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [UNRELEASED]
+## UNRELEASED
+
+### Updated
+- Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
+
+## [5.23.0] - 2024-07-23
+
+### Updated
+- Updated Plotly.js from version 2.32.0 to version 2.34.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2340----2024-07-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `subtitle` attribute to `layout.title` to enable adding subtitles to plots [[#7012](https://github.com/plotly/plotly.js/pull/7012)]
+  - Introduce "u" and "s" pseudo html tags to add partial underline and strike-through styles to SVG text elements [[#7043](https://github.com/plotly/plotly.js/pull/7043)]
+  - Add geometric mean functionality and 'geometric mean ascending' + 'geometric mean descending' to `category_order` on cartesian axes [[#6223](https://github.com/plotly/plotly.js/pull/6223)],
+   with thanks to @acxz and @prabhathc for the contribution!
+  - Add axis property `ticklabelindex` for drawing the label for each minor tick n positions away from a major tick,
+   with thanks to @my-tien for the contribution! [[#7036](https://github.com/plotly/plotly.js/pull/7036)]
+  - Add property `ticklabelstandoff` and `ticklabelshift` to cartesian axes to adjust positioning of tick labels,
+   with thanks to @my-tien for the contribution! [[#7006](https://github.com/plotly/plotly.js/pull/7006)]
+  - Add `x0shift`, `x1shift`, `y0shift`, `y1shift` to shapes to add control over positioning of shape vertices on (multi-)category axes,
+   with thanks to @my-tien for the contribution! [[#7005](https://github.com/plotly/plotly.js/pull/7005)]
+- Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
+- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [#4612].
+
+
+## [5.22.0] - 2024-05-01
+
+### Updated
+- Updated Plotly.js from version 2.31.1 to version 2.32.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2320----2024-04-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [#6956]
+  - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [#6967], with thanks to @my-tien for the contribution!
+  - Fix positioning of multi-line axis titles with standoff [#6970], with thanks to @my-tien for the contribution!
+
+## [5.21.0] - 2024-04-17
+
+### Updated
+- Updated Plotly.js from version 2.30.0 to version 2.31.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2311----2024-04-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `zorder` attribute to various cartesian traces for controlling stacking order of SVG traces drawn into a subplot [[#6918](https://github.com/plotly/plotly.js/pull/6918), [#6953](https://github.com/plotly/plotly.js/pull/6953)],
+    This feature was anonymously sponsored: thank you to our sponsor!
+  - Add "between" option to shape layer for placing them above grid lines and below traces [[#6927](https://github.com/plotly/plotly.js/pull/6927)],
+    with thanks to @my-tien for the contribution!
+  - Add "raw" `sizemode` to cone trace [[#6938](https://github.com/plotly/plotly.js/pull/6938)]
+  - Add `layout.hoversubplots` to enable hover effects across multiple cartesian suplots sharing one axis [[#6947](https://github.com/plotly/plotly.js/pull/6947), [#6950](https://github.com/plotly/plotly.js/pull/6950)]
 
 ### Fixed
+- Fixed `orjson` loading issue [[#4562](https://github.com/plotly/plotly.py/pull/4562)]
+
+## [5.20.0] - 2024-03-13
+
+### Updated
+- Updated Plotly.js from version 2.29.1 to version 2.30.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2300----2024-03-06) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add fill gradients for scatter traces [[#6905](https://github.com/plotly/plotly.js/pull/6905)], with thanks to @lumip for the contribution!
+  - Add `indentation` to legend [[#6874](https://github.com/plotly/plotly.js/pull/6874)], with thanks to @my-tien for the contribution!
+
+## [5.19.0] - 2024-02-15
+
+### Updated
+
+- Updated Plotly.js from version 2.27.0 to version 2.29.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2291----2024-02-12) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Add `layout.barcornerradius` and `trace.marker.cornerradius` properties to support rounding the corners of bar traces [[#6761](https://github.com/plotly/plotly.js/pull/6761)],
+   with thanks to [Displayr](https://www.displayr.com) for sponsoring development!
+  - Add `autotickangles` to cartesian and radial axes [[#6790](https://github.com/plotly/plotly.js/pull/6790)], with thanks to @my-tien for the contribution!
+  - Add `align` option to sankey nodes to control horizontal alignment [[#6800](https://github.com/plotly/plotly.js/pull/6800)],
+   with thanks to @adamreeve for the contribution!
+  - Add the possibility of loading "virtual-webgl" script for WebGL 1 to help display several WebGL contexts on a page [[#6784](https://github.com/plotly/plotly.js/pull/6784)], with thanks to @greggman for the contribution!
+  - Add options to use base64 encoding (`bdata`) and `shape` (for 2 dimensional arrays) to declare various typed arrays i.e. `dtype=(float64|float32|int32|int16|int8|uint32|uint16|uint8)` [[#5230](https://github.com/plotly/plotly.js/pull/5230)]
+  -  Adjust stamen styles to point to `stadiamaps.com`, the users may also need to provide their own API_KEY via `config.mapboxAccessToken` [[#6776](https://github.com/plotly/plotly.js/pull/6776), [#6778](https://github.com/plotly/plotly.js/pull/6778)]
+- Removed Python 3.6 and Python 3.7 support [[#4492](https://github.com/plotly/plotly.py/pull/4492)]
+
+### Fixed
+- Ensure scatter `mode` is deterministic from `px` [[#4429](https://github.com/plotly/plotly.py/pull/4429)]
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
-- Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)],
+- Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
+- Fix KeyError when using column of `pd.Categorical` dtype with unobserved categories [[#4437](https://github.com/plotly/plotly.py/pull/4437)]
+- Fix dataframe interchange in case `column_names` returns an unmaterialized object: generator, iterator, etc. [[#4442]](https://github.com/plotly/plotly.py/pull/4442)
+- Fix issue with `FutureWarning` being displayed when setting the `color` argument in `plotly.express` [[#4519]](https://github.com/plotly/plotly.py/pull/4519)
 
 ## [5.18.0] - 2023-10-25
 

@@ -125,12 +125,15 @@ learn and become confident about git, like http://try.github.io/.
 
 ### Create a virtual environment for plotly development
 
-You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.:
 
 ```bash
-conda create -n plotly-dev python
+conda create -n plotly-dev python=3.11
 conda activate plotly-dev
 ```
+
+As of May 2024 our dependencies have been tested against Python versions 3.8 to 3.11.
+We will support Python 3.12 and higher versions soon.
 
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
@@ -224,7 +227,30 @@ the `plotly/plotly.js` GitHub repository (and place them in
 `plotly/package_data`). It will then regenerate all of the `graph_objs`
 classes based on the new schema.
 
-For dev branches, it is also possible to use `updateplotlyjsdev --devrepo reponame --devbranch branchname` to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
+For dev branches, it is also possible to use `updateplotlyjsdev` in two configurations:
+
+### CircleCI Release
+
+If your devbranch is part of the official plotly.js repository, you can use 
+```bash
+python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
+``` 
+to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
+
+### Local Repository
+
+If you have a local repository of `plotly.js` you'd like to try, you can run:
+
+```bash
+# In your plotly.js/ directory, prepare the package:
+
+$ npm run build
+$ npm pack
+$ mv plotly.js-*.tgz plotly.js.tgz
+
+# In your plotly.py/packages/python/plotly/ directory:
+$ python setup.py updateplotlyjsdev --local /path/to/your/plotly.js/
+```
 
 ## Testing
 

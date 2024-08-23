@@ -7,6 +7,8 @@ from packaging import version
 import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
+import sys
+import warnings
 
 
 # Fixtures
@@ -14,12 +16,12 @@ from pandas.testing import assert_frame_equal
 @pytest.fixture
 def add_interchange_module_for_old_pandas():
     if not hasattr(pd.api, "interchange"):
-        pd.api.interchange = mock.MagicMock()
-        # to make the following import work: `import pandas.api.interchange`
-        with mock.patch.dict(
-            "sys.modules", {"pandas.api.interchange": pd.api.interchange}
-        ):
-            yield
+        with mock.patch.object(pd.api, "interchange", mock.MagicMock(), create=True):
+            # to make the following import work: `import pandas.api.interchange`
+            with mock.patch.dict(
+                "sys.modules", {"pandas.api.interchange": pd.api.interchange}
+            ):
+                yield
     else:
         yield
 
@@ -250,15 +252,24 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
+@pytest.mark.parametrize("column_names_as_generator", [False, True])
 def test_build_df_using_interchange_protocol_mock(
-    add_interchange_module_for_old_pandas,
+    add_interchange_module_for_old_pandas, column_names_as_generator
 ):
     class InterchangeDataFrame:
         def __init__(self, columns):
             self._columns = columns
 
-        def column_names(self):
-            return self._columns
+        if column_names_as_generator:
+
+            def column_names(self):
+                for col in self._columns:
+                    yield col
+
+        else:
+
+            def column_names(self):
+                return self._columns
 
     interchange_dataframe = InterchangeDataFrame(
         ["petal_width", "sepal_length", "sepal_width"]
@@ -309,7 +320,8 @@ def test_build_df_using_interchange_protocol_mock(
 
 
 @pytest.mark.skipif(
-    version.parse(pd.__version__) < version.parse("2.0.2"),
+    version.parse(pd.__version__) < version.parse("2.0.2")
+    or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
 @pytest.mark.parametrize("test_lib", ["vaex", "polars"])
@@ -330,7 +342,8 @@ def test_build_df_from_vaex_and_polars(test_lib):
 
 
 @pytest.mark.skipif(
-    version.parse(pd.__version__) < version.parse("2.0.2"),
+    version.parse(pd.__version__) < version.parse("2.0.2")
+    or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
 @pytest.mark.parametrize("test_lib", ["vaex", "polars"])
@@ -655,3 +668,16 @@ def test_x_or_y(fn):
         assert list(fig.data[0].x) == constant
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "h"
+
+
+def test_no_futurewarning():
+    with warnings.catch_warnings(record=True) as warn_list:
+        _ = px.scatter(
+            x=[15, 20, 29],
+            y=[10, 20, 30],
+            color=["Category 1", "Category 2", "Category 1"],
+        )
+    future_warnings = [
+        warn for warn in warn_list if issubclass(warn.category, FutureWarning)
+    ]
+    assert len(future_warnings) == 0, "FutureWarning(s) raised!"

@@ -95,6 +95,7 @@ class Box(_BaseTraceType):
         "yperiod0",
         "yperiodalignment",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -1678,7 +1679,7 @@ class Box(_BaseTraceType):
         the number of boxes desired. This attribute has effect only
         under the q1/median/q3 signature. If `upperfence` is not
         provided but a sample (in `y` or `x`) is set, we compute the
-        lower as the last sample point above 1.5 times the IQR.
+        upper as the last sample point above 1.5 times the IQR.
 
         The 'upperfence' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -2198,6 +2199,28 @@ class Box(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -2538,7 +2561,7 @@ class Box(_BaseTraceType):
             items as the number of boxes desired. This attribute
             has effect only under the q1/median/q3 signature. If
             `upperfence` is not provided but a sample (in `y` or
-            `x`) is set, we compute the lower as the last sample
+            `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
@@ -2649,6 +2672,11 @@ class Box(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2739,6 +2767,7 @@ class Box(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -3103,7 +3132,7 @@ class Box(_BaseTraceType):
             items as the number of boxes desired. This attribute
             has effect only under the q1/median/q3 signature. If
             `upperfence` is not provided but a sample (in `y` or
-            `x`) is set, we compute the lower as the last sample
+            `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
@@ -3214,6 +3243,11 @@ class Box(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -3588,6 +3622,10 @@ an instance of :class:`plotly.graph_objs.Box`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

@@ -78,6 +78,7 @@ class Heatmap(_BaseTraceType):
         "zmax",
         "zmid",
         "zmin",
+        "zorder",
         "zsmooth",
         "zsrc",
     }
@@ -1232,11 +1233,34 @@ class Heatmap(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -2036,6 +2060,28 @@ class Heatmap(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # zsmooth
     # -------
     @property
@@ -2438,6 +2484,11 @@ class Heatmap(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -2516,6 +2567,7 @@ class Heatmap(_BaseTraceType):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
         **kwargs,
@@ -2896,6 +2948,11 @@ class Heatmap(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -3207,6 +3264,10 @@ an instance of :class:`plotly.graph_objs.Heatmap`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
         _v = arg.pop("zsmooth", None)
         _v = zsmooth if zsmooth is not None else _v
         if _v is not None:

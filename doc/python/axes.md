@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.15.1
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.10.14
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -363,6 +363,23 @@ fig.update_xaxes(tickangle=45, tickfont=dict(family='Rockwell', color='crimson',
 fig.show()
 ```
 
+##### Auto Tick Angle Options
+
+*New in 5.19*
+
+If `tickangle` is not explicitly set, its default value is `auto`, meaning if the label needs to be rotated to avoid labels overlapping, it will rotate by either 30 or 90 degrees. Using `autotickangles`, you can also specify a list of angles for `tickangle` to use. If `tickangle` is `auto` and you provide a list of angles to `autotickangles`, the label angle will be set to the first value in the list that prevents overlap.
+
+```python
+import plotly.express as px
+df = px.data.gapminder()
+df = df.loc[(df.continent=="Asia") & (df.year==1992)]
+fig = px.histogram(df, x=df.country, y=df.gdpPercap)
+
+fig.update_xaxes(autotickangles=[45, 60, 90])
+
+fig.show()
+```
+
 #### Enumerated Ticks with Tickvals and Ticktext
 
 The `tickvals` and `ticktext` axis properties can be used together to display custom tick label text at custom locations along an axis. They should be set to lists of the same length where the `tickvals` list contains positions along the axis, and `ticktext` contains the strings that should be displayed at the corresponding positions.
@@ -373,14 +390,18 @@ Here is an example.
 import plotly.graph_objects as go
 import pandas as pd
 
-# Load and filter Apple stock data for 2016
 apple_df = pd.read_csv(
-    "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv",
-    parse_dates=["Date"],
-    index_col="Date"
+    "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv"
 )
 
-apple_df_2016 = apple_df["2016"]
+# Convert 'Date' column to datetime format
+apple_df['Date'] = pd.to_datetime(apple_df['Date'])
+
+# Set 'Date' column as index
+apple_df.set_index('Date', inplace=True)
+
+# Filter for 2016
+apple_df_2016 = apple_df.loc['2016']
 
 # Create figure and add line
 fig = go.Figure()
@@ -423,6 +444,62 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 fig.update_xaxes(minor=dict(ticklen=6, tickcolor="black", showgrid=True))
 fig.update_yaxes(minor_ticks="inside")
+
+fig.show()
+```
+
+#### Adjust Tick Label Positions
+
+*New in 5.23*
+
+You can adjust tick label positions by moving them a number of pixels away from the axis using `ticklabelstandoff` or along the axis using `ticklabelshift`.
+
+In this example, `ticklabelshift=25` shifts the labels 25 pixels to the right along the x-axis. By providing a negative value, we could move the labels 25 pixels to the left, (`ticklabelshift=-25`).
+
+Here, `ticklabelstandoff=15` moves the labels 15 pixels further away from the x-axis. A negative value here would move them closer to the axis.
+
+```python
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.line(df, x='Date', y='AAPL.High')
+
+fig.update_layout(
+    xaxis=dict(
+        ticks='outside',
+        ticklen=10,
+        ticklabelshift=25,
+        ticklabelstandoff=15
+    )
+)
+
+fig.show()
+```
+
+#### Use Minor Tick for Label
+
+*New in 5.23*
+
+On date or linear axes, use `ticklabelindex` to draw a label for a minor tick instead of a major tick.
+
+To draw the label for the minor tick before each major tick, set `ticklabelindex=-1`, like in the following example.
+
+```python
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.line(df, x='Date', y='AAPL.High')
+
+fig.update_layout(
+    xaxis=dict(
+        minor=dict(ticks='outside'),
+        ticks='outside',
+        ticklen=10,
+        ticklabelindex=-1
+    )
+)
 
 fig.show()
 ```
@@ -582,7 +659,7 @@ fig.show()
 
 *New in 5.17*
 
-You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange. 
+You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange.
 
 ```python
 import plotly.express as px
@@ -840,7 +917,7 @@ fig.show()
 
 #### <code>nonnegative</code>, <code>tozero</code>, and <code>normal</code> Rangemode
 
-When you don't specify a range, autorange is used. It's also used for bounds set to `None` when providing a `range`. 
+When you don't specify a range, autorange is used. It's also used for bounds set to `None` when providing a `range`.
 
 The axis auto-range calculation logic can be configured using the `rangemode` axis parameter.
 
@@ -881,7 +958,7 @@ fig.update_xaxes(autorangeoptions=dict(maxallowed=5))
 fig.show()
 ```
 
-##### Clip Minimum and Maximum 
+##### Clip Minimum and Maximum
 
 You can also clip an axis range at a specific maximum or minimum value with `autorangeoptions.clipmax` and `autorangeoptions.clipmin`.
 
@@ -899,7 +976,7 @@ fig.show()
 
 ##### Specify Values to be Included
 
-Use `autorangeoptions.include` to specify a value that should always be included within the calculated autorange. In this example, we specify that for the autorange calculated on the x-axis, 5 should be included. 
+Use `autorangeoptions.include` to specify a value that should always be included within the calculated autorange. In this example, we specify that for the autorange calculated on the x-axis, 5 should be included.
 
 ```python
 import plotly.express as px

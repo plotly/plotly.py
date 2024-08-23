@@ -80,6 +80,10 @@ class Figure(BaseFigure):
                         `type` detection. This is the default value;
                         however it could be overridden for individual
                         axes.
+                    barcornerradius
+                        Sets the rounding of bar corners. May be an
+                        integer number of pixels, or a percentage of
+                        bar width (as a string ending in %).
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.
@@ -309,6 +313,15 @@ class Figure(BaseFigure):
                         spikelines are enabled by default perpendicular
                         to the specified axis. If false, hover
                         interactions are disabled.
+                    hoversubplots
+                        Determines expansion of hover effects to other
+                        subplots If "single" just the axis pair of the
+                        primary point is included without overlaying
+                        subplots. If "overlaying" all subplots using
+                        the main axis and occupying the same space are
+                        included. If "axis", also include stacked
+                        subplots using the same axis when `hovermode`
+                        is set to "x", *x unified*, "y" or *y unified*.
                     iciclecolorway
                         Sets the default icicle slice colors. Defaults
                         to the main `colorway` used for trace colors.
@@ -1282,6 +1295,7 @@ class Figure(BaseFigure):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -1664,6 +1678,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -1765,6 +1784,7 @@ class Figure(BaseFigure):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -2203,6 +2223,7 @@ class Figure(BaseFigure):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -2567,7 +2588,7 @@ class Figure(BaseFigure):
             items as the number of boxes desired. This attribute
             has effect only under the q1/median/q3 signature. If
             `upperfence` is not provided but a sample (in `y` or
-            `x`) is set, we compute the lower as the last sample
+            `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
         upperfencesrc
             Sets the source reference on Chart Studio Cloud for
@@ -2678,6 +2699,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -2791,6 +2817,7 @@ class Figure(BaseFigure):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -2845,6 +2872,7 @@ class Figure(BaseFigure):
         xsrc=None,
         yaxis=None,
         yhoverformat=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -3084,6 +3112,11 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3160,6 +3193,7 @@ class Figure(BaseFigure):
             xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -3202,6 +3236,7 @@ class Figure(BaseFigure):
         y=None,
         yaxis=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -3376,6 +3411,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3440,6 +3480,7 @@ class Figure(BaseFigure):
             y=y,
             yaxis=yaxis,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -4483,7 +4524,8 @@ class Figure(BaseFigure):
             Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
             the vector field) or as "absolute" value (in the same
-            units as the vector field).
+            units as the vector field). To display sizes in actual
+            vector length use "raw".
         sizeref
             Adjusts the cone size scaling. The size of the cones is
             determined by their u/v/w norm multiplied a factor and
@@ -4492,8 +4534,9 @@ class Figure(BaseFigure):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
+            "raw", its default value is 1. With `sizemode` set to
             "scaled", `sizeref` is unitless, its default value is
-            0.5 With `sizemode` set to "absolute", `sizeref` has
+            0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
@@ -4780,6 +4823,7 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsrc=None,
         row=None,
         col=None,
@@ -5169,6 +5213,11 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsrc
             Sets the source reference on Chart Studio Cloud for
             `z`.
@@ -5271,6 +5320,7 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
+            zorder=zorder,
             zsrc=zsrc,
             **kwargs,
         )
@@ -5330,6 +5380,7 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsrc=None,
         row=None,
         col=None,
@@ -5578,6 +5629,11 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsrc
             Sets the source reference on Chart Studio Cloud for
             `z`.
@@ -5661,6 +5717,7 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
+            zorder=zorder,
             zsrc=zsrc,
             **kwargs,
         )
@@ -6112,6 +6169,7 @@ class Figure(BaseFigure):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -6478,6 +6536,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -6571,6 +6634,7 @@ class Figure(BaseFigure):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -7007,6 +7071,7 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
         row=None,
@@ -7387,6 +7452,11 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -7488,6 +7558,7 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
+            zorder=zorder,
             zsmooth=zsmooth,
             zsrc=zsrc,
             **kwargs,
@@ -7917,6 +7988,7 @@ class Figure(BaseFigure):
         ycalendar=None,
         yhoverformat=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -8288,6 +8360,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -8381,6 +8458,7 @@ class Figure(BaseFigure):
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -9893,6 +9971,7 @@ class Figure(BaseFigure):
         z=None,
         zmax=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
         row=None,
@@ -10111,6 +10190,11 @@ class Figure(BaseFigure):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
@@ -10182,6 +10266,7 @@ class Figure(BaseFigure):
             z=z,
             zmax=zmax,
             zmin=zmin,
+            zorder=zorder,
             zsmooth=zsmooth,
             zsrc=zsrc,
             **kwargs,
@@ -11470,6 +11555,7 @@ class Figure(BaseFigure):
         xsrc=None,
         yaxis=None,
         yhoverformat=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -11708,6 +11794,11 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -11784,6 +11875,7 @@ class Figure(BaseFigure):
             xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -13175,6 +13267,7 @@ class Figure(BaseFigure):
         error_y=None,
         fill=None,
         fillcolor=None,
+        fillgradient=None,
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
@@ -13236,6 +13329,7 @@ class Figure(BaseFigure):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -13311,7 +13405,12 @@ class Figure(BaseFigure):
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
-            color, whichever is available.
+            color, whichever is available. If fillgradient is
+            specified, fillcolor is ignored except for setting the
+            background color of the hover label, if any.
+        fillgradient
+            Sets a fill gradient. If not specified, the fillcolor
+            is used instead.
         fillpattern
             Sets the pattern within the marker.
         groupnorm
@@ -13662,6 +13761,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -13701,6 +13805,7 @@ class Figure(BaseFigure):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            fillgradient=fillgradient,
             fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
@@ -13762,6 +13867,7 @@ class Figure(BaseFigure):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -14009,8 +14115,7 @@ class Figure(BaseFigure):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            :class:`plotly.graph_objects.scatter3d.Textfont`
-            instance or dict with compatible properties
+            Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -14254,6 +14359,7 @@ class Figure(BaseFigure):
         visible=None,
         xaxis=None,
         yaxis=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -14527,6 +14633,11 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -14604,6 +14715,7 @@ class Figure(BaseFigure):
             visible=visible,
             xaxis=xaxis,
             yaxis=yaxis,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -19912,6 +20024,7 @@ class Figure(BaseFigure):
         yaxis=None,
         yhoverformat=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -20267,6 +20380,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -20355,6 +20473,7 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             yhoverformat=yhoverformat,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -20917,6 +21036,7 @@ class Figure(BaseFigure):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -21302,6 +21422,11 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -21402,6 +21527,7 @@ class Figure(BaseFigure):
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
             ysrc=ysrc,
+            zorder=zorder,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -22980,8 +23106,8 @@ class Figure(BaseFigure):
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
             (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub> <span>
-            are also supported.
+            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
+            <span> are also supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -23971,12 +24097,16 @@ class Figure(BaseFigure):
         type=None,
         visible=None,
         x0=None,
+        x0shift=None,
         x1=None,
+        x1shift=None,
         xanchor=None,
         xref=None,
         xsizemode=None,
         y0=None,
+        y0shift=None,
         y1=None,
+        y1shift=None,
         yanchor=None,
         yref=None,
         ysizemode=None,
@@ -24010,8 +24140,9 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.layout.shape.Label`
             instance or dict with compatible properties
         layer
-            Specifies whether shapes are drawn below or above
-            traces.
+            Specifies whether shapes are drawn below gridlines
+            ("below"), between gridlines and traces ("between") or
+            above traces ("above").
         legend
             Sets the reference to a legend to show this shape in.
             References to these legends are "legend", "legend2",
@@ -24109,9 +24240,19 @@ class Figure(BaseFigure):
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -24146,9 +24287,19 @@ class Figure(BaseFigure):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -24220,12 +24371,16 @@ class Figure(BaseFigure):
             type=type,
             visible=visible,
             x0=x0,
+            x0shift=x0shift,
             x1=x1,
+            x1shift=x1shift,
             xanchor=xanchor,
             xref=xref,
             xsizemode=xsizemode,
             y0=y0,
+            y0shift=y0shift,
             y1=y1,
+            y1shift=y1shift,
             yanchor=yanchor,
             yref=yref,
             ysizemode=ysizemode,

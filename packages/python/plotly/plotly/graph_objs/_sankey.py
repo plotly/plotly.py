@@ -415,6 +415,15 @@ class Sankey(_BaseTraceType):
                 customdatasrc
                     Sets the source reference on Chart Studio Cloud
                     for `customdata`.
+                hovercolor
+                    Sets the `link` hover color. It can be a single
+                    value, or an array for specifying hover colors
+                    for each `link`. If `link.hovercolor` is
+                    omitted, then by default, links will become
+                    slightly more opaque when hovered over.
+                hovercolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `hovercolor`.
                 hoverinfo
                     Determines which trace information appear when
                     hovering links. If `none` or `skip` are set, no
@@ -586,6 +595,9 @@ class Sankey(_BaseTraceType):
 
             Supported dict properties:
 
+                align
+                    Sets the alignment method used to position the
+                    nodes along the horizontal axis.
                 color
                     Sets the `node` color. It can be a single
                     value, or an array for specifying color for
@@ -796,11 +808,34 @@ class Sankey(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------

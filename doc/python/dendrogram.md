@@ -92,7 +92,7 @@ from scipy.spatial.distance import pdist, squareform
 # get data
 data = np.genfromtxt("http://files.figshare.com/2133304/ExpRawData_E_TABM_84_A_AFFY_44.tab",
                      names=True,usecols=tuple(range(1,30)),dtype=float, delimiter="\t")
-data_array = data.view((np.float, len(data.dtype.names)))
+data_array = data.view((float, len(data.dtype.names)))
 data_array = data_array.transpose()
 labels = data.dtype.names
 
