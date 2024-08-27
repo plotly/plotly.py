@@ -104,7 +104,7 @@ token = open(".mapbox_token").read() # you will need your own token
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
 
-fig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
+fig = px.density_mapbox(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
                         center=dict(lat=0, lon=180), zoom=0,
                         map_style="stamen-terrain")
 fig.update_layout(mapbox_accesstoken=token)
