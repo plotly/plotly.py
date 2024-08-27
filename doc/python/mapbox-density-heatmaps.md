@@ -92,7 +92,7 @@ fig.show()
 <!-- #endregion -->
 
 <!-- #region -->
-#### Stamen Terrain base map (Stadia Maps token needed): density heatmap with `plotly.express`
+#### Stamen Terrain base map with Mapbox (Stadia Maps token needed): density heatmap with `plotly.express`
 
 Some base maps require a token. To use "stamen" base maps, you'll need a [Stadia Maps](https://www.stadiamaps.com) token, which you can provide to the `mapbox_accesstoken` parameter on `fig.update_layout`. Here, we have the token saved in a file called `.mapbox_token`, load it in to the variable `token`, and then pass it to `mapbox_accesstoken`.
 
