@@ -51,7 +51,7 @@ These traces replace the existing Mapbox traces, `px.scatter_mapbox`, `px.line_m
 
 When switching to the new traces, keep an eye out for improved rendering performance, WebGL2 support, and over time, improved features in the Plotly map traces inherited from the MapLibre renderer, including projection support, globe views, terrain support, and support for modern mapping standards.
 
-You can learn  more about the motivations for this change in our [announcement post](https://plotly.com/blog/plotly-is-switching-to-maplibre/).
+You can learn more about the motivations for this change in our [announcement post](https://plotly.com/blog/plotly-is-switching-to-maplibre/).
 
 As a result of removing Mapbox as the rendering engine, we're also removing the Mapbox branding from these trace names. This means that migrating from Mapbox traces to MapLibre traces will require some code changes in your projects.
 
