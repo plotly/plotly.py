@@ -1241,7 +1241,7 @@ def scatter_map(
     height=None,
 ) -> go.Figure:
     """
-    In a Map scatter plot, each row of `data_frame` is represented by a
+    In a scatter map, each row of `data_frame` is represented by a
     symbol mark on the map.
     """
     return make_figure(args=locals(), constructor=go.Scattermap)
@@ -1278,7 +1278,7 @@ def choropleth_map(
     height=None,
 ) -> go.Figure:
     """
-    In a Map choropleth map, each row of `data_frame` is represented by a
+    In a choropleth map, each row of `data_frame` is represented by a
     colored region on the map.
     """
     return make_figure(args=locals(), constructor=go.Choroplethmap)
@@ -1313,7 +1313,7 @@ def density_map(
     height=None,
 ) -> go.Figure:
     """
-    In a Map density map, each row of `data_frame` contributes to the intensity of
+    In a density map, each row of `data_frame` contributes to the intensity of
     the color of the region around the corresponding point on the map
     """
     return make_figure(
@@ -1349,7 +1349,7 @@ def line_map(
     height=None,
 ) -> go.Figure:
     """
-    In a Map line plot, each row of `data_frame` is represented as
+    In a line map, each row of `data_frame` is represented as
     vertex of a polyline mark on the map.
     """
     return make_figure(args=locals(), constructor=go.Scattermap)
