@@ -30,7 +30,6 @@ jupyter:
     order: 1
     page_type: example_index
     permalink: python/mapbox-to-maplibre/
-    redirect_from: python/mapbox-migration/
     thumbnail: thumbnail/line-and-scatter.jpg
 ---
 
