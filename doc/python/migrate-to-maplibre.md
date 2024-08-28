@@ -60,7 +60,7 @@ As a result of removing Mapbox as the rendering engine, we're also removing the 
 3. If in use, update `mapbox_style` to `map_style`.
 4. Verify your `map_style` settings. With `mapbox` traces, we bundle `basic`, `streets`, `outdoors`, `light`, `dark`, `satellite`, and `satellite-streets` styles, using Mapbox styling. These style names are still available, but they now reference slightly different styles provided by other tools.
 
-Note that Mapbox API keys are no longer required for Plotly-provided styles, but using external styles in your Plotly maps, remains supported with the existing API.
+Note that Mapbox API keys are no longer required for Plotly-provided styles, but using external styles in your Plotly maps remains supported with the existing API.
 
 ### Style changes
 Built-in styles in map traces are free styles from [Carto](https://carto.com) and [ESRI](https://www.esri.com/en-us/home). Several names are re-used from the previous Mapbox styles.
