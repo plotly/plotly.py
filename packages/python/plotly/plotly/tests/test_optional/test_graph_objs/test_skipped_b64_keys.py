@@ -4,7 +4,7 @@ from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 import plotly.graph_objs as go
 
 
-class TestSkippedBase64Keys(NumpyTestUtilsMixin, TestCase):
+class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
     def test_np_geojson(self):
         normal_coordinates = [
             [
