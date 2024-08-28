@@ -1,6 +1,7 @@
 import base64
 import numbers
 import textwrap
+import traceback
 import uuid
 from importlib import import_module
 import copy
@@ -488,9 +489,10 @@ class DataArrayValidator(BaseValidator):
         )
 
     def validate_coerce(self, v):
-
         if is_none_or_typed_array_spec(v):
             pass
+        elif 'layer' in self.parent_name or 'range' in self.parent_name or 'geojson' in self.parent_name:
+            v = to_scalar_or_list(v)
         elif is_homogeneous_array(v):
             v = to_typed_array_spec(v)
         elif is_simple_array(v):
