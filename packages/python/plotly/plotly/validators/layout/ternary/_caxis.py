@@ -53,14 +53,19 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "SI", 1G. If "B", 1B.
             gridcolor
                 Sets the color of the grid lines.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the grid lines.
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -69,6 +74,19 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             layer
                 Sets the layer on which this axis is displayed.
                 If *above traces*, this axis is displayed above
@@ -147,8 +165,8 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -166,6 +184,16 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 out.ternary.caxis.tickformatstopdefaults), sets
                 the default property values to use for elements
                 of layout.ternary.caxis.tickformatstops
+            ticklabelstep
+                Sets the spacing between tick labels as
+                compared to the spacing between ticks. A value
+                of 1 (default) means each tick gets a label. A
+                value of 2 means shows every 2nd label. A
+                larger value n means only every nth tick is
+                labeled. `tick0` determines which labels are
+                shown. Not implemented for axes with `type`
+                "log" or "multicategory", or when `tickmode` is
+                "array".
             ticklen
                 Sets the tick length (in px).
             tickmode
@@ -195,14 +223,14 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             tickwidth
                 Sets the tick width (in px).
             title
@@ -222,5 +250,5 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `ternary<N>.uirevision`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

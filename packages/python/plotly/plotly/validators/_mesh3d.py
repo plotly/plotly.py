@@ -37,14 +37,14 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             cauto
                 Determines whether or not the color domain is
                 computed with respect to the input data (here
                 `intensity`) or the bounds set in `cmin` and
-                `cmax`  Defaults to `false` when `cmin` and
+                `cmax` Defaults to `false` when `cmin` and
                 `cmax` are set by the user.
             cmax
                 Sets the upper bound of the color domain. Value
@@ -82,7 +82,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`cmin` and
+                colorscale in color space, use `cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -99,7 +99,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             delaunayaxis
                 Sets the Delaunay axis, which is the axis that
                 is perpendicular to the surface of the Delaunay
@@ -111,7 +111,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and "vertexcolor".
             facecolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  facecolor .
+                for `facecolor`.
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -124,7 +124,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.mesh3d.Hoverlabel`
                 instance or dict with compatible properties
@@ -142,8 +142,8 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -163,12 +163,12 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             i
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -186,7 +186,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             intensity
                 Sets the intensity values for vertices or cells
                 as defined by `intensitymode`. It can be used
@@ -195,10 +195,10 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines the source of `intensity` values.
             intensitysrc
                 Sets the source reference on Chart Studio Cloud
-                for  intensity .
+                for `intensity`.
             isrc
                 Sets the source reference on Chart Studio Cloud
-                for  i .
+                for `i`.
             j
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -212,7 +212,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 triangle.
             jsrc
                 Sets the source reference on Chart Studio Cloud
-                for  j .
+                for `j`.
             k
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -225,11 +225,18 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 space, which is the third vertex of a triangle.
             ksrc
                 Sets the source reference on Chart Studio Cloud
-                for  k .
+                for `k`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.mesh3d.Legendgroup
                 title` instance or dict with compatible
@@ -237,13 +244,19 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             lighting
                 :class:`plotly.graph_objects.mesh3d.Lighting`
                 instance or dict with compatible properties
@@ -266,9 +279,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the surface. Please note
@@ -307,7 +320,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 elements will be seen in the hover labels.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -343,7 +356,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 0 and 1.
             vertexcolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  vertexcolor .
+                for `vertexcolor`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -361,9 +374,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -374,7 +387,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the Y coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -387,9 +400,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -400,7 +413,7 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             z
                 Sets the Z coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -413,9 +426,9 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -426,8 +439,8 @@ class Mesh3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `zaxis.hoverformat`.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

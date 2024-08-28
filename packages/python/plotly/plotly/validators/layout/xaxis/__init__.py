@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zerolinewidth import ZerolinewidthValidator
     from ._zerolinecolor import ZerolinecolorValidator
     from ._zeroline import ZerolineValidator
@@ -19,9 +20,14 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
+    from ._ticklabelstep import TicklabelstepValidator
+    from ._ticklabelstandoff import TicklabelstandoffValidator
+    from ._ticklabelshift import TicklabelshiftValidator
     from ._ticklabelposition import TicklabelpositionValidator
     from ._ticklabeloverflow import TicklabeloverflowValidator
     from ._ticklabelmode import TicklabelmodeValidator
+    from ._ticklabelindexsrc import TicklabelindexsrcValidator
+    from ._ticklabelindex import TicklabelindexValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
     from ._tickformat import TickformatValidator
@@ -56,13 +62,19 @@ if sys.version_info < (3, 7):
     from ._overlaying import OverlayingValidator
     from ._nticks import NticksValidator
     from ._mirror import MirrorValidator
+    from ._minor import MinorValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._matches import MatchesValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
+    from ._labelalias import LabelaliasValidator
+    from ._insiderange import InsiderangeValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._fixedrange import FixedrangeValidator
     from ._exponentformat import ExponentformatValidator
@@ -78,6 +90,8 @@ if sys.version_info < (3, 7):
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autotickangles import AutotickanglesValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -106,9 +120,14 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
+            "._ticklabelstep.TicklabelstepValidator",
+            "._ticklabelstandoff.TicklabelstandoffValidator",
+            "._ticklabelshift.TicklabelshiftValidator",
             "._ticklabelposition.TicklabelpositionValidator",
             "._ticklabeloverflow.TicklabeloverflowValidator",
             "._ticklabelmode.TicklabelmodeValidator",
+            "._ticklabelindexsrc.TicklabelindexsrcValidator",
+            "._ticklabelindex.TicklabelindexValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
             "._tickformat.TickformatValidator",
@@ -143,13 +162,19 @@ else:
             "._overlaying.OverlayingValidator",
             "._nticks.NticksValidator",
             "._mirror.MirrorValidator",
+            "._minor.MinorValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._matches.MatchesValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
+            "._labelalias.LabelaliasValidator",
+            "._insiderange.InsiderangeValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._fixedrange.FixedrangeValidator",
             "._exponentformat.ExponentformatValidator",
@@ -165,6 +190,8 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autotickangles.AutotickanglesValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",

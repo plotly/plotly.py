@@ -1,7 +1,4 @@
-from __future__ import absolute_import
-
-import decimal
-import six
+from collections.abc import Sequence
 
 from plotly import exceptions
 from plotly.colors import (
@@ -22,11 +19,6 @@ from plotly.colors import (
     validate_colorscale,
     validate_scale_values,
 )
-
-try:
-    from collections.abc import Sequence
-except ImportError:
-    from collections import Sequence
 
 
 def is_sequence(obj):

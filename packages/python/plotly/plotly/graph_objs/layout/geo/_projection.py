@@ -18,7 +18,7 @@ class Projection(_BaseLayoutHierarchyType):
         For satellite projection type only. Sets the distance from the
         center of the sphere to the point of view as a proportion of
         the sphere’s radius.
-    
+
         The 'distance' property is a number and may be specified as:
           - An int or float in the interval [1.001, inf]
 
@@ -37,20 +37,20 @@ class Projection(_BaseLayoutHierarchyType):
     @property
     def parallels(self):
         """
-        For conic projection types only. Sets the parallels (tangent,
-        secant) where the cone intersects the sphere.
-    
-        The 'parallels' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'parallels[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'parallels[1]' property is a number and may be specified as:
-          - An int or float
+            For conic projection types only. Sets the parallels (tangent,
+            secant) where the cone intersects the sphere.
 
-        Returns
-        -------
-        list
+            The 'parallels' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'parallels[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'parallels[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["parallels"]
 
@@ -68,9 +68,9 @@ class Projection(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`
           - A dict of string/value properties that will be passed
             to the Rotation constructor
-    
+
             Supported dict properties:
-                
+
                 lat
                     Rotates the map along meridians (in degrees
                     North).
@@ -99,7 +99,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
         Zooms in or out on the map view. A scale of 1 corresponds to
         the largest zoom level that fits the map's lon and lat ranges.
-    
+
         The 'scale' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -120,7 +120,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
         For satellite projection type only. Sets the tilt angle of
         perspective projection.
-    
+
         The 'tilt' property is a number and may be specified as:
           - An int or float
 
@@ -140,7 +140,7 @@ class Projection(_BaseLayoutHierarchyType):
     def type(self):
         """
         Sets the projection type.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['airy', 'aitoff', 'albers', 'albers usa', 'august',
@@ -150,11 +150,11 @@ class Projection(_BaseLayoutHierarchyType):
                 equidistant', 'craig', 'craster', 'cylindrical equal
                 area', 'cylindrical stereographic', 'eckert1', 'eckert2',
                 'eckert3', 'eckert4', 'eckert5', 'eckert6', 'eisenlohr',
-                'equirectangular', 'fahey', 'foucaut', 'foucaut
-                sinusoidal', 'ginzburg4', 'ginzburg5', 'ginzburg6',
-                'ginzburg8', 'ginzburg9', 'gnomonic', 'gringorten',
-                'gringorten quincuncial', 'guyou', 'hammer', 'hill',
-                'homolosine', 'hufnagel', 'hyperelliptical',
+                'equal earth', 'equirectangular', 'fahey', 'foucaut',
+                'foucaut sinusoidal', 'ginzburg4', 'ginzburg5',
+                'ginzburg6', 'ginzburg8', 'ginzburg9', 'gnomonic',
+                'gringorten', 'gringorten quincuncial', 'guyou', 'hammer',
+                'hill', 'homolosine', 'hufnagel', 'hyperelliptical',
                 'kavrayskiy7', 'lagrange', 'larrivee', 'laskowski',
                 'loximuthal', 'mercator', 'miller', 'mollweide', 'mt flat
                 polar parabolic', 'mt flat polar quartic', 'mt flat polar
@@ -213,11 +213,11 @@ class Projection(_BaseLayoutHierarchyType):
         scale=None,
         tilt=None,
         type=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Projection object
-        
+
         Parameters
         ----------
         arg
@@ -265,8 +265,8 @@ class Projection(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.geo.Projection 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.geo.Projection
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.geo.Projection`"""
             )
 

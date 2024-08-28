@@ -34,7 +34,7 @@ class Cells(_BaseTraceHierarchyType):
         an effect only if `text` spans two or more lines (i.e. `text`
         contains one or more <br> HTML tags) or if an explicit width is
         set to override the text width.
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -55,8 +55,8 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def alignsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  align .
-    
+        Sets the source reference on Chart Studio Cloud for `align`.
+
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -80,16 +80,16 @@ class Cells(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.cells.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the cell fill color. It accepts either a
                     specific color or an array of colors or a 2D
                     array of colors.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
 
         Returns
         -------
@@ -111,14 +111,14 @@ class Cells(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.cells.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -132,18 +132,58 @@ class Cells(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -164,7 +204,7 @@ class Cells(_BaseTraceHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-    
+
         The 'format' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -183,8 +223,8 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def formatsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  format .
-    
+        Sets the source reference on Chart Studio Cloud for `format`.
+
         The 'formatsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -204,7 +244,7 @@ class Cells(_BaseTraceHierarchyType):
     def height(self):
         """
         The height of cells.
-    
+
         The 'height' property is a number and may be specified as:
           - An int or float
 
@@ -228,19 +268,19 @@ class Cells(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.table.cells.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
-    
+
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -258,7 +298,7 @@ class Cells(_BaseTraceHierarchyType):
     def prefix(self):
         """
         Prefix for cell values.
-    
+
         The 'prefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -279,8 +319,8 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def prefixsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  prefix .
-    
+        Sets the source reference on Chart Studio Cloud for `prefix`.
+
         The 'prefixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -300,7 +340,7 @@ class Cells(_BaseTraceHierarchyType):
     def suffix(self):
         """
         Suffix for cell values.
-    
+
         The 'suffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -321,8 +361,8 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def suffixsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  suffix .
-    
+        Sets the source reference on Chart Studio Cloud for `suffix`.
+
         The 'suffixsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -345,7 +385,7 @@ class Cells(_BaseTraceHierarchyType):
         point in column `m`, therefore the `values[m]` vector length
         for all columns must be the same (longer vectors will be
         truncated). Each value must be a finite number or a string.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -364,8 +404,8 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
-    
+        Sets the source reference on Chart Studio Cloud for `values`.
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -392,7 +432,7 @@ class Cells(_BaseTraceHierarchyType):
             width.
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         fill
             :class:`plotly.graph_objects.table.cells.Fill` instance
             or dict with compatible properties
@@ -406,7 +446,7 @@ class Cells(_BaseTraceHierarchyType):
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
-            format .
+            `format`.
         height
             The height of cells.
         line
@@ -416,12 +456,12 @@ class Cells(_BaseTraceHierarchyType):
             Prefix for cell values.
         prefixsrc
             Sets the source reference on Chart Studio Cloud for
-            prefix .
+            `prefix`.
         suffix
             Suffix for cell values.
         suffixsrc
             Sets the source reference on Chart Studio Cloud for
-            suffix .
+            `suffix`.
         values
             Cell values. `values[m][n]` represents the value of the
             `n`th point in column `m`, therefore the `values[m]`
@@ -430,7 +470,7 @@ class Cells(_BaseTraceHierarchyType):
             number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         """
 
     def __init__(
@@ -450,11 +490,11 @@ class Cells(_BaseTraceHierarchyType):
         suffixsrc=None,
         values=None,
         valuessrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Cells object
-        
+
         Parameters
         ----------
         arg
@@ -468,7 +508,7 @@ class Cells(_BaseTraceHierarchyType):
             width.
         alignsrc
             Sets the source reference on Chart Studio Cloud for
-            align .
+            `align`.
         fill
             :class:`plotly.graph_objects.table.cells.Fill` instance
             or dict with compatible properties
@@ -482,7 +522,7 @@ class Cells(_BaseTraceHierarchyType):
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         formatsrc
             Sets the source reference on Chart Studio Cloud for
-            format .
+            `format`.
         height
             The height of cells.
         line
@@ -492,12 +532,12 @@ class Cells(_BaseTraceHierarchyType):
             Prefix for cell values.
         prefixsrc
             Sets the source reference on Chart Studio Cloud for
-            prefix .
+            `prefix`.
         suffix
             Suffix for cell values.
         suffixsrc
             Sets the source reference on Chart Studio Cloud for
-            suffix .
+            `suffix`.
         values
             Cell values. `values[m][n]` represents the value of the
             `n`th point in column `m`, therefore the `values[m]`
@@ -506,7 +546,7 @@ class Cells(_BaseTraceHierarchyType):
             number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
 
         Returns
         -------
@@ -529,8 +569,8 @@ class Cells(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.table.Cells 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.table.Cells
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.table.Cells`"""
             )
 

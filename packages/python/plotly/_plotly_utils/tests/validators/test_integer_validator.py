@@ -33,6 +33,18 @@ def validator_aok(request):
     return IntegerValidator("prop", "parent", min=-2, max=10, array_ok=True)
 
 
+@pytest.fixture
+def validator_extras():
+    return IntegerValidator("prop", "parent", min=-2, max=10, extras=["normal", "bold"])
+
+
+@pytest.fixture
+def validator_extras_aok():
+    return IntegerValidator(
+        "prop", "parent", min=-2, max=10, array_ok=True, extras=["normal", "bold"]
+    )
+
+
 # ### Acceptance ###
 @pytest.mark.parametrize("val", [1, -19, 0, -1234])
 def test_acceptance(val, validator):
@@ -57,8 +69,29 @@ def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
 
 
+# With extras
+@pytest.mark.parametrize("val", ["normal", "bold", 10, -2])
+def test_acceptance_extras(val, validator_extras):
+    assert validator_extras.validate_coerce(val) == val
+
+
+# Test extras for array_ok
+@pytest.mark.parametrize("val", [[10, "normal", "bold"], ["normal"], [10, -2], [5]])
+def test_acceptance_extras_array(val, validator_extras_aok):
+    assert validator_extras_aok.validate_coerce(val) == val
+
+
+# Test rejection by extras
+@pytest.mark.parametrize("val", ["invalid value", "different invalid value", -3, 11])
+def test_rejection_extras(val, validator_extras):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_extras.validate_coerce(val)
+
+    assert "Invalid value" in str(validation_failure.value)
+
+
 @pytest.mark.parametrize(
-    "val", [-1.01, -10, 2.1, 3, np.iinfo(np.int).max, np.iinfo(np.int).min]
+    "val", [-1.01, -10, 2.1, 3, np.iinfo(int).max, np.iinfo(int).min]
 )
 def test_rejection_min_max(val, validator_min_max):
     with pytest.raises(ValueError) as validation_failure:
@@ -74,7 +107,7 @@ def test_acceptance_min(val, validator_min):
     assert validator_min.validate_coerce(val) == approx(val)
 
 
-@pytest.mark.parametrize("val", [-2, -123, np.iinfo(np.int).min])
+@pytest.mark.parametrize("val", [-2, -123, np.iinfo(int).min])
 def test_rejection_min(val, validator_min):
     with pytest.raises(ValueError) as validation_failure:
         validator_min.validate_coerce(val)

@@ -6,11 +6,11 @@ class CategoryarraysrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="categoryarraysrc",
         parent_name="layout.polar.angularaxis",
-        **kwargs
+        **kwargs,
     ):
         super(CategoryarraysrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
-            **kwargs
+            **kwargs,
         )

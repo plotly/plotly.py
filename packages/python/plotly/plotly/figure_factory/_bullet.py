@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-
-import collections
 import math
 
 from plotly import exceptions, optional_imports
@@ -156,7 +153,7 @@ def _bullet(
             hoverinfo="x" if orientation == "h" else "y",
             xaxis="x{}".format(row + 1),
             yaxis="y{}".format(row + 1),
-            **scatter_options
+            **scatter_options,
         )
 
         fig.add_trace(markers)
@@ -195,7 +192,7 @@ def create_bullet(
     horizontal_spacing=None,
     vertical_spacing=None,
     scatter_options={},
-    **layout_options
+    **layout_options,
 ):
     """
     **deprecated**, use instead the plotly.graph_objects trace
@@ -239,7 +236,7 @@ def create_bullet(
         for more information on valid params.
 
     Example 1: Use a Dictionary
-    
+
     >>> import plotly.figure_factory as ff
 
     >>> data = [

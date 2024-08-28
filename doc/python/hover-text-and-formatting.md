@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to use hover text and formatting in Python with Plotly.
     display_as: file_settings
@@ -93,9 +93,13 @@ Change the hovermode below and try hovering over the points:
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Selecting a hovermode in a figure created with `plotly.graph_objects`
 
@@ -109,6 +113,37 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(x=t, y=np.sin(t), name='sin(t)'))
 fig.add_trace(go.Scatter(x=t, y=np.cos(t), name='cost(t)'))
 fig.update_layout(hovermode='x unified')
+fig.show()
+```
+
+#### Hover on Subplots
+
+*New in 5.21*
+
+Use `hoversubplots` to define how hover effects expand to additional subplots. With `hoversubplots=axis`, hover effects are included on stacked subplots using the same axis when `hovermode` is set to `x`, `x unified`, `y`, or `y unified`.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+from plotly import data
+
+df = data.stocks()
+
+layout = dict(
+    hoversubplots="axis",
+    title="Stock Price Changes",
+    hovermode="x",
+    grid=dict(rows=3, columns=1),
+)
+
+data = [
+    go.Scatter(x=df["date"], y=df["AAPL"], xaxis="x", yaxis="y", name="Apple"),
+    go.Scatter(x=df["date"], y=df["GOOG"], xaxis="x", yaxis="y2", name="Google"),
+    go.Scatter(x=df["date"], y=df["AMZN"], xaxis="x", yaxis="y3", name="Amazon"),
+]
+
+fig = go.Figure(data=data, layout=layout)
+
 fig.show()
 ```
 
@@ -183,7 +218,7 @@ fig.show()
 
 ### Customizing hover text with a hovertemplate
 
-To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` tracces, which is a template string used for rendering the information that appear on hoverbox.
+To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
 
 Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
@@ -248,6 +283,58 @@ print("user_defined hovertemplate:", fig.data[0].hovertemplate)
 fig.show()
 ```
 
+### Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate
+
+This example adds custom fields to a Plotly Express figure using the custom_data parameter and then adds a hover template that applies d3 formats to each element of the customdata[n] array and uses HTML to customize the fonts and spacing. 
+
+```python
+# %%
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
+import math
+import numpy as np
+
+data = px.data.gapminder()
+df = data[data['year']==2007]
+df = df.sort_values(['continent', 'country'])
+
+df.rename(columns={"gdpPercap":'GDP per capita', "lifeExp":'Life Expectancy (years)'}, inplace=True)
+
+fig=px.scatter(df, 
+               x='GDP per capita',
+               y='Life Expectancy (years)', 
+               color='continent', 
+               size=np.sqrt(df['pop']),           
+               # Specifying data to make available to the hovertemplate
+               # The px custom_data parameter has an underscore, while the analogous graph objects customdata parameter has no underscore.
+               # The px custom_data parameter is a list of column names in the data frame, while the graph objects customdata parameter expects a data frame or a numpy array.
+               custom_data=['country', 'continent', 'pop'], 
+)
+
+# Plotly express does not have a hovertemplate parameter in the graph creation function, so we apply the template with update_traces
+fig.update_traces(
+    hovertemplate = 
+                "<b>%{customdata[0]}</b><br>" +
+                "<b>%{customdata[1]}</b><br><br>" +
+                "GDP per Capita: %{x:$,.0f}<br>" +
+                "Life Expectation: %{y:.0f}<br>" +
+                "Population: %{customdata[2]:,.0f}" +
+                "<extra></extra>",
+    mode='markers',
+    marker={'sizemode':'area',
+            'sizeref':10},
+)
+
+fig.update_layout(
+        xaxis={
+            'type':'log'},
+        )
+
+fig.show()
+```
+
+
 ### Hover Templates with Mixtures of Period data
 
 *New in v5.0*
@@ -284,7 +371,7 @@ fig.show()
 
 ### Advanced Hover Template
 
-The following example shows how to format a hover template.
+This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the customdata array using the df[["col_i", "col_j"]] subsetting notation.  It then references those variables using e.g. %{customdata[0]} in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.  
 
 ```python
 import plotly.graph_objects as go
@@ -308,20 +395,30 @@ continent_data = {continent:df_2007.query("continent == '%s'" %continent)
 
 fig = go.Figure()
 
-for continent_name, continent in continent_data.items():
-    fig.add_trace(go.Scatter(
-        x=continent['gdpPercap'],
-        y=continent['lifeExp'],
-        name=continent_name,
-        text=df_2007['continent'],
-        hovertemplate=
-        "<b>%{text}</b><br><br>" +
-        "GDP per Capita: %{x:$,.0f}<br>" +
-        "Life Expectation: %{y:.0%}<br>" +
-        "Population: %{marker.size:,}" +
-        "<extra></extra>",
-        marker_size=continent['size'],
+for continent_name, df in continent_data.items():
+    fig.add_trace(
+        go.Scatter(
+            x=df['gdpPercap'],
+            y=df['lifeExp'],
+            marker_size=df['size'],
+            name=continent_name,
+
+            # The next three parameters specify the hover text
+            # Text supports just one customized field per trace 
+            # and is implemented here with text=df['continent'],  
+            # Custom data supports multiple fields through numeric indices in the hovertemplate 
+            # In we weren't using the text parameter in our example, 
+            # we could instead add continent as a third customdata field.
+            customdata=df[['country','pop']],  
+            hovertemplate=
+                "<b>%{customdata[0]}</b><br>" +
+                "<b>%{text}</b><br><br>" +
+                "GDP per Capita: %{x:$,.0f}<br>" +
+                "Life Expectancy: %{y:.0f}<br>" +
+                "Population: %{customdata[1]:,.0f}" +
+                "<extra></extra>",
         ))
+
 
 fig.update_traces(
     mode='markers',

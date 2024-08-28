@@ -34,5 +34,5 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the projection type.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

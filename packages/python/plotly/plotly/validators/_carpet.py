@@ -22,7 +22,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             asrc
                 Sets the source reference on Chart Studio Cloud
-                for  a .
+                for `a`.
             b
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -35,7 +35,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             bsrc
                 Sets the source reference on Chart Studio Cloud
-                for  b .
+                for `b`.
             carpet
                 An identifier for this carpet, so that
                 `scattercarpet` and `contourcarpet` traces can
@@ -58,7 +58,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             da
                 Sets the a coordinate step. See `a0` for more
                 info.
@@ -75,7 +75,13 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.carpet.Legendgroup
                 title` instance or dict with compatible
@@ -83,13 +89,19 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -106,9 +118,9 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -159,7 +171,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.xaxis2`, and so on.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -171,8 +183,13 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

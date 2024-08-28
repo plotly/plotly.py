@@ -36,7 +36,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Determines which button (by index starting from 0) is
         considered active.
-    
+
         The 'active' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
@@ -57,7 +57,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the update menu buttons.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -116,7 +116,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the update menu.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -175,7 +175,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) of the border enclosing the update menu.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -199,9 +199,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.updatemenu.Button
           - A list or tuple of dicts of string/value properties that
             will be passed to the Button constructor
-    
+
             Supported dict properties:
-                
+
                 args
                     Sets the arguments values to be passed to the
                     Plotly method set in `method` on click.
@@ -275,13 +275,13 @@ class Updatemenu(_BaseLayoutHierarchyType):
         layout.template.layout.updatemenu.buttondefaults), sets the
         default property values to use for elements of
         layout.updatemenu.buttons
-    
+
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.updatemenu.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -303,7 +303,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         whether in a dropdown menu or a row/column of buttons. For
         `left` and `up`, the buttons will still appear in left-to-right
         or top-to-bottom order respectively.
-    
+
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'right', 'up', 'down']
@@ -324,17 +324,17 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets the font of the update menu button text.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.updatemenu.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -348,11 +348,34 @@ class Updatemenu(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -376,7 +399,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -397,15 +420,15 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def pad(self):
         """
         Sets the padding around the buttons or dropdown menu.
-    
+
         The 'pad' property is an instance of Pad
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.updatemenu.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
-    
+
             Supported dict properties:
-                
+
                 b
                     The amount of padding (in px) along the bottom
                     of the component.
@@ -435,7 +458,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def showactive(self):
         """
         Highlights active dropdown item or active button if true.
-    
+
         The 'showactive' property must be specified as a bool
         (either True, or False)
 
@@ -462,7 +485,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -485,7 +508,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Determines whether the buttons are accessible via a dropdown
         menu or whether the buttons are stacked horizontally or
         vertically
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['dropdown', 'buttons']
@@ -506,7 +529,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not the update menu is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -527,7 +550,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Sets the x position (in normalized coordinates) of the update
         menu.
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -549,7 +572,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Sets the update menu's horizontal position anchor. This anchor
         binds the `x` position to the "left", "center" or "right" of
         the range selector.
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'left', 'center', 'right']
@@ -571,7 +594,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Sets the y position (in normalized coordinates) of the update
         menu.
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -593,7 +616,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Sets the update menu's vertical position anchor This anchor
         binds the `y` position to the "top", "middle" or "bottom" of
         the range selector.
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'top', 'middle', 'bottom']
@@ -707,11 +730,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Updatemenu object
-        
+
         Parameters
         ----------
         arg
@@ -811,8 +834,8 @@ class Updatemenu(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Updatemenu 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Updatemenu
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Updatemenu`"""
             )
 

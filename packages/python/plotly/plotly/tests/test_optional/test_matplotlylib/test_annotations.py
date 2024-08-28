@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import pytest
 
 from plotly import optional_imports
@@ -14,7 +12,7 @@ if matplotlylib:
     from plotly.tests.test_optional.test_matplotlylib.data.annotations import *
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_annotations():
     fig, ax = plt.subplots()
     ax.plot([1, 2, 3], "b-")

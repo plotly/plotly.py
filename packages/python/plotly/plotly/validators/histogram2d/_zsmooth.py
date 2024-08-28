@@ -8,5 +8,5 @@ class ZsmoothValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop("values", ["fast", "best", False]),
-            **kwargs
+            **kwargs,
         )

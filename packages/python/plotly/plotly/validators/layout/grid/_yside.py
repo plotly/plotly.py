@@ -8,5 +8,5 @@ class YsideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             values=kwargs.pop("values", ["left", "left plot", "right plot", "right"]),
-            **kwargs
+            **kwargs,
         )

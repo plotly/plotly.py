@@ -14,5 +14,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "plot", "valType": "number"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

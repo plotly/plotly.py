@@ -86,7 +86,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     f = 51515
     singlerow = pd.DataFrame(
@@ -103,7 +103,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     f = 2270
     singlerow = pd.DataFrame(
@@ -120,19 +120,19 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
         index=[max(gdf.index) + 1],
     )
-    gdf = gdf.append(singlerow, sort=True)
+    gdf = pd.concat([gdf, singlerow], sort=True)
 
     row_2198 = gdf[gdf["FIPS"] == 2198]
     row_2198.index = [max(gdf.index) + 1]
     row_2198.loc[row_2198.index[0], "FIPS"] = 2201
     row_2198.loc[row_2198.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2198, sort=True)
+    gdf = pd.concat([gdf, row_2198], sort=True)
 
     row_2105 = gdf[gdf["FIPS"] == 2105]
     row_2105.index = [max(gdf.index) + 1]
     row_2105.loc[row_2105.index[0], "FIPS"] = 2232
     row_2105.loc[row_2105.index[0], "STATEFP"] = "02"
-    gdf = gdf.append(row_2105, sort=True)
+    gdf = pd.concat([gdf, row_2105], sort=True)
     gdf = gdf.rename(columns={"NAME": "COUNTY_NAME"})
 
     gdf_reduced = gdf[["FIPS", "STATEFP", "COUNTY_NAME", "geometry"]]
@@ -267,7 +267,7 @@ def _human_format(number):
     units = ["", "K", "M", "G", "T", "P"]
     k = 1000.0
     magnitude = int(floor(log(number, k)))
-    return "%.2f%s" % (number / k ** magnitude, units[magnitude])
+    return "%.2f%s" % (number / k**magnitude, units[magnitude])
 
 
 def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_format):
@@ -358,15 +358,15 @@ def _calculations(
     elif fips_polygon_map[f].type == "MultiPolygon":
         x = [
             poly.simplify(simplify_county).exterior.xy[0].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
         y = [
             poly.simplify(simplify_county).exterior.xy[1].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
 
-        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
-        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
+        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f].geoms]
+        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f].geoms]
 
         county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
         state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
@@ -382,7 +382,7 @@ def _calculations(
             + "<br>Value: "
             + str(values[index])
         )
-        t_c = [text for poly in fips_polygon_map[f]]
+        t_c = [text for poly in fips_polygon_map[f].geoms]
         x_centroids = x_c + x_centroids
         y_centroids = y_c + y_centroids
         centroid_text = t_c + centroid_text
@@ -411,9 +411,14 @@ def create_choropleth(
     round_legend_values=False,
     exponent_format=False,
     legend_title="",
-    **layout_options
+    **layout_options,
 ):
     """
+    **deprecated**, use instead
+    :func:`plotly.express.choropleth` with custom GeoJSON.
+
+    This function also requires `shapely`, `geopandas` and `plotly-geo` to be installed.
+
     Returns figure for county choropleth. Uses data from package_data.
 
     :param (list) fips: list of FIPS values which correspond to the con
@@ -848,11 +853,11 @@ $ conda install -c plotly plotly-geo
         elif df_state["geometry"][index].type == "MultiPolygon":
             x = [
                 poly.simplify(simplify_state).exterior.xy[0].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             y = [
                 poly.simplify(simplify_state).exterior.xy[1].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             for segment in range(len(x)):
                 x_states = x_states + x[segment]

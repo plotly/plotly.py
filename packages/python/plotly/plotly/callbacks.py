@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from plotly.utils import _list_repr_elided
 
 
@@ -17,11 +16,11 @@ class InputDeviceState:
     def __repr__(self):
         return """\
 InputDeviceState(
-    ctrl={ctrl}, 
-    alt={alt}, 
-    shift={shift}, 
-    meta={meta}, 
-    button={button}, 
+    ctrl={ctrl},
+    alt={alt},
+    shift={shift},
+    meta={meta},
+    button={button},
     buttons={buttons})""".format(
             ctrl=repr(self.ctrl),
             alt=repr(self.alt),

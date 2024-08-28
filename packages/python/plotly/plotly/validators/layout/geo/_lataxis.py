@@ -15,6 +15,11 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 step.
             gridcolor
                 Sets the graticule's stroke color.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the graticule's stroke width (in px).
             range
@@ -28,5 +33,5 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 longitude/latitude.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

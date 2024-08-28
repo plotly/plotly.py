@@ -67,5 +67,5 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 visible.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

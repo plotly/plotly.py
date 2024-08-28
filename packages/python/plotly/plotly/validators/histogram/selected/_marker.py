@@ -18,5 +18,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker opacity of selected points.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

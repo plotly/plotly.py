@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tools
 =====
@@ -7,13 +5,9 @@ tools
 Functions that USERS will possibly want access to.
 
 """
-from __future__ import absolute_import
-
 import json
 import warnings
 
-import six
-import re
 import os
 
 from plotly import exceptions, optional_imports
@@ -242,7 +236,7 @@ def make_subplots(
     shared_yaxes=False,
     start_cell="top-left",
     print_grid=None,
-    **kwargs
+    **kwargs,
 ):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
@@ -472,7 +466,7 @@ def make_subplots(
         shared_yaxes=shared_yaxes,
         start_cell=start_cell,
         print_grid=print_grid,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -512,7 +506,7 @@ def _replace_newline(obj):
         for index, entry in enumerate(obj):
             l += [_replace_newline(entry)]
         return l
-    elif isinstance(obj, six.string_types):
+    elif isinstance(obj, str):
         s = obj.replace("\n", "<br>")
         if s != obj:
             warnings.warn(

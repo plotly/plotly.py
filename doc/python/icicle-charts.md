@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make Icicle Charts.
     display_as: basic
@@ -232,7 +232,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the suplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/icicle/#icicle-domain) attribute.
+This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/icicle/#icicle-domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -305,7 +305,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
     """
-    df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
+    df_list = []
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
         dfg = df.groupby(levels[i:]).sum()
@@ -317,11 +317,12 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
             df_tree['parent'] = 'total'
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_list.append(df_tree)
     total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
-                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()), name=0)
+    df_list.append(total)
+    df_all_trees = pd.concat(df_list, ignore_index=True)
     return df_all_trees
 
 
@@ -415,6 +416,30 @@ fig = go.Figure(go.Icicle(
     marker_colorscale = 'Blues'))
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
+fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Icicle charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Icicle(
+        labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
+        root_color="lightgrey",
+        textfont_size=20,
+        marker=dict(pattern=dict(shape="|", size=5, solidity=0.9)),
+    )
+)
+
+fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 

@@ -269,7 +269,7 @@ class Grid(MutableSequence):
         return grid_json
 
     def get_column(self, column_name):
-        """ Return the first column with name `column_name`.
+        """Return the first column with name `column_name`.
         If no column with `column_name` exists in this grid, return None.
         """
         for column in self._columns:

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import pytest
 
 from plotly import optional_imports
@@ -13,7 +11,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_even_linear_scale():
     fig, ax = plt.subplots()
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

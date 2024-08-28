@@ -10,6 +10,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     _path_str = "layout.scene.zaxis"
     _valid_props = {
         "autorange",
+        "autorangeoptions",
         "autotypenumbers",
         "backgroundcolor",
         "calendar",
@@ -22,8 +23,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         "gridcolor",
         "gridwidth",
         "hoverformat",
+        "labelalias",
         "linecolor",
         "linewidth",
+        "maxallowed",
+        "minallowed",
         "minexponent",
         "mirror",
         "nticks",
@@ -75,11 +79,19 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to False.
-    
+        `range` is provided and it has a value for both the lower and
+        upper bound, `autorange` is set to False. Using "min" applies
+        autorange only to set the minimum. Using "max" applies
+        autorange only to set the maximum. Using *min reversed* applies
+        autorange only to set the minimum on a reversed axis. Using
+        *max reversed* applies autorange only to set the maximum on a
+        reversed axis. Using "reversed" applies autorange on both ends
+        and reverses the axis direction.
+
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                [True, False, 'reversed']
+                [True, False, 'reversed', 'min reversed', 'max reversed',
+                'min', 'max']
 
         Returns
         -------
@@ -91,6 +103,47 @@ class ZAxis(_BaseLayoutHierarchyType):
     def autorange(self, val):
         self["autorange"] = val
 
+    # autorangeoptions
+    # ----------------
+    @property
+    def autorangeoptions(self):
+        """
+        The 'autorangeoptions' property is an instance of Autorangeoptions
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Autorangeoptions`
+          - A dict of string/value properties that will be passed
+            to the Autorangeoptions constructor
+
+            Supported dict properties:
+
+                clipmax
+                    Clip autorange maximum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.maxallowed` is provided.
+                clipmin
+                    Clip autorange minimum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.minallowed` is provided.
+                include
+                    Ensure this value is included in autorange.
+                includesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `include`.
+                maxallowed
+                    Use this value exactly as autorange maximum.
+                minallowed
+                    Use this value exactly as autorange minimum.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.scene.zaxis.Autorangeoptions
+        """
+        return self["autorangeoptions"]
+
+    @autorangeoptions.setter
+    def autorangeoptions(self, val):
+        self["autorangeoptions"] = val
+
     # autotypenumbers
     # ---------------
     @property
@@ -100,7 +153,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         to a number. Using *convert types* a numeric string in trace
         data may be treated as a number during automatic axis `type`
         detection. Defaults to layout.autotypenumbers.
-    
+
         The 'autotypenumbers' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['convert types', 'strict']
@@ -121,7 +174,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def backgroundcolor(self):
         """
         Sets the background color of this axis' wall.
-    
+
         The 'backgroundcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -183,7 +236,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         is a date axis. This does not set the calendar for interpreting
         data on this axis, that's specified in the trace or via the
         global `layout.calendar`
-    
+
         The 'calendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -209,7 +262,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         Sets the order in which categories on this axis appear. Only
         has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
-    
+
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -229,8 +282,8 @@ class ZAxis(_BaseLayoutHierarchyType):
     def categoryarraysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        categoryarray .
-    
+        `categoryarray`.
+
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -262,16 +315,17 @@ class ZAxis(_BaseLayoutHierarchyType):
         `categoryarray`. Set `categoryorder` to *total ascending* or
         *total descending* if order should be determined by the
         numerical order of the values. Similarly, the order can be
-        determined by the min, max, sum, mean or median of all the
-        values.
-    
+        determined by the min, max, sum, mean, geometric mean or median
+        of all the values.
+
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
                 'array', 'total ascending', 'total descending', 'min
                 ascending', 'min descending', 'max ascending', 'max
                 descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'median ascending', 'median
+                ascending', 'mean descending', 'geometric mean ascending',
+                'geometric mean descending', 'median ascending', 'median
                 descending']
 
         Returns
@@ -293,7 +347,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -371,7 +425,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -394,7 +448,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -415,7 +469,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the color of the grid lines.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -474,7 +528,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def gridwidth(self):
         """
         Sets the width (in px) of the grid lines.
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -503,7 +557,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'hoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -518,13 +572,40 @@ class ZAxis(_BaseLayoutHierarchyType):
     def hoverformat(self, val):
         self["hoverformat"] = val
 
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
+
     # linecolor
     # ---------
     @property
     def linecolor(self):
         """
         Sets the axis line color.
-    
+
         The 'linecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -583,7 +664,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def linewidth(self):
         """
         Sets the width (in px) of the axis line.
-    
+
         The 'linewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -597,6 +678,44 @@ class ZAxis(_BaseLayoutHierarchyType):
     def linewidth(self, val):
         self["linewidth"] = val
 
+    # maxallowed
+    # ----------
+    @property
+    def maxallowed(self):
+        """
+        Determines the maximum range of this axis.
+
+        The 'maxallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["maxallowed"]
+
+    @maxallowed.setter
+    def maxallowed(self, val):
+        self["maxallowed"] = val
+
+    # minallowed
+    # ----------
+    @property
+    def minallowed(self):
+        """
+        Determines the minimum range of this axis.
+
+        The 'minallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["minallowed"]
+
+    @minallowed.setter
+    def minallowed(self, val):
+        self["minallowed"] = val
+
     # minexponent
     # -----------
     @property
@@ -604,7 +723,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -629,7 +748,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         False, mirroring is disable. If "all", axis lines are mirrored
         on all shared-axes subplots. If "allticks", axis lines and
         ticks are mirrored on all shared-axes subplots.
-    
+
         The 'mirror' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, 'ticks', False, 'all', 'allticks']
@@ -653,7 +772,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -673,24 +792,26 @@ class ZAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is "log", then
-        you must take the log of your desired range (e.g. to set the
-        range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is "date", it should be date strings, like date data,
-        though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is "category", it
-        should be numbers, using the scale where each category is
-        assigned a serial number from zero in the order it appears.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            Sets the range of this axis. If the axis `type` is "log", then
+            you must take the log of your desired range (e.g. to set the
+            range from 1 to 100, set the range from 0 to 2). If the axis
+            `type` is "date", it should be date strings, like date data,
+            though Date objects and unix milliseconds will be accepted and
+            converted to strings. If the axis `type` is "category", it
+            should be numbers, using the scale where each category is
+            assigned a serial number from zero in the order it appears.
+            Leaving either or both elements `null` impacts the default
+            `autorange`.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -708,7 +829,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data. Applies only to
         linear axes.
-    
+
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['normal', 'tozero', 'nonnegative']
@@ -729,7 +850,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -749,7 +870,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def showaxeslabels(self):
         """
         Sets whether or not this axis is labeled
-    
+
         The 'showaxeslabels' property must be specified as a bool
         (either True, or False)
 
@@ -769,7 +890,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def showbackground(self):
         """
         Sets whether or not this axis' wall has a background color.
-    
+
         The 'showbackground' property must be specified as a bool
         (either True, or False)
 
@@ -792,7 +913,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -814,7 +935,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -834,7 +955,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def showline(self):
         """
         Determines whether or not a line bounding this axis is drawn.
-    
+
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -855,7 +976,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not spikes starting from data points to this
         axis' wall are shown on hover.
-    
+
         The 'showspikes' property must be specified as a bool
         (either True, or False)
 
@@ -875,7 +996,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -898,7 +1019,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -919,7 +1040,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -940,7 +1061,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def spikecolor(self):
         """
         Sets the color of the spikes.
-    
+
         The 'spikecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1000,7 +1121,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not spikes extending from the projection data
         points to this axis' wall boundaries are shown on hover.
-    
+
         The 'spikesides' property must be specified as a bool
         (either True, or False)
 
@@ -1020,7 +1141,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def spikethickness(self):
         """
         Sets the thickness (in px) of the spikes.
-    
+
         The 'spikethickness' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1048,7 +1169,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -1069,10 +1190,10 @@ class ZAxis(_BaseLayoutHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -1091,7 +1212,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1150,17 +1271,17 @@ class ZAxis(_BaseLayoutHierarchyType):
     def tickfont(self):
         """
         Sets the tick font.
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1174,11 +1295,34 @@ class ZAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1205,7 +1349,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1230,9 +1374,9 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.scene.zaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -1286,13 +1430,13 @@ class ZAxis(_BaseLayoutHierarchyType):
         layout.template.layout.scene.zaxis.tickformatstopdefaults),
         sets the default property values to use for elements of
         layout.scene.zaxis.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -1311,7 +1455,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1337,7 +1481,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
-    
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'linear', 'array']
@@ -1358,7 +1502,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1381,7 +1525,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -1402,7 +1546,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1425,7 +1569,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1444,8 +1588,8 @@ class ZAxis(_BaseLayoutHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
-    
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1466,7 +1610,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1485,8 +1629,8 @@ class ZAxis(_BaseLayoutHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  tickvals .
-    
+        Sets the source reference on Chart Studio Cloud for `tickvals`.
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1506,7 +1650,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1530,9 +1674,9 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this axis' title font. Note that the
                     title's font used to be customized by the now
@@ -1562,17 +1706,17 @@ class ZAxis(_BaseLayoutHierarchyType):
         Deprecated: Please use layout.scene.zaxis.title.font instead.
         Sets this axis' title font. Note that the title's font used to
         be customized by the now deprecated `titlefont` attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1586,15 +1730,38 @@ class ZAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
-        
+
         """
         return self["titlefont"]
 
@@ -1610,7 +1777,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         Sets the axis type. By default, plotly attempts to determined
         the axis type by looking into the data of the traces that
         referenced the axis in question.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['-', 'linear', 'log', 'date', 'category']
@@ -1633,7 +1800,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -1655,7 +1822,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         Determines whether or not a line is drawn at along the 0 value
         of this axis. If True, the zero line is drawn on top of the
         grid lines.
-    
+
         The 'zeroline' property must be specified as a bool
         (either True, or False)
 
@@ -1675,7 +1842,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def zerolinecolor(self):
         """
         Sets the line color of the zero line.
-    
+
         The 'zerolinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1734,7 +1901,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     def zerolinewidth(self):
         """
         Sets the width (in px) of the zero line.
-    
+
         The 'zerolinewidth' property is a number and may be specified as:
           - An int or float
 
@@ -1756,8 +1923,18 @@ class ZAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.scene.zaxis.Autoran
+            geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -1777,7 +1954,7 @@ class ZAxis(_BaseLayoutHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1794,7 +1971,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1846,10 +2024,25 @@ class ZAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -1878,7 +2071,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -1988,14 +2182,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -2030,6 +2224,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         self,
         arg=None,
         autorange=None,
+        autorangeoptions=None,
         autotypenumbers=None,
         backgroundcolor=None,
         calendar=None,
@@ -2042,8 +2237,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         gridcolor=None,
         gridwidth=None,
         hoverformat=None,
+        labelalias=None,
         linecolor=None,
         linewidth=None,
+        maxallowed=None,
+        minallowed=None,
         minexponent=None,
         mirror=None,
         nticks=None,
@@ -2086,11 +2284,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new ZAxis object
-        
+
         Parameters
         ----------
         arg
@@ -2100,8 +2298,18 @@ class ZAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.scene.zaxis.Autoran
+            geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -2121,7 +2329,7 @@ class ZAxis(_BaseLayoutHierarchyType):
             "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on Chart Studio Cloud for
-            categoryarray .
+            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2138,7 +2346,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -2190,10 +2399,25 @@ class ZAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -2222,7 +2446,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2332,14 +2557,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -2388,8 +2613,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.scene.ZAxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.scene.ZAxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
             )
 
@@ -2404,6 +2629,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autorangeoptions", None)
+        _v = autorangeoptions if autorangeoptions is not None else _v
+        if _v is not None:
+            self["autorangeoptions"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
@@ -2452,6 +2681,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("linecolor", None)
         _v = linecolor if linecolor is not None else _v
         if _v is not None:
@@ -2460,6 +2693,14 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = linewidth if linewidth is not None else _v
         if _v is not None:
             self["linewidth"] = _v
+        _v = arg.pop("maxallowed", None)
+        _v = maxallowed if maxallowed is not None else _v
+        if _v is not None:
+            self["maxallowed"] = _v
+        _v = arg.pop("minallowed", None)
+        _v = minallowed if minallowed is not None else _v
+        if _v is not None:
+            self["minallowed"] = _v
         _v = arg.pop("minexponent", None)
         _v = minexponent if minexponent is not None else _v
         if _v is not None:

@@ -15,7 +15,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             below
@@ -46,7 +46,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`zmin` and
+                colorscale in color space, use `zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -60,7 +60,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -81,7 +81,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.choroplethmapbox.H
                 overlabel` instance or dict with compatible
@@ -100,8 +100,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -114,6 +114,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variable `properties` Anything contained in tag
                 `<extra>` is displayed in the secondary box,
                 for example "<extra>{fullData.name}</extra>".
@@ -121,12 +122,12 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -134,11 +135,18 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.choroplethmapbox.L
                 egendgrouptitle` instance or dict with
@@ -146,19 +154,25 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             locations
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.
             locationssrc
                 Sets the source reference on Chart Studio Cloud
-                for  locations .
+                for `locations`.
             marker
                 :class:`plotly.graph_objects.choroplethmapbox.M
                 arker` instance or dict with compatible
@@ -179,9 +193,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             reversescale
                 Reverses the color mapping if true. If true,
@@ -222,7 +236,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 location.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -282,8 +296,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

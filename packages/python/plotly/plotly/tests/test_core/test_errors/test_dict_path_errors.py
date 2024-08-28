@@ -1,10 +1,11 @@
 import plotly.graph_objects as go
 from _plotly_utils.exceptions import PlotlyKeyError
 import pytest
+import sys
 
 
 def error_substr(s, r):
-    """ remove a part of the error message we don't want to compare """
+    """remove a part of the error message we don't want to compare"""
     return s.replace(r, "")
 
 
@@ -400,9 +401,11 @@ template_layout_plot_bgcolor_x
     except ValueError as e:
         raised = True
         print(e.args[0])
+        # Error is different in Python 3.11 and later
+        error_addition_py_311 = ", not 'str'" if sys.version_info >= (3, 11, 0) else ""
         e_substr = error_substr(
             e.args[0],
-            """string indices must be integers
+            f"""string indices must be integers{error_addition_py_311}
 
 Invalid value received for the 'plot_bgcolor' property of layout
 
@@ -436,7 +439,7 @@ def form_error_string(call, exception, subs):
     replacement is only performed once on the exception string so the
     replacement of multiple occurences of a pattern is specified by repeating a
     (pattern,relacement) pair in the list.
-    returns modified exception string 
+    returns modified exception string
     """
     raised = False
     try:

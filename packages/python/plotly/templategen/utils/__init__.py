@@ -180,6 +180,8 @@ def initialize_template(
 
     pattern = dict(fillmode="overlay", solidity=0.2, size=10)
 
+    template.data.scatter = [{"fillpattern": pattern}]
+
     # Bar outline
     # Changing marker line color also affects error color,
     # so reset default error colors

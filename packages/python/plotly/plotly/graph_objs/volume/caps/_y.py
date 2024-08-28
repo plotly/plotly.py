@@ -19,7 +19,7 @@ class Y(_BaseTraceHierarchyType):
         the `caps` is 1 meaning that they are entirely shaded. On the
         other hand Applying a `fill` ratio less than one would allow
         the creation of openings parallel to the edges.
-    
+
         The 'fill' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -42,7 +42,7 @@ class Y(_BaseTraceHierarchyType):
         the y `slices` is 1 meaning that they are entirely shaded. On
         the other hand Applying a `fill` ratio less than one would
         allow the creation of openings parallel to the edges.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -78,7 +78,7 @@ class Y(_BaseTraceHierarchyType):
     def __init__(self, arg=None, fill=None, show=None, **kwargs):
         """
         Construct a new Y object
-        
+
         Parameters
         ----------
         arg
@@ -118,8 +118,8 @@ class Y(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.volume.caps.Y 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.volume.caps.Y
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.volume.caps.Y`"""
             )
 

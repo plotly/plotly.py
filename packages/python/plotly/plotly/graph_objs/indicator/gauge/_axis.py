@@ -11,6 +11,7 @@ class Axis(_BaseTraceHierarchyType):
     _valid_props = {
         "dtick",
         "exponentformat",
+        "labelalias",
         "minexponent",
         "nticks",
         "range",
@@ -26,6 +27,7 @@ class Axis(_BaseTraceHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelstep",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -64,7 +66,7 @@ class Axis(_BaseTraceHierarchyType):
         `n` must be a positive integer. To set ticks on the 15th of
         every third month, set `tick0` to "2000-01-15" and `dtick` to
         "M3". To set ticks every 4 years, set `dtick` to "M48"
-    
+
         The 'dtick' property accepts values of any type
 
         Returns
@@ -87,7 +89,7 @@ class Axis(_BaseTraceHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-    
+
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -102,6 +104,33 @@ class Axis(_BaseTraceHierarchyType):
     def exponentformat(self, val):
         self["exponentformat"] = val
 
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
+
     # minexponent
     # -----------
     @property
@@ -109,7 +138,7 @@ class Axis(_BaseTraceHierarchyType):
         """
         Hide SI prefix for 10^n if |n| is below this number. This only
         has an effect when `tickformat` is "SI" or "B".
-    
+
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -132,7 +161,7 @@ class Axis(_BaseTraceHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-    
+
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -152,19 +181,19 @@ class Axis(_BaseTraceHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            Sets the range of this axis.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -178,7 +207,7 @@ class Axis(_BaseTraceHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-    
+
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -201,7 +230,7 @@ class Axis(_BaseTraceHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-    
+
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -222,7 +251,7 @@ class Axis(_BaseTraceHierarchyType):
     def showticklabels(self):
         """
         Determines whether or not the tick labels are drawn.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -245,7 +274,7 @@ class Axis(_BaseTraceHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-    
+
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -266,7 +295,7 @@ class Axis(_BaseTraceHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-    
+
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -295,7 +324,7 @@ class Axis(_BaseTraceHierarchyType):
         "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
-    
+
         The 'tick0' property accepts values of any type
 
         Returns
@@ -316,10 +345,10 @@ class Axis(_BaseTraceHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-    
+
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -338,7 +367,7 @@ class Axis(_BaseTraceHierarchyType):
     def tickcolor(self):
         """
         Sets the tick color.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -397,17 +426,17 @@ class Axis(_BaseTraceHierarchyType):
     def tickfont(self):
         """
         Sets the color bar's tick label font
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.axis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -421,11 +450,34 @@ class Axis(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -452,7 +504,7 @@ class Axis(_BaseTraceHierarchyType):
         well as "%{n}f" for fractional seconds with n digits. For
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
-    
+
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -477,9 +529,9 @@ class Axis(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.indicator.gauge.axis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-    
+
             Supported dict properties:
-                
+
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -533,13 +585,13 @@ class Axis(_BaseTraceHierarchyType):
         e.axis.tickformatstopdefaults), sets the default property
         values to use for elements of
         indicator.gauge.axis.tickformatstops
-    
+
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.axis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -552,13 +604,39 @@ class Axis(_BaseTraceHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelstep
+    # -------------
+    @property
+    def ticklabelstep(self):
+        """
+        Sets the spacing between tick labels as compared to the spacing
+        between ticks. A value of 1 (default) means each tick gets a
+        label. A value of 2 means shows every 2nd label. A larger value
+        n means only every nth tick is labeled. `tick0` determines
+        which labels are shown. Not implemented for axes with `type`
+        "log" or "multicategory", or when `tickmode` is "array".
+
+        The 'ticklabelstep' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 9223372036854775807]
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstep"]
+
+    @ticklabelstep.setter
+    def ticklabelstep(self, val):
+        self["ticklabelstep"] = val
+
     # ticklen
     # -------
     @property
     def ticklen(self):
         """
         Sets the tick length (in px).
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -584,7 +662,7 @@ class Axis(_BaseTraceHierarchyType):
         `dtick` are provided). If "array", the placement of the ticks
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
-    
+
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'linear', 'array']
@@ -605,7 +683,7 @@ class Axis(_BaseTraceHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-    
+
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -628,7 +706,7 @@ class Axis(_BaseTraceHierarchyType):
         Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
-    
+
         The 'ticks' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['outside', 'inside', '']
@@ -649,7 +727,7 @@ class Axis(_BaseTraceHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -672,7 +750,7 @@ class Axis(_BaseTraceHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-    
+
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -691,8 +769,8 @@ class Axis(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ticktext .
-    
+        Sets the source reference on Chart Studio Cloud for `ticktext`.
+
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -713,7 +791,7 @@ class Axis(_BaseTraceHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-    
+
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -732,8 +810,8 @@ class Axis(_BaseTraceHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  tickvals .
-    
+        Sets the source reference on Chart Studio Cloud for `tickvals`.
+
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -753,7 +831,7 @@ class Axis(_BaseTraceHierarchyType):
     def tickwidth(self):
         """
         Sets the tick width (in px).
-    
+
         The 'tickwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -775,7 +853,7 @@ class Axis(_BaseTraceHierarchyType):
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -824,6 +902,17 @@ class Axis(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -892,6 +981,14 @@ class Axis(_BaseTraceHierarchyType):
             tor.gauge.axis.tickformatstopdefaults), sets the
             default property values to use for elements of
             indicator.gauge.axis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -917,14 +1014,14 @@ class Axis(_BaseTraceHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -938,6 +1035,7 @@ class Axis(_BaseTraceHierarchyType):
         arg=None,
         dtick=None,
         exponentformat=None,
+        labelalias=None,
         minexponent=None,
         nticks=None,
         range=None,
@@ -953,6 +1051,7 @@ class Axis(_BaseTraceHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelstep=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -964,11 +1063,11 @@ class Axis(_BaseTraceHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Axis object
-        
+
         Parameters
         ----------
         arg
@@ -1005,6 +1104,17 @@ class Axis(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -1073,6 +1183,14 @@ class Axis(_BaseTraceHierarchyType):
             tor.gauge.axis.tickformatstopdefaults), sets the
             default property values to use for elements of
             indicator.gauge.axis.tickformatstops
+        ticklabelstep
+            Sets the spacing between tick labels as compared to the
+            spacing between ticks. A value of 1 (default) means
+            each tick gets a label. A value of 2 means shows every
+            2nd label. A larger value n means only every nth tick
+            is labeled. `tick0` determines which labels are shown.
+            Not implemented for axes with `type` "log" or
+            "multicategory", or when `tickmode` is "array".
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1098,14 +1216,14 @@ class Axis(_BaseTraceHierarchyType):
             "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on Chart Studio Cloud for
-            ticktext .
+            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on Chart Studio Cloud for
-            tickvals .
+            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -1134,8 +1252,8 @@ class Axis(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.Axis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.gauge.Axis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`"""
             )
 
@@ -1154,6 +1272,10 @@ an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`"""
         _v = exponentformat if exponentformat is not None else _v
         if _v is not None:
             self["exponentformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("minexponent", None)
         _v = minexponent if minexponent is not None else _v
         if _v is not None:
@@ -1214,6 +1336,10 @@ an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelstep", None)
+        _v = ticklabelstep if ticklabelstep is not None else _v
+        if _v is not None:
+            self["ticklabelstep"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

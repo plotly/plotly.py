@@ -10,5 +10,5 @@ class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs
+            **kwargs,
         )

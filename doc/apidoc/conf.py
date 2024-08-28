@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Configuration file for the Sphinx documentation builder.
 #
 # This file does only contain a selection of the most common options. For a
@@ -22,13 +20,13 @@ import sphinx_bootstrap_theme
 # -- Project information -----------------------------------------------------
 
 project = ""
-copyright = "2020, Plotly"
+copyright = "2022, Plotly"
 author = "Plotly"
 
 # The short X.Y version
 version = ""
 # The full version, including alpha/beta/rc tags
-release = "5.3.0"
+release = "5.23.0"
 
 
 # -- General configuration ---------------------------------------------------

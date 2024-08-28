@@ -14,5 +14,5 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text font color of selected points.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

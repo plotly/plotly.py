@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._value import ValueValidator
     from ._uirevision import UirevisionValidator
@@ -12,8 +13,10 @@ if sys.version_info < (3, 7):
     from ._mode import ModeValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
+    from ._legend import LegendValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._gauge import GaugeValidator
@@ -40,8 +43,10 @@ else:
             "._mode.ModeValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
+            "._legend.LegendValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._gauge.GaugeValidator",

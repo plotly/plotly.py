@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from numbers import Number
 
 import copy
@@ -819,6 +817,9 @@ def create_gantt(
     show_hover_fill=True,
 ):
     """
+    **deprecated**, use instead
+    :func:`plotly.express.timeline`.
+
     Returns figure for a gantt chart
 
     :param (array|list) df: input data for gantt chart. Must be either a

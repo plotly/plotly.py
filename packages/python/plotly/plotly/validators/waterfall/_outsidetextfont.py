@@ -16,7 +16,7 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -30,19 +30,59 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 generates images on a server, where only a
                 select number of fonts are installed and
                 supported. These include "Arial", "Balto",
-                "Courier New", "Droid Sans",, "Droid Serif",
+                "Courier New", "Droid Sans", "Droid Serif",
                 "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             familysrc
                 Sets the source reference on Chart Studio Cloud
-                for  family .
+                for `family`.
+            lineposition
+                Sets the kind of decoration line(s) with text,
+                such as an "under", "over" or "through" as well
+                as combinations e.g. "under+over", etc.
+            linepositionsrc
+                Sets the source reference on Chart Studio Cloud
+                for `lineposition`.
+            shadow
+                Sets the shape and color of the shadow behind
+                text. "auto" places minimal shadow and applies
+                contrast text font color. See
+                https://developer.mozilla.org/en-
+                US/docs/Web/CSS/text-shadow for additional
+                options.
+            shadowsrc
+                Sets the source reference on Chart Studio Cloud
+                for `shadow`.
             size
 
             sizesrc
                 Sets the source reference on Chart Studio Cloud
-                for  size .
+                for `size`.
+            style
+                Sets whether a font should be styled with a
+                normal or italic face from its family.
+            stylesrc
+                Sets the source reference on Chart Studio Cloud
+                for `style`.
+            textcase
+                Sets capitalization of text. It can be used to
+                make text appear in all-uppercase or all-
+                lowercase, or with each word capitalized.
+            textcasesrc
+                Sets the source reference on Chart Studio Cloud
+                for `textcase`.
+            variant
+                Sets the variant of the font.
+            variantsrc
+                Sets the source reference on Chart Studio Cloud
+                for `variant`.
+            weight
+                Sets the weight (or boldness) of the font.
+            weightsrc
+                Sets the source reference on Chart Studio Cloud
+                for `weight`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

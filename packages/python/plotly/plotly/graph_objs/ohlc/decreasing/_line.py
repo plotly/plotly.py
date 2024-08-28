@@ -16,7 +16,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -78,7 +78,7 @@ class Line(_BaseTraceHierarchyType):
         ("solid", "dot", "dash", "longdash", "dashdot", or
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following dash styles:
                 ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
@@ -101,7 +101,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the line width (in px).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -134,7 +134,7 @@ class Line(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, dash=None, width=None, **kwargs):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -172,8 +172,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.ohlc.decreasing.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.ohlc.decreasing.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.ohlc.decreasing.Line`"""
             )
 

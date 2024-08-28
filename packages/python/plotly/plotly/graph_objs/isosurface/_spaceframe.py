@@ -20,7 +20,7 @@ class Spaceframe(_BaseTraceHierarchyType):
         faces of tetras would be shaded. Applying a greater `fill`
         ratio would allow the creation of stronger elements or could be
         sued to have entirely closed areas (in case of using 1).
-    
+
         The 'fill' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -42,7 +42,7 @@ class Spaceframe(_BaseTraceHierarchyType):
         Displays/hides tetrahedron shapes between minimum and maximum
         iso-values. Often useful when either caps or surfaces are
         disabled or filled with values less than 1.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -78,7 +78,7 @@ class Spaceframe(_BaseTraceHierarchyType):
     def __init__(self, arg=None, fill=None, show=None, **kwargs):
         """
         Construct a new Spaceframe object
-        
+
         Parameters
         ----------
         arg
@@ -119,8 +119,8 @@ class Spaceframe(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.isosurface.Spaceframe 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.isosurface.Spaceframe
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.isosurface.Spaceframe`"""
             )
 

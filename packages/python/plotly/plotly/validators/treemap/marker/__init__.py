@@ -1,11 +1,14 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._showscale import ShowscaleValidator
     from ._reversescale import ReversescaleValidator
+    from ._pattern import PatternValidator
     from ._pad import PadValidator
     from ._line import LineValidator
     from ._depthfade import DepthfadeValidator
+    from ._cornerradius import CornerradiusValidator
     from ._colorssrc import ColorssrcValidator
     from ._colorscale import ColorscaleValidator
     from ._colors import ColorsValidator
@@ -25,9 +28,11 @@ else:
         [
             "._showscale.ShowscaleValidator",
             "._reversescale.ReversescaleValidator",
+            "._pattern.PatternValidator",
             "._pad.PadValidator",
             "._line.LineValidator",
             "._depthfade.DepthfadeValidator",
+            "._cornerradius.CornerradiusValidator",
             "._colorssrc.ColorssrcValidator",
             "._colorscale.ColorscaleValidator",
             "._colors.ColorsValidator",

@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zerolinewidth import ZerolinewidthValidator
     from ._zerolinecolor import ZerolinecolorValidator
     from ._zeroline import ZerolineValidator
@@ -42,8 +43,11 @@ if sys.version_info < (3, 7):
     from ._nticks import NticksValidator
     from ._mirror import MirrorValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
+    from ._labelalias import LabelaliasValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
     from ._gridcolor import GridcolorValidator
@@ -56,6 +60,7 @@ if sys.version_info < (3, 7):
     from ._calendar import CalendarValidator
     from ._backgroundcolor import BackgroundcolorValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -105,8 +110,11 @@ else:
             "._nticks.NticksValidator",
             "._mirror.MirrorValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
+            "._labelalias.LabelaliasValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
             "._gridcolor.GridcolorValidator",
@@ -119,6 +127,7 @@ else:
             "._calendar.CalendarValidator",
             "._backgroundcolor.BackgroundcolorValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
         ],
     )

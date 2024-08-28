@@ -20,9 +20,9 @@ class Caps(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.volume.caps.X`
           - A dict of string/value properties that will be passed
             to the X constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `caps`. The default
                     fill value of the `caps` is 1 meaning that they
@@ -57,9 +57,9 @@ class Caps(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.volume.caps.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `caps`. The default
                     fill value of the `caps` is 1 meaning that they
@@ -94,9 +94,9 @@ class Caps(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.volume.caps.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `caps`. The default
                     fill value of the `caps` is 1 meaning that they
@@ -140,7 +140,7 @@ class Caps(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Caps object
-        
+
         Parameters
         ----------
         arg
@@ -177,8 +177,8 @@ class Caps(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.volume.Caps 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.volume.Caps
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.volume.Caps`"""
             )
 

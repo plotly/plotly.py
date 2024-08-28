@@ -15,7 +15,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
-                is true, the default  palette will be chosen
+                is true, the default palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             coloraxis
@@ -38,7 +38,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in color space, use`zmin` and
+                colorscale in color space, use `zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
                 palette name string of the following list: Blac
                 kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -58,7 +58,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -73,7 +73,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.heatmap.Hoverlabel
                 ` instance or dict with compatible properties
@@ -95,8 +95,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -116,12 +116,12 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -129,11 +129,18 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.heatmap.Legendgrou
                 ptitle` instance or dict with compatible
@@ -141,13 +148,19 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -164,9 +177,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -187,9 +200,30 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             text
                 Sets the text elements associated with each z
                 value.
+            textfont
+                Sets the text font.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
+                https://github.com/d3/d3-time-
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. Every attributes
+                that can be specified per-point (the ones that
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
+                `x`, `y`, `z` and `text`.
             transpose
                 Transposes the z data.
             uid
@@ -245,9 +279,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -277,7 +311,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             xtype
                 If "array", the heatmap's x coordinates are
                 given by "x" (the default behavior when `x` is
@@ -306,9 +340,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -338,7 +372,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
             ytype
                 If "array", the heatmap's y coordinates are
                 given by "y" (the default behavior when `y` is
@@ -357,9 +391,10 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format.By default the values are formatted
-                using generic number format.
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format.By default the
+                values are formatted using generic number
+                format.
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
@@ -374,13 +409,18 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the lower bound of the color domain. Value
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
             zsmooth
                 Picks a smoothing algorithm use to smooth `z`
                 data.
             zsrc
                 Sets the source reference on Chart Studio Cloud
-                for  z .
+                for `z`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

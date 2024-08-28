@@ -21,6 +21,7 @@ class Parcats(_BaseTraceType):
         "hovertemplate",
         "labelfont",
         "legendgrouptitle",
+        "legendwidth",
         "line",
         "meta",
         "metasrc",
@@ -44,7 +45,7 @@ class Parcats(_BaseTraceType):
         perpendicular to the paths. If `freeform`, the categories can
         freely move on the plane. If `fixed`, the categories and
         dimensions are stationary.
-    
+
         The 'arrangement' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['perpendicular', 'freeform', 'fixed']
@@ -66,7 +67,7 @@ class Parcats(_BaseTraceType):
         """
         Sort paths so that like colors are bundled together within each
         category.
-    
+
         The 'bundlecolors' property must be specified as a bool
         (either True, or False)
 
@@ -87,7 +88,7 @@ class Parcats(_BaseTraceType):
         """
         The number of observations represented by each state. Defaults
         to 1 so that each state represents one observation
-    
+
         The 'counts' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -107,8 +108,8 @@ class Parcats(_BaseTraceType):
     @property
     def countssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  counts .
-    
+        Sets the source reference on Chart Studio Cloud for `counts`.
+
         The 'countssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -128,15 +129,15 @@ class Parcats(_BaseTraceType):
     def dimensions(self):
         """
         The dimensions (variables) of the parallel categories diagram.
-    
+
         The 'dimensions' property is a tuple of instances of
         Dimension that may be specified as:
           - A list or tuple of instances of plotly.graph_objs.parcats.Dimension
           - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
-    
+
             Supported dict properties:
-                
+
                 categoryarray
                     Sets the order in which categories in this
                     dimension appear. Only has an effect if
@@ -144,7 +145,7 @@ class Parcats(_BaseTraceType):
                     `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  categoryarray .
+                    for `categoryarray`.
                 categoryorder
                     Specifies the ordering logic for the categories
                     in the dimension. By default, plotly uses
@@ -174,7 +175,7 @@ class Parcats(_BaseTraceType):
                     with `categoryorder`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 values
                     Dimension values. `values[n]` represents the
                     category value of the `n`th point in the
@@ -183,7 +184,7 @@ class Parcats(_BaseTraceType):
                     will be truncated).
                 valuessrc
                     Sets the source reference on Chart Studio Cloud
-                    for  values .
+                    for `values`.
                 visible
                     Shows the dimension when set to `true` (the
                     default). Hides the dimension for `false`.
@@ -207,13 +208,13 @@ class Parcats(_BaseTraceType):
         layout.template.data.parcats.dimensiondefaults), sets the
         default property values to use for elements of
         parcats.dimensions
-    
+
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcats.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -236,9 +237,9 @@ class Parcats(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcats.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this parcats trace
@@ -271,7 +272,7 @@ class Parcats(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['count', 'probability'] joined with '+' characters
@@ -298,7 +299,7 @@ class Parcats(_BaseTraceType):
         `color`, hover interactions take place per color per category.
         If `dimension`, hover interactions take place across all
         categories per dimension.
-    
+
         The 'hoveron' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['category', 'color', 'dimension']
@@ -337,13 +338,17 @@ class Parcats(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `count`, `probability`, `category`, `categorycount`,
-        `colorcount` and `bandcolorcount`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available.  This value
+        here applies when hovering over dimensions. Note that
+        `*categorycount`, "colorcount" and "bandcolorcount" are only
+        available when `hoveron` contains the "color" flagFinally, the
+        template string has access to variables `count`, `probability`,
+        `category`, `categorycount`, `colorcount` and `bandcolorcount`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -364,17 +369,17 @@ class Parcats(_BaseTraceType):
     def labelfont(self):
         """
         Sets the font for the `dimension` labels.
-    
+
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcats.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -388,11 +393,34 @@ class Parcats(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -414,9 +442,9 @@ class Parcats(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcats.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -432,6 +460,27 @@ class Parcats(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # line
     # ----
     @property
@@ -442,16 +491,16 @@ class Parcats(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcats.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `line.colorscale`. Has an effect
-                    only if in `line.color`is set to a numerical
+                    only if in `line.color` is set to a numerical
                     array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default  palette
+                    `autocolorscale` is true, the default palette
                     will be chosen according to whether numbers in
                     the `color` array are all positive, all
                     negative or mixed.
@@ -459,13 +508,13 @@ class Parcats(_BaseTraceType):
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `line.color`) or the bounds set in
-                    `line.cmin` and `line.cmax`  Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    `line.cmin` and `line.cmax` Has an effect only
+                    if in `line.color` is set to a numerical array.
                     Defaults to `false` when `line.cmin` and
                     `line.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmin` must be set as well.
@@ -473,22 +522,22 @@ class Parcats(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `line.cmin` and/or `line.cmax` to be
                     equidistant to this point. Has an effect only
-                    if in `line.color`is set to a numerical array.
+                    if in `line.color` is set to a numerical array.
                     Value should have the same units as in
                     `line.color`. Has no effect when `line.cauto`
                     is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `line.color`is set to a
+                    an effect only if in `line.color` is set to a
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmax` must be set as well.
                 color
-                    Sets thelinecolor. It accepts either a specific
-                    color or an array of numbers that are mapped to
-                    the colorscale relative to the max and min
-                    values of the array or relative to `line.cmin`
-                    and `line.cmax` if set.
+                    Sets the line color. It accepts either a
+                    specific color or an array of numbers that are
+                    mapped to the colorscale relative to the max
+                    and min values of the array or relative to
+                    `line.cmin` and `line.cmax` if set.
                 coloraxis
                     Sets a reference to a shared color axis.
                     References to these shared color axes are
@@ -504,7 +553,7 @@ class Parcats(_BaseTraceType):
                     properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `line.color`is set to a numerical array. The
+                    `line.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -512,7 +561,7 @@ class Parcats(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`line.cmin` and `line.cmax`.
+                    color space, use `line.cmin` and `line.cmax`.
                     Alternatively, `colorscale` may be a palette
                     name string of the following list: Blackbody,Bl
                     uered,Blues,Cividis,Earth,Electric,Greens,Greys
@@ -520,7 +569,7 @@ class Parcats(_BaseTraceType):
                     dis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 hovertemplate
                     Template string used for rendering the
                     information that appear on hover box. Note that
@@ -535,8 +584,8 @@ class Parcats(_BaseTraceType):
                     only when this field is shown. Numbers are
                     formatted using d3-format's syntax
                     %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-format/tre
-                    e/v1.4.5#d3-format for details on the
+                    %{y:$.2f}". https://github.com/d3/d3-
+                    format/tree/v1.4.5#d3-format for details on the
                     formatting syntax. Dates are formatted using
                     d3-time-format's syntax %{variable|d3-time-
                     format}, for example "Day: %{2019-01-01|%A}".
@@ -549,15 +598,17 @@ class Parcats(_BaseTraceType):
                     events/#event-data. Additionally, every
                     attributes that can be specified per-point (the
                     ones that are `arrayOk: true`) are available.
-                    variables `count` and `probability`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
+                    This value here applies when hovering over
+                    lines.Finally, the template string has access
+                    to variables `count` and `probability`.
+                    Anything contained in tag `<extra>` is
+                    displayed in the secondary box, for example
                     "<extra>{fullData.name}</extra>". To hide the
                     secondary box completely, use an empty tag
                     `<extra></extra>`.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `line.color`is set to a
+                    effect only if in `line.color` is set to a
                     numerical array. If true, `line.cmin` will
                     correspond to the last color in the array and
                     `line.cmax` will correspond to the first color.
@@ -568,7 +619,7 @@ class Parcats(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `line.color`is set to a numerical array.
+                    in `line.color` is set to a numerical array.
 
         Returns
         -------
@@ -595,7 +646,7 @@ class Parcats(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -613,8 +664,8 @@ class Parcats(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -633,9 +684,9 @@ class Parcats(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -658,7 +709,7 @@ class Parcats(_BaseTraceType):
         Sets the path sorting algorithm. If `forward`, sort paths based
         on dimension categories from left to right. If `backward`, sort
         paths based on dimensions categories from right to left.
-    
+
         The 'sortpaths' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['forward', 'backward']
@@ -683,9 +734,9 @@ class Parcats(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcats.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -712,17 +763,17 @@ class Parcats(_BaseTraceType):
     def tickfont(self):
         """
         Sets the font for the `category` labels.
-    
+
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcats.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -736,11 +787,34 @@ class Parcats(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -759,7 +833,7 @@ class Parcats(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -794,7 +868,7 @@ class Parcats(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -815,7 +889,7 @@ class Parcats(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -857,7 +931,7 @@ class Parcats(_BaseTraceType):
             observation
         countssrc
             Sets the source reference on Chart Studio Cloud for
-            counts .
+            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -905,17 +979,25 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -934,9 +1016,9 @@ class Parcats(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         sortpaths
             Sets the path sorting algorithm. If `forward`, sort
@@ -992,6 +1074,7 @@ class Parcats(_BaseTraceType):
         hovertemplate=None,
         labelfont=None,
         legendgrouptitle=None,
+        legendwidth=None,
         line=None,
         meta=None,
         metasrc=None,
@@ -1002,11 +1085,11 @@ class Parcats(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Parcats object
-        
+
         Parallel categories diagram for multidimensional categorical
         data.
 
@@ -1031,7 +1114,7 @@ class Parcats(_BaseTraceType):
             observation
         countssrc
             Sets the source reference on Chart Studio Cloud for
-            counts .
+            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -1079,17 +1162,25 @@ class Parcats(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `count`, `probability`,
-            `category`, `categorycount`, `colorcount` and
-            `bandcolorcount`. Anything contained in tag `<extra>`
-            is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  This value here applies when hovering
+            over dimensions. Note that `*categorycount`,
+            "colorcount" and "bandcolorcount" are only available
+            when `hoveron` contains the "color" flagFinally, the
+            template string has access to variables `count`,
+            `probability`, `category`, `categorycount`,
+            `colorcount` and `bandcolorcount`. Anything contained
+            in tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
             :class:`plotly.graph_objects.parcats.Legendgrouptitle`
             instance or dict with compatible properties
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.parcats.Line` instance or
             dict with compatible properties
@@ -1108,9 +1199,9 @@ class Parcats(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         sortpaths
             Sets the path sorting algorithm. If `forward`, sort
@@ -1171,8 +1262,8 @@ class Parcats(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Parcats 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Parcats
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Parcats`"""
             )
 
@@ -1231,6 +1322,10 @@ an instance of :class:`plotly.graph_objs.Parcats`"""
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
             self["legendgrouptitle"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

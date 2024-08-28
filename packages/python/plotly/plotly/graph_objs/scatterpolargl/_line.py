@@ -8,7 +8,7 @@ class Line(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "scatterpolargl"
     _path_str = "scatterpolargl.line"
-    _valid_props = {"color", "dash", "shape", "width"}
+    _valid_props = {"color", "dash", "width"}
 
     # color
     # -----
@@ -16,7 +16,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -75,7 +75,7 @@ class Line(_BaseTraceHierarchyType):
     def dash(self):
         """
         Sets the style of the lines.
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['dash', 'dashdot', 'dot', 'longdash', 'longdashdot',
@@ -91,35 +91,13 @@ class Line(_BaseTraceHierarchyType):
     def dash(self, val):
         self["dash"] = val
 
-    # shape
-    # -----
-    @property
-    def shape(self):
-        """
-        Determines the line shape. The values correspond to step-wise
-        line shapes.
-    
-        The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'hv', 'vh', 'hvh', 'vhv']
-
-        Returns
-        -------
-        Any
-        """
-        return self["shape"]
-
-    @shape.setter
-    def shape(self, val):
-        self["shape"] = val
-
     # width
     # -----
     @property
     def width(self):
         """
         Sets the line width (in px).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -142,19 +120,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the style of the lines.
-        shape
-            Determines the line shape. The values correspond to
-            step-wise line shapes.
         width
             Sets the line width (in px).
         """
 
-    def __init__(
-        self, arg=None, color=None, dash=None, shape=None, width=None, **kwargs
-    ):
+    def __init__(self, arg=None, color=None, dash=None, width=None, **kwargs):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -165,9 +138,6 @@ class Line(_BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the style of the lines.
-        shape
-            Determines the line shape. The values correspond to
-            step-wise line shapes.
         width
             Sets the line width (in px).
 
@@ -192,8 +162,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterpolargl.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterpolargl.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterpolargl.Line`"""
             )
 
@@ -212,10 +182,6 @@ an instance of :class:`plotly.graph_objs.scatterpolargl.Line`"""
         _v = dash if dash is not None else _v
         if _v is not None:
             self["dash"] = _v
-        _v = arg.pop("shape", None)
-        _v = shape if shape is not None else _v
-        if _v is not None:
-            self["shape"] = _v
         _v = arg.pop("width", None)
         _v = width if width is not None else _v
         if _v is not None:

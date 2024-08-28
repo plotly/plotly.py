@@ -50,7 +50,7 @@ def _infer_zmax_from_type(img):
         elif im_max <= 65535 * rtol:
             return 65535
         else:
-            return 2 ** 32
+            return 2**32
 
 
 def imshow(
@@ -79,7 +79,8 @@ def imshow(
     binary_backend="auto",
     binary_compression_level=4,
     binary_format="png",
-):
+    text_auto=False,
+) -> go.Figure:
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -208,6 +209,10 @@ def imshow(
         since it uses lossless compression, but 'jpg' (lossy) compression can
         result if smaller binary strings for natural images.
 
+    text_auto: bool or str (default `False`)
+        If `True` or a string, single-channel `img` values will be displayed as text.
+        A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.
+
     Returns
     -------
     fig : graph_objects.Figure containing the displayed image
@@ -260,14 +265,18 @@ def imshow(
     if xarray_imported and isinstance(img, xarray.DataArray):
         dims = list(img.dims)
         img_is_xarray = True
+        pop_indexes = []
         if facet_col is not None:
             facet_slices = img.coords[img.dims[facet_col]].values
-            _ = dims.pop(facet_col)
+            pop_indexes.append(facet_col)
             facet_label = img.dims[facet_col]
         if animation_frame is not None:
             animation_slices = img.coords[img.dims[animation_frame]].values
-            _ = dims.pop(animation_frame)
+            pop_indexes.append(animation_frame)
             animation_label = img.dims[animation_frame]
+        # Remove indices in sorted order.
+        for index in sorted(pop_indexes, reverse=True):
+            _ = dims.pop(index)
         y_label, x_label = dims[0], dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -346,7 +355,7 @@ def imshow(
         binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
-    if img.dtype == np.bool:
+    if img.dtype == bool:
         img = 255 * img.astype(np.uint8)
 
     if range_color is not None:
@@ -385,8 +394,22 @@ def imshow(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
+
+        texttemplate = None
+        if text_auto is True:
+            texttemplate = "%{z}"
+        elif text_auto is not False:
+            texttemplate = "%{z:" + text_auto + "}"
+
         traces = [
-            go.Heatmap(x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i))
+            go.Heatmap(
+                x=x,
+                y=y,
+                z=img[index_tup],
+                coloraxis="coloraxis1",
+                name=str(i),
+                texttemplate=texttemplate,
+            )
             for i, index_tup in enumerate(itertools.product(*iterables))
         ]
         autorange = True if origin == "lower" else "reversed"
@@ -510,8 +533,8 @@ def imshow(
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
-            "An image of shape %s was provided."
-            "Alternatively, 3- or 4-D single or multichannel datasets can be"
+            "An image of shape %s was provided. "
+            "Alternatively, 3- or 4-D single or multichannel datasets can be "
             "visualized using the `facet_col` or/and `animation_frame` arguments."
             % str(img.shape)
         )
@@ -522,7 +545,7 @@ def imshow(
         slice_label = (
             "facet_col" if labels.get("facet_col") is None else labels["facet_col"]
         )
-        col_labels = ["%s=%d" % (slice_label, i) for i in facet_slices]
+        col_labels = [f"{slice_label}={i}" for i in facet_slices]
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     for attr_name in ["height", "width"]:
         if args[attr_name]:

@@ -18,7 +18,7 @@ class Title(_BaseTraceHierarchyType):
         Sets the horizontal alignment of the title. It defaults to
         `center` except for bullet charts for which it defaults to
         right.
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -39,17 +39,17 @@ class Title(_BaseTraceHierarchyType):
     def font(self):
         """
         Set the font used to display the title
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -63,11 +63,34 @@ class Title(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -85,7 +108,7 @@ class Title(_BaseTraceHierarchyType):
     def text(self):
         """
         Sets the title of this indicator.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -118,7 +141,7 @@ class Title(_BaseTraceHierarchyType):
     def __init__(self, arg=None, align=None, font=None, text=None, **kwargs):
         """
         Construct a new Title object
-        
+
         Parameters
         ----------
         arg
@@ -155,8 +178,8 @@ class Title(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.Title 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.Title
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.Title`"""
             )
 

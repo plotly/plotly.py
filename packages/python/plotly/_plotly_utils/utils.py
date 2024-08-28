@@ -8,9 +8,6 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
-PY36_OR_LATER = sys.version_info >= (3, 6)
-
-
 def cumsum(x):
     """
     Custom cumsum to avoid a numpy import.
@@ -167,15 +164,19 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
     @staticmethod
     def encode_as_pandas(obj):
-        """Attempt to convert pandas.NaT"""
+        """Attempt to convert pandas.NaT / pandas.NA"""
         pandas = get_module("pandas", should_load=False)
         if not pandas:
             raise NotEncodable
 
         if obj is pandas.NaT:
             return None
-        else:
-            raise NotEncodable
+
+        # pandas.NA was introduced in pandas 1.0
+        if hasattr(pandas, "NA") and obj is pandas.NA:
+            return None
+
+        raise NotEncodable
 
     @staticmethod
     def encode_as_numpy(obj):

@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
     from ._zsmooth import ZsmoothValidator
     from ._zmin import ZminValidator
@@ -28,6 +29,8 @@ if sys.version_info < (3, 7):
     from ._visible import VisibleValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
+    from ._texttemplate import TexttemplateValidator
+    from ._textfont import TextfontValidator
     from ._stream import StreamValidator
     from ._showscale import ShowscaleValidator
     from ._showlegend import ShowlegendValidator
@@ -39,9 +42,11 @@ if sys.version_info < (3, 7):
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._marker import MarkerValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._hovertemplatesrc import HovertemplatesrcValidator
@@ -94,6 +99,8 @@ else:
             "._visible.VisibleValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
+            "._texttemplate.TexttemplateValidator",
+            "._textfont.TextfontValidator",
             "._stream.StreamValidator",
             "._showscale.ShowscaleValidator",
             "._showlegend.ShowlegendValidator",
@@ -105,9 +112,11 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._marker.MarkerValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._hovertemplatesrc.HovertemplatesrcValidator",

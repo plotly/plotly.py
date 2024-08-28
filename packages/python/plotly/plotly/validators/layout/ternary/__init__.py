@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._uirevision import UirevisionValidator
     from ._sum import SumValidator
     from ._domain import DomainValidator

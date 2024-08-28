@@ -28,9 +28,11 @@ class Funnelarea(_BaseTraceType):
         "label0",
         "labels",
         "labelssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "marker",
         "meta",
         "metasrc",
@@ -62,7 +64,7 @@ class Funnelarea(_BaseTraceType):
     def aspectratio(self):
         """
         Sets the ratio between height and width
-    
+
         The 'aspectratio' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -82,7 +84,7 @@ class Funnelarea(_BaseTraceType):
     def baseratio(self):
         """
         Sets the ratio between bottom length and maximum top length.
-    
+
         The 'baseratio' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -105,7 +107,7 @@ class Funnelarea(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -124,9 +126,9 @@ class Funnelarea(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -146,7 +148,7 @@ class Funnelarea(_BaseTraceType):
     def dlabel(self):
         """
         Sets the label step. See `label0` for more info.
-    
+
         The 'dlabel' property is a number and may be specified as:
           - An int or float
 
@@ -170,9 +172,9 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this funnelarea
@@ -206,7 +208,7 @@ class Funnelarea(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
@@ -229,9 +231,9 @@ class Funnelarea(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -255,9 +257,9 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -265,19 +267,19 @@ class Funnelarea(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -292,7 +294,7 @@ class Funnelarea(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -328,12 +330,13 @@ class Funnelarea(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `label`, `color`, `value`, `text` and `percent`. Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `label`, `color`,
+        `value`, `text` and `percent`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -355,8 +358,8 @@ class Funnelarea(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
-    
+        `hovertemplate`.
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -380,7 +383,7 @@ class Funnelarea(_BaseTraceType):
         an array of string, the items are mapped in order of this
         trace's sectors. To be seen, trace `hoverinfo` must contain a
         "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -401,9 +404,9 @@ class Funnelarea(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -425,7 +428,7 @@ class Funnelarea(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -444,8 +447,8 @@ class Funnelarea(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -465,20 +468,20 @@ class Funnelarea(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `textinfo` lying inside the sector.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.funnelarea.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -492,18 +495,58 @@ class Funnelarea(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -523,7 +566,7 @@ class Funnelarea(_BaseTraceType):
         Alternate to `labels`. Builds a numeric set of labels. Use with
         `dlabel` where `label0` is the starting label and `dlabel` the
         step.
-    
+
         The 'label0' property is a number and may be specified as:
           - An int or float
 
@@ -547,7 +590,7 @@ class Funnelarea(_BaseTraceType):
         is not provided. For other array attributes (including color)
         we use the first non-empty entry among all occurrences of the
         label.
-    
+
         The 'labels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -566,8 +609,8 @@ class Funnelarea(_BaseTraceType):
     @property
     def labelssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  labels .
-    
+        Sets the source reference on Chart Studio Cloud for `labels`.
+
         The 'labelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -581,15 +624,40 @@ class Funnelarea(_BaseTraceType):
     def labelssrc(self, val):
         self["labelssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -614,9 +682,9 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -639,11 +707,13 @@ class Funnelarea(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
-    
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -657,6 +727,27 @@ class Funnelarea(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # marker
     # ------
     @property
@@ -667,20 +758,22 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 colors
                     Sets the color of each sector. If not
                     specified, the default trace color set is used
                     to pick the sector colors.
                 colorssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  colors .
+                    for `colors`.
                 line
                     :class:`plotly.graph_objects.funnelarea.marker.
                     Line` instance or dict with compatible
                     properties
+                pattern
+                    Sets the pattern within the marker.
 
         Returns
         -------
@@ -707,7 +800,7 @@ class Funnelarea(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -725,8 +818,8 @@ class Funnelarea(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -745,9 +838,9 @@ class Funnelarea(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -768,7 +861,7 @@ class Funnelarea(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -790,7 +883,7 @@ class Funnelarea(_BaseTraceType):
         If there are multiple funnelareas that should be sized
         according to their totals, link them by providing a non-empty
         group id here shared by every trace in the same group.
-    
+
         The 'scalegroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -812,7 +905,7 @@ class Funnelarea(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -836,9 +929,9 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -869,7 +962,7 @@ class Funnelarea(_BaseTraceType):
         on the chart. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -889,20 +982,20 @@ class Funnelarea(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `textinfo`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.funnelarea.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -916,18 +1009,58 @@ class Funnelarea(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -945,7 +1078,7 @@ class Funnelarea(_BaseTraceType):
     def textinfo(self):
         """
         Determines which trace information appear on the graph.
-    
+
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'percent'] joined with '+' characters
@@ -968,7 +1101,7 @@ class Funnelarea(_BaseTraceType):
     def textposition(self):
         """
         Specifies the location of the `textinfo`.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'none']
@@ -990,8 +1123,8 @@ class Funnelarea(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
-    
+        `textposition`.
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1010,8 +1143,8 @@ class Funnelarea(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1042,8 +1175,9 @@ class Funnelarea(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `label`, `color`, `value`, `text` and `percent`.
-    
+        Finally, the template string has access to variables `label`,
+        `color`, `value`, `text` and `percent`.
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1065,8 +1199,8 @@ class Funnelarea(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
-    
+        `texttemplate`.
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1090,9 +1224,9 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets the font used for `title`. Note that the
                     title's font used to be set by the now
@@ -1125,7 +1259,7 @@ class Funnelarea(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1160,7 +1294,7 @@ class Funnelarea(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1180,7 +1314,7 @@ class Funnelarea(_BaseTraceType):
         """
         Sets the values of the sectors. If omitted, we count
         occurrences of each label.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1199,8 +1333,8 @@ class Funnelarea(_BaseTraceType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  values .
-    
+        Sets the source reference on Chart Studio Cloud for `values`.
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1222,7 +1356,7 @@ class Funnelarea(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1260,7 +1394,7 @@ class Funnelarea(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dlabel
             Sets the label step. See `label0` for more info.
         domain
@@ -1273,7 +1407,7 @@ class Funnelarea(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.funnelarea.Hoverlabel`
             instance or dict with compatible properties
@@ -1301,15 +1435,15 @@ class Funnelarea(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1318,14 +1452,14 @@ class Funnelarea(_BaseTraceType):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1341,22 +1475,34 @@ class Funnelarea(_BaseTraceType):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -1375,9 +1521,9 @@ class Funnelarea(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1406,10 +1552,10 @@ class Funnelarea(_BaseTraceType):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -1425,11 +1571,12 @@ class Funnelarea(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.funnelarea.Title` instance
             or dict with compatible properties
@@ -1460,7 +1607,7 @@ class Funnelarea(_BaseTraceType):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1490,9 +1637,11 @@ class Funnelarea(_BaseTraceType):
         label0=None,
         labels=None,
         labelssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1515,11 +1664,11 @@ class Funnelarea(_BaseTraceType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Funnelarea object
-        
+
         Visualize stages in a process using area-encoded trapezoids.
         This trace can be used to show data in a part-to-whole
         representation similar to a "pie" trace, wherein each item
@@ -1543,7 +1692,7 @@ class Funnelarea(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dlabel
             Sets the label step. See `label0` for more info.
         domain
@@ -1556,7 +1705,7 @@ class Funnelarea(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.funnelarea.Hoverlabel`
             instance or dict with compatible properties
@@ -1584,15 +1733,15 @@ class Funnelarea(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`. Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1601,14 +1750,14 @@ class Funnelarea(_BaseTraceType):
             trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1624,22 +1773,34 @@ class Funnelarea(_BaseTraceType):
             non-empty entry among all occurrences of the label.
         labelssrc
             Sets the source reference on Chart Studio Cloud for
-            labels .
+            `labels`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.funnelarea.Marker`
             instance or dict with compatible properties
@@ -1658,9 +1819,9 @@ class Funnelarea(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1689,10 +1850,10 @@ class Funnelarea(_BaseTraceType):
             Specifies the location of the `textinfo`.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -1708,11 +1869,12 @@ class Funnelarea(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label`, `color`, `value`,
-            `text` and `percent`.
+            are available. Finally, the template string has access
+            to variables `label`, `color`, `value`, `text` and
+            `percent`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         title
             :class:`plotly.graph_objects.funnelarea.Title` instance
             or dict with compatible properties
@@ -1743,7 +1905,7 @@ class Funnelarea(_BaseTraceType):
             occurrences of each label.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
-            values .
+            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1771,8 +1933,8 @@ class Funnelarea(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Funnelarea 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Funnelarea
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Funnelarea`"""
             )
 
@@ -1859,6 +2021,10 @@ an instance of :class:`plotly.graph_objs.Funnelarea`"""
         _v = labelssrc if labelssrc is not None else _v
         if _v is not None:
             self["labelssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -1871,6 +2037,10 @@ an instance of :class:`plotly.graph_objs.Funnelarea`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("marker", None)
         _v = marker if marker is not None else _v
         if _v is not None:

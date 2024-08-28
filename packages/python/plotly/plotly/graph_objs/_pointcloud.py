@@ -18,9 +18,11 @@ class Pointcloud(_BaseTraceType):
         "idssrc",
         "indices",
         "indicessrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "marker",
         "meta",
         "metasrc",
@@ -57,7 +59,7 @@ class Pointcloud(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -76,9 +78,9 @@ class Pointcloud(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -100,7 +102,7 @@ class Pointcloud(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -123,9 +125,9 @@ class Pointcloud(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -149,9 +151,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -159,19 +161,19 @@ class Pointcloud(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -186,7 +188,7 @@ class Pointcloud(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -206,7 +208,7 @@ class Pointcloud(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -225,8 +227,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -252,7 +254,7 @@ class Pointcloud(_BaseTraceType):
         create one large `indices` typed array that is guaranteed to be
         at least as long as the largest number of points during use,
         and reuse it on each `Plotly.restyle()` call.
-    
+
         The 'indices' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -271,8 +273,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def indicessrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  indices .
-    
+        Sets the source reference on Chart Studio Cloud for `indices`.
+
         The 'indicessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -286,15 +288,40 @@ class Pointcloud(_BaseTraceType):
     def indicessrc(self, val):
         self["indicessrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -319,9 +346,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -344,11 +371,13 @@ class Pointcloud(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
-    
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -362,6 +391,27 @@ class Pointcloud(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # marker
     # ------
     @property
@@ -372,9 +422,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 blend
                     Determines if colors are blended together for a
                     translucency effect in case `opacity` is
@@ -387,9 +437,10 @@ class Pointcloud(_BaseTraceType):
                     properties
                 color
                     Sets the marker fill color. It accepts a
-                    specific color.If the color is not fully opaque
-                    and there are hundreds of thousandsof points,
-                    it may cause slower zooming and panning.
+                    specific color. If the color is not fully
+                    opaque and there are hundreds of thousands of
+                    points, it may cause slower zooming and
+                    panning.
                 opacity
                     Sets the marker opacity. The default value is
                     `1` (fully opaque). If the markers are not
@@ -432,7 +483,7 @@ class Pointcloud(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -450,8 +501,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -470,9 +521,9 @@ class Pointcloud(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -493,7 +544,7 @@ class Pointcloud(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -514,7 +565,7 @@ class Pointcloud(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -538,9 +589,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -572,7 +623,7 @@ class Pointcloud(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -593,8 +644,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -615,7 +666,7 @@ class Pointcloud(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -650,7 +701,7 @@ class Pointcloud(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -671,7 +722,7 @@ class Pointcloud(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -692,7 +743,7 @@ class Pointcloud(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -715,7 +766,7 @@ class Pointcloud(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -739,7 +790,7 @@ class Pointcloud(_BaseTraceType):
         Specify `xbounds` in the shape of `[xMin, xMax] to avoid
         looping through the `xy` typed array. Use it in conjunction
         with `xy` and `ybounds` for the performance benefits.
-    
+
         The 'xbounds' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -758,8 +809,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def xboundssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  xbounds .
-    
+        Sets the source reference on Chart Studio Cloud for `xbounds`.
+
         The 'xboundssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -778,8 +829,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
-    
+        Sets the source reference on Chart Studio Cloud for `x`.
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -802,7 +853,7 @@ class Pointcloud(_BaseTraceType):
         supplied, it must be a typed `Float32Array` array that
         represents points such that `xy[i * 2] = x[i]` and `xy[i * 2 +
         1] = y[i]`
-    
+
         The 'xy' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -821,8 +872,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def xysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  xy .
-    
+        Sets the source reference on Chart Studio Cloud for `xy`.
+
         The 'xysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -842,7 +893,7 @@ class Pointcloud(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -865,7 +916,7 @@ class Pointcloud(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -889,7 +940,7 @@ class Pointcloud(_BaseTraceType):
         Specify `ybounds` in the shape of `[yMin, yMax] to avoid
         looping through the `xy` typed array. Use it in conjunction
         with `xy` and `xbounds` for the performance benefits.
-    
+
         The 'ybounds' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -908,8 +959,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def yboundssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ybounds .
-    
+        Sets the source reference on Chart Studio Cloud for `ybounds`.
+
         The 'yboundssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -928,8 +979,8 @@ class Pointcloud(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
-    
+        Sets the source reference on Chart Studio Cloud for `y`.
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -961,7 +1012,7 @@ class Pointcloud(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -969,7 +1020,7 @@ class Pointcloud(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pointcloud.Hoverlabel`
             instance or dict with compatible properties
@@ -979,7 +1030,7 @@ class Pointcloud(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         indices
             A sequential value, 0..n, supply it to avoid creating
             this array inside plotting. If specified, it must be a
@@ -991,22 +1042,34 @@ class Pointcloud(_BaseTraceType):
             it on each `Plotly.restyle()` call.
         indicessrc
             Sets the source reference on Chart Studio Cloud for
-            indices .
+            `indices`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.pointcloud.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -1025,9 +1088,9 @@ class Pointcloud(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1047,7 +1110,7 @@ class Pointcloud(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1089,18 +1152,18 @@ class Pointcloud(_BaseTraceType):
             benefits.
         xboundssrc
             Sets the source reference on Chart Studio Cloud for
-            xbounds .
+            `xbounds`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xy
             Faster alternative to specifying `x` and `y`
             separately. If supplied, it must be a typed
             `Float32Array` array that represents points such that
             `xy[i * 2] = x[i]` and `xy[i * 2 + 1] = y[i]`
         xysrc
-            Sets the source reference on Chart Studio Cloud for  xy
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `xy`.
         y
             Sets the y coordinates.
         yaxis
@@ -1115,10 +1178,10 @@ class Pointcloud(_BaseTraceType):
             benefits.
         yboundssrc
             Sets the source reference on Chart Studio Cloud for
-            ybounds .
+            `ybounds`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
         """
 
     def __init__(
@@ -1133,9 +1196,11 @@ class Pointcloud(_BaseTraceType):
         idssrc=None,
         indices=None,
         indicessrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -1160,11 +1225,11 @@ class Pointcloud(_BaseTraceType):
         ybounds=None,
         yboundssrc=None,
         ysrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Pointcloud object
-        
+
         "pointcloud" trace is deprecated! Please consider switching to
         the "scattergl" trace type. The data visualized as a point
         cloud set in `x` and `y` using the WebGl plotting engine.
@@ -1181,7 +1246,7 @@ class Pointcloud(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1189,7 +1254,7 @@ class Pointcloud(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.pointcloud.Hoverlabel`
             instance or dict with compatible properties
@@ -1199,7 +1264,7 @@ class Pointcloud(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         indices
             A sequential value, 0..n, supply it to avoid creating
             this array inside plotting. If specified, it must be a
@@ -1211,22 +1276,34 @@ class Pointcloud(_BaseTraceType):
             it on each `Plotly.restyle()` call.
         indicessrc
             Sets the source reference on Chart Studio Cloud for
-            indices .
+            `indices`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.pointcloud.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.pointcloud.Marker`
             instance or dict with compatible properties
@@ -1245,9 +1322,9 @@ class Pointcloud(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1267,7 +1344,7 @@ class Pointcloud(_BaseTraceType):
             the hover labels.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1309,18 +1386,18 @@ class Pointcloud(_BaseTraceType):
             benefits.
         xboundssrc
             Sets the source reference on Chart Studio Cloud for
-            xbounds .
+            `xbounds`.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         xy
             Faster alternative to specifying `x` and `y`
             separately. If supplied, it must be a typed
             `Float32Array` array that represents points such that
             `xy[i * 2] = x[i]` and `xy[i * 2 + 1] = y[i]`
         xysrc
-            Sets the source reference on Chart Studio Cloud for  xy
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `xy`.
         y
             Sets the y coordinates.
         yaxis
@@ -1335,10 +1412,10 @@ class Pointcloud(_BaseTraceType):
             benefits.
         yboundssrc
             Sets the source reference on Chart Studio Cloud for
-            ybounds .
+            `ybounds`.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
 
         Returns
         -------
@@ -1361,8 +1438,8 @@ class Pointcloud(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Pointcloud 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Pointcloud
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Pointcloud`"""
             )
 
@@ -1409,6 +1486,10 @@ an instance of :class:`plotly.graph_objs.Pointcloud`"""
         _v = indicessrc if indicessrc is not None else _v
         if _v is not None:
             self["indicessrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -1421,6 +1502,10 @@ an instance of :class:`plotly.graph_objs.Pointcloud`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("marker", None)
         _v = marker if marker is not None else _v
         if _v is not None:

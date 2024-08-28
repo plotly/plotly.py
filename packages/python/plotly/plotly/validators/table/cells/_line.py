@@ -14,13 +14,13 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             width
 
             widthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  width .
+                for `width`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )
