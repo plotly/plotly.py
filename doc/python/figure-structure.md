@@ -181,7 +181,7 @@ The following trace types are compatible with smith subplots via the `smith` att
 
 ### Map Trace Types and Subplots
 
-Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [mapbox subplots for tile maps](/python/tile-map-layers/). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [tile-based maps](/python/tile-map-layers/). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with geo subplots via the `geo` attribute:
 
