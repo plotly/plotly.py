@@ -18,7 +18,7 @@ class Center(_BaseLayoutHierarchyType):
         Sets the latitude of the map's center. For all projection
         types, the map's latitude center lies at the middle of the
         latitude range by default.
-    
+
         The 'lat' property is a number and may be specified as:
           - An int or float
 
@@ -41,7 +41,7 @@ class Center(_BaseLayoutHierarchyType):
         longitude center lies at the middle of the longitude range for
         scoped projection and above `projection.rotation.lon`
         otherwise.
-    
+
         The 'lon' property is a number and may be specified as:
           - An int or float
 
@@ -74,7 +74,7 @@ class Center(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, lat=None, lon=None, **kwargs):
         """
         Construct a new Center object
-        
+
         Parameters
         ----------
         arg
@@ -112,8 +112,8 @@ class Center(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.geo.Center 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.geo.Center
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.geo.Center`"""
             )
 

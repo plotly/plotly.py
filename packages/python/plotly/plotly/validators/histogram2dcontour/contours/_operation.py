@@ -6,7 +6,7 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="operation",
         parent_name="histogram2dcontour.contours",
-        **kwargs
+        **kwargs,
     ):
         super(OperationValidator, self).__init__(
             plotly_name=plotly_name,
@@ -30,5 +30,5 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     ")[",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

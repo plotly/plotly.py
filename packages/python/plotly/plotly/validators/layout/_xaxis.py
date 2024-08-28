@@ -23,7 +23,24 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not the range of this
                 axis is computed in relation to the input data.
                 See `rangemode` for more info. If `range` is
-                provided, then `autorange` is set to False.
+                provided and it has a value for both the lower
+                and upper bound, `autorange` is set to False.
+                Using "min" applies autorange only to set the
+                minimum. Using "max" applies autorange only to
+                set the maximum. Using *min reversed* applies
+                autorange only to set the minimum on a reversed
+                axis. Using *max reversed* applies autorange
+                only to set the maximum on a reversed axis.
+                Using "reversed" applies autorange on both ends
+                and reverses the axis direction.
+            autorangeoptions
+                :class:`plotly.graph_objects.layout.xaxis.Autor
+                angeoptions` instance or dict with compatible
+                properties
+            autotickangles
+                When `tickangle` is set to "auto", it will be
+                set to the first angle in this array that is
+                large enough to prevent label overlap.
             autotypenumbers
                 Using "strict" a numeric string in trace data
                 is not converted to a number. Using *convert
@@ -43,7 +60,7 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 is set to "array". Used with `categoryorder`.
             categoryarraysrc
                 Sets the source reference on Chart Studio Cloud
-                for  categoryarray .
+                for `categoryarray`.
             categoryorder
                 Specifies the ordering logic for the case of
                 categorical variables. By default, plotly uses
@@ -63,7 +80,8 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 descending* if order should be determined by
                 the numerical order of the values. Similarly,
                 the order can be determined by the min, max,
-                sum, mean or median of all the values.
+                sum, mean, geometric mean or median of all the
+                values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -135,14 +153,19 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 able. If true, then zoom is disabled.
             gridcolor
                 Sets the color of the grid lines.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the grid lines.
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -151,6 +174,26 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            insiderange
+                Could be used to set the desired inside range
+                of this axis (excluding the labels) when
+                `ticklabelposition` of the anchored axis has
+                "inside". Not implemented for axes with `type`
+                "log". This would be ignored when `range` is
+                provided.
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             layer
                 Sets the layer on which this axis is displayed.
                 If *above traces*, this axis is displayed above
@@ -174,10 +217,17 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `scaleanchor` and a `matches` constraint is
                 currently forbidden. Moreover, note that
                 matching axes must have the same `type`.
+            maxallowed
+                Determines the maximum range of this axis.
+            minallowed
+                Determines the minimum range of this axis.
             minexponent
                 Hide SI prefix for 10^n if |n| is below this
                 number. This only has an effect when
                 `tickformat` is "SI" or "B".
+            minor
+                :class:`plotly.graph_objects.layout.xaxis.Minor
+                ` instance or dict with compatible properties
             mirror
                 Determines if the axis lines or/and ticks are
                 mirrored to the opposite side of the plotting
@@ -216,7 +266,9 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 strings. If the axis `type` is "category", it
                 should be numbers, using the scale where each
                 category is assigned a serial number from zero
-                in the order it appears.
+                in the order it appears. Leaving either or both
+                elements `null` impacts the default
+                `autorange`.
             rangebreaks
                 A tuple of :class:`plotly.graph_objects.layout.
                 xaxis.Rangebreak` instances or dicts with
@@ -263,6 +315,15 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 constraints via `scaleratio`. Note that setting
                 axes simultaneously in both a `scaleanchor` and
                 a `matches` constraint is currently forbidden.
+                Setting `false` allows to remove a default
+                constraint (occasionally, you may need to
+                prevent a default `scaleanchor` constraint from
+                being applied, eg. when having an image trace
+                `yaxis: {scaleanchor: "x"}` is set
+                automatically in order for pixels to be
+                rendered as squares, setting `yaxis:
+                {scaleanchor: false}` allows to remove the
+                constraint).
             scaleratio
                 If this axis is linked to another by
                 `scaleanchor`, this determines the pixel to
@@ -356,8 +417,8 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -375,6 +436,20 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 out.xaxis.tickformatstopdefaults), sets the
                 default property values to use for elements of
                 layout.xaxis.tickformatstops
+            ticklabelindex
+                Only for axes with `type` "date" or "linear".
+                Instead of drawing the major tick label, draw
+                the label for the minor tick that is n
+                positions away from the major tick. E.g. to
+                always draw the label for the minor tick before
+                each major tick, choose `ticklabelindex` -1.
+                This is useful for date axes with
+                `ticklabelmode` "period" if you want to label
+                the period that ends with each major tick
+                instead of the period that begins there.
+            ticklabelindexsrc
+                Sets the source reference on Chart Studio Cloud
+                for `ticklabelindex`.
             ticklabelmode
                 Determines where tick labels are drawn with
                 respect to their corresponding ticks and grid
@@ -402,6 +477,34 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes linked by `matches` or `scaleanchor`, no
                 extra padding for inside labels would be added
                 by autorange, so that the scales could match.
+            ticklabelshift
+                Shifts the tick labels by the specified number
+                of pixels in parallel to the axis. Positive
+                values move the labels in the positive
+                direction of the axis.
+            ticklabelstandoff
+                Sets the standoff distance (in px) between the
+                axis tick labels and their default position. A
+                positive `ticklabelstandoff` moves the labels
+                farther away from the plot area if
+                `ticklabelposition` is "outside", and deeper
+                into the plot area if `ticklabelposition` is
+                "inside". A negative `ticklabelstandoff` works
+                in the opposite direction, moving outside ticks
+                towards the plot area and inside ticks towards
+                the outside. If the negative value is large
+                enough, inside ticks can even end up outside
+                and vice versa.
+            ticklabelstep
+                Sets the spacing between tick labels as
+                compared to the spacing between ticks. A value
+                of 1 (default) means each tick gets a label. A
+                value of 2 means shows every 2nd label. A
+                larger value n means only every nth tick is
+                labeled. `tick0` determines which labels are
+                shown. Not implemented for axes with `type`
+                "log" or "multicategory", or when `tickmode` is
+                "array".
             ticklen
                 Sets the tick length (in px).
             tickmode
@@ -414,7 +517,9 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "array", the placement of the ticks is set via
                 `tickvals` and the tick text is `ticktext`.
                 ("array" is the default value if `tickvals` is
-                provided).
+                provided). If "sync", the number of ticks will
+                sync with the overlayed axis set by
+                `overlaying` property.
             tickprefix
                 Sets a tick label prefix.
             ticks
@@ -438,14 +543,14 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             tickwidth
                 Sets the tick width (in px).
             title
@@ -481,5 +586,5 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

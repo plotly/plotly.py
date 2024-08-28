@@ -30,5 +30,5 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 reflected in a single direction, causing shine.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

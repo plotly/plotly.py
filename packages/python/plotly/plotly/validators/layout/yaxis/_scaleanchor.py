@@ -12,7 +12,8 @@ class ScaleanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 [
                     "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
                     "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
+                    False,
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

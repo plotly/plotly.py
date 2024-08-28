@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from plotly.tests.utils import TestCaseNoTemplate
@@ -28,13 +26,13 @@ class FigureTest(TestCaseNoTemplate):
         self.assertEqual(go.Figure().frames, ())
 
     def test_nested_frames(self):
-        with self.assertRaisesRegexp(ValueError, "frames"):
+        with self.assertRaisesRegex(ValueError, "frames"):
             go.Figure({"frames": [{"frames": []}]})
 
         figure = go.Figure()
         figure.frames = [{}]
 
-        with self.assertRaisesRegexp(ValueError, "frames"):
+        with self.assertRaisesRegex(ValueError, "frames"):
             figure.to_plotly_json()["frames"][0]["frames"] = []
             figure.frames[0].frames = []
 

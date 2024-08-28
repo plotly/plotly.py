@@ -29,7 +29,7 @@ class TestDashboard(TestCase):
             "the strings 'first' and 'second'."
         )
 
-        self.assertRaisesRegexp(PlotlyError, message, dash._insert, my_box, "third")
+        self.assertRaisesRegex(PlotlyError, message, dash._insert, my_box, "third")
 
     def test_box_id_none(self):
 
@@ -49,9 +49,7 @@ class TestDashboard(TestCase):
             "one box in your dashboard."
         )
 
-        self.assertRaisesRegexp(
-            PlotlyError, message, dash.insert, my_box, "above", None
-        )
+        self.assertRaisesRegex(PlotlyError, message, dash.insert, my_box, "above", None)
 
     def test_id_not_valid(self):
         my_box = {
@@ -71,12 +69,12 @@ class TestDashboard(TestCase):
         dash.insert(my_box, "above", 1)
 
         # insert box
-        self.assertRaisesRegexp(PlotlyError, message, dash.insert, my_box, "above", 0)
+        self.assertRaisesRegex(PlotlyError, message, dash.insert, my_box, "above", 0)
         # get box by id
-        self.assertRaisesRegexp(PlotlyError, message, dash.get_box, 0)
+        self.assertRaisesRegex(PlotlyError, message, dash.get_box, 0)
 
         # remove box
-        self.assertRaisesRegexp(PlotlyError, message, dash.remove, 0)
+        self.assertRaisesRegex(PlotlyError, message, dash.remove, 0)
 
     def test_invalid_side(self):
         my_box = {
@@ -96,7 +94,7 @@ class TestDashboard(TestCase):
         dash = dashboard.Dashboard()
         dash.insert(my_box, "above", 0)
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, message, dash.insert, my_box, "somewhere", 1
         )
 

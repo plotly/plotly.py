@@ -6,7 +6,7 @@ class TickformatstopdefaultsValidator(_plotly_utils.basevalidators.CompoundValid
         self,
         plotly_name="tickformatstopdefaults",
         parent_name="mesh3d.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TickformatstopdefaultsValidator, self).__init__(
             plotly_name=plotly_name,
@@ -17,5 +17,5 @@ class TickformatstopdefaultsValidator(_plotly_utils.basevalidators.CompoundValid
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

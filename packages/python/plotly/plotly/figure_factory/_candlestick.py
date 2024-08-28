@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from plotly.figure_factory import utils
 from plotly.figure_factory._ohlc import (
     _DEFAULT_INCREASING_COLOR,
@@ -51,7 +49,7 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
         y=increase_y,
         whiskerwidth=0,
         boxpoints=False,
-        **kwargs
+        **kwargs,
     )
 
     return [candle_incr_data]
@@ -91,7 +89,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
         y=decrease_y,
         whiskerwidth=0,
         boxpoints=False,
-        **kwargs
+        **kwargs,
     )
 
     return [candle_decr_data]
@@ -99,7 +97,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objects trace 
+    **deprecated**, use instead the plotly.graph_objects trace
     :class:`plotly.graph_objects.Candlestick`
 
     :param (list) open: opening values
@@ -164,7 +162,7 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     >>> fig.show()
 
     Example 3: Candlestick chart with datetime objects
- 
+
     >>> from plotly.figure_factory import create_candlestick
 
     >>> from datetime import datetime

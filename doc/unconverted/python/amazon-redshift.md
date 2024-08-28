@@ -45,8 +45,6 @@ This notebook will go over one of the easiest ways to graph data from your [Amaz
 In this notebook we'll be using [Amazon's Sample Redshift Data](http://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-create-sample-db.html) for this notebook. Although we won't be connecting through a JDBC/ODBC connection we'll be using the [psycopg2 package](http://initd.org/psycopg/docs/index.html) with [SQLAlchemy](http://www.sqlalchemy.org/)  and [pandas](http://pandas.pydata.org/) to make it simple to query and analyze our data.
 
 ```python
-from __future__ import print_function #python 3 support
-
 import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly.tools as tls

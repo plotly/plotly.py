@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
+      format_version: '1.3'
+      jupytext_version: 1.14.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.10.4
   plotly:
     description: How to configure and style base maps for Choropleths and Bubble Maps.
     display_as: maps
@@ -119,9 +119,7 @@ fig.show()
 
 ### Map Projections
 
-Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space.
-
-The available projections are `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'` and `'sinusoidal'`.
+Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space. In the following examples, we show the `'orthographic'` and `'natural earth'` projections, two of the many projection types available. For a full list of available projection types, see the [layout.geo reference documentation](https://plotly.com/python/reference/layout/geo/#layout-geo-projection-type).
 
 ```python
 import plotly.graph_objects as go
@@ -221,7 +219,3 @@ fig.show()
 ### Reference
 
 See https://plotly.com/python/reference/layout/geo/ for more information and chart attribute options!
-
-```python
-
-```

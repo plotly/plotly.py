@@ -31,7 +31,7 @@ Plotly's Python library is free and open source! [Get started](https://plot.ly/p
 
 
 #### Comparison
-In this tutorial we plot the same network - the coauthorship network of scientists working on network theory and experiment - first as an `igraph.Graph` object, with the Kamada-Kawai layout, and then as a `networkx.Graph`, with the Fruchterman-Reingold layout. Install the Python libraries with `sudo pip install python-igraph` and `sudo pip install networkx`.
+In this tutorial we plot the same network - the coauthorship network of scientists working on network theory and experiment - first as an `igraph.Graph` object, with the Kamada-Kawai layout, and then as a `networkx.Graph`, with the Fruchterman-Reingold layout. Install the Python libraries with `sudo pip install igraph` and `sudo pip install networkx`.
 
 The graph data are read from a gml file, posted at UC Irvine [Network Data Repository](http://networkdata.ics.uci.edu/data/netscience/netscience.gml):
 

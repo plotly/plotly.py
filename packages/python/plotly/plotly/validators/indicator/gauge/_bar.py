@@ -21,5 +21,5 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the total thickness of the gauge.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

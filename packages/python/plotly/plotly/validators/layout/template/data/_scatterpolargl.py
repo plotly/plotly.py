@@ -14,5 +14,5 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundArrayValidato
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

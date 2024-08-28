@@ -26,9 +26,11 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "sum descending",
                     "mean ascending",
                     "mean descending",
+                    "geometric mean ascending",
+                    "geometric mean descending",
                     "median ascending",
                     "median descending",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

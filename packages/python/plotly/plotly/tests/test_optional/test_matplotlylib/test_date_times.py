@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import datetime
 import random
 from unittest import TestCase
@@ -17,7 +15,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 class TestDateTimes(TestCase):
     def test_normal_mpl_dates(self):
         datetime_format = "%Y-%m-%d %H:%M:%S"

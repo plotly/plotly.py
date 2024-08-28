@@ -7,10 +7,6 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-from unittest import skipIf
-
-import six
-
 import _plotly_utils.exceptions
 from chart_studio import exceptions
 from chart_studio.plotly import plotly as py
@@ -93,7 +89,6 @@ class GetFigureTest(PlotlyTestCase):
 
 
 class TestBytesVStrings(PlotlyTestCase):
-    @skipIf(six.PY2, "Decoding and missing escapes only seen in PY3")
     def test_proper_escaping(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"

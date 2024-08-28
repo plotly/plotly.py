@@ -13,5 +13,5 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 "values",
                 ["trace", "category ascending", "category descending", "array"],
             ),
-            **kwargs
+            **kwargs,
         )

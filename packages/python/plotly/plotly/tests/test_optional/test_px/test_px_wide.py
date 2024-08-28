@@ -1,9 +1,11 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
+import warnings
 
 
 def test_is_col_list():
@@ -148,11 +150,15 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
     args_in = dict(data_frame=df_in, color=None, orientation=orientation)
     args_out = build_dataframe(args_in, trace_type)
     df_out = args_out.pop("data_frame")
-    expected = dict(variable=["a", "a", "a", "b", "b", "b"], value=[1, 2, 3, 4, 5, 6],)
+    expected = dict(
+        variable=["a", "a", "a", "b", "b", "b"],
+        value=[1, 2, 3, 4, 5, 6],
+    )
     if x == "index":
         expected["index"] = [11, 12, 13, 11, 12, 13]
     assert_frame_equal(
-        df_out.sort_index(axis=1), pd.DataFrame(expected).sort_index(axis=1),
+        df_out.sort_index(axis=1),
+        pd.DataFrame(expected).sort_index(axis=1),
     )
     if trace_type in [go.Histogram2dContour, go.Histogram2d]:
         if orientation is None or orientation == "v":
@@ -173,14 +179,18 @@ for transpose in [True, False]:
         df_in = dict(a=[1, 2], b=[3, 4])
         args = dict(x=None, y=["a", "b"], color=None, orientation=None)
         df_exp = dict(
-            variable=["a", "a", "b", "b"], value=[1, 2, 3, 4], index=[0, 1, 0, 1],
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+            index=[0, 1, 0, 1],
         )
         cases.append((tt, df_in, args, "index", "value", color, df_exp, transpose))
 
         df_in = dict(a=[1, 2], b=[3, 4], c=[5, 6])
         args = dict(x="c", y=["a", "b"], color=None, orientation=None)
         df_exp = dict(
-            variable=["a", "a", "b", "b"], value=[1, 2, 3, 4], c=[5, 6, 5, 6],
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+            c=[5, 6, 5, 6],
         )
         cases.append((tt, df_in, args, "c", "value", color, df_exp, transpose))
 
@@ -211,13 +221,18 @@ for transpose in [True, False]:
     for tt in [go.Violin, go.Box]:
         df_in = dict(a=[1, 2], b=[3, 4])
         args = dict(x=None, y=["a", "b"], color=None, orientation=None)
-        df_exp = dict(variable=["a", "a", "b", "b"], value=[1, 2, 3, 4],)
+        df_exp = dict(
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+        )
         cases.append((tt, df_in, args, "variable", "value", None, df_exp, transpose))
 
         df_in = dict(a=[1, 2], b=[3, 4], c=[5, 6])
         args = dict(x="c", y=["a", "b"], color=None, orientation=None)
         df_exp = dict(
-            variable=["a", "a", "b", "b"], value=[1, 2, 3, 4], c=[5, 6, 5, 6],
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+            c=[5, 6, 5, 6],
         )
         cases.append((tt, df_in, args, "c", "value", None, df_exp, transpose))
 
@@ -236,13 +251,18 @@ for transpose in [True, False]:
     for tt in [go.Histogram]:
         df_in = dict(a=[1, 2], b=[3, 4])
         args = dict(x=None, y=["a", "b"], color=None, orientation=None)
-        df_exp = dict(variable=["a", "a", "b", "b"], value=[1, 2, 3, 4],)
+        df_exp = dict(
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+        )
         cases.append((tt, df_in, args, None, "value", "variable", df_exp, transpose))
 
         df_in = dict(a=[1, 2], b=[3, 4], c=[5, 6])
         args = dict(x="c", y=["a", "b"], color=None, orientation=None)
         df_exp = dict(
-            variable=["a", "a", "b", "b"], value=[1, 2, 3, 4], c=[5, 6, 5, 6],
+            variable=["a", "a", "b", "b"],
+            value=[1, 2, 3, 4],
+            c=[5, 6, 5, 6],
         )
         cases.append((tt, df_in, args, "c", "value", "variable", df_exp, transpose))
 
@@ -387,7 +407,11 @@ append_special_case(
     args_in=dict(x=None, y=None, color=None),
     args_expect=dict(x="index", y="value", color="variable", orientation="v"),
     df_expect=pd.DataFrame(
-        dict(index=[0, 1, 0, 1], value=[1, 4, 2, 5], variable=["0", "0", "1", "1"],)
+        dict(
+            index=[0, 1, 0, 1],
+            value=[1, 4, 2, 5],
+            variable=["0", "0", "1", "1"],
+        )
     ),
 )
 
@@ -396,7 +420,11 @@ append_special_case(
     df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"])),
     args_in=dict(x=None, y=None, color=None, symbol="symbol_col"),
     args_expect=dict(
-        x="index", y="value", color="variable", symbol="symbol_col", orientation="v",
+        x="index",
+        y="value",
+        color="variable",
+        symbol="symbol_col",
+        orientation="v",
     ),
     df_expect=pd.DataFrame(
         dict(
@@ -412,7 +440,11 @@ append_special_case(
 append_special_case(
     df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"])),
     args_in=dict(
-        x=None, y=None, color=None, symbol="symbol_col", custom_data=["symbol_col"],
+        x=None,
+        y=None,
+        color=None,
+        symbol="symbol_col",
+        custom_data=["symbol_col"],
     ),
     args_expect=dict(
         x="index",
@@ -438,7 +470,11 @@ append_special_case(
         dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"], data_col=["i", "j"])
     ),
     args_in=dict(
-        x=None, y=None, color=None, symbol="symbol_col", custom_data=["data_col"],
+        x=None,
+        y=None,
+        color=None,
+        symbol="symbol_col",
+        custom_data=["data_col"],
     ),
     args_expect=dict(
         x="index",
@@ -509,7 +545,11 @@ append_special_case(
         x="index", y="value", color="variable", symbol="variable", orientation="v"
     ),
     df_expect=pd.DataFrame(
-        dict(index=[0, 1, 0, 1], value=[1, 2, 3, 4], variable=["a", "a", "b", "b"],)
+        dict(
+            index=[0, 1, 0, 1],
+            value=[1, 2, 3, 4],
+            variable=["a", "a", "b", "b"],
+        )
     ),
 )
 
@@ -518,7 +558,11 @@ append_special_case(
     df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], color_col=["q", "r"])),
     args_in=dict(x=None, y=None, color="color_col", symbol="variable"),
     args_expect=dict(
-        x="index", y="value", color="color_col", symbol="variable", orientation="v",
+        x="index",
+        y="value",
+        color="color_col",
+        symbol="variable",
+        orientation="v",
     ),
     df_expect=pd.DataFrame(
         dict(
@@ -544,7 +588,11 @@ append_special_case(
         orientation="v",
     ),
     df_expect=pd.DataFrame(
-        dict(index=[0, 1, 0, 1], value=[1, 2, 3, 4], my_col_name=["a", "a", "b", "b"],)
+        dict(
+            index=[0, 1, 0, 1],
+            value=[1, 2, 3, 4],
+            my_col_name=["a", "a", "b", "b"],
+        )
     ),
 )
 
@@ -623,7 +671,12 @@ df = pd.DataFrame(dict(index=[1, 2], value=[3, 4], variable=[5, 6]), index=[7, 8
 append_special_case(
     df_in=df,
     args_in=dict(x=None, y=None, color=None),
-    args_expect=dict(x="_index", y="_value", color="_variable", orientation="v",),
+    args_expect=dict(
+        x="_index",
+        y="_value",
+        color="_variable",
+        orientation="v",
+    ),
     df_expect=pd.DataFrame(
         dict(
             _index=[7, 8, 7, 8, 7, 8],
@@ -640,9 +693,18 @@ df.columns.name = "b"
 append_special_case(
     df_in=df,
     args_in=dict(x=None, y=None, color=None),
-    args_expect=dict(x="index", y="value", color="variable", orientation="v",),
+    args_expect=dict(
+        x="index",
+        y="value",
+        color="variable",
+        orientation="v",
+    ),
     df_expect=pd.DataFrame(
-        dict(index=[7, 8, 7, 8], value=[1, 2, 3, 4], variable=["a", "a", "b", "b"],)
+        dict(
+            index=[7, 8, 7, 8],
+            value=[1, 2, 3, 4],
+            variable=["a", "a", "b", "b"],
+        )
     ),
 )
 
@@ -653,7 +715,12 @@ df.columns.name = "value"
 append_special_case(
     df_in=df,
     args_in=dict(x=None, y=None, color=None),
-    args_expect=dict(x="index", y="_value", color="variable", orientation="v",),
+    args_expect=dict(
+        x="index",
+        y="_value",
+        color="variable",
+        orientation="v",
+    ),
     df_expect=pd.DataFrame(
         dict(
             index=[7, 8, 7, 8],
@@ -713,7 +780,12 @@ df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
 append_special_case(
     df_in=df,
     args_in=dict(x=None, y=None, color=px.NO_COLOR),
-    args_expect=dict(x="index", y="value", color=None, orientation="v",),
+    args_expect=dict(
+        x="index",
+        y="value",
+        color=None,
+        orientation="v",
+    ),
     df_expect=pd.DataFrame(
         dict(variable=["a", "a", "b", "b"], index=[0, 1, 0, 1], value=[1, 2, 3, 4])
     ),
@@ -727,7 +799,8 @@ def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect
     df_out = args_out.pop("data_frame")
     assert args_out == args_expect
     assert_frame_equal(
-        df_out.sort_index(axis=1), df_expect.sort_index(axis=1),
+        df_out.sort_index(axis=1),
+        df_expect.sort_index(axis=1),
     )
 
 
@@ -776,3 +849,29 @@ def test_line_group():
     assert len(fig.data) == 4
     fig = px.scatter(df, x="x", y=["miss", "score"], color="who")
     assert len(fig.data) == 2
+
+
+def test_no_pd_perf_warning():
+    n_cols = 1000
+    n_rows = 1000
+
+    columns = list(f"col_{c}" for c in range(n_cols))
+    index = list(f"i_{r}" for r in range(n_rows))
+
+    df = pd.DataFrame(
+        np.random.uniform(size=(n_rows, n_cols)), index=index, columns=columns
+    )
+
+    with warnings.catch_warnings(record=True) as warn_list:
+        _ = px.bar(
+            df,
+            x=df.index,
+            y=df.columns[:-2],
+            labels=df.columns[:-2],
+        )
+    performance_warnings = [
+        warn
+        for warn in warn_list
+        if issubclass(warn.category, pd.errors.PerformanceWarning)
+    ]
+    assert len(performance_warnings) == 0, "PerformanceWarning(s) raised!"

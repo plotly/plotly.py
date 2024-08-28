@@ -20,9 +20,9 @@ class Contours(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.surface.contours.X`
           - A dict of string/value properties that will be passed
             to the X constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the contour lines.
                 end
@@ -77,9 +77,9 @@ class Contours(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.surface.contours.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the contour lines.
                 end
@@ -134,9 +134,9 @@ class Contours(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.surface.contours.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the contour lines.
                 end
@@ -200,7 +200,7 @@ class Contours(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Contours object
-        
+
         Parameters
         ----------
         arg
@@ -238,8 +238,8 @@ class Contours(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.surface.Contours 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.surface.Contours
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.surface.Contours`"""
             )
 

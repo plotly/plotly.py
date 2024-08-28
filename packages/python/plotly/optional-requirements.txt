@@ -14,7 +14,7 @@ numpy
 ## testing dependencies ##
 coverage==4.3.1
 mock==2.0.0
-pytest==3.5.1
+pytest==8.1.1
 backports.tempfile==1.0
 xarray
 pytz
@@ -25,7 +25,7 @@ psutil
 
 ## code formatting
 pre-commit
-black==19.10b0
+black==22.3.0
 
 
 ## codegen dependencies ##

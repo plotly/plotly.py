@@ -27,5 +27,5 @@ class TestDataframeToGrid(TestCase):
             'the column "{}" and try again.'.format("col_1")
         )
 
-        with self.assertRaisesRegexp(InputError, expected_message):
+        with self.assertRaisesRegex(InputError, expected_message):
             Grid(df)

@@ -16,5 +16,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the inner box plot bounding line width.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

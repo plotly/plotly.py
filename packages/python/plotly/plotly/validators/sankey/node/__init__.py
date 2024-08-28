@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._ysrc import YsrcValidator
     from ._y import YValidator
     from ._xsrc import XsrcValidator
@@ -19,6 +20,7 @@ if sys.version_info < (3, 7):
     from ._customdata import CustomdataValidator
     from ._colorsrc import ColorsrcValidator
     from ._color import ColorValidator
+    from ._align import AlignValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -44,5 +46,6 @@ else:
             "._customdata.CustomdataValidator",
             "._colorsrc.ColorsrcValidator",
             "._color.ColorValidator",
+            "._align.AlignValidator",
         ],
     )

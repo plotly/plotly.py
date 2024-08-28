@@ -28,10 +28,10 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
         `colorscale`. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
+        `autocolorscale` is true, the default palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -52,9 +52,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the color domain is computed with
         respect to the input data (here corresponding trace color
-        array(s)) or the bounds set in `cmin` and `cmax`  Defaults to
+        array(s)) or the bounds set in `cmin` and `cmax` Defaults to
         `false` when `cmin` and `cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -76,7 +76,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Sets the upper bound of the color domain. Value should have the
         same units as corresponding trace color array(s) and if set,
         `cmin` must be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -99,7 +99,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         `cmax` to be equidistant to this point. Value should have the
         same units as corresponding trace color array(s). Has no effect
         when `cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -121,7 +121,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Sets the lower bound of the color domain. Value should have the
         same units as corresponding trace color array(s) and if set,
         `cmax` must be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -145,9 +145,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.coloraxis.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -190,6 +190,19 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -210,6 +223,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
                     `tickmode` is set to "auto".
+                orientation
+                    Sets the orientation of the colorbar.
                 outlinecolor
                     Sets the axis line color.
                 outlinewidth
@@ -267,8 +282,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -294,7 +309,20 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     labels is *hide past domain*. In other cases
                     the default is *hide past div*.
                 ticklabelposition
-                    Determines where tick labels are drawn.
+                    Determines where tick labels are drawn relative
+                    to the ticks. Left and right options are used
+                    when `orientation` is "h", top and bottom when
+                    `orientation` is "v".
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -324,14 +352,14 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -348,30 +376,57 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     Deprecated: Please use
                     layout.coloraxis.colorbar.title.side instead.
                     Determines the location of color bar's title
-                    with respect to the color bar. Note that the
-                    title's location used to be set by the now
+                    with respect to the color bar. Defaults to
+                    "top" when `orientation` if "v" and  defaults
+                    to "right" when `orientation` if "h". Note that
+                    the title's location used to be set by the now
                     deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction).
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
                     the "left", "center" or "right" of the color
-                    bar.
+                    bar. Defaults to "left" when `orientation` is
+                    "v" and "center" when `orientation` is "h".
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction).
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
                     "top", "middle" or "bottom" of the color bar.
+                    Defaults to "middle" when `orientation` is "v"
+                    and "bottom" when `orientation` is "h".
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -393,12 +448,12 @@ class Coloraxis(_BaseLayoutHierarchyType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        bounds of the colorscale in color space, use `cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Blackbody,Bluered,Blues,Cividis,Earth,Electric,
         Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viridis,
         YlGnBu,YlOrRd.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -444,7 +499,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Reverses the color mapping if true. If true, `cmin` will
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -465,7 +520,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -488,14 +543,14 @@ class Coloraxis(_BaseLayoutHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here corresponding
             trace color array(s)) or the bounds set in `cmin` and
-            `cmax`  Defaults to `false` when `cmin` and `cmax` are
+            `cmax` Defaults to `false` when `cmin` and `cmax` are
             set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -520,7 +575,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -546,11 +601,11 @@ class Coloraxis(_BaseLayoutHierarchyType):
         colorscale=None,
         reversescale=None,
         showscale=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Coloraxis object
-        
+
         Parameters
         ----------
         arg
@@ -561,14 +616,14 @@ class Coloraxis(_BaseLayoutHierarchyType):
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
             `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default  palette will be
+            `autocolorscale` is true, the default palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here corresponding
             trace color array(s)) or the bounds set in `cmin` and
-            `cmax`  Defaults to `false` when `cmin` and `cmax` are
+            `cmax` Defaults to `false` when `cmin` and `cmax` are
             set by the user.
         cmax
             Sets the upper bound of the color domain. Value should
@@ -593,7 +648,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use`cmin` and `cmax`.
+            colorscale in color space, use `cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
@@ -627,8 +682,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Coloraxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Coloraxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Coloraxis`"""
             )
 

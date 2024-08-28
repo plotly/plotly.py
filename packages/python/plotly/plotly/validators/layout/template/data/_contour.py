@@ -14,5 +14,5 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

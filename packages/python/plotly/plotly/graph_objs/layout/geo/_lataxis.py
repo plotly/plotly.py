@@ -8,7 +8,15 @@ class Lataxis(_BaseLayoutHierarchyType):
     # --------------------
     _parent_path_str = "layout.geo"
     _path_str = "layout.geo.lataxis"
-    _valid_props = {"dtick", "gridcolor", "gridwidth", "range", "showgrid", "tick0"}
+    _valid_props = {
+        "dtick",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "range",
+        "showgrid",
+        "tick0",
+    }
 
     # dtick
     # -----
@@ -16,7 +24,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def dtick(self):
         """
         Sets the graticule's longitude/latitude tick step.
-    
+
         The 'dtick' property is a number and may be specified as:
           - An int or float
 
@@ -36,7 +44,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the graticule's stroke color.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -89,13 +97,39 @@ class Lataxis(_BaseLayoutHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
+    # griddash
+    # --------
+    @property
+    def griddash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'griddash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["griddash"]
+
+    @griddash.setter
+    def griddash(self, val):
+        self["griddash"] = val
+
     # gridwidth
     # ---------
     @property
     def gridwidth(self):
         """
         Sets the graticule's stroke width (in px).
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -114,20 +148,20 @@ class Lataxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis (in degrees), sets the map's
-        clipped coordinates.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            Sets the range of this axis (in degrees), sets the map's
+            clipped coordinates.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -141,7 +175,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def showgrid(self):
         """
         Sets whether or not graticule are shown on the map.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -161,7 +195,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def tick0(self):
         """
         Sets the graticule's starting tick longitude/latitude.
-    
+
         The 'tick0' property is a number and may be specified as:
           - An int or float
 
@@ -184,6 +218,11 @@ class Lataxis(_BaseLayoutHierarchyType):
             Sets the graticule's longitude/latitude tick step.
         gridcolor
             Sets the graticule's stroke color.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the graticule's stroke width (in px).
         range
@@ -200,15 +239,16 @@ class Lataxis(_BaseLayoutHierarchyType):
         arg=None,
         dtick=None,
         gridcolor=None,
+        griddash=None,
         gridwidth=None,
         range=None,
         showgrid=None,
         tick0=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Lataxis object
-        
+
         Parameters
         ----------
         arg
@@ -219,6 +259,11 @@ class Lataxis(_BaseLayoutHierarchyType):
             Sets the graticule's longitude/latitude tick step.
         gridcolor
             Sets the graticule's stroke color.
+        griddash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         gridwidth
             Sets the graticule's stroke width (in px).
         range
@@ -250,8 +295,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.geo.Lataxis 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.geo.Lataxis
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`"""
             )
 
@@ -270,6 +315,10 @@ an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`"""
         _v = gridcolor if gridcolor is not None else _v
         if _v is not None:
             self["gridcolor"] = _v
+        _v = arg.pop("griddash", None)
+        _v = griddash if griddash is not None else _v
+        if _v is not None:
+            self["griddash"] = _v
         _v = arg.pop("gridwidth", None)
         _v = gridwidth if gridwidth is not None else _v
         if _v is not None:

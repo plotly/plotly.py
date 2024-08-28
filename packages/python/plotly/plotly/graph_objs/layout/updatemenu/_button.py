@@ -24,19 +24,19 @@ class Button(_BaseLayoutHierarchyType):
     @property
     def args(self):
         """
-        Sets the arguments values to be passed to the Plotly method set
-        in `method` on click.
-    
-        The 'args' property is an info array that may be specified as:
-    
-        * a list or tuple of up to 3 elements where:
-    (0) The 'args[0]' property accepts values of any type
-    (1) The 'args[1]' property accepts values of any type
-    (2) The 'args[2]' property accepts values of any type
+            Sets the arguments values to be passed to the Plotly method set
+            in `method` on click.
 
-        Returns
-        -------
-        list
+            The 'args' property is an info array that may be specified as:
+
+            * a list or tuple of up to 3 elements where:
+        (0) The 'args[0]' property accepts values of any type
+        (1) The 'args[1]' property accepts values of any type
+        (2) The 'args[2]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["args"]
 
@@ -49,20 +49,20 @@ class Button(_BaseLayoutHierarchyType):
     @property
     def args2(self):
         """
-        Sets a 2nd set of `args`, these arguments values are passed to
-        the Plotly method set in `method` when clicking this button
-        while in the active state. Use this to create toggle buttons.
-    
-        The 'args2' property is an info array that may be specified as:
-    
-        * a list or tuple of up to 3 elements where:
-    (0) The 'args2[0]' property accepts values of any type
-    (1) The 'args2[1]' property accepts values of any type
-    (2) The 'args2[2]' property accepts values of any type
+            Sets a 2nd set of `args`, these arguments values are passed to
+            the Plotly method set in `method` when clicking this button
+            while in the active state. Use this to create toggle buttons.
 
-        Returns
-        -------
-        list
+            The 'args2' property is an info array that may be specified as:
+
+            * a list or tuple of up to 3 elements where:
+        (0) The 'args2[0]' property accepts values of any type
+        (1) The 'args2[1]' property accepts values of any type
+        (2) The 'args2[2]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["args2"]
 
@@ -82,7 +82,7 @@ class Button(_BaseLayoutHierarchyType):
         manually without losing the benefit of the updatemenu
         automatically binding to the state of the plot through the
         specification of `method` and `args`.
-    
+
         The 'execute' property must be specified as a bool
         (either True, or False)
 
@@ -102,7 +102,7 @@ class Button(_BaseLayoutHierarchyType):
     def label(self):
         """
         Sets the text label to appear on the button.
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -127,7 +127,7 @@ class Button(_BaseLayoutHierarchyType):
         will perform no API calls and will not bind automatically to
         state updates. This may be used to create a component interface
         and attach to updatemenu events manually via JavaScript.
-    
+
         The 'method' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['restyle', 'relayout', 'animate', 'update', 'skip']
@@ -154,7 +154,7 @@ class Button(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -182,7 +182,7 @@ class Button(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -203,7 +203,7 @@ class Button(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this button is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -282,11 +282,11 @@ class Button(_BaseLayoutHierarchyType):
         name=None,
         templateitemname=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Button object
-        
+
         Parameters
         ----------
         arg
@@ -362,8 +362,8 @@ class Button(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.updatemenu.Button 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.updatemenu.Button
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
             )
 

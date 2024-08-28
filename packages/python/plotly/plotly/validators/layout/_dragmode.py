@@ -24,5 +24,5 @@ class DragmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     False,
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

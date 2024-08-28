@@ -1,7 +1,9 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
+    from ._zorder import ZorderValidator
     from ._zmin import ZminValidator
     from ._zmid import ZmidValidator
     from ._zmax import ZmaxValidator
@@ -32,7 +34,9 @@ if sys.version_info < (3, 7):
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
     from ._transpose import TransposeValidator
+    from ._texttemplate import TexttemplateValidator
     from ._textsrc import TextsrcValidator
+    from ._textfont import TextfontValidator
     from ._text import TextValidator
     from ._stream import StreamValidator
     from ._showscale import ShowscaleValidator
@@ -44,9 +48,11 @@ if sys.version_info < (3, 7):
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._hovertextsrc import HovertextsrcValidator
@@ -77,6 +83,7 @@ else:
         [],
         [
             "._zsrc.ZsrcValidator",
+            "._zorder.ZorderValidator",
             "._zmin.ZminValidator",
             "._zmid.ZmidValidator",
             "._zmax.ZmaxValidator",
@@ -107,7 +114,9 @@ else:
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
             "._transpose.TransposeValidator",
+            "._texttemplate.TexttemplateValidator",
             "._textsrc.TextsrcValidator",
+            "._textfont.TextfontValidator",
             "._text.TextValidator",
             "._stream.StreamValidator",
             "._showscale.ShowscaleValidator",
@@ -119,9 +128,11 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._hovertextsrc.HovertextsrcValidator",

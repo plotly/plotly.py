@@ -114,7 +114,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         buffer.write(
             f"""
     _subplotid_prop_names = {repr(subplot_names)}
-    
+
     import re
     _subplotid_prop_re = re.compile(
         '^(' + '|'.join(_subplotid_prop_names) + r')(\d+)$')
@@ -147,7 +147,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         from plotly.validators.layout import ({validator_csv})
 
         return {subplot_dict_str}
-        
+
     def _subplot_re_match(self, prop):
         return self._subplotid_prop_re.match(prop)
 """
@@ -208,7 +208,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
             # #### Combine to form property docstring ####
             if property_description.strip():
                 property_docstring = f"""{property_description}
-    
+
         {validator_description}"""
             else:
                 property_docstring = f"        {validator_description}"
@@ -342,8 +342,8 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
             arg = _copy.copy(arg)
         else:
             raise ValueError(\"\"\"\\
-The first argument to the {class_name} 
-constructor must be a dict or 
+The first argument to the {class_name}
+constructor must be a dict or
 an instance of :class:`{class_name}`\"\"\")
 
         # Handle skip_invalid
@@ -389,11 +389,11 @@ an instance of :class:`{class_name}`\"\"\")
 
     buffer.write(
         f"""
-    
+
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-        
+
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
@@ -429,7 +429,9 @@ def reindent_validator_description(validator, extra_indent):
     return ("\n" + " " * extra_indent).join(validator.description().strip().split("\n"))
 
 
-def add_constructor_params(buffer, subtype_nodes, prepend_extras=(), append_extras=()):
+def add_constructor_params(
+    buffer, subtype_nodes, prepend_extras=(), append_extras=(), output_type=None
+):
     """
     Write datatype constructor params to a buffer
 
@@ -470,9 +472,12 @@ def add_constructor_params(buffer, subtype_nodes, prepend_extras=(), append_extr
             **kwargs"""
     )
     buffer.write(
-        f"""
-        ):"""
+        """
+        )"""
     )
+    if output_type:
+        buffer.write(f"-> '{output_type}'")
+    buffer.write(":")
 
 
 def add_docstring(
@@ -525,7 +530,7 @@ def add_docstring(
         f"""
         \"\"\"
         {header}
-        
+
 {node_description}        Parameters
         ----------"""
     )

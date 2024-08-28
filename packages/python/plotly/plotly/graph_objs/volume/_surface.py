@@ -18,7 +18,7 @@ class Surface(_BaseTraceHierarchyType):
         Sets the number of iso-surfaces between minimum and maximum
         iso-values. By default this value is 2 meaning that only
         minimum and maximum surfaces would be drawn.
-    
+
         The 'count' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -42,7 +42,7 @@ class Surface(_BaseTraceHierarchyType):
         of the surface is 1 meaning that they are entirely shaded. On
         the other hand Applying a `fill` ratio less than one would
         allow the creation of openings parallel to the edges.
-    
+
         The 'fill' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -68,7 +68,7 @@ class Surface(_BaseTraceHierarchyType):
         surface. Using various combinations of capital `A`, `B`, `C`,
         `D` and `E` may also be used to reduce the number of triangles
         on the iso-surfaces and creating other patterns of interest.
-    
+
         The 'pattern' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['A', 'B', 'C', 'D', 'E'] joined with '+' characters
@@ -91,7 +91,7 @@ class Surface(_BaseTraceHierarchyType):
     def show(self):
         """
         Hides/displays surfaces between minimum and maximum iso-values.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -140,7 +140,7 @@ class Surface(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Surface object
-        
+
         Parameters
         ----------
         arg
@@ -192,8 +192,8 @@ class Surface(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.volume.Surface 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.volume.Surface
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.volume.Surface`"""
             )
 

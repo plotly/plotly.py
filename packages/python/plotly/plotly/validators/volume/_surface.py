@@ -38,5 +38,5 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 maximum iso-values.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

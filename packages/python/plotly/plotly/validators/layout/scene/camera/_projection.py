@@ -18,5 +18,5 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "orthographic". The default is "perspective".
 """,
             ),
-            **kwargs
+            **kwargs,
         )

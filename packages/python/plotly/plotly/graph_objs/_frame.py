@@ -19,7 +19,7 @@ class Frame(_BaseFrameHierarchyType):
         merged before applying. This is used to unify properties and
         avoid needing to specify the same values for the same
         properties in multiple frames.
-    
+
         The 'baseframe' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -59,7 +59,7 @@ class Frame(_BaseFrameHierarchyType):
         """
         An identifier that specifies the group to which the frame
         belongs, used by animate to select a subset of frames.
-    
+
         The 'group' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -98,7 +98,7 @@ class Frame(_BaseFrameHierarchyType):
     def name(self):
         """
         A label by which to identify the frame
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -120,7 +120,7 @@ class Frame(_BaseFrameHierarchyType):
         """
         A list of trace indices that identify the respective traces in
         the data attribute
-    
+
         The 'traces' property accepts values of any type
 
         Returns
@@ -169,11 +169,11 @@ class Frame(_BaseFrameHierarchyType):
         layout=None,
         name=None,
         traces=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Frame object
-        
+
         Parameters
         ----------
         arg
@@ -221,8 +221,8 @@ class Frame(_BaseFrameHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Frame 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Frame
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Frame`"""
             )
 

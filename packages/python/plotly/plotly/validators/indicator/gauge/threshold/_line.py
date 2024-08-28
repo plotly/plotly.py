@@ -18,5 +18,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the threshold line.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

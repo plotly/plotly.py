@@ -8,5 +8,5 @@ class X0Validator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "scaled"}),
-            **kwargs
+            **kwargs,
         )

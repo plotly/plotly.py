@@ -17,7 +17,7 @@ class Transition(_BaseLayoutHierarchyType):
         """
         The duration of the transition, in milliseconds. If equal to
         zero, updates are synchronous.
-    
+
         The 'duration' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -37,7 +37,7 @@ class Transition(_BaseLayoutHierarchyType):
     def easing(self):
         """
         The easing function used for the transition
-    
+
         The 'easing' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'quad', 'cubic', 'sin', 'exp', 'circle',
@@ -68,7 +68,7 @@ class Transition(_BaseLayoutHierarchyType):
         Determines whether the figure's layout or traces smoothly
         transitions during updates that make both traces and layout
         change.
-    
+
         The 'ordering' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['layout first', 'traces first']
@@ -102,7 +102,7 @@ class Transition(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, duration=None, easing=None, ordering=None, **kwargs):
         """
         Construct a new Transition object
-        
+
         Sets transition options used during Plotly.react updates.
 
         Parameters
@@ -142,8 +142,8 @@ class Transition(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Transition 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Transition
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Transition`"""
             )
 

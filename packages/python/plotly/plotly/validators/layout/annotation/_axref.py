@@ -10,5 +10,5 @@ class AxrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["pixel", "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"]
             ),
-            **kwargs
+            **kwargs,
         )

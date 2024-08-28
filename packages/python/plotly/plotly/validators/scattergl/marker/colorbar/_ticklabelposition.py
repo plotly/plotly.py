@@ -6,7 +6,7 @@ class TicklabelpositionValidator(_plotly_utils.basevalidators.EnumeratedValidato
         self,
         plotly_name="ticklabelposition",
         parent_name="scattergl.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TicklabelpositionValidator, self).__init__(
             plotly_name=plotly_name,
@@ -19,9 +19,13 @@ class TicklabelpositionValidator(_plotly_utils.basevalidators.EnumeratedValidato
                     "inside",
                     "outside top",
                     "inside top",
+                    "outside left",
+                    "inside left",
+                    "outside right",
+                    "inside right",
                     "outside bottom",
                     "inside bottom",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

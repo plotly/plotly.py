@@ -6,7 +6,7 @@ class NamelengthValidator(_plotly_utils.basevalidators.IntegerValidator):
         self,
         plotly_name="namelength",
         parent_name="choroplethmapbox.hoverlabel",
-        **kwargs
+        **kwargs,
     ):
         super(NamelengthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -14,5 +14,5 @@ class NamelengthValidator(_plotly_utils.basevalidators.IntegerValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
             min=kwargs.pop("min", -1),
-            **kwargs
+            **kwargs,
         )

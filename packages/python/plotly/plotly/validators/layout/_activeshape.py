@@ -17,5 +17,5 @@ class ActiveshapeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the active shape.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

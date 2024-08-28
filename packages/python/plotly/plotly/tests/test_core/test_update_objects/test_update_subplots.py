@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import copy
 from unittest import TestCase
 
@@ -85,7 +83,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
                 selector=selector,
                 row=row,
                 col=col,
-                **sec_y_args
+                **sec_y_args,
             )
 
             self.assertIs(res, fig)
@@ -349,7 +347,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
         col=None,
         secondary_y=None,
         test_no_grid=False,
-        **kwargs
+        **kwargs,
     ):
 
         update_fn = getattr(Figure, "update_" + subplots_name)
@@ -372,7 +370,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
                 selector=selector,
                 row=row,
                 col=col,
-                **dict(kwargs, **secy_kwargs)
+                **dict(kwargs, **secy_kwargs),
             )
 
             self.assertIs(update_res, fig)

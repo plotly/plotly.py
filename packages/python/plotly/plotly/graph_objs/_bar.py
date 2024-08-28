@@ -31,9 +31,11 @@ class Bar(_BaseTraceType):
         "idssrc",
         "insidetextanchor",
         "insidetextfont",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "marker",
         "meta",
         "metasrc",
@@ -81,6 +83,7 @@ class Bar(_BaseTraceType):
         "yperiod0",
         "yperiodalignment",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -91,7 +94,7 @@ class Bar(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same alignmentgroup. This controls whether bars
         compute their positional range dependently or independently.
-    
+
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -114,7 +117,7 @@ class Bar(_BaseTraceType):
         Sets where the bar base is drawn (in position axis units). In
         "stack" or "relative" barmode, traces that set "base" will be
         excluded and drawn in "overlay" mode instead.
-    
+
         The 'base' property accepts values of any type
 
         Returns
@@ -132,8 +135,8 @@ class Bar(_BaseTraceType):
     @property
     def basesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  base .
-    
+        Sets the source reference on Chart Studio Cloud for `base`.
+
         The 'basesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -156,7 +159,7 @@ class Bar(_BaseTraceType):
         axes. To show the text nodes above axis lines and tick labels,
         make sure to set `xaxis.layer` and `yaxis.layer` to *below
         traces*.
-    
+
         The 'cliponaxis' property must be specified as a bool
         (either True, or False)
 
@@ -177,7 +180,7 @@ class Bar(_BaseTraceType):
         """
         Constrain the size of text inside or outside a bar to be no
         larger than the bar itself.
-    
+
         The 'constraintext' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'outside', 'both', 'none']
@@ -201,7 +204,7 @@ class Bar(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -220,9 +223,9 @@ class Bar(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -242,7 +245,7 @@ class Bar(_BaseTraceType):
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -262,7 +265,7 @@ class Bar(_BaseTraceType):
     def dy(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -286,9 +289,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -300,14 +303,14 @@ class Bar(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 copy_ystyle
-    
+
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -316,9 +319,9 @@ class Bar(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -367,9 +370,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -381,10 +384,10 @@ class Bar(_BaseTraceType):
                     relative to the underlying data.
                 arrayminussrc
                     Sets the source reference on Chart Studio Cloud
-                    for  arrayminus .
+                    for `arrayminus`.
                 arraysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  array .
+                    for `array`.
                 color
                     Sets the stoke color of the error bars.
                 symmetric
@@ -395,9 +398,9 @@ class Bar(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -444,7 +447,7 @@ class Bar(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -467,9 +470,9 @@ class Bar(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -493,9 +496,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -503,19 +506,19 @@ class Bar(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -530,7 +533,7 @@ class Bar(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -566,12 +569,13 @@ class Bar(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `value` and `label`. Anything contained in tag `<extra>` is
-        displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `value` and `label`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -593,8 +597,8 @@ class Bar(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
-    
+        `hovertemplate`.
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -618,7 +622,7 @@ class Bar(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -639,9 +643,9 @@ class Bar(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -663,7 +667,7 @@ class Bar(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -682,8 +686,8 @@ class Bar(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -704,7 +708,7 @@ class Bar(_BaseTraceType):
         """
         Determines if texts are kept at center or start/end points in
         `textposition` "inside" mode.
-    
+
         The 'insidetextanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['end', 'middle', 'start']
@@ -725,20 +729,20 @@ class Bar(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `text` lying inside the bar.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.bar.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -752,18 +756,58 @@ class Bar(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -775,15 +819,40 @@ class Bar(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -808,9 +877,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -833,11 +902,13 @@ class Bar(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
-    
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -851,6 +922,27 @@ class Bar(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
+
     # marker
     # ------
     @property
@@ -861,30 +953,30 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
                     determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. In case `colorscale` is
                     unspecified or `autocolorscale` is true, the
-                    default  palette will be chosen according to
+                    default palette will be chosen according to
                     whether numbers in the `color` array are all
                     positive, all negative or mixed.
                 cauto
                     Determines whether or not the color domain is
                     computed with respect to the input data (here
                     in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax`  Has an effect
-                    only if in `marker.color`is set to a numerical
+                    `marker.cmin` and `marker.cmax` Has an effect
+                    only if in `marker.color` is set to a numerical
                     array. Defaults to `false` when `marker.cmin`
                     and `marker.cmax` are set by the user.
                 cmax
                     Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
@@ -892,18 +984,18 @@ class Bar(_BaseTraceType):
                     Sets the mid-point of the color domain by
                     scaling `marker.cmin` and/or `marker.cmax` to
                     be equidistant to this point. Has an effect
-                    only if in `marker.color`is set to a numerical
+                    only if in `marker.color` is set to a numerical
                     array. Value should have the same units as in
                     `marker.color`. Has no effect when
                     `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color`is set to a
+                    an effect only if in `marker.color` is set to a
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets themarkercolor. It accepts either a
+                    Sets the marker color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -922,7 +1014,7 @@ class Bar(_BaseTraceType):
                     r` instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
-                    `marker.color`is set to a numerical array. The
+                    `marker.color` is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -930,7 +1022,7 @@ class Bar(_BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                     To control the bounds of the colorscale in
-                    color space, use`marker.cmin` and
+                    color space, use `marker.cmin` and
                     `marker.cmax`. Alternatively, `colorscale` may
                     be a palette name string of the following list:
                     Blackbody,Bluered,Blues,Cividis,Earth,Electric,
@@ -938,7 +1030,14 @@ class Bar(_BaseTraceType):
                     Bu,Reds,Viridis,YlGnBu,YlOrRd.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
+                cornerradius
+                    Sets the rounding of corners. May be an integer
+                    number of pixels, or a percentage of bar width
+                    (as a string ending in %). Defaults to
+                    `layout.barcornerradius`. In stack or relative
+                    barmode, the first trace to set cornerradius is
+                    used for the whole stack.
                 line
                     :class:`plotly.graph_objects.bar.marker.Line`
                     instance or dict with compatible properties
@@ -946,12 +1045,12 @@ class Bar(_BaseTraceType):
                     Sets the opacity of the bars.
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  opacity .
+                    for `opacity`.
                 pattern
                     Sets the pattern within the marker.
                 reversescale
                     Reverses the color mapping if true. Has an
-                    effect only if in `marker.color`is set to a
+                    effect only if in `marker.color` is set to a
                     numerical array. If true, `marker.cmin` will
                     correspond to the last color in the array and
                     `marker.cmax` will correspond to the first
@@ -959,7 +1058,7 @@ class Bar(_BaseTraceType):
                 showscale
                     Determines whether or not a colorbar is
                     displayed for this trace. Has an effect only if
-                    in `marker.color`is set to a numerical array.
+                    in `marker.color` is set to a numerical array.
 
         Returns
         -------
@@ -986,7 +1085,7 @@ class Bar(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1004,8 +1103,8 @@ class Bar(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1024,9 +1123,9 @@ class Bar(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1049,7 +1148,7 @@ class Bar(_BaseTraceType):
         Shifts the position where the bar is drawn (in position axis
         units). In "group" barmode, traces that set "offset" will be
         excluded and drawn in "overlay" mode instead.
-    
+
         The 'offset' property is a number and may be specified as:
           - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
@@ -1072,7 +1171,7 @@ class Bar(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same offsetgroup where bars of the same position
         coordinate will line up.
-    
+
         The 'offsetgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1092,8 +1191,8 @@ class Bar(_BaseTraceType):
     @property
     def offsetsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  offset .
-    
+        Sets the source reference on Chart Studio Cloud for `offset`.
+
         The 'offsetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1113,7 +1212,7 @@ class Bar(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1134,7 +1233,7 @@ class Bar(_BaseTraceType):
         """
         Sets the orientation of the bars. With "v" ("h"), the value of
         the each bar spans along the vertical (horizontal).
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -1155,20 +1254,20 @@ class Bar(_BaseTraceType):
     def outsidetextfont(self):
         """
         Sets the font used for `text` lying outside the bar.
-    
+
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.bar.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1182,18 +1281,58 @@ class Bar(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1215,9 +1354,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.bar.selected.Marke
                     r` instance or dict with compatible properties
@@ -1247,7 +1386,7 @@ class Bar(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1267,7 +1406,7 @@ class Bar(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1291,9 +1430,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1325,7 +1464,7 @@ class Bar(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1350,10 +1489,10 @@ class Bar(_BaseTraceType):
         example, a `tickangle` of -90 draws the tick labels vertically.
         With "auto" the texts may automatically be rotated to fit with
         the maximum size in bars.
-    
+
         The 'textangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -1372,20 +1511,20 @@ class Bar(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `text`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.bar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1399,18 +1538,58 @@ class Bar(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
-                    for  family .
+                    for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
-                    for  size .
+                    for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1435,7 +1614,7 @@ class Bar(_BaseTraceType):
         `text` inside the bar, but if the bar is too small and no bar
         is stacked on this one the text is moved outside. If "none", no
         text appears.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'outside', 'auto', 'none']
@@ -1457,8 +1636,8 @@ class Bar(_BaseTraceType):
     def textpositionsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        textposition .
-    
+        `textposition`.
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1477,8 +1656,8 @@ class Bar(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1509,8 +1688,9 @@ class Bar(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `value` and `label`.
-    
+        Finally, the template string has access to variables `value`
+        and `label`.
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1532,8 +1712,8 @@ class Bar(_BaseTraceType):
     def texttemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        texttemplate .
-    
+        `texttemplate`.
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1554,7 +1734,7 @@ class Bar(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1589,7 +1769,7 @@ class Bar(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1612,9 +1792,9 @@ class Bar(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.bar.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.bar.unselected.Mar
                     ker` instance or dict with compatible
@@ -1642,7 +1822,7 @@ class Bar(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1663,7 +1843,7 @@ class Bar(_BaseTraceType):
     def width(self):
         """
         Sets the bar width (in position axis units).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -1683,8 +1863,8 @@ class Bar(_BaseTraceType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  width .
-    
+        Sets the source reference on Chart Studio Cloud for `width`.
+
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1704,7 +1884,7 @@ class Bar(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1726,7 +1906,7 @@ class Bar(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1748,7 +1928,7 @@ class Bar(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1770,7 +1950,7 @@ class Bar(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -1804,7 +1984,7 @@ class Bar(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `xaxis.hoverformat`.
-    
+
         The 'xhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1828,7 +2008,7 @@ class Bar(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the x axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'xperiod' property accepts values of any type
 
         Returns
@@ -1851,7 +2031,7 @@ class Bar(_BaseTraceType):
         axis. When `x0period` is round number of weeks, the `x0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'xperiod0' property accepts values of any type
 
         Returns
@@ -1871,7 +2051,7 @@ class Bar(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the x axis.
-    
+
         The 'xperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -1891,8 +2071,8 @@ class Bar(_BaseTraceType):
     @property
     def xsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  x .
-    
+        Sets the source reference on Chart Studio Cloud for `x`.
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1912,7 +2092,7 @@ class Bar(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1934,7 +2114,7 @@ class Bar(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1956,7 +2136,7 @@ class Bar(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1978,7 +2158,7 @@ class Bar(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['chinese', 'coptic', 'discworld', 'ethiopian',
@@ -2012,7 +2192,7 @@ class Bar(_BaseTraceType):
         example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display *09~15~23.46*By default the values
         are formatted using `yaxis.hoverformat`.
-    
+
         The 'yhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -2036,7 +2216,7 @@ class Bar(_BaseTraceType):
         positioning in milliseconds or "M<n>" on the y axis. Special
         values in the form of "M<n>" could be used to declare the
         number of months. In this case `n` must be a positive integer.
-    
+
         The 'yperiod' property accepts values of any type
 
         Returns
@@ -2059,7 +2239,7 @@ class Bar(_BaseTraceType):
         axis. When `y0period` is round number of weeks, the `y0period0`
         by default would be on a Sunday i.e. 2000-01-02, otherwise it
         would be at 2000-01-01.
-    
+
         The 'yperiod0' property accepts values of any type
 
         Returns
@@ -2079,7 +2259,7 @@ class Bar(_BaseTraceType):
         """
         Only relevant when the axis `type` is "date". Sets the
         alignment of data points on the y axis.
-    
+
         The 'yperiodalignment' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'middle', 'end']
@@ -2099,8 +2279,8 @@ class Bar(_BaseTraceType):
     @property
     def ysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  y .
-    
+        Sets the source reference on Chart Studio Cloud for `y`.
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2113,6 +2293,28 @@ class Bar(_BaseTraceType):
     @ysrc.setter
     def ysrc(self, val):
         self["ysrc"] = val
+
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
 
     # type
     # ----
@@ -2137,7 +2339,7 @@ class Bar(_BaseTraceType):
             instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -2153,7 +2355,7 @@ class Bar(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2171,7 +2373,7 @@ class Bar(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -2199,14 +2401,15 @@ class Bar(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2216,34 +2419,46 @@ class Bar(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.bar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -2262,9 +2477,9 @@ class Bar(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -2277,7 +2492,7 @@ class Bar(_BaseTraceType):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -2330,10 +2545,10 @@ class Bar(_BaseTraceType):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2349,10 +2564,11 @@ class Bar(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2387,7 +2603,7 @@ class Bar(_BaseTraceType):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2431,8 +2647,8 @@ class Bar(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2476,8 +2692,13 @@ class Bar(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2505,9 +2726,11 @@ class Bar(_BaseTraceType):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -2554,13 +2777,14 @@ class Bar(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
-        **kwargs
+        zorder=None,
+        **kwargs,
     ):
         """
         Construct a new Bar object
-        
+
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th "v" (the default) and the labels are
+        `orientation` is set to "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
@@ -2581,7 +2805,7 @@ class Bar(_BaseTraceType):
             instead.
         basesrc
             Sets the source reference on Chart Studio Cloud for
-            base .
+            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -2597,7 +2821,7 @@ class Bar(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2615,7 +2839,7 @@ class Bar(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -2643,14 +2867,15 @@ class Bar(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2660,34 +2885,46 @@ class Bar(_BaseTraceType):
             a "text" flag.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.bar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.bar.Marker` instance or
             dict with compatible properties
@@ -2706,9 +2943,9 @@ class Bar(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -2721,7 +2958,7 @@ class Bar(_BaseTraceType):
             same position coordinate will line up.
         offsetsrc
             Sets the source reference on Chart Studio Cloud for
-            offset .
+            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -2774,10 +3011,10 @@ class Bar(_BaseTraceType):
             "none", no text appears.
         textpositionsrc
             Sets the source reference on Chart Studio Cloud for
-            textposition .
+            `textposition`.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         texttemplate
             Template string used for rendering the information text
             that appear on points. Note that this will override
@@ -2793,10 +3030,11 @@ class Bar(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`.
+            are available. Finally, the template string has access
+            to variables `value` and `label`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            texttemplate .
+            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2831,7 +3069,7 @@ class Bar(_BaseTraceType):
             Sets the bar width (in position axis units).
         widthsrc
             Sets the source reference on Chart Studio Cloud for
-            width .
+            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2875,8 +3113,8 @@ class Bar(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
         xsrc
-            Sets the source reference on Chart Studio Cloud for  x
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2920,8 +3158,13 @@ class Bar(_BaseTraceType):
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
         ysrc
-            Sets the source reference on Chart Studio Cloud for  y
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -2944,8 +3187,8 @@ class Bar(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Bar 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Bar
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Bar`"""
             )
 
@@ -3044,6 +3287,10 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = insidetextfont if insidetextfont is not None else _v
         if _v is not None:
             self["insidetextfont"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -3056,6 +3303,10 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("marker", None)
         _v = marker if marker is not None else _v
         if _v is not None:
@@ -3240,6 +3491,10 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

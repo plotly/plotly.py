@@ -9,12 +9,15 @@ class Link(_BaseTraceHierarchyType):
     _parent_path_str = "sankey"
     _path_str = "sankey.link"
     _valid_props = {
+        "arrowlen",
         "color",
         "colorscaledefaults",
         "colorscales",
         "colorsrc",
         "customdata",
         "customdatasrc",
+        "hovercolor",
+        "hovercolorsrc",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
@@ -30,6 +33,27 @@ class Link(_BaseTraceHierarchyType):
         "valuesrc",
     }
 
+    # arrowlen
+    # --------
+    @property
+    def arrowlen(self):
+        """
+        Sets the length (in px) of the links arrow, if 0 no arrow will
+        be drawn.
+
+        The 'arrowlen' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["arrowlen"]
+
+    @arrowlen.setter
+    def arrowlen(self, val):
+        self["arrowlen"] = val
+
     # color
     # -----
     @property
@@ -38,7 +62,7 @@ class Link(_BaseTraceHierarchyType):
         Sets the `link` color. It can be a single value, or an array
         for specifying color for each `link`. If `link.color` is
         omitted, then by default, a translucent grey link will be used.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -102,9 +126,9 @@ class Link(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.sankey.link.Colorscale
           - A list or tuple of dicts of string/value properties that
             will be passed to the Colorscale constructor
-    
+
             Supported dict properties:
-                
+
                 cmax
                     Sets the upper bound of the color domain.
                 cmin
@@ -117,7 +141,7 @@ class Link(_BaseTraceHierarchyType):
                     lowest (0) and highest (1) values are required.
                     For example, `[[0, 'rgb(0,0,255)'], [1,
                     'rgb(255,0,0)']]`. To control the bounds of the
-                    colorscale in color space, use`cmin` and
+                    colorscale in color space, use `cmin` and
                     `cmax`. Alternatively, `colorscale` may be a
                     palette name string of the following list: Blac
                     kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
@@ -167,13 +191,13 @@ class Link(_BaseTraceHierarchyType):
         layout.template.data.sankey.link.colorscaledefaults), sets the
         default property values to use for elements of
         sankey.link.colorscales
-    
+
         The 'colorscaledefaults' property is an instance of Colorscale
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sankey.link.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -191,8 +215,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
-    
+        Sets the source reference on Chart Studio Cloud for `color`.
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -212,7 +236,7 @@ class Link(_BaseTraceHierarchyType):
     def customdata(self):
         """
         Assigns extra data to each link.
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -231,9 +255,9 @@ class Link(_BaseTraceHierarchyType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -247,6 +271,90 @@ class Link(_BaseTraceHierarchyType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
+    # hovercolor
+    # ----------
+    @property
+    def hovercolor(self):
+        """
+        Sets the `link` hover color. It can be a single value, or an
+        array for specifying hover colors for each `link`. If
+        `link.hovercolor` is omitted, then by default, links will
+        become slightly more opaque when hovered over.
+
+        The 'hovercolor' property is a color and may be specified as:
+          - A hex string (e.g. '#ff0000')
+          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+          - A named CSS color:
+                aliceblue, antiquewhite, aqua, aquamarine, azure,
+                beige, bisque, black, blanchedalmond, blue,
+                blueviolet, brown, burlywood, cadetblue,
+                chartreuse, chocolate, coral, cornflowerblue,
+                cornsilk, crimson, cyan, darkblue, darkcyan,
+                darkgoldenrod, darkgray, darkgrey, darkgreen,
+                darkkhaki, darkmagenta, darkolivegreen, darkorange,
+                darkorchid, darkred, darksalmon, darkseagreen,
+                darkslateblue, darkslategray, darkslategrey,
+                darkturquoise, darkviolet, deeppink, deepskyblue,
+                dimgray, dimgrey, dodgerblue, firebrick,
+                floralwhite, forestgreen, fuchsia, gainsboro,
+                ghostwhite, gold, goldenrod, gray, grey, green,
+                greenyellow, honeydew, hotpink, indianred, indigo,
+                ivory, khaki, lavender, lavenderblush, lawngreen,
+                lemonchiffon, lightblue, lightcoral, lightcyan,
+                lightgoldenrodyellow, lightgray, lightgrey,
+                lightgreen, lightpink, lightsalmon, lightseagreen,
+                lightskyblue, lightslategray, lightslategrey,
+                lightsteelblue, lightyellow, lime, limegreen,
+                linen, magenta, maroon, mediumaquamarine,
+                mediumblue, mediumorchid, mediumpurple,
+                mediumseagreen, mediumslateblue, mediumspringgreen,
+                mediumturquoise, mediumvioletred, midnightblue,
+                mintcream, mistyrose, moccasin, navajowhite, navy,
+                oldlace, olive, olivedrab, orange, orangered,
+                orchid, palegoldenrod, palegreen, paleturquoise,
+                palevioletred, papayawhip, peachpuff, peru, pink,
+                plum, powderblue, purple, red, rosybrown,
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
+          - A list or array of any of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["hovercolor"]
+
+    @hovercolor.setter
+    def hovercolor(self, val):
+        self["hovercolor"] = val
+
+    # hovercolorsrc
+    # -------------
+    @property
+    def hovercolorsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `hovercolor`.
+
+        The 'hovercolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["hovercolorsrc"]
+
+    @hovercolorsrc.setter
+    def hovercolorsrc(self, val):
+        self["hovercolorsrc"] = val
+
     # hoverinfo
     # ---------
     @property
@@ -256,7 +364,7 @@ class Link(_BaseTraceHierarchyType):
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
-    
+
         The 'hoverinfo' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'none', 'skip']
@@ -281,9 +389,9 @@ class Link(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.link.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -291,19 +399,19 @@ class Link(_BaseTraceHierarchyType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -318,7 +426,7 @@ class Link(_BaseTraceHierarchyType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -354,12 +462,13 @@ class Link(_BaseTraceHierarchyType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `value` and `label`. Anything contained in tag `<extra>` is
-        displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
-    
+        (the ones that are `arrayOk: true`) are available.  Variables
+        `source` and `target` are node objects.Finally, the template
+        string has access to variables `value` and `label`. Anything
+        contained in tag `<extra>` is displayed in the secondary box,
+        for example "<extra>{fullData.name}</extra>". To hide the
+        secondary box completely, use an empty tag `<extra></extra>`.
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -381,8 +490,8 @@ class Link(_BaseTraceHierarchyType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
-    
+        `hovertemplate`.
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -402,7 +511,7 @@ class Link(_BaseTraceHierarchyType):
     def label(self):
         """
         The shown name of the link.
-    
+
         The 'label' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -421,8 +530,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def labelsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  label .
-    
+        Sets the source reference on Chart Studio Cloud for `label`.
+
         The 'labelsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -446,21 +555,21 @@ class Link(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.sankey.link.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the `line` around each
                     `link`.
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  color .
+                    for `color`.
                 width
                     Sets the width (in px) of the `line` around
                     each `link`.
                 widthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  width .
+                    for `width`.
 
         Returns
         -------
@@ -479,7 +588,7 @@ class Link(_BaseTraceHierarchyType):
         """
         An integer number `[0..nodes.length - 1]` that represents the
         source node.
-    
+
         The 'source' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -498,8 +607,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def sourcesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  source .
-    
+        Sets the source reference on Chart Studio Cloud for `source`.
+
         The 'sourcesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -520,7 +629,7 @@ class Link(_BaseTraceHierarchyType):
         """
         An integer number `[0..nodes.length - 1]` that represents the
         target node.
-    
+
         The 'target' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -539,8 +648,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def targetsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  target .
-    
+        Sets the source reference on Chart Studio Cloud for `target`.
+
         The 'targetsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -560,7 +669,7 @@ class Link(_BaseTraceHierarchyType):
     def value(self):
         """
         A numeric value representing the flow volume value.
-    
+
         The 'value' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -579,8 +688,8 @@ class Link(_BaseTraceHierarchyType):
     @property
     def valuesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  value .
-    
+        Sets the source reference on Chart Studio Cloud for `value`.
+
         The 'valuesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -599,6 +708,9 @@ class Link(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -615,12 +727,21 @@ class Link(_BaseTraceHierarchyType):
             sankey.link.colorscales
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each link.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -653,19 +774,21 @@ class Link(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  Variables `source` and `target` are
+            node objects.Finally, the template string has access to
+            variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the link.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
@@ -674,29 +797,32 @@ class Link(_BaseTraceHierarchyType):
             represents the source node.
         sourcesrc
             Sets the source reference on Chart Studio Cloud for
-            source .
+            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
         targetsrc
             Sets the source reference on Chart Studio Cloud for
-            target .
+            `target`.
         value
             A numeric value representing the flow volume value.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
         """
 
     def __init__(
         self,
         arg=None,
+        arrowlen=None,
         color=None,
         colorscales=None,
         colorscaledefaults=None,
         colorsrc=None,
         customdata=None,
         customdatasrc=None,
+        hovercolor=None,
+        hovercolorsrc=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
@@ -710,11 +836,11 @@ class Link(_BaseTraceHierarchyType):
         targetsrc=None,
         value=None,
         valuesrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Link object
-        
+
         The links of the Sankey plot.
 
         Parameters
@@ -722,6 +848,9 @@ class Link(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.sankey.Link`
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -738,12 +867,21 @@ class Link(_BaseTraceHierarchyType):
             sankey.link.colorscales
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         customdata
             Assigns extra data to each link.
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -776,19 +914,21 @@ class Link(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  Variables `source` and `target` are
+            node objects.Finally, the template string has access to
+            variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         label
             The shown name of the link.
         labelsrc
             Sets the source reference on Chart Studio Cloud for
-            label .
+            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
@@ -797,18 +937,18 @@ class Link(_BaseTraceHierarchyType):
             represents the source node.
         sourcesrc
             Sets the source reference on Chart Studio Cloud for
-            source .
+            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
         targetsrc
             Sets the source reference on Chart Studio Cloud for
-            target .
+            `target`.
         value
             A numeric value representing the flow volume value.
         valuesrc
             Sets the source reference on Chart Studio Cloud for
-            value .
+            `value`.
 
         Returns
         -------
@@ -831,8 +971,8 @@ class Link(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.Link 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sankey.Link
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sankey.Link`"""
             )
 
@@ -843,6 +983,10 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("arrowlen", None)
+        _v = arrowlen if arrowlen is not None else _v
+        if _v is not None:
+            self["arrowlen"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:
@@ -867,6 +1011,14 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
         _v = customdatasrc if customdatasrc is not None else _v
         if _v is not None:
             self["customdatasrc"] = _v
+        _v = arg.pop("hovercolor", None)
+        _v = hovercolor if hovercolor is not None else _v
+        if _v is not None:
+            self["hovercolor"] = _v
+        _v = arg.pop("hovercolorsrc", None)
+        _v = hovercolorsrc if hovercolorsrc is not None else _v
+        if _v is not None:
+            self["hovercolorsrc"] = _v
         _v = arg.pop("hoverinfo", None)
         _v = hoverinfo if hoverinfo is not None else _v
         if _v is not None:

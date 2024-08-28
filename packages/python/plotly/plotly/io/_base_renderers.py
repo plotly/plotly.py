@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import base64
 import json
 import webbrowser
@@ -6,7 +5,6 @@ import inspect
 import os
 from os.path import isdir
 
-import six
 from plotly import utils, optional_imports
 from plotly.io import to_json, to_image, write_image, write_html
 from plotly.io._orca import ensure_server
@@ -237,7 +235,7 @@ _window_plotly_config = """\
 window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 
 _mathjax_config = """\
-if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
 
 
 class HtmlRenderer(MimetypeRenderer):
@@ -610,11 +608,13 @@ class IFrameRenderer(MimetypeRenderer):
 
     def build_filename(self):
         ip = IPython.get_ipython() if IPython else None
-        cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1 if ip else 0
-        filename = "{dirname}/figure_{cell_number}.html".format(
+        try:
+            cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1 if ip else 0
+        except Exception:
+            cell_number = 0
+        return "{dirname}/figure_{cell_number}.html".format(
             dirname=self.html_directory, cell_number=cell_number
         )
-        return filename
 
     def build_url(self, filename):
         return filename
@@ -666,7 +666,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     using, new, autoraise:
         See docstrings in webbrowser.get and webbrowser.open
     """
-    if isinstance(html, six.string_types):
+    if isinstance(html, str):
         html = html.encode("utf8")
 
     browser = None

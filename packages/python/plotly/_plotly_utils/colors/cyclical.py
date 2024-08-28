@@ -143,13 +143,13 @@ mygbm = [
     "#ef55f1",
 ]
 
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
-
+Edge_r = Edge[::-1]
+HSV_r = HSV[::-1]
+IceFire_r = IceFire[::-1]
+Phase_r = Phase[::-1]
+Twilight_r = Twilight[::-1]
+mrybm_r = mrybm[::-1]
+mygbm_r = mygbm[::-1]
 
 __all__ = [
     "swatches",

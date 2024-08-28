@@ -16,7 +16,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the marker opacity of selected points.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -42,7 +42,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, opacity=None, **kwargs):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
@@ -73,8 +73,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.choropleth.selected.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.choropleth.selected.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.choropleth.selected.Marker`"""
             )
 

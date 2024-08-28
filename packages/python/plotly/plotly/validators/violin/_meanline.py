@@ -23,5 +23,5 @@ class MeanlineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the mean line width.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

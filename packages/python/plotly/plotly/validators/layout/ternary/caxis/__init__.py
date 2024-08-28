@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._uirevision import UirevisionValidator
     from ._title import TitleValidator
     from ._tickwidth import TickwidthValidator
@@ -13,6 +14,7 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
+    from ._ticklabelstep import TicklabelstepValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
     from ._tickformat import TickformatValidator
@@ -33,8 +35,10 @@ if sys.version_info < (3, 7):
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
+    from ._labelalias import LabelaliasValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
+    from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
@@ -58,6 +62,7 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
+            "._ticklabelstep.TicklabelstepValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
             "._tickformat.TickformatValidator",
@@ -78,8 +83,10 @@ else:
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
+            "._labelalias.LabelaliasValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
+            "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",

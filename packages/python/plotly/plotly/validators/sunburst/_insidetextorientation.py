@@ -10,5 +10,5 @@ class InsidetextorientationValidator(_plotly_utils.basevalidators.EnumeratedVali
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             values=kwargs.pop("values", ["horizontal", "radial", "tangential", "auto"]),
-            **kwargs
+            **kwargs,
         )

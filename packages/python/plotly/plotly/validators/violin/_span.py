@@ -14,5 +14,5 @@ class SpanValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "calc", "valType": "any"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

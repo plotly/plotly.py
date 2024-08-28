@@ -25,7 +25,7 @@ class PlotlyTestCase(TestCase):
         self.stash_files()
         defaults = dict(
             files.FILE_CONTENT[files.CREDENTIALS_FILE],
-            **files.FILE_CONTENT[files.CONFIG_FILE]
+            **files.FILE_CONTENT[files.CONFIG_FILE],
         )
         session.sign_in(**defaults)
 

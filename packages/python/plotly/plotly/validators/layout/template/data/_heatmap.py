@@ -14,5 +14,5 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -19,7 +19,7 @@ class TestPresentation(TestCase):
         # one slide
         """
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             chart_studio.presentation_objs.presentation_objs.STYLE_ERROR,
             pres.Presentation,
@@ -36,7 +36,7 @@ class TestPresentation(TestCase):
         print x
         """
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             chart_studio.presentation_objs.presentation_objs.CODE_ENV_ERROR,
             pres.Presentation,
@@ -52,7 +52,7 @@ class TestPresentation(TestCase):
         ```
         """
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             chart_studio.presentation_objs.presentation_objs.LANG_ERROR,
             pres.Presentation,

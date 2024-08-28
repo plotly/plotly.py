@@ -50,5 +50,5 @@ class EasingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "bounce-in-out",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

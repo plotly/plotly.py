@@ -8,5 +8,5 @@ class Tick0Validator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
-            **kwargs
+            **kwargs,
         )

@@ -23,5 +23,5 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 otherwise.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

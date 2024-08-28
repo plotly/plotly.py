@@ -383,9 +383,37 @@ Vivid = [
     "rgb(165, 170, 153)",
 ]
 
-# Prefix variable names with _ so that they will not be added to the swatches
-_contents = dict(globals())
-for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
-        continue
-    globals()[_k + "_r"] = _cols[::-1]
+Aggrnyl_r = Aggrnyl[::-1]
+Agsunset_r = Agsunset[::-1]
+Antique_r = Antique[::-1]
+Armyrose_r = Armyrose[::-1]
+Blugrn_r = Blugrn[::-1]
+Bluyl_r = Bluyl[::-1]
+Bold_r = Bold[::-1]
+Brwnyl_r = Brwnyl[::-1]
+Burg_r = Burg[::-1]
+Burgyl_r = Burgyl[::-1]
+Darkmint_r = Darkmint[::-1]
+Earth_r = Earth[::-1]
+Emrld_r = Emrld[::-1]
+Fall_r = Fall[::-1]
+Geyser_r = Geyser[::-1]
+Magenta_r = Magenta[::-1]
+Mint_r = Mint[::-1]
+Oryel_r = Oryel[::-1]
+Pastel_r = Pastel[::-1]
+Peach_r = Peach[::-1]
+Pinkyl_r = Pinkyl[::-1]
+Prism_r = Prism[::-1]
+Purp_r = Purp[::-1]
+Purpor_r = Purpor[::-1]
+Redor_r = Redor[::-1]
+Safe_r = Safe[::-1]
+Sunset_r = Sunset[::-1]
+Sunsetdark_r = Sunsetdark[::-1]
+Teal_r = Teal[::-1]
+Tealgrn_r = Tealgrn[::-1]
+Tealrose_r = Tealrose[::-1]
+Temps_r = Temps[::-1]
+Tropic_r = Tropic[::-1]
+Vivid_r = Vivid[::-1]

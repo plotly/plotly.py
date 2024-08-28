@@ -36,5 +36,5 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 math issues arising from degenerate geometry.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

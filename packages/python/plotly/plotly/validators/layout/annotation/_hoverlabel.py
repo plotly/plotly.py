@@ -26,5 +26,5 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `hoverlabel.bordercolor`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

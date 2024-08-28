@@ -16,11 +16,13 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to pick the sector colors.
             colorssrc
                 Sets the source reference on Chart Studio Cloud
-                for  colors .
+                for `colors`.
             line
                 :class:`plotly.graph_objects.pie.marker.Line`
                 instance or dict with compatible properties
+            pattern
+                Sets the pattern within the marker.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

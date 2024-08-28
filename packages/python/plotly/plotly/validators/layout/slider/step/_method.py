@@ -12,5 +12,5 @@ class MethodValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["restyle", "relayout", "animate", "update", "skip"]
             ),
-            **kwargs
+            **kwargs,
         )

@@ -126,12 +126,16 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
       | any
       | IPlotlySpec;
 
+    if (!layout.height) {
+      layout.height = 360;
+    }
+
     // Load plotly asynchronously
     const loadPlotly = async (): Promise<void> => {
       if (RenderedPlotly.Plotly === null) {
         RenderedPlotly.Plotly = await import("plotly.js/dist/plotly");
         RenderedPlotly._resolveLoadingPlotly();
-      } 
+      }
       return RenderedPlotly.loadingPlotly;
     };
 

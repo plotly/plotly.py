@@ -8,5 +8,5 @@ class XrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             values=kwargs.pop("values", ["container", "paper"]),
-            **kwargs
+            **kwargs,
         )

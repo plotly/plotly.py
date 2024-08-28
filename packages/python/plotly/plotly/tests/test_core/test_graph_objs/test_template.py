@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import copy
 from unittest import TestCase
 import pytest
@@ -356,7 +354,7 @@ class TestToTemplated(TestCaseNoTemplate):
             },
         )
 
-        self.assertEqual(pio.to_json(templated_fig), pio.to_json(expected_fig))
+        self.assertEqual(templated_fig.to_dict(), expected_fig.to_dict())
 
     def test_move_nested_trace_properties_existing_traces(self):
         fig = go.Figure(

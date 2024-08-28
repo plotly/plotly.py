@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._enabled import EnabledValidator
     from ._direction import DirectionValidator
     from ._currentbin import CurrentbinValidator

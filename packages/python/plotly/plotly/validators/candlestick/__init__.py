@@ -1,6 +1,8 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._zorder import ZorderValidator
     from ._yhoverformat import YhoverformatValidator
     from ._yaxis import YaxisValidator
     from ._xsrc import XsrcValidator
@@ -29,9 +31,11 @@ if sys.version_info < (3, 7):
     from ._lowsrc import LowsrcValidator
     from ._low import LowValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._increasing import IncreasingValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -54,6 +58,7 @@ else:
         __name__,
         [],
         [
+            "._zorder.ZorderValidator",
             "._yhoverformat.YhoverformatValidator",
             "._yaxis.YaxisValidator",
             "._xsrc.XsrcValidator",
@@ -82,9 +87,11 @@ else:
             "._lowsrc.LowsrcValidator",
             "._low.LowValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._increasing.IncreasingValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

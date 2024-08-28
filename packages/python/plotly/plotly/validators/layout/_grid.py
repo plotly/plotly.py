@@ -91,5 +91,5 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
                 similar.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

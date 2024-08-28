@@ -17,7 +17,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the marker color of unselected points, applied only when a
         selection exists.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -77,7 +77,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the marker opacity of unselected points, applied only when
         a selection exists.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -98,7 +98,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the marker size of unselected points, applied only when a
         selection exists.
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -131,7 +131,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, opacity=None, size=None, **kwargs):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
@@ -169,8 +169,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.splom.unselected.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.splom.unselected.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.splom.unselected.Marker`"""
             )
 

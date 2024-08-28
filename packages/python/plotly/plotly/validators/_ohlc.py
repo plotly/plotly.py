@@ -14,7 +14,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the close values.
             closesrc
                 Sets the source reference on Chart Studio Cloud
-                for  close .
+                for `close`.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -23,7 +23,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             decreasing
                 :class:`plotly.graph_objects.ohlc.Decreasing`
                 instance or dict with compatible properties
@@ -31,7 +31,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the high values.
             highsrc
                 Sets the source reference on Chart Studio Cloud
-                for  high .
+                for `high`.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -40,7 +40,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.ohlc.Hoverlabel`
                 instance or dict with compatible properties
@@ -48,7 +48,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -56,14 +56,21 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             increasing
                 :class:`plotly.graph_objects.ohlc.Increasing`
                 instance or dict with compatible properties
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.ohlc.Legendgroupti
                 tle` instance or dict with compatible
@@ -71,13 +78,19 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.ohlc.Line`
                 instance or dict with compatible properties
@@ -85,7 +98,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the low values.
             lowsrc
                 Sets the source reference on Chart Studio Cloud
-                for  low .
+                for `low`.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -102,9 +115,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -112,7 +125,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the open values.
             opensrc
                 Sets the source reference on Chart Studio Cloud
-                for  open .
+                for `open`.
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -136,7 +149,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to this trace's sample points.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             tickwidth
                 Sets the width of the open/close tick marks
                 relative to the "x" minimal interval.
@@ -187,9 +200,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -219,7 +232,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -230,9 +243,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -241,7 +254,12 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 *09~15~23.46*By default the values are
                 formatted using `yaxis.hoverformat`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

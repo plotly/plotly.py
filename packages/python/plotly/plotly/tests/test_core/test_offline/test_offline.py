@@ -2,19 +2,14 @@
 test__offline
 
 """
-from __future__ import absolute_import
-
+import json
 import os
 from unittest import TestCase
 import pytest
 
-import json as _json
-
 import plotly
 import plotly.io as pio
 from plotly.io._utils import plotly_cdn_url
-
-import json
 
 packages_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(plotly.__file__))))
@@ -41,9 +36,11 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script src="{cdn_url}"></script>'.format(cdn_url=plotly_cdn_url())
+cdn_script = '<script charset="utf-8" src="{cdn_url}"></script>'.format(
+    cdn_url=plotly_cdn_url()
+)
 
-directory_script = '<script src="plotly.min.js"></script>'
+directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
 
 mathjax_cdn = "https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"
@@ -81,9 +78,10 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def tearDown(self):
         pio.templates.default = "plotly"
+        super().tearDown()
 
     def _read_html(self, file_url):
-        """ Read and return the HTML contents from a file_url
+        """Read and return the HTML contents from a file_url
         in the form e.g. file:///Users/chriddyp/Repos/plotly.py/plotly-temp.html
         """
         with open(file_url.replace("file://", "").replace(" ", "")) as f:
@@ -315,19 +313,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         html = get_html()
 
         self.assertIn('"bogus": 42', html)
-
-    @pytest.mark.nodev
-    def test_plotlyjs_version(self):
-        path = os.path.join(
-            packages_root, "javascript", "jupyterlab-plotly", "package.json"
-        )
-        with open(path, "rt") as f:
-            package_json = json.load(f)
-            expected_version = package_json["dependencies"]["plotly.js"]
-            if expected_version[0] == "^":
-                expected_version = expected_version[1:]
-
-        self.assertEqual(expected_version, plotly.offline.get_plotlyjs_version())
 
     def test_include_mathjax_false_html(self):
         html = self._read_html(

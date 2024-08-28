@@ -23,8 +23,10 @@ class Image(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "meta",
         "metasrc",
         "name",
@@ -44,6 +46,7 @@ class Image(_BaseTraceType):
         "z",
         "zmax",
         "zmin",
+        "zorder",
         "zsmooth",
         "zsrc",
     }
@@ -57,7 +60,7 @@ class Image(_BaseTraceType):
         described in `z` into colors. If `source` is specified, this
         attribute will be set to `rgba256` otherwise it defaults to
         `rgb`.
-    
+
         The 'colormodel' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['rgb', 'rgba', 'rgba256', 'hsl', 'hsla']
@@ -81,7 +84,7 @@ class Image(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -100,9 +103,9 @@ class Image(_BaseTraceType):
     @property
     def customdatasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  customdata
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `customdata`.
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -122,7 +125,7 @@ class Image(_BaseTraceType):
     def dx(self):
         """
         Set the pixel's horizontal size.
-    
+
         The 'dx' property is a number and may be specified as:
           - An int or float
 
@@ -142,7 +145,7 @@ class Image(_BaseTraceType):
     def dy(self):
         """
         Set the pixel's vertical size
-    
+
         The 'dy' property is a number and may be specified as:
           - An int or float
 
@@ -164,7 +167,7 @@ class Image(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'color', 'name', 'text'] joined with '+' characters
@@ -187,9 +190,9 @@ class Image(_BaseTraceType):
     @property
     def hoverinfosrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hoverinfo
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hoverinfo`.
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -213,9 +216,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -223,19 +226,19 @@ class Image(_BaseTraceType):
                     more lines
                 alignsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  align .
+                    for `align`.
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
                 bgcolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bgcolor .
+                    for `bgcolor`.
                 bordercolor
                     Sets the border color of the hover labels for
                     this trace.
                 bordercolorsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  bordercolor .
+                    for `bordercolor`.
                 font
                     Sets the font used in hover labels.
                 namelength
@@ -250,7 +253,7 @@ class Image(_BaseTraceType):
                     ellipsis.
                 namelengthsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  namelength .
+                    for `namelength`.
 
         Returns
         -------
@@ -286,12 +289,13 @@ class Image(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `z`, `color` and `colormodel`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variables `z`, `color` and
+        `colormodel`. Anything contained in tag `<extra>` is displayed
+        in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -313,8 +317,8 @@ class Image(_BaseTraceType):
     def hovertemplatesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for
-        hovertemplate .
-    
+        `hovertemplate`.
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -334,7 +338,7 @@ class Image(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -353,9 +357,9 @@ class Image(_BaseTraceType):
     @property
     def hovertextsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  hovertext
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `hovertext`.
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -377,7 +381,7 @@ class Image(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -396,8 +400,8 @@ class Image(_BaseTraceType):
     @property
     def idssrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  ids .
-    
+        Sets the source reference on Chart Studio Cloud for `ids`.
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -411,6 +415,31 @@ class Image(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgrouptitle
     # ----------------
     @property
@@ -421,9 +450,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend group's title font.
                 text
@@ -446,11 +475,13 @@ class Image(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
-    
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
         The 'legendrank' property is a number and may be specified as:
           - An int or float
 
@@ -463,6 +494,27 @@ class Image(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # meta
     # ----
@@ -479,7 +531,7 @@ class Image(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -497,8 +549,8 @@ class Image(_BaseTraceType):
     @property
     def metasrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  meta .
-    
+        Sets the source reference on Chart Studio Cloud for `meta`.
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -517,9 +569,9 @@ class Image(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -540,7 +592,7 @@ class Image(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -561,7 +613,7 @@ class Image(_BaseTraceType):
         """
         Specifies the data URI of the image to be visualized. The URI
         consists of "data:image/[<media subtype>][;base64],<data>"
-    
+
         The 'source' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -586,9 +638,9 @@ class Image(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.image.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -615,7 +667,7 @@ class Image(_BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -634,8 +686,8 @@ class Image(_BaseTraceType):
     @property
     def textsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  text .
-    
+        Sets the source reference on Chart Studio Cloud for `text`.
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -656,7 +708,7 @@ class Image(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -691,7 +743,7 @@ class Image(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -712,7 +764,7 @@ class Image(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -732,8 +784,10 @@ class Image(_BaseTraceType):
     @property
     def x0(self):
         """
-        Set the image's x position.
-    
+        Set the image's x position. The left edge of the image (or the
+        right edge if the x axis is reversed or dx is negative) will be
+        found at xmin=x0-dx/2
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -755,7 +809,7 @@ class Image(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -776,8 +830,13 @@ class Image(_BaseTraceType):
     @property
     def y0(self):
         """
-        Set the image's y position.
-    
+        Set the image's y position. The top edge of the image (or the
+        bottom edge if the y axis is NOT reversed or if dy is negative)
+        will be found at ymin=y0-dy/2. By default when an image trace
+        is included, the y axis will be reversed so that the image is
+        right-side-up, but you can disable this by setting
+        yaxis.autorange=true or by providing an explicit y axis range.
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -799,7 +858,7 @@ class Image(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -822,7 +881,7 @@ class Image(_BaseTraceType):
         """
         A 2-dimensional array in which each element is an array of 3 or
         4 numbers representing a color.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -841,29 +900,29 @@ class Image(_BaseTraceType):
     @property
     def zmax(self):
         """
-        Array defining the higher bound for each color component. Note
-        that the default value will depend on the colormodel. For the
-        `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
-        colormodel, it is [255, 255, 255, 1]. For the `rgba256`
-        colormodel, it is [255, 255, 255, 255]. For the `hsl`
-        colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
-        it is [360, 100, 100, 1].
-    
-        The 'zmax' property is an info array that may be specified as:
-    
-        * a list or tuple of 4 elements where:
-    (0) The 'zmax[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'zmax[1]' property is a number and may be specified as:
-          - An int or float
-    (2) The 'zmax[2]' property is a number and may be specified as:
-          - An int or float
-    (3) The 'zmax[3]' property is a number and may be specified as:
-          - An int or float
+            Array defining the higher bound for each color component. Note
+            that the default value will depend on the colormodel. For the
+            `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
+            colormodel, it is [255, 255, 255, 1]. For the `rgba256`
+            colormodel, it is [255, 255, 255, 255]. For the `hsl`
+            colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
+            it is [360, 100, 100, 1].
 
-        Returns
-        -------
-        list
+            The 'zmax' property is an info array that may be specified as:
+
+            * a list or tuple of 4 elements where:
+        (0) The 'zmax[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'zmax[1]' property is a number and may be specified as:
+              - An int or float
+        (2) The 'zmax[2]' property is a number and may be specified as:
+              - An int or float
+        (3) The 'zmax[3]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["zmax"]
 
@@ -876,34 +935,56 @@ class Image(_BaseTraceType):
     @property
     def zmin(self):
         """
-        Array defining the lower bound for each color component. Note
-        that the default value will depend on the colormodel. For the
-        `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
-        it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
-        0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
-        `hsla` colormodel, it is [0, 0, 0, 0].
-    
-        The 'zmin' property is an info array that may be specified as:
-    
-        * a list or tuple of 4 elements where:
-    (0) The 'zmin[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'zmin[1]' property is a number and may be specified as:
-          - An int or float
-    (2) The 'zmin[2]' property is a number and may be specified as:
-          - An int or float
-    (3) The 'zmin[3]' property is a number and may be specified as:
-          - An int or float
+            Array defining the lower bound for each color component. Note
+            that the default value will depend on the colormodel. For the
+            `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
+            it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
+            0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
+            `hsla` colormodel, it is [0, 0, 0, 0].
 
-        Returns
-        -------
-        list
+            The 'zmin' property is an info array that may be specified as:
+
+            * a list or tuple of 4 elements where:
+        (0) The 'zmin[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'zmin[1]' property is a number and may be specified as:
+              - An int or float
+        (2) The 'zmin[2]' property is a number and may be specified as:
+              - An int or float
+        (3) The 'zmin[3]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["zmin"]
 
     @zmin.setter
     def zmin(self, val):
         self["zmin"] = val
+
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
 
     # zsmooth
     # -------
@@ -912,7 +993,7 @@ class Image(_BaseTraceType):
         """
         Picks a smoothing algorithm used to smooth `z` data. This only
         applies for image traces that use the `source` attribute.
-    
+
         The 'zsmooth' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fast', False]
@@ -932,8 +1013,8 @@ class Image(_BaseTraceType):
     @property
     def zsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  z .
-    
+        Sets the source reference on Chart Studio Cloud for `z`.
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -970,7 +1051,7 @@ class Image(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
@@ -982,7 +1063,7 @@ class Image(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -1010,37 +1091,50 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1056,9 +1150,9 @@ class Image(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1073,7 +1167,7 @@ class Image(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1102,14 +1196,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1135,13 +1238,18 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
             `source` attribute.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
         """
 
     def __init__(
@@ -1161,8 +1269,10 @@ class Image(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         meta=None,
         metasrc=None,
         name=None,
@@ -1181,13 +1291,14 @@ class Image(_BaseTraceType):
         z=None,
         zmax=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Image object
-        
+
         Display an image, i.e. data on a 2D regular raster. By default,
         when an image is displayed in a subplot, its y axis will be
         reversed (ie. `autorange: 'reversed'`), constrained to the
@@ -1212,7 +1323,7 @@ class Image(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
-            customdata .
+            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
@@ -1224,7 +1335,7 @@ class Image(_BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
+            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -1252,37 +1363,50 @@ class Image(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `z`, `color` and `colormodel`.
-            Anything contained in tag `<extra>` is displayed in the
+            are available. Finally, the template string has access
+            to variables `z`, `color` and `colormodel`. Anything
+            contained in tag `<extra>` is displayed in the
             secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
-            hovertemplate .
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
             Sets the source reference on Chart Studio Cloud for
-            hovertext .
+            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on Chart Studio Cloud for
-            ids .
+            `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgrouptitle
             :class:`plotly.graph_objects.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1298,9 +1422,9 @@ class Image(_BaseTraceType):
             index.
         metasrc
             Sets the source reference on Chart Studio Cloud for
-            meta .
+            `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1315,7 +1439,7 @@ class Image(_BaseTraceType):
             Sets the text elements associated with each z value.
         textsrc
             Sets the source reference on Chart Studio Cloud for
-            text .
+            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1344,14 +1468,23 @@ class Image(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         x0
-            Set the image's x position.
+            Set the image's x position. The left edge of the image
+            (or the right edge if the x axis is reversed or dx is
+            negative) will be found at xmin=x0-dx/2
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         y0
-            Set the image's y position.
+            Set the image's y position. The top edge of the image
+            (or the bottom edge if the y axis is NOT reversed or if
+            dy is negative) will be found at ymin=y0-dy/2. By
+            default when an image trace is included, the y axis
+            will be reversed so that the image is right-side-up,
+            but you can disable this by setting
+            yaxis.autorange=true or by providing an explicit y axis
+            range.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1377,13 +1510,18 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
             `source` attribute.
         zsrc
-            Sets the source reference on Chart Studio Cloud for  z
-            .
+            Sets the source reference on Chart Studio Cloud for
+            `z`.
 
         Returns
         -------
@@ -1406,8 +1544,8 @@ class Image(_BaseTraceType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.Image 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.Image
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Image`"""
             )
 
@@ -1474,6 +1612,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgrouptitle", None)
         _v = legendgrouptitle if legendgrouptitle is not None else _v
         if _v is not None:
@@ -1482,6 +1624,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("meta", None)
         _v = meta if meta is not None else _v
         if _v is not None:
@@ -1554,6 +1700,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
         _v = arg.pop("zsmooth", None)
         _v = zsmooth if zsmooth is not None else _v
         if _v is not None:

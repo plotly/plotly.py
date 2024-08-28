@@ -55,7 +55,7 @@ Namely, if the distance(`V[i], V[j]`), belongs to the $K^{th}$ interval associat
 
 We processed data provided by [Eurovision Song Contest](http://www.eurovision.tv/page/history/by-year/contest?event=2083#Scoreboard), and saved  the corresponding graph in a `gml` file. Now we can read the `gml` file and define  an [`igraph.Graph`](http://igraph.org/python/) object.
 
-Install the Python libraries with `sudo pip install python-igraph` and `sudo pip install networkx`.
+Install the Python libraries with `sudo pip install igraph` and `sudo pip install networkx`.
 
 ```python
 import igraph as ig

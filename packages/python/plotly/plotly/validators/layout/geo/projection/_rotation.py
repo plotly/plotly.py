@@ -24,5 +24,5 @@ class RotationValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of 180 makes the map appear upside down.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

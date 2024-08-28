@@ -22,5 +22,5 @@ class TransitionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 make both traces and layout change.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

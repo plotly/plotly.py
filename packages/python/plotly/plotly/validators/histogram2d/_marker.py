@@ -14,8 +14,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the aggregation data.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

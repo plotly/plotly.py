@@ -41,6 +41,6 @@ setup(
         "chart_studio.plotly.chunked_requests",
         "chart_studio.presentation_objs",
     ],
-    install_requires=["plotly", "requests", "retrying>=1.3.3", "six"],
+    install_requires=["plotly", "requests", "retrying>=1.3.3"],
     zip_safe=False,
 )

@@ -39,6 +39,15 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the same axis type) can have compatible bin
                 settings. Note that histogram and histogram2d*
                 trace can share the same `bingroup`
+            cliponaxis
+                Determines whether the text nodes are clipped
+                about the subplot axes. To show the text nodes
+                above axis lines and tick labels, make sure to
+                set `xaxis.layer` and `yaxis.layer` to *below
+                traces*.
+            constraintext
+                Constrain the size of text inside or outside a
+                bar to be no larger than the bar itself.
             cumulative
                 :class:`plotly.graph_objects.histogram.Cumulati
                 ve` instance or dict with compatible properties
@@ -50,7 +59,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             error_x
                 :class:`plotly.graph_objects.histogram.ErrorX`
                 instance or dict with compatible properties
@@ -92,7 +101,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.histogram.Hoverlab
                 el` instance or dict with compatible properties
@@ -110,8 +119,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -124,6 +133,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variable `binNumber` Anything contained in tag
                 `<extra>` is displayed in the secondary box,
                 for example "<extra>{fullData.name}</extra>".
@@ -131,12 +141,12 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Same as `text`.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -144,11 +154,25 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
+            insidetextanchor
+                Determines if texts are kept at center or
+                start/end points in `textposition` "inside"
+                mode.
+            insidetextfont
+                Sets the font used for `text` lying inside the
+                bar.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.histogram.Legendgr
                 ouptitle` instance or dict with compatible
@@ -156,13 +180,19 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             marker
                 :class:`plotly.graph_objects.histogram.Marker`
                 instance or dict with compatible properties
@@ -182,9 +212,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             nbinsx
                 Specifies the maximum number of desired bins.
@@ -209,6 +239,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the orientation of the bars. With "v"
                 ("h"), the value of the each bar spans along
                 the vertical (horizontal).
+            outsidetextfont
+                Sets the font used for `text` lying outside the
+                bar.
             selected
                 :class:`plotly.graph_objects.histogram.Selected
                 ` instance or dict with compatible properties
@@ -233,9 +266,47 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all bars. If an array of string,
                 the items are mapped in order to the this
                 trace's coordinates.
+            textangle
+                Sets the angle of the tick labels with respect
+                to the bar. For example, a `tickangle` of -90
+                draws the tick labels vertically. With "auto"
+                the texts may automatically be rotated to fit
+                with the maximum size in bars.
+            textfont
+                Sets the text font.
+            textposition
+                Specifies the location of the `text`. "inside"
+                positions `text` inside, next to the bar end
+                (rotated and scaled if needed). "outside"
+                positions `text` outside, next to the bar end
+                (scaled if needed), unless there is another bar
+                stacked on this one, then the text gets pushed
+                inside. "auto" tries to position `text` inside
+                the bar, but if the bar is too small and no bar
+                is stacked on this one the text is moved
+                outside. If "none", no text appears.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
+                formatting syntax. Dates are formatted using
+                d3-time-format's syntax %{variable|d3-time-
+                format}, for example "Day: %{2019-01-01|%A}".
+                https://github.com/d3/d3-time-
+                format/tree/v2.2.3#locale_format for details on
+                the date formatting syntax. Every attributes
+                that can be specified per-point (the ones that
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
+                `label` and `value`.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -289,9 +360,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -302,7 +373,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `xaxis.hoverformat`.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 Sets the sample data to be binned on the y
                 axis.
@@ -322,9 +393,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -335,8 +406,13 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using `yaxis.hoverformat`.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

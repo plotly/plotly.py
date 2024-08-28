@@ -37,7 +37,7 @@ class Layer(_BaseLayoutHierarchyType):
         Determines if the layer will be inserted before the layer with
         the specified ID. If omitted or set to '', the layer will be
         inserted above every existing layer.
-    
+
         The 'below' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -62,9 +62,9 @@ class Layer(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`
           - A dict of string/value properties that will be passed
             to the Circle constructor
-    
+
             Supported dict properties:
-                
+
                 radius
                     Sets the circle radius
                     (mapbox.layer.paint.circle-radius). Has an
@@ -92,7 +92,7 @@ class Layer(_BaseLayoutHierarchyType):
         corresponds to the fill color (mapbox.layer.paint.fill-color)
         If `type` is "symbol", color corresponds to the icon color
         (mapbox.layer.paint.icon-color)
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -154,7 +154,7 @@ class Layer(_BaseLayoutHierarchyType):
         for the image corners listed in clockwise order: top left, top
         right, bottom right, bottom left. Only has an effect for
         "image" `sourcetype`.
-    
+
         The 'coordinates' property accepts values of any type
 
         Returns
@@ -177,9 +177,9 @@ class Layer(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
-    
+
             Supported dict properties:
-                
+
                 outlinecolor
                     Sets the fill outline color
                     (mapbox.layer.paint.fill-outline-color). Has an
@@ -205,16 +205,16 @@ class Layer(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 dash
                     Sets the length of dashes and gaps
                     (mapbox.layer.paint.line-dasharray). Has an
                     effect only when `type` is set to "line".
                 dashsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  dash .
+                    for `dash`.
                 width
                     Sets the line width (mapbox.layer.paint.line-
                     width). Has an effect only when `type` is set
@@ -238,7 +238,7 @@ class Layer(_BaseLayoutHierarchyType):
         Sets the maximum zoom level (mapbox.layer.maxzoom). At zoom
         levels equal to or greater than the maxzoom, the layer will be
         hidden.
-    
+
         The 'maxzoom' property is a number and may be specified as:
           - An int or float in the interval [0, 24]
 
@@ -259,7 +259,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         Sets the minimum zoom level (mapbox.layer.minzoom). At zoom
         levels less than the minzoom, the layer will be hidden.
-    
+
         The 'minzoom' property is a number and may be specified as:
           - An int or float in the interval [0, 24]
 
@@ -285,7 +285,7 @@ class Layer(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -313,7 +313,7 @@ class Layer(_BaseLayoutHierarchyType):
         (mapbox.layer.paint.fill-opacity) If `type` is "symbol",
         opacity corresponds to the icon/text opacity
         (mapbox.layer.paint.text-opacity)
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -338,7 +338,7 @@ class Layer(_BaseLayoutHierarchyType):
         "vector" or "raster", `source` can be a URL or an array of tile
         URLs. When `sourcetype` is set to "image", `source` can be a
         URL to an image.
-    
+
         The 'source' property accepts values of any type
 
         Returns
@@ -357,7 +357,7 @@ class Layer(_BaseLayoutHierarchyType):
     def sourceattribution(self):
         """
         Sets the attribution for this source.
-    
+
         The 'sourceattribution' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -380,7 +380,7 @@ class Layer(_BaseLayoutHierarchyType):
         Specifies the layer to use from a vector tile source
         (mapbox.layer.source-layer). Required for "vector" source type
         that supports multiple layers.
-    
+
         The 'sourcelayer' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -402,7 +402,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         Sets the source type for this layer, that is the type of the
         layer data.
-    
+
         The 'sourcetype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['geojson', 'vector', 'raster', 'image']
@@ -427,9 +427,9 @@ class Layer(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`
           - A dict of string/value properties that will be passed
             to the Symbol constructor
-    
+
             Supported dict properties:
-                
+
                 icon
                     Sets the symbol icon image
                     (mapbox.layer.layout.icon-image). Full list:
@@ -482,7 +482,7 @@ class Layer(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -510,7 +510,7 @@ class Layer(_BaseLayoutHierarchyType):
         "vector", the following values are allowed:  "circle", "line",
         "fill" and "symbol". With `sourcetype` set to "raster" or
         `*image*`, only the "raster" value is allowed.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['circle', 'line', 'fill', 'symbol', 'raster']
@@ -531,7 +531,7 @@ class Layer(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether this layer is displayed
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -671,11 +671,11 @@ class Layer(_BaseLayoutHierarchyType):
         templateitemname=None,
         type=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Layer object
-        
+
         Parameters
         ----------
         arg
@@ -802,8 +802,8 @@ class Layer(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.mapbox.Layer 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.mapbox.Layer
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`"""
             )
 

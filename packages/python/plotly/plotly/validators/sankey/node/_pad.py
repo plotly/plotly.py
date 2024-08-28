@@ -9,5 +9,5 @@ class PadValidator(_plotly_utils.basevalidators.NumberValidator):
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
-            **kwargs
+            **kwargs,
         )

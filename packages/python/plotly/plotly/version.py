@@ -13,8 +13,6 @@ def stable_semver():
 
     '3.0.0rc11' -> '3.0.0'
     """
-    from distutils.version import LooseVersion
+    from packaging.version import Version
 
-    version_components = LooseVersion(__version__).version
-    stable_ver_str = ".".join(str(s) for s in version_components[0:3])
-    return stable_ver_str
+    return Version(__version__).base_version

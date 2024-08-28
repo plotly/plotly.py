@@ -6,7 +6,7 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="categoryorder",
         parent_name="layout.polar.angularaxis",
-        **kwargs
+        **kwargs,
     ):
         super(CategoryorderValidator, self).__init__(
             plotly_name=plotly_name,
@@ -29,9 +29,11 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "sum descending",
                     "mean ascending",
                     "mean descending",
+                    "geometric mean ascending",
+                    "geometric mean descending",
                     "median ascending",
                     "median descending",
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

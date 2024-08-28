@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._colorbar import ColorBar
     from ._contours import Contours
     from ._hoverlabel import Hoverlabel
@@ -8,6 +9,7 @@ if sys.version_info < (3, 7):
     from ._line import Line
     from ._marker import Marker
     from ._stream import Stream
+    from ._textfont import Textfont
     from ._xbins import XBins
     from ._ybins import YBins
     from . import colorbar
@@ -28,6 +30,7 @@ else:
             "._line.Line",
             "._marker.Marker",
             "._stream.Stream",
+            "._textfont.Textfont",
             "._xbins.XBins",
             "._ybins.YBins",
         ],

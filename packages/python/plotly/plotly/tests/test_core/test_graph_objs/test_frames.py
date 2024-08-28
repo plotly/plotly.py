@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from unittest import TestCase
 
 from plotly.graph_objs import Bar, Frames, Frame, Layout
@@ -53,7 +51,20 @@ class FramesTest(TestCase):
         matches = return_prop_descriptions(prop_descrip_text)
 
         # It's OK if this needs to change, but we should check *something*.
-        self.assertEqual(set(matches), {"color", "family", "size"})
+        self.assertEqual(
+            set(matches),
+            {
+                "color",
+                "family",
+                "size",
+                "weight",
+                "variant",
+                "style",
+                "textcase",
+                "lineposition",
+                "shadow",
+            },
+        )
 
     def test_deeply_nested_data_attributes(self):
         frames = Frame

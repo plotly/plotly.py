@@ -8,18 +8,48 @@ class Marker(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "box"
     _path_str = "box.marker"
-    _valid_props = {"color", "line", "opacity", "outliercolor", "size", "symbol"}
+    _valid_props = {
+        "angle",
+        "color",
+        "line",
+        "opacity",
+        "outliercolor",
+        "size",
+        "symbol",
+    }
+
+    # angle
+    # -----
+    @property
+    def angle(self):
+        """
+        Sets the marker angle in respect to `angleref`.
+
+        The 'angle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self["angle"]
+
+    @angle.setter
+    def angle(self, val):
+        self["angle"] = val
 
     # color
     # -----
     @property
     def color(self):
         """
-        Sets themarkercolor. It accepts either a specific color or an
+        Sets the marker color. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -82,11 +112,11 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.box.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
-                    Sets themarker.linecolor. It accepts either a
+                    Sets the marker.line color. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
@@ -118,7 +148,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self):
         """
         Sets the marker opacity.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -138,7 +168,7 @@ class Marker(_BaseTraceHierarchyType):
     def outliercolor(self):
         """
         Sets the color of the outlier sample points.
-    
+
         The 'outliercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -197,7 +227,7 @@ class Marker(_BaseTraceHierarchyType):
     def size(self):
         """
         Sets the marker size (in px).
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -220,7 +250,7 @@ class Marker(_BaseTraceHierarchyType):
         appending "-open" to a symbol name. Adding 200 is equivalent to
         appending "-dot" to a symbol name. Adding 300 is equivalent to
         appending "-open-dot" or "dot-open" to a symbol name.
-    
+
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [0, '0', 'circle', 100, '100', 'circle-open', 200, '200',
@@ -309,7 +339,9 @@ class Marker(_BaseTraceHierarchyType):
                 'arrow-bar-up-open', 50, '50', 'arrow-bar-down', 150,
                 '150', 'arrow-bar-down-open', 51, '51', 'arrow-bar-left',
                 151, '151', 'arrow-bar-left-open', 52, '52',
-                'arrow-bar-right', 152, '152', 'arrow-bar-right-open']
+                'arrow-bar-right', 152, '152', 'arrow-bar-right-open', 53,
+                '53', 'arrow', 153, '153', 'arrow-open', 54, '54',
+                'arrow-wide', 154, '154', 'arrow-wide-open']
 
         Returns
         -------
@@ -326,9 +358,11 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        angle
+            Sets the marker angle in respect to `angleref`.
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
+            Sets the marker color. It accepts either a specific
+            color or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
@@ -352,25 +386,28 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        angle=None,
         color=None,
         line=None,
         opacity=None,
         outliercolor=None,
         size=None,
         symbol=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.box.Marker`
+        angle
+            Sets the marker angle in respect to `angleref`.
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
+            Sets the marker color. It accepts either a specific
+            color or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
@@ -411,8 +448,8 @@ class Marker(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.box.Marker 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.box.Marker
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.box.Marker`"""
             )
 
@@ -423,6 +460,10 @@ an instance of :class:`plotly.graph_objs.box.Marker`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("angle", None)
+        _v = angle if angle is not None else _v
+        if _v is not None:
+            self["angle"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

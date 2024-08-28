@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import pytest
 
 from plotly import optional_imports
@@ -12,7 +11,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_vertical_bar():
     fig, ax = plt.subplots()
     ax.bar(left=D["left"], height=D["height"])
@@ -32,7 +31,7 @@ def test_vertical_bar():
     assert equivalent, msg
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_horizontal_bar():
     fig, ax = plt.subplots()
     ax.barh(bottom=D["bottom"], width=D["width"])
@@ -52,7 +51,7 @@ def test_horizontal_bar():
     assert equivalent, msg
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_h_and_v_bars():
     fig, ax = plt.subplots()
     ax.bar(

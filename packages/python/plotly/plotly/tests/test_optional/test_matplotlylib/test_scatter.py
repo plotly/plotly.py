@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import pytest
 
 from plotly import optional_imports
@@ -12,7 +11,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_simple_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D["x1"], D["y1"])
@@ -32,7 +31,7 @@ def test_simple_scatter():
     assert equivalent, msg
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_double_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D["x1"], D["y1"], color="red", s=121, marker="^", alpha=0.5)

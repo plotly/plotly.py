@@ -17,6 +17,17 @@ def test_skip_hover():
     assert fig.data[0].hovertemplate == "species_id=%{marker.size}<extra></extra>"
 
 
+def test_hover_data_string_column():
+    df = px.data.tips()
+    fig = px.scatter(
+        df,
+        x="tip",
+        y="total_bill",
+        hover_data="sex",
+    )
+    assert "sex" in fig.data[0].hovertemplate
+
+
 def test_composite_hover():
     df = px.data.tips()
     hover_dict = OrderedDict(
@@ -65,7 +76,11 @@ def test_newdatain_hover_data():
         {"comment": (":.1f", pd.Series([1.234, 45.3455, 5666.234]))},
     ]
     for hover_dict in hover_dicts:
-        fig = px.scatter(x=[1, 2, 3], y=[3, 4, 5], hover_data=hover_dict,)
+        fig = px.scatter(
+            x=[1, 2, 3],
+            y=[3, 4, 5],
+            hover_data=hover_dict,
+        )
         assert (
             fig.data[0].hovertemplate
             == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]:.1f}<extra></extra>"
@@ -85,17 +100,20 @@ def test_formatted_hover_and_labels():
 
 
 def test_fail_wrong_column():
-    with pytest.raises(ValueError) as err_msg:
-        px.scatter(
-            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
-            x="a",
-            y="b",
-            hover_data={"d": True},
+    # Testing for each of bare string, list, and basic dictionary
+    for hover_data_value in ["d", ["d"], {"d": True}]:
+        with pytest.raises(ValueError) as err_msg:
+            px.scatter(
+                {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+                x="a",
+                y="b",
+                hover_data=hover_data_value,
+            )
+        assert (
+            "Value of 'hover_data_0' is not the name of a column in 'data_frame'."
+            in str(err_msg.value)
         )
-    assert (
-        "Value of 'hover_data_0' is not the name of a column in 'data_frame'."
-        in str(err_msg.value)
-    )
+    # Testing other dictionary possibilities below
     with pytest.raises(ValueError) as err_msg:
         px.scatter(
             {"a": [1, 2], "b": [3, 4], "c": [2, 1]},

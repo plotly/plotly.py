@@ -14,5 +14,5 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     {"editType": "calc", "max": 1, "min": 0, "valType": "number"},
                 ],
             ),
-            **kwargs
+            **kwargs,
         )

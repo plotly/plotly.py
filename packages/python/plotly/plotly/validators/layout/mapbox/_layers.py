@@ -123,5 +123,5 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Determines whether this layer is displayed
 """,
             ),
-            **kwargs
+            **kwargs,
         )

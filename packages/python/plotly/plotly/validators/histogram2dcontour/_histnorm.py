@@ -13,5 +13,5 @@ class HistnormValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 "values",
                 ["", "percent", "probability", "density", "probability density"],
             ),
-            **kwargs
+            **kwargs,
         )

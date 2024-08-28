@@ -20,5 +20,5 @@ class ConnectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines if connector lines are drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

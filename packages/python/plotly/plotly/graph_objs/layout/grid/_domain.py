@@ -15,21 +15,21 @@ class Domain(_BaseLayoutHierarchyType):
     @property
     def x(self):
         """
-        Sets the horizontal domain of this grid subplot (in plot
-        fraction). The first and last cells end exactly at the domain
-        edges, with no grout around the edges.
-    
-        The 'x' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'x[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'x[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            Sets the horizontal domain of this grid subplot (in plot
+            fraction). The first and last cells end exactly at the domain
+            edges, with no grout around the edges.
 
-        Returns
-        -------
-        list
+            The 'x' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'x[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'x[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
         return self["x"]
 
@@ -42,21 +42,21 @@ class Domain(_BaseLayoutHierarchyType):
     @property
     def y(self):
         """
-        Sets the vertical domain of this grid subplot (in plot
-        fraction). The first and last cells end exactly at the domain
-        edges, with no grout around the edges.
-    
-        The 'y' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'y[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'y[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            Sets the vertical domain of this grid subplot (in plot
+            fraction). The first and last cells end exactly at the domain
+            edges, with no grout around the edges.
 
-        Returns
-        -------
-        list
+            The 'y' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'y[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'y[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
         return self["y"]
 
@@ -82,7 +82,7 @@ class Domain(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
-        
+
         Parameters
         ----------
         arg
@@ -119,8 +119,8 @@ class Domain(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.grid.Domain 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.grid.Domain
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.grid.Domain`"""
             )
 

@@ -15,11 +15,11 @@ class Line(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets themarker.linecolor. It accepts either a specific color or
-        an array of numbers that are mapped to the colorscale relative
-        to the max and min values of the array or relative to
+        Sets the marker.line color. It accepts either a specific color
+        or an array of numbers that are mapped to the colorscale
+        relative to the max and min values of the array or relative to
         `marker.line.cmin` and `marker.line.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -79,7 +79,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the border line color of the outlier sample points.
         Defaults to marker.color
-    
+
         The 'outliercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -139,7 +139,7 @@ class Line(_BaseTraceHierarchyType):
         """
         Sets the border line width (in px) of the outlier sample
         points.
-    
+
         The 'outlierwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -159,7 +159,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width (in px) of the lines bounding the marker points.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -179,10 +179,10 @@ class Line(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets themarker.linecolor. It accepts either a specific
-            color or an array of numbers that are mapped to the
-            colorscale relative to the max and min values of the
-            array or relative to `marker.line.cmin` and
+            Sets the marker.line color. It accepts either a
+            specific color or an array of numbers that are mapped
+            to the colorscale relative to the max and min values of
+            the array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
         outliercolor
             Sets the border line color of the outlier sample
@@ -202,11 +202,11 @@ class Line(_BaseTraceHierarchyType):
         outliercolor=None,
         outlierwidth=None,
         width=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg
@@ -214,10 +214,10 @@ class Line(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.box.marker.Line`
         color
-            Sets themarker.linecolor. It accepts either a specific
-            color or an array of numbers that are mapped to the
-            colorscale relative to the max and min values of the
-            array or relative to `marker.line.cmin` and
+            Sets the marker.line color. It accepts either a
+            specific color or an array of numbers that are mapped
+            to the colorscale relative to the max and min values of
+            the array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
         outliercolor
             Sets the border line color of the outlier sample
@@ -250,8 +250,8 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.box.marker.Line 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.box.marker.Line
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.box.marker.Line`"""
             )
 

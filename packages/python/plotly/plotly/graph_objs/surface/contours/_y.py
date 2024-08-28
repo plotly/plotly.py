@@ -28,7 +28,7 @@ class Y(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the color of the contour lines.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -88,7 +88,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Sets the end contour level value. Must be more than
         `contours.start`
-    
+
         The 'end' property is a number and may be specified as:
           - An int or float
 
@@ -109,7 +109,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Determines whether or not contour lines about the y dimension
         are highlighted on hover.
-    
+
         The 'highlight' property must be specified as a bool
         (either True, or False)
 
@@ -129,7 +129,7 @@ class Y(_BaseTraceHierarchyType):
     def highlightcolor(self):
         """
         Sets the color of the highlighted contour lines.
-    
+
         The 'highlightcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -188,7 +188,7 @@ class Y(_BaseTraceHierarchyType):
     def highlightwidth(self):
         """
         Sets the width of the highlighted contour lines.
-    
+
         The 'highlightwidth' property is a number and may be specified as:
           - An int or float in the interval [1, 16]
 
@@ -212,9 +212,9 @@ class Y(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.surface.contours.y.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     Determines whether or not these contour lines
                     are projected on the x plane. If `highlight` is
@@ -251,7 +251,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Determines whether or not contour lines about the y dimension
         are drawn.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -271,7 +271,7 @@ class Y(_BaseTraceHierarchyType):
     def size(self):
         """
         Sets the step between each contour level. Must be positive.
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -292,7 +292,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Sets the starting contour level value. Must be less than
         `contours.end`
-    
+
         The 'start' property is a number and may be specified as:
           - An int or float
 
@@ -313,7 +313,7 @@ class Y(_BaseTraceHierarchyType):
         """
         An alternate to "color". Determines whether or not the contour
         lines are colored using the trace "colorscale".
-    
+
         The 'usecolormap' property must be specified as a bool
         (either True, or False)
 
@@ -333,7 +333,7 @@ class Y(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the width of the contour lines.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [1, 16]
 
@@ -397,11 +397,11 @@ class Y(_BaseTraceHierarchyType):
         start=None,
         usecolormap=None,
         width=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Y object
-        
+
         Parameters
         ----------
         arg
@@ -459,8 +459,8 @@ class Y(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.surface.contours.Y 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.surface.contours.Y
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.surface.contours.Y`"""
             )
 

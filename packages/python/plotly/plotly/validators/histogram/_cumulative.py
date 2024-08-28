@@ -38,5 +38,5 @@ class CumulativeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

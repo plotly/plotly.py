@@ -18,7 +18,7 @@ class Margin(_BaseLayoutHierarchyType):
         Turns on/off margin expansion computations. Legends, colorbars,
         updatemenus, sliders, axis rangeselector and rangeslider are
         allowed to push the margins by defaults.
-    
+
         The 'autoexpand' property must be specified as a bool
         (either True, or False)
 
@@ -38,7 +38,7 @@ class Margin(_BaseLayoutHierarchyType):
     def b(self):
         """
         Sets the bottom margin (in px).
-    
+
         The 'b' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -58,7 +58,7 @@ class Margin(_BaseLayoutHierarchyType):
     def l(self):
         """
         Sets the left margin (in px).
-    
+
         The 'l' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -79,7 +79,7 @@ class Margin(_BaseLayoutHierarchyType):
         """
         Sets the amount of padding (in px) between the plotting area
         and the axis lines
-    
+
         The 'pad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -99,7 +99,7 @@ class Margin(_BaseLayoutHierarchyType):
     def r(self):
         """
         Sets the right margin (in px).
-    
+
         The 'r' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -119,7 +119,7 @@ class Margin(_BaseLayoutHierarchyType):
     def t(self):
         """
         Sets the top margin (in px).
-    
+
         The 't' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -165,11 +165,11 @@ class Margin(_BaseLayoutHierarchyType):
         pad=None,
         r=None,
         t=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Margin object
-        
+
         Parameters
         ----------
         arg
@@ -213,8 +213,8 @@ class Margin(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.Margin 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.Margin
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Margin`"""
             )
 

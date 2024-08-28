@@ -19,19 +19,19 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 more lines
             alignsrc
                 Sets the source reference on Chart Studio Cloud
-                for  align .
+                for `align`.
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  bgcolor .
+                for `bgcolor`.
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  bordercolor .
+                for `bordercolor`.
             font
                 Sets the font used in hover labels.
             namelength
@@ -46,8 +46,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ellipsis.
             namelengthsrc
                 Sets the source reference on Chart Studio Cloud
-                for  namelength .
+                for `namelength`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

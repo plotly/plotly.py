@@ -32,7 +32,7 @@ class ErrorY(_BaseTraceHierarchyType):
         """
         Sets the data corresponding the length of each error bar.
         Values are plotted relative to the underlying data.
-    
+
         The 'array' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -54,7 +54,7 @@ class ErrorY(_BaseTraceHierarchyType):
         Sets the data corresponding the length of each error bar in the
         bottom (left) direction for vertical (horizontal) bars Values
         are plotted relative to the underlying data.
-    
+
         The 'arrayminus' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -73,9 +73,9 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def arrayminussrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  arrayminus
-        .
-    
+        Sets the source reference on Chart Studio Cloud for
+        `arrayminus`.
+
         The 'arrayminussrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -94,8 +94,8 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def arraysrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  array .
-    
+        Sets the source reference on Chart Studio Cloud for `array`.
+
         The 'arraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -115,7 +115,7 @@ class ErrorY(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the stoke color of the error bars.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -176,7 +176,7 @@ class ErrorY(_BaseTraceHierarchyType):
         Determines whether or not the error bars have the same length
         in both direction (top/bottom for vertical bars, left/right for
         horizontal bars.
-    
+
         The 'symmetric' property must be specified as a bool
         (either True, or False)
 
@@ -196,7 +196,7 @@ class ErrorY(_BaseTraceHierarchyType):
     def thickness(self):
         """
         Sets the thickness (in px) of the error bars.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -260,7 +260,7 @@ class ErrorY(_BaseTraceHierarchyType):
         `value`. If "sqrt", the bar lengths correspond to the square of
         the underlying data. If "data", the bar lengths are set with
         data set `array`.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['percent', 'constant', 'sqrt', 'data']
@@ -283,7 +283,7 @@ class ErrorY(_BaseTraceHierarchyType):
         Sets the value of either the percentage (if `type` is set to
         "percent") or the constant (if `type` is set to "constant")
         corresponding to the lengths of the error bars.
-    
+
         The 'value' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -306,7 +306,7 @@ class ErrorY(_BaseTraceHierarchyType):
         "percent") or the constant (if `type` is set to "constant")
         corresponding to the lengths of the error bars in the bottom
         (left) direction for vertical (horizontal) bars
-    
+
         The 'valueminus' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -326,7 +326,7 @@ class ErrorY(_BaseTraceHierarchyType):
     def visible(self):
         """
         Determines whether or not this set of error bars is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -347,7 +347,7 @@ class ErrorY(_BaseTraceHierarchyType):
         """
         Sets the width (in px) of the cross-bar at both ends of the
         error bars.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -377,10 +377,10 @@ class ErrorY(_BaseTraceHierarchyType):
             underlying data.
         arrayminussrc
             Sets the source reference on Chart Studio Cloud for
-            arrayminus .
+            `arrayminus`.
         arraysrc
             Sets the source reference on Chart Studio Cloud for
-            array .
+            `array`.
         color
             Sets the stoke color of the error bars.
         symmetric
@@ -438,11 +438,11 @@ class ErrorY(_BaseTraceHierarchyType):
         valueminus=None,
         visible=None,
         width=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new ErrorY object
-        
+
         Parameters
         ----------
         arg
@@ -460,10 +460,10 @@ class ErrorY(_BaseTraceHierarchyType):
             underlying data.
         arrayminussrc
             Sets the source reference on Chart Studio Cloud for
-            arrayminus .
+            `arrayminus`.
         arraysrc
             Sets the source reference on Chart Studio Cloud for
-            array .
+            `array`.
         color
             Sets the stoke color of the error bars.
         symmetric
@@ -524,8 +524,8 @@ class ErrorY(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scattergl.ErrorY 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scattergl.ErrorY
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scattergl.ErrorY`"""
             )
 

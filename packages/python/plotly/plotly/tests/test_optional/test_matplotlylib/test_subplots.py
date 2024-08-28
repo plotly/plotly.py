@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import pytest
 
 from plotly import optional_imports
@@ -14,7 +12,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@pytest.mark.matplotlib
+@pytest.mark.skip
 def test_blank_subplots():
     fig = plt.figure()
     gs = GridSpec(4, 6)

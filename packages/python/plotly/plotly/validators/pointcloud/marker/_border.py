@@ -20,5 +20,5 @@ class BorderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 may cause slower zooming and panning.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

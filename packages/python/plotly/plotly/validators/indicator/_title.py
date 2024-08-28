@@ -20,5 +20,5 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 Sets the title of this indicator.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

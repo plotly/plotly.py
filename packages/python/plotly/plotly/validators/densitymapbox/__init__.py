@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
     from ._zmin import ZminValidator
     from ._zmid import ZmidValidator
@@ -25,9 +26,11 @@ if sys.version_info < (3, 7):
     from ._meta import MetaValidator
     from ._lonsrc import LonsrcValidator
     from ._lon import LonValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._latsrc import LatsrcValidator
     from ._lat import LatValidator
     from ._idssrc import IdssrcValidator
@@ -77,9 +80,11 @@ else:
             "._meta.MetaValidator",
             "._lonsrc.LonsrcValidator",
             "._lon.LonValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._latsrc.LatsrcValidator",
             "._lat.LatValidator",
             "._idssrc.IdssrcValidator",

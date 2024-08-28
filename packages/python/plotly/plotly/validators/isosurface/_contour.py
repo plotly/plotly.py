@@ -19,5 +19,5 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the contour lines.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

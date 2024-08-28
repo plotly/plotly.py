@@ -20,9 +20,9 @@ class Increasing(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.waterfall.increasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the marker color of all increasing values.
                 line
@@ -53,7 +53,7 @@ class Increasing(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Increasing object
-        
+
         Parameters
         ----------
         arg
@@ -85,8 +85,8 @@ class Increasing(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.waterfall.Increasing 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.waterfall.Increasing
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.waterfall.Increasing`"""
             )
 

@@ -21,11 +21,6 @@
   overflow: hidden;
 }
 
-/* Output styles */
-.jp-OutputArea .jp-RenderedPlotly {
-  min-height: 360px;
-}
-
 /* Document icon */
 .jp-PlotlyIcon {
   background-image: var(--jp-icon-plotly);

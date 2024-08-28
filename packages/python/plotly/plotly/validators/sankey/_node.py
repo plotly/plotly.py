@@ -10,6 +10,9 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            align
+                Sets the alignment method used to position the
+                nodes along the horizontal axis.
             color
                 Sets the `node` color. It can be a single
                 value, or an array for specifying color for
@@ -20,12 +23,12 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 some visibility of what is beneath the node.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             customdata
                 Assigns extra data to each node.
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             groups
                 Groups of nodes. Each group is defined by an
                 array with the indices of the nodes it
@@ -54,8 +57,8 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -68,20 +71,22 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                variables `value` and `label`. Anything
-                contained in tag `<extra>` is displayed in the
-                secondary box, for example
+                Variables `sourceLinks` and `targetLinks` are
+                arrays of link objects.Finally, the template
+                string has access to variables `value` and
+                `label`. Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             label
                 The shown name of the node.
             labelsrc
                 Sets the source reference on Chart Studio Cloud
-                for  label .
+                for `label`.
             line
                 :class:`plotly.graph_objects.sankey.node.Line`
                 instance or dict with compatible properties
@@ -93,13 +98,13 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The normalized horizontal position of the node.
             xsrc
                 Sets the source reference on Chart Studio Cloud
-                for  x .
+                for `x`.
             y
                 The normalized vertical position of the node.
             ysrc
                 Sets the source reference on Chart Studio Cloud
-                for  y .
+                for `y`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -267,11 +267,11 @@ def perform_codegen():
         root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
     optional_figure_widget_import = f"""
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
-        from distutils.version import LooseVersion as _LooseVersion
-        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
+        from packaging.version import Version as _Version
+        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
         else:
             raise ImportError()
@@ -284,9 +284,9 @@ else:
         if import_name == "FigureWidget":
             try:
                 import ipywidgets
-                from distutils.version import LooseVersion
+                from packaging.version import Version
 
-                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+                if Version(ipywidgets.__version__) >= Version("7.0.0"):
                     from ..graph_objs._figurewidget import FigureWidget
 
                     return FigureWidget
@@ -337,9 +337,9 @@ else:
         f.write(graph_objects_init_source)
 
     # ### Run black code formatter on output directories ###
-    subprocess.call(["black", "--target-version=py27", validators_pkgdir])
-    subprocess.call(["black", "--target-version=py27", graph_objs_pkgdir])
-    subprocess.call(["black", "--target-version=py27", graph_objects_path])
+    subprocess.call(["black", "--target-version=py36", validators_pkgdir])
+    subprocess.call(["black", "--target-version=py36", graph_objs_pkgdir])
+    subprocess.call(["black", "--target-version=py36", graph_objects_path])
 
 
 if __name__ == "__main__":

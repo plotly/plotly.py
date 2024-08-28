@@ -52,8 +52,8 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -67,13 +67,13 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 via `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             values
                 Dimension values. `values[n]` represents the
                 value of the `n`th point in the dataset,
@@ -83,11 +83,11 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 number.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

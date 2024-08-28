@@ -27,7 +27,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 represents one observation
             countssrc
                 Sets the source reference on Chart Studio Cloud
-                for  counts .
+                for `counts`.
             dimensions
                 The dimensions (variables) of the parallel
                 categories diagram.
@@ -66,8 +66,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -80,6 +80,11 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                This value here applies when hovering over
+                dimensions. Note that `*categorycount`,
+                "colorcount" and "bandcolorcount" are only
+                available when `hoveron` contains the "color"
+                flagFinally, the template string has access to
                 variables `count`, `probability`, `category`,
                 `categorycount`, `colorcount` and
                 `bandcolorcount`. Anything contained in tag
@@ -93,6 +98,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.parcats.Legendgrou
                 ptitle` instance or dict with compatible
                 properties
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.parcats.Line`
                 instance or dict with compatible properties
@@ -112,9 +120,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             sortpaths
                 Sets the path sorting algorithm. If `forward`,
@@ -159,5 +167,5 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

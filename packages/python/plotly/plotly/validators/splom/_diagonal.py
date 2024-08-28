@@ -15,5 +15,5 @@ class DiagonalValidator(_plotly_utils.basevalidators.CompoundValidator):
                 diagonal are displayed.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

@@ -10,5 +10,5 @@ class TextinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             extras=kwargs.pop("extras", ["none"]),
             flags=kwargs.pop("flags", ["label", "text", "initial", "delta", "final"]),
-            **kwargs
+            **kwargs,
         )

@@ -54,7 +54,12 @@ def test_image_save_as_saves_valid_image(
     data = setup_image
     f, filename = tempfile.mkstemp(".{}".format(image_format))
     py.image.save_as(
-        data, filename, format=image_format, width=width, height=height, scale=scale,
+        data,
+        filename,
+        format=image_format,
+        width=width,
+        height=height,
+        scale=scale,
     )
     if image_format in ["png", "jpeg"]:
         assert imghdr.what(filename) == image_format

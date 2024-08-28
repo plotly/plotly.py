@@ -30,9 +30,9 @@ class Gauge(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Axis`
           - A dict of string/value properties that will be passed
             to the Axis constructor
-    
+
             Supported dict properties:
-                
+
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
@@ -68,6 +68,19 @@ class Gauge(_BaseTraceHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -123,8 +136,8 @@ class Gauge(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -143,6 +156,16 @@ class Gauge(_BaseTraceHierarchyType):
                     sets the default property values to use for
                     elements of
                     indicator.gauge.axis.tickformatstops
+                ticklabelstep
+                    Sets the spacing between tick labels as
+                    compared to the spacing between ticks. A value
+                    of 1 (default) means each tick gets a label. A
+                    value of 2 means shows every 2nd label. A
+                    larger value n means only every nth tick is
+                    labeled. `tick0` determines which labels are
+                    shown. Not implemented for axes with `type`
+                    "log" or "multicategory", or when `tickmode` is
+                    "array".
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -172,14 +195,14 @@ class Gauge(_BaseTraceHierarchyType):
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
+                    for `ticktext`.
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
+                    for `tickvals`.
                 tickwidth
                     Sets the tick width (in px).
                 visible
@@ -204,15 +227,15 @@ class Gauge(_BaseTraceHierarchyType):
     def bar(self):
         """
         Set the appearance of the gauge's value
-    
+
         The 'bar' property is an instance of Bar
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Bar`
           - A dict of string/value properties that will be passed
             to the Bar constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the background color of the arc.
                 line
@@ -239,7 +262,7 @@ class Gauge(_BaseTraceHierarchyType):
     def bgcolor(self):
         """
         Sets the gauge background color.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -298,7 +321,7 @@ class Gauge(_BaseTraceHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the gauge.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -357,7 +380,7 @@ class Gauge(_BaseTraceHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) of the border enclosing the gauge.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -377,7 +400,7 @@ class Gauge(_BaseTraceHierarchyType):
     def shape(self):
         """
         Set the shape of the gauge
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['angular', 'bullet']
@@ -402,9 +425,9 @@ class Gauge(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.indicator.gauge.Step
           - A list or tuple of dicts of string/value properties that
             will be passed to the Step constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the background color of the arc.
                 line
@@ -457,13 +480,13 @@ class Gauge(_BaseTraceHierarchyType):
         layout.template.data.indicator.gauge.stepdefaults), sets the
         default property values to use for elements of
         indicator.gauge.steps
-    
+
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -486,9 +509,9 @@ class Gauge(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`
           - A dict of string/value properties that will be passed
             to the Threshold constructor
-    
+
             Supported dict properties:
-                
+
                 line
                     :class:`plotly.graph_objects.indicator.gauge.th
                     reshold.Line` instance or dict with compatible
@@ -554,11 +577,11 @@ class Gauge(_BaseTraceHierarchyType):
         steps=None,
         stepdefaults=None,
         threshold=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Gauge object
-        
+
         The gauge of the Indicator plot.
 
         Parameters
@@ -615,8 +638,8 @@ class Gauge(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.Gauge 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.Gauge
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.Gauge`"""
             )
 

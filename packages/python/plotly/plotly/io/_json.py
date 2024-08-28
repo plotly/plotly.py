@@ -1,9 +1,7 @@
-from __future__ import absolute_import
-
-from six import string_types
 import json
 import decimal
 import datetime
+import warnings
 from pathlib import Path
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
@@ -56,6 +54,25 @@ def coerce_to_strict(const):
         return None
     else:
         return const
+
+
+_swap_json = (
+    ("<", "\\u003c"),
+    (">", "\\u003e"),
+    ("/", "\\u002f"),
+)
+_swap_orjson = _swap_json + (
+    ("\u2028", "\\u2028"),
+    ("\u2029", "\\u2029"),
+)
+
+
+def _safe(json_str, _swap):
+    out = json_str
+    for unsafe_char, safe_char in _swap:
+        if unsafe_char in out:
+            out = out.replace(unsafe_char, safe_char)
+    return out
 
 
 def to_json_plotly(plotly_object, pretty=False, engine=None):
@@ -112,7 +129,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     # Dump to a JSON string and return
     # --------------------------------
     if engine == "json":
-        opts = {"sort_keys": True}
+        opts = {}
         if pretty:
             opts["indent"] = 2
         else:
@@ -121,10 +138,12 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         from _plotly_utils.utils import PlotlyJSONEncoder
 
-        return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
+        return _safe(
+            json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts), _swap_json
+        )
     elif engine == "orjson":
         JsonConfig.validate_orjson()
-        opts = orjson.OPT_SORT_KEYS | orjson.OPT_SERIALIZE_NUMPY
+        opts = orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY
 
         if pretty:
             opts |= orjson.OPT_INDENT_2
@@ -137,14 +156,19 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         # Try without cleaning
         try:
-            return orjson.dumps(plotly_object, option=opts).decode("utf8")
+            return _safe(
+                orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
+            )
         except TypeError:
             pass
 
         cleaned = clean_to_json_compatible(
-            plotly_object, numpy_allowed=True, datetime_allowed=True, modules=modules,
+            plotly_object,
+            numpy_allowed=True,
+            datetime_allowed=True,
+            modules=modules,
         )
-        return orjson.dumps(cleaned, option=opts).decode("utf8")
+        return _safe(orjson.dumps(cleaned, option=opts).decode("utf8"), _swap_orjson)
 
 
 def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
@@ -239,7 +263,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
 
     # Try to cast `file` as a pathlib object `path`.
     # ----------------------------------------------
-    if isinstance(file, string_types):
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):
@@ -304,7 +328,7 @@ def from_json_plotly(value, engine=None):
 
     # Validate value
     # --------------
-    if not isinstance(value, (string_types, bytes)):
+    if not isinstance(value, (str, bytes)):
         raise ValueError(
             """
 from_json_plotly requires a string or bytes argument but received value of type {typ}
@@ -427,8 +451,8 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     # Try to cast `file` as a pathlib object `path`.
     # -------------------------
     # ----------------------------------------------
-    file_is_str = isinstance(file, string_types)
-    if isinstance(file, string_types):
+    file_is_str = isinstance(file, str)
+    if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
     elif isinstance(file, Path):
@@ -458,11 +482,11 @@ def clean_to_json_compatible(obj, **kwargs):
     # Return immediately if we know we've hit a primitive value
 
     # Bail out fast for simple scalar types
-    if isinstance(obj, (int, float, string_types)):
+    if isinstance(obj, (int, float, str)):
         return obj
 
     if isinstance(obj, dict):
-        return {str(k): clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
     elif isinstance(obj, (list, tuple)):
         if obj:
             # Must process list recursively even though it may be slow
@@ -512,7 +536,11 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj.values)
             elif obj.dtype.kind == "M":
                 if isinstance(obj, pd.Series):
-                    dt_values = obj.dt.to_pydatetime().tolist()
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", FutureWarning)
+                        # Series.dt.to_pydatetime will return Index[object]
+                        # https://github.com/pandas-dev/pandas/pull/52459
+                        dt_values = np.array(obj.dt.to_pydatetime()).tolist()
                 else:  # DatetimeIndex
                     dt_values = obj.to_pydatetime().tolist()
 

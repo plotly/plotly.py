@@ -126,6 +126,7 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
 # ------------
 # See plotly/tests/test_orca/test_image_renderers.py
 
+
 # HTML
 # ----
 def assert_full_html(html):
@@ -311,7 +312,9 @@ def test_repr_html(renderer):
     template = (
         '<div>                        <script type="text/javascript">'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
-        '<script src="' + plotly_cdn_url() + '"></script>                '
+        '<script charset="utf-8" src="'
+        + plotly_cdn_url()
+        + '"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                                    window.PLOTLYENV=window.PLOTLYENV || {};"
@@ -379,3 +382,43 @@ def test_repr_mimebundle_mixed_renderer(fig1):
     assert set(fig1._repr_mimebundle_().keys()) == set(
         {"application/vnd.plotly.v1+json", "text/html"}
     )
+
+
+def test_missing_webbrowser_module(fig1):
+    """
+    Assert that no errors occur if the webbrowser module is absent
+    """
+    import builtins
+
+    realimport = builtins.__import__
+
+    def webbrowser_absent_import(name, globals, locals, fromlist, level):
+        """
+        Mimick an absent webbrowser module
+        """
+        if name == "webbrowser":
+            raise ImportError
+        return realimport(name, globals, locals, fromlist, level)
+
+    with mock.patch("builtins.__import__", webbrowser_absent_import):
+        # 1: check whether importing webbrowser actually results in an ImportError
+        with pytest.raises(ImportError):
+            import webbrowser
+
+        # 2: check whether the _repr_html_ can handle it regardless
+        fig1._repr_html_()
+
+
+def test_missing_webbrowser_methods(fig1):
+    """
+    Assert that no errors occur if the webbrowser module does not contain some methods
+    """
+    import webbrowser
+
+    removed_webbrowser_get_method = webbrowser.get
+    try:
+        del webbrowser.get
+        fig1._repr_html_()
+    finally:
+        # restore everything after this test
+        webbrowser.get = removed_webbrowser_get_method

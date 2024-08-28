@@ -10,5 +10,5 @@ class ColoringValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop("values", ["fill", "lines", "none"]),
-            **kwargs
+            **kwargs,
         )

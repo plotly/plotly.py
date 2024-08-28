@@ -1,6 +1,8 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._zorder import ZorderValidator
     from ._ysrc import YsrcValidator
     from ._yperiodalignment import YperiodalignmentValidator
     from ._yperiod0 import Yperiod0Validator
@@ -30,10 +32,13 @@ if sys.version_info < (3, 7):
     from ._textsrc import TextsrcValidator
     from ._text import TextValidator
     from ._stream import StreamValidator
+    from ._sizemode import SizemodeValidator
+    from ._showwhiskers import ShowwhiskersValidator
     from ._showlegend import ShowlegendValidator
     from ._selectedpoints import SelectedpointsValidator
     from ._selected import SelectedValidator
     from ._sdsrc import SdsrcValidator
+    from ._sdmultiple import SdmultipleValidator
     from ._sd import SdValidator
     from ._quartilemethod import QuartilemethodValidator
     from ._q3src import Q3SrcValidator
@@ -59,9 +64,11 @@ if sys.version_info < (3, 7):
     from ._lowerfencesrc import LowerfencesrcValidator
     from ._lowerfence import LowerfenceValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._jitter import JitterValidator
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
@@ -88,6 +95,7 @@ else:
         __name__,
         [],
         [
+            "._zorder.ZorderValidator",
             "._ysrc.YsrcValidator",
             "._yperiodalignment.YperiodalignmentValidator",
             "._yperiod0.Yperiod0Validator",
@@ -117,10 +125,13 @@ else:
             "._textsrc.TextsrcValidator",
             "._text.TextValidator",
             "._stream.StreamValidator",
+            "._sizemode.SizemodeValidator",
+            "._showwhiskers.ShowwhiskersValidator",
             "._showlegend.ShowlegendValidator",
             "._selectedpoints.SelectedpointsValidator",
             "._selected.SelectedValidator",
             "._sdsrc.SdsrcValidator",
+            "._sdmultiple.SdmultipleValidator",
             "._sd.SdValidator",
             "._quartilemethod.QuartilemethodValidator",
             "._q3src.Q3SrcValidator",
@@ -146,9 +157,11 @@ else:
             "._lowerfencesrc.LowerfencesrcValidator",
             "._lowerfence.LowerfenceValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._jitter.JitterValidator",
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",

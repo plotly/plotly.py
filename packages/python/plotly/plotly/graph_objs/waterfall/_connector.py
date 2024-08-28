@@ -20,9 +20,9 @@ class Connector(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.waterfall.connector.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -49,7 +49,7 @@ class Connector(_BaseTraceHierarchyType):
     def mode(self):
         """
         Sets the shape of connector lines.
-    
+
         The 'mode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['spanning', 'between']
@@ -70,7 +70,7 @@ class Connector(_BaseTraceHierarchyType):
     def visible(self):
         """
         Determines if connector lines are drawn.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -101,7 +101,7 @@ class Connector(_BaseTraceHierarchyType):
     def __init__(self, arg=None, line=None, mode=None, visible=None, **kwargs):
         """
         Construct a new Connector object
-        
+
         Parameters
         ----------
         arg
@@ -137,8 +137,8 @@ class Connector(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.waterfall.Connector 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.waterfall.Connector
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.waterfall.Connector`"""
             )
 

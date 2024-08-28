@@ -16,7 +16,7 @@ class Center(_BaseLayoutHierarchyType):
     def lat(self):
         """
         Sets the latitude of the center of the map (in degrees North).
-    
+
         The 'lat' property is a number and may be specified as:
           - An int or float
 
@@ -36,7 +36,7 @@ class Center(_BaseLayoutHierarchyType):
     def lon(self):
         """
         Sets the longitude of the center of the map (in degrees East).
-    
+
         The 'lon' property is a number and may be specified as:
           - An int or float
 
@@ -66,7 +66,7 @@ class Center(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, lat=None, lon=None, **kwargs):
         """
         Construct a new Center object
-        
+
         Parameters
         ----------
         arg
@@ -101,8 +101,8 @@ class Center(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.mapbox.Center 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.mapbox.Center
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.mapbox.Center`"""
             )
 

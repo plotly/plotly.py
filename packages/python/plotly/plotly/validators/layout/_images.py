@@ -109,5 +109,5 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 and the top of the domain of the second y axis.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

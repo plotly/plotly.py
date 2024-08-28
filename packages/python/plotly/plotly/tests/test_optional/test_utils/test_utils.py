@@ -2,8 +2,6 @@
 Module to test plotly.utils with optional dependencies.
 
 """
-from __future__ import absolute_import
-
 import datetime
 import math
 import decimal
@@ -15,7 +13,7 @@ import pytest
 import numpy as np
 import pandas as pd
 import pytz
-from pandas.util.testing import assert_series_equal
+from pandas.testing import assert_series_equal
 import json as _json
 import os
 import base64
@@ -301,7 +299,10 @@ class TestJSONEncoder(TestCase):
 
     def test_encode_customdata_datetime_inhomogenous_dataframe(self):
         df = pd.DataFrame(
-            dict(t=pd.to_datetime(["2010-01-01", "2010-01-02"]), v=np.arange(2),)
+            dict(
+                t=pd.to_datetime(["2010-01-01", "2010-01-02"]),
+                v=np.arange(2),
+            )
         )
         # 2D customdata
         fig = Figure(
@@ -411,8 +412,8 @@ class TestNumpyIntegerBaseType(TestCase):
         import plotly.graph_objects as go
         from plotly.subplots import make_subplots
 
-        indices_rows = np.array([1], dtype=np.int)
-        indices_cols = np.array([1], dtype=np.int)
+        indices_rows = np.array([1], dtype=int)
+        indices_cols = np.array([1], dtype=int)
         fig = make_subplots(rows=1, cols=1)
         fig.add_trace(go.Scatter(y=[1]), row=indices_rows[0], col=indices_cols[0])
 

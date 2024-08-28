@@ -9,5 +9,5 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
-            **kwargs
+            **kwargs,
         )

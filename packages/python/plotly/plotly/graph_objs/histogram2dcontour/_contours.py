@@ -32,7 +32,7 @@ class Contours(_BaseTraceHierarchyType):
         "heatmap", a heatmap gradient coloring is applied between each
         contour level. If "lines", coloring is done on the contour
         lines. If "none", no coloring is applied on this trace.
-    
+
         The 'coloring' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fill', 'heatmap', 'lines', 'none']
@@ -54,7 +54,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the end contour level value. Must be more than
         `contours.start`
-    
+
         The 'end' property is a number and may be specified as:
           - An int or float
 
@@ -76,17 +76,17 @@ class Contours(_BaseTraceHierarchyType):
         Sets the font used for labeling the contour levels. The default
         color comes from the lines, if shown. The default family and
         size come from `layout.font`.
-    
+
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.contours.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -100,11 +100,34 @@ class Contours(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -125,7 +148,7 @@ class Contours(_BaseTraceHierarchyType):
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-    
+
         The 'labelformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -153,7 +176,7 @@ class Contours(_BaseTraceHierarchyType):
         vs. closed intervals make no difference to constraint display,
         but all versions are allowed for consistency with filter
         transforms.
-    
+
         The 'operation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', '][',
@@ -176,7 +199,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         Determines whether to label the contour lines with their
         values.
-    
+
         The 'showlabels' property must be specified as a bool
         (either True, or False)
 
@@ -197,7 +220,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         Determines whether or not the contour lines are drawn. Has an
         effect only if `contours.coloring` is set to "fill".
-    
+
         The 'showlines' property must be specified as a bool
         (either True, or False)
 
@@ -217,7 +240,7 @@ class Contours(_BaseTraceHierarchyType):
     def size(self):
         """
         Sets the step between each contour level. Must be positive.
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -238,7 +261,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the starting contour level value. Must be less than
         `contours.end`
-    
+
         The 'start' property is a number and may be specified as:
           - An int or float
 
@@ -261,7 +284,7 @@ class Contours(_BaseTraceHierarchyType):
         multiple levels displayed. If `constraint`, the data is
         represented as constraints with the invalid region shaded as
         specified by the `operation` and `value` parameters.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['levels', 'constraint']
@@ -288,7 +311,7 @@ class Contours(_BaseTraceHierarchyType):
         ([],(),[),(],][,)(,](,)[) "value" is expected to be an array of
         two numbers where the first is the lower bound and the second
         is the upper bound.
-    
+
         The 'value' property accepts values of any type
 
         Returns
@@ -377,11 +400,11 @@ class Contours(_BaseTraceHierarchyType):
         start=None,
         type=None,
         value=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Contours object
-        
+
         Parameters
         ----------
         arg
@@ -465,8 +488,8 @@ class Contours(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.histogram2dcontour.Contours 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.histogram2dcontour.Contours
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram2dcontour.Contours`"""
             )
 

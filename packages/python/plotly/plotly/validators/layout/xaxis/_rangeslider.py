@@ -46,5 +46,5 @@ class RangesliderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 properties
 """,
             ),
-            **kwargs
+            **kwargs,
         )

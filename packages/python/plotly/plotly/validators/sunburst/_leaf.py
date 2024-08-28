@@ -16,5 +16,5 @@ class LeafValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to 0.7
 """,
             ),
-            **kwargs
+            **kwargs,
         )

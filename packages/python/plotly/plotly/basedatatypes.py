@@ -1,10 +1,6 @@
-from __future__ import absolute_import
-
 import collections
 from collections import OrderedDict
 import re
-import six
-from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
@@ -24,7 +20,7 @@ from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
 
 from . import shapeannotation
-from . import subplots
+from . import _subplots
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -292,7 +288,7 @@ def _indexing_combinations(dims, alls, product=False):
 
 
 def _is_select_subplot_coordinates_arg(*args):
-    """ Returns true if any args are lists or the string 'all' """
+    """Returns true if any args are lists or the string 'all'"""
     return any((a == "all") or isinstance(a, list) for a in args)
 
 
@@ -383,7 +379,7 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
 
 
 def _generator(i):
-    """ "cast" an iterator to a generator """
+    """ "cast" an iterator to a generator"""
     for x in i:
         yield x
 
@@ -821,18 +817,10 @@ class BaseFigure(object):
 
         renderer_str = pio.renderers.default
         renderers = pio._renderers.renderers
-        renderer_names = renderers._validate_coerce_renderers(renderer_str)
-        renderers_list = [renderers[name] for name in renderer_names]
         from plotly.io._utils import validate_coerce_fig_to_dict
-        from plotly.io._renderers import MimetypeRenderer
 
         fig_dict = validate_coerce_fig_to_dict(self, validate)
-        # Mimetype renderers
-        bundle = {}
-        for renderer in renderers_list:
-            if isinstance(renderer, MimetypeRenderer):
-                bundle.update(renderer.to_mimebundle(fig_dict))
-        return bundle
+        return renderers._build_mime_bundle(fig_dict, renderer_str, **kwargs)
 
     def _ipython_display_(self):
         """
@@ -1141,7 +1129,7 @@ class BaseFigure(object):
             Generator that iterates through all of the traces that satisfy
             all of the specified selection criteria
         """
-        if not selector:
+        if not selector and not isinstance(selector, int):
             selector = {}
 
         if row is not None or col is not None or secondary_y is not None:
@@ -1183,7 +1171,7 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
-        from plotly.subplots import _get_subplot_ref_for_trace
+        from plotly._subplots import _get_subplot_ref_for_trace
 
         # functions for filtering
         def _filter_by_subplot_ref(trace):
@@ -1202,7 +1190,7 @@ class BaseFigure(object):
             return True
         # If selector is a string then put it at the 'type' key of a dictionary
         # to select objects where "type":selector
-        if isinstance(selector, six.string_types):
+        if isinstance(selector, str):
             selector = dict(type=selector)
         # If selector is a dict, compare the fields
         if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
@@ -1224,7 +1212,7 @@ class BaseFigure(object):
                     return False
             return True
         # If selector is a function, call it with the obj as the argument
-        elif six.callable(selector):
+        elif callable(selector):
             return selector(obj)
         else:
             raise TypeError(
@@ -1317,7 +1305,7 @@ class BaseFigure(object):
         col=None,
         secondary_y=None,
         overwrite=False,
-        **kwargs
+        **kwargs,
     ):
         """
         Perform a property update operation on all traces that satisfy the
@@ -1483,15 +1471,15 @@ class BaseFigure(object):
         # filter down (select) which graph objects, by applying the filters
         # successively
         def _filter_row(obj):
-            """ Filter objects in rows by column """
+            """Filter objects in rows by column"""
             return (col is None) or (xref_to_col.get(obj.xref, None) == col)
 
         def _filter_col(obj):
-            """ Filter objects in columns by row """
+            """Filter objects in columns by row"""
             return (row is None) or (yref_to_row.get(obj.yref, None) == row)
 
         def _filter_sec_y(obj):
-            """ Filter objects on secondary y axes """
+            """Filter objects on secondary y axes"""
             return (secondary_y is None) or (
                 yref_to_secondary_y.get(obj.yref, None) == secondary_y
             )
@@ -1569,17 +1557,31 @@ is of type {subplot_type}.""".format(
                         subplot_type=refs[0].subplot_type,
                     )
                 )
-            if len(refs) == 1 and secondary_y:
-                raise ValueError(
-                    """
-Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-because subplot does not have a secondary y-axis"""
-                )
-            if secondary_y:
-                xaxis, yaxis = refs[1].layout_keys
+
+            # If the new_object was created with a yref specified that did not include paper or domain, the specified yref should be used otherwise assign the xref and yref from the layout_keys
+            if (
+                new_obj.yref is None
+                or new_obj.yref == "y"
+                or "paper" in new_obj.yref
+                or "domain" in new_obj.yref
+            ):
+                if len(refs) == 1 and secondary_y:
+                    raise ValueError(
+                        """
+    Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+    because subplot does not have a secondary y-axis""".format(
+                            prop_singular=prop_singular, r=row, c=col
+                        )
+                    )
+                if secondary_y:
+                    xaxis, yaxis = refs[1].layout_keys
+                else:
+                    xaxis, yaxis = refs[0].layout_keys
+                xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             else:
-                xaxis, yaxis = refs[0].layout_keys
-            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+                yref = new_obj.yref
+                xaxis = refs[0].layout_keys[0]
+                xref = xaxis.replace("axis", "")
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
@@ -1601,6 +1603,11 @@ because subplot does not have a secondary y-axis"""
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
+        # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
+        # will appear as if user supplied yref params when looping through subplots and
+        # will force annotation to be on the axis of the last drawn annotation
+        # i.e. they all end up on the same axis.
+        new_obj.update(xref=None, yref=None)
 
         return self
 
@@ -1825,7 +1832,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         tuple[str | int]
         """
         if (
-            isinstance(key_path_str, string_types)
+            isinstance(key_path_str, str)
             and "." not in key_path_str
             and "[" not in key_path_str
             and "_" not in key_path_str
@@ -2315,7 +2322,7 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
-        from plotly.subplots import _set_trace_grid_reference
+        from plotly._subplots import _set_trace_grid_reference
 
         grid_ref = self._validate_get_grid_ref()
         return _set_trace_grid_reference(
@@ -2369,7 +2376,9 @@ Please use the add_trace method with the row and col parameters.
         # _get_subplot_coordinates, because some coordinates given by
         # the _indexing_combinations function might be invalid.
         t = _indexing_combinations(
-            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
+            [rows, cols],
+            list(self._get_subplot_rows_columns()),
+            product=product,
         )
         t = list(t)
         # remove rows and cols where the subplot is "None"
@@ -2413,7 +2422,7 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
-        from plotly.subplots import _get_grid_subplot
+        from plotly._subplots import _get_grid_subplot
 
         return _get_grid_subplot(self, row, col, secondary_y)
 
@@ -2484,7 +2493,7 @@ Please use the add_trace method with the row and col parameters.
 
     def _init_child_props(self, child):
         """
-        Initialize the properites dict for a child trace or layout
+        Initialize the properties dict for a child trace or layout
 
         Note: this method must match the name/signature of one on
         BasePlotlyType
@@ -2917,7 +2926,7 @@ Invalid property path '{key_path_str}' for layout
                 restyle_data=restyle_changes,
                 relayout_data=relayout_changes,
                 trace_indexes=trace_indexes,
-                **msg_kwargs
+                **msg_kwargs,
             )
 
         # Dispatch changes
@@ -3307,6 +3316,9 @@ Invalid property path '{key_path_str}' for layout
         """
         Convert figure to a JSON representation as a Python dict
 
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
+
         Returns
         -------
         dict
@@ -3576,6 +3588,10 @@ Invalid property path '{key_path_str}' for layout
         validate: bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
+        div_id: str (default None)
+            If provided, this is the value of the id attribute of the div tag. If None, the
+            id attribute is a UUID.
+
         Returns
         -------
         str
@@ -3616,12 +3632,7 @@ Invalid property path '{key_path_str}' for layout
 
             If 'directory', a script tag is included that references an external
             plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file. If `file` is a string to a local file path
-            and `full_html` is True then
-
-            If 'directory', a script tag is included that references an external
-            plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file.  If `file` is a string to a local file
+            directory as the HTML file. If `file` is a string to a local file
             path and `full_html` is True, then the plotly.min.js bundle is copied
             into the directory of the resulting HTML file. If a file named
             plotly.min.js already exists in the output directory then this file
@@ -3687,13 +3698,16 @@ Invalid property path '{key_path_str}' for layout
         validate: bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        auto_open: bool (default True
+        auto_open: bool (default True)
             If True, open the saved file in a web browser after saving.
             This argument only applies if `full_html` is True.
+        div_id: str (default None)
+            If provided, this is the value of the id attribute of the div tag. If None, the
+            id attribute is a UUID.
+
         Returns
         -------
-        str
-            Representation of figure as an HTML div string
+        None
         """
         import plotly.io as pio
 
@@ -3862,18 +3876,17 @@ Invalid property path '{key_path_str}' for layout
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
+                # special handling for missing keys that match _subplot_re_match
+                if key not in plotly_obj and isinstance(plotly_obj, BaseLayoutType):
+                    # try _subplot_re_match
+                    match = plotly_obj._subplot_re_match(key)
+                    if match:
+                        # We need to create a subplotid object
+                        plotly_obj[key] = {}
+                        continue
+
                 err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
                 if err is not None:
-                    if isinstance(plotly_obj, BaseLayoutType):
-                        # try _subplot_re_match
-                        match = plotly_obj._subplot_re_match(key)
-                        if match:
-                            # We need to create a subplotid object
-                            plotly_obj[key] = {}
-                            continue
-                    # If no match, raise the error, which should already
-                    # contain the _raise_on_invalid_property_error
-                    # generated message
                     raise err
 
             # Convert update_obj to dict
@@ -3990,7 +4003,7 @@ Invalid property path '{key_path_str}' for layout
         shape_type,
         exclude_empty_subplots=True,
         annotation=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
@@ -4027,7 +4040,7 @@ Invalid property path '{key_path_str}' for layout
             row=row,
             col=col,
             exclude_empty_subplots=exclude_empty_subplots,
-            **_combine_dicts([shape_args, shape_kwargs])
+            **_combine_dicts([shape_args, shape_kwargs]),
         )
         if augmented_annotation is not None:
             self.add_annotation(
@@ -4035,6 +4048,7 @@ Invalid property path '{key_path_str}' for layout
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
+                yref=shape_kwargs.get("yref", "y"),
             )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
@@ -4046,16 +4060,20 @@ Invalid property path '{key_path_str}' for layout
             ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
-                # however, in the case of a single plot, xref and yref are not
-                # specified, so we specify them here so the following routines can work
-                # (they need to append " domain" to xref or yref)
-                self.layout[layout_obj][-1].update(xref="x", yref="y")
+                # however, in the case of a single plot, xref and yref MAY not be
+                # specified, IF they are not specified we specify them here so the following routines can work
+                # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
+                if self.layout[layout_obj][-1].xref is None:
+                    self.layout[layout_obj][-1].update(xref="x")
+                if self.layout[layout_obj][-1].yref is None:
+                    self.layout[layout_obj][-1].update(yref="y")
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
                     [
                         self._make_axis_spanning_layout_object(
-                            direction, self.layout[layout_obj][n],
+                            direction,
+                            self.layout[layout_obj][n],
                         )
                         for n in range(n_layout_objs_before, n_layout_objs_after)
                     ],
@@ -4072,7 +4090,7 @@ Invalid property path '{key_path_str}' for layout
         col="all",
         exclude_empty_subplots=True,
         annotation=None,
-        **kwargs
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
@@ -4081,27 +4099,49 @@ Invalid property path '{key_path_str}' for layout
             "vline",
             exclude_empty_subplots=exclude_empty_subplots,
             annotation=annotation,
-            **kwargs
+            **kwargs,
         )
         return self
 
     add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
 
-    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
+    def add_hline(
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
         self._process_multiple_axis_spanning_shapes(
-            dict(type="line", x0=0, x1=1, y0=y, y1=y,),
+            dict(
+                type="line",
+                x0=0,
+                x1=1,
+                y0=y,
+                y1=y,
+            ),
             row,
             col,
             "hline",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            annotation=annotation,
+            **kwargs,
         )
         return self
 
     add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
 
     def add_vrect(
-        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
@@ -4109,14 +4149,22 @@ Invalid property path '{key_path_str}' for layout
             col,
             "vrect",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            annotation=annotation,
+            **kwargs,
         )
         return self
 
     add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
 
     def add_hrect(
-        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+        self,
+        y0,
+        y1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
     ):
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
@@ -4124,15 +4172,16 @@ Invalid property path '{key_path_str}' for layout
             col,
             "hrect",
             exclude_empty_subplots=exclude_empty_subplots,
-            **kwargs
+            annotation=annotation,
+            **kwargs,
         )
         return self
 
     add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
 
     def _has_subplots(self):
-        """ Returns True if figure contains subplots, otherwise it contains a
-        single plot and so this returns False. """
+        """Returns True if figure contains subplots, otherwise it contains a
+        single plot and so this returns False."""
         return self._grid_ref is not None
 
     def _subplot_not_empty(self, xref, yref, selector="all"):
@@ -4200,7 +4249,7 @@ Invalid property path '{key_path_str}' for layout
             make_subplots_args["cols"] = cols
         if self._has_subplots():
             raise ValueError("This figure already has subplots.")
-        return subplots.make_subplots(figure=self, **make_subplots_args)
+        return _subplots.make_subplots(figure=self, **make_subplots_args)
 
 
 class BasePlotlyType(object):
@@ -4746,7 +4795,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._valid_props:
+                if hasattr(obj, "_valid_props") and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False
@@ -5543,11 +5592,47 @@ on_change callbacks are not supported in this case.
         """
         Return plotly JSON representation of object as a Python dict
 
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
+
         Returns
         -------
         dict
         """
         return deepcopy(self._props if self._props is not None else {})
+
+    def to_json(self, *args, **kwargs):
+        """
+        Convert object to a JSON string representation
+
+        Parameters
+        ----------
+        validate: bool (default True)
+            True if the object should be validated before being converted to
+            JSON, False otherwise.
+
+        pretty: bool (default False)
+            True if JSON representation should be pretty-printed, False if
+            representation should be as compact as possible.
+
+        remove_uids: bool (default True)
+            True if trace UIDs should be omitted from the JSON representation
+
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for an encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
+
+        Returns
+        -------
+        str
+            Representation of object as a JSON string
+        """
+        import plotly.io as pio
+
+        return pio.to_json(self, *args, **kwargs)
 
     @staticmethod
     def _vals_equal(v1, v2):
@@ -5618,7 +5703,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # These are used when a layout has multiple instances of subplot types
     # (xaxis2, yaxis3, geo4, etc.)
     #
-    # The base version of each suplot type is defined in the schema and code
+    # The base version of each subplot type is defined in the schema and code
     # generated. So the Layout subclass has statically defined properties
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
@@ -5747,7 +5832,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # ----------------------------------
         # e.g. ('xaxis', 'range') or 'xaxis.range'
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             return prop
         else:
             # Unwrap to scalar string
@@ -5805,7 +5890,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Convert prop to prop tuple
         # --------------------------
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], string_types):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             # Let parent handle non-scalar non-string cases
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
             return
@@ -5842,42 +5927,9 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        if six.PY2:
-
-            def get_attrs(obj):
-                import types
-
-                if not hasattr(obj, "__dict__"):
-                    return []
-                if not isinstance(obj.__dict__, (dict, types.DictProxyType)):
-                    raise TypeError("%s.__dict__ is not a dictionary" "" % obj.__name__)
-                return obj.__dict__.keys()
-
-            def dir2(obj):
-                attrs = set()
-                if not hasattr(obj, "__bases__"):
-                    # obj is an instance
-                    if not hasattr(obj, "__class__"):
-                        # slots
-                        return sorted(get_attrs(obj))
-                    klass = obj.__class__
-                    attrs.update(get_attrs(klass))
-                else:
-                    # obj is a class
-                    klass = obj
-
-                for cls in klass.__bases__:
-                    attrs.update(get_attrs(cls))
-                    attrs.update(dir2(cls))
-                attrs.update(get_attrs(obj))
-                return list(attrs)
-
-            return dir2(self) + sorted(self._subplotid_props)
-        else:
-
-            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
-                self._subplotid_props
-            )
+        return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
+            self._subplotid_props
+        )
 
 
 class BaseTraceHierarchyType(BasePlotlyType):

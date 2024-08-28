@@ -17,7 +17,7 @@ class Gradient(_BaseTraceHierarchyType):
         """
         Sets the final color of the gradient fill: the center color for
         radial, the right for horizontal, or the bottom for vertical.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -76,8 +76,8 @@ class Gradient(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  color .
-    
+        Sets the source reference on Chart Studio Cloud for `color`.
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -97,7 +97,7 @@ class Gradient(_BaseTraceHierarchyType):
     def type(self):
         """
         Sets the type of gradient used to fill the markers
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['radial', 'horizontal', 'vertical', 'none']
@@ -118,8 +118,8 @@ class Gradient(_BaseTraceHierarchyType):
     @property
     def typesrc(self):
         """
-        Sets the source reference on Chart Studio Cloud for  type .
-    
+        Sets the source reference on Chart Studio Cloud for `type`.
+
         The 'typesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -144,12 +144,12 @@ class Gradient(_BaseTraceHierarchyType):
             bottom for vertical.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         type
             Sets the type of gradient used to fill the markers
         typesrc
             Sets the source reference on Chart Studio Cloud for
-            type .
+            `type`.
         """
 
     def __init__(
@@ -157,7 +157,7 @@ class Gradient(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Gradient object
-        
+
         Parameters
         ----------
         arg
@@ -170,12 +170,12 @@ class Gradient(_BaseTraceHierarchyType):
             bottom for vertical.
         colorsrc
             Sets the source reference on Chart Studio Cloud for
-            color .
+            `color`.
         type
             Sets the type of gradient used to fill the markers
         typesrc
             Sets the source reference on Chart Studio Cloud for
-            type .
+            `type`.
 
         Returns
         -------
@@ -198,8 +198,8 @@ class Gradient(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.scatterpolar.marker.Gradient 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.scatterpolar.marker.Gradient
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scatterpolar.marker.Gradient`"""
             )
 

@@ -14,9 +14,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
                 determined by `line.colorscale`. Has an effect
-                only if in `line.color`is set to a numerical
+                only if in `line.color` is set to a numerical
                 array. In case `colorscale` is unspecified or
-                `autocolorscale` is true, the default  palette
+                `autocolorscale` is true, the default palette
                 will be chosen according to whether numbers in
                 the `color` array are all positive, all
                 negative or mixed.
@@ -24,13 +24,13 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not the color domain is
                 computed with respect to the input data (here
                 in `line.color`) or the bounds set in
-                `line.cmin` and `line.cmax`  Has an effect only
-                if in `line.color`is set to a numerical array.
+                `line.cmin` and `line.cmax` Has an effect only
+                if in `line.color` is set to a numerical array.
                 Defaults to `false` when `line.cmin` and
                 `line.cmax` are set by the user.
             cmax
                 Sets the upper bound of the color domain. Has
-                an effect only if in `line.color`is set to a
+                an effect only if in `line.color` is set to a
                 numerical array. Value should have the same
                 units as in `line.color` and if set,
                 `line.cmin` must be set as well.
@@ -38,22 +38,22 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the mid-point of the color domain by
                 scaling `line.cmin` and/or `line.cmax` to be
                 equidistant to this point. Has an effect only
-                if in `line.color`is set to a numerical array.
+                if in `line.color` is set to a numerical array.
                 Value should have the same units as in
                 `line.color`. Has no effect when `line.cauto`
                 is `false`.
             cmin
                 Sets the lower bound of the color domain. Has
-                an effect only if in `line.color`is set to a
+                an effect only if in `line.color` is set to a
                 numerical array. Value should have the same
                 units as in `line.color` and if set,
                 `line.cmax` must be set as well.
             color
-                Sets thelinecolor. It accepts either a specific
-                color or an array of numbers that are mapped to
-                the colorscale relative to the max and min
-                values of the array or relative to `line.cmin`
-                and `line.cmax` if set.
+                Sets the line color. It accepts either a
+                specific color or an array of numbers that are
+                mapped to the colorscale relative to the max
+                and min values of the array or relative to
+                `line.cmin` and `line.cmax` if set.
             coloraxis
                 Sets a reference to a shared color axis.
                 References to these shared color axes are
@@ -69,7 +69,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 properties
             colorscale
                 Sets the colorscale. Has an effect only if in
-                `line.color`is set to a numerical array. The
+                `line.color` is set to a numerical array. The
                 colorscale must be an array containing arrays
                 mapping a normalized value to an rgb, rgba,
                 hex, hsl, hsv, or named color string. At
@@ -77,7 +77,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 highest (1) values are required. For example,
                 `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
                 To control the bounds of the colorscale in
-                color space, use`line.cmin` and `line.cmax`.
+                color space, use `line.cmin` and `line.cmax`.
                 Alternatively, `colorscale` may be a palette
                 name string of the following list: Blackbody,Bl
                 uered,Blues,Cividis,Earth,Electric,Greens,Greys
@@ -85,7 +85,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dis,YlGnBu,YlOrRd.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -100,8 +100,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -114,15 +114,17 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                variables `count` and `probability`. Anything
-                contained in tag `<extra>` is displayed in the
-                secondary box, for example
+                This value here applies when hovering over
+                lines.Finally, the template string has access
+                to variables `count` and `probability`.
+                Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             reversescale
                 Reverses the color mapping if true. Has an
-                effect only if in `line.color`is set to a
+                effect only if in `line.color` is set to a
                 numerical array. If true, `line.cmin` will
                 correspond to the last color in the array and
                 `line.cmax` will correspond to the first color.
@@ -133,8 +135,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
-                in `line.color`is set to a numerical array.
+                in `line.color` is set to a numerical array.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

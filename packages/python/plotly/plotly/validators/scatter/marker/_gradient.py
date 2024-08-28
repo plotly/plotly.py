@@ -16,14 +16,14 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
                 horizontal, or the bottom for vertical.
             colorsrc
                 Sets the source reference on Chart Studio Cloud
-                for  color .
+                for `color`.
             type
                 Sets the type of gradient used to fill the
                 markers
             typesrc
                 Sets the source reference on Chart Studio Cloud
-                for  type .
+                for `type`.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

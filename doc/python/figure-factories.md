@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
+      format_version: '1.3'
+      jupytext_version: 1.13.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.8.11
   plotly:
     description: Figure Factories are dedicated functions for creating very specific
       types of plots.
@@ -39,7 +39,6 @@ The `plotly.figure_factory` module contains dedicated functions for creating ver
 
 The following types of plots are still difficult to create with Graph Objects or Plotly Express and therefore the corresponding Figure Factories are *not* deprecated:
 
-  * [Annotated Heatmaps](/python/annotated-heatmap/)
   * [Dendrograms](/python/dendrogram/)
   * [Hexagonal Binning Tile Map](/python/hexbin-mapbox/)
   * [Quiver Plots](/python/quiver-plots/)
@@ -50,6 +49,7 @@ The following types of plots are still difficult to create with Graph Objects or
 
 Deprecated "legacy" Figure Factories include:
 
+  * [Annotated Heatmaps](/python/annotated-heatmap/), deprecated by [heatmaps with `px.imshow()`](/python/heatmaps/)
   * [County Choropleth Maps](/python/county-choropleth/), deprecated by regular [Choropleth maps with GeoJSON input](/python/choropleth-maps/)
   * [Distplots](/python/distplot/), mostly deprecated by [`px.histogram`](/python/histograms/) except for KDE plots, which `px.histogram` doesn't support yet
   * [Gantt Charts](/python/gantt/), deprecated by [`px.timeline`](/python/gantt/)
@@ -57,3 +57,4 @@ Deprecated "legacy" Figure Factories include:
 #### Reference
 
 For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](https://plotly.com/python-api-reference/plotly.figure_factory.html).
+

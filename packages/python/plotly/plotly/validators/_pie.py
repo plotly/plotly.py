@@ -21,7 +21,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 DOM elements
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
-                for  customdata .
+                for `customdata`.
             direction
                 Specifies the direction at which succeeding
                 sectors follow one another.
@@ -42,7 +42,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 fired.
             hoverinfosrc
                 Sets the source reference on Chart Studio Cloud
-                for  hoverinfo .
+                for `hoverinfo`.
             hoverlabel
                 :class:`plotly.graph_objects.pie.Hoverlabel`
                 instance or dict with compatible properties
@@ -60,8 +60,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -74,6 +74,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `label`, `color`, `value`, `percent`
                 and `text`. Anything contained in tag `<extra>`
                 is displayed in the secondary box, for example
@@ -82,7 +83,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertemplate .
+                for `hovertemplate`.
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -92,7 +93,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  hovertext .
+                for `hovertext`.
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -100,7 +101,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on Chart Studio Cloud
-                for  ids .
+                for `ids`.
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
@@ -128,24 +129,37 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 all occurrences of the label.
             labelssrc
                 Sets the source reference on Chart Studio Cloud
-                for  labels .
+                for `labels`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.pie.Legendgrouptit
                 le` instance or dict with compatible properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             marker
                 :class:`plotly.graph_objects.pie.Marker`
                 instance or dict with compatible properties
@@ -165,9 +179,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 key of the `meta` and `n` is the trace index.
             metasrc
                 Sets the source reference on Chart Studio Cloud
-                for  meta .
+                for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -182,7 +196,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 more slices.
             pullsrc
                 Sets the source reference on Chart Studio Cloud
-                for  pull .
+                for `pull`.
             rotation
                 Instead of the first slice starting at 12
                 o'clock, rotate to some other angle.
@@ -216,10 +230,10 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Specifies the location of the `textinfo`.
             textpositionsrc
                 Sets the source reference on Chart Studio Cloud
-                for  textposition .
+                for `textposition`.
             textsrc
                 Sets the source reference on Chart Studio Cloud
-                for  text .
+                for `text`.
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -227,8 +241,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
-                rmat/tree/v1.4.5#d3-format for details on the
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -236,12 +250,13 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 format/tree/v2.2.3#locale_format for details on
                 the date formatting syntax. Every attributes
                 that can be specified per-point (the ones that
-                are `arrayOk: true`) are available. variables
+                are `arrayOk: true`) are available. Finally,
+                the template string has access to variables
                 `label`, `color`, `value`, `percent` and
                 `text`.
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
-                for  texttemplate .
+                for `texttemplate`.
             title
                 :class:`plotly.graph_objects.pie.Title`
                 instance or dict with compatible properties
@@ -287,7 +302,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 count occurrences of each label.
             valuessrc
                 Sets the source reference on Chart Studio Cloud
-                for  values .
+                for `values`.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -295,5 +310,5 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs
+            **kwargs,
         )

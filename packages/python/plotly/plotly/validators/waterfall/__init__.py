@@ -1,6 +1,8 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
+    from ._zorder import ZorderValidator
     from ._ysrc import YsrcValidator
     from ._yperiodalignment import YperiodalignmentValidator
     from ._yperiod0 import Yperiod0Validator
@@ -46,9 +48,11 @@ if sys.version_info < (3, 7):
     from ._meta import MetaValidator
     from ._measuresrc import MeasuresrcValidator
     from ._measure import MeasureValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
     from ._legendgroup import LegendgroupValidator
+    from ._legend import LegendValidator
     from ._insidetextfont import InsidetextfontValidator
     from ._insidetextanchor import InsidetextanchorValidator
     from ._increasing import IncreasingValidator
@@ -78,6 +82,7 @@ else:
         __name__,
         [],
         [
+            "._zorder.ZorderValidator",
             "._ysrc.YsrcValidator",
             "._yperiodalignment.YperiodalignmentValidator",
             "._yperiod0.Yperiod0Validator",
@@ -123,9 +128,11 @@ else:
             "._meta.MetaValidator",
             "._measuresrc.MeasuresrcValidator",
             "._measure.MeasureValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
             "._legendgroup.LegendgroupValidator",
+            "._legend.LegendValidator",
             "._insidetextfont.InsidetextfontValidator",
             "._insidetextanchor.InsidetextanchorValidator",
             "._increasing.IncreasingValidator",

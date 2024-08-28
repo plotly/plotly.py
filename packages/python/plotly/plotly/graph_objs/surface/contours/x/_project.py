@@ -19,7 +19,7 @@ class Project(_BaseTraceHierarchyType):
         the x plane. If `highlight` is set to True (the default), the
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
-    
+
         The 'x' property must be specified as a bool
         (either True, or False)
 
@@ -42,7 +42,7 @@ class Project(_BaseTraceHierarchyType):
         the y plane. If `highlight` is set to True (the default), the
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
-    
+
         The 'y' property must be specified as a bool
         (either True, or False)
 
@@ -65,7 +65,7 @@ class Project(_BaseTraceHierarchyType):
         the z plane. If `highlight` is set to True (the default), the
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
-    
+
         The 'z' property must be specified as a bool
         (either True, or False)
 
@@ -107,7 +107,7 @@ class Project(_BaseTraceHierarchyType):
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Project object
-        
+
         Parameters
         ----------
         arg
@@ -154,8 +154,8 @@ class Project(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.surface.contours.x.Project 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.surface.contours.x.Project
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.surface.contours.x.Project`"""
             )
 

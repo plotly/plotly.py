@@ -20,9 +20,9 @@ class Threshold(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.threshold.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the threshold line.
                 width
@@ -45,7 +45,7 @@ class Threshold(_BaseTraceHierarchyType):
         """
         Sets the thickness of the threshold line as a fraction of the
         thickness of the gauge.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -65,7 +65,7 @@ class Threshold(_BaseTraceHierarchyType):
     def value(self):
         """
         Sets a treshold value drawn as a line.
-    
+
         The 'value' property is a number and may be specified as:
           - An int or float
 
@@ -97,7 +97,7 @@ class Threshold(_BaseTraceHierarchyType):
     def __init__(self, arg=None, line=None, thickness=None, value=None, **kwargs):
         """
         Construct a new Threshold object
-        
+
         Parameters
         ----------
         arg
@@ -134,8 +134,8 @@ class Threshold(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.Threshold 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.indicator.gauge.Threshold
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`"""
             )
 

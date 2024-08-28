@@ -22,5 +22,5 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 around the edges.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

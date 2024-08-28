@@ -32,7 +32,7 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 is set to "array". Used with `categoryorder`.
             categoryarraysrc
                 Sets the source reference on Chart Studio Cloud
-                for  categoryarray .
+                for `categoryarray`.
             categoryorder
                 Specifies the ordering logic for the case of
                 categorical variables. By default, plotly uses
@@ -78,8 +78,26 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 able. If true, then zoom is disabled.
             gridcolor
                 Sets the axis line color.
+            griddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             gridwidth
                 Sets the width (in px) of the axis line.
+            labelalias
+                Replacement text for specific tick or hover
+                labels. For example using {US: 'USA', CA:
+                'Canada'} changes US to USA and CA to Canada.
+                The labels we would have shown must match the
+                keys exactly, after adding any tickprefix or
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
+                axis type, and both keys (if needed) and values
+                (if desired) can include html-like tags or
+                MathJax.
             labelpadding
                 Extra padding between label and the axis
             labelprefix
@@ -98,6 +116,11 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             minorgridcount
                 Sets the number of minor grid ticks per major
                 grid tick
+            minorgriddash
+                Sets the dash style of lines. Set to a dash
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             minorgridwidth
                 Sets the width (in px) of the grid lines.
             nticks
@@ -174,8 +197,8 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat. And for dates see:
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format. And for dates see:
                 https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
@@ -206,14 +229,14 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickvals`.
             ticktextsrc
                 Sets the source reference on Chart Studio Cloud
-                for  ticktext .
+                for `ticktext`.
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
                 Sets the source reference on Chart Studio Cloud
-                for  tickvals .
+                for `tickvals`.
             title
                 :class:`plotly.graph_objects.carpet.baxis.Title
                 ` instance or dict with compatible properties
@@ -236,5 +259,5 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 question.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

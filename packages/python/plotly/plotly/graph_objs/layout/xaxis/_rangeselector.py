@@ -29,7 +29,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     def activecolor(self):
         """
         Sets the background color of the active range selector button.
-    
+
         The 'activecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -88,7 +88,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the range selector buttons.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -147,7 +147,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the range selector.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -207,7 +207,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         """
         Sets the width (in px) of the border enclosing the range
         selector.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -228,15 +228,15 @@ class Rangeselector(_BaseLayoutHierarchyType):
         """
         Sets the specifications for each buttons. By default, a range
         selector comes with no buttons.
-    
+
         The 'buttons' property is a tuple of instances of
         Button that may be specified as:
           - A list or tuple of instances of plotly.graph_objs.layout.xaxis.rangeselector.Button
           - A list or tuple of dicts of string/value properties that
             will be passed to the Button constructor
-    
+
             Supported dict properties:
-                
+
                 count
                     Sets the number of steps to take to update the
                     range. Use with `step` to specify the update
@@ -302,13 +302,13 @@ class Rangeselector(_BaseLayoutHierarchyType):
         layout.template.layout.xaxis.rangeselector.buttondefaults),
         sets the default property values to use for elements of
         layout.xaxis.rangeselector.buttons
-    
+
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -327,17 +327,17 @@ class Rangeselector(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets the font of the range selector button text.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -351,11 +351,34 @@ class Rangeselector(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -375,7 +398,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Determines whether or not this range selector is visible. Note
         that range selectors are only available for x axes of `type`
         set to or auto-typed to "date".
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -396,7 +419,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         """
         Sets the x position (in normalized coordinates) of the range
         selector.
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -418,7 +441,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Sets the range selector's horizontal position anchor. This
         anchor binds the `x` position to the "left", "center" or
         "right" of the range selector.
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'left', 'center', 'right']
@@ -440,7 +463,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         """
         Sets the y position (in normalized coordinates) of the range
         selector.
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -462,7 +485,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Sets the range selector's vertical position anchor This anchor
         binds the `y` position to the "top", "middle" or "bottom" of
         the range selector.
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'top', 'middle', 'bottom']
@@ -539,11 +562,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Rangeselector object
-        
+
         Parameters
         ----------
         arg
@@ -612,8 +635,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
             )
 

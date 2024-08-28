@@ -17,7 +17,7 @@ class Leaf(_BaseTraceHierarchyType):
         """
         Sets the opacity of the leaves. With colorscale it is defaulted
         to 1; otherwise it is defaulted to 0.7
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -44,7 +44,7 @@ class Leaf(_BaseTraceHierarchyType):
     def __init__(self, arg=None, opacity=None, **kwargs):
         """
         Construct a new Leaf object
-        
+
         Parameters
         ----------
         arg
@@ -75,8 +75,8 @@ class Leaf(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sunburst.Leaf 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.sunburst.Leaf
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.sunburst.Leaf`"""
             )
 

@@ -18,5 +18,5 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the symbol to display for increasing value
 """,
             ),
-            **kwargs
+            **kwargs,
         )

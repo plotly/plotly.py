@@ -17,5 +17,5 @@ class SubplotsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     "values": ["/^x([2-9]|[1-9][0-9]+)?y([2-9]|[1-9][0-9]+)?$/", ""],
                 },
             ),
-            **kwargs
+            **kwargs,
         )

@@ -16,7 +16,7 @@ class TestColors(TestCase):
             "Plotly scale, an rgb color or a hex color."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_colors, color_string
         )
 
@@ -27,7 +27,7 @@ class TestColors(TestCase):
             "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, colors.validate_colors, color_string2
         )
 
@@ -36,7 +36,7 @@ class TestColors(TestCase):
 
         pattern3 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern3, colors.validate_colors, color_tuple
         )
 
@@ -56,7 +56,7 @@ class TestColors(TestCase):
 
         pattern2 = "You must select either rgb or tuple for your colortype " "variable."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern2,
             colors.convert_colors_to_same_type,
@@ -72,7 +72,7 @@ class TestColors(TestCase):
 
         pattern = "You must select either rgb or tuple for your colortype " "variable."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError,
             pattern,
             colors.convert_dict_colors_to_same_type,
@@ -89,7 +89,7 @@ class TestColors(TestCase):
             "You must input a list of scale values that has at least " "two values."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -101,7 +101,7 @@ class TestColors(TestCase):
             "1.0 respectively."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -113,7 +113,7 @@ class TestColors(TestCase):
             "increasing sequence of numbers."
         )
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
         )
 
@@ -124,9 +124,7 @@ class TestColors(TestCase):
 
         pattern = "You must input a list of colors that has at least two colors."
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, colors.make_colorscale, color_list
-        )
+        self.assertRaisesRegex(PlotlyError, pattern, colors.make_colorscale, color_list)
 
         # test length of colors and scale
         color_list2 = [(0, 0, 0), (1, 1, 1)]
@@ -134,7 +132,7 @@ class TestColors(TestCase):
 
         pattern2 = "The length of colors and scale must be the same."
 
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             PlotlyError, pattern2, colors.make_colorscale, color_list2, scale
         )
 
@@ -144,7 +142,7 @@ class TestColors(TestCase):
         pattern = "Name argument have to be a string."
         name = colors.sequential.haline
 
-        self.assertRaisesRegexp(PlotlyError, pattern, colors.get_colorscale, name)
+        self.assertRaisesRegex(PlotlyError, pattern, colors.get_colorscale, name)
 
         # test for non-existing colorscale
         pattern = r"Colorscale \S+ is not a built-in scale."
@@ -209,5 +207,33 @@ class TestColors(TestCase):
         self.assertEqual(expected_output, output)
 
         self.assertEqual(
-            colors.sample_colorscale("TuRbId_r", 12), colors.sequential.turbid_r,
+            colors.sample_colorscale("TuRbId_r", 12),
+            colors.sequential.turbid_r,
         )
+
+    def test_n_colors(self):
+        # test that n_colors constrains values to between 0 and 255
+        generated_colorscale = colors.n_colors(
+            lowcolor="rgb(255,0,0)",
+            highcolor="rgb(0,255,0)",
+            n_colors=14,
+            colortype="rgb",
+        )
+        expected_colorscale = [
+            "rgb(255.0, 0.0, 0.0)",
+            "rgb(235.3846153846154, 19.615384615384617, 0.0)",
+            "rgb(215.76923076923077, 39.23076923076923, 0.0)",
+            "rgb(196.15384615384613, 58.846153846153854, 0.0)",
+            "rgb(176.53846153846155, 78.46153846153847, 0.0)",
+            "rgb(156.9230769230769, 98.07692307692308, 0.0)",
+            "rgb(137.3076923076923, 117.69230769230771, 0.0)",
+            "rgb(117.69230769230768, 137.30769230769232, 0.0)",
+            "rgb(98.07692307692307, 156.92307692307693, 0.0)",
+            "rgb(78.46153846153845, 176.53846153846155, 0.0)",
+            "rgb(58.84615384615384, 196.15384615384616, 0.0)",
+            "rgb(39.230769230769226, 215.76923076923077, 0.0)",
+            "rgb(19.615384615384585, 235.38461538461542, 0.0)",
+            "rgb(0.0, 255.0, 0.0)",
+        ]
+
+        self.assertEqual(generated_colorscale, expected_colorscale)

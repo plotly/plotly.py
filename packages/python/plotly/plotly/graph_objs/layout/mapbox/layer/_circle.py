@@ -17,7 +17,7 @@ class Circle(_BaseLayoutHierarchyType):
         """
         Sets the circle radius (mapbox.layer.paint.circle-radius). Has
         an effect only when `type` is set to "circle".
-    
+
         The 'radius' property is a number and may be specified as:
           - An int or float
 
@@ -45,7 +45,7 @@ class Circle(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, radius=None, **kwargs):
         """
         Construct a new Circle object
-        
+
         Parameters
         ----------
         arg
@@ -78,8 +78,8 @@ class Circle(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`"""
             )
 

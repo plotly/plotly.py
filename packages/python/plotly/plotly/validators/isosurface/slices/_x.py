@@ -24,11 +24,11 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 start and end.
             locationssrc
                 Sets the source reference on Chart Studio Cloud
-                for  locations .
+                for `locations`.
             show
                 Determines whether or not slice planes about
                 the x dimension are drawn.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

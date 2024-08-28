@@ -6,7 +6,7 @@ class Histogram2DcontourValidator(_plotly_utils.basevalidators.CompoundArrayVali
         self,
         plotly_name="histogram2dcontour",
         parent_name="layout.template.data",
-        **kwargs
+        **kwargs,
     ):
         super(Histogram2DcontourValidator, self).__init__(
             plotly_name=plotly_name,
@@ -17,5 +17,5 @@ class Histogram2DcontourValidator(_plotly_utils.basevalidators.CompoundArrayVali
                 """
 """,
             ),
-            **kwargs
+            **kwargs,
         )

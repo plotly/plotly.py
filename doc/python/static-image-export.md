@@ -101,7 +101,7 @@ if not os.path.exists("images"):
     os.mkdir("images")
 ```
 
-If you are running this notebook live, click to [open the output directory](./images) so you can examine the images as they are written.
+If you are running this notebook live, click to open the output directory so you can examine the images as they are written.
 
 
 #### Raster Formats: PNG, JPEG, and WebP
@@ -109,42 +109,42 @@ If you are running this notebook live, click to [open the output directory](./im
 
 plotly.py can output figures to several raster image formats including **PNG**, ...
 
-```python
+~~~python
 fig.write_image("images/fig1.png")
-```
+~~~
 
 **JPEG**, ...
 
-```python
+~~~python
 fig.write_image("images/fig1.jpeg")
-```
+~~~
 
 and **WebP**
 
-```python
+~~~python
 fig.write_image("images/fig1.webp")
-```
+~~~
 
 #### Vector Formats: SVG and PDF...
 
 
 plotly.py can also output figures in several vector formats including **SVG**, ...
 
-```python
+~~~python
 fig.write_image("images/fig1.svg")
-```
+~~~
 
 **PDF**, ...
 
-```python
+~~~python
 fig.write_image("images/fig1.pdf")
-```
+~~~
 
 and **EPS** (requires the poppler library)
 
-```python
+~~~python
 fig.write_image("images/fig1.eps")
-```
+~~~
 
 **Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
@@ -158,8 +158,8 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'static-image-export', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'static-image-export', width='100%', height=1200)
 ```
 
 ### Get Image as Bytes
@@ -199,14 +199,14 @@ Image(img_bytes)
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying that orca should be used:
-```python
+~~~python
 fig.to_image(format="png", engine="orca")
-```
+~~~
 
 And, here is an example of specifying that Kaleido should be used:
-```python
+~~~python
 fig.to_image(format="png", engine="kaleido")
-```
+~~~
 
 <!-- #endregion -->
 

@@ -1,6 +1,7 @@
 import sys
+from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7):
+if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -38,6 +39,7 @@ if sys.version_info < (3, 7):
     from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
+    from ._scattersmith import Scattersmith
     from ._scatterternary import Scatterternary
     from ._splom import Splom
     from ._streamtube import Streamtube
@@ -92,6 +94,7 @@ else:
             "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",
+            "._scattersmith.Scattersmith",
             "._scatterternary.Scatterternary",
             "._splom.Splom",
             "._streamtube.Streamtube",

@@ -25,7 +25,7 @@ class Button(_BaseLayoutHierarchyType):
         """
         Sets the number of steps to take to update the range. Use with
         `step` to specify the update interval.
-    
+
         The 'count' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -45,7 +45,7 @@ class Button(_BaseLayoutHierarchyType):
     def label(self):
         """
         Sets the text label to appear on the button.
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -72,7 +72,7 @@ class Button(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -94,7 +94,7 @@ class Button(_BaseLayoutHierarchyType):
         """
         The unit of measurement that the `count` value will set the
         range by.
-    
+
         The 'step' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['month', 'year', 'day', 'hour', 'minute', 'second',
@@ -124,7 +124,7 @@ class Button(_BaseLayoutHierarchyType):
         back to January 01 of the current year. Month and year "todate"
         are currently available only for the built-in (Gregorian)
         calendar.
-    
+
         The 'stepmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['backward', 'todate']
@@ -152,7 +152,7 @@ class Button(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -173,7 +173,7 @@ class Button(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this button is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -244,11 +244,11 @@ class Button(_BaseLayoutHierarchyType):
         stepmode=None,
         templateitemname=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Button object
-        
+
         Sets the specifications for each buttons. By default, a range
         selector comes with no buttons.
 
@@ -320,8 +320,8 @@ class Button(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`"""
             )
 

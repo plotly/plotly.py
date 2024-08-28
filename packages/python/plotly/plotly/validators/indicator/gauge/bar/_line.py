@@ -18,5 +18,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 each sector.
 """,
             ),
-            **kwargs
+            **kwargs,
         )

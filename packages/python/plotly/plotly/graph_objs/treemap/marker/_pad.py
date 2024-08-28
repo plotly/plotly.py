@@ -16,7 +16,7 @@ class Pad(_BaseTraceHierarchyType):
     def b(self):
         """
         Sets the padding form the bottom (in px).
-    
+
         The 'b' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -36,7 +36,7 @@ class Pad(_BaseTraceHierarchyType):
     def l(self):
         """
         Sets the padding form the left (in px).
-    
+
         The 'l' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -56,7 +56,7 @@ class Pad(_BaseTraceHierarchyType):
     def r(self):
         """
         Sets the padding form the right (in px).
-    
+
         The 'r' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -76,7 +76,7 @@ class Pad(_BaseTraceHierarchyType):
     def t(self):
         """
         Sets the padding form the top (in px).
-    
+
         The 't' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -108,7 +108,7 @@ class Pad(_BaseTraceHierarchyType):
     def __init__(self, arg=None, b=None, l=None, r=None, t=None, **kwargs):
         """
         Construct a new Pad object
-        
+
         Parameters
         ----------
         arg
@@ -145,8 +145,8 @@ class Pad(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.treemap.marker.Pad 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.treemap.marker.Pad
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.treemap.marker.Pad`"""
             )
 

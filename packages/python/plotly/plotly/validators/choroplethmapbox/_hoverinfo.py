@@ -12,5 +12,5 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             extras=kwargs.pop("extras", ["all", "none", "skip"]),
             flags=kwargs.pop("flags", ["location", "z", "text", "name"]),
-            **kwargs
+            **kwargs,
         )

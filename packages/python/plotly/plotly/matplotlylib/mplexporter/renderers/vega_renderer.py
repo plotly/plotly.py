@@ -23,8 +23,18 @@ class VegaRenderer(Renderer):
             dict(type="y", scale="y", ticks=10),
         ]
         self.scales = [
-            dict(name="x", domain=props["xlim"], type="linear", range="width",),
-            dict(name="y", domain=props["ylim"], type="linear", range="height",),
+            dict(
+                name="x",
+                domain=props["xlim"],
+                type="linear",
+                range="width",
+            ),
+            dict(
+                name="y",
+                domain=props["ylim"],
+                type="linear",
+                range="height",
+            ),
         ]
 
     def draw_line(self, data, coordinates, style, label, mplobj=None):
@@ -103,7 +113,7 @@ class VegaHTML(object):
 
     def html(self):
         """Build the HTML representation for IPython."""
-        id = random.randint(0, 2 ** 16)
+        id = random.randint(0, 2**16)
         html = '<div id="vis%d"></div>' % id
         html += "<script>\n"
         html += VEGA_TEMPLATE % (json.dumps(self.specification), id)

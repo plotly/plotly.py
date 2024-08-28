@@ -6,9 +6,6 @@ fig_to_plotly, which is intended to be the main way that user's will interact
 with the matplotlylib package.
 
 """
-from __future__ import absolute_import
-
-import six
 import warnings
 
 import plotly.graph_objs as go
@@ -481,7 +478,7 @@ class PlotlyRenderer(Renderer):
                 mode=mode,
                 name=(
                     str(props["label"])
-                    if isinstance(props["label"], six.string_types)
+                    if isinstance(props["label"], str)
                     else props["label"]
                 ),
                 x=[xy_pair[0] for xy_pair in props["data"]],
@@ -712,7 +709,7 @@ class PlotlyRenderer(Renderer):
             annotation = go.layout.Annotation(
                 text=(
                     str(props["text"])
-                    if isinstance(props["text"], six.string_types)
+                    if isinstance(props["text"], str)
                     else props["text"]
                 ),
                 opacity=props["style"]["alpha"],

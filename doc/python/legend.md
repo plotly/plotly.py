@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -35,7 +35,7 @@ jupyter:
 
 ### Trace Types, Legends and Color Bars
 
-[Traces](/python/figure-structure) of most types can be optionally associated with a single legend item in the [legend](/python/legend/). Whether or not a given trace appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items also support the `legendgroup` attribute, and all traces with the same legend group are treated the same way during click/double-click interactions.
+[Traces](/python/figure-structure) of most types and shapes can be optionally associated with a single legend item in the [legend](/python/legend/). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.
 
 The fact that legend items are linked to traces means that when using [discrete color](/python/discrete-color/), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](/python/discrete-color/) to make this easy.
 
@@ -97,26 +97,66 @@ fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1]))
 fig.show()
 ```
 
-*New in v5.0*
+*New in 5.16*
 
-The `legendrank` attribute of a trace can be used to control its placement within the legend, without regard for its placement in the `data` list. 
-
-The default `legendrank` for traces is 1000 and ties are broken as described above, meaning that any trace can be pulled up to the top if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
+If you have shapes that are configured to appear in a legend, these are displayed after all traces:
 
 ```python
 import plotly.graph_objects as go
 
 fig = go.Figure()
-fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1], legendrank=4))
-fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2,1], legendrank=2))
-fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1,2], legendrank=1))
+fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1, 2]))
+fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2, 1]))
+fig.add_shape(
+    name="first shape",
+    showlegend=True,
+    type="rect",
+    xref="paper",
+    line=dict(dash="dash"),
+    x0=0.85,
+    x1=0.95,
+    y0=0,
+    y1=1.5,
+)
+fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1, 2]))
+fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2, 1]))
+
+fig.show()
+
+```
+
+The `legendrank` attribute of a trace or shape can be used to control its placement in the legend.
+The default `legendrank` for traces and shapes is 1000. When all traces and shapes have the same `legendrank`, traces appear in the order they appear in the data, followed by shapes in the order they are defined.
+
+Any trace or shape can be pulled up to the top of the legend if it is the only one with a legend rank less than 1000 and pushed to the bottom if it is the only one with a rank greater than 1000.
+
+In this example, we add a `legendrank` for each trace and shape, giving the shape the lowest rank so it appears first, and moving the first trace defined to the bottom of the legend by giving it the highest rank.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1], legendrank=5))
+fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2,1], legendrank=4))
+fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1,2], legendrank=2))
 fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1,2], legendrank=3))
+fig.add_shape(
+    legendrank=1,
+    showlegend=True,
+    type="line",
+    xref="paper",
+    line=dict(dash="5px"),
+    x0=0.05,
+    x1=0.45,
+    y0=1.5,
+    y1=1.5,
+)
 fig.show()
 ```
 
 #### Showing and Hiding the Legend
 
-By default the legend is displayed on Plotly charts with multiple traces, and this can be explicitly set with the `layout.showlegend` attribute:
+By default the legend is displayed on Plotly charts with multiple traces, and this can be explicitly set with the `layout.showlegend` attribute.
 
 ```python
 import plotly.express as px
@@ -159,9 +199,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'legend', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'legend', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Horizontal Legends
 
@@ -176,6 +220,31 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
 
 fig.update_layout(legend=dict(
     orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
+fig.show()
+```
+
+#### Horizontal Legend Entry Width
+
+*New in 5.11*
+
+Set the width of horizontal legend entries by setting `entrywidth`. Here we set it to `70` pixels. Pixels is the default unit for `entrywidth`, but you can set it to be a fraction of the plot width using `entrywidthmode='fraction'`.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    orientation="h",
+    entrywidth=70,
     yanchor="bottom",
     y=1.02,
     xanchor="right",
@@ -224,7 +293,7 @@ When creating figures using [graph objects](/python/graph-objects/) without usin
 
 #### Legend Item Names
 
-Legend items appear per trace, and the legend item name is taken from the trace's `name` attribute.
+For traces, legend items appear per trace, and the legend item name is taken from the trace's `name` attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -242,6 +311,38 @@ fig.add_trace(go.Scatter(
     y=[5, 4, 3, 2, 1],
     name="Negative"
 ))
+
+fig.show()
+```
+
+By default, for shapes, legend items are disabled. Set `showlegend=True` on a shape for it to display a legend item.
+The name that appears for the shape in the legend is the shape's `name` if it is provided. If no `name` is provided, the shape label's `text` is used. If neither is provided, the legend item appears as "shape \<shape number>". For example, "shape 1".
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[1, 2, 3, 4, 5],
+    name="Positive"
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[5, 4, 3, 2, 1],
+    name="Negative"
+))
+
+fig.add_shape(
+    showlegend=True,
+    type="rect",
+    x0=2,
+    x1=4,
+    y0=4.5,
+    y1=5,
+)
 
 fig.show()
 ```
@@ -295,7 +396,7 @@ fig.show()
 
 #### Hiding the Trace Initially
 
-Traces have a `visible` attribute. If set to `legendonly`, the trace is hidden from the graph implicitly. Click on the name in the legend to display the hidden trace.
+Traces and shapes have a `visible` attribute. If set to `legendonly`, the trace or shape is hidden from the graph implicitly. Click on the name in the legend to display the hidden trace or shape.
 
 ```python
 import plotly.graph_objects as go
@@ -445,6 +546,96 @@ fig.update_layout(title="Try Clicking on the Legend Items!")
 fig.show()
 ```
 
+#### Indent Legend Entries
+
+*New in 5.20*
+
+To indent legend entries, set `indenation` on `layout.legend` to a number of pixels. In the following example, we indent legend entries by 10 pixels. 
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.iris()
+
+fig = go.Figure(
+    [
+        go.Scatter(
+            x=df[df["species"] == species]["sepal_width"],
+            y=df[df["species"] == species]["sepal_length"],
+            mode="markers",
+            name=species,
+        )
+        for species in df["species"].unique()
+    ],
+    layout=dict(
+        legend=dict(
+            title="Species",
+            indentation=10
+        )
+    ),
+)
+
+
+fig.show()
+```
+
+#### Group click toggle behavior
+
+*New in v5.3*
+
+You can also define the toggle behavior for when a user clicks an item in a group. Here we set the `groupclick` for the `legend` to `toggleitem`. This toggles the visibility of just the item clicked on by the user. Set to `togglegroup` and it toggles the visibility of all items in the same group as the item clicked on.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 1, 3],
+    legendgroup="group",  # this can be any string, not just "group"
+    legendgrouptitle_text="First Group Title",
+    name="first legend group",
+    mode="markers",
+    marker=dict(color="Crimson", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[2, 2, 2],
+    legendgroup="group",
+    name="first legend group - average",
+    mode="lines",
+    line=dict(color="Crimson")
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[4, 9, 2],
+    legendgroup="group2",
+    legendgrouptitle_text="Second Group Title",
+    name="second legend group",
+    mode="markers",
+    marker=dict(color="MediumPurple", size=10)
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3],
+    y=[5, 5, 5],
+    legendgroup="group2",
+    name="second legend group - average",
+    mode="lines",
+    line=dict(color="MediumPurple")
+))
+
+fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(legend=dict(groupclick="toggleitem"))
+
+fig.show()
+
+```
+
 ### Legend items for continuous fields (2D and 3D)
 
 Traces corresponding to 2D fields (e.g. `go.Heatmap`, `go.Histogram2d`) or 3D fields (e.g. `go.Isosurface`, `go.Volume`, `go.Cone`) can also appear in the legend. They come with legend icons corresponding to each trace type, which are colored using the same colorscale as the trace.
@@ -487,6 +678,111 @@ fig.add_trace(go.Streamtube(
 fig.update_traces(showlegend=True, showscale=False)
 fig.update_layout(width=600, title_text='Exploration of a vector field using several traces')
 fig.show()
+```
+
+### Adding Multiple Legends
+
+*New in 5.15*
+
+By default, all traces and shapes appear on one legend. To have multiple legends, specify an alternative legend for a trace or shape using the `legend` property. For a second legend, set `legend="legend2"`. Specify more legends with `legend="legend3"`, `legend="legend4"` and so on.
+
+In this example, the last two scatter traces display on the second legend, "legend2". On the figure's layout, we then position and style each legend.
+
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+df_germany = df.loc[(df.country.isin(["Germany"]))]
+df_france = df.loc[(df.country.isin(["France"]))]
+df_uk = df.loc[(df.country.isin(["United Kingdom"]))]
+
+
+df_averages_europe = (
+    df.loc[(df.continent.isin(["Europe"]))].groupby(by="year").mean(numeric_only=True)
+)
+df_averages_americas = (
+    df.loc[(df.continent.isin(["Americas"]))].groupby(by="year").mean(numeric_only=True)
+)
+
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=df_germany.year, y=df_germany.gdpPercap, name="Germany"),
+        go.Scatter(x=df_france.year, y=df_france.gdpPercap, name="France"),
+        go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
+        go.Scatter(
+            x=df_averages_europe.index,
+            y=df_averages_europe.gdpPercap,
+            name="Europe",
+            legend="legend2",
+        ),
+        go.Scatter(
+            x=df_averages_americas.index,
+            y=df_averages_americas.gdpPercap,
+            name="Americas",
+            legend="legend2",
+        ),
+    ],
+    layout=dict(
+        title="GDP Per Capita",
+        legend={
+            "title": "By country",
+            "xref": "container",
+            "yref": "container",
+            "y": 0.65,
+            "bgcolor": "Orange",
+        },
+        legend2={
+            "title": "By continent",
+            "xref": "container",
+            "yref": "container",
+            "y": 0.85,
+            "bgcolor": "Gold",
+
+        },
+    ),
+)
+
+fig.show()
+```
+
+### Positioning Legends
+
+In the previous example, we position the second legend by specifying x and y values. By default, these values are based on the width and height of the plot area. It is also possible to specify values that reference the container width and height by setting "xref=container" and "yref="container" (the default values are "xref=paper" and "yref="paper"). When set to "container", the margin grows so the legend and plot don't overlap.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+
+df_germany = df.loc[(df.country.isin(["Germany"]))]
+df_france = df.loc[(df.country.isin(["France"]))]
+df_uk = df.loc[(df.country.isin(["United Kingdom"]))]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=df_germany.year, y=df_germany.gdpPercap, name="Germany"),
+        go.Scatter(x=df_france.year, y=df_france.gdpPercap, name="France"),
+        go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
+    ],
+    layout=dict(
+        title="GDP Per Capita",
+        legend={
+            "x": 0.9,
+            "y": 0.9,
+            "xref": "container",
+            "yref": "container",
+            "bgcolor": "Gold",
+        },
+    ),
+)
+
+fig.show()
+
 ```
 
 #### Reference

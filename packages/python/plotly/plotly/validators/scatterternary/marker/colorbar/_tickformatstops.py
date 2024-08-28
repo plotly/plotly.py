@@ -6,7 +6,7 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
         self,
         plotly_name="tickformatstops",
         parent_name="scatterternary.marker.colorbar",
-        **kwargs
+        **kwargs,
     ):
         super(TickformatstopsValidator, self).__init__(
             plotly_name=plotly_name,
@@ -50,5 +50,5 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 the same as "tickformat"
 """,
             ),
-            **kwargs
+            **kwargs,
         )

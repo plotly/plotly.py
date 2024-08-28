@@ -16,7 +16,7 @@ class Meanline(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the mean line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -78,7 +78,7 @@ class Meanline(_BaseTraceHierarchyType):
         shown inside the violins. If `box.visible` is turned on, the
         mean line is drawn inside the inner box. Otherwise, the mean
         line is drawn from one side of the violin to other.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -98,7 +98,7 @@ class Meanline(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the mean line width.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -132,7 +132,7 @@ class Meanline(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, visible=None, width=None, **kwargs):
         """
         Construct a new Meanline object
-        
+
         Parameters
         ----------
         arg
@@ -171,8 +171,8 @@ class Meanline(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.violin.Meanline 
-constructor must be a dict or 
+The first argument to the plotly.graph_objs.violin.Meanline
+constructor must be a dict or
 an instance of :class:`plotly.graph_objs.violin.Meanline`"""
             )
 

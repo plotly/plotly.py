@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.8
   plotly:
     description: How to plot date and time in python.
     display_as: financial
@@ -70,9 +70,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'time-series', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'time-series', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Different Chart Types on Date Axes
 
@@ -132,6 +136,55 @@ fig.update_xaxes(
     dtick="M1",
     tickformat="%b\n%Y",
     ticklabelmode="period")
+fig.show()
+```
+
+### Adding Minor Ticks
+
+_new in 5.8_
+
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+
+In this example, we've added minor ticks to the inside of the x-axis and turned on minor grid lines.
+
+```python
+import pandas as pd
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+
+fig.update_xaxes(minor=dict(ticks="inside", showgrid=True))
+
+fig.show()
+```
+
+#### Monthly Period Labels With Weekly Minor Ticks
+
+_new in 5.8_
+
+You can set `dtick` on `minor` to control the spacing for minor ticks and grid lines. In the following example, by setting `dtick=7*24*60*60*1000` (the number of milliseconds in a week) and setting `tick0="2016-07-03"` (the first Sunday in our data), a minor tick and grid line is displayed for the start of each week. When zoomed out, we can see where each month and week begins and ends.
+
+```python
+import pandas as pd
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+df = df.loc[(df["Date"] >= "2016-07-01") & (df["Date"] <= "2016-12-01")]
+
+fig = px.line(df, x='Date', y='AAPL.High')
+fig.update_xaxes(ticks= "outside",
+                 ticklabelmode= "period", 
+                 tickcolor= "black", 
+                 ticklen=10, 
+                 minor=dict(
+                     ticklen=4,  
+                     dtick=7*24*60*60*1000,  
+                     tick0="2016-07-03", 
+                     griddash='dot', 
+                     gridcolor='white')
+                )
+
 fig.show()
 ```
 

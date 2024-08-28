@@ -9,13 +9,12 @@ contribution.
 
 ## Code of Conduct
 
-Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it,
+Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't skip it,
 but the general idea is to be nice.
 
 ## What are the different ways to contribute?
 
-There are many ways to contribute to plotly.py. It helps to understand first
-the structure of the code and of the repository.
+There are many ways to contribute to plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
@@ -24,7 +23,7 @@ the structure of the code and of the repository.
   in `packages/python/plotly/codegen`. Most of the codegen code concerns the generation of docstrings from
   the schema JSON in Plotly.js. Traces and
   Layout classes have a direct correspondence with their Javascript
-  counterpart. Higher-level methods that work on on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
+  counterpart. Higher-level methods that work on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
   `update_layout`, `add_trace`, etc.
 
 - [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level
@@ -126,12 +125,15 @@ learn and become confident about git, like http://try.github.io/.
 
 ### Create a virtual environment for plotly development
 
-You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.:
 
 ```bash
-conda create -n plotly-dev python
+conda create -n plotly-dev python=3.11
 conda activate plotly-dev
 ```
+
+As of May 2024 our dependencies have been tested against Python versions 3.8 to 3.11.
+We will support Python 3.12 and higher versions soon.
 
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
@@ -225,7 +227,30 @@ the `plotly/plotly.js` GitHub repository (and place them in
 `plotly/package_data`). It will then regenerate all of the `graph_objs`
 classes based on the new schema.
 
-For dev branches, it is also possible to use `updateplotlyjsdev --devrepo reponame --devbranch branchname` to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
+For dev branches, it is also possible to use `updateplotlyjsdev` in two configurations:
+
+### CircleCI Release
+
+If your devbranch is part of the official plotly.js repository, you can use 
+```bash
+python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
+``` 
+to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
+
+### Local Repository
+
+If you have a local repository of `plotly.js` you'd like to try, you can run:
+
+```bash
+# In your plotly.js/ directory, prepare the package:
+
+$ npm run build
+$ npm pack
+$ mv plotly.js-*.tgz plotly.js.tgz
+
+# In your plotly.py/packages/python/plotly/ directory:
+$ python setup.py updateplotlyjsdev --local /path/to/your/plotly.js/
+```
 
 ## Testing
 
@@ -272,11 +297,11 @@ pytest plotly/tests/test_plotly/test_plot.py::test_function
 
 Running tests with tox is much more powerful, but requires a bit more setup.
 
-You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 2.7` and
+You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 3.9` and
 `Python 3.6`, but only care to check the `core` specs, you would need to ensure that the following variables are exported:
 
 ```
-export PLOTLY_TOX_PYTHON_27=<python binary>
+export PLOTLY_TOX_PYTHON_39=<python binary>
 export PLOTLY_TOX_PYTHON_36=<python binary>
 ```
 
@@ -287,15 +312,15 @@ Where the `<python binary` is going to be specific to your development setup. As
 # tox envs #
 ############
 
-export PLOTLY_TOX_PYTHON_27=python2.7
-export PLOTLY_TOX_PYTHON_34=python3.4
-export TOXENV=py27-core,py34-core
+export PLOTLY_TOX_PYTHON_39=python3.9
+export PLOTLY_TOX_PYTHON_36=python3.6
+export TOXENV=py39-core,py36-core
 ```
 
 Where `TOXENV` is the environment list you want to use when invoking `tox` from the command line. Note that the `PLOTLY_TOX_*` pattern is used to pass in variables for use in the `tox.ini` file. Though this is a little setup, intensive, you'll get the following benefits:
 
 * `tox` will automatically manage a virtual env for each environment you want to test in.
-* You only have to run `tox` and know that the module is working in both `Python 2` and `Python 3`.
+* You only have to run `tox` and know that the module is working in all included Python versions.
 
 Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `packages/python/plotly/pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
 

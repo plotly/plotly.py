@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,10 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.10.8
   plotly:
-    description: How to set, create and control continuous color scales and color bars
-      in scatter, bar, map and heatmap figures.
+    description: How to set, create and control continuous color scales and color
+      bars in scatter, bar, map and heatmap figures.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187
@@ -99,9 +99,13 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'colorscales', width='100%', height=630)
+snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+IFrame(snippet_url + 'colorscales', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Color Scales in Plotly Express
 
@@ -294,6 +298,41 @@ fig.update_layout(coloraxis_colorbar=dict(
 fig.show()
 ```
 
+### Using Label Aliases on Colorbars
+
+*New in 5.14*
+
+Using `labelalias` you can replace some labels on the `colorbar` with alternative values. In this example, the `colorbar` has five `tickvals`. Using `labelalias`, instead of displaying all labels as the numbers in `tickvals`, we swap out three of the labels for text.
+
+```python
+import plotly.graph_objects as go
+
+import urllib.request as request
+import json
+
+# Load heatmap data
+response = request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure()
+
+fig.add_trace(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(
+        title="Surface Heat",
+        titleside="top",
+        tickmode="array",
+        tickvals=[2, 25, 50, 75, 100],
+        labelalias={100: "Hot", 50: "Mild", 2: "Cold"},
+        ticks="outside"
+    )
+))
+
+fig.show()
+```
+
 ### Custom Discretized Heatmap Color scale with Graph Objects
 
 ```python
@@ -400,10 +439,10 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-import six.moves.urllib
+import urllib
 import json
 
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json"
 )
 
@@ -492,11 +531,11 @@ Like axes, you can customize the color bar ticks, labels, and values with `ticks
 ```python
 import plotly.graph_objects as go
 
-import six.moves.urllib
+import urllib
 import json
 
 # Load heatmap data
-response = six.moves.urllib.request.urlopen(
+response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
 dataset = json.load(response)
 
@@ -514,6 +553,31 @@ fig.add_trace(go.Heatmap(
         ticks="outside"
     )
 ))
+
+fig.show()
+```
+
+### Color Bar Displayed Horizontally
+
+By default, color bars are displayed vertically. You can change a color bar to be displayed horizontally by setting the `colorbar` `orientation` attribute to `h`.
+
+```python
+import plotly.graph_objects as go
+
+import urllib
+import json
+
+# Load heatmap data
+response = urllib.request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure()
+
+fig.add_trace(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(orientation='h')))
 
 fig.show()
 ```
@@ -562,6 +626,36 @@ fig = go.Figure(go.Heatmap(
         tick0= 0,
         tickmode= 'array',
         tickvals= [0, 1000, 10000, 100000]
+    )
+))
+
+fig.show()
+```
+
+### Positioning Colorbars
+
+Colorbars can be positioned by specifying x and y coordinates. By default, the x and y values are "paper" coordinates, which refer to the plot area. You can also use coordinates based on the "container" by setting `xref="container"` or `yref="container"`. The following example uses a container reference for the x position.
+
+See the positioning section of [the figure data structure page](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates) for more details on "paper" vs "container" coordinates.
+
+```python
+import plotly.graph_objects as go
+
+import urllib
+import json
+
+# Load heatmap data
+response = urllib.request.urlopen(
+    "https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json")
+dataset = json.load(response)
+
+# Create and show figure
+fig = go.Figure(go.Heatmap(
+    z=dataset["z"],
+    colorbar=dict(
+        x=0.2,
+        xref="container",
+        title="Surface Heat"
     )
 ))
 

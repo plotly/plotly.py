@@ -1,15 +1,6 @@
-import uuid
-from importlib import import_module
-import os
-import numbers
-
-try:
-    from urllib import parse
-except ImportError:
-    from urlparse import urlparse as parse
-
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
+
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
@@ -119,7 +110,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             layout_plotly=layout,
             frames=frames,
             skip_invalid=skip_invalid,
-            **kwargs
+            **kwargs,
         )
 
         # Validate Frames
@@ -733,12 +724,29 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Display
     # -------
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        raise NotImplementedError  # Prefer _repr_mimebundle_
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        return {
+            "application/vnd.jupyter.widget-view+json": {
+                "version_major": 2,
+                "version_minor": 0,
+                "model_id": self._model_id,
+            },
+        }
+
     def _ipython_display_(self):
         """
         Handle rich display of figures in ipython contexts
         """
-        # Override BaseFigure's display to make sure we display the widget version
-        widgets.DOMWidget._ipython_display_(self)
+        raise NotImplementedError  # Prefer _repr_mimebundle_
 
     # Callbacks
     # ---------

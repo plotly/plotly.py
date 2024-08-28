@@ -9,5 +9,5 @@ class YperiodalignmentValidator(_plotly_utils.basevalidators.EnumeratedValidator
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"ytype": "scaled"}),
             values=kwargs.pop("values", ["start", "middle", "end"]),
-            **kwargs
+            **kwargs,
         )

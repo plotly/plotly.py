@@ -1,7 +1,3 @@
-from __future__ import absolute_import
-
-import six
-
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
@@ -177,7 +173,7 @@ def scatterplot(dataframe, headers, diag, size, height, width, title, **kwargs):
                         mode="markers",
                         marker=dict(size=size),
                         showlegend=False,
-                        **kwargs
+                        **kwargs,
                     )
             trace_list.append(trace)
 
@@ -216,7 +212,7 @@ def scatterplot_dict(
     endpts,
     colormap,
     colormap_type,
-    **kwargs
+    **kwargs,
 ):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
@@ -274,7 +270,7 @@ def scatterplot_dict(
                                 mode="markers",
                                 name=name,
                                 showlegend=True,
-                                **kwargs
+                                **kwargs,
                             )
                         else:
                             trace = graph_objs.Scatter(
@@ -284,7 +280,7 @@ def scatterplot_dict(
                                 name=name,
                                 marker=dict(size=size, color=theme[name]),
                                 showlegend=True,
-                                **kwargs
+                                **kwargs,
                             )
                 # Generate trace with INVISIBLE icon
                 else:
@@ -311,7 +307,7 @@ def scatterplot_dict(
                                 mode="markers",
                                 name=name,
                                 showlegend=False,
-                                **kwargs
+                                **kwargs,
                             )
                         else:
                             trace = graph_objs.Scatter(
@@ -321,7 +317,7 @@ def scatterplot_dict(
                                 name=name,
                                 marker=dict(size=size, color=theme[name]),
                                 showlegend=False,
-                                **kwargs
+                                **kwargs,
                             )
                 # Push the trace into dictionary
                 unique_index_vals[name] = trace
@@ -371,7 +367,7 @@ def scatterplot_theme(
     endpts,
     colormap,
     colormap_type,
-    **kwargs
+    **kwargs,
 ):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
@@ -445,7 +441,7 @@ def scatterplot_theme(
                                     mode="markers",
                                     name=name,
                                     showlegend=True,
-                                    **kwargs
+                                    **kwargs,
                                 )
                             else:
                                 trace = graph_objs.Scatter(
@@ -455,7 +451,7 @@ def scatterplot_theme(
                                     name=name,
                                     marker=dict(size=size, color=theme[c_indx]),
                                     showlegend=True,
-                                    **kwargs
+                                    **kwargs,
                                 )
                     # Generate trace with INVISIBLE icon
                     else:
@@ -482,7 +478,7 @@ def scatterplot_theme(
                                     mode="markers",
                                     name=name,
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                             else:
                                 trace = graph_objs.Scatter(
@@ -492,7 +488,7 @@ def scatterplot_theme(
                                     name=name,
                                     marker=dict(size=size, color=theme[c_indx]),
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                     # Push the trace into dictionary
                     unique_index_vals[name] = trace
@@ -602,7 +598,7 @@ def scatterplot_theme(
                                         mode="markers",
                                         name=str(interval),
                                         showlegend=True,
-                                        **kwargs
+                                        **kwargs,
                                     )
                                 else:
                                     trace = graph_objs.Scatter(
@@ -612,7 +608,7 @@ def scatterplot_theme(
                                         name=str(interval),
                                         marker=dict(size=size, color=theme[c_indx]),
                                         showlegend=True,
-                                        **kwargs
+                                        **kwargs,
                                     )
                         # Generate trace with INVISIBLE icon
                         else:
@@ -639,7 +635,7 @@ def scatterplot_theme(
                                         mode="markers",
                                         name=str(interval),
                                         showlegend=False,
-                                        **kwargs
+                                        **kwargs,
                                     )
                                 else:
                                     trace = graph_objs.Scatter(
@@ -649,7 +645,7 @@ def scatterplot_theme(
                                         name=str(interval),
                                         marker=dict(size=size, color=theme[c_indx]),
                                         showlegend=False,
-                                        **kwargs
+                                        **kwargs,
                                     )
                         # Push the trace into dictionary
                         interval_labels[str(interval)] = trace
@@ -740,7 +736,7 @@ def scatterplot_theme(
                                     y=listy,
                                     mode="markers",
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                             else:
                                 trace = graph_objs.Scatter(
@@ -754,7 +750,7 @@ def scatterplot_theme(
                                         showscale=True,
                                     ),
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                     # Generate trace with INVISIBLE icon
                     else:
@@ -777,7 +773,7 @@ def scatterplot_theme(
                                     y=listy,
                                     mode="markers",
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                             else:
                                 trace = graph_objs.Scatter(
@@ -791,7 +787,7 @@ def scatterplot_theme(
                                         showscale=False,
                                     ),
                                     showlegend=False,
-                                    **kwargs
+                                    **kwargs,
                                 )
                     # Push the trace into list
                     trace_list.append(trace)
@@ -851,7 +847,7 @@ def create_scatterplotmatrix(
     dataframe=None,
     headers=None,
     index_vals=None,
-    **kwargs
+    **kwargs,
 ):
     """
     Returns data for a scatterplot matrix;
@@ -1045,11 +1041,7 @@ def create_scatterplotmatrix(
     # Validate colormap
     if isinstance(colormap, dict):
         colormap = clrs.validate_colors_dict(colormap, "rgb")
-    elif (
-        isinstance(colormap, six.string_types)
-        and "rgb" not in colormap
-        and "#" not in colormap
-    ):
+    elif isinstance(colormap, str) and "rgb" not in colormap and "#" not in colormap:
         if colormap not in clrs.PLOTLY_SCALES.keys():
             raise exceptions.PlotlyError(
                 "If 'colormap' is a string, it must be the name "
@@ -1120,7 +1112,7 @@ def create_scatterplotmatrix(
                 endpts,
                 colormap,
                 colormap_type,
-                **kwargs
+                **kwargs,
             )
             return figure
 
@@ -1138,6 +1130,6 @@ def create_scatterplotmatrix(
                 endpts,
                 colormap,
                 colormap_type,
-                **kwargs
+                **kwargs,
             )
             return figure

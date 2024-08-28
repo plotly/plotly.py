@@ -12,5 +12,5 @@ class DashValidator(_plotly_utils.basevalidators.DashValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs
+            **kwargs,
         )
