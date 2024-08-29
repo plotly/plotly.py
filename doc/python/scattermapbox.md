@@ -26,7 +26,7 @@ jupyter:
     display_as: maps
     language: python
     layout: base
-    name: Scatter Plots on Mapbox
+    name: Scatter Plots on Tile Maps
     order: 10
     page_type: u-guide
     permalink: python/tile-scatter-maps/
