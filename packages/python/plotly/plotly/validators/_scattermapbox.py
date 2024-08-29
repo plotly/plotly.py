@@ -210,11 +210,15 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.scattermapbox.Stre
                 am` instance or dict with compatible properties
             subplot
-                Sets a reference between this trace's data
-                coordinates and a mapbox subplot. If "mapbox"
-                (the default value), the data refer to
-                `layout.mapbox`. If "mapbox2", the data refer
-                to `layout.mapbox2`, and so on.
+                mapbox subplots and traces are deprecated!
+                Please consider switching to `map` subplots and
+                traces. Learn more at:
+                https://plotly.com/javascript/maplibre-
+                migration/ Sets a reference between this
+                trace's data coordinates and a mapbox subplot.
+                If "mapbox" (the default value), the data refer
+                to `layout.mapbox`. If "mapbox2", the data
+                refer to `layout.mapbox2`, and so on.
             text
                 Sets text elements associated with each
                 (lon,lat) pair If a single string, the same
