@@ -285,7 +285,7 @@ fig.show()
 
 ### Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate
 
-This example adds custom fields to a Plotly Express figure using the custom_data parameter and then adds a hover template that applies d3 formats to each element of the customdata[n] array and uses HTML to customize the fonts and spacing. 
+This example adds custom fields to a Plotly Express figure using the `custom_data` parameter and then adds a hover template that applies d3 formats to each element of the `customdata[n]` array and uses HTML to customize the fonts and spacing.
 
 ```python
 # %%
@@ -301,20 +301,20 @@ df = df.sort_values(['continent', 'country'])
 
 df.rename(columns={"gdpPercap":'GDP per capita', "lifeExp":'Life Expectancy (years)'}, inplace=True)
 
-fig=px.scatter(df, 
+fig=px.scatter(df,
                x='GDP per capita',
-               y='Life Expectancy (years)', 
-               color='continent', 
-               size=np.sqrt(df['pop']),           
+               y='Life Expectancy (years)',
+               color='continent',
+               size=np.sqrt(df['pop']),
                # Specifying data to make available to the hovertemplate
                # The px custom_data parameter has an underscore, while the analogous graph objects customdata parameter has no underscore.
                # The px custom_data parameter is a list of column names in the data frame, while the graph objects customdata parameter expects a data frame or a numpy array.
-               custom_data=['country', 'continent', 'pop'], 
+               custom_data=['country', 'continent', 'pop'],
 )
 
 # Plotly express does not have a hovertemplate parameter in the graph creation function, so we apply the template with update_traces
 fig.update_traces(
-    hovertemplate = 
+    hovertemplate =
                 "<b>%{customdata[0]}</b><br>" +
                 "<b>%{customdata[1]}</b><br><br>" +
                 "GDP per Capita: %{x:$,.0f}<br>" +
@@ -371,7 +371,7 @@ fig.show()
 
 ### Advanced Hover Template
 
-This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the customdata array using the df[["col_i", "col_j"]] subsetting notation.  It then references those variables using e.g. %{customdata[0]} in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.  
+This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the `customdata` array using the `df[["col_i", "col_j"]]` subsetting notation.  It then references those variables using e.g. `%{customdata[0]}` in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.
 
 ```python
 import plotly.graph_objects as go
@@ -404,12 +404,12 @@ for continent_name, df in continent_data.items():
             name=continent_name,
 
             # The next three parameters specify the hover text
-            # Text supports just one customized field per trace 
-            # and is implemented here with text=df['continent'],  
-            # Custom data supports multiple fields through numeric indices in the hovertemplate 
-            # In we weren't using the text parameter in our example, 
+            # Text supports just one customized field per trace
+            # and is implemented here with text=df['continent'],
+            # Custom data supports multiple fields through numeric indices in the hovertemplate
+            # In we weren't using the text parameter in our example,
             # we could instead add continent as a third customdata field.
-            customdata=df[['country','pop']],  
+            customdata=df[['country','pop']],
             hovertemplate=
                 "<b>%{customdata[0]}</b><br>" +
                 "<b>%{text}</b><br><br>" +
@@ -462,14 +462,12 @@ fig.update_layout(title_text='Hover to see the value of z1, z2 and z3 together')
 fig.show()
 ```
 
-### Setting the Hover Template in Mapbox Maps
+### Setting the Hover Template in Tile Maps
 
 ```python
 import plotly.graph_objects as go
 
-token = open(".mapbox_token").read() # you need your own token
-
-fig = go.Figure(go.Scattermapbox(
+fig = go.Figure(go.Scattermap(
     name = "",
     mode = "markers+text+lines",
     lon = [-75, -80, -50],
@@ -481,8 +479,7 @@ fig = go.Figure(go.Scattermapbox(
     "latitude: %{lat}<br>" ))
 
 fig.update_layout(
-    mapbox = {
-        'accesstoken': token,
+    map = {
         'style': "outdoors", 'zoom': 1},
     showlegend = False)
 
