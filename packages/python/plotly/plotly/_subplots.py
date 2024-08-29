@@ -8,7 +8,7 @@
 # little differently.
 import collections
 
-_single_subplot_types = {"scene", "geo", "polar", "ternary", "mapbox"}
+_single_subplot_types = {"scene", "geo", "polar", "ternary", "map", "mapbox"}
 _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 
 # For most subplot types, a trace is associated with a particular subplot
@@ -20,7 +20,7 @@ _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 # the trace property is just named `subplot`.  For example setting
 # the `scatterpolar.subplot` property to `polar3` associates the scatterpolar
 # trace with the third polar subplot in the figure
-_subplot_prop_named_subplot = {"polar", "ternary", "mapbox"}
+_subplot_prop_named_subplot = {"polar", "ternary", "map", "mapbox"}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
@@ -150,7 +150,8 @@ def make_subplots(
                 - 'scene': 3D Cartesian subplot for scatter3d, cone, etc.
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
-                - 'mapbox': Mapbox subplot for scattermapbox
+                - 'map': Map subplot for scattermap, choroplethmap and densitymap
+                - 'mapbox': Mapbox subplot for scattermapbox, choroplethmapbox and densitymapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
                 - trace type: A trace type which will be used to determine
