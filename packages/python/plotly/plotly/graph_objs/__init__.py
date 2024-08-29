@@ -8,12 +8,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._candlestick import Candlestick
     from ._carpet import Carpet
     from ._choropleth import Choropleth
-    from ._choroplethmap import Choroplethmap
     from ._choroplethmapbox import Choroplethmapbox
     from ._cone import Cone
     from ._contour import Contour
     from ._contourcarpet import Contourcarpet
-    from ._densitymap import Densitymap
     from ._densitymapbox import Densitymapbox
     from ._deprecations import AngularAxis
     from ._deprecations import Annotation
@@ -66,7 +64,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._scattercarpet import Scattercarpet
     from ._scattergeo import Scattergeo
     from ._scattergl import Scattergl
-    from ._scattermap import Scattermap
     from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
@@ -87,12 +84,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import candlestick
     from . import carpet
     from . import choropleth
-    from . import choroplethmap
     from . import choroplethmapbox
     from . import cone
     from . import contour
     from . import contourcarpet
-    from . import densitymap
     from . import densitymapbox
     from . import funnel
     from . import funnelarea
@@ -118,7 +113,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import scattercarpet
     from . import scattergeo
     from . import scattergl
-    from . import scattermap
     from . import scattermapbox
     from . import scatterpolar
     from . import scatterpolargl
@@ -145,12 +139,10 @@ else:
             ".candlestick",
             ".carpet",
             ".choropleth",
-            ".choroplethmap",
             ".choroplethmapbox",
             ".cone",
             ".contour",
             ".contourcarpet",
-            ".densitymap",
             ".densitymapbox",
             ".funnel",
             ".funnelarea",
@@ -176,7 +168,6 @@ else:
             ".scattercarpet",
             ".scattergeo",
             ".scattergl",
-            ".scattermap",
             ".scattermapbox",
             ".scatterpolar",
             ".scatterpolargl",
@@ -199,12 +190,10 @@ else:
             "._candlestick.Candlestick",
             "._carpet.Carpet",
             "._choropleth.Choropleth",
-            "._choroplethmap.Choroplethmap",
             "._choroplethmapbox.Choroplethmapbox",
             "._cone.Cone",
             "._contour.Contour",
             "._contourcarpet.Contourcarpet",
-            "._densitymap.Densitymap",
             "._densitymapbox.Densitymapbox",
             "._deprecations.AngularAxis",
             "._deprecations.Annotation",
@@ -257,7 +246,6 @@ else:
             "._scattercarpet.Scattercarpet",
             "._scattergeo.Scattergeo",
             "._scattergl.Scattergl",
-            "._scattermap.Scattermap",
             "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",

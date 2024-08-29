@@ -49,7 +49,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._meta import MetaValidator
     from ._margin import MarginValidator
     from ._mapbox import MapboxValidator
-    from ._map import MapValidator
     from ._legend import LegendValidator
     from ._imagedefaults import ImagedefaultsValidator
     from ._images import ImagesValidator
@@ -151,7 +150,6 @@ else:
             "._meta.MetaValidator",
             "._margin.MarginValidator",
             "._mapbox.MapboxValidator",
-            "._map.MapValidator",
             "._legend.LegendValidator",
             "._imagedefaults.ImagedefaultsValidator",
             "._images.ImagesValidator",
