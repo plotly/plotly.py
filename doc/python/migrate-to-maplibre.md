@@ -23,14 +23,14 @@ jupyter:
     version: 3.10.11
   plotly:
     description: Migrating from Mapbox traces to MapLibre traces.
-    display_as: basic
+    display_as: maps
     language: python
     layout: base
     name: MapLibre Migration
     order: 1
-    page_type: example_index
+    page_type: u-guide
     permalink: python/mapbox-to-maplibre/
-    thumbnail: thumbnail/line-and-scatter.jpg
+    thumbnail: thumbnail/mapbox-layers.png
 ---
 
 ## Migrating from Mapbox traces to MapLibre traces

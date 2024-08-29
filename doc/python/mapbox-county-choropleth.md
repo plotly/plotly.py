@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Tile Choropleth Maps
-    order: 1
+    order: 2
     page_type: example_index
     permalink: python/tile-county-choropleth/
     redirect_from: python/mapbox-county-choropleth/

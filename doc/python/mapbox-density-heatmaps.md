@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Density Heatmap
-    order: 5
+    order: 6
     page_type: u-guide
     permalink: python/density-heatmaps/
     redirect_from: python/mapbox-density-heatmaps/

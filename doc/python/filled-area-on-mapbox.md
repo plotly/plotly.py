@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Filled Area on Maps
-    order: 3
+    order: 4
     page_type: example_index
     permalink: python/filled-area-tile-maps/
     redirect_from: python/filled-area-on-mapbox/

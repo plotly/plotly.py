@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Tile Map Layers
-    order: 8
+    order: 9
     page_type: u-guide
     permalink: /python/tile-map-layers/
     redirect_from: /python/mapbox-layers/
@@ -222,7 +222,7 @@ fig.show()
 <!-- #region -->
 ### Mapbox
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py. 
+> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 #### How Layers Work in Mapbox Tile Maps
 
@@ -234,11 +234,11 @@ Mapbox tile maps are composed of various layers, of three different types:
 
 #### Mapbox Access Tokens and When You Need Them
 
-The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL JS open-source library, which is integrated into Plotly.py. 
+The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL JS open-source library, which is integrated into Plotly.py.
 
 If your basemap in `layout.mapbox.style` uses data from the Mapbox _service_, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided in `layout.mapbox.access_token` (or, if using Plotly Express, via the `px.set_mapbox_access_token()` configuration function).
 
-If you basemap in `layout.mapbox.style` uses maps from the [Stadia Maps service](https://www.stadiamaps.com) (see below for details), you'll need to register for a Stadia Maps account and token. 
+If you basemap in `layout.mapbox.style` uses maps from the [Stadia Maps service](https://www.stadiamaps.com) (see below for details), you'll need to register for a Stadia Maps account and token.
 
 
 #### Base Maps in `layout.mapbox.style`
@@ -248,7 +248,7 @@ The accepted values for `layout.mapbox.style` are one of:
 - `"white-bg"` yields an empty white canvas which results in no external HTTP requests
 - `"open-street-map"`, `"carto-positron"`, and `"carto-darkmatter"` yield maps composed of _raster_ tiles from various public tile servers which do not require signups or access tokens.
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
-- `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token. 
+- `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token.
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
 - A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/
 
