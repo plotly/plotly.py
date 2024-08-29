@@ -41,7 +41,7 @@ Other kinds of subplots and axes are described in other tutorials:
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
 - [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
 - [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
-- [Map axes](/python/map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
+- [Map axes](/python/tile-map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
 - [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
 **See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
