@@ -426,7 +426,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         # as a list of row lists, which is what we want
                         trace_patch["customdata"] = trace_data[customdata_cols]
             elif attr_name == "color":
-                if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
+                if trace_spec.constructor in [
+                    go.Choropleth,
+                    go.Choroplethmap,
+                    go.Choroplethmapbox,
+                ]:
                     trace_patch["z"] = trace_data[attr_value]
                     trace_patch["coloraxis"] = "coloraxis1"
                     mapping_labels[attr_label] = "%{z}"
@@ -532,6 +536,9 @@ def configure_axes(args, constructor, fig, orders):
         go.Scatterpolar: configure_polar_axes,
         go.Scatterpolargl: configure_polar_axes,
         go.Barpolar: configure_polar_axes,
+        go.Scattermap: configure_map,
+        go.Choroplethmap: configure_map,
+        go.Densitymap: configure_map,
         go.Scattermapbox: configure_mapbox,
         go.Choroplethmapbox: configure_mapbox,
         go.Densitymapbox: configure_mapbox,
@@ -736,6 +743,20 @@ def configure_mapbox(args, fig, orders):
         center=center,
         zoom=args["zoom"],
         style=args["mapbox_style"],
+    )
+
+
+def configure_map(args, fig, orders):
+    center = args["center"]
+    if not center and "lat" in args and "lon" in args:
+        center = dict(
+            lat=args["data_frame"][args["lat"]].mean(),
+            lon=args["data_frame"][args["lon"]].mean(),
+        )
+    fig.update_maps(
+        center=center,
+        zoom=args["zoom"],
+        style=args["map_style"],
     )
 
 
@@ -1911,7 +1932,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         else:
             trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
 
-    if constructor in [go.Histogram2d, go.Densitymapbox]:
+    if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -1919,7 +1940,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         if args["opacity"] is None:
             if "barmode" in args and args["barmode"] == "overlay":
                 trace_patch["marker"] = dict(opacity=0.5)
-        elif constructor in [go.Densitymapbox, go.Pie, go.Funnel, go.Funnelarea]:
+        elif constructor in [
+            go.Densitymap,
+            go.Densitymapbox,
+            go.Pie,
+            go.Funnel,
+            go.Funnelarea,
+        ]:
             trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
@@ -1937,7 +1964,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             modes.add("lines")
         trace_patch["mode"] = "+".join(sorted(modes))
     elif constructor != go.Splom and (
-        "symbol" in args or constructor == go.Scattermapbox
+        "symbol" in args or constructor in [go.Scattermap, go.Scattermapbox]
     ):
         trace_patch["mode"] = "markers" + ("+text" if args["text"] else "")
 
@@ -2154,7 +2181,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 go.Parcats,
                 go.Parcoords,
                 go.Choropleth,
+                go.Choroplethmap,
                 go.Choroplethmapbox,
+                go.Densitymap,
                 go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
@@ -2198,7 +2227,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
                     elif (
-                        trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]
+                        trace_spec.constructor
+                        in [go.Choropleth, go.Choroplethmap, go.Choroplethmapbox]
                         and m.variable == "color"
                     ):
                         trace.update(
@@ -2281,7 +2311,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         )
 
     if show_colorbar:
-        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
+        colorvar = (
+            "z"
+            if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]
+            else "color"
+        )
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")

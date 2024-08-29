@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: '1.3'
+      jupytext_version: 1.16.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.10.0
   plotly:
     description: How to use datashader to rasterize large datasets, and visualize
       the generated raster data with plotly.
@@ -36,10 +36,10 @@ jupyter:
 
 [datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc.
 
-### Passing datashader rasters as a mapbox image layer
+### Passing datashader rasters as a tile map image layer
 
 We visualize here the spatial distribution of taxi rides in New York City. A higher density
-is observed on major avenues. For more details about mapbox charts, see [the mapbox layers tutorial](/python/mapbox-layers). No mapbox token is needed here.
+is observed on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](/python/tile-map-layers).
 
 ```python
 import pandas as pd
@@ -51,7 +51,7 @@ cvs = ds.Canvas(plot_width=1000, plot_height=1000)
 agg = cvs.points(dff, x='Lon', y='Lat')
 # agg is an xarray object, see http://xarray.pydata.org/en/stable/ for more details
 coords_lat, coords_lon = agg.coords['Lat'].values, agg.coords['Lon'].values
-# Corners of the image, which need to be passed to mapbox
+# Corners of the image
 coordinates = [[coords_lon[0], coords_lat[0]],
                [coords_lon[-1], coords_lat[0]],
                [coords_lon[-1], coords_lat[-1]],
@@ -62,16 +62,12 @@ import datashader.transfer_functions as tf
 img = tf.shade(agg, cmap=fire)[::-1].to_pil()
 
 import plotly.express as px
-# Trick to create rapidly a figure with mapbox axes
-fig = px.scatter_mapbox(dff[:1], lat='Lat', lon='Lon', zoom=12)
-# Add the datashader image as a mapbox layer image
-fig.update_layout(mapbox_style="carto-darkmatter",
-                 mapbox_layers = [
-                {
-                    "sourcetype": "image",
-                    "source": img,
-                    "coordinates": coordinates
-                }]
+# Trick to create rapidly a figure with map axes
+fig = px.scatter_map(dff[:1], lat='Lat', lon='Lon', zoom=12)
+# Add the datashader image as a tile map layer image
+fig.update_layout(
+    map_style="carto-darkmatter",
+    map_layers=[{"sourcetype": "image", "source": img, "coordinates": coordinates}],
 )
 fig.show()
 ```
@@ -112,8 +108,4 @@ fig = px.imshow(agg, origin='lower', labels={'color':'Log10(count)'})
 fig.update_traces(hoverongaps=False)
 fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
 fig.show()
-```
-
-```python
-
 ```
