@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Bubble Maps
-    order: 4
+    order: 5
     page_type: example_index
     permalink: python/bubble-maps/
     thumbnail: thumbnail/bubble-map.jpg

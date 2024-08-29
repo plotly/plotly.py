@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Lines on Maps
-    order: 2
+    order: 3
     page_type: example_index
     permalink: python/lines-on-tile-maps/
     redirect_from: python/lines-on-mapbox/

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Map Configuration and Styling on Geo Maps
-    order: 12
+    order: 13
     page_type: u-guide
     permalink: python/map-configuration/
     thumbnail: thumbnail/county-level-choropleth.jpg
