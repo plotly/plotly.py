@@ -68,3 +68,8 @@ Built-in styles in map traces are free styles from [Carto](https://carto.com) an
   <img src="https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/baselines/map_predefined-styles2.png" alt="Style comparison part 2" width="45%" />
 </p>
 
+Compare to the previous Mapbox styles:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/plotly/graphing-library-docs/master/all_static/images/mapbox_1.png" alt="Style comparison part 1" width="45%" />
+  <img src="https://raw.githubusercontent.com/plotly/graphing-library-docs/master/all_static/images/mapbox_2.png" alt="Style comparison part 2" width="45%" />
+</p>
