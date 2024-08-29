@@ -29,8 +29,8 @@ jupyter:
     name: Tile Map Layers
     order: 9
     page_type: u-guide
-    permalink: /python/tile-map-layers/
-    redirect_from: /python/mapbox-layers/
+    permalink: python/tile-map-layers/
+    redirect_from: python/mapbox-layers/
     thumbnail: thumbnail/mapbox-layers.png
 ---
 
