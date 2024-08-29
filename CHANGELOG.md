@@ -2,7 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## [5.24.0] - 2024-08-29
+
+### Added
+- New `px` functions for maps: `scatter_map`, `line_map`, `choropleth_map`, and `density_map`.
 
 ### Updated
 
