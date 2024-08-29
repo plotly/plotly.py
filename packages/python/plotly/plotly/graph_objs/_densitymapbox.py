@@ -1234,9 +1234,12 @@ class Densitymapbox(_BaseTraceType):
     @property
     def subplot(self):
         """
-        Sets a reference between this trace's data coordinates and a
-        mapbox subplot. If "mapbox" (the default value), the data refer
-        to `layout.mapbox`. If "mapbox2", the data refer to
+        mapbox subplots and traces are deprecated! Please consider
+        switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/javascript/maplibre-migration/ Sets a
+        reference between this trace's data coordinates and a mapbox
+        subplot. If "mapbox" (the default value), the data refer to
+        `layout.mapbox`. If "mapbox2", the data refer to
         `layout.mapbox2`, and so on.
 
         The 'subplot' property is an identifier of a particular
@@ -1699,10 +1702,14 @@ class Densitymapbox(_BaseTraceType):
             :class:`plotly.graph_objects.densitymapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
@@ -1823,9 +1830,12 @@ class Densitymapbox(_BaseTraceType):
         """
         Construct a new Densitymapbox object
 
-        Draws a bivariate kernel density estimation with a Gaussian
-        kernel from `lon` and `lat` coordinates and optional `z` values
-        using a colorscale.
+        "densitymapbox" trace is deprecated! Please consider switching
+        to the "densitymap" trace type and `map` subplots. Learn more
+        at: https://plotly.com/javascript/maplibre-migration/ Draws a
+        bivariate kernel density estimation with a Gaussian kernel from
+        `lon` and `lat` coordinates and optional `z` values using a
+        colorscale.
 
         Parameters
         ----------
@@ -2013,10 +2023,14 @@ class Densitymapbox(_BaseTraceType):
             :class:`plotly.graph_objects.densitymapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
