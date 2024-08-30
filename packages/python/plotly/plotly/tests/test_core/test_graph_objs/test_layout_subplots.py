@@ -173,7 +173,7 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(layout.geo4.bgcolor, "blue")
         self.assertEqual(layout.ternary5.sum, 120)
         self.assertEqual(layout.scene6.dragmode, "zoom")
-        self.assertEqual(layout.map.zoom, 2)
+        self.assertEqual(layout.map7.zoom, 2)
         self.assertEqual(layout.polar8.sector, (0, 90))
 
     def test_create_subplot_with_update(self):
