@@ -292,6 +292,15 @@ def is_typed_array_spec(v):
     return isinstance(v, dict) and "bdata" in v and "dtype" in v
 
 
+def has_skipped_key(all_parent_keys):
+    """
+    Return whether any keys in the parent hierarchy are in the list of keys that 
+    are skipped for conversion to the typed array spec
+    """
+    skipped_keys = ['geojson', 'layer', 'range']
+    return any(skipped_key in all_parent_keys for skipped_key in skipped_keys)
+
+
 def is_none_or_typed_array_spec(v):
     return v is None or is_typed_array_spec(v)
 
@@ -491,7 +500,7 @@ class DataArrayValidator(BaseValidator):
     def validate_coerce(self, v):
         if is_none_or_typed_array_spec(v):
             pass
-        elif 'layer' in self.parent_name or 'range' in self.parent_name or 'geojson' in self.parent_name:
+        elif has_skipped_key(self.parent_name):
             v = to_scalar_or_list(v)
         elif is_homogeneous_array(v):
             v = to_typed_array_spec(v)
