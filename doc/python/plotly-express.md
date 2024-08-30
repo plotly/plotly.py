@@ -60,7 +60,7 @@ Plotly Express currently includes the following functions:
 * **Matrix or Image Input**: [`imshow`](/python/imshow/)
 * **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
 * **Multidimensional**: [`scatter_matrix`](/python/splom/), [`parallel_coordinates`](/python/parallel-coordinates-plot/), [`parallel_categories`](/python/parallel-categories-diagram/)
-* **Tile Maps**: [`scatter_mapbox`](/python/scattermapbox/), [`line_mapbox`](/python/lines-on-mapbox/), [`choropleth_mapbox`](/python/mapbox-county-choropleth/), [`density_mapbox`](/python/mapbox-density-heatmaps/)
+* **Tile Maps**: [`scatter_map`](/python/tile-scatter-maps/), [`line_map`](/python/lines-on-tile-maps/), [`choropleth_map`](/python/tile-county-choropleth/), [`density_map`](/python/tile-density-heatmaps/)
 * **Outline Maps**: [`scatter_geo`](/python/scatter-plots-on-maps/), [`line_geo`](/python/lines-on-maps/), [`choropleth`](/python/choropleth-maps/)
 * **Polar Charts**: [`scatter_polar`](/python/polar-chart/), [`line_polar`](/python/polar-chart/), [`bar_polar`](/python/wind-rose-charts/)
 * **Ternary Charts**: [`scatter_ternary`](/python/ternary-plots/), [`line_ternary`](/python/ternary-plots/)
@@ -393,18 +393,18 @@ fig.show()
 
 #### Tile Maps
 
-**Read more about [tile maps](/python/mapbox-layers/) and [point on tile maps](/python/scattermapbox/).**
+**Read more about [tile maps](/python/tile-map-layers/) and [point on tile maps](/python/tile-scatter-maps/).**
 
 ```python
 import plotly.express as px
 df = px.data.carshare()
-fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", size="car_hours",
+fig = px.scatter_map(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", size="car_hours",
                   color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10,
-                  mapbox_style="carto-positron")
+                  map_style="carto-positron")
 fig.show()
 ```
 
-**Read more about [tile map GeoJSON choropleths](/python/mapbox-county-choropleth/).**
+**Read more about [tile map GeoJSON choropleths](/python/tile-county-choropleth/).**
 
 ```python
 import plotly.express as px
@@ -412,10 +412,10 @@ import plotly.express as px
 df = px.data.election()
 geojson = px.data.election_geojson()
 
-fig = px.choropleth_mapbox(df, geojson=geojson, color="Bergeron",
+fig = px.choropleth_map(df, geojson=geojson, color="Bergeron",
                            locations="district", featureidkey="properties.district",
                            center={"lat": 45.5517, "lon": -73.7073},
-                           mapbox_style="carto-positron", zoom=9)
+                           map_style="carto-positron", zoom=9)
 fig.show()
 ```
 
