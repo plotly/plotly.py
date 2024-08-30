@@ -45,18 +45,19 @@ class ModebarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "reset", "resetCameraDefault3d",
                 "resetCameraLastSave3d", "resetGeo",
                 "resetSankeyGroup", "resetScale2d",
-                "resetViewMapbox", "resetViews",
-                "resetcameradefault", "resetcameralastsave",
-                "resetsankeygroup", "resetscale", "resetview",
-                "resetviews", "select", "select2d",
-                "sendDataToCloud", "senddatatocloud",
-                "tableRotation", "tablerotation", "toImage",
-                "toggleHover", "toggleSpikelines",
-                "togglehover", "togglespikelines", "toimage",
-                "zoom", "zoom2d", "zoom3d", "zoomIn2d",
-                "zoomInGeo", "zoomInMapbox", "zoomOut2d",
-                "zoomOutGeo", "zoomOutMapbox", "zoomin",
-                "zoomout".
+                "resetViewMap", "resetViewMapbox",
+                "resetViews", "resetcameradefault",
+                "resetcameralastsave", "resetsankeygroup",
+                "resetscale", "resetview", "resetviews",
+                "select", "select2d", "sendDataToCloud",
+                "senddatatocloud", "tableRotation",
+                "tablerotation", "toImage", "toggleHover",
+                "toggleSpikelines", "togglehover",
+                "togglespikelines", "toimage", "zoom",
+                "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
+                "zoomInMap", "zoomInMapbox", "zoomOut2d",
+                "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+                "zoomin", "zoomout".
             removesrc
                 Sets the source reference on Chart Studio Cloud
                 for `remove`.

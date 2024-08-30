@@ -8,6 +8,7 @@ class Layout(_BaseLayoutType):
         "coloraxis",
         "geo",
         "legend",
+        "map",
         "mapbox",
         "polar",
         "scene",
@@ -34,6 +35,7 @@ class Layout(_BaseLayoutType):
             ColoraxisValidator,
             GeoValidator,
             LegendValidator,
+            MapValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -47,6 +49,7 @@ class Layout(_BaseLayoutType):
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
             "legend": LegendValidator,
+            "map": MapValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -111,6 +114,7 @@ class Layout(_BaseLayoutType):
         "imagedefaults",
         "images",
         "legend",
+        "map",
         "mapbox",
         "margin",
         "meta",
@@ -2179,6 +2183,83 @@ class Layout(_BaseLayoutType):
     def legend(self, val):
         self["legend"] = val
 
+    # map
+    # ---
+    @property
+    def map(self):
+        """
+        The 'map' property is an instance of Map
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Map`
+          - A dict of string/value properties that will be passed
+            to the Map constructor
+
+            Supported dict properties:
+
+                bearing
+                    Sets the bearing angle of the map in degrees
+                    counter-clockwise from North (map.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.map.Bounds`
+                    instance or dict with compatible properties
+                center
+                    :class:`plotly.graph_objects.layout.map.Center`
+                    instance or dict with compatible properties
+                domain
+                    :class:`plotly.graph_objects.layout.map.Domain`
+                    instance or dict with compatible properties
+                layers
+                    A tuple of
+                    :class:`plotly.graph_objects.layout.map.Layer`
+                    instances or dicts with compatible properties
+                layerdefaults
+                    When used in a template (as
+                    layout.template.layout.map.layerdefaults), sets
+                    the default property values to use for elements
+                    of layout.map.layers
+                pitch
+                    Sets the pitch angle of the map (in degrees,
+                    where 0 means perpendicular to the surface of
+                    the map) (map.pitch).
+                style
+                    Defines the map layers that are rendered by
+                    default below the trace layers defined in
+                    `data`, which are themselves by default
+                    rendered below the layers defined in
+                    `layout.map.layers`.  These layers can be
+                    defined either explicitly as a Map Style object
+                    which can contain multiple layer definitions
+                    that load data from any public or private Tile
+                    Map Service (TMS or XYZ) or Web Map Service
+                    (WMS) or implicitly by using one of the built-
+                    in style objects which use WMSes or by using a
+                    custom style URL  Map Style objects are of the
+                    form described in the MapLibre GL JS
+                    documentation available at
+                    https://maplibre.org/maplibre-style-spec/  The
+                    built-in plotly.js styles objects are: basic,
+                    carto-darkmatter, carto-darkmatter-nolabels,
+                    carto-positron, carto-positron-nolabels, carto-
+                    voyager, carto-voyager-nolabels, dark, light,
+                    open-street-map, outdoors, satellite,
+                    satellite-streets, streets, white-bg.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view: `center`, `zoom`, `bearing`, `pitch`.
+                    Defaults to `layout.uirevision`.
+                zoom
+                    Sets the zoom level of the map (map.zoom).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Map
+        """
+        return self["map"]
+
+    @map.setter
+    def map(self, val):
+        self["map"] = val
+
     # mapbox
     # ------
     @property
@@ -2448,18 +2529,19 @@ class Layout(_BaseLayoutType):
                     "reset", "resetCameraDefault3d",
                     "resetCameraLastSave3d", "resetGeo",
                     "resetSankeyGroup", "resetScale2d",
-                    "resetViewMapbox", "resetViews",
-                    "resetcameradefault", "resetcameralastsave",
-                    "resetsankeygroup", "resetscale", "resetview",
-                    "resetviews", "select", "select2d",
-                    "sendDataToCloud", "senddatatocloud",
-                    "tableRotation", "tablerotation", "toImage",
-                    "toggleHover", "toggleSpikelines",
-                    "togglehover", "togglespikelines", "toimage",
-                    "zoom", "zoom2d", "zoom3d", "zoomIn2d",
-                    "zoomInGeo", "zoomInMapbox", "zoomOut2d",
-                    "zoomOutGeo", "zoomOutMapbox", "zoomin",
-                    "zoomout".
+                    "resetViewMap", "resetViewMapbox",
+                    "resetViews", "resetcameradefault",
+                    "resetcameralastsave", "resetsankeygroup",
+                    "resetscale", "resetview", "resetviews",
+                    "select", "select2d", "sendDataToCloud",
+                    "senddatatocloud", "tableRotation",
+                    "tablerotation", "toImage", "toggleHover",
+                    "toggleSpikelines", "togglehover",
+                    "togglespikelines", "toimage", "zoom",
+                    "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
+                    "zoomInMap", "zoomInMapbox", "zoomOut2d",
+                    "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+                    "zoomin", "zoomout".
                 removesrc
                     Sets the source reference on Chart Studio Cloud
                     for `remove`.
@@ -5851,6 +5933,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6136,6 +6221,7 @@ class Layout(_BaseLayoutType):
         images=None,
         imagedefaults=None,
         legend=None,
+        map=None,
         mapbox=None,
         margin=None,
         meta=None,
@@ -6454,6 +6540,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6746,6 +6835,7 @@ class Layout(_BaseLayoutType):
             "imagedefaults",
             "images",
             "legend",
+            "map",
             "mapbox",
             "margin",
             "meta",
@@ -7007,6 +7097,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = legend if legend is not None else _v
         if _v is not None:
             self["legend"] = _v
+        _v = arg.pop("map", None)
+        _v = map if map is not None else _v
+        if _v is not None:
+            self["map"] = _v
         _v = arg.pop("mapbox", None)
         _v = mapbox if mapbox is not None else _v
         if _v is not None:
