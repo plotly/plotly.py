@@ -68,8 +68,6 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
 
         fig = go.Figure(data=data, layout=layout)
 
-        # TODO: This is failing because the actual value of the "dash" field
-        # is converted to the { b64, dtype } object.
         assert fig.layout['mapbox']['layers'][0]['line']['dash'] == (2.5, 1)
 
         assert (
