@@ -15,10 +15,12 @@ class Data(_BaseLayoutHierarchyType):
         "candlestick",
         "carpet",
         "choropleth",
+        "choroplethmap",
         "choroplethmapbox",
         "cone",
         "contour",
         "contourcarpet",
+        "densitymap",
         "densitymapbox",
         "funnel",
         "funnelarea",
@@ -43,6 +45,7 @@ class Data(_BaseLayoutHierarchyType):
         "scattercarpet",
         "scattergeo",
         "scattergl",
+        "scattermap",
         "scattermapbox",
         "scatterpolar",
         "scatterpolargl",
@@ -197,6 +200,29 @@ class Data(_BaseLayoutHierarchyType):
     def choroplethmapbox(self, val):
         self["choroplethmapbox"] = val
 
+    # choroplethmap
+    # -------------
+    @property
+    def choroplethmap(self):
+        """
+        The 'choroplethmap' property is a tuple of instances of
+        Choroplethmap that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmap
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Choroplethmap constructor
+
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Choroplethmap]
+        """
+        return self["choroplethmap"]
+
+    @choroplethmap.setter
+    def choroplethmap(self, val):
+        self["choroplethmap"] = val
+
     # choropleth
     # ----------
     @property
@@ -311,6 +337,29 @@ class Data(_BaseLayoutHierarchyType):
     @densitymapbox.setter
     def densitymapbox(self, val):
         self["densitymapbox"] = val
+
+    # densitymap
+    # ----------
+    @property
+    def densitymap(self):
+        """
+        The 'densitymap' property is a tuple of instances of
+        Densitymap that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymap
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Densitymap constructor
+
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Densitymap]
+        """
+        return self["densitymap"]
+
+    @densitymap.setter
+    def densitymap(self, val):
+        self["densitymap"] = val
 
     # funnelarea
     # ----------
@@ -841,6 +890,29 @@ class Data(_BaseLayoutHierarchyType):
     def scattermapbox(self, val):
         self["scattermapbox"] = val
 
+    # scattermap
+    # ----------
+    @property
+    def scattermap(self):
+        """
+        The 'scattermap' property is a tuple of instances of
+        Scattermap that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattermap
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Scattermap constructor
+
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Scattermap]
+        """
+        return self["scattermap"]
+
+    @scattermap.setter
+    def scattermap(self, val):
+        self["scattermap"] = val
+
     # scatterpolargl
     # --------------
     @property
@@ -1187,6 +1259,9 @@ class Data(_BaseLayoutHierarchyType):
             A tuple of
             :class:`plotly.graph_objects.Choroplethmapbox`
             instances or dicts with compatible properties
+        choroplethmap
+            A tuple of :class:`plotly.graph_objects.Choroplethmap`
+            instances or dicts with compatible properties
         choropleth
             A tuple of :class:`plotly.graph_objects.Choropleth`
             instances or dicts with compatible properties
@@ -1201,6 +1276,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         densitymapbox
             A tuple of :class:`plotly.graph_objects.Densitymapbox`
+            instances or dicts with compatible properties
+        densitymap
+            A tuple of :class:`plotly.graph_objects.Densitymap`
             instances or dicts with compatible properties
         funnelarea
             A tuple of :class:`plotly.graph_objects.Funnelarea`
@@ -1271,6 +1349,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         scattermapbox
             A tuple of :class:`plotly.graph_objects.Scattermapbox`
+            instances or dicts with compatible properties
+        scattermap
+            A tuple of :class:`plotly.graph_objects.Scattermap`
             instances or dicts with compatible properties
         scatterpolargl
             A tuple of :class:`plotly.graph_objects.Scatterpolargl`
@@ -1325,11 +1406,13 @@ class Data(_BaseLayoutHierarchyType):
         candlestick=None,
         carpet=None,
         choroplethmapbox=None,
+        choroplethmap=None,
         choropleth=None,
         cone=None,
         contourcarpet=None,
         contour=None,
         densitymapbox=None,
+        densitymap=None,
         funnelarea=None,
         funnel=None,
         heatmapgl=None,
@@ -1353,6 +1436,7 @@ class Data(_BaseLayoutHierarchyType):
         scattergeo=None,
         scattergl=None,
         scattermapbox=None,
+        scattermap=None,
         scatterpolargl=None,
         scatterpolar=None,
         scatter=None,
@@ -1397,6 +1481,9 @@ class Data(_BaseLayoutHierarchyType):
             A tuple of
             :class:`plotly.graph_objects.Choroplethmapbox`
             instances or dicts with compatible properties
+        choroplethmap
+            A tuple of :class:`plotly.graph_objects.Choroplethmap`
+            instances or dicts with compatible properties
         choropleth
             A tuple of :class:`plotly.graph_objects.Choropleth`
             instances or dicts with compatible properties
@@ -1411,6 +1498,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         densitymapbox
             A tuple of :class:`plotly.graph_objects.Densitymapbox`
+            instances or dicts with compatible properties
+        densitymap
+            A tuple of :class:`plotly.graph_objects.Densitymap`
             instances or dicts with compatible properties
         funnelarea
             A tuple of :class:`plotly.graph_objects.Funnelarea`
@@ -1481,6 +1571,9 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         scattermapbox
             A tuple of :class:`plotly.graph_objects.Scattermapbox`
+            instances or dicts with compatible properties
+        scattermap
+            A tuple of :class:`plotly.graph_objects.Scattermap`
             instances or dicts with compatible properties
         scatterpolargl
             A tuple of :class:`plotly.graph_objects.Scatterpolargl`
@@ -1582,6 +1675,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = choroplethmapbox if choroplethmapbox is not None else _v
         if _v is not None:
             self["choroplethmapbox"] = _v
+        _v = arg.pop("choroplethmap", None)
+        _v = choroplethmap if choroplethmap is not None else _v
+        if _v is not None:
+            self["choroplethmap"] = _v
         _v = arg.pop("choropleth", None)
         _v = choropleth if choropleth is not None else _v
         if _v is not None:
@@ -1602,6 +1699,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = densitymapbox if densitymapbox is not None else _v
         if _v is not None:
             self["densitymapbox"] = _v
+        _v = arg.pop("densitymap", None)
+        _v = densitymap if densitymap is not None else _v
+        if _v is not None:
+            self["densitymap"] = _v
         _v = arg.pop("funnelarea", None)
         _v = funnelarea if funnelarea is not None else _v
         if _v is not None:
@@ -1694,6 +1795,10 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = scattermapbox if scattermapbox is not None else _v
         if _v is not None:
             self["scattermapbox"] = _v
+        _v = arg.pop("scattermap", None)
+        _v = scattermap if scattermap is not None else _v
+        if _v is not None:
+            self["scattermap"] = _v
         _v = arg.pop("scatterpolargl", None)
         _v = scatterpolargl if scatterpolargl is not None else _v
         if _v is not None:
