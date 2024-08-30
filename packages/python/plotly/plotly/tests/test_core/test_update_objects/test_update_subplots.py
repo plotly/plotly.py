@@ -114,7 +114,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
         # object is always present
         self.assert_select_subplots("geo", "geos", [1], test_no_grid=True)
 
-        self.assert_select_subplots("mapbox", "mapboxes", [1], test_no_grid=True)
+        self.assert_select_subplots("map", "maps", [1], test_no_grid=True)
 
     def test_select_by_type_and_grid(self):
         self.assert_select_subplots("xaxis", "xaxes", [1, 2], row=1)
@@ -273,7 +273,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
         )
 
         self.assert_select_subplots(
-            "mapbox", "mapboxes", [], selector={"pitch": 45}, test_no_grid=True
+            "map", "maps", [], selector={"pitch": 45}, test_no_grid=True
         )
 
     def test_select_by_type_and_grid_and_selector(self):
@@ -431,7 +431,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
         )
 
         self.assert_update_subplots(
-            "mapbox", "mapboxes", [1], {"pitch": 99}, test_no_grid=True
+            "map", "maps", [1], {"pitch": 99}, test_no_grid=True
         )
 
     def test_update_by_type_and_grid(self):
