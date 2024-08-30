@@ -22,7 +22,7 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(self.layout.yaxis, go.layout.YAxis())
         self.assertEqual(self.layout["geo"], go.layout.Geo())
         self.assertEqual(self.layout.scene, go.layout.Scene())
-        self.assertEqual(self.layout.mapbox, go.layout.Mapbox())
+        self.assertEqual(self.layout.map, go.layout.Map())
         self.assertEqual(self.layout.polar, go.layout.Polar())
 
         # Subplot ids of 1 should be mapped to the same object as the base
@@ -31,7 +31,7 @@ class TestLayoutSubplots(TestCase):
         self.assertIs(self.layout.yaxis, self.layout.yaxis1)
         self.assertIs(self.layout.geo, self.layout.geo1)
         self.assertIs(self.layout.scene, self.layout.scene1)
-        self.assertIs(self.layout.mapbox, self.layout.mapbox1)
+        self.assertIs(self.layout.map, self.layout.map1)
         self.assertIs(self.layout.polar, self.layout.polar1)
 
     def test_initial_access_subplot2(self):
@@ -147,8 +147,8 @@ class TestLayoutSubplots(TestCase):
         self.layout.scene6 = {}
         self.assertIsInstance(self.layout.scene6, go.layout.Scene)
 
-        self.layout.mapbox7 = {}
-        self.assertIsInstance(self.layout.mapbox7, go.layout.Mapbox)
+        self.layout.map7 = {}
+        self.assertIsInstance(self.layout.map7, go.layout.Map)
 
         self.layout.polar8 = {}
         self.assertIsInstance(self.layout.polar8, go.layout.Polar)
@@ -164,7 +164,7 @@ class TestLayoutSubplots(TestCase):
             geo4=go.layout.Geo(bgcolor="blue"),
             ternary5=go.layout.Ternary(sum=120),
             scene6=go.layout.Scene(dragmode="zoom"),
-            mapbox7=go.layout.Mapbox(zoom=2),
+            map7=go.layout.Map(zoom=2),
             polar8=go.layout.Polar(sector=[0, 90]),
         )
 
@@ -173,7 +173,7 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(layout.geo4.bgcolor, "blue")
         self.assertEqual(layout.ternary5.sum, 120)
         self.assertEqual(layout.scene6.dragmode, "zoom")
-        self.assertEqual(layout.mapbox7.zoom, 2)
+        self.assertEqual(layout.map7.zoom, 2)
         self.assertEqual(layout.polar8.sector, (0, 90))
 
     def test_create_subplot_with_update(self):
@@ -185,7 +185,7 @@ class TestLayoutSubplots(TestCase):
             geo4=go.layout.Geo(bgcolor="blue"),
             ternary5=go.layout.Ternary(sum=120),
             scene6=go.layout.Scene(dragmode="zoom"),
-            mapbox7=go.layout.Mapbox(zoom=2),
+            map7=go.layout.Map(zoom=2),
             polar8=go.layout.Polar(sector=[0, 90]),
         )
 
@@ -195,7 +195,7 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(self.layout.geo4.bgcolor, "blue")
         self.assertEqual(self.layout.ternary5.sum, 120)
         self.assertEqual(self.layout.scene6.dragmode, "zoom")
-        self.assertEqual(self.layout.mapbox7.zoom, 2)
+        self.assertEqual(self.layout.map7.zoom, 2)
         self.assertEqual(self.layout.polar8.sector, (0, 90))
 
     def test_create_subplot_with_update_dict(self):
@@ -208,7 +208,7 @@ class TestLayoutSubplots(TestCase):
                 "geo4": {"bgcolor": "blue"},
                 "ternary5": {"sum": 120},
                 "scene6": {"dragmode": "zoom"},
-                "mapbox7": {"zoom": 2},
+                "map7": {"zoom": 2},
                 "polar8": {"sector": [0, 90]},
             }
         )
@@ -219,7 +219,7 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(self.layout.geo4.bgcolor, "blue")
         self.assertEqual(self.layout.ternary5.sum, 120)
         self.assertEqual(self.layout.scene6.dragmode, "zoom")
-        self.assertEqual(self.layout.mapbox7.zoom, 2)
+        self.assertEqual(self.layout.map7.zoom, 2)
         self.assertEqual(self.layout.polar8.sector, (0, 90))
 
     def test_bug_1462(self):
