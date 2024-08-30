@@ -294,10 +294,10 @@ def is_typed_array_spec(v):
 
 def has_skipped_key(all_parent_keys):
     """
-    Return whether any keys in the parent hierarchy are in the list of keys that 
+    Return whether any keys in the parent hierarchy are in the list of keys that
     are skipped for conversion to the typed array spec
     """
-    skipped_keys = ['geojson', 'layer', 'range']
+    skipped_keys = ["geojson", "layer", "range"]
     return any(skipped_key in all_parent_keys for skipped_key in skipped_keys)
 
 
