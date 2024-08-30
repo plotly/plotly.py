@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/heatmap.jpg
 ---
 
-The term "heatmap" usually refers to a cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/mapbox-density-heatmaps/).
+The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/tile-density-heatmaps/).
 
 Plotly supports two different types of colored-tile heatmaps:
 
