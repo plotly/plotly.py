@@ -110,11 +110,11 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
         self.assert_select_subplots("ternary", "ternaries", [1], test_no_grid=True)
 
-        # No 'geo' or 'mapbox' subplots initialized, but the first subplot
+        # No 'geo' or 'map' subplots initialized, but the first subplot
         # object is always present
         self.assert_select_subplots("geo", "geos", [1], test_no_grid=True)
 
-        self.assert_select_subplots("mapbox", "mapboxes", [1], test_no_grid=True)
+        self.assert_select_subplots("map", "maps", [1], test_no_grid=True)
 
     def test_select_by_type_and_grid(self):
         self.assert_select_subplots("xaxis", "xaxes", [1, 2], row=1)
@@ -262,7 +262,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
             "ternary", "ternaries", [1], selector=-1, test_no_grid=True
         )
 
-        # No 'geo' or 'mapbox' subplots initialized, but the first subplot
+        # No 'geo' or 'map' subplots initialized, but the first subplot
         # object is always present
         self.assert_select_subplots(
             "geo", "geos", [], selector={"bgcolor": "blue"}, test_no_grid=True
@@ -273,7 +273,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
         )
 
         self.assert_select_subplots(
-            "mapbox", "mapboxes", [], selector={"pitch": 45}, test_no_grid=True
+            "map", "maps", [], selector={"pitch": 45}, test_no_grid=True
         )
 
     def test_select_by_type_and_grid_and_selector(self):
@@ -424,14 +424,14 @@ class TestSelectForEachUpdateSubplots(TestCase):
             test_no_grid=True,
         )
 
-        # No 'geo' or 'mapbox' subplots initialized, but the first subplot
+        # No 'geo' or 'map' subplots initialized, but the first subplot
         # object is always present
         self.assert_update_subplots(
             "geo", "geos", [1], {"bgcolor": "purple"}, test_no_grid=True
         )
 
         self.assert_update_subplots(
-            "mapbox", "mapboxes", [1], {"pitch": 99}, test_no_grid=True
+            "map", "maps", [1], {"pitch": 99}, test_no_grid=True
         )
 
     def test_update_by_type_and_grid(self):
