@@ -398,9 +398,7 @@ fig.write_html(os.path.join(dir_name, "scatter_map.html"))
 
 
 carshare = px.data.carshare()
-fig = px.line_map(
-    carshare, lat="centroid_lat", lon="centroid_lon", color="peak_hour"
-)
+fig = px.line_map(carshare, lat="centroid_lat", lon="centroid_lon", color="peak_hour")
 fig.write_html(os.path.join(dir_name, "line_map.html"))
 
 
