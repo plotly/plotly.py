@@ -68,7 +68,7 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
 
         fig = go.Figure(data=data, layout=layout)
 
-        assert fig.layout['mapbox']['layers'][0]['line']['dash'] == (2.5, 1)
+        assert fig.layout["mapbox"]["layers"][0]["line"]["dash"] == (2.5, 1)
 
         assert (
             fig.layout["mapbox"]["layers"][0]["source"]["features"][0]["geometry"][
