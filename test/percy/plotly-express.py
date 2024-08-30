@@ -384,7 +384,7 @@ fig.write_html(os.path.join(dir_name, "bar_polar.html"))
 
 
 carshare = px.data.carshare()
-fig = px.scatter_mapbox(
+fig = px.scatter_map(
     carshare,
     lat="centroid_lat",
     lon="centroid_lon",
@@ -394,14 +394,14 @@ fig = px.scatter_mapbox(
     size_max=15,
     zoom=10,
 )
-fig.write_html(os.path.join(dir_name, "scatter_mapbox.html"))
+fig.write_html(os.path.join(dir_name, "scatter_map.html"))
 
 
 carshare = px.data.carshare()
-fig = px.line_mapbox(
+fig = px.line_map(
     carshare, lat="centroid_lat", lon="centroid_lon", color="peak_hour"
 )
-fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
+fig.write_html(os.path.join(dir_name, "line_map.html"))
 
 
 sample_geojson = {
@@ -419,23 +419,23 @@ sample_geojson = {
         }
     ],
 }
-fig = px.choropleth_mapbox(
+fig = px.choropleth_map(
     geojson=sample_geojson,
     locations=["the_polygon"],
     color=[10],
     zoom=6,
 )
-fig.write_html(os.path.join(dir_name, "choropleth_mapbox.html"), auto_play=False)
+fig.write_html(os.path.join(dir_name, "choropleth_map.html"), auto_play=False)
 
 
 carshare = px.data.carshare()
-fig = px.density_mapbox(
+fig = px.density_map(
     carshare,
     lat="centroid_lat",
     lon="centroid_lon",
     z="peak_hour",
 )
-fig.write_html(os.path.join(dir_name, "density_mapbox.html"), auto_play=False)
+fig.write_html(os.path.join(dir_name, "density_map.html"), auto_play=False)
 
 
 gapminder = px.data.gapminder()
