@@ -309,7 +309,7 @@ def area(
 ) -> go.Figure:
     """
     In a stacked area plot, each row of `data_frame` is represented as
-    a vertex of a polyline mark in 2D space. The area between 
+    a vertex of a polyline mark in 2D space. The area between
     successive polylines is filled.
     """
     return make_figure(
@@ -992,7 +992,7 @@ def line_polar(
     height=None,
 ) -> go.Figure:
     """
-    In a polar line plot, each row of `data_frame` is represented as a 
+    In a polar line plot, each row of `data_frame` is represented as a
     vertex of a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
