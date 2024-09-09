@@ -39,7 +39,7 @@ Plotly supports two different kinds of maps:
 
 - **[Tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map)**
 
-If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`,`go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox` the `layout.map` object in your figure contains configuration information for the map itself.
+If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`, `go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox`, the `layout.map` object in your figure contains configuration information for the map itself.
 
 - **Outline-based maps**
 
