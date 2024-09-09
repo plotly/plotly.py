@@ -26,7 +26,7 @@ jupyter:
     display_as: maps
     language: python
     layout: base
-    name: Lines on Maps
+    name: Lines on Tile Maps
     order: 3
     page_type: example_index
     permalink: python/lines-on-tile-maps/
@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/line_mapbox.jpg
 ---
 
-### Lines on maps using Plotly Express
+### Lines on tile maps using Plotly Express
 
 To draw a line on a map, you either can use `px.line_map` in Plotly Express, or `go.Scattermap` in Plotly Graph Objects. Here's an example of drawing a line on a tile-based map using Plotly Express.
 
