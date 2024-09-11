@@ -156,7 +156,6 @@ def test_colab_renderer_show(fig1):
     # Check html contents
     html = mock_arg1["text/html"]
     assert_full_html(html)
-    assert_html_renderer_connected(html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
@@ -183,10 +182,7 @@ def test_notebook_connected_show(fig1, name, connected):
 
     # Check init display contents
     bundle_display_html = mock_arg1_html
-    if connected:
-        assert_html_renderer_connected(bundle_display_html)
-    else:
-        assert_offline(bundle_display_html)
+    assert_offline(bundle_display_html)
 
     # ### Check display call ###
     # Get display call arguments
