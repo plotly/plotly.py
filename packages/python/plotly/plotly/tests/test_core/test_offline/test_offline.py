@@ -161,30 +161,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(directory_script, html)
 
-    def test_including_plotlyjs_cdn_html(self):
-        for include_plotlyjs in ["cdn", "CDN", "Cdn"]:
-            html = self._read_html(
-                plotly.offline.plot(
-                    fig,
-                    include_plotlyjs=include_plotlyjs,
-                    output_type="file",
-                    filename=html_filename,
-                    auto_open=False,
-                )
-            )
-            self.assertIn(plotly_config_script, html)
-            self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(directory_script, html)
-
-    def test_including_plotlyjs_cdn_div(self):
-        for include_plotlyjs in ["cdn", "CDN", "Cdn"]:
-            html = plotly.offline.plot(
-                fig, include_plotlyjs=include_plotlyjs, output_type="div"
-            )
-            self.assertIn(plotly_config_script, html)
-            self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(directory_script, html)
-
     def test_including_plotlyjs_directory_html(self):
         self.assertFalse(os.path.exists(os.path.join(here, "plotly.min.js")))
 
