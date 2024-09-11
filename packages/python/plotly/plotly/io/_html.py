@@ -57,21 +57,9 @@ def to_html(
         is included in the output.  HTML files generated with this option are
         fully self-contained and can be used offline.
 
-        If 'cdn', a script tag that references the plotly.js CDN is included
-        in the output. The url used is versioned to match the bundled plotly.js.
-        HTML files generated with this option are about 3MB smaller than those
-        generated with include_plotlyjs=True, but they require an active
-        internet connection in order to load the plotly.js library.
-
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.
-
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
 
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
@@ -392,12 +380,6 @@ def write_html(
         is included in the output.  HTML files generated with this option are
         fully self-contained and can be used offline.
 
-        If 'cdn', a script tag that references the plotly.js CDN is included
-        in the output. The url used is versioned to match the bundled plotly.js.
-        HTML files generated with this option are about 3MB smaller than those
-        generated with include_plotlyjs=True, but they require an active
-        internet connection in order to load the plotly.js library.
-
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.  If `file` is a string to a local file
@@ -410,12 +392,6 @@ def write_html(
         useful when many figures will be saved as HTML files in the same
         directory because the plotly.js source code will be included only
         once per output directory, rather than once per output file.
-
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
 
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
