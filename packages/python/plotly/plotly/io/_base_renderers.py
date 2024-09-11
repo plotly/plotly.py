@@ -327,9 +327,6 @@ class HtmlRenderer(MimetypeRenderer):
         if self.requirejs:
             include_plotlyjs = "require"
             include_mathjax = False
-        elif self.connected:
-            include_plotlyjs = "cdn"
-            include_mathjax = "cdn"
         else:
             include_plotlyjs = True
             include_mathjax = "cdn"
@@ -760,7 +757,7 @@ class DatabricksRenderer(ExternalRenderer):
         auto_play=False,
         post_script=None,
         animation_opts=None,
-        include_plotlyjs="cdn",
+        include_plotlyjs=True,
     ):
 
         self.config = config
@@ -840,9 +837,6 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         if self.requirejs:
             include_plotlyjs = "require"
             include_mathjax = False
-        elif self.connected:
-            include_plotlyjs = "cdn"
-            include_mathjax = "cdn"
         else:
             include_plotlyjs = True
             include_mathjax = "cdn"
@@ -875,7 +869,7 @@ class SphinxGalleryOrcaRenderer(ExternalRenderer):
         filename_html = filename_root + ".html"
         filename_png = filename_root + ".png"
         figure = return_figure_from_figure_or_data(fig_dict, True)
-        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
+        _ = write_html(fig_dict, file=filename_html, include_plotlyjs=True)
         try:
             write_image(figure, filename_png)
         except (ValueError, ImportError):

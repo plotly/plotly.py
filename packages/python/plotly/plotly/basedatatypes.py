@@ -3524,12 +3524,6 @@ Invalid property path '{key_path_str}' for layout
             is included in the output.  HTML files generated with this option are
             fully self-contained and can be used offline.
 
-            If 'cdn', a script tag that references the plotly.js CDN is included
-            in the output. HTML files generated with this option are about 3MB
-            smaller than those generated with include_plotlyjs=True, but they
-            require an active internet connection in order to load the plotly.js
-            library.
-
             If 'directory', a script tag is included that references an external
             plotly.min.js bundle that is assumed to reside in the same
             directory as the HTML file.
