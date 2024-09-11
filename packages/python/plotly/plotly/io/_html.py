@@ -254,27 +254,10 @@ def to_html(
     if isinstance(include_plotlyjs, str):
         include_plotlyjs = include_plotlyjs.lower()
 
-    # Start/end of requirejs block (if any)
-    require_start = ""
-    require_end = ""
-
     # Init and load
     load_plotlyjs = ""
 
-    # Init plotlyjs. This block needs to run before plotly.js is loaded in
-    # order for MathJax configuration to work properly
-    if include_plotlyjs == "require":
-        require_start = 'require(["plotly"], function(Plotly) {'
-        require_end = "});"
-
-    elif include_plotlyjs == "cdn":
-        load_plotlyjs = """\
-        {win_config}
-    """.format(
-            win_config=_window_plotly_config
-        )
-
-    elif include_plotlyjs == "directory":
+    if include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
         <script charset="utf-8" src="plotly.min.js"></script>\
@@ -342,10 +325,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
             <div id="{id}" class="plotly-graph-div" \
 style="height:{height}; width:{width};"></div>\
             <script type="text/javascript">\
-                {require_start}\
-                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
-                    {script};\
-                {require_end}\
+                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
+                {script};\
             </script>\
         </div>""".format(
         mathjax_script=mathjax_script,
@@ -354,9 +335,7 @@ style="height:{height}; width:{width};"></div>\
         width=div_width,
         height=div_height,
         base_url_line=base_url_line,
-        require_start=require_start,
         script=script,
-        require_end=require_end,
     ).strip()
 
     if full_html:
