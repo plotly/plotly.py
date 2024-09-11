@@ -8,7 +8,6 @@ from os.path import isdir
 from plotly import utils, optional_imports
 from plotly.io import to_json, to_image, write_image, write_html
 from plotly.io._orca import ensure_server
-from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly.tools import return_figure_from_figure_or_data
 
@@ -286,11 +285,6 @@ class HtmlRenderer(MimetypeRenderer):
         {mathjax_config}
         if (typeof require !== 'undefined') {{
         require.undef("plotly");
-        requirejs.config({{
-            paths: {{
-                'plotly': ['{plotly_cdn}']
-            }}
-        }});
         require(['plotly'], function(Plotly) {{
             window._Plotly = Plotly;
         }});
@@ -299,7 +293,6 @@ class HtmlRenderer(MimetypeRenderer):
         """.format(
                     win_config=_window_plotly_config,
                     mathjax_config=_mathjax_config,
-                    plotly_cdn=plotly_cdn_url().rstrip(".js"),
                 )
 
             else:

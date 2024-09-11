@@ -3,7 +3,7 @@ from pathlib import Path
 import webbrowser
 
 from _plotly_utils.optional_imports import get_module
-from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
+from plotly.io._utils import validate_coerce_fig_to_dict
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 _json = get_module("json")
@@ -270,9 +270,8 @@ def to_html(
     elif include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
-        <script charset="utf-8" src="{cdn_url}"></script>\
     """.format(
-            win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
+            win_config=_window_plotly_config
         )
 
     elif include_plotlyjs == "directory":

@@ -12,7 +12,6 @@ import webbrowser
 import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
-from plotly.io._utils import plotly_cdn_url
 
 if sys.version_info >= (3, 3):
     import unittest.mock as mock
@@ -135,10 +134,6 @@ def assert_full_html(html):
 
 def assert_not_full_html(html):
     assert not html.startswith("<html")
-
-
-def assert_html_renderer_connected(html):
-    assert plotly_cdn_url().rstrip(".js") in html
 
 
 def assert_offline(html):
@@ -312,9 +307,7 @@ def test_repr_html(renderer):
     template = (
         '<div>                        <script type="text/javascript">'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
-        '<script charset="utf-8" src="'
-        + plotly_cdn_url()
-        + '"></script>                '
+        '<script charset="utf-8" src="' + '"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                                    window.PLOTLYENV=window.PLOTLYENV || {};"

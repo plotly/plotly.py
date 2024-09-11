@@ -6,7 +6,6 @@ import numpy as np
 
 import plotly.graph_objs as go
 import plotly.io as pio
-from plotly.io._utils import plotly_cdn_url
 
 
 if sys.version_info >= (3, 3):
@@ -34,10 +33,6 @@ def fig1(request):
 
 # HTML
 # ----
-
-
-def test_versioned_cdn_included(fig1):
-    assert plotly_cdn_url() in pio.to_html(fig1, include_plotlyjs="cdn")
 
 
 def test_html_deterministic(fig1):

@@ -9,7 +9,6 @@ import pytest
 
 import plotly
 import plotly.io as pio
-from plotly.io._utils import plotly_cdn_url
 
 packages_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(plotly.__file__))))
@@ -36,9 +35,6 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script charset="utf-8" src="{cdn_url}"></script>'.format(
-    cdn_url=plotly_cdn_url()
-)
 
 directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
@@ -124,7 +120,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
             self.assertIn(plotly_config_script, html)
             self.assertIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_truthy_div(self):
@@ -137,7 +132,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
             self.assertIn(plotly_config_script, html)
             self.assertIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_false_html(self):
@@ -156,7 +150,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
             self.assertNotIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_false_div(self):
@@ -166,7 +159,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             )
             self.assertNotIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_cdn_html(self):
@@ -182,7 +174,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             )
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_cdn_div(self):
@@ -192,7 +183,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             )
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_directory_html(self):
@@ -209,7 +199,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             )
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertIn(directory_script, html)
 
         # plot creates plotly.min.js in the output directory
@@ -230,7 +219,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertIn(directory_script, html)
 
         # plot does NOT create a plotly.min.js file in the output directory
@@ -257,7 +245,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 )
             )
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
             self.assertIn(include_plotlyjs, html)
 
@@ -275,7 +262,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig, include_plotlyjs=include_plotlyjs, output_type="div"
             )
             self.assertNotIn(PLOTLYJS, html)
-            self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
             self.assertIn(include_plotlyjs, html)
 
