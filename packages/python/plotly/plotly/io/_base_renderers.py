@@ -272,7 +272,7 @@ class HtmlRenderer(MimetypeRenderer):
                         cls=self.__class__.__name__
                     )
                 )
-            print("self.connected: ", self.connected)
+
             if self.connected:
                 script = """\
         <script type="text/javascript">
