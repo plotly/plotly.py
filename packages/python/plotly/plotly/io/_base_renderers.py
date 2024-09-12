@@ -279,7 +279,7 @@ class HtmlRenderer(MimetypeRenderer):
         {win_config}
         {mathjax_config}
         </script>
-        <script src=\"{plotly_cdn}\" charset="utf-8"></script> 
+        <script type="module">import \"{plotly_cdn}\"</script>
         """.format(
                     win_config=_window_plotly_config,
                     mathjax_config=_mathjax_config,
