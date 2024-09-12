@@ -617,4 +617,3 @@ workflows:
       - python_39_percy
       - python_312_no_numpy
       - build-doc
-
