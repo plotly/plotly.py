@@ -580,13 +580,30 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -598,6 +615,13 @@ class Funnel(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc
@@ -1056,13 +1080,30 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -1074,6 +1115,13 @@ class Funnel(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc
@@ -1258,13 +1306,30 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
@@ -1276,6 +1341,13 @@ class Funnel(_BaseTraceType):
                 stylesrc
                     Sets the source reference on Chart Studio Cloud
                     for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
                 variant
                     Sets the variant of the font.
                 variantsrc

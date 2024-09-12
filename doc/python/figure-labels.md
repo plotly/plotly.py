@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.14
   plotly:
     description: How to set the global font, title, legend-entries, and axis-titles
       in python.
@@ -234,6 +234,45 @@ fig.update_layout(
         'yanchor': 'top'})
 
 fig.show()
+```
+
+### Adding a Plot Subtitle
+
+*New in 5.23*
+
+Add a subtitle to a plot with `layout.title.subtitle`. In the following example, we set the subtitle's `text`, and configure the `font` `color` and `size`. By default, if you don't set a font size for the subtitle, it will be `0.7` of the `title` font size.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder().query("continent == 'Europe' and (year == 1952 or year == 2002)")
+
+df_pivot = df.pivot(index="country", columns="year", values="lifeExp")
+
+fig = go.Figure(
+    [
+        go.Bar(
+            x=df_pivot.index, y=df_pivot[1952], name="1952", marker_color="IndianRed"
+        ),
+        go.Bar(
+            x=df_pivot.index, y=df_pivot[2002], name="2002", marker_color="LightSalmon"
+        ),
+    ],
+    layout=dict(
+        title=dict(
+            text="Life Expectancy",
+            subtitle=dict(
+                text="Life expectancy by European country in 1952 and in 2002",
+                font=dict(color="gray", size=13),
+            ),
+        )
+    ),
+)
+
+
+fig.show()
+
 ```
 
 #### Reference
