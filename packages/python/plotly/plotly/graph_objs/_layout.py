@@ -8,6 +8,7 @@ class Layout(_BaseLayoutType):
         "coloraxis",
         "geo",
         "legend",
+        "map",
         "mapbox",
         "polar",
         "scene",
@@ -34,6 +35,7 @@ class Layout(_BaseLayoutType):
             ColoraxisValidator,
             GeoValidator,
             LegendValidator,
+            MapValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -47,6 +49,7 @@ class Layout(_BaseLayoutType):
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
             "legend": LegendValidator,
+            "map": MapValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -111,6 +114,7 @@ class Layout(_BaseLayoutType):
         "imagedefaults",
         "images",
         "legend",
+        "map",
         "mapbox",
         "margin",
         "meta",
@@ -434,8 +438,8 @@ class Layout(_BaseLayoutType):
                     Plotly uses a subset of HTML tags to do things
                     like newline (<br>), bold (<b></b>), italics
                     (<i></i>), hyperlinks (<a href='...'></a>).
-                    Tags <em>, <sup>, <sub> <span> are also
-                    supported.
+                    Tags <em>, <sup>, <sub>, <s>, <u> <span> are
+                    also supported.
                 textangle
                     Sets the angle at which the `text` is drawn
                     with respect to the horizontal.
@@ -1275,15 +1279,30 @@ class Layout(_BaseLayoutType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -2164,6 +2183,83 @@ class Layout(_BaseLayoutType):
     def legend(self, val):
         self["legend"] = val
 
+    # map
+    # ---
+    @property
+    def map(self):
+        """
+        The 'map' property is an instance of Map
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Map`
+          - A dict of string/value properties that will be passed
+            to the Map constructor
+
+            Supported dict properties:
+
+                bearing
+                    Sets the bearing angle of the map in degrees
+                    counter-clockwise from North (map.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.map.Bounds`
+                    instance or dict with compatible properties
+                center
+                    :class:`plotly.graph_objects.layout.map.Center`
+                    instance or dict with compatible properties
+                domain
+                    :class:`plotly.graph_objects.layout.map.Domain`
+                    instance or dict with compatible properties
+                layers
+                    A tuple of
+                    :class:`plotly.graph_objects.layout.map.Layer`
+                    instances or dicts with compatible properties
+                layerdefaults
+                    When used in a template (as
+                    layout.template.layout.map.layerdefaults), sets
+                    the default property values to use for elements
+                    of layout.map.layers
+                pitch
+                    Sets the pitch angle of the map (in degrees,
+                    where 0 means perpendicular to the surface of
+                    the map) (map.pitch).
+                style
+                    Defines the map layers that are rendered by
+                    default below the trace layers defined in
+                    `data`, which are themselves by default
+                    rendered below the layers defined in
+                    `layout.map.layers`.  These layers can be
+                    defined either explicitly as a Map Style object
+                    which can contain multiple layer definitions
+                    that load data from any public or private Tile
+                    Map Service (TMS or XYZ) or Web Map Service
+                    (WMS) or implicitly by using one of the built-
+                    in style objects which use WMSes or by using a
+                    custom style URL  Map Style objects are of the
+                    form described in the MapLibre GL JS
+                    documentation available at
+                    https://maplibre.org/maplibre-style-spec/  The
+                    built-in plotly.js styles objects are: basic,
+                    carto-darkmatter, carto-darkmatter-nolabels,
+                    carto-positron, carto-positron-nolabels, carto-
+                    voyager, carto-voyager-nolabels, dark, light,
+                    open-street-map, outdoors, satellite,
+                    satellite-streets, streets, white-bg.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view: `center`, `zoom`, `bearing`, `pitch`.
+                    Defaults to `layout.uirevision`.
+                zoom
+                    Sets the zoom level of the map (map.zoom).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Map
+        """
+        return self["map"]
+
+    @map.setter
+    def map(self, val):
+        self["map"] = val
+
     # mapbox
     # ------
     @property
@@ -2433,18 +2529,19 @@ class Layout(_BaseLayoutType):
                     "reset", "resetCameraDefault3d",
                     "resetCameraLastSave3d", "resetGeo",
                     "resetSankeyGroup", "resetScale2d",
-                    "resetViewMapbox", "resetViews",
-                    "resetcameradefault", "resetcameralastsave",
-                    "resetsankeygroup", "resetscale", "resetview",
-                    "resetviews", "select", "select2d",
-                    "sendDataToCloud", "senddatatocloud",
-                    "tableRotation", "tablerotation", "toImage",
-                    "toggleHover", "toggleSpikelines",
-                    "togglehover", "togglespikelines", "toimage",
-                    "zoom", "zoom2d", "zoom3d", "zoomIn2d",
-                    "zoomInGeo", "zoomInMapbox", "zoomOut2d",
-                    "zoomOutGeo", "zoomOutMapbox", "zoomin",
-                    "zoomout".
+                    "resetViewMap", "resetViewMapbox",
+                    "resetViews", "resetcameradefault",
+                    "resetcameralastsave", "resetsankeygroup",
+                    "resetscale", "resetview", "resetviews",
+                    "select", "select2d", "sendDataToCloud",
+                    "senddatatocloud", "tableRotation",
+                    "tablerotation", "toImage", "toggleHover",
+                    "toggleSpikelines", "togglehover",
+                    "togglespikelines", "toimage", "zoom",
+                    "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
+                    "zoomInMap", "zoomInMapbox", "zoomOut2d",
+                    "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+                    "zoomin", "zoomout".
                 removesrc
                     Sets the source reference on Chart Studio Cloud
                     for `remove`.
@@ -3271,9 +3368,21 @@ class Layout(_BaseLayoutType):
                 x0
                     Sets the shape's starting x position. See
                     `type` and `xsizemode` for more info.
+                x0shift
+                    Shifts `x0` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 x1
                     Sets the shape's end x position. See `type` and
                     `xsizemode` for more info.
+                x1shift
+                    Shifts `x1` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 xanchor
                     Only relevant in conjunction with `xsizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3313,9 +3422,21 @@ class Layout(_BaseLayoutType):
                 y0
                     Sets the shape's starting y position. See
                     `type` and `ysizemode` for more info.
+                y0shift
+                    Shifts `y0` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 y1
                     Sets the shape's end y position. See `type` and
                     `ysizemode` for more info.
+                y1shift
+                    Shifts `y1` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 yanchor
                     Only relevant in conjunction with `ysizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3796,6 +3917,10 @@ class Layout(_BaseLayoutType):
                     `xanchor`/`yanchor` is determined
                     automatically. Padding is muted if the
                     respective anchor value is "middle*/*center".
+                subtitle
+                    :class:`plotly.graph_objects.layout.title.Subti
+                    tle` instance or dict with compatible
+                    properties
                 text
                     Sets the plot's title. Note that before the
                     existence of `title.text`, the title's contents
@@ -3878,15 +4003,30 @@ class Layout(_BaseLayoutType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
 
                 style
                     Sets whether a font should be styled with a
                     normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
                 variant
                     Sets the variant of the font.
                 weight
@@ -4404,7 +4544,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -4759,6 +4900,20 @@ class Layout(_BaseLayoutType):
                     out.xaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.xaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -4786,6 +4941,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value
@@ -4977,7 +5150,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -5335,6 +5509,20 @@ class Layout(_BaseLayoutType):
                     out.yaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.yaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -5362,6 +5550,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value
@@ -5727,6 +5933,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6012,6 +6221,7 @@ class Layout(_BaseLayoutType):
         images=None,
         imagedefaults=None,
         legend=None,
+        map=None,
         mapbox=None,
         margin=None,
         meta=None,
@@ -6330,6 +6540,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6622,6 +6835,7 @@ class Layout(_BaseLayoutType):
             "imagedefaults",
             "images",
             "legend",
+            "map",
             "mapbox",
             "margin",
             "meta",
@@ -6883,6 +7097,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = legend if legend is not None else _v
         if _v is not None:
             self["legend"] = _v
+        _v = arg.pop("map", None)
+        _v = map if map is not None else _v
+        if _v is not None:
+            self["map"] = _v
         _v = arg.pop("mapbox", None)
         _v = mapbox if mapbox is not None else _v
         if _v is not None:
