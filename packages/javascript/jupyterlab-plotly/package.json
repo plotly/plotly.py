@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-plotly",
-  "version": "5.24.0",
+  "version": "5.24.1",
   "description": "The plotly Jupyter extension",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -65,7 +65,7 @@
     "@lumino/messaging": "^1.2.3",
     "@lumino/widgets": "^1.8.1",
     "lodash": "^4.17.4",
-    "plotly.js": "^2.35.1"
+    "plotly.js": "^2.35.2"
   },
   "jupyterlab": {
     "extension": "lib/jupyterlab-plugin",
