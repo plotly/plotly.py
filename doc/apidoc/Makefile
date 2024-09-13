@@ -36,7 +36,7 @@ help:
 	# Remove files which were added only for docstring generation
 	rm ../../packages/python/plotly/plotly/colors/diverging.py ../../packages/python/plotly/plotly/colors/sequential.py ../../packages/python/plotly/plotly/colors/qualitative.py ../../packages/python/plotly/plotly/colors/cyclical.py ../../packages/python/plotly/plotly/colors/colorbrewer.py ../../packages/python/plotly/plotly/colors/carto.py ../../packages/python/plotly/plotly/colors/cmocean.py
 	rm ../../packages/python/plotly/plotly/express/colors/diverging.py ../../packages/python/plotly/plotly/express/colors/sequential.py ../../packages/python/plotly/plotly/express/colors/qualitative.py ../../packages/python/plotly/plotly/express/colors/cyclical.py ../../packages/python/plotly/plotly/express/colors/colorbrewer.py ../../packages/python/plotly/plotly/express/colors/carto.py ../../packages/python/plotly/plotly/express/colors/cmocean.py
-	rename 's/graph_objs/graph_objects/' _build/html/*.html _build/html/generated/*.html
+	rename 's/graph_objs/graph_objects/' _build/html/*.html _build/html/generated/*.html _build/html/generated/generated/*.html
 	mv _build/html/generated/plotly.graph_objs.html _build/html/generated/plotly.graph_objects.html
 	sed -i 's/graph_objs/graph_objects/g' _build/html/*.html
 	sed -i 's/graph_objs/graph_objects/g' _build/html/*.inv

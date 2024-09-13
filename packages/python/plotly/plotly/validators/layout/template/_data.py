@@ -31,6 +31,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 A tuple of
                 :class:`plotly.graph_objects.Choroplethmapbox`
                 instances or dicts with compatible properties
+            choroplethmap
+                A tuple of
+                :class:`plotly.graph_objects.Choroplethmap`
+                instances or dicts with compatible properties
             choropleth
                 A tuple of
                 :class:`plotly.graph_objects.Choropleth`
@@ -49,6 +53,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             densitymapbox
                 A tuple of
                 :class:`plotly.graph_objects.Densitymapbox`
+                instances or dicts with compatible properties
+            densitymap
+                A tuple of
+                :class:`plotly.graph_objects.Densitymap`
                 instances or dicts with compatible properties
             funnelarea
                 A tuple of
@@ -134,6 +142,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             scattermapbox
                 A tuple of
                 :class:`plotly.graph_objects.Scattermapbox`
+                instances or dicts with compatible properties
+            scattermap
+                A tuple of
+                :class:`plotly.graph_objects.Scattermap`
                 instances or dicts with compatible properties
             scatterpolargl
                 A tuple of
