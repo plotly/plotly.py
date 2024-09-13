@@ -369,47 +369,55 @@ fig.add_trace(
     go.Scatter(x=list(df.index),
                y=list(df.High),
                name="High",
-               line=dict(color="#33CFA5")))
+               line=dict(color="MediumSlateBlue")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=[df.High.mean()] * len(df.index),
                name="High Average",
                visible=False,
-               line=dict(color="#33CFA5", dash="dash")))
+               line=dict(color="MediumSlateBlue", dash="dash")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=list(df.Low),
                name="Low",
-               line=dict(color="#F06A6A")))
+               line=dict(color="DarkOrange")))
 
 fig.add_trace(
     go.Scatter(x=list(df.index),
                y=[df.Low.mean()] * len(df.index),
                name="Low Average",
                visible=False,
-               line=dict(color="#F06A6A", dash="dash")))
+               line=dict(color="DarkOrange", dash="dash")))
 
 # Add Annotations and Buttons
-high_annotations = [dict(x="2016-03-01",
+high_annotations = [dict(x=-0.05,
                          y=df.High.mean(),
-                         xref="x", yref="y",
-                         text="High Average:<br> %.2f" % df.High.mean(),
-                         ax=0, ay=-40),
+                         xanchor="right",
+                         yanchor="bottom",
+                         xref="x domain",
+                         yref="y",
+                         text="High Avg:<br> %.2f" % df.High.mean(),
+                         showarrow=False),
                     dict(x=df.High.idxmax(),
                          y=df.High.max(),
-                         xref="x", yref="y",
+                         xref="x",
+                         yref="y",
                          text="High Max:<br> %.2f" % df.High.max(),
                          ax=0, ay=-40)]
-low_annotations = [dict(x="2015-05-01",
+low_annotations = [dict(x=-0.05,
                         y=df.Low.mean(),
-                        xref="x", yref="y",
-                        text="Low Average:<br> %.2f" % df.Low.mean(),
-                        ax=-40, ay=40),
-                   dict(x=df.High.idxmin(),
+                        xanchor="right",
+                        yanchor="top",
+                        xref="x domain",
+                        yref="y",
+                        text="Low Avg:<br> %.2f" % df.Low.mean(),
+                        showarrow=False),
+                   dict(x=df.Low.idxmin(),
                         y=df.Low.min(),
-                        xref="x", yref="y",
+                        xref="x",
+                        yref="y",
                         text="Low Min:<br> %.2f" % df.Low.min(),
                         ax=0, ay=40)]
 
