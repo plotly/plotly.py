@@ -28,6 +28,7 @@
     "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc",
     "build:nbextension": "webpack --mode=production",
+    "bundle": "esbuild --bundle --format=esm --outfile=../../python/plotly/plotly/bundle.js src/Figure.ts",
     "clean": "npm run clean:lib && npm run clean:nbextension && npm run clean:labextension",
     "clean:lib": "rimraf lib",
     "clean:labextension": "rimraf ../../python/plotly/jupyterlab_plotly/labextension",
