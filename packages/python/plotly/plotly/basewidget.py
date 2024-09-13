@@ -15,7 +15,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     subclass
     """
 
-    _esm = pathlib.Path(__file__).parent / "../../../../bundle.js"
+    _esm = pathlib.Path(__file__).parent / "bundle.js"
 
     # ### _data and _layout ###
     # These properties store the current state of the traces and
