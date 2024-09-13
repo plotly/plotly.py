@@ -41,6 +41,7 @@ commands:
       - run:
           name: Install dependencies
           command: |
+            cd packages/javascript/jupyterlab-plotly && npm run bundle && cd ../..
             cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
