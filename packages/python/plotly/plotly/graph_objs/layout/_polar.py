@@ -67,7 +67,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -603,7 +604,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
