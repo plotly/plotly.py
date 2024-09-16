@@ -1,6 +1,6 @@
 import type { DOMWidgetModel } from "@jupyter-widgets/base";
 import _ from "lodash";
-import Plotly from "plotly.js/dist/plotly";
+import Plotly from "plotly.js";
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
