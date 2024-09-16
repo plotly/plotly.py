@@ -1,16 +1,11 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "esModuleInterop":true,
+    "target": "es2020",
+    "esModuleInterop": true,
     "lib": ["es2015", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
-    "noEmitOnError": true,
     "noUnusedLocals": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strictPropertyInitialization": false,
-    "target": "es2015",
-    "types": []
+    "skipLibCheck": true
   }
 }
