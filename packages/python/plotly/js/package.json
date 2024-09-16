@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "build": "esbuild --bundle --format=esm --outfile=../plotly/bundle.js widget.ts",
+    "watch": "npm run build -- --watch",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/plotly.js": "^2.33.4",
+    "esbuild": "^0.23.1",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@jupyter-widgets/base": "^6.0.10",
+    "lodash": "^4.17.21",
+    "plotly.js": "^2.35.2"
+  }
+}
