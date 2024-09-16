@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-plotly",
-  "version": "5.24.1",
+  "version": "5.22.0",
   "description": "The plotly Jupyter extension",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -28,7 +28,6 @@
     "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc",
     "build:nbextension": "webpack --mode=production",
-    "bundle": "esbuild --bundle --format=esm --outfile=../../python/plotly/plotly/bundle.js src/Figure.ts",
     "clean": "npm run clean:lib && npm run clean:nbextension && npm run clean:labextension",
     "clean:lib": "rimraf lib",
     "clean:labextension": "rimraf ../../python/plotly/jupyterlab_plotly/labextension",
@@ -66,7 +65,7 @@
     "@lumino/messaging": "^1.2.3",
     "@lumino/widgets": "^1.8.1",
     "lodash": "^4.17.4",
-    "plotly.js": "^2.35.2"
+    "plotly.js": "^2.32.0"
   },
   "jupyterlab": {
     "extension": "lib/jupyterlab-plugin",
