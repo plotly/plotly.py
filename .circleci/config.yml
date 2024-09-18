@@ -128,7 +128,7 @@ commands:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            pytest plotly/tests/test_orca
+            pytest -v plotly/tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
           path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
