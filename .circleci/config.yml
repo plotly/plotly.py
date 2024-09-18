@@ -95,7 +95,7 @@ commands:
   test_orca:
     parameters:
       py:
-        default: "310"
+        default: "311"
         type: string
     steps:
       - checkout
@@ -252,10 +252,10 @@ jobs:
   # Orca
   python_38_orca:
     docker:
-      - image: cimg/python:3.8-browsers
+      - image: cimg/python:3.11-browsers
     steps:
       - test_orca:
-          py: "38"
+          py: "311"
 
   # Percy
   python_39_percy:
