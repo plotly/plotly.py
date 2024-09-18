@@ -10,6 +10,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     _path_str = "layout.scene.zaxis"
     _valid_props = {
         "autorange",
+        "autorangeoptions",
         "autotypenumbers",
         "backgroundcolor",
         "calendar",
@@ -25,6 +26,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         "labelalias",
         "linecolor",
         "linewidth",
+        "maxallowed",
+        "minallowed",
         "minexponent",
         "mirror",
         "nticks",
@@ -76,11 +79,19 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to False.
+        `range` is provided and it has a value for both the lower and
+        upper bound, `autorange` is set to False. Using "min" applies
+        autorange only to set the minimum. Using "max" applies
+        autorange only to set the maximum. Using *min reversed* applies
+        autorange only to set the minimum on a reversed axis. Using
+        *max reversed* applies autorange only to set the maximum on a
+        reversed axis. Using "reversed" applies autorange on both ends
+        and reverses the axis direction.
 
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                [True, False, 'reversed']
+                [True, False, 'reversed', 'min reversed', 'max reversed',
+                'min', 'max']
 
         Returns
         -------
@@ -91,6 +102,47 @@ class ZAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autorangeoptions
+    # ----------------
+    @property
+    def autorangeoptions(self):
+        """
+        The 'autorangeoptions' property is an instance of Autorangeoptions
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Autorangeoptions`
+          - A dict of string/value properties that will be passed
+            to the Autorangeoptions constructor
+
+            Supported dict properties:
+
+                clipmax
+                    Clip autorange maximum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.maxallowed` is provided.
+                clipmin
+                    Clip autorange minimum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.minallowed` is provided.
+                include
+                    Ensure this value is included in autorange.
+                includesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `include`.
+                maxallowed
+                    Use this value exactly as autorange maximum.
+                minallowed
+                    Use this value exactly as autorange minimum.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.scene.zaxis.Autorangeoptions
+        """
+        return self["autorangeoptions"]
+
+    @autorangeoptions.setter
+    def autorangeoptions(self, val):
+        self["autorangeoptions"] = val
 
     # autotypenumbers
     # ---------------
@@ -263,8 +315,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         `categoryarray`. Set `categoryorder` to *total ascending* or
         *total descending* if order should be determined by the
         numerical order of the values. Similarly, the order can be
-        determined by the min, max, sum, mean or median of all the
-        values.
+        determined by the min, max, sum, mean, geometric mean or median
+        of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -272,7 +324,8 @@ class ZAxis(_BaseLayoutHierarchyType):
                 'array', 'total ascending', 'total descending', 'min
                 ascending', 'min descending', 'max ascending', 'max
                 descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'median ascending', 'median
+                ascending', 'mean descending', 'geometric mean ascending',
+                'geometric mean descending', 'median ascending', 'median
                 descending']
 
         Returns
@@ -527,9 +580,12 @@ class ZAxis(_BaseLayoutHierarchyType):
         Replacement text for specific tick or hover labels. For example
         using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
         Canada. The labels we would have shown must match the keys
-        exactly, after adding any tickprefix or ticksuffix. labelalias
-        can be used with any axis type, and both keys (if needed) and
-        values (if desired) can include html-like tags or MathJax.
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
 
         The 'labelalias' property accepts values of any type
 
@@ -622,6 +678,44 @@ class ZAxis(_BaseLayoutHierarchyType):
     def linewidth(self, val):
         self["linewidth"] = val
 
+    # maxallowed
+    # ----------
+    @property
+    def maxallowed(self):
+        """
+        Determines the maximum range of this axis.
+
+        The 'maxallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["maxallowed"]
+
+    @maxallowed.setter
+    def maxallowed(self, val):
+        self["maxallowed"] = val
+
+    # minallowed
+    # ----------
+    @property
+    def minallowed(self):
+        """
+        Determines the minimum range of this axis.
+
+        The 'minallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["minallowed"]
+
+    @minallowed.setter
+    def minallowed(self, val):
+        self["minallowed"] = val
+
     # minexponent
     # -----------
     @property
@@ -706,6 +800,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             converted to strings. If the axis `type` is "category", it
             should be numbers, using the scale where each category is
             assigned a serial number from zero in the order it appears.
+            Leaving either or both elements `null` impacts the default
+            `autorange`.
 
             The 'range' property is an info array that may be specified as:
 
@@ -1199,11 +1295,34 @@ class ZAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1611,11 +1730,34 @@ class ZAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1781,8 +1923,18 @@ class ZAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.scene.zaxis.Autoran
+            geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -1819,7 +1971,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1876,13 +2029,20 @@ class ZAxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -1911,7 +2071,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2063,6 +2224,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         self,
         arg=None,
         autorange=None,
+        autorangeoptions=None,
         autotypenumbers=None,
         backgroundcolor=None,
         calendar=None,
@@ -2078,6 +2240,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         labelalias=None,
         linecolor=None,
         linewidth=None,
+        maxallowed=None,
+        minallowed=None,
         minexponent=None,
         mirror=None,
         nticks=None,
@@ -2134,8 +2298,18 @@ class ZAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.scene.zaxis.Autoran
+            geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -2172,7 +2346,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -2229,13 +2404,20 @@ class ZAxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         linecolor
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -2264,7 +2446,8 @@ class ZAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2446,6 +2629,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autorangeoptions", None)
+        _v = autorangeoptions if autorangeoptions is not None else _v
+        if _v is not None:
+            self["autorangeoptions"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
@@ -2506,6 +2693,14 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = linewidth if linewidth is not None else _v
         if _v is not None:
             self["linewidth"] = _v
+        _v = arg.pop("maxallowed", None)
+        _v = maxallowed if maxallowed is not None else _v
+        if _v is not None:
+            self["maxallowed"] = _v
+        _v = arg.pop("minallowed", None)
+        _v = minallowed if minallowed is not None else _v
+        if _v is not None:
+            self["minallowed"] = _v
         _v = arg.pop("minexponent", None)
         _v = minexponent if minexponent is not None else _v
         if _v is not None:

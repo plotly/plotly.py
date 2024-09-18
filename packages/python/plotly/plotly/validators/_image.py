@@ -105,13 +105,16 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
             legendwidth
                 Sets the width (in px or fraction) of the
                 legend for this trace.
@@ -133,7 +136,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -230,6 +233,11 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `rgba256` colormodel, it is [0, 0, 0, 0]. For
                 the `hsl` colormodel, it is [0, 0, 0]. For the
                 `hsla` colormodel, it is [0, 0, 0, 0].
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
             zsmooth
                 Picks a smoothing algorithm used to smooth `z`
                 data. This only applies for image traces that

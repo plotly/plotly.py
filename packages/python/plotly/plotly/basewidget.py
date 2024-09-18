@@ -1,15 +1,6 @@
-import uuid
-from importlib import import_module
-import os
-import numbers
-
-try:
-    from urllib import parse
-except ImportError:
-    from urlparse import urlparse as parse
-
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
+
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers

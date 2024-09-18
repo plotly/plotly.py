@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import base64
 import numbers
 import textwrap
@@ -9,6 +7,7 @@ import copy
 import io
 import re
 import sys
+import warnings
 
 from _plotly_utils.optional_imports import get_module
 
@@ -102,7 +101,11 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         elif v.dtype.kind == "M":
             # Convert datetime Series/Index to numpy array of datetimes
             if isinstance(v, pd.Series):
-                v = v.dt.to_pydatetime()
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", FutureWarning)
+                    # Series.dt.to_pydatetime will return Index[object]
+                    # https://github.com/pandas-dev/pandas/pull/52459
+                    v = np.array(v.dt.to_pydatetime())
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
@@ -111,7 +114,13 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         if dtype.kind in numeric_kinds:
             v = v.values
         elif dtype.kind == "M":
-            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", FutureWarning)
+                # Series.dt.to_pydatetime will return Index[object]
+                # https://github.com/pandas-dev/pandas/pull/52459
+                v = [
+                    np.array(row.dt.to_pydatetime()).tolist() for i, row in v.iterrows()
+                ]
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
@@ -146,7 +155,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     # --------------------------
     if force_numeric and new_v.dtype.kind not in numeric_kinds:
         raise ValueError(
-            "Input value is not numeric and" "force_numeric parameter set to True"
+            "Input value is not numeric and force_numeric parameter set to True"
         )
 
     if "U" not in kind:
@@ -815,13 +824,21 @@ class IntegerValidator(BaseValidator):
             "dflt",
             "min",
             "max",
+            "extras",
             "arrayOk"
         ]
     },
     """
 
     def __init__(
-        self, plotly_name, parent_name, min=None, max=None, array_ok=False, **kwargs
+        self,
+        plotly_name,
+        parent_name,
+        min=None,
+        max=None,
+        extras=None,
+        array_ok=False,
+        **kwargs,
     ):
         super(IntegerValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -846,6 +863,7 @@ class IntegerValidator(BaseValidator):
         else:
             self.has_min_max = False
 
+        self.extras = extras if extras is not None else []
         self.array_ok = array_ok
 
     def description(self):
@@ -869,6 +887,16 @@ class IntegerValidator(BaseValidator):
                 )
             )
 
+        # Extras
+        if self.extras:
+            desc = (
+                desc
+                + (
+                    """
+        OR exactly one of {extras} (e.g. '{eg_extra}')"""
+                ).format(extras=self.extras, eg_extra=self.extras[-1])
+            )
+
         if self.array_ok:
             desc = (
                 desc
@@ -882,6 +910,8 @@ class IntegerValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
+        elif v in self.extras:
+            return v
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
             v_array = copy_to_readonly_numpy_array(
@@ -908,14 +938,21 @@ class IntegerValidator(BaseValidator):
             v = v_array
         elif self.array_ok and is_simple_array(v):
             # Check integer type
-            invalid_els = [e for e in v if not isinstance(e, int)]
+            invalid_els = [
+                e for e in v if not isinstance(e, int) and e not in self.extras
+            ]
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
             # Check min/max
             if self.has_min_max:
-                invalid_els = [e for e in v if not (self.min_val <= e <= self.max_val)]
+                invalid_els = [
+                    e
+                    for e in v
+                    if not (isinstance(e, int) and self.min_val <= e <= self.max_val)
+                    and e not in self.extras
+                ]
 
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])

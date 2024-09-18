@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.11
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -361,7 +361,7 @@ fig.show()
 
 ### Using a Custom Marker
 
-To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`.
+To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`. 
 
 
 ```python
@@ -376,6 +376,31 @@ fig.update_traces(
 )
 fig.show()
 
+```
+
+#### Open Marker Colors
+
+In the previous example, each marker has two colors, a marker color (set in Plotly Express with `color="species"`)  and a line color (set on the line with `color="DarkSlateGrey"`. All open markers, like "diamond-open" in the following example, have a transparent fill, which means you can specify only one color.  Specify this color using the marker color parameter. This controls the outline color and any dot or cross. For open markers, the line color does nothing.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(
+    marker=dict(
+        size=8, 
+        symbol="diamond-open", 
+        line=dict(
+            width=2, 
+#             color="DarkSlateGrey" Line colors don't apply to open markers
+        )
+    ),
+    selector=dict(mode="markers"),
+)
+
+fig.show()
 ```
 
 ### Setting Marker Angles

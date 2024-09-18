@@ -12,6 +12,8 @@ class XAxis(_BaseLayoutHierarchyType):
         "anchor",
         "automargin",
         "autorange",
+        "autorangeoptions",
+        "autotickangles",
         "autotypenumbers",
         "calendar",
         "categoryarray",
@@ -30,11 +32,14 @@ class XAxis(_BaseLayoutHierarchyType):
         "griddash",
         "gridwidth",
         "hoverformat",
+        "insiderange",
         "labelalias",
         "layer",
         "linecolor",
         "linewidth",
         "matches",
+        "maxallowed",
+        "minallowed",
         "minexponent",
         "minor",
         "mirror",
@@ -71,9 +76,13 @@ class XAxis(_BaseLayoutHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelindex",
+        "ticklabelindexsrc",
         "ticklabelmode",
         "ticklabeloverflow",
         "ticklabelposition",
+        "ticklabelshift",
+        "ticklabelstandoff",
         "ticklabelstep",
         "ticklen",
         "tickmode",
@@ -153,11 +162,19 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to False.
+        `range` is provided and it has a value for both the lower and
+        upper bound, `autorange` is set to False. Using "min" applies
+        autorange only to set the minimum. Using "max" applies
+        autorange only to set the maximum. Using *min reversed* applies
+        autorange only to set the minimum on a reversed axis. Using
+        *max reversed* applies autorange only to set the maximum on a
+        reversed axis. Using "reversed" applies autorange on both ends
+        and reverses the axis direction.
 
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                [True, False, 'reversed']
+                [True, False, 'reversed', 'min reversed', 'max reversed',
+                'min', 'max']
 
         Returns
         -------
@@ -168,6 +185,73 @@ class XAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autorangeoptions
+    # ----------------
+    @property
+    def autorangeoptions(self):
+        """
+        The 'autorangeoptions' property is an instance of Autorangeoptions
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Autorangeoptions`
+          - A dict of string/value properties that will be passed
+            to the Autorangeoptions constructor
+
+            Supported dict properties:
+
+                clipmax
+                    Clip autorange maximum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.maxallowed` is provided.
+                clipmin
+                    Clip autorange minimum if it goes beyond this
+                    value. Has no effect when
+                    `autorangeoptions.minallowed` is provided.
+                include
+                    Ensure this value is included in autorange.
+                includesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `include`.
+                maxallowed
+                    Use this value exactly as autorange maximum.
+                minallowed
+                    Use this value exactly as autorange minimum.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.Autorangeoptions
+        """
+        return self["autorangeoptions"]
+
+    @autorangeoptions.setter
+    def autorangeoptions(self, val):
+        self["autorangeoptions"] = val
+
+    # autotickangles
+    # --------------
+    @property
+    def autotickangles(self):
+        """
+        When `tickangle` is set to "auto", it will be set to the first
+        angle in this array that is large enough to prevent label
+        overlap.
+
+        The 'autotickangles' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'autotickangles[i]' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        list
+        """
+        return self["autotickangles"]
+
+    @autotickangles.setter
+    def autotickangles(self, val):
+        self["autotickangles"] = val
 
     # autotypenumbers
     # ---------------
@@ -281,8 +365,8 @@ class XAxis(_BaseLayoutHierarchyType):
         `categoryarray`. Set `categoryorder` to *total ascending* or
         *total descending* if order should be determined by the
         numerical order of the values. Similarly, the order can be
-        determined by the min, max, sum, mean or median of all the
-        values.
+        determined by the min, max, sum, mean, geometric mean or median
+        of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -290,7 +374,8 @@ class XAxis(_BaseLayoutHierarchyType):
                 'array', 'total ascending', 'total descending', 'min
                 ascending', 'min descending', 'max ascending', 'max
                 descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'median ascending', 'median
+                ascending', 'mean descending', 'geometric mean ascending',
+                'geometric mean descending', 'median ascending', 'median
                 descending']
 
         Returns
@@ -741,6 +826,32 @@ class XAxis(_BaseLayoutHierarchyType):
     def hoverformat(self, val):
         self["hoverformat"] = val
 
+    # insiderange
+    # -----------
+    @property
+    def insiderange(self):
+        """
+            Could be used to set the desired inside range of this axis
+            (excluding the labels) when `ticklabelposition` of the anchored
+            axis has "inside". Not implemented for axes with `type` "log".
+            This would be ignored when `range` is provided.
+
+            The 'insiderange' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'insiderange[0]' property accepts values of any type
+        (1) The 'insiderange[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
+        """
+        return self["insiderange"]
+
+    @insiderange.setter
+    def insiderange(self, val):
+        self["insiderange"] = val
+
     # labelalias
     # ----------
     @property
@@ -749,9 +860,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Replacement text for specific tick or hover labels. For example
         using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
         Canada. The labels we would have shown must match the keys
-        exactly, after adding any tickprefix or ticksuffix. labelalias
-        can be used with any axis type, and both keys (if needed) and
-        values (if desired) can include html-like tags or MathJax.
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
 
         The 'labelalias' property accepts values of any type
 
@@ -897,6 +1011,44 @@ class XAxis(_BaseLayoutHierarchyType):
     @matches.setter
     def matches(self, val):
         self["matches"] = val
+
+    # maxallowed
+    # ----------
+    @property
+    def maxallowed(self):
+        """
+        Determines the maximum range of this axis.
+
+        The 'maxallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["maxallowed"]
+
+    @maxallowed.setter
+    def maxallowed(self, val):
+        self["maxallowed"] = val
+
+    # minallowed
+    # ----------
+    @property
+    def minallowed(self):
+        """
+        Determines the minimum range of this axis.
+
+        The 'minallowed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["minallowed"]
+
+    @minallowed.setter
+    def minallowed(self, val):
+        self["minallowed"] = val
 
     # minexponent
     # -----------
@@ -1144,6 +1296,8 @@ class XAxis(_BaseLayoutHierarchyType):
             converted to strings. If the axis `type` is "category", it
             should be numbers, using the scale where each category is
             assigned a serial number from zero in the order it appears.
+            Leaving either or both elements `null` impacts the default
+            `autorange`.
 
             The 'range' property is an info array that may be specified as:
 
@@ -1436,9 +1590,17 @@ class XAxis(_BaseLayoutHierarchyType):
         constraint encountered will be ignored to avoid possible
         inconsistent constraints via `scaleratio`. Note that setting
         axes simultaneously in both a `scaleanchor` and a `matches`
-        constraint is currently forbidden.
+        constraint is currently forbidden. Setting `false` allows to
+        remove a default constraint (occasionally, you may need to
+        prevent a default `scaleanchor` constraint from being applied,
+        eg. when having an image trace `yaxis: {scaleanchor: "x"}` is
+        set automatically in order for pixels to be rendered as
+        squares, setting `yaxis: {scaleanchor: false}` allows to remove
+        the constraint).
 
         The 'scaleanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [False]
           - A string that matches one of the following regular expressions:
                 ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
                 '^y([2-9]|[1-9][0-9]+)?( domain)?$']
@@ -1987,11 +2149,34 @@ class XAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -2118,6 +2303,55 @@ class XAxis(_BaseLayoutHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelindex
+    # --------------
+    @property
+    def ticklabelindex(self):
+        """
+        Only for axes with `type` "date" or "linear". Instead of
+        drawing the major tick label, draw the label for the minor tick
+        that is n positions away from the major tick. E.g. to always
+        draw the label for the minor tick before each major tick,
+        choose `ticklabelindex` -1. This is useful for date axes with
+        `ticklabelmode` "period" if you want to label the period that
+        ends with each major tick instead of the period that begins
+        there.
+
+        The 'ticklabelindex' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|numpy.ndarray
+        """
+        return self["ticklabelindex"]
+
+    @ticklabelindex.setter
+    def ticklabelindex(self, val):
+        self["ticklabelindex"] = val
+
+    # ticklabelindexsrc
+    # -----------------
+    @property
+    def ticklabelindexsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `ticklabelindex`.
+
+        The 'ticklabelindexsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["ticklabelindexsrc"]
+
+    @ticklabelindexsrc.setter
+    def ticklabelindexsrc(self, val):
+        self["ticklabelindexsrc"] = val
+
     # ticklabelmode
     # -------------
     @property
@@ -2196,6 +2430,56 @@ class XAxis(_BaseLayoutHierarchyType):
     @ticklabelposition.setter
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
+
+    # ticklabelshift
+    # --------------
+    @property
+    def ticklabelshift(self):
+        """
+        Shifts the tick labels by the specified number of pixels in
+        parallel to the axis. Positive values move the labels in the
+        positive direction of the axis.
+
+        The 'ticklabelshift' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelshift"]
+
+    @ticklabelshift.setter
+    def ticklabelshift(self, val):
+        self["ticklabelshift"] = val
+
+    # ticklabelstandoff
+    # -----------------
+    @property
+    def ticklabelstandoff(self):
+        """
+        Sets the standoff distance (in px) between the axis tick labels
+        and their default position. A positive `ticklabelstandoff`
+        moves the labels farther away from the plot area if
+        `ticklabelposition` is "outside", and deeper into the plot area
+        if `ticklabelposition` is "inside". A negative
+        `ticklabelstandoff` works in the opposite direction, moving
+        outside ticks towards the plot area and inside ticks towards
+        the outside. If the negative value is large enough, inside
+        ticks can even end up outside and vice versa.
+
+        The 'ticklabelstandoff' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["ticklabelstandoff"]
+
+    @ticklabelstandoff.setter
+    def ticklabelstandoff(self, val):
+        self["ticklabelstandoff"] = val
 
     # ticklabelstep
     # -------------
@@ -2543,11 +2827,34 @@ class XAxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -2743,8 +3050,22 @@ class XAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            ons` instance or dict with compatible properties
+        autotickangles
+            When `tickangle` is set to "auto", it will be set to
+            the first angle in this array that is large enough to
+            prevent label overlap.
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -2779,7 +3100,8 @@ class XAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -2861,14 +3183,23 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        insiderange
+            Could be used to set the desired inside range of this
+            axis (excluding the labels) when `ticklabelposition` of
+            the anchored axis has "inside". Not implemented for
+            axes with `type` "log". This would be ignored when
+            `range` is provided.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -2890,6 +3221,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -2932,7 +3267,8 @@ class XAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangebreaks
             A tuple of
             :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
@@ -2973,7 +3309,13 @@ class XAxis(_BaseLayoutHierarchyType):
             possible inconsistent constraints via `scaleratio`.
             Note that setting axes simultaneously in both a
             `scaleanchor` and a `matches` constraint is currently
-            forbidden.
+            forbidden. Setting `false` allows to remove a default
+            constraint (occasionally, you may need to prevent a
+            default `scaleanchor` constraint from being applied,
+            eg. when having an image trace `yaxis: {scaleanchor:
+            "x"}` is set automatically in order for pixels to be
+            rendered as squares, setting `yaxis: {scaleanchor:
+            false}` allows to remove the constraint).
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -3077,6 +3419,19 @@ class XAxis(_BaseLayoutHierarchyType):
             layout.template.layout.xaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.xaxis.tickformatstops
+        ticklabelindex
+            Only for axes with `type` "date" or "linear". Instead
+            of drawing the major tick label, draw the label for the
+            minor tick that is n positions away from the major
+            tick. E.g. to always draw the label for the minor tick
+            before each major tick, choose `ticklabelindex` -1.
+            This is useful for date axes with `ticklabelmode`
+            "period" if you want to label the period that ends with
+            each major tick instead of the period that begins
+            there.
+        ticklabelindexsrc
+            Sets the source reference on Chart Studio Cloud for
+            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3100,6 +3455,21 @@ class XAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelshift
+            Shifts the tick labels by the specified number of
+            pixels in parallel to the axis. Positive values move
+            the labels in the positive direction of the axis.
+        ticklabelstandoff
+            Sets the standoff distance (in px) between the axis
+            tick labels and their default position. A positive
+            `ticklabelstandoff` moves the labels farther away from
+            the plot area if `ticklabelposition` is "outside", and
+            deeper into the plot area if `ticklabelposition` is
+            "inside". A negative `ticklabelstandoff` works in the
+            opposite direction, moving outside ticks towards the
+            plot area and inside ticks towards the outside. If the
+            negative value is large enough, inside ticks can even
+            end up outside and vice versa.
         ticklabelstep
             Sets the spacing between tick labels as compared to the
             spacing between ticks. A value of 1 (default) means
@@ -3190,6 +3560,8 @@ class XAxis(_BaseLayoutHierarchyType):
         anchor=None,
         automargin=None,
         autorange=None,
+        autorangeoptions=None,
+        autotickangles=None,
         autotypenumbers=None,
         calendar=None,
         categoryarray=None,
@@ -3208,11 +3580,14 @@ class XAxis(_BaseLayoutHierarchyType):
         griddash=None,
         gridwidth=None,
         hoverformat=None,
+        insiderange=None,
         labelalias=None,
         layer=None,
         linecolor=None,
         linewidth=None,
         matches=None,
+        maxallowed=None,
+        minallowed=None,
         minexponent=None,
         minor=None,
         mirror=None,
@@ -3249,9 +3624,13 @@ class XAxis(_BaseLayoutHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelindex=None,
+        ticklabelindexsrc=None,
         ticklabelmode=None,
         ticklabeloverflow=None,
         ticklabelposition=None,
+        ticklabelshift=None,
+        ticklabelstandoff=None,
         ticklabelstep=None,
         ticklen=None,
         tickmode=None,
@@ -3293,8 +3672,22 @@ class XAxis(_BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
-            for more info. If `range` is provided, then `autorange`
-            is set to False.
+            for more info. If `range` is provided and it has a
+            value for both the lower and upper bound, `autorange`
+            is set to False. Using "min" applies autorange only to
+            set the minimum. Using "max" applies autorange only to
+            set the maximum. Using *min reversed* applies autorange
+            only to set the minimum on a reversed axis. Using *max
+            reversed* applies autorange only to set the maximum on
+            a reversed axis. Using "reversed" applies autorange on
+            both ends and reverses the axis direction.
+        autorangeoptions
+            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            ons` instance or dict with compatible properties
+        autotickangles
+            When `tickangle` is set to "auto", it will be set to
+            the first angle in this array that is large enough to
+            prevent label overlap.
         autotypenumbers
             Using "strict" a numeric string in trace data is not
             converted to a number. Using *convert types* a numeric
@@ -3329,7 +3722,8 @@ class XAxis(_BaseLayoutHierarchyType):
             to *total ascending* or *total descending* if order
             should be determined by the numerical order of the
             values. Similarly, the order can be determined by the
-            min, max, sum, mean or median of all the values.
+            min, max, sum, mean, geometric mean or median of all
+            the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -3411,14 +3805,23 @@ class XAxis(_BaseLayoutHierarchyType):
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
+        insiderange
+            Could be used to set the desired inside range of this
+            axis (excluding the labels) when `ticklabelposition` of
+            the anchored axis has "inside". Not implemented for
+            axes with `type` "log". This would be ignored when
+            `range` is provided.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -3440,6 +3843,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        maxallowed
+            Determines the maximum range of this axis.
+        minallowed
+            Determines the minimum range of this axis.
         minexponent
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
@@ -3482,7 +3889,8 @@ class XAxis(_BaseLayoutHierarchyType):
             strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
-            appears.
+            appears. Leaving either or both elements `null` impacts
+            the default `autorange`.
         rangebreaks
             A tuple of
             :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
@@ -3523,7 +3931,13 @@ class XAxis(_BaseLayoutHierarchyType):
             possible inconsistent constraints via `scaleratio`.
             Note that setting axes simultaneously in both a
             `scaleanchor` and a `matches` constraint is currently
-            forbidden.
+            forbidden. Setting `false` allows to remove a default
+            constraint (occasionally, you may need to prevent a
+            default `scaleanchor` constraint from being applied,
+            eg. when having an image trace `yaxis: {scaleanchor:
+            "x"}` is set automatically in order for pixels to be
+            rendered as squares, setting `yaxis: {scaleanchor:
+            false}` allows to remove the constraint).
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -3627,6 +4041,19 @@ class XAxis(_BaseLayoutHierarchyType):
             layout.template.layout.xaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.xaxis.tickformatstops
+        ticklabelindex
+            Only for axes with `type` "date" or "linear". Instead
+            of drawing the major tick label, draw the label for the
+            minor tick that is n positions away from the major
+            tick. E.g. to always draw the label for the minor tick
+            before each major tick, choose `ticklabelindex` -1.
+            This is useful for date axes with `ticklabelmode`
+            "period" if you want to label the period that ends with
+            each major tick instead of the period that begins
+            there.
+        ticklabelindexsrc
+            Sets the source reference on Chart Studio Cloud for
+            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3650,6 +4077,21 @@ class XAxis(_BaseLayoutHierarchyType):
             "boundaries". When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
+        ticklabelshift
+            Shifts the tick labels by the specified number of
+            pixels in parallel to the axis. Positive values move
+            the labels in the positive direction of the axis.
+        ticklabelstandoff
+            Sets the standoff distance (in px) between the axis
+            tick labels and their default position. A positive
+            `ticklabelstandoff` moves the labels farther away from
+            the plot area if `ticklabelposition` is "outside", and
+            deeper into the plot area if `ticklabelposition` is
+            "inside". A negative `ticklabelstandoff` works in the
+            opposite direction, moving outside ticks towards the
+            plot area and inside ticks towards the outside. If the
+            negative value is large enough, inside ticks can even
+            end up outside and vice versa.
         ticklabelstep
             Sets the spacing between tick labels as compared to the
             spacing between ticks. A value of 1 (default) means
@@ -3776,6 +4218,14 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autorangeoptions", None)
+        _v = autorangeoptions if autorangeoptions is not None else _v
+        if _v is not None:
+            self["autorangeoptions"] = _v
+        _v = arg.pop("autotickangles", None)
+        _v = autotickangles if autotickangles is not None else _v
+        if _v is not None:
+            self["autotickangles"] = _v
         _v = arg.pop("autotypenumbers", None)
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
@@ -3848,6 +4298,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = hoverformat if hoverformat is not None else _v
         if _v is not None:
             self["hoverformat"] = _v
+        _v = arg.pop("insiderange", None)
+        _v = insiderange if insiderange is not None else _v
+        if _v is not None:
+            self["insiderange"] = _v
         _v = arg.pop("labelalias", None)
         _v = labelalias if labelalias is not None else _v
         if _v is not None:
@@ -3868,6 +4322,14 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = matches if matches is not None else _v
         if _v is not None:
             self["matches"] = _v
+        _v = arg.pop("maxallowed", None)
+        _v = maxallowed if maxallowed is not None else _v
+        if _v is not None:
+            self["maxallowed"] = _v
+        _v = arg.pop("minallowed", None)
+        _v = minallowed if minallowed is not None else _v
+        if _v is not None:
+            self["minallowed"] = _v
         _v = arg.pop("minexponent", None)
         _v = minexponent if minexponent is not None else _v
         if _v is not None:
@@ -4012,6 +4474,14 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelindex", None)
+        _v = ticklabelindex if ticklabelindex is not None else _v
+        if _v is not None:
+            self["ticklabelindex"] = _v
+        _v = arg.pop("ticklabelindexsrc", None)
+        _v = ticklabelindexsrc if ticklabelindexsrc is not None else _v
+        if _v is not None:
+            self["ticklabelindexsrc"] = _v
         _v = arg.pop("ticklabelmode", None)
         _v = ticklabelmode if ticklabelmode is not None else _v
         if _v is not None:
@@ -4024,6 +4494,14 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = ticklabelposition if ticklabelposition is not None else _v
         if _v is not None:
             self["ticklabelposition"] = _v
+        _v = arg.pop("ticklabelshift", None)
+        _v = ticklabelshift if ticklabelshift is not None else _v
+        if _v is not None:
+            self["ticklabelshift"] = _v
+        _v = arg.pop("ticklabelstandoff", None)
+        _v = ticklabelstandoff if ticklabelstandoff is not None else _v
+        if _v is not None:
+            self["ticklabelstandoff"] = _v
         _v = arg.pop("ticklabelstep", None)
         _v = ticklabelstep if ticklabelstep is not None else _v
         if _v is not None:

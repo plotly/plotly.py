@@ -1,8 +1,7 @@
-from __future__ import absolute_import
-
 import json
 import decimal
 import datetime
+import warnings
 from pathlib import Path
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
@@ -537,7 +536,11 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj.values)
             elif obj.dtype.kind == "M":
                 if isinstance(obj, pd.Series):
-                    dt_values = obj.dt.to_pydatetime().tolist()
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", FutureWarning)
+                        # Series.dt.to_pydatetime will return Index[object]
+                        # https://github.com/pandas-dev/pandas/pull/52459
+                        dt_values = np.array(obj.dt.to_pydatetime()).tolist()
                 else:  # DatetimeIndex
                     dt_values = obj.to_pydatetime().tolist()
 

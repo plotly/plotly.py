@@ -1,8 +1,7 @@
 """
 `plotly.express` is a terse, consistent, high-level wrapper around `plotly.graph_objects`
-for rapid data exploration and figure generation. Learn more at https://plotly.express/
+for rapid data exploration and figure generation. Learn more at https://plotly.com/python/plotly-express/
 """
-from __future__ import absolute_import
 from plotly import optional_imports
 
 pd = optional_imports.get_module("pandas")
@@ -18,12 +17,14 @@ from ._chart_types import (  # noqa: F401
     scatter_3d,
     scatter_polar,
     scatter_ternary,
+    scatter_map,
     scatter_mapbox,
     scatter_geo,
     line,
     line_3d,
     line_polar,
     line_ternary,
+    line_map,
     line_mapbox,
     line_geo,
     area,
@@ -47,7 +48,9 @@ from ._chart_types import (  # noqa: F401
     icicle,
     funnel,
     funnel_area,
+    choropleth_map,
     choropleth_mapbox,
+    density_map,
     density_mapbox,
 )
 
@@ -68,16 +71,19 @@ __all__ = [
     "scatter_3d",
     "scatter_polar",
     "scatter_ternary",
+    "scatter_map",
     "scatter_mapbox",
     "scatter_geo",
     "scatter_matrix",
     "density_contour",
     "density_heatmap",
+    "density_map",
     "density_mapbox",
     "line",
     "line_3d",
     "line_polar",
     "line_ternary",
+    "line_map",
     "line_mapbox",
     "line_geo",
     "parallel_coordinates",
@@ -92,6 +98,7 @@ __all__ = [
     "histogram",
     "ecdf",
     "choropleth",
+    "choropleth_map",
     "choropleth_mapbox",
     "pie",
     "sunburst",

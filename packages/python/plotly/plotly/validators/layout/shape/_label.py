@@ -16,7 +16,8 @@ class LabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets padding (in px) between edge of label and
                 edge of shape.
             text
-                Sets the text to display with shape.
+                Sets the text to display with shape. It is also
+                used for legend item if `name` is not provided.
             textangle
                 Sets the angle at which the label text is drawn
                 with respect to the horizontal. For lines,

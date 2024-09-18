@@ -73,8 +73,6 @@ choose to use a categorical colormap with a column of numbers.
 Be careful! If you have a lot of unique numbers in your color column you will
 end up with a colormap that is massive and may slow down graphing performance.
 """
-from __future__ import absolute_import
-
 import decimal
 from numbers import Number
 

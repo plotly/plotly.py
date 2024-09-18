@@ -80,6 +80,26 @@ def test_labels():
     assert fig.layout.annotations[4].text.startswith("TIME")
 
 
+@pytest.mark.parametrize(
+    ["extra_kwargs", "expected_mode"],
+    [
+        ({}, "lines"),
+        ({"markers": True}, "lines+markers"),
+        ({"text": "continent"}, "lines+markers+text"),
+    ],
+)
+def test_line_mode(extra_kwargs, expected_mode):
+    gapminder = px.data.gapminder()
+    fig = px.line(
+        gapminder,
+        x="year",
+        y="pop",
+        color="country",
+        **extra_kwargs,
+    )
+    assert fig.data[0].mode == expected_mode
+
+
 def test_px_templates():
     try:
         import plotly.graph_objects as go

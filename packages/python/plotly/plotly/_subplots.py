@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
 # Constants
 # ---------
 # Subplot types that are each individually positioned with a domain
@@ -11,7 +8,7 @@ from __future__ import absolute_import, unicode_literals
 # little differently.
 import collections
 
-_single_subplot_types = {"scene", "geo", "polar", "ternary", "mapbox"}
+_single_subplot_types = {"scene", "geo", "polar", "ternary", "map", "mapbox"}
 _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 
 # For most subplot types, a trace is associated with a particular subplot
@@ -23,7 +20,7 @@ _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 # the trace property is just named `subplot`.  For example setting
 # the `scatterpolar.subplot` property to `polar3` associates the scatterpolar
 # trace with the third polar subplot in the figure
-_subplot_prop_named_subplot = {"polar", "ternary", "mapbox"}
+_subplot_prop_named_subplot = {"polar", "ternary", "map", "mapbox"}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
@@ -153,7 +150,8 @@ def make_subplots(
                 - 'scene': 3D Cartesian subplot for scatter3d, cone, etc.
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
-                - 'mapbox': Mapbox subplot for scattermapbox
+                - 'map': Map subplot for scattermap, choroplethmap and densitymap
+                - 'mapbox': Mapbox subplot for scattermapbox, choroplethmapbox and densitymapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
                 - trace type: A trace type which will be used to determine
@@ -193,7 +191,7 @@ def make_subplots(
                   in fraction of cell height ('to_end': to cell top edge)
 
     column_widths: list of numbers or None (default None)
-        list of length `cols` of the relative widths of each column of suplots.
+        list of length `cols` of the relative widths of each column of subplots.
         Values are normalized internally and used to distribute overall width
         of the figure (excluding padding) among the columns.
 
@@ -361,7 +359,7 @@ def make_subplots(
     if not isinstance(rows, int) or rows <= 0:
         raise ValueError(
             """
-The 'rows' argument to make_suplots must be an int greater than 0.
+The 'rows' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(rows), val=repr(rows)
             )
@@ -371,7 +369,7 @@ The 'rows' argument to make_suplots must be an int greater than 0.
     if not isinstance(cols, int) or cols <= 0:
         raise ValueError(
             """
-The 'cols' argument to make_suplots must be an int greater than 0.
+The 'cols' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(cols), val=repr(cols)
             )
@@ -402,7 +400,7 @@ The 'start_cell` argument to make_subplots must be one of \
             if not isinstance(item, dict):
                 raise ValueError(
                     """
-Elements of the '{name}' argument to make_suplots must be dictionaries \
+Elements of the '{name}' argument to make_subplots must be dictionaries \
 or None.
     Received value of type {typ}: {val}""".format(
                         name=name, typ=type(item), val=repr(item)
@@ -487,7 +485,7 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
     ):
         raise ValueError(
             """
-The 'insets' argument to make_suplots must be a list of dictionaries.
+The 'insets' argument to make_subplots must be a list of dictionaries.
     Received value of type {typ}: {val}""".format(
                 typ=type(insets), val=repr(insets)
             )
@@ -590,7 +588,7 @@ The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".f
     else:
         raise ValueError(
             """
-The 'column_widths' argument to make_suplots must be a list of numbers of \
+The 'column_widths' argument to make_subplots must be a list of numbers of \
 length {cols}.
     Received value of type {typ}: {val}""".format(
                 cols=cols, typ=type(column_widths), val=repr(column_widths)
@@ -610,7 +608,7 @@ length {cols}.
     else:
         raise ValueError(
             """
-The 'row_heights' argument to make_suplots must be a list of numbers of \
+The 'row_heights' argument to make_subplots must be a list of numbers of \
 length {rows}.
     Received value of type {typ}: {val}""".format(
                 rows=rows, typ=type(row_heights), val=repr(row_heights)

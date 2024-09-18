@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
     from ._zsmooth import ZsmoothValidator
+    from ._zorder import ZorderValidator
     from ._zmin import ZminValidator
     from ._zmid import ZmidValidator
     from ._zmax import ZmaxValidator
@@ -81,6 +82,7 @@ else:
         [
             "._zsrc.ZsrcValidator",
             "._zsmooth.ZsmoothValidator",
+            "._zorder.ZorderValidator",
             "._zmin.ZminValidator",
             "._zmid.ZmidValidator",
             "._zmax.ZmaxValidator",

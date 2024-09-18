@@ -8,9 +8,6 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
-PY36_OR_LATER = sys.version_info >= (3, 6)
-
-
 def cumsum(x):
     """
     Custom cumsum to avoid a numpy import.

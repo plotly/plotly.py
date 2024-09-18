@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.4
   plotly:
     description: Plotly Express is a terse, consistent, high-level API for creating
       figures.
@@ -42,8 +42,7 @@ Plotly Express provides [more than 30 functions for creating different types of 
 
 Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/) that gives a good introduction to Plotly Express and [Dash](https://dash.plotly.com/):
 
-```python hide_code=true
-%%html
+```html hide_code=true
 <div align="center">
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/FpCgG85g2Hw"
@@ -61,7 +60,7 @@ Plotly Express currently includes the following functions:
 * **Matrix or Image Input**: [`imshow`](/python/imshow/)
 * **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
 * **Multidimensional**: [`scatter_matrix`](/python/splom/), [`parallel_coordinates`](/python/parallel-coordinates-plot/), [`parallel_categories`](/python/parallel-categories-diagram/)
-* **Tile Maps**: [`scatter_mapbox`](/python/scattermapbox/), [`line_mapbox`](/python/lines-on-mapbox/), [`choropleth_mapbox`](/python/mapbox-county-choropleth/), [`density_mapbox`](/python/mapbox-density-heatmaps/)
+* **Tile Maps**: [`scatter_map`](/python/tile-scatter-maps/), [`line_map`](/python/lines-on-tile-maps/), [`choropleth_map`](/python/tile-county-choropleth/), [`density_map`](/python/tile-density-heatmaps/)
 * **Outline Maps**: [`scatter_geo`](/python/scatter-plots-on-maps/), [`line_geo`](/python/lines-on-maps/), [`choropleth`](/python/choropleth-maps/)
 * **Polar Charts**: [`scatter_polar`](/python/polar-chart/), [`line_polar`](/python/polar-chart/), [`bar_polar`](/python/wind-rose-charts/)
 * **Ternary Charts**: [`scatter_ternary`](/python/ternary-plots/), [`line_ternary`](/python/ternary-plots/)
@@ -72,7 +71,7 @@ The Plotly Express API in general offers the following features:
 
 * **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](https://plotly.com/python/creating-and-updating-figures/#updating-figures).
 * **Sensible, Overridable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
-* **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
+* **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
 * **Automatic Trace and Layout configuration**: PX functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](https://plotly.com/python/legend/) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](/python/figure-structure).
 * **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](https://plotly.com/python/figure-labels/) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
 * **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).
@@ -394,18 +393,18 @@ fig.show()
 
 #### Tile Maps
 
-**Read more about [tile maps](/python/mapbox-layers/) and [point on tile maps](/python/scattermapbox/).**
+**Read more about [tile maps](/python/tile-map-layers/) and [point on tile maps](/python/tile-scatter-maps/).**
 
 ```python
 import plotly.express as px
 df = px.data.carshare()
-fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", size="car_hours",
+fig = px.scatter_map(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", size="car_hours",
                   color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10,
-                  mapbox_style="carto-positron")
+                  map_style="carto-positron")
 fig.show()
 ```
 
-**Read more about [tile map GeoJSON choropleths](/python/mapbox-county-choropleth/).**
+**Read more about [tile map GeoJSON choropleths](/python/tile-county-choropleth/).**
 
 ```python
 import plotly.express as px
@@ -413,10 +412,10 @@ import plotly.express as px
 df = px.data.election()
 geojson = px.data.election_geojson()
 
-fig = px.choropleth_mapbox(df, geojson=geojson, color="Bergeron",
+fig = px.choropleth_map(df, geojson=geojson, color="Bergeron",
                            locations="district", featureidkey="properties.district",
                            center={"lat": 45.5517, "lon": -73.7073},
-                           mapbox_style="carto-positron", zoom=9)
+                           map_style="carto-positron", zoom=9)
 fig.show()
 ```
 

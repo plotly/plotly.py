@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import plotly.graph_objs as go
 
 D = dict(x1=[0, 1], y1=[1, 2])

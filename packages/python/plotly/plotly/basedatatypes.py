@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import collections
 from collections import OrderedDict
 import re
@@ -2495,7 +2493,7 @@ Please use the add_trace method with the row and col parameters.
 
     def _init_child_props(self, child):
         """
-        Initialize the properites dict for a child trace or layout
+        Initialize the properties dict for a child trace or layout
 
         Note: this method must match the name/signature of one on
         BasePlotlyType
@@ -3318,6 +3316,9 @@ Invalid property path '{key_path_str}' for layout
         """
         Convert figure to a JSON representation as a Python dict
 
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
+
         Returns
         -------
         dict
@@ -3631,12 +3632,7 @@ Invalid property path '{key_path_str}' for layout
 
             If 'directory', a script tag is included that references an external
             plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file. If `file` is a string to a local file path
-            and `full_html` is True then
-
-            If 'directory', a script tag is included that references an external
-            plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file.  If `file` is a string to a local file
+            directory as the HTML file. If `file` is a string to a local file
             path and `full_html` is True, then the plotly.min.js bundle is copied
             into the directory of the resulting HTML file. If a file named
             plotly.min.js already exists in the output directory then this file
@@ -3711,8 +3707,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        str
-            Representation of figure as an HTML div string
+        None
         """
         import plotly.io as pio
 
@@ -5597,11 +5592,47 @@ on_change callbacks are not supported in this case.
         """
         Return plotly JSON representation of object as a Python dict
 
+        Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
+        or the `to_json` method to encode to a string.
+
         Returns
         -------
         dict
         """
         return deepcopy(self._props if self._props is not None else {})
+
+    def to_json(self, *args, **kwargs):
+        """
+        Convert object to a JSON string representation
+
+        Parameters
+        ----------
+        validate: bool (default True)
+            True if the object should be validated before being converted to
+            JSON, False otherwise.
+
+        pretty: bool (default False)
+            True if JSON representation should be pretty-printed, False if
+            representation should be as compact as possible.
+
+        remove_uids: bool (default True)
+            True if trace UIDs should be omitted from the JSON representation
+
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for an encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
+
+        Returns
+        -------
+        str
+            Representation of object as a JSON string
+        """
+        import plotly.io as pio
+
+        return pio.to_json(self, *args, **kwargs)
 
     @staticmethod
     def _vals_equal(v1, v2):
@@ -5672,7 +5703,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # These are used when a layout has multiple instances of subplot types
     # (xaxis2, yaxis3, geo4, etc.)
     #
-    # The base version of each suplot type is defined in the schema and code
+    # The base version of each subplot type is defined in the schema and code
     # generated. So the Layout subclass has statically defined properties
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.

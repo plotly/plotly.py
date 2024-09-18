@@ -299,7 +299,10 @@ class Cone(_BaseTraceType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.
@@ -918,9 +921,9 @@ class Cone(_BaseTraceType):
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -971,10 +974,12 @@ class Cone(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -1144,7 +1149,7 @@ class Cone(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1283,11 +1288,12 @@ class Cone(_BaseTraceType):
         Determines whether `sizeref` is set as a "scaled" (i.e
         unitless) scalar (normalized by the max u/v/w norm in the
         vector field) or as "absolute" value (in the same units as the
-        vector field).
+        vector field). To display sizes in actual vector length use
+        "raw".
 
         The 'sizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['scaled', 'absolute']
+                ['scaled', 'absolute', 'raw']
 
         Returns
         -------
@@ -1310,9 +1316,10 @@ class Cone(_BaseTraceType):
         minimum "time" to travel across two successive x/y/z positions
         at the average velocity of those two successive positions. All
         cones in a given trace use the same factor. With `sizemode` set
-        to "scaled", `sizeref` is unitless, its default value is 0.5
-        With `sizemode` set to "absolute", `sizeref` has the same units
-        as the u/v/w vector field, its the default value is half the
+        to "raw", its default value is 1. With `sizemode` set to
+        "scaled", `sizeref` is unitless, its default value is 0.5. With
+        `sizemode` set to "absolute", `sizeref` has the same units as
+        the u/v/w vector field, its the default value is half the
         sample's maximum vector norm.
 
         The 'sizeref' property is a number and may be specified as:
@@ -2026,20 +2033,23 @@ class Cone(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2066,7 +2076,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -2096,7 +2106,8 @@ class Cone(_BaseTraceType):
             Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
             the vector field) or as "absolute" value (in the same
-            units as the vector field).
+            units as the vector field). To display sizes in actual
+            vector length use "raw".
         sizeref
             Adjusts the cone size scaling. The size of the cones is
             determined by their u/v/w norm multiplied a factor and
@@ -2105,8 +2116,9 @@ class Cone(_BaseTraceType):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
+            "raw", its default value is 1. With `sizemode` set to
             "scaled", `sizeref` is unitless, its default value is
-            0.5 With `sizemode` set to "absolute", `sizeref` has
+            0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
@@ -2439,20 +2451,23 @@ class Cone(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2479,7 +2494,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -2509,7 +2524,8 @@ class Cone(_BaseTraceType):
             Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
             the vector field) or as "absolute" value (in the same
-            units as the vector field).
+            units as the vector field). To display sizes in actual
+            vector length use "raw".
         sizeref
             Adjusts the cone size scaling. The size of the cones is
             determined by their u/v/w norm multiplied a factor and
@@ -2518,8 +2534,9 @@ class Cone(_BaseTraceType):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
+            "raw", its default value is 1. With `sizemode` set to
             "scaled", `sizeref` is unitless, its default value is
-            0.5 With `sizemode` set to "absolute", `sizeref` has
+            0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.0
+    version: 3.10.11
   plotly:
     description: How to design figures with multiple chart types in python.
     display_as: file_settings
@@ -206,6 +206,42 @@ fig.add_trace(
 )
 
 fig.show()
+```
+
+#### Trace Zorder
+
+*New in 5.21*
+
+You can move a trace in front of or behind another trace by setting its `zorder`. All traces have a default `zorder` of `0`. In the following example, we set `zorder` on the bar trace to `1` to move it in front of the scatter trace.
+
+```python
+import plotly.graph_objects as go
+
+x = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+y_bar = [10, 15, 7, 10, 17, 15, 14, 20, 16, 19, 15, 17]
+y_area = [12, 13, 10, 14, 15, 13, 16, 18, 15, 17, 14, 16]
+
+area_trace = go.Scatter(
+    x=x,
+    y=y_area,
+    fill="tozeroy",
+    mode="lines+markers",
+    name="Area Trace with default `zorder` of 0",
+    line=dict(color="lightsteelblue"),
+)
+
+bar_trace = go.Bar(
+    x=x,
+    y=y_bar,
+    name="Bar Trace with `zorder` of 1",
+    zorder=1,
+    marker=dict(color="lightslategray"),
+)
+
+fig = go.Figure(data=[area_trace, bar_trace])
+
+fig.show()
+
 ```
 
 #### Reference

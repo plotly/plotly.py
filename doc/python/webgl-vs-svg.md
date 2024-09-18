@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,18 +20,18 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.5
+    version: 3.10.11
   plotly:
-    description: Using WebGL for increased speed, improved interactivity, and
-      the ability to plot even more data!
+    description: Using WebGL for increased speed, improved interactivity, and the
+      ability to plot even more data!
     display_as: basic
     language: python
     layout: base
     name: WebGL vs SVG
     order: 14
     permalink: python/webgl-vs-svg/
-    thumbnail: thumbnail/webgl.jpg
     redirect_from: python/compare-webgl-svg/
+    thumbnail: thumbnail/webgl.jpg
 ---
 
 ### SVG and canvas/WebGL: two browser capabilities for rendering
@@ -57,6 +57,27 @@ In addition to the above limitations, the WebGL-powered version of certain SVG-p
 * Area fills are not yet supported in WebGL
 * Range breaks on time-series axes are not yet supported
 * Axis range heuristics may differ
+
+### Multiple WebGL Contexts
+
+*New in 5.19*
+
+Most browsers have a limit of between 8 and 16 WebGL contexts per page. A Plotly WebGL-based figure may use multiple WebGL contexts, but generally you'll be able to render between 4 and 8 figures on one page.
+
+If you exceed the browser limit on WebGL contexts, some figures won't render and you'll see an error. In the console in Chrome, for example, you'll see the error: "Too many active WebGL contexts. Oldest context will be lost".
+
+If you encounter WebGL context limits when using WebGL-based figures, you can use [Virtual WebGL](https://github.com/greggman/virtual-webgl), which virtualizes a single WebGL context into multiple contexts.
+
+To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
+
+In a Jupyter notebook environment that supports magic commands, you can load it with the [HTML magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-html):
+
+<!-- #region -->
+```
+%%html
+<script src=“https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js”></script>
+```
+<!-- #endregion -->
 
 ### WebGL for Scatter Performance
 

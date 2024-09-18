@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-
 from collections import OrderedDict
 
 from plotly import exceptions, optional_imports
@@ -347,10 +343,10 @@ class _Dendrogram(object):
             color_threshold=color_threshold,
         )
 
-        icoord = scp.array(P["icoord"])
-        dcoord = scp.array(P["dcoord"])
-        ordered_labels = scp.array(P["ivl"])
-        color_list = scp.array(P["color_list"])
+        icoord = np.array(P["icoord"])
+        dcoord = np.array(P["dcoord"])
+        ordered_labels = np.array(P["ivl"])
+        color_list = np.array(P["color_list"])
         colors = self.get_color_dict(colorscale)
 
         trace_list = []
@@ -391,8 +387,8 @@ class _Dendrogram(object):
             except ValueError:
                 y_index = ""
 
-            trace["xaxis"] = "x" + x_index
-            trace["yaxis"] = "y" + y_index
+            trace["xaxis"] = f"x{x_index}"
+            trace["yaxis"] = f"y{y_index}"
 
             trace_list.append(trace)
 

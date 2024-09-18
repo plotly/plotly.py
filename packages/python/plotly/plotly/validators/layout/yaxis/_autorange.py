@@ -8,6 +8,9 @@ class AutorangeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "axrange"),
             implied_edits=kwargs.pop("implied_edits", {}),
-            values=kwargs.pop("values", [True, False, "reversed"]),
+            values=kwargs.pop(
+                "values",
+                [True, False, "reversed", "min reversed", "max reversed", "min", "max"],
+            ),
             **kwargs,
         )

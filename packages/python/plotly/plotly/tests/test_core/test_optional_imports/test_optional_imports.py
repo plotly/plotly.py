@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import sys
 from unittest import TestCase
 from plotly.optional_imports import get_module

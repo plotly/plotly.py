@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.10
+    version: 3.10.14
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -579,6 +579,72 @@ fig.update_layout(
 fig.show()
 ```
 
+#### Shifting Shapes on Categorical Axes
+
+*New in 5.23*
+
+When drawing shapes where `xref` or `yref` reference axes of type category or multicategory, you can shift `x0`, `x1`, `y0`, and `y1` away from the center of the category using `x0shift`, `x1shift`, `y0shift`, and `y1shift` by specifying a value between -1 and 1. 
+
+-1 is the center of the previous category, 0 is the center of the referenced category, and 1 is the center of the next category.
+
+In the following example, the `x0` and `x1` values for both shapes reference category values on the x-axis.
+
+In this example, the first shape:
+- Shifts `x0` half way between the center of category "Germany" and the center of the previous category by setting `x0shift=-0.5`
+- Shifts `x1`half way between the center of category "Germany" and the center of the next category by setting `x1shift=0.5`
+
+The second shape:
+- Shifts `x0` back to the center of the previous category by setting `x0shift=-1`
+- Shifts `x1`forward to the center of the next category by setting `x1shift=1`
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 1952")
+
+fig = go.Figure(
+    data=go.Bar(x=df["country"], y=df["lifeExp"], marker_color="LightSalmon"),
+    layout=dict(
+        shapes=[
+            dict(
+                type="rect",
+                x0="Germany",
+                y0=0,
+                x1="Germany",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-0.5,
+                x1shift=0.5,
+                line=dict(color="LightGreen", width=4),
+            ),
+            dict(
+                type="rect",
+                x0="Spain",
+                y0=0,
+                x1="Spain",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-1,
+                x1shift=1,
+                line=dict(color="MediumTurquoise", width=4),
+            ),
+        ]
+    ),
+)
+
+fig.update_layout(
+    title="GDP per Capita in Europe (1972)",
+    xaxis_title="Country",
+    yaxis_title="GDP per Capita",
+)
+
+fig.show()
+
+```
+
 ### Drawing shapes with a Mouse on Cartesian plots
 
 _introduced in plotly 4.7_
@@ -677,12 +743,12 @@ import plotly.graph_objects as go
 fig = go.Figure()
 
 fig.add_shape(
-    type="rect", 
-    fillcolor='turquoise', 
-    x0=1, 
-    y0=1, 
-    x1=2, 
-    y1=3, 
+    type="rect",
+    fillcolor='turquoise',
+    x0=1,
+    y0=1,
+    x1=2,
+    y1=3,
     label=dict(text="Text in rectangle")
 )
 fig.add_shape(
@@ -701,8 +767,8 @@ fig.show()
 
 #### Styling Text Labels
 
-Use the `font` property to configure the `color`, `size`, and `family` of the label font. 
-In this example, we change the label color of the first rectangle to "DarkOrange", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle. 
+Use the `font` property to configure the `color`, `size`, and `family` of the label font.
+In this example, we change the label color of the first rectangle to "DarkOrange", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle.
 
 ```python
 import plotly.graph_objects as go
@@ -776,7 +842,7 @@ fig.add_shape(
 
 fig.add_shape(
     type="line",
-    line_color="MediumSlateBlue",    
+    line_color="MediumSlateBlue",
     x0=3,
     y0=2,
     x1=5,
@@ -870,10 +936,10 @@ fig.show()
 
 #### Setting Label Anchors
 
-`xanchor` sets a label's horizontal positional anchor and `yanchor` sets its vertical position anchor. 
+`xanchor` sets a label's horizontal positional anchor and `yanchor` sets its vertical position anchor.
 Use `xanchor` to bind the `textposition` to the "left", "center" or "right" of the label text and `yanchor` to bind `textposition` to the "top", "middle" or "bottom" of the label text.
 
-In this example, `yanchor`is set to "top", instead of the default of "bottom" for lines, meaning the text displays below the line. 
+In this example, `yanchor`is set to "top", instead of the default of "bottom" for lines, meaning the text displays below the line.
 
 
 ```python
@@ -930,7 +996,7 @@ Use `texttemplate` to add text with variables to shapes. You have access to raw 
 
 `texttemplate` supports d3 number and date formatting.
 
-Add a variable with "%{variable}". This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes. 
+Add a variable with "%{variable}". This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes.
 
 ```python
 import plotly.graph_objects as go
@@ -1024,6 +1090,138 @@ fig.show(
         ]
     }
 )
+```
+
+#### Shapes in the Legend
+
+*New in 5.16*
+
+You can add a shape to the legend by setting `showlegend=True` on the shape. In this example, we add the second shape to the legend. The name that appears for the shape in the legend is the shape's `name` if it is provided. If no `name` is provided, the shape label's `text` is used. If neither is provided, the legend item appears as "shape \<shape number>". For example, "shape 1".
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-09-24",
+    y0=0,
+    x1="2018-12-18",
+    y1=3,
+    line_width=0,
+    label=dict(text="Decline", textposition="top center", font=dict(size=20)),
+    fillcolor="green",
+    opacity=0.25,
+)
+
+fig.add_shape(
+    showlegend=True,
+    type="line",
+    x0=min(df.index),
+    y0=1,
+    x1=max(df.index),
+    y1=1,
+    line_width=3,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+
+fig.show()
+```
+
+`newshape` also supports `showlegend`. In this example, each new line drawn on the graph appears in the legend.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.stocks()
+
+fig = go.Figure(
+    data=go.Scatter(
+        x=df.date,
+        y=df.AAPL,
+        name="Apple"
+    ),
+    layout=go.Layout(
+        yaxis=dict(title="Price in USD"),
+        newshape=dict(
+            showlegend=True,
+            label=dict(texttemplate="Change: %{dy:.2f}")
+        ),
+        title="Apple Share Price 2018/2019",
+    ),
+)
+
+
+fig.show(
+    config={
+        "modeBarButtonsToAdd": [
+            "drawline",
+        ]
+    }
+)
+```
+
+#### Shape Layer
+
+By default, shapes are drawn above traces. You can also configure them to be drawn between traces and gridlines with `layer="between"` (new in 5.21), or below gridlines with `layer="below"`.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-03-01",
+    y0=0,
+    x1="2018-08-01",
+    y1=3,
+    line_width=0,
+    layer="above",
+    label=dict(text="Above", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-10-01",
+    y0=0,
+    x1="2019-03-01",
+    y1=3,
+    line_width=0,
+    layer="between",
+    label=dict(text="Between", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2019-05-01",
+    y0=0,
+    x1="2019-10-01",
+    y1=3,
+    line_width=0,
+    layer="below",
+    label=dict(text="Below", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.show()
 ```
 
 ### Reference

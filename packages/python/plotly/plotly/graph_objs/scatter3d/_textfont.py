@@ -8,7 +8,20 @@ class Textfont(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.textfont"
-    _valid_props = {"color", "colorsrc", "family", "size", "sizesrc"}
+    _valid_props = {
+        "color",
+        "colorsrc",
+        "family",
+        "familysrc",
+        "size",
+        "sizesrc",
+        "style",
+        "stylesrc",
+        "variant",
+        "variantsrc",
+        "weight",
+        "weightsrc",
+    }
 
     # color
     # -----
@@ -102,22 +115,43 @@ class Textfont(_BaseTraceHierarchyType):
         studio.plotly.com or on-premise) generates images on a server,
         where only a select number of fonts are installed and
         supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
-        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
-        Narrow", "Raleway", "Times New Roman".
+        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
+        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
+        "Raleway", "Times New Roman".
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        str
+        str|numpy.ndarray
         """
         return self["family"]
 
     @family.setter
     def family(self, val):
         self["family"] = val
+
+    # familysrc
+    # ---------
+    @property
+    def familysrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `family`.
+
+        The 'familysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["familysrc"]
+
+    @familysrc.setter
+    def familysrc(self, val):
+        self["familysrc"] = val
 
     # size
     # ----
@@ -158,6 +192,134 @@ class Textfont(_BaseTraceHierarchyType):
     def sizesrc(self, val):
         self["sizesrc"] = val
 
+    # style
+    # -----
+    @property
+    def style(self):
+        """
+        Sets whether a font should be styled with a normal or italic
+        face from its family.
+
+        The 'style' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'italic']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self["style"]
+
+    @style.setter
+    def style(self, val):
+        self["style"] = val
+
+    # stylesrc
+    # --------
+    @property
+    def stylesrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `style`.
+
+        The 'stylesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["stylesrc"]
+
+    @stylesrc.setter
+    def stylesrc(self, val):
+        self["stylesrc"] = val
+
+    # variant
+    # -------
+    @property
+    def variant(self):
+        """
+        Sets the variant of the font.
+
+        The 'variant' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'small-caps']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self["variant"]
+
+    @variant.setter
+    def variant(self, val):
+        self["variant"] = val
+
+    # variantsrc
+    # ----------
+    @property
+    def variantsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `variant`.
+
+        The 'variantsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["variantsrc"]
+
+    @variantsrc.setter
+    def variantsrc(self, val):
+        self["variantsrc"] = val
+
+    # weight
+    # ------
+    @property
+    def weight(self):
+        """
+        Sets the weight (or boldness) of the font.
+
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
+            OR exactly one of ['normal', 'bold'] (e.g. 'bold')
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|numpy.ndarray
+        """
+        return self["weight"]
+
+    @weight.setter
+    def weight(self, val):
+        self["weight"] = val
+
+    # weightsrc
+    # ---------
+    @property
+    def weightsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `weight`.
+
+        The 'weightsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["weightsrc"]
+
+    @weightsrc.setter
+    def weightsrc(self, val):
+        self["weightsrc"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -179,14 +341,33 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
+        familysrc
+            Sets the source reference on Chart Studio Cloud for
+            `family`.
         size
 
         sizesrc
             Sets the source reference on Chart Studio Cloud for
             `size`.
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        stylesrc
+            Sets the source reference on Chart Studio Cloud for
+            `style`.
+        variant
+            Sets the variant of the font.
+        variantsrc
+            Sets the source reference on Chart Studio Cloud for
+            `variant`.
+        weight
+            Sets the weight (or boldness) of the font.
+        weightsrc
+            Sets the source reference on Chart Studio Cloud for
+            `weight`.
         """
 
     def __init__(
@@ -195,12 +376,21 @@ class Textfont(_BaseTraceHierarchyType):
         color=None,
         colorsrc=None,
         family=None,
+        familysrc=None,
         size=None,
         sizesrc=None,
+        style=None,
+        stylesrc=None,
+        variant=None,
+        variantsrc=None,
+        weight=None,
+        weightsrc=None,
         **kwargs,
     ):
         """
         Construct a new Textfont object
+
+        Sets the text font.
 
         Parameters
         ----------
@@ -224,14 +414,33 @@ class Textfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
+        familysrc
+            Sets the source reference on Chart Studio Cloud for
+            `family`.
         size
 
         sizesrc
             Sets the source reference on Chart Studio Cloud for
             `size`.
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        stylesrc
+            Sets the source reference on Chart Studio Cloud for
+            `style`.
+        variant
+            Sets the variant of the font.
+        variantsrc
+            Sets the source reference on Chart Studio Cloud for
+            `variant`.
+        weight
+            Sets the weight (or boldness) of the font.
+        weightsrc
+            Sets the source reference on Chart Studio Cloud for
+            `weight`.
 
         Returns
         -------
@@ -278,6 +487,10 @@ an instance of :class:`plotly.graph_objs.scatter3d.Textfont`"""
         _v = family if family is not None else _v
         if _v is not None:
             self["family"] = _v
+        _v = arg.pop("familysrc", None)
+        _v = familysrc if familysrc is not None else _v
+        if _v is not None:
+            self["familysrc"] = _v
         _v = arg.pop("size", None)
         _v = size if size is not None else _v
         if _v is not None:
@@ -286,6 +499,30 @@ an instance of :class:`plotly.graph_objs.scatter3d.Textfont`"""
         _v = sizesrc if sizesrc is not None else _v
         if _v is not None:
             self["sizesrc"] = _v
+        _v = arg.pop("style", None)
+        _v = style if style is not None else _v
+        if _v is not None:
+            self["style"] = _v
+        _v = arg.pop("stylesrc", None)
+        _v = stylesrc if stylesrc is not None else _v
+        if _v is not None:
+            self["stylesrc"] = _v
+        _v = arg.pop("variant", None)
+        _v = variant if variant is not None else _v
+        if _v is not None:
+            self["variant"] = _v
+        _v = arg.pop("variantsrc", None)
+        _v = variantsrc if variantsrc is not None else _v
+        if _v is not None:
+            self["variantsrc"] = _v
+        _v = arg.pop("weight", None)
+        _v = weight if weight is not None else _v
+        if _v is not None:
+            self["weight"] = _v
+        _v = arg.pop("weightsrc", None)
+        _v = weightsrc if weightsrc is not None else _v
+        if _v is not None:
+            self["weightsrc"] = _v
 
         # Process unknown kwargs
         # ----------------------

@@ -8,7 +8,6 @@ import matplotlib as mpl
 from matplotlib import transforms
 
 from .. import utils
-from .. import _py3k_compat as py3k
 
 
 class Renderer(object):
@@ -220,7 +219,7 @@ class Renderer(object):
         ]
 
         it = itertools
-        return it.islice(py3k.zip(*py3k.map(it.cycle, elements)), N)
+        return it.islice(zip(*map(it.cycle, elements)), N)
 
     def draw_path_collection(
         self,
