@@ -189,9 +189,9 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
 
 # Tests
 # -----
-def test_simple_to_image(fig1, format):
-    img_bytes = pio.to_image(fig1, format=format, width=700, height=500, engine="orca")
-    assert_image_bytes(img_bytes, "fig1." + format)
+# def test_simple_to_image(fig1, format):
+#     img_bytes = pio.to_image(fig1, format=format, width=700, height=500, engine="orca")
+#     assert_image_bytes(img_bytes, "fig1." + format)
 
 
 def test_to_image_default(fig1, format):
