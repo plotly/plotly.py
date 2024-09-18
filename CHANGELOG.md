@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused latex to not render in plotly charts. 
 
-- Removed require.js from the generated javascript in plotly charts. 
+- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7)
 
 ## [5.23.0] - 2024-07-23
 
