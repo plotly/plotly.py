@@ -250,7 +250,7 @@ jobs:
           py: "312_no_numpy"
 
   # Orca
-  python_38_orca:
+  python_311_orca:
     docker:
       - image: cimg/python:3.11-browsers
     steps:
