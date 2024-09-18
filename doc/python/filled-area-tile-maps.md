@@ -26,7 +26,7 @@ jupyter:
     display_as: maps
     language: python
     layout: base
-    name: Filled Area on Maps
+    name: Filled Area on Tile Maps
     order: 4
     page_type: example_index
     permalink: python/filled-area-tile-maps/
