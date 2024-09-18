@@ -613,7 +613,7 @@ workflows:
       - python_311_optional
       - python_312_optional
       - python_39_pandas_2_optional
-      - python_38_orca
+      - python_311_orca
       - python_39_percy
       - python_312_no_numpy
       - build-doc
