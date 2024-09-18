@@ -13,7 +13,7 @@ ipykernel==5.5.3
 jupyter==1.0.0
 scipy==1.11.4
 Shapely==2.0.2
-geopandas==0.14.2
+geopandas==0.14.4
 pyshp==2.3.1
 matplotlib==3.8.2
 scikit-image==0.22.0

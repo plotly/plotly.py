@@ -1,4 +1,0 @@
-requests==2.12.4
-tenacity==6.2.0
-pytest==3.5.1
-packaging
