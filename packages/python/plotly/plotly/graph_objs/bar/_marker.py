@@ -19,6 +19,7 @@ class Marker(_BaseTraceHierarchyType):
         "colorbar",
         "colorscale",
         "colorsrc",
+        "cornerradius",
         "line",
         "opacity",
         "opacitysrc",
@@ -301,7 +302,10 @@ class Marker(_BaseTraceHierarchyType):
                     'Canada'} changes US to USA and CA to Canada.
                     The labels we would have shown must match the
                     keys exactly, after adding any tickprefix or
-                    ticksuffix. labelalias can be used with any
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
                     axis type, and both keys (if needed) and values
                     (if desired) can include html-like tags or
                     MathJax.
@@ -612,6 +616,29 @@ class Marker(_BaseTraceHierarchyType):
     @colorsrc.setter
     def colorsrc(self, val):
         self["colorsrc"] = val
+
+    # cornerradius
+    # ------------
+    @property
+    def cornerradius(self):
+        """
+        Sets the rounding of corners. May be an integer number of
+        pixels, or a percentage of bar width (as a string ending in %).
+        Defaults to `layout.barcornerradius`. In stack or relative
+        barmode, the first trace to set cornerradius is used for the
+        whole stack.
+
+        The 'cornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["cornerradius"]
+
+    @cornerradius.setter
+    def cornerradius(self, val):
+        self["cornerradius"] = val
 
     # line
     # ----
@@ -957,6 +984,12 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width (as a string
+            ending in %). Defaults to `layout.barcornerradius`. In
+            stack or relative barmode, the first trace to set
+            cornerradius is used for the whole stack.
         line
             :class:`plotly.graph_objects.bar.marker.Line` instance
             or dict with compatible properties
@@ -992,6 +1025,7 @@ class Marker(_BaseTraceHierarchyType):
         colorbar=None,
         colorscale=None,
         colorsrc=None,
+        cornerradius=None,
         line=None,
         opacity=None,
         opacitysrc=None,
@@ -1074,6 +1108,12 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        cornerradius
+            Sets the rounding of corners. May be an integer number
+            of pixels, or a percentage of bar width (as a string
+            ending in %). Defaults to `layout.barcornerradius`. In
+            stack or relative barmode, the first trace to set
+            cornerradius is used for the whole stack.
         line
             :class:`plotly.graph_objects.bar.marker.Line` instance
             or dict with compatible properties
@@ -1168,6 +1208,10 @@ an instance of :class:`plotly.graph_objs.bar.Marker`"""
         _v = colorsrc if colorsrc is not None else _v
         if _v is not None:
             self["colorsrc"] = _v
+        _v = arg.pop("cornerradius", None)
+        _v = cornerradius if cornerradius is not None else _v
+        if _v is not None:
+            self["cornerradius"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

@@ -46,6 +46,7 @@ class Image(_BaseTraceType):
         "z",
         "zmax",
         "zmin",
+        "zorder",
         "zsmooth",
         "zsrc",
     }
@@ -474,10 +475,12 @@ class Image(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -566,7 +569,7 @@ class Image(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -961,6 +964,28 @@ class Image(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # zsmooth
     # -------
     @property
@@ -1099,11 +1124,14 @@ class Image(_BaseTraceType):
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1124,7 +1152,7 @@ class Image(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1210,6 +1238,11 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
@@ -1258,6 +1291,7 @@ class Image(_BaseTraceType):
         z=None,
         zmax=None,
         zmin=None,
+        zorder=None,
         zsmooth=None,
         zsrc=None,
         **kwargs,
@@ -1362,11 +1396,14 @@ class Image(_BaseTraceType):
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1387,7 +1424,7 @@ class Image(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1473,6 +1510,11 @@ class Image(_BaseTraceType):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
@@ -1658,6 +1700,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
         _v = arg.pop("zsmooth", None)
         _v = zsmooth if zsmooth is not None else _v
         if _v is not None:

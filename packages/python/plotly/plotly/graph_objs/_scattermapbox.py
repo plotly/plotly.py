@@ -620,9 +620,9 @@ class Scattermapbox(_BaseTraceType):
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -673,10 +673,12 @@ class Scattermapbox(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -1012,7 +1014,7 @@ class Scattermapbox(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1160,9 +1162,12 @@ class Scattermapbox(_BaseTraceType):
     @property
     def subplot(self):
         """
-        Sets a reference between this trace's data coordinates and a
-        mapbox subplot. If "mapbox" (the default value), the data refer
-        to `layout.mapbox`. If "mapbox2", the data refer to
+        mapbox subplots and traces are deprecated! Please consider
+        switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/javascript/maplibre-migration/ Sets a
+        reference between this trace's data coordinates and a mapbox
+        subplot. If "mapbox" (the default value), the data refer to
+        `layout.mapbox`. If "mapbox2", the data refer to
         `layout.mapbox2`, and so on.
 
         The 'subplot' property is an identifier of a particular
@@ -1239,11 +1244,17 @@ class Scattermapbox(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1572,20 +1583,23 @@ class Scattermapbox(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1622,7 +1636,7 @@ class Scattermapbox(_BaseTraceType):
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1643,10 +1657,14 @@ class Scattermapbox(_BaseTraceType):
             :class:`plotly.graph_objects.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
@@ -1772,8 +1790,11 @@ class Scattermapbox(_BaseTraceType):
         """
         Construct a new Scattermapbox object
 
-        The data visualized as scatter point, lines or marker symbols
-        on a Mapbox GL geographic map is provided by longitude/latitude
+        "scattermapbox" trace is deprecated! Please consider switching
+        to the "scattermap" trace type and `map` subplots. Learn more
+        at: https://plotly.com/javascript/maplibre-migration/ The data
+        visualized as scatter point, lines or marker symbols on a
+        Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
 
         Parameters
@@ -1881,20 +1902,23 @@ class Scattermapbox(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1931,7 +1955,7 @@ class Scattermapbox(_BaseTraceType):
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1952,10 +1976,14 @@ class Scattermapbox(_BaseTraceType):
             :class:`plotly.graph_objects.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all

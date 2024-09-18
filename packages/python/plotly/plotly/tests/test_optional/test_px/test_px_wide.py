@@ -1,9 +1,11 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
+import warnings
 
 
 def test_is_col_list():
@@ -847,3 +849,29 @@ def test_line_group():
     assert len(fig.data) == 4
     fig = px.scatter(df, x="x", y=["miss", "score"], color="who")
     assert len(fig.data) == 2
+
+
+def test_no_pd_perf_warning():
+    n_cols = 1000
+    n_rows = 1000
+
+    columns = list(f"col_{c}" for c in range(n_cols))
+    index = list(f"i_{r}" for r in range(n_rows))
+
+    df = pd.DataFrame(
+        np.random.uniform(size=(n_rows, n_cols)), index=index, columns=columns
+    )
+
+    with warnings.catch_warnings(record=True) as warn_list:
+        _ = px.bar(
+            df,
+            x=df.index,
+            y=df.columns[:-2],
+            labels=df.columns[:-2],
+        )
+    performance_warnings = [
+        warn
+        for warn in warn_list
+        if issubclass(warn.category, pd.errors.PerformanceWarning)
+    ]
+    assert len(performance_warnings) == 0, "PerformanceWarning(s) raised!"

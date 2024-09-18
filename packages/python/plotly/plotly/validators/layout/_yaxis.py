@@ -23,7 +23,20 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not the range of this
                 axis is computed in relation to the input data.
                 See `rangemode` for more info. If `range` is
-                provided, then `autorange` is set to False.
+                provided and it has a value for both the lower
+                and upper bound, `autorange` is set to False.
+                Using "min" applies autorange only to set the
+                minimum. Using "max" applies autorange only to
+                set the maximum. Using *min reversed* applies
+                autorange only to set the minimum on a reversed
+                axis. Using *max reversed* applies autorange
+                only to set the maximum on a reversed axis.
+                Using "reversed" applies autorange on both ends
+                and reverses the axis direction.
+            autorangeoptions
+                :class:`plotly.graph_objects.layout.yaxis.Autor
+                angeoptions` instance or dict with compatible
+                properties
             autoshift
                 Automatically reposition the axis to avoid
                 overlap with other axes with the same
@@ -32,6 +45,10 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes on the same side with `autoshift` is set
                 to true. Only has an effect if `anchor` is set
                 to "free".
+            autotickangles
+                When `tickangle` is set to "auto", it will be
+                set to the first angle in this array that is
+                large enough to prevent label overlap.
             autotypenumbers
                 Using "strict" a numeric string in trace data
                 is not converted to a number. Using *convert
@@ -71,7 +88,8 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 descending* if order should be determined by
                 the numerical order of the values. Similarly,
                 the order can be determined by the min, max,
-                sum, mean or median of all the values.
+                sum, mean, geometric mean or median of all the
+                values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -164,13 +182,23 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
+            insiderange
+                Could be used to set the desired inside range
+                of this axis (excluding the labels) when
+                `ticklabelposition` of the anchored axis has
+                "inside". Not implemented for axes with `type`
+                "log". This would be ignored when `range` is
+                provided.
             labelalias
                 Replacement text for specific tick or hover
                 labels. For example using {US: 'USA', CA:
                 'Canada'} changes US to USA and CA to Canada.
                 The labels we would have shown must match the
                 keys exactly, after adding any tickprefix or
-                ticksuffix. labelalias can be used with any
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
                 axis type, and both keys (if needed) and values
                 (if desired) can include html-like tags or
                 MathJax.
@@ -197,6 +225,10 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `scaleanchor` and a `matches` constraint is
                 currently forbidden. Moreover, note that
                 matching axes must have the same `type`.
+            maxallowed
+                Determines the maximum range of this axis.
+            minallowed
+                Determines the minimum range of this axis.
             minexponent
                 Hide SI prefix for 10^n if |n| is below this
                 number. This only has an effect when
@@ -242,7 +274,9 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 strings. If the axis `type` is "category", it
                 should be numbers, using the scale where each
                 category is assigned a serial number from zero
-                in the order it appears.
+                in the order it appears. Leaving either or both
+                elements `null` impacts the default
+                `autorange`.
             rangebreaks
                 A tuple of :class:`plotly.graph_objects.layout.
                 yaxis.Rangebreak` instances or dicts with
@@ -281,6 +315,15 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 constraints via `scaleratio`. Note that setting
                 axes simultaneously in both a `scaleanchor` and
                 a `matches` constraint is currently forbidden.
+                Setting `false` allows to remove a default
+                constraint (occasionally, you may need to
+                prevent a default `scaleanchor` constraint from
+                being applied, eg. when having an image trace
+                `yaxis: {scaleanchor: "x"}` is set
+                automatically in order for pixels to be
+                rendered as squares, setting `yaxis:
+                {scaleanchor: false}` allows to remove the
+                constraint).
             scaleratio
                 If this axis is linked to another by
                 `scaleanchor`, this determines the pixel to
@@ -404,6 +447,20 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 out.yaxis.tickformatstopdefaults), sets the
                 default property values to use for elements of
                 layout.yaxis.tickformatstops
+            ticklabelindex
+                Only for axes with `type` "date" or "linear".
+                Instead of drawing the major tick label, draw
+                the label for the minor tick that is n
+                positions away from the major tick. E.g. to
+                always draw the label for the minor tick before
+                each major tick, choose `ticklabelindex` -1.
+                This is useful for date axes with
+                `ticklabelmode` "period" if you want to label
+                the period that ends with each major tick
+                instead of the period that begins there.
+            ticklabelindexsrc
+                Sets the source reference on Chart Studio Cloud
+                for `ticklabelindex`.
             ticklabelmode
                 Determines where tick labels are drawn with
                 respect to their corresponding ticks and grid
@@ -431,6 +488,24 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axes linked by `matches` or `scaleanchor`, no
                 extra padding for inside labels would be added
                 by autorange, so that the scales could match.
+            ticklabelshift
+                Shifts the tick labels by the specified number
+                of pixels in parallel to the axis. Positive
+                values move the labels in the positive
+                direction of the axis.
+            ticklabelstandoff
+                Sets the standoff distance (in px) between the
+                axis tick labels and their default position. A
+                positive `ticklabelstandoff` moves the labels
+                farther away from the plot area if
+                `ticklabelposition` is "outside", and deeper
+                into the plot area if `ticklabelposition` is
+                "inside". A negative `ticklabelstandoff` works
+                in the opposite direction, moving outside ticks
+                towards the plot area and inside ticks towards
+                the outside. If the negative value is large
+                enough, inside ticks can even end up outside
+                and vice versa.
             ticklabelstep
                 Sets the spacing between tick labels as
                 compared to the spacing between ticks. A value

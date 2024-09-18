@@ -75,6 +75,7 @@ class Funnel(_BaseTraceType):
         "yperiod0",
         "yperiodalignment",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -579,18 +580,58 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -632,9 +673,9 @@ class Funnel(_BaseTraceType):
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -685,10 +726,12 @@ class Funnel(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -896,7 +939,7 @@ class Funnel(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1037,18 +1080,58 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1223,18 +1306,58 @@ class Funnel(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on Chart Studio Cloud
                     for `family`.
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                linepositionsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `lineposition`.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
+                shadowsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shadow`.
                 size
 
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                textcasesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `textcase`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1864,6 +1987,28 @@ class Funnel(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -1976,20 +2121,23 @@ class Funnel(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2013,7 +2161,7 @@ class Funnel(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -2221,6 +2369,11 @@ class Funnel(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2291,6 +2444,7 @@ class Funnel(_BaseTraceType):
         yperiod0=None,
         yperiodalignment=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2409,20 +2563,23 @@ class Funnel(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -2446,7 +2603,7 @@ class Funnel(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
@@ -2654,6 +2811,11 @@ class Funnel(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -2948,6 +3110,10 @@ an instance of :class:`plotly.graph_objs.Funnel`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

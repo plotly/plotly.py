@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import plotly
 import plotly.graph_objs as go
 from plotly.offline import get_plotlyjs_version

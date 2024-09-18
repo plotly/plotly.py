@@ -49,10 +49,12 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._meta import MetaValidator
     from ._margin import MarginValidator
     from ._mapbox import MapboxValidator
+    from ._map import MapValidator
     from ._legend import LegendValidator
     from ._imagedefaults import ImagedefaultsValidator
     from ._images import ImagesValidator
     from ._iciclecolorway import IciclecolorwayValidator
+    from ._hoversubplots import HoversubplotsValidator
     from ._hovermode import HovermodeValidator
     from ._hoverlabel import HoverlabelValidator
     from ._hoverdistance import HoverdistanceValidator
@@ -88,6 +90,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._barmode import BarmodeValidator
     from ._bargroupgap import BargroupgapValidator
     from ._bargap import BargapValidator
+    from ._barcornerradius import BarcornerradiusValidator
     from ._autotypenumbers import AutotypenumbersValidator
     from ._autosize import AutosizeValidator
     from ._annotationdefaults import AnnotationdefaultsValidator
@@ -148,10 +151,12 @@ else:
             "._meta.MetaValidator",
             "._margin.MarginValidator",
             "._mapbox.MapboxValidator",
+            "._map.MapValidator",
             "._legend.LegendValidator",
             "._imagedefaults.ImagedefaultsValidator",
             "._images.ImagesValidator",
             "._iciclecolorway.IciclecolorwayValidator",
+            "._hoversubplots.HoversubplotsValidator",
             "._hovermode.HovermodeValidator",
             "._hoverlabel.HoverlabelValidator",
             "._hoverdistance.HoverdistanceValidator",
@@ -187,6 +192,7 @@ else:
             "._barmode.BarmodeValidator",
             "._bargroupgap.BargroupgapValidator",
             "._bargap.BargapValidator",
+            "._barcornerradius.BarcornerradiusValidator",
             "._autotypenumbers.AutotypenumbersValidator",
             "._autosize.AutosizeValidator",
             "._annotationdefaults.AnnotationdefaultsValidator",

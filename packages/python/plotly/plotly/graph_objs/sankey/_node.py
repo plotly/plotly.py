@@ -9,6 +9,7 @@ class Node(_BaseTraceHierarchyType):
     _parent_path_str = "sankey"
     _path_str = "sankey.node"
     _valid_props = {
+        "align",
         "color",
         "colorsrc",
         "customdata",
@@ -28,6 +29,28 @@ class Node(_BaseTraceHierarchyType):
         "y",
         "ysrc",
     }
+
+    # align
+    # -----
+    @property
+    def align(self):
+        """
+        Sets the alignment method used to position the nodes along the
+        horizontal axis.
+
+        The 'align' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['justify', 'left', 'right', 'center']
+
+        Returns
+        -------
+        Any
+        """
+        return self["align"]
+
+    @align.setter
+    def align(self, val):
+        self["align"] = val
 
     # color
     # -----
@@ -531,6 +554,9 @@ class Node(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        align
+            Sets the alignment method used to position the nodes
+            along the horizontal axis.
         color
             Sets the `node` color. It can be a single value, or an
             array for specifying color for each `node`. If
@@ -619,6 +645,7 @@ class Node(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        align=None,
         color=None,
         colorsrc=None,
         customdata=None,
@@ -649,6 +676,9 @@ class Node(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.sankey.Node`
+        align
+            Sets the alignment method used to position the nodes
+            along the horizontal axis.
         color
             Sets the `node` color. It can be a single value, or an
             array for specifying color for each `node`. If
@@ -766,6 +796,10 @@ an instance of :class:`plotly.graph_objs.sankey.Node`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("align", None)
+        _v = align if align is not None else _v
+        if _v is not None:
+            self["align"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Hexbin Mapbox
-    order: 13
+    order: 14
     page_type: u-guide
     permalink: python/hexbin-mapbox/
     thumbnail: thumbnail/hexbin_mapbox.jpg

@@ -136,8 +136,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.scattercarpet.Lege
                 ndgrouptitle` instance or dict with compatible
@@ -145,13 +146,16 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
             legendwidth
                 Sets the width (in px or fraction) of the
                 legend for this trace.
@@ -187,7 +191,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points and the trace is not stacked then the
                 default is "lines+markers". Otherwise, "lines".
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -299,6 +303,11 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

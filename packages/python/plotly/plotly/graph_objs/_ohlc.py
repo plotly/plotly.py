@@ -58,6 +58,7 @@ class Ohlc(_BaseTraceType):
         "xsrc",
         "yaxis",
         "yhoverformat",
+        "zorder",
     }
 
     # close
@@ -462,9 +463,9 @@ class Ohlc(_BaseTraceType):
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -515,10 +516,12 @@ class Ohlc(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -684,7 +687,7 @@ class Ohlc(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1227,6 +1230,28 @@ class Ohlc(_BaseTraceType):
     def yhoverformat(self, val):
         self["yhoverformat"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -1292,20 +1317,23 @@ class Ohlc(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1334,7 +1362,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1454,6 +1482,11 @@ class Ohlc(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -1507,6 +1540,7 @@ class Ohlc(_BaseTraceType):
         xsrc=None,
         yaxis=None,
         yhoverformat=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -1580,20 +1614,23 @@ class Ohlc(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1622,7 +1659,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1742,6 +1779,11 @@ class Ohlc(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -1968,6 +2010,10 @@ an instance of :class:`plotly.graph_objs.Ohlc`"""
         _v = yhoverformat if yhoverformat is not None else _v
         if _v is not None:
             self["yhoverformat"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

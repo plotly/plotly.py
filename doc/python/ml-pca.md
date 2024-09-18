@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: Visualize Principle Component Analysis (PCA) of your high-dimensional
       data in Python with Plotly.
@@ -105,17 +105,17 @@ fig.show()
 
 When you will have too many features to visualize, you might be interested in only visualizing the most relevant components. Those components often capture a majority of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation), which is a good way to tell if those components are sufficient for modelling this dataset.
 
-In the example below, our dataset contains 10 features, but we only select the first 4 components, since they explain over 99% of the total variance.
+In the example below, our dataset contains 8 features, but we only select the first 2 components.
 
 ```python
 import pandas as pd
 import plotly.express as px
 from sklearn.decomposition import PCA
-from sklearn.datasets import load_boston
+from sklearn.datasets import fetch_california_housing
 
-boston = load_boston()
-df = pd.DataFrame(boston.data, columns=boston.feature_names)
-n_components = 4
+housing = fetch_california_housing(as_frame=True)
+df = housing.data
+n_components = 2
 
 pca = PCA(n_components=n_components)
 components = pca.fit_transform(df)
@@ -127,7 +127,7 @@ labels['color'] = 'Median Price'
 
 fig = px.scatter_matrix(
     components,
-    color=boston.target,
+    color=housing.target,
     dimensions=range(n_components),
     labels=labels,
     title=f'Total Explained Variance: {total_var:.2f}%',

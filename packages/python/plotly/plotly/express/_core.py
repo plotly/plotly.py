@@ -7,6 +7,7 @@ from .trendline_functions import ols, lowess, rolling, expanding, ewm
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
 import math
+from packaging import version
 import pandas as pd
 import numpy as np
 
@@ -15,6 +16,8 @@ from plotly._subplots import (
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
 )
+
+pandas_2_2_0 = version.parse(pd.__version__) >= version.parse("2.2.0")
 
 NO_COLOR = "px_no_color_constant"
 trendline_functions = dict(
@@ -321,7 +324,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
-
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
                     y = sorted_trace_data[args["y"]].values
@@ -424,7 +426,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         # as a list of row lists, which is what we want
                         trace_patch["customdata"] = trace_data[customdata_cols]
             elif attr_name == "color":
-                if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
+                if trace_spec.constructor in [
+                    go.Choropleth,
+                    go.Choroplethmap,
+                    go.Choroplethmapbox,
+                ]:
                     trace_patch["z"] = trace_data[attr_value]
                     trace_patch["coloraxis"] = "coloraxis1"
                     mapping_labels[attr_label] = "%{z}"
@@ -530,6 +536,9 @@ def configure_axes(args, constructor, fig, orders):
         go.Scatterpolar: configure_polar_axes,
         go.Scatterpolargl: configure_polar_axes,
         go.Barpolar: configure_polar_axes,
+        go.Scattermap: configure_map,
+        go.Choroplethmap: configure_map,
+        go.Densitymap: configure_map,
         go.Scattermapbox: configure_mapbox,
         go.Choroplethmapbox: configure_mapbox,
         go.Densitymapbox: configure_mapbox,
@@ -562,7 +571,6 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
-
     if "histogram" in [args["marginal_x"], args["marginal_y"]]:
         fig.layout["barmode"] = "overlay"
 
@@ -738,6 +746,20 @@ def configure_mapbox(args, fig, orders):
     )
 
 
+def configure_map(args, fig, orders):
+    center = args["center"]
+    if not center and "lat" in args and "lon" in args:
+        center = dict(
+            lat=args["data_frame"][args["lat"]].mean(),
+            lon=args["data_frame"][args["lon"]].mean(),
+        )
+    fig.update_maps(
+        center=center,
+        zoom=args["zoom"],
+        style=args["map_style"],
+    )
+
+
 def configure_geo(args, fig, orders):
     fig.update_geos(
         center=args["center"],
@@ -813,6 +835,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             or (
                 args["render_mode"] == "auto"
                 and len(args["data_frame"]) > 1000
+                and args.get("line_shape") != "spline"
                 and args["animation_frame"] is None
             )
         ):
@@ -1017,7 +1040,7 @@ def _get_reserved_col_names(args):
     return reserved_names
 
 
-def _is_col_list(df_input, arg):
+def _is_col_list(columns, arg):
     """Returns True if arg looks like it's a list of columns or references to columns
     in df_input, and False otherwise (in which case it's assumed to be a single column
     or reference to a column).
@@ -1032,7 +1055,7 @@ def _is_col_list(df_input, arg):
         return False  # not iterable
     for c in arg:
         if isinstance(c, str) or isinstance(c, int):
-            if df_input is None or c not in df_input.columns:
+            if columns is None or c not in columns:
                 return False
         else:
             try:
@@ -1058,20 +1081,20 @@ def _isinstance_listlike(x):
         return True
 
 
-def _escape_col_name(df_input, col_name, extra):
-    while df_input is not None and (col_name in df_input.columns or col_name in extra):
+def _escape_col_name(columns, col_name, extra):
+    while columns is not None and (col_name in columns or col_name in extra):
         col_name = "_" + col_name
     return col_name
 
 
-def to_unindexed_series(x):
+def to_unindexed_series(x, name=None):
     """
     assuming x is list-like or even an existing pd.Series, return a new pd.Series with
     no index, without extracting the data from an existing Series via numpy, which
     seems to mangle datetime columns. Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building
     """
-    return pd.Series(x).reset_index(drop=True)
+    return pd.Series(x, name=name).reset_index(drop=True)
 
 
 def process_args_into_dataframe(args, wide_mode, var_name, value_name):
@@ -1086,9 +1109,12 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     df_input = args["data_frame"]
     df_provided = df_input is not None
 
-    df_output = pd.DataFrame()
-    constants = dict()
-    ranges = list()
+    # we use a dict instead of a dataframe directly so that it doesn't cause
+    # PerformanceWarning by pandas by repeatedly setting the columns.
+    # a dict is used instead of a list as the columns needs to be overwritten.
+    df_output = {}
+    constants = {}
+    ranges = []
     wide_id_vars = set()
     reserved_names = _get_reserved_col_names(args) if df_provided else set()
 
@@ -1099,7 +1125,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
             )
         else:
-            df_output[df_input.columns] = df_input[df_input.columns]
+            df_output = {col: series for col, series in df_input.items()}
 
     # hover_data is a dict
     hover_data_is_dict = (
@@ -1140,7 +1166,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
         # argument_list and field_list ready, iterate over them
         # Core of the loop starts here
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
-            length = len(df_output)
+            length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
             if argument is None:
                 continue
             col_name = None
@@ -1181,11 +1207,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                             % (
                                 argument,
                                 len(real_argument),
-                                str(list(df_output.columns)),
+                                str(list(df_output.keys())),
                                 length,
                             )
                         )
-                    df_output[col_name] = to_unindexed_series(real_argument)
+                    df_output[col_name] = to_unindexed_series(real_argument, col_name)
                 elif not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1214,13 +1240,15 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         % (
                             field,
                             len(df_input[argument]),
-                            str(list(df_output.columns)),
+                            str(list(df_output.keys())),
                             length,
                         )
                     )
                 else:
                     col_name = str(argument)
-                    df_output[col_name] = to_unindexed_series(df_input[argument])
+                    df_output[col_name] = to_unindexed_series(
+                        df_input[argument], col_name
+                    )
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
@@ -1247,9 +1275,9 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
                         "length of  previously-processed arguments %s is %d"
-                        % (field, len(argument), str(list(df_output.columns)), length)
+                        % (field, len(argument), str(list(df_output.keys())), length)
                     )
-                df_output[str(col_name)] = to_unindexed_series(argument)
+                df_output[str(col_name)] = to_unindexed_series(argument, str(col_name))
 
             # Finally, update argument with column name now that column exists
             assert col_name is not None, (
@@ -1267,12 +1295,19 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
             if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
 
-    for col_name in ranges:
-        df_output[col_name] = range(len(df_output))
+    length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
+    df_output.update(
+        {col_name: to_unindexed_series(range(length), col_name) for col_name in ranges}
+    )
+    df_output.update(
+        {
+            # constant is single value. repeat by len to avoid creating NaN on concating
+            col_name: to_unindexed_series([constants[col_name]] * length, col_name)
+            for col_name in constants
+        }
+    )
 
-    for col_name in constants:
-        df_output[col_name] = constants[col_name]
-
+    df_output = pd.DataFrame(df_output)
     return df_output, wide_id_vars
 
 
@@ -1306,19 +1341,46 @@ def build_dataframe(args, constructor):
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
+    needs_interchanging = False
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        if hasattr(args["data_frame"], "to_pandas"):
+        if hasattr(args["data_frame"], "__dataframe__") and version.parse(
+            pd.__version__
+        ) >= version.parse("2.0.2"):
+            import pandas.api.interchange
+
+            df_not_pandas = args["data_frame"]
+            args["data_frame"] = df_not_pandas.__dataframe__()
+            # According interchange protocol: `def column_names(self) -> Iterable[str]:`
+            # so this function can return for example a generator.
+            # The easiest way is to convert `columns` to `pandas.Index` so that the
+            # type is similar to the types in other code branches.
+            columns = pd.Index(args["data_frame"].column_names())
+            needs_interchanging = True
+        elif hasattr(args["data_frame"], "to_pandas"):
             args["data_frame"] = args["data_frame"].to_pandas()
+            columns = args["data_frame"].columns
+        elif hasattr(args["data_frame"], "toPandas"):
+            args["data_frame"] = args["data_frame"].toPandas()
+            columns = args["data_frame"].columns
+        elif hasattr(args["data_frame"], "to_pandas_df"):
+            args["data_frame"] = args["data_frame"].to_pandas_df()
+            columns = args["data_frame"].columns
         else:
             args["data_frame"] = pd.DataFrame(args["data_frame"])
+            columns = args["data_frame"].columns
+    elif df_provided:
+        columns = args["data_frame"].columns
+    else:
+        columns = None
+
     df_input = args["data_frame"]
 
     # now we handle special cases like wide-mode or x-xor-y specification
     # by rearranging args to tee things up for process_args_into_dataframe to work
     no_x = args.get("x") is None
     no_y = args.get("y") is None
-    wide_x = False if no_x else _is_col_list(df_input, args["x"])
-    wide_y = False if no_y else _is_col_list(df_input, args["y"])
+    wide_x = False if no_x else _is_col_list(columns, args["x"])
+    wide_y = False if no_y else _is_col_list(columns, args["y"])
 
     wide_mode = False
     var_name = None  # will likely be "variable" in wide_mode
@@ -1333,15 +1395,18 @@ def build_dataframe(args, constructor):
             )
         if df_provided and no_x and no_y:
             wide_mode = True
-            if isinstance(df_input.columns, pd.MultiIndex):
+            if isinstance(columns, pd.MultiIndex):
                 raise TypeError(
                     "Data frame columns is a pandas MultiIndex. "
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment."
                 )
-            args["wide_variable"] = list(df_input.columns)
-            var_name = df_input.columns.name
-            if var_name in [None, "value", "index"] or var_name in df_input:
+            args["wide_variable"] = list(columns)
+            if isinstance(columns, pd.Index):
+                var_name = columns.name
+            else:
+                var_name = None
+            if var_name in [None, "value", "index"] or var_name in columns:
                 var_name = "variable"
             if constructor == go.Funnel:
                 wide_orientation = args.get("orientation") or "h"
@@ -1352,12 +1417,12 @@ def build_dataframe(args, constructor):
         elif wide_x != wide_y:
             wide_mode = True
             args["wide_variable"] = args["y"] if wide_y else args["x"]
-            if df_provided and args["wide_variable"] is df_input.columns:
-                var_name = df_input.columns.name
+            if df_provided and args["wide_variable"] is columns:
+                var_name = columns.name
             if isinstance(args["wide_variable"], pd.Index):
                 args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
-                df_provided and var_name in df_input
+                df_provided and var_name in columns
             ):
                 var_name = "variable"
             if hist1d_orientation:
@@ -1370,8 +1435,44 @@ def build_dataframe(args, constructor):
                 wide_cross_name = "__x__" if wide_y else "__y__"
 
     if wide_mode:
-        value_name = _escape_col_name(df_input, "value", [])
-        var_name = _escape_col_name(df_input, var_name, [])
+        value_name = _escape_col_name(columns, "value", [])
+        var_name = _escape_col_name(columns, var_name, [])
+
+    if needs_interchanging:
+        try:
+            if wide_mode or not hasattr(args["data_frame"], "select_columns_by_name"):
+                args["data_frame"] = pd.api.interchange.from_dataframe(
+                    args["data_frame"]
+                )
+            else:
+                # Save precious resources by only interchanging columns that are
+                # actually going to be plotted.
+                necessary_columns = {
+                    i for i in args.values() if isinstance(i, str) and i in columns
+                }
+                for field in args:
+                    if args[field] is not None and field in array_attrables:
+                        necessary_columns.update(i for i in args[field] if i in columns)
+                columns = list(necessary_columns)
+                args["data_frame"] = pd.api.interchange.from_dataframe(
+                    args["data_frame"].select_columns_by_name(columns)
+                )
+        except (ImportError, NotImplementedError) as exc:
+            # temporary workaround; developers of third-party libraries themselves
+            # should try a different implementation, if available. For example:
+            # def __dataframe__(self, ...):
+            #   if not some_condition:
+            #     self.to_pandas(...)
+            if hasattr(df_not_pandas, "toPandas"):
+                args["data_frame"] = df_not_pandas.toPandas()
+            elif hasattr(df_not_pandas, "to_pandas_df"):
+                args["data_frame"] = df_not_pandas.to_pandas_df()
+            elif hasattr(df_not_pandas, "to_pandas"):
+                args["data_frame"] = df_not_pandas.to_pandas()
+            else:
+                raise exc
+
+    df_input = args["data_frame"]
 
     missing_bar_dim = None
     if (
@@ -1831,7 +1932,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         else:
             trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
 
-    if constructor in [go.Histogram2d, go.Densitymapbox]:
+    if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -1839,7 +1940,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         if args["opacity"] is None:
             if "barmode" in args and args["barmode"] == "overlay":
                 trace_patch["marker"] = dict(opacity=0.5)
-        elif constructor in [go.Densitymapbox, go.Pie, go.Funnel, go.Funnelarea]:
+        elif constructor in [
+            go.Densitymap,
+            go.Densitymapbox,
+            go.Pie,
+            go.Funnel,
+            go.Funnelarea,
+        ]:
             trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
@@ -1855,9 +1962,9 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             modes.add("text")
         if len(modes) == 0:
             modes.add("lines")
-        trace_patch["mode"] = "+".join(modes)
+        trace_patch["mode"] = "+".join(sorted(modes))
     elif constructor != go.Splom and (
-        "symbol" in args or constructor == go.Scattermapbox
+        "symbol" in args or constructor in [go.Scattermap, go.Scattermapbox]
     ):
         trace_patch["mode"] = "markers" + ("+text" if args["text"] else "")
 
@@ -1968,7 +2075,9 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [g for g in grouper if g != one_group]
-        grouped = df.groupby(required_grouper, sort=False)  # skip one_group groupers
+        grouped = df.groupby(
+            required_grouper, sort=False, observed=True
+        )  # skip one_group groupers
         group_indices = grouped.indices
         sorted_group_names = [
             g if len(required_grouper) != 1 else (g,) for g in group_indices
@@ -1988,10 +2097,15 @@ def get_groups_and_orders(args, grouper):
                     g.insert(i, "")
         full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
 
-        groups = {
-            sf: grouped.get_group(s if len(s) > 1 else s[0])
-            for sf, s in zip(full_sorted_group_names, sorted_group_names)
-        }
+        groups = {}
+        for sf, s in zip(full_sorted_group_names, sorted_group_names):
+            if len(s) > 1:
+                groups[sf] = grouped.get_group(s)
+            else:
+                if pandas_2_2_0:
+                    groups[sf] = grouped.get_group((s[0],))
+                else:
+                    groups[sf] = grouped.get_group(s[0])
     return groups, orders
 
 
@@ -2067,7 +2181,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 go.Parcats,
                 go.Parcoords,
                 go.Choropleth,
+                go.Choroplethmap,
                 go.Choroplethmapbox,
+                go.Densitymap,
                 go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
@@ -2111,7 +2227,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
                     elif (
-                        trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]
+                        trace_spec.constructor
+                        in [go.Choropleth, go.Choroplethmap, go.Choroplethmapbox]
                         and m.variable == "color"
                     ):
                         trace.update(
@@ -2194,7 +2311,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         )
 
     if show_colorbar:
-        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
+        colorvar = (
+            "z"
+            if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]
+            else "color"
+        )
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")

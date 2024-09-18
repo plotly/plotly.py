@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernel_info:
     name: python2
   kernelspec:
@@ -22,7 +22,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.11
   plotly:
     description: How to make Sankey Diagrams in Python with Plotly.
     display_as: basic
@@ -160,6 +160,34 @@ fig.update_layout(
 fig.show()
 ```
 
+### Link Hover Color
+
+*New in 5.19*
+
+Set `link.hovercolor` to change the colors of links on hover. `link.hovercolor` accepts either one color, specified as a string, that will apply to all links, or a list of colors to specify different colors for each link. Here, we use a list to specify a different color for each link:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(data=[go.Sankey(
+    node = dict(
+      pad = 15,
+      thickness = 20,
+      line = dict(color = "black", width = 0.5),
+      label = ["A1", "A2", "B1", "B2", "C1", "C2"],
+      color = "blue"
+    ),
+    link = dict(
+      source = [0, 1, 0, 2, 3, 3],
+      target = [2, 3, 3, 4, 4, 5],
+      value = [8, 4, 2, 8, 4, 2],
+      hovercolor=["midnightblue", "lightskyblue", "gold", "mediumturquoise", "lightgreen", "cyan"],
+  ))])
+
+fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
+fig.show()
+```
+
 ### Hovertemplate and customdata of Sankey diagrams
 
 Links and nodes have their own hovertemplate, in which link- or node-specific attributes can be displayed. To add more data to links and nodes, it is possible to use the `customdata` attribute of `link` and `nodes`, as in the following example. For more information about hovertemplate and customdata, please see the [tutorial on hover text](/python/hover-text-and-formatting/).
@@ -229,13 +257,61 @@ fig = go.Figure(go.Sankey(
         label=['A', 'B', 'C', 'D', 'E', 'F'],
         x=[0.2, 0.1, 0.5, 0.7, 0.3, 0.5],
         y=[0.7, 0.5, 0.2, 0.4, 0.2, 0.3],
-        pad=10  
+        pad=10,
+        align="right",
     ),
     link=dict(
         arrowlen=15,
         source=[0, 0, 1, 2, 5, 4, 3, 5],
         target=[5, 3, 4, 3, 0, 2, 2, 3],
         value=[1, 2, 1, 1, 1, 1, 1, 2]  
+    )
+))
+
+fig.show()
+```
+
+### Node Alignment
+
+*New in 5.19*
+
+You can set the alignment of nodes using `node.align`. Here are two examples with the same `source` and `target`. The first example has nodes aligned "left" and the second has nodes aligned "right". `node.align` also supports "center" and "justify". "justify" is the default if `node.align` is not set, and is similar to aligning to the "left", except that nodes without outgoing links are moved to the right of the figure. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Sankey(
+    arrangement='snap',
+    node=dict(
+        label=["0", "1", "2", "3", "4", "5"],
+        align='left'
+
+    ),
+    link=dict(
+        arrowlen=15,
+        source=[0, 1, 4, 2, 1],
+        target=[1, 4, 5, 4, 3],
+        value=[4, 2, 3, 1, 2]  
+    )
+))
+
+fig.show()
+```
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Sankey(
+    arrangement='snap',
+    node=dict(
+        label=["0", "1", "2", "3", "4", "5"],
+        align="right",
+    ),
+    link=dict(
+        arrowlen=15,
+        source=[0, 1, 4, 2, 1],
+        target=[1, 4, 5, 4, 3],
+        value=[4, 2, 3, 1, 2]  
     )
 ))
 

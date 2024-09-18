@@ -43,7 +43,8 @@ class AngularaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 descending* if order should be determined by
                 the numerical order of the values. Similarly,
                 the order can be determined by the min, max,
-                sum, mean or median of all the values.
+                sum, mean, geometric mean or median of all the
+                values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -117,7 +118,10 @@ class AngularaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'Canada'} changes US to USA and CA to Canada.
                 The labels we would have shown must match the
                 keys exactly, after adding any tickprefix or
-                ticksuffix. labelalias can be used with any
+                ticksuffix. For negative numbers the minus sign
+                symbol used (U+2212) is wider than the regular
+                ascii dash. That means you need to use −1
+                instead of -1. labelalias can be used with any
                 axis type, and both keys (if needed) and values
                 (if desired) can include html-like tags or
                 MathJax.

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.5
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.9
+    version: 3.10.14
   plotly:
     description: How to set the global font, title, legend-entries, and axis-titles
       in python.
@@ -124,7 +124,7 @@ IFrame(snippet_url + 'figure-labels', width='100%', height=1200)
 
 ### Manual Labelling with Graph Objects
 
-When using (graph objects)[/python/graph-objects/] rather than [Plotly Express](/python/plotly-express/), you will need to explicitly label traces and axes:
+When using [graph objects](/python/graph-objects/) rather than [Plotly Express](/python/plotly-express/), you will need to explicitly label traces and axes:
 
 ```python
 import plotly.graph_objects as go
@@ -159,6 +159,60 @@ fig.update_layout(
 fig.show()
 ```
 
+### Configuring Font Variant, Style, and  Weight
+
+*New in 5.22*
+
+You can configure a `variant`, `style`, and `weight` on `layout.font`. Here, we set the font variant to `small-caps`.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.iris()
+
+setosa_df = df[df["species"] == "setosa"]
+versicolor_df = df[df["species"] == "versicolor"]
+virginica_df = df[df["species"] == "virginica"]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=setosa_df["sepal_width"],
+            y=setosa_df["sepal_length"],
+            mode="markers",
+            name="setosa",
+        ),
+        go.Scatter(
+            x=versicolor_df["sepal_width"],
+            y=versicolor_df["sepal_length"],
+            mode="markers",
+            name="versicolor",
+        ),
+        go.Scatter(
+            x=virginica_df["sepal_width"],
+            y=virginica_df["sepal_length"],
+            mode="markers",
+            name="virginica",
+        ),
+    ],
+    layout=go.Layout(
+        title="Plot Title",
+        xaxis=dict(title="X Axis Title"),
+        yaxis=dict(title="Y Axis Title"),
+        legend=dict(title="Legend Title"),
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="RebeccaPurple",
+            variant="small-caps",
+        )
+    )
+)
+
+fig.show()
+```
+
 The configuration of the legend is discussed in detail in the [Legends](/python/legend/) page.
 
 ### Align Plot Title
@@ -180,6 +234,45 @@ fig.update_layout(
         'yanchor': 'top'})
 
 fig.show()
+```
+
+### Adding a Plot Subtitle
+
+*New in 5.23*
+
+Add a subtitle to a plot with `layout.title.subtitle`. In the following example, we set the subtitle's `text`, and configure the `font` `color` and `size`. By default, if you don't set a font size for the subtitle, it will be `0.7` of the `title` font size.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder().query("continent == 'Europe' and (year == 1952 or year == 2002)")
+
+df_pivot = df.pivot(index="country", columns="year", values="lifeExp")
+
+fig = go.Figure(
+    [
+        go.Bar(
+            x=df_pivot.index, y=df_pivot[1952], name="1952", marker_color="IndianRed"
+        ),
+        go.Bar(
+            x=df_pivot.index, y=df_pivot[2002], name="2002", marker_color="LightSalmon"
+        ),
+    ],
+    layout=dict(
+        title=dict(
+            text="Life Expectancy",
+            subtitle=dict(
+                text="Life expectancy by European country in 1952 and in 2002",
+                font=dict(color="gray", size=13),
+            ),
+        )
+    ),
+)
+
+
+fig.show()
+
 ```
 
 #### Reference

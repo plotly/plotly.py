@@ -321,9 +321,12 @@ class Aaxis(_BaseLayoutHierarchyType):
         Replacement text for specific tick or hover labels. For example
         using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
         Canada. The labels we would have shown must match the keys
-        exactly, after adding any tickprefix or ticksuffix. labelalias
-        can be used with any axis type, and both keys (if needed) and
-        values (if desired) can include html-like tags or MathJax.
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
 
         The 'labelalias' property accepts values of any type
 
@@ -799,11 +802,34 @@ class Aaxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1237,11 +1263,34 @@ class Aaxis(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1340,9 +1389,12 @@ class Aaxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -1608,9 +1660,12 @@ class Aaxis(_BaseLayoutHierarchyType):
             example using {US: 'USA', CA: 'Canada'} changes US to
             USA and CA to Canada. The labels we would have shown
             must match the keys exactly, after adding any
-            tickprefix or ticksuffix. labelalias can be used with
-            any axis type, and both keys (if needed) and values (if
-            desired) can include html-like tags or MathJax.
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the

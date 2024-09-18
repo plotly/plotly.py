@@ -49,11 +49,34 @@ class Label(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -90,7 +113,8 @@ class Label(_BaseLayoutHierarchyType):
     @property
     def text(self):
         """
-        Sets the text to display with shape.
+        Sets the text to display with shape. It is also used for legend
+        item if `name` is not provided.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -261,7 +285,8 @@ class Label(_BaseLayoutHierarchyType):
             Sets padding (in px) between edge of label and edge of
             shape.
         text
-            Sets the text to display with shape.
+            Sets the text to display with shape. It is also used
+            for legend item if `name` is not provided.
         textangle
             Sets the angle at which the label text is drawn with
             respect to the horizontal. For lines, angle "auto" is
@@ -344,7 +369,8 @@ class Label(_BaseLayoutHierarchyType):
             Sets padding (in px) between edge of label and edge of
             shape.
         text
-            Sets the text to display with shape.
+            Sets the text to display with shape. It is also used
+            for legend item if `name` is not provided.
         textangle
             Sets the angle at which the label text is drawn with
             respect to the horizontal. For lines, angle "auto" is
