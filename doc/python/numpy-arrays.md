@@ -66,7 +66,7 @@ The following array data types are supported:
 
 ## Unsupported Attributes
 
-Arrays passsed to attributes with the following names do not use the Plotly.js base64 typed arrays functionality:
+Arrays passed to attributes with the following names are not supported:
 
 `geojson`, `layers`, and `range`.
 
