@@ -22,19 +22,19 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.10.0
   plotly:
-    description: How to use typed arrays in Plotly.py
+    description: How to use NumPy arrays in Plotly.py for improved performance
     display_as: file_settings
     language: python
     layout: base
-    name: Improving Performance with Typed Arrays
+    name: Improving Performance with NumPy Arrays
     order: 39
-    permalink: python/b64/
+    permalink: python/performance/
     thumbnail: thumbnail/b64.png
 ---
 
 *New in Plotly.py 6.0**
 
-Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects. 
+Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects.
 
 Plotly.py uses Plotly.js for rendering, which supports base64-encoded typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
@@ -59,8 +59,8 @@ The following array data types are supported:
 - float64
 - int64*
 - uint64*
-    
-*If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. 
+
+*If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible.
 
 
 
