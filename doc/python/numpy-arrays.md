@@ -38,7 +38,6 @@ Improve the performance of generating Plotly figures that use a large number of 
 
 Plotly.py uses Plotly.js for rendering, which supports base64-encoded typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
-
 ## Arrays and Data Types Supported
 
 The following types of array objects in Python are supported:
@@ -61,8 +60,6 @@ The following array data types are supported:
 - uint64*
 
 *If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible.
-
-
 
 ## Unsupported Attributes
 
