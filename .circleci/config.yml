@@ -234,6 +234,21 @@ jobs:
       - test_optional:
           py: "39_pandas_2"
 
+  # No numpy
+  python_312_no_numpy:
+    docker:
+      - image: cimg/python:3.12-browsers
+    steps:
+      - run:
+          name: Check that numpy is not installed
+          command: |
+            if pip list | grep numpy > /dev/null 2>&1
+            then exit 1
+            else exit 0
+            fi
+      - test_optional:
+          py: "312_no_numpy"
+
   # Orca
   python_38_orca:
     docker:
@@ -385,6 +400,8 @@ jobs:
       - run:
           name: Create conda environment
           command: |
+            conda config --remove channels defaults
+            conda config --add channels conda-forge
             conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
             conda install -n env -c conda-forge jupyterlab=3 nodejs=16
             conda init bash
@@ -448,7 +465,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, for example, `3.9-browsers`
-      - image: cimg/python:3.10-browsers
+      - image: cimg/python:3.9-browsers
 
     steps:
       - add_ssh_keys:
@@ -598,5 +615,5 @@ workflows:
       - python_39_pandas_2_optional
       - python_38_orca
       - python_39_percy
+      - python_312_no_numpy
       - build-doc
-
