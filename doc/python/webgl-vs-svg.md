@@ -34,9 +34,22 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-### SVG and canvas/WebGL: two browser capabilities for rendering
+In some examples in the documentation, you'll see figures created using data structures that are native to Python, such as lists and tuples, and which use trace types that render as SVGs. 
 
-`plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: the SVG API which supports vector rendering, and the Canvas API which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
+This will work fine for many use cases, but may not provide optimal performance with larger datasets. 
+
+For improved performance, consider using WebGL-based traces and NumPy arrays.
+
+<!-- #region -->
+## WebGL
+
+`plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: 
+
+- The SVG API, which supports vector rendering 
+- The Canvas API, which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. 
+
+
+Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
 
 * Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`, `heatmapgl`
 * High-performance multidimensional trace types: `splom`, or `parcoords`
@@ -71,7 +84,7 @@ If you encounter WebGL context limits when using WebGL-based figures, you can us
 To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
 
 In a Jupyter notebook environment that supports magic commands, you can load it with the [HTML magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-html):
-
+<!-- #endregion -->
 
 ```
 %%html
@@ -201,7 +214,7 @@ See https://plotly.com/python/reference/scattergl/ for more information and char
 
 ## NumPy Arrays
 
-*New in Plotly.py 6.0**
+*New in Plotly.py 6.0*
 
 Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects.
 
