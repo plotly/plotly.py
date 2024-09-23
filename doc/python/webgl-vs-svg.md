@@ -62,7 +62,7 @@ WebGL is a powerful technology for accelerating computation but comes with some 
 
 1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers
 2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition: text rendering will differ between SVG and WebGL-powered traces.
-3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.**
+3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.** See the following section, Multiple WebGL Contexts, for more details.
 4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height)
 
 In addition to the above limitations, the WebGL-powered version of certain SVG-powered trace types (`scattergl`, `scatterpolargl`, `heatmapgl`) are not complete drop-in replacements for their SVG counterparts yet
@@ -71,7 +71,7 @@ In addition to the above limitations, the WebGL-powered version of certain SVG-p
 * Range breaks on time-series axes are not yet supported
 * Axis range heuristics may differ
 
-### Multiple WebGL Contexts
+#### Multiple WebGL Contexts
 
 *New in 5.19*
 
@@ -214,11 +214,9 @@ See https://plotly.com/python/reference/scattergl/ for more information and char
 
 ## NumPy Arrays
 
-*New in Plotly.py 6.0*
-
 Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects.
 
-Plotly.py uses Plotly.js for rendering, which supports base64-encoded typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
+Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
 ### Arrays and Data Types Supported
 
