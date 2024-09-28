@@ -1049,10 +1049,12 @@ def _get_reserved_col_names(args):
             elif is_into_series(arg):
                 arg_name = nw.from_native(arg, series_only=True).name
                 if arg_name and arg_name in df.columns:
-                    in_df = arg == df.get_column(arg_name)
+                    in_df = (
+                        nw.from_native(arg, series_only=True) == df.get_column(arg_name)
+                    ).all()
                     if in_df:
                         reserved_names.add(arg_name)
-            elif arg == nw.maybe_get_index(df) and arg.name is not None:
+            elif (arg == nw.maybe_get_index(df)).all() and arg.name is not None:
                 reserved_names.add(arg.name)
 
     return reserved_names
@@ -1288,10 +1290,7 @@ def process_args_into_dataframe(
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
-                    if (
-                        is_pd_like
-                        and argument is df_input._compliant_frame._native_frame.index
-                    ):
+                    if is_pd_like and argument is nw.maybe_get_index(df_input):
                         if argument.name is None or argument.name in df_input.columns:
                             col_name = "index"
                         else:
@@ -1303,10 +1302,10 @@ def process_args_into_dataframe(
                         if (
                             argument.name is not None
                             and argument.name in df_input.columns
-                            and argument
-                            is df_input[
-                                argument.name
-                            ]  # TODO: Check what argument is at this point and the check translate in pandas case
+                            and (
+                                nw.from_native(argument, allow_series=True)
+                                == df_input.get_column(argument.name)
+                            ).all()
                         ):
                             col_name = argument.name
                 if col_name is None:  # numpy array, list...
@@ -1340,17 +1339,29 @@ def process_args_into_dataframe(
                 wide_id_vars.add(str(col_name))
 
     length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
+
     df_output.update(
         {
-            col_name: to_unindexed_series(range(length), col_name, native_namespace)
+            col_name: nw.new_series(
+                name=col_name,
+                values=range(length),
+                native_namespace=(
+                    native_namespace if df_provided else nw.dependencies.get_pandas()
+                ),
+            )
             for col_name in ranges
         }
     )
+
     df_output.update(
         {
             # constant is single value. repeat by len to avoid creating NaN on concating
-            col_name: to_unindexed_series(
-                [constants[col_name]] * length, col_name, native_namespace
+            col_name: nw.new_series(
+                name=col_name,
+                values=[constants[col_name]] * length,
+                native_namespace=(
+                    native_namespace if df_provided else nw.dependencies.get_pandas()
+                ),
             )
             for col_name in constants
         }
@@ -1426,10 +1437,26 @@ def build_dataframe(args, constructor):
 
         elif hasattr(args["data_frame"], "__dataframe__"):
             args["data_frame"] = nw.from_native(
-                args["data_frame"], eager_or_interchange_only=True
+                nw.from_native(
+                    args["data_frame"], eager_or_interchange_only=True
+                ).to_pandas(),
+                eager_only=True,
             )
             columns = args["data_frame"].columns
+            is_pd_like = True
 
+        elif isinstance(args["data_frame"], dict):
+            pd = nw.dependencies.get_pandas()
+            if pd is None:
+                msg = (
+                    "data_frame of type dict requires Pandas to be installed. "
+                    "Convert it to supported dataframe type of install Pandas."
+                )
+                raise ValueError(msg)
+
+            args["data_frame"] = nw.from_native(pd.DataFrame(args["data_frame"]))
+            columns = args["data_frame"].columns
+            is_pd_like = True
         else:
             msg = f"Unsupported type: {type(args['data_frame'])}"
             raise NotImplementedError(msg)
@@ -1437,6 +1464,7 @@ def build_dataframe(args, constructor):
         columns = None  # no data_frame
 
     df_input: nw.DataFrame | None = args["data_frame"]
+    index = nw.maybe_get_index(df_input) if df_provided else None
     # Narwhals does not support native namespace for interchange level
     native_namespace = (
         getattr(df_input._compliant_frame, "__native_namespace__", lambda: None)()
@@ -1494,7 +1522,7 @@ def build_dataframe(args, constructor):
         elif wide_x != wide_y:
             wide_mode = True
             args["wide_variable"] = args["y"] if wide_y else args["x"]
-            if df_provided and args["wide_variable"] is columns:
+            if df_provided and is_pd_like and args["wide_variable"] is columns:
                 var_name = columns.name
             if is_pd_like and isinstance(args["wide_variable"], native_namespace.Index):
                 args["wide_variable"] = list(args["wide_variable"])
@@ -1523,7 +1551,7 @@ def build_dataframe(args, constructor):
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
                 if args.get(ax) is None:
-                    args[ax] = df_input.index if df_provided else Range()
+                    args[ax] = index if index is not None else Range()
                     if constructor == go.Bar:
                         missing_bar_dim = ax
                     else:
@@ -1532,14 +1560,14 @@ def build_dataframe(args, constructor):
         if wide_mode and wide_cross_name is None:
             if no_x != no_y and args["orientation"] is None:
                 args["orientation"] = "v" if no_x else "h"
-            if df_provided and is_pd_like:
-                if isinstance(columns, native_namespace.MultiIndex):
+            if df_provided and is_pd_like and index is not None:
+                if isinstance(index, native_namespace.MultiIndex):
                     raise TypeError(
                         "Data frame index is a pandas MultiIndex. "
                         "pandas MultiIndex is not supported by plotly express "
                         "at the moment."
                     )
-                args["wide_cross"] = df_input._compliant_frame._native_frame.index
+                args["wide_cross"] = index
             else:
                 args["wide_cross"] = Range(
                     label=_escape_col_name(
@@ -1929,7 +1957,7 @@ def process_dataframe_timeline(args):
 
     try:
         df: nw.DataFrame = args["data_frame"]
-        x_start = df.get_column([args["x_start"]]).cast(nw.Datetime())
+        x_start = df.get_column(args["x_start"]).cast(nw.Datetime())
         x_end = df.get_column(args["x_end"]).cast(nw.Datetime())
     except (ValueError, TypeError):
         raise TypeError(
