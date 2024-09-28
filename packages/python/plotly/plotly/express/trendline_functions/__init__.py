@@ -8,7 +8,7 @@ Note that the functions in this module are not meant to be called directly, and 
 exposed as part of the public API for documentation purposes.
 """
 
-import pandas as pd
+import narwhals.stable.v1 as nw
 import numpy as np
 
 __all__ = ["ols", "lowess", "rolling", "ewm", "expanding"]
@@ -114,7 +114,15 @@ def _pandas(mode, trendline_options, x_raw, y, non_missing):
     trendline_options = trendline_options.copy()
     function_name = trendline_options.pop("function", "mean")
     function_args = trendline_options.pop("function_args", dict())
-    series = pd.Series(y, index=x_raw)
+
+    pd = nw.dependencies.get_pandas()
+    if pd is None:
+        msg = "Trendline requires pandas to be installed"
+        raise ImportError(msg)
+
+    series = pd.Series(y, index=x_raw.to_numpy())
+
+    # TODO: If narwhals were to sopport rolling, ewm and expanding then we could go around these
     agg = getattr(series, mode)  # e.g. series.rolling
     agg_obj = agg(**trendline_options)  # e.g. series.rolling(**opts)
     function = getattr(agg_obj, function_name)  # e.g. series.rolling(**opts).mean
