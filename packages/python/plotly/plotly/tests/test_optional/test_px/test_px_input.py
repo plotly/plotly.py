@@ -230,8 +230,8 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
-    out.pop("data_frame")
+    df_out = out.pop("data_frame")
+    assert_frame_equal(df_out, df[df_out.columns])
     assert out == output
 
     # Arrays
@@ -240,8 +240,9 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
-    out.pop("data_frame")
+    df_out = out.pop("data_frame")
+    assert_frame_equal(df_out, df[df_out.columns])
+
     assert out == output
 
 

@@ -157,8 +157,8 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
     if x == "index":
         expected["index"] = [11, 12, 13, 11, 12, 13]
     assert_frame_equal(
-        df_out.sort_index(axis=1),
-        pd.DataFrame(expected).sort_index(axis=1),
+        df_out.to_native(),
+        pd.DataFrame(expected)[df_out.columns],
     )
     if trace_type in [go.Histogram2dContour, go.Histogram2d]:
         if orientation is None or orientation == "v":
@@ -285,8 +285,8 @@ def test_wide_x_or_y(tt, df_in, args_in, x, y, color, df_out_exp, transpose):
         args_in["y"], args_in["x"] = args_in["x"], args_in["y"]
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, tt)
-    df_out = args_out.pop("data_frame").sort_index(axis=1)
-    assert_frame_equal(df_out, pd.DataFrame(df_out_exp).sort_index(axis=1))
+    df_out = args_out.pop("data_frame")
+    assert_frame_equal(df_out, pd.DataFrame(df_out_exp)[df_out.columns])
     if transpose:
         args_exp = dict(x=y, y=x, color=color)
     else:
@@ -306,7 +306,7 @@ def test_wide_mode_internal_bar_exception(orientation):
     args_out = build_dataframe(args_in, go.Bar)
     df_out = args_out.pop("data_frame")
     assert_frame_equal(
-        df_out.sort_index(axis=1),
+        df_out.to_native(),
         pd.DataFrame(
             dict(
                 index=[11, 12, 13, 11, 12, 13],
@@ -314,7 +314,7 @@ def test_wide_mode_internal_bar_exception(orientation):
                 value=["q", "r", "s", "t", "u", "v"],
                 count=[1, 1, 1, 1, 1, 1],
             )
-        ).sort_index(axis=1),
+        )[df_out.columns],
     )
     if orientation is None or orientation == "v":
         assert args_out == dict(x="value", y="count", color="variable", orientation="v")
@@ -799,8 +799,8 @@ def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect
     df_out = args_out.pop("data_frame")
     assert args_out == args_expect
     assert_frame_equal(
-        df_out.sort_index(axis=1),
-        df_expect.sort_index(axis=1),
+        df_out.to_native(),
+        df_expect[df_out.columns],
     )
 
 
