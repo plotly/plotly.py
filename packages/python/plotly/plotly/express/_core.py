@@ -277,6 +277,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
 
     if "line_close" in args and args["line_close"]:
         trace_data = nw.concat([trace_data, trace_data.head(1)], how="vertical")
+        native_trace = trace_data.to_native()
+        if nw.dependencies.is_pandas_like_dataframe(native_trace):
+            trace_data = nw.from_native(native_trace.reset_index(drop=True))
+
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -1445,21 +1449,22 @@ def build_dataframe(args, constructor):
             columns = args["data_frame"].columns
             is_pd_like = True
 
-        elif isinstance(args["data_frame"], dict):
-            pd = nw.dependencies.get_pandas()
-            if pd is None:
-                msg = (
-                    "data_frame of type dict requires Pandas to be installed. "
-                    "Convert it to supported dataframe type of install Pandas."
-                )
-                raise ValueError(msg)
-
-            args["data_frame"] = nw.from_native(pd.DataFrame(args["data_frame"]))
-            columns = args["data_frame"].columns
-            is_pd_like = True
         else:
-            msg = f"Unsupported type: {type(args['data_frame'])}"
-            raise NotImplementedError(msg)
+            try:
+                pd = nw.dependencies.get_pandas()
+                if pd is None:
+                    msg = (
+                        "data_frame of type dict requires Pandas to be installed. "
+                        "Convert it to supported dataframe type of install Pandas."
+                    )
+                    raise ValueError(msg)
+
+                args["data_frame"] = nw.from_native(pd.DataFrame(args["data_frame"]))
+                columns = args["data_frame"].columns
+                is_pd_like = True
+            except Exception:
+                msg = f"Unsupported type: {type(args['data_frame'])}"
+                raise NotImplementedError(msg)
     else:
         columns = None  # no data_frame
 
@@ -1918,8 +1923,11 @@ def process_dataframe_hierarchy(args):
 
         all_trees.append(df_tree.select(*["labels", "parent", "id", *cols]))
 
-    # TODO: Why does this fail in tests? Is is because of vertical concat without `ignore_index=True` of narwhals?
+    # TODO: Why does this fail in tests?
     df_all_trees = nw.concat(all_trees, how="vertical")
+    native_trees = df_all_trees.to_native()
+    if nw.dependencies.is_pandas_like_dataframe(native_trees):
+        df_all_trees = nw.from_native(native_trees.reset_index(drop=True))
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
