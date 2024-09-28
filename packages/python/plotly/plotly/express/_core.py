@@ -1,14 +1,16 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
+from collections.abc import Sequence
+from functools import reduce
 from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
 import math
-from packaging import version
-import pandas as pd
+
+import narwhals.stable.v1 as nw
 import numpy as np
 
 from plotly._subplots import (
@@ -17,9 +19,9 @@ from plotly._subplots import (
     _subplot_type_for_trace_type,
 )
 
-pandas_2_2_0 = version.parse(pd.__version__) >= version.parse("2.2.0")
-
 NO_COLOR = "px_no_color_constant"
+NW_NUMERIC_DTYPES = {nw.Float32, nw.Float64, nw.Int8, nw.Int16, nw.Int32, nw.Int64}
+
 trendline_functions = dict(
     lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
 )
@@ -154,8 +156,8 @@ def invert_label(args, column):
         return column
 
 
-def _is_continuous(df, col_name):
-    return df[col_name].dtype.kind in "ifc"
+def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
+    return df.get_column(col_name).dtype in NW_NUMERIC_DTYPES
 
 
 def get_decorated_label(args, column, role):
@@ -270,8 +272,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     fit_results : dict
         fit information to be used for trendlines
     """
+    trace_data: nw.DataFrame
+    df: nw.DataFrame = args["data_frame"]
+
     if "line_close" in args and args["line_close"]:
-        trace_data = pd.concat([trace_data, trace_data.iloc[:1]])
+        trace_data = nw.concat([trace_data, trace_data.head(1)], how="vertical")
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -280,17 +285,14 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         attr_label = get_decorated_label(args, attr_value, attr_name)
         if attr_name == "dimensions":
             dims = [
-                (name, column)
-                for (name, column) in trace_data.items()
+                (name, trace_data.get_column(name))
+                for name in trace_data.columns
                 if ((not attr_value) or (name in attr_value))
-                and (
-                    trace_spec.constructor != go.Parcoords
-                    or _is_continuous(args["data_frame"], name)
-                )
+                and (trace_spec.constructor != go.Parcoords or _is_continuous(df, name))
                 and (
                     trace_spec.constructor != go.Parcats
                     or (attr_value is not None and name in attr_value)
-                    or len(args["data_frame"][name].unique())
+                    or df.get_column(name).n_unique()
                     <= args["dimensions_max_cardinality"]
                 )
             ]
@@ -308,7 +310,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             if attr_name == "size":
                 if "marker" not in trace_patch:
                     trace_patch["marker"] = dict()
-                trace_patch["marker"]["size"] = trace_data[attr_value]
+                trace_patch["marker"]["size"] = trace_data.get_column(attr_value)
                 trace_patch["marker"]["sizemode"] = "area"
                 trace_patch["marker"]["sizeref"] = sizeref
                 mapping_labels[attr_label] = "%{marker.size}"
@@ -322,13 +324,16 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if (
                     args["x"]
                     and args["y"]
-                    and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
+                    and len(  # TODO: Handle case arg["y"] is a list
+                        trace_data.select(nw.col(args["x"], args["y"])).drop_nulls()
+                    )
+                    > 1
                 ):
                     # sorting is bad but trace_specs with "trendline" have no other attrs
-                    sorted_trace_data = trace_data.sort_values(by=args["x"])
-                    y = sorted_trace_data[args["y"]].values
-                    x = sorted_trace_data[args["x"]].values
-
+                    sorted_trace_data = trace_data.sort(by=args["x"])
+                    y = sorted_trace_data.select(nw.col(args["y"])).to_numpy().squeeze()
+                    x = sorted_trace_data.get_column(args["x"]).to_numpy().squeeze()
+                    # TODO: Fix dtype
                     if x.dtype.type == np.datetime64:
                         # convert to unix epoch seconds
                         x = x.astype(np.int64) / 10**9
@@ -356,17 +361,26 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     non_missing = np.logical_not(
                         np.logical_or(np.isnan(y), np.isnan(x))
                     )
-                    trace_patch["x"] = sorted_trace_data[args["x"]][non_missing]
+                    # TODO: Double check slicing here or find workaround
+                    trace_patch["x"] = sorted_trace_data[non_missing].select(
+                        nw.col(args["x"])
+                    )
                     trendline_function = trendline_functions[attr_value]
                     y_out, hover_header, fit_results = trendline_function(
                         args["trendline_options"],
-                        sorted_trace_data[args["x"]],
-                        x,
-                        y,
+                        sorted_trace_data.get_column(args["x"]),  # narwhals series
+                        x,  # numpy array
+                        y,  # numpy array
                         args["x"],
                         args["y"],
-                        non_missing,
+                        non_missing,  # numpy array
                     )
+                    # TODO: This is most likely not needed anymore
+                    # y_out = nw.new_series(
+                    #     name="",
+                    #     values=y_out,
+                    #     native_namespace=sorted_trace_data.__native_namespace__(),
+                    # )
                     assert len(y_out) == len(
                         trace_patch["x"]
                     ), "missing-data-handling failure in trendline code"
@@ -378,19 +392,19 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 arr = "arrayminus" if attr_name.endswith("minus") else "array"
                 if error_xy not in trace_patch:
                     trace_patch[error_xy] = {}
-                trace_patch[error_xy][arr] = trace_data[attr_value]
+                trace_patch[error_xy][arr] = trace_data.get_column(attr_value)
             elif attr_name == "custom_data":
                 if len(attr_value) > 0:
                     # here we store a data frame in customdata, and it's serialized
                     # as a list of row lists, which is what we want
-                    trace_patch["customdata"] = trace_data[attr_value]
+                    trace_patch["customdata"] = trace_data.select(nw.col(attr_value))
             elif attr_name == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    trace_patch["hovertext"] = trace_data[attr_value]
+                    trace_patch["hovertext"] = trace_data.get_column(attr_value)
                     if hover_header == "":
                         hover_header = "<b>%{hovertext}</b><br><br>"
             elif attr_name == "hover_data":
@@ -431,7 +445,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Choroplethmap,
                     go.Choroplethmapbox,
                 ]:
-                    trace_patch["z"] = trace_data[attr_value]
+                    trace_patch["z"] = trace_data.get_column(attr_value)
                     trace_patch["coloraxis"] = "coloraxis1"
                     mapping_labels[attr_label] = "%{z}"
                 elif trace_spec.constructor in [
@@ -445,7 +459,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         trace_patch["marker"] = dict()
 
                     if args.get("color_is_continuous"):
-                        trace_patch["marker"]["colors"] = trace_data[attr_value]
+                        trace_patch["marker"]["colors"] = trace_data.get_column(
+                            attr_value
+                        )
                         trace_patch["marker"]["coloraxis"] = "coloraxis1"
                         mapping_labels[attr_label] = "%{color}"
                     else:
@@ -454,7 +470,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             mapping = args["color_discrete_map"].copy()
                         else:
                             mapping = {}
-                        for cat in trace_data[attr_value]:
+                        for cat in trace_data.get_column(attr_value):
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
@@ -466,24 +482,24 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         colorable = "line"
                     if colorable not in trace_patch:
                         trace_patch[colorable] = dict()
-                    trace_patch[colorable]["color"] = trace_data[attr_value]
+                    trace_patch[colorable]["color"] = trace_data.get_column(attr_value)
                     trace_patch[colorable]["coloraxis"] = "coloraxis1"
                     mapping_labels[attr_label] = "%%{%s.color}" % colorable
             elif attr_name == "animation_group":
-                trace_patch["ids"] = trace_data[attr_value]
+                trace_patch["ids"] = trace_data.get_column(attr_value)
             elif attr_name == "locations":
-                trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data.get_column(attr_value)
                 mapping_labels[attr_label] = "%{location}"
             elif attr_name == "values":
-                trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data.get_column(attr_value)
                 _label = "value" if attr_label == "values" else attr_label
                 mapping_labels[_label] = "%{value}"
             elif attr_name == "parents":
-                trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data.get_column(attr_value)
                 _label = "parent" if attr_label == "parents" else attr_label
                 mapping_labels[_label] = "%{parent}"
             elif attr_name == "ids":
-                trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data.get_column(attr_value)
                 _label = "id" if attr_label == "ids" else attr_label
                 mapping_labels[_label] = "%{id}"
             elif attr_name == "names":
@@ -494,13 +510,13 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Pie,
                     go.Funnelarea,
                 ]:
-                    trace_patch["labels"] = trace_data[attr_value]
+                    trace_patch["labels"] = trace_data.get_column(attr_value)
                     _label = "label" if attr_label == "names" else attr_label
                     mapping_labels[_label] = "%{label}"
                 else:
-                    trace_patch[attr_name] = trace_data[attr_value]
+                    trace_patch[attr_name] = trace_data.get_column(attr_value)
             else:
-                trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data.get_column(attr_value)
                 mapping_labels[attr_label] = "%%{%s}" % attr_name
         elif (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"]) or (
             trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
@@ -520,9 +536,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     formatter = args["hover_data"][k_args][0]
                     if formatter:
                         if isinstance(formatter, str):
+                            # TODO: Check if is it possible that `v` is a Series
                             mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
                     else:
                         _ = mapping_labels_copy.pop(k)
+        # TODO: Check if is it possible that `v` is a Series
         hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
         trace_patch["hovertemplate"] += "<extra></extra>"
@@ -1015,7 +1033,7 @@ def _get_reserved_col_names(args):
     as arguments, either as str/int arguments or given as columns
     (pandas series type).
     """
-    df = args["data_frame"]
+    df: nw.DataFrame = args["data_frame"]
     reserved_names = set()
     for field in args:
         if field not in all_attrables:
@@ -1028,26 +1046,26 @@ def _get_reserved_col_names(args):
                 continue
             elif isinstance(arg, str):  # no need to add ints since kw arg are not ints
                 reserved_names.add(arg)
-            elif isinstance(arg, pd.Series):
-                arg_name = arg.name
-                if arg_name and hasattr(df, arg_name):
-                    in_df = arg is df[arg_name]
+            elif is_into_series(arg):
+                arg_name = nw.from_native(arg, series_only=True).name
+                if arg_name and arg_name in df.columns:
+                    in_df = arg == df.get_column(arg_name)
                     if in_df:
                         reserved_names.add(arg_name)
-            elif arg is df.index and arg.name is not None:
+            elif arg == nw.maybe_get_index(df) and arg.name is not None:
                 reserved_names.add(arg.name)
 
     return reserved_names
 
 
-def _is_col_list(columns, arg):
+def _is_col_list(columns, arg, is_pd_like, native_namespace):
     """Returns True if arg looks like it's a list of columns or references to columns
     in df_input, and False otherwise (in which case it's assumed to be a single column
     or reference to a column).
     """
     if arg is None or isinstance(arg, str) or isinstance(arg, int):
         return False
-    if isinstance(arg, pd.MultiIndex):
+    if is_pd_like and isinstance(arg, native_namespace.MultiIndex):
         return False  # just to keep existing behaviour for now
     try:
         iter(arg)
@@ -1087,17 +1105,30 @@ def _escape_col_name(columns, col_name, extra):
     return col_name
 
 
-def to_unindexed_series(x, name=None):
+def to_unindexed_series(x, name=None, native_namespace=None):
     """
     assuming x is list-like or even an existing pd.Series, return a new pd.Series with
     no index, without extracting the data from an existing Series via numpy, which
     seems to mangle datetime columns. Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building
     """
-    return pd.Series(x, name=name).reset_index(drop=True)
+    if nw.dependencies.is_pandas_like_series(x):
+        return nw.from_native(x.rename(name).reset_index(drop=True), series_only=True)
+    elif isinstance(x, nw.Series):
+        return x
+    else:
+        if native_namespace is not None:
+            return nw.new_series(name=name, values=x, native_namespace=native_namespace)
+        elif (pd := nw.dependencies.get_pandas()) is not None:
+            return nw.new_series(name=name, values=x, native_namespace=pd)
+        else:
+            msg = "Pandas is required"
+            raise NotImplementedError(msg)
 
 
-def process_args_into_dataframe(args, wide_mode, var_name, value_name):
+def process_args_into_dataframe(
+    args, wide_mode, var_name, value_name, is_pd_like, native_namespace
+):
     """
     After this function runs, the `all_attrables` keys of `args` all contain only
     references to columns of `df_output`. This function handles the extraction of data
@@ -1106,7 +1137,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     reference.
     """
 
-    df_input = args["data_frame"]
+    df_input: nw.DataFrame | None = args["data_frame"]
     df_provided = df_input is not None
 
     # we use a dict instead of a dataframe directly so that it doesn't cause
@@ -1125,7 +1156,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
             )
         else:
-            df_output = {col: series for col, series in df_input.items()}
+            df_output = {col: df_input.get_column(col) for col in df_input.columns}
 
     # hover_data is a dict
     hover_data_is_dict = (
@@ -1171,14 +1202,14 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 continue
             col_name = None
             # Case of multiindex
-            if isinstance(argument, pd.MultiIndex):
+            if is_pd_like and isinstance(argument, native_namespace.MultiIndex):
                 raise TypeError(
-                    "Argument '%s' is a pandas MultiIndex. "
-                    "pandas MultiIndex is not supported by plotly express "
+                    "Argument '%s' is a MultiIndex. "
+                    " MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
             # ----------------- argument is a special value ----------------------
-            if isinstance(argument, Constant) or isinstance(argument, Range):
+            if isinstance(argument, (Constant, Range)):
                 col_name = _check_name_not_reserved(
                     str(argument.label) if argument.label is not None else field,
                     reserved_names,
@@ -1211,7 +1242,9 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                                 length,
                             )
                         )
-                    df_output[col_name] = to_unindexed_series(real_argument, col_name)
+                    df_output[col_name] = to_unindexed_series(
+                        real_argument, col_name, native_namespace
+                    )
                 elif not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1232,14 +1265,17 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         if argument == "index":
                             err_msg += "\n To use the index, pass it in directly as `df.index`."
                         raise ValueError(err_msg)
-                elif length and len(df_input[argument]) != length:
+                elif (
+                    length
+                    and (actual_len := len(df_input.select(nw.col(argument)))) != length
+                ):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
                         "length of  previously-processed arguments %s is %d"
                         % (
                             field,
-                            len(df_input[argument]),
+                            actual_len,
                             str(list(df_output.keys())),
                             length,
                         )
@@ -1252,19 +1288,25 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
-                    if argument is df_input.index:
-                        if argument.name is None or argument.name in df_input:
+                    if (
+                        is_pd_like
+                        and argument is df_input._compliant_frame._native_frame.index
+                    ):
+                        if argument.name is None or argument.name in df_input.columns:
                             col_name = "index"
                         else:
                             col_name = argument.name
                         col_name = _escape_col_name(
-                            df_input, col_name, [var_name, value_name]
+                            df_input.columns, col_name, [var_name, value_name]
                         )
                     else:
                         if (
                             argument.name is not None
-                            and argument.name in df_input
-                            and argument is df_input[argument.name]
+                            and argument.name in df_input.columns
+                            and argument
+                            is df_input[
+                                argument.name
+                            ]  # TODO: Check what argument is at this point and the check translate in pandas case
                         ):
                             col_name = argument.name
                 if col_name is None:  # numpy array, list...
@@ -1277,7 +1319,9 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         "length of  previously-processed arguments %s is %d"
                         % (field, len(argument), str(list(df_output.keys())), length)
                     )
-                df_output[str(col_name)] = to_unindexed_series(argument, str(col_name))
+                df_output[str(col_name)] = to_unindexed_series(
+                    argument, str(col_name), native_namespace=native_namespace
+                )
 
             # Finally, update argument with column name now that column exists
             assert col_name is not None, (
@@ -1297,17 +1341,26 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
 
     length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
     df_output.update(
-        {col_name: to_unindexed_series(range(length), col_name) for col_name in ranges}
+        {
+            col_name: to_unindexed_series(range(length), col_name, native_namespace)
+            for col_name in ranges
+        }
     )
     df_output.update(
         {
             # constant is single value. repeat by len to avoid creating NaN on concating
-            col_name: to_unindexed_series([constants[col_name]] * length, col_name)
+            col_name: to_unindexed_series(
+                [constants[col_name]] * length, col_name, native_namespace
+            )
             for col_name in constants
         }
     )
 
-    df_output = pd.DataFrame(df_output)
+    if df_output:
+        df_output = nw.from_dict(df_output)
+    else:
+        pd = nw.dependencies.get_pandas()
+        df_output = nw.from_native(pd.DataFrame({}), eager_only=True)
     return df_output, wide_id_vars
 
 
@@ -1341,46 +1394,70 @@ def build_dataframe(args, constructor):
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
-    needs_interchanging = False
-    if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        if hasattr(args["data_frame"], "__dataframe__") and version.parse(
-            pd.__version__
-        ) >= version.parse("2.0.2"):
-            import pandas.api.interchange
+    is_pd_like = False
+    if df_provided:
 
-            df_not_pandas = args["data_frame"]
-            args["data_frame"] = df_not_pandas.__dataframe__()
-            # According interchange protocol: `def column_names(self) -> Iterable[str]:`
-            # so this function can return for example a generator.
-            # The easiest way is to convert `columns` to `pandas.Index` so that the
-            # type is similar to the types in other code branches.
-            columns = pd.Index(args["data_frame"].column_names())
-            needs_interchanging = True
-        elif hasattr(args["data_frame"], "to_pandas"):
-            args["data_frame"] = args["data_frame"].to_pandas()
+        if nw.dependencies.is_polars_dataframe(
+            args["data_frame"]
+        ) or nw.dependencies.is_pyarrow_table(args["data_frame"]):
+            args["data_frame"] = nw.from_native(args["data_frame"])
             columns = args["data_frame"].columns
-        elif hasattr(args["data_frame"], "toPandas"):
-            args["data_frame"] = args["data_frame"].toPandas()
+
+        elif nw.dependencies.is_polars_series(
+            args["data_frame"]
+        ) or nw.dependencies.is_pyarrow_chunked_array(args["data_frame"]):
+            args["data_frame"] = nw.from_native(
+                args["data_frame"], series_only=True
+            ).to_frame()
             columns = args["data_frame"].columns
-        elif hasattr(args["data_frame"], "to_pandas_df"):
-            args["data_frame"] = args["data_frame"].to_pandas_df()
+
+        elif nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
+
+            columns = args["data_frame"].columns  # This can be multi index
+            args["data_frame"] = nw.from_native(args["data_frame"])
+            is_pd_like = True
+
+        elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
             columns = args["data_frame"].columns
+            args["data_frame"] = nw.from_native(
+                args["data_frame"], series_only=True
+            ).to_frame()
+            is_pd_like = True
+
+        elif hasattr(args["data_frame"], "__dataframe__"):
+            args["data_frame"] = nw.from_native(
+                args["data_frame"], eager_or_interchange_only=True
+            )
+            columns = args["data_frame"].columns
+
         else:
-            args["data_frame"] = pd.DataFrame(args["data_frame"])
-            columns = args["data_frame"].columns
-    elif df_provided:
-        columns = args["data_frame"].columns
+            msg = f"Unsupported type: {type(args['data_frame'])}"
+            raise NotImplementedError(msg)
     else:
-        columns = None
+        columns = None  # no data_frame
 
-    df_input = args["data_frame"]
+    df_input: nw.DataFrame | None = args["data_frame"]
+    # Narwhals does not support native namespace for interchange level
+    native_namespace = (
+        getattr(df_input._compliant_frame, "__native_namespace__", lambda: None)()
+        if df_provided
+        else None
+    )
 
     # now we handle special cases like wide-mode or x-xor-y specification
     # by rearranging args to tee things up for process_args_into_dataframe to work
     no_x = args.get("x") is None
     no_y = args.get("y") is None
-    wide_x = False if no_x else _is_col_list(columns, args["x"])
-    wide_y = False if no_y else _is_col_list(columns, args["y"])
+    wide_x = (
+        False
+        if no_x
+        else _is_col_list(columns, args["x"], is_pd_like, native_namespace)
+    )
+    wide_y = (
+        False
+        if no_y
+        else _is_col_list(columns, args["y"], is_pd_like, native_namespace)
+    )
 
     wide_mode = False
     var_name = None  # will likely be "variable" in wide_mode
@@ -1395,14 +1472,14 @@ def build_dataframe(args, constructor):
             )
         if df_provided and no_x and no_y:
             wide_mode = True
-            if isinstance(columns, pd.MultiIndex):
+            if is_pd_like and isinstance(columns, native_namespace.MultiIndex):
                 raise TypeError(
-                    "Data frame columns is a pandas MultiIndex. "
-                    "pandas MultiIndex is not supported by plotly express "
+                    "Data frame columns is a MultiIndex. "
+                    "MultiIndex is not supported by plotly express "
                     "at the moment."
                 )
-            args["wide_variable"] = list(columns)
-            if isinstance(columns, pd.Index):
+            args["wide_variable"] = columns
+            if is_pd_like and isinstance(columns, native_namespace.Index):
                 var_name = columns.name
             else:
                 var_name = None
@@ -1419,7 +1496,7 @@ def build_dataframe(args, constructor):
             args["wide_variable"] = args["y"] if wide_y else args["x"]
             if df_provided and args["wide_variable"] is columns:
                 var_name = columns.name
-            if isinstance(args["wide_variable"], pd.Index):
+            if is_pd_like and isinstance(args["wide_variable"], native_namespace.Index):
                 args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
                 df_provided and var_name in columns
@@ -1438,42 +1515,6 @@ def build_dataframe(args, constructor):
         value_name = _escape_col_name(columns, "value", [])
         var_name = _escape_col_name(columns, var_name, [])
 
-    if needs_interchanging:
-        try:
-            if wide_mode or not hasattr(args["data_frame"], "select_columns_by_name"):
-                args["data_frame"] = pd.api.interchange.from_dataframe(
-                    args["data_frame"]
-                )
-            else:
-                # Save precious resources by only interchanging columns that are
-                # actually going to be plotted.
-                necessary_columns = {
-                    i for i in args.values() if isinstance(i, str) and i in columns
-                }
-                for field in args:
-                    if args[field] is not None and field in array_attrables:
-                        necessary_columns.update(i for i in args[field] if i in columns)
-                columns = list(necessary_columns)
-                args["data_frame"] = pd.api.interchange.from_dataframe(
-                    args["data_frame"].select_columns_by_name(columns)
-                )
-        except (ImportError, NotImplementedError) as exc:
-            # temporary workaround; developers of third-party libraries themselves
-            # should try a different implementation, if available. For example:
-            # def __dataframe__(self, ...):
-            #   if not some_condition:
-            #     self.to_pandas(...)
-            if hasattr(df_not_pandas, "toPandas"):
-                args["data_frame"] = df_not_pandas.toPandas()
-            elif hasattr(df_not_pandas, "to_pandas_df"):
-                args["data_frame"] = df_not_pandas.to_pandas_df()
-            elif hasattr(df_not_pandas, "to_pandas"):
-                args["data_frame"] = df_not_pandas.to_pandas()
-            else:
-                raise exc
-
-    df_input = args["data_frame"]
-
     missing_bar_dim = None
     if (
         constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types
@@ -1491,34 +1532,42 @@ def build_dataframe(args, constructor):
         if wide_mode and wide_cross_name is None:
             if no_x != no_y and args["orientation"] is None:
                 args["orientation"] = "v" if no_x else "h"
-            if df_provided:
-                if isinstance(df_input.index, pd.MultiIndex):
+            if df_provided and is_pd_like:
+                if isinstance(columns, native_namespace.MultiIndex):
                     raise TypeError(
                         "Data frame index is a pandas MultiIndex. "
                         "pandas MultiIndex is not supported by plotly express "
                         "at the moment."
                     )
-                args["wide_cross"] = df_input.index
+                args["wide_cross"] = df_input._compliant_frame._native_frame.index
             else:
                 args["wide_cross"] = Range(
-                    label=_escape_col_name(df_input, "index", [var_name, value_name])
+                    label=_escape_col_name(
+                        df_input.columns, "index", [var_name, value_name]
+                    )
                 )
 
     no_color = False
-    if type(args.get("color")) == str and args["color"] == NO_COLOR:
+    if isinstance(args.get("color"), str) and args["color"] == NO_COLOR:
         no_color = True
         args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
 
     df_output, wide_id_vars = process_args_into_dataframe(
-        args, wide_mode, var_name, value_name
+        args,
+        wide_mode,
+        var_name,
+        value_name,
+        is_pd_like,
+        native_namespace,
     )
+    df_output: nw.DataFrame
 
     # now that `df_output` exists and `args` contains only references, we complete
     # the special-case and wide-mode handling by further rewriting args and/or mutating
     # df_output
 
-    count_name = _escape_col_name(df_output, "count", [var_name, value_name])
+    count_name = _escape_col_name(df_output.columns, "count", [var_name, value_name])
     if not wide_mode and missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
         # dimension is categorical: if so, then setting the missing dimension to a
@@ -1527,7 +1576,7 @@ def build_dataframe(args, constructor):
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
             args[missing_bar_dim] = count_name
-            df_output[count_name] = 1
+            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
@@ -1552,18 +1601,18 @@ def build_dataframe(args, constructor):
         del args["wide_cross"]
         dtype = None
         for v in wide_value_vars:
-            v_dtype = df_output[v].dtype.kind
-            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
+            v_dtype = df_output.get_column(v).dtype
+            v_dtype = "number" if v_dtype in NW_NUMERIC_DTYPES else v_dtype
             if dtype is None:
                 dtype = v_dtype
             elif dtype != v_dtype:
                 raise ValueError(
                     "Plotly Express cannot process wide-form data with columns of different type."
                 )
-        df_output = df_output.melt(
-            id_vars=wide_id_vars,
-            value_vars=wide_value_vars,
-            var_name=var_name,
+        df_output = df_output.unpivot(
+            index=wide_id_vars,
+            on=wide_value_vars,
+            variable_name=var_name,
             value_name=value_name,
         )
         assert len(df_output.columns) == len(set(df_output.columns)), (
@@ -1572,7 +1621,7 @@ def build_dataframe(args, constructor):
             "https://github.com/plotly/plotly.py/issues/new and we will try to "
             "replicate and fix it."
         )
-        df_output[var_name] = df_output[var_name].astype(str)
+        df_output = df_output.with_columns(nw.col(var_name).cast(nw.String))
         orient_v = wide_orientation == "v"
 
         if hist1d_orientation:
@@ -1594,7 +1643,7 @@ def build_dataframe(args, constructor):
             else:
                 args["x" if orient_v else "y"] = value_name
                 args["y" if orient_v else "x"] = count_name
-                df_output[count_name] = 1
+                df_output = df_output.with_columns(**{count_name: nw.lit(1)})
                 args["color"] = args["color"] or var_name
         elif constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
@@ -1607,12 +1656,12 @@ def build_dataframe(args, constructor):
             args["histfunc"] = None
             args["orientation"] = "h"
             args["x"] = count_name
-            df_output[count_name] = 1
+            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
         else:
             args["histfunc"] = None
             args["orientation"] = "v"
             args["y"] = count_name
-            df_output[count_name] = 1
+            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
 
     if no_color:
         args["color"] = None
@@ -1620,21 +1669,36 @@ def build_dataframe(args, constructor):
     return args
 
 
-def _check_dataframe_all_leaves(df):
-    df_sorted = df.sort_values(by=list(df.columns))
-    null_mask = df_sorted.isnull()
-    df_sorted = df_sorted.astype(str)
-    null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
+def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
+    cols = df.columns
+    df_sorted = df.sort(by=cols)
+    null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
+    df_sorted = df_sorted.with_columns(*[nw.col(c).cast(nw.String) for c in cols])
+    null_indices = (
+        null_mask.select(null_mask=nw.any_horizontal(nw.col(cols)))
+        .get_column("null_mask")
+        .arg_true()
+    )
     for null_row_index in null_indices:
-        row = null_mask.iloc[null_row_index]
-        i = np.nonzero(row.values)[0][0]
+        row = np.array(null_mask.row(null_row_index))
+        i = np.nonzero(row)[0][0]
+
         if not row[i:].all():
             raise ValueError(
                 "None entries cannot have not-None children",
-                df_sorted.iloc[null_row_index],
+                df_sorted.row(null_row_index),
             )
-    df_sorted[null_mask] = ""
-    row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
+    df_sorted = df_sorted.with_columns(
+        **{
+            c: df_sorted.get_column(c).zip_with(null_mask.get_column(c), nw.lit(""))
+            for c in cols
+        }
+    )
+    row_strings = reduce(
+        lambda x, y: x + y,
+        [df_sorted.get_column(c).cast(nw.String()) for c in cols],
+        "",
+    )
     for i, row in enumerate(row_strings[:-1]):
         if row_strings[i + 1] in row and (i + 1) in null_indices:
             raise ValueError(
@@ -1648,42 +1712,45 @@ def process_dataframe_hierarchy(args):
     """
     Build dataframe for sunburst, treemap, or icicle when the path argument is provided.
     """
-    df = args["data_frame"]
+    df: nw.DataFrame = args["data_frame"]
     path = args["path"][::-1]
     _check_dataframe_all_leaves(df[path[::-1]])
     discrete_color = False
 
-    new_path = []
-    for col_name in path:
-        new_col_name = col_name + "_path_copy"
-        new_path.append(new_col_name)
-        df[new_col_name] = df[col_name]
+    new_path = [col_name + "_path_copy" for col_name in path]
+    df = df.with_columns(
+        **{
+            new_col_name: nw.col(col_name)
+            for new_col_name, col_name in zip(new_path, path)
+        }
+    )
     path = new_path
     # ------------ Define aggregation functions --------------------------------
-
-    def aggfunc_discrete(x):
-        uniques = x.unique()
-        if len(uniques) == 1:
-            return uniques[0]
-        else:
-            return "(?)"
-
     agg_f = {}
     aggfunc_color = None
     if args["values"]:
         try:
-            df[args["values"]] = pd.to_numeric(df[args["values"]])
+            if isinstance(args["values"], Sequence) and not isinstance(
+                args["values"], str
+            ):
+                df = df.with_columns(
+                    **{c: nw.col(c).cast(nw.Float64()) for c in args["values"]}
+                )
+            else:
+                df = df.with_columns(
+                    **{args["values"]: nw.col(args["values"]).cast(nw.Float64())}
+                )
+
         except ValueError:
             raise ValueError(
                 "Column `%s` of `df` could not be converted to a numerical data type."
                 % args["values"]
             )
 
-        if args["color"]:
-            if args["color"] == args["values"]:
-                new_value_col_name = args["values"] + "_sum"
-                df[new_value_col_name] = df[args["values"]]
-                args["values"] = new_value_col_name
+        if args["color"] and args["color"] == args["values"]:
+            new_value_col_name = args["values"] + "_sum"
+            df = df.with_columns(**{new_value_col_name: nw.col(args["values"])})
+            args["values"] = new_value_col_name
         count_colname = args["values"]
     else:
         # we need a count column for the first groupby and the weighted mean of color
@@ -1691,66 +1758,149 @@ def process_dataframe_hierarchy(args):
         count_colname = (
             "count"
             if "count" not in df.columns
-            else "".join([str(el) for el in list(df.columns)])
+            else "".join([str(el) for el in df.columns])
         )
         # we can modify df because it's a copy of the px argument
-        df[count_colname] = 1
+        df = df.with_columns(**{count_colname: nw.lit(1)})
         args["values"] = count_colname
-    agg_f[count_colname] = "sum"
+
+    # Since count_colname is always in agg_f, it can be used later to normalize color
+    # in the continuous case after some gymnastic
+    agg_f[count_colname] = nw.sum(count_colname)
+
+    discrete_aggs = []
+    continuous_aggs = []
 
     if args["color"]:
         if not _is_continuous(df, args["color"]):
-            aggfunc_color = aggfunc_discrete
+
+            discrete_aggs.append(args["color"])
             discrete_color = True
+            # TODO: In theory, we should have a way to do nw.col(x).unique() and
+            # successively do:
+            # nw.when(nw.col(x).list.len()==1).then(nw.col(x).list.first()).otherwise(nw.lit("(?)"))
+            # which replicates:
+            # ```
+            # uniques = x.unique()
+            # if len(uniques) == 1:
+            #     return uniques[0]
+            # else:
+            #     return "(?)"
+            # ```
+            # However we cannot do that just yet, therefore a workaround is provided
+            agg_f[args["color"]] = nw.col(args["color"]).max()
+            agg_f[f'{args["color"]}__n_unique__'] = (
+                nw.col(args["color"]).n_unique().alias(f'{args["color"]}__n_unique__')
+            )
         else:
+            # This first needs to be multiplied by `count_colname`
+            continuous_aggs.append(args["color"])
+            discrete_color = False
 
-            def aggfunc_continuous(x):
-                return np.average(x, weights=df.loc[x.index, count_colname])
-
-            aggfunc_color = aggfunc_continuous
-        agg_f[args["color"]] = aggfunc_color
+            agg_f[args["color"]] = nw.sum(args["color"])
 
     #  Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
+    df = df.with_columns(
+        **{c: nw.col(c).cast(nw.String()) for c in cols if c not in agg_f}
+    )
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
-            agg_f[col] = aggfunc_discrete
+            # Similar trick as above
+            discrete_aggs.append(col)
+            agg_f[col] = nw.col(col).max()
+            agg_f[f"{col}__n_unique__"] = (
+                nw.col(col).n_unique().alias(f"{col}__n_unique__")
+            )
     # Avoid collisions with reserved names - columns in the path have been copied already
     cols = list(set(cols) - set(["labels", "parent", "id"]))
     # ----------------------------------------------------------------------------
-    df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
-    #  Set column type here (useful for continuous vs discrete colorscale)
-    for col in cols:
-        df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
+    all_trees = []
+
+    if args["color"] and not discrete_color:
+        df = df.with_columns(
+            **{args["color"]: nw.col(args["color"]) * nw.col(count_colname)}
+        )
+
+    def post_agg(
+        dframe: nw.DataFrame, continuous_aggs: list[str], discrete_aggs: list[str]
+    ) -> nw.DataFrame:
+        """
+        - continuous_aggs is either [] or [args["color"]]
+        - discrete_aggs is either [args["color"], <rest_of_cols>] or [<rest_of cols>]
+        """
+        return dframe.with_columns(
+            **{c: nw.col(c) / nw.col(count_colname) for c in continuous_aggs},
+            **{
+                c: nw.when(nw.col(f"{c}__n_unique__") == nw.lit(1))
+                .then(nw.col(c))
+                .otherwise(nw.lit("(?)"))
+                for c in discrete_aggs
+            },
+        ).drop([f"{c}__n_unique__" for c in discrete_aggs])
+
     for i, level in enumerate(path):
-        df_tree = pd.DataFrame(columns=df_all_trees.columns)
-        dfg = df.groupby(path[i:]).agg(agg_f)
-        dfg = dfg.reset_index()
+
+        dfg = (
+            df.group_by(path[i:])
+            .agg(**agg_f)
+            .pipe(post_agg, continuous_aggs, discrete_aggs)
+        )
+
         # Path label massaging
-        df_tree["labels"] = dfg[level].copy().astype(str)
-        df_tree["parent"] = ""
-        df_tree["id"] = dfg[level].copy().astype(str)
+        df_tree = dfg.clone().with_columns(
+            *cols,
+            labels=nw.col(level).cast(nw.String()),
+            parent=nw.lit(""),
+            id=nw.col(level).cast(nw.String()),
+        )
         if i < len(path) - 1:
             j = i + 1
+
+            # TODO: There should be a fast path along the following lines.. come back to this later.
+            # path_j_col = reduce(lambda c1, c2: c1 + "/" + c2, (dfg.get_column(path[j]).cast(nw.String()) for j in range(len(path)-1, j, -1)), "")
+            # parent_col = df_tree.get_column("parent").cast(nw.String())
+            # id_col = df_tree.get_column("id").cast(nw.String())
+            # df_tree = df_tree.with_columns(
+            #     **{
+            #         "parent": path_j_col + "/" + parent_col,
+            #         "id": path_j_col + "/" + id_col,
+            #     }
+            # )
+
             while j < len(path):
-                df_tree["parent"] = (
-                    dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                path_j_col = dfg.get_column(path[j]).cast(nw.String())
+                parent_col = df_tree.get_column("parent").cast(nw.String())
+                id_col = df_tree.get_column("id").cast(nw.String())
+
+                df_tree = df_tree.with_columns(
+                    **{
+                        "parent": path_j_col + "/" + parent_col,
+                        "id": path_j_col + "/" + id_col,
+                    }
                 )
-                df_tree["id"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["id"]
                 j += 1
 
-        df_tree["parent"] = df_tree["parent"].str.rstrip("/")
-        if cols:
-            df_tree[cols] = dfg[cols]
-        df_all_trees = pd.concat([df_all_trees, df_tree], ignore_index=True)
+        # TODO: breakpoint
+        df_tree = df_tree.with_columns(
+            parent=nw.col("parent").str.replace(
+                "/?$", ""
+            )  # strip "/" if at the end of the string, equivalent to `.str.rstrip`
+        )
+
+        all_trees.append(df_tree.select(*["labels", "parent", "id", *cols]))
+
+    # TODO: Why does this fail in tests? Is is because of vertical concat without `ignore_index=True` of narwhals?
+    df_all_trees = nw.concat(all_trees, how="vertical")
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
         sort_col_name = "sort_color_if_discrete_color"
         while sort_col_name in df_all_trees.columns:
             sort_col_name += "0"
-        df_all_trees[sort_col_name] = df[args["color"]].astype(str)
-        df_all_trees = df_all_trees.sort_values(by=sort_col_name)
+        df_all_trees = df_all_trees.with_columns(
+            **{sort_col_name: df[args["color"]].cast(nw.String())}
+        ).sort(by=sort_col_name)
 
     # Now modify arguments
     args["data_frame"] = df_all_trees
@@ -1778,17 +1928,18 @@ def process_dataframe_timeline(args):
         raise ValueError("Both x_start and x_end are required")
 
     try:
-        x_start = pd.to_datetime(args["data_frame"][args["x_start"]])
-        x_end = pd.to_datetime(args["data_frame"][args["x_end"]])
+        df: nw.DataFrame = args["data_frame"]
+        x_start = df.get_column([args["x_start"]]).cast(nw.Datetime())
+        x_end = df.get_column(args["x_end"]).cast(nw.Datetime())
     except (ValueError, TypeError):
         raise TypeError(
             "Both x_start and x_end must refer to data convertible to datetimes."
         )
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
-    args["data_frame"][args["x_end"]] = (x_end - x_start).astype(
-        "timedelta64[ns]"
-    ) / np.timedelta64(1, "ms")
+    args["data_frame"] = df.with_columns(
+        **{args["x_end"]: (x_end - x_start).cast(nw.Duration()).dt.total_milliseconds()}
+    )
     args["x"] = args["x_end"]
     del args["x_end"]
     args["base"] = args["x_start"]
@@ -1803,23 +1954,27 @@ def process_dataframe_pie(args, trace_patch):
     order_in = args["category_orders"].get(names, {}).copy()
     if not order_in:
         return args, trace_patch
-    df = args["data_frame"]
+    df: nw.DataFrame = args["data_frame"]
     trace_patch["sort"] = False
     trace_patch["direction"] = "clockwise"
-    uniques = list(df[names].unique())
+    uniques = df.get_column(names).unique().to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
-    args["data_frame"] = df.set_index(names).loc[order].reset_index()
+
+    breakpoint()
+    # TODO: Replicate: args["data_frame"] = df.set_index(names).loc[order].reset_index()
+    # args["data_frame"] = df.select(*[names, *order])
     return args, trace_patch
 
 
 def infer_config(args, constructor, trace_patch, layout_patch):
     attrs = [k for k in direct_attrables + array_attrables if k in args]
     grouped_attrs = []
+    df: nw.DataFrame = args["data_frame"]
 
     # Compute sizeref
     sizeref = 0
     if "size" in args and args["size"]:
-        sizeref = args["data_frame"][args["size"]].max() / args["size_max"] ** 2
+        sizeref = df.get_column(args["size"]).max() / args["size_max"] ** 2
 
     # Compute color attributes and grouping attributes
     if "color" in args:
@@ -1827,7 +1982,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             if "color_discrete_sequence" not in args:
                 attrs.append("color")
             else:
-                if args["color"] and _is_continuous(args["data_frame"], args["color"]):
+                if args["color"] and _is_continuous(df, args["color"]):
                     attrs.append("color")
                     args["color_is_continuous"] = True
                 elif constructor in [go.Sunburst, go.Treemap, go.Icicle]:
@@ -1882,8 +2037,8 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                     args["orientation"] = "h"
 
         if args["orientation"] is None and has_x and has_y:
-            x_is_continuous = _is_continuous(args["data_frame"], args["x"])
-            y_is_continuous = _is_continuous(args["data_frame"], args["y"])
+            x_is_continuous = _is_continuous(df, args["x"])
+            y_is_continuous = _is_continuous(df, args["y"])
             if x_is_continuous and not y_is_continuous:
                 args["orientation"] = "h"
             if y_is_continuous and not x_is_continuous:
@@ -1991,7 +2146,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[other_position] = None
 
     # Ignore facet rows and columns when data frame is empty so as to prevent nrows/ncols equaling 0
-    if len(args["data_frame"]) == 0:
+    if df.is_empty():
         args["facet_row"] = args["facet_col"] = None
 
     # If both marginals and faceting are specified, faceting wins
@@ -2052,7 +2207,7 @@ def get_groups_and_orders(args, grouper):
     of a single dimension-group
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
-
+    df: nw.DataFrame = args["data_frame"]
     # figure out orders and what the single group name would be if there were one
     single_group_name = []
     unique_cache = dict()
@@ -2061,7 +2216,7 @@ def get_groups_and_orders(args, grouper):
             single_group_name.append("")
         else:
             if col not in unique_cache:
-                unique_cache[col] = list(args["data_frame"][col].unique())
+                unique_cache[col] = df.get_column(col).unique().to_list()
             uniques = unique_cache[col]
             if len(uniques) == 1:
                 single_group_name.append(uniques[0])
@@ -2069,19 +2224,14 @@ def get_groups_and_orders(args, grouper):
                 orders[col] = uniques
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
-    df = args["data_frame"]
+
     if len(single_group_name) == len(grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [g for g in grouper if g != one_group]
-        grouped = df.groupby(
-            required_grouper, sort=False, observed=True
-        )  # skip one_group groupers
-        group_indices = grouped.indices
-        sorted_group_names = [
-            g if len(required_grouper) != 1 else (g,) for g in group_indices
-        ]
+        grouped = dict(df.group_by(required_grouper).__iter__())
+        sorted_group_names = list(grouped.keys())
 
         for i, col in reversed(list(enumerate(required_grouper))):
             sorted_group_names = sorted(
@@ -2097,15 +2247,9 @@ def get_groups_and_orders(args, grouper):
                     g.insert(i, "")
         full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
 
-        groups = {}
-        for sf, s in zip(full_sorted_group_names, sorted_group_names):
-            if len(s) > 1:
-                groups[sf] = grouped.get_group(s)
-            else:
-                if pandas_2_2_0:
-                    groups[sf] = grouped.get_group((s[0],))
-                else:
-                    groups[sf] = grouped.get_group(s[0])
+        groups = {
+            sf: grouped[s] for sf, s in zip(full_sorted_group_names, sorted_group_names)
+        }
     return groups, orders
 
 
@@ -2280,19 +2424,25 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
                 ascending = args.get("ecdfmode", "standard") != "reversed"
-                group = group.sort_values(by=base, ascending=ascending)
-                group_sum = group[var].sum()  # compute here before next line mutates
-                group[var] = group[var].cumsum()
+                group = group.sort(by=base, descending=not ascending)
+                group_sum = group.get_column(
+                    var
+                ).sum()  # compute here before next line mutates
+                group = group.with_columns(**{var: nw.col(var).cum_sum()})
                 if not ascending:
-                    group = group.sort_values(by=base, ascending=True)
+                    group = group.sort(by=base, descending=False)
 
                 if args.get("ecdfmode", "standard") == "complementary":
-                    group[var] = group_sum - group[var]
+                    group = group.with_columns(
+                        **{var: -nw.col(var) + nw.lit(group_sum)}
+                    )
 
                 if args["ecdfnorm"] == "probability":
-                    group[var] = group[var] / group_sum
+                    group = group.with_columns(**{var: nw.col(var) / nw.lit(group_sum)})
                 elif args["ecdfnorm"] == "percent":
-                    group[var] = 100.0 * group[var] / group_sum
+                    group = group.with_columns(
+                        **{var: nw.col(var) / nw.lit(group_sum) * nw.lit(100.0)}
+                    )
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
@@ -2406,7 +2556,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         if fit_results is not None:
             trendline_rows.append(dict(px_fit_results=fit_results))
 
-    fig._px_trendlines = pd.DataFrame(trendline_rows)
+    if (pd := nw.dependencies.get_pandas()) is not None:
+        fig._px_trendlines = pd.DataFrame(trendline_rows)
+    else:
+        msg = "Trendlines require pandas to be installed"
+        raise NotImplementedError(msg)
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
@@ -2508,3 +2662,21 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
         annot.update(font=None)
 
     return fig
+
+
+def is_into_eager_dataframe(df) -> bool:
+    """Check if `df` is a supported narwhals eager dataframe."""
+    return (
+        nw.dependencies.is_polars_dataframe(df)
+        or nw.dependencies.is_pyarrow_table(df)
+        or nw.dependencies.is_pandas_like_dataframe(df)
+    )
+
+
+def is_into_series(df) -> bool:
+    """Check if `df` is a supported narwhals eager dataframe."""
+    return (
+        nw.dependencies.is_polars_series(df)
+        or nw.dependencies.is_pyarrow_chunked_array(df)
+        or nw.dependencies.is_pandas_like_series(df)
+    )
