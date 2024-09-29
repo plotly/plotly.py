@@ -1307,7 +1307,7 @@ def process_args_into_dataframe(
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
-                    if is_pd_like and argument is nw.maybe_get_index(df_input):
+                    if is_pd_like and (argument == nw.maybe_get_index(df_input)).all():
                         if argument.name is None or argument.name in df_input.columns:
                             col_name = "index"
                         else:
@@ -1330,12 +1330,12 @@ def process_args_into_dataframe(
                 if col_name is None:  # numpy array, list...
                     col_name = _check_name_not_reserved(field, reserved_names)
 
-                if length and len(argument) != length:
+                if length and (len_arg := len(argument)) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
                         "length of  previously-processed arguments %s is %d"
-                        % (field, len(argument), str(list(df_output.keys())), length)
+                        % (field, len_arg, str(list(df_output.keys())), length)
                     )
                 df_output[str(col_name)] = to_unindexed_series(
                     argument, str(col_name), native_namespace=native_namespace
@@ -1349,12 +1349,10 @@ def process_args_into_dataframe(
                 "replicate and fix it."
             )
             if field_name not in array_attrables:
-                del args[field_name]
                 args[field_name] = str(col_name)
             elif isinstance(args[field_name], dict):
                 pass
             else:
-                # FIXME: Here field name can be an index, but this should not be the case
                 args[field_name][i] = str(col_name)
             if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
@@ -1532,7 +1530,7 @@ def build_dataframe(args, constructor):
                     "MultiIndex is not supported by plotly express "
                     "at the moment."
                 )
-            args["wide_variable"] = columns
+            args["wide_variable"] = list(columns)
             if is_pd_like and isinstance(columns, native_namespace.Index):
                 var_name = columns.name
             else:
