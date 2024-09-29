@@ -335,24 +335,43 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 ):
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort(by=args["x"])
-                    y = sorted_trace_data.select(nw.col(args["y"])).to_numpy().squeeze()
-                    x = sorted_trace_data.get_column(args["x"]).to_numpy().squeeze()
+                    y = sorted_trace_data.get_column(args["y"])
+                    x = sorted_trace_data.get_column(args["x"])
+
                     # TODO: Fix dtype
-                    if x.dtype.type == np.datetime64:
+                    if isinstance(x.dtype, nw.Datetime):
+                        x = (
+                            x.to_frame()
+                            .select(
+                                **{
+                                    args["x"]: nw.when(~x.is_null())
+                                    .then(x.cast(nw.Int64))
+                                    .otherwise(nw.lit(None, nw.Int64))
+                                }
+                            )
+                            .get_column(args["x"])
+                        )
                         # convert to unix epoch seconds
-                        x = x.astype(np.int64) / 10**9
-                    elif x.dtype.type == np.object_:
+                        # x = x.astype(np.int64) / 10**9
+                    elif x.dtype in {
+                        nw.Object(),
+                        nw.String(),
+                    }:  # TODO: Should this just be: x non numeric?
                         try:
-                            x = x.astype(np.float64)
+                            x = x.cast(nw.Float64())
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'x' ('%s') into a numeric type. "
                                 "If 'x' contains stringified dates, please convert to a datetime column."
                                 % args["x"]
                             )
-                    if y.dtype.type == np.object_:
+
+                    if y.dtype in {
+                        nw.Object(),
+                        nw.String(),
+                    }:  # TODO: Should this just be: x_series non numeric?
                         try:
-                            y = y.astype(np.float64)
+                            y = y.cast(nw.Float64()).to_numpy()
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'y' into a numeric type."
@@ -362,29 +381,21 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     # otherwise numpy/pandas can mess with the timezones
                     # NB this means trendline functions must output one-to-one with the input series
                     # i.e. we can't do resampling, because then the X values might not line up!
-                    non_missing = np.logical_not(
-                        np.logical_or(np.isnan(y), np.isnan(x))
+                    non_missing = ~(x.is_null() | y.is_null())
+                    trace_patch["x"] = sorted_trace_data.filter(non_missing).get_column(
+                        args["x"]
                     )
-                    # TODO: Double check slicing here or find workaround
-                    trace_patch["x"] = sorted_trace_data[non_missing].select(
-                        nw.col(args["x"])
-                    )
+
                     trendline_function = trendline_functions[attr_value]
                     y_out, hover_header, fit_results = trendline_function(
                         args["trendline_options"],
                         sorted_trace_data.get_column(args["x"]),  # narwhals series
-                        x,  # numpy array
-                        y,  # numpy array
+                        x.to_numpy(),  # numpy array
+                        y.to_numpy(),  # numpy array
                         args["x"],
                         args["y"],
-                        non_missing,  # numpy array
+                        non_missing.to_numpy(),  # numpy array
                     )
-                    # TODO: This is most likely not needed anymore
-                    # y_out = nw.new_series(
-                    #     name="",
-                    #     values=y_out,
-                    #     native_namespace=sorted_trace_data.__native_namespace__(),
-                    # )
                     assert len(y_out) == len(
                         trace_patch["x"]
                     ), "missing-data-handling failure in trendline code"
