@@ -338,7 +338,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     y = sorted_trace_data.get_column(args["y"])
                     x = sorted_trace_data.get_column(args["x"])
 
-                    # TODO: Fix dtype
                     if isinstance(x.dtype, nw.Datetime):
                         x = (
                             x.to_frame()
@@ -1117,7 +1116,9 @@ def _isinstance_listlike(x):
 
 
 def _escape_col_name(columns, col_name, extra):
-    while columns is not None and (col_name in columns or col_name in extra):
+    if columns is None:
+        return col_name
+    while col_name in columns or col_name in extra:
         col_name = "_" + col_name
     return col_name
 
@@ -1202,10 +1203,15 @@ def process_args_into_dataframe(
             else args.get(field_name)
         )
         # argument not specified, continue
-        if argument_list is None or argument_list is [None]:
+        if argument_list is None or (
+            hasattr(argument_list, "__len__")
+            and len(argument_list) == 1
+            and argument_list[0] is None
+        ):
             continue
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
+        # breakpoint()
         field_list = (
             [field_name]
             if field_name not in array_attrables
@@ -1247,14 +1253,14 @@ def process_args_into_dataframe(
                     col_name = str(argument)
                     real_argument = args["hover_data"][col_name][1]
 
-                    if length and len(real_argument) != length:
+                    if length and (real_length := len(real_argument)) != length:
                         raise ValueError(
                             "All arguments should have the same length. "
                             "The length of hover_data key `%s` is %d, whereas the "
                             "length of previously-processed arguments %s is %d"
                             % (
                                 argument,
-                                len(real_argument),
+                                real_length,
                                 str(list(df_output.keys())),
                                 length,
                             )
@@ -1282,10 +1288,7 @@ def process_args_into_dataframe(
                         if argument == "index":
                             err_msg += "\n To use the index, pass it in directly as `df.index`."
                         raise ValueError(err_msg)
-                elif (
-                    length
-                    and (actual_len := len(df_input.select(nw.col(argument)))) != length
-                ):
+                elif length and (actual_len := len(df_input)) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
@@ -1318,7 +1321,9 @@ def process_args_into_dataframe(
                             argument.name is not None
                             and argument.name in df_input.columns
                             and (
-                                nw.from_native(argument, allow_series=True)
+                                to_unindexed_series(
+                                    argument, argument.name, native_namespace
+                                )
                                 == df_input.get_column(argument.name)
                             ).all()
                         ):
@@ -1345,10 +1350,12 @@ def process_args_into_dataframe(
                 "replicate and fix it."
             )
             if field_name not in array_attrables:
+                del args[field_name]
                 args[field_name] = str(col_name)
             elif isinstance(args[field_name], dict):
                 pass
             else:
+                breakpoint()
                 args[field_name][i] = str(col_name)
             if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
@@ -1426,14 +1433,15 @@ def build_dataframe(args, constructor):
         if nw.dependencies.is_polars_dataframe(
             args["data_frame"]
         ) or nw.dependencies.is_pyarrow_table(args["data_frame"]):
-            args["data_frame"] = nw.from_native(args["data_frame"])
+            args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
             columns = args["data_frame"].columns
 
         elif nw.dependencies.is_polars_series(
             args["data_frame"]
         ) or nw.dependencies.is_pyarrow_chunked_array(args["data_frame"]):
             args["data_frame"] = nw.from_native(
-                args["data_frame"], series_only=True
+                args["data_frame"],
+                series_only=True,
             ).to_frame()
             columns = args["data_frame"].columns
 
@@ -1444,10 +1452,12 @@ def build_dataframe(args, constructor):
             is_pd_like = True
 
         elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
-            columns = args["data_frame"].columns
+
             args["data_frame"] = nw.from_native(
-                args["data_frame"], series_only=True
+                args["data_frame"],
+                series_only=True,
             ).to_frame()
+            columns = args["data_frame"].columns
             is_pd_like = True
 
         elif hasattr(args["data_frame"], "__dataframe__"):
@@ -1465,8 +1475,9 @@ def build_dataframe(args, constructor):
                 pd = nw.dependencies.get_pandas()
                 if pd is None:
                     msg = (
-                        "data_frame of type dict requires Pandas to be installed. "
-                        "Convert it to supported dataframe type of install Pandas."
+                        f"data_frame of type {type(args['data_frame'])} requires Pandas "
+                        "to be installed. Convert it to supported dataframe type or "
+                        "install Pandas."
                     )
                     raise ValueError(msg)
 
@@ -1538,8 +1549,12 @@ def build_dataframe(args, constructor):
         elif wide_x != wide_y:
             wide_mode = True
             args["wide_variable"] = args["y"] if wide_y else args["x"]
-            if df_provided and is_pd_like and args["wide_variable"] is columns:
-                var_name = columns.name
+            if (
+                df_provided
+                and is_pd_like
+                and all(c1 == c2 for c1, c2 in zip(args["wide_variable"], columns))
+            ):
+                var_name = df_input.to_native().columns.name
             if is_pd_like and isinstance(args["wide_variable"], native_namespace.Index):
                 args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
@@ -1586,9 +1601,7 @@ def build_dataframe(args, constructor):
                 args["wide_cross"] = index
             else:
                 args["wide_cross"] = Range(
-                    label=_escape_col_name(
-                        df_input.columns, "index", [var_name, value_name]
-                    )
+                    label=_escape_col_name(columns, "index", [var_name, value_name])
                 )
 
     no_color = False
@@ -1606,7 +1619,6 @@ def build_dataframe(args, constructor):
         native_namespace,
     )
     df_output: nw.DataFrame
-
     # now that `df_output` exists and `args` contains only references, we complete
     # the special-case and wide-mode handling by further rewriting args and/or mutating
     # df_output
