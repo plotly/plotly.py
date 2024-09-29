@@ -120,7 +120,7 @@ def _pandas(mode, trendline_options, x_raw, y, non_missing):
         msg = "Trendline requires pandas to be installed"
         raise ImportError(msg)
 
-    series = pd.Series(y, index=x_raw.to_numpy())
+    series = pd.Series(y, index=x_raw.to_pandas())
 
     # TODO: If narwhals were to sopport rolling, ewm and expanding then we could go around these
     agg = getattr(series, mode)  # e.g. series.rolling
