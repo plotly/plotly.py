@@ -231,7 +231,7 @@ def test_build_df_from_lists():
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
     df_out = out.pop("data_frame")
-    assert_frame_equal(df_out, df[df_out.columns])
+    assert_frame_equal(df_out.to_pandas(), df[df_out.columns])
     assert out == output
 
     # Arrays
@@ -241,7 +241,7 @@ def test_build_df_from_lists():
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
     df_out = out.pop("data_frame")
-    assert_frame_equal(df_out, df[df_out.columns])
+    assert_frame_equal(df_out.to_pandas(), df[df_out.columns])
 
     assert out == output
 
@@ -250,74 +250,77 @@ def test_build_df_with_index():
     tips = px.data.tips()
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
-
-
-@pytest.mark.parametrize("column_names_as_generator", [False, True])
-def test_build_df_using_interchange_protocol_mock(
-    add_interchange_module_for_old_pandas, column_names_as_generator
-):
-    class InterchangeDataFrame:
-        def __init__(self, columns):
-            self._columns = columns
-
-        if column_names_as_generator:
-
-            def column_names(self):
-                for col in self._columns:
-                    yield col
-
-        else:
-
-            def column_names(self):
-                return self._columns
-
-    interchange_dataframe = InterchangeDataFrame(
-        ["petal_width", "sepal_length", "sepal_width"]
-    )
-    interchange_dataframe_reduced = InterchangeDataFrame(
-        ["petal_width", "sepal_length"]
-    )
-    interchange_dataframe.select_columns_by_name = mock.MagicMock(
-        return_value=interchange_dataframe_reduced
-    )
-    interchange_dataframe_reduced.select_columns_by_name = mock.MagicMock(
-        return_value=interchange_dataframe_reduced
+    assert_frame_equal(
+        tips.reset_index()[out["data_frame"].columns], out["data_frame"].to_pandas()
     )
 
-    class CustomDataFrame:
-        def __dataframe__(self):
-            return interchange_dataframe
 
-    class CustomDataFrameReduced:
-        def __dataframe__(self):
-            return interchange_dataframe_reduced
+# TODO: Changed how this is accomplished in the first place
+# @pytest.mark.parametrize("column_names_as_generator", [False, True])
+# def test_build_df_using_interchange_protocol_mock(
+#     add_interchange_module_for_old_pandas, column_names_as_generator
+# ):
+#     class InterchangeDataFrame:
+#         def __init__(self, columns):
+#             self._columns = columns
 
-    input_dataframe = CustomDataFrame()
-    input_dataframe_reduced = CustomDataFrameReduced()
+#         if column_names_as_generator:
 
-    iris_pandas = px.data.iris()
+#             def column_names(self):
+#                 for col in self._columns:
+#                     yield col
 
-    with mock.patch("pandas.__version__", "2.0.2"):
-        args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
-        with mock.patch(
-            "pandas.api.interchange.from_dataframe", return_value=iris_pandas
-        ) as mock_from_dataframe:
-            build_dataframe(args, go.Scatter)
-        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-        assert set(interchange_dataframe.select_columns_by_name.call_args[0][0]) == {
-            "petal_width",
-            "sepal_length",
-        }
+#         else:
 
-        args = dict(data_frame=input_dataframe_reduced, color=None)
-        with mock.patch(
-            "pandas.api.interchange.from_dataframe",
-            return_value=iris_pandas[["petal_width", "sepal_length"]],
-        ) as mock_from_dataframe:
-            build_dataframe(args, go.Scatter)
-        mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-        interchange_dataframe_reduced.select_columns_by_name.assert_not_called()
+#             def column_names(self):
+#                 return self._columns
+
+#     interchange_dataframe = InterchangeDataFrame(
+#         ["petal_width", "sepal_length", "sepal_width"]
+#     )
+#     interchange_dataframe_reduced = InterchangeDataFrame(
+#         ["petal_width", "sepal_length"]
+#     )
+#     interchange_dataframe.select_columns_by_name = mock.MagicMock(
+#         return_value=interchange_dataframe_reduced
+#     )
+#     interchange_dataframe_reduced.select_columns_by_name = mock.MagicMock(
+#         return_value=interchange_dataframe_reduced
+#     )
+
+#     class CustomDataFrame:
+#         def __dataframe__(self):
+#             return interchange_dataframe
+
+#     class CustomDataFrameReduced:
+#         def __dataframe__(self):
+#             return interchange_dataframe_reduced
+
+#     input_dataframe = CustomDataFrame()
+#     input_dataframe_reduced = CustomDataFrameReduced()
+
+#     iris_pandas = px.data.iris()
+
+#     with mock.patch("pandas.__version__", "2.0.2"):
+#         args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+#         with mock.patch(
+#             "pandas.api.interchange.from_dataframe", return_value=iris_pandas
+#         ) as mock_from_dataframe:
+#             build_dataframe(args, go.Scatter)
+#         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+#         assert set(interchange_dataframe.select_columns_by_name.call_args[0][0]) == {
+#             "petal_width",
+#             "sepal_length",
+#         }
+
+#         args = dict(data_frame=input_dataframe_reduced, color=None)
+#         with mock.patch(
+#             "pandas.api.interchange.from_dataframe",
+#             return_value=iris_pandas[["petal_width", "sepal_length"]],
+#         ) as mock_from_dataframe:
+#             build_dataframe(args, go.Scatter)
+#         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
+#         interchange_dataframe_reduced.select_columns_by_name.assert_not_called()
 
 
 @pytest.mark.skipif(
@@ -338,7 +341,8 @@ def test_build_df_from_vaex_and_polars(test_lib):
     args = dict(data_frame=iris_vaex, x="petal_width", y="sepal_length")
     out = build_dataframe(args, go.Scatter)
     assert_frame_equal(
-        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+        iris_pandas.reset_index()[out["data_frame"].columns],
+        out["data_frame"].to_pandas(),
     )
 
 
@@ -368,7 +372,8 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
     )
     out = build_dataframe(args, go.Scatter)
     assert_frame_equal(
-        iris_pandas.reset_index()[out["data_frame"].columns], out["data_frame"]
+        iris_pandas.reset_index()[out["data_frame"].columns],
+        out["data_frame"].to_pandas(),
     )
 
 
@@ -377,7 +382,7 @@ def test_timezones():
     df["date"] = pd.to_datetime(df["date"])
     args = dict(data_frame=df, x="date", y="value")
     out = build_dataframe(args, go.Scatter)
-    assert str(out["data_frame"]["date"][0]) == str(df["date"][0])
+    assert str(out["data_frame"].to_pandas()["date"][0]) == str(df["date"][0])
 
 
 def test_non_matching_index():
@@ -387,17 +392,17 @@ def test_non_matching_index():
 
     args = dict(data_frame=df, x=df.index, y="y")
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(expected, out["data_frame"])
+    assert_frame_equal(expected, out["data_frame"].to_pandas())
 
     expected = pd.DataFrame(dict(x=["a", "b", "c"], y=[1, 2, 3]))
 
     args = dict(data_frame=None, x=df.index, y=df.y)
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(expected, out["data_frame"])
+    assert_frame_equal(expected, out["data_frame"].to_pandas())
 
     args = dict(data_frame=None, x=["a", "b", "c"], y=df.y)
     out = build_dataframe(args, go.Scatter)
-    assert_frame_equal(expected, out["data_frame"])
+    assert_frame_equal(expected, out["data_frame"].to_pandas())
 
 
 def test_splom_case():
