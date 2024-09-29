@@ -1203,11 +1203,7 @@ def process_args_into_dataframe(
             else args.get(field_name)
         )
         # argument not specified, continue
-        if argument_list is None or (
-            hasattr(argument_list, "__len__")
-            and len(argument_list) == 1
-            and argument_list[0] is None
-        ):
+        if argument_list is None or argument_list is [None]:
             continue
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
@@ -1546,12 +1542,8 @@ def build_dataframe(args, constructor):
         elif wide_x != wide_y:
             wide_mode = True
             args["wide_variable"] = args["y"] if wide_y else args["x"]
-            if (
-                df_provided
-                and is_pd_like
-                and all(c1 == c2 for c1, c2 in zip(args["wide_variable"], columns))
-            ):
-                var_name = df_input.to_native().columns.name
+            if df_provided and is_pd_like and args["wide_variable"] is columns:
+                var_name = columns.name
             if is_pd_like and isinstance(args["wide_variable"], native_namespace.Index):
                 args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
