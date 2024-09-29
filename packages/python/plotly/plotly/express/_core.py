@@ -1302,7 +1302,7 @@ def process_args_into_dataframe(
                 else:
                     col_name = str(argument)
                     df_output[col_name] = to_unindexed_series(
-                        df_input[argument], col_name
+                        df_input.get_column(argument), col_name
                     )
             # ----------------- argument is likely a column / array / list.... -------
             else:
