@@ -805,6 +805,7 @@ def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, go.Scatter)
     df_out = args_out.pop("data_frame")
+
     assert args_out == args_expect
     assert_frame_equal(
         df_out.to_pandas(),
