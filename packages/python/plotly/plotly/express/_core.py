@@ -328,7 +328,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if (
                     args["x"]
                     and args["y"]
-                    and len(  # TODO: Handle case arg["y"] is a list
+                    and len(  # TODO: Handle case arg["y"] is a list?
                         trace_data.select(nw.col(args["x"], args["y"])).drop_nulls()
                     )
                     > 1
@@ -1211,7 +1211,6 @@ def process_args_into_dataframe(
             continue
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
-        # breakpoint()
         field_list = (
             [field_name]
             if field_name not in array_attrables
@@ -1355,7 +1354,7 @@ def process_args_into_dataframe(
             elif isinstance(args[field_name], dict):
                 pass
             else:
-                breakpoint()
+                # FIXME: Here field name can be an index, but this should not be the case
                 args[field_name][i] = str(col_name)
             if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
@@ -1937,7 +1936,6 @@ def process_dataframe_hierarchy(args):
                 )
                 j += 1
 
-        # TODO: breakpoint
         df_tree = df_tree.with_columns(
             parent=nw.col("parent").str.replace(
                 "/?$", ""
@@ -2019,9 +2017,10 @@ def process_dataframe_pie(args, trace_patch):
     uniques = df.get_column(names).unique().to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
 
-    breakpoint()
-    # TODO: Replicate: args["data_frame"] = df.set_index(names).loc[order].reset_index()
-    # args["data_frame"] = df.select(*[names, *order])
+    # TODO
+    # Original implementation: args["data_frame"] = df.set_index(names).loc[order].reset_index()
+    # However this is untested, therefore will need some special attention to verify
+    args["data_frame"] = df[order].select(names)
     return args, trace_patch
 
 
