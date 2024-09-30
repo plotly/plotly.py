@@ -339,6 +339,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     x = sorted_trace_data.get_column(args["x"])
 
                     if isinstance(x.dtype, nw.Datetime):
+                        # convert to unix epoch seconds
                         x = (
                             x.to_frame()
                             .select(
@@ -346,16 +347,15 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                     args["x"]: nw.when(~x.is_null())
                                     .then(x.cast(nw.Int64))
                                     .otherwise(nw.lit(None, nw.Int64))
+                                    / 10**9
                                 }
                             )
                             .get_column(args["x"])
                         )
-                        # convert to unix epoch seconds
-                        # x = x.astype(np.int64) / 10**9
                     elif x.dtype in {
                         nw.Object(),
                         nw.String(),
-                    }:  # TODO: Should this just be: x non numeric?
+                    }:  # TODO: Should this case just be: x non numeric?
                         try:
                             x = x.cast(nw.Float64())
                         except ValueError:
@@ -368,7 +368,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if y.dtype in {
                         nw.Object(),
                         nw.String(),
-                    }:  # TODO: Should this just be: x_series non numeric?
+                    }:  # TODO: Should this case just be: y non numeric?
                         try:
                             y = y.cast(nw.Float64()).to_numpy()
                         except ValueError:
@@ -1821,16 +1821,17 @@ def process_dataframe_hierarchy(args):
 
             discrete_aggs.append(args["color"])
             discrete_color = True
-            # TODO: In theory, we should have a way to do nw.col(x).unique() and
+            # Hack: In theory, we should have a way to do nw.col(x).unique() and
             # successively do:
-            # nw.when(nw.col(x).list.len()==1).then(nw.col(x).list.first()).otherwise(nw.lit("(?)"))
+            # (nw.when(nw.col(x).list.len()==1)
+            # .then(nw.col(x).list.first())
+            # .otherwise(nw.lit("(?)"))
+            # )
             # which replicates:
             # ```
-            # uniques = x.unique()
-            # if len(uniques) == 1:
-            #     return uniques[0]
-            # else:
-            #     return "(?)"
+            # def discrete_agg(x):
+            #     uniques = x.unique()
+            #     return uniques[0] if len(uniques) == 1 else "(?)"
             # ```
             # However we cannot do that just yet, therefore a workaround is provided
             agg_f[args["color"]] = nw.col(args["color"]).max()
@@ -1946,7 +1947,7 @@ def process_dataframe_hierarchy(args):
         while sort_col_name in df_all_trees.columns:
             sort_col_name += "0"
         df_all_trees = df_all_trees.with_columns(
-            **{sort_col_name: df[args["color"]].cast(nw.String())}
+            **{sort_col_name: df.get_column(args["color"]).cast(nw.String())}
         ).sort(by=sort_col_name)
 
     # Now modify arguments
