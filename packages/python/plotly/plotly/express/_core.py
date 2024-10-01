@@ -1083,7 +1083,7 @@ def _get_reserved_col_names(args):
                     ).all()
                     if in_df:
                         reserved_names.add(arg_name)
-            elif (arg == nw.maybe_get_index(df)).all() and arg.name is not None:
+            elif arg is nw.maybe_get_index(df) and arg.name is not None:
                 reserved_names.add(arg.name)
 
     return reserved_names
@@ -2605,11 +2605,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         if fit_results is not None:
             trendline_rows.append(dict(px_fit_results=fit_results))
 
-    if (pd := nw.dependencies.get_pandas()) is not None:
+    if trendline_rows:
+        if (pd := nw.dependencies.get_pandas()) is None:
+            msg = "Trendlines require pandas to be installed"
+            raise NotImplementedError(msg)
         fig._px_trendlines = pd.DataFrame(trendline_rows)
-    else:
-        msg = "Trendlines require pandas to be installed"
-        raise NotImplementedError(msg)
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
