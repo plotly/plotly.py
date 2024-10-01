@@ -150,10 +150,6 @@ def test_sunburst_treemap_with_path():
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
-    # Values passed
-    fig = px.sunburst(df, path=path, values="values")
-    assert fig.data[0].branchvalues == "total"
-    assert fig.data[0].values[-1] == np.sum(values)
     # Error when values cannot be converted to numerical data type
     df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
     msg = "Column `values` of `df` could not be converted to a numerical data type."

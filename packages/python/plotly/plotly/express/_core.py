@@ -11,6 +11,17 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
+from narwhals.dtypes import Datetime
+from narwhals.dtypes import Float32
+from narwhals.dtypes import Float64
+from narwhals.dtypes import Int8
+from narwhals.dtypes import Int16
+from narwhals.dtypes import Int32
+from narwhals.dtypes import Int64
+from narwhals.dtypes import UInt8
+from narwhals.dtypes import UInt16
+from narwhals.dtypes import UInt32
+from narwhals.dtypes import UInt64
 import numpy as np
 
 from plotly._subplots import (
@@ -20,7 +31,18 @@ from plotly._subplots import (
 )
 
 NO_COLOR = "px_no_color_constant"
-NW_NUMERIC_DTYPES = {nw.Float32, nw.Float64, nw.Int8, nw.Int16, nw.Int32, nw.Int64}
+NW_NUMERIC_DTYPES = {
+    Float32,
+    Float64,
+    Int8,
+    Int16,
+    Int32,
+    Int64,
+    UInt8,
+    UInt16,
+    UInt32,
+    UInt64,
+}
 
 trendline_functions = dict(
     lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
@@ -276,10 +298,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     df: nw.DataFrame = args["data_frame"]
 
     if "line_close" in args and args["line_close"]:
-        trace_data = nw.concat([trace_data, trace_data.head(1)], how="vertical")
-        native_trace = trace_data.to_native()
-        if nw.dependencies.is_pandas_like_dataframe(native_trace):
-            trace_data = nw.from_native(native_trace.reset_index(drop=True))
+        trace_data = nw.maybe_reset_index(
+            nw.concat([trace_data, trace_data.head(1)], how="vertical")
+        )
 
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
@@ -338,7 +359,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     y = sorted_trace_data.get_column(args["y"])
                     x = sorted_trace_data.get_column(args["x"])
 
-                    if isinstance(x.dtype, nw.Datetime):
+                    if isinstance(x.dtype, Datetime):
                         # convert to unix epoch seconds
                         x = (
                             x.to_frame()
@@ -347,17 +368,14 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                     args["x"]: nw.when(~x.is_null())
                                     .then(x.cast(nw.Int64))
                                     .otherwise(nw.lit(None, nw.Int64))
-                                    / 10**9
                                 }
                             )
                             .get_column(args["x"])
+                            / 10**9
                         )
-                    elif x.dtype in {
-                        nw.Object(),
-                        nw.String(),
-                    }:  # TODO: Should this case just be: x non numeric?
+                    elif x.dtype not in NW_NUMERIC_DTYPES:
                         try:
-                            x = x.cast(nw.Float64())
+                            x = x.cast(Float64())
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'x' ('%s') into a numeric type. "
@@ -365,12 +383,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                 % args["x"]
                             )
 
-                    if y.dtype in {
-                        nw.Object(),
-                        nw.String(),
-                    }:  # TODO: Should this case just be: y non numeric?
+                    if y.dtype not in NW_NUMERIC_DTYPES:
                         try:
-                            y = y.cast(nw.Float64()).to_numpy()
+                            y = y.cast(Float64()).to_numpy()
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'y' into a numeric type."
@@ -1772,18 +1787,17 @@ def process_dataframe_hierarchy(args):
     path = new_path
     # ------------ Define aggregation functions --------------------------------
     agg_f = {}
-    aggfunc_color = None
     if args["values"]:
         try:
             if isinstance(args["values"], Sequence) and not isinstance(
                 args["values"], str
             ):
                 df = df.with_columns(
-                    **{c: nw.col(c).cast(nw.Float64()) for c in args["values"]}
+                    **{c: nw.col(c).cast(Float64()) for c in args["values"]}
                 )
             else:
                 df = df.with_columns(
-                    **{args["values"]: nw.col(args["values"]).cast(nw.Float64())}
+                    **{args["values"]: nw.col(args["values"]).cast(Float64())}
                 )
 
         except ValueError:
@@ -1903,43 +1917,29 @@ def process_dataframe_hierarchy(args):
         if i < len(path) - 1:
             j = i + 1
 
-            # TODO: There should be a fast path along the following lines.. come back to this later.
-            # path_j_col = reduce(lambda c1, c2: c1 + "/" + c2, (dfg.get_column(path[j]).cast(nw.String()) for j in range(len(path)-1, j, -1)), "")
-            # parent_col = df_tree.get_column("parent").cast(nw.String())
-            # id_col = df_tree.get_column("id").cast(nw.String())
-            # df_tree = df_tree.with_columns(
-            #     **{
-            #         "parent": path_j_col + "/" + parent_col,
-            #         "id": path_j_col + "/" + id_col,
-            #     }
-            # )
+            path_j_col = reduce(
+                lambda c1, c2: c1 + "/" + c2,
+                (
+                    dfg.get_column(path[j]).cast(nw.String())
+                    for j in range(len(path) - 1, j, -1)
+                ),
+                "",
+            )
+            parent_col = df_tree.get_column("parent").cast(nw.String())
+            id_col = df_tree.get_column("id").cast(nw.String())
+            df_tree = df_tree.with_columns(
+                **{
+                    "parent": path_j_col + "/" + parent_col,
+                    "id": path_j_col + "/" + id_col,
+                }
+            )
 
-            while j < len(path):
-                path_j_col = dfg.get_column(path[j]).cast(nw.String())
-                parent_col = df_tree.get_column("parent").cast(nw.String())
-                id_col = df_tree.get_column("id").cast(nw.String())
-
-                df_tree = df_tree.with_columns(
-                    **{
-                        "parent": path_j_col + "/" + parent_col,
-                        "id": path_j_col + "/" + id_col,
-                    }
-                )
-                j += 1
-
-        df_tree = df_tree.with_columns(
-            parent=nw.col("parent").str.replace(
-                "/?$", ""
-            )  # strip "/" if at the end of the string, equivalent to `.str.rstrip`
-        )
+        # strip "/" if at the end of the string, equivalent to `.str.rstrip`
+        df_tree = df_tree.with_columns(parent=nw.col("parent").str.replace("/?$", ""))
 
         all_trees.append(df_tree.select(*["labels", "parent", "id", *cols]))
 
-    # TODO: Why does this fail in tests?
-    df_all_trees = nw.concat(all_trees, how="vertical")
-    native_trees = df_all_trees.to_native()
-    if nw.dependencies.is_pandas_like_dataframe(native_trees):
-        df_all_trees = nw.from_native(native_trees.reset_index(drop=True))
+    df_all_trees = nw.maybe_reset_index(nw.concat(all_trees, how="vertical"))
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
@@ -1947,7 +1947,7 @@ def process_dataframe_hierarchy(args):
         while sort_col_name in df_all_trees.columns:
             sort_col_name += "0"
         df_all_trees = df_all_trees.with_columns(
-            **{sort_col_name: df.get_column(args["color"]).cast(nw.String())}
+            **{sort_col_name: df_all_trees.get_column(args["color"]).cast(nw.String())}
         ).sort(by=sort_col_name)
 
     # Now modify arguments
@@ -1963,6 +1963,8 @@ def process_dataframe_hierarchy(args):
             if not args["hover_data"].get(args["color"]):
                 args["hover_data"][args["color"]] = (True, None)
         else:
+            # FIXME: Hover data can become a list with duplicate values, and then we select that!
+            # In narwhals this raises `ValueError: Expected unique column names, got: Index(['smoker', 'smoker'], dtype='object')`
             args["hover_data"].append(args["color"])
     return args
 
@@ -1977,8 +1979,8 @@ def process_dataframe_timeline(args):
 
     try:
         df: nw.DataFrame = args["data_frame"]
-        x_start = df.get_column(args["x_start"]).cast(nw.Datetime())
-        x_end = df.get_column(args["x_end"]).cast(nw.Datetime())
+        x_start = df.get_column(args["x_start"]).cast(Datetime)
+        x_end = df.get_column(args["x_end"]).cast(Datetime)
     except (ValueError, TypeError):
         raise TypeError(
             "Both x_start and x_end must refer to data convertible to datetimes."
@@ -1986,7 +1988,7 @@ def process_dataframe_timeline(args):
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
     args["data_frame"] = df.with_columns(
-        **{args["x_end"]: (x_end - x_start).cast(nw.Duration()).dt.total_milliseconds()}
+        **{args["x_end"]: (x_end - x_start).dt.total_milliseconds()}
     )
     args["x"] = args["x_end"]
     del args["x_end"]
