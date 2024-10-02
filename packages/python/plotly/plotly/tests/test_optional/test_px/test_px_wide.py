@@ -71,7 +71,7 @@ def test_is_col_list_pandas():
 )
 @pytest.mark.parametrize("orientation", [None, "v", "h"])
 @pytest.mark.parametrize("style", ["implicit", "explicit"])
-def test_wide_mode_external(constructor, px_fn, orientation, style):
+def test_wide_mode_external(px_fn, orientation, style):
     # here we test this feature "black box" style by calling actual PX functions and
     # inspecting the figure... this is important but clunky, and is mostly a smoke test
     # allowing us to do more "white box" testing below
