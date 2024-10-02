@@ -1,12 +1,19 @@
 import pandas as pd
+import polars as pl
+import pyarrow as pa
 import plotly.express as px
 from pytest import approx
 import pytest
 import random
 
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
-def test_facets():
-    df = px.data.tips()
+
+@pytest.mark.parametrize("constructor", constructors)
+def test_facets(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
+
     fig = px.scatter(df, x="total_bill", y="tip")
     assert "xaxis2" not in fig.layout
     assert "yaxis2" not in fig.layout
@@ -46,8 +53,10 @@ def test_facets():
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
-def test_facets_with_marginals():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_facets_with_marginals(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
 
     fig = px.histogram(df, x="total_bill", facet_col="sex", marginal="rug")
     assert len(fig.data) == 4
@@ -93,12 +102,12 @@ def test_facets_with_marginals():
     assert len(fig.data) == 2  # ignore all marginals
 
 
-@pytest.fixture
-def bad_facet_spacing_df():
+@pytest.fixture(params=constructors)
+def bad_facet_spacing_df(request):
     NROWS = 101
     NDATA = 1000
     categories = [n % NROWS for n in range(NDATA)]
-    df = pd.DataFrame(
+    df = request.param(
         {
             "x": [random.random() for _ in range(NDATA)],
             "y": [random.random() for _ in range(NDATA)],

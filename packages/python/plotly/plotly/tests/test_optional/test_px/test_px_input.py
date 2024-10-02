@@ -1,7 +1,10 @@
 import plotly.express as px
 import plotly.graph_objects as go
+import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
+import polars as pl
+import pyarrow as pa
 import pytest
 from packaging import version
 import unittest.mock as mock
@@ -10,6 +13,7 @@ from pandas.testing import assert_frame_equal
 import sys
 import warnings
 
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
 # Fixtures
 # --------
@@ -64,50 +68,56 @@ def test_with_index():
     assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}<extra></extra>"
 
 
-def test_pandas_series():
-    tips = px.data.tips()
-    before_tip = tips.total_bill - tips.tip
+@pytest.mark.parametrize("constructor", constructors)
+def test_series(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    tips = nw.from_native(constructor(data))
+    before_tip = (tips.get_column("total_bill") - tips.get_column("tip")).to_native()
+    day = tips.get_column("day").to_native()
+    tips = tips.to_native()
+
     fig = px.bar(tips, x="day", y=before_tip)
     assert fig.data[0].hovertemplate == "day=%{x}<br>y=%{y}<extra></extra>"
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}<extra></extra>"
     # lock down that we can pass df.col to facet_*
-    fig = px.bar(tips, x="day", y="tip", facet_row=tips.day, facet_col=tips.day)
+    fig = px.bar(tips, x="day", y="tip", facet_row=day, facet_col=day)
     assert fig.data[0].hovertemplate == "day=%{x}<br>tip=%{y}<extra></extra>"
 
 
-def test_several_dataframes():
-    df = pd.DataFrame(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
-    df2 = pd.DataFrame(dict(time=[23, 26], money=[100, 200]))
-    fig = px.scatter(df, x="z", y=df2.money, size="x")
+@pytest.mark.parametrize("constructor", constructors)
+def test_several_dataframes(constructor):
+    df = constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
+    df2 = constructor(dict(time=[23, 26], money=[100, 200]))
+    fig = px.scatter(df, x="z", y=df2["money"], size="x")
     assert (
         fig.data[0].hovertemplate
         == "z=%{x}<br>y=%{y}<br>x=%{marker.size}<extra></extra>"
     )
-    fig = px.scatter(df2, x=df.z, y=df2.money, size=df.z)
+    fig = px.scatter(df2, x=df["z"], y=df2["money"], size=df.z)
     assert (
         fig.data[0].hovertemplate
         == "x=%{x}<br>money=%{y}<br>size=%{marker.size}<extra></extra>"
     )
     # Name conflict
     with pytest.raises(NameError) as err_msg:
-        fig = px.scatter(df, x="z", y=df2.money, size="y")
+        fig = px.scatter(df, x="z", y=df2["money"], size="y")
     assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
     with pytest.raises(NameError) as err_msg:
-        fig = px.scatter(df, x="z", y=df2.money, size=df.y)
+        fig = px.scatter(df, x="z", y=df2["money"], size=df.y)
     assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
 
     # No conflict when the dataframe is not given, fields are used
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
-    df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
-    fig = px.scatter(x=df.y, y=df2.y)
+    df = constructor(dict(x=[0, 1], y=[3, 4]))
+    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
+    fig = px.scatter(x=df["y"], y=df2["y"])
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<extra></extra>"
 
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
-    df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
-    df3 = pd.DataFrame(dict(y=[0.1, 0.2]))
+    df = constructor(dict(x=[0, 1], y=[3, 4]))
+    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
+    df3 = constructor(dict(y=[0.1, 0.2]))
     fig = px.scatter(x=df.y, y=df2.y, size=df3.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
@@ -116,9 +126,9 @@ def test_several_dataframes():
         == "x=%{x}<br>y=%{y}<br>size=%{marker.size}<extra></extra>"
     )
 
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
-    df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
-    df3 = pd.DataFrame(dict(y=[0.1, 0.2]))
+    df = constructor(dict(x=[0, 1], y=[3, 4]))
+    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
+    df3 = constructor(dict(y=[0.1, 0.2]))
     fig = px.scatter(x=df.y, y=df2.y, hover_data=[df3.y])
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
@@ -128,16 +138,19 @@ def test_several_dataframes():
     )
 
 
-def test_name_heuristics():
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
+@pytest.mark.parametrize("constructor", constructors)
+def test_name_heuristics(constructor):
+    df = constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
     fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([0, 1]))
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
 
-def test_repeated_name():
-    iris = px.data.iris()
+@pytest.mark.parametrize("constructor", constructors)
+def test_repeated_name(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    iris = constructor(data)
     fig = px.scatter(
         iris,
         x="sepal_width",
@@ -148,8 +161,10 @@ def test_repeated_name():
     assert fig.data[0].customdata.shape[1] == 4
 
 
-def test_arrayattrable_numpy():
-    tips = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_arrayattrable_numpy(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    tips = constructor(data)
     fig = px.scatter(
         tips, x="total_bill", y="tip", hover_data=[np.random.random(tips.shape[0])]
     )
@@ -157,7 +172,6 @@ def test_arrayattrable_numpy():
         fig.data[0]["hovertemplate"]
         == "total_bill=%{x}<br>tip=%{y}<br>hover_data_0=%{customdata[0]}<extra></extra>"
     )
-    tips = px.data.tips()
     fig = px.scatter(
         tips,
         x="total_bill",
@@ -191,20 +205,24 @@ def test_wrong_dimensions_of_array():
     assert "All arguments should have the same length." in str(err_msg.value)
 
 
-def test_wrong_dimensions_mixed_case():
+@pytest.mark.parametrize("constructor", constructors)
+def test_wrong_dimensions_mixed_case(constructor):
     with pytest.raises(ValueError) as err_msg:
-        df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
+        df = constructor(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
         px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
     assert "All arguments should have the same length." in str(err_msg.value)
 
 
-def test_wrong_dimensions():
+@pytest.mark.parametrize("constructor", constructors)
+def test_wrong_dimensions(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     with pytest.raises(ValueError) as err_msg:
-        px.scatter(px.data.tips(), x="tip", y=[1, 2, 3])
+        px.scatter(df, x="tip", y=[1, 2, 3])
     assert "All arguments should have the same length." in str(err_msg.value)
     # the order matters
     with pytest.raises(ValueError) as err_msg:
-        px.scatter(px.data.tips(), x=[1, 2, 3], y="tip")
+        px.scatter(df, x=[1, 2, 3], y="tip")
     assert "All arguments should have the same length." in str(err_msg.value)
     with pytest.raises(ValueError):
         px.scatter(px.data.tips(), x=px.data.iris().index, y="tip")
@@ -223,26 +241,27 @@ def test_multiindex_raise_error():
     assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
 
 
-def test_build_df_from_lists():
+@pytest.mark.parametrize("constructor", constructors)
+def test_build_df_from_lists(constructor):
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
     output = {key: key for key in args}
-    df = pd.DataFrame(args)
+    df = constructor(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
-    df_out = out.pop("data_frame")
-    assert_frame_equal(df_out.to_pandas(), df[df_out.columns])
+    df_out = out.pop("data_frame").to_native()
+
+    assert df_out.equals(df)
     assert out == output
 
     # Arrays
     args = dict(x=np.array([1, 2, 3]), y=np.array([2, 3, 4]), color=[1, 3, 9])
     output = {key: key for key in args}
-    df = pd.DataFrame(args)
+    df = constructor(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
-    df_out = out.pop("data_frame")
-    assert_frame_equal(df_out.to_pandas(), df[df_out.columns])
-
+    df_out = out.pop("data_frame").to_native()
+    assert df_out.equals(df)
     assert out == output
 
 
@@ -377,12 +396,16 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
     )
 
 
-def test_timezones():
-    df = pd.DataFrame({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
+@pytest.mark.parametrize("constructor", constructors)
+def test_timezones(constructor):
+    df = constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
     df["date"] = pd.to_datetime(df["date"])
     args = dict(data_frame=df, x="date", y="value")
     out = build_dataframe(args, go.Scatter)
-    assert str(out["data_frame"].to_pandas()["date"][0]) == str(df["date"][0])
+
+    assert str(out["data_frame"].item(row=0, column="date")) == str(
+        nw.from_native(df).item(row=0, column="date")
+    )
 
 
 def test_non_matching_index():
@@ -405,8 +428,10 @@ def test_non_matching_index():
     assert_frame_equal(expected, out["data_frame"].to_pandas())
 
 
-def test_splom_case():
-    iris = px.data.iris()
+@pytest.mark.parametrize("constructor", constructors)
+def test_splom_case(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    iris = constructor(data)
     fig = px.scatter_matrix(iris)
     assert len(fig.data[0].dimensions) == len(iris.columns)
     dic = {"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]}
@@ -417,11 +442,12 @@ def test_splom_case():
     assert np.all(fig.data[0].dimensions[0].values == ar[:, 0])
 
 
-def test_int_col_names():
+@pytest.mark.parametrize("constructor", constructors)
+def test_int_col_names(constructor):
     # DataFrame with int column names
-    lengths = pd.DataFrame(np.random.random(100))
-    fig = px.histogram(lengths, x=0)
-    assert np.all(np.array(lengths).flatten() == fig.data[0].x)
+    lengths = constructor({"0": np.random.random(100)})
+    fig = px.histogram(lengths, x="0")
+    assert np.all(nw.from_native(lengths).to_numpy().flatten() == fig.data[0].x)
     # Numpy array
     ar = np.arange(100).reshape((10, 10))
     fig = px.scatter(ar, x=2, y=8)
@@ -435,7 +461,7 @@ def test_data_frame_from_dict():
 
 
 def test_arguments_not_modified():
-    iris = px.data.iris()
+    iris = px.data.iris()  # TODO
     petal_length = iris.petal_length
     hover_data = [iris.sepal_length]
     px.scatter(iris, x=petal_length, y="petal_width", hover_data=hover_data)
@@ -444,7 +470,7 @@ def test_arguments_not_modified():
 
 
 def test_pass_df_columns():
-    tips = px.data.tips()
+    tips = px.data.tips()  # TODO
     fig = px.histogram(
         tips,
         x="total_bill",
@@ -460,7 +486,7 @@ def test_pass_df_columns():
 
 
 def test_size_column():
-    df = px.data.tips()
+    df = px.data.tips()  # TODO
     fig = px.scatter(df, x=df["size"], y=df.tip)
     assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}<extra></extra>"
 
@@ -587,6 +613,7 @@ def test_auto_histfunc():
     assert px.density_heatmap(x=a, y=a, z=a, histfunc="avg").data[0].histfunc == "avg"
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "fn,mode", [(px.violin, "violinmode"), (px.box, "boxmode"), (px.strip, "boxmode")]
 )
@@ -601,8 +628,8 @@ def test_auto_histfunc():
         ("numerical", "categorical1", "categorical1", "overlay"),
     ],
 )
-def test_auto_boxlike_overlay(fn, mode, x, y, color, result):
-    df = pd.DataFrame(
+def test_auto_boxlike_overlay(constructor, fn, mode, x, y, color, result):
+    df = constructor(
         dict(
             categorical1=["a", "a", "b", "b"],
             categorical2=["a", "a", "b", "b"],
