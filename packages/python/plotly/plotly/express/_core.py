@@ -1740,7 +1740,7 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
         .get_column("null_mask")
         .arg_true()
     )
-    for null_row_index in null_indices:
+    for null_row_index in null_indices.to_list():
         row = null_mask.row(null_row_index)
         i = row.index(True)
 

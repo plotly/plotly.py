@@ -1,12 +1,20 @@
 import plotly.express as px
+import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
+import polars as pl
+import pyarrow as pa
 import pytest
 from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
-def test_skip_hover():
-    df = px.data.iris()
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+
+
+@pytest.mark.parametrize("constructor", constructors)
+def test_skip_hover(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    df = constructor(data)
     fig = px.scatter(
         df,
         x="petal_length",
@@ -17,8 +25,10 @@ def test_skip_hover():
     assert fig.data[0].hovertemplate == "species_id=%{marker.size}<extra></extra>"
 
 
-def test_hover_data_string_column():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_hover_data_string_column(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     fig = px.scatter(
         df,
         x="tip",
@@ -28,8 +38,10 @@ def test_hover_data_string_column():
     assert "sex" in fig.data[0].hovertemplate
 
 
-def test_composite_hover():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_composite_hover(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     hover_dict = OrderedDict(
         {"day": False, "time": False, "sex": True, "total_bill": ":.1f"}
     )
@@ -87,8 +99,10 @@ def test_newdatain_hover_data():
         )
 
 
-def test_formatted_hover_and_labels():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_formatted_hover_and_labels(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     fig = px.scatter(
         df,
         x="tip",
@@ -171,8 +185,10 @@ def test_fail_wrong_column():
     )
 
 
-def test_sunburst_hoverdict_color():
-    df = px.data.gapminder().query("year == 2007")
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_hoverdict_color(constructor):
+    data = px.data.gapminder().query("year == 2007").to_dict(orient="list")
+    df = constructor(data)
     fig = px.sunburst(
         df,
         path=["continent", "country"],
@@ -183,8 +199,10 @@ def test_sunburst_hoverdict_color():
     assert "color" in fig.data[0].hovertemplate
 
 
-def test_date_in_hover():
-    df = pd.DataFrame({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
-    df["date"] = pd.to_datetime(df["date"])
+@pytest.mark.parametrize("constructor", constructors)
+def test_date_in_hover(constructor):
+    df = nw.from_native(
+        constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
+    ).with_columns(date=nw.col("date").cast(nw.Datetime()))
     fig = px.scatter(df, x="value", y="value", hover_data=["date"])
     assert str(fig.data[0].customdata[0][0]) == str(df["date"][0])

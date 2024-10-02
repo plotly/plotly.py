@@ -1,9 +1,15 @@
 import plotly.express as px
 import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
+import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
+import polars as pl
+import pyarrow as pa
 import pytest
+
+
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
 
 def _compare_figures(go_trace, px_fig):
@@ -118,7 +124,8 @@ def test_sunburst_treemap_colorscales():
         assert list(fig.layout[colorway]) == color_seq
 
 
-def test_sunburst_treemap_with_path():
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_treemap_with_path(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -133,7 +140,7 @@ def test_sunburst_treemap_with_path():
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
     total = ["total"] * 8
-    df = pd.DataFrame(
+    df = constructor(
         dict(
             vendors=vendors,
             sectors=sectors,
@@ -150,6 +157,8 @@ def test_sunburst_treemap_with_path():
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
+
+    # TODO: Fix from here
     # Error when values cannot be converted to numerical data type
     df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
     msg = "Column `values` of `df` could not be converted to a numerical data type."
@@ -167,32 +176,41 @@ def test_sunburst_treemap_with_path():
     assert fig.data[0].values[-1] == 8
 
 
-def test_sunburst_treemap_with_path_and_hover():
-    df = px.data.tips()
+# TODO: Fix duplicate column, pyarrow cannot sum strings to concatenate them
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_treemap_with_path_and_hover(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     fig = px.sunburst(
         df, path=["sex", "day", "time", "smoker"], color="smoker", hover_data=["smoker"]
     )
     assert "smoker" in fig.data[0].hovertemplate
 
-    df = px.data.gapminder().query("year == 2007")
+    data = px.data.gapminder().query("year == 2007").to_dict(orient="list")
+    df = constructor(data)
+
     fig = px.sunburst(
         df, path=["continent", "country"], color="lifeExp", hover_data=df.columns
     )
     assert fig.layout.coloraxis.colorbar.title.text == "lifeExp"
 
-    df = px.data.tips()
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
+
     fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], hover_name="smoker")
     assert "smoker" not in fig.data[0].hovertemplate  # represented as '%{hovertext}'
     assert "%{hovertext}" in fig.data[0].hovertemplate  # represented as '%{hovertext}'
 
-    df = px.data.tips()
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
     fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], custom_data=["smoker"])
     assert fig.data[0].customdata[0][0] in ["Yes", "No"]
     assert "smoker" not in fig.data[0].hovertemplate
     assert "%{hovertext}" not in fig.data[0].hovertemplate
 
 
-def test_sunburst_treemap_with_path_color():
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_treemap_with_path_color(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -208,16 +226,17 @@ def test_sunburst_treemap_with_path_color():
     values = [1, 3, 2, 4, 2, 2, 1, 4]
     calls = [8, 2, 1, 3, 2, 2, 4, 1]
     total = ["total"] * 8
-    df = pd.DataFrame(
-        dict(
-            vendors=vendors,
-            sectors=sectors,
-            regions=regions,
-            values=values,
-            total=total,
-            calls=calls,
-        )
+    hover = [el.lower() for el in vendors]
+
+    data = dict(
+        vendors=vendors,
+        sectors=sectors,
+        regions=regions,
+        values=values,
+        total=total,
+        calls=calls,
     )
+    df = constructor(data)
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
@@ -227,12 +246,12 @@ def test_sunburst_treemap_with_path_color():
     assert np.all(np.array(colors[:8]) == np.array(calls))
 
     # Hover info
-    df["hover"] = [el.lower() for el in vendors]
+    df = nw.from_native(df).with_columns(hover=hover).to_native()
     fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
     custom = fig.data[0].customdata
-    assert np.all(custom[:8, 0] == df["hover"])
+    assert np.all(custom[:8, 0] == hover)
     assert np.all(custom[8:, 0] == "(?)")
-    assert np.all(custom[:8, 1] == df["calls"])
+    assert np.all(custom[:8, 1] == calls)
 
     # Discrete color
     fig = px.sunburst(df, path=path, color="vendors")
@@ -244,14 +263,24 @@ def test_sunburst_treemap_with_path_color():
     assert np.all(np.in1d(fig.data[0].marker.colors, list(cmap.values())))
 
     # Numerical column in path
-    df["regions"] = df["regions"].map({"North": 1, "South": 2})
+    df = (
+        nw.from_native(df)
+        .with_columns(
+            regions=nw.when(nw.col("region") == "North")
+            .then(1)
+            .otherwise(2)
+            .cast(nw.Int64())
+        )
+        .to_native()
+    )
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
     assert np.all(np.array(colors[:8]) == np.array(calls))
 
 
-def test_sunburst_treemap_column_parent():
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_treemap_column_parent(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -265,7 +294,7 @@ def test_sunburst_treemap_column_parent():
     ]
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
-    df = pd.DataFrame(
+    df = constructor(
         dict(
             id=vendors,
             sectors=sectors,
@@ -278,7 +307,9 @@ def test_sunburst_treemap_column_parent():
     px.sunburst(df, path=path, values="values")
 
 
-def test_sunburst_treemap_with_path_non_rectangular():
+@pytest.mark.parametrize("constructor", constructors)
+def test_sunburst_treemap_with_path_non_rectangular(constructor):
+    print(str(constructor))
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
     sectors = [
         "Tech",
@@ -306,7 +337,7 @@ def test_sunburst_treemap_with_path_non_rectangular():
     ]
     values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
     total = ["total"] * 10
-    df = pd.DataFrame(
+    df = constructor(
         dict(
             vendors=vendors,
             sectors=sectors,
@@ -319,7 +350,18 @@ def test_sunburst_treemap_with_path_non_rectangular():
     msg = "Non-leaves rows are not permitted in the dataframe"
     with pytest.raises(ValueError, match=msg):
         fig = px.sunburst(df, path=path, values="values")
-    df.loc[df["vendors"].isnull(), "sectors"] = "Other"
+
+    df = (
+        nw.from_native(df)
+        .with_columns(
+            sectors=(
+                nw.when(~nw.col("vendors").is_null())
+                .then(nw.col("sectors"))
+                .otherwise(nw.lit("Other"))
+            )
+        )
+        .to_native()
+    )
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].values[-1] == np.sum(values)
 
@@ -358,8 +400,10 @@ def test_funnel():
     assert len(fig.data) == 2
 
 
-def test_parcats_dimensions_max():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_parcats_dimensions_max(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
 
     # default behaviour
     fig = px.parallel_categories(df)
@@ -391,13 +435,15 @@ def test_parcats_dimensions_max():
     assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("histfunc,y", [(None, None), ("count", "tip")])
-def test_histfunc_hoverlabels_univariate(histfunc, y):
+def test_histfunc_hoverlabels_univariate(constructor, histfunc, y):
     def check_label(label, fig):
         assert fig.layout.yaxis.title.text == label
         assert label + "=" in fig.data[0].hovertemplate
 
-    df = px.data.tips()
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
 
     # base case, just "count" (note count(tip) is same as count())
     fig = px.histogram(df, x="total_bill", y=y, histfunc=histfunc)
@@ -423,12 +469,14 @@ def test_histfunc_hoverlabels_univariate(histfunc, y):
             check_label("%s (normalized as %s)" % (histnorm, barnorm), fig)
 
 
-def test_histfunc_hoverlabels_bivariate():
+@pytest.mark.parametrize("constructor", constructors)
+def test_histfunc_hoverlabels_bivariate(constructor):
     def check_label(label, fig):
         assert fig.layout.yaxis.title.text == label
         assert label + "=" in fig.data[0].hovertemplate
 
-    df = px.data.tips()
+    data = px.data.tips().to_dict(orient="list")
+    df = constructor(data)
 
     # with y, should be same as forcing histfunc to sum
     fig = px.histogram(df, x="total_bill", y="tip")
@@ -483,13 +531,14 @@ def test_histfunc_hoverlabels_bivariate():
     check_label("density of max of tip", fig)
 
 
-def test_timeline():
-    df = pd.DataFrame(
-        [
-            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28"),
-            dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15"),
-            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30"),
-        ]
+@pytest.mark.parametrize("constructor", constructors)
+def test_timeline(constructor):
+    df = constructor(
+        {
+            "Task": ["Job A", "Job B", "Job C"],
+            "Start": ["2009-01-01", "2009-03-05", "2009-02-20"],
+            "Finish": ["2009-02-28", "2009-04-15", "2009-05-30"],
+        }
     )
     fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Task")
     assert len(fig.data) == 3
