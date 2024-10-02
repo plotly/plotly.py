@@ -348,7 +348,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if (
                     args["x"]
                     and args["y"]
-                    and len(  # TODO: Handle case arg["y"] is a list?
+                    and len(
                         trace_data.select(nw.col(args["x"], args["y"])).drop_nulls()
                     )
                     > 1
@@ -395,8 +395,12 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     # NB this means trendline functions must output one-to-one with the input series
                     # i.e. we can't do resampling, because then the X values might not line up!
                     non_missing = ~(x.is_null() | y.is_null())
-                    trace_patch["x"] = sorted_trace_data.filter(non_missing).get_column(
-                        args["x"]
+                    trace_patch["x"] = (
+                        sorted_trace_data.filter(non_missing)
+                        .get_column(args["x"])
+                        .to_numpy()
+                        # FIXME: Converting to numpy is needed to pass `test_trendline_on_timeseries`
+                        # test, but I wonder if it is the right way to do it in the first place.
                     )
 
                     trendline_function = trendline_functions[attr_value]
@@ -564,11 +568,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     formatter = args["hover_data"][k_args][0]
                     if formatter:
                         if isinstance(formatter, str):
-                            # TODO: Check if is it possible that `v` is a Series
                             mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
                     else:
                         _ = mapping_labels_copy.pop(k)
-        # TODO: Check if is it possible that `v` is a Series
         hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
         trace_patch["hovertemplate"] += "<extra></extra>"
@@ -1731,7 +1733,7 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     cols = df.columns
     df_sorted = df.sort(by=cols)
     null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
-    df_sorted = df_sorted.with_columns(*[nw.col(c).cast(nw.String()) for c in cols])
+    df_sorted = df_sorted.with_columns(nw.col(*cols).cast(nw.String()))
     null_indices = (
         null_mask.select(null_mask=nw.any_horizontal(nw.col(cols)))
         .get_column("null_mask")
@@ -1746,9 +1748,15 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
                 "None entries cannot have not-None children",
                 df_sorted.row(null_row_index),
             )
+    fill_series = nw.new_series(
+        name="fill_value",
+        values=[""] * len(df_sorted),
+        dtype=nw.String(),
+        native_namespace=df_sorted.__native_namespace__(),
+    )
     df_sorted = df_sorted.with_columns(
         **{
-            c: df_sorted.get_column(c).zip_with(null_mask.get_column(c), nw.lit(""))
+            c: df_sorted.get_column(c).zip_with(~null_mask.get_column(c), fill_series)
             for c in cols
         }
     )
@@ -1757,11 +1765,13 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
         [df_sorted.get_column(c).cast(nw.String()) for c in cols],
         "",
     )
-    for i, row in enumerate(row_strings[:-1]):
-        if row_strings[i + 1] in row and (i + 1) in null_indices:
+    for i, (current_row, next_row) in enumerate(
+        zip(row_strings[:-1], row_strings[1:]), start=1
+    ):
+        if next_row in current_row and (i) in null_indices:
             raise ValueError(
                 "Non-leaves rows are not permitted in the dataframe \n",
-                df_sorted.iloc[i + 1],
+                df_sorted.row(i),
                 "is not a leaf.",
             )
 

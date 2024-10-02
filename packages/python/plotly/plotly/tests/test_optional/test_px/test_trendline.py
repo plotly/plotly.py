@@ -196,8 +196,8 @@ def test_trendline_on_timeseries(mode, options):
     fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
-    assert type(fig.data[0].x[0]) == datetime
-    assert type(fig.data[1].x[0]) == datetime
+    assert isinstance(fig.data[0].x[0], datetime)
+    assert isinstance(fig.data[1].x[0], datetime)
     assert np.all(fig.data[0].x == fig.data[1].x)
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
