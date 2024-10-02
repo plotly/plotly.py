@@ -169,6 +169,7 @@ def test_sunburst_treemap_with_path(constructor):
             native_namespace=native_namespace,
         )
     )
+    # TODO: Different exception is raise, but it is raised!
     msg = "Column `values` of `df` could not be converted to a numerical data type."
     with pytest.raises(ValueError, match=msg):
         fig = px.sunburst(df.to_native(), path=path, values="values")
@@ -320,6 +321,7 @@ def test_sunburst_treemap_column_parent(constructor):
     px.sunburst(df, path=path, values="values")
 
 
+# FIXME: They are not raising
 @pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_non_rectangular(constructor):
     print(str(constructor))

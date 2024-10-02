@@ -87,30 +87,46 @@ def test_series(constructor):
 
 @pytest.mark.parametrize("constructor", constructors)
 def test_several_dataframes(constructor):
-    df = constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
-    df2 = constructor(dict(time=[23, 26], money=[100, 200]))
-    fig = px.scatter(df, x="z", y=df2["money"], size="x")
+    df = nw.from_native(constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8])))
+    df2 = nw.from_native(constructor(dict(time=[23, 26], money=[100, 200])))
+    fig = px.scatter(
+        df.to_native(), x="z", y=df2.get_column("money").to_native(), size="x"
+    )
     assert (
         fig.data[0].hovertemplate
         == "z=%{x}<br>y=%{y}<br>x=%{marker.size}<extra></extra>"
     )
-    fig = px.scatter(df2, x=df["z"], y=df2["money"], size=df.z)
+    fig = px.scatter(
+        df2.to_native(),
+        x=df.get_column("z").to_native(),
+        y=df2.get_column("money").to_native(),
+        size=df.get_column("z").to_native(),
+    )
     assert (
         fig.data[0].hovertemplate
         == "x=%{x}<br>money=%{y}<br>size=%{marker.size}<extra></extra>"
     )
     # Name conflict
     with pytest.raises(NameError) as err_msg:
-        fig = px.scatter(df, x="z", y=df2["money"], size="y")
+        fig = px.scatter(
+            df.to_native(), x="z", y=df2.get_column("money").to_native(), size="y"
+        )
     assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
     with pytest.raises(NameError) as err_msg:
-        fig = px.scatter(df, x="z", y=df2["money"], size=df.y)
+        fig = px.scatter(
+            df.to_native(),
+            x="z",
+            y=df2.get_column("money").to_native(),
+            size=df.get_column("y").to_native(),
+        )
     assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
 
     # No conflict when the dataframe is not given, fields are used
-    df = constructor(dict(x=[0, 1], y=[3, 4]))
-    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
-    fig = px.scatter(x=df["y"], y=df2["y"])
+    df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4])))
+    df2 = nw.from_native(constructor(dict(x=[3, 5], y=[23, 24])))
+    fig = px.scatter(
+        x=df.get_column("y").to_native(), y=df2.get_column("y").to_native()
+    )
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<extra></extra>"
@@ -140,8 +156,13 @@ def test_several_dataframes(constructor):
 
 @pytest.mark.parametrize("constructor", constructors)
 def test_name_heuristics(constructor):
-    df = constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
-    fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
+    df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2])))
+    fig = px.scatter(
+        df.to_native(),
+        x=df.get_column("y").to_native(),
+        y=df.get_column("x").to_native(),
+        size=df.get_column("y").to_native(),
+    )
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([0, 1]))
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
@@ -241,12 +262,11 @@ def test_multiindex_raise_error():
     assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_build_df_from_lists(constructor):
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
     output = {key: key for key in args}
-    df = constructor(args)
+    df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
     df_out = out.pop("data_frame").to_native()
@@ -398,9 +418,10 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
 
 @pytest.mark.parametrize("constructor", constructors)
 def test_timezones(constructor):
-    df = constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
-    df["date"] = pd.to_datetime(df["date"])
-    args = dict(data_frame=df, x="date", y="value")
+    df = nw.from_native(
+        constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
+    ).with_columns(nw.col("date").cast(nw.Datetime(time_zone="Europe/London")))
+    args = dict(data_frame=df.to_native(), x="date", y="value")
     out = build_dataframe(args, go.Scatter)
 
     assert str(out["data_frame"].item(row=0, column="date")) == str(

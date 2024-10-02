@@ -122,11 +122,7 @@ def test_trendline_nan_values(constructor, mode, options):
     data = px.data.gapminder().query("continent == 'Oceania'").to_dict(orient="list")
     df = nw.from_native(constructor(data))
     start_date = 1970
-    df = df.with_columns(
-        pop=nw.when(nw.col("year") >= start_date)
-        .then(nw.col("pop"))
-        .otherwise(nw.lit(None))
-    )
+    df = df.with_columns(pop=nw.when(nw.col("year") >= start_date).then(nw.col("pop")))
 
     fig = px.scatter(
         df.to_native(),
@@ -213,6 +209,7 @@ def test_trendline_on_timeseries(constructor, mode, options):
         err_msg.value
     )
 
+    # TODO: This conversion requires to be fixed in narwhals
     df = df.with_columns(date=nw.col("date").cast(nw.Datetime(time_zone="CET")))
     fig = px.scatter(
         df.to_native(), x="date", y="GOOG", trendline=mode, trendline_options=options
