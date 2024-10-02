@@ -22,7 +22,6 @@ from narwhals.dtypes import UInt8
 from narwhals.dtypes import UInt16
 from narwhals.dtypes import UInt32
 from narwhals.dtypes import UInt64
-import numpy as np
 
 from plotly._subplots import (
     make_subplots,
@@ -366,8 +365,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             .select(
                                 **{
                                     args["x"]: nw.when(~x.is_null())
-                                    .then(x.cast(nw.Int64))
-                                    .otherwise(nw.lit(None, nw.Int64))
+                                    .then(x.cast(Int64()))
+                                    .otherwise(nw.lit(None, Int64()))
                                 }
                             )
                             .get_column(args["x"])
@@ -385,7 +384,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
 
                     if y.dtype not in NW_NUMERIC_DTYPES:
                         try:
-                            y = y.cast(Float64()).to_numpy()
+                            y = y.cast(Float64())
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'y' into a numeric type."
@@ -1233,11 +1232,12 @@ def process_args_into_dataframe(
                 continue
             col_name = None
             # Case of multiindex
+            native_namespace
             if is_pd_like and isinstance(argument, native_namespace.MultiIndex):
                 raise TypeError(
-                    "Argument '%s' is a MultiIndex. "
-                    " MultiIndex is not supported by plotly express "
-                    "at the moment." % field
+                    f"Argument '{field}' is a {native_namespace.__name__} MultiIndex. "
+                    f"{native_namespace.__name__} MultiIndex is not supported by plotly "
+                    "express at the moment."
                 )
             # ----------------- argument is a special value ----------------------
             if isinstance(argument, (Constant, Range)):
@@ -1316,7 +1316,7 @@ def process_args_into_dataframe(
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
-                    if is_pd_like and (argument == nw.maybe_get_index(df_input)).all():
+                    if is_pd_like and argument is nw.maybe_get_index(df_input):
                         if argument.name is None or argument.name in df_input.columns:
                             col_name = "index"
                         else:
@@ -1535,9 +1535,9 @@ def build_dataframe(args, constructor):
             wide_mode = True
             if is_pd_like and isinstance(columns, native_namespace.MultiIndex):
                 raise TypeError(
-                    "Data frame columns is a MultiIndex. "
-                    "MultiIndex is not supported by plotly express "
-                    "at the moment."
+                    f"Data frame columns is a {native_namespace.__name__} MultiIndex. "
+                    f"{native_namespace.__name__} MultiIndex is not supported by plotly "
+                    "express at the moment."
                 )
             args["wide_variable"] = list(columns)
             if is_pd_like and isinstance(columns, native_namespace.Index):
@@ -1596,9 +1596,9 @@ def build_dataframe(args, constructor):
             if df_provided and is_pd_like and index is not None:
                 if isinstance(index, native_namespace.MultiIndex):
                     raise TypeError(
-                        "Data frame index is a pandas MultiIndex. "
-                        "pandas MultiIndex is not supported by plotly express "
-                        "at the moment."
+                        f"Data frame index is a {native_namespace.__name__} MultiIndex. "
+                        f"{native_namespace.__name__} MultiIndex is not supported by "
+                        "plotly express at the moment."
                     )
                 args["wide_cross"] = index
             else:
@@ -1660,7 +1660,7 @@ def build_dataframe(args, constructor):
         dtype = None
         for v in wide_value_vars:
             v_dtype = df_output.get_column(v).dtype
-            v_dtype = "number" if v_dtype in NW_NUMERIC_DTYPES else v_dtype
+            v_dtype = "number" if v_dtype in NW_NUMERIC_DTYPES else str(v_dtype)
             if dtype is None:
                 dtype = v_dtype
             elif dtype != v_dtype:
@@ -1731,17 +1731,17 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     cols = df.columns
     df_sorted = df.sort(by=cols)
     null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
-    df_sorted = df_sorted.with_columns(*[nw.col(c).cast(nw.String) for c in cols])
+    df_sorted = df_sorted.with_columns(*[nw.col(c).cast(nw.String()) for c in cols])
     null_indices = (
         null_mask.select(null_mask=nw.any_horizontal(nw.col(cols)))
         .get_column("null_mask")
         .arg_true()
     )
     for null_row_index in null_indices:
-        row = np.array(null_mask.row(null_row_index))
-        i = np.nonzero(row)[0][0]
+        row = null_mask.row(null_row_index)
+        i = row.index(True)
 
-        if not row[i:].all():
+        if not all(row[i:]):
             raise ValueError(
                 "None entries cannot have not-None children",
                 df_sorted.row(null_row_index),
@@ -2610,6 +2610,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             msg = "Trendlines require pandas to be installed"
             raise NotImplementedError(msg)
         fig._px_trendlines = pd.DataFrame(trendline_rows)
+    else:
+        fig._px_trendlines = []
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
