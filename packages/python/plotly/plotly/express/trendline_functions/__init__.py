@@ -9,7 +9,6 @@ exposed as part of the public API for documentation purposes.
 """
 
 import narwhals.stable.v1 as nw
-import numpy as np
 
 __all__ = ["ols", "lowess", "rolling", "ewm", "expanding"]
 
@@ -32,6 +31,8 @@ def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     respect to the base 10 logarithm of the input. Note that this means no zeros can
     be present in the input.
     """
+    import numpy as np
+
     valid_options = ["add_constant", "log_x", "log_y"]
     for k in trendline_options.keys():
         if k not in valid_options:
