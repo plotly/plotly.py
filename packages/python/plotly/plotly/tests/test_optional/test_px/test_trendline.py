@@ -1,10 +1,17 @@
 import plotly.express as px
+import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
+import polars as pl
+import pyarrow as pa
 import pytest
 from datetime import datetime
 
 
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+
+
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -16,10 +23,11 @@ from datetime import datetime
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_results_passthrough(mode, options):
-    df = px.data.gapminder().query("continent == 'Oceania'")
+def test_trendline_results_passthrough(constructor, mode, options):
+    data = px.data.gapminder().query("continent == 'Oceania'").to_dict(orient="list")
+    df = nw.from_native(constructor(data))
     fig = px.scatter(
-        df,
+        df.to_native(),
         x="year",
         y="pop",
         color="country",
@@ -97,6 +105,7 @@ def test_trendline_enough_values(mode, options):
     assert len(fig.data[1].x) == 2
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -109,12 +118,18 @@ def test_trendline_enough_values(mode, options):
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_nan_values(mode, options):
-    df = px.data.gapminder().query("continent == 'Oceania'")
+def test_trendline_nan_values(constructor, mode, options):
+    data = px.data.gapminder().query("continent == 'Oceania'").to_dict(orient="list")
+    df = nw.from_native(constructor(data))
     start_date = 1970
-    df["pop"][df["year"] < start_date] = np.nan
+    df = df.with_columns(
+        pop=nw.when(nw.col("year") >= start_date)
+        .then(nw.col("pop"))
+        .otherwise(nw.lit(None))
+    )
+
     fig = px.scatter(
-        df,
+        df.to_native(),
         x="year",
         y="pop",
         color="country",
@@ -170,6 +185,7 @@ def test_ols_trendline_slopes():
     assert "y = 0 * x + 1.5<br>" in fig.data[1].hovertemplate
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -182,18 +198,25 @@ def test_ols_trendline_slopes():
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_on_timeseries(mode, options):
-    df = px.data.stocks()
+def test_trendline_on_timeseries(constructor, mode, options):
+    df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
 
     with pytest.raises(ValueError) as err_msg:
-        px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
+        px.scatter(
+            df.to_native(),
+            x="date",
+            y="GOOG",
+            trendline=mode,
+            trendline_options=options,
+        )
     assert "Could not convert value of 'x' ('date') into a numeric type." in str(
         err_msg.value
     )
 
-    df["date"] = pd.to_datetime(df["date"])
-    df["date"] = df["date"].dt.tz_localize("CET")  # force a timezone
-    fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
+    df = df.with_columns(date=nw.col("date").cast(nw.Datetime(time_zone="CET")))
+    fig = px.scatter(
+        df.to_native(), x="date", y="GOOG", trendline=mode, trendline_options=options
+    )
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
     assert isinstance(fig.data[0].x[0], datetime)
@@ -202,16 +225,17 @@ def test_trendline_on_timeseries(mode, options):
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
 
-def test_overall_trendline():
-    df = px.data.tips()
-    fig1 = px.scatter(df, x="total_bill", y="tip", trendline="ols")
+@pytest.mark.parametrize("constructor", constructors)
+def test_overall_trendline(constructor):
+    df = nw.from_native(constructor(px.data.tips().to_dict(orient="list")))
+    fig1 = px.scatter(df.to_native(), x="total_bill", y="tip", trendline="ols")
     assert len(fig1.data) == 2
     assert "trendline" in fig1.data[1].hovertemplate
     results1 = px.get_trendline_results(fig1)
     params1 = results1["px_fit_results"].iloc[0].params
 
     fig2 = px.scatter(
-        df,
+        df.to_native(),
         x="total_bill",
         y="tip",
         color="sex",
@@ -226,7 +250,7 @@ def test_overall_trendline():
     assert np.all(np.array_equal(params1, params2))
 
     fig3 = px.scatter(
-        df,
+        df.to_native(),
         x="total_bill",
         y="tip",
         facet_row="sex",

@@ -1,17 +1,24 @@
 import plotly.express as px
 import plotly.graph_objects as go
-import pandas as pd
+import narwhals.stable.v1 as nw
 import numpy as np
+import pandas as pd
+import polars as pl
+import pyarrow as pa
 from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
 import warnings
 
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
-def test_is_col_list():
-    df_input = pd.DataFrame(dict(a=[1, 2], b=[1, 2]))
-    is_pd_like = True
-    native_namespace = pd
+
+@pytest.mark.parametrize("constructor", constructors)
+def test_is_col_list(constructor):
+    df_input = constructor(dict(a=[1, 2], b=[1, 2]))
+    is_pd_like = nw.dependencies.is_pandas_like_dataframe(df_input)
+    native_namespace = df_input.__native_namespace__()
+
     assert _is_col_list(df_input, ["a"], is_pd_like, native_namespace)
     assert _is_col_list(df_input, ["a", "b"], is_pd_like, native_namespace)
     assert _is_col_list(df_input, [[3, 4]], is_pd_like, native_namespace)
@@ -24,6 +31,8 @@ def test_is_col_list():
     assert not _is_col_list(df_input, ["a", "b", "c"], is_pd_like, native_namespace)
     assert not _is_col_list(df_input, [1, 2], is_pd_like, native_namespace)
 
+
+def test_is_col_list_pandas():
     df_input = pd.DataFrame([[1, 2], [1, 2]])
     is_pd_like = True
     native_namespace = pd
@@ -62,7 +71,7 @@ def test_is_col_list():
 )
 @pytest.mark.parametrize("orientation", [None, "v", "h"])
 @pytest.mark.parametrize("style", ["implicit", "explicit"])
-def test_wide_mode_external(px_fn, orientation, style):
+def test_wide_mode_external(constructor, px_fn, orientation, style):
     # here we test this feature "black box" style by calling actual PX functions and
     # inspecting the figure... this is important but clunky, and is mostly a smoke test
     # allowing us to do more "white box" testing below
@@ -294,7 +303,7 @@ def test_wide_x_or_y(tt, df_in, args_in, x, y, color, df_out_exp, transpose):
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, tt)
     df_out = args_out.pop("data_frame")
-    assert_frame_equal(df_out.to_pandas(), pd.DataFrame(df_out_exp)[df_out.columns])
+    assert_frame_equal(df_out.to_native(), pd.DataFrame(df_out_exp)[df_out.columns])
     if transpose:
         args_exp = dict(x=y, y=x, color=color)
     else:
@@ -314,7 +323,7 @@ def test_wide_mode_internal_bar_exception(orientation):
     args_out = build_dataframe(args_in, go.Bar)
     df_out = args_out.pop("data_frame")
     assert_frame_equal(
-        df_out.to_pandas(),
+        df_out.to_native(),
         pd.DataFrame(
             dict(
                 index=[11, 12, 13, 11, 12, 13],
@@ -837,14 +846,16 @@ def test_mixed_input_error(df):
     )
 
 
-def test_mixed_number_input():
-    df = pd.DataFrame(dict(a=[1, 2], b=[1.1, 2.1]))
+@pytest.mark.parametrize("constructor", constructors)
+def test_mixed_number_input(constructor):
+    df = constructor(dict(a=[1, 2], b=[1.1, 2.1]))
     fig = px.line(df)
     assert len(fig.data) == 2
 
 
-def test_line_group():
-    df = pd.DataFrame(
+@pytest.mark.parametrize("constructor", constructors)
+def test_line_group(constructor):
+    df = constructor(
         data={
             "who": ["a", "a", "b", "b"],
             "x": [0, 1, 0, 1],

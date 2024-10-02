@@ -1,54 +1,72 @@
 import plotly.express as px
 import plotly.io as pio
+import narwhals.stable.v1 as nw
 import numpy as np
+import pandas as pd
+import polars as pl
+import pyarrow as pa
 import pytest
 from itertools import permutations
 
+constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
-def test_scatter():
-    iris = px.data.iris()
-    fig = px.scatter(iris, x="sepal_width", y="sepal_length")
+
+@pytest.mark.parametrize("constructor", constructors)
+def test_scatter(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    iris = nw.from_native(constructor(data))
+    fig = px.scatter(iris.to_native(), x="sepal_width", y="sepal_length")
     assert fig.data[0].type == "scatter"
-    assert np.all(fig.data[0].x == iris.sepal_width)
-    assert np.all(fig.data[0].y == iris.sepal_length)
+    assert np.all(fig.data[0].x == iris.get_column("sepal_width").to_numpy())
+    assert np.all(fig.data[0].y == iris.get_column("sepal_length").to_numpy())
     # test defaults
     assert fig.data[0].mode == "markers"
 
 
-def test_custom_data_scatter():
-    iris = px.data.iris()
+@pytest.mark.parametrize("constructor", constructors)
+def test_custom_data_scatter(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    iris = nw.from_native(constructor(data))
     # No hover, no custom data
-    fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species")
+    fig = px.scatter(
+        iris.to_native(), x="sepal_width", y="sepal_length", color="species"
+    )
     assert fig.data[0].customdata is None
     # Hover, no custom data
     fig = px.scatter(
-        iris,
+        iris.to_native(),
         x="sepal_width",
         y="sepal_length",
         color="species",
         hover_data=["petal_length", "petal_width"],
     )
     for data in fig.data:
-        assert np.all(np.in1d(data.customdata[:, 1], iris.petal_width))
+        assert np.all(
+            np.in1d(data.customdata[:, 1], iris.get_column("petal_width").to_numpy())
+        )
     # Hover and custom data, no repeated arguments
     fig = px.scatter(
-        iris,
+        iris.to_native(),
         x="sepal_width",
         y="sepal_length",
         hover_data=["petal_length", "petal_width"],
         custom_data=["species_id", "species"],
     )
-    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
+    assert np.all(
+        fig.data[0].customdata[:, 0] == iris.get_column("species_id").to_numpy()
+    )
     assert fig.data[0].customdata.shape[1] == 4
     # Hover and custom data, with repeated arguments
     fig = px.scatter(
-        iris,
+        iris.to_native(),
         x="sepal_width",
         y="sepal_length",
         hover_data=["petal_length", "petal_width", "species_id"],
         custom_data=["species_id", "species"],
     )
-    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
+    assert np.all(
+        fig.data[0].customdata[:, 0] == iris.get_column("species_id").to_numpy()
+    )
     assert fig.data[0].customdata.shape[1] == 4
     assert (
         fig.data[0].hovertemplate
@@ -56,10 +74,12 @@ def test_custom_data_scatter():
     )
 
 
-def test_labels():
-    tips = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_labels(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    tips = nw.from_native(constructor(data))
     fig = px.scatter(
-        tips,
+        tips.to_native(),
         x="total_bill",
         y="tip",
         facet_row="time",
@@ -80,6 +100,7 @@ def test_labels():
     assert fig.layout.annotations[4].text.startswith("TIME")
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     ["extra_kwargs", "expected_mode"],
     [
@@ -88,10 +109,12 @@ def test_labels():
         ({"text": "continent"}, "lines+markers+text"),
     ],
 )
-def test_line_mode(extra_kwargs, expected_mode):
-    gapminder = px.data.gapminder()
+def test_line_mode(constructor, extra_kwargs, expected_mode):
+    data = px.data.gapminder().to_dict(orient="list")
+    gapminder = nw.from_native(constructor(data))
+
     fig = px.line(
-        gapminder,
+        gapminder.to_native(),
         x="year",
         y="pop",
         color="country",
@@ -100,11 +123,13 @@ def test_line_mode(extra_kwargs, expected_mode):
     assert fig.data[0].mode == expected_mode
 
 
-def test_px_templates():
+@pytest.mark.parametrize("constructor", constructors)
+def test_px_templates(constructor):
     try:
         import plotly.graph_objects as go
 
-        tips = px.data.tips()
+        data = px.data.tips().to_dict(orient="list")
+        tips = nw.from_native(constructor(data))
 
         # use the normal defaults
         fig = px.scatter()
@@ -131,7 +156,7 @@ def test_px_templates():
 
         # read colorway from the template
         fig = px.scatter(
-            tips,
+            tips.to_native(),
             x="total_bill",
             y="tip",
             color="sex",
@@ -148,14 +173,14 @@ def test_px_templates():
         # pio default template colorway fallback
         pio.templates.default = "seaborn"
         px.defaults.template = None
-        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
+        fig = px.scatter(tips.to_native(), x="total_bill", y="tip", color="sex")
         assert fig.data[0].marker.color == pio.templates["seaborn"].layout.colorway[0]
         assert fig.data[1].marker.color == pio.templates["seaborn"].layout.colorway[1]
 
         # pio default template colorway fallback
         pio.templates.default = "seaborn"
         px.defaults.template = "ggplot2"
-        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
+        fig = px.scatter(tips.to_native(), x="total_bill", y="tip", color="sex")
         assert fig.data[0].marker.color == pio.templates["ggplot2"].layout.colorway[0]
         assert fig.data[1].marker.color == pio.templates["ggplot2"].layout.colorway[1]
 
@@ -173,7 +198,7 @@ def test_px_templates():
         pio.templates.default = "none"
         px.defaults.template = None
         fig = px.scatter(
-            tips,
+            tips.to_native(),
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -185,7 +210,7 @@ def test_px_templates():
         assert fig.layout.yaxis3.showgrid
 
         fig = px.scatter(
-            tips,
+            tips.to_native(),
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -198,7 +223,7 @@ def test_px_templates():
         assert fig.layout.yaxis3.showgrid is None
 
         fig = px.scatter(
-            tips,
+            tips.to_native(),
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -230,11 +255,15 @@ def test_px_defaults():
         pio.templates.default = "plotly"
 
 
-def assert_orderings(days_order, days_check, times_order, times_check):
+def assert_orderings(constructor, days_order, days_check, times_order, times_check):
     symbol_sequence = ["circle", "diamond", "square", "cross", "circle", "diamond"]
     color_sequence = ["red", "blue", "red", "blue", "red", "blue", "red", "blue"]
+
+    data = px.data.tips().to_dict(orient="list")
+    tips = nw.from_native(constructor(data))
+
     fig = px.scatter(
-        px.data.tips(),
+        tips.to_native(),
         x="total_bill",
         y="tip",
         facet_row="time",
@@ -263,16 +292,20 @@ def assert_orderings(days_order, days_check, times_order, times_check):
                 assert trace.marker.color == color_sequence[i]
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "x"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "x"]))
-def test_orthogonal_and_missing_orderings(days, times):
-    assert_orderings(days, list(days) + ["Thur"], times, list(times) + ["Dinner"])
+def test_orthogonal_and_missing_orderings(constructor, days, times):
+    assert_orderings(
+        constructor, days, list(days) + ["Thur"], times, list(times) + ["Dinner"]
+    )
 
 
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "Thur"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "Dinner"]))
-def test_orthogonal_orderings(days, times):
-    assert_orderings(days, days, times, times)
+def test_orthogonal_orderings(constructor, days, times):
+    assert_orderings(constructor, days, days, times, times)
 
 
 def test_permissive_defaults():
@@ -281,10 +314,12 @@ def test_permissive_defaults():
         px.defaults.should_not_work = "test"
 
 
-def test_marginal_ranges():
-    df = px.data.tips()
+@pytest.mark.parametrize("constructor", constructors)
+def test_marginal_ranges(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    df = nw.from_native(constructor(data))
     fig = px.scatter(
-        df,
+        df.to_native(),
         x="total_bill",
         y="tip",
         marginal_x="histogram",
@@ -296,23 +331,34 @@ def test_marginal_ranges():
     assert fig.layout.yaxis3.range is None
 
 
-def test_render_mode():
-    df = px.data.gapminder()
-    df2007 = df.query("year == 2007")
-    fig = px.scatter(df2007, x="gdpPercap", y="lifeExp", trendline="ols")
+@pytest.mark.parametrize("constructor", constructors)
+def test_render_mode(constructor):
+    data = px.data.gapminder().to_dict(orient="list")
+    df = nw.from_native(constructor(data))
+    df2007 = df.filter(nw.col("year") == 2007)
+
+    fig = px.scatter(df2007.to_native(), x="gdpPercap", y="lifeExp", trendline="ols")
     assert fig.data[0].type == "scatter"
     assert fig.data[1].type == "scatter"
     fig = px.scatter(
-        df2007, x="gdpPercap", y="lifeExp", trendline="ols", render_mode="webgl"
+        df2007.to_native(),
+        x="gdpPercap",
+        y="lifeExp",
+        trendline="ols",
+        render_mode="webgl",
     )
     assert fig.data[0].type == "scattergl"
     assert fig.data[1].type == "scattergl"
-    fig = px.scatter(df, x="gdpPercap", y="lifeExp", trendline="ols")
+    fig = px.scatter(df.to_native(), x="gdpPercap", y="lifeExp", trendline="ols")
     assert fig.data[0].type == "scattergl"
     assert fig.data[1].type == "scattergl"
-    fig = px.scatter(df, x="gdpPercap", y="lifeExp", trendline="ols", render_mode="svg")
+    fig = px.scatter(
+        df.to_native(), x="gdpPercap", y="lifeExp", trendline="ols", render_mode="svg"
+    )
     assert fig.data[0].type == "scatter"
     assert fig.data[1].type == "scatter"
-    fig = px.density_contour(df, x="gdpPercap", y="lifeExp", trendline="ols")
+    fig = px.density_contour(
+        df.to_native(), x="gdpPercap", y="lifeExp", trendline="ols"
+    )
     assert fig.data[0].type == "histogram2dcontour"
     assert fig.data[1].type == "scatter"

@@ -158,19 +158,32 @@ def test_sunburst_treemap_with_path(constructor):
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
 
-    # TODO: Fix from here
     # Error when values cannot be converted to numerical data type
-    df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
+    df = nw.from_native(df)
+    native_namespace = df.__native_namespace__()
+    df = df.with_columns(
+        values=nw.new_series(
+            "values",
+            ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"],
+            dtype=nw.String(),
+            native_namespace=native_namespace,
+        )
+    )
     msg = "Column `values` of `df` could not be converted to a numerical data type."
     with pytest.raises(ValueError, match=msg):
-        fig = px.sunburst(df, path=path, values="values")
+        fig = px.sunburst(df.to_native(), path=path, values="values")
     #  path is a mixture of column names and array-like
-    path = [df.total, "regions", df.sectors, "vendors"]
-    fig = px.sunburst(df, path=path)
+    path = [
+        df.get_column("total").to_native(),
+        "regions",
+        df.get_column("sectors").to_native(),
+        "vendors",
+    ]
+    fig = px.sunburst(df.to_native(), path=path)
     assert fig.data[0].branchvalues == "total"
     # Continuous colorscale
-    df["values"] = 1
-    fig = px.sunburst(df, path=path, values="values", color="values")
+    df = df.with_columns(values=nw.lit(1))
+    fig = px.sunburst(df.to_native(), path=path, values="values", color="values")
     assert "coloraxis" in fig.data[0].marker
     assert np.all(np.array(fig.data[0].marker.colors) == 1)
     assert fig.data[0].values[-1] == 8
