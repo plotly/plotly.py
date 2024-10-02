@@ -1146,6 +1146,7 @@ def to_unindexed_series(x, name=None, native_namespace=None):
     seems to mangle datetime columns. Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building
     """
+    x = nw.from_native(x, series_only=True, strict=False)
     if isinstance(x, nw.Series):
         return nw.maybe_reset_index(x).rename(name)
     else:
@@ -1234,7 +1235,6 @@ def process_args_into_dataframe(
                 continue
             col_name = None
             # Case of multiindex
-            native_namespace
             if is_pd_like and isinstance(argument, native_namespace.MultiIndex):
                 raise TypeError(
                     f"Argument '{field}' is a {native_namespace.__name__} MultiIndex. "
@@ -1348,8 +1348,11 @@ def process_args_into_dataframe(
                         "length of  previously-processed arguments %s is %d"
                         % (field, len_arg, str(list(df_output.keys())), length)
                     )
+
                 df_output[str(col_name)] = to_unindexed_series(
-                    argument, str(col_name), native_namespace=native_namespace
+                    x=nw.from_native(argument, allow_series=True, strict=False),
+                    name=str(col_name),
+                    native_namespace=native_namespace,
                 )
 
             # Finally, update argument with column name now that column exists
@@ -1500,11 +1503,11 @@ def build_dataframe(args, constructor):
 
     df_input: nw.DataFrame | None = args["data_frame"]
     index = nw.maybe_get_index(df_input) if df_provided else None
-    # Narwhals does not support native namespace for interchange level
+
+    # This is safe since at this point `_compliant_frame` is one of the "full" level
+    # support dataframe(s)
     native_namespace = (
-        getattr(df_input._compliant_frame, "__native_namespace__", lambda: None)()
-        if df_provided
-        else None
+        df_input._compliant_frame.__native_namespace__() if df_provided else None
     )
 
     # now we handle special cases like wide-mode or x-xor-y specification
