@@ -321,13 +321,12 @@ def imshow(
             aspect = "equal"
 
     # --- Set the value of binary_string (forbidden for pandas)
-    # TODO: Should this be generic for all dataframes?
-    if (pd := nw.dependencies.get_pandas()) is not None and isinstance(
-        img, pd.DataFrame
-    ):
+    img = nw.from_native(img, strict=False)
+    if isinstance(img, nw.DataFrame):
         if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
         is_dataframe = True
+        img = img.to_numpy()
     else:
         is_dataframe = False
 

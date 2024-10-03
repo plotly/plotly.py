@@ -42,7 +42,7 @@ def test_trendline_results_passthrough(constructor, mode, options):
         if mode == "ols":
             assert "R<sup>2</sup>" in trendline.hovertemplate
     results = px.get_trendline_results(fig)
-    if mode == "ols":
+    if mode == "ols":  # Somehow this is flaky for polars?
         assert len(results) == 2
         assert results["country"].values[0] == "Australia"
         au_result = results["px_fit_results"].values[0]
@@ -200,7 +200,10 @@ def test_ols_trendline_slopes():
 def test_trendline_on_timeseries(constructor, from_pandas_fn, mode, options):
     df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
 
-    with pytest.raises(ValueError) as err_msg:
+    pd_err_msg = "Could not convert value of 'x' \('date'\) into a numeric type."
+    pl_err_msg = "conversion from `str` to `f64` failed in column 'date'"
+
+    with pytest.raises(Exception, match=rf"({pd_err_msg}|{pl_err_msg})"):
         px.scatter(
             df.to_native(),
             x="date",
@@ -208,20 +211,20 @@ def test_trendline_on_timeseries(constructor, from_pandas_fn, mode, options):
             trendline=mode,
             trendline_options=options,
         )
-    assert "Could not convert value of 'x' ('date') into a numeric type." in str(
-        err_msg.value
-    )
 
     # TODO: This conversion requires new functionalities in narwhals
+    # for now here is a workaround
     df = df.to_pandas()
     df["date"] = pd.to_datetime(df["date"])
     df["date"] = df["date"].dt.tz_localize("CET")  # force a timezone
     df = from_pandas_fn(df)
+
     fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
+
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
-    assert isinstance(fig.data[0].x[0], datetime)
-    assert isinstance(fig.data[1].x[0], datetime)
+    assert isinstance(fig.data[0].x[0], (datetime, np.datetime64))
+    assert isinstance(fig.data[1].x[0], (datetime, np.datetime64))
     assert np.all(fig.data[0].x == fig.data[1].x)
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
