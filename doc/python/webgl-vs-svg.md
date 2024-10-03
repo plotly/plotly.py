@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.11.10
   plotly:
-    description: Using WebGL and NumPy and Pandas for increased speed, improved interactivity,
+    description: Recommendations for increased speed, improved interactivity,
       and the ability to plot even more data!
     display_as: basic
     language: python
