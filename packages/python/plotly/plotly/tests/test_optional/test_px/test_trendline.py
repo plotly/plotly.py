@@ -181,7 +181,10 @@ def test_ols_trendline_slopes():
     assert "y = 0 * x + 1.5<br>" in fig.data[1].hovertemplate
 
 
-@pytest.mark.parametrize("constructor", constructors)
+@pytest.mark.parametrize(
+    ("constructor", "from_pandas_fn"),
+    zip(constructors, (lambda x: x, pl.from_pandas, pa.Table.from_pandas)),
+)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -194,7 +197,7 @@ def test_ols_trendline_slopes():
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_on_timeseries(constructor, mode, options):
+def test_trendline_on_timeseries(constructor, from_pandas_fn, mode, options):
     df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
 
     with pytest.raises(ValueError) as err_msg:
@@ -209,11 +212,12 @@ def test_trendline_on_timeseries(constructor, mode, options):
         err_msg.value
     )
 
-    # TODO: This conversion requires to be fixed in narwhals
-    df = df.with_columns(date=nw.col("date").cast(nw.Datetime(time_zone="CET")))
-    fig = px.scatter(
-        df.to_native(), x="date", y="GOOG", trendline=mode, trendline_options=options
-    )
+    # TODO: This conversion requires new functionalities in narwhals
+    df = df.to_pandas()
+    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = df["date"].dt.tz_localize("CET")  # force a timezone
+    df = from_pandas_fn(df)
+    fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
     assert isinstance(fig.data[0].x[0], datetime)

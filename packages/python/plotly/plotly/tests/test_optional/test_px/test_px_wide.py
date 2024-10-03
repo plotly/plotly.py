@@ -15,9 +15,11 @@ constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 
 @pytest.mark.parametrize("constructor", constructors)
 def test_is_col_list(constructor):
-    df_input = constructor(dict(a=[1, 2], b=[1, 2]))
-    is_pd_like = nw.dependencies.is_pandas_like_dataframe(df_input)
+    df_input = nw.from_native(constructor(dict(a=[1, 2], b=[1, 2])))
     native_namespace = df_input.__native_namespace__()
+
+    df_input = df_input.to_native()
+    is_pd_like = nw.dependencies.is_pandas_like_dataframe(df_input)
 
     assert _is_col_list(df_input, ["a"], is_pd_like, native_namespace)
     assert _is_col_list(df_input, ["a", "b"], is_pd_like, native_namespace)

@@ -166,7 +166,9 @@ def test_px_templates(constructor):
         assert fig.data[1].marker.color == "blue"
 
         # default colorway fallback
-        fig = px.scatter(tips, x="total_bill", y="tip", color="sex", template=dict())
+        fig = px.scatter(
+            tips.to_native(), x="total_bill", y="tip", color="sex", template=dict()
+        )
         assert fig.data[0].marker.color == px.colors.qualitative.D3[0]
         assert fig.data[1].marker.color == px.colors.qualitative.D3[1]
 
