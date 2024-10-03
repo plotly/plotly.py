@@ -316,7 +316,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 and (
                     trace_spec.constructor != go.Parcats
                     or (attr_value is not None and name in attr_value)
-                    or df.get_column(name).n_unique()
+                    or to_py_scalar(df.get_column(name).n_unique())
                     <= args["dimensions_max_cardinality"]
                 )
             ]
@@ -2033,7 +2033,9 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     # Compute sizeref
     sizeref = 0
     if "size" in args and args["size"]:
-        sizeref = df.get_column(args["size"]).max() / args["size_max"] ** 2
+        sizeref = (
+            to_py_scalar(df.get_column(args["size"]).max()) / args["size_max"] ** 2
+        )
 
     # Compute color attributes and grouping attributes
     if "color" in args:
@@ -2270,6 +2272,7 @@ def get_groups_and_orders(args, grouper):
     # figure out orders and what the single group name would be if there were one
     single_group_name = []
     unique_cache = dict()
+
     for col in grouper:
         if col == one_group:
             single_group_name.append("")
@@ -2289,6 +2292,7 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [g for g in grouper if g != one_group]
+        # required_grouper = list(set(g for g in grouper if g != one_group))
         grouped = dict(df.group_by(required_grouper).__iter__())
         sorted_group_names = list(grouped.keys())
 
@@ -2741,3 +2745,13 @@ def is_into_series(df) -> bool:
         or nw.dependencies.is_pyarrow_chunked_array(df)
         or nw.dependencies.is_pandas_like_series(df)
     )
+
+
+def to_py_scalar(scalar_like):
+    """If scalar is not python native, tries to convert it to python native."""
+    if hasattr(scalar_like, "as_py"):
+        return scalar_like.as_py()
+    elif hasattr(scalar_like, "item"):
+        return scalar_like.item()
+    else:
+        return scalar_like
