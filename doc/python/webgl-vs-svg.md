@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.3
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,9 +20,9 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.0
+    version: 3.11.10
   plotly:
-    description: Using WebGL and NumPy arrays for increased speed, improved interactivity,
+    description: Using WebGL and NumPy and Pandas for increased speed, improved interactivity,
       and the ability to plot even more data!
     display_as: basic
     language: python
@@ -34,19 +34,15 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-In some examples in the documentation, you'll see figures created using data structures that are native to Python, such as lists and tuples, and which use trace types that render as SVGs. 
-
-This will work fine for many use cases, but may not provide optimal performance with larger datasets. 
-
-For improved performance, consider using WebGL-based traces and NumPy arrays.
+For improved performance, consider using WebGL-based traces and Pandas or NumPy objects.
 
 <!-- #region -->
 ## WebGL
 
-`plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: 
+`plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics:
 
-- The SVG API, which supports vector rendering 
-- The Canvas API, which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. 
+- The SVG API, which supports vector rendering
+- The Canvas API, which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL.
 
 
 Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
@@ -212,7 +208,7 @@ fig.show()
 
 See https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!
 
-## NumPy Arrays
+## Pandas and NumPy for Improved Performance
 
 Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects.
 
@@ -220,7 +216,7 @@ Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.p
 
 ### Arrays and Data Types Supported
 
-The following types of array objects in Python are supported:
+The following types of objects in Python are supported for improved performance:
 
 - Numpy `numpy.ndarray` objects.
 - Pandas Index, `pandas.Index`, or Series, `pandas.Series`, objects.
