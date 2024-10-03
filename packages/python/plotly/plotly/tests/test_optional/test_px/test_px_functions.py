@@ -169,7 +169,6 @@ def test_sunburst_treemap_with_path(constructor):
             native_namespace=native_namespace,
         )
     )
-    # TODO: Different exception is raise, but it is raised!
     msg = "Column `values` of `df` could not be converted to a numerical data type."
     with pytest.raises(ValueError, match=msg):
         fig = px.sunburst(df.to_native(), path=path, values="values")
@@ -250,37 +249,48 @@ def test_sunburst_treemap_with_path_color(constructor):
         total=total,
         calls=calls,
     )
-    df = constructor(data)
+    df = nw.from_native(constructor(data))
     path = ["total", "regions", "sectors", "vendors"]
-    fig = px.sunburst(df, path=path, values="values", color="calls")
+    fig = px.sunburst(df.to_native(), path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
-    fig = px.sunburst(df, path=path, color="calls")
+    assert np.all(
+        np.array(colors[:8]) == np.array(calls)
+    )  # TODO: Fails because polars has `maintain_order=False` in group by
+    fig = px.sunburst(df.to_native(), path=path, color="calls")
     colors = fig.data[0].marker.colors
     assert np.all(np.array(colors[:8]) == np.array(calls))
 
     # Hover info
-    df = nw.from_native(df).with_columns(hover=hover).to_native()
-    fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
+    df = df.with_columns(
+        hover=nw.new_series(
+            name="hover",
+            values=hover,
+            dtype=nw.String(),
+            native_namespace=df.__native_namespace__(),
+        )
+    )
+    fig = px.sunburst(df.to_native(), path=path, color="calls", hover_data=["hover"])
     custom = fig.data[0].customdata
     assert np.all(custom[:8, 0] == hover)
     assert np.all(custom[8:, 0] == "(?)")
     assert np.all(custom[:8, 1] == calls)
 
     # Discrete color
-    fig = px.sunburst(df, path=path, color="vendors")
+    fig = px.sunburst(df.to_native(), path=path, color="vendors")
     assert len(np.unique(fig.data[0].marker.colors)) == 9
 
     # Discrete color and color_discrete_map
     cmap = {"Tech": "yellow", "Finance": "magenta", "(?)": "black"}
-    fig = px.sunburst(df, path=path, color="sectors", color_discrete_map=cmap)
+    fig = px.sunburst(
+        df.to_native(), path=path, color="sectors", color_discrete_map=cmap
+    )
     assert np.all(np.in1d(fig.data[0].marker.colors, list(cmap.values())))
 
     # Numerical column in path
     df = (
         nw.from_native(df)
         .with_columns(
-            regions=nw.when(nw.col("region") == "North")
+            regions=nw.when(nw.col("regions") == "North")
             .then(1)
             .otherwise(2)
             .cast(nw.Int64())
@@ -321,7 +331,6 @@ def test_sunburst_treemap_column_parent(constructor):
     px.sunburst(df, path=path, values="values")
 
 
-# FIXME: They are not raising
 @pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_non_rectangular(constructor):
     print(str(constructor))

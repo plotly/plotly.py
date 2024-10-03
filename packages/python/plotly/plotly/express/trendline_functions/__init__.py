@@ -123,7 +123,7 @@ def _pandas(mode, trendline_options, x_raw, y, non_missing):
 
     series = pd.Series(y, index=x_raw.to_pandas())
 
-    # TODO: If narwhals were to sopport rolling, ewm and expanding then we could go around these
+    # TODO: If narwhals were to support rolling, ewm and expanding then we could go around these
     agg = getattr(series, mode)  # e.g. series.rolling
     agg_obj = agg(**trendline_options)  # e.g. series.rolling(**opts)
     function = getattr(agg_obj, function_name)  # e.g. series.rolling(**opts).mean

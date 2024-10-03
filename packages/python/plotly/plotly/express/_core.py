@@ -11,17 +11,6 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
-from narwhals.dtypes import Datetime
-from narwhals.dtypes import Float32
-from narwhals.dtypes import Float64
-from narwhals.dtypes import Int8
-from narwhals.dtypes import Int16
-from narwhals.dtypes import Int32
-from narwhals.dtypes import Int64
-from narwhals.dtypes import UInt8
-from narwhals.dtypes import UInt16
-from narwhals.dtypes import UInt32
-from narwhals.dtypes import UInt64
 
 from plotly._subplots import (
     make_subplots,
@@ -31,16 +20,16 @@ from plotly._subplots import (
 
 NO_COLOR = "px_no_color_constant"
 NW_NUMERIC_DTYPES = {
-    Float32,
-    Float64,
-    Int8,
-    Int16,
-    Int32,
-    Int64,
-    UInt8,
-    UInt16,
-    UInt32,
-    UInt64,
+    nw.Float32,
+    nw.Float64,
+    nw.Int8,
+    nw.Int16,
+    nw.Int32,
+    nw.Int64,
+    nw.UInt8,
+    nw.UInt16,
+    nw.UInt32,
+    nw.UInt64,
 }
 
 trendline_functions = dict(
@@ -358,15 +347,16 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     y = sorted_trace_data.get_column(args["y"])
                     x = sorted_trace_data.get_column(args["x"])
 
-                    if isinstance(x.dtype, Datetime):
+                    if x.dtype == nw.Datetime:
                         # convert to unix epoch seconds
                         x = (
                             x.to_frame()
                             .select(
                                 **{
                                     args["x"]: nw.when(~x.is_null())
-                                    .then(x.cast(Int64()))
-                                    .otherwise(nw.lit(None, Int64()))
+                                    .then(x.cast(nw.Int64()))
+                                    .otherwise(nw.lit(None, nw.Int64()))
+                                    # Pyarrow breaks due to https://github.com/narwhals-dev/narwhals/issues/1117
                                 }
                             )
                             .get_column(args["x"])
@@ -374,7 +364,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         )
                     elif x.dtype not in NW_NUMERIC_DTYPES:
                         try:
-                            x = x.cast(Float64())
+                            x = x.cast(nw.Float64())
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'x' ('%s') into a numeric type. "
@@ -384,7 +374,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
 
                     if y.dtype not in NW_NUMERIC_DTYPES:
                         try:
-                            y = y.cast(Float64())
+                            y = y.cast(nw.Float64())
                         except ValueError:
                             raise ValueError(
                                 "Could not convert value of 'y' into a numeric type."
@@ -1732,13 +1722,18 @@ def build_dataframe(args, constructor):
 
 def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     cols = df.columns
-    df_sorted = df.sort(by=cols)
+    # FIXME: Requires (https://github.com/narwhals-dev/narwhals/pull/1124) to be merged and released
+    # df_sorted = df.sort(by=cols, descending=False, nulls_last=True)
+    df_sorted = df.sort(by=cols, descending=False)
     null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
     df_sorted = df_sorted.with_columns(nw.col(*cols).cast(nw.String()))
-    null_indices = null_mask.select(
+    null_indices_mask = null_mask.select(
         null_mask=nw.any_horizontal(nw.col(cols))
     ).get_column("null_mask")
-    for row_idx, row in zip(null_indices, null_mask.filter(null_indices).iter_rows()):
+    null_indices = null_indices_mask.arg_true()
+    for row_idx, row in zip(
+        null_indices_mask, null_mask.filter(null_indices_mask).iter_rows()
+    ):
 
         i = row.index(True)
 
@@ -1768,7 +1763,7 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     for i, (current_row, next_row) in enumerate(
         zip(row_strings[:-1], row_strings[1:]), start=1
     ):
-        if next_row in current_row and (i) in null_indices:
+        if (i in null_indices) and (next_row in current_row):
             raise ValueError(
                 "Non-leaves rows are not permitted in the dataframe \n",
                 df_sorted.row(i),
@@ -1801,14 +1796,14 @@ def process_dataframe_hierarchy(args):
                 args["values"], str
             ):
                 df = df.with_columns(
-                    **{c: nw.col(c).cast(Float64()) for c in args["values"]}
+                    **{c: nw.col(c).cast(nw.Float64()) for c in args["values"]}
                 )
             else:
                 df = df.with_columns(
-                    **{args["values"]: nw.col(args["values"]).cast(Float64())}
+                    **{args["values"]: nw.col(args["values"]).cast(nw.Float64())}
                 )
 
-        except ValueError:
+        except Exception:  # pandas, Polars and pyarrow exception types are different
             raise ValueError(
                 "Column `%s` of `df` could not be converted to a numerical data type."
                 % args["values"]
@@ -1943,7 +1938,9 @@ def process_dataframe_hierarchy(args):
             )
 
         # strip "/" if at the end of the string, equivalent to `.str.rstrip`
-        df_tree = df_tree.with_columns(parent=nw.col("parent").str.replace("/?$", ""))
+        df_tree = df_tree.with_columns(
+            parent=nw.col("parent").str.replace("/?$", "").str.replace("^/?", "")
+        )
 
         all_trees.append(df_tree.select(*["labels", "parent", "id", *cols]))
 
@@ -1987,9 +1984,9 @@ def process_dataframe_timeline(args):
 
     try:
         df: nw.DataFrame = args["data_frame"]
-        x_start = df.get_column(args["x_start"]).cast(Datetime)
-        x_end = df.get_column(args["x_end"]).cast(Datetime)
-    except (ValueError, TypeError):
+        x_start = df.get_column(args["x_start"]).cast(nw.Datetime())
+        x_end = df.get_column(args["x_end"]).cast(nw.Datetime())
+    except Exception:
         raise TypeError(
             "Both x_start and x_end must refer to data convertible to datetimes."
         )

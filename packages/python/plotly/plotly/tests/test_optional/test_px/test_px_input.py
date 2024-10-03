@@ -262,7 +262,7 @@ def test_multiindex_raise_error():
     assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
 
 
-def test_build_df_from_lists(constructor):
+def test_build_df_from_lists():
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
     output = {key: key for key in args}
@@ -277,7 +277,7 @@ def test_build_df_from_lists(constructor):
     # Arrays
     args = dict(x=np.array([1, 2, 3]), y=np.array([2, 3, 4]), color=[1, 3, 9])
     output = {key: key for key in args}
-    df = constructor(args)
+    df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, go.Scatter)
     df_out = out.pop("data_frame").to_native()
