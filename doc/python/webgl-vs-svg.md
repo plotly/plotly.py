@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-For improved performance, consider using WebGL-based traces and Pandas or NumPy objects.
+For improved performance, consider using WebGL-based traces and Pandas or NumPy objects when creating figures in Plotly.
 
 <!-- #region -->
 ## WebGL
