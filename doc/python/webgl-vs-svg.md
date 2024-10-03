@@ -45,7 +45,7 @@ For improved performance, consider using WebGL-based traces and Pandas or NumPy 
 - The Canvas API, which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL.
 
 
-Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
+Each `plotly` trace type is rendered with either SVG or WebGL. The following trace types use WebGL for rendering:
 
 * Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`, `heatmapgl`
 * High-performance multidimensional trace types: `splom`, or `parcoords`
