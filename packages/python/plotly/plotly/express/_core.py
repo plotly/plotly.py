@@ -2267,8 +2267,9 @@ def get_groups_and_orders(args, grouper):
     # figure out orders and what the single group name would be if there were one
     single_group_name = []
     unique_cache = dict()
+    grp_to_idx = dict()
 
-    for col in grouper:
+    for i, col in enumerate(grouper):
         if col == one_group:
             single_group_name.append("")
         else:
@@ -2282,12 +2283,13 @@ def get_groups_and_orders(args, grouper):
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
+    grp_to_idx = {k: i for i, k in enumerate(orders)}
+
     if len(single_group_name) == len(grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        required_grouper = [g for g in grouper if g != one_group]
-        # required_grouper = list(set(g for g in grouper if g != one_group))
+        required_grouper = list(orders.keys())
         grouped = dict(df.group_by(required_grouper).__iter__())
         sorted_group_names = list(grouped.keys())
 
@@ -2298,12 +2300,15 @@ def get_groups_and_orders(args, grouper):
             )
 
         # calculate the full group_names by inserting "" in the tuple index for one_group groups
-        full_sorted_group_names = [list(t) for t in sorted_group_names]
-        for i, col in enumerate(grouper):
-            if col == one_group:
-                for g in full_sorted_group_names:
-                    g.insert(i, "")
-        full_sorted_group_names = [tuple(g) for g in full_sorted_group_names]
+        full_sorted_group_names = [
+            tuple(
+                [
+                    "" if col == one_group else sub_group_names[grp_to_idx[col]]
+                    for col in grouper
+                ]
+            )
+            for sub_group_names in sorted_group_names
+        ]
 
         groups = {
             sf: grouped[s] for sf, s in zip(full_sorted_group_names, sorted_group_names)
