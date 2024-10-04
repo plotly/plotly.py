@@ -343,7 +343,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     > 1
                 ):
                     # sorting is bad but trace_specs with "trendline" have no other attrs
-                    sorted_trace_data = trace_data.sort(by=args["x"])
+                    sorted_trace_data = trace_data.sort(by=args["x"], nulls_last=True)
                     y = sorted_trace_data.get_column(args["y"])
                     x = sorted_trace_data.get_column(args["x"])
 
@@ -1722,9 +1722,7 @@ def build_dataframe(args, constructor):
 
 def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     cols = df.columns
-    # FIXME: Requires (https://github.com/narwhals-dev/narwhals/pull/1124) to be merged and released
-    # df_sorted = df.sort(by=cols, descending=False, nulls_last=True)
-    df_sorted = df.sort(by=cols, descending=False)
+    df_sorted = df.sort(by=cols, descending=False, nulls_last=True)
     null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
     df_sorted = df_sorted.with_columns(nw.col(*cols).cast(nw.String()))
     null_indices_mask = null_mask.select(
@@ -1953,7 +1951,7 @@ def process_dataframe_hierarchy(args):
             sort_col_name += "0"
         df_all_trees = df_all_trees.with_columns(
             **{sort_col_name: df_all_trees.get_column(args["color"]).cast(nw.String())}
-        ).sort(by=sort_col_name)
+        ).sort(by=sort_col_name, nulls_last=True)
 
     # Now modify arguments
     args["data_frame"] = df_all_trees
@@ -2484,13 +2482,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
                 ascending = args.get("ecdfmode", "standard") != "reversed"
-                group = group.sort(by=base, descending=not ascending)
+                group = group.sort(by=base, descending=not ascending, nulls_last=True)
                 group_sum = group.get_column(
                     var
                 ).sum()  # compute here before next line mutates
                 group = group.with_columns(**{var: nw.col(var).cum_sum()})
                 if not ascending:
-                    group = group.sort(by=base, descending=False)
+                    group = group.sort(by=base, descending=False, nulls_last=True)
 
                 if args.get("ecdfmode", "standard") == "complementary":
                     group = group.with_columns(
