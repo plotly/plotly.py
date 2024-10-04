@@ -287,7 +287,7 @@ def _get_embed_url(file_owner_or_url, file_id=None):
             "The 'file_id' argument must be a non-negative number."
         )
 
-    if share_key is "":
+    if share_key == "":
         return "{plotly_rest_url}/~{file_owner}/{file_id}.embed".format(
             plotly_rest_url=plotly_rest_url, file_owner=file_owner, file_id=file_id
         )
