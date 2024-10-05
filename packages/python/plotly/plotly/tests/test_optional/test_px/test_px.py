@@ -8,7 +8,11 @@ import pyarrow as pa
 import pytest
 from itertools import permutations
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)

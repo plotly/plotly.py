@@ -10,7 +10,11 @@ from pandas.testing import assert_frame_equal
 import pytest
 import warnings
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)

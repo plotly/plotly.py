@@ -9,7 +9,11 @@ import pyarrow as pa
 import pytest
 
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 def _compare_figures(go_trace, px_fig):
