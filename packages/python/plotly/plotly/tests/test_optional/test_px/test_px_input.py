@@ -131,10 +131,14 @@ def test_several_dataframes(constructor):
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<extra></extra>"
 
-    df = constructor(dict(x=[0, 1], y=[3, 4]))
-    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
-    df3 = constructor(dict(y=[0.1, 0.2]))
-    fig = px.scatter(x=df.y, y=df2.y, size=df3.y)
+    df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4])))
+    df2 = nw.from_native(constructor(dict(x=[3, 5], y=[23, 24])))
+    df3 = nw.from_native(constructor(dict(y=[0.1, 0.2])))
+    fig = px.scatter(
+        x=df.get_column("y").to_native(),
+        y=df2.get_column("y").to_native(),
+        size=df3.get_column("y").to_native(),
+    )
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert (
@@ -142,10 +146,14 @@ def test_several_dataframes(constructor):
         == "x=%{x}<br>y=%{y}<br>size=%{marker.size}<extra></extra>"
     )
 
-    df = constructor(dict(x=[0, 1], y=[3, 4]))
-    df2 = constructor(dict(x=[3, 5], y=[23, 24]))
-    df3 = constructor(dict(y=[0.1, 0.2]))
-    fig = px.scatter(x=df.y, y=df2.y, hover_data=[df3.y])
+    df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4])))
+    df2 = nw.from_native(constructor(dict(x=[3, 5], y=[23, 24])))
+    df3 = nw.from_native(constructor(dict(y=[0.1, 0.2])))
+    fig = px.scatter(
+        x=df.get_column("y").to_native(),
+        y=df2.get_column("y").to_native(),
+        hover_data=[df3.get_column("y").to_native()],
+    )
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert (
