@@ -17,38 +17,38 @@ constructors = (pd.DataFrame, pl.DataFrame, pa.table)
 def test_is_col_list(constructor):
     df_input = nw.from_native(constructor(dict(a=[1, 2], b=[1, 2])))
     native_namespace = df_input.__native_namespace__()
-
+    columns = df_input.columns
     df_input = df_input.to_native()
     is_pd_like = nw.dependencies.is_pandas_like_dataframe(df_input)
-
-    assert _is_col_list(df_input, ["a"], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, ["a", "b"], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, [[3, 4]], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, [[3, 4], [3, 4]], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, pytest, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, False, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, ["a", 1], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, "a", is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, 1, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, ["a", "b", "c"], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, [1, 2], is_pd_like, native_namespace)
+    assert _is_col_list(columns, ["a"], is_pd_like, native_namespace)
+    assert _is_col_list(columns, ["a", "b"], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4]], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4], [3, 4]], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, pytest, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, False, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", 1], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, "a", is_pd_like, native_namespace)
+    assert not _is_col_list(columns, 1, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", "b", "c"], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, [1, 2], is_pd_like, native_namespace)
 
 
 def test_is_col_list_pandas():
     df_input = pd.DataFrame([[1, 2], [1, 2]])
     is_pd_like = True
     native_namespace = pd
-    assert _is_col_list(df_input, [0], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, [0, 1], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, [[3, 4]], is_pd_like, native_namespace)
-    assert _is_col_list(df_input, [[3, 4], [3, 4]], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, pytest, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, False, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, ["a", 1], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, "a", is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, 1, is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, [0, 1, 2], is_pd_like, native_namespace)
-    assert not _is_col_list(df_input, ["a", "b"], is_pd_like, native_namespace)
+    columns = list(df_input.columns)
+    assert _is_col_list(columns, [0], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [0, 1], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4]], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4], [3, 4]], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, pytest, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, False, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", 1], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, "a", is_pd_like, native_namespace)
+    assert not _is_col_list(columns, 1, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, [0, 1, 2], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", "b"], is_pd_like, native_namespace)
 
     df_input = None
     is_pd_like = False

@@ -11,6 +11,7 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
+from narwhals.utils import generate_unique_token
 
 from plotly._subplots import (
     make_subplots,
@@ -353,10 +354,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             x.to_frame()
                             .select(
                                 **{
-                                    args["x"]: nw.when(~x.is_null())
-                                    .then(x.cast(nw.Int64()))
-                                    .otherwise(nw.lit(None, nw.Int64()))
-                                    # Pyarrow breaks due to https://github.com/narwhals-dev/narwhals/issues/1117
+                                    args["x"]: nw.when(~x.is_null()).then(
+                                        x.cast(nw.Int64())
+                                    )
+                                    # .otherwise(nw.lit(None, nw.Int64()))
                                 }
                             )
                             .get_column(args["x"])
@@ -1753,11 +1754,10 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
             for c in cols
         }
     )
-    row_strings = reduce(
-        lambda x, y: x + y,
-        [df_sorted.get_column(c).cast(nw.String()) for c in cols],
-        "",
-    )
+    row_strings = df_sorted.select(
+        row_strings=nw.concat_str(cols, separator="", ignore_nulls=False)
+    ).get_column("row_strings")
+
     for i, (current_row, next_row) in enumerate(
         zip(row_strings[:-1], row_strings[1:]), start=1
     ):
@@ -1893,7 +1893,7 @@ def process_dataframe_hierarchy(args):
         return dframe.with_columns(
             **{c: nw.col(c) / nw.col(count_colname) for c in continuous_aggs},
             **{
-                c: nw.when(nw.col(f"{c}__n_unique__") == nw.lit(1))
+                c: nw.when(nw.col(f"{c}__n_unique__") == 1)
                 .then(nw.col(c))
                 .otherwise(nw.lit("(?)"))
                 for c in discrete_aggs
@@ -1909,30 +1909,37 @@ def process_dataframe_hierarchy(args):
         )
 
         # Path label massaging
-        df_tree = dfg.clone().with_columns(
+        df_tree = dfg.with_columns(
             *cols,
             labels=nw.col(level).cast(nw.String()),
             parent=nw.lit(""),
             id=nw.col(level).cast(nw.String()),
         )
         if i < len(path) - 1:
-            j = i + 1
-
-            path_j_col = reduce(
-                lambda c1, c2: c1 + "/" + c2,
-                (
-                    dfg.get_column(path[j]).cast(nw.String())
-                    for j in range(len(path) - 1, j, -1)
-                ),
-                "",
-            )
-            parent_col = df_tree.get_column("parent").cast(nw.String())
-            id_col = df_tree.get_column("id").cast(nw.String())
-            df_tree = df_tree.with_columns(
-                **{
-                    "parent": path_j_col + "/" + parent_col,
-                    "id": path_j_col + "/" + id_col,
-                }
+            token = generate_unique_token(n_bytes=8, columns=df_tree.columns)
+            df_tree = (
+                df_tree.with_columns(
+                    **{
+                        token: nw.concat_str(
+                            [
+                                nw.col(path[j]).cast(nw.String())
+                                for j in range(len(path) - 1, i, -1)
+                            ],
+                            separator="/",
+                        )
+                    }
+                )
+                .with_columns(
+                    **{
+                        "parent": nw.concat_str(
+                            [nw.col(token), nw.col("parent")], separator="/"
+                        ),
+                        "id": nw.concat_str(
+                            [nw.col(token), nw.col("id")], separator="/"
+                        ),
+                    }
+                )
+                .drop(token)
             )
 
         # strip "/" if at the end of the string, equivalent to `.str.rstrip`
@@ -1950,7 +1957,7 @@ def process_dataframe_hierarchy(args):
         while sort_col_name in df_all_trees.columns:
             sort_col_name += "0"
         df_all_trees = df_all_trees.with_columns(
-            **{sort_col_name: df_all_trees.get_column(args["color"]).cast(nw.String())}
+            **{sort_col_name: nw.col(args["color"]).cast(nw.String())}
         ).sort(by=sort_col_name, nulls_last=True)
 
     # Now modify arguments
