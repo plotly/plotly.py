@@ -4,7 +4,11 @@ import pyarrow as pa
 import plotly.express as px
 import pytest
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)

@@ -6,7 +6,11 @@ from pytest import approx
 import pytest
 import random
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)

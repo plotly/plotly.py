@@ -8,7 +8,11 @@ import pytest
 from datetime import datetime
 
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)

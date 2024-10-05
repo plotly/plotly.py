@@ -8,7 +8,11 @@ import pytest
 from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 
 @pytest.mark.parametrize("constructor", constructors)
@@ -202,7 +206,7 @@ def test_sunburst_hoverdict_color(constructor):
 @pytest.mark.parametrize("constructor", constructors)
 def test_date_in_hover(constructor):
     df = nw.from_native(
-        constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
-    ).with_columns(date=nw.col("date").cast(nw.Datetime()))
+        constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
+    ).with_columns(date=nw.col("date").cast(nw.Datetime(time_zone="Europe/Berlin")))
     fig = px.scatter(df, x="value", y="value", hover_data=["date"])
     assert str(fig.data[0].customdata[0][0]) == str(df["date"][0])

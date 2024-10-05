@@ -13,7 +13,11 @@ from pandas.testing import assert_frame_equal
 import sys
 import warnings
 
-constructors = (pd.DataFrame, pl.DataFrame, pa.table)
+constructors = (
+    pd.DataFrame,
+    pl.DataFrame,
+    pa.table,
+)
 
 # Fixtures
 # --------

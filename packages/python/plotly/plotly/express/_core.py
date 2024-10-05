@@ -461,7 +461,12 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if len(customdata_cols) > 0:
                         # here we store a data frame in customdata, and it's serialized
                         # as a list of row lists, which is what we want
-                        trace_patch["customdata"] = trace_data[customdata_cols]
+
+                        # dict.fromkeys(customdata_cols) allows to deduplicate column
+                        # names, yet maintaining the original order.
+                        trace_patch["customdata"] = trace_data.select(
+                            [nw.col(c) for c in dict.fromkeys(customdata_cols)]
+                        )
             elif attr_name == "color":
                 if trace_spec.constructor in [
                     go.Choropleth,
@@ -1836,12 +1841,14 @@ def process_dataframe_hierarchy(args):
 
             discrete_aggs.append(args["color"])
             discrete_color = True
-            # Hack: In theory, we should have a way to do nw.col(x).unique() and
-            # successively do:
+            # Hack: In theory, we should have a way to do `.agg(nw.col(x).unique())` and
+            # successively unpack/parse it as:
+            # ```
             # (nw.when(nw.col(x).list.len()==1)
             # .then(nw.col(x).list.first())
             # .otherwise(nw.lit("(?)"))
             # )
+            # ```
             # which replicates:
             # ```
             # def discrete_agg(x):
@@ -1988,9 +1995,15 @@ def process_dataframe_timeline(args):
         raise ValueError("Both x_start and x_end are required")
 
     try:
+        # FIXME: naive cast is most likely not enough in this context
+        # Related issue: https://github.com/narwhals-dev/narwhals/issues/1120
         df: nw.DataFrame = args["data_frame"]
-        x_start = df.get_column(args["x_start"]).cast(nw.Datetime())
-        x_end = df.get_column(args["x_end"]).cast(nw.Datetime())
+        df = df.with_columns(
+            **{
+                args["x_start"]: nw.col(args["x_start"]).cast(nw.Datetime()),
+                args["x_end"]: nw.col(args["x_end"]).cast(nw.Datetime()),
+            }
+        )
     except Exception:
         raise TypeError(
             "Both x_start and x_end must refer to data convertible to datetimes."
@@ -1998,12 +2011,15 @@ def process_dataframe_timeline(args):
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
     args["data_frame"] = df.with_columns(
-        **{args["x_end"]: (x_end - x_start).dt.total_milliseconds()}
+        **{
+            args["x_end"]: (
+                nw.col(args["x_end"]) - nw.col(args["x_start"])
+            ).dt.total_milliseconds()
+        }
     )
     args["x"] = args["x_end"]
-    del args["x_end"]
     args["base"] = args["x_start"]
-    del args["x_start"]
+    del args["x_start"], args["x_end"]
     return args
 
 
