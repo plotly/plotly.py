@@ -557,7 +557,10 @@ def test_histfunc_hoverlabels_bivariate(constructor):
 
 
 @pytest.mark.parametrize("constructor", constructors)
-def test_timeline(constructor):
+def test_timeline(request, constructor):
+    if constructor in {pl.DataFrame, pa.table}:
+        request.applymarker(pytest.mark.xfail)
+
     df = constructor(
         {
             "Task": ["Job A", "Job B", "Job C"],

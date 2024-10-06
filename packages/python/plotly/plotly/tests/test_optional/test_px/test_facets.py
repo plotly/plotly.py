@@ -57,7 +57,6 @@ def test_facets(constructor):
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
-# TODO: Figure out how to deal with multiple occurrences of same column name
 @pytest.mark.parametrize("constructor", constructors)
 def test_facets_with_marginals(constructor):
     data = px.data.tips().to_dict(orient="list")
