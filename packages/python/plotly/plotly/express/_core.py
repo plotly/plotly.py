@@ -2,7 +2,6 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
 from collections.abc import Sequence
-from functools import reduce
 from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
@@ -2270,9 +2269,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args["histnorm"] = args["ecdfnorm"]
 
     # Compute applicable grouping attributes
-    for k in group_attrables:
-        if k in args:
-            grouped_attrs.append(k)
+    grouped_attrs.extend([k for k in group_attrables if k in args])
 
     # Create grouped mappings
     grouped_mappings = [make_mapping(args, a) for a in grouped_attrs]

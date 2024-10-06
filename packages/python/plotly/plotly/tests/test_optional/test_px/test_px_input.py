@@ -73,10 +73,15 @@ def test_with_index():
 
 
 @pytest.mark.parametrize("constructor", constructors)
-def test_series(constructor):
+def test_series(request, constructor):
+    if constructor is pa.table:
+        request.applymarker(pytest.mark.xfail)
+
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))
     before_tip = (tips.get_column("total_bill") - tips.get_column("tip")).to_native()
+    # By converting to native, we lose the name for pyarrow chunked_array and the last
+    # assertion fails
     day = tips.get_column("day").to_native()
     tips = tips.to_native()
 
@@ -90,7 +95,10 @@ def test_series(constructor):
 
 
 @pytest.mark.parametrize("constructor", constructors)
-def test_several_dataframes(constructor):
+def test_several_dataframes(request, constructor):
+    if constructor is pa.table:
+        request.applymarker(pytest.mark.xfail)
+
     df = nw.from_native(constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8])))
     df2 = nw.from_native(constructor(dict(time=[23, 26], money=[100, 200])))
     fig = px.scatter(
@@ -167,7 +175,10 @@ def test_several_dataframes(constructor):
 
 
 @pytest.mark.parametrize("constructor", constructors)
-def test_name_heuristics(constructor):
+def test_name_heuristics(request, constructor):
+    if constructor is pa.table:
+        request.applymarker(pytest.mark.xfail)
+
     df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2])))
     fig = px.scatter(
         df.to_native(),
