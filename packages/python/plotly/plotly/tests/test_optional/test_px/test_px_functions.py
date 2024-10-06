@@ -193,7 +193,6 @@ def test_sunburst_treemap_with_path(constructor):
     assert fig.data[0].values[-1] == 8
 
 
-# TODO: Fix duplicate column, pyarrow cannot sum strings to concatenate them
 @pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_and_hover(constructor):
     data = px.data.tips().to_dict(orient="list")
@@ -257,12 +256,10 @@ def test_sunburst_treemap_with_path_color(constructor):
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df.to_native(), path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(
-        np.array(colors[:8]) == np.array(calls)
-    )  # TODO: Fails because polars has `maintain_order=False` in group by
+    assert np.all(np.array(np.sort(colors[:8])) == np.array(sorted(calls)))
     fig = px.sunburst(df.to_native(), path=path, color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
+    assert np.all(np.sort(colors[:8]) == np.array(sorted(calls)))
 
     # Hover info
     df = df.with_columns(
@@ -275,9 +272,9 @@ def test_sunburst_treemap_with_path_color(constructor):
     )
     fig = px.sunburst(df.to_native(), path=path, color="calls", hover_data=["hover"])
     custom = fig.data[0].customdata
-    assert np.all(custom[:8, 0] == hover)
-    assert np.all(custom[8:, 0] == "(?)")
-    assert np.all(custom[:8, 1] == calls)
+    assert np.all(np.sort(custom[:8, 0]) == sorted(hover))
+    assert np.all(np.sort(custom[8:, 0]) == "(?)")
+    assert np.all(np.sort(custom[:8, 1]) == sorted(calls))
 
     # Discrete color
     fig = px.sunburst(df.to_native(), path=path, color="vendors")
@@ -304,7 +301,7 @@ def test_sunburst_treemap_with_path_color(constructor):
     path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values", color="calls")
     colors = fig.data[0].marker.colors
-    assert np.all(np.array(colors[:8]) == np.array(calls))
+    assert np.all(np.sort(colors[:8]) == sorted(calls))
 
 
 @pytest.mark.parametrize("constructor", constructors)
