@@ -2007,8 +2007,8 @@ def process_dataframe_timeline(args):
         df: nw.DataFrame = args["data_frame"]
         df = df.with_columns(
             **{
-                args["x_start"]: nw.col(args["x_start"]).cast(nw.Datetime()),
-                args["x_end"]: nw.col(args["x_end"]).cast(nw.Datetime()),
+                args["x_start"]: nw.col(args["x_start"]).str.to_datetime(),
+                args["x_end"]: nw.col(args["x_end"]).str.to_datetime(),
             }
         )
     except Exception:

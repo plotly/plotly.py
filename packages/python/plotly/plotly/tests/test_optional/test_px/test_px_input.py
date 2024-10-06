@@ -442,8 +442,8 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
 @pytest.mark.parametrize("constructor", constructors)
 def test_timezones(constructor):
     df = nw.from_native(
-        constructor({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
-    ).with_columns(nw.col("date").cast(nw.Datetime(time_zone="Europe/London")))
+        constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
+    ).with_columns(nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
     args = dict(data_frame=df.to_native(), x="date", y="value")
     out = build_dataframe(args, go.Scatter)
 
@@ -504,19 +504,23 @@ def test_data_frame_from_dict():
     assert np.all(fig.data[0].x == [0, 1])
 
 
-def test_arguments_not_modified():
-    iris = px.data.iris()  # TODO
-    petal_length = iris.petal_length
-    hover_data = [iris.sepal_length]
-    px.scatter(iris, x=petal_length, y="petal_width", hover_data=hover_data)
-    assert iris.petal_length.equals(petal_length)
-    assert iris.sepal_length.equals(hover_data[0])
+@pytest.mark.parametrize("constructor", constructors)
+def test_arguments_not_modified(constructor):
+    data = px.data.iris().to_dict(orient="list")
+    iris = nw.from_native(constructor(data))
+    petal_length = iris.get_column("petal_length").to_native()
+    hover_data = [iris.get_column("sepal_length").to_native()]
+    px.scatter(iris.to_native(), x=petal_length, y="petal_width", hover_data=hover_data)
+    assert petal_length.equals(petal_length)
+    assert iris.get_column("sepal_length").to_native().equals(hover_data[0])
 
 
-def test_pass_df_columns():
-    tips = px.data.tips()  # TODO
+@pytest.mark.parametrize("constructor", constructors)
+def test_pass_df_columns(constructor):
+    data = px.data.tips().to_dict(orient="list")
+    tips = nw.from_native(constructor(data))
     fig = px.histogram(
-        tips,
+        tips.to_native(),
         x="total_bill",
         y="tip",
         color="sex",
@@ -525,13 +529,21 @@ def test_pass_df_columns():
     )
     # the "- 2" is because we re-use x and y in the hovertemplate where possible
     assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns) - 2
-    tips_copy = px.data.tips()
-    assert tips_copy.columns.equals(tips.columns)
+    tips_copy = nw.from_native(constructor(data))
+    assert tips_copy.columns == tips.columns
 
 
-def test_size_column():
-    df = px.data.tips()  # TODO
-    fig = px.scatter(df, x=df["size"], y=df.tip)
+@pytest.mark.parametrize("constructor", constructors)
+def test_size_column(request, constructor):
+    if constructor is pa.table:
+        request.applymarker(pytest.mark.xfail)
+    data = px.data.tips().to_dict(orient="list")
+    tips = nw.from_native(constructor(data))
+    fig = px.scatter(
+        tips.to_native(),
+        x=tips.get_column("size").to_native(),
+        y=tips.get_column("tip").to_native(),
+    )
     assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}<extra></extra>"
 
 

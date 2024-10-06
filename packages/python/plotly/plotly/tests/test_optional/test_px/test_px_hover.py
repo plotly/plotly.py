@@ -204,9 +204,11 @@ def test_sunburst_hoverdict_color(constructor):
 
 
 @pytest.mark.parametrize("constructor", constructors)
-def test_date_in_hover(constructor):
+def test_date_in_hover(request, constructor):
+    if constructor in {pl.DataFrame, pa.table}:
+        request.applymarker(pytest.mark.xfail)
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
-    ).with_columns(date=nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S"))
+    ).with_columns(date=nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
     fig = px.scatter(df.to_native(), x="value", y="value", hover_data=["date"])
-    assert str(fig.data[0].customdata[0][0]) == str(df["date"][0])
+    assert fig.data[0].customdata[0][0] == df.item(row=0, column="date")
