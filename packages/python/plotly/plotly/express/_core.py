@@ -499,6 +499,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         else:
                             mapping = {}
                         for cat in trace_data.get_column(attr_value):
+                            cat = to_py_scalar(cat)
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
@@ -1734,7 +1735,7 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     null_indices_mask = null_mask.select(
         null_mask=nw.any_horizontal(nw.col(cols))
     ).get_column("null_mask")
-    null_indices = null_indices_mask.arg_true()
+
     for row_idx, row in zip(
         null_indices_mask, null_mask.filter(null_indices_mask).iter_rows()
     ):
@@ -1759,10 +1760,17 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
             for c in cols
         }
     )
-    row_strings = df_sorted.select(
-        row_strings=nw.concat_str(cols, separator="", ignore_nulls=False)
-    ).get_column("row_strings")
 
+    # Conversion to list is due to python native vs pyarrow scalars
+    row_strings = (
+        df_sorted.select(
+            row_strings=nw.concat_str(cols, separator="", ignore_nulls=False)
+        )
+        .get_column("row_strings")
+        .to_list()
+    )
+
+    null_indices = null_indices_mask.arg_true().to_list()
     for i, (current_row, next_row) in enumerate(
         zip(row_strings[:-1], row_strings[1:]), start=1
     ):
