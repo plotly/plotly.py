@@ -1,3 +1,4 @@
+from _plotly_utils.basevalidators import is_homogeneous_array, to_typed_array_spec
 import plotly
 import plotly.graph_objs as go
 from plotly.offline import get_plotlyjs_version
@@ -24,6 +25,14 @@ The fig parameter must be a dict or Figure.
                 typ=type(fig), v=fig
             )
         )
+
+    # Add base64 conversion before sending to the front-end
+    for trace in fig_dict["data"]:
+        for key, value in trace.items():
+            if is_homogeneous_array(value):
+                print("to typed array: key:", key, "value:", value)
+                trace[key] = to_typed_array_spec(value)
+
     return fig_dict
 
 
