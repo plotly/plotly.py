@@ -3,6 +3,11 @@ import copy as _copy
 
 
 class Choroplethmapbox(_BaseTraceType):
+    print(
+        "*choroplethmapbox* trace is deprecated!",
+        "Please consider switching to the *choroplethmap* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/javascript/maplibre-migration/",
+    )
 
     # class properties
     # --------------------

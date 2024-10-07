@@ -3,6 +3,11 @@ import copy as _copy
 
 
 class Densitymapbox(_BaseTraceType):
+    print(
+        "*densitymapbox* trace is deprecated!",
+        "Please consider switching to the *densitymap* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/javascript/maplibre-migration/",
+    )
 
     # class properties
     # --------------------
