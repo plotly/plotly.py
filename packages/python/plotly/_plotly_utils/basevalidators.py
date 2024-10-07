@@ -503,7 +503,7 @@ class DataArrayValidator(BaseValidator):
         elif has_skipped_key(self.parent_name):
             v = to_scalar_or_list(v)
         elif is_homogeneous_array(v):
-            v = to_typed_array_spec(v)
+            v = copy_to_readonly_numpy_array(v)
         elif is_simple_array(v):
             v = to_scalar_or_list(v)
         else:
