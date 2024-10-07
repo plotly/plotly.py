@@ -14,6 +14,8 @@ constructors = (
     pd.DataFrame,
     pl.DataFrame,
     pa.table,
+    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
+    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
 )
 
 
@@ -862,7 +864,7 @@ def test_mixed_number_input(constructor):
 @pytest.mark.parametrize("constructor", constructors)
 def test_line_group(constructor):
     df = constructor(
-        data={
+        {
             "who": ["a", "a", "b", "b"],
             "x": [0, 1, 0, 1],
             "score": [1.0, 2, 3, 4],

@@ -17,6 +17,8 @@ constructors = (
     pd.DataFrame,
     pl.DataFrame,
     pa.table,
+    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
+    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
 )
 
 # Fixtures
