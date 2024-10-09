@@ -1769,11 +1769,11 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
         .to_list()
     )
 
-    null_indices = null_indices_mask.arg_true().to_list()
+    null_indices = set(null_indices_mask.arg_true().to_list())
     for i, (current_row, next_row) in enumerate(
         zip(row_strings[:-1], row_strings[1:]), start=1
     ):
-        if (i in null_indices) and (next_row in current_row):
+        if (next_row in current_row) and (i in null_indices):
             raise ValueError(
                 "Non-leaves rows are not permitted in the dataframe \n",
                 df_sorted.row(i),
@@ -2002,8 +2002,8 @@ def process_dataframe_timeline(args):
         raise ValueError("Both x_start and x_end are required")
 
     try:
-        # FIXME: naive cast is most likely not enough in this context
-        # Related issue: https://github.com/narwhals-dev/narwhals/issues/1120
+        # TODO(FBruzzesi): We still cannot infer datetime format for pyarrow
+        # Related issue: https://github.com/narwhals-dev/narwhals/issues/1151
         df: nw.DataFrame = args["data_frame"]
         df = df.with_columns(
             **{
