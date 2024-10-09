@@ -356,7 +356,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                     args["x"]: nw.when(~x.is_null()).then(
                                         x.cast(nw.Int64())
                                     )
-                                    # .otherwise(nw.lit(None, nw.Int64()))
                                 }
                             )
                             .get_column(args["x"])
@@ -1987,8 +1986,6 @@ def process_dataframe_hierarchy(args):
             if not args["hover_data"].get(args["color"]):
                 args["hover_data"][args["color"]] = (True, None)
         else:
-            # FIXME: Hover data can become a list with duplicate values, and then we select that!
-            # In narwhals this raises `ValueError: Expected unique column names, got: Index(['smoker', 'smoker'], dtype='object')`
             args["hover_data"].append(args["color"])
     return args
 
