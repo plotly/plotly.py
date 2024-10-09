@@ -48,7 +48,7 @@ def test_trendline_results_passthrough(constructor, mode, options):
         if mode == "ols":
             assert "R<sup>2</sup>" in trendline.hovertemplate
     results = px.get_trendline_results(fig)
-    if mode == "ols":  # Somehow this is flaky for polars?
+    if mode == "ols":  # This is flaky for polars?
         assert len(results) == 2
         assert results["country"].values[0] == "Australia"
         au_result = results["px_fit_results"].values[0]
@@ -187,10 +187,7 @@ def test_ols_trendline_slopes():
     assert "y = 0 * x + 1.5<br>" in fig.data[1].hovertemplate
 
 
-@pytest.mark.parametrize(
-    ("constructor", "from_pandas_fn"),
-    zip(constructors, (lambda x: x, pl.from_pandas, pa.Table.from_pandas)),
-)
+@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -203,7 +200,7 @@ def test_ols_trendline_slopes():
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_on_timeseries(constructor, from_pandas_fn, mode, options):
+def test_trendline_on_timeseries(constructor, mode, options):
     df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
 
     pd_err_msg = "Could not convert value of 'x' \('date'\) into a numeric type."
@@ -217,15 +214,15 @@ def test_trendline_on_timeseries(constructor, from_pandas_fn, mode, options):
             trendline=mode,
             trendline_options=options,
         )
+    df = df.with_columns(
+        date=nw.col("date")
+        .str.to_datetime(format="%Y-%m-%d")
+        .dt.replace_time_zone("CET")
+    )
 
-    # TODO: This conversion requires new functionalities in narwhals
-    # for now here is a workaround
-    df = df.to_pandas()
-    df["date"] = pd.to_datetime(df["date"])
-    df["date"] = df["date"].dt.tz_localize("CET")  # force a timezone
-    df = from_pandas_fn(df)
-
-    fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
+    fig = px.scatter(
+        df.to_native(), x="date", y="GOOG", trendline=mode, trendline_options=options
+    )
 
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
