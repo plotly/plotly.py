@@ -2,6 +2,15 @@
 `plotly.express` is a terse, consistent, high-level wrapper around `plotly.graph_objects`
 for rapid data exploration and figure generation. Learn more at https://plotly.com/python/plotly-express/
 """
+from plotly import optional_imports
+
+nw = optional_imports.get_module("narwhals")
+if nw is None:
+    raise ImportError(
+        """\
+Plotly express requires narwhals to be installed."""
+    )
+
 from ._imshow import imshow
 from ._chart_types import (  # noqa: F401
     scatter,
