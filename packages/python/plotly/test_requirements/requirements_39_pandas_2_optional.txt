@@ -22,3 +22,5 @@ kaleido
 vaex
 pydantic<=1.10.11 # for vaex, see https://github.com/vaexio/vaex/issues/2384
 polars
+pyarrow
+narwhals>=1.9.2
