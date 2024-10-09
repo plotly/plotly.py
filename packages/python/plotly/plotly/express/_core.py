@@ -2754,15 +2754,6 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
     return fig
 
 
-def is_into_eager_dataframe(df) -> bool:
-    """Check if `df` is a supported narwhals eager dataframe."""
-    return (
-        nw.dependencies.is_polars_dataframe(df)
-        or nw.dependencies.is_pyarrow_table(df)
-        or nw.dependencies.is_pandas_like_dataframe(df)
-    )
-
-
 def is_into_series(df) -> bool:
     """Check if `df` is a supported narwhals eager dataframe."""
     return (
