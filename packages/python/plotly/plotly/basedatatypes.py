@@ -17,7 +17,7 @@ from _plotly_utils.utils import (
     find_closest_string,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
-from packages.python.plotly.plotly.io._utils import convert_to_base64
+from _plotly_utils.utils import convert_to_base64
 from .optional_imports import get_module
 
 from . import shapeannotation
