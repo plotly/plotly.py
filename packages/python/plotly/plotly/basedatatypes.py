@@ -17,6 +17,7 @@ from _plotly_utils.utils import (
     find_closest_string,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
+from packages.python.plotly.plotly.io._utils import convert_to_base64
 from .optional_imports import get_module
 
 from . import shapeannotation
@@ -3309,6 +3310,9 @@ Invalid property path '{key_path_str}' for layout
 
         if frames:
             res["frames"] = frames
+
+        # Add base64 conversion before sending to the front-end
+        convert_to_base64(res)
 
         return res
 
