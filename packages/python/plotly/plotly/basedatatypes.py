@@ -15,9 +15,9 @@ from _plotly_utils.utils import (
     display_string_positions,
     chomp_empty_strings,
     find_closest_string,
+    convert_to_base64,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
-from _plotly_utils.utils import convert_to_base64
 from .optional_imports import get_module
 
 from . import shapeannotation
