@@ -119,29 +119,31 @@ fig.update_layout(
     title="Planets!",
     scene=dict(
         xaxis=dict(
-          title=dict(
-          text="Distance from Sun",
-          font=dict(
-            color="white"
-          )
-        )
+            title=dict(
+                text="Distance from Sun",
+                font=dict(
+                    color="white"
+                )
+            )
         ),
         yaxis=dict(
-          title=dict(
-            text="Density",
-            font=dict(
-              color="white"
+            title=dict(
+                text="Density",
+                font=dict(
+                    color="white"
+                )
             )
         ),
         zaxis=dict(
-          title=dict(
-            text="Gravity",
-            font=dict(
-              color="white"
+            title=dict(
+                text="Gravity",
+                font=dict(
+                    color="white"
+                )
             )
-          ),
-        bgcolor="rgb(20, 24, 54)",
-    ),
+        ),
+        bgcolor="rgb(20, 24, 54)"
+    )
 )
 
 
