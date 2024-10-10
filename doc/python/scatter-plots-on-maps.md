@@ -187,7 +187,9 @@ fig = go.Figure(data=go.Scattergeo(
         opacity = 0.7,
         size = 2,
         colorbar = dict(
-            titleside = "right",
+            title = dict(
+                side="right"
+            ),
             outlinecolor = "rgba(68, 68, 68, 0)",
             ticks = "outside",
             showticksuffix = "last",

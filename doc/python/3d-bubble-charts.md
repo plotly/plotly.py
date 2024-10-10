@@ -113,12 +113,36 @@ fig = go.Figure(data=go.Scatter3d(
         )
 ))
 
-fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', titlefont_color='white'),
-                               yaxis=dict(title='Density', titlefont_color='white'),
-                               zaxis=dict(title='Gravity', titlefont_color='white'),
-                               bgcolor = 'rgb(20, 24, 54)'
-                           ))
+fig.update_layout(
+    width=800,
+    height=800,
+    title="Planets!",
+    scene=dict(
+        xaxis=dict(
+          title=dict(
+          text="Distance from Sun",
+          font=dict(
+            color="white"
+          )
+        ),
+        yaxis=dict(
+          title=dict(
+            text="Density",
+            font=dict(
+              color="white"
+            )
+        ),
+        zaxis=dict(
+          title=dict(
+            text="Gravity",
+            font=dict(
+              color="white"
+            )
+          ),
+        bgcolor="rgb(20, 24, 54)",
+    ),
+)
+
 
 fig.show()
 ```
@@ -154,12 +178,38 @@ fig = go.Figure(go.Scatter3d(
         )
 ))
 
-fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', titlefont_color='white'),
-                               yaxis=dict(title='Density', titlefont_color='white'),
-                               zaxis=dict(title='Gravity', titlefont_color='white'),
-                               bgcolor = 'rgb(20, 24, 54)'
-                           ))
+fig.update_layout(
+    width=800,
+    height=800,
+    title="Planets!",
+    scene=dict(
+        xaxis=dict(
+            title=dict(
+                text="Distance from Sun",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Density",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        zaxis=dict(
+            title=dict(
+                text="Gravity",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        bgcolor="rgb(20, 24, 54)"
+    )
+)
 
 fig.show()
 ```

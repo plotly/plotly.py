@@ -82,8 +82,7 @@ rawData = [
 
 def makeAxis(title, tickangle):
     return {
-      'title': title,
-      'titlefont': { 'size': 20 },
+      'title': {'text': title, 'font': { 'size': 20},
       'tickangle': tickangle,
       'tickfont': { 'size': 15 },
       'tickcolor': 'rgba(0,0,0,0)',

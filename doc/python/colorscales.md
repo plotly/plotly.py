@@ -321,8 +321,10 @@ fig = go.Figure()
 fig.add_trace(go.Heatmap(
     z=dataset["z"],
     colorbar=dict(
-        title="Surface Heat",
-        titleside="top",
+        title=dict(
+            text="Surface Heat",
+            side="top",
+        ),
         tickmode="array",
         tickvals=[2, 25, 50, 75, 100],
         labelalias={100: "Hot", 50: "Mild", 2: "Cold"},
@@ -545,8 +547,10 @@ fig = go.Figure()
 fig.add_trace(go.Heatmap(
     z=dataset["z"],
     colorbar=dict(
-        title="Surface Heat",
-        titleside="top",
+        title=dict(
+            text="Surface Heat",
+            side="top",
+        ),
         tickmode="array",
         tickvals=[2, 50, 100],
         ticktext=["Cool", "Mild", "Hot"],
