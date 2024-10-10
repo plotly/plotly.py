@@ -224,18 +224,18 @@ The following types of objects in Python are supported for improved performance:
 
 The following array data types are supported:
 
+- float32
+- float64
 - int8
 - uint8
 - int16
 - uint16
 - int32
 - uint32
-- float32
-- float64
 - int64*
 - uint64*
 
-*If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible.
+*If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
 
 ### Unsupported Attributes
 
