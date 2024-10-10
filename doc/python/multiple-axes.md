@@ -192,18 +192,22 @@ fig.update_layout(
         domain=[0.3, 0.7]
     ),
     yaxis=dict(
-        title="yaxis title",
-        titlefont=dict(
-            color="#1f77b4"
+        title=dict(
+            text="yaxis title",
+            font=dict(
+                color="#1f77b4"
+            )
         ),
         tickfont=dict(
             color="#1f77b4"
         )
     ),
     yaxis2=dict(
-        title="yaxis2 title",
-        titlefont=dict(
-            color="#ff7f0e"
+        title=dict(
+            text="yaxis2 title",
+            font=dict(
+                color="#ff7f0e"
+            )
         ),
         tickfont=dict(
             color="#ff7f0e"
@@ -214,9 +218,11 @@ fig.update_layout(
         position=0.15
     ),
     yaxis3=dict(
-        title="yaxis3 title",
-        titlefont=dict(
-            color="#d62728"
+        title=dict(
+            text="yaxis3 title",
+            font=dict(
+                color="#d62728"
+            )
         ),
         tickfont=dict(
             color="#d62728"
@@ -226,9 +232,11 @@ fig.update_layout(
         side="right"
     ),
     yaxis4=dict(
-        title="yaxis4 title",
-        titlefont=dict(
-            color="#9467bd"
+        title=dict(
+            text="yaxis4 title",
+            font=dict(
+                color="#9467bd"
+            )
         ),
         tickfont=dict(
             color="#9467bd"
