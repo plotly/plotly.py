@@ -328,32 +328,28 @@ def test_imshow_dataframe():
 def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
     img = np.arange(100, dtype=dtype).reshape((10, 10))
     fig = px.imshow(img, binary_string=True, contrast_rescaling=contrast_rescaling)
+
+    decoded = decode_image_string(fig.data[0].source)[:, :, 0]
     if contrast_rescaling == "minmax":
         assert (
             np.max(
                 np.abs(
                     rescale_intensity(img, in_range="image", out_range=np.uint8)
-                    - decode_image_string(fig.data[0].source)
+                    - decoded
                 )
             )
             < 1
         )
     else:
         if dtype in [np.uint8, np.float32, np.float64]:
-            assert np.all(img == decode_image_string(fig.data[0].source))
+            assert np.all(img == decoded)
         else:
-            assert (
-                np.abs(
-                    np.max(decode_image_string(fig.data[0].source))
-                    - 255 * img.max() / np.iinfo(dtype).max
-                )
-                < 1
-            )
+            assert np.abs(np.max(decoded) - 255 * img.max() / np.iinfo(dtype).max) < 1
 
 
 @pytest.mark.parametrize("backend", ["auto", "pypng", "pil"])
 def test_imshow_backend(backend):
-    fig = px.imshow(img_rgb, binary_backend=backend)
+    fig = px.imshow(img_rgb, binary_backend=backend, binary_format="png")
     decoded_img = decode_image_string(fig.data[0].source)
     assert np.all(decoded_img == img_rgb)
 
@@ -365,6 +361,7 @@ def test_imshow_compression(level):
     fig = px.imshow(
         grid_img,
         binary_string=True,
+        binary_format="png",
         binary_compression_level=level,
         contrast_rescaling="infer",
     )
