@@ -63,7 +63,7 @@ def image_array_to_data_uri(
             greyscale=(ndim == 2),
             alpha=alpha,
             compression=compression,
-            **backend_kwargs
+            **backend_kwargs,
         )
         img_png = from_array(img, mode=mode)
         prefix = "data:image/png;base64,"
@@ -92,7 +92,7 @@ def image_array_to_data_uri(
                 format=ext,
                 compress_level=compression,
                 lossless=True,
-                **backend_kwargs
+                **backend_kwargs,
             )
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
     return base64_string
