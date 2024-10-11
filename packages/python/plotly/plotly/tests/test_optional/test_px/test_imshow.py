@@ -16,7 +16,9 @@ def decode_image_string(image_string):
     """
     Converts image string to numpy array.
     """
-    if "png" in image_string[:22]:
+    if "webp" in image_string[:23]:
+        return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
+    elif "png" in image_string[:22]:
         return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[22:]))))
     elif "jpeg" in image_string[:23]:
         return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
@@ -62,7 +64,7 @@ def test_automatic_zmax_from_dtype():
 
 
 @pytest.mark.parametrize("binary_string", [False, True])
-@pytest.mark.parametrize("binary_format", ["png", "jpg"])
+@pytest.mark.parametrize("binary_format", ["webp", "png", "jpg"])
 def test_origin(binary_string, binary_format):
     for i, img in enumerate([img_rgb, img_gray]):
         fig = px.imshow(
@@ -76,7 +78,9 @@ def test_origin(binary_string, binary_format):
             # The equality below does not hold for jpeg compression since it's lossy
             assert np.all(img[::-1] == decode_image_string(fig.data[0].source))
         if binary_string:
-            if binary_format == "jpg":
+            if binary_format == "webp":
+                assert fig.data[0].source[:15] == "data:image/webp"
+            elif binary_format == "jpg":
                 assert fig.data[0].source[:15] == "data:image/jpeg"
             else:
                 assert fig.data[0].source[:14] == "data:image/png"
