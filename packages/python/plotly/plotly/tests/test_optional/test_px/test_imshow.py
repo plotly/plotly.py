@@ -354,6 +354,15 @@ def test_imshow_backend(backend):
     assert np.all(decoded_img == img_rgb)
 
 
+@pytest.mark.parametrize("lossless", [True, False])
+def test_imshow_backend_kwargs(lossless):
+    fig = px.imshow(img_rgb, binary_backend_kwargs={"lossless": lossless})
+    decoded_img = decode_image_string(fig.data[0].source)
+
+    if lossless:
+        assert np.all(decoded_img == img_rgb)
+
+
 @pytest.mark.parametrize("level", [0, 3, 6, 9])
 def test_imshow_compression(level):
     _, grid_img = np.mgrid[0:10, 0:100]

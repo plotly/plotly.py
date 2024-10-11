@@ -53,6 +53,8 @@ def image_array_to_data_uri(
         backend_kwargs = {}
 
     if backend == "pypng":
+        backend_kwargs.setdefault("compression", compression)
+
         ndim = img.ndim
         sh = img.shape
         if ndim == 3:
@@ -62,7 +64,6 @@ def image_array_to_data_uri(
             sh[0],
             greyscale=(ndim == 2),
             alpha=alpha,
-            compression=compression,
             **backend_kwargs,
         )
         img_png = from_array(img, mode=mode)
@@ -71,6 +72,12 @@ def image_array_to_data_uri(
             w.write(stream, img_png.rows)
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
     else:  # pil
+        if ext == "png":
+            backend_kwargs.setdefault("compress_level", compression)
+
+        if ext == "webp":
+            backend_kwargs.setdefault("lossless", True)
+
         if not pil_imported:
             raise ImportError(
                 "pillow needs to be installed to use `backend='pil'. Please"
@@ -90,8 +97,6 @@ def image_array_to_data_uri(
             pil_img.save(
                 stream,
                 format=ext,
-                compress_level=compression,
-                lossless=True,
                 **backend_kwargs,
             )
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
