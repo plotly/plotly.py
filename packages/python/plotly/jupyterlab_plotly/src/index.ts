@@ -223,7 +223,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
 export const rendererFactory: IRenderMime.IRendererFactory = {
   safe: true,
   mimeTypes: [MIME_TYPE],
-  createRenderer: (options) => new RenderedPlotly(options),
+  createRenderer: (options: any) => new RenderedPlotly(options),
 };
 
 const extensions: IRenderMime.IExtension | IRenderMime.IExtension[] = [
