@@ -1,6 +1,6 @@
 import type { DOMWidgetModel } from "@jupyter-widgets/base";
-import _ from "https://esm.sh/lodash-es";
-import Plotly from "https://esm.sh/plotly.js@2.33.0/dist/plotly";
+import _ from "lodash-es";
+import Plotly from "plotly.js";
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
@@ -522,7 +522,7 @@ export class FigureModel {
        * requested by the Python side
        */
       _last_trace_edit_id: 0,
-    };
+    } as any;
   }
 
   /**
@@ -593,7 +593,7 @@ export class FigureModel {
     if (msgData !== null) {
       var currentTraces = this.model.get("_data");
       var newTraces = msgData.trace_data;
-      _.forEach(newTraces, function (newTrace) {
+      _.forEach(newTraces, function (newTrace: any) {
         currentTraces.push(newTrace);
       });
     }
@@ -2069,13 +2069,13 @@ function randstr(
 }
 
 export default () => {
-  let model;
+  let model: any;
   return {
-    initialize(ctx) {
+    initialize(ctx: any) {
       model = new FigureModel(ctx.model, serializers);
       model.initialize();
     },
-    render({ el }) {
+    render({ el }: any) {
       const view = new FigureView(model, el);
       view.perform_render()
       return () => view.remove();
