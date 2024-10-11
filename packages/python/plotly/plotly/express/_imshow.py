@@ -508,7 +508,7 @@ def imshow(
                     backend=binary_backend,
                     compression=binary_compression_level,
                     ext=binary_format,
-                    binary_backend_kwargs=binary_backend_kwargs,
+                    backend_kwargs=binary_backend_kwargs,
                 )
                 for index_tup in itertools.product(*iterables)
             ]
