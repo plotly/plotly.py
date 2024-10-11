@@ -74,6 +74,9 @@ fig = px.imshow(img, binary_format="jpeg", binary_compression_level=0)
 fig.show()
 ```
 
+Image data is encoded as a lossless base64-encoded WebP string by default.
+The example below uses a lossy WebP instead by passing a setting to the underlying image library backend.
+
 ```python
 import plotly.express as px
 from skimage import data
