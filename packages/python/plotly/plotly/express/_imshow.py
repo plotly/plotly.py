@@ -78,7 +78,8 @@ def imshow(
     binary_string=None,
     binary_backend="auto",
     binary_compression_level=4,
-    binary_format="png",
+    binary_format="webp",
+    binary_backend_kwargs=None,
     text_auto=False,
 ) -> go.Figure:
     """
@@ -204,10 +205,15 @@ def imshow(
         test `len(fig.data[0].source)` and to time the execution of `imshow` to
         tune the level of compression. 0 means no compression (not recommended).
 
-    binary_format: str, 'png' (default) or 'jpg'
-        compression format used to generate b64 string. 'png' is recommended
-        since it uses lossless compression, but 'jpg' (lossy) compression can
-        result if smaller binary strings for natural images.
+    binary_format: str, 'webp' (default), 'png', or 'jpg'
+        compression format used to generate b64 string. 'webp' is recommended
+        since it supports both lossless and lossy compression with better quality
+        then 'png' or 'jpg' of similar sizes, but 'jpg' or 'png' can be used for
+        environments that do not support 'webp'.
+
+    binary_backend_kwargs : dict or None
+        keyword arguments for the image backend. For Pillow, these are passed to `Image.save`.
+        For 'pypng', these are passed to `Writer.__init__`
 
     text_auto: bool or str (default `False`)
         If `True` or a string, single-channel `img` values will be displayed as text.
@@ -502,6 +508,7 @@ def imshow(
                     backend=binary_backend,
                     compression=binary_compression_level,
                     ext=binary_format,
+                    binary_backend_kwargs=binary_backend_kwargs,
                 )
                 for index_tup in itertools.product(*iterables)
             ]
