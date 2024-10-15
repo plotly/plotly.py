@@ -2522,7 +2522,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
                 if args.get("ecdfmode", "standard") == "complementary":
                     group = group.with_columns(
-                        **{var: -nw.col(var) + nw.lit(group_sum)}
+                        **{var: (nw.col(var) - nw.lit(group_sum)) * (-1)}
                     )
 
                 if args["ecdfnorm"] == "probability":
