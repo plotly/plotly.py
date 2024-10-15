@@ -1,19 +1,7 @@
-import pandas as pd
-import polars as pl
-import pyarrow as pa
 import plotly.express as px
 import pytest
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
-
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("px_fn", [px.scatter, px.density_heatmap, px.density_contour])
 @pytest.mark.parametrize("marginal_x", [None, "histogram", "box", "violin"])
 @pytest.mark.parametrize("marginal_y", [None, "rug"])
@@ -27,7 +15,6 @@ def test_xy_marginals(constructor, px_fn, marginal_x, marginal_y):
     assert len(fig.data) == 1 + (marginal_x is not None) + (marginal_y is not None)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("px_fn", [px.histogram, px.ecdf])
 @pytest.mark.parametrize("marginal", [None, "rug", "histogram", "box", "violin"])
 @pytest.mark.parametrize("orientation", ["h", "v"])

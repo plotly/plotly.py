@@ -1,23 +1,10 @@
 import plotly.express as px
 import narwhals.stable.v1 as nw
 import numpy as np
-import pandas as pd
-import polars as pl
-import pyarrow as pa
 import pytest
 from datetime import datetime
 
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
-
-
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -111,7 +98,6 @@ def test_trendline_enough_values(mode, options):
     assert len(fig.data[1].x) == 2
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -187,7 +173,6 @@ def test_ols_trendline_slopes():
     assert "y = 0 * x + 1.5<br>" in fig.data[1].hovertemplate
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "mode,options",
     [
@@ -232,7 +217,6 @@ def test_trendline_on_timeseries(constructor, mode, options):
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_overall_trendline(constructor):
     df = nw.from_native(constructor(px.data.tips().to_dict(orient="list")))
     fig1 = px.scatter(df.to_native(), x="total_bill", y="tip", trendline="ols")

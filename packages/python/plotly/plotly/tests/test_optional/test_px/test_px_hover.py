@@ -2,22 +2,10 @@ import plotly.express as px
 import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
-import polars as pl
-import pyarrow as pa
 import pytest
 from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
-
-
-@pytest.mark.parametrize("constructor", constructors)
 def test_skip_hover(constructor):
     data = px.data.iris().to_dict(orient="list")
     df = constructor(data)
@@ -31,7 +19,6 @@ def test_skip_hover(constructor):
     assert fig.data[0].hovertemplate == "species_id=%{marker.size}<extra></extra>"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_hover_data_string_column(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -44,7 +31,6 @@ def test_hover_data_string_column(constructor):
     assert "sex" in fig.data[0].hovertemplate
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_composite_hover(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -105,7 +91,6 @@ def test_newdatain_hover_data():
         )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_formatted_hover_and_labels(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -191,7 +176,6 @@ def test_fail_wrong_column():
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_hoverdict_color(constructor):
     data = px.data.gapminder().query("year == 2007").to_dict(orient="list")
     df = constructor(data)
@@ -205,10 +189,10 @@ def test_sunburst_hoverdict_color(constructor):
     assert "color" in fig.data[0].hovertemplate
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_date_in_hover(request, constructor):
-    if constructor in {pl.DataFrame, pa.table}:
+    if "pyarrow_table" in str(constructor) or "polars_eager" in str(constructor):
         request.applymarker(pytest.mark.xfail)
+
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
     ).with_columns(date=nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))

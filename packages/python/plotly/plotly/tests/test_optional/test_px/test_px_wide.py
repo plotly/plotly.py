@@ -3,23 +3,12 @@ import plotly.graph_objects as go
 import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
-import polars as pl
-import pyarrow as pa
 from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
 import warnings
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
-
-@pytest.mark.parametrize("constructor", constructors)
 def test_is_col_list(constructor):
     df_input = nw.from_native(constructor(dict(a=[1, 2], b=[1, 2])))
     native_namespace = df_input.__native_namespace__()
@@ -854,14 +843,12 @@ def test_mixed_input_error(df):
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_mixed_number_input(constructor):
     df = constructor(dict(a=[1, 2], b=[1.1, 2.1]))
     fig = px.line(df)
     assert len(fig.data) == 2
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_line_group(constructor):
     df = constructor(
         {
