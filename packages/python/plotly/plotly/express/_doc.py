@@ -502,7 +502,7 @@ docs = dict(
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
         "str, one of `'h'` for horizontal or `'v'` for vertical. ",
-        "(default `'v'` if `x` and `y` are provided and both continous or both categorical, ",
+        "(default `'v'` if `x` and `y` are provided and both continuous or both categorical, ",
         "otherwise `'v'`(`'h'`) if `x`(`y`) is categorical and `y`(`x`) is continuous, ",
         "otherwise `'v'`(`'h'`) if only `x`(`y`) is provided) ",
     ],
