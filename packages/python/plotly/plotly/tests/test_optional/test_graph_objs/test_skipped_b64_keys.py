@@ -1,3 +1,4 @@
+import json
 from unittest import TestCase
 import numpy as np
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
@@ -34,8 +35,9 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
         fig = go.Figure(data=data)
 
         assert (
-            fig["data"][0]["geojson"]["geometry"]["coordinates"] == normal_coordinates
-        ).all()
+            json.loads(fig.to_json())["data"][0]["geojson"]["geometry"]["coordinates"]
+            == normal_coordinates
+        )
 
     def test_np_layers(self):
         layout = {
@@ -68,18 +70,15 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
 
         fig = go.Figure(data=data, layout=layout)
 
-        assert fig.layout["mapbox"]["layers"][0]["line"]["dash"] == (2.5, 1)
+        assert (fig.layout["mapbox"]["layers"][0]["line"]["dash"] == (2.5, 1)).all()
 
-        assert (
-            fig.layout["mapbox"]["layers"][0]["source"]["features"][0]["geometry"][
-                "coordinates"
-            ]
-            == [[0.25, 52], [0.75, 50]]
-        ).all()
+        assert json.loads(fig.to_json())["layout"]["mapbox"]["layers"][0]["source"][
+            "features"
+        ][0]["geometry"]["coordinates"] == [[0.25, 52], [0.75, 50]]
 
     def test_np_range(self):
         layout = {"xaxis": {"range": np.array([0, 1])}}
 
         fig = go.Figure(data=[{"type": "scatter"}], layout=layout)
 
-        assert fig.layout["xaxis"]["range"] == (0, 1)
+        assert json.loads(fig.to_json())["layout"]["xaxis"]["range"] == [0, 1]
