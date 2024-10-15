@@ -2,7 +2,6 @@ import pytest
 from _plotly_utils.basevalidators import DataArrayValidator
 import numpy as np
 import pandas as pd
-from plotly.tests.b64 import b64
 
 # Fixtures
 # --------
@@ -34,22 +33,12 @@ def test_validator_acceptance_simple(val, validator):
 
 @pytest.mark.parametrize(
     "val",
-    [pd.Series(["a", "b", "c"])],
+    [np.array([2, 3, 4]), pd.Series(["a", "b", "c"]), np.array([[1, 2, 3], [4, 5, 6]])],
 )
 def test_validator_acceptance_homogeneous(val, validator):
     coerce_val = validator.validate_coerce(val)
     assert isinstance(coerce_val, np.ndarray)
-    assert np.array_equal(validator.present(coerce_val), b64(val))
-
-
-@pytest.mark.parametrize(
-    "val",
-    [np.array([2, 3, 4]), np.array([[1, 2, 3], [4, 5, 6]])],
-)
-def test_validator_acceptance_homogeneous(val, validator):
-    coerce_val = validator.validate_coerce(val)
-    assert isinstance(coerce_val, object)
-    assert np.array_equal(validator.present(coerce_val), b64(val))
+    assert np.array_equal(validator.present(coerce_val), val)
 
 
 # ### Rejection ###

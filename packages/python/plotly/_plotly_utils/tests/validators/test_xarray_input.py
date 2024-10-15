@@ -9,8 +9,6 @@ from _plotly_utils.basevalidators import (
     ColorValidator,
 )
 
-from plotly.tests.b64 import _b64
-
 
 @pytest.fixture
 def data_array_validator(request):
@@ -101,12 +99,10 @@ def test_data_array_validator(data_array_validator, numeric_xarray):
     res = data_array_validator.validate_coerce(numeric_xarray)
 
     # Check type
-    assert isinstance(res, object)
-
-    numeric_xarray = _b64(numeric_xarray)
+    assert isinstance(res, np.ndarray)
 
     # Check dtype
-    assert res["dtype"] == numeric_xarray["dtype"]
+    assert res.dtype == numeric_xarray.dtype
 
     # Check values
     np.testing.assert_array_equal(res, numeric_xarray)

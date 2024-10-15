@@ -3,7 +3,6 @@
 import pytest
 from pytest import approx
 from _plotly_utils.basevalidators import IntegerValidator
-from plotly.tests.b64 import b64
 import numpy as np
 import pandas as pd
 
@@ -143,51 +142,6 @@ def test_acceptance_aok_scalars(val, validator_aok):
 @pytest.mark.parametrize("val", [[1, 0], [1], [-2, 1, 8], np.array([3, 2, -1, 5])])
 def test_acceptance_aok_list(val, validator_aok):
     assert np.array_equal(validator_aok.validate_coerce(val), val)
-
-
-# Test base64 encoded arrays with array_ok=True
-INT_BASE64_TEST_CASES = [
-    # Note: we decided not to support int64 in plotly.js,
-    # so the the max / min value are limited to int32 and the
-    # dtype is cast to int32 in the output
-    (
-        b64(np.array([-900000000, 900000000, 3], dtype="int64")),
-        {"bdata": "ABdbygDppDUDAAAA", "dtype": "i4"},
-    ),
-    (
-        b64(np.array([-900000000, 900000000, 3], dtype="int32")),
-        {"bdata": "ABdbygDppDUDAAAA", "dtype": "i4"},
-    ),
-    (
-        b64(np.array([32767, -32767, 3], dtype="int16")),
-        {"bdata": "/38BgAMA", "dtype": "i2"},
-    ),
-    (
-        b64(np.array([127, -127, 3], dtype="int8")),
-        {"bdata": "f4ED", "dtype": "i1"},
-    ),
-    (
-        b64(np.array([900000000, 2, 3], dtype="uint64")),
-        {"bdata": "AOmkNQIAAAADAAAA", "dtype": "u4"},
-    ),
-    (
-        b64(np.array([900000000, 2, 3], dtype="uint32")),
-        {"bdata": "AOmkNQIAAAADAAAA", "dtype": "u4"},
-    ),
-    (
-        b64(np.array([32767, 0, 3], dtype="uint16")),
-        {"bdata": "/38AAAMA", "dtype": "u2"},
-    ),
-    (
-        b64(np.array([127, 2, 3], dtype="uint8")),
-        {"bdata": "fwID", "dtype": "u1"},
-    ),
-]
-
-
-@pytest.mark.parametrize("val, expected", INT_BASE64_TEST_CASES)
-def test_acceptance_aok_base64(val, expected, validator_aok):
-    assert np.array_equal(validator_aok.validate_coerce(val), expected)
 
 
 # ### Coerce ###
