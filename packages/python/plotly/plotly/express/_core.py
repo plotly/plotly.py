@@ -1468,7 +1468,7 @@ def build_dataframe(args, constructor):
             args["data_frame"] = nw.from_native(
                 nw.from_native(
                     args["data_frame"], eager_or_interchange_only=True
-                ).to_pandas(),
+                ).to_pandas(),  # Converts to pandas
                 eager_only=True,
             )
             columns = args["data_frame"].columns

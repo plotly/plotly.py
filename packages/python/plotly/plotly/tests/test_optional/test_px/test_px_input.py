@@ -3,8 +3,6 @@ import plotly.graph_objects as go
 import narwhals.stable.v1 as nw
 import numpy as np
 import pandas as pd
-import polars as pl
-import pyarrow as pa
 import pytest
 from packaging import version
 import unittest.mock as mock
@@ -12,21 +10,6 @@ from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
 import sys
 import warnings
-
-
-# Fixtures
-# --------
-@pytest.fixture
-def add_interchange_module_for_old_pandas():
-    if not hasattr(pd.api, "interchange"):
-        with mock.patch.object(pd.api, "interchange", mock.MagicMock(), create=True):
-            # to make the following import work: `import pandas.api.interchange`
-            with mock.patch.dict(
-                "sys.modules", {"pandas.api.interchange": pd.api.interchange}
-            ):
-                yield
-    else:
-        yield
 
 
 def test_numpy():
@@ -68,7 +51,7 @@ def test_with_index():
 
 
 def test_series(request, constructor):
-    if constructor is pa.table:
+    if "pyarrow_table" in str(constructor):
         request.applymarker(pytest.mark.xfail)
 
     data = px.data.tips().to_dict(orient="list")
@@ -89,7 +72,7 @@ def test_series(request, constructor):
 
 
 def test_several_dataframes(request, constructor):
-    if constructor is pa.table:
+    if "pyarrow_table" in str(constructor):
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8])))
@@ -168,7 +151,7 @@ def test_several_dataframes(request, constructor):
 
 
 def test_name_heuristics(request, constructor):
-    if constructor is pa.table:
+    if "pyarrow_table" in str(constructor):
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2])))
@@ -305,72 +288,39 @@ def test_build_df_with_index():
     )
 
 
-# TODO: Changed how this is accomplished in the first place
-# @pytest.mark.parametrize("column_names_as_generator", [False, True])
-# def test_build_df_using_interchange_protocol_mock(
-#     add_interchange_module_for_old_pandas, column_names_as_generator
-# ):
-#     class InterchangeDataFrame:
-#         def __init__(self, columns):
-#             self._columns = columns
+def test_build_df_using_interchange_protocol_mock():
+    class InterchangeDataFrame:
+        def __init__(self, columns):
+            self._columns = columns
 
-#         if column_names_as_generator:
+        def column_names(self):
+            return self._columns
 
-#             def column_names(self):
-#                 for col in self._columns:
-#                     yield col
+    interchange_dataframe = InterchangeDataFrame(
+        ["petal_width", "sepal_length", "sepal_width"]
+    )
 
-#         else:
+    class CustomDataFrame:
+        def __dataframe__(self):
+            return interchange_dataframe
 
-#             def column_names(self):
-#                 return self._columns
+    input_dataframe = CustomDataFrame()
 
-#     interchange_dataframe = InterchangeDataFrame(
-#         ["petal_width", "sepal_length", "sepal_width"]
-#     )
-#     interchange_dataframe_reduced = InterchangeDataFrame(
-#         ["petal_width", "sepal_length"]
-#     )
-#     interchange_dataframe.select_columns_by_name = mock.MagicMock(
-#         return_value=interchange_dataframe_reduced
-#     )
-#     interchange_dataframe_reduced.select_columns_by_name = mock.MagicMock(
-#         return_value=interchange_dataframe_reduced
-#     )
+    iris_pandas = px.data.iris()
 
-#     class CustomDataFrame:
-#         def __dataframe__(self):
-#             return interchange_dataframe
+    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+    with mock.patch(
+        "narwhals._interchange.dataframe.InterchangeFrame.to_pandas",
+        return_value=iris_pandas,
+    ) as mock_from_dataframe:
+        out = build_dataframe(args, go.Scatter)
 
-#     class CustomDataFrameReduced:
-#         def __dataframe__(self):
-#             return interchange_dataframe_reduced
+        mock_from_dataframe.assert_called_once()
 
-#     input_dataframe = CustomDataFrame()
-#     input_dataframe_reduced = CustomDataFrameReduced()
-
-#     iris_pandas = px.data.iris()
-
-#     with mock.patch("pandas.__version__", "2.0.2"):
-#         args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
-#         with mock.patch(
-#             "pandas.api.interchange.from_dataframe", return_value=iris_pandas
-#         ) as mock_from_dataframe:
-#             build_dataframe(args, go.Scatter)
-#         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-#         assert set(interchange_dataframe.select_columns_by_name.call_args[0][0]) == {
-#             "petal_width",
-#             "sepal_length",
-#         }
-
-#         args = dict(data_frame=input_dataframe_reduced, color=None)
-#         with mock.patch(
-#             "pandas.api.interchange.from_dataframe",
-#             return_value=iris_pandas[["petal_width", "sepal_length"]],
-#         ) as mock_from_dataframe:
-#             build_dataframe(args, go.Scatter)
-#         mock_from_dataframe.assert_called_once_with(interchange_dataframe_reduced)
-#         interchange_dataframe_reduced.select_columns_by_name.assert_not_called()
+        assert_frame_equal(
+            iris_pandas.reset_index()[out["data_frame"].columns],
+            out["data_frame"].to_pandas(),
+        )
 
 
 @pytest.mark.skipif(
@@ -517,7 +467,7 @@ def test_pass_df_columns(constructor):
 
 
 def test_size_column(request, constructor):
-    if constructor is pa.table:
+    if "pyarrow_table" in str(constructor):
         request.applymarker(pytest.mark.xfail)
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))
