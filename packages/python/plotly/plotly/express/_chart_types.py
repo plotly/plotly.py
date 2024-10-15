@@ -258,7 +258,7 @@ def line(
     height=None,
 ) -> go.Figure:
     """
-    In a 2D line plot, each row of `data_frame` is represented as vertex of
+    In a 2D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
@@ -309,8 +309,8 @@ def area(
 ) -> go.Figure:
     """
     In a stacked area plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in 2D space. The area between successive
-    polylines is filled.
+    a vertex of a polyline mark in 2D space. The area between
+    successive polylines is filled.
     """
     return make_figure(
         args=locals(),
@@ -821,7 +821,7 @@ def line_3d(
     height=None,
 ) -> go.Figure:
     """
-    In a 3D line plot, each row of `data_frame` is represented as vertex of
+    In a 3D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
@@ -902,7 +902,7 @@ def line_ternary(
 ) -> go.Figure:
     """
     In a ternary line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in ternary coordinates.
+    a vertex of a polyline mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -992,8 +992,8 @@ def line_polar(
     height=None,
 ) -> go.Figure:
     """
-    In a polar line plot, each row of `data_frame` is represented as vertex
-    of a polyline mark in polar coordinates.
+    In a polar line plot, each row of `data_frame` is represented as a
+    vertex of a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -1199,7 +1199,7 @@ def line_geo(
 ) -> go.Figure:
     """
     In a geographic line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a map.
+    a vertex of a polyline mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -1314,7 +1314,7 @@ def density_map(
 ) -> go.Figure:
     """
     In a density map, each row of `data_frame` contributes to the intensity of
-    the color of the region around the corresponding point on the map
+    the color of the region around the corresponding point on the map.
     """
     return make_figure(
         args=locals(), constructor=go.Densitymap, trace_patch=dict(radius=radius)
@@ -1350,7 +1350,7 @@ def line_map(
 ) -> go.Figure:
     """
     In a line map, each row of `data_frame` is represented as
-    vertex of a polyline mark on the map.
+    a vertex of a polyline mark on the map.
     """
     return make_figure(args=locals(), constructor=go.Scattermap)
 
@@ -1497,7 +1497,7 @@ def line_mapbox(
 ) -> go.Figure:
     """
     In a Mapbox line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a Mapbox map.
+    a vertex of a polyline mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 

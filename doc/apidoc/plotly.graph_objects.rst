@@ -99,6 +99,9 @@ Map Traces
 
    Scattergeo
    Choropleth
+   Scattermap
+   Choroplethmap
+   Densitymap
    Scattermapbox
    Choroplethmapbox
    Densitymapbox
