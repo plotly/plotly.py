@@ -62,7 +62,7 @@ class TestJSONEncoder(TestCase):
                 utils.NotEncodable, utils.PlotlyJSONEncoder.encode_as_plotly, obj
             )
 
-        # should return without exception when obj has `to_plotly_josn` attr
+        # should return without exception when obj has `to_plotly_json` attr
         expected_res = "wedidit"
 
         class ObjWithAttr(object):
@@ -274,7 +274,7 @@ class TestJSONEncoder(TestCase):
             )
         )
 
-    def test_encode_customdata_datetime_homogenous_dataframe(self):
+    def test_encode_customdata_datetime_homogeneous_dataframe(self):
         df = pd.DataFrame(
             dict(
                 t1=pd.to_datetime(["2010-01-01", "2010-01-02"]),
@@ -297,7 +297,7 @@ class TestJSONEncoder(TestCase):
             )
         )
 
-    def test_encode_customdata_datetime_inhomogenous_dataframe(self):
+    def test_encode_customdata_datetime_inhomogeneous_dataframe(self):
         df = pd.DataFrame(
             dict(
                 t=pd.to_datetime(["2010-01-01", "2010-01-02"]),
