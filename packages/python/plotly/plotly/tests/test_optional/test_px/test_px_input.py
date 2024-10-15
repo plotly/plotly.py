@@ -13,13 +13,6 @@ from pandas.testing import assert_frame_equal
 import sys
 import warnings
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
 # Fixtures
 # --------
@@ -74,7 +67,6 @@ def test_with_index():
     assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}<extra></extra>"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_series(request, constructor):
     if constructor is pa.table:
         request.applymarker(pytest.mark.xfail)
@@ -96,7 +88,6 @@ def test_series(request, constructor):
     assert fig.data[0].hovertemplate == "day=%{x}<br>tip=%{y}<extra></extra>"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_several_dataframes(request, constructor):
     if constructor is pa.table:
         request.applymarker(pytest.mark.xfail)
@@ -176,7 +167,6 @@ def test_several_dataframes(request, constructor):
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_name_heuristics(request, constructor):
     if constructor is pa.table:
         request.applymarker(pytest.mark.xfail)
@@ -193,7 +183,6 @@ def test_name_heuristics(request, constructor):
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_repeated_name(constructor):
     data = px.data.iris().to_dict(orient="list")
     iris = constructor(data)
@@ -207,7 +196,6 @@ def test_repeated_name(constructor):
     assert fig.data[0].customdata.shape[1] == 4
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_arrayattrable_numpy(constructor):
     data = px.data.tips().to_dict(orient="list")
     tips = constructor(data)
@@ -251,7 +239,6 @@ def test_wrong_dimensions_of_array():
     assert "All arguments should have the same length." in str(err_msg.value)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_wrong_dimensions_mixed_case(constructor):
     with pytest.raises(ValueError) as err_msg:
         df = constructor(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
@@ -259,7 +246,6 @@ def test_wrong_dimensions_mixed_case(constructor):
     assert "All arguments should have the same length." in str(err_msg.value)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_wrong_dimensions(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -441,7 +427,6 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_timezones(constructor):
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
@@ -474,7 +459,6 @@ def test_non_matching_index():
     assert_frame_equal(expected, out["data_frame"].to_pandas())
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_splom_case(constructor):
     data = px.data.iris().to_dict(orient="list")
     iris = constructor(data)
@@ -488,7 +472,6 @@ def test_splom_case(constructor):
     assert np.all(fig.data[0].dimensions[0].values == ar[:, 0])
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_int_col_names(constructor):
     # DataFrame with int column names
     lengths = constructor({"0": np.random.random(100)})
@@ -506,7 +489,6 @@ def test_data_frame_from_dict():
     assert np.all(fig.data[0].x == [0, 1])
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_arguments_not_modified(constructor):
     data = px.data.iris().to_dict(orient="list")
     iris = nw.from_native(constructor(data))
@@ -517,7 +499,6 @@ def test_arguments_not_modified(constructor):
     assert iris.get_column("sepal_length").to_native().equals(hover_data[0])
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_pass_df_columns(constructor):
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))
@@ -535,7 +516,6 @@ def test_pass_df_columns(constructor):
     assert tips_copy.columns == tips.columns
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_size_column(request, constructor):
     if constructor is pa.table:
         request.applymarker(pytest.mark.xfail)
@@ -671,7 +651,6 @@ def test_auto_histfunc():
     assert px.density_heatmap(x=a, y=a, z=a, histfunc="avg").data[0].histfunc == "avg"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     "fn,mode", [(px.violin, "violinmode"), (px.box, "boxmode"), (px.strip, "boxmode")]
 )

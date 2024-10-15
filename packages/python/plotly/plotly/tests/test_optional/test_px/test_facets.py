@@ -1,21 +1,9 @@
-import pandas as pd
-import polars as pl
-import pyarrow as pa
 import plotly.express as px
 from pytest import approx
 import pytest
 import random
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
-
-@pytest.mark.parametrize("constructor", constructors)
 def test_facets(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -59,7 +47,6 @@ def test_facets(constructor):
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_facets_with_marginals(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -108,12 +95,11 @@ def test_facets_with_marginals(constructor):
     assert len(fig.data) == 2  # ignore all marginals
 
 
-@pytest.fixture(params=constructors)
-def bad_facet_spacing_df(request):
+def bad_facet_spacing_df(constructor_func):
     NROWS = 101
     NDATA = 1000
     categories = [n % NROWS for n in range(NDATA)]
-    df = request.param(
+    df = constructor_func(
         {
             "x": [random.random() for _ in range(NDATA)],
             "y": [random.random() for _ in range(NDATA)],
@@ -123,8 +109,8 @@ def bad_facet_spacing_df(request):
     return df
 
 
-def test_bad_facet_spacing_eror(bad_facet_spacing_df):
-    df = bad_facet_spacing_df
+def test_bad_facet_spacing_error(constructor):
+    df = bad_facet_spacing_df(constructor_func=constructor)
     with pytest.raises(
         ValueError, match="Use the facet_row_spacing argument to adjust this spacing."
     ):

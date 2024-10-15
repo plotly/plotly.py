@@ -2,22 +2,10 @@ import plotly.express as px
 import plotly.io as pio
 import narwhals.stable.v1 as nw
 import numpy as np
-import pandas as pd
-import polars as pl
-import pyarrow as pa
 import pytest
 from itertools import permutations
 
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
-
-@pytest.mark.parametrize("constructor", constructors)
 def test_scatter(constructor):
     data = px.data.iris().to_dict(orient="list")
     iris = nw.from_native(constructor(data))
@@ -29,7 +17,6 @@ def test_scatter(constructor):
     assert fig.data[0].mode == "markers"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_custom_data_scatter(constructor):
     data = px.data.iris().to_dict(orient="list")
     iris = nw.from_native(constructor(data))
@@ -80,7 +67,6 @@ def test_custom_data_scatter(constructor):
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_labels(constructor):
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))
@@ -106,7 +92,6 @@ def test_labels(constructor):
     assert fig.layout.annotations[4].text.startswith("TIME")
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize(
     ["extra_kwargs", "expected_mode"],
     [
@@ -129,7 +114,6 @@ def test_line_mode(constructor, extra_kwargs, expected_mode):
     assert fig.data[0].mode == expected_mode
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_px_templates(constructor):
     try:
         import plotly.graph_objects as go
@@ -300,7 +284,6 @@ def assert_orderings(constructor, days_order, days_check, times_order, times_che
                 assert trace.marker.color == color_sequence[i]
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "x"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "x"]))
 def test_orthogonal_and_missing_orderings(constructor, days, times):
@@ -309,7 +292,6 @@ def test_orthogonal_and_missing_orderings(constructor, days, times):
     )
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "Thur"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "Dinner"]))
 def test_orthogonal_orderings(constructor, days, times):
@@ -322,7 +304,6 @@ def test_permissive_defaults():
         px.defaults.should_not_work = "test"
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_marginal_ranges(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = nw.from_native(constructor(data))
@@ -339,7 +320,6 @@ def test_marginal_ranges(constructor):
     assert fig.layout.yaxis3.range is None
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_render_mode(constructor):
     data = px.data.gapminder().to_dict(orient="list")
     df = nw.from_native(constructor(data))

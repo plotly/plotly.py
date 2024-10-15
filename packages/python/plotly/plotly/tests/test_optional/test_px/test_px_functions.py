@@ -3,19 +3,7 @@ import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
 import narwhals.stable.v1 as nw
 import numpy as np
-import pandas as pd
-import polars as pl
-import pyarrow as pa
 import pytest
-
-
-constructors = (
-    pd.DataFrame,
-    pl.DataFrame,
-    pa.table,
-    lambda d: pd.DataFrame(d).convert_dtypes("pyarrow"),
-    lambda d: pd.DataFrame(d).convert_dtypes("numpy_nullable"),
-)
 
 
 def _compare_figures(go_trace, px_fig):
@@ -130,7 +118,6 @@ def test_sunburst_treemap_colorscales():
         assert list(fig.layout[colorway]) == color_seq
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
@@ -195,7 +182,6 @@ def test_sunburst_treemap_with_path(constructor):
     assert fig.data[0].values[-1] == 8
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_and_hover(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -227,7 +213,6 @@ def test_sunburst_treemap_with_path_and_hover(constructor):
     assert "%{hovertext}" not in fig.data[0].hovertemplate
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_color(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
@@ -306,7 +291,6 @@ def test_sunburst_treemap_with_path_color(constructor):
     assert np.all(np.sort(colors[:8]) == sorted(calls))
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_column_parent(constructor):
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
@@ -334,9 +318,7 @@ def test_sunburst_treemap_column_parent(constructor):
     px.sunburst(df, path=path, values="values")
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_sunburst_treemap_with_path_non_rectangular(constructor):
-    print(str(constructor))
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
     sectors = [
         "Tech",
@@ -427,7 +409,6 @@ def test_funnel():
     assert len(fig.data) == 2
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_parcats_dimensions_max(constructor):
     data = px.data.tips().to_dict(orient="list")
     df = constructor(data)
@@ -462,7 +443,6 @@ def test_parcats_dimensions_max(constructor):
     assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
 
 
-@pytest.mark.parametrize("constructor", constructors)
 @pytest.mark.parametrize("histfunc,y", [(None, None), ("count", "tip")])
 def test_histfunc_hoverlabels_univariate(constructor, histfunc, y):
     def check_label(label, fig):
@@ -496,7 +476,6 @@ def test_histfunc_hoverlabels_univariate(constructor, histfunc, y):
             check_label("%s (normalized as %s)" % (histnorm, barnorm), fig)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_histfunc_hoverlabels_bivariate(constructor):
     def check_label(label, fig):
         assert fig.layout.yaxis.title.text == label
@@ -558,9 +537,8 @@ def test_histfunc_hoverlabels_bivariate(constructor):
     check_label("density of max of tip", fig)
 
 
-@pytest.mark.parametrize("constructor", constructors)
 def test_timeline(request, constructor):
-    if constructor in {pl.DataFrame, pa.table}:
+    if "pyarrow_table" in str(constructor) or "polars_eager" in str(constructor):
         request.applymarker(pytest.mark.xfail)
 
     df = constructor(
