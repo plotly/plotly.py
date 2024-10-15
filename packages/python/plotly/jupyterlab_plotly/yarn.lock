@@ -1114,12 +1114,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-alpha@npm:1.0.4, color-alpha@npm:^1.0.4":
+"color-alpha@npm:1.0.4":
   version: 1.0.4
   resolution: "color-alpha@npm:1.0.4"
   dependencies:
     color-parse: ^1.3.8
   checksum: e0e5dd4c7b746113156abf10284efa69e9400e8ff0f2c1b54839e3fe87884c0e561dc09eefc335731b3315f64d42cf7a66671d96aeb5393fc551bd41e09f949f
+  languageName: node
+  linkType: hard
+
+"color-alpha@npm:^1.0.4":
+  version: 1.1.3
+  resolution: "color-alpha@npm:1.1.3"
+  dependencies:
+    color-parse: ^1.4.1
+  checksum: 7c47fa16e1ceffd567731439e4c84f7c971767eb522fa3ba74be1f5a4f22b204962b02a969ce32c40b0f2358b63ec44ddf1115f29264d07369c6103c0fed97e7
   languageName: node
   linkType: hard
 
@@ -1141,14 +1150,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:1.1.3, color-name@npm:^1.0.0":
+"color-name@npm:1.1.3":
   version: 1.1.3
   resolution: "color-name@npm:1.1.3"
   checksum: 09c5d3e33d2105850153b14466501f2bfb30324a2f76568a408763a3b7433b0e50e5b4ab1947868e65cb101bb7cb75029553f2c333b6d4b8138a73fcc133d69d
   languageName: node
   linkType: hard
 
-"color-normalize@npm:1.5.0, color-normalize@npm:^1.5.0":
+"color-name@npm:^1.0.0":
+  version: 1.1.4
+  resolution: "color-name@npm:1.1.4"
+  checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"color-normalize@npm:1.5.0":
   version: 1.5.0
   resolution: "color-normalize@npm:1.5.0"
   dependencies:
@@ -1156,6 +1172,16 @@ __metadata:
     color-rgba: ^2.1.1
     dtype: ^2.0.0
   checksum: 4217dada6ec6302e2067fb4c113ec3d0976557466d7888f9499ebc96e33e67630f73718c3d9cbb9707e782f3561f279ec312a4b42d0ec6fff221ba4107c2b1f5
+  languageName: node
+  linkType: hard
+
+"color-normalize@npm:^1.5.0":
+  version: 1.5.2
+  resolution: "color-normalize@npm:1.5.2"
+  dependencies:
+    color-rgba: ^2.2.0
+    dtype: ^2.0.0
+  checksum: 162686b78da1d5276e3c9d7da6906a1823d2e939ce38fc38f7a45133c02838eb1c5d479bf3fbf3f1a5badc884c835730608cfec9b1f5eda34638b8b2d8aec28e
   languageName: node
   linkType: hard
 
@@ -1168,7 +1194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-parse@npm:^1.3.8":
+"color-parse@npm:^1.3.8, color-parse@npm:^1.4.1, color-parse@npm:^1.4.2":
   version: 1.4.3
   resolution: "color-parse@npm:1.4.3"
   dependencies:
@@ -1177,7 +1203,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-rgba@npm:2.1.1, color-rgba@npm:^2.1.1":
+"color-rgba@npm:2.1.1":
   version: 2.1.1
   resolution: "color-rgba@npm:2.1.1"
   dependencies:
@@ -1188,6 +1214,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"color-rgba@npm:^2.1.1, color-rgba@npm:^2.2.0":
+  version: 2.4.0
+  resolution: "color-rgba@npm:2.4.0"
+  dependencies:
+    color-parse: ^1.4.2
+    color-space: ^2.0.0
+  checksum: a72b1001af4bed60d4677f6e368e3ea44fd228f6f3098182dd8d8d612165cb847f0792252539b36aa238840f45f1c644b8d7ed867e3d735d67d4e4b107384279
+  languageName: node
+  linkType: hard
+
 "color-space@npm:^1.14.6":
   version: 1.16.0
   resolution: "color-space@npm:1.16.0"
@@ -1195,6 +1231,13 @@ __metadata:
     hsluv: ^0.0.3
     mumath: ^3.3.4
   checksum: 655ae748f81ef96f2a031e0aaa1e6a6dacf23731c4d7845d7d996dbf6a0a7971d533b378a82031b04e7397c55efd34a2fef784a4af1b89d81ff920e8af03fadf
+  languageName: node
+  linkType: hard
+
+"color-space@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "color-space@npm:2.0.1"
+  checksum: 98f8f6acc716d2332705ef6a98876b47e8e39094256b83eec1df17246a5b5c37d107ae682e87d96488b06da12df3595ed5ad4f0e354a45571e23fb2196e4c6e7
   languageName: node
   linkType: hard
 
@@ -1645,9 +1688,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.28":
-  version: 1.5.36
-  resolution: "electron-to-chromium@npm:1.5.36"
-  checksum: 1f83daebdf88dd4817565660fa68a827bdca2866032d4902bfd79c6f16d97acbd731b63c09029dd5aa1af4aadbe567834cf3c89b52a37602d375352185d68cf4
+  version: 1.5.38
+  resolution: "electron-to-chromium@npm:1.5.38"
+  checksum: 8279317608f24f95366b679703c7e4196beb0702384fca211a5db4a53e6c960067d0f5de487883fe807b04eaba3939137a39958d6c5209b4d1e5a693efdd6f6a
   languageName: node
   linkType: hard
 
@@ -2653,6 +2696,8 @@ __metadata:
   dependencies:
     "@jupyterlab/builder": ^4.2.5
     "@jupyterlab/rendermime-interfaces": ^3.10.5
+    "@lumino/messaging": ^2.0.2
+    "@lumino/widgets": ^2.5.0
     plotly.js: ^2.35.0
     regl: ^2.1.0
     webpack: ^5.95.0
@@ -4067,12 +4112,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"to-px@npm:1.0.1, to-px@npm:^1.0.1":
+"to-px@npm:1.0.1":
   version: 1.0.1
   resolution: "to-px@npm:1.0.1"
   dependencies:
     parse-unit: ^1.0.1
   checksum: 4cf87de44413d7c6391e2e03ddc25efb80a7ca912e8da1fac70dcedc17acd512aecdbc01252a0a914981b99276b9f139a98df62c951792ffe98e77ade2c7da62
+  languageName: node
+  linkType: hard
+
+"to-px@npm:^1.0.1":
+  version: 1.1.0
+  resolution: "to-px@npm:1.1.0"
+  dependencies:
+    parse-unit: ^1.0.1
+  checksum: bb434716a751a8918c8c711a79f9a95786b84572fac0253f64cff8d5cf9843ecdbb8e47a6d81152042aa2ccab9db5091f8dca2473f4fb3d3554bf36cfb41b7d9
   languageName: node
   linkType: hard
 
