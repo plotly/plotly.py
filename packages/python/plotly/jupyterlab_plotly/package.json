@@ -28,7 +28,9 @@
   },
   "devDependencies": {
     "@jupyterlab/builder": "^4.2.5",
-    "@jupyterlab/rendermime-interfaces": "^3.10.5"
+    "@jupyterlab/rendermime-interfaces": "^3.10.5",
+    "@lumino/messaging": "^2.0.2",
+    "@lumino/widgets": "^2.5.0"
   },
   "dependencies": {
     "plotly.js": "^2.35.0",
@@ -37,6 +39,6 @@
   },
   "jupyterlab": {
     "mimeExtension": true,
-    "outputDir": "labextension"
+    "outputDir": "jupyterlab_plotly/labextension"
   }
 }
