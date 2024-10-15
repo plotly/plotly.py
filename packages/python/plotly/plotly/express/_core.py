@@ -1148,7 +1148,7 @@ def to_unindexed_series(x, name=None, native_namespace=None):
         elif (pd := nw.dependencies.get_pandas()) is not None:
             return nw.new_series(name=name, values=x, native_namespace=pd)
         else:
-            msg = "Pandas is required"
+            msg = "Pandas installation is required if no namespace is provided."
             raise NotImplementedError(msg)
 
 
@@ -1381,7 +1381,7 @@ def process_args_into_dataframe(
 
     df_output.update(
         {
-            # constant is single value. repeat by len to avoid creating NaN on concating
+            # constant is single value. repeat by len to avoid creating NaN on concatenating
             col_name: nw.new_series(
                 name=col_name,
                 values=[constants[col_name]] * length,
@@ -2645,10 +2645,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             trendline_rows.append(dict(px_fit_results=fit_results))
 
     if trendline_rows:
-        if (pd := nw.dependencies.get_pandas()) is None:
-            msg = "Trendlines require pandas to be installed"
+        try:
+            import pandas as pd
+
+            fig._px_trendlines = pd.DataFrame(trendline_rows)
+        except ImportError:
+            msg = "Trendlines require pandas to be installed."
             raise NotImplementedError(msg)
-        fig._px_trendlines = pd.DataFrame(trendline_rows)
     else:
         fig._px_trendlines = []
 
