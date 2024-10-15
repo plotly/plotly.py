@@ -22,3 +22,4 @@ kaleido
 orjson==3.8.12
 polars
 pyarrow
+narwhals>=1.9.2
