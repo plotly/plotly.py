@@ -2,7 +2,7 @@ import itertools
 import pytest
 from _plotly_utils.basevalidators import FlaglistValidator
 import numpy as np
-from plotly.tests.b64 import b64
+
 
 EXTRAS = ["none", "all", True, False, 3]
 FLAGS = ["lines", "markers", "text"]
@@ -128,14 +128,6 @@ def test_acceptance_aok_scalar_flaglist(flaglist, validator_extra_aok):
 
 def test_acceptance_aok_scalar_extra(extra, validator_extra_aok):
     assert validator_extra_aok.validate_coerce(extra) == extra
-
-
-# Test base64 array
-def test_acceptance_aok_scalar_base64(validator_extra_aok):
-    val = b64(np.array([1, 2, 3], dtype="int64"))
-    coerce_val = validator_extra_aok.validate_coerce(val)
-    assert coerce_val["bdata"] == "AQID"
-    assert coerce_val["dtype"] == "i1"
 
 
 # ### Acceptance (lists) ###

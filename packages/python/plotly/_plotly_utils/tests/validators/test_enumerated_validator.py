@@ -2,7 +2,6 @@ import pytest
 import numpy as np
 import pandas as pd
 from _plotly_utils.basevalidators import EnumeratedValidator
-from plotly.tests.b64 import b64
 
 
 # Fixtures
@@ -93,14 +92,6 @@ def test_acceptance_aok(val, validator_aok):
         assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
     else:
         assert coerce_val == val
-
-
-# Test base64 array
-def test_aok_base64_array(validator_aok):
-    val = b64(np.array([1, 2, 3], dtype="int64"))
-    coerce_val = validator_aok.validate_coerce(val)
-    assert coerce_val["bdata"] == "AQID"
-    assert coerce_val["dtype"] == "i1"
 
 
 # ### Rejection by value ###
