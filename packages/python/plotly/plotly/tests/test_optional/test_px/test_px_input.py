@@ -7,7 +7,6 @@ from packaging import version
 import unittest.mock as mock
 from plotly.express._core import build_dataframe
 from pandas.testing import assert_frame_equal
-from plotly.tests.b64 import b64, _b64
 import sys
 import warnings
 
@@ -29,9 +28,8 @@ def add_interchange_module_for_old_pandas():
 
 def test_numpy():
     fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
-
-    assert np.all(fig.data[0].x == b64(np.array([1, 2, 3])))
-    assert np.all(fig.data[0].y == b64(np.array([2, 3, 4])))
+    assert np.all(fig.data[0].x == np.array([1, 2, 3]))
+    assert np.all(fig.data[0].y == np.array([2, 3, 4]))
     assert np.all(fig.data[0].marker.color == np.array([1, 3, 9]))
 
 
@@ -103,16 +101,16 @@ def test_several_dataframes():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
     fig = px.scatter(x=df.y, y=df2.y)
-    assert np.all(fig.data[0].x == b64(np.array([3, 4])))
-    assert np.all(fig.data[0].y == b64(np.array([23, 24])))
+    assert np.all(fig.data[0].x == np.array([3, 4]))
+    assert np.all(fig.data[0].y == np.array([23, 24]))
     assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<extra></extra>"
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
     df3 = pd.DataFrame(dict(y=[0.1, 0.2]))
     fig = px.scatter(x=df.y, y=df2.y, size=df3.y)
-    assert np.all(fig.data[0].x == b64(np.array([3, 4])))
-    assert np.all(fig.data[0].y == b64(np.array([23, 24])))
+    assert np.all(fig.data[0].x == np.array([3, 4]))
+    assert np.all(fig.data[0].y == np.array([23, 24]))
     assert (
         fig.data[0].hovertemplate
         == "x=%{x}<br>y=%{y}<br>size=%{marker.size}<extra></extra>"
@@ -122,8 +120,8 @@ def test_several_dataframes():
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
     df3 = pd.DataFrame(dict(y=[0.1, 0.2]))
     fig = px.scatter(x=df.y, y=df2.y, hover_data=[df3.y])
-    assert np.all(fig.data[0].x == b64(np.array([3, 4])))
-    assert np.all(fig.data[0].y == b64(np.array([23, 24])))
+    assert np.all(fig.data[0].x == np.array([3, 4]))
+    assert np.all(fig.data[0].y == np.array([23, 24]))
     assert (
         fig.data[0].hovertemplate
         == "x=%{x}<br>y=%{y}<br>hover_data_0=%{customdata[0]}<extra></extra>"
@@ -133,8 +131,8 @@ def test_several_dataframes():
 def test_name_heuristics():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
     fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
-    assert np.all(fig.data[0].x == b64(np.array([3, 4])))
-    assert np.all(fig.data[0].y == b64(np.array([0, 1])))
+    assert np.all(fig.data[0].x == np.array([3, 4]))
+    assert np.all(fig.data[0].y == np.array([0, 1]))
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
 
@@ -407,27 +405,27 @@ def test_splom_case():
     assert len(fig.data[0].dimensions) == len(iris.columns)
     dic = {"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]}
     fig = px.scatter_matrix(dic)
-    assert np.all(fig.data[0].dimensions[0].values == b64(np.array(dic["a"])))
+    assert np.all(fig.data[0].dimensions[0].values == np.array(dic["a"]))
     ar = np.arange(9).reshape((3, 3))
     fig = px.scatter_matrix(ar)
-    assert np.all(fig.data[0].dimensions[0].values == b64(ar[:, 0]))
+    assert np.all(fig.data[0].dimensions[0].values == ar[:, 0])
 
 
 def test_int_col_names():
     # DataFrame with int column names
     lengths = pd.DataFrame(np.random.random(100))
     fig = px.histogram(lengths, x=0)
-    assert np.all(b64(np.array(lengths).flatten()) == fig.data[0].x)
+    assert np.all(np.array(lengths).flatten() == fig.data[0].x)
     # Numpy array
     ar = np.arange(100).reshape((10, 10))
     fig = px.scatter(ar, x=2, y=8)
-    assert np.all(fig.data[0].x == b64(ar[:, 2]))
+    assert np.all(fig.data[0].x == ar[:, 2])
 
 
 def test_data_frame_from_dict():
     fig = px.scatter({"time": [0, 1], "money": [1, 2]}, x="time", y="money")
     assert fig.data[0].hovertemplate == "time=%{x}<br>money=%{y}<extra></extra>"
-    assert np.all(fig.data[0].x == _b64([0, 1]))
+    assert np.all(fig.data[0].x == [0, 1])
 
 
 def test_arguments_not_modified():
@@ -491,11 +489,13 @@ def test_identity_map():
 
 def test_constants():
     fig = px.scatter(x=px.Constant(1), y=[1, 2])
-    assert fig.data[0].x == _b64([1, 1])
+    assert fig.data[0].x[0] == 1
+    assert fig.data[0].x[1] == 1
     assert "x=" in fig.data[0].hovertemplate
 
     fig = px.scatter(x=px.Constant(1, label="time"), y=[1, 2])
-    assert fig.data[0].x == _b64([1, 1])
+    assert fig.data[0].x[0] == 1
+    assert fig.data[0].x[1] == 1
     assert "x=" not in fig.data[0].hovertemplate
     assert "time=" in fig.data[0].hovertemplate
 
@@ -519,12 +519,15 @@ def test_constants():
 
 def test_ranges():
     fig = px.scatter(x=px.Range(), y=[1, 2], hover_data=[px.Range()])
-    assert fig.data[0].x == _b64([0, 1])
-    assert fig.data[0].customdata == _b64([[0], [1]])
+    assert fig.data[0].x[0] == 0
+    assert fig.data[0].x[1] == 1
+    assert fig.data[0].customdata[0][0] == 0
+    assert fig.data[0].customdata[1][0] == 1
     assert "x=" in fig.data[0].hovertemplate
 
     fig = px.scatter(x=px.Range(label="time"), y=[1, 2])
-    assert fig.data[0].x == _b64([0, 1])
+    assert fig.data[0].x[0] == 0
+    assert fig.data[0].x[1] == 1
     assert "x=" not in fig.data[0].hovertemplate
     assert "time=" in fig.data[0].hovertemplate
 
@@ -614,55 +617,55 @@ def test_x_or_y(fn):
     categorical_df = pd.DataFrame(dict(col=categorical), index=index)
 
     fig = fn(x=numerical)
-    assert fig.data[0].x == _b64(numerical)
-    assert fig.data[0].y == _b64(range_4)
+    assert list(fig.data[0].x) == numerical
+    assert list(fig.data[0].y) == range_4
     assert fig.data[0].orientation == "h"
     fig = fn(y=numerical)
-    assert fig.data[0].x == _b64(range_4)
-    assert fig.data[0].y == _b64(numerical)
+    assert list(fig.data[0].x) == range_4
+    assert list(fig.data[0].y) == numerical
     assert fig.data[0].orientation == "v"
     fig = fn(numerical_df, x="col")
-    assert fig.data[0].x == _b64(numerical)
-    assert fig.data[0].y == _b64(index)
+    assert list(fig.data[0].x) == numerical
+    assert list(fig.data[0].y) == index
     assert fig.data[0].orientation == "h"
     fig = fn(numerical_df, y="col")
-    assert fig.data[0].x == _b64(index)
-    assert fig.data[0].y == _b64(numerical)
+    assert list(fig.data[0].x) == index
+    assert list(fig.data[0].y) == numerical
     assert fig.data[0].orientation == "v"
 
     if fn != px.bar:
         fig = fn(x=categorical)
         assert list(fig.data[0].x) == categorical
-        assert fig.data[0].y == _b64(range_4)
+        assert list(fig.data[0].y) == range_4
         assert fig.data[0].orientation == "h"
         fig = fn(y=categorical)
-        assert fig.data[0].x == _b64(range_4)
+        assert list(fig.data[0].x) == range_4
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "v"
         fig = fn(categorical_df, x="col")
         assert list(fig.data[0].x) == categorical
-        assert fig.data[0].y == _b64(index)
+        assert list(fig.data[0].y) == index
         assert fig.data[0].orientation == "h"
         fig = fn(categorical_df, y="col")
-        assert fig.data[0].x == _b64(index)
+        assert list(fig.data[0].x) == index
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "v"
 
     else:
         fig = fn(x=categorical)
         assert list(fig.data[0].x) == categorical
-        assert fig.data[0].y == _b64(constant)
+        assert list(fig.data[0].y) == constant
         assert fig.data[0].orientation == "v"
         fig = fn(y=categorical)
-        assert fig.data[0].x == _b64(constant)
+        assert list(fig.data[0].x) == constant
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "h"
         fig = fn(categorical_df, x="col")
         assert list(fig.data[0].x) == categorical
-        assert fig.data[0].y == _b64(constant)
+        assert list(fig.data[0].y) == constant
         assert fig.data[0].orientation == "v"
         fig = fn(categorical_df, y="col")
-        assert fig.data[0].x == _b64(constant)
+        assert list(fig.data[0].x) == constant
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "h"
 
