@@ -1295,7 +1295,7 @@ def process_args_into_dataframe(
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (
                             field,
                             actual_len,
@@ -1338,7 +1338,7 @@ def process_args_into_dataframe(
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (field, len_arg, str(list(df_output.keys())), length)
                     )
 
