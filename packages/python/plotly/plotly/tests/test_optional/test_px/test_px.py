@@ -3,15 +3,14 @@ import plotly.io as pio
 import numpy as np
 import pytest
 from itertools import permutations
-from plotly.tests.b64 import _b64
 
 
 def test_scatter():
     iris = px.data.iris()
     fig = px.scatter(iris, x="sepal_width", y="sepal_length")
     assert fig.data[0].type == "scatter"
-    assert np.all(fig.data[0].x == _b64(iris.sepal_width))
-    assert np.all(fig.data[0].y == _b64(iris.sepal_length))
+    assert np.all(fig.data[0].x == iris.sepal_width)
+    assert np.all(fig.data[0].y == iris.sepal_length)
     # test defaults
     assert fig.data[0].mode == "markers"
 
@@ -29,11 +28,8 @@ def test_custom_data_scatter():
         color="species",
         hover_data=["petal_length", "petal_width"],
     )
-    assert fig.data[0].customdata == {
-        "dtype": "f8",
-        "bdata": "ZmZmZmZm9j+amZmZmZnJP2ZmZmZmZvY/mpmZmZmZyT/NzMzMzMz0P5qZmZmZmck/AAAAAAAA+D+amZmZmZnJP2ZmZmZmZvY/mpmZmZmZyT8zMzMzMzP7P5qZmZmZmdk/ZmZmZmZm9j8zMzMzMzPTPwAAAAAAAPg/mpmZmZmZyT9mZmZmZmb2P5qZmZmZmck/AAAAAAAA+D+amZmZmZm5PwAAAAAAAPg/mpmZmZmZyT+amZmZmZn5P5qZmZmZmck/ZmZmZmZm9j+amZmZmZm5P5qZmZmZmfE/mpmZmZmZuT8zMzMzMzPzP5qZmZmZmck/AAAAAAAA+D+amZmZmZnZP83MzMzMzPQ/mpmZmZmZ2T9mZmZmZmb2PzMzMzMzM9M/MzMzMzMz+z8zMzMzMzPTPwAAAAAAAPg/MzMzMzMz0z8zMzMzMzP7P5qZmZmZmck/AAAAAAAA+D+amZmZmZnZPwAAAAAAAPA/mpmZmZmZyT8zMzMzMzP7PwAAAAAAAOA/ZmZmZmZm/j+amZmZmZnJP5qZmZmZmfk/mpmZmZmZyT+amZmZmZn5P5qZmZmZmdk/AAAAAAAA+D+amZmZmZnJP2ZmZmZmZvY/mpmZmZmZyT+amZmZmZn5P5qZmZmZmck/mpmZmZmZ+T+amZmZmZnJPwAAAAAAAPg/mpmZmZmZ2T8AAAAAAAD4P5qZmZmZmbk/ZmZmZmZm9j+amZmZmZnJPwAAAAAAAPg/mpmZmZmZuT8zMzMzMzPzP5qZmZmZmck/zczMzMzM9D+amZmZmZnJPwAAAAAAAPg/mpmZmZmZuT/NzMzMzMz0P5qZmZmZmck/AAAAAAAA+D+amZmZmZnJP83MzMzMzPQ/MzMzMzMz0z/NzMzMzMz0PzMzMzMzM9M/zczMzMzM9D+amZmZmZnJP5qZmZmZmfk/MzMzMzMz4z9mZmZmZmb+P5qZmZmZmdk/ZmZmZmZm9j8zMzMzMzPTP5qZmZmZmfk/mpmZmZmZyT9mZmZmZmb2P5qZmZmZmck/AAAAAAAA+D+amZmZmZnJP2ZmZmZmZvY/mpmZmZmZyT8=",
-        "shape": "50, 2",
-    }
+    for data in fig.data:
+        assert np.all(np.in1d(data.customdata[:, 1], iris.petal_width))
     # Hover and custom data, no repeated arguments
     fig = px.scatter(
         iris,

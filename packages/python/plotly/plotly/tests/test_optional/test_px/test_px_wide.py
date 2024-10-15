@@ -6,7 +6,6 @@ from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
 import warnings
-from plotly.tests.b64 import _b64
 
 
 def test_is_col_list():
@@ -74,10 +73,10 @@ def test_wide_mode_external(px_fn, orientation, style):
         if style == "explicit":
             fig = px_fn(**{"data_frame": df, y: list(df.columns), x: df.index})
         assert len(fig.data) == 3
-        assert fig.data[0][x] == _b64([11, 12, 13])
-        assert fig.data[0][y] == _b64([1, 2, 3])
-        assert fig.data[1][x] == _b64([11, 12, 13])
-        assert fig.data[1][y] == _b64([4, 5, 6])
+        assert list(fig.data[0][x]) == [11, 12, 13]
+        assert list(fig.data[0][y]) == [1, 2, 3]
+        assert list(fig.data[1][x]) == [11, 12, 13]
+        assert list(fig.data[1][y]) == [4, 5, 6]
         assert fig.layout[xaxis].title.text == "index"
         assert fig.layout[yaxis].title.text == "value"
         assert fig.layout.legend.title.text == "variable"
@@ -85,8 +84,8 @@ def test_wide_mode_external(px_fn, orientation, style):
         if style == "explicit":
             fig = px_fn(**{"data_frame": df, y: list(df.columns), x: df.index})
         assert len(fig.data) == 1
-        assert fig.data[0][x] == _b64([11, 12, 13, 11, 12, 13, 11, 12, 13])
-        assert fig.data[0][y] == _b64([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        assert list(fig.data[0][x]) == [11, 12, 13, 11, 12, 13, 11, 12, 13]
+        assert list(fig.data[0][y]) == [1, 2, 3, 4, 5, 6, 7, 8, 9]
         assert fig.layout[xaxis].title.text == "index"
         assert fig.layout[yaxis].title.text == "value"
     if px_fn in [px.violin, px.box, px.strip]:
@@ -94,14 +93,14 @@ def test_wide_mode_external(px_fn, orientation, style):
             fig = px_fn(**{"data_frame": df, y: list(df.columns)})
         assert len(fig.data) == 1
         assert list(fig.data[0][x]) == ["a"] * 3 + ["b"] * 3 + ["c"] * 3
-        assert fig.data[0][y] == _b64(range(1, 10))
+        assert list(fig.data[0][y]) == list(range(1, 10))
         assert fig.layout[yaxis].title.text == "value"
         assert fig.layout[xaxis].title.text == "variable"
     if px_fn in [px.histogram]:
         if style == "explicit":
             fig = px_fn(**{"data_frame": df, x: list(df.columns)})
         assert len(fig.data) == 3
-        assert fig.data[1][x] == _b64([4, 5, 6])
+        assert list(fig.data[1][x]) == [4, 5, 6]
         assert fig.layout.legend.title.text == "variable"
         assert fig.layout[xaxis].title.text == "value"
 

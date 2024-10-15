@@ -7,7 +7,6 @@ from io import BytesIO
 import base64
 import datetime
 from plotly.express.imshow_utils import rescale_intensity
-from plotly.tests.b64 import _b64
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
 img_gray = np.arange(100, dtype=float).reshape((10, 10))
@@ -182,7 +181,7 @@ def test_imshow_xarray(binary_string):
     assert fig.layout.xaxis.title.text == "dim_cols"
     assert fig.layout.yaxis.title.text == "dim_rows"
     if not binary_string:
-        assert np.all(np.array(fig.data[0].x) == _b64(da.coords["dim_cols"]))
+        assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
 
 
 def test_imshow_xarray_slicethrough():
@@ -192,7 +191,7 @@ def test_imshow_xarray_slicethrough():
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_2"
     assert fig.layout.yaxis.title.text == "dim_1"
-    assert np.all(np.array(fig.data[0].x) == _b64(da.coords["dim_2"]))
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
 
 
 def test_imshow_xarray_facet_col_string():
@@ -204,7 +203,7 @@ def test_imshow_xarray_facet_col_string():
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_2"
     assert fig.layout.yaxis.title.text == "dim_1"
-    assert np.all(np.array(fig.data[0].x) == _b64(da.coords["dim_2"]))
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
 
 
 def test_imshow_xarray_animation_frame_string():
@@ -216,7 +215,7 @@ def test_imshow_xarray_animation_frame_string():
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_2"
     assert fig.layout.yaxis.title.text == "dim_1"
-    assert np.all(np.array(fig.data[0].x) == _b64(da.coords["dim_2"]))
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
 
 
 def test_imshow_xarray_animation_facet_slicethrough():
@@ -226,7 +225,7 @@ def test_imshow_xarray_animation_facet_slicethrough():
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_3"
     assert fig.layout.yaxis.title.text == "dim_2"
-    assert np.all(np.array(fig.data[0].x) == _b64(da.coords["dim_3"]))
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_3"]))
 
 
 def test_imshow_labels_and_ranges():
@@ -292,7 +291,8 @@ def test_imshow_dataframe():
     assert fig.data[0].x[0] == df.columns[0]
     assert fig.data[0].x[0] == "nation"
     assert fig.layout.xaxis.title.text is None
-    assert fig.data[0].y == _b64(df.index)
+    assert fig.data[0].y[0] == df.index[0]
+    assert fig.data[0].y[0] == 0
     assert fig.layout.yaxis.title.text is None
 
     df = px.data.medals_wide(indexed=True)

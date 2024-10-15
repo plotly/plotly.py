@@ -188,7 +188,7 @@ class TestJSONEncoder(TestCase):
             '"z": [1, "A", "2014-01-05T00:00:00", '
             '"2014-01-05T01:01:01", "2014-01-05T01:01:01.000001"]}'
         )
-        assert js2 == '{"type": "scatter", "x": {"bdata": "AQID", "dtype": "i1"}}'
+        assert js2 == '{"type": "scatter", "x": [1, 2, 3]}'
 
         # Test JSON encoding works
         _json.dumps(data, cls=utils.PlotlyJSONEncoder, sort_keys=True)
@@ -372,7 +372,6 @@ class TestJSONEncoder(TestCase):
         with self.assertRaises(TypeError):
             _json.dumps({"a": {1}}, cls=utils.PlotlyJSONEncoder)
 
-    @pytest.mark.skip(reason="The encoding is faster now.")
     def test_fast_track_finite_arrays(self):
         # if NaN or Infinity is found in the json dump
         # of a figure, it is decoded and re-encoded to replace these values

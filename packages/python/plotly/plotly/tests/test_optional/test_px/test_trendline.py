@@ -122,7 +122,8 @@ def test_trendline_nan_values(mode, options):
         trendline_options=options,
     )
     for trendline in fig["data"][1::2]:
-        assert trendline.x == {"bdata": "tAe5B74HwwfIB80H0gfXBw==", "dtype": "i2"}
+        assert trendline.x[0] >= start_date
+        assert len(trendline.x) == len(trendline.y)
 
 
 def test_ols_trendline_slopes():
