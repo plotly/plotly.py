@@ -409,7 +409,7 @@ def create_hexbin_mapbox(
     if args["animation_frame"] is not None:
         groups = dict(args["data_frame"].group_by(args["animation_frame"]).__iter__())
     else:
-        groups = {0: args["data_frame"]}
+        groups = {(0,): args["data_frame"]}
 
     agg_data_frame_list = []
     for key, df in groups.items():
@@ -427,7 +427,7 @@ def create_hexbin_mapbox(
         agg_data_frame_list.append(
             nw.from_dict(
                 {
-                    "frame": [key] * len(hexagons_ids),
+                    "frame": [int(key[0])] * len(hexagons_ids),
                     "locations": hexagons_ids,
                     "color": aggregated_value,
                 },
