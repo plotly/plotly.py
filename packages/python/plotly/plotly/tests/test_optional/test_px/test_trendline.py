@@ -35,11 +35,12 @@ def test_trendline_results_passthrough(constructor, mode, options):
         if mode == "ols":
             assert "R<sup>2</sup>" in trendline.hovertemplate
     results = px.get_trendline_results(fig)
-    if mode == "ols":  # This is flaky for polars?
+    if mode == "ols":
         assert len(results) == 2
-        assert results["country"].values[0] == "Australia"
-        au_result = results["px_fit_results"].values[0]
-        assert len(au_result.params) == 2
+        # Polars does not guarantee to maintain order in group by
+        assert set(results["country"].to_list()) == {"Australia", "New Zealand"}
+        result = results["px_fit_results"].values[0]
+        assert len(result.params) == 2
     else:
         assert len(results) == 0
 

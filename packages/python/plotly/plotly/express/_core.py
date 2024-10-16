@@ -1896,9 +1896,7 @@ def process_dataframe_hierarchy(args):
             **{args["color"]: nw.col(args["color"]) * nw.col(count_colname)}
         )
 
-    def post_agg(
-        dframe: nw.DataFrame, continuous_aggs: list[str], discrete_aggs: list[str]
-    ) -> nw.DataFrame:
+    def post_agg(dframe: nw.DataFrame, continuous_aggs, discrete_aggs) -> nw.DataFrame:
         """
         - continuous_aggs is either [] or [args["color"]]
         - discrete_aggs is either [args["color"], <rest_of_cols>] or [<rest_of cols>]
