@@ -1,0 +1,2 @@
+pandas; python_version < '3.9' # Loose requirement for older Python as older numpy is not supported
+pandas>=2.2.0; python_version >= '3.9' # Minimum pin to ensure compatibility with all versions of numpy

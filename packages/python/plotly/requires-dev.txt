@@ -1,7 +1,7 @@
 ### Optional Dependencies for Additional Plotly Functionality   ###
 ###                                                             ###
 ### To install, run:                                            ###
-###      $ pip install -r optional-requirements.txt             ###
+###      $ pip install -r requires-dev.txt             ###
 ###                                                             ###
 ###################################################################
 
