@@ -436,7 +436,7 @@ def create_hexbin_mapbox(
         )
 
     agg_data_frame = nw.concat(agg_data_frame_list, how="vertical").with_columns(
-        color=nw.col("color").cast(nw.Float64)
+        color=nw.col("color").cast(nw.Int64)
     )
 
     if range_color is None:

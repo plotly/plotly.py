@@ -20,6 +20,6 @@ matplotlib==3.7.3
 scikit-image==0.18.1
 psutil==5.7.0
 kaleido
-polars
+polars[timezone]
 pyarrow
 narwhals>=1.9.2
