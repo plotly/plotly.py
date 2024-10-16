@@ -109,7 +109,7 @@ def convert_to_base64(obj):
             else:
                 convert_to_base64(value)
     elif isinstance(obj, list) or isinstance(obj, tuple):
-        for i, value in enumerate(obj):
+        for value in obj:
             convert_to_base64(value)
 
 
