@@ -111,17 +111,20 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def _pandas(mode, trendline_options, x_raw, y, non_missing):
+    import numpy as np
+
+    try:
+        import pandas as pd
+    except ImportError:
+        msg = "Trendline requires pandas to be installed"
+        raise ImportError(msg)
+
     modes = dict(rolling="Rolling", ewm="Exponentially Weighted", expanding="Expanding")
     trendline_options = trendline_options.copy()
     function_name = trendline_options.pop("function", "mean")
     function_args = trendline_options.pop("function_args", dict())
 
-    pd = nw.dependencies.get_pandas()
-    if pd is None:
-        msg = "Trendline requires pandas to be installed"
-        raise ImportError(msg)
-
-    series = pd.Series(y, index=x_raw.to_pandas())
+    series = pd.Series(np.copy(y), index=x_raw.to_pandas())
 
     # TODO: If narwhals were to support rolling, ewm and expanding then we could go around these
     agg = getattr(series, mode)  # e.g. series.rolling

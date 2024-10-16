@@ -427,7 +427,7 @@ def create_hexbin_mapbox(
         agg_data_frame_list.append(
             nw.from_dict(
                 {
-                    "frame": [int(key[0])] * len(hexagons_ids),
+                    "frame": [key[0]] * len(hexagons_ids),
                     "locations": hexagons_ids,
                     "color": aggregated_value,
                 },
