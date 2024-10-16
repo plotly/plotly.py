@@ -74,6 +74,22 @@ fig = px.imshow(img, binary_format="jpeg", binary_compression_level=0)
 fig.show()
 ```
 
+Image data is encoded as a lossless base64-encoded WebP string by default.
+The example below uses a lossy WebP instead by passing a setting to the underlying image library backend.
+
+```python
+import plotly.express as px
+from skimage import data
+img = data.astronaut()
+fig = px.imshow(
+  img,
+  # Pillow backend parameters are documented here: https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp
+  # Available parameters depend on the `binary_format`
+  binary_backend_kwargs={"lossless": False}
+)
+fig.show()
+```
+
 ### Display single-channel 2D data as a heatmap
 
 For a 2D image, `px.imshow` uses a colorscale to map scalar data to colors. The default colorscale is the one of the active template (see [the tutorial on templates](/python/templates/)).
