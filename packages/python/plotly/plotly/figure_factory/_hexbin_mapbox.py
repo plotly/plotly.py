@@ -473,7 +473,7 @@ def create_hexbin_mapbox(
                 )
                 if args["animation_frame"] is not None
                 else args["data_frame"]
-            ),
+            ).to_native(),
             lat=args["lat"],
             lon=args["lon"],
             animation_frame=args["animation_frame"],
