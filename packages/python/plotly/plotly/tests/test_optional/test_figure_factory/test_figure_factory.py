@@ -4474,7 +4474,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         lon = np.random.randn(N)
         color = np.ones(N)
         frame = np.random.randint(0, n_frames, N)
-        df = pd.DataFrame(
+        df = pd.DataFrame(  # TODO: Test other constructors?
             np.c_[lat, lon, color, frame],
             columns=["Latitude", "Longitude", "Metric", "Frame"],
         )
