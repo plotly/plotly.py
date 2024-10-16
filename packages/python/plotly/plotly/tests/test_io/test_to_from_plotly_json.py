@@ -137,7 +137,7 @@ def datetime_array(request, datetime_value):
 def test_graph_object_input(engine, pretty):
     scatter = go.Scatter(x=[1, 2, 3], y=np.array([4, 5, 6]))
     result = pio.to_json_plotly(scatter, engine=engine)
-    expected = """{"x":[1,2,3],"y":{"dtype":"i1","bdata":"BAUG"},"type":"scatter"}"""
+    expected = """{"x":[1,2,3],"y":[4,5,6],"type":"scatter"}"""
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
 
