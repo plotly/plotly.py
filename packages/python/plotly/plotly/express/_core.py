@@ -1633,15 +1633,6 @@ def _check_dataframe_all_leaves(df):
                 "None entries cannot have not-None children",
                 df_sorted.iloc[null_row_index],
             )
-    df_sorted[null_mask] = ""
-    row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
-    for i, row in enumerate(row_strings[:-1]):
-        if row_strings[i + 1] in row and (i + 1) in null_indices:
-            raise ValueError(
-                "Non-leaves rows are not permitted in the dataframe \n",
-                df_sorted.iloc[i + 1],
-                "is not a leaf.",
-            )
 
 
 def process_dataframe_hierarchy(args):
