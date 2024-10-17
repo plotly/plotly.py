@@ -1787,7 +1787,9 @@ def process_dataframe_hierarchy(args):
     df: nw.DataFrame = args["data_frame"]
     path = args["path"][::-1]
     _check_dataframe_all_leaves(df[path[::-1]])
-    discrete_color = False
+    discrete_color = not _is_continuous(df, args["color"]) if args["color"] else False
+
+    df = df.lazy()
 
     new_path = [col_name + "_path_copy" for col_name in path]
     df = df.with_columns(
@@ -1826,10 +1828,9 @@ def process_dataframe_hierarchy(args):
     else:
         # we need a count column for the first groupby and the weighted mean of color
         # trick to be sure the col name is unused: take the sum of existing names
+        columns = df.collect_schema().names()
         count_colname = (
-            "count"
-            if "count" not in df.columns
-            else "".join([str(el) for el in df.columns])
+            "count" if "count" not in columns else "".join([str(el) for el in columns])
         )
         # we can modify df because it's a copy of the px argument
         df = df.with_columns(**{count_colname: nw.lit(1)})
@@ -1843,10 +1844,9 @@ def process_dataframe_hierarchy(args):
     continuous_aggs = []
 
     if args["color"]:
-        if not _is_continuous(df, args["color"]):
+        if discrete_color:
 
             discrete_aggs.append(args["color"])
-            discrete_color = True
             # Hack: In theory, we should have a way to do `.agg(nw.col(x).unique())` and
             # successively unpack/parse it as:
             # ```
@@ -1869,12 +1869,11 @@ def process_dataframe_hierarchy(args):
         else:
             # This first needs to be multiplied by `count_colname`
             continuous_aggs.append(args["color"])
-            discrete_color = False
 
             agg_f[args["color"]] = nw.sum(args["color"])
 
     #  Other columns (for color, hover_data, custom_data etc.)
-    cols = list(set(df.columns).difference(path))
+    cols = list(set(df.collect_schema().names()).difference(path))
     df = df.with_columns(
         **{c: nw.col(c).cast(nw.String()) for c in cols if c not in agg_f}
     )
@@ -1896,7 +1895,7 @@ def process_dataframe_hierarchy(args):
             **{args["color"]: nw.col(args["color"]) * nw.col(count_colname)}
         )
 
-    def post_agg(dframe: nw.DataFrame, continuous_aggs, discrete_aggs) -> nw.DataFrame:
+    def post_agg(dframe: nw.LazyFrame, continuous_aggs, discrete_aggs) -> nw.LazyFrame:
         """
         - continuous_aggs is either [] or [args["color"]]
         - discrete_aggs is either [args["color"], <rest_of_cols>] or [<rest_of cols>]
@@ -1960,7 +1959,7 @@ def process_dataframe_hierarchy(args):
 
         all_trees.append(df_tree.select(*["labels", "parent", "id", *cols]))
 
-    df_all_trees = nw.maybe_reset_index(nw.concat(all_trees, how="vertical"))
+    df_all_trees = nw.maybe_reset_index(nw.concat(all_trees, how="vertical").collect())
 
     # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
