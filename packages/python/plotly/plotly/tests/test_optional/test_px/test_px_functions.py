@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
 import narwhals.stable.v1 as nw
 import numpy as np
+from polars.exceptions import InvalidOperationError
 import pytest
 
 
@@ -162,8 +163,12 @@ def test_sunburst_treemap_with_path(constructor):
             native_namespace=native_namespace,
         )
     )
-    msg = "Column `values` of `df` could not be converted to a numerical data type."
-    with pytest.raises(ValueError, match=msg):
+    pd_msg = "Column `values` of `df` could not be converted to a numerical data type."
+    pl_msg = "conversion from `str` to `f64` failed in column 'values'"
+
+    with pytest.raises(
+        (ValueError, InvalidOperationError), match=f"({pd_msg}|{pl_msg})"
+    ):
         fig = px.sunburst(df.to_native(), path=path, values="values")
     #  path is a mixture of column names and array-like
     path = [
