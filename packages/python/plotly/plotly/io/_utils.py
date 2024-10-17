@@ -24,7 +24,6 @@ The fig parameter must be a dict or Figure.
                 typ=type(fig), v=fig
             )
         )
-
     return fig_dict
 
 
