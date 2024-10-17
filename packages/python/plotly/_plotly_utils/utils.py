@@ -94,7 +94,7 @@ def is_skipped_key(key):
     """
     Return whether the key is skipped for conversion to the typed array spec
     """
-    skipped_keys = ["geojson", "layer", "range"]
+    skipped_keys = ["geojson", "layer", "layers", "range"]
     return any(skipped_key == key for skipped_key in skipped_keys)
 
 
