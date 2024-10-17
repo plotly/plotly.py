@@ -44,7 +44,7 @@ def to_typed_array_spec(v):
     v = copy_to_readonly_numpy_array(v)
 
     np = get_module("numpy", should_load=False)
-    if not isinstance(v, np.ndarray):
+    if not np or not isinstance(v, np.ndarray):
         return v
 
     dtype = str(v.dtype)
@@ -96,7 +96,7 @@ def is_skipped_key(key):
     are skipped for conversion to the typed array spec
     """
     skipped_keys = ["geojson", "layer", "range"]
-    return any(skipped_key in key for skipped_key in skipped_keys)
+    return any(skipped_key == key for skipped_key in skipped_keys)
 
 
 def convert_to_base64(obj):
