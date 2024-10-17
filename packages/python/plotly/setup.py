@@ -20,7 +20,7 @@ import versioneer
 
 here = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-node_root = os.path.join(project_root, "packages", "javascript", "jupyterlab-plotly")
+node_root = os.path.join(here, "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 
 npm_path = os.pathsep.join(
@@ -31,6 +31,7 @@ npm_path = os.pathsep.join(
 )
 
 labstatic = "jupyterlab_plotly/labextension/static"
+
 if not os.path.exists(labstatic):
     # Ensure the folder exists when we will look for files in it
     os.makedirs(labstatic)
@@ -133,9 +134,7 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "jupyterlab_plotly", "nbextension", "extension.js"),
-        os.path.join(here, "jupyterlab_plotly", "nbextension", "index.js"),
-        os.path.join(here, "jupyterlab_plotly", "labextension", "package.json"),
+        os.path.join(here, "plotly", "bundle.js"),
     ]
 
     def initialize_options(self):
@@ -198,7 +197,7 @@ class NPM(Command):
                     stderr=sys.stderr,
                 )
             check_call(
-                [npmName, "run", "build:prod"],
+                [npmName, "run", "build"],
                 cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
