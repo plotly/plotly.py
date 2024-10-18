@@ -21,10 +21,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
 
-- Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused latex to not render in plotly charts. 
-
-- Removed require.js from the generated javascript in plotly charts. 
-
 ## [5.23.0] - 2024-07-23
 
 ### Updated
