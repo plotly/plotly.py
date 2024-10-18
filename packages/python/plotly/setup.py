@@ -30,34 +30,6 @@ npm_path = os.pathsep.join(
     ]
 )
 
-labstatic = "jupyterlab_plotly/labextension/static"
-
-if not os.path.exists(labstatic):
-    # Ensure the folder exists when we will look for files in it
-    os.makedirs(labstatic)
-
-prebuilt_assets = [
-    (
-        "share/jupyter/labextensions/jupyterlab-plotly",
-        [
-            "jupyterlab_plotly/labextension/package.json",
-        ],
-    ),
-    (
-        "share/jupyter/labextensions/jupyterlab-plotly/static",
-        [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
-    ),
-    (
-        "share/jupyter/nbextensions/jupyterlab-plotly",
-        [
-            "jupyterlab_plotly/nbextension/extension.js",
-            "jupyterlab_plotly/nbextension/index.js",
-            "jupyterlab_plotly/nbextension/index.js.LICENSE.txt",
-        ],
-    ),
-]
-
-
 if "--skip-npm" in sys.argv or os.environ.get("SKIP_NPM") is not None:
     print("Skipping npm install as requested.")
     skip_npm = True
@@ -68,9 +40,7 @@ else:
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
-    path = os.path.join(
-        project_root, "packages", "javascript", "jupyterlab-plotly", "package.json"
-    )
+    path = os.path.join(here, "js", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
@@ -93,7 +63,6 @@ def js_prerelease(command, strict=False):
             if not is_repo and all(os.path.exists(t) for t in jsdeps.targets):
                 # sdist, nothing to do
                 command.run(self)
-                self.distribution.data_files.extend(prebuilt_assets)
                 return
 
             try:
@@ -117,10 +86,6 @@ def js_prerelease(command, strict=False):
 def update_package_data(distribution):
     """update package_data to catch changes during setup"""
     build_py = distribution.get_command_obj("build_py")
-
-    # JS assets will not be present if we are skip npm build
-    if not skip_npm:
-        distribution.data_files.extend(prebuilt_assets)
 
     # re-init build_py options which load package_data
     build_py.finalize_options()
@@ -207,8 +172,6 @@ class NPM(Command):
         for t in self.targets:
             if not os.path.exists(t):
                 msg = "Missing file: %s" % t
-                if not has_npm:
-                    msg += "\nnpm is required to build a development version of jupyterlab-plotly"
                 raise ValueError(msg)
 
         # update package data in case this created new files
@@ -490,7 +453,7 @@ class UpdatePlotlyJsDevCommand(Command):
 
 
 class UpdatePlotlywidgetVersionCommand(Command):
-    description = "Update package.json version of jupyterlab-plotly"
+    description = "Update package.json version to match widget version"
 
     user_options = []
 
@@ -565,7 +528,6 @@ setup(
     python_requires=">=3.8",
     license="MIT",
     packages=[
-        "jupyterlab_plotly",
         "plotly",
         "plotly.plotly",
         "plotly.offline",
@@ -593,15 +555,7 @@ setup(
             "package_data/templates/*",
             "package_data/datasets/*",
         ],
-        "jupyterlab_plotly": [
-            "nbextension/*",
-            "labextension/*",
-            "labextension/static/*",
-        ],
     },
-    data_files=[
-        ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
-    ],
     install_requires=["tenacity>=6.2.0", "packaging"],
     zip_safe=False,
     cmdclass=dict(

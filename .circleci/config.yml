@@ -41,7 +41,6 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/javascript/jupyterlab-plotly && npm run bundle && cd ../../..
             cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
@@ -249,14 +248,6 @@ jobs:
             fi
       - test_optional:
           py: "312_no_numpy"
-
-  # Orca
-  python_38_orca:
-    docker:
-      - image: cimg/python:3.8-browsers
-    steps:
-      - test_orca:
-          py: "38"
 
   # Percy
   python_39_percy:
@@ -614,7 +605,6 @@ workflows:
       - python_311_optional
       - python_312_optional
       - python_39_pandas_2_optional
-      - python_38_orca
       - python_39_percy
       - python_312_no_numpy
       - build-doc
