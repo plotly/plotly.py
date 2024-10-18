@@ -2037,10 +2037,11 @@ def process_dataframe_pie(args, trace_patch):
     uniques = df.get_column(names).unique().to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
 
-    # TODO
     # Original implementation: args["data_frame"] = df.set_index(names).loc[order].reset_index()
-    # However this is untested, therefore will need some special attention to verify
-    args["data_frame"] = df[order].select(names)
+    # However we do not have a way to custom sort a dataframe in narwhals.
+    args["data_frame"] = nw.concat(
+        [df.filter(nw.col(names) == value) for value in order], how="vertical"
+    )
     return args, trace_patch
 
 
