@@ -138,17 +138,17 @@ We will support Python 3.12 and higher versions soon.
 
 ### Install requirements - (Non-Windows)
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
-(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-install.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-dev.txt
  ```
 ### Install requirements - (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
 complete installation and avoid gdal-config errors.
 
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-install.txt
 (plotly_dev) $ conda install fiona
-(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-dev.txt
 ```
 
 ### Editable install of plotly packages
@@ -171,7 +171,7 @@ documentation on _development mode_.
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
 and the [pre-commit](https://pre-commit.com/) library to manage a git commit hook to
 run Black prior to each commit.  Both pre-commit and black are included in the
-`packages/python/plotly/optional-requirements.txt` file, so you should have them
+`packages/python/plotly/requires-dev.txt` file, so you should have them
 installed already if you've been following along.
 
 To enable the Black formatting git hook, run the following from within your virtual
@@ -259,7 +259,7 @@ We take advantage of two tools to run tests:
 
 ### Running Tests with `pytest`
 
-Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
+Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `requires-dev.txt` as explained above.
 
 After you've done that, go ahead and run the test suite!
 

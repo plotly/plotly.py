@@ -65,6 +65,7 @@ if "--skip-npm" in sys.argv or os.environ.get("SKIP_NPM") is not None:
 else:
     skip_npm = False
 
+
 # Load plotly.js version from js/package.json
 def plotly_js_version():
     path = os.path.join(
@@ -303,7 +304,6 @@ def request_json(url):
 
 
 def get_latest_publish_build_info(repo, branch):
-
     url = (
         r"https://circleci.com/api/v1.1/project/github/"
         r"{repo}/tree/{branch}?limit=100&filter=completed"
@@ -537,6 +537,14 @@ validator_packages = [
 ]
 
 versioneer_cmds = versioneer.get_cmdclass()
+
+
+def read_req_file(req_type):
+    with open(f"requires-{req_type}.txt", encoding="utf-8") as fp:
+        requires = (line.strip() for line in fp)
+        return [req for req in requires if req and not req.startswith("#")]
+
+
 setup(
     name="plotly",
     version=versioneer.get_version(),
@@ -603,7 +611,11 @@ setup(
     data_files=[
         ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
     ],
-    install_requires=["tenacity>=6.2.0", "packaging"],
+    install_requires=read_req_file("install"),
+    extras_require={
+        "pandas": read_req_file("pandas"),
+        "dev": read_req_file("dev"),
+    },
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),
