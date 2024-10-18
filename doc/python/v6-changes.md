@@ -34,4 +34,67 @@ jupyter:
     thumbnail: thumbnail/v4-migration.png
 ---
 
-### Changes in Plotly.py Version 6
+This page outlines the changes in Plotly.py version 6 and cases where you may need to update your charts or tools that you use for working with Plotly.py
+
+<!-- #region -->
+## Jupyter Notebook Support
+
+## Removed Attributes
+
+The following attributes have been removed in Plotly.py 6.
+
+### `layout.titlefont`
+
+`layout.titlefont` as shown in the following example has been removed. 
+
+
+```python
+import plotly.graph_objects as go
+
+trace = go.Bar(
+    x=['A', 'B', 'C', 'D'],
+    y=[10, 15, 13, 17]
+)
+
+layout = go.Layout(
+    title=dict(
+        text='Chart Title'
+    ),
+    titlefont=dict(
+        size=40
+    )
+)
+
+fig = go.Figure(data=[trace], layout=layout)
+
+fig.show()
+```
+
+Replace it with `layout.title.font`:
+
+```python
+import plotly.graph_objects as go
+
+trace = go.Bar(
+    x=['A', 'B', 'C', 'D'],
+    y=[10, 15, 13, 17]
+)
+
+layout = go.Layout(
+    title=dict(
+        text='Chart Title',
+        font=dict(size=40)
+    )
+)
+
+fig = go.Figure(data=[trace], layout=layout)
+
+fig.show()
+```
+
+## Removed Traces
+
+
+
+
+<!-- #endregion -->
