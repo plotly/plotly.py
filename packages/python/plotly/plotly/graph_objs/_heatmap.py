@@ -365,21 +365,6 @@ class Heatmap(_BaseTraceType):
                     :class:`plotly.graph_objects.heatmap.colorbar.T
                     itle` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    heatmap.colorbar.title.font instead. Sets this
-                    color bar's title font. Note that the title's
-                    font used to be set by the now deprecated
-                    `titlefont` attribute.
-                titleside
-                    Deprecated: Please use
-                    heatmap.colorbar.title.side instead. Determines
-                    the location of color bar's title with respect
-                    to the color bar. Defaults to "top" when
-                    `orientation` if "v" and  defaults to "right"
-                    when `orientation` if "h". Note that the
-                    title's location used to be set by the now
-                    deprecated `titleside` attribute.
                 x
                     Sets the x position with respect to `xref` of
                     the color bar (in plot fraction). When `xref`
