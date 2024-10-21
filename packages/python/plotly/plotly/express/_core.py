@@ -10,6 +10,7 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
+from narwhals.dependencies import is_into_series
 from narwhals.utils import generate_unique_token
 
 from plotly._subplots import (
@@ -305,7 +306,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 and (
                     trace_spec.constructor != go.Parcats
                     or (attr_value is not None and name in attr_value)
-                    or to_py_scalar(df.get_column(name).n_unique())
+                    or nw.to_py_scalar(df.get_column(name).n_unique())
                     <= args["dimensions_max_cardinality"]
                 )
             ]
@@ -349,18 +350,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
 
                     if x.dtype == nw.Datetime:
                         # convert to unix epoch seconds
-                        x = (
-                            x.to_frame()
-                            .select(
-                                **{
-                                    args["x"]: nw.when(~x.is_null()).then(
-                                        x.cast(nw.Int64())
-                                    )
-                                }
-                            )
-                            .get_column(args["x"])
-                            / 10**9
-                        )
+                        x = x.dt.timestamp() / 10**9
                     elif x.dtype not in NW_NUMERIC_DTYPES:
                         try:
                             x = x.cast(nw.Float64())
@@ -497,7 +487,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         else:
                             mapping = {}
                         for cat in trace_data.get_column(attr_value):
-                            cat = to_py_scalar(cat)
+                            cat = nw.to_py_scalar(cat)
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
@@ -2054,7 +2044,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     sizeref = 0
     if "size" in args and args["size"]:
         sizeref = (
-            to_py_scalar(df.get_column(args["size"]).max()) / args["size_max"] ** 2
+            nw.to_py_scalar(df.get_column(args["size"]).max()) / args["size_max"] ** 2
         )
 
     # Compute color attributes and grouping attributes
@@ -2753,22 +2743,3 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
         annot.update(font=None)
 
     return fig
-
-
-def is_into_series(df) -> bool:
-    """Check if `df` is a supported narwhals eager dataframe."""
-    return (
-        nw.dependencies.is_polars_series(df)
-        or nw.dependencies.is_pyarrow_chunked_array(df)
-        or nw.dependencies.is_pandas_like_series(df)
-    )
-
-
-def to_py_scalar(scalar_like):
-    """If scalar is not python native, tries to convert it to python native."""
-    if hasattr(scalar_like, "as_py"):
-        return scalar_like.as_py()
-    elif hasattr(scalar_like, "item"):
-        return scalar_like.item()
-    else:
-        return scalar_like
