@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,27 +20,32 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.10.0
   plotly:
-    description: How to configure and style base maps for Choropleths and Bubble Maps.
+    description: How to configure and style base maps for outline-based Geo Maps.
     display_as: maps
     language: python
     layout: base
-    name: Map Configuration and Styling
-    order: 12
+    name: Map Configuration and Styling on Geo Maps
+    order: 13
     page_type: u-guide
     permalink: python/map-configuration/
     thumbnail: thumbnail/county-level-choropleth.jpg
 ---
 
-### Mapbox Maps vs Geo Maps
+### Tile Maps vs Outline Maps
 
 Plotly supports two different kinds of maps:
 
-1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with a `px.scatter_mapbox`, `px.line_mapbox`, `px.choropleth_mapbox` or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermapbox`, `go.Choroplethmapbox` or `go.Densitymapbox`, the `layout.mapbox` object in your figure contains configuration information for the map itself.
-2. **Geo maps** are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
+- **[Tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map)**
 
-This page documents Geo outline-based maps, and the [Mapbox Layers documentation](/python/mapbox-layers/) describes how to configure Mapbox tile-based maps.
+If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`, `go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox`, the `layout.map` object in your figure contains configuration information for the map itself.
+
+- **Outline-based maps**
+
+Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
+
+> This page documents **Geo outline-based maps**, and the [Tile Map Layers documentation](/python/tile-map-layers/) describes how to configure tile-based maps.
 
 **Note:** Plotly Express cannot create empty figures, so the examples below mostly create an "empty" map using `fig = go.Figure(go.Scattergeo())`. That said, every configuration option here is equally applicable to non-empty maps created with the Plotly Express `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions.
 

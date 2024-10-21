@@ -25,7 +25,7 @@ def _compare_figures(go_trace, px_fig):
 def test_pie_like_px():
     # Pie
     labels = ["Oxygen", "Hydrogen", "Carbon_Dioxide", "Nitrogen"]
-    values = [4500, 2500, 1053, 500]
+    values = np.array([4500, 2500, 1053, 500])
 
     fig = px.pie(names=labels, values=values)
     trace = go.Pie(labels=labels, values=values)
@@ -33,7 +33,7 @@ def test_pie_like_px():
 
     labels = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
     parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
-    values = [10, 14, 12, 10, 2, 6, 6, 4, 4]
+    values = np.array([10, 14, 12, 10, 2, 6, 6, 4, 4])
     # Sunburst
     fig = px.sunburst(names=labels, parents=parents, values=values)
     trace = go.Sunburst(labels=labels, parents=parents, values=values)
@@ -45,7 +45,7 @@ def test_pie_like_px():
 
     # Funnel
     x = ["A", "B", "C"]
-    y = [3, 2, 1]
+    y = np.array([3, 2, 1])
     fig = px.funnel(y=y, x=x)
     trace = go.Funnel(y=y, x=x)
     _compare_figures(trace, fig)

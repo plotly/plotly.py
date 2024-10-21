@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.10.14
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -41,7 +41,7 @@ Other kinds of subplots and axes are described in other tutorials:
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
 - [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
 - [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
-- [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/layout/mapbox/)
+- [Map axes](/python/tile-map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
 - [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
 **See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
@@ -444,6 +444,62 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 
 fig.update_xaxes(minor=dict(ticklen=6, tickcolor="black", showgrid=True))
 fig.update_yaxes(minor_ticks="inside")
+
+fig.show()
+```
+
+#### Adjust Tick Label Positions
+
+*New in 5.23*
+
+You can adjust tick label positions by moving them a number of pixels away from the axis using `ticklabelstandoff` or along the axis using `ticklabelshift`.
+
+In this example, `ticklabelshift=25` shifts the labels 25 pixels to the right along the x-axis. By providing a negative value, we could move the labels 25 pixels to the left, (`ticklabelshift=-25`).
+
+Here, `ticklabelstandoff=15` moves the labels 15 pixels further away from the x-axis. A negative value here would move them closer to the axis.
+
+```python
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.line(df, x='Date', y='AAPL.High')
+
+fig.update_layout(
+    xaxis=dict(
+        ticks='outside',
+        ticklen=10,
+        ticklabelshift=25,
+        ticklabelstandoff=15
+    )
+)
+
+fig.show()
+```
+
+#### Use Minor Tick for Label
+
+*New in 5.23*
+
+On date or linear axes, use `ticklabelindex` to draw a label for a minor tick instead of a major tick.
+
+To draw the label for the minor tick before each major tick, set `ticklabelindex=-1`, like in the following example.
+
+```python
+import plotly.express as px
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.line(df, x='Date', y='AAPL.High')
+
+fig.update_layout(
+    xaxis=dict(
+        minor=dict(ticks='outside'),
+        ticks='outside',
+        ticklen=10,
+        ticklabelindex=-1
+    )
+)
 
 fig.show()
 ```

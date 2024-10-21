@@ -301,6 +301,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             legend
                 :class:`plotly.graph_objects.layout.Legend`
                 instance or dict with compatible properties
+            map
+                :class:`plotly.graph_objects.layout.Map`
+                instance or dict with compatible properties
             mapbox
                 :class:`plotly.graph_objects.layout.Mapbox`
                 instance or dict with compatible properties

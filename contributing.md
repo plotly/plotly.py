@@ -57,9 +57,7 @@ There are many ways to contribute to plotly.py. To contribute effectively, it is
 
 - tests are found in `packages/python/plotly/plotly/tests`. Different
   directories correspond to different test jobs (with different dependency sets)
-  run in continuous integration. These jobs are configured in
-  `packages/python/plotly/tox.ini`, which itself is used in the Circle CI
-  configuration file `.circleci/config.yml`. More is explained about tests
+  run in continuous integration. More is explained about tests
   in the following "Technical aspects" section.
 
 - the **documentation** is part of this repository. Its structure and some
@@ -231,10 +229,10 @@ For dev branches, it is also possible to use `updateplotlyjsdev` in two configur
 
 ### CircleCI Release
 
-If your devbranch is part of the official plotly.js repository, you can use 
+If your devbranch is part of the official plotly.js repository, you can use
 ```bash
 python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
-``` 
+```
 to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
 
 ### Local Repository
