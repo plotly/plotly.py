@@ -20,7 +20,9 @@ import versioneer
 
 here = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-jupyterlab_extension_root = os.path.join(project_root, "packages", "javascript", "jupyterlab-plotly")
+jupyterlab_extension_root = os.path.join(
+    project_root, "packages", "javascript", "jupyterlab-plotly"
+)
 widget_root = os.path.join(here, "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 
