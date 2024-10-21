@@ -262,7 +262,7 @@ data = [
             colorscale = 'Hot'
         )
     ]
-layout = go.Layout(title="State and Music Tastes", yaxis=dict(autotick=False, dtick=1))
+layout = go.Layout(title="State and Music Tastes", yaxis=dict(tickmode='linear', dtick=1))
 py.iplot(Figure(data=data, layout=layout), filename='redshift/state and music taste heatmap', height=1000)
 ```
 
