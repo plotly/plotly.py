@@ -6,12 +6,7 @@ from plotly.missing_anywidget import FigureWidget as FigureWidgetMissingAnywidge
 
 try:
     import anywidget as _anywidget
-    from packaging.version import Version as _Version
-
-    if _Version(_anywidget.__version__) >= _Version("7.0.0"):
-        missing_anywidget = False
-    else:
-        raise ImportError()
+    missing_anywidget = False
 except Exception:
     missing_anywidget = True
 
