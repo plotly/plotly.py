@@ -122,7 +122,7 @@ fig.update_layout(
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        titlefont=dict(size=30),
+        title_font=dict(size=30),
     )
 )
 
@@ -157,7 +157,7 @@ fig.update_layout(
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        titlefont=dict(size=30),
+        title_font=dict(size=30),
     )
 )
 
@@ -194,7 +194,7 @@ fig.update_layout(
         ticktext=["Label", "Very long label", "Other label", "Very very long label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        titlefont=dict(size=30),
+        title_font=dict(size=30),
     )
 )
 

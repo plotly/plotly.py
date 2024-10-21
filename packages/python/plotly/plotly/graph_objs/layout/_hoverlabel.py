@@ -236,11 +236,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         Sets the font for group titles in hover (unified modes).
         Defaults to `hoverlabel.font`.
 
-        The 'grouptitlefont' property is an instance of Grouptitlefont
+        The 'grouptitlefont' property is an instance of Grouptitle_font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.hoverlabel.Grouptitlefont`
+          - An instance of :class:`plotly.graph_objs.layout.hoverlabel.Grouptitle_font`
           - A dict of string/value properties that will be passed
-            to the Grouptitlefont constructor
+            to the Grouptitle_font constructor
 
             Supported dict properties:
 
@@ -290,7 +290,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.layout.hoverlabel.Grouptitlefont
+        plotly.graph_objs.layout.hoverlabel.Grouptitle_font
         """
         return self["grouptitlefont"]
 
