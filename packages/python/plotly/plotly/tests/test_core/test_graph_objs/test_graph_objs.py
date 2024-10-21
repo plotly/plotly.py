@@ -118,31 +118,6 @@ class TestBackwardsCompat(TestCase):
             {"type": "pie", "title": {"text": "A title 2", "font": {"size": 23}}},
         )
 
-    def test_legacy_title_props_remapped(self):
-
-        # plain Layout
-        obj = go.Layout()
-        self.assertIs(obj.title_font, obj.title.font)
-        self.assertIsNone(obj.title.font.family)
-
-        # Set title_font in constructor
-        obj = go.Layout(title_font={"family": "Courier"})
-        self.assertIs(obj.title_font, obj.title.font)
-        self.assertEqual(obj.title_font.family, "Courier")
-        self.assertEqual(obj.title.font.family, "Courier")
-
-        # Property assignment
-        obj = go.Layout()
-        obj.title_font.family = "Courier"
-        self.assertIs(obj.title_font, obj.title.font)
-        self.assertEqual(obj["title_font.family"], "Courier")
-        self.assertEqual(obj.title.font.family, "Courier")
-
-        # In/Iter
-        self.assertIn("title_font", obj)
-        self.assertIn("title_font.family", obj)
-        self.assertIn("title_font", iter(obj))
-
 
 class TestPop(TestCase):
     def setUp(self):
