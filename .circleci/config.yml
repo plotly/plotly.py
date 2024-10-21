@@ -64,6 +64,7 @@ commands:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
+            python setup.py jsdeps
             pytest plotly/tests/test_optional
           no_output_timeout: 40m
       - run:
