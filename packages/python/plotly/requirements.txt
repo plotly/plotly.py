@@ -9,4 +9,4 @@
 tenacity>=6.2.0
 
 ## dataframe agnostic layer ##
-narwhals>=1.9.2
+narwhals>=1.10.0
