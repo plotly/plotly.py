@@ -293,8 +293,8 @@ class HtmlRenderer(MimetypeRenderer):
         <script type="text/javascript">
         {win_config}
         {mathjax_config}
-        {script}
         </script>
+        <script type="module">{script}</script>
         """.format(
                     script=get_plotlyjs(),
                     win_config=_window_plotly_config,
