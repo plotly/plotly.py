@@ -286,7 +286,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         else:
             raise ImportError()
     except Exception:
-        from ..missing_ipywidgets import FigureWidget
+        from ..missing_anywidget import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -304,7 +304,7 @@ else:
                 else:
                     raise ImportError()
             except Exception:
-                from ..missing_ipywidgets import FigureWidget
+                from ..missing_anywidget import FigureWidget
 
                 return FigureWidget
 
