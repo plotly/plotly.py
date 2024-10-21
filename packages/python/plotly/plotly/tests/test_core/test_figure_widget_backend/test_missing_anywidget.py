@@ -6,6 +6,7 @@ from plotly.missing_anywidget import FigureWidget as FigureWidgetMissingAnywidge
 
 try:
     import anywidget as _anywidget
+
     missing_anywidget = False
 except Exception:
     missing_anywidget = True
