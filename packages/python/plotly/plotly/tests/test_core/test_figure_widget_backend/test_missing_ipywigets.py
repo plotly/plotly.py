@@ -2,36 +2,36 @@ import pytest
 
 # Use wildcard import to make sure FigureWidget is always included
 from plotly.graph_objects import *
-from plotly.missing_ipywidgets import FigureWidget as FigureWidgetMissingIPywidgets
+from plotly.missing_anywidget import FigureWidget as FigureWidgetMissingAnywidget
 
 try:
-    import ipywidgets as _ipywidgets
+    import anywidget as _anywidget
     from packaging.version import Version as _Version
 
-    if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-        missing_ipywidgets = False
+    if _Version(_anywidget.__version__) >= _Version("7.0.0"):
+        missing_anywidget = False
     else:
         raise ImportError()
 except Exception:
-    missing_ipywidgets = True
+    missing_anywidget = True
 
 
-if missing_ipywidgets:
+if missing_anywidget:
 
-    def test_import_figurewidget_without_ipywidgets():
-        assert FigureWidget is FigureWidgetMissingIPywidgets
+    def test_import_figurewidget_without_anywidget():
+        assert FigureWidget is FigureWidgetMissingAnywidget
 
         with pytest.raises(ImportError):
-            # ipywidgets import error raised on construction, not import
+            # anywidget import error raised on construction, not import
             FigureWidget()
 
 else:
 
-    def test_import_figurewidget_with_ipywidgets():
+    def test_import_figurewidget_with_anywidget():
         from plotly.graph_objs._figurewidget import (
-            FigureWidget as FigureWidgetWithIPywidgets,
+            FigureWidget as FigureWidgetWithAnywidget,
         )
 
-        assert FigureWidget is FigureWidgetWithIPywidgets
+        assert FigureWidget is FigureWidgetWithAnywidget
         fig = FigureWidget()
-        assert isinstance(fig, FigureWidgetWithIPywidgets)
+        assert isinstance(fig, FigureWidgetWithAnywidget)

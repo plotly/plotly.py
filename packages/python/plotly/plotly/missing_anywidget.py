@@ -11,5 +11,5 @@ class FigureWidget(BaseFigure):
 
     def __init__(self, *args, **kwargs):
         raise ImportError(
-            "Please install ipywidgets>=7.0.0 to use the FigureWidget class"
+            "Please install anywidget to use the FigureWidget class"
         )
