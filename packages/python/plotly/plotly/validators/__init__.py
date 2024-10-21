@@ -23,7 +23,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._scatter3d import Scatter3DValidator
     from ._scatter import ScatterValidator
     from ._sankey import SankeyValidator
-    from ._pointcloud import PointcloudValidator
     from ._pie import PieValidator
     from ._parcoords import ParcoordsValidator
     from ._parcats import ParcatsValidator

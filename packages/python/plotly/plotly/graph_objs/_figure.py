@@ -24,17 +24,17 @@ class Figure(BaseFigure):
                              'choroplethmapbox', 'cone', 'contour',
                              'contourcarpet', 'densitymap',
                              'densitymapbox', 'funnel', 'funnelarea',
-                             'heatmap', 'histogram',
-                             'histogram2d', 'histogram2dcontour', 'icicle',
-                             'image', 'indicator', 'isosurface', 'mesh3d',
-                             'ohlc', 'parcats', 'parcoords', 'pie',
-                             'sankey', 'scatter',
-                             'scatter3d', 'scattercarpet', 'scattergeo',
-                             'scattergl', 'scattermap', 'scattermapbox',
-                             'scatterpolar', 'scatterpolargl',
-                             'scattersmith', 'scatterternary', 'splom',
-                             'streamtube', 'sunburst', 'surface', 'table',
-                             'treemap', 'violin', 'volume', 'waterfall']
+                             'heatmap', 'histogram', 'histogram2d',
+                             'histogram2dcontour', 'icicle', 'image',
+                             'indicator', 'isosurface', 'mesh3d', 'ohlc',
+                             'parcats', 'parcoords', 'pie', 'sankey',
+                             'scatter', 'scatter3d', 'scattercarpet',
+                             'scattergeo', 'scattergl', 'scattermap',
+                             'scattermapbox', 'scatterpolar',
+                             'scatterpolargl', 'scattersmith',
+                             'scatterternary', 'splom', 'streamtube',
+                             'sunburst', 'surface', 'table', 'treemap',
+                             'violin', 'volume', 'waterfall']
 
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -510,11 +510,6 @@ class Figure(BaseFigure):
                     title
                         :class:`plotly.graph_objects.layout.Title`
                         instance or dict with compatible properties
-                    titlefont
-                        Deprecated: Please use layout.title.font
-                        instead. Sets the title font. Note that the
-                        title's font used to be customized by the now
-                        deprecated `titlefont` attribute.
                     transition
                         Sets transition options used during
                         Plotly.react updates.
@@ -12787,8 +12782,6 @@ class Figure(BaseFigure):
         texttemplate=None,
         texttemplatesrc=None,
         title=None,
-        titlefont=None,
-        titleposition=None,
         uid=None,
         uirevision=None,
         values=None,
@@ -13036,15 +13029,6 @@ class Figure(BaseFigure):
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use pie.title.font instead. Sets the
-            font used for `title`. Note that the title's font used
-            to be set by the now deprecated `titlefont` attribute.
-        titleposition
-            Deprecated: Please use pie.title.position instead.
-            Specifies the location of the `title`. Note that the
-            title's position used to be set by the now deprecated
-            `titleposition` attribute.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -13144,8 +13128,6 @@ class Figure(BaseFigure):
             texttemplate=texttemplate,
             texttemplatesrc=texttemplatesrc,
             title=title,
-            titlefont=titlefont,
-            titleposition=titleposition,
             uid=uid,
             uirevision=uirevision,
             values=values,

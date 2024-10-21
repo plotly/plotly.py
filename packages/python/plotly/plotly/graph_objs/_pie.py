@@ -57,8 +57,6 @@ class Pie(_BaseTraceType):
         "texttemplate",
         "texttemplatesrc",
         "title",
-        "titlefont",
-        "titleposition",
         "type",
         "uid",
         "uirevision",
@@ -1469,19 +1467,12 @@ class Pie(_BaseTraceType):
             Supported dict properties:
 
                 font
-                    Sets the font used for `title`. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
+                    Sets the font used for `title`.
                 position
-                    Specifies the location of the `title`. Note
-                    that the title's position used to be set by the
-                    now deprecated `titleposition` attribute.
+                    Specifies the location of the `title`.
                 text
                     Sets the title of the chart. If it is empty, no
-                    title is displayed. Note that before the
-                    existence of `title.text`, the title's contents
-                    used to be defined as the `title` attribute
-                    itself. This behavior has been deprecated.
+                    title is displayed.
 
         Returns
         -------
@@ -1492,128 +1483,6 @@ class Pie(_BaseTraceType):
     @title.setter
     def title(self, val):
         self["title"] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use pie.title.font instead. Sets the font
-        used for `title`. Note that the title's font used to be set by
-        the now deprecated `titlefont` attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.pie.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
-
-    # titleposition
-    # -------------
-    @property
-    def titleposition(self):
-        """
-        Deprecated: Please use pie.title.position instead. Specifies
-        the location of the `title`. Note that the title's position
-        used to be set by the now deprecated `titleposition` attribute.
-
-        The 'position' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle center',
-                'bottom left', 'bottom center', 'bottom right']
-
-        Returns
-        -------
-
-        """
-        return self["titleposition"]
-
-    @titleposition.setter
-    def titleposition(self, val):
-        self["titleposition"] = val
 
     # uid
     # ---
@@ -1974,15 +1843,6 @@ class Pie(_BaseTraceType):
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use pie.title.font instead. Sets the
-            font used for `title`. Note that the title's font used
-            to be set by the now deprecated `titlefont` attribute.
-        titleposition
-            Deprecated: Please use pie.title.position instead.
-            Specifies the location of the `title`. Note that the
-            title's position used to be set by the now deprecated
-            `titleposition` attribute.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2017,11 +1877,6 @@ class Pie(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-
-    _mapped_properties = {
-        "titlefont": ("title", "font"),
-        "titleposition": ("title", "position"),
-    }
 
     def __init__(
         self,
@@ -2074,8 +1929,6 @@ class Pie(_BaseTraceType):
         texttemplate=None,
         texttemplatesrc=None,
         title=None,
-        titlefont=None,
-        titleposition=None,
         uid=None,
         uirevision=None,
         values=None,
@@ -2324,15 +2177,6 @@ class Pie(_BaseTraceType):
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use pie.title.font instead. Sets the
-            font used for `title`. Note that the title's font used
-            to be set by the now deprecated `titlefont` attribute.
-        titleposition
-            Deprecated: Please use pie.title.position instead.
-            Specifies the location of the `title`. Note that the
-            title's position used to be set by the now deprecated
-            `titleposition` attribute.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2592,14 +2436,6 @@ an instance of :class:`plotly.graph_objs.Pie`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
-        _v = arg.pop("titleposition", None)
-        _v = titleposition if titleposition is not None else _v
-        if _v is not None:
-            self["titleposition"] = _v
         _v = arg.pop("uid", None)
         _v = uid if uid is not None else _v
         if _v is not None:
