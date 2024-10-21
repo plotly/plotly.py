@@ -51,9 +51,9 @@ class TestAssignmentPrimitive(TestCase):
         assert d1 == d2
 
     def test_nested_attr(self):
-        assert self.scatter.marker.colorbar.title_font.family is None
-        self.scatter.marker.colorbar.title_font.family = "courier"
-        assert self.scatter.marker.colorbar.title_font.family == "courier"
+        assert self.scatter.marker.colorbar.title.font.family is None
+        self.scatter.marker.colorbar.title.font.family = "courier"
+        assert self.scatter.marker.colorbar.title.font.family == "courier"
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 

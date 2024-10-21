@@ -97,7 +97,7 @@ class TestOnChangeCallbacks(TestCase):
         fn_layout = MagicMock()
 
         # Register callback on change to family property under title_font
-        self.figure.layout.xaxis.title_font.on_change(fn_title_font, "family")
+        self.figure.layout.xaxis.title.font.on_change(fn_title_font, "family")
 
         # Register callback on the range and title_font.family properties
         # under xaxis
@@ -106,7 +106,7 @@ class TestOnChangeCallbacks(TestCase):
         # Register callback on xaxis object itself
         self.figure.layout.on_change(fn_layout, "xaxis")
 
-        # Assign a new xaxis range and title_font.family
+        # Assign a new xaxis range and title.font.family
         self.figure.layout.xaxis.title.font.family = "courier"
 
         # Check that all callbacks were executed once
