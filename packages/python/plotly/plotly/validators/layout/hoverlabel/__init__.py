@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._namelength import NamelengthValidator
-    from ._grouptitlefont import GrouptitlefontValidator
+    from ._grouptitlefont import Grouptitle_fontValidator
     from ._font import FontValidator
     from ._bordercolor import BordercolorValidator
     from ._bgcolor import BgcolorValidator
@@ -16,7 +16,7 @@ else:
         [],
         [
             "._namelength.NamelengthValidator",
-            "._grouptitlefont.GrouptitlefontValidator",
+            "._grouptitlefont.Grouptitle_fontValidator",
             "._font.FontValidator",
             "._bordercolor.BordercolorValidator",
             "._bgcolor.BgcolorValidator",

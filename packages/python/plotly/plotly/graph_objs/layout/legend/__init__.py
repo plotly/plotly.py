@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._font import Font
-    from ._grouptitlefont import Grouptitlefont
+    from ._grouptitlefont import Grouptitle_font
     from ._title import Title
     from . import title
 else:
@@ -12,5 +12,5 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [".title"],
-        ["._font.Font", "._grouptitlefont.Grouptitlefont", "._title.Title"],
+        ["._font.Font", "._grouptitlefont.Grouptitle_font", "._title.Title"],
     )
