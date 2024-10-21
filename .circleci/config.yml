@@ -400,7 +400,7 @@ jobs:
             conda init bash
             mkdir output
 
-     - run:
+      - run:
           name: initial NPM Build
           command: |
             eval "$(conda shell.bash hook)"
