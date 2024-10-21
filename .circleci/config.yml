@@ -56,6 +56,7 @@ commands:
           name: Test core
           command: |
             cd packages/python/plotly
+            python setup.py jsdeps
             . venv/bin/activate
             pytest plotly/tests/test_core
           no_output_timeout: 20m
@@ -64,7 +65,6 @@ commands:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            python setup.py jsdeps
             pytest plotly/tests/test_optional
           no_output_timeout: 40m
       - run:
