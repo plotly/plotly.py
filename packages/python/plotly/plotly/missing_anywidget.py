@@ -10,6 +10,4 @@ class FigureWidget(BaseFigure):
     """
 
     def __init__(self, *args, **kwargs):
-        raise ImportError(
-            "Please install anywidget to use the FigureWidget class"
-        )
+        raise ImportError("Please install anywidget to use the FigureWidget class")
