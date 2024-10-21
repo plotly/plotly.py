@@ -15,6 +15,7 @@ from _plotly_utils.utils import (
     display_string_positions,
     chomp_empty_strings,
     find_closest_string,
+    convert_to_base64,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -2493,7 +2494,7 @@ Please use the add_trace method with the row and col parameters.
 
     def _init_child_props(self, child):
         """
-        Initialize the properites dict for a child trace or layout
+        Initialize the properties dict for a child trace or layout
 
         Note: this method must match the name/signature of one on
         BasePlotlyType
@@ -3310,6 +3311,9 @@ Invalid property path '{key_path_str}' for layout
         if frames:
             res["frames"] = frames
 
+        # Add base64 conversion before sending to the front-end
+        convert_to_base64(res)
+
         return res
 
     def to_plotly_json(self):
@@ -3632,12 +3636,7 @@ Invalid property path '{key_path_str}' for layout
 
             If 'directory', a script tag is included that references an external
             plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file. If `file` is a string to a local file path
-            and `full_html` is True then
-
-            If 'directory', a script tag is included that references an external
-            plotly.min.js bundle that is assumed to reside in the same
-            directory as the HTML file.  If `file` is a string to a local file
+            directory as the HTML file. If `file` is a string to a local file
             path and `full_html` is True, then the plotly.min.js bundle is copied
             into the directory of the resulting HTML file. If a file named
             plotly.min.js already exists in the output directory then this file
@@ -3712,8 +3711,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        str
-            Representation of figure as an HTML div string
+        None
         """
         import plotly.io as pio
 

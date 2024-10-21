@@ -72,10 +72,12 @@ To use it, in the environment where your Plotly figures are being rendered, load
 
 In a Jupyter notebook environment that supports magic commands, you can load it with the [HTML magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-html):
 
+<!-- #region -->
 ```
 %%html
 <script src=“https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js”></script>
 ```
+<!-- #endregion -->
 
 ### WebGL for Scatter Performance
 
