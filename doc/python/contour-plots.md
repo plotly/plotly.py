@@ -283,7 +283,7 @@ fig = go.Figure(data=
         colorbar=dict(
             title='Color bar title', # title here
             titleside='right',
-            titlefont=dict(
+            title_font=dict(
                 size=14,
                 family='Arial, sans-serif')
         )))
