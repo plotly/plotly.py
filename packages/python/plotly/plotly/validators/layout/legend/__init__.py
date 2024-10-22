@@ -20,7 +20,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._itemdoubleclick import ItemdoubleclickValidator
     from ._itemclick import ItemclickValidator
     from ._indentation import IndentationValidator
-    from ._grouptitlefont import Grouptitle_fontValidator
+    from ._grouptitlefont import GrouptitlefontValidator
     from ._groupclick import GroupclickValidator
     from ._font import FontValidator
     from ._entrywidthmode import EntrywidthmodeValidator
@@ -53,7 +53,7 @@ else:
             "._itemdoubleclick.ItemdoubleclickValidator",
             "._itemclick.ItemclickValidator",
             "._indentation.IndentationValidator",
-            "._grouptitlefont.Grouptitle_fontValidator",
+            "._grouptitlefont.GrouptitlefontValidator",
             "._groupclick.GroupclickValidator",
             "._font.FontValidator",
             "._entrywidthmode.EntrywidthmodeValidator",
