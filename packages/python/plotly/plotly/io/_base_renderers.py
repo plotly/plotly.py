@@ -249,7 +249,6 @@ class HtmlRenderer(MimetypeRenderer):
         self,
         connected=False,
         full_html=False,
-        requirejs=True,
         global_init=False,
         config=None,
         auto_play=False,
@@ -261,7 +260,6 @@ class HtmlRenderer(MimetypeRenderer):
         self.auto_play = auto_play
         self.connected = connected
         self.global_init = global_init
-        self.requirejs = requirejs
         self.full_html = full_html
         self.animation_opts = animation_opts
         self.post_script = post_script
@@ -275,27 +273,13 @@ class HtmlRenderer(MimetypeRenderer):
                     )
                 )
 
-            if not self.requirejs:
-                raise ValueError("global_init is only supported with requirejs=True")
-
             if self.connected:
-                # Connected so we configure requirejs with the plotly CDN
                 script = """\
         <script type="text/javascript">
         {win_config}
         {mathjax_config}
-        if (typeof require !== 'undefined') {{
-        require.undef("plotly");
-        requirejs.config({{
-            paths: {{
-                'plotly': ['{plotly_cdn}']
-            }}
-        }});
-        require(['plotly'], function(Plotly) {{
-            window._Plotly = Plotly;
-        }});
-        }}
         </script>
+        <script type="module">import \"{plotly_cdn}\"</script>
         """.format(
                     win_config=_window_plotly_config,
                     mathjax_config=_mathjax_config,
@@ -309,16 +293,8 @@ class HtmlRenderer(MimetypeRenderer):
         <script type="text/javascript">
         {win_config}
         {mathjax_config}
-        if (typeof require !== 'undefined') {{
-        require.undef("plotly");
-        define('plotly', function(require, exports, module) {{
-            {script}
-        }});
-        require(['plotly'], function(Plotly) {{
-            window._Plotly = Plotly;
-        }});
-        }}
         </script>
+        <script type="module">{script}</script>
         """.format(
                     script=get_plotlyjs(),
                     win_config=_window_plotly_config,
@@ -331,10 +307,7 @@ class HtmlRenderer(MimetypeRenderer):
 
         from plotly.io import to_html
 
-        if self.requirejs:
-            include_plotlyjs = "require"
-            include_mathjax = False
-        elif self.connected:
+        if self.connected:
             include_plotlyjs = "cdn"
             include_mathjax = "cdn"
         else:
@@ -416,7 +389,6 @@ class NotebookRenderer(HtmlRenderer):
         super(NotebookRenderer, self).__init__(
             connected=connected,
             full_html=False,
-            requirejs=True,
             global_init=True,
             config=config,
             auto_play=auto_play,
@@ -444,7 +416,6 @@ class KaggleRenderer(HtmlRenderer):
         super(KaggleRenderer, self).__init__(
             connected=True,
             full_html=False,
-            requirejs=True,
             global_init=True,
             config=config,
             auto_play=auto_play,
@@ -472,7 +443,6 @@ class AzureRenderer(HtmlRenderer):
         super(AzureRenderer, self).__init__(
             connected=True,
             full_html=False,
-            requirejs=True,
             global_init=True,
             config=config,
             auto_play=auto_play,
@@ -497,7 +467,6 @@ class ColabRenderer(HtmlRenderer):
         super(ColabRenderer, self).__init__(
             connected=True,
             full_html=True,
-            requirejs=False,
             global_init=False,
             config=config,
             auto_play=auto_play,
@@ -832,7 +801,6 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         super(SphinxGalleryHtmlRenderer, self).__init__(
             connected=connected,
             full_html=False,
-            requirejs=False,
             global_init=False,
             config=config,
             auto_play=auto_play,
@@ -844,10 +812,7 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
 
         from plotly.io import to_html
 
-        if self.requirejs:
-            include_plotlyjs = "require"
-            include_mathjax = False
-        elif self.connected:
+        if self.connected:
             include_plotlyjs = "cdn"
             include_mathjax = "cdn"
         else:
