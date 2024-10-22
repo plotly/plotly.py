@@ -45,6 +45,7 @@ commands:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
+            python setup.py jsdeps
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
       - run:
           name: Install plotly-geo
@@ -56,7 +57,6 @@ commands:
           name: Test core
           command: |
             cd packages/python/plotly
-            python setup.py jsdeps
             . venv/bin/activate
             pytest plotly/tests/test_core
           no_output_timeout: 20m
