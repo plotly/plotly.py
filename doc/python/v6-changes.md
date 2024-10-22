@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.16
+    version: 3.11.10
   plotly:
     description: Guide to changes in version 6 of Plotly.py and how to migrate from
       version 5
@@ -39,14 +39,24 @@ This page outlines the changes in Plotly.py version 6 and cases where you may ne
 <!-- #region -->
 ## Jupyter Notebook Support
 
+Versions of Jupyter Notebook earlier than version 7 are no longer supported. To upgrade to the latest Jupyter Notebook:
+
+```
+pip install notebook -upgrade
+```
+
+## Processing NumPy and Pandas Series
+
+Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](python/performance/) for more details.
+
+
 ## Removed Attributes
 
 The following attributes have been removed in Plotly.py 6.
 
-### `layout.titlefont`
+### `titlefont`
 
-`layout.titlefont` as shown in the following example has been removed. 
-
+The `titlefont` attribute, shown in the following example on `layout`, has been removed. 
 
 ```python
 import plotly.graph_objects as go
@@ -92,9 +102,20 @@ fig = go.Figure(data=[trace], layout=layout)
 fig.show()
 ```
 
+### `titleoffset`
+
+### `titleside`
+
 ## Removed Traces
 
+The following traces have been removed. 
 
+### `heatmapgl`
 
+### `pointcloud`
 
 <!-- #endregion -->
+
+```python
+
+```
