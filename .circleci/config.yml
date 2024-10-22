@@ -441,6 +441,7 @@ jobs:
             npm pack
             mv jupyterlab-plotly*.tgz ../../../output
             cd ../../python/plotly/js
+            npm install
             npm run build
             mv ../bundle.js ../../../../output
 
@@ -489,7 +490,12 @@ jobs:
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
-              pip install -e ../packages/python/plotly
+              cd ../packages/python/plotly
+              pip install -e .
+              cd js
+              npm install
+              npm run build
+              cd ../../../../doc
             fi
             cd ..
       - run:
