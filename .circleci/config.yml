@@ -46,7 +46,9 @@ commands:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
-            python setup.py jsdeps
+            cd js
+            npm install
+            npm run build
       - run:
           name: Install plotly-geo
           command: |
