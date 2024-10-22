@@ -118,11 +118,15 @@ fig.update_layout(
     width=500,
     height=500,
     yaxis=dict(
-        title_text="Y-axis Title",
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        title_font=dict(size=30),
     )
 )
 
@@ -153,11 +157,15 @@ fig.update_layout(
     width=500,
     height=500,
     yaxis=dict(
-        title_text="Y-axis Title",
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        title_font=dict(size=30),
     )
 )
 
@@ -190,11 +198,15 @@ fig.update_layout(
     width=450,
     height=450,
     yaxis=dict(
-        title_text="Y-axis Title",
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
         ticktext=["Label", "Very long label", "Other label", "Very very long label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        title_font=dict(size=30),
     )
 )
 

@@ -235,8 +235,10 @@ fig.update_traces(hole=.4, hoverinfo="label+percent+name")
 fig.update_layout(
     title_text="Global Emissions 1990-2011",
     # Add annotations in the center of the donut pies.
-    annotations=[dict(text='GHG', x=0.18, y=0.5, font_size=20, showarrow=False),
-                 dict(text='CO2', x=0.82, y=0.5, font_size=20, showarrow=False)])
+    annotations=[dict(text='GHG', x=sum(fig.get_subplot(1, 1).x) / 2, y=0.5,
+                      font_size=20, showarrow=False, xanchor="center"),
+                 dict(text='CO2', x=sum(fig.get_subplot(1, 2).x) / 2, y=0.5,
+                      font_size=20, showarrow=False, xanchor="center")])
 fig.show()
 ```
 
