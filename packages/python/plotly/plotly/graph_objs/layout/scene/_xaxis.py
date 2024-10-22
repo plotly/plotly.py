@@ -64,7 +64,6 @@ class XAxis(_BaseLayoutHierarchyType):
         "tickvalssrc",
         "tickwidth",
         "title",
-        "titlefont",
         "type",
         "visible",
         "zeroline",
@@ -1678,15 +1677,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Supported dict properties:
 
                 font
-                    Sets this axis' title font. Note that the
-                    title's font used to be customized by the now
-                    deprecated `titlefont` attribute.
+                    Sets this axis' title font.
                 text
-                    Sets the title of this axis. Note that before
-                    the existence of `title.text`, the title's
-                    contents used to be defined as the `title`
-                    attribute itself. This behavior has been
-                    deprecated.
+                    Sets the title of this axis.
 
         Returns
         -------
@@ -1697,77 +1690,6 @@ class XAxis(_BaseLayoutHierarchyType):
     @title.setter
     def title(self, val):
         self["title"] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use layout.scene.xaxis.title.font instead.
-        Sets this axis' title font. Note that the title's font used to
-        be customized by the now deprecated `titlefont` attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.scene.xaxis.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
 
     # type
     # ----
@@ -2195,11 +2117,6 @@ class XAxis(_BaseLayoutHierarchyType):
         title
             :class:`plotly.graph_objects.layout.scene.xaxis.Title`
             instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.scene.xaxis.title.font
-            instead. Sets this axis' title font. Note that the
-            title's font used to be customized by the now
-            deprecated `titlefont` attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -2217,8 +2134,6 @@ class XAxis(_BaseLayoutHierarchyType):
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
-
-    _mapped_properties = {"titlefont": ("title", "font")}
 
     def __init__(
         self,
@@ -2278,7 +2193,6 @@ class XAxis(_BaseLayoutHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
         type=None,
         visible=None,
         zeroline=None,
@@ -2570,11 +2484,6 @@ class XAxis(_BaseLayoutHierarchyType):
         title
             :class:`plotly.graph_objects.layout.scene.xaxis.Title`
             instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.scene.xaxis.title.font
-            instead. Sets this axis' title font. Note that the
-            title's font used to be customized by the now
-            deprecated `titlefont` attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -2845,10 +2754,6 @@ an instance of :class:`plotly.graph_objs.layout.scene.XAxis`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
         _v = arg.pop("type", None)
         _v = type if type is not None else _v
         if _v is not None:
