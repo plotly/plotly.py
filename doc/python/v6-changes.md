@@ -54,10 +54,9 @@ Plotly.py now takes advantage of recent changes in how Plotly.js handles typed a
 
 The following attributes have been removed in Plotly.py 6.
 
-### `titlefont`, `titleoffset`, and `titleside`
+### `titlefont`,`titleposition`, `titleside`, and `titleoffset`
 
-The `titlefont`, `titleoffset`, and `titleside` attributes have been removed. 
-Replace them with `title.font`, `title.side`, and `title.offset`.
+The `titlefont`,`titleposition`, `titleside`, and `titleoffset` attributes have been removed. Replace them with `title.font`, `title.position`, `title.side`, and `title.offset`.
 
 Here's an example using `layout.tilefont`:
 
@@ -112,10 +111,11 @@ The following traces have been removed.
 
 ### `heatmapgl`
 
+The `heatmapgl` trace has been removed. Use [`heatmap`](/python/heatmaps/) instead. 
+
+
 ### `pointcloud`
 
+The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/scattergl/).  
+
 <!-- #endregion -->
-
-```python
-
-```
