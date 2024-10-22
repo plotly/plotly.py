@@ -20,7 +20,7 @@ import versioneer
 
 here = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-node_root = os.path.join(project_root, "packages", "javascript", "jupyterlab-plotly")
+node_root = os.path.join(project_root, "packages", "python", "plotly", "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 
 npm_path = os.pathsep.join(
@@ -99,9 +99,7 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "jupyterlab_plotly", "nbextension", "extension.js"),
-        os.path.join(here, "jupyterlab_plotly", "nbextension", "index.js"),
-        os.path.join(here, "jupyterlab_plotly", "labextension", "package.json"),
+        os.path.join(here, "bundle.js"),
     ]
 
     def initialize_options(self):
@@ -125,11 +123,6 @@ class NPM(Command):
         except:
             return False
 
-    def should_run_npm_install(self):
-        package_json = os.path.join(node_root, "package.json")
-        node_modules_exists = os.path.exists(self.node_modules)
-        return self.has_npm()
-
     def run(self):
         if skip_npm:
             log.info("Skipping npm-installation")
@@ -144,7 +137,7 @@ class NPM(Command):
         env = os.environ.copy()
         env["PATH"] = npm_path
 
-        if self.should_run_npm_install():
+        if self.has_npm():
             log.info(
                 "Installing build dependencies with npm.  This may take a while..."
             )
@@ -164,7 +157,7 @@ class NPM(Command):
                     stderr=sys.stderr,
                 )
             check_call(
-                [npmName, "run", "build:prod"],
+                [npmName, "run", "build"],
                 cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,

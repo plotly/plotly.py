@@ -211,7 +211,7 @@ make that pull request!
 
 
 ## Update to a new version of Plotly.js
-First update the version of the `plotly.js` dependency in `packages/javascript/jupyterlab-plotly/package.json`.
+First update the version of the `plotly.js` dependency in `packages/python/plotly/js/package.json`.
 
 Then run the `updateplotlyjs` command with:
 
