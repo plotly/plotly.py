@@ -15,6 +15,7 @@ from _plotly_utils.utils import (
     display_string_positions,
     chomp_empty_strings,
     find_closest_string,
+    convert_to_base64,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -3310,6 +3311,9 @@ Invalid property path '{key_path_str}' for layout
         if frames:
             res["frames"] = frames
 
+        # Add base64 conversion before sending to the front-end
+        convert_to_base64(res)
+
         return res
 
     def to_plotly_json(self):
@@ -4247,7 +4251,7 @@ class BasePlotlyType(object):
     """
 
     # ### Mapped (deprecated) properties ###
-    # dict for deprecated property name (e.g. 'titlefont') to tuple
+    # dict for deprecated property name (e.g. 'title_font') to tuple
     # of relative path to new property (e.g. ('title', 'font')
     _mapped_properties = {}
 

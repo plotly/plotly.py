@@ -569,7 +569,7 @@ fig.update_layout(
         # filled Polygon
         dict(
             type="path",
-            path=" M 3,7 L2,8 L2,9 L3,10, L4,10 L5,9 L5,8 L4,7 Z",
+            path=" M 3,7 L2,8 L2,9 L3,10 L4,10 L5,9 L5,8 L4,7 Z",
             fillcolor="PaleTurquoise",
             line_color="LightSeaGreen",
         ),

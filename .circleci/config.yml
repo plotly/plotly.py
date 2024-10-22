@@ -46,7 +46,9 @@ commands:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
-            python setup.py jsdeps
+            cd js
+            npm install
+            npm run build
       - run:
           name: Install plotly-geo
           command: |
@@ -340,8 +342,9 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_38_core.txt black inflect
+            pip install jupyterlab~=3.0
       - run:
-          name: Update widget plotly.js version
+          name: Update jupyterlab-plotly and jupyter widget plotly.js version
           command: |
             cd packages/python/plotly
             . venv/bin/activate
@@ -395,9 +398,19 @@ jobs:
             conda config --remove channels defaults
             conda config --add channels conda-forge
             conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
-            conda install -n env -c conda-forge nodejs=16
+            conda install -n env -c conda-forge jupyterlab=3 nodejs=16
             conda init bash
             mkdir output
+
+      - run:
+          name: initial NPM Build
+          command: |
+            eval "$(conda shell.bash hook)"
+            conda activate env
+            cd packages/javascript/jupyterlab-plotly
+            npm ci
+            npm run build:prod
+            git status
 
       - run:
           name: PyPI Build
@@ -424,7 +437,10 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/python/plotly/js
+            cd packages/javascript/jupyterlab-plotly
+            npm pack
+            mv jupyterlab-plotly*.tgz ../../../output
+            cd ../../python/plotly/js
             npm run build
             mv ../bundle.js ../../../../output
 
