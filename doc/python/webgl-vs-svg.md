@@ -222,7 +222,7 @@ The following types of objects in Python are supported for improved performance:
 - Pandas Index, `pandas.Index`, or Series, `pandas.Series`, objects.
 - Array objects that can be converted to `numpy.ndarray` objects. i.e., they implement `"__array__"` or `"__array_interface__"` and return a `numpy.ndarray`.
 
-The following array data types are supported:
+The following [array data types](https://numpy.org/devdocs/reference/arrays.scalars.html) are supported:
 
 - float32
 - float64
@@ -232,8 +232,6 @@ The following array data types are supported:
 - uint16
 - int32
 - uint32
-- int64*
-- uint64*
 
 *If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
 
