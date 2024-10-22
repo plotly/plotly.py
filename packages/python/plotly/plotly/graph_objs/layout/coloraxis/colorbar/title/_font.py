@@ -326,8 +326,7 @@ class Font(_BaseLayoutHierarchyType):
         """
         Construct a new Font object
 
-        Sets this color bar's title font. Note that the title's font
-        used to be set by the now deprecated `titlefont` attribute.
+        Sets this color bar's title font.
 
         Parameters
         ----------

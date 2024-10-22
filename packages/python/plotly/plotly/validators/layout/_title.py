@@ -27,9 +27,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 values. Invalid values will be reset to the
                 default 1.
             font
-                Sets the title font. Note that the title's font
-                used to be customized by the now deprecated
-                `titlefont` attribute.
+                Sets the title font.
             pad
                 Sets the padding of the title. Each padding
                 value only applies when the corresponding
@@ -44,10 +42,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 tle` instance or dict with compatible
                 properties
             text
-                Sets the plot's title. Note that before the
-                existence of `title.text`, the title's contents
-                used to be defined as the `title` attribute
-                itself. This behavior has been deprecated.
+                Sets the plot's title.
             x
                 Sets the x position with respect to `xref` in
                 normalized coordinates from 0 (left) to 1

@@ -2,7 +2,7 @@ from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchy
 import copy as _copy
 
 
-class Grouptitlefont(_BaseLayoutHierarchyType):
+class Grouptitle_font(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
@@ -324,7 +324,7 @@ class Grouptitlefont(_BaseLayoutHierarchyType):
         **kwargs,
     ):
         """
-        Construct a new Grouptitlefont object
+        Construct a new Grouptitle_font object
 
         Sets the font for group titles in hover (unified modes).
         Defaults to `hoverlabel.font`.
@@ -334,7 +334,7 @@ class Grouptitlefont(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.layout.hoverla
-            bel.Grouptitlefont`
+            bel.Grouptitle_font`
         color
 
         family
@@ -376,9 +376,9 @@ class Grouptitlefont(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        Grouptitlefont
+        Grouptitle_font
         """
-        super(Grouptitlefont, self).__init__("grouptitlefont")
+        super(Grouptitle_font, self).__init__("grouptitlefont")
 
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
@@ -395,9 +395,9 @@ class Grouptitlefont(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.hoverlabel.Grouptitlefont
+The first argument to the plotly.graph_objs.layout.hoverlabel.Grouptitle_font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.hoverlabel.Grouptitlefont`"""
+an instance of :class:`plotly.graph_objs.layout.hoverlabel.Grouptitle_font`"""
             )
 
         # Handle skip_invalid
