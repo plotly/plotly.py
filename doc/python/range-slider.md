@@ -252,7 +252,11 @@ fig.update_layout(
         tickfont={"color": "#673ab7"},
         tickmode="auto",
         ticks="",
-        title_font={"color": "#673ab7"},
+        title=dict(
+            font=dict(
+                color="#673ab7"
+            )
+        ),
         type="linear",
         zeroline=False
     ),
@@ -268,7 +272,11 @@ fig.update_layout(
         tickfont={"color": "#E91E63"},
         tickmode="auto",
         ticks="",
-        title_font={"color": "#E91E63"},
+        title=dict(
+            font=dict(
+                color="#E91E63"
+            )
+        ),
         type="linear",
         zeroline=False
     ),
@@ -284,8 +292,12 @@ fig.update_layout(
         tickfont={"color": "#795548"},
         tickmode="auto",
         ticks="",
-        title="mg/L",
-        title_font={"color": "#795548"},
+        title=dict(
+            text="mg/L",
+            font=dict(
+                color="#795548"
+            )
+        ),
         type="linear",
         zeroline=False
     ),
@@ -301,8 +313,12 @@ fig.update_layout(
         tickfont={"color": "#607d8b"},
         tickmode="auto",
         ticks="",
-        title="mmol/L",
-        title_font={"color": "#607d8b"},
+        title=dict(
+            text="mmol/L",
+            font=dict(
+                color="#607d8b"
+            )
+        ),
         type="linear",
         zeroline=False
     ),
@@ -318,8 +334,12 @@ fig.update_layout(
         tickfont={"color": "#2196F3"},
         tickmode="auto",
         ticks="",
-        title="mg/Kg",
-        title_font={"color": "#2196F3"},
+        title=dict(
+            text="mg/Kg",
+            font=dict(
+                color="#2196F3"
+            )
+        ),
         type="linear",
         zeroline=False
     )

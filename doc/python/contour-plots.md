@@ -281,12 +281,15 @@ fig = go.Figure(data=
            [0.625, 1.25, 3.125, 6.25, 10.625],
            [0, 0.625, 2.5, 5.625, 10]],
         colorbar=dict(
-            title='Color bar title', # title here
-            titleside='right',
-            title_font=dict(
-                size=14,
-                family='Arial, sans-serif')
-        )))
+            title=dict(
+                text='Color bar title', # title here
+                side='right',
+                font=dict(
+                    size=14,
+                    family='Arial, sans-serif')
+                )
+            ),
+        ))
 
 fig.show()
 ```
