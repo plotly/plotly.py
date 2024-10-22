@@ -20,18 +20,7 @@ from plotly._subplots import (
 )
 
 NO_COLOR = "px_no_color_constant"
-NW_NUMERIC_DTYPES = {
-    nw.Float32,
-    nw.Float64,
-    nw.Int8,
-    nw.Int16,
-    nw.Int32,
-    nw.Int64,
-    nw.UInt8,
-    nw.UInt16,
-    nw.UInt32,
-    nw.UInt64,
-}
+
 
 trendline_functions = dict(
     lowess=lowess, rolling=rolling, ewm=ewm, expanding=expanding, ols=ols
@@ -168,7 +157,7 @@ def invert_label(args, column):
 
 
 def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
-    return df.get_column(col_name).dtype in NW_NUMERIC_DTYPES
+    return df.get_column(col_name).dtype.is_numeric()
 
 
 def get_decorated_label(args, column, role):
@@ -351,7 +340,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if x.dtype == nw.Datetime:
                         # convert to unix epoch seconds
                         x = x.dt.timestamp() / 10**9
-                    elif x.dtype not in NW_NUMERIC_DTYPES:
+                    elif not x.dtype.is_numeric():
                         try:
                             x = x.cast(nw.Float64())
                         except ValueError:
@@ -361,7 +350,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                 % args["x"]
                             )
 
-                    if y.dtype not in NW_NUMERIC_DTYPES:
+                    if not y.dtype.is_numeric():
                         try:
                             y = y.cast(nw.Float64())
                         except ValueError:
@@ -1648,7 +1637,7 @@ def build_dataframe(args, constructor):
         dtype = None
         for v in wide_value_vars:
             v_dtype = df_output.get_column(v).dtype
-            v_dtype = "number" if v_dtype in NW_NUMERIC_DTYPES else str(v_dtype)
+            v_dtype = "number" if v_dtype.is_numeric() else str(v_dtype)
             if dtype is None:
                 dtype = v_dtype
             elif dtype != v_dtype:
