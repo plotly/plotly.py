@@ -189,10 +189,10 @@ def test_ols_trendline_slopes():
 def test_trendline_on_timeseries(constructor, mode, options):
     df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
 
-    with pytest.raises(
-        ValueError,
-        match=r"Could not convert value of 'x' \('date'\) into a numeric type.",
-    ):
+    pd_err_msg = r"Could not convert value of 'x' \('date'\) into a numeric type."
+    pl_err_msg = "conversion from `str` to `f64` failed in column 'date'"
+
+    with pytest.raises(Exception, match=rf"({pd_err_msg}|{pl_err_msg})"):
         px.scatter(
             df.to_native(),
             x="date",
