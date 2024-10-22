@@ -625,7 +625,6 @@ fig.update_layout(
                 size=16
             )
         ),
-        tickfont_size=14,
     ),
     legend=dict(
         x=0,

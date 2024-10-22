@@ -15,8 +15,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def font(self):
         """
-        Sets the font used for `title`. Note that the title's font used
-        to be set by the now deprecated `titlefont` attribute.
+        Sets the font used for `title`.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -112,9 +111,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def position(self):
         """
-        Specifies the location of the `title`. Note that the title's
-        position used to be set by the now deprecated `titleposition`
-        attribute.
+        Specifies the location of the `title`.
 
         The 'position' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -136,9 +133,7 @@ class Title(_BaseTraceHierarchyType):
     def text(self):
         """
         Sets the title of the chart. If it is empty, no title is
-        displayed. Note that before the existence of `title.text`, the
-        title's contents used to be defined as the `title` attribute
-        itself. This behavior has been deprecated.
+        displayed.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -160,19 +155,12 @@ class Title(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         font
-            Sets the font used for `title`. Note that the title's
-            font used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets the font used for `title`.
         position
-            Specifies the location of the `title`. Note that the
-            title's position used to be set by the now deprecated
-            `titleposition` attribute.
+            Specifies the location of the `title`.
         text
             Sets the title of the chart. If it is empty, no title
-            is displayed. Note that before the existence of
-            `title.text`, the title's contents used to be defined
-            as the `title` attribute itself. This behavior has been
-            deprecated.
+            is displayed.
         """
 
     def __init__(self, arg=None, font=None, position=None, text=None, **kwargs):
@@ -186,19 +174,12 @@ class Title(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.funnelarea.Title`
         font
-            Sets the font used for `title`. Note that the title's
-            font used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets the font used for `title`.
         position
-            Specifies the location of the `title`. Note that the
-            title's position used to be set by the now deprecated
-            `titleposition` attribute.
+            Specifies the location of the `title`.
         text
             Sets the title of the chart. If it is empty, no title
-            is displayed. Note that before the existence of
-            `title.text`, the title's contents used to be defined
-            as the `title` attribute itself. This behavior has been
-            deprecated.
+            is displayed.
 
         Returns
         -------

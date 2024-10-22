@@ -561,8 +561,7 @@ class Font(_BaseTraceHierarchyType):
         """
         Construct a new Font object
 
-        Sets the font used for `title`. Note that the title's font used
-        to be set by the now deprecated `titlefont` attribute.
+        Sets the font used for `title`.
 
         Parameters
         ----------

@@ -780,10 +780,10 @@ class PlotlyRenderer(Renderer):
                 "          Only one subplot found, adding as a " "plotly title\n"
             )
             self.plotly_fig["layout"]["title"] = props["text"]
-            titlefont = dict(
+            title_font = dict(
                 size=props["style"]["fontsize"], color=props["style"]["color"]
             )
-            self.plotly_fig["layout"]["titlefont"] = titlefont
+            self.plotly_fig["layout"]["title_font"] = title_font
 
     def draw_xlabel(self, **props):
         """Add an xaxis label to the current subplot in layout dictionary.
@@ -811,8 +811,10 @@ class PlotlyRenderer(Renderer):
         self.msg += "        Adding xlabel\n"
         axis_key = "xaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = str(props["text"])
-        titlefont = dict(size=props["style"]["fontsize"], color=props["style"]["color"])
-        self.plotly_fig["layout"][axis_key]["titlefont"] = titlefont
+        title_font = dict(
+            size=props["style"]["fontsize"], color=props["style"]["color"]
+        )
+        self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 
     def draw_ylabel(self, **props):
         """Add a yaxis label to the current subplot in layout dictionary.
@@ -840,8 +842,10 @@ class PlotlyRenderer(Renderer):
         self.msg += "        Adding ylabel\n"
         axis_key = "yaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = props["text"]
-        titlefont = dict(size=props["style"]["fontsize"], color=props["style"]["color"])
-        self.plotly_fig["layout"][axis_key]["titlefont"] = titlefont
+        title_font = dict(
+            size=props["style"]["fontsize"], color=props["style"]["color"]
+        )
+        self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 
     def resize(self):
         """Revert figure layout to allow plotly to resize.

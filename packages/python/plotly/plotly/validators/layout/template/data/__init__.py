@@ -23,7 +23,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._scattercarpet import ScattercarpetValidator
     from ._scatter3d import Scatter3DValidator
     from ._sankey import SankeyValidator
-    from ._pointcloud import PointcloudValidator
     from ._pie import PieValidator
     from ._parcoords import ParcoordsValidator
     from ._parcats import ParcatsValidator
@@ -37,7 +36,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._histogram2d import Histogram2DValidator
     from ._histogram2dcontour import Histogram2DcontourValidator
     from ._heatmap import HeatmapValidator
-    from ._heatmapgl import HeatmapglValidator
     from ._funnel import FunnelValidator
     from ._funnelarea import FunnelareaValidator
     from ._densitymap import DensitymapValidator
@@ -81,7 +79,6 @@ else:
             "._scattercarpet.ScattercarpetValidator",
             "._scatter3d.Scatter3DValidator",
             "._sankey.SankeyValidator",
-            "._pointcloud.PointcloudValidator",
             "._pie.PieValidator",
             "._parcoords.ParcoordsValidator",
             "._parcats.ParcatsValidator",
@@ -95,7 +92,6 @@ else:
             "._histogram2d.Histogram2DValidator",
             "._histogram2dcontour.Histogram2DcontourValidator",
             "._heatmap.HeatmapValidator",
-            "._heatmapgl.HeatmapglValidator",
             "._funnel.FunnelValidator",
             "._funnelarea.FunnelareaValidator",
             "._densitymap.DensitymapValidator",
