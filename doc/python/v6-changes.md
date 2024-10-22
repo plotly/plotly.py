@@ -42,7 +42,7 @@ This page outlines the changes in Plotly.py version 6 and cases where you may ne
 Versions of Jupyter Notebook earlier than version 7 are no longer supported. To upgrade to the latest Jupyter Notebook:
 
 ```
-pip install notebook -upgrade
+pip install notebook --upgrade
 ```
 
 ## Processing NumPy and Pandas Series
@@ -54,9 +54,12 @@ Plotly.py now takes advantage of recent changes in how Plotly.js handles typed a
 
 The following attributes have been removed in Plotly.py 6.
 
-### `titlefont`
+### `titlefont`, `titleoffset`, and `titleside`
 
-The `titlefont` attribute, shown in the following example on `layout`, has been removed. 
+The `titlefont`, `titleoffset`, and `titleside` attributes have been removed. 
+Replace them with `title.font`, `title.side`, and `title.offset`.
+
+Here's an example using `layout.tilefont`:
 
 ```python
 import plotly.graph_objects as go
@@ -80,7 +83,8 @@ fig = go.Figure(data=[trace], layout=layout)
 fig.show()
 ```
 
-Replace it with `layout.title.font`:
+Updated to use `layout.title.font`:
+
 
 ```python
 import plotly.graph_objects as go
@@ -101,10 +105,6 @@ fig = go.Figure(data=[trace], layout=layout)
 
 fig.show()
 ```
-
-### `titleoffset`
-
-### `titleside`
 
 ## Removed Traces
 
