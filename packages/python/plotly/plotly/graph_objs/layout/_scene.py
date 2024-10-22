@@ -833,12 +833,6 @@ class Scene(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.scene.xaxis
                     .Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    layout.scene.xaxis.title.font instead. Sets
-                    this axis' title font. Note that the title's
-                    font used to be customized by the now
-                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -1190,12 +1184,6 @@ class Scene(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.scene.yaxis
                     .Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    layout.scene.yaxis.title.font instead. Sets
-                    this axis' title font. Note that the title's
-                    font used to be customized by the now
-                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -1547,12 +1535,6 @@ class Scene(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.scene.zaxis
                     .Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    layout.scene.zaxis.title.font instead. Sets
-                    this axis' title font. Note that the title's
-                    font used to be customized by the now
-                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the

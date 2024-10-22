@@ -567,11 +567,6 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             title
                 :class:`plotly.graph_objects.layout.yaxis.Title
                 ` instance or dict with compatible properties
-            titlefont
-                Deprecated: Please use layout.yaxis.title.font
-                instead. Sets this axis' title font. Note that
-                the title's font used to be customized by the
-                now deprecated `titlefont` attribute.
             type
                 Sets the axis type. By default, plotly attempts
                 to determined the axis type by looking into the

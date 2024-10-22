@@ -67,12 +67,6 @@ def to_html(
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.
 
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
-
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
         the resulting HTML file to an alternative CDN or local bundle.
@@ -254,20 +248,10 @@ def to_html(
     if isinstance(include_plotlyjs, str):
         include_plotlyjs = include_plotlyjs.lower()
 
-    # Start/end of requirejs block (if any)
-    require_start = ""
-    require_end = ""
-
     # Init and load
     load_plotlyjs = ""
 
-    # Init plotlyjs. This block needs to run before plotly.js is loaded in
-    # order for MathJax configuration to work properly
-    if include_plotlyjs == "require":
-        require_start = 'require(["plotly"], function(Plotly) {'
-        require_end = "});"
-
-    elif include_plotlyjs == "cdn":
+    if include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
         <script charset="utf-8" src="{cdn_url}"></script>\
@@ -343,10 +327,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
             <div id="{id}" class="plotly-graph-div" \
 style="height:{height}; width:{width};"></div>\
             <script type="text/javascript">\
-                {require_start}\
-                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
-                    {script};\
-                {require_end}\
+                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
+                {script};\
             </script>\
         </div>""".format(
         mathjax_script=mathjax_script,
@@ -355,9 +337,7 @@ style="height:{height}; width:{width};"></div>\
         width=div_width,
         height=div_height,
         base_url_line=base_url_line,
-        require_start=require_start,
         script=script,
-        require_end=require_end,
     ).strip()
 
     if full_html:
@@ -432,12 +412,6 @@ def write_html(
         useful when many figures will be saved as HTML files in the same
         directory because the plotly.js source code will be included only
         once per output directory, rather than once per output file.
-
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
 
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point

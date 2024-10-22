@@ -326,8 +326,7 @@ class Font(_BaseLayoutHierarchyType):
         """
         Construct a new Font object
 
-        Sets the title font. Note that the title's font used to be
-        customized by the now deprecated `titlefont` attribute.
+        Sets the title font.
 
         Parameters
         ----------

@@ -57,8 +57,7 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def font(self):
         """
-        Sets the title font. Note that the title's font used to be
-        customized by the now deprecated `titlefont` attribute.
+        Sets the title font.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -198,9 +197,7 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def text(self):
         """
-        Sets the plot's title. Note that before the existence of
-        `title.text`, the title's contents used to be defined as the
-        `title` attribute itself. This behavior has been deprecated.
+        Sets the plot's title.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -377,9 +374,7 @@ class Title(_BaseLayoutHierarchyType):
             only 1 or 0 are allowed y values. Invalid values will
             be reset to the default 1.
         font
-            Sets the title font. Note that the title's font used to
-            be customized by the now deprecated `titlefont`
-            attribute.
+            Sets the title font.
         pad
             Sets the padding of the title. Each padding value only
             applies when the corresponding `xanchor`/`yanchor`
@@ -392,10 +387,7 @@ class Title(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.title.Subtitle`
             instance or dict with compatible properties
         text
-            Sets the plot's title. Note that before the existence
-            of `title.text`, the title's contents used to be
-            defined as the `title` attribute itself. This behavior
-            has been deprecated.
+            Sets the plot's title.
         x
             Sets the x position with respect to `xref` in
             normalized coordinates from 0 (left) to 1 (right).
@@ -466,9 +458,7 @@ class Title(_BaseLayoutHierarchyType):
             only 1 or 0 are allowed y values. Invalid values will
             be reset to the default 1.
         font
-            Sets the title font. Note that the title's font used to
-            be customized by the now deprecated `titlefont`
-            attribute.
+            Sets the title font.
         pad
             Sets the padding of the title. Each padding value only
             applies when the corresponding `xanchor`/`yanchor`
@@ -481,10 +471,7 @@ class Title(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.title.Subtitle`
             instance or dict with compatible properties
         text
-            Sets the plot's title. Note that before the existence
-            of `title.text`, the title's contents used to be
-            defined as the `title` attribute itself. This behavior
-            has been deprecated.
+            Sets the plot's title.
         x
             Sets the x position with respect to `xref` in
             normalized coordinates from 0 (left) to 1 (right).
