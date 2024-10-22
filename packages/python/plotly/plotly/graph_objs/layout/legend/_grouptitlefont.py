@@ -2,7 +2,7 @@ from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchy
 import copy as _copy
 
 
-class Grouptitle_font(_BaseLayoutHierarchyType):
+class Grouptitlefont(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
@@ -324,7 +324,7 @@ class Grouptitle_font(_BaseLayoutHierarchyType):
         **kwargs,
     ):
         """
-        Construct a new Grouptitle_font object
+        Construct a new Grouptitlefont object
 
         Sets the font for group titles in legend. Defaults to
         `legend.font` with its size increased about 10%.
@@ -334,7 +334,7 @@ class Grouptitle_font(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :class:`plotly.graph_objs.layout.legend.Grouptitle_font`
+            :class:`plotly.graph_objs.layout.legend.Grouptitlefont`
         color
 
         family
@@ -376,9 +376,9 @@ class Grouptitle_font(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        Grouptitle_font
+        Grouptitlefont
         """
-        super(Grouptitle_font, self).__init__("grouptitlefont")
+        super(Grouptitlefont, self).__init__("grouptitlefont")
 
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
@@ -395,9 +395,9 @@ class Grouptitle_font(_BaseLayoutHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.layout.legend.Grouptitle_font
+The first argument to the plotly.graph_objs.layout.legend.Grouptitlefont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.legend.Grouptitle_font`"""
+an instance of :class:`plotly.graph_objs.layout.legend.Grouptitlefont`"""
             )
 
         # Handle skip_invalid
