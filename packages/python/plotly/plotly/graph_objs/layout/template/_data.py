@@ -25,7 +25,6 @@ class Data(_BaseLayoutHierarchyType):
         "funnel",
         "funnelarea",
         "heatmap",
-        "heatmapgl",
         "histogram",
         "histogram2d",
         "histogram2dcontour",
@@ -38,7 +37,6 @@ class Data(_BaseLayoutHierarchyType):
         "parcats",
         "parcoords",
         "pie",
-        "pointcloud",
         "sankey",
         "scatter",
         "scatter3d",
@@ -407,29 +405,6 @@ class Data(_BaseLayoutHierarchyType):
     def funnel(self, val):
         self["funnel"] = val
 
-    # heatmapgl
-    # ---------
-    @property
-    def heatmapgl(self):
-        """
-        The 'heatmapgl' property is a tuple of instances of
-        Heatmapgl that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Heatmapgl
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Heatmapgl constructor
-
-            Supported dict properties:
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Heatmapgl]
-        """
-        return self["heatmapgl"]
-
-    @heatmapgl.setter
-    def heatmapgl(self, val):
-        self["heatmapgl"] = val
-
     # heatmap
     # -------
     @property
@@ -728,29 +703,6 @@ class Data(_BaseLayoutHierarchyType):
     @pie.setter
     def pie(self, val):
         self["pie"] = val
-
-    # pointcloud
-    # ----------
-    @property
-    def pointcloud(self):
-        """
-        The 'pointcloud' property is a tuple of instances of
-        Pointcloud that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Pointcloud
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Pointcloud constructor
-
-            Supported dict properties:
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Pointcloud]
-        """
-        return self["pointcloud"]
-
-    @pointcloud.setter
-    def pointcloud(self, val):
-        self["pointcloud"] = val
 
     # sankey
     # ------
@@ -1286,9 +1238,6 @@ class Data(_BaseLayoutHierarchyType):
         funnel
             A tuple of :class:`plotly.graph_objects.Funnel`
             instances or dicts with compatible properties
-        heatmapgl
-            A tuple of :class:`plotly.graph_objects.Heatmapgl`
-            instances or dicts with compatible properties
         heatmap
             A tuple of :class:`plotly.graph_objects.Heatmap`
             instances or dicts with compatible properties
@@ -1329,9 +1278,6 @@ class Data(_BaseLayoutHierarchyType):
         pie
             A tuple of :class:`plotly.graph_objects.Pie` instances
             or dicts with compatible properties
-        pointcloud
-            A tuple of :class:`plotly.graph_objects.Pointcloud`
-            instances or dicts with compatible properties
         sankey
             A tuple of :class:`plotly.graph_objects.Sankey`
             instances or dicts with compatible properties
@@ -1415,7 +1361,6 @@ class Data(_BaseLayoutHierarchyType):
         densitymap=None,
         funnelarea=None,
         funnel=None,
-        heatmapgl=None,
         heatmap=None,
         histogram2dcontour=None,
         histogram2d=None,
@@ -1429,7 +1374,6 @@ class Data(_BaseLayoutHierarchyType):
         parcats=None,
         parcoords=None,
         pie=None,
-        pointcloud=None,
         sankey=None,
         scatter3d=None,
         scattercarpet=None,
@@ -1508,9 +1452,6 @@ class Data(_BaseLayoutHierarchyType):
         funnel
             A tuple of :class:`plotly.graph_objects.Funnel`
             instances or dicts with compatible properties
-        heatmapgl
-            A tuple of :class:`plotly.graph_objects.Heatmapgl`
-            instances or dicts with compatible properties
         heatmap
             A tuple of :class:`plotly.graph_objects.Heatmap`
             instances or dicts with compatible properties
@@ -1551,9 +1492,6 @@ class Data(_BaseLayoutHierarchyType):
         pie
             A tuple of :class:`plotly.graph_objects.Pie` instances
             or dicts with compatible properties
-        pointcloud
-            A tuple of :class:`plotly.graph_objects.Pointcloud`
-            instances or dicts with compatible properties
         sankey
             A tuple of :class:`plotly.graph_objects.Sankey`
             instances or dicts with compatible properties
@@ -1711,10 +1649,6 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = funnel if funnel is not None else _v
         if _v is not None:
             self["funnel"] = _v
-        _v = arg.pop("heatmapgl", None)
-        _v = heatmapgl if heatmapgl is not None else _v
-        if _v is not None:
-            self["heatmapgl"] = _v
         _v = arg.pop("heatmap", None)
         _v = heatmap if heatmap is not None else _v
         if _v is not None:
@@ -1767,10 +1701,6 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`"""
         _v = pie if pie is not None else _v
         if _v is not None:
             self["pie"] = _v
-        _v = arg.pop("pointcloud", None)
-        _v = pointcloud if pointcloud is not None else _v
-        if _v is not None:
-            self["pointcloud"] = _v
         _v = arg.pop("sankey", None)
         _v = sankey if sankey is not None else _v
         if _v is not None:
