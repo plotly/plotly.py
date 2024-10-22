@@ -97,7 +97,7 @@ def write_validator_py(outdir, node: PlotlyNode):
     """
     if node.is_mapped:
         # No validator written for mapped nodes
-        # e.g. no validator for layout.titlefont since ths is mapped to
+        # e.g. no validator for layout.title_font since ths is mapped to
         # layout.title.font
         return
 
