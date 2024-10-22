@@ -114,9 +114,9 @@ fig = go.Figure(data=go.Scatter3d(
 ))
 
 fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', titlefont_color='white'),
-                               yaxis=dict(title='Density', titlefont_color='white'),
-                               zaxis=dict(title='Gravity', titlefont_color='white'),
+                  scene = dict(xaxis=dict(title='Distance from Sun', title_font_color='white'),
+                               yaxis=dict(title='Density', title_font_color='white'),
+                               zaxis=dict(title='Gravity', title_font_color='white'),
                                bgcolor = 'rgb(20, 24, 54)'
                            ))
 
@@ -155,9 +155,9 @@ fig = go.Figure(go.Scatter3d(
 ))
 
 fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', titlefont_color='white'),
-                               yaxis=dict(title='Density', titlefont_color='white'),
-                               zaxis=dict(title='Gravity', titlefont_color='white'),
+                  scene = dict(xaxis=dict(title='Distance from Sun', title_font_color='white'),
+                               yaxis=dict(title='Density', title_font_color='white'),
+                               zaxis=dict(title='Gravity', title_font_color='white'),
                                bgcolor = 'rgb(20, 24, 54)'
                            ))
 
