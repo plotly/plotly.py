@@ -1,4 +1,3 @@
-// Adapted from ../../../javascript/jupyterlab-plotly/src/Figure.ts for anywidget.
 import type { DOMWidgetModel } from "@jupyter-widgets/base";
 import _ from "lodash";
 import Plotly from "plotly.js";
