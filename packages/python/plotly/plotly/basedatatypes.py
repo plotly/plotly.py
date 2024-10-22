@@ -4251,7 +4251,7 @@ class BasePlotlyType(object):
     """
 
     # ### Mapped (deprecated) properties ###
-    # dict for deprecated property name (e.g. 'titlefont') to tuple
+    # dict for deprecated property name (e.g. 'title_font') to tuple
     # of relative path to new property (e.g. ('title', 'font')
     _mapped_properties = {}
 
