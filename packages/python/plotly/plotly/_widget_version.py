@@ -2,4 +2,4 @@
 # for automated dev builds
 #
 # It is edited by hand prior to official releases
-__frontend_version__ = "1.5.4+2901.g54d9fe453"
+__frontend_version__ = "^5.24.1"
