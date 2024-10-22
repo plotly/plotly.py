@@ -20,21 +20,17 @@ import versioneer
 
 here = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-jupyterlab_extension_root = os.path.join(
-    project_root, "packages", "javascript", "jupyterlab-plotly"
-)
-widget_root = os.path.join(here, "js")
+node_root = os.path.join(project_root, "packages", "javascript", "jupyterlab-plotly")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 
 npm_path = os.pathsep.join(
     [
-        os.path.join(jupyterlab_extension_root, "node_modules", ".bin"),
+        os.path.join(node_root, "node_modules", ".bin"),
         os.environ.get("PATH", os.defpath),
     ]
 )
 
 labstatic = "jupyterlab_plotly/labextension/static"
-
 if not os.path.exists(labstatic):
     # Ensure the folder exists when we will look for files in it
     os.makedirs(labstatic)
@@ -134,13 +130,12 @@ class NPM(Command):
 
     user_options = []
 
-    node_modules = os.path.join(jupyterlab_extension_root, "node_modules")
+    node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
         os.path.join(here, "jupyterlab_plotly", "nbextension", "extension.js"),
         os.path.join(here, "jupyterlab_plotly", "nbextension", "index.js"),
         os.path.join(here, "jupyterlab_plotly", "labextension", "package.json"),
-        os.path.join(here, "plotly", "bundle.js"),
     ]
 
     def initialize_options(self):
@@ -164,6 +159,11 @@ class NPM(Command):
         except:
             return False
 
+    def should_run_npm_install(self):
+        package_json = os.path.join(node_root, "package.json")
+        node_modules_exists = os.path.exists(self.node_modules)
+        return self.has_npm()
+
     def run(self):
         if skip_npm:
             log.info("Skipping npm-installation")
@@ -178,20 +178,14 @@ class NPM(Command):
         env = os.environ.copy()
         env["PATH"] = npm_path
 
-        if self.has_npm():
+        if self.should_run_npm_install():
             log.info(
                 "Installing build dependencies with npm.  This may take a while..."
             )
             npmName = self.get_npm_name()
             check_call(
                 [npmName, "install"],
-                cwd=jupyterlab_extension_root,
-                stdout=sys.stdout,
-                stderr=sys.stderr,
-            )
-            check_call(
-                [npmName, "install"],
-                cwd=widget_root,
+                cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
@@ -199,19 +193,13 @@ class NPM(Command):
                 plotly_archive = os.path.join(self.local, "plotly.js.tgz")
                 check_call(
                     [npmName, "install", plotly_archive],
-                    cwd=jupyterlab_extension_root,
+                    cwd=node_root,
                     stdout=sys.stdout,
                     stderr=sys.stderr,
                 )
             check_call(
                 [npmName, "run", "build:prod"],
-                cwd=jupyterlab_extension_root,
-                stdout=sys.stdout,
-                stderr=sys.stderr,
-            )
-            check_call(
-                [npmName, "run", "build"],
-                cwd=widget_root,
+                cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
@@ -462,7 +450,7 @@ class UpdateBundleSchemaDevCommand(Command):
             overwrite_schema_local(schema_uri)
 
         # Update plotly.js url in package.json
-        package_json_path = os.path.join(jupyterlab_extension_root, "package.json")
+        package_json_path = os.path.join(node_root, "package.json")
         with open(package_json_path, "r") as f:
             package_json = json.load(f)
 
@@ -517,7 +505,7 @@ class UpdatePlotlywidgetVersionCommand(Command):
         from plotly._version import git_pieces_from_vcs, render
 
         # Update plotly.js url in package.json
-        package_json_path = os.path.join(jupyterlab_extension_root, "package.json")
+        package_json_path = os.path.join(node_root, "package.json")
 
         with open(package_json_path, "r") as f:
             package_json = json.load(f)
