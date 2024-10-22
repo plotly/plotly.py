@@ -188,6 +188,13 @@ jobs:
       - test_core:
           py: "312"
 
+  python_313_core:
+    docker:
+      - image: cimg/python:3.13-browsers
+    steps:
+      - test_core:
+          py: "313"
+
   # Optional
 
   python_38_optional:
@@ -224,6 +231,13 @@ jobs:
     steps:
       - test_optional:
           py: "312"
+
+  python_313_optional:
+    docker:
+      - image: cimg/python:3.13-browsers
+    steps:
+      - test_optional:
+          py: "313"
 
   # Pandas
 
@@ -599,11 +613,13 @@ workflows:
       - python_310_core
       - python_311_core
       - python_312_core
+      - python_313_core
       - python_38_optional
       - python_39_optional
       - python_310_optional
       - python_311_optional
       - python_312_optional
+      - python_313_optional
       - python_39_pandas_2_optional
       - python_39_percy
       - python_312_no_numpy
