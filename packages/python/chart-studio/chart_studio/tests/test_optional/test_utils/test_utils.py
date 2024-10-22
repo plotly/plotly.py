@@ -6,7 +6,7 @@ from chart_studio.grid_objs import Column
 from datetime import datetime as dt
 import numpy as np
 
-np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
+np_list = np.array([1, 2, 3, np.nan, np.nan, np.inf, dt(2014, 1, 5)])
 numeric_list = [1, 2, 3]
 mixed_list = [
     1,
