@@ -1277,7 +1277,7 @@ class MappedPropNode(PlotlyNode):
     def __init__(self, mapped_prop_node, parent, prop_name, plotly_schema):
         """
         Create node that represents a legacy title property.
-        e.g. layout.titlefont.  These properties are now subproperties under
+        e.g. layout.title_font.  These properties are now subproperties under
         the sibling `title` property. e.g. layout.title.font.
 
         Parameters
@@ -1285,7 +1285,7 @@ class MappedPropNode(PlotlyNode):
         title_node: PlotlyNode
         prop_name: str
             The name of the propery (without the title prefix)
-            e.g. 'font' to represent the layout.titlefont property.
+            e.g. 'font' to represent the layout.title_font property.
         """
         node_path = parent.node_path + (prop_name,)
         super().__init__(plotly_schema, node_path=node_path, parent=parent)

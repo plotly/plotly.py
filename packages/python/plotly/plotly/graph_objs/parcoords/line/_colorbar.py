@@ -50,8 +50,6 @@ class ColorBar(_BaseTraceHierarchyType):
         "tickvalssrc",
         "tickwidth",
         "title",
-        "titlefont",
-        "titleside",
         "x",
         "xanchor",
         "xpad",
@@ -1231,22 +1229,14 @@ class ColorBar(_BaseTraceHierarchyType):
             Supported dict properties:
 
                 font
-                    Sets this color bar's title font. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
+                    Sets this color bar's title font.
                 side
                     Determines the location of color bar's title
                     with respect to the color bar. Defaults to
                     "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h". Note that
-                    the title's location used to be set by the now
-                    deprecated `titleside` attribute.
+                    to "right" when `orientation` if "h".
                 text
-                    Sets the title of the color bar. Note that
-                    before the existence of `title.text`, the
-                    title's contents used to be defined as the
-                    `title` attribute itself. This behavior has
-                    been deprecated.
+                    Sets the title of the color bar.
 
         Returns
         -------
@@ -1257,104 +1247,6 @@ class ColorBar(_BaseTraceHierarchyType):
     @title.setter
     def title(self, val):
         self["title"] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use parcoords.line.colorbar.title.font
-        instead. Sets this color bar's title font. Note that the
-        title's font used to be set by the now deprecated `titlefont`
-        attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcoords.line.colorbar.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
-
-    # titleside
-    # ---------
-    @property
-    def titleside(self):
-        """
-        Deprecated: Please use parcoords.line.colorbar.title.side
-        instead. Determines the location of color bar's title with
-        respect to the color bar. Defaults to "top" when `orientation`
-        if "v" and  defaults to "right" when `orientation` if "h". Note
-        that the title's location used to be set by the now deprecated
-        `titleside` attribute.
-
-        The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['right', 'top', 'bottom']
-
-        Returns
-        -------
-
-        """
-        return self["titleside"]
-
-    @titleside.setter
-    def titleside(self, val):
-        self["titleside"] = val
 
     # x
     # -
@@ -1741,19 +1633,6 @@ class ColorBar(_BaseTraceHierarchyType):
         title
             :class:`plotly.graph_objects.parcoords.line.colorbar.Ti
             tle` instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use
-            parcoords.line.colorbar.title.font instead. Sets this
-            color bar's title font. Note that the title's font used
-            to be set by the now deprecated `titlefont` attribute.
-        titleside
-            Deprecated: Please use
-            parcoords.line.colorbar.title.side instead. Determines
-            the location of color bar's title with respect to the
-            color bar. Defaults to "top" when `orientation` if "v"
-            and  defaults to "right" when `orientation` if "h".
-            Note that the title's location used to be set by the
-            now deprecated `titleside` attribute.
         x
             Sets the x position with respect to `xref` of the color
             bar (in plot fraction). When `xref` is "paper",
@@ -1800,11 +1679,6 @@ class ColorBar(_BaseTraceHierarchyType):
             height of the plotting area only.
         """
 
-    _mapped_properties = {
-        "titlefont": ("title", "font"),
-        "titleside": ("title", "side"),
-    }
-
     def __init__(
         self,
         arg=None,
@@ -1849,8 +1723,6 @@ class ColorBar(_BaseTraceHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
-        titleside=None,
         x=None,
         xanchor=None,
         xpad=None,
@@ -2064,19 +1936,6 @@ class ColorBar(_BaseTraceHierarchyType):
         title
             :class:`plotly.graph_objects.parcoords.line.colorbar.Ti
             tle` instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use
-            parcoords.line.colorbar.title.font instead. Sets this
-            color bar's title font. Note that the title's font used
-            to be set by the now deprecated `titlefont` attribute.
-        titleside
-            Deprecated: Please use
-            parcoords.line.colorbar.title.side instead. Determines
-            the location of color bar's title with respect to the
-            color bar. Defaults to "top" when `orientation` if "v"
-            and  defaults to "right" when `orientation` if "h".
-            Note that the title's location used to be set by the
-            now deprecated `titleside` attribute.
         x
             Sets the x position with respect to `xref` of the color
             bar (in plot fraction). When `xref` is "paper",
@@ -2319,14 +2178,6 @@ an instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
-        _v = arg.pop("titleside", None)
-        _v = titleside if titleside is not None else _v
-        if _v is not None:
-            self["titleside"] = _v
         _v = arg.pop("x", None)
         _v = x if x is not None else _v
         if _v is not None:

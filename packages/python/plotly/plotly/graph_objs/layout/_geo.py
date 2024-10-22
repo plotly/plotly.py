@@ -358,7 +358,7 @@ class Geo(_BaseLayoutHierarchyType):
         getting auto-filled. On maps with a clipped projection, setting
         `fitbounds` leads to `center.lon`, `center.lat`,
         `projection.rotation.lon`, `projection.rotation.lat`,
-        `lonaxis.range` and `lonaxis.range` getting auto-filled. If
+        `lonaxis.range` and `lataxis.range` getting auto-filled. If
         "locations", only the trace's visible locations are considered
         in the `fitbounds` computations. If "geojson", the entire trace
         input `geojson` (if provided) is considered in the `fitbounds`
@@ -1205,7 +1205,7 @@ class Geo(_BaseLayoutHierarchyType):
             auto-filled. On maps with a clipped projection, setting
             `fitbounds` leads to `center.lon`, `center.lat`,
             `projection.rotation.lon`, `projection.rotation.lat`,
-            `lonaxis.range` and `lonaxis.range` getting auto-
+            `lonaxis.range` and `lataxis.range` getting auto-
             filled. If "locations", only the trace's visible
             locations are considered in the `fitbounds`
             computations. If "geojson", the entire trace input
@@ -1341,7 +1341,7 @@ class Geo(_BaseLayoutHierarchyType):
             auto-filled. On maps with a clipped projection, setting
             `fitbounds` leads to `center.lon`, `center.lat`,
             `projection.rotation.lon`, `projection.rotation.lat`,
-            `lonaxis.range` and `lonaxis.range` getting auto-
+            `lonaxis.range` and `lataxis.range` getting auto-
             filled. If "locations", only the trace's visible
             locations are considered in the `fitbounds`
             computations. If "geojson", the entire trace input
