@@ -437,10 +437,7 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/javascript/jupyterlab-plotly
-            npm pack
-            mv jupyterlab-plotly*.tgz ../../../output
-            cd ../../python/plotly/js
+            cd packages/python/plotly/js
             npm install
             npm run build
             mv ../plotly/bundle.js ../../../../output
