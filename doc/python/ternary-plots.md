@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.11.10
   plotly:
     description: How to make Ternary plots in Python with Plotly.
     display_as: scientific
@@ -82,8 +82,7 @@ rawData = [
 
 def makeAxis(title, tickangle):
     return {
-      'title': title,
-      'title_font': { 'size': 20 },
+      'title': {'text': title, 'font': { 'size': 20}},
       'tickangle': tickangle,
       'tickfont': { 'size': 15 },
       'tickcolor': 'rgba(0,0,0,0)',

@@ -98,9 +98,11 @@ node_trace = go.Scatter(
         size=10,
         colorbar=dict(
             thickness=15,
-            title='Node Connections',
+            title=dict(
+              text='Node Connections',
+              side='right'
+            ),
             xanchor='left',
-            titleside='right'
         ),
         line_width=2))
 
@@ -128,8 +130,12 @@ node_trace.text = node_text
 ```python
 fig = go.Figure(data=[edge_trace, node_trace],
              layout=go.Layout(
-                title='<br>Network graph made with Python',
-                title_font_size=16,
+                title=dict(
+                    text="<br>Network graph made with Python",
+                    font=dict(
+                        size=16
+                    )
+                ),
                 showlegend=False,
                 hovermode='closest',
                 margin=dict(b=20,l=5,r=5,t=40),

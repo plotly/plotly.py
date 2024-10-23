@@ -109,19 +109,19 @@ fig.layout.title = 'Torque and Fuel Efficience'
 Check default font size
 
 ```python
-fig.layout.title_font.size
+fig.layout.title.font.size
 ```
 
 Increase the title font size
 
 ```python
-fig.layout.title_font.size = 22
+fig.layout.title.font.size = 22
 ```
 
-Set `fig.layout.title_font.family` to `'Rockwell'`
+Set `fig.layout.title.font.family` to `'Rockwell'`
 
 ```python
-fig.layout.title_font.family = 'Rockwell'
+fig.layout.title.font.family = 'Rockwell'
 ```
 
 ### Create New View for Figure

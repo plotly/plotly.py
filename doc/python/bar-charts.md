@@ -37,7 +37,7 @@ jupyter:
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms). 
+With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms).
 
 In the example below, there is only a single row of data per year, so a single bar is displayed per year.
 
@@ -152,7 +152,7 @@ fig.show()
 
 ### Aggregating into Single Colored Bars
 
-As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram). 
+As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram).
 
 > `px.bar` and `px.histogram` are designed  to be nearly interchangeable in their call signatures, so as to be able to switch between aggregated and disaggregated bar representations.
 
@@ -304,7 +304,7 @@ fig.update_layout(barmode='stack')
 fig.show()
 ```
 
-### Stacked Bar Chart From Aggregating a DataFrame 
+### Stacked Bar Chart From Aggregating a DataFrame
 
 Stacked bar charts are a powerful way to present results summarizing categories generated using the Pandas aggregate commands. `pandas.DataFrame.agg` produces a wide data set format incompatible with `px.bar`. Transposing and updating the indexes to achieve `px.bar` compatibility is a somewhat involved option. Here is one straightforward alternative, which presents the aggregated data as a stacked bar using plotly.graph_objects.
 
@@ -326,19 +326,19 @@ df_summarized["percent of world population"]=100*df_summarized["pop"]/df_summari
 df_summarized["percent of world GDP"]=100*df_summarized["gdp"]/df_summarized["gdp"].sum()
 
 
-df = df_summarized[["continent", 
+df = df_summarized[["continent",
 "percent of world population",
 "percent of world GDP",
 ]]
 
 # We now have a wide data frame, but it's in the opposite orientation from the one that px is designed to deal with.
-# Transposing it and rebuilding the indexes is an option, but iterating through the DF using graph objects is more succinct. 
+# Transposing it and rebuilding the indexes is an option, but iterating through the DF using graph objects is more succinct.
 
 fig=go.Figure()
 for category in df_summarized["continent"].values:
     fig.add_trace(go.Bar(
             x=df.columns[1:],
-            # We need to get a pandas series that contains just the values to graph; 
+            # We need to get a pandas series that contains just the values to graph;
             # We do so by selecting the right row, selecting the right columns
             # and then transposing and using iloc to convert to a series
             # Here, we assume that the bar element category variable is in column 0
@@ -619,9 +619,12 @@ fig.update_layout(
     title='US Export of Plastic Scrap',
     xaxis_tickfont_size=14,
     yaxis=dict(
-        title='USD (millions)',
-        title_font_size=16,
-        tickfont_size=14,
+        title=dict(
+            text="USD (millions)",
+            font=dict(
+                size=16
+            )
+        ),
     ),
     legend=dict(
         x=0,
