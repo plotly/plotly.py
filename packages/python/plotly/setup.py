@@ -99,7 +99,7 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "bundle.js"),
+        os.path.join(here, "plotly", "bundle.js"),
     ]
 
     def initialize_options(self):
