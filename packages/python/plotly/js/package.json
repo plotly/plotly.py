@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/bundle.js widget.ts",
+    "build": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/package_data/widgetbundle.js widget.ts",
     "watch": "npm run build -- --watch --sourcemap=inline",
     "typecheck": "tsc --noEmit"
   },

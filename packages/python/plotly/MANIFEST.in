@@ -3,4 +3,4 @@ include README.md
 include jupyterlab-plotly.json
 include versioneer.py
 include plotly/_version.py
-include plotly/bundle.js
+include plotly/package_data/widgetbundle.js
