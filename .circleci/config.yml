@@ -410,7 +410,10 @@ jobs:
             cd packages/javascript/jupyterlab-plotly
             npm ci
             npm run build:prod
-            git status
+
+            cd ../../python/plotly/js
+            npm install
+            npm run build
 
       - run:
           name: PyPI Build
@@ -440,10 +443,6 @@ jobs:
             cd packages/javascript/jupyterlab-plotly
             npm pack
             mv jupyterlab-plotly*.tgz ../../../output
-            cd ../../python/plotly/js
-            npm install
-            npm run build
-            mv ../plotly/bundle.js ../../../../output
 
       - run:
           name: Zip output
