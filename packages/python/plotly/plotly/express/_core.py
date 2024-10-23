@@ -337,9 +337,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     y = sorted_trace_data.get_column(args["y"])
                     x = sorted_trace_data.get_column(args["x"])
 
-                    if x.dtype == nw.Datetime:
+                    if x.dtype == nw.Datetime or x.dtype == nw.Date:
                         # convert to unix epoch seconds
-                        x = x.dt.timestamp() / 10**9
+                        x = _to_unix_epoch_seconds(x)
                     elif not x.dtype.is_numeric():
                         try:
                             x = x.cast(nw.Float64())
@@ -1051,11 +1051,10 @@ def _get_reserved_col_names(args):
             elif isinstance(arg, str):  # no need to add ints since kw arg are not ints
                 reserved_names.add(arg)
             elif is_into_series(arg):
-                arg_name = nw.from_native(arg, series_only=True).name
+                arg_series = nw.from_native(arg, series_only=True)
+                arg_name = arg_series.name
                 if arg_name and arg_name in df.columns:
-                    in_df = (
-                        nw.from_native(arg, series_only=True) == df.get_column(arg_name)
-                    ).all()
+                    in_df = (arg_series == df.get_column(arg_name)).all()
                     if in_df:
                         reserved_names.add(arg_name)
             elif arg is nw.maybe_get_index(df) and arg.name is not None:
@@ -1114,20 +1113,28 @@ def _escape_col_name(columns, col_name, extra):
 
 
 def to_unindexed_series(x, name=None, native_namespace=None):
-    """Assuming x is list-like or even an existing Series, returns a new Series with
-    no index (if pandas-like). Stripping the index from existing pd.Series is
+    """Assuming x is list-like or even an existing Series, returns a new Series (with
+    itx index reset if pandas-like). Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building.
     """
+    x_native = nw.to_native(x, strict=False)
+    if nw.dependencies.is_pandas_like_series(x_native):
+        return nw.from_native(
+            x_native.__class__(x_native, name=name).reset_index(drop=True),
+            series_only=True,
+        )
     x = nw.from_native(x, series_only=True, strict=False)
     if isinstance(x, nw.Series):
-        return nw.maybe_reset_index(x).rename(name)
+        return x.rename(name)
+    elif native_namespace is not None:
+        return nw.new_series(name=name, values=x, native_namespace=native_namespace)
     else:
-        if native_namespace is not None:
-            return nw.new_series(name=name, values=x, native_namespace=native_namespace)
-        elif (pd := nw.dependencies.get_pandas()) is not None:
+        try:
+            import pandas as pd
+
             return nw.new_series(name=name, values=x, native_namespace=pd)
-        else:
-            msg = "Pandas installation is required if no namespace is provided."
+        except ImportError:
+            msg = "Pandas installation is required if no dataframe is provided."
             raise NotImplementedError(msg)
 
 
@@ -1322,7 +1329,7 @@ def process_args_into_dataframe(
                     )
 
                 df_output[str(col_name)] = to_unindexed_series(
-                    x=nw.from_native(argument, allow_series=True, strict=False),
+                    x=nw.from_native(argument, series_only=True, strict=False),
                     name=str(col_name),
                     native_namespace=native_namespace,
                 )
@@ -1345,14 +1352,19 @@ def process_args_into_dataframe(
 
     length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
 
+    if native_namespace is None:
+        try:
+            import pandas as pd
+
+            native_namespace = pd
+        except ImportError:
+            msg = "Pandas installation is required if no dataframe is provided."
+            raise NotImplementedError(msg)
+
     df_output.update(
         {
             col_name: nw.new_series(
-                name=col_name,
-                values=range(length),
-                native_namespace=(
-                    native_namespace if df_provided else nw.dependencies.get_pandas()
-                ),
+                name=col_name, values=range(length), native_namespace=native_namespace
             )
             for col_name in ranges
         }
@@ -1364,9 +1376,7 @@ def process_args_into_dataframe(
             col_name: nw.new_series(
                 name=col_name,
                 values=[constants[col_name]] * length,
-                native_namespace=(
-                    native_namespace if df_provided else nw.dependencies.get_pandas()
-                ),
+                native_namespace=native_namespace,
             )
             for col_name in constants
         }
@@ -1375,7 +1385,11 @@ def process_args_into_dataframe(
     if df_output:
         df_output = nw.from_dict(df_output)
     else:
-        pd = nw.dependencies.get_pandas()
+        try:
+            import pandas as pd
+        except ImportError:
+            msg = "Pandas installation is required."
+            raise NotImplementedError(msg)
         df_output = nw.from_native(pd.DataFrame({}), eager_only=True)
     return df_output, wide_id_vars
 
@@ -1455,21 +1469,25 @@ def build_dataframe(args, constructor):
 
         else:
             try:
-                pd = nw.dependencies.get_pandas()
-                if pd is None:
-                    msg = (
-                        f"data_frame of type {type(args['data_frame'])} requires Pandas "
-                        "to be installed. Convert it to supported dataframe type or "
-                        "install Pandas."
-                    )
-                    raise ValueError(msg)
+                import pandas as pd
 
-                args["data_frame"] = nw.from_native(pd.DataFrame(args["data_frame"]))
-                columns = args["data_frame"].columns
-                is_pd_like = True
-            except Exception:
-                msg = f"Unsupported type: {type(args['data_frame'])}"
+                try:
+                    args["data_frame"] = nw.from_native(
+                        pd.DataFrame(args["data_frame"])
+                    )
+                    columns = args["data_frame"].columns
+                    is_pd_like = True
+                except Exception:
+                    msg = f"Unsupported type: {type(args['data_frame'])}"
+                    raise NotImplementedError(msg)
+            except ImportError:
+                msg = (
+                    f"data_frame of type {type(args['data_frame'])} requires Pandas "
+                    "to be installed. Convert it to supported dataframe type or "
+                    "install Pandas."
+                )
                 raise NotImplementedError(msg)
+
     else:
         columns = None  # no data_frame
 
@@ -1478,9 +1496,7 @@ def build_dataframe(args, constructor):
 
     # This is safe since at this point `_compliant_frame` is one of the "full" level
     # support dataframe(s)
-    native_namespace = (
-        df_input._compliant_frame.__native_namespace__() if df_provided else None
-    )
+    native_namespace = nw.get_native_namespace(df_input) if df_provided else None
 
     # now we handle special cases like wide-mode or x-xor-y specification
     # by rearranging args to tee things up for process_args_into_dataframe to work
@@ -2732,3 +2748,22 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
         annot.update(font=None)
 
     return fig
+
+
+def _to_unix_epoch_seconds(s: nw.Series) -> nw.Series:
+    dtype = s.dtype
+    if dtype == nw.Date:
+        return s.dt.timestamp("ms") / 1_000
+    if dtype == nw.Datetime:
+        if dtype.time_unit in ("s", "ms"):
+            return s.dt.timestamp("ms") / 1_000
+        elif dtype.time_unit == "us":
+            return s.dt.timestamp("us") / 1_000_000
+        elif dtype.time_unit == "ns":
+            return s.dt.timestamp("us") / 1_000_000_000
+        else:
+            msg = "Unexpected dtype, please report a bug"
+            raise ValueError(msg)
+    else:
+        msg = f"Expected Date or Datetime, got {dtype}"
+        raise TypeError(msg)
