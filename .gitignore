@@ -59,7 +59,7 @@ doc/check-or-enforce-order.py
 packages/javascript/jupyterlab-plotly/lib/
 packages/python/plotly/jupyterlab_plotly/labextension/
 packages/python/plotly/jupyterlab_plotly/nbextension/index.js*
-packages/python/plotly/plotly/widgetbundle.js
+packages/python/plotly/plotly/package_data/widgetbundle.js
 
 test/percy/*.html
 test/percy/pandas2/*.html
