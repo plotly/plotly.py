@@ -46,6 +46,9 @@ commands:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
+            cd js
+            npm install
+            npm run build
       - run:
           name: Install plotly-geo
           command: |
@@ -341,7 +344,7 @@ jobs:
             pip install -r ./test_requirements/requirements_38_core.txt black inflect
             pip install jupyterlab~=3.0
       - run:
-          name: Update jupyterlab-plotly version
+          name: Update jupyterlab-plotly and jupyter widget plotly.js version
           command: |
             cd packages/python/plotly
             . venv/bin/activate
@@ -407,7 +410,10 @@ jobs:
             cd packages/javascript/jupyterlab-plotly
             npm ci
             npm run build:prod
-            git status
+
+            cd ../../python/plotly/js
+            npm install
+            npm run build
 
       - run:
           name: PyPI Build
@@ -483,7 +489,12 @@ jobs:
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
-              pip install -e ../packages/python/plotly
+              cd ../packages/python/plotly
+              pip install -e .
+              cd js
+              npm install
+              npm run build
+              cd ../../../../doc
             fi
             cd ..
       - run:
