@@ -440,7 +440,6 @@ jobs:
             cd packages/python/plotly/js
             npm install
             npm run build
-            mv ../plotly/bundle.js ../../../../output
 
       - run:
           name: Zip output
