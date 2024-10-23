@@ -2,17 +2,11 @@
 # How to release plotly packages
 
 There are 3 Python packages (`plotly`, `plotly-geo` and `chart-studio`) which need to be
-published to PyPI and conda, and 1 JS packages (`jupyterlab-plotly`)
-which need to be published to NPM. In addition, there are various changelogs, github
-releases and forum announcements to do :)
+published to PyPI and conda. In addition, there are various changelogs, github releases and forum announcements to do :)
 
 ## Release process - `plotly` package and extensions
 
-This is the release process for releasing `plotly.py` version `X.Y.Z` with
-`jupyterlab-plotly` with matching versions.
-
-> Note: it's easier to lock the JS extension and Python versions together, even if it means we occasionally
-> push no-change versions to NPM/PyPI/Conda.
+This is the release process for releasing `plotly.py` version `X.Y.Z`.
 
 ### Finalize changelog
 
@@ -39,9 +33,9 @@ Manually update the versions to `X.Y.Z` in the files specified below.
    + this must be done at this point because the README gets baked into PyPI
  - `packages/python/plotly/plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
- - `packages/javascript/jupyterlab-plotly/package.json`
+ - `packages/python/plotly/js/package.json`
    + Update `"version"` to `X.Y.Z`
- - `packages/javascript/jupyterlab-plotly/package-lock.json`
+ - `packages/python/plotly/js/package-lock.json`
    + Update `"version"` to `X.Y.Z` in two places (to avoid dirty repo after rebuild)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
@@ -63,7 +57,7 @@ The `full_build` job in the `release_build` workflow in CircleCI produces a tarb
 
 **Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
-To locally install the PyPI dist, make sure you have an environment with JupyterLab 3 installed (maybe one created with `conda create -n condatest python=3.10 jupyterlab ipywidgets pandas`):
+To locally install the PyPI dist, make sure you have an environment with JupyterLab installed (maybe one created with `conda create -n condatest python=3.10 jupyter anywidget pandas`):
 
 - `tar xzf output.tgz`
 - `pip uninstall plotly`
@@ -75,8 +69,6 @@ To locally install the Conda dist (generally do this in a different, clean envir
 - `conda uninstall plotly`
 - `pip uninstall plotly` (just in case!)
 - `conda install path/to/output/plotly-X.Y.Z.tar.bz2`
-
-It's more complicated to locally install the NPM bundle, as you'll need to have a JupyterLab 2 environment installed... Undocumented for now :see_no_evil:.
 
 You'll want to check, in both Lab and Notebook, **in a brand new notebook in each** so that there is no caching of previous results, that `go.Figure()` and `go.FigureWidget()` work without error.
 
@@ -92,13 +84,6 @@ Publishing to PyPI:
 ```bash
 (plotly_dev) $ cd path/to/output/dist
 (plotly_dev) $ twine upload plotly-X.Y.Z*
-```
-
-Publishing to NPM:
-
-```bash
-(plotly_dev) $ cd path/to/output
-(plotly_dev) $ npm publish jupyterlab-plotly-X.Y.Z.tgz
 ```
 
 Publishing to `plotly` conda channel (make sure you have run `conda install anaconda-client` to get the `anaconda` command):
@@ -151,12 +136,6 @@ PyPI RC (no special flags, just the `rc1` suffix):
 
 ```bash
 (plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
-```
-
-NPM RC:
-
-```bash
-npm publish --access public --tag next jupyterlab-plotly.*
 ```
 
 The `--tag next` part ensures that users won't install this version unless
