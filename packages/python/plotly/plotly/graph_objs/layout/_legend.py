@@ -321,11 +321,11 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the font for group titles in legend. Defaults to
         `legend.font` with its size increased about 10%.
 
-        The 'grouptitlefont' property is an instance of Grouptitle_font
+        The 'grouptitlefont' property is an instance of Grouptitlefont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.legend.Grouptitle_font`
+          - An instance of :class:`plotly.graph_objs.layout.legend.Grouptitlefont`
           - A dict of string/value properties that will be passed
-            to the Grouptitle_font constructor
+            to the Grouptitlefont constructor
 
             Supported dict properties:
 
@@ -375,7 +375,7 @@ class Legend(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.layout.legend.Grouptitle_font
+        plotly.graph_objs.layout.legend.Grouptitlefont
         """
         return self["grouptitlefont"]
 

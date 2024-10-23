@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.3
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.11.10
   plotly:
     description: How to make 3D Bubble Charts in Python with Plotly. Three examples
       of 3D Bubble Charts.
@@ -113,12 +113,38 @@ fig = go.Figure(data=go.Scatter3d(
         )
 ))
 
-fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', title_font_color='white'),
-                               yaxis=dict(title='Density', title_font_color='white'),
-                               zaxis=dict(title='Gravity', title_font_color='white'),
-                               bgcolor = 'rgb(20, 24, 54)'
-                           ))
+fig.update_layout(
+    width=800,
+    height=800,
+    title="Planets!",
+    scene=dict(
+        xaxis=dict(
+            title=dict(
+                text="Distance from Sun",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Density",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        zaxis=dict(
+            title=dict(
+                text="Gravity",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        bgcolor="rgb(20, 24, 54)"
+    )
+)
 
 fig.show()
 ```
@@ -154,12 +180,38 @@ fig = go.Figure(go.Scatter3d(
         )
 ))
 
-fig.update_layout(width=800, height=800, title = 'Planets!',
-                  scene = dict(xaxis=dict(title='Distance from Sun', title_font_color='white'),
-                               yaxis=dict(title='Density', title_font_color='white'),
-                               zaxis=dict(title='Gravity', title_font_color='white'),
-                               bgcolor = 'rgb(20, 24, 54)'
-                           ))
+fig.update_layout(
+    width=800,
+    height=800,
+    title="Planets!",
+    scene=dict(
+        xaxis=dict(
+            title=dict(
+                text="Distance from Sun",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Density",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        zaxis=dict(
+            title=dict(
+                text="Gravity",
+                font=dict(
+                    color="white"
+                )
+            )
+        ),
+        bgcolor="rgb(20, 24, 54)"
+    )
+)
 
 fig.show()
 ```

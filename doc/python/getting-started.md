@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.14
   plotly:
     description: Getting Started with Plotly for Python.
     has_thumbnail: false
@@ -96,8 +96,7 @@ IFrame(snippet_url + 'getting-started', width='100%', height=1200)
 
 #### JupyterLab Support
 
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
-packages using `pip`:
+To use `plotly` in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets` packages in the same environment as you installed `plotly`, using `pip`:
 
 ```
 $ pip install "jupyterlab>=3" "ipywidgets>=7.6"
@@ -109,21 +108,16 @@ or `conda`:
 $ conda install "jupyterlab>=3" "ipywidgets>=7.6"
 ```
 
-You'll need `jupyter-dash` to add widgets such as sliders, dropdowns, and buttons to Plotly charts in JupyterLab.
+The `plotly` jupyterlab extension is included when you install `plotly` using `pip` or `conda`. When you run Jupyter Lab, ensure you are running it in the same environment that you installed `plotly` in so it has access to the `plotly` jupyterlab extension.
 
-Install [`jupyter-dash`](https://github.com/plotly/jupyter-dash) using `pip`:
-
-```
-$ pip install jupyter-dash
-```
-
-or `conda`:
+**JupyterLab 2 or earlier** does not support the prebuilt extensions installed using `pip` and `conda`. If you are using JupyterLab 2, run the following command to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
-$ conda install -c conda-forge -c plotly jupyter-dash
+# JupyterLab 2.x renderer support
+jupyter labextension install jupyterlab-plotly@5.22.0 @jupyter-widgets/jupyterlab-manager
 ```
 
-These packages contain everything you need to run JupyterLab...
+Launch JupyterLab with:
 
 ```
 $ jupyter lab
@@ -148,17 +142,9 @@ fig_widget = go.FigureWidget(fig)
 fig_widget
 ```
 
-The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.24.1 @jupyter-widgets/jupyterlab-manager
-```
-
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
-
-
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
+
+See the [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple Python environments inside Jupyter.
 
 
 
