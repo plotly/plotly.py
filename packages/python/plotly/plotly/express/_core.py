@@ -2338,6 +2338,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
     if args["title"]:
         layout_patch["title_text"] = args["title"]
+    if args["subtitle"]:
+        layout_patch["title_subtitle_text"] = args["subtitle"]
     elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (
@@ -2476,9 +2478,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             e.args = (
                 e.args[0]
                 + """
-Use the {facet_arg} argument to adjust this spacing.""".format(
-                    facet_arg=facet_arg
-                ),
+Use the {facet_arg} argument to adjust this spacing.""".format(facet_arg=facet_arg),
             )
             raise e
 
