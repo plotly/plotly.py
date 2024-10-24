@@ -107,15 +107,21 @@ fig.show()
 
 ## Removed Traces
 
-The following traces have been removed. 
+The following traces have been removed.
 
 ### `heatmapgl`
 
-The `heatmapgl` trace has been removed. Use [`heatmap`](/python/heatmaps/) instead. 
+The `heatmapgl` trace has been removed. Use [`heatmap`](/python/heatmaps/) instead.
 
 
 ### `pointcloud`
 
-The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/scattergl/).  
+The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/scattergl/).
 
 <!-- #endregion -->
+
+## Other Removed Features
+
+### Transforms
+
+Transforms, which were deprecated in Plotly.py v5, have been removed.
