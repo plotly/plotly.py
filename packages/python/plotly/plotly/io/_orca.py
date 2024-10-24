@@ -124,13 +124,16 @@ def retry(min_wait=5, max_wait=10, max_delay=60000):
                 except Exception as e:
                     elapsed_time = time.time() - start_time
                     if elapsed_time * 1000 >= max_delay:
-                        raise TimeoutError(f"Retry limit of {max_delay} milliseconds reached.") from e
-                    
+                        raise TimeoutError(
+                            f"Retry limit of {max_delay} milliseconds reached."
+                        ) from e
+
                     wait_time = random.uniform(min_wait, max_wait)
                     print(f"Retrying in {wait_time:.2f} seconds due to {e}...")
                     time.sleep(wait_time)
-                    
+
         return wrapper
+
     return decorator
 
 
