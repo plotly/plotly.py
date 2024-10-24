@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API
+- Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
 
 ### Updated
 

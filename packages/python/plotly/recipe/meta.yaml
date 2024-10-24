@@ -25,7 +25,6 @@ requirements:
     - setuptools
   run:
     - python
-    - tenacity >=6.2.0
 
 test:
   imports:
