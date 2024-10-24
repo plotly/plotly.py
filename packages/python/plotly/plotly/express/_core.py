@@ -2338,10 +2338,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
     if args["title"]:
         layout_patch["title_text"] = args["title"]
-    if args["subtitle"]:
-        layout_patch["title_subtitle_text"] = args["subtitle"]
     elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
+    if args["subtitle"]:
+        layout_patch["title_subtitle_text"] = args["subtitle"]
     if (
         "size" in args
         and args["size"]
