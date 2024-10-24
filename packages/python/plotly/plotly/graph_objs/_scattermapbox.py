@@ -3,6 +3,11 @@ import copy as _copy
 
 
 class Scattermapbox(_BaseTraceType):
+    print(
+        "*scattermapbox* trace is deprecated!",
+        "Please consider switching to the *scattermap* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/javascript/maplibre-migration/",
+    )
 
     # class properties
     # --------------------
