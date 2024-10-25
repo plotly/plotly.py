@@ -1877,8 +1877,8 @@ def process_dataframe_hierarchy(args):
             # Similar trick as above
             discrete_aggs.append(col)
             agg_f[col] = nw.col(col).max()
-            agg_f[f"{col}__n_unique__"] = (
-                nw.col(col).n_unique().alias(f"{col}__n_unique__")
+            agg_f[f"{col}__plotly_n_unique__"] = (
+                nw.col(col).n_unique().alias(f"{col}__plotly_n_unique__")
             )
     # Avoid collisions with reserved names - columns in the path have been copied already
     cols = list(set(cols) - set(["labels", "parent", "id"]))
@@ -1898,12 +1898,12 @@ def process_dataframe_hierarchy(args):
         return dframe.with_columns(
             **{c: nw.col(c) / nw.col(count_colname) for c in continuous_aggs},
             **{
-                c: nw.when(nw.col(f"{c}__n_unique__") == 1)
+                c: nw.when(nw.col(f"{c}__plotly_n_unique__") == 1)
                 .then(nw.col(c))
                 .otherwise(nw.lit("(?)"))
                 for c in discrete_aggs
             },
-        ).drop([f"{c}__n_unique__" for c in discrete_aggs])
+        ).drop([f"{c}__plotly_n_unique__" for c in discrete_aggs])
 
     for i, level in enumerate(path):
 
@@ -2760,7 +2760,7 @@ def _to_unix_epoch_seconds(s: nw.Series) -> nw.Series:
         elif dtype.time_unit == "us":
             return s.dt.timestamp("us") / 1_000_000
         elif dtype.time_unit == "ns":
-            return s.dt.timestamp("us") / 1_000_000_000
+            return s.dt.timestamp("ns") / 1_000_000_000
         else:
             msg = "Unexpected dtype, please report a bug"
             raise ValueError(msg)
