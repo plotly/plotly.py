@@ -8,8 +8,6 @@ Note that the functions in this module are not meant to be called directly, and 
 exposed as part of the public API for documentation purposes.
 """
 
-import narwhals.stable.v1 as nw
-
 __all__ = ["ols", "lowess", "rolling", "ewm", "expanding"]
 
 

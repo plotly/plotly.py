@@ -30,10 +30,12 @@ def pyarrow_table_constructor(obj) -> IntoDataFrame:
 constructors = [polars_eager_constructor, pyarrow_table_constructor, pandas_constructor]
 
 if parse_version(pd.__version__) >= parse_version("2.0.0"):
-    constructors = [
-        pandas_nullable_constructor,
-        pandas_pyarrow_constructor,
-    ]
+    constructors.extend(
+        [
+            pandas_nullable_constructor,
+            pandas_pyarrow_constructor,
+        ]
+    )
 
 
 @pytest.fixture(params=constructors)
