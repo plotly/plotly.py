@@ -326,7 +326,6 @@ def imshow(
         if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
         is_dataframe = True
-        img = img.to_numpy()
     else:
         is_dataframe = False
 

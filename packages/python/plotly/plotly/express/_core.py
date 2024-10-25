@@ -156,6 +156,8 @@ def invert_label(args, column):
 
 
 def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
+    if nw.dependencies.is_pandas_like_dataframe(df_native := df.to_native()):
+        return df_native[col_name].dtype.kind in 'ifc'
     return df.get_column(col_name).dtype.is_numeric()
 
 
@@ -1114,15 +1116,12 @@ def to_unindexed_series(x, name=None, native_namespace=None):
     itx index reset if pandas-like). Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building.
     """
-    x_native = nw.to_native(x, strict=False)
-    if nw.dependencies.is_pandas_like_series(x_native):
-        return nw.from_native(
-            x_native.__class__(x_native, name=name).reset_index(drop=True),
-            series_only=True,
-        )
     x = nw.from_native(x, series_only=True, strict=False)
     if isinstance(x, nw.Series):
-        return x.rename(name)
+        if name == x.name:
+            # Avoid potentially creating a copy in pre-copy-on-write pandas
+            return nw.maybe_reset_index(x)
+        return nw.maybe_reset_index(x).rename(name)
     elif native_namespace is not None:
         return nw.new_series(name=name, values=x, native_namespace=native_namespace)
     else:
@@ -1907,7 +1906,7 @@ def process_dataframe_hierarchy(args):
     for i, level in enumerate(path):
 
         dfg = (
-            df.group_by(path[i:])
+            df.group_by(path[i:], drop_null_keys=True)
             .agg(**agg_f)
             .pipe(post_agg, continuous_aggs, discrete_aggs)
         )
@@ -2307,7 +2306,7 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = list(orders.keys())
-        grouped = dict(df.group_by(required_grouper).__iter__())
+        grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
         sorted_group_names = list(grouped.keys())
 
         for i, col in reversed(list(enumerate(required_grouper))):
