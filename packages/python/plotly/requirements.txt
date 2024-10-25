@@ -5,8 +5,5 @@
 ###                                             ###
 ###################################################
 
-## retrying requests ##
-tenacity>=6.2.0
-
 ## dataframe agnostic layer ##
 narwhals>=1.10.0
