@@ -157,7 +157,14 @@ complete installation and avoid gdal-config errors.
 (plotly_dev) $ pip install -e packages/python/chart-studio/
 (plotly_dev) $ pip install -e packages/python/plotly-geo/
 ```
-This will ensure that the installed packages links to your local development
+
+**Note**: To test `go.FigureWidget` locally, you'll need to generate the javascript bundle as follows:
+```
+cd packages/python/plotly/js
+npm install && npm run build
+```
+
+Running `pip install -e` will ensure that the installed packages links to your local development
 directory, meaning that all changes you make reflect directly in your
 environment (don't forget to restart the Jupyter kernel though!). For more
 information see the
