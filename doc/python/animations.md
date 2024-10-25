@@ -30,6 +30,7 @@ jupyter:
     order: 1
     page_type: example_index
     permalink: python/animations/
+    redirect_from: python/visualizing-mri-volume-slices/
     thumbnail: thumbnail/animations.gif
 ---
 
@@ -171,7 +172,7 @@ fig = go.Figure(
 fig.update_layout(width=600, height=450,
         xaxis=dict(range=[xm, xM], autorange=False, zeroline=False),
         yaxis=dict(range=[ym, yM], autorange=False, zeroline=False),
-        title_text="Kinematic Generation of a Planar Curve", title_x=0.5, 
+        title_text="Kinematic Generation of a Planar Curve", title_x=0.5,
         updatemenus = [dict(type = "buttons",
         buttons = [
             dict(
@@ -179,9 +180,9 @@ fig.update_layout(width=600, height=450,
                                 "fromcurrent": True, "transition": {"duration": 10}}],
                 label = "Play",
                 method = "animate",
-                 
+
                 )])])
-       
+
 fig.update(frames=[go.Frame(
                         data=[go.Scatter(
                                    x=[xx[k]],
