@@ -1859,7 +1859,9 @@ def process_dataframe_hierarchy(args):
             # However we cannot do that just yet, therefore a workaround is provided
             agg_f[args["color"]] = nw.col(args["color"]).max()
             agg_f[f'{args["color"]}__plotly_n_unique__'] = (
-                nw.col(args["color"]).n_unique().alias(f'{args["color"]}__plotly_n_unique__')
+                nw.col(args["color"])
+                .n_unique()
+                .alias(f'{args["color"]}__plotly_n_unique__')
             )
         else:
             # This first needs to be multiplied by `count_colname`
