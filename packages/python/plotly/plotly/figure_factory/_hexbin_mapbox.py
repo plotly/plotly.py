@@ -407,7 +407,11 @@ def create_hexbin_mapbox(
         center = dict(lat=lat_range.mean(), lon=lon_range.mean())
 
     if args["animation_frame"] is not None:
-        groups = dict(args["data_frame"].group_by(args["animation_frame"], drop_null_keys=True).__iter__())
+        groups = dict(
+            args["data_frame"]
+            .group_by(args["animation_frame"], drop_null_keys=True)
+            .__iter__()
+        )
     else:
         groups = {(0,): args["data_frame"]}
 
