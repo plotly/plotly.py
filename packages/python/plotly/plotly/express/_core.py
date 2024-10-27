@@ -10,7 +10,6 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
-from narwhals.dependencies import is_into_series
 from narwhals.utils import generate_unique_token
 
 from plotly._subplots import (
@@ -276,9 +275,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     df: nw.DataFrame = args["data_frame"]
 
     if "line_close" in args and args["line_close"]:
-        trace_data = nw.maybe_reset_index(
-            nw.concat([trace_data, trace_data.head(1)], how="vertical")
-        )
+        trace_data = nw.concat([trace_data, trace_data.head(1)], how="vertical")
 
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
@@ -1050,7 +1047,7 @@ def _get_reserved_col_names(args):
                 continue
             elif isinstance(arg, str):  # no need to add ints since kw arg are not ints
                 reserved_names.add(arg)
-            elif is_into_series(arg):
+            elif nw.dependencies.is_into_series(arg):
                 arg_series = nw.from_native(arg, series_only=True)
                 arg_name = arg_series.name
                 if arg_name and arg_name in df.columns:
