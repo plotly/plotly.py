@@ -157,6 +157,9 @@ def invert_label(args, column):
 
 def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
     if nw.dependencies.is_pandas_like_dataframe(df_native := df.to_native()):
+        # fastpath for pandas: Narwhals' Series.dtype has a bit of overhead, as it
+        # tries to distinguish between true "object" columns, and "string" columns
+        # disguised as "object". But here, we deal with neither.
         return df_native[col_name].dtype.kind in 'ifc'
     return df.get_column(col_name).dtype.is_numeric()
 
@@ -1118,9 +1121,6 @@ def to_unindexed_series(x, name=None, native_namespace=None):
     """
     x = nw.from_native(x, series_only=True, strict=False)
     if isinstance(x, nw.Series):
-        if name == x.name:
-            # Avoid potentially creating a copy in pre-copy-on-write pandas
-            return nw.maybe_reset_index(x)
         return nw.maybe_reset_index(x).rename(name)
     elif native_namespace is not None:
         return nw.new_series(name=name, values=x, native_namespace=native_namespace)
