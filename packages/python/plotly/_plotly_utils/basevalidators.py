@@ -8,6 +8,7 @@ import io
 import re
 import sys
 import warnings
+import narwhals.stable.v1 as nw
 
 from _plotly_utils.optional_imports import get_module
 
@@ -93,8 +94,19 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
-    # Handle pandas Series and Index objects
+    if isinstance(v, nw.Series):
+        if nw.dependencies.is_pandas_like_series(v_native := v.to_native()):
+            v = v_native
+        else:
+            v = v.to_numpy()
+    elif isinstance(v, nw.DataFrame):
+        if nw.dependencies.is_pandas_like_dataframe(v_native := v.to_native()):
+            v = v_native
+        else:
+            v = v.to_numpy()
+
     if pd and isinstance(v, (pd.Series, pd.Index)):
+        # Handle pandas Series and Index objects
         if v.dtype.kind in numeric_kinds:
             # Get the numeric numpy array so we use fast path below
             v = v.values
@@ -193,6 +205,7 @@ def is_homogeneous_array(v):
         np
         and isinstance(v, np.ndarray)
         or (pd and isinstance(v, (pd.Series, pd.Index)))
+        or (isinstance(v, nw.Series))
     ):
         return True
     if is_numpy_convertable(v):
