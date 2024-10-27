@@ -201,7 +201,6 @@ def is_homogeneous_array(v):
     """
     np = get_module("numpy", should_load=False)
     pd = get_module("pandas", should_load=False)
-    import narwhals as nw
     if (
         np
         and isinstance(v, np.ndarray)
