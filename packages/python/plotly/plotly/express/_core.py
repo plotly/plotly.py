@@ -160,7 +160,7 @@ def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
         # fastpath for pandas: Narwhals' Series.dtype has a bit of overhead, as it
         # tries to distinguish between true "object" columns, and "string" columns
         # disguised as "object". But here, we deal with neither.
-        return df_native[col_name].dtype.kind in 'ifc'
+        return df_native[col_name].dtype.kind in "ifc"
     return df.get_column(col_name).dtype.is_numeric()
 
 
@@ -1454,11 +1454,21 @@ def build_dataframe(args, constructor):
             is_pd_like = True
 
         elif hasattr(args["data_frame"], "__dataframe__"):
+            # data_frame supports interchange protocol
             args["data_frame"] = nw.from_native(
                 nw.from_native(
                     args["data_frame"], eager_or_interchange_only=True
                 ).to_pandas(),  # Converts to pandas
                 eager_only=True,
+            )
+            columns = args["data_frame"].columns
+            is_pd_like = True
+
+        elif hasattr(args["data_frame"], "toPandas"):
+            # data_frame is PySpark: it does not support interchange and it is not
+            # integrated in narwhals just yet
+            args["data_frame"] = nw.from_native(
+                args["data_frame"].toPandas(), eager_only=True
             )
             columns = args["data_frame"].columns
             is_pd_like = True
