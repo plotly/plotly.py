@@ -4,7 +4,3 @@
 ###      $ pip install -r requirements.txt      ###
 ###                                             ###
 ###################################################
-
-## retrying requests ##
-tenacity>=6.2.0
-anywidget>=0.9.0
