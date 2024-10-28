@@ -1116,7 +1116,7 @@ def _escape_col_name(columns, col_name, extra):
 
 def to_unindexed_series(x, name=None, native_namespace=None):
     """Assuming x is list-like or even an existing Series, returns a new Series (with
-    itx index reset if pandas-like). Stripping the index from existing pd.Series is
+    its index reset if pandas-like). Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building.
     """
     x = nw.from_native(x, series_only=True, strict=False)
