@@ -551,7 +551,7 @@ setup(
             "package_data/datasets/*",
         ],
     },
-    install_requires=["tenacity>=6.2.0", "packaging"],
+    install_requires=["packaging"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),
