@@ -1423,46 +1423,25 @@ def build_dataframe(args, constructor):
     is_pd_like = False
     if df_provided:
 
-        if nw.dependencies.is_polars_dataframe(
-            args["data_frame"]
-        ) or nw.dependencies.is_pyarrow_table(args["data_frame"]):
-            args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
-            columns = args["data_frame"].columns
-
-        elif nw.dependencies.is_polars_series(
-            args["data_frame"]
-        ) or nw.dependencies.is_pyarrow_chunked_array(args["data_frame"]):
-            args["data_frame"] = nw.from_native(
-                args["data_frame"],
-                series_only=True,
-            ).to_frame()
-            columns = args["data_frame"].columns
-
-        elif nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
+        if nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
 
             columns = args["data_frame"].columns  # This can be multi index
-            args["data_frame"] = nw.from_native(args["data_frame"])
+            args["data_frame"] = nw.from_native(args['data_frame'], eager_only=True)
             is_pd_like = True
 
         elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
 
-            args["data_frame"] = nw.from_native(
-                args["data_frame"],
-                series_only=True,
-            ).to_frame()
+            args["data_frame"] = nw.from_native(args['data_frame'], series_only=True).to_frame()
             columns = args["data_frame"].columns
             is_pd_like = True
 
-        elif hasattr(args["data_frame"], "__dataframe__"):
-            # data_frame supports interchange protocol
-            args["data_frame"] = nw.from_native(
-                nw.from_native(
-                    args["data_frame"], eager_or_interchange_only=True
-                ).to_pandas(),  # Converts to pandas
-                eager_only=True,
-            )
-            columns = args["data_frame"].columns
-            is_pd_like = True
+        elif isinstance(data_frame := nw.from_native(args['data_frame'], eager_or_interchange_only=True, strict=False), nw.DataFrame):
+            args["data_frame"] = data_frame
+            columns = args['data_frame'].schema.names()
+
+        elif isinstance(series := nw.from_native(args['data_frame'], series_only=True, strict=False), nw.Series):
+            args["data_frame"] = series.to_frame()
+            columns = args['data_frame'].columns
 
         elif hasattr(args["data_frame"], "toPandas"):
             # data_frame is PySpark: it does not support interchange and it is not
@@ -1574,6 +1553,10 @@ def build_dataframe(args, constructor):
     if wide_mode:
         value_name = _escape_col_name(columns, "value", [])
         var_name = _escape_col_name(columns, var_name, [])
+
+    if isinstance(args['data_frame'], nw.DataFrame) and nw.get_level(args['data_frame']) == 'interchange':
+        # Interchange to PyArrow if necessary
+        args['data_frame'] = nw.from_native(data_frame.to_arrow(), eager_only=True)
 
     missing_bar_dim = None
     if (
