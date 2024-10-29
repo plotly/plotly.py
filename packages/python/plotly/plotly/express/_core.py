@@ -1572,7 +1572,8 @@ def build_dataframe(args, constructor):
                     necessary_columns.update(i for i in args[field] if i in columns)
             columns = list(necessary_columns)
             args["data_frame"] = nw.from_native(args['data_frame'].select(columns).to_arrow(), eager_only=True)
-
+        import pyarrow as pa
+        native_namespace = pa
     missing_bar_dim = None
     if (
         constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types
