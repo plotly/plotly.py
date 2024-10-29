@@ -293,15 +293,23 @@ def test_build_df_using_interchange_protocol_mock():
     class InterchangeDataFrame:
         def __init__(self, df):
             self._df = df
-        
+
         def __dataframe__(self):
             return self
 
         def column_names(self):
             return list(self._df._data.keys())
-        
+
         def select_columns_by_name(self, columns):
-            return InterchangeDataFrame(CustomDataFrame({key: value for key, value in self._df._data.items() if key in columns}))
+            return InterchangeDataFrame(
+                CustomDataFrame(
+                    {
+                        key: value
+                        for key, value in self._df._data.items()
+                        if key in columns
+                    }
+                )
+            )
 
     class CustomDataFrame:
         def __init__(self, data):
@@ -310,9 +318,9 @@ def test_build_df_using_interchange_protocol_mock():
         def __dataframe__(self, allow_copy: bool = True):
             return InterchangeDataFrame(self)
 
-    input_dataframe = CustomDataFrame({'a': [1,2,3], 'b': [4,5,6]})
+    input_dataframe = CustomDataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
 
-    input_dataframe_pa = pa.table({'a': [1,2,3], 'b': [4,5,6]})
+    input_dataframe_pa = pa.table({"a": [1, 2, 3], "b": [4, 5, 6]})
 
     args = dict(data_frame=input_dataframe, x="a", y="b")
     with mock.patch(
