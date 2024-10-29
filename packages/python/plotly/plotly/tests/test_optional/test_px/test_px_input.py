@@ -1,4 +1,5 @@
 import plotly.express as px
+import pyarrow as pa
 import plotly.graph_objects as go
 import narwhals.stable.v1 as nw
 import numpy as np
@@ -290,35 +291,40 @@ def test_build_df_with_index():
 
 def test_build_df_using_interchange_protocol_mock():
     class InterchangeDataFrame:
-        def __init__(self, columns):
-            self._columns = columns
+        def __init__(self, df):
+            self._df = df
+        
+        def __dataframe__(self):
+            return self
 
         def column_names(self):
-            return self._columns
-
-    interchange_dataframe = InterchangeDataFrame(
-        ["petal_width", "sepal_length", "sepal_width"]
-    )
+            return list(self._df._data.keys())
+        
+        def select_columns_by_name(self, columns):
+            return InterchangeDataFrame(CustomDataFrame({key: value for key, value in self._df._data.items() if key in columns}))
 
     class CustomDataFrame:
-        def __dataframe__(self):
-            return interchange_dataframe
+        def __init__(self, data):
+            self._data = data
 
-    input_dataframe = CustomDataFrame()
+        def __dataframe__(self, allow_copy: bool = True):
+            return InterchangeDataFrame(self)
 
-    iris_pandas = px.data.iris()
+    input_dataframe = CustomDataFrame({'a': [1,2,3], 'b': [4,5,6]})
 
-    args = dict(data_frame=input_dataframe, x="petal_width", y="sepal_length")
+    input_dataframe_pa = pa.table({'a': [1,2,3], 'b': [4,5,6]})
+
+    args = dict(data_frame=input_dataframe, x="a", y="b")
     with mock.patch(
-        "narwhals._interchange.dataframe.InterchangeFrame.to_pandas",
-        return_value=iris_pandas,
+        "narwhals._interchange.dataframe.InterchangeFrame.to_arrow",
+        return_value=input_dataframe_pa,
     ) as mock_from_dataframe:
         out = build_dataframe(args, go.Scatter)
 
         mock_from_dataframe.assert_called_once()
 
         assert_frame_equal(
-            iris_pandas.reset_index()[out["data_frame"].columns],
+            input_dataframe_pa.select(out["data_frame"].columns).to_pandas(),
             out["data_frame"].to_pandas(),
         )
 
