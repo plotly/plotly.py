@@ -1479,8 +1479,7 @@ def build_dataframe(args, constructor):
         columns = None  # no data_frame
 
     df_input: nw.DataFrame | None = args["data_frame"]
-    index = nw.maybe_get_index(df_input) if df_provided else None
-
+    index = nw.maybe_get_index(df_input) if df_provided and not needs_interchanging else None
     native_namespace = nw.get_native_namespace(df_input) if df_provided and not needs_interchanging else None
 
     # now we handle special cases like wide-mode or x-xor-y specification
