@@ -1607,7 +1607,13 @@ def build_dataframe(args, constructor):
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
                 if args.get(ax) is None:
-                    args[ax] = index if index is not None else Range()
+                    args[ax] = (
+                        index
+                        if index is not None
+                        else Range(
+                            label=_escape_col_name(columns, ax, [var_name, value_name])
+                        )
+                    )
                     if constructor == go.Bar:
                         missing_bar_dim = ax
                     else:
