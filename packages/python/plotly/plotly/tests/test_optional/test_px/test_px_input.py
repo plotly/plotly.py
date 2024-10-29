@@ -53,13 +53,13 @@ def test_with_index():
 
 def test_series(request, constructor):
     if "pyarrow_table" in str(constructor):
+        # By converting to native, we lose the name for pyarrow chunked_array
+        # and the assertions fail
         request.applymarker(pytest.mark.xfail)
 
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))
     before_tip = (tips.get_column("total_bill") - tips.get_column("tip")).to_native()
-    # By converting to native, we lose the name for pyarrow chunked_array and the last
-    # assertion fails
     day = tips.get_column("day").to_native()
     tips = tips.to_native()
 
@@ -74,6 +74,8 @@ def test_series(request, constructor):
 
 def test_several_dataframes(request, constructor):
     if "pyarrow_table" in str(constructor):
+        # By converting to native, we lose the name for pyarrow chunked_array
+        # and the assertions fail
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(constructor(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8])))
@@ -153,6 +155,8 @@ def test_several_dataframes(request, constructor):
 
 def test_name_heuristics(request, constructor):
     if "pyarrow_table" in str(constructor):
+        # By converting to native, we lose the name for pyarrow chunked_array
+        # and the assertions fail
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(constructor(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2])))
@@ -482,6 +486,8 @@ def test_pass_df_columns(constructor):
 
 def test_size_column(request, constructor):
     if "pyarrow_table" in str(constructor):
+        # By converting to native, we lose the name for pyarrow chunked_array
+        # and the assertions fail
         request.applymarker(pytest.mark.xfail)
     data = px.data.tips().to_dict(orient="list")
     tips = nw.from_native(constructor(data))

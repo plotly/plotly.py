@@ -1868,6 +1868,10 @@ def process_dataframe_hierarchy(args):
     discrete_aggs = []
     continuous_aggs = []
 
+    n_unique_token = nw.generate_temporary_column_name(
+        n_bytes=16, columns=[*path, count_colname]
+    )
+
     if args["color"]:
         if discrete_color:
 
@@ -1888,10 +1892,10 @@ def process_dataframe_hierarchy(args):
             # ```
             # However we cannot do that just yet, therefore a workaround is provided
             agg_f[args["color"]] = nw.col(args["color"]).max()
-            agg_f[f'{args["color"]}__plotly_n_unique__'] = (
+            agg_f[f'{args["color"]}_{n_unique_token}__'] = (
                 nw.col(args["color"])
                 .n_unique()
-                .alias(f'{args["color"]}__plotly_n_unique__')
+                .alias(f'{args["color"]}_{n_unique_token}__')
             )
         else:
             # This first needs to be multiplied by `count_colname`
@@ -1909,8 +1913,8 @@ def process_dataframe_hierarchy(args):
             # Similar trick as above
             discrete_aggs.append(col)
             agg_f[col] = nw.col(col).max()
-            agg_f[f"{col}__plotly_n_unique__"] = (
-                nw.col(col).n_unique().alias(f"{col}__plotly_n_unique__")
+            agg_f[f"{col}_{n_unique_token}__"] = (
+                nw.col(col).n_unique().alias(f"{col}_{n_unique_token}__")
             )
     # Avoid collisions with reserved names - columns in the path have been copied already
     cols = list(set(cols) - set(["labels", "parent", "id"]))
@@ -1930,12 +1934,12 @@ def process_dataframe_hierarchy(args):
         return dframe.with_columns(
             **{c: nw.col(c) / nw.col(count_colname) for c in continuous_aggs},
             **{
-                c: nw.when(nw.col(f"{c}__plotly_n_unique__") == 1)
+                c: nw.when(nw.col(f"{c}_{n_unique_token}__") == 1)
                 .then(nw.col(c))
                 .otherwise(nw.lit("(?)"))
                 for c in discrete_aggs
             },
-        ).drop([f"{c}__plotly_n_unique__" for c in discrete_aggs])
+        ).drop([f"{c}_{n_unique_token}__" for c in discrete_aggs])
 
     for i, level in enumerate(path):
 
@@ -1953,11 +1957,13 @@ def process_dataframe_hierarchy(args):
             id=nw.col(level).cast(nw.String()),
         )
         if i < len(path) - 1:
-            token = generate_unique_token(n_bytes=8, columns=df_tree.columns)
+            _concat_str_token = nw.generate_temporary_column_name(
+                n_bytes=8, columns=[*cols, "labels", "parent", "id"]
+            )
             df_tree = (
                 df_tree.with_columns(
                     **{
-                        token: nw.concat_str(
+                        _concat_str_token: nw.concat_str(
                             [
                                 nw.col(path[j]).cast(nw.String())
                                 for j in range(len(path) - 1, i, -1)
@@ -1969,14 +1975,14 @@ def process_dataframe_hierarchy(args):
                 .with_columns(
                     **{
                         "parent": nw.concat_str(
-                            [nw.col(token), nw.col("parent")], separator="/"
+                            [nw.col(_concat_str_token), nw.col("parent")], separator="/"
                         ),
                         "id": nw.concat_str(
-                            [nw.col(token), nw.col("id")], separator="/"
+                            [nw.col(_concat_str_token), nw.col("id")], separator="/"
                         ),
                     }
                 )
-                .drop(token)
+                .drop(_concat_str_token)
             )
 
         # strip "/" if at the end of the string, equivalent to `.str.rstrip`

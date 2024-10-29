@@ -542,9 +542,7 @@ def test_histfunc_hoverlabels_bivariate(constructor):
     check_label("density of max of tip", fig)
 
 
-def test_timeline(request, constructor):
-    if "pyarrow_table" in str(constructor) or "polars_eager" in str(constructor):
-        request.applymarker(pytest.mark.xfail)
+def test_timeline(constructor):
 
     df = constructor(
         {
