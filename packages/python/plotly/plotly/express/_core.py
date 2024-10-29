@@ -1421,48 +1421,41 @@ def build_dataframe(args, constructor):
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     is_pd_like = False
+    needs_interchanging = False
     if df_provided:
 
-        if nw.dependencies.is_polars_dataframe(
-            args["data_frame"]
-        ) or nw.dependencies.is_pyarrow_table(args["data_frame"]):
-            args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
-            columns = args["data_frame"].columns
-
-        elif nw.dependencies.is_polars_series(
-            args["data_frame"]
-        ) or nw.dependencies.is_pyarrow_chunked_array(args["data_frame"]):
-            args["data_frame"] = nw.from_native(
-                args["data_frame"],
-                series_only=True,
-            ).to_frame()
-            columns = args["data_frame"].columns
-
-        elif nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
+        if nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
 
             columns = args["data_frame"].columns  # This can be multi index
-            args["data_frame"] = nw.from_native(args["data_frame"])
+            args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
             is_pd_like = True
 
         elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
 
             args["data_frame"] = nw.from_native(
-                args["data_frame"],
-                series_only=True,
+                args["data_frame"], series_only=True
             ).to_frame()
             columns = args["data_frame"].columns
             is_pd_like = True
 
-        elif hasattr(args["data_frame"], "__dataframe__"):
-            # data_frame supports interchange protocol
-            args["data_frame"] = nw.from_native(
-                nw.from_native(
-                    args["data_frame"], eager_or_interchange_only=True
-                ).to_pandas(),  # Converts to pandas
-                eager_only=True,
-            )
+        elif isinstance(
+            data_frame := nw.from_native(
+                args["data_frame"], eager_or_interchange_only=True, strict=False
+            ),
+            nw.DataFrame,
+        ):
+            args["data_frame"] = data_frame
+            needs_interchanging = nw.get_level(data_frame) == "interchange"
             columns = args["data_frame"].columns
-            is_pd_like = True
+
+        elif isinstance(
+            series := nw.from_native(
+                args["data_frame"], series_only=True, strict=False
+            ),
+            nw.Series,
+        ):
+            args["data_frame"] = series.to_frame()
+            columns = args["data_frame"].columns
 
         elif hasattr(args["data_frame"], "toPandas"):
             # data_frame is PySpark: it does not support interchange and it is not
@@ -1498,11 +1491,16 @@ def build_dataframe(args, constructor):
         columns = None  # no data_frame
 
     df_input: nw.DataFrame | None = args["data_frame"]
-    index = nw.maybe_get_index(df_input) if df_provided else None
-
-    # This is safe since at this point `_compliant_frame` is one of the "full" level
-    # support dataframe(s)
-    native_namespace = nw.get_native_namespace(df_input) if df_provided else None
+    index = (
+        nw.maybe_get_index(df_input)
+        if df_provided and not needs_interchanging
+        else None
+    )
+    native_namespace = (
+        nw.get_native_namespace(df_input)
+        if df_provided and not needs_interchanging
+        else None
+    )
 
     # now we handle special cases like wide-mode or x-xor-y specification
     # by rearranging args to tee things up for process_args_into_dataframe to work
@@ -1575,6 +1573,32 @@ def build_dataframe(args, constructor):
         value_name = _escape_col_name(columns, "value", [])
         var_name = _escape_col_name(columns, var_name, [])
 
+    if isinstance(args["data_frame"], nw.DataFrame) and needs_interchanging:
+        # Interchange to PyArrow
+        if wide_mode:
+            args["data_frame"] = nw.from_native(
+                args["data_frame"].to_arrow(), eager_only=True
+            )
+        else:
+            # Save precious resources by only interchanging columns that are
+            # actually going to be plotted. This is tricky to do in the general case,
+            # because Plotly allows calls like `px.line(df, x='x', y=['y1', df['y1']])`,
+            # but interchange-only objects (e.g. DuckDB) don't typically have a concept
+            # of self-standing Series. It's more important to perform project pushdown
+            # here seeing as we're materialising to an (eager) PyArrow table.
+            necessary_columns = {
+                i for i in args.values() if isinstance(i, str) and i in columns
+            }
+            for field in args:
+                if args[field] is not None and field in array_attrables:
+                    necessary_columns.update(i for i in args[field] if i in columns)
+            columns = list(necessary_columns)
+            args["data_frame"] = nw.from_native(
+                args["data_frame"].select(columns).to_arrow(), eager_only=True
+            )
+        import pyarrow as pa
+
+        native_namespace = pa
     missing_bar_dim = None
     if (
         constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types
