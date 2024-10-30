@@ -1,5 +1,5 @@
 // Adapted from ../../../javascript/jupyterlab-plotly/src/Figure.ts for anywidget.
-import _ from "https://esm.sh/lodash-es@4.17.21";
+import _ from "lodash-es";
 import Plotly from "plotly.js";
 /*global define */
 
