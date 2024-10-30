@@ -1,7 +1,7 @@
 // Adapted from ../../../javascript/jupyterlab-plotly/src/Figure.ts for anywidget.
-import type { DOMWidgetModel } from "@jupyter-widgets/base";
-import _ from "lodash";
+import _ from "https://esm.sh/lodash-es@4.17.21";
 import Plotly from "plotly.js";
+/*global define */
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
@@ -124,7 +124,6 @@ type Selector = {
  * FigureModels and Python FigureWidgets. The JavaScript FigureModel is
  * initialized as soon as a Python FigureWidget initialized, this happens
  * even before the widget is first displayed in the Notebook
- * @type {widgets.DOMWidgetModel}
  */
 
 type Serializer<In=any, Out=any> = {
@@ -133,10 +132,10 @@ type Serializer<In=any, Out=any> = {
 }
 
 export class FigureModel {
-  model: DOMWidgetModel;
+  model;
   serializers: Record<string, Serializer>
 
-  constructor(model: DOMWidgetModel, serializers: Record<string, Serializer>) {
+  constructor(model, serializers: Record<string, Serializer>) {
     this.model = model;
     this.serializers = serializers;
   }
@@ -1647,7 +1646,7 @@ function js2py_serializer(v: any, widgetManager?: any) {
     for (var i = 0; i < v.length; i++) {
       res[i] = js2py_serializer(v[i]);
     }
-  } else if (_.isPlainObject(v)) {
+  } else if (_.isObject(v)) {
     // Serialize object properties recursively
     res = {};
     for (var p in v) {
@@ -1679,7 +1678,7 @@ function py2js_deserializer(v: any, widgetManager?: any) {
     for (var i = 0; i < v.length; i++) {
       res[i] = py2js_deserializer(v[i]);
     }
-  } else if (_.isPlainObject(v)) {
+  } else if (_.isObject(v)) {
     if (
       (_.has(v, "value") || _.has(v, "buffer")) &&
       _.has(v, "dtype") &&
@@ -2072,10 +2071,12 @@ function randstr(
 export default () => {
   let model;
   return {
+    /** @type {import('anywidget/types').Initialize<Model>} */
     initialize(ctx) {
       model = new FigureModel(ctx.model, serializers);
       model.initialize();
     },
+    /** @type {import('anywidget/types').Render<Model>} */
     render({ el }) {
       const view = new FigureView(model, el);
       view.perform_render()
