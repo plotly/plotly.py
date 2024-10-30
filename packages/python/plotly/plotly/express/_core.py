@@ -1480,7 +1480,6 @@ def build_dataframe(args, constructor):
         # data_frame is PySpark: it does not support interchange protocol and it is not
         # integrated in Narwhals. We use its native method to convert it to pandas.
         elif hasattr(args["data_frame"], "toPandas"):
-            # data_frame is PySpark:
             args["data_frame"] = nw.from_native(
                 args["data_frame"].toPandas(), eager_only=True
             )
@@ -1603,8 +1602,10 @@ def build_dataframe(args, constructor):
         value_name = _escape_col_name(columns, "value", [])
         var_name = _escape_col_name(columns, var_name, [])
 
+    # If the data_frame has interchange-only support levelin Narwhals, then we need to
+    # convert it to a full support level backend.
+    # Hence we convert requires Interchange to PyArrow.
     if needs_interchanging:
-        # Interchange to PyArrow
         if wide_mode:
             args["data_frame"] = nw.from_native(
                 args["data_frame"].to_arrow(), eager_only=True
@@ -1908,25 +1909,38 @@ def process_dataframe_hierarchy(args):
         n_bytes=16, columns=[*path, count_colname]
     )
 
+    # In theory, for discrete columns aggregation, we should have a way to do
+    # `.agg(nw.col(x).unique())` in group_by and successively unpack/parse it as:
+    # ```
+    # (nw.when(nw.col(x).list.len()==1)
+    # .then(nw.col(x).list.first())
+    # .otherwise(nw.lit("(?)"))
+    # )
+    # ```
+    # which replicates the original pandas only codebase:
+    # ```
+    # def discrete_agg(x):
+    #     uniques = x.unique()
+    #     return uniques[0] if len(uniques) == 1 else "(?)"
+    #
+    # df.groupby(path[i:]).agg(...)
+    # ```
+    # However this is not possible, therefore the following workaround is provided.
+    # We make two aggregations for the same column:
+    # - take the max value
+    # - take the number of unique values
+    # Finally, after the group by statement, it is unpacked via:
+    # ```
+    # (nw.when(nw.col(col_n_unique) == 1)
+    # .then(nw.col(col_max_value))  # which is the unique value
+    # .otherwise(nw.lit("(?)"))
+    # )
+    # ```
+
     if args["color"]:
         if discrete_color:
 
             discrete_aggs.append(args["color"])
-            # Hack: In theory, we should have a way to do `.agg(nw.col(x).unique())` and
-            # successively unpack/parse it as:
-            # ```
-            # (nw.when(nw.col(x).list.len()==1)
-            # .then(nw.col(x).list.first())
-            # .otherwise(nw.lit("(?)"))
-            # )
-            # ```
-            # which replicates:
-            # ```
-            # def discrete_agg(x):
-            #     uniques = x.unique()
-            #     return uniques[0] if len(uniques) == 1 else "(?)"
-            # ```
-            # However we cannot do that just yet, therefore a workaround is provided
             agg_f[args["color"]] = nw.col(args["color"]).max()
             agg_f[f'{args["color"]}_{n_unique_token}__'] = (
                 nw.col(args["color"])

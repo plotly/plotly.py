@@ -124,7 +124,10 @@ def _pandas(mode, trendline_options, x_raw, y, non_missing):
 
     series = pd.Series(np.copy(y), index=x_raw.to_pandas())
 
-    # TODO: If narwhals were to support rolling, ewm and expanding then we could go around these
+    # TODO: Narwhals Series/DataFrame do not support rolling, ewm nor expanding, therefore
+    # it fallbacks to pandas Series independently of the original type.
+    # Plotly issue: https://github.com/plotly/plotly.py/issues/4834
+    # Narwhals issue: https://github.com/narwhals-dev/narwhals/issues/1254
     agg = getattr(series, mode)  # e.g. series.rolling
     agg_obj = agg(**trendline_options)  # e.g. series.rolling(**opts)
     function = getattr(agg_obj, function_name)  # e.g. series.rolling(**opts).mean
