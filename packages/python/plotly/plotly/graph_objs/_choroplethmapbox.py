@@ -367,21 +367,6 @@ class Choroplethmapbox(_BaseTraceType):
                     :class:`plotly.graph_objects.choroplethmapbox.c
                     olorbar.Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    choroplethmapbox.colorbar.title.font instead.
-                    Sets this color bar's title font. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleside
-                    Deprecated: Please use
-                    choroplethmapbox.colorbar.title.side instead.
-                    Determines the location of color bar's title
-                    with respect to the color bar. Defaults to
-                    "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h". Note that
-                    the title's location used to be set by the now
-                    deprecated `titleside` attribute.
                 x
                     Sets the x position with respect to `xref` of
                     the color bar (in plot fraction). When `xref`
@@ -1261,9 +1246,12 @@ class Choroplethmapbox(_BaseTraceType):
     @property
     def subplot(self):
         """
-        Sets a reference between this trace's data coordinates and a
-        mapbox subplot. If "mapbox" (the default value), the data refer
-        to `layout.mapbox`. If "mapbox2", the data refer to
+        mapbox subplots and traces are deprecated! Please consider
+        switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/javascript/maplibre-migration/ Sets a
+        reference between this trace's data coordinates and a mapbox
+        subplot. If "mapbox" (the default value), the data refer to
+        `layout.mapbox`. If "mapbox2", the data refer to
         `layout.mapbox2`, and so on.
 
         The 'subplot' property is an identifier of a particular
@@ -1755,10 +1743,14 @@ class Choroplethmapbox(_BaseTraceType):
             :class:`plotly.graph_objects.choroplethmapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets the text elements associated with each location.
         textsrc
@@ -1875,9 +1867,12 @@ class Choroplethmapbox(_BaseTraceType):
         """
         Construct a new Choroplethmapbox object
 
-        GeoJSON features to be filled are set in `geojson` The data
-        that describes the choropleth value-to-color mapping is set in
-        `locations` and `z`.
+        "choroplethmapbox" trace is deprecated! Please consider
+        switching to the "choroplethmap" trace type and `map` subplots.
+        Learn more at: https://plotly.com/javascript/maplibre-
+        migration/ GeoJSON features to be filled are set in `geojson`
+        The data that describes the choropleth value-to-color mapping
+        is set in `locations` and `z`.
 
         Parameters
         ----------
@@ -2073,10 +2068,14 @@ class Choroplethmapbox(_BaseTraceType):
             :class:`plotly.graph_objects.choroplethmapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets the text elements associated with each location.
         textsrc

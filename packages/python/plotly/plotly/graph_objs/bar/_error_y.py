@@ -114,7 +114,7 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the stoke color of the error bars.
+        Sets the stroke color of the error bars.
 
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -382,7 +382,7 @@ class ErrorY(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `array`.
         color
-            Sets the stoke color of the error bars.
+            Sets the stroke color of the error bars.
         symmetric
             Determines whether or not the error bars have the same
             length in both direction (top/bottom for vertical bars,
@@ -464,7 +464,7 @@ class ErrorY(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `array`.
         color
-            Sets the stoke color of the error bars.
+            Sets the stroke color of the error bars.
         symmetric
             Determines whether or not the error bars have the same
             length in both direction (top/bottom for vertical bars,

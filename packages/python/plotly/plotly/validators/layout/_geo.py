@@ -40,7 +40,7 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `center.lon`, `center.lat`,
                 `projection.rotation.lon`,
                 `projection.rotation.lat`, `lonaxis.range` and
-                `lonaxis.range` getting auto-filled. If
+                `lataxis.range` getting auto-filled. If
                 "locations", only the trace's visible locations
                 are considered in the `fitbounds` computations.
                 If "geojson", the entire trace input `geojson`

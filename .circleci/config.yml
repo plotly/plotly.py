@@ -249,14 +249,6 @@ jobs:
       - test_optional:
           py: "312_no_numpy"
 
-  # Orca
-  python_38_orca:
-    docker:
-      - image: cimg/python:3.8-browsers
-    steps:
-      - test_orca:
-          py: "38"
-
   # Percy
   python_39_percy:
     docker:
@@ -400,6 +392,8 @@ jobs:
       - run:
           name: Create conda environment
           command: |
+            conda config --remove channels defaults
+            conda config --add channels conda-forge
             conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
             conda install -n env -c conda-forge jupyterlab=3 nodejs=16
             conda init bash
@@ -463,7 +457,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, for example, `3.9-browsers`
-      - image: cimg/python:3.10-browsers
+      - image: cimg/python:3.9-browsers
 
     steps:
       - add_ssh_keys:
@@ -611,8 +605,6 @@ workflows:
       - python_311_optional
       - python_312_optional
       - python_39_pandas_2_optional
-      - python_38_orca
       - python_39_percy
       - python_312_no_numpy
       - build-doc
-
