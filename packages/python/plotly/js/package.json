@@ -5,6 +5,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "plotly.js": "^2.35.2"
   },
   "devDependencies": {
