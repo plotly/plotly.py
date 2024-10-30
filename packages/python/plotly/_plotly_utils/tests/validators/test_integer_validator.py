@@ -5,7 +5,7 @@ from pytest import approx
 from _plotly_utils.basevalidators import IntegerValidator
 import numpy as np
 import pandas as pd
-
+from plotly.tests.test_optional.test_utils.test_utils import (np_nan, np_inf)
 
 # ### Fixtures ###
 @pytest.fixture()
@@ -53,7 +53,7 @@ def test_acceptance(val, validator):
 
 # ### Rejection by value ###
 @pytest.mark.parametrize(
-    "val", ["hello", (), [], [1, 2, 3], set(), "34", np.nan, np.inf, -np.inf]
+    "val", ["hello", (), [], [1, 2, 3], set(), "34", np_nan(), np_inf(), -np_inf()]
 )
 def test_rejection_by_value(val, validator):
     with pytest.raises(ValueError) as validation_failure:
