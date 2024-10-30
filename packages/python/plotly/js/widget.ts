@@ -1,7 +1,6 @@
 // Adapted from ../../../javascript/jupyterlab-plotly/src/Figure.ts for anywidget.
 import _ from "lodash-es";
 import Plotly from "plotly.js";
-/*global define */
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
