@@ -44,6 +44,10 @@ class Template(_BaseLayoutHierarchyType):
                     A tuple of
                     :class:`plotly.graph_objects.Choroplethmapbox`
                     instances or dicts with compatible properties
+                choroplethmap
+                    A tuple of
+                    :class:`plotly.graph_objects.Choroplethmap`
+                    instances or dicts with compatible properties
                 choropleth
                     A tuple of
                     :class:`plotly.graph_objects.Choropleth`
@@ -63,16 +67,16 @@ class Template(_BaseLayoutHierarchyType):
                     A tuple of
                     :class:`plotly.graph_objects.Densitymapbox`
                     instances or dicts with compatible properties
+                densitymap
+                    A tuple of
+                    :class:`plotly.graph_objects.Densitymap`
+                    instances or dicts with compatible properties
                 funnelarea
                     A tuple of
                     :class:`plotly.graph_objects.Funnelarea`
                     instances or dicts with compatible properties
                 funnel
                     A tuple of :class:`plotly.graph_objects.Funnel`
-                    instances or dicts with compatible properties
-                heatmapgl
-                    A tuple of
-                    :class:`plotly.graph_objects.Heatmapgl`
                     instances or dicts with compatible properties
                 heatmap
                     A tuple of
@@ -121,10 +125,6 @@ class Template(_BaseLayoutHierarchyType):
                 pie
                     A tuple of :class:`plotly.graph_objects.Pie`
                     instances or dicts with compatible properties
-                pointcloud
-                    A tuple of
-                    :class:`plotly.graph_objects.Pointcloud`
-                    instances or dicts with compatible properties
                 sankey
                     A tuple of :class:`plotly.graph_objects.Sankey`
                     instances or dicts with compatible properties
@@ -147,6 +147,10 @@ class Template(_BaseLayoutHierarchyType):
                 scattermapbox
                     A tuple of
                     :class:`plotly.graph_objects.Scattermapbox`
+                    instances or dicts with compatible properties
+                scattermap
+                    A tuple of
+                    :class:`plotly.graph_objects.Scattermap`
                     instances or dicts with compatible properties
                 scatterpolargl
                     A tuple of

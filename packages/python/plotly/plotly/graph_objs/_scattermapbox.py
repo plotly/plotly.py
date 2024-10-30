@@ -1162,9 +1162,12 @@ class Scattermapbox(_BaseTraceType):
     @property
     def subplot(self):
         """
-        Sets a reference between this trace's data coordinates and a
-        mapbox subplot. If "mapbox" (the default value), the data refer
-        to `layout.mapbox`. If "mapbox2", the data refer to
+        mapbox subplots and traces are deprecated! Please consider
+        switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/javascript/maplibre-migration/ Sets a
+        reference between this trace's data coordinates and a mapbox
+        subplot. If "mapbox" (the default value), the data refer to
+        `layout.mapbox`. If "mapbox2", the data refer to
         `layout.mapbox2`, and so on.
 
         The 'subplot' property is an identifier of a particular
@@ -1654,10 +1657,14 @@ class Scattermapbox(_BaseTraceType):
             :class:`plotly.graph_objects.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
@@ -1783,8 +1790,11 @@ class Scattermapbox(_BaseTraceType):
         """
         Construct a new Scattermapbox object
 
-        The data visualized as scatter point, lines or marker symbols
-        on a Mapbox GL geographic map is provided by longitude/latitude
+        "scattermapbox" trace is deprecated! Please consider switching
+        to the "scattermap" trace type and `map` subplots. Learn more
+        at: https://plotly.com/javascript/maplibre-migration/ The data
+        visualized as scatter point, lines or marker symbols on a
+        Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
 
         Parameters
@@ -1966,10 +1976,14 @@ class Scattermapbox(_BaseTraceType):
             :class:`plotly.graph_objects.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
-            Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If "mapbox" (the default value),
-            the data refer to `layout.mapbox`. If "mapbox2", the
-            data refer to `layout.mapbox2`, and so on.
+            mapbox subplots and traces are deprecated! Please
+            consider switching to `map` subplots and traces. Learn
+            more at: https://plotly.com/javascript/maplibre-
+            migration/ Sets a reference between this trace's data
+            coordinates and a mapbox subplot. If "mapbox" (the
+            default value), the data refer to `layout.mapbox`. If
+            "mapbox2", the data refer to `layout.mapbox2`, and so
+            on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all

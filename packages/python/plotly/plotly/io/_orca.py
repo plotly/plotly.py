@@ -1,17 +1,18 @@
 import atexit
+import functools
 import json
 import os
+import random
 import socket
 import subprocess
 import sys
 import threading
+import time
 import warnings
-from copy import copy
 from contextlib import contextmanager
+from copy import copy
 from pathlib import Path
 from shutil import which
-
-import tenacity
 
 import plotly
 from plotly.files import PLOTLY_DIR, ensure_writable_plotly_dir
@@ -109,6 +110,31 @@ def find_open_port():
     s.close()
 
     return port
+
+
+def retry(min_wait=5, max_wait=10, max_delay=60000):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+
+            while True:
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    elapsed_time = time.time() - start_time
+                    if elapsed_time * 1000 >= max_delay:
+                        raise TimeoutError(
+                            f"Retry limit of {max_delay} milliseconds reached."
+                        ) from e
+
+                    wait_time = random.uniform(min_wait, max_wait)
+                    print(f"Retrying in {wait_time:.2f} seconds due to {e}...")
+                    time.sleep(wait_time)
+
+        return wrapper
+
+    return decorator
 
 
 # Orca configuration class
@@ -1357,10 +1383,7 @@ Install using conda:
                 orca_state["shutdown_timer"] = t
 
 
-@tenacity.retry(
-    wait=tenacity.wait_random(min=5, max=10),
-    stop=tenacity.stop_after_delay(60000),
-)
+@retry(min_wait=5, max_wait=10, max_delay=60000)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process

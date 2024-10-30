@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
+      format_version: '1.3'
+      jupytext_version: 1.16.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.10.0
   plotly:
     description: How to create colormaped representations of USA counties by FIPS
       values in Python.
@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: USA County Choropleth Maps
-    order: 10
+    order: 11
     page_type: u-guide
     permalink: python/county-choropleth/
     thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg
@@ -37,7 +37,7 @@ jupyter:
 ### Deprecation warning
 
 
-This page describes a [legacy "figure factory" method](/python/figure-factories/) for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
+This page describes a [legacy "figure factory" method](/python/figure-factories/) for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [tile-based choropleth maps](/python/tile-county-choropleth).
 
 
 #### Required Packages
@@ -274,7 +274,7 @@ fig.layout.template = None
 fig.show()
 ```
 
-Also see Mapbox county choropleths made in Python: [https://plotly.com/python/mapbox-county-choropleth/](https://plotly.com/python/mapbox-county-choropleth/)
+Also see tile county choropleths made in Python: [https://plotly.com/python/tile-county-choropleth/](https://plotly.com/python/tile-county-choropleth/)
 
 ### Reference
 

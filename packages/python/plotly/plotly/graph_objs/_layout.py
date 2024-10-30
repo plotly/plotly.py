@@ -8,6 +8,7 @@ class Layout(_BaseLayoutType):
         "coloraxis",
         "geo",
         "legend",
+        "map",
         "mapbox",
         "polar",
         "scene",
@@ -34,6 +35,7 @@ class Layout(_BaseLayoutType):
             ColoraxisValidator,
             GeoValidator,
             LegendValidator,
+            MapValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -47,6 +49,7 @@ class Layout(_BaseLayoutType):
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
             "legend": LegendValidator,
+            "map": MapValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -111,6 +114,7 @@ class Layout(_BaseLayoutType):
         "imagedefaults",
         "images",
         "legend",
+        "map",
         "mapbox",
         "margin",
         "meta",
@@ -143,7 +147,6 @@ class Layout(_BaseLayoutType):
         "template",
         "ternary",
         "title",
-        "titlefont",
         "transition",
         "treemapcolorway",
         "uirevision",
@@ -1449,7 +1452,7 @@ class Layout(_BaseLayoutType):
                     `center.lon`, `center.lat`,
                     `projection.rotation.lon`,
                     `projection.rotation.lat`, `lonaxis.range` and
-                    `lonaxis.range` getting auto-filled. If
+                    `lataxis.range` getting auto-filled. If
                     "locations", only the trace's visible locations
                     are considered in the `fitbounds` computations.
                     If "geojson", the entire trace input `geojson`
@@ -2179,6 +2182,83 @@ class Layout(_BaseLayoutType):
     def legend(self, val):
         self["legend"] = val
 
+    # map
+    # ---
+    @property
+    def map(self):
+        """
+        The 'map' property is an instance of Map
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Map`
+          - A dict of string/value properties that will be passed
+            to the Map constructor
+
+            Supported dict properties:
+
+                bearing
+                    Sets the bearing angle of the map in degrees
+                    counter-clockwise from North (map.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.map.Bounds`
+                    instance or dict with compatible properties
+                center
+                    :class:`plotly.graph_objects.layout.map.Center`
+                    instance or dict with compatible properties
+                domain
+                    :class:`plotly.graph_objects.layout.map.Domain`
+                    instance or dict with compatible properties
+                layers
+                    A tuple of
+                    :class:`plotly.graph_objects.layout.map.Layer`
+                    instances or dicts with compatible properties
+                layerdefaults
+                    When used in a template (as
+                    layout.template.layout.map.layerdefaults), sets
+                    the default property values to use for elements
+                    of layout.map.layers
+                pitch
+                    Sets the pitch angle of the map (in degrees,
+                    where 0 means perpendicular to the surface of
+                    the map) (map.pitch).
+                style
+                    Defines the map layers that are rendered by
+                    default below the trace layers defined in
+                    `data`, which are themselves by default
+                    rendered below the layers defined in
+                    `layout.map.layers`.  These layers can be
+                    defined either explicitly as a Map Style object
+                    which can contain multiple layer definitions
+                    that load data from any public or private Tile
+                    Map Service (TMS or XYZ) or Web Map Service
+                    (WMS) or implicitly by using one of the built-
+                    in style objects which use WMSes or by using a
+                    custom style URL  Map Style objects are of the
+                    form described in the MapLibre GL JS
+                    documentation available at
+                    https://maplibre.org/maplibre-style-spec/  The
+                    built-in plotly.js styles objects are: basic,
+                    carto-darkmatter, carto-darkmatter-nolabels,
+                    carto-positron, carto-positron-nolabels, carto-
+                    voyager, carto-voyager-nolabels, dark, light,
+                    open-street-map, outdoors, satellite,
+                    satellite-streets, streets, white-bg.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view: `center`, `zoom`, `bearing`, `pitch`.
+                    Defaults to `layout.uirevision`.
+                zoom
+                    Sets the zoom level of the map (map.zoom).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Map
+        """
+        return self["map"]
+
+    @map.setter
+    def map(self, val):
+        self["map"] = val
+
     # mapbox
     # ------
     @property
@@ -2448,18 +2528,19 @@ class Layout(_BaseLayoutType):
                     "reset", "resetCameraDefault3d",
                     "resetCameraLastSave3d", "resetGeo",
                     "resetSankeyGroup", "resetScale2d",
-                    "resetViewMapbox", "resetViews",
-                    "resetcameradefault", "resetcameralastsave",
-                    "resetsankeygroup", "resetscale", "resetview",
-                    "resetviews", "select", "select2d",
-                    "sendDataToCloud", "senddatatocloud",
-                    "tableRotation", "tablerotation", "toImage",
-                    "toggleHover", "toggleSpikelines",
-                    "togglehover", "togglespikelines", "toimage",
-                    "zoom", "zoom2d", "zoom3d", "zoomIn2d",
-                    "zoomInGeo", "zoomInMapbox", "zoomOut2d",
-                    "zoomOutGeo", "zoomOutMapbox", "zoomin",
-                    "zoomout".
+                    "resetViewMap", "resetViewMapbox",
+                    "resetViews", "resetcameradefault",
+                    "resetcameralastsave", "resetsankeygroup",
+                    "resetscale", "resetview", "resetviews",
+                    "select", "select2d", "sendDataToCloud",
+                    "senddatatocloud", "tableRotation",
+                    "tablerotation", "toImage", "toggleHover",
+                    "toggleSpikelines", "togglehover",
+                    "togglespikelines", "toimage", "zoom",
+                    "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
+                    "zoomInMap", "zoomInMapbox", "zoomOut2d",
+                    "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+                    "zoomin", "zoomout".
                 removesrc
                     Sets the source reference on Chart Studio Cloud
                     for `remove`.
@@ -3823,9 +3904,7 @@ class Layout(_BaseLayoutType):
                     values. Invalid values will be reset to the
                     default 1.
                 font
-                    Sets the title font. Note that the title's font
-                    used to be customized by the now deprecated
-                    `titlefont` attribute.
+                    Sets the title font.
                 pad
                     Sets the padding of the title. Each padding
                     value only applies when the corresponding
@@ -3840,10 +3919,7 @@ class Layout(_BaseLayoutType):
                     tle` instance or dict with compatible
                     properties
                 text
-                    Sets the plot's title. Note that before the
-                    existence of `title.text`, the title's contents
-                    used to be defined as the `title` attribute
-                    itself. This behavior has been deprecated.
+                    Sets the plot's title.
                 x
                     Sets the x position with respect to `xref` in
                     normalized coordinates from 0 (left) to 1
@@ -3888,77 +3964,6 @@ class Layout(_BaseLayoutType):
     @title.setter
     def title(self, val):
         self["title"] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use layout.title.font instead. Sets the
-        title font. Note that the title's font used to be customized by
-        the now deprecated `titlefont` attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
 
     # transition
     # ----------
@@ -4938,11 +4943,6 @@ class Layout(_BaseLayoutType):
                 title
                     :class:`plotly.graph_objects.layout.xaxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use layout.xaxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be customized by the
-                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -5547,11 +5547,6 @@ class Layout(_BaseLayoutType):
                 title
                     :class:`plotly.graph_objects.layout.yaxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use layout.yaxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be customized by the
-                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -5851,6 +5846,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6002,10 +6000,6 @@ class Layout(_BaseLayoutType):
         title
             :class:`plotly.graph_objects.layout.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.title.font instead. Sets
-            the title font. Note that the title's font used to be
-            customized by the now deprecated `titlefont` attribute.
         transition
             Sets transition options used during Plotly.react
             updates.
@@ -6084,8 +6078,6 @@ class Layout(_BaseLayoutType):
             dict with compatible properties
         """
 
-    _mapped_properties = {"titlefont": ("title", "font")}
-
     def __init__(
         self,
         arg=None,
@@ -6136,6 +6128,7 @@ class Layout(_BaseLayoutType):
         images=None,
         imagedefaults=None,
         legend=None,
+        map=None,
         mapbox=None,
         margin=None,
         meta=None,
@@ -6168,7 +6161,6 @@ class Layout(_BaseLayoutType):
         template=None,
         ternary=None,
         title=None,
-        titlefont=None,
         transition=None,
         treemapcolorway=None,
         uirevision=None,
@@ -6454,6 +6446,9 @@ class Layout(_BaseLayoutType):
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
             dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
+            dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
             dict with compatible properties
@@ -6605,10 +6600,6 @@ class Layout(_BaseLayoutType):
         title
             :class:`plotly.graph_objects.layout.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.title.font instead. Sets
-            the title font. Note that the title's font used to be
-            customized by the now deprecated `titlefont` attribute.
         transition
             Sets transition options used during Plotly.react
             updates.
@@ -6746,6 +6737,7 @@ class Layout(_BaseLayoutType):
             "imagedefaults",
             "images",
             "legend",
+            "map",
             "mapbox",
             "margin",
             "meta",
@@ -6778,7 +6770,6 @@ class Layout(_BaseLayoutType):
             "template",
             "ternary",
             "title",
-            "titlefont",
             "transition",
             "treemapcolorway",
             "uirevision",
@@ -7007,6 +6998,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = legend if legend is not None else _v
         if _v is not None:
             self["legend"] = _v
+        _v = arg.pop("map", None)
+        _v = map if map is not None else _v
+        if _v is not None:
+            self["map"] = _v
         _v = arg.pop("mapbox", None)
         _v = mapbox if mapbox is not None else _v
         if _v is not None:
@@ -7135,10 +7130,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
         _v = arg.pop("transition", None)
         _v = transition if transition is not None else _v
         if _v is not None:

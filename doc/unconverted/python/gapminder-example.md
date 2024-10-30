@@ -118,7 +118,7 @@ figure['layout']['plot_bgcolor'] = 'rgb(223, 232, 243)'
 For the slider to appear, we need to adda `sliders` dictionary to `layout`. The `sliders` dictionary is set in the following way:
 
 ```
-figure['layout']['sliders] = {
+figure['layout']['sliders'] = {
     'active': 0,
     'yanchor': 'top',
     'xanchor': 'left',

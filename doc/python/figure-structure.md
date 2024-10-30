@@ -97,7 +97,7 @@ The second of the three top-level attributes of a figure is `layout`, whose valu
   * Subplots of various types on which can be drawn multiple traces and which are positioned in paper coordinates:
     * `xaxis`, `yaxis`, `xaxis2`, `yaxis3` etc: X and Y cartesian axes, the intersections of which are cartesian subplots
     * `scene`, `scene2`, `scene3` etc: 3d scene subplots
-    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `mapbox`, `mapbox2`, `mabox3`, `smith`, `smith2` etc: ternary, polar, geo, mapbox or smith subplots
+    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `map`, `map2`, `map3`, `smith`, `smith2` etc: ternary, polar, geo, map or smith subplots
   * Non-data marks which can be positioned in paper coordinates, or in data coordinates linked to 2d cartesian subplots:
     * `annotations`: [textual annotations with or without arrows](/python/text-and-annotations/)
     * `shapes`: [lines, rectangles, ellipses or open or closed paths](/python/shapes/)
@@ -181,18 +181,18 @@ The following trace types are compatible with smith subplots via the `smith` att
 
 ### Map Trace Types and Subplots
 
-Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [mapbox subplots for tile maps](/python/mapbox-layers/). The following trace types support attributes named `geo` or `mapbox`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.mapbox` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [tile-based maps](/python/tile-map-layers/). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with geo subplots via the `geo` attribute:
 
 * [`scattergeo`](/python/scatter-plots-on-maps/), which can be used to draw [individual markers](/python/scatter-plots-on-maps/), [line and curves](/python/lines-on-maps/) and filled areas on outline maps
 * [`choropleth`](/python/choropleth-maps/): [colored polygons](/python/choropleth-maps/) on outline maps
 
-The following trace types are compatible with mapbox subplots via the `mapbox` attribute:
+The following trace types are compatible with tile map subplots via the `map` attribute:
 
-* [`scattermapbox`](/python/scattermapbox/), which can be used to draw [individual markers](/python/scattermapbox/), [lines and curves](/python/lines-on-mapbox/) and [filled areas](/python/filled-area-on-mapbox/) on tile maps
-* [`choroplethmapbox`](/python/mapbox-county-choropleth/): colored polygons on tile maps
-* [`densitymapbox`](/python/mapbox-density-heatmaps/): density heatmaps on tile maps
+* [`scattermap`](/python/tile-scatter-maps/), which can be used to draw [individual markers](/python/tile-scatter-maps/), [lines and curves](/python/lines-on-tile-maps/) and [filled areas](/python/filled-area-tile-maps/) on tile maps
+* [`choroplethmap`](/python/tile-county-choropleth/): colored polygons on tile maps
+* [`densitymap`](/python/tile-density-heatmaps/): density heatmaps on tile maps
 
 ### Traces Which Are Their Own Subplots
 

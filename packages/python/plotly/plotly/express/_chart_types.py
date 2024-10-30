@@ -258,7 +258,7 @@ def line(
     height=None,
 ) -> go.Figure:
     """
-    In a 2D line plot, each row of `data_frame` is represented as vertex of
+    In a 2D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
@@ -309,8 +309,8 @@ def area(
 ) -> go.Figure:
     """
     In a stacked area plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in 2D space. The area between successive
-    polylines is filled.
+    a vertex of a polyline mark in 2D space. The area between
+    successive polylines is filled.
     """
     return make_figure(
         args=locals(),
@@ -821,7 +821,7 @@ def line_3d(
     height=None,
 ) -> go.Figure:
     """
-    In a 3D line plot, each row of `data_frame` is represented as vertex of
+    In a 3D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
@@ -902,7 +902,7 @@ def line_ternary(
 ) -> go.Figure:
     """
     In a ternary line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in ternary coordinates.
+    a vertex of a polyline mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -992,8 +992,8 @@ def line_polar(
     height=None,
 ) -> go.Figure:
     """
-    In a polar line plot, each row of `data_frame` is represented as vertex
-    of a polyline mark in polar coordinates.
+    In a polar line plot, each row of `data_frame` is represented as a
+    vertex of a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -1199,7 +1199,7 @@ def line_geo(
 ) -> go.Figure:
     """
     In a geographic line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a map.
+    a vertex of a polyline mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -1209,6 +1209,153 @@ def line_geo(
 
 
 line_geo.__doc__ = make_docstring(line_geo)
+
+
+def scatter_map(
+    data_frame=None,
+    lat=None,
+    lon=None,
+    color=None,
+    text=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    size=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    opacity=None,
+    size_max=None,
+    zoom=8,
+    center=None,
+    map_style=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+) -> go.Figure:
+    """
+    In a scatter map, each row of `data_frame` is represented by a
+    symbol mark on the map.
+    """
+    return make_figure(args=locals(), constructor=go.Scattermap)
+
+
+scatter_map.__doc__ = make_docstring(scatter_map)
+
+
+def choropleth_map(
+    data_frame=None,
+    geojson=None,
+    featureidkey=None,
+    locations=None,
+    color=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    opacity=None,
+    zoom=8,
+    center=None,
+    map_style=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+) -> go.Figure:
+    """
+    In a choropleth map, each row of `data_frame` is represented by a
+    colored region on the map.
+    """
+    return make_figure(args=locals(), constructor=go.Choroplethmap)
+
+
+choropleth_map.__doc__ = make_docstring(choropleth_map)
+
+
+def density_map(
+    data_frame=None,
+    lat=None,
+    lon=None,
+    z=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    opacity=None,
+    zoom=8,
+    center=None,
+    map_style=None,
+    radius=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+) -> go.Figure:
+    """
+    In a density map, each row of `data_frame` contributes to the intensity of
+    the color of the region around the corresponding point on the map.
+    """
+    return make_figure(
+        args=locals(), constructor=go.Densitymap, trace_patch=dict(radius=radius)
+    )
+
+
+density_map.__doc__ = make_docstring(density_map)
+
+
+def line_map(
+    data_frame=None,
+    lat=None,
+    lon=None,
+    color=None,
+    text=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    line_group=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    zoom=8,
+    center=None,
+    map_style=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+) -> go.Figure:
+    """
+    In a line map, each row of `data_frame` is represented as
+    a vertex of a polyline mark on the map.
+    """
+    return make_figure(args=locals(), constructor=go.Scattermap)
+
+
+line_map.__doc__ = make_docstring(line_map)
 
 
 def scatter_mapbox(
@@ -1350,7 +1497,7 @@ def line_mapbox(
 ) -> go.Figure:
     """
     In a Mapbox line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a Mapbox map.
+    a vertex of a polyline mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 

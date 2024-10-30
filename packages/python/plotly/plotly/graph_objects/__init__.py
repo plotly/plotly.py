@@ -16,13 +16,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import Scatterpolargl
     from ..graph_objs import Scatterpolar
     from ..graph_objs import Scattermapbox
+    from ..graph_objs import Scattermap
     from ..graph_objs import Scattergl
     from ..graph_objs import Scattergeo
     from ..graph_objs import Scattercarpet
     from ..graph_objs import Scatter3d
     from ..graph_objs import Scatter
     from ..graph_objs import Sankey
-    from ..graph_objs import Pointcloud
     from ..graph_objs import Pie
     from ..graph_objs import Parcoords
     from ..graph_objs import Parcats
@@ -35,15 +35,16 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import Histogram2dContour
     from ..graph_objs import Histogram2d
     from ..graph_objs import Histogram
-    from ..graph_objs import Heatmapgl
     from ..graph_objs import Heatmap
     from ..graph_objs import Funnelarea
     from ..graph_objs import Funnel
     from ..graph_objs import Densitymapbox
+    from ..graph_objs import Densitymap
     from ..graph_objs import Contourcarpet
     from ..graph_objs import Contour
     from ..graph_objs import Cone
     from ..graph_objs import Choroplethmapbox
+    from ..graph_objs import Choroplethmap
     from ..graph_objs import Choropleth
     from ..graph_objs import Carpet
     from ..graph_objs import Candlestick
@@ -92,13 +93,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import scatterpolargl
     from ..graph_objs import scatterpolar
     from ..graph_objs import scattermapbox
+    from ..graph_objs import scattermap
     from ..graph_objs import scattergl
     from ..graph_objs import scattergeo
     from ..graph_objs import scattercarpet
     from ..graph_objs import scatter3d
     from ..graph_objs import scatter
     from ..graph_objs import sankey
-    from ..graph_objs import pointcloud
     from ..graph_objs import pie
     from ..graph_objs import parcoords
     from ..graph_objs import parcats
@@ -111,15 +112,16 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import histogram2dcontour
     from ..graph_objs import histogram2d
     from ..graph_objs import histogram
-    from ..graph_objs import heatmapgl
     from ..graph_objs import heatmap
     from ..graph_objs import funnelarea
     from ..graph_objs import funnel
     from ..graph_objs import densitymapbox
+    from ..graph_objs import densitymap
     from ..graph_objs import contourcarpet
     from ..graph_objs import contour
     from ..graph_objs import cone
     from ..graph_objs import choroplethmapbox
+    from ..graph_objs import choroplethmap
     from ..graph_objs import choropleth
     from ..graph_objs import carpet
     from ..graph_objs import candlestick
@@ -147,13 +149,13 @@ else:
             "..graph_objs.scatterpolargl",
             "..graph_objs.scatterpolar",
             "..graph_objs.scattermapbox",
+            "..graph_objs.scattermap",
             "..graph_objs.scattergl",
             "..graph_objs.scattergeo",
             "..graph_objs.scattercarpet",
             "..graph_objs.scatter3d",
             "..graph_objs.scatter",
             "..graph_objs.sankey",
-            "..graph_objs.pointcloud",
             "..graph_objs.pie",
             "..graph_objs.parcoords",
             "..graph_objs.parcats",
@@ -166,15 +168,16 @@ else:
             "..graph_objs.histogram2dcontour",
             "..graph_objs.histogram2d",
             "..graph_objs.histogram",
-            "..graph_objs.heatmapgl",
             "..graph_objs.heatmap",
             "..graph_objs.funnelarea",
             "..graph_objs.funnel",
             "..graph_objs.densitymapbox",
+            "..graph_objs.densitymap",
             "..graph_objs.contourcarpet",
             "..graph_objs.contour",
             "..graph_objs.cone",
             "..graph_objs.choroplethmapbox",
+            "..graph_objs.choroplethmap",
             "..graph_objs.choropleth",
             "..graph_objs.carpet",
             "..graph_objs.candlestick",
@@ -198,13 +201,13 @@ else:
             "..graph_objs.Scatterpolargl",
             "..graph_objs.Scatterpolar",
             "..graph_objs.Scattermapbox",
+            "..graph_objs.Scattermap",
             "..graph_objs.Scattergl",
             "..graph_objs.Scattergeo",
             "..graph_objs.Scattercarpet",
             "..graph_objs.Scatter3d",
             "..graph_objs.Scatter",
             "..graph_objs.Sankey",
-            "..graph_objs.Pointcloud",
             "..graph_objs.Pie",
             "..graph_objs.Parcoords",
             "..graph_objs.Parcats",
@@ -217,15 +220,16 @@ else:
             "..graph_objs.Histogram2dContour",
             "..graph_objs.Histogram2d",
             "..graph_objs.Histogram",
-            "..graph_objs.Heatmapgl",
             "..graph_objs.Heatmap",
             "..graph_objs.Funnelarea",
             "..graph_objs.Funnel",
             "..graph_objs.Densitymapbox",
+            "..graph_objs.Densitymap",
             "..graph_objs.Contourcarpet",
             "..graph_objs.Contour",
             "..graph_objs.Cone",
             "..graph_objs.Choroplethmapbox",
+            "..graph_objs.Choroplethmap",
             "..graph_objs.Choropleth",
             "..graph_objs.Carpet",
             "..graph_objs.Candlestick",

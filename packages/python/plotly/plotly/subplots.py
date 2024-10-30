@@ -114,6 +114,7 @@ def make_subplots(
                 - 'scene': 3D Cartesian subplot for scatter3d, cone, etc.
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
+                - 'map': Map subplot for scattermap
                 - 'mapbox': Mapbox subplot for scattermapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
