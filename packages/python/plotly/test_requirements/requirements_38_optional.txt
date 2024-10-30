@@ -18,4 +18,4 @@ matplotlib==3.7.3
 scikit-image==0.18.1
 psutil==5.7.0
 kaleido
-anywidget
+anywidget==0.9.13
