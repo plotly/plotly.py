@@ -5,8 +5,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@jupyter-widgets/base": "^6.0.10",
-    "lodash": "^4.17.21",
     "plotly.js": "^2.35.2"
   },
   "devDependencies": {
