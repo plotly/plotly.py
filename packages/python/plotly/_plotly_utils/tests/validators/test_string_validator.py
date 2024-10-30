@@ -2,6 +2,7 @@ import pytest
 
 from _plotly_utils.basevalidators import StringValidator
 import numpy as np
+from plotly.tests.test_optional.test_utils.test_utils import (np_nan)
 
 
 # Fixtures
@@ -53,7 +54,7 @@ def validator_no_blanks_aok():
 # Not strict
 # ### Acceptance ###
 @pytest.mark.parametrize(
-    "val", ["bar", 234, np.nan, "HELLO!!!", "world!@#$%^&*()", "", "\u03BC"]
+    "val", ["bar", 234, np_nan(), "HELLO!!!", "world!@#$%^&*()", "", "\u03BC"]
 )
 def test_acceptance(val, validator):
     expected = str(val) if not isinstance(val, str) else val
@@ -108,7 +109,7 @@ def test_acceptance_strict(val, validator_strict):
 
 
 # ### Rejection by value ###
-@pytest.mark.parametrize("val", [(), [], [1, 2, 3], set(), np.nan, np.pi, 23])
+@pytest.mark.parametrize("val", [(), [], [1, 2, 3], set(), np_nan(), np.pi, 23])
 def test_rejection_strict(val, validator_strict):
     with pytest.raises(ValueError) as validation_failure:
         validator_strict.validate_coerce(val)

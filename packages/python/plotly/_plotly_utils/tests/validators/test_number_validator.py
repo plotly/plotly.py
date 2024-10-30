@@ -4,6 +4,7 @@ from pytest import approx
 from _plotly_utils.basevalidators import NumberValidator
 import numpy as np
 import pandas as pd
+from plotly.tests.test_optional.test_utils.test_utils import (np_nan, np_inf)
 
 # Fixtures
 # --------
@@ -36,7 +37,7 @@ def validator_aok():
 # ------------
 # ### Acceptance ###
 @pytest.mark.parametrize(
-    "val", [1.0, 0.0, 1, -1234.5678, 54321, np.pi, np.nan, np.inf, -np.inf]
+    "val", [1.0, 0.0, 1, -1234.5678, 54321, np.pi, np_nan(), np_inf(), -np_inf()]
 )
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == approx(val, nan_ok=True)
@@ -57,7 +58,7 @@ def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
 
 
-@pytest.mark.parametrize("val", [-1.01, -10, 2.1, 234, -np.inf, np.nan, np.inf])
+@pytest.mark.parametrize("val", [-1.01, -10, 2.1, 234, -np_inf(), np_nan(), np_inf()])
 def test_rejection_min_max(val, validator_min_max):
     with pytest.raises(ValueError) as validation_failure:
         validator_min_max.validate_coerce(val)
@@ -66,12 +67,12 @@ def test_rejection_min_max(val, validator_min_max):
 
 
 # ### With min only ###
-@pytest.mark.parametrize("val", [0, 0.0, -0.5, 99999, np.inf])
+@pytest.mark.parametrize("val", [0, 0.0, -0.5, 99999, np_inf()])
 def test_acceptance_min(val, validator_min):
     assert validator_min.validate_coerce(val) == approx(val)
 
 
-@pytest.mark.parametrize("val", [-1.01, -np.inf, np.nan])
+@pytest.mark.parametrize("val", [-1.01, -np_inf(), np_nan()])
 def test_rejection_min(val, validator_min):
     with pytest.raises(ValueError) as validation_failure:
         validator_min.validate_coerce(val)
@@ -80,12 +81,12 @@ def test_rejection_min(val, validator_min):
 
 
 # ### With max only ###
-@pytest.mark.parametrize("val", [0, 0.0, -np.inf, -123456, np.pi / 2])
+@pytest.mark.parametrize("val", [0, 0.0, -np_inf(), -123456, np.pi / 2])
 def test_acceptance_max(val, validator_max):
     assert validator_max.validate_coerce(val) == approx(val)
 
 
-@pytest.mark.parametrize("val", [2.01, np.inf, np.nan])
+@pytest.mark.parametrize("val", [2.01, np_inf(), np_nan()])
 def test_rejection_max(val, validator_max):
     with pytest.raises(ValueError) as validation_failure:
         validator_max.validate_coerce(val)
@@ -142,7 +143,7 @@ def test_rejection_aok(val, validator_aok):
 # ### Rejection by element ###
 @pytest.mark.parametrize(
     "val",
-    [[-1.6, 0.0], [1, 1.5, 2], [-0.1234, 0.41, np.nan], [0, np.inf], [0, -np.inf]],
+    [[-1.6, 0.0], [1, 1.5, 2], [-0.1234, 0.41, np_nan()], [0, np_inf()], [0, -np_inf()]],
 )
 def test_rejection_aok_min_max(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
