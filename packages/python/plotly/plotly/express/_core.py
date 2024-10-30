@@ -1420,16 +1420,30 @@ def build_dataframe(args, constructor):
 
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
+
+    # Flag that indicates if the resulting data_frame after parsing is pandas-like
+    # (in terms of resulting Narwhals DataFrame).
+    # True if pandas, modin.pandas or cudf DataFrame/Series instance, or converted from
+    # PySpark to pandas.
     is_pd_like = False
+
+    # Flag that indicates if data_frame requires to be converted to arrow via the
+    # dataframe interchange protocol.
+    # True if Ibis, DuckDB, Vaex or implementes __dataframe__
     needs_interchanging = False
+
+    # If data_frame is provided, we parse it into a narwhals DataFrame, while accounting
+    # for compatibility with pandas specific paths (e.g. Index/MultiIndex case).
     if df_provided:
 
+        # data_frame is pandas-like DataFrame (pandas, modin.pandas, cudf)
         if nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
 
             columns = args["data_frame"].columns  # This can be multi index
             args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
             is_pd_like = True
 
+        # data_frame is pandas-like Series (pandas, modin.pandas, cudf)
         elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
 
             args["data_frame"] = nw.from_native(
@@ -1438,6 +1452,9 @@ def build_dataframe(args, constructor):
             columns = args["data_frame"].columns
             is_pd_like = True
 
+        # data_frame is any other DataFrame object natively supported via Narwhals.
+        # With strict=False, the original object will be returned if unable to convert
+        # to a Narwhals DataFrame, making this condition False.
         elif isinstance(
             data_frame := nw.from_native(
                 args["data_frame"], eager_or_interchange_only=True, strict=False
@@ -1448,6 +1465,9 @@ def build_dataframe(args, constructor):
             needs_interchanging = nw.get_level(data_frame) == "interchange"
             columns = args["data_frame"].columns
 
+        # data_frame is any other Series object natively supported via Narwhals.
+        # With strict=False, the original object will be returned if unable to convert
+        # to a Narwhals DataFrame, making this condition False.
         elif isinstance(
             series := nw.from_native(
                 args["data_frame"], series_only=True, strict=False
@@ -1457,15 +1477,19 @@ def build_dataframe(args, constructor):
             args["data_frame"] = series.to_frame()
             columns = args["data_frame"].columns
 
+        # data_frame is PySpark: it does not support interchange protocol and it is not
+        # integrated in Narwhals. We use its native method to convert it to pandas.
         elif hasattr(args["data_frame"], "toPandas"):
-            # data_frame is PySpark: it does not support interchange and it is not
-            # integrated in narwhals just yet
+            # data_frame is PySpark:
             args["data_frame"] = nw.from_native(
                 args["data_frame"].toPandas(), eager_only=True
             )
             columns = args["data_frame"].columns
             is_pd_like = True
 
+        # data_frame is some other object type (e.g. dict, list, ...)
+        # We try to import pandas, and then try to instantiate a pandas dataframe from
+        # this such object
         else:
             try:
                 import pandas as pd
@@ -1477,18 +1501,24 @@ def build_dataframe(args, constructor):
                     columns = args["data_frame"].columns
                     is_pd_like = True
                 except Exception:
-                    msg = f"Unsupported type: {type(args['data_frame'])}"
+                    msg = (
+                        f"Unable to convert data_frame of type {type(args['data_frame'])} "
+                        "to pandas DataFrame. Please provide a supported dataframe type "
+                        "or a type that can be passed to pd.DataFrame."
+                    )
+
                     raise NotImplementedError(msg)
             except ImportError:
                 msg = (
-                    f"data_frame of type {type(args['data_frame'])} requires Pandas "
-                    "to be installed. Convert it to supported dataframe type or "
-                    "install Pandas."
+                    f"Attempting to convert data_frame of type {type(args['data_frame'])} "
+                    "to pandas DataFrame, but Pandas is not installed. "
+                    "Convert it to supported dataframe type or install pandas."
                 )
                 raise NotImplementedError(msg)
 
+    # data_frame is not provided
     else:
-        columns = None  # no data_frame
+        columns = None
 
     df_input: nw.DataFrame | None = args["data_frame"]
     index = (
@@ -1573,7 +1603,7 @@ def build_dataframe(args, constructor):
         value_name = _escape_col_name(columns, "value", [])
         var_name = _escape_col_name(columns, var_name, [])
 
-    if isinstance(args["data_frame"], nw.DataFrame) and needs_interchanging:
+    if needs_interchanging:
         # Interchange to PyArrow
         if wide_mode:
             args["data_frame"] = nw.from_native(
@@ -2035,8 +2065,6 @@ def process_dataframe_timeline(args):
         raise ValueError("Both x_start and x_end are required")
 
     try:
-        # TODO(FBruzzesi): We still cannot infer datetime format for pyarrow
-        # Related issue: https://github.com/narwhals-dev/narwhals/issues/1151
         df: nw.DataFrame = args["data_frame"]
         df = df.with_columns(
             **{
