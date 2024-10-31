@@ -10,7 +10,6 @@ from plotly.colors import qualitative, sequential
 import math
 
 import narwhals.stable.v1 as nw
-from narwhals.utils import generate_unique_token
 
 from plotly._subplots import (
     make_subplots,
@@ -1429,7 +1428,7 @@ def build_dataframe(args, constructor):
 
     # Flag that indicates if data_frame requires to be converted to arrow via the
     # dataframe interchange protocol.
-    # True if Ibis, DuckDB, Vaex or implementes __dataframe__
+    # True if Ibis, DuckDB, Vaex or implements __dataframe__
     needs_interchanging = False
 
     # If data_frame is provided, we parse it into a narwhals DataFrame, while accounting
