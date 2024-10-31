@@ -371,6 +371,7 @@ docs = dict(
         "If provided, overrides auto-scaling on the angular axis in polar coordinates.",
     ],
     title=["str", "The figure title."],
+    subtitle=["str", "The figure subtitle."],
     template=[
         "str or dict or plotly.graph_objects.layout.Template instance",
         "The figure template name (must be a key in plotly.io.templates) or definition.",
