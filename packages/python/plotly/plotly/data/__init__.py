@@ -3,7 +3,14 @@ Built-in datasets for demonstration, educational and test purposes.
 """
 import narwhals.stable.v1 as nw
 
-def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False, return_type="pandas"):
+
+def gapminder(
+    datetimes=False,
+    centroids=False,
+    year=None,
+    pretty_names=False,
+    return_type="pandas",
+):
     """
     Each row represents a country on a given year.
 
@@ -17,11 +24,17 @@ def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False, r
         If `centroids` is True, two new columns are added: ['centroid_lat', 'centroid_lon']
         If `year` is an integer, the dataset will be filtered for that year
     """
-    df = nw.from_native(_get_dataset("gapminder", return_type=return_type), eager_only=True)
+    df = nw.from_native(
+        _get_dataset("gapminder", return_type=return_type), eager_only=True
+    )
     if year:
         df = df.filter(nw.col("year") == year)
     if datetimes:
-        df = df.with_columns(nw.concat_str([nw.col("year").cast(nw.String()), nw.lit("-01-01")]).cast(nw.Datetime(time_unit="ns")))
+        df = df.with_columns(
+            nw.concat_str([nw.col("year").cast(nw.String()), nw.lit("-01-01")]).cast(
+                nw.Datetime(time_unit="ns")
+            )
+        )
     if not centroids:
         df = df.drop("centroid_lat", "centroid_lon")
     if pretty_names:
@@ -149,10 +162,12 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
         msg = "Cannot set index for backend different from pandas"
         raise NotImplementedError(msg)
 
-    df = nw.from_native(_get_dataset("stocks", return_type=return_type), eager_only=True)
+    df = nw.from_native(
+        _get_dataset("stocks", return_type=return_type), eager_only=True
+    )
     if datetimes:
         df = df.with_columns(nw.col("date").cast(nw.Datetime(time_unit="ns")))
-    
+
     if indexed:  # then it must be pandas
         df = df.to_native().set_index("date")
         df.columns.name = "company"
@@ -171,12 +186,14 @@ def experiment(indexed=False, return_type="pandas"):
         A `pandas.DataFrame` with 100 rows and the following columns:
         `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
         If `indexed` is True, the data frame index is named "participant" """
-    
+
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
         raise NotImplementedError(msg)
 
-    df = nw.from_native(_get_dataset("experiment", return_type=return_type), eager_only=True)
+    df = nw.from_native(
+        _get_dataset("experiment", return_type=return_type), eager_only=True
+    )
     if indexed:  # then it must be pandas
         df = df.to_native()
         df.index.name = "participant"
@@ -194,12 +211,14 @@ def medals_wide(indexed=False, return_type="pandas"):
         `['nation', 'gold', 'silver', 'bronze']`.
         If `indexed` is True, the 'nation' column is used as the index and the column index
         is named 'medal'"""
-    
+
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
         raise NotImplementedError(msg)
 
-    df = nw.from_native(_get_dataset("medals", return_type=return_type), eager_only=True)
+    df = nw.from_native(
+        _get_dataset("medals", return_type=return_type), eager_only=True
+    )
     if indexed:  # then it must be pandas
         df = df.to_native().set_index("nation")
         df.columns.name = "medal"
@@ -216,18 +235,18 @@ def medals_long(indexed=False, return_type="pandas"):
         A `pandas.DataFrame` with 9 rows and the following columns:
         `['nation', 'medal', 'count']`.
         If `indexed` is True, the 'nation' column is used as the index."""
-    
+
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
         raise NotImplementedError(msg)
-    
-    df = (
-        nw.from_native(_get_dataset("medals", return_type=return_type), eager_only=True)
-        .unpivot(
-            index=["nation"],
-            value_name="count",
-            variable_name="medal",
-        ))
+
+    df = nw.from_native(
+        _get_dataset("medals", return_type=return_type), eager_only=True
+    ).unpivot(
+        index=["nation"],
+        value_name="count",
+        variable_name="medal",
+    )
     if indexed:
         df = nw.maybe_set_index(df, "nation")
     return df.to_native()
