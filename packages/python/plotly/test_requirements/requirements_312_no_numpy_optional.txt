@@ -18,4 +18,3 @@ scikit-image==0.22.0
 psutil==5.9.7
 kaleido
 orjson==3.9.10
-scikit-image==0.24.0
