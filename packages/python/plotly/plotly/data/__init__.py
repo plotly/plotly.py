@@ -1,9 +1,9 @@
 """
 Built-in datasets for demonstration, educational and test purposes.
 """
+import narwhals.stable.v1 as nw
 
-
-def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False):
+def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False, return_type="pandas"):
     """
     Each row represents a country on a given year.
 
@@ -17,16 +17,16 @@ def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False):
         If `centroids` is True, two new columns are added: ['centroid_lat', 'centroid_lon']
         If `year` is an integer, the dataset will be filtered for that year
     """
-    df = _get_dataset("gapminder")
+    df = nw.from_native(_get_dataset("gapminder", return_type=return_type), eager_only=True)
     if year:
-        df = df[df["year"] == year]
+        df = df.filter(nw.col("year") == year)
     if datetimes:
-        df["year"] = (df["year"].astype(str) + "-01-01").astype("datetime64[ns]")
+        df = df.with_columns(nw.concat_str([nw.col("year").cast(nw.String()), nw.lit("-01-01")]).cast(nw.Datetime(time_unit="ns")))
     if not centroids:
-        df = df.drop(["centroid_lat", "centroid_lon"], axis=1)
+        df = df.drop("centroid_lat", "centroid_lon")
     if pretty_names:
-        df.rename(
-            mapper=dict(
+        df = df.rename(
+            dict(
                 country="Country",
                 continent="Continent",
                 year="Year",
@@ -37,14 +37,12 @@ def gapminder(datetimes=False, centroids=False, year=None, pretty_names=False):
                 iso_num="ISO Numeric Country Code",
                 centroid_lat="Centroid Latitude",
                 centroid_lon="Centroid Longitude",
-            ),
-            axis="columns",
-            inplace=True,
+            )
         )
-    return df
+    return df.to_native()
 
 
-def tips(pretty_names=False):
+def tips(pretty_names=False, return_type="pandas"):
     """
     Each row represents a restaurant bill.
 
@@ -54,10 +52,10 @@ def tips(pretty_names=False):
         A `pandas.DataFrame` with 244 rows and the following columns:
         `['total_bill', 'tip', 'sex', 'smoker', 'day', 'time', 'size']`."""
 
-    df = _get_dataset("tips")
+    df = nw.from_native(_get_dataset("tips", return_type=return_type), eager_only=True)
     if pretty_names:
-        df.rename(
-            mapper=dict(
+        df = df.rename(
+            dict(
                 total_bill="Total Bill",
                 tip="Tip",
                 sex="Payer Gender",
@@ -65,14 +63,12 @@ def tips(pretty_names=False):
                 day="Day of Week",
                 time="Meal",
                 size="Party Size",
-            ),
-            axis="columns",
-            inplace=True,
+            )
         )
-    return df
+    return df.to_native()
 
 
-def iris():
+def iris(return_type="pandas"):
     """
     Each row represents a flower.
 
@@ -81,20 +77,20 @@ def iris():
     Returns:
         A `pandas.DataFrame` with 150 rows and the following columns:
         `['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species', 'species_id']`."""
-    return _get_dataset("iris")
+    return _get_dataset("iris", return_type=return_type)
 
 
-def wind():
+def wind(return_type="pandas"):
     """
     Each row represents a level of wind intensity in a cardinal direction, and its frequency.
 
     Returns:
         A `pandas.DataFrame` with 128 rows and the following columns:
         `['direction', 'strength', 'frequency']`."""
-    return _get_dataset("wind")
+    return _get_dataset("wind", return_type=return_type)
 
 
-def election():
+def election(return_type="pandas"):
     """
     Each row represents voting results for an electoral district in the 2013 Montreal
     mayoral election.
@@ -102,7 +98,7 @@ def election():
     Returns:
         A `pandas.DataFrame` with 58 rows and the following columns:
         `['district', 'Coderre', 'Bergeron', 'Joly', 'total', 'winner', 'result', 'district_id']`."""
-    return _get_dataset("election")
+    return _get_dataset("election", return_type=return_type)
 
 
 def election_geojson():
@@ -128,7 +124,7 @@ def election_geojson():
     return result
 
 
-def carshare():
+def carshare(return_type="pandas"):
     """
     Each row represents the availability of car-sharing services near the centroid of a zone
     in Montreal over a month-long period.
@@ -136,10 +132,10 @@ def carshare():
     Returns:
         A `pandas.DataFrame` with 249 rows and the following columns:
         `['centroid_lat', 'centroid_lon', 'car_hours', 'peak_hour']`."""
-    return _get_dataset("carshare")
+    return _get_dataset("carshare", return_type=return_type)
 
 
-def stocks(indexed=False, datetimes=False):
+def stocks(indexed=False, datetimes=False, return_type="pandas"):
     """
     Each row in this wide dataset represents closing prices from 6 tech stocks in 2018/2019.
 
@@ -149,16 +145,23 @@ def stocks(indexed=False, datetimes=False):
         If `indexed` is True, the 'date' column is used as the index and the column index
         If `datetimes` is True, the 'date' column will be a datetime column
         is named 'company'"""
-    df = _get_dataset("stocks")
+    if indexed and return_type != "pandas":
+        msg = "Cannot set index for backend different from pandas"
+        raise NotImplementedError(msg)
+
+    df = nw.from_native(_get_dataset("stocks", return_type=return_type), eager_only=True)
     if datetimes:
-        df["date"] = df["date"].astype("datetime64[ns]")
-    if indexed:
-        df = df.set_index("date")
+        df = df.with_columns(nw.col("date").cast(nw.Datetime(time_unit="ns")))
+    
+    if indexed:  # then it must be pandas
+        df = df.to_native().set_index("date")
         df.columns.name = "company"
-    return df
+        return df
+
+    return df.to_native()
 
 
-def experiment(indexed=False):
+def experiment(indexed=False, return_type="pandas"):
     """
     Each row in this wide dataset represents the results of 100 simulated participants
     on three hypothetical experiments, along with their gender and control/treatment group.
@@ -168,13 +171,20 @@ def experiment(indexed=False):
         A `pandas.DataFrame` with 100 rows and the following columns:
         `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
         If `indexed` is True, the data frame index is named "participant" """
-    df = _get_dataset("experiment")
-    if indexed:
+    
+    if indexed and return_type != "pandas":
+        msg = "Cannot set index for backend different from pandas"
+        raise NotImplementedError(msg)
+
+    df = nw.from_native(_get_dataset("experiment", return_type=return_type), eager_only=True)
+    if indexed:  # then it must be pandas
+        df = df.to_native()
         df.index.name = "participant"
-    return df
+        return df
+    return df.to_native()
 
 
-def medals_wide(indexed=False):
+def medals_wide(indexed=False, return_type="pandas"):
     """
     This dataset represents the medal table for Olympic Short Track Speed Skating for the
     top three nations as of 2020.
@@ -184,14 +194,20 @@ def medals_wide(indexed=False):
         `['nation', 'gold', 'silver', 'bronze']`.
         If `indexed` is True, the 'nation' column is used as the index and the column index
         is named 'medal'"""
-    df = _get_dataset("medals")
-    if indexed:
-        df = df.set_index("nation")
+    
+    if indexed and return_type != "pandas":
+        msg = "Cannot set index for backend different from pandas"
+        raise NotImplementedError(msg)
+
+    df = nw.from_native(_get_dataset("medals", return_type=return_type), eager_only=True)
+    if indexed:  # then it must be pandas
+        df = df.to_native().set_index("nation")
         df.columns.name = "medal"
-    return df
+        return df
+    return df.to_native()
 
 
-def medals_long(indexed=False):
+def medals_long(indexed=False, return_type="pandas"):
     """
     This dataset represents the medal table for Olympic Short Track Speed Skating for the
     top three nations as of 2020.
@@ -200,23 +216,42 @@ def medals_long(indexed=False):
         A `pandas.DataFrame` with 9 rows and the following columns:
         `['nation', 'medal', 'count']`.
         If `indexed` is True, the 'nation' column is used as the index."""
-    df = _get_dataset("medals").melt(
-        id_vars=["nation"], value_name="count", var_name="medal"
-    )
+    
+    if indexed and return_type != "pandas":
+        msg = "Cannot set index for backend different from pandas"
+        raise NotImplementedError(msg)
+    
+    df = (
+        nw.from_native(_get_dataset("medals", return_type=return_type), eager_only=True)
+        .unpivot(
+            index=["nation"],
+            value_name="count",
+            variable_name="medal",
+        ))
     if indexed:
-        df = df.set_index("nation")
-    return df
+        df = nw.maybe_set_index(df, "nation")
+    return df.to_native()
 
 
-def _get_dataset(d):
-    import pandas
+def _get_dataset(d, return_type):
     import os
+    from importlib import import_module
 
-    return pandas.read_csv(
-        os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
-            "package_data",
-            "datasets",
-            d + ".csv.gz",
-        )
+    AVAILABLE_BACKENDS = {"pandas", "polars", "pyarrow"}
+
+    filepath = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        "package_data",
+        "datasets",
+        d + ".csv.gz",
     )
+    if return_type not in AVAILABLE_BACKENDS:
+        msg = f"Unsupported return_type. Found {return_type}, expected one of {AVAILABLE_BACKENDS}"
+        raise NotImplementedError(msg)
+
+    try:
+        backend = import_module(return_type)
+        return backend.read_csv(filepath)
+    except ModuleNotFoundError:
+        msg = f"return_type={return_type}, but {return_type} is not installed"
+        raise ModuleNotFoundError(msg)
