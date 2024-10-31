@@ -237,12 +237,6 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.layout.ternary.bax
                 is.Title` instance or dict with compatible
                 properties
-            titlefont
-                Deprecated: Please use
-                layout.ternary.baxis.title.font instead. Sets
-                this axis' title font. Note that the title's
-                font used to be customized by the now
-                deprecated `titlefont` attribute.
             uirevision
                 Controls persistence of user-driven changes in
                 axis `min`, and `title` if in `editable: true`
