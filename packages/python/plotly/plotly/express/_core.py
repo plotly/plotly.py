@@ -163,6 +163,50 @@ def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
     return df.get_column(col_name).dtype.is_numeric()
 
 
+def _to_unix_epoch_seconds(s: nw.Series) -> nw.Series:
+    dtype = s.dtype
+    if dtype == nw.Date:
+        return s.dt.timestamp("ms") / 1_000
+    if dtype == nw.Datetime:
+        if dtype.time_unit in ("s", "ms"):
+            return s.dt.timestamp("ms") / 1_000
+        elif dtype.time_unit == "us":
+            return s.dt.timestamp("us") / 1_000_000
+        elif dtype.time_unit == "ns":
+            return s.dt.timestamp("ns") / 1_000_000_000
+        else:
+            msg = "Unexpected dtype, please report a bug"
+            raise ValueError(msg)
+    else:
+        msg = f"Expected Date or Datetime, got {dtype}"
+        raise TypeError(msg)
+
+
+def _generate_temporary_column_name(n_bytes: int, columns: list[str]) -> str:
+    """Wraps of Narwhals generate_temporary_column_name to generate a token
+    which is guaranteed to not be in columns, nor in [col + token for col in columns]
+    """
+    counter = 0
+    while True:
+        # This is guaranteed to not be in columns by Narwhals
+        token = nw.generate_temporary_column_name(n_bytes, columns=columns)
+
+        # Now check that it is not in the [col + token for col in columns] list
+        if token not in {f"{c}{token}" for c in columns}:
+            return token
+
+        counter += 1
+        if counter > 100:
+            msg = (
+                "Internal Error: Plotly was not able to generate a column name with "
+                f"{n_bytes=} and not in {columns}.\n"
+                "Please report this to "
+                "https://github.com/plotly/plotly.py/issues/new and we will try to "
+                "replicate and fix it."
+            )
+            raise AssertionError(msg)
+
+
 def get_decorated_label(args, column, role):
     original_label = label = get_label(args, column)
     if "histfunc" in args and (
@@ -443,7 +487,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         # dict.fromkeys(customdata_cols) allows to deduplicate column
                         # names, yet maintaining the original order.
                         trace_patch["customdata"] = trace_data.select(
-                            [nw.col(c) for c in dict.fromkeys(customdata_cols)]
+                            *[nw.col(c) for c in dict.fromkeys(customdata_cols)]
                         )
             elif attr_name == "color":
                 if trace_spec.constructor in [
@@ -1693,7 +1737,7 @@ def build_dataframe(args, constructor):
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
             args[missing_bar_dim] = count_name
-            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
+            df_output = df_output.with_columns(nw.lit(1).alias(count_name))
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
@@ -1760,7 +1804,7 @@ def build_dataframe(args, constructor):
             else:
                 args["x" if orient_v else "y"] = value_name
                 args["y" if orient_v else "x"] = count_name
-                df_output = df_output.with_columns(**{count_name: nw.lit(1)})
+                df_output = df_output.with_columns(nw.lit(1).alias(count_name))
                 args["color"] = args["color"] or var_name
         elif constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
@@ -1773,12 +1817,12 @@ def build_dataframe(args, constructor):
             args["histfunc"] = None
             args["orientation"] = "h"
             args["x"] = count_name
-            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
+            df_output = df_output.with_columns(nw.lit(1).alias(count_name))
         else:
             args["histfunc"] = None
             args["orientation"] = "v"
             args["y"] = count_name
-            df_output = df_output.with_columns(**{count_name: nw.lit(1)})
+            df_output = df_output.with_columns(nw.lit(1).alias(count_name))
 
     if no_color:
         args["color"] = None
@@ -1789,10 +1833,10 @@ def build_dataframe(args, constructor):
 def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     cols = df.columns
     df_sorted = df.sort(by=cols, descending=False, nulls_last=True)
-    null_mask = df_sorted.select(*[nw.col(c).is_null() for c in cols])
-    df_sorted = df_sorted.with_columns(nw.col(*cols).cast(nw.String()))
+    null_mask = df_sorted.select(nw.all().is_null())
+    df_sorted = df_sorted.select(nw.all().cast(nw.String()))
     null_indices_mask = null_mask.select(
-        null_mask=nw.any_horizontal(nw.col(cols))
+        null_mask=nw.any_horizontal(nw.all())
     ).get_column("null_mask")
 
     for row_idx, row in zip(
@@ -1854,26 +1898,15 @@ def process_dataframe_hierarchy(args):
 
     new_path = [col_name + "_path_copy" for col_name in path]
     df = df.with_columns(
-        **{
-            new_col_name: nw.col(col_name)
-            for new_col_name, col_name in zip(new_path, path)
-        }
+        nw.col(col_name).alias(new_col_name)
+        for new_col_name, col_name in zip(new_path, path)
     )
     path = new_path
     # ------------ Define aggregation functions --------------------------------
     agg_f = {}
     if args["values"]:
         try:
-            if isinstance(args["values"], Sequence) and not isinstance(
-                args["values"], str
-            ):
-                df = df.with_columns(
-                    **{c: nw.col(c).cast(nw.Float64()) for c in args["values"]}
-                )
-            else:
-                df = df.with_columns(
-                    **{args["values"]: nw.col(args["values"]).cast(nw.Float64())}
-                )
+            df = df.with_columns(nw.col(args["values"]).cast(nw.Float64()))
 
         except Exception:  # pandas, Polars and pyarrow exception types are different
             raise ValueError(
@@ -1883,7 +1916,7 @@ def process_dataframe_hierarchy(args):
 
         if args["color"] and args["color"] == args["values"]:
             new_value_col_name = args["values"] + "_sum"
-            df = df.with_columns(**{new_value_col_name: nw.col(args["values"])})
+            df = df.with_columns(nw.col(args["values"]).alias(new_value_col_name))
             args["values"] = new_value_col_name
         count_colname = args["values"]
     else:
@@ -1894,7 +1927,7 @@ def process_dataframe_hierarchy(args):
             "count" if "count" not in columns else "".join([str(el) for el in columns])
         )
         # we can modify df because it's a copy of the px argument
-        df = df.with_columns(**{count_colname: nw.lit(1)})
+        df = df.with_columns(nw.lit(1).alias(count_colname))
         args["values"] = count_colname
 
     # Since count_colname is always in agg_f, it can be used later to normalize color
@@ -1904,8 +1937,8 @@ def process_dataframe_hierarchy(args):
     discrete_aggs = []
     continuous_aggs = []
 
-    n_unique_token = nw.generate_temporary_column_name(
-        n_bytes=16, columns=[*path, count_colname]
+    n_unique_token = _generate_temporary_column_name(
+        n_bytes=16, columns=df.collect_schema().names()
     )
 
     # In theory, for discrete columns aggregation, we should have a way to do
@@ -1941,10 +1974,10 @@ def process_dataframe_hierarchy(args):
 
             discrete_aggs.append(args["color"])
             agg_f[args["color"]] = nw.col(args["color"]).max()
-            agg_f[f'{args["color"]}_{n_unique_token}__'] = (
+            agg_f[f'{args["color"]}{n_unique_token}'] = (
                 nw.col(args["color"])
                 .n_unique()
-                .alias(f'{args["color"]}_{n_unique_token}__')
+                .alias(f'{args["color"]}{n_unique_token}')
             )
         else:
             # This first needs to be multiplied by `count_colname`
@@ -1954,16 +1987,15 @@ def process_dataframe_hierarchy(args):
 
     #  Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.collect_schema().names()).difference(path))
-    df = df.with_columns(
-        **{c: nw.col(c).cast(nw.String()) for c in cols if c not in agg_f}
-    )
+    df = df.with_columns(nw.col(c).cast(nw.String()) for c in cols if c not in agg_f)
+
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
             # Similar trick as above
             discrete_aggs.append(col)
             agg_f[col] = nw.col(col).max()
-            agg_f[f"{col}_{n_unique_token}__"] = (
-                nw.col(col).n_unique().alias(f"{col}_{n_unique_token}__")
+            agg_f[f"{col}{n_unique_token}"] = (
+                nw.col(col).n_unique().alias(f"{col}{n_unique_token}")
             )
     # Avoid collisions with reserved names - columns in the path have been copied already
     cols = list(set(cols) - set(["labels", "parent", "id"]))
@@ -1972,7 +2004,7 @@ def process_dataframe_hierarchy(args):
 
     if args["color"] and not discrete_color:
         df = df.with_columns(
-            **{args["color"]: nw.col(args["color"]) * nw.col(count_colname)}
+            (nw.col(args["color"]) * nw.col(count_colname)).alias(args["color"])
         )
 
     def post_agg(dframe: nw.LazyFrame, continuous_aggs, discrete_aggs) -> nw.LazyFrame:
@@ -1981,14 +2013,14 @@ def process_dataframe_hierarchy(args):
         - discrete_aggs is either [args["color"], <rest_of_cols>] or [<rest_of cols>]
         """
         return dframe.with_columns(
-            **{c: nw.col(c) / nw.col(count_colname) for c in continuous_aggs},
+            **{col: nw.col(col) / nw.col(count_colname) for col in continuous_aggs},
             **{
-                c: nw.when(nw.col(f"{c}_{n_unique_token}__") == 1)
-                .then(nw.col(c))
+                col: nw.when(nw.col(f"{col}{n_unique_token}") == 1)
+                .then(nw.col(col))
                 .otherwise(nw.lit("(?)"))
-                for c in discrete_aggs
+                for col in discrete_aggs
             },
-        ).drop([f"{c}_{n_unique_token}__" for c in discrete_aggs])
+        ).drop([f"{col}{n_unique_token}" for col in discrete_aggs])
 
     for i, level in enumerate(path):
 
@@ -2006,30 +2038,26 @@ def process_dataframe_hierarchy(args):
             id=nw.col(level).cast(nw.String()),
         )
         if i < len(path) - 1:
-            _concat_str_token = nw.generate_temporary_column_name(
-                n_bytes=8, columns=[*cols, "labels", "parent", "id"]
+            _concat_str_token = _generate_temporary_column_name(
+                n_bytes=16, columns=[*cols, "labels", "parent", "id"]
             )
             df_tree = (
                 df_tree.with_columns(
-                    **{
-                        _concat_str_token: nw.concat_str(
-                            [
-                                nw.col(path[j]).cast(nw.String())
-                                for j in range(len(path) - 1, i, -1)
-                            ],
-                            separator="/",
-                        )
-                    }
+                    nw.concat_str(
+                        [
+                            nw.col(path[j]).cast(nw.String())
+                            for j in range(len(path) - 1, i, -1)
+                        ],
+                        separator="/",
+                    ).alias(_concat_str_token)
                 )
                 .with_columns(
-                    **{
-                        "parent": nw.concat_str(
-                            [nw.col(_concat_str_token), nw.col("parent")], separator="/"
-                        ),
-                        "id": nw.concat_str(
-                            [nw.col(_concat_str_token), nw.col("id")], separator="/"
-                        ),
-                    }
+                    parent=nw.concat_str(
+                        [nw.col(_concat_str_token), nw.col("parent")], separator="/"
+                    ),
+                    id=nw.concat_str(
+                        [nw.col(_concat_str_token), nw.col("id")], separator="/"
+                    ),
                 )
                 .drop(_concat_str_token)
             )
@@ -2049,7 +2077,7 @@ def process_dataframe_hierarchy(args):
         while sort_col_name in df_all_trees.columns:
             sort_col_name += "0"
         df_all_trees = df_all_trees.with_columns(
-            **{sort_col_name: nw.col(args["color"]).cast(nw.String())}
+            nw.col(args["color"]).cast(nw.String()).alias(sort_col_name)
         ).sort(by=sort_col_name, nulls_last=True)
 
     # Now modify arguments
@@ -2080,10 +2108,8 @@ def process_dataframe_timeline(args):
     try:
         df: nw.DataFrame = args["data_frame"]
         df = df.with_columns(
-            **{
-                args["x_start"]: nw.col(args["x_start"]).str.to_datetime(),
-                args["x_end"]: nw.col(args["x_end"]).str.to_datetime(),
-            }
+            nw.col(args["x_start"]).str.to_datetime().alias(args["x_start"]),
+            nw.col(args["x_end"]).str.to_datetime().alias(args["x_end"]),
         )
     except Exception:
         raise TypeError(
@@ -2092,11 +2118,9 @@ def process_dataframe_timeline(args):
 
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
     args["data_frame"] = df.with_columns(
-        **{
-            args["x_end"]: (
-                nw.col(args["x_end"]) - nw.col(args["x_start"])
-            ).dt.total_milliseconds()
-        }
+        (nw.col(args["x_end"]) - nw.col(args["x_start"]))
+        .dt.total_milliseconds()
+        .alias(args["x_end"])
     )
     args["x"] = args["x_end"]
     args["base"] = args["x_start"]
@@ -2594,20 +2618,22 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 group_sum = group.get_column(
                     var
                 ).sum()  # compute here before next line mutates
-                group = group.with_columns(**{var: nw.col(var).cum_sum()})
+                group = group.with_columns(nw.col(var).cum_sum().alias(var))
                 if not ascending:
                     group = group.sort(by=base, descending=False, nulls_last=True)
 
                 if args.get("ecdfmode", "standard") == "complementary":
                     group = group.with_columns(
-                        **{var: (nw.col(var) - nw.lit(group_sum)) * (-1)}
+                        ((nw.col(var) - nw.lit(group_sum)) * (-1)).alias(var)
                     )
 
                 if args["ecdfnorm"] == "probability":
-                    group = group.with_columns(**{var: nw.col(var) / nw.lit(group_sum)})
+                    group = group.with_columns(
+                        (nw.col(var) / nw.lit(group_sum)).alias(var)
+                    )
                 elif args["ecdfnorm"] == "percent":
                     group = group.with_columns(
-                        **{var: nw.col(var) / nw.lit(group_sum) * nw.lit(100.0)}
+                        (nw.col(var) / nw.lit(group_sum) * nw.lit(100.0)).alias(var)
                     )
 
             patch, fit_results = make_trace_kwargs(
@@ -2835,22 +2861,3 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
         annot.update(font=None)
 
     return fig
-
-
-def _to_unix_epoch_seconds(s: nw.Series) -> nw.Series:
-    dtype = s.dtype
-    if dtype == nw.Date:
-        return s.dt.timestamp("ms") / 1_000
-    if dtype == nw.Datetime:
-        if dtype.time_unit in ("s", "ms"):
-            return s.dt.timestamp("ms") / 1_000
-        elif dtype.time_unit == "us":
-            return s.dt.timestamp("us") / 1_000_000
-        elif dtype.time_unit == "ns":
-            return s.dt.timestamp("ns") / 1_000_000_000
-        else:
-            msg = "Unexpected dtype, please report a bug"
-            raise ValueError(msg)
-    else:
-        msg = f"Expected Date or Datetime, got {dtype}"
-        raise TypeError(msg)
