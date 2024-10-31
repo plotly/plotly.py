@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pytest
 from datetime import datetime
-from plotly.tests.test_optional.test_utils.test_utils import (np_nan)
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 
 @pytest.mark.parametrize(

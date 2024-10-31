@@ -34,16 +34,18 @@ if matplotlylib:
 
 
 def np_nan():
-    if Version(np.__version__) < Version('2.0.0'):
+    if Version(np.__version__) < Version("2.0.0"):
         return np.NaN
     else:
         return np.nan
-    
+
+
 def np_inf():
-    if Version(np.__version__) < Version('2.0.0'):
+    if Version(np.__version__) < Version("2.0.0"):
         return np.Inf
     else:
         return np.inf
+
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
@@ -250,7 +252,9 @@ class TestJSONEncoder(TestCase):
         # Test that data wasn't mutated
         assert_series_equal(
             df["col 1"],
-            pd.Series([1, 2, 3, dt(2014, 1, 5), pd.NaT, np_nan(), np_inf()], name="col 1"),
+            pd.Series(
+                [1, 2, 3, dt(2014, 1, 5), pd.NaT, np_nan(), np_inf()], name="col 1"
+            ),
         )
 
         j2 = _json.dumps(df.index, cls=utils.PlotlyJSONEncoder)

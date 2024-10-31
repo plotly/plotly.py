@@ -6,7 +6,7 @@ import plotly.io as pio
 
 import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
-from plotly.tests.test_optional.test_utils.test_utils import (np_nan, np_inf)
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 import numpy as np
 from plotly.tests.utils import TestCaseNoTemplate
