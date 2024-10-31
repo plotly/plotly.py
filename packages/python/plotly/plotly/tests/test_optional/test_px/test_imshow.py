@@ -7,7 +7,7 @@ from io import BytesIO
 import base64
 import datetime
 from plotly.express.imshow_utils import rescale_intensity
-from plotly.tests.test_optional.test_utils.test_utils import (np_nan)
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
 img_gray = np.arange(100, dtype=float).reshape((10, 10))

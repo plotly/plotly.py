@@ -4,7 +4,7 @@ from pytest import approx
 from _plotly_utils.basevalidators import NumberValidator
 import numpy as np
 import pandas as pd
-from plotly.tests.test_optional.test_utils.test_utils import (np_nan, np_inf)
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 # Fixtures
 # --------
@@ -143,7 +143,13 @@ def test_rejection_aok(val, validator_aok):
 # ### Rejection by element ###
 @pytest.mark.parametrize(
     "val",
-    [[-1.6, 0.0], [1, 1.5, 2], [-0.1234, 0.41, np_nan()], [0, np_inf()], [0, -np_inf()]],
+    [
+        [-1.6, 0.0],
+        [1, 1.5, 2],
+        [-0.1234, 0.41, np_nan()],
+        [0, np_inf()],
+        [0, -np_inf()],
+    ],
 )
 def test_rejection_aok_min_max(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
