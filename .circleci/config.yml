@@ -249,7 +249,7 @@ jobs:
       - test_optional:
           py: "312_no_numpy"
 
-  python_312_numpy_2:
+  python_312_np2:
     docker:
       - image: cimg/python:3.12-browsers
     steps:
