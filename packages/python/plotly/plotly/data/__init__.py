@@ -1,7 +1,12 @@
 """
 Built-in datasets for demonstration, educational and test purposes.
 """
+import os
+from importlib import import_module
+
 import narwhals.stable.v1 as nw
+
+AVAILABLE_BACKENDS = {"pandas", "polars", "pyarrow"}
 
 
 def gapminder(
@@ -372,9 +377,10 @@ def _get_dataset(d, return_type):
     """
     Loads the dataset using the specified backend.
 
-    Notice that the available backends are 'pandas', 'polars', 'pyarrow' and they all
-    have a `read_csv` function. Therefore we can dynamically load the library via
-    `importlib.import_module` and then call `backend.read_csv(filepath)`.
+    Notice that the available backends are 'pandas', 'polars', 'pyarrow' and they all have
+    a `read_csv` function (pyarrow has it via pyarrow.csv). Therefore we can dynamically
+    load the library using `importlib.import_module` and then call
+    `backend.read_csv(filepath)`.
 
     Parameters
     ----------
@@ -388,23 +394,20 @@ def _get_dataset(d, return_type):
     -------
     Dataframe of `return_type` type
     """
-    import os
-    from importlib import import_module
-
-    AVAILABLE_BACKENDS = {"pandas", "polars", "pyarrow"}
-
     filepath = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         "package_data",
         "datasets",
         d + ".csv.gz",
     )
+
     if return_type not in AVAILABLE_BACKENDS:
         msg = f"Unsupported return_type. Found {return_type}, expected one of {AVAILABLE_BACKENDS}"
         raise NotImplementedError(msg)
 
     try:
-        backend = import_module(return_type)
+        module_to_load = "pyarrow.csv" if return_type == "pyarrow" else return_type
+        backend = import_module(module_to_load)
     except ModuleNotFoundError:
         msg = f"return_type={return_type}, but {return_type} is not installed"
         raise ModuleNotFoundError(msg)
