@@ -102,10 +102,10 @@ def test_labels(constructor):
 )
 def test_line_mode(constructor, extra_kwargs, expected_mode):
     data = px.data.gapminder().to_dict(orient="list")
-    gapminder = nw.from_native(constructor(data))
+    gapminder = constructor(data)
 
     fig = px.line(
-        gapminder.to_native(),
+        gapminder,
         x="year",
         y="pop",
         color="country",
@@ -119,7 +119,7 @@ def test_px_templates(constructor):
         import plotly.graph_objects as go
 
         data = px.data.tips().to_dict(orient="list")
-        tips = nw.from_native(constructor(data))
+        tips = constructor(data)
 
         # use the normal defaults
         fig = px.scatter()
@@ -146,7 +146,7 @@ def test_px_templates(constructor):
 
         # read colorway from the template
         fig = px.scatter(
-            tips.to_native(),
+            tips,
             x="total_bill",
             y="tip",
             color="sex",
@@ -156,23 +156,21 @@ def test_px_templates(constructor):
         assert fig.data[1].marker.color == "blue"
 
         # default colorway fallback
-        fig = px.scatter(
-            tips.to_native(), x="total_bill", y="tip", color="sex", template=dict()
-        )
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex", template=dict())
         assert fig.data[0].marker.color == px.colors.qualitative.D3[0]
         assert fig.data[1].marker.color == px.colors.qualitative.D3[1]
 
         # pio default template colorway fallback
         pio.templates.default = "seaborn"
         px.defaults.template = None
-        fig = px.scatter(tips.to_native(), x="total_bill", y="tip", color="sex")
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
         assert fig.data[0].marker.color == pio.templates["seaborn"].layout.colorway[0]
         assert fig.data[1].marker.color == pio.templates["seaborn"].layout.colorway[1]
 
         # pio default template colorway fallback
         pio.templates.default = "seaborn"
         px.defaults.template = "ggplot2"
-        fig = px.scatter(tips.to_native(), x="total_bill", y="tip", color="sex")
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
         assert fig.data[0].marker.color == pio.templates["ggplot2"].layout.colorway[0]
         assert fig.data[1].marker.color == pio.templates["ggplot2"].layout.colorway[1]
 
@@ -190,7 +188,7 @@ def test_px_templates(constructor):
         pio.templates.default = "none"
         px.defaults.template = None
         fig = px.scatter(
-            tips.to_native(),
+            tips,
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -202,7 +200,7 @@ def test_px_templates(constructor):
         assert fig.layout.yaxis3.showgrid
 
         fig = px.scatter(
-            tips.to_native(),
+            tips,
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -215,7 +213,7 @@ def test_px_templates(constructor):
         assert fig.layout.yaxis3.showgrid is None
 
         fig = px.scatter(
-            tips.to_native(),
+            tips,
             x="total_bill",
             y="tip",
             marginal_x="histogram",
@@ -306,9 +304,9 @@ def test_permissive_defaults():
 
 def test_marginal_ranges(constructor):
     data = px.data.tips().to_dict(orient="list")
-    df = nw.from_native(constructor(data))
+    df = constructor(data)
     fig = px.scatter(
-        df.to_native(),
+        df,
         x="total_bill",
         y="tip",
         marginal_x="histogram",

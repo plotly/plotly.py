@@ -154,7 +154,7 @@ def test_sunburst_treemap_with_path(constructor):
 
     # Error when values cannot be converted to numerical data type
     df = nw.from_native(df)
-    native_namespace = df.__native_namespace__()
+    native_namespace = nw.get_native_namespace(df)
     df = df.with_columns(
         values=nw.new_series(
             "values",
@@ -259,7 +259,7 @@ def test_sunburst_treemap_with_path_color(constructor):
             name="hover",
             values=hover,
             dtype=nw.String(),
-            native_namespace=df.__native_namespace__(),
+            native_namespace=nw.get_native_namespace(df),
         )
     )
     fig = px.sunburst(df.to_native(), path=path, color="calls", hover_data=["hover"])
