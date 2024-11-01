@@ -19,3 +19,4 @@ scikit-image==0.22.0
 psutil==5.7.0
 kaleido
 orjson==3.8.12
+narwhals>=1.12.0
