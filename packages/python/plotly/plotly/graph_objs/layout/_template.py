@@ -78,10 +78,6 @@ class Template(_BaseLayoutHierarchyType):
                 funnel
                     A tuple of :class:`plotly.graph_objects.Funnel`
                     instances or dicts with compatible properties
-                heatmapgl
-                    A tuple of
-                    :class:`plotly.graph_objects.Heatmapgl`
-                    instances or dicts with compatible properties
                 heatmap
                     A tuple of
                     :class:`plotly.graph_objects.Heatmap` instances
@@ -128,10 +124,6 @@ class Template(_BaseLayoutHierarchyType):
                     instances or dicts with compatible properties
                 pie
                     A tuple of :class:`plotly.graph_objects.Pie`
-                    instances or dicts with compatible properties
-                pointcloud
-                    A tuple of
-                    :class:`plotly.graph_objects.Pointcloud`
                     instances or dicts with compatible properties
                 sankey
                     A tuple of :class:`plotly.graph_objects.Sankey`

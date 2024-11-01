@@ -55,6 +55,7 @@ def scatter(
     range_y=None,
     render_mode="auto",
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -105,6 +106,7 @@ def density_contour(
     nbinsy=None,
     text_auto=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -175,6 +177,7 @@ def density_heatmap(
     nbinsy=None,
     text_auto=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -253,12 +256,13 @@ def line(
     line_shape=None,
     render_mode="auto",
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
-    In a 2D line plot, each row of `data_frame` is represented as vertex of
+    In a 2D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
@@ -303,14 +307,15 @@ def area(
     range_y=None,
     line_shape=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a stacked area plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in 2D space. The area between successive
-    polylines is filled.
+    a vertex of a polyline mark in 2D space. The area between
+    successive polylines is filled.
     """
     return make_figure(
         args=locals(),
@@ -362,6 +367,7 @@ def bar(
     range_y=None,
     text_auto=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -412,6 +418,7 @@ def timeline(
     range_x=None,
     range_y=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -467,6 +474,7 @@ def histogram(
     nbins=None,
     text_auto=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -541,6 +549,7 @@ def ecdf(
     range_x=None,
     range_y=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -597,6 +606,7 @@ def violin(
     points=None,
     box=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -650,6 +660,7 @@ def box(
     points=None,
     notched=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -700,6 +711,7 @@ def strip(
     range_x=None,
     range_y=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -765,6 +777,7 @@ def scatter_3d(
     range_y=None,
     range_z=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -816,12 +829,13 @@ def line_3d(
     range_y=None,
     range_z=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
-    In a 3D line plot, each row of `data_frame` is represented as vertex of
+    In a 3D line plot, each row of `data_frame` is represented as a vertex of
     a polyline mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
@@ -856,6 +870,7 @@ def scatter_ternary(
     opacity=None,
     size_max=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -896,13 +911,14 @@ def line_ternary(
     markers=False,
     line_shape=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a ternary line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark in ternary coordinates.
+    a vertex of a polyline mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -941,6 +957,7 @@ def scatter_polar(
     log_r=False,
     render_mode="auto",
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -987,13 +1004,14 @@ def line_polar(
     range_theta=None,
     log_r=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
-    In a polar line plot, each row of `data_frame` is represented as vertex
-    of a polyline mark in polar coordinates.
+    In a polar line plot, each row of `data_frame` is represented as a
+    vertex of a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -1030,6 +1048,7 @@ def bar_polar(
     range_theta=None,
     log_r=False,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1080,6 +1099,7 @@ def choropleth(
     fitbounds=None,
     basemap_visible=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1137,6 +1157,7 @@ def scatter_geo(
     fitbounds=None,
     basemap_visible=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1193,13 +1214,14 @@ def line_geo(
     fitbounds=None,
     basemap_visible=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a geographic line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a map.
+    a vertex of a polyline mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -1236,6 +1258,7 @@ def scatter_map(
     center=None,
     map_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1273,6 +1296,7 @@ def choropleth_map(
     center=None,
     map_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1308,13 +1332,14 @@ def density_map(
     map_style=None,
     radius=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a density map, each row of `data_frame` contributes to the intensity of
-    the color of the region around the corresponding point on the map
+    the color of the region around the corresponding point on the map.
     """
     return make_figure(
         args=locals(), constructor=go.Densitymap, trace_patch=dict(radius=radius)
@@ -1344,13 +1369,14 @@ def line_map(
     center=None,
     map_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a line map, each row of `data_frame` is represented as
-    vertex of a polyline mark on the map.
+    a vertex of a polyline mark on the map.
     """
     return make_figure(args=locals(), constructor=go.Scattermap)
 
@@ -1383,6 +1409,7 @@ def scatter_mapbox(
     center=None,
     mapbox_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1420,6 +1447,7 @@ def choropleth_mapbox(
     center=None,
     mapbox_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1455,6 +1483,7 @@ def density_mapbox(
     mapbox_style=None,
     radius=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1491,13 +1520,14 @@ def line_mapbox(
     center=None,
     mapbox_style=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
 ) -> go.Figure:
     """
     In a Mapbox line plot, each row of `data_frame` is represented as
-    vertex of a polyline mark on a Mapbox map.
+    a vertex of a polyline mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
@@ -1526,6 +1556,7 @@ def scatter_matrix(
     opacity=None,
     size_max=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1553,6 +1584,7 @@ def parallel_coordinates(
     range_color=None,
     color_continuous_midpoint=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1577,6 +1609,7 @@ def parallel_categories(
     range_color=None,
     color_continuous_midpoint=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1612,6 +1645,7 @@ def pie(
     category_orders=None,
     labels=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1664,6 +1698,7 @@ def sunburst(
     custom_data=None,
     labels=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1714,6 +1749,7 @@ def treemap(
     custom_data=None,
     labels=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1764,6 +1800,7 @@ def icicle(
     custom_data=None,
     labels=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1823,6 +1860,7 @@ def funnel(
     range_x=None,
     range_y=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,
@@ -1849,6 +1887,7 @@ def funnel_area(
     custom_data=None,
     labels=None,
     title=None,
+    subtitle=None,
     template=None,
     width=None,
     height=None,

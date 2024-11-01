@@ -159,9 +159,10 @@ fig.add_trace(go.Contourcarpet(
     colorbar = dict(
       y = 0,
       yanchor = "bottom",
-      titleside = "right",
       len = 0.75,
-      title = "Pressure coefficient, c<sub>p</sub>"
+      title = dict(
+        text="Pressure coefficient, c<sub>p</sub>",
+        side="right")
     ),
     contours = dict(
       start = -1,
