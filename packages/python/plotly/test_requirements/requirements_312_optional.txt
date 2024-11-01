@@ -20,3 +20,4 @@ psutil==5.9.7
 kaleido
 orjson==3.9.10
 jupyter-console==6.4.4
+narwhals>=1.12.0
