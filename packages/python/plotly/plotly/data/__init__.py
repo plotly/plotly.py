@@ -16,10 +16,30 @@ def gapminder(
 
     https://www.gapminder.org/data/
 
-    Returns:
-        A `pandas.DataFrame` with 1704 rows and the following columns:
+    Parameters
+    ----------
+    datetimes: bool
+        Whether or not 'year' column will converted to datetime type
+
+    centroids: bool
+        If True, ['centroid_lat', 'centroid_lon'] columns are added
+
+    year: int | None
+        If provided, the dataset will be filtered for that year
+
+    pretty_names: bool
+        If True, prettifies the column names
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 1704 rows and the following columns:
         `['country', 'continent', 'year', 'lifeExp', 'pop', 'gdpPercap',
         'iso_alpha', 'iso_num']`.
+
         If `datetimes` is True, the 'year' column will be a datetime column
         If `centroids` is True, two new columns are added: ['centroid_lat', 'centroid_lon']
         If `year` is an integer, the dataset will be filtered for that year
@@ -61,9 +81,20 @@ def tips(pretty_names=False, return_type="pandas"):
 
     https://vincentarelbundock.github.io/Rdatasets/doc/reshape2/tips.html
 
-    Returns:
-        A `pandas.DataFrame` with 244 rows and the following columns:
-        `['total_bill', 'tip', 'sex', 'smoker', 'day', 'time', 'size']`."""
+    Parameters
+    ----------
+    pretty_names: bool
+        If True, prettifies the column names
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 244 rows and the following columns:
+        `['total_bill', 'tip', 'sex', 'smoker', 'day', 'time', 'size']`.
+    """
 
     df = nw.from_native(_get_dataset("tips", return_type=return_type), eager_only=True)
     if pretty_names:
@@ -87,9 +118,17 @@ def iris(return_type="pandas"):
 
     https://en.wikipedia.org/wiki/Iris_flower_data_set
 
-    Returns:
-        A `pandas.DataFrame` with 150 rows and the following columns:
-        `['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species', 'species_id']`."""
+    Parameters
+    ----------
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 150 rows and the following columns:
+        `['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species', 'species_id']`.
+    """
     return _get_dataset("iris", return_type=return_type)
 
 
@@ -97,9 +136,17 @@ def wind(return_type="pandas"):
     """
     Each row represents a level of wind intensity in a cardinal direction, and its frequency.
 
-    Returns:
-        A `pandas.DataFrame` with 128 rows and the following columns:
-        `['direction', 'strength', 'frequency']`."""
+    Parameters
+    ----------
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 128 rows and the following columns:
+        `['direction', 'strength', 'frequency']`.
+    """
     return _get_dataset("wind", return_type=return_type)
 
 
@@ -108,9 +155,17 @@ def election(return_type="pandas"):
     Each row represents voting results for an electoral district in the 2013 Montreal
     mayoral election.
 
-    Returns:
-        A `pandas.DataFrame` with 58 rows and the following columns:
-        `['district', 'Coderre', 'Bergeron', 'Joly', 'total', 'winner', 'result', 'district_id']`."""
+    Parameters
+    ----------
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 58 rows and the following columns:
+        `['district', 'Coderre', 'Bergeron', 'Joly', 'total', 'winner', 'result', 'district_id']`.
+    """
     return _get_dataset("election", return_type=return_type)
 
 
@@ -118,10 +173,12 @@ def election_geojson():
     """
     Each feature represents an electoral district in the 2013 Montreal mayoral election.
 
-    Returns:
+    Returns
+    -------
         A GeoJSON-formatted `dict` with 58 polygon or multi-polygon features whose `id`
         is an electoral district numerical ID and whose `district` property is the ID and
-        district name."""
+        district name.
+    """
     import gzip
     import json
     import os
@@ -142,9 +199,17 @@ def carshare(return_type="pandas"):
     Each row represents the availability of car-sharing services near the centroid of a zone
     in Montreal over a month-long period.
 
-    Returns:
-        A `pandas.DataFrame` with 249 rows and the following columns:
-        `['centroid_lat', 'centroid_lon', 'car_hours', 'peak_hour']`."""
+    Parameters
+    ----------
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe` with 249 rows and the following columns:
+        `['centroid_lat', 'centroid_lon', 'car_hours', 'peak_hour']`.
+    """
     return _get_dataset("carshare", return_type=return_type)
 
 
@@ -152,12 +217,27 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
     """
     Each row in this wide dataset represents closing prices from 6 tech stocks in 2018/2019.
 
-    Returns:
-        A `pandas.DataFrame` with 100 rows and the following columns:
+    Parameters
+    ----------
+    indexed: bool
+        Whether or not the 'date' column is used as the index and the column index
+        is named 'company'. Applicable only if `return_type='pandas'`
+
+    datetimes: bool
+        Whether or not the 'date' column will be of datetime type
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 100 rows and the following columns:
         `['date', 'GOOG', 'AAPL', 'AMZN', 'FB', 'NFLX', 'MSFT']`.
         If `indexed` is True, the 'date' column is used as the index and the column index
+        is named 'company'
         If `datetimes` is True, the 'date' column will be a datetime column
-        is named 'company'"""
+    """
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
         raise NotImplementedError(msg)
@@ -181,11 +261,22 @@ def experiment(indexed=False, return_type="pandas"):
     Each row in this wide dataset represents the results of 100 simulated participants
     on three hypothetical experiments, along with their gender and control/treatment group.
 
+    Parameters
+    ----------
+    indexed: bool
+        If True, then the index is named "participant".
+        Applicable only if `return_type='pandas'`
 
-    Returns:
-        A `pandas.DataFrame` with 100 rows and the following columns:
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 100 rows and the following columns:
         `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
-        If `indexed` is True, the data frame index is named "participant" """
+        If `indexed` is True, the data frame index is named "participant"
+    """
 
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
@@ -206,11 +297,23 @@ def medals_wide(indexed=False, return_type="pandas"):
     This dataset represents the medal table for Olympic Short Track Speed Skating for the
     top three nations as of 2020.
 
-    Returns:
-        A `pandas.DataFrame` with 3 rows and the following columns:
+    Parameters
+    ----------
+    indexed: bool
+        Whether or not the 'nation' column is used as the index and the column index
+        is named 'medal'. Applicable only if `return_type='pandas'`
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 3 rows and the following columns:
         `['nation', 'gold', 'silver', 'bronze']`.
         If `indexed` is True, the 'nation' column is used as the index and the column index
-        is named 'medal'"""
+        is named 'medal'
+    """
 
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
@@ -231,10 +334,21 @@ def medals_long(indexed=False, return_type="pandas"):
     This dataset represents the medal table for Olympic Short Track Speed Skating for the
     top three nations as of 2020.
 
-    Returns:
-        A `pandas.DataFrame` with 9 rows and the following columns:
-        `['nation', 'medal', 'count']`.
-        If `indexed` is True, the 'nation' column is used as the index."""
+    Parameters
+    ----------
+    indexed: bool
+        Whether or not the 'nation' column is used as the index.
+        Applicable only if `return_type='pandas'`
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+        Dataframe with 9 rows and the following columns: `['nation', 'medal', 'count']`.
+        If `indexed` is True, the 'nation' column is used as the index.
+    """
 
     if indexed and return_type != "pandas":
         msg = "Cannot set index for backend different from pandas"
@@ -253,6 +367,25 @@ def medals_long(indexed=False, return_type="pandas"):
 
 
 def _get_dataset(d, return_type):
+    """
+    Loads the dataset using the specified backend.
+
+    Notice that the available backends are 'pandas', 'polars', 'pyarrow' and they all
+    have a `read_csv` function. Therefore we can dynamically load the library via
+    `importlib.import_module` and then call `backend.read_csv(filepath)`.
+
+    Parameters
+    ----------
+    d: str
+        Name of the dataset to load.
+
+    return_type: {'pandas', 'polars', 'pyarrow'}
+        Type of the resulting dataframe
+
+    Returns
+    -------
+    Dataframe of `return_type` type
+    """
     import os
     from importlib import import_module
 
