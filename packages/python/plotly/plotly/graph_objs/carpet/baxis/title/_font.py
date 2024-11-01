@@ -326,8 +326,7 @@ class Font(_BaseTraceHierarchyType):
         """
         Construct a new Font object
 
-        Sets this axis' title font. Note that the title's font used to
-        be set by the now deprecated `titlefont` attribute.
+        Sets this axis' title font.
 
         Parameters
         ----------

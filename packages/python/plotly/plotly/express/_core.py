@@ -1236,7 +1236,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (
                             field,
                             len(df_input[argument]),
@@ -1274,7 +1274,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
-                        "length of  previously-processed arguments %s is %d"
+                        "length of previously-processed arguments %s is %d"
                         % (field, len(argument), str(list(df_output.keys())), length)
                     )
                 df_output[str(col_name)] = to_unindexed_series(argument, str(col_name))
@@ -2340,6 +2340,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         layout_patch["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
+    if args["subtitle"]:
+        layout_patch["title_subtitle_text"] = args["subtitle"]
     if (
         "size" in args
         and args["size"]

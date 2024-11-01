@@ -4,6 +4,3 @@
 ###      $ pip install -r requirements.txt      ###
 ###                                             ###
 ###################################################
-
-## retrying requests ##
-tenacity>=6.2.0
