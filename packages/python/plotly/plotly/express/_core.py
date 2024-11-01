@@ -1,7 +1,6 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
-from collections.abc import Sequence
 from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
@@ -182,7 +181,7 @@ def _to_unix_epoch_seconds(s: nw.Series) -> nw.Series:
         raise TypeError(msg)
 
 
-def _generate_temporary_column_name(n_bytes: int, columns: list[str]) -> str:
+def _generate_temporary_column_name(n_bytes, columns) -> str:
     """Wraps of Narwhals generate_temporary_column_name to generate a token
     which is guaranteed to not be in columns, nor in [col + token for col in columns]
     """
@@ -2013,13 +2012,16 @@ def process_dataframe_hierarchy(args):
         - discrete_aggs is either [args["color"], <rest_of_cols>] or [<rest_of cols>]
         """
         return dframe.with_columns(
-            **{col: nw.col(col) / nw.col(count_colname) for col in continuous_aggs},
-            **{
-                col: nw.when(nw.col(f"{col}{n_unique_token}") == 1)
-                .then(nw.col(col))
-                .otherwise(nw.lit("(?)"))
+            *[nw.col(col) / nw.col(count_colname) for col in continuous_aggs],
+            *[
+                (
+                    nw.when(nw.col(f"{col}{n_unique_token}") == 1)
+                    .then(nw.col(col))
+                    .otherwise(nw.lit("(?)"))
+                    .alias(col)
+                )
                 for col in discrete_aggs
-            },
+            ],
         ).drop([f"{col}{n_unique_token}" for col in discrete_aggs])
 
     for i, level in enumerate(path):
