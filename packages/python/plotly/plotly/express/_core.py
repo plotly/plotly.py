@@ -8,13 +8,18 @@ from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
 import math
 
-import narwhals.stable.v1 as nw
-
 from plotly._subplots import (
     make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
 )
+
+import narwhals.stable.v1 as nw
+
+# The reason to use narwhals.stable.v1 is to have a stable and perfectly
+# backwards-compatible API, hence the confidence to not pin the Narwhals version exactly,
+# allowing for multiple major libraries to have Narwhals as a dependency without
+# forbidding users to install them all together due to dependency conflicts.
 
 NO_COLOR = "px_no_color_constant"
 
