@@ -51,9 +51,11 @@ def gapminder(
         df = df.filter(nw.col("year") == year)
     if datetimes:
         df = df.with_columns(
-            nw.concat_str([nw.col("year").cast(nw.String()), nw.lit("-01-01")]).cast(
-                nw.Datetime(time_unit="ns")
-            )
+            # Concatenate the year value with the literal "-01-01" so that it can be
+            # casted to datetime from "%Y-%m-%d" format
+            nw.concat_str(
+                [nw.col("year").cast(nw.String()), nw.lit("-01-01")]
+            ).str.to_datetime(format="%Y-%m-%d")
         )
     if not centroids:
         df = df.drop("centroid_lat", "centroid_lon")
@@ -403,7 +405,12 @@ def _get_dataset(d, return_type):
 
     try:
         backend = import_module(return_type)
-        return backend.read_csv(filepath)
     except ModuleNotFoundError:
         msg = f"return_type={return_type}, but {return_type} is not installed"
         raise ModuleNotFoundError(msg)
+
+    try:
+        return backend.read_csv(filepath)
+    except Exception as e:
+        msg = f"Unable to read '{d}' dataset due to: {e}"
+        raise Exception(msg).with_traceback(e.__traceback__)
