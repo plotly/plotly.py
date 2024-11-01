@@ -413,12 +413,20 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     # i.e. we can't do resampling, because then the X values might not line up!
                     non_missing = ~(x.is_null() | y.is_null())
                     trace_patch["x"] = (
-                        sorted_trace_data.filter(non_missing)
-                        .get_column(args["x"])
-                        .to_numpy()
+                        sorted_trace_data.filter(non_missing).get_column(args["x"])
                         # FIXME: Converting to numpy is needed to pass `test_trendline_on_timeseries`
                         # test, but I wonder if it is the right way to do it in the first place.
                     )
+                    if (
+                        trace_patch["x"].dtype == nw.Datetime
+                        and trace_patch["x"].dtype.time_zone is not None
+                    ):
+                        # Remove time zone so that local time is displayed
+                        trace_patch["x"] = (
+                            trace_patch["x"].dt.replace_time_zone(None).to_numpy()
+                        )
+                    else:
+                        trace_patch["x"] = trace_patch["x"].to_numpy()
 
                     trendline_function = trendline_functions[attr_value]
                     y_out, hover_header, fit_results = trendline_function(
