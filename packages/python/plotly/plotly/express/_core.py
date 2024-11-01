@@ -1855,7 +1855,7 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
         name="fill_value",
         values=[""] * len(df_sorted),
         dtype=nw.String(),
-        native_namespace=df_sorted.__native_namespace__(),
+        native_namespace=nw.get_native_namespace(df_sorted),
     )
     df_sorted = df_sorted.with_columns(
         **{
