@@ -6,7 +6,8 @@ from importlib import import_module
 
 import narwhals.stable.v1 as nw
 
-AVAILABLE_BACKENDS = {"pandas", "polars", "pyarrow"}
+AVAILABLE_BACKENDS = {"pandas", "polars", "pyarrow", "modin", "cudf"}
+BACKENDS_WITH_INDEX_SUPPORT = {"pandas", "modin", "cudf"}
 
 
 def gapminder(
@@ -35,7 +36,7 @@ def gapminder(
     pretty_names: bool
         If True, prettifies the column names
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -93,7 +94,7 @@ def tips(pretty_names=False, return_type="pandas"):
     pretty_names: bool
         If True, prettifies the column names
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -127,7 +128,7 @@ def iris(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -145,7 +146,7 @@ def wind(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -164,7 +165,7 @@ def election(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -208,7 +209,7 @@ def carshare(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -233,7 +234,7 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
     datetimes: bool
         Whether or not the 'date' column will be of datetime type
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -245,8 +246,8 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
         is named 'company'
         If `datetimes` is True, the 'date' column will be a datetime column
     """
-    if indexed and return_type != "pandas":
-        msg = "Cannot set index for backend different from pandas"
+    if indexed and return_type not in BACKENDS_WITH_INDEX_SUPPORT:
+        msg = f"Backend '{return_type}' does not support setting index"
         raise NotImplementedError(msg)
 
     df = nw.from_native(
@@ -274,7 +275,7 @@ def experiment(indexed=False, return_type="pandas"):
         If True, then the index is named "participant".
         Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -285,8 +286,8 @@ def experiment(indexed=False, return_type="pandas"):
         If `indexed` is True, the data frame index is named "participant"
     """
 
-    if indexed and return_type != "pandas":
-        msg = "Cannot set index for backend different from pandas"
+    if indexed and return_type not in BACKENDS_WITH_INDEX_SUPPORT:
+        msg = f"Backend '{return_type}' does not support setting index"
         raise NotImplementedError(msg)
 
     df = nw.from_native(
@@ -310,7 +311,7 @@ def medals_wide(indexed=False, return_type="pandas"):
         Whether or not the 'nation' column is used as the index and the column index
         is named 'medal'. Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -322,8 +323,8 @@ def medals_wide(indexed=False, return_type="pandas"):
         is named 'medal'
     """
 
-    if indexed and return_type != "pandas":
-        msg = "Cannot set index for backend different from pandas"
+    if indexed and return_type not in BACKENDS_WITH_INDEX_SUPPORT:
+        msg = f"Backend '{return_type}' does not support setting index"
         raise NotImplementedError(msg)
 
     df = nw.from_native(
@@ -347,7 +348,7 @@ def medals_long(indexed=False, return_type="pandas"):
         Whether or not the 'nation' column is used as the index.
         Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -357,8 +358,8 @@ def medals_long(indexed=False, return_type="pandas"):
         If `indexed` is True, the 'nation' column is used as the index.
     """
 
-    if indexed and return_type != "pandas":
-        msg = "Cannot set index for backend different from pandas"
+    if indexed and return_type not in BACKENDS_WITH_INDEX_SUPPORT:
+        msg = f"Backend '{return_type}' does not support setting index"
         raise NotImplementedError(msg)
 
     df = nw.from_native(
@@ -387,7 +388,7 @@ def _get_dataset(d, return_type):
     d: str
         Name of the dataset to load.
 
-    return_type: {'pandas', 'polars', 'pyarrow'}
+    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -406,7 +407,12 @@ def _get_dataset(d, return_type):
         raise NotImplementedError(msg)
 
     try:
-        module_to_load = "pyarrow.csv" if return_type == "pyarrow" else return_type
+        if return_type == "pyarrow":
+            module_to_load = "pyarrow.csv"
+        elif return_type == "modin":
+            module_to_load = "modin.pandas"
+        else:
+            module_to_load = return_type
         backend = import_module(module_to_load)
     except ModuleNotFoundError:
         msg = f"return_type={return_type}, but {return_type} is not installed"
