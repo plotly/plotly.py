@@ -45,6 +45,11 @@ Versions of Jupyter Notebook earlier than version 7 are no longer supported. To 
 pip install notebook --upgrade
 ```
 
+## Change to anywidget for go.FigureWidget
+
+[go.FigureWidget](https://plotly.com/python/figurewidget/) now uses [anywidget](https://anywidget.dev/). Install `anywidget` to 
+
+
 ## Processing NumPy and Pandas Series
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](python/performance/) for more details.
