@@ -16,6 +16,6 @@ pyshp==2.3.1
 matplotlib==3.8.2
 scikit-image==0.22.0
 psutil==5.9.7
-kaleido==0.0.4rc3
+kaleido==0.4.0rc3
 orjson==3.9.10
 jupyter-console==6.4.4
