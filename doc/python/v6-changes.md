@@ -47,8 +47,12 @@ pip install notebook --upgrade
 
 ## Change to anywidget for go.FigureWidget
 
-[go.FigureWidget](https://plotly.com/python/figurewidget/) now uses [anywidget](https://anywidget.dev/). Install `anywidget` to 
+[go.FigureWidget](https://plotly.com/python/figurewidget/) now uses [anywidget](https://anywidget.dev/). Install `anywidget` with:
 
+
+```python
+pip install anywidget
+```
 
 ## Processing NumPy and Pandas Series
 
