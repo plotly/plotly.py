@@ -18,7 +18,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._funnel import Funnel
     from ._funnelarea import Funnelarea
     from ._heatmap import Heatmap
-    from ._heatmapgl import Heatmapgl
     from ._histogram import Histogram
     from ._histogram2d import Histogram2d
     from ._histogram2dcontour import Histogram2dContour
@@ -31,7 +30,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
-    from ._pointcloud import Pointcloud
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
@@ -76,7 +74,6 @@ else:
             "._funnel.Funnel",
             "._funnelarea.Funnelarea",
             "._heatmap.Heatmap",
-            "._heatmapgl.Heatmapgl",
             "._histogram.Histogram",
             "._histogram2d.Histogram2d",
             "._histogram2dcontour.Histogram2dContour",
@@ -89,7 +86,6 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
-            "._pointcloud.Pointcloud",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",

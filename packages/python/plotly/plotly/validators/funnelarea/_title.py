@@ -11,19 +11,12 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 "data_docs",
                 """
             font
-                Sets the font used for `title`. Note that the
-                title's font used to be set by the now
-                deprecated `titlefont` attribute.
+                Sets the font used for `title`.
             position
-                Specifies the location of the `title`. Note
-                that the title's position used to be set by the
-                now deprecated `titleposition` attribute.
+                Specifies the location of the `title`.
             text
                 Sets the title of the chart. If it is empty, no
-                title is displayed. Note that before the
-                existence of `title.text`, the title's contents
-                used to be defined as the `title` attribute
-                itself. This behavior has been deprecated.
+                title is displayed.
 """,
             ),
             **kwargs,
