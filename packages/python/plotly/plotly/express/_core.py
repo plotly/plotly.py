@@ -1174,7 +1174,7 @@ def to_unindexed_series(x, name=None, native_namespace=None):
     its index reset if pandas-like). Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building.
     """
-    x = nw.from_native(x, series_only=True, strict=False)
+    x = nw.from_native(x, series_only=True, pass_through=True)
     if isinstance(x, nw.Series):
         return nw.maybe_reset_index(x).rename(name)
     elif native_namespace is not None:
@@ -1380,7 +1380,7 @@ def process_args_into_dataframe(
                     )
 
                 df_output[str(col_name)] = to_unindexed_series(
-                    x=nw.from_native(argument, series_only=True, strict=False),
+                    x=nw.from_native(argument, series_only=True, pass_through=True),
                     name=str(col_name),
                     native_namespace=native_namespace,
                 )
@@ -1508,11 +1508,11 @@ def build_dataframe(args, constructor):
             is_pd_like = True
 
         # data_frame is any other DataFrame object natively supported via Narwhals.
-        # With strict=False, the original object will be returned if unable to convert
+        # With pass_through=True, the original object will be returned if unable to convert
         # to a Narwhals DataFrame, making this condition False.
         elif isinstance(
             data_frame := nw.from_native(
-                args["data_frame"], eager_or_interchange_only=True, strict=False
+                args["data_frame"], eager_or_interchange_only=True, pass_through=True
             ),
             nw.DataFrame,
         ):
@@ -1521,11 +1521,11 @@ def build_dataframe(args, constructor):
             columns = args["data_frame"].columns
 
         # data_frame is any other Series object natively supported via Narwhals.
-        # With strict=False, the original object will be returned if unable to convert
+        # With pass_through=True, the original object will be returned if unable to convert
         # to a Narwhals DataFrame, making this condition False.
         elif isinstance(
             series := nw.from_native(
-                args["data_frame"], series_only=True, strict=False
+                args["data_frame"], series_only=True, pass_through=True
             ),
             nw.Series,
         ):

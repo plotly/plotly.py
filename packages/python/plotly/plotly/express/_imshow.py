@@ -321,7 +321,7 @@ def imshow(
             aspect = "equal"
 
     # --- Set the value of binary_string (forbidden for pandas)
-    img = nw.from_native(img, strict=False)
+    img = nw.from_native(img, pass_through=True)
     if isinstance(img, nw.DataFrame):
         if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
