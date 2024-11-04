@@ -34,9 +34,6 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-
-
-
 ## WebGL
 
 `plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics:
@@ -153,9 +150,9 @@ fig.show()
 
 See https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!
 
-## Pandas and NumPy for Improved Performance
+## NumPy and NumPy Convertible Arrays for Improved Performance
 
-Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that can be converted to NumPy arrays, such as Pandas Series and Index objects.
+Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas Series and Index objects.
 
 Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
@@ -213,35 +210,6 @@ fig = go.Figure(data=[go.Scatter3d(
     marker=dict(color=c),
     mode='markers',
     opacity=0.2
-)])
-
-fig.show()
-```
-
-### Example with Multi-Dimensional Array
-
-Here, we use a multi dimensional array with a `go.Surface` figure.
-
-
-```python
-import plotly.graph_objects as go
-import numpy as np
-
-np.random.seed(1)
-
-# Define the dimensions
-M = 100
-N = 200
-
-x = np.arange(0, M, 1, dtype='int32')
-y = np.arange(0, N, 1, dtype='uint8')
-
-z = np.random.random([N, M])
-
-fig = go.Figure(data=[go.Surface(
-    x=x,
-    y=y,
-    z=z
 )])
 
 fig.show()
