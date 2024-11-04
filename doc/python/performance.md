@@ -152,7 +152,7 @@ See https://plotly.com/python/reference/scattergl/ for more information and char
 
 ## NumPy and NumPy Convertible Arrays for Improved Performance
 
-Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas Series and Index objects.
+Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas and Polars Series.
 
 Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
@@ -161,7 +161,7 @@ Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.p
 The following types of objects in Python are supported for improved performance:
 
 - Numpy `numpy.ndarray` objects.
-- Pandas Index, `pandas.Index`, or Series, `pandas.Series`, objects.
+- Pandas Index, Pandas Series, Polars Series, and PyArrow Chunked Array objects. 
 - Array objects that can be converted to `numpy.ndarray` objects. i.e., they implement `"__array__"` or `"__array_interface__"` and return a `numpy.ndarray`.
 
 The following [array data types](https://numpy.org/devdocs/reference/arrays.scalars.html) are supported:
