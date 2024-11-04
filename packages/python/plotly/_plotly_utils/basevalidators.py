@@ -73,8 +73,6 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     """
     np = get_module("numpy")
 
-    # Don't force pandas to be loaded, we only want to know if it's already loaded
-    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -93,6 +91,10 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "f": "float64",
         "O": "object",
     }
+
+    # With `pass_through=True``, the original object will be returned if unable to convert
+    # to a Narwhals DataFrame or Series.
+    v = nw.from_native(v, allow_series=True, pass_through=True)
 
     if isinstance(v, nw.Series):
         if v.dtype == nw.Datetime and v.dtype.time_zone is not None:
