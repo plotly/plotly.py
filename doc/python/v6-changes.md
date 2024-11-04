@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/v4-migration.png
 ---
 
-This page outlines the changes in Plotly.py version 6 and cases where you may need to update your charts or tools that you use for working with Plotly.py
+This page outlines the changes in Plotly.py version 6 and cases where you may need to update your charts or tools that you use for working with Plotly.py.
 
 <!-- #region -->
 ## Jupyter Notebook Support
