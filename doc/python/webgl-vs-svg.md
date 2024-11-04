@@ -34,16 +34,15 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-For improved performance, consider using WebGL-based traces and Pandas or NumPy objects when creating figures in Plotly.
 
-<!-- #region -->
+
+
 ## WebGL
 
 `plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics:
 
-- The SVG API, which supports vector rendering
+- The SVG API, which supports vector rendering.
 - The Canvas API, which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL.
-
 
 Each `plotly` trace type is rendered with either SVG or WebGL. The following trace types use WebGL for rendering:
 
@@ -56,16 +55,16 @@ Each `plotly` trace type is rendered with either SVG or WebGL. The following tra
 
 WebGL is a powerful technology for accelerating computation but comes with some strict limitations:
 
-1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers
+1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers.
 2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition: text rendering will differ between SVG and WebGL-powered traces.
 3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.** See the following section, Multiple WebGL Contexts, for more details.
-4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height)
+4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height).
 
 In addition to the above limitations, the WebGL-powered version of certain SVG-powered trace types (`scattergl`, `scatterpolargl`) are not complete drop-in replacements for their SVG counterparts yet
-* Available symbols will differ
-* Area fills are not yet supported in WebGL
-* Range breaks on time-series axes are not yet supported
-* Axis range heuristics may differ
+* Available symbols will differ.
+* Area fills are not yet supported in WebGL.
+* Range breaks on time-series axes are not yet supported.
+* Axis range heuristics may differ.
 
 #### Multiple WebGL Contexts
 
@@ -80,7 +79,7 @@ If you encounter WebGL context limits when using WebGL-based figures, you can us
 To use it, in the environment where your Plotly figures are being rendered, load the Virtual WebGL script, "https://unpkg.com/virtual-webgl@1.0.6/src/virtual-webgl.js", for example, using a `<script>` tag.
 
 In a Jupyter notebook environment that supports magic commands, you can load it with the [HTML magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-html):
-<!-- #endregion -->
+
 
 ```
 %%html
@@ -96,9 +95,9 @@ it is also possible to use [datashader](/python/datashader/).
 
 ### WebGL with Plotly Express
 
-The `rendermode` argument to supported Plotly Express functions (e.g. `scatter` and `scatter_polar`) can be used to enable WebGL rendering.
+The `render_mode` argument to supported Plotly Express functions (e.g. `scatter` and `scatter_polar`) can be used to enable WebGL rendering.
 
-> **Note** The default `rendermode` is `"auto"`, in which case Plotly Express will automatically set `rendermode="webgl"` if the input data is more than 1,000 rows long. If WebGL acceleration is *not* desired in this case, `rendermode` can be forced to `"svg"` for vectorized, if slower, rendering.
+> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGl can be disabled by setting `render_mode=svg`.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
 
@@ -107,6 +106,7 @@ import plotly.express as px
 
 import pandas as pd
 import numpy as np
+
 np.random.seed(1)
 
 N = 100000
@@ -122,7 +122,7 @@ fig.show()
 ```
 
 
-#### WebGL with 100,000 points with Graph Objects
+#### WebGL with 1,000,000 points with Graph Objects
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scattergl` class from `plotly.graph_objects`](/python/graph-objects/).
 
@@ -131,9 +131,8 @@ import plotly.graph_objects as go
 
 import numpy as np
 
-N = 100000
+N = 1_000_000
 
-# Create figure
 fig = go.Figure()
 
 fig.add_trace(
