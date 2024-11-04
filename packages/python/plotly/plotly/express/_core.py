@@ -2638,18 +2638,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     group = group.sort(by=base, descending=False, nulls_last=True)
 
                 if args.get("ecdfmode", "standard") == "complementary":
-                    group = group.with_columns(
-                        ((nw.col(var) - nw.lit(group_sum)) * (-1)).alias(var)
-                    )
+                    group = group.with_columns((group_sum - nw.col(var)).alias(var))
 
                 if args["ecdfnorm"] == "probability":
-                    group = group.with_columns(
-                        (nw.col(var) / nw.lit(group_sum)).alias(var)
-                    )
+                    group = group.with_columns(nw.col(var) / group_sum)
                 elif args["ecdfnorm"] == "percent":
-                    group = group.with_columns(
-                        (nw.col(var) / nw.lit(group_sum) * nw.lit(100.0)).alias(var)
-                    )
+                    group = group.with_columns((nw.col(var) / group_sum) * 100.0)
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
