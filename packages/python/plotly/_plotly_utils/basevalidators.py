@@ -73,8 +73,6 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     """
     np = get_module("numpy")
 
-    # Don't force pandas to be loaded, we only want to know if it's already loaded
-    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -94,45 +92,26 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
+    # With `pass_through=True``, the original object will be returned if unable to convert
+    # to a Narwhals DataFrame or Series.
+    v = nw.from_native(v, allow_series=True, pass_through=True)
+
     if isinstance(v, nw.Series):
-        if nw.dependencies.is_pandas_like_series(v_native := v.to_native()):
-            v = v_native
+        if v.dtype == nw.Datetime and v.dtype.time_zone is not None:
+            # Remove time zone so that local time is displayed
+            v = v.dt.replace_time_zone(None).to_numpy()
         else:
             v = v.to_numpy()
     elif isinstance(v, nw.DataFrame):
-        if nw.dependencies.is_pandas_like_dataframe(v_native := v.to_native()):
-            v = v_native
-        else:
-            v = v.to_numpy()
-
-    if pd and isinstance(v, (pd.Series, pd.Index)):
-        # Handle pandas Series and Index objects
-        if v.dtype.kind in numeric_kinds:
-            # Get the numeric numpy array so we use fast path below
-            v = v.values
-        elif v.dtype.kind == "M":
-            # Convert datetime Series/Index to numpy array of datetimes
-            if isinstance(v, pd.Series):
-                with warnings.catch_warnings():
-                    warnings.simplefilter("ignore", FutureWarning)
-                    # Series.dt.to_pydatetime will return Index[object]
-                    # https://github.com/pandas-dev/pandas/pull/52459
-                    v = np.array(v.dt.to_pydatetime())
-            else:
-                # DatetimeIndex
-                v = v.to_pydatetime()
-    elif pd and isinstance(v, pd.DataFrame) and len(set(v.dtypes)) == 1:
-        dtype = v.dtypes.tolist()[0]
-        if dtype.kind in numeric_kinds:
-            v = v.values
-        elif dtype.kind == "M":
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore", FutureWarning)
-                # Series.dt.to_pydatetime will return Index[object]
-                # https://github.com/pandas-dev/pandas/pull/52459
-                v = [
-                    np.array(row.dt.to_pydatetime()).tolist() for i, row in v.iterrows()
-                ]
+        schema = v.schema
+        overrides = {}
+        for key, val in schema.items():
+            if val == nw.Datetime and val.time_zone is not None:
+                # Remove time zone so that local time is displayed
+                overrides[key] = nw.col(key).dt.replace_time_zone(None)
+        if overrides:
+            v = v.with_columns(**overrides)
+        v = v.to_numpy()
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
