@@ -1522,7 +1522,7 @@ def build_dataframe(args, constructor):
 
         # data_frame is any other Series object natively supported via Narwhals.
         # With pass_through=True, the original object will be returned if unable to convert
-        # to a Narwhals DataFrame, making this condition False.
+        # to a Narwhals Series, making this condition False.
         elif isinstance(
             series := nw.from_native(
                 args["data_frame"], series_only=True, pass_through=True
