@@ -22,8 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.11.10
   plotly:
-    description: Recommendations for increased speed, improved interactivity,
-      and the ability to plot even more data!
+    description: Recommendations for increased speed, improved interactivity, and
+      the ability to plot even more data!
     display_as: basic
     language: python
     layout: base
@@ -151,60 +151,6 @@ fig.add_trace(
 
 fig.show()
 ```
-
-#### WebGL Rendering with 1 Million Points
-
-```python
-import plotly.graph_objects as go
-
-import numpy as np
-
-N = 1000000
-
-# Create figure
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scattergl(
-        x = np.random.randn(N),
-        y = np.random.randn(N),
-        mode = 'markers',
-        marker = dict(
-            line = dict(
-                width = 1,
-                color = 'DarkSlateGrey')
-        )
-    )
-)
-
-fig.show()
-```
-
-#### WebGL with many traces
-
-```python
-import plotly.graph_objects as go
-
-import numpy as np
-
-fig = go.Figure()
-
-trace_num = 10
-point_num = 5000
-for i in range(trace_num):
-    fig.add_trace(
-        go.Scattergl(
-                x = np.linspace(0, 1, point_num),
-                y = np.random.randn(point_num)+(i*5)
-        )
-    )
-
-fig.update_layout(showlegend=False)
-
-fig.show()
-```
-
-### Reference
 
 See https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!
 
