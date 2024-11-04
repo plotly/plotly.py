@@ -30,7 +30,9 @@ jupyter:
     name: High Performance Visualization
     order: 14
     permalink: python/performance/
-    redirect_from: python/webgl-vs-svg/
+    redirect_from: 
+    - python/webgl-vs-svg/
+    - python/datashader/
     thumbnail: thumbnail/webgl.jpg
 ---
 
@@ -152,6 +154,8 @@ See https://plotly.com/python/reference/scattergl/ for more information and char
 
 ## NumPy and NumPy Convertible Arrays for Improved Performance
 
+*New in Plotly.py version 6*
+
 Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas and Polars Series.
 
 Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
@@ -214,3 +218,81 @@ fig = go.Figure(data=[go.Scatter3d(
 
 fig.show()
 ```
+
+## Datashader
+
+Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed to the browser for rendering by creating a rasterized representation of the dataset. This makes it ideal for working with datasets of tens to hundreds of millions of points. 
+
+### Passing Datashader Rasters as a Tile Map Image Layer
+
+We visualize here the spatial distribution of taxi rides in New York City. A higher density
+is observed on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](/python/tile-map-layers).
+
+```python
+import pandas as pd
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/uber-rides-data1.csv')
+dff = df.query('Lat < 40.82').query('Lat > 40.70').query('Lon > -74.02').query('Lon < -73.91')
+
+import datashader as ds
+cvs = ds.Canvas(plot_width=1000, plot_height=1000)
+agg = cvs.points(dff, x='Lon', y='Lat')
+# agg is an xarray object, see http://xarray.pydata.org/en/stable/ for more details
+coords_lat, coords_lon = agg.coords['Lat'].values, agg.coords['Lon'].values
+# Corners of the image
+coordinates = [[coords_lon[0], coords_lat[0]],
+               [coords_lon[-1], coords_lat[0]],
+               [coords_lon[-1], coords_lat[-1]],
+               [coords_lon[0], coords_lat[-1]]]
+
+from colorcet import fire
+import datashader.transfer_functions as tf
+img = tf.shade(agg, cmap=fire)[::-1].to_pil()
+
+import plotly.express as px
+# Trick to create rapidly a figure with map axes
+fig = px.scatter_map(dff[:1], lat='Lat', lon='Lon', zoom=12)
+# Add the datashader image as a tile map layer image
+fig.update_layout(
+    map_style="carto-darkmatter",
+    map_layers=[{"sourcetype": "image", "source": img, "coordinates": coordinates}],
+)
+fig.show()
+```
+
+### Exploring Correlations of a Large Dataset
+
+Here we explore the flight delay dataset from https://www.kaggle.com/usdot/flight-delays. In order to get a visual impression of the correlation between features, we generate a datashader rasterized array which we plot using a `Heatmap` trace. It creates a much clearer visualization than a scatter plot of (even a fraction of) the data points, as shown below.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+import numpy as np
+import datashader as ds
+df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2015_flights.parquet')
+fig = go.Figure(go.Scattergl(x=df['SCHEDULED_DEPARTURE'][::200],
+                             y=df['DEPARTURE_DELAY'][::200],
+                             mode='markers')
+)
+fig.update_layout(title_text='A busy plot')
+fig.show()
+```
+
+```python
+import plotly.express as px
+import pandas as pd
+import numpy as np
+import datashader as ds
+df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2015_flights.parquet')
+
+cvs = ds.Canvas(plot_width=100, plot_height=100)
+agg = cvs.points(df, 'SCHEDULED_DEPARTURE', 'DEPARTURE_DELAY')
+zero_mask = agg.values == 0
+agg.values = np.log10(agg.values, where=np.logical_not(zero_mask))
+agg.values[zero_mask] = np.nan
+fig = px.imshow(agg, origin='lower', labels={'color':'Log10(count)'})
+fig.update_traces(hoverongaps=False)
+fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
+fig.show()
+```
+
+Instead of using Datashader, it would theoretically be possible to create a [2d histogram](/python/2d-histogram-contour/) with Plotly, but this is not recommended because you would need to load the whole dataset of around 5M rows in the browser for plotly.js to compute the heatmap.
