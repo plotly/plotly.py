@@ -4,10 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API
+- Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
 
 ### Updated
 
 - Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance. 
+- Add `subtitle` attribute to all Plotly Express traces
 
 ## [5.24.1] - 2024-09-12
 

@@ -1,5 +1,4 @@
 requests==2.25.1
-tenacity==6.2.0
 pandas==1.5.3
 numpy==1.23.2
 xarray==0.17.0
