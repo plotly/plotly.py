@@ -37,12 +37,9 @@
   </a>
 </div>
 
-
 ## Quickstart
 
 `pip install plotly==5.24.1`
-
-Inside [Jupyter](https://jupyter.org/install) (installable with `pip install "jupyterlab>=3" "ipywidgets>=7.6"`):
 
 ```python
 import plotly.express as px
@@ -51,7 +48,6 @@ fig.show()
 ```
 
 See the [Python documentation](https://plotly.com/python/) for more examples.
-
 
 ## Overview
 
@@ -82,7 +78,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ## Installation
 
-plotly.py may be installed using pip...
+plotly.py may be installed using pip
 
 ```
 pip install plotly==5.24.1
@@ -94,32 +90,13 @@ or conda.
 conda install -c plotly plotly=5.24.1
 ```
 
-### JupyterLab Support
-
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
-packages using `pip`:
-
-```
-pip install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-or `conda`:
-
-```
-conda install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
-
 ### Jupyter Widget Support
 
 For use as a Jupyter widget, install `jupyter` and `anywidget`
 packages using `pip`:
 
 ```
-pip install  jupyter anywidget
+pip install jupyter anywidget
 ```
 
 or `conda`:
@@ -138,40 +115,17 @@ command line utility (legacy as of `plotly` version 4.9).
 #### Kaleido
 
 The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
-using pip...
+using pip
 
 ```
 pip install -U kaleido
 ```
 
-or conda.
+or conda
 
 ```
 conda install -c conda-forge python-kaleido
 ```
-
-#### Orca
-
-While Kaleido is now the recommended image export approach because it is easier to install
-and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
-can also be supported
-by the legacy [orca](https://github.com/plotly/orca) command line utility and the
- [`psutil`](https://github.com/giampaolo/psutil) Python package.
-
-These dependencies can both be installed using conda:
-
-```
-conda install -c plotly plotly-orca==1.3.1 psutil
-```
-
-Or, `psutil` can be installed using pip...
-
-```
-pip install psutil
-```
-
-and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
-
 
 ### Extended Geo Support
 
