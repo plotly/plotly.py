@@ -187,31 +187,28 @@ def test_sunburst_treemap_with_path(constructor):
     assert fig.data[0].values[-1] == 8
 
 
-def test_sunburst_treemap_with_path_and_hover(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_sunburst_treemap_with_path_and_hover(backend):
+    df = px.data.tips(return_type=backend)
     fig = px.sunburst(
         df, path=["sex", "day", "time", "smoker"], color="smoker", hover_data=["smoker"]
     )
     assert "smoker" in fig.data[0].hovertemplate
 
-    data = px.data.gapminder().query("year == 2007").to_dict(orient="list")
-    df = constructor(data)
-
+    df = nw.from_native(px.data.gapminder(year=2007, return_type=backend))
     fig = px.sunburst(
-        df, path=["continent", "country"], color="lifeExp", hover_data=df.columns
+        df.to_native(),
+        path=["continent", "country"],
+        color="lifeExp",
+        hover_data=df.columns,
     )
     assert fig.layout.coloraxis.colorbar.title.text == "lifeExp"
 
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
-
+    df = px.data.tips(return_type=backend)
     fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], hover_name="smoker")
     assert "smoker" not in fig.data[0].hovertemplate  # represented as '%{hovertext}'
     assert "%{hovertext}" in fig.data[0].hovertemplate  # represented as '%{hovertext}'
 
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+    df = px.data.tips(return_type=backend)
     fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], custom_data=["smoker"])
     assert fig.data[0].customdata[0][0] in ["Yes", "No"]
     assert "smoker" not in fig.data[0].hovertemplate
@@ -414,9 +411,8 @@ def test_funnel():
     assert len(fig.data) == 2
 
 
-def test_parcats_dimensions_max(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_parcats_dimensions_max(backend):
+    df = px.data.tips(return_type=backend)
 
     # default behaviour
     fig = px.parallel_categories(df)
@@ -449,13 +445,12 @@ def test_parcats_dimensions_max(constructor):
 
 
 @pytest.mark.parametrize("histfunc,y", [(None, None), ("count", "tip")])
-def test_histfunc_hoverlabels_univariate(constructor, histfunc, y):
+def test_histfunc_hoverlabels_univariate(backend, histfunc, y):
     def check_label(label, fig):
         assert fig.layout.yaxis.title.text == label
         assert label + "=" in fig.data[0].hovertemplate
 
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+    df = px.data.tips(return_type=backend)
 
     # base case, just "count" (note count(tip) is same as count())
     fig = px.histogram(df, x="total_bill", y=y, histfunc=histfunc)
@@ -481,13 +476,12 @@ def test_histfunc_hoverlabels_univariate(constructor, histfunc, y):
             check_label("%s (normalized as %s)" % (histnorm, barnorm), fig)
 
 
-def test_histfunc_hoverlabels_bivariate(constructor):
+def test_histfunc_hoverlabels_bivariate(backend):
     def check_label(label, fig):
         assert fig.layout.yaxis.title.text == label
         assert label + "=" in fig.data[0].hovertemplate
 
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+    df = px.data.tips(return_type=backend)
 
     # with y, should be same as forcing histfunc to sum
     fig = px.histogram(df, x="total_bill", y="tip")

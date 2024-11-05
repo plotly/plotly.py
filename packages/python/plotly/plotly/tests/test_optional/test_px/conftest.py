@@ -41,3 +41,8 @@ if parse_version(pd.__version__) >= parse_version("2.0.0"):
 @pytest.fixture(params=constructors)
 def constructor(request: pytest.FixtureRequest):
     return request.param  # type: ignore[no-any-return]
+
+
+@pytest.fixture(params=["pandas", "pyarrow", "polars"])
+def backend(request: pytest.FixtureRequest) -> str:
+    return request.param  # type: ignore[no-any-return]

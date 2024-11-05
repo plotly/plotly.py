@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance.
 - Add `subtitle` attribute to all Plotly Express traces
-- Allow to load plotly data directly via pandas, polars and pyarrow, without depending directly on any [#4843](https://github.com/plotly/plotly.py/pull/4843)
+- Make plotly-express dataframe agnostic via Narwhals [#4790](https://github.com/plotly/plotly.py/pull/4790)
 
 ## [5.24.1] - 2024-09-12
 

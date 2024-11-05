@@ -51,14 +51,13 @@ def test_with_index():
     assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}<extra></extra>"
 
 
-def test_series(request, constructor):
-    if "pyarrow_table" in str(constructor):
+def test_series(request, backend):
+    if backend == "pyarrow":
         # By converting to native, we lose the name for pyarrow chunked_array
         # and the assertions fail
         request.applymarker(pytest.mark.xfail)
 
-    data = px.data.tips().to_dict(orient="list")
-    tips = nw.from_native(constructor(data))
+    tips = nw.from_native(px.data.tips(return_type=backend))
     before_tip = (tips.get_column("total_bill") - tips.get_column("tip")).to_native()
     day = tips.get_column("day").to_native()
     tips = tips.to_native()
@@ -171,9 +170,8 @@ def test_name_heuristics(request, constructor):
     assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
 
-def test_repeated_name(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    iris = constructor(data)
+def test_repeated_name(backend):
+    iris = px.data.iris(return_type=backend)
     fig = px.scatter(
         iris,
         x="sepal_width",
@@ -184,9 +182,8 @@ def test_repeated_name(constructor):
     assert fig.data[0].customdata.shape[1] == 4
 
 
-def test_arrayattrable_numpy(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    tips = constructor(data)
+def test_arrayattrable_numpy(backend):
+    tips = px.data.tips(return_type=backend)
     fig = px.scatter(
         tips, x="total_bill", y="tip", hover_data=[np.random.random(tips.shape[0])]
     )
@@ -234,9 +231,8 @@ def test_wrong_dimensions_mixed_case(constructor):
     assert "All arguments should have the same length." in str(err_msg.value)
 
 
-def test_wrong_dimensions(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_wrong_dimensions(backend):
+    df = px.data.tips(return_type=backend)
     with pytest.raises(ValueError) as err_msg:
         px.scatter(df, x="tip", y=[1, 2, 3])
     assert "All arguments should have the same length." in str(err_msg.value)
@@ -427,9 +423,8 @@ def test_non_matching_index():
     assert_frame_equal(expected, out["data_frame"].to_pandas())
 
 
-def test_splom_case(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    iris = constructor(data)
+def test_splom_case(backend):
+    iris = px.data.iris(return_type=backend)
     fig = px.scatter_matrix(iris)
     assert len(fig.data[0].dimensions) == len(iris.columns)
     dic = {"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]}
@@ -457,9 +452,8 @@ def test_data_frame_from_dict():
     assert np.all(fig.data[0].x == [0, 1])
 
 
-def test_arguments_not_modified(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    iris = nw.from_native(constructor(data))
+def test_arguments_not_modified(backend):
+    iris = nw.from_native(px.data.iris(return_type=backend))
     petal_length = iris.get_column("petal_length").to_native()
     hover_data = [iris.get_column("sepal_length").to_native()]
     px.scatter(iris.to_native(), x=petal_length, y="petal_width", hover_data=hover_data)
@@ -467,11 +461,10 @@ def test_arguments_not_modified(constructor):
     assert iris.get_column("sepal_length").to_native().equals(hover_data[0])
 
 
-def test_pass_df_columns(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    tips = nw.from_native(constructor(data))
+def test_pass_df_columns(backend):
+    tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.histogram(
-        tips.to_native(),
+        tips,
         x="total_bill",
         y="tip",
         color="sex",
@@ -480,17 +473,16 @@ def test_pass_df_columns(constructor):
     )
     # the "- 2" is because we re-use x and y in the hovertemplate where possible
     assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns) - 2
-    tips_copy = nw.from_native(constructor(data))
+    tips_copy = nw.from_native(px.data.tips(return_type=backend))
     assert tips_copy.columns == tips.columns
 
 
-def test_size_column(request, constructor):
-    if "pyarrow_table" in str(constructor):
+def test_size_column(request, backend):
+    if backend == "pyarrow":
         # By converting to native, we lose the name for pyarrow chunked_array
         # and the assertions fail
         request.applymarker(pytest.mark.xfail)
-    data = px.data.tips().to_dict(orient="list")
-    tips = nw.from_native(constructor(data))
+    tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.scatter(
         tips.to_native(),
         x=tips.get_column("size").to_native(),

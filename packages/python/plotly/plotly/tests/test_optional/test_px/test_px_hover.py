@@ -6,9 +6,8 @@ import pytest
 from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
-def test_skip_hover(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    df = constructor(data)
+def test_skip_hover(backend):
+    df = px.data.iris(return_type=backend)
     fig = px.scatter(
         df,
         x="petal_length",
@@ -19,9 +18,8 @@ def test_skip_hover(constructor):
     assert fig.data[0].hovertemplate == "species_id=%{marker.size}<extra></extra>"
 
 
-def test_hover_data_string_column(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_hover_data_string_column(backend):
+    df = px.data.tips(return_type=backend)
     fig = px.scatter(
         df,
         x="tip",
@@ -31,9 +29,8 @@ def test_hover_data_string_column(constructor):
     assert "sex" in fig.data[0].hovertemplate
 
 
-def test_composite_hover(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_composite_hover(backend):
+    df = px.data.tips(return_type=backend)
     hover_dict = OrderedDict(
         {"day": False, "time": False, "sex": True, "total_bill": ":.1f"}
     )
@@ -91,9 +88,8 @@ def test_newdatain_hover_data():
         )
 
 
-def test_formatted_hover_and_labels(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_formatted_hover_and_labels(backend):
+    df = px.data.tips(return_type=backend)
     fig = px.scatter(
         df,
         x="tip",
@@ -176,9 +172,8 @@ def test_fail_wrong_column():
     )
 
 
-def test_sunburst_hoverdict_color(constructor):
-    data = px.data.gapminder().query("year == 2007").to_dict(orient="list")
-    df = constructor(data)
+def test_sunburst_hoverdict_color(backend):
+    df = px.data.gapminder(year=2007, return_type=backend)
     fig = px.sunburst(
         df,
         path=["continent", "country"],
@@ -189,7 +184,7 @@ def test_sunburst_hoverdict_color(constructor):
     assert "color" in fig.data[0].hovertemplate
 
 
-def test_date_in_hover(request, constructor):
+def test_date_in_hover(constructor):
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
     ).with_columns(date=nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
