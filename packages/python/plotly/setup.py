@@ -603,7 +603,7 @@ setup(
     data_files=[
         ("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),
     ],
-    install_requires=["narwhals>=1.13.1", "packaging"],
+    install_requires=["narwhals>=1.13.2", "packaging"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),

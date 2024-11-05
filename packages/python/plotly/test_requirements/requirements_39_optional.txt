@@ -22,4 +22,4 @@ kaleido
 orjson==3.8.12
 polars[timezone]
 pyarrow
-narwhals>=1.13.1
+narwhals>=1.13.2
