@@ -58,7 +58,6 @@ pip install anywidget
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](python/performance/) for more details.
 
-
 ## Removed Attributes
 
 The following attributes have been removed in Plotly.py 6.
@@ -133,4 +132,21 @@ The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/sca
 
 ### Transforms
 
-Transforms, which were deprecated in Plotly.py v5, have been removed.
+Transforms, which were deprecated in Plotly.py v5, have been removed. You can achieve similar functionality by preprocessing the data with a DataFrame library.
+
+For example, a transform to filter the data:
+
+```python
+  dict(
+    type = 'filter',
+    target = df['year'],
+    orientation = '=',
+    value = 2007
+  ),
+```
+
+Could be rewritten using Pandas:
+
+```python
+df_2007 = df[df['year'] == 2007]
+```
