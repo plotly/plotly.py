@@ -3,10 +3,11 @@ import copy as _copy
 
 
 class Densitymapbox(_BaseTraceType):
+
     print(
         "*densitymapbox* trace is deprecated!",
-        "Please consider switching to the *densitymap* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/javascript/maplibre-migration/",
+        "Please consider switching to *densitymap* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/python/maplibre-migration/",
     )
 
     # class properties
@@ -1226,6 +1227,7 @@ class Densitymapbox(_BaseTraceType):
         """
         mapbox subplots and traces are deprecated! Please consider
         switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/python/maplibre-migration/ as well as
         https://plotly.com/javascript/maplibre-migration/ Sets a
         reference between this trace's data coordinates and a mapbox
         subplot. If "mapbox" (the default value), the data refer to
@@ -1694,7 +1696,8 @@ class Densitymapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -1822,7 +1825,8 @@ class Densitymapbox(_BaseTraceType):
 
         "densitymapbox" trace is deprecated! Please consider switching
         to the "densitymap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/javascript/maplibre-migration/ Draws a
+        at: https://plotly.com/python/maplibre-migration/ as well as
+        https://plotly.com/javascript/maplibre-migration/ Draws a
         bivariate kernel density estimation with a Gaussian kernel from
         `lon` and `lat` coordinates and optional `z` values using a
         colorscale.
@@ -2015,7 +2019,8 @@ class Densitymapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If

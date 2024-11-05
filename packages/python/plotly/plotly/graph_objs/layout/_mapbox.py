@@ -4,6 +4,12 @@ import copy as _copy
 
 class Mapbox(_BaseLayoutHierarchyType):
 
+    print(
+        "*mapbox* trace is deprecated!",
+        "Please consider switching to *map* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/python/maplibre-migration/",
+    )
+
     # class properties
     # --------------------
     _parent_path_str = "layout"

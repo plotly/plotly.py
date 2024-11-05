@@ -167,7 +167,18 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     _valid_props = {{"{'", "'.join(valid_props_list)}"}}
 """
 
-    print(node)
+    trace = node.name_property
+    if "mapbox" in trace:
+        str = (
+            f"""
+    print(
+        "*{trace}* trace is deprecated!",
+        "Please consider switching to *{trace.replace("mapbox", "map")}* trace type and `map` subplots.",
+        "Learn more at: https://plotly.com/python/maplibre-migration/",
+    )
+"""
+            + str
+        )
 
     buffer.write(str)
 
