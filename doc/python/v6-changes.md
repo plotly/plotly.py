@@ -67,7 +67,7 @@ The following attributes have been removed in Plotly.py 6.
 
 The `titlefont`,`titleposition`, `titleside`, and `titleoffset` attributes have been removed. Replace them with `title.font`, `title.position`, `title.side`, and `title.offset`.
 
-Here's an example using `layout.tilefont`:
+Here's an example using `layout.titlefont`:
 
 ```python
 import plotly.graph_objects as go
