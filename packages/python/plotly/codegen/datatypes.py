@@ -158,15 +158,18 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     valid_props_list = sorted(
         [node.name_property for node in subtype_nodes + literal_nodes]
     )
-    buffer.write(
-        f"""
+
+    str = f"""
     # class properties
     # --------------------
     _parent_path_str = '{node.parent_path_str}'
     _path_str = '{node.path_str}'
     _valid_props = {{"{'", "'.join(valid_props_list)}"}}
 """
-    )
+
+    print(node)
+
+    buffer.write(str)
 
     # ### Property definitions ###
     for subtype_node in subtype_nodes:
