@@ -59,7 +59,7 @@ df = px.data.iris(return_type='polars')
 df.head()
 ```
 
-## Long, Wide-, and Mixed-Form Data
+## Long, Wide, and Mixed-Form Data
 
 There are three common conventions for storing column-oriented data, usually in a data frame with column names:
 
@@ -129,7 +129,7 @@ The first argument of every `px` function is `data_frame`. If you provide a Data
 - Modin
 
 > To use Polars, PyArrow, or Modin with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`.
-To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed. 
+To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
 
 `px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these DataFrames. Other types of DataFrames that are currently supported by Narwhals may also work with `px`, for example cuDF.
 
