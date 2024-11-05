@@ -21,4 +21,4 @@ psutil==5.7.0
 kaleido
 polars[timezone]
 pyarrow
-narwhals>=1.13.1
+narwhals>=1.13.2

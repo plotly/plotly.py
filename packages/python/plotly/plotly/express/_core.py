@@ -533,6 +533,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         else:
                             mapping = {}
                         for cat in trace_data.get_column(attr_value).to_list():
+                            # although trace_data.get_column(attr_value) is a Narwhals
+                            # Series, which is an iterable, explicitly calling a to_list()
+                            # makes sure that the elements we loop over are python objects
+                            # in all cases, since depending on the backend this may not be
+                            # the case (e.g. PyArrow)
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
