@@ -4,9 +4,8 @@ import pytest
 import random
 
 
-def test_facets(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_facets(backend):
+    df = px.data.tips(return_type=backend)
 
     fig = px.scatter(df, x="total_bill", y="tip")
     assert "xaxis2" not in fig.layout
@@ -47,9 +46,8 @@ def test_facets(constructor):
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
-def test_facets_with_marginals(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_facets_with_marginals(backend):
+    df = px.data.tips(return_type=backend)
 
     fig = px.histogram(df, x="total_bill", facet_col="sex", marginal="rug")
     assert len(fig.data) == 4

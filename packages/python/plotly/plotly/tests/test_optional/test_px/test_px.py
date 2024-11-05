@@ -6,9 +6,8 @@ import pytest
 from itertools import permutations
 
 
-def test_scatter(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    iris = nw.from_native(constructor(data))
+def test_scatter(backend):
+    iris = nw.from_native(px.data.iris(return_type=backend))
     fig = px.scatter(iris.to_native(), x="sepal_width", y="sepal_length")
     assert fig.data[0].type == "scatter"
     assert np.all(fig.data[0].x == iris.get_column("sepal_width").to_numpy())
@@ -17,9 +16,8 @@ def test_scatter(constructor):
     assert fig.data[0].mode == "markers"
 
 
-def test_custom_data_scatter(constructor):
-    data = px.data.iris().to_dict(orient="list")
-    iris = nw.from_native(constructor(data))
+def test_custom_data_scatter(backend):
+    iris = nw.from_native(px.data.iris(return_type=backend))
     # No hover, no custom data
     fig = px.scatter(
         iris.to_native(), x="sepal_width", y="sepal_length", color="species"
@@ -67,9 +65,8 @@ def test_custom_data_scatter(constructor):
     )
 
 
-def test_labels(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    tips = nw.from_native(constructor(data))
+def test_labels(backend):
+    tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.scatter(
         tips.to_native(),
         x="total_bill",
@@ -100,10 +97,8 @@ def test_labels(constructor):
         ({"text": "continent"}, "lines+markers+text"),
     ],
 )
-def test_line_mode(constructor, extra_kwargs, expected_mode):
-    data = px.data.gapminder().to_dict(orient="list")
-    gapminder = constructor(data)
-
+def test_line_mode(backend, extra_kwargs, expected_mode):
+    gapminder = px.data.gapminder(return_type=backend)
     fig = px.line(
         gapminder,
         x="year",
@@ -114,12 +109,11 @@ def test_line_mode(constructor, extra_kwargs, expected_mode):
     assert fig.data[0].mode == expected_mode
 
 
-def test_px_templates(constructor):
+def test_px_templates(backend):
     try:
         import plotly.graph_objects as go
 
-        data = px.data.tips().to_dict(orient="list")
-        tips = constructor(data)
+        tips = px.data.tips(return_type=backend)
 
         # use the normal defaults
         fig = px.scatter()
@@ -245,12 +239,11 @@ def test_px_defaults():
         pio.templates.default = "plotly"
 
 
-def assert_orderings(constructor, days_order, days_check, times_order, times_check):
+def assert_orderings(backend, days_order, days_check, times_order, times_check):
     symbol_sequence = ["circle", "diamond", "square", "cross", "circle", "diamond"]
     color_sequence = ["red", "blue", "red", "blue", "red", "blue", "red", "blue"]
 
-    data = px.data.tips().to_dict(orient="list")
-    tips = nw.from_native(constructor(data))
+    tips = nw.from_native(px.data.tips(return_type=backend))
 
     fig = px.scatter(
         tips.to_native(),
@@ -284,16 +277,16 @@ def assert_orderings(constructor, days_order, days_check, times_order, times_che
 
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "x"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "x"]))
-def test_orthogonal_and_missing_orderings(constructor, days, times):
+def test_orthogonal_and_missing_orderings(backend, days, times):
     assert_orderings(
-        constructor, days, list(days) + ["Thur"], times, list(times) + ["Dinner"]
+        backend, days, list(days) + ["Thur"], times, list(times) + ["Dinner"]
     )
 
 
 @pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "Thur"]))
 @pytest.mark.parametrize("times", permutations(["Lunch", "Dinner"]))
-def test_orthogonal_orderings(constructor, days, times):
-    assert_orderings(constructor, days, days, times, times)
+def test_orthogonal_orderings(backend, days, times):
+    assert_orderings(backend, days, days, times, times)
 
 
 def test_permissive_defaults():
@@ -302,9 +295,8 @@ def test_permissive_defaults():
         px.defaults.should_not_work = "test"
 
 
-def test_marginal_ranges(constructor):
-    data = px.data.tips().to_dict(orient="list")
-    df = constructor(data)
+def test_marginal_ranges(backend):
+    df = px.data.tips(return_type=backend)
     fig = px.scatter(
         df,
         x="total_bill",
@@ -318,9 +310,8 @@ def test_marginal_ranges(constructor):
     assert fig.layout.yaxis3.range is None
 
 
-def test_render_mode(constructor):
-    data = px.data.gapminder().to_dict(orient="list")
-    df = nw.from_native(constructor(data))
+def test_render_mode(backend):
+    df = nw.from_native(px.data.gapminder(return_type=backend))
     df2007 = df.filter(nw.col("year") == 2007)
 
     fig = px.scatter(df2007.to_native(), x="gdpPercap", y="lifeExp", trendline="ols")

@@ -16,9 +16,10 @@ from datetime import datetime
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_results_passthrough(constructor, mode, options):
-    data = px.data.gapminder().query("continent == 'Oceania'").to_dict(orient="list")
-    df = nw.from_native(constructor(data))
+def test_trendline_results_passthrough(backend, mode, options):
+    df = nw.from_native(px.data.gapminder(return_type=backend)).filter(
+        nw.col("continent") == "Oceania"
+    )
     fig = px.scatter(
         df.to_native(),
         x="year",
@@ -111,9 +112,11 @@ def test_trendline_enough_values(mode, options):
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_nan_values(constructor, mode, options):
-    data = px.data.gapminder().query("continent == 'Oceania'").to_dict(orient="list")
-    df = nw.from_native(constructor(data))
+def test_trendline_nan_values(backend, mode, options):
+    df = nw.from_native(px.data.gapminder(return_type=backend)).filter(
+        nw.col("continent") == "Oceania"
+    )
+
     start_date = 1970
     df = df.with_columns(pop=nw.when(nw.col("year") >= start_date).then(nw.col("pop")))
 
@@ -219,16 +222,16 @@ def test_trendline_on_timeseries(constructor, mode, options):
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
 
-def test_overall_trendline(constructor):
-    df = nw.from_native(constructor(px.data.tips().to_dict(orient="list")))
-    fig1 = px.scatter(df.to_native(), x="total_bill", y="tip", trendline="ols")
+def test_overall_trendline(backend):
+    df = px.data.tips(return_type=backend)
+    fig1 = px.scatter(df, x="total_bill", y="tip", trendline="ols")
     assert len(fig1.data) == 2
     assert "trendline" in fig1.data[1].hovertemplate
     results1 = px.get_trendline_results(fig1)
     params1 = results1["px_fit_results"].iloc[0].params
 
     fig2 = px.scatter(
-        df.to_native(),
+        df,
         x="total_bill",
         y="tip",
         color="sex",
@@ -243,7 +246,7 @@ def test_overall_trendline(constructor):
     assert np.all(np.array_equal(params1, params2))
 
     fig3 = px.scatter(
-        df.to_native(),
+        df,
         x="total_bill",
         y="tip",
         facet_row="sex",
