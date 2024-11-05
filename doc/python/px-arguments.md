@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.11.10
   plotly:
     description: Input data arguments accepted by Plotly Express functions
     display_as: file_settings
@@ -33,19 +33,33 @@ jupyter:
     thumbnail: thumbnail/plotly-express.png
 ---
 
-### Plotly Express works with Column-oriented, Matrix or Geographic Data
+Plotly Express (`px`) is the high-level interface to Plotly and provides functions for generating charts. `px` functions support data provided in a number of different formats (long, wide, and mixed) and as different types of objects, including pandas and Polars DataFrames.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+## Data for the Examples
 
-Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the **Input Data as Non-Pandas DataFrames** section below for more details.
+The examples on this page use datasets available in the `data` package in `px`. `px.data` contains functions that when called return a dataset as a DataFrame. Some of the datasets included in `px.data` are:
 
-[`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide column-oriented data to most Plotly Express functions.
+- `carshare` - Each row represents the availability of car-sharing services near the centroid of a zone in Montreal over a month-long period.
+- `election` - Each row represents voting results for an electoral district in the 2013 Montreal mayoral election.
+- `iris` - Each row represents a flower.
 
+To access the `iris` dataset, we call it's function and assign it to a variable:
 
+```python
+import plotly.express as px
 
-### Plotly Express works with  Long-, Wide-, and Mixed-Form Data
+df = px.data.iris()
+df.head()
+```
 
-*Until version 4.8, Plotly Express only operated on long-form (previously called "tidy") data, but [now accepts wide-form and mixed-form data](/python/wide-form/) as well.*
+By default `px.data` functions return Pandas DataFrames, but you can specify an alternative DataFrame type using `return_type`. `pandas`, `polars`, and `pyarrow` are supported return types.
+
+```python
+df = px.data.iris(return_type='polars')
+df.head()
+```
+
+## Long, Wide-, and Mixed-Form Data
 
 There are three common conventions for storing column-oriented data, usually in a data frame with column names:
 
@@ -87,7 +101,7 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Fo
 fig.show()
 ```
 
-You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
+You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
 
 ```python
 import plotly.express as px
@@ -101,33 +115,56 @@ fig.show()
 Many more examples of wide-form and messy data input can be found in our [detailed wide-form support documentation](/python/wide-form/).
 
 
-### Input Data as Pandas `DataFrame`s
+## DataFrame Input
 
-As shown above, `px` functions supports natively pandas DataFrame. Arguments can either be passed as dataframe columns, or as column names if the `data_frame` argument is provided.
+The first argument of every `px` function is `data_frame`. If you provide a DataFrame as a `px` function's first argument, you can then specify column names as strings from the DataFrame as other arguments.
 
-#### Passing columns as arguments
+### Supported DataFrames
+
+`px` functions natively support the following types of DataFrames:
+
+- pandas
+- Polars
+- PyArrow
+- Modin
+
+> To use Polars, PyArrow, or Modin with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`
+
+`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these DataFrames. Other types of DataFrames that are currently supported by Narwhals may also work with `px`, for example cuDF.
+
+You can also pass DataFrames that are not natively supported, but support the dataframe interchange protocol, or have a `to_pandas()` method.
+
+> Not all `px` functionality is supported natively for non-pandas DataFrames.
+
+### Example: Using a Pandas DataFrame with `px.bar`
+
+Here, we create a pandas DataFrame, pass it to `px.bar` as its first argument, and then use the `"sepal_length"` column for the x-axis and the `"sepal_width"` for the y-axis.
 
 ```python
 import plotly.express as px
-df = px.data.iris()
-# Use directly Columns as argument. You can use tab completion for this!
-fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, color=df.species, size=df.petal_length)
-fig.show()
-```
 
-#### Passing name strings as arguments
-
-```python
-import plotly.express as px
 df = px.data.iris()
-# Use column names instead. This is the same chart as above.
+
 fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', size='petal_length')
 fig.show()
 ```
 
-#### Using the index of a DataFrame
+### Example: Polars DataFrame with `px.bar`
 
-In addition to columns, it is also possible to pass the index of a DataFrame as argument. In the example below the index is displayed in the hover data.
+`px` provides native support for DataFrame types other than pandas:
+
+```python
+import plotly.express as px
+
+df = px.data.iris(return_type='polars')
+
+fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', size='petal_length')
+fig.show()
+```
+
+### Using the Index of a DataFrame
+
+If the DataFrame you are using has an index, it is also possible to use that index as an argument. In the following example, the index is used for the hover data.
 
 ```python
 import plotly.express as px
@@ -137,18 +174,17 @@ fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, size=df.petal_length,
 fig.show()
 ```
 
-### Columns not in the `data_frame` argument
+### Using Columns from Multiple DataFrames
 
-In the addition to columns from the `data_frame` argument, one may also pass columns from a different DataFrame, _as long as all columns have the same length_. It is also possible to pass columns without passing the `data_frame` argument.
-
-However, column names are used only if they correspond to columns in the `data_frame` argument, in other cases, the name of the keyword argument is used. As explained below, the `labels` argument can be used to set names.
+You can also use columns from multiple dataframes in the one `px` function, as long as all the DataFrame columns you use have the same length. In this example, we pass `df1` as the `data_frame` argument to `px.bar` and then us a column from `df2` for the `y` argument.
 
 ```python
 import plotly.express as px
 import pandas as pd
+
 df1 = pd.DataFrame(dict(time=[10, 20, 30], sales=[10, 8, 30]))
 df2 = pd.DataFrame(dict(market=[4, 2, 5]))
-fig = px.bar(df1, x=df1.time, y=df2.market, color=df1.sales)
+fig = px.bar(df1, x="time", y=df2.market, color="sales")
 fig.show()
 ```
 
@@ -168,40 +204,9 @@ fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'gdp'},
 fig.show()
 ```
 
-### Input Data as Non-Pandas `DataFrame`s
-
-*New in 5.15*
-
-In the examples above, we've used Pandas DataFrames. You can also provide another type of DataFrame to the `data_frame` argument if that DataFrame has a `to_pandas` method, for example, a [Polars](https://www.pola.rs/) DataFrame.
-
-Plotly Express uses Pandas internally to process the data. When you provide a Non-Pandas DataFrame to the `data_frame` argument of a Plotly Express function, the entire DataFrame is converted to a Pandas DataFrame.
-
-In this example, we use a Polars DataFrame. If you are using Polars, you'll need to install `pyarrow`, which is used by its [`to_pandas` method](
-https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_pandas.html)
-
 ```python
-import polars as pl
-import plotly.express as px
-
-wide_df = pl.DataFrame(
-    {
-        "nation": ["South Korea", "China", "Canada"],
-        "gold": [24, 10, 9],
-        "silver": [13, 15, 12],
-        "bronze": [9, 12, 12],
-    }
-)
-
-fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
-fig.show()
+## Other Input Data
 ```
-
-*New in 5.16*
-
-As of version 5.16, you can also provide another type of DataFrame to the `data_frame` argument if that DataFrame supports the [Python dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/index.html), or has a `toPandas` or `to_pandas_df` method.
-
-Even if the DataFrame that you are using supports the Python dataframe interchange protocol, you'll need to have Pandas version 2.0.3 or later installed. If you are using an earlier version of Pandas, Plotly Express will look for a `to_pandas`, `toPandas`, and `to_pandas_df` method, and use whichever one is available.
-
 
 ### Input Data as array-like columns: NumPy arrays, lists...
 
@@ -212,16 +217,6 @@ import plotly.express as px
 
 # List arguments
 fig = px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8])
-fig.show()
-```
-
-```python
-import numpy as np
-import plotly.express as px
-
-t = np.linspace(0, 10, 100)
-# NumPy arrays arguments
-fig = px.scatter(x=t, y=np.sin(t), labels={'x':'t', 'y':'sin(t)'}) # override keyword names with labels
 fig.show()
 ```
 
@@ -239,7 +234,7 @@ fig.show()
 
 ### Passing dictionaries or array-likes as the data_frame argument
 
-The column-based argument `data_frame` can also be passed with a `dict` or `array`. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a pandas DataFrame.
+The column-based argument `data_frame` can also be passed with a `dict` or `array`. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a DataFrame.
 
 ```python
 import plotly.express as px
