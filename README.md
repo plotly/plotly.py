@@ -94,41 +94,34 @@ conda install -c plotly plotly=5.24.1
 
 ### JupyterLab Support
 
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
+For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `anywidget`
 packages using `pip`:
 
 ```
-pip install "jupyterlab>=3" "ipywidgets>=7.6"
+pip install "jupyterlab>=3" "anywidget>=0.9.13"
 ```
 
 or `conda`:
 
 ```
-conda install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.24.1 @jupyter-widgets/jupyterlab-manager
+conda install "jupyterlab>=3" "anywidget>=0.9.13"
 ```
 
 Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
 
 ### Jupyter Notebook Support
 
-For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
+For use in the Jupyter Notebook, install the `notebook` and `anywidget`
 packages using `pip`:
 
 ```
-pip install "notebook>=5.3" "ipywidgets>=7.5"
+pip install "notebook>=7.0" "anywidget>=0.9.13"
 ```
 
 or `conda`:
 
 ```
-conda install "notebook>=5.3" "ipywidgets>=7.5"
+conda install "notebook>=7.0" "anywidget>=0.9.13"
 ```
 
 ### Static Image Export
