@@ -30,7 +30,7 @@ jupyter:
     name: High Performance Visualization
     order: 14
     permalink: python/performance/
-    redirect_from: 
+    redirect_from:
     - python/webgl-vs-svg/
     - python/datashader/
     thumbnail: thumbnail/webgl.jpg
@@ -55,7 +55,7 @@ Each `plotly` trace type is rendered with either SVG or WebGL. The following tra
 WebGL is a powerful technology for accelerating computation but comes with some strict limitations:
 
 1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers.
-2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition: text rendering will differ between SVG and WebGL-powered traces.
+2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition, text rendering will differ between SVG and WebGL-powered traces.
 3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.** See the following section, Multiple WebGL Contexts, for more details.
 4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height).
 
@@ -165,7 +165,7 @@ Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.p
 The following types of objects in Python are supported for improved performance:
 
 - Numpy `numpy.ndarray` objects.
-- Pandas Index, Pandas Series, Polars Series, and PyArrow Chunked Array objects. 
+- Pandas Index, Pandas Series, Polars Series, and PyArrow Chunked Array objects.
 - Array objects that can be converted to `numpy.ndarray` objects. i.e., they implement `"__array__"` or `"__array_interface__"` and return a `numpy.ndarray`.
 
 The following [array data types](https://numpy.org/devdocs/reference/arrays.scalars.html) are supported:
@@ -221,7 +221,7 @@ fig.show()
 
 ## Datashader
 
-Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed to the browser for rendering by creating a rasterized representation of the dataset. This makes it ideal for working with datasets of tens to hundreds of millions of points. 
+Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed to the browser for rendering by creating a rasterized representation of the dataset. This makes it ideal for working with datasets of tens to hundreds of millions of points.
 
 ### Passing Datashader Rasters as a Tile Map Image Layer
 
