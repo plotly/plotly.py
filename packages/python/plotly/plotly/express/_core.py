@@ -532,8 +532,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             mapping = args["color_discrete_map"].copy()
                         else:
                             mapping = {}
-                        for cat in trace_data.get_column(attr_value):
-                            cat = nw.to_py_scalar(cat)
+                        for cat in trace_data.get_column(attr_value).to_list():
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
