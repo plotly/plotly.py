@@ -189,8 +189,9 @@ def test_ols_trendline_slopes():
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_on_timeseries(constructor, mode, options):
-    df = nw.from_native(constructor(px.data.stocks().to_dict(orient="list")))
+def test_trendline_on_timeseries(backend, mode, options):
+
+    df = nw.from_native(px.data.stocks(return_type=backend))
 
     pd_err_msg = r"Could not convert value of 'x' \('date'\) into a numeric type."
     pl_err_msg = "conversion from `str` to `f64` failed in column 'date'"
