@@ -299,11 +299,6 @@ fig.update_layout(
         scaleanchor='x',
         scaleratio=1
     ),
-    zaxis=dict(
-        title=dict(
-            text='Z AXIS TITLE'
-        )
-    ),
     width=700, height=500
 )
 fig.show()
