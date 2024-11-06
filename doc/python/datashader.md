@@ -106,6 +106,6 @@ agg.values = np.log10(agg.values, where=np.logical_not(zero_mask))
 agg.values[zero_mask] = np.nan
 fig = px.imshow(agg, origin='lower', labels={'color':'Log10(count)'})
 fig.update_traces(hoverongaps=False)
-fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
+fig.update_layout(coloraxis_colorbar=dict(title=dict(text='Count'), tickprefix='1.e'))
 fig.show()
 ```

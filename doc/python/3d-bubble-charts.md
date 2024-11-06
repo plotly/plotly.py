@@ -77,7 +77,7 @@ fig = go.Figure(data=go.Scatter3d(
 
 
 fig.update_layout(height=800, width=800,
-                  title='Examining Population and Life Expectancy Over Time')
+                  title=dict(text='Examining Population and Life Expectancy Over Time'))
 
 fig.show()
 ```
@@ -116,7 +116,7 @@ fig = go.Figure(data=go.Scatter3d(
 fig.update_layout(
     width=800,
     height=800,
-    title="Planets!",
+    title=dict(text="Planets!"),
     scene=dict(
         xaxis=dict(
             title=dict(
