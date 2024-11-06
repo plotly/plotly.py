@@ -6,8 +6,8 @@ class Choroplethmapbox(_BaseTraceType):
 
     print(
         "*choroplethmapbox* trace is deprecated!",
-        "Please consider switching to *choroplethmap* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/python/maplibre-migration/",
+        "Use *choroplethmap* instead.",
+        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
     )
 
     # class properties

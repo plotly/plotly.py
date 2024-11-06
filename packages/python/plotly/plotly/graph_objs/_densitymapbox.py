@@ -6,8 +6,8 @@ class Densitymapbox(_BaseTraceType):
 
     print(
         "*densitymapbox* trace is deprecated!",
-        "Please consider switching to *densitymap* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/python/maplibre-migration/",
+        "Use *densitymap* instead.",
+        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
     )
 
     # class properties

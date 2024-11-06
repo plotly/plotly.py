@@ -6,8 +6,8 @@ class Mapbox(_BaseLayoutHierarchyType):
 
     print(
         "*mapbox* trace is deprecated!",
-        "Please consider switching to *map* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/python/maplibre-migration/",
+        "Use *map* instead.",
+        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
     )
 
     # class properties

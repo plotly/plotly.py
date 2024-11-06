@@ -6,8 +6,8 @@ class Scattermapbox(_BaseTraceType):
 
     print(
         "*scattermapbox* trace is deprecated!",
-        "Please consider switching to *scattermap* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/python/maplibre-migration/",
+        "Use *scattermap* instead.",
+        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
     )
 
     # class properties
