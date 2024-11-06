@@ -325,7 +325,7 @@ fig = go.Figure(
 
 
 fig.update_layout(
-    title="Iris Data set",
+    title=dict(text="Iris Data set"),
     hoversubplots="axis",
     width=600,
     height=600,
