@@ -136,7 +136,7 @@ fig = go.Figure(data=go.Splom(
 
 
 fig.update_layout(
-    title='Iris Data set',
+    title=dict(text='Iris Data set'),
     dragmode='select',
     width=600,
     height=600,
@@ -173,7 +173,7 @@ fig = go.Figure(data=go.Splom(
 
 
 fig.update_layout(
-    title='Iris Data set',
+    title=dict(text='Iris Data set'),
     width=600,
     height=600,
 )
@@ -208,7 +208,7 @@ fig = go.Figure(data=go.Splom(
 
 
 fig.update_layout(
-    title='Iris Data set',
+    title=dict(text='Iris Data set'),
     width=600,
     height=600,
 )
@@ -243,7 +243,7 @@ fig = go.Figure(data=go.Splom(
 
 
 fig.update_layout(
-    title='Iris Data set',
+    title=dict(text='Iris Data set'),
     width=600,
     height=600,
 )

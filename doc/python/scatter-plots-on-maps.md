@@ -227,7 +227,7 @@ fig.update_layout(
             dtick = 5
         )
     ),
-    title='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>',
+    title=dict(text='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>'),
 )
 fig.show()
 ```
