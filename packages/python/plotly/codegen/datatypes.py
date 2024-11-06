@@ -173,8 +173,8 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
             f"""
     print(
         "*{trace}* trace is deprecated!",
-        "Please consider switching to *{trace.replace("mapbox", "map")}* trace type and `map` subplots.",
-        "Learn more at: https://plotly.com/python/maplibre-migration/",
+        "Use *{trace.replace("mapbox", "map")}* instead.",
+        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
     )
 """
             + str
