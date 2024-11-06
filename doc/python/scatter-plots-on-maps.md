@@ -144,7 +144,11 @@ fig = go.Figure(data=go.Scattergeo(
             cmin = 0,
             color = df['cnt'],
             cmax = df['cnt'].max(),
-            colorbar_title="Incoming flights<br>February 2011"
+            colorbar=dict(
+                title=dict(
+                    text="Incoming flights<br>February 2011"
+                )
+            )
         )))
 
 fig.update_layout(

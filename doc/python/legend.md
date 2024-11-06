@@ -492,7 +492,7 @@ fig.add_trace(go.Scatter(
     line=dict(color="MediumPurple")
 ))
 
-fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(title=dict(text="Try Clicking on the Legend Items!"))
 
 fig.show()
 ```
@@ -542,7 +542,7 @@ fig.add_trace(go.Scatter(
     showlegend=False
 ))
 
-fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(title=dict(text="Try Clicking on the Legend Items!"))
 fig.show()
 ```
 
@@ -550,7 +550,7 @@ fig.show()
 
 *New in 5.20*
 
-To indent legend entries, set `indenation` on `layout.legend` to a number of pixels. In the following example, we indent legend entries by 10 pixels. 
+To indent legend entries, set `indenation` on `layout.legend` to a number of pixels. In the following example, we indent legend entries by 10 pixels.
 
 ```python
 import plotly.graph_objects as go
@@ -570,7 +570,9 @@ fig = go.Figure(
     ],
     layout=dict(
         legend=dict(
-            title="Species",
+            title=dict(
+                text="Species",
+            ),
             indentation=10
         )
     ),
@@ -629,7 +631,7 @@ fig.add_trace(go.Scatter(
     line=dict(color="MediumPurple")
 ))
 
-fig.update_layout(title="Try Clicking on the Legend Items!")
+fig.update_layout(title=dict(text="Try Clicking on the Legend Items!"))
 fig.update_layout(legend=dict(groupclick="toggleitem"))
 
 fig.show()
@@ -727,22 +729,27 @@ fig = go.Figure(
         ),
     ],
     layout=dict(
-        title="GDP Per Capita",
-        legend={
-            "title": "By country",
-            "xref": "container",
-            "yref": "container",
-            "y": 0.65,
-            "bgcolor": "Orange",
-        },
-        legend2={
-            "title": "By continent",
-            "xref": "container",
-            "yref": "container",
-            "y": 0.85,
-            "bgcolor": "Gold",
-
-        },
+        title=dict(
+            text="GDP Per Capita"
+        ),
+        legend=dict(
+            title=dict(
+                text="By country"
+            ),
+            xref="container",
+            yref="container",
+            y=0.65,
+            bgcolor="Orange"
+        ),
+        legend2=dict(
+            title=dict(
+                text="By continent"
+            ),
+            xref="container",
+            yref="container",
+            y=0.85,
+            bgcolor="Gold"
+        ),
     ),
 )
 
@@ -770,7 +777,7 @@ fig = go.Figure(
         go.Scatter(x=df_uk.year, y=df_uk.gdpPercap, name="UK"),
     ],
     layout=dict(
-        title="GDP Per Capita",
+        title=dict(text="GDP Per Capita"),
         legend={
             "x": 0.9,
             "y": 0.9,

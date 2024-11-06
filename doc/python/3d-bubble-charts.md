@@ -184,7 +184,7 @@ fig = go.Figure(go.Scatter3d(
 fig.update_layout(
     width=800,
     height=800,
-    title="Planets!",
+    title=dict(text="Planets!"),
     scene=dict(
         xaxis=dict(
             title=dict(
