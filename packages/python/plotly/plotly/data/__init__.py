@@ -252,9 +252,10 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
 
     df = nw.from_native(
         _get_dataset("stocks", return_type=return_type), eager_only=True
-    )
+    ).with_columns(nw.col("date").cast(nw.String()))
+
     if datetimes:
-        df = df.with_columns(nw.col("date").cast(nw.Datetime(time_unit="ns")))
+        df = df.with_columns(nw.col("date").str.to_datetime())
 
     if indexed:  # then it must be pandas
         df = df.to_native().set_index("date")
