@@ -120,7 +120,14 @@ fig = ff.create_choropleth(
     fips=fips, values=values, scope=['CA', 'AZ', 'Nevada', 'Oregon', ' Idaho'],
     binning_endpoints=[14348, 63983, 134827, 426762, 2081313], colorscale=colorscale,
     county_outline={'color': 'rgb(255,255,255)', 'width': 0.5}, round_legend_values=True,
-    legend_title='Population by County', title='California and Nearby States'
+    legend=dict(
+      title=dict(
+        text='Population by County'
+      )
+    ),
+    title=dict(
+      text='California and Nearby States'
+    )
 )
 fig.layout.template = None
 fig.show()
