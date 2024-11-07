@@ -32,6 +32,38 @@ if matplotlylib:
     import matplotlib.pyplot as plt
     from plotly.matplotlylib import Exporter, PlotlyRenderer
 
+    @pytest.mark.matplotlib
+    def test_masked_constants_example():
+        try:
+            pd.options.plotting.backend = "matplotlib"
+        except Exception:
+            pass
+
+        # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
+        data = {
+            "esN": [0, 1, 2, 3],
+            "ewe_is0": [-398.11901997, -398.11902774, -398.11897111, -398.11882215],
+            "ewe_is1": [-398.11793027, -398.11792966, -398.11786308, None],
+            "ewe_is2": [-398.11397008, -398.11396421, None, None],
+        }
+        df = pd.DataFrame.from_dict(data)
+
+        plotopts = {"x": "esN"}
+        fig, ax = plt.subplots(1, 1)
+        df.plot(ax=ax, **plotopts)
+
+        renderer = PlotlyRenderer()
+        Exporter(renderer).run(fig)
+
+        _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
+
+        jy = _json.dumps(
+            renderer.plotly_fig["data"][1]["y"], cls=utils.PlotlyJSONEncoder
+        )
+        print(jy)
+        array = _json.loads(jy)
+        assert array == [-398.11793027, -398.11792966, -398.11786308, None]
+
 
 def np_nan():
     if Version(np.__version__) < Version("2.0.0"):
@@ -431,38 +463,3 @@ class TestNoNumpyIntegerBaseType(TestCase):
         expected_tuple = (int,)
 
         self.assertEqual(int_type_tuple, expected_tuple)
-
-
-if matplotlylib:
-
-    @pytest.mark.matplotlib
-    def test_masked_constants_example():
-        try:
-            pd.options.plotting.backend = "matplotlib"
-        except Exception:
-            pass
-
-        # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
-        data = {
-            "esN": [0, 1, 2, 3],
-            "ewe_is0": [-398.11901997, -398.11902774, -398.11897111, -398.11882215],
-            "ewe_is1": [-398.11793027, -398.11792966, -398.11786308, None],
-            "ewe_is2": [-398.11397008, -398.11396421, None, None],
-        }
-        df = pd.DataFrame.from_dict(data)
-
-        plotopts = {"x": "esN"}
-        fig, ax = plt.subplots(1, 1)
-        df.plot(ax=ax, **plotopts)
-
-        renderer = PlotlyRenderer()
-        Exporter(renderer).run(fig)
-
-        _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
-
-        jy = _json.dumps(
-            renderer.plotly_fig["data"][1]["y"], cls=utils.PlotlyJSONEncoder
-        )
-        print(jy)
-        array = _json.loads(jy)
-        assert array == [-398.11793027, -398.11792966, -398.11786308, None]
