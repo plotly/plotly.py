@@ -1,6 +1,7 @@
 import pytest
 from _plotly_utils.basevalidators import AnyValidator
 import numpy as np
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 
 # Fixtures
@@ -18,7 +19,7 @@ def validator_aok():
 # Tests
 # -----
 # ### Acceptance ###
-@pytest.mark.parametrize("val", [set(), "Hello", 123, np.inf, np.nan, {}])
+@pytest.mark.parametrize("val", [set(), "Hello", 123, np_inf(), np_nan(), {}])
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) is val
 

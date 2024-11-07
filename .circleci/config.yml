@@ -252,6 +252,14 @@ jobs:
       - test_optional:
           py: "312_no_numpy"
 
+  python_312_np2:
+    docker:
+      - image: cimg/python:3.12-browsers
+    steps:
+      - test_optional:
+          py: "312_np2"
+
+
   # Percy
   python_39_percy:
     docker:
@@ -615,4 +623,5 @@ workflows:
       - python_39_pandas_2_optional
       - python_39_percy
       - python_312_no_numpy
+      - python_312_np2
       - build-doc
