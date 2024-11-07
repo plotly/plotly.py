@@ -412,10 +412,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     # NB this means trendline functions must output one-to-one with the input series
                     # i.e. we can't do resampling, because then the X values might not line up!
                     non_missing = ~(x.is_null() | y.is_null())
-                    trace_patch["x"] = (
-                        sorted_trace_data.filter(non_missing).get_column(args["x"])
-                        # FIXME: Converting to numpy is needed to pass `test_trendline_on_timeseries`
-                        # test, but I wonder if it is the right way to do it in the first place.
+                    trace_patch["x"] = sorted_trace_data.filter(non_missing).get_column(
+                        args["x"]
                     )
                     if (
                         trace_patch["x"].dtype == nw.Datetime
@@ -1178,6 +1176,8 @@ def to_unindexed_series(x, name=None, native_namespace=None):
     its index reset if pandas-like). Stripping the index from existing pd.Series is
     required to get things to match up right in the new DataFrame we're building.
     """
+    # With `pass_through=True`, the original object will be returned if unable to convert
+    # to a Narwhals Series.
     x = nw.from_native(x, series_only=True, pass_through=True)
     if isinstance(x, nw.Series):
         return nw.maybe_reset_index(x).rename(name)
@@ -1383,6 +1383,8 @@ def process_args_into_dataframe(
                         % (field, len_arg, str(list(df_output.keys())), length)
                     )
 
+                # With `pass_through=True`, the original object will be returned if unable to convert
+                # to a Narwhals Series.
                 df_output[str(col_name)] = to_unindexed_series(
                     x=nw.from_native(argument, series_only=True, pass_through=True),
                     name=str(col_name),
@@ -1512,7 +1514,7 @@ def build_dataframe(args, constructor):
             is_pd_like = True
 
         # data_frame is any other DataFrame object natively supported via Narwhals.
-        # With pass_through=True, the original object will be returned if unable to convert
+        # With `pass_through=True`, the original object will be returned if unable to convert
         # to a Narwhals DataFrame, making this condition False.
         elif isinstance(
             data_frame := nw.from_native(
@@ -1525,7 +1527,7 @@ def build_dataframe(args, constructor):
             columns = args["data_frame"].columns
 
         # data_frame is any other Series object natively supported via Narwhals.
-        # With pass_through=True, the original object will be returned if unable to convert
+        # With `pass_through=True`, the original object will be returned if unable to convert
         # to a Narwhals Series, making this condition False.
         elif isinstance(
             series := nw.from_native(

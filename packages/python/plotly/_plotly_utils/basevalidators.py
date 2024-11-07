@@ -92,7 +92,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
-    # With `pass_through=True``, the original object will be returned if unable to convert
+    # With `pass_through=True`, the original object will be returned if unable to convert
     # to a Narwhals DataFrame or Series.
     v = nw.from_native(v, allow_series=True, pass_through=True)
 
