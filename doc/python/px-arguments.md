@@ -33,11 +33,11 @@ jupyter:
     thumbnail: thumbnail/plotly-express.png
 ---
 
-Plotly Express (`px`) is the high-level interface to Plotly and provides functions for generating charts. `px` functions support data provided in a number of different formats (long, wide, and mixed) and as different types of objects, including pandas and Polars DataFrames.
+Plotly Express (`px`) is the high-level interface to Plotly and provides functions for generating charts. `px` functions support data provided in a number of different formats (long, wide, and mixed) and as different types of objects, including pandas and Polars dataframes.
 
 ## Data for the Examples
 
-The examples on this page use datasets available in the `data` package in `px`. `px.data` contains functions that when called return a dataset as a DataFrame. Some of the datasets included in `px.data` are:
+The examples on this page use datasets available in the `data` package in `px`. `px.data` contains functions that when called return a dataset as a dataframe. Some of the datasets included in `px.data` are:
 
 - `carshare` - Each row represents the availability of car-sharing services near the centroid of a zone in Montreal over a month-long period.
 - `election` - Each row represents voting results for an electoral district in the 2013 Montreal mayoral election.
@@ -52,7 +52,7 @@ df = px.data.iris()
 df.head()
 ```
 
-By default `px.data` functions return Pandas DataFrames, but you can specify an alternative DataFrame type using `return_type`. `pandas`, `polars`, and `pyarrow` are supported return types.
+By default `px.data` functions return a pandas `DataFrame` object, but you can specify an alternative dataframe type using `return_type`. `pandas`, `polars`, and `pyarrow` are supported return types.
 
 ```python
 df = px.data.iris(return_type='polars')
@@ -115,13 +115,13 @@ fig.show()
 Many more examples of wide-form and messy data input can be found in our [detailed wide-form support documentation](/python/wide-form/).
 
 
-## DataFrame Input
+## Dataframe Input
 
-The first argument of every `px` function is `data_frame`. If you provide a DataFrame as a `px` function's first argument, you can then specify column names as strings from the DataFrame as other arguments.
+The first argument of every `px` function is `data_frame`. If you provide a dataframe as a `px` function's first argument, you can then specify column names as strings from the dataframe as other arguments.
 
-### Supported DataFrames
+### Supported Dataframes
 
-`px` functions natively support the following types of DataFrames:
+`px` functions natively support the following types of dataframes:
 
 - pandas
 - Polars
@@ -131,13 +131,13 @@ The first argument of every `px` function is `data_frame`. If you provide a Data
 > To use Polars, PyArrow, or Modin with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`.
 To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
 
-`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these DataFrames. Other types of DataFrames that are currently supported by Narwhals may also work with `px`, for example cuDF.
+`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these dataframes. Other types of dataframes that are currently supported by Narwhals may also work with `px`, for example cuDF.
 
-You can also pass DataFrames that are not natively supported, but support the dataframe interchange protocol, or have a `to_pandas()` method.
+You can also pass dataframes that are not natively supported, but support the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/), or have a `to_pandas()` method.
 
 ### Example: Using a Pandas DataFrame with `px.bar`
 
-Here, we create a pandas DataFrame, pass it to `px.bar` as its first argument, and then use the `"sepal_length"` column for the x-axis and the `"sepal_width"` for the y-axis.
+Here, we create a pandas `DataFrame`, pass it to `px.bar` as its first argument, and then use the `"sepal_length"` column for the x-axis and the `"sepal_width"` for the y-axis.
 
 ```python
 import plotly.express as px
@@ -150,7 +150,7 @@ fig.show()
 
 ### Example: Polars DataFrame with `px.bar`
 
-`px` provides native support for DataFrame types other than pandas:
+`px` provides native support for dataframe types other than pandas, including Polars:
 
 ```python
 import plotly.express as px
@@ -161,9 +161,9 @@ fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', size='p
 fig.show()
 ```
 
-### Using the Index of a DataFrame
+### Using the Index of a Dataframe
 
-If the DataFrame you are using has an index, it is also possible to use that index as an argument. In the following example, the index is used for the hover data.
+If the dataframe you are using has an index, it is also possible to use that index as an argument. In the following example, the index is used for the hover data.
 
 ```python
 import plotly.express as px
@@ -173,9 +173,9 @@ fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, size=df.petal_length,
 fig.show()
 ```
 
-### Using Columns from Multiple DataFrames
+### Using Columns from Multiple Dataframes
 
-You can also use columns from multiple dataframes in one `px` function, as long as all the DataFrame columns you use have the same length. In this example, we pass `df1` as the `data_frame` argument to `px.bar` and then us a column from `df2` for the `y` argument.
+You can also use columns from multiple dataframes in one `px` function, as long as all the dataframe columns you use have the same length. In this example, we pass `df1` as the `data_frame` argument to `px.bar` and then us a column from `df2` for the `y` argument.
 
 ```python
 import plotly.express as px
@@ -233,7 +233,7 @@ fig.show()
 
 ### Passing dictionaries or array-likes as the data_frame argument
 
-The column-based argument `data_frame` can also be passed with a `dict` or `array`. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a DataFrame.
+The column-based argument `data_frame` can also be passed with a `dict` or `array`. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a dataframe.
 
 ```python
 import plotly.express as px
@@ -261,7 +261,7 @@ fig.show()
 
 ### Mixing dataframes and other types
 
-It is possible to mix DataFrame columns, NumPy arrays and lists as arguments. Remember that the only column names to be used correspond to columns in the `data_frame` argument, use `labels` to override names displayed in axis titles, legend entries or hovers.
+It is possible to mix dataframe columns, NumPy arrays and lists as arguments. Remember that the only column names to be used correspond to columns in the `data_frame` argument, use `labels` to override names displayed in axis titles, legend entries or hovers.
 
 ```python
 import plotly.express as px
