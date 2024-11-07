@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 import pandas as pd
 from _plotly_utils.basevalidators import EnumeratedValidator
-
+from plotly.tests.test_optional.test_utils.test_utils import np_inf
 
 # Fixtures
 # --------
@@ -42,7 +42,7 @@ def test_acceptance(val, validator):
 # ### Value Rejection ###
 @pytest.mark.parametrize(
     "val",
-    [True, 0, 1, 23, np.inf, set(), ["first", "second"], [True], ["third", 4], [4]],
+    [True, 0, 1, 23, np_inf(), set(), ["first", "second"], [True], ["third", 4], [4]],
 )
 def test_rejection_by_value(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -95,7 +95,7 @@ def test_acceptance_aok(val, validator_aok):
 
 
 # ### Rejection by value ###
-@pytest.mark.parametrize("val", [True, 0, 1, 23, np.inf, set()])
+@pytest.mark.parametrize("val", [True, 0, 1, 23, np_inf(), set()])
 def test_rejection_by_value_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
@@ -105,7 +105,7 @@ def test_rejection_by_value_aok(val, validator_aok):
 
 # ### Reject by elements ###
 @pytest.mark.parametrize(
-    "val", [[True], [0], [1, 23], [np.inf, set()], ["ffirstt", "second", "third"]]
+    "val", [[True], [0], [1, 23], [np_inf(), set()], ["ffirstt", "second", "third"]]
 )
 def test_rejection_by_element_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:

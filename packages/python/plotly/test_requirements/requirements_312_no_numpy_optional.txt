@@ -5,9 +5,9 @@ statsmodels
 Pillow==10.2.0
 pytest==7.4.4
 pytz==2023.3.post1
-ipython[all]==7.22.0
-ipykernel==5.5.3
-jupyter==1.0.0
+ipython[all]
+ipykernel
+jupyter
 scipy==1.11.4
 Shapely==2.0.2
 geopandas==0.14.4
