@@ -43,7 +43,7 @@ The examples on this page use datasets available in the `data` package in `px`. 
 - `election` - Each row represents voting results for an electoral district in the 2013 Montreal mayoral election.
 - `iris` - Each row represents a flower.
 
-To access the `iris` dataset, we call it's function and assign it to a variable:
+To access the `iris` dataset, we call its function and assign it to a variable:
 
 ```python
 import plotly.express as px
@@ -175,7 +175,7 @@ fig.show()
 
 ### Using Columns from Multiple DataFrames
 
-You can also use columns from multiple dataframes in the one `px` function, as long as all the DataFrame columns you use have the same length. In this example, we pass `df1` as the `data_frame` argument to `px.bar` and then us a column from `df2` for the `y` argument.
+You can also use columns from multiple dataframes in one `px` function, as long as all the DataFrame columns you use have the same length. In this example, we pass `df1` as the `data_frame` argument to `px.bar` and then us a column from `df2` for the `y` argument.
 
 ```python
 import plotly.express as px

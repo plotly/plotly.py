@@ -44,7 +44,7 @@ Plotly Express natively supports [pandas, Polars, PyArrow, and Modin dataframes]
 
 *New in Plotly.py version 6*
 
-Improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas and Polars Series.
+You can improve the performance of generating Plotly figures that use a large number of data points by using NumPy arrays and other objects that Plotly can convert to NumPy arrays, such as Pandas and Polars Series.
 
 Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
@@ -67,11 +67,11 @@ The following [array data types](https://numpy.org/devdocs/reference/arrays.scal
 - int32
 - uint32
 
-*If the array dtype is **int64** and **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
+*If the array dtype is **int64** or **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
 
 ### Unsupported Attributes
 
-Arrays passed to attributes with the following names are not supported:
+Arrays passed to attributes with the following names are not supported for the performance benefits:
 
 `geojson`, `layers`, and `range`.
 
@@ -229,8 +229,7 @@ Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed
 
 ### Passing Datashader Rasters as a Tile Map Image Layer
 
-We visualize here the spatial distribution of taxi rides in New York City. A higher density
-is observed on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](/python/tile-map-layers).
+The following example shows the spatial distribution of taxi rides in New York City, which are concentrated on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](/python/tile-map-layers).
 
 ```python
 import pandas as pd
