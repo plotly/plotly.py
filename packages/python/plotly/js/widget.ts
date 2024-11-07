@@ -962,14 +962,6 @@ export class FigureView {
     }
   }
 
-  // processPhosphorMessage(msg: any) {
-  //   this._processLuminoMessage(msg, super["processPhosphorMessage"]);
-  // }
-
-  // processLuminoMessage(msg: any) {
-  //   this._processLuminoMessage(msg, super["processLuminoMessage"]);
-  // }
-
   autosizeFigure() {
     var that = this;
     var layout = that.model.get("_layout");
