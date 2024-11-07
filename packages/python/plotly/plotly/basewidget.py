@@ -1,6 +1,6 @@
 import pathlib
-import ipywidgets as widgets
-from traitlets import List, Unicode, Dict, observe, Integer
+from traitlets import List, Dict, observe, Integer
+from plotly.io._utils import display_jupyter_version_warnings
 
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
@@ -725,6 +725,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         """
         Return mimebundle corresponding to default renderer.
         """
+        display_jupyter_version_warnings()
         return {
             "application/vnd.jupyter.widget-view+json": {
                 "version_major": 2,
