@@ -95,6 +95,9 @@ def build_datatype_py(node):
     )
     buffer.write(f"import copy as _copy\n")
 
+    if "mapbox" in node.name_property:
+        buffer.write(f"from warnings import warn\n")
+
     # Write class definition
     # ----------------------
     buffer.write(
@@ -167,14 +170,14 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     _valid_props = {{"{'", "'.join(valid_props_list)}"}}
 """
 
-    trace = node.name_property
-    if "mapbox" in trace:
+    if "mapbox" in node.name_property:
         str = (
             f"""
-    print(
-        "*{trace}* trace is deprecated!",
-        "Use *{trace.replace("mapbox", "map")}* instead.",
-        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+    warn(
+        "*{node.name_property}* is deprecated!"
+        + " Use *{node.name_property.replace("mapbox", "map")}* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2
     )
 """
             + str

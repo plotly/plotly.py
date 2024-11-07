@@ -1,13 +1,15 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
+from warnings import warn
 
 
 class Mapbox(_BaseLayoutHierarchyType):
 
-    print(
-        "*mapbox* trace is deprecated!",
-        "Use *map* instead.",
-        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+    warn(
+        "*mapbox* is deprecated!"
+        + " Use *map* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
     )
 
     # class properties

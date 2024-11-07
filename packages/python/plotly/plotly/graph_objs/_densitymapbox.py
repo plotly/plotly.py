@@ -1,13 +1,15 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Densitymapbox(_BaseTraceType):
 
-    print(
-        "*densitymapbox* trace is deprecated!",
-        "Use *densitymap* instead.",
-        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+    warn(
+        "*densitymapbox* is deprecated!"
+        + " Use *densitymap* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
     )
 
     # class properties

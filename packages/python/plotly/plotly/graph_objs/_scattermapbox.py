@@ -1,13 +1,15 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Scattermapbox(_BaseTraceType):
 
-    print(
-        "*scattermapbox* trace is deprecated!",
-        "Use *scattermap* instead.",
-        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+    warn(
+        "*scattermapbox* is deprecated!"
+        + " Use *scattermap* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
     )
 
     # class properties

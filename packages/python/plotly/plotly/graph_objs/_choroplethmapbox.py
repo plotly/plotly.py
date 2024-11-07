@@ -1,13 +1,15 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Choroplethmapbox(_BaseTraceType):
 
-    print(
-        "*choroplethmapbox* trace is deprecated!",
-        "Use *choroplethmap* instead.",
-        "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+    warn(
+        "*choroplethmapbox* is deprecated!"
+        + " Use *choroplethmap* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
     )
 
     # class properties
