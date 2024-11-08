@@ -1383,10 +1383,8 @@ def process_args_into_dataframe(
                         % (field, len_arg, str(list(df_output.keys())), length)
                     )
 
-                # With `pass_through=True`, the original object will be returned if unable to convert
-                # to a Narwhals Series.
                 df_output[str(col_name)] = to_unindexed_series(
-                    x=nw.from_native(argument, series_only=True, pass_through=True),
+                    x=argument,
                     name=str(col_name),
                     native_namespace=native_namespace,
                 )
@@ -1418,14 +1416,15 @@ def process_args_into_dataframe(
             msg = "Pandas installation is required if no dataframe is provided."
             raise NotImplementedError(msg)
 
-    df_output.update(
-        {
-            col_name: nw.new_series(
-                name=col_name, values=range(length), native_namespace=native_namespace
-            )
-            for col_name in ranges
-        }
-    )
+    if ranges:
+        range_series = nw.new_series(
+            name="__placeholder__",
+            values=range(length),
+            native_namespace=native_namespace,
+        )
+        df_output.update(
+            {col_name: range_series.alias(col_name) for col_name in ranges}
+        )
 
     df_output.update(
         {
@@ -2159,7 +2158,7 @@ def process_dataframe_pie(args, trace_patch):
     df: nw.DataFrame = args["data_frame"]
     trace_patch["sort"] = False
     trace_patch["direction"] = "clockwise"
-    uniques = df.get_column(names).unique().to_list()
+    uniques = df.get_column(names).unique(maintain_order=True).to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
 
     # Original implementation: args["data_frame"] = df.set_index(names).loc[order].reset_index()
@@ -2422,7 +2421,9 @@ def get_groups_and_orders(args, grouper):
             single_group_name.append("")
         else:
             if col not in unique_cache:
-                unique_cache[col] = df.get_column(col).unique().to_list()
+                unique_cache[col] = (
+                    df.get_column(col).unique(maintain_order=True).to_list()
+                )
             uniques = unique_cache[col]
             if len(uniques) == 1:
                 single_group_name.append(uniques[0])
