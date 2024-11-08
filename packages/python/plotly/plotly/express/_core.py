@@ -1417,9 +1417,11 @@ def process_args_into_dataframe(
             raise NotImplementedError(msg)
 
     if ranges:
+        import numpy as np
+
         range_series = nw.new_series(
             name="__placeholder__",
-            values=range(length),
+            values=np.arange(length),
             native_namespace=native_namespace,
         )
         df_output.update(
@@ -2161,10 +2163,16 @@ def process_dataframe_pie(args, trace_patch):
     uniques = df.get_column(names).unique(maintain_order=True).to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
 
-    # Original implementation: args["data_frame"] = df.set_index(names).loc[order].reset_index()
-    # However we do not have a way to custom sort a dataframe in narwhals.
-    args["data_frame"] = nw.concat(
-        [df.filter(nw.col(names) == value) for value in order], how="vertical"
+    # Sort args['data_frame'] by column 'b' according to order `order`.
+    token = nw.generate_temporary_column_name(8, df.columns)
+    args["data_frame"] = (
+        df.with_columns(
+            nw.col("b")
+            .replace_strict(order, range(len(order)), return_dtype=nw.UInt32)
+            .alias(token)
+        )
+        .sort(token)
+        .drop(token)
     )
     return args, trace_patch
 
