@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import pytest
 from datetime import datetime
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 
 @pytest.mark.parametrize(
@@ -65,7 +66,7 @@ def test_trendline_enough_values(mode, options):
     assert len(fig.data) == 2
     assert fig.data[1].x is None
     fig = px.scatter(
-        x=[0, 1], y=np.array([0, np.nan]), trendline=mode, trendline_options=options
+        x=[0, 1], y=np.array([0, np_nan()]), trendline=mode, trendline_options=options
     )
     assert len(fig.data) == 2
     assert fig.data[1].x is None
@@ -75,8 +76,8 @@ def test_trendline_enough_values(mode, options):
     assert len(fig.data) == 2
     assert fig.data[1].x is None
     fig = px.scatter(
-        x=np.array([0, 1, np.nan]),
-        y=np.array([0, np.nan, 1]),
+        x=np.array([0, 1, np_nan()]),
+        y=np.array([0, np_nan(), 1]),
         trendline=mode,
         trendline_options=options,
     )
@@ -88,8 +89,8 @@ def test_trendline_enough_values(mode, options):
     assert len(fig.data) == 2
     assert len(fig.data[1].x) == 2
     fig = px.scatter(
-        x=np.array([0, 1, np.nan, 2]),
-        y=np.array([1, np.nan, 1, 2]),
+        x=np.array([0, 1, np_nan(), 2]),
+        y=np.array([1, np_nan(), 1, 2]),
         trendline=mode,
         trendline_options=options,
     )
@@ -112,7 +113,7 @@ def test_trendline_enough_values(mode, options):
 def test_trendline_nan_values(mode, options):
     df = px.data.gapminder().query("continent == 'Oceania'")
     start_date = 1970
-    df["pop"][df["year"] < start_date] = np.nan
+    df["pop"][df["year"] < start_date] = np_nan()
     fig = px.scatter(
         df,
         x="year",
