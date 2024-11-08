@@ -6,4 +6,4 @@
 ###################################################
 
 ## dataframe agnostic layer ##
-narwhals>=1.13.2
+narwhals>=1.13.3
