@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.11.10
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -301,6 +301,83 @@ fig = go.Figure(data=[
 ])
 # Change the bar mode
 fig.update_layout(barmode='stack')
+fig.show()
+```
+
+### Bar Chart with Relative Barmode
+
+With "relative" barmode, the bars are stacked on top of one another, with negative values
+below the axis, positive values above.
+
+```python
+import plotly.graph_objects as go
+x = [1, 2, 3, 4]
+
+fig = go.Figure()
+fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
+fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
+fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
+fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
+
+fig.update_layout(barmode='relative', title_text='Relative Barmode')
+fig.show()
+```
+
+### Grouped Stacked Bar Chart
+
+*Supported in Plotly.py 6.0.0 and later*
+
+Use the `offsetgroup` property with `barmode="stacked"` or `barmode="relative"` to create grouped stacked bar charts. Bars that have the same `offsetgroup` will share the same position on the axis. Bars with no `offsetgroup` set will also share the same position on the axis. In the following example, for each quarter, the value for cities that belong to the same `offsetgroup` are stacked together. 
+
+```python
+import plotly.graph_objects as go
+
+data = [
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[150, 200, 250, 300],
+        name='New York',
+        offsetgroup="USA"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[180, 220, 270, 320],
+        name='Boston',
+        offsetgroup="USA"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[130, 170, 210, 260],
+        name='Montreal',
+        offsetgroup="Canada"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[160, 210, 260, 310],
+        name='Toronto',
+        offsetgroup="Canada"
+    )
+]
+
+layout = go.Layout(
+    title={
+        'text': 'Quarterly Sales by City, Grouped by Country'
+    },
+    xaxis={
+        'title': {
+            'text': 'Quarter'
+        }
+    },
+    yaxis={
+        'title': {
+            'text': 'Sales'
+        }
+    },
+    barmode='stack'
+)
+
+fig = go.Figure(data=data, layout=layout)
+
 fig.show()
 ```
 
@@ -636,25 +713,6 @@ fig.update_layout(
     bargap=0.15, # gap between bars of adjacent location coordinates.
     bargroupgap=0.1 # gap between bars of the same location coordinate.
 )
-fig.show()
-```
-
-### Bar Chart with Relative Barmode
-
-With "relative" barmode, the bars are stacked on top of one another, with negative values
-below the axis, positive values above.
-
-```python
-import plotly.graph_objects as go
-x = [1, 2, 3, 4]
-
-fig = go.Figure()
-fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
-fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
-fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
-fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
-
-fig.update_layout(barmode='relative', title_text='Relative Barmode')
 fig.show()
 ```
 
