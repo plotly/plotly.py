@@ -6,24 +6,30 @@ from plotly import optional_imports
 import warnings
 import psutil
 
-jupyter_notebook = optional_imports.get_module("notebook")
-jupyter_lab = optional_imports.get_module("jupyterlab")
-
 
 def display_jupyter_version_warnings():
+    parent_process = None
+    try:
+        parent_process = psutil.Process().parent().cmdline()[-1]
+    except Exception:
+        pass
 
-    parent_process = psutil.Process().parent().cmdline()[-1]
-
-    if "jupyter-notebook" in parent_process and jupyter_notebook.__version__ < "7":
-        # Add warning about upgrading notebook
-        warnings.warn(
-            f"Plotly version >= 6 requires Jupyter Notebook >= 7 but you have {jupyter_notebook.__version__} installed.\n To upgrade Jupyter Notebook, please run `pip install notebook --upgrade`."
-        )
-    elif "jupyter-lab" in parent_process and jupyter_lab.__version__ < "3":
-        # Add warning about upgrading jupyterlab
-        warnings.warn(
-            f"Plotly version >= 6 requires JupyterLab >= 3 but you have {jupyter_lab.__version__} installed. To upgrade JupyterLab, please run `pip install jupyterlab --upgrade`."
-        )
+    if parent_process is None:
+        return
+    elif "jupyter-notebook" in parent_process:
+        jupyter_notebook = optional_imports.get_module("notebook")
+        if jupyter_notebook.__version__ < "7":
+            # Add warning about upgrading notebook
+            warnings.warn(
+                f"Plotly version >= 6 requires Jupyter Notebook >= 7 but you have {jupyter_notebook.__version__} installed.\n To upgrade Jupyter Notebook, please run `pip install notebook --upgrade`."
+            )
+    elif "jupyter-lab" in parent_process:
+        jupyter_lab = optional_imports.get_module("jupyterlab")
+        if jupyter_lab.__version__ < "3":
+            # Add warning about upgrading jupyterlab
+            warnings.warn(
+                f"Plotly version >= 6 requires JupyterLab >= 3 but you have {jupyter_lab.__version__} installed. To upgrade JupyterLab, please run `pip install jupyterlab --upgrade`."
+            )
 
 
 def validate_coerce_fig_to_dict(fig, validate):
