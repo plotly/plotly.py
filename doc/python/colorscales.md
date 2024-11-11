@@ -246,7 +246,7 @@ df = px.data.tips()
 fig = px.density_heatmap(df, x="total_bill", y="tip", title="Customized color bar on this density plot")
 
 fig.update_layout(coloraxis_colorbar=dict(
-    title="Number of Bills per Cell",
+    title=dict(text="Number of Bills per Cell"),
     thicknessmode="pixels", thickness=50,
     lenmode="pixels", len=200,
     yanchor="top", y=1,
@@ -271,7 +271,7 @@ fig = px.parallel_coordinates(df, dimensions=["sepal_length", "sepal_width", "pe
                                                      (0.66, "blue"),  (1.00, "blue")])
 
 fig.update_layout(coloraxis_colorbar=dict(
-    title="Species",
+    title=dict(text="Species"),
     tickvals=[1,2,3],
     ticktext=["setosa","versicolor","virginica"],
     lenmode="pixels", len=100,
@@ -291,7 +291,7 @@ df = px.data.gapminder().query("year == 2007")
 fig = px.scatter(df, y="lifeExp", x="pop", color=np.log10(df["pop"]), hover_name="country", log_x=True)
 
 fig.update_layout(coloraxis_colorbar=dict(
-    title="Population",
+    title=dict(text="Population"),
     tickvals=[6,7,8,9],
     ticktext=["1M", "10M", "100M", "1B"],
 ))
@@ -408,7 +408,7 @@ fig.add_trace(go.Scatter(
         cmin=0,
         color=values,
         colorbar=dict(
-            title="Colorbar"
+            title=dict(text="Colorbar")
         ),
         colorscale="Viridis"
     ),
@@ -659,7 +659,7 @@ fig = go.Figure(go.Heatmap(
     colorbar=dict(
         x=0.2,
         xref="container",
-        title="Surface Heat"
+        title=dict(text="Surface Heat")
     )
 ))
 

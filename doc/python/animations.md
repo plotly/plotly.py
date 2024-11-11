@@ -126,7 +126,7 @@ fig = go.Figure(
     layout=go.Layout(
         xaxis=dict(range=[0, 5], autorange=False),
         yaxis=dict(range=[0, 5], autorange=False),
-        title="Start Title",
+        title=dict(text="Start Title"),
         updatemenus=[dict(
             type="buttons",
             buttons=[dict(label="Play",
@@ -240,7 +240,7 @@ fig = go.Figure(
     layout=go.Layout(width=600, height=600,
                      xaxis=dict(range=[xm, xM], autorange=False, zeroline=False),
                      yaxis=dict(range=[ym, yM], autorange=False, zeroline=False),
-                     title="Moving Frenet Frame Along a Planar Curve",
+                     title=dict(text="Moving Frenet Frame Along a Planar Curve"),
                      hovermode="closest",
                      updatemenus=[dict(type="buttons",
                                        buttons=[dict(label="Play",
