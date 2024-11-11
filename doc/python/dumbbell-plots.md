@@ -89,7 +89,7 @@ fig = go.Figure(
                 color="green",
                 size=10
             )
-            
+
         ),
         go.Scatter(
             x=data["2002"],
@@ -99,13 +99,13 @@ fig = go.Figure(
             marker=dict(
                 color="blue",
                 size=10
-            )   
+            )
         ),
     ]
 )
 
 fig.update_layout(
-    title="Life Expectancy in Europe: 1952 and 2002",
+    title=dict(text="Life Expectancy in Europe: 1952 and 2002"),
     height=1000,
     legend_itemclick=False
 )
@@ -158,16 +158,16 @@ fig = go.Figure(
             mode="markers+lines",
             showlegend=False,
             marker=dict(
-                symbol="arrow", 
-                color="black", 
-                size=16, 
-                angleref="previous", 
+                symbol="arrow",
+                color="black",
+                size=16,
+                angleref="previous",
                 standoff=8
             )
         ),
         go.Scatter(
             x=data["1952"],
-            y=countries, 
+            y=countries,
             name="1952",
             mode="markers",
             marker=dict(
@@ -189,7 +189,7 @@ fig = go.Figure(
 )
 
 fig.update_layout(
-    title="Life Expectancy in Europe: 1952 and 2002",
+    title=dict(text="Life Expectancy in Europe: 1952 and 2002"),
     height=1000,
     legend_itemclick=False
 )

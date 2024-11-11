@@ -98,9 +98,21 @@ fig.add_trace(go.Scatter(
     name="Men",
 ))
 
-fig.update_layout(title="Gender Earnings Disparity",
-                  xaxis_title="Annual Salary (in thousands)",
-                  yaxis_title="School")
+fig.update_layout(
+    title=dict(
+        text="Gender Earnings Disparity"
+    ),
+    xaxis=dict(
+        title=dict(
+            text="Annual Salary (in thousands)"
+        )
+    ),
+    yaxis=dict(
+        title=dict(
+            text="School"
+        )
+    ),
+)
 
 fig.show()
 ```
@@ -139,7 +151,7 @@ fig.add_trace(go.Scatter(
 fig.update_traces(mode='markers', marker=dict(line_width=1, symbol='circle', size=16))
 
 fig.update_layout(
-    title="Votes cast for ten lowest voting age population in OECD countries",
+    title=dict(text="Votes cast for ten lowest voting age population in OECD countries"),
     xaxis=dict(
         showgrid=False,
         showline=True,

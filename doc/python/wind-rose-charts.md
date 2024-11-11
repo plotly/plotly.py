@@ -79,7 +79,7 @@ fig.add_trace(go.Barpolar(
 
 fig.update_traces(text=['North', 'N-E', 'East', 'S-E', 'South', 'S-W', 'West', 'N-W'])
 fig.update_layout(
-    title='Wind Speed Distribution in Laurel, NE',
+    title=dict(text='Wind Speed Distribution in Laurel, NE'),
     font_size=16,
     legend_font_size=16,
     polar_radialaxis_ticksuffix='%',
