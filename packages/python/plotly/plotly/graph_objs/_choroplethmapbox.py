@@ -5,13 +5,6 @@ from warnings import warn
 
 class Choroplethmapbox(_BaseTraceType):
 
-    warn(
-        "*choroplethmapbox* is deprecated!"
-        + " Use *choroplethmap* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-    )
-
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -2386,3 +2379,10 @@ an instance of :class:`plotly.graph_objs.Choroplethmapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*choroplethmapbox* is deprecated!"
+            + " Use *choroplethmap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+        )

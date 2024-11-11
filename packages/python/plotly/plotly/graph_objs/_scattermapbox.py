@@ -5,13 +5,6 @@ from warnings import warn
 
 class Scattermapbox(_BaseTraceType):
 
-    warn(
-        "*scattermapbox* is deprecated!"
-        + " Use *scattermap* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-    )
-
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -2300,3 +2293,10 @@ an instance of :class:`plotly.graph_objs.Scattermapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*scattermapbox* is deprecated!"
+            + " Use *scattermap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+        )

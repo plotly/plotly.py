@@ -5,13 +5,6 @@ from warnings import warn
 
 class Densitymapbox(_BaseTraceType):
 
-    warn(
-        "*densitymapbox* is deprecated!"
-        + " Use *densitymap* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-    )
-
     # class properties
     # --------------------
     _parent_path_str = ""
@@ -2327,3 +2320,10 @@ an instance of :class:`plotly.graph_objs.Densitymapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*densitymapbox* is deprecated!"
+            + " Use *densitymap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+        )

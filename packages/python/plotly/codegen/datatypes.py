@@ -170,19 +170,6 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     _valid_props = {{"{'", "'.join(valid_props_list)}"}}
 """
 
-    if "mapbox" in node.name_property:
-        str = (
-            f"""
-    warn(
-        "*{node.name_property}* is deprecated!"
-        + " Use *{node.name_property.replace("mapbox", "map")}* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2
-    )
-"""
-            + str
-        )
-
     buffer.write(str)
 
     # ### Property definitions ###
@@ -416,6 +403,18 @@ an instance of :class:`{class_name}`\"\"\")
         self._skip_invalid = False
 """
     )
+
+    if "mapbox" in node.name_property:
+        buffer.write(
+            f"""
+        warn(
+            "*{node.name_property}* is deprecated!"
+            + " Use *{node.name_property.replace("mapbox", "map")}* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2
+        )
+"""
+        )
 
     # Return source string
     # --------------------

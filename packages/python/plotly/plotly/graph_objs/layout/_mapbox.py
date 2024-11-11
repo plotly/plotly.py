@@ -5,13 +5,6 @@ from warnings import warn
 
 class Mapbox(_BaseLayoutHierarchyType):
 
-    warn(
-        "*mapbox* is deprecated!"
-        + " Use *map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-    )
-
     # class properties
     # --------------------
     _parent_path_str = "layout"
@@ -690,3 +683,10 @@ an instance of :class:`plotly.graph_objs.layout.Mapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*mapbox* is deprecated!"
+            + " Use *map* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+        )
