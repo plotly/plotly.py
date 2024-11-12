@@ -49,7 +49,6 @@ pip install notebook --upgrade
 
 [go.FigureWidget](https://plotly.com/python/figurewidget/) now uses [anywidget](https://anywidget.dev/). Install `anywidget` with:
 
-
 ```python
 pip install anywidget
 ```
@@ -57,6 +56,10 @@ pip install anywidget
 ## Processing NumPy and NumPy-Convertible Arrays
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](python/performance/) for more details.
+
+## Dataframe Support
+
+Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, PyArrow, and Modin.
 
 ## Removed Attributes
 
@@ -132,7 +135,7 @@ The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/sca
 
 ### Transforms
 
-Transforms, which were deprecated in Plotly.py v5, have been removed. You can achieve similar functionality by preprocessing the data with a DataFrame library.
+Transforms, which were deprecated in Plotly.py v5, have been removed. You can achieve similar functionality by preprocessing the data with a dataframe library.
 
 For example, a transform to filter the data:
 
