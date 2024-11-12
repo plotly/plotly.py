@@ -6,7 +6,6 @@ Pillow==10.2.0
 pytest==7.4.4
 pytz==2023.3.post1
 ipython[all]
-ipywidgets
 ipykernel
 jupyter
 scipy==1.11.4
@@ -21,4 +20,5 @@ orjson==3.9.10
 polars[timezone]
 pyarrow
 narwhals>=1.13.3
+anywidget==0.9.13
 jupyter-console==6.4.4

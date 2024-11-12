@@ -4315,10 +4315,11 @@ class FigureWidget(BaseFigureWidget):
 
         "choroplethmapbox" trace is deprecated! Please consider
         switching to the "choroplethmap" trace type and `map` subplots.
-        Learn more at: https://plotly.com/javascript/maplibre-
-        migration/ GeoJSON features to be filled are set in `geojson`
-        The data that describes the choropleth value-to-color mapping
-        is set in `locations` and `z`.
+        Learn more at: https://plotly.com/python/maplibre-migration/ as
+        well as https://plotly.com/javascript/maplibre-migration/
+        GeoJSON features to be filled are set in `geojson` The data
+        that describes the choropleth value-to-color mapping is set in
+        `locations` and `z`.
 
         Parameters
         ----------
@@ -4512,7 +4513,8 @@ class FigureWidget(BaseFigureWidget):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -6553,7 +6555,8 @@ class FigureWidget(BaseFigureWidget):
 
         "densitymapbox" trace is deprecated! Please consider switching
         to the "densitymap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/javascript/maplibre-migration/ Draws a
+        at: https://plotly.com/python/maplibre-migration/ as well as
+        https://plotly.com/javascript/maplibre-migration/ Draws a
         bivariate kernel density estimation with a Gaussian kernel from
         `lon` and `lat` coordinates and optional `z` values using a
         colorscale.
@@ -6743,7 +6746,8 @@ class FigureWidget(BaseFigureWidget):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -16185,7 +16189,8 @@ class FigureWidget(BaseFigureWidget):
 
         "scattermapbox" trace is deprecated! Please consider switching
         to the "scattermap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/javascript/maplibre-migration/ The data
+        at: https://plotly.com/python/maplibre-migration/ as well as
+        https://plotly.com/javascript/maplibre-migration/ The data
         visualized as scatter point, lines or marker symbols on a
         Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
@@ -16368,7 +16373,8 @@ class FigureWidget(BaseFigureWidget):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
