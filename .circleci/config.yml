@@ -47,7 +47,7 @@ commands:
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
-            npm install
+            npm ci
             npm run build
       - run:
           name: Install plotly-geo
@@ -416,7 +416,7 @@ jobs:
             eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/python/plotly/js
-            npm install
+            npm ci
             npm run build
             git status
 
@@ -441,12 +441,12 @@ jobs:
             git status
 
       - run:
-          name: NPM Pack
+          name: Build Widget javascript bundle
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/python/plotly/js
-            npm install
+            npm ci
             npm run build
 
       - run:
@@ -497,7 +497,7 @@ jobs:
               cd ../packages/python/plotly
               pip install -e .
               cd js
-              npm install
+              npm ci
               npm run build
               cd ../../../../doc
             fi
