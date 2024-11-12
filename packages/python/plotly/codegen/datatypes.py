@@ -5,6 +5,13 @@ from io import StringIO
 from codegen.utils import PlotlyNode, write_source_py
 
 
+Deprecated_mapbox_traces = [
+    "scattermapbox",
+    "choroplethmapbox",
+    "densitymapbox",
+]
+
+
 def get_typing_type(plotly_type, array_ok=False):
     """
     Get Python type corresponding to a valType string from the plotly schema
@@ -94,6 +101,9 @@ def build_datatype_py(node):
         f"import {node.name_base_datatype} as _{node.name_base_datatype}\n"
     )
     buffer.write(f"import copy as _copy\n")
+
+    if node.name_property in Deprecated_mapbox_traces:
+        buffer.write(f"from warnings import warn\n")
 
     # Write class definition
     # ----------------------
@@ -399,6 +409,18 @@ an instance of :class:`{class_name}`\"\"\")
         self._skip_invalid = False
 """
     )
+
+    if node.name_property in Deprecated_mapbox_traces:
+        buffer.write(
+            f"""
+        warn(
+            "*{node.name_property}* is deprecated!"
+            + " Use *{node.name_property.replace("mapbox", "map")}* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2
+        )
+"""
+        )
 
     # Return source string
     # --------------------
