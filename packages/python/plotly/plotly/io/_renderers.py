@@ -27,7 +27,6 @@ from plotly.io._base_renderers import (
     DatabricksRenderer,
 )
 from plotly.io._utils import validate_coerce_fig_to_dict
-from plotly.io._renderers import display_jupyter_version_warnings
 
 ipython = optional_imports.get_module("IPython")
 ipython_display = optional_imports.get_module("IPython.display")
