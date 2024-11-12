@@ -128,12 +128,17 @@ The first argument of every `px` function is `data_frame`. If you provide a data
 - PyArrow
 - Modin
 
-> To use Polars, PyArrow, or Modin with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`.
-To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
+`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these dataframes. Other types of dataframes that are currently supported by Narwhals may also work with `px`.
 
-`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these dataframes. Other types of dataframes that are currently supported by Narwhals may also work with `px`, for example cuDF.
+You can also pass dataframes that are not natively supported, but which support the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/).
 
-You can also pass dataframes that are not natively supported, but support the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/), or have a `to_pandas()` method.
+PySpark dataframes are also supported and are converted to pandas dataframes internally by Plotly Express.
+
+#### Additional Dependencies Required
+
+- To use Polars, PyArrow, or other dataframes supported natively with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`.
+- To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
+- To use PySpark dataframes or datafarmes that support the dataframe interchange protocol, you'll need to have pandas installed.
 
 ### Example: Using a Pandas DataFrame with `px.bar`
 
