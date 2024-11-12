@@ -96,25 +96,16 @@ IFrame(snippet_url + 'getting-started', width='100%', height=1200)
 
 #### JupyterLab Support
 
-To use `plotly` in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets` packages in the same environment as you installed `plotly`, using `pip`:
+To use `plotly` in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `anywidget` packages in the same environment as you installed `plotly`, using `pip`:
 
 ```
-$ pip install "jupyterlab>=3" "ipywidgets>=7.6"
+$ pip install jupyterlab anywidget
 ```
 
 or `conda`:
 
 ```
-$ conda install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-The `plotly` jupyterlab extension is included when you install `plotly` using `pip` or `conda`. When you run Jupyter Lab, ensure you are running it in the same environment that you installed `plotly` in so it has access to the `plotly` jupyterlab extension.
-
-**JupyterLab 2 or earlier** does not support the prebuilt extensions installed using `pip` and `conda`. If you are using JupyterLab 2, run the following command to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.22.0 @jupyter-widgets/jupyterlab-manager
+$ conda install jupyterlab anywidget
 ```
 
 Launch JupyterLab with:
