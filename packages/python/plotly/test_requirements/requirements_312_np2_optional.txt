@@ -22,3 +22,4 @@ orjson==3.9.10
 polars[timezone]
 pyarrow
 narwhals>=1.13.3
+anywidget==0.9.13
