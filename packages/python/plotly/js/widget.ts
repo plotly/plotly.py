@@ -1,18 +1,8 @@
-import {
-  DOMWidgetModel,
-  DOMWidgetView,
-  ISerializers,
-} from "@jupyter-widgets/base";
-
-import _ from "lodash";
-
-import Plotly from "plotly.js/dist/plotly";
-
-import { MODULE_NAME, MODULE_VERSION } from "./version";
+import _ from "lodash-es";
+import Plotly from "plotly.js";
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
-const semver_range = "^" + MODULE_VERSION;
 
 type InputDeviceState = {
   alt: any;
@@ -132,20 +122,49 @@ type Selector = {
  * FigureModels and Python FigureWidgets. The JavaScript FigureModel is
  * initialized as soon as a Python FigureWidget initialized, this happens
  * even before the widget is first displayed in the Notebook
- * @type {widgets.DOMWidgetModel}
  */
-export class FigureModel extends DOMWidgetModel {
+
+type Serializer<In=any, Out=any> = {
+  deserialize(value: Out): In;
+  serialize(value: In): Out;
+}
+
+export class FigureModel {
+  model;
+  serializers: Record<string, Serializer>
+
+  constructor(model, serializers: Record<string, Serializer>) {
+    this.model = model;
+    this.serializers = serializers;
+  }
+
+  get(key: string) {
+    const serializer = this.serializers[key];
+    const update = this.model.get(key)
+    if (serializer?.deserialize) {
+      return serializer.deserialize(update)
+    }
+    return update;
+  }
+
+  set(key: string, value: unknown) {
+    let serializer = this.serializers[key];
+    if (serializer?.serialize) {
+      value = serializer.serialize(value)
+    }
+    this.model.set(key, value);
+  }
+  
+  on(event: string, cb?: () => void) {
+    this.model.on(event, cb);
+  }
+
+  save_changes() {
+    this.model.save_changes();
+  }
+
   defaults() {
     return {
-      ...super.defaults(),
-      // Model metadata
-      // --------------
-      _model_name: FigureModel.model_name,
-      _model_module: FigureModel.model_module,
-      _model_module_version: FigureModel.model_module_version,
-      _view_name: FigureModel.view_name,
-      _view_module: FigureModel.view_module,
-      _view_module_version: FigureModel.view_module_version,
 
       // Data and Layout
       // ---------------
@@ -509,19 +528,17 @@ export class FigureModel extends DOMWidgetModel {
    * constructed
    */
   initialize() {
-    super.initialize.apply(this, arguments);
-
-    this.on("change:_data", this.do_data, this);
-    this.on("change:_layout", this.do_layout, this);
-    this.on("change:_py2js_addTraces", this.do_addTraces, this);
-    this.on("change:_py2js_deleteTraces", this.do_deleteTraces, this);
-    this.on("change:_py2js_moveTraces", this.do_moveTraces, this);
-    this.on("change:_py2js_restyle", this.do_restyle, this);
-    this.on("change:_py2js_relayout", this.do_relayout, this);
-    this.on("change:_py2js_update", this.do_update, this);
-    this.on("change:_py2js_animate", this.do_animate, this);
-    this.on("change:_py2js_removeLayoutProps", this.do_removeLayoutProps, this);
-    this.on("change:_py2js_removeTraceProps", this.do_removeTraceProps, this);
+    this.model.on("change:_data", () => this.do_data());
+    this.model.on("change:_layout", () => this.do_layout());
+    this.model.on("change:_py2js_addTraces", () => this.do_addTraces());
+    this.model.on("change:_py2js_deleteTraces", () => this.do_deleteTraces());
+    this.model.on("change:_py2js_moveTraces", () => this.do_moveTraces());
+    this.model.on("change:_py2js_restyle", () => this.do_restyle());
+    this.model.on("change:_py2js_relayout", () => this.do_relayout());
+    this.model.on("change:_py2js_update", () => this.do_update());
+    this.model.on("change:_py2js_animate", () => this.do_animate());
+    this.model.on("change:_py2js_removeLayoutProps", () => this.do_removeLayoutProps());
+    this.model.on("change:_py2js_removeTraceProps", () => this.do_removeTraceProps());
   }
 
   /**
@@ -539,7 +556,7 @@ export class FigureModel extends DOMWidgetModel {
    */
   _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
     if (trace_indexes === null || trace_indexes === undefined) {
-      var numTraces = this.get("_data").length;
+      var numTraces = this.model.get("_data").length;
       trace_indexes = _.range(numTraces);
     }
     if (!Array.isArray(trace_indexes)) {
@@ -569,10 +586,10 @@ export class FigureModel extends DOMWidgetModel {
   do_addTraces() {
     // add trace to plot
     /** @type {Py2JsAddTracesMsg} */
-    var msgData: Py2JsAddTracesMsg = this.get("_py2js_addTraces");
+    var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
 
     if (msgData !== null) {
-      var currentTraces = this.get("_data");
+      var currentTraces = this.model.get("_data");
       var newTraces = msgData.trace_data;
       _.forEach(newTraces, function (newTrace) {
         currentTraces.push(newTrace);
@@ -587,11 +604,11 @@ export class FigureModel extends DOMWidgetModel {
     // remove traces from plot
 
     /** @type {Py2JsDeleteTracesMsg} */
-    var msgData: Py2JsDeleteTracesMsg = this.get("_py2js_deleteTraces");
+    var msgData: Py2JsDeleteTracesMsg = this.model.get("_py2js_deleteTraces");
 
     if (msgData !== null) {
       var delete_inds = msgData.delete_inds;
-      var tracesData = this.get("_data");
+      var tracesData = this.model.get("_data");
 
       // Remove del inds in reverse order so indexes remain valid
       // throughout loop
@@ -609,10 +626,10 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_moveTraces() {
     /** @type {Py2JsMoveTracesMsg} */
-    var msgData: Py2JsMoveTracesMsg = this.get("_py2js_moveTraces");
+    var msgData: Py2JsMoveTracesMsg = this.model.get("_py2js_moveTraces");
 
     if (msgData !== null) {
-      var tracesData = this.get("_data");
+      var tracesData = this.model.get("_data");
       var currentInds = msgData.current_trace_inds;
       var newInds = msgData.new_trace_inds;
 
@@ -625,11 +642,11 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_restyle() {
     /** @type {Py2JsRestyleMsg} */
-    var msgData: Py2JsRestyleMsg = this.get("_py2js_restyle");
+    var msgData: Py2JsRestyleMsg = this.model.get("_py2js_restyle");
     if (msgData !== null) {
       var restyleData = msgData.restyle_data;
       var restyleTraces = this._normalize_trace_indexes(msgData.restyle_traces);
-      performRestyleLike(this.get("_data"), restyleData, restyleTraces);
+      performRestyleLike(this.model.get("_data"), restyleData, restyleTraces);
     }
   }
 
@@ -638,10 +655,10 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_relayout() {
     /** @type {Py2JsRelayoutMsg} */
-    var msgData: Py2JsRelayoutMsg = this.get("_py2js_relayout");
+    var msgData: Py2JsRelayoutMsg = this.model.get("_py2js_relayout");
 
     if (msgData !== null) {
-      performRelayoutLike(this.get("_layout"), msgData.relayout_data);
+      performRelayoutLike(this.model.get("_layout"), msgData.relayout_data);
     }
   }
 
@@ -650,14 +667,14 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_update() {
     /** @type {Py2JsUpdateMsg} */
-    var msgData: Py2JsUpdateMsg = this.get("_py2js_update");
+    var msgData: Py2JsUpdateMsg = this.model.get("_py2js_update");
 
     if (msgData !== null) {
       var style = msgData.style_data;
       var layout = msgData.layout_data;
       var styleTraces = this._normalize_trace_indexes(msgData.style_traces);
-      performRestyleLike(this.get("_data"), style, styleTraces);
-      performRelayoutLike(this.get("_layout"), layout);
+      performRestyleLike(this.model.get("_data"), style, styleTraces);
+      performRelayoutLike(this.model.get("_layout"), layout);
     }
   }
 
@@ -666,7 +683,7 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_animate() {
     /** @type {Py2JsAnimateMsg} */
-    var msgData: Py2JsAnimateMsg = this.get("_py2js_animate");
+    var msgData: Py2JsAnimateMsg = this.model.get("_py2js_animate");
     if (msgData !== null) {
       var styles = msgData.style_data;
       var layout = msgData.layout_data;
@@ -675,11 +692,11 @@ export class FigureModel extends DOMWidgetModel {
       for (var i = 0; i < styles.length; i++) {
         var style = styles[i];
         var trace_index = trace_indexes[i];
-        var trace = this.get("_data")[trace_index];
+        var trace = this.model.get("_data")[trace_index];
         performRelayoutLike(trace, style);
       }
 
-      performRelayoutLike(this.get("_layout"), layout);
+      performRelayoutLike(this.model.get("_layout"), layout);
     }
   }
 
@@ -688,13 +705,13 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_removeLayoutProps() {
     /** @type {Py2JsRemoveLayoutPropsMsg} */
-    var msgData: Py2JsRemoveLayoutPropsMsg = this.get(
+    var msgData: Py2JsRemoveLayoutPropsMsg = this.model.get(
       "_py2js_removeLayoutProps"
     );
 
     if (msgData !== null) {
       var keyPaths = msgData.remove_props;
-      var layout = this.get("_layout");
+      var layout = this.model.get("_layout");
       performRemoveProps(layout, keyPaths);
     }
   }
@@ -704,95 +721,87 @@ export class FigureModel extends DOMWidgetModel {
    */
   do_removeTraceProps() {
     /** @type {Py2JsRemoveTracePropsMsg} */
-    var msgData: Py2JsRemoveTracePropsMsg = this.get("_py2js_removeTraceProps");
+    var msgData: Py2JsRemoveTracePropsMsg = this.model.get("_py2js_removeTraceProps");
     if (msgData !== null) {
       var keyPaths = msgData.remove_props;
       var traceIndex = msgData.remove_trace;
-      var trace = this.get("_data")[traceIndex];
+      var trace = this.model.get("_data")[traceIndex];
 
       performRemoveProps(trace, keyPaths);
     }
   }
-
-  static serializers: ISerializers = {
-    ...DOMWidgetModel.serializers,
-    _data: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _layout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_addTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_deleteTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_moveTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_restyle: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_relayout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_update: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_animate: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_removeLayoutProps: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_removeTraceProps: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_restyle: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_relayout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_update: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_layoutDelta: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_traceDeltas: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_pointsCallback: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-  };
-
-  static model_name = "FigureModel";
-  static model_module = MODULE_NAME;
-  static model_module_version = semver_range;
-  static view_name = "FigureView";
-  static view_module = MODULE_NAME;
-  static view_module_version = semver_range;
 }
+
+const serializers: Record<string, Serializer> = {
+  _data: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _layout: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_addTraces: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_deleteTraces: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_moveTraces: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_restyle: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_relayout: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_update: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_animate: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_removeLayoutProps: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _py2js_removeTraceProps: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_restyle: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_relayout: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_update: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_layoutDelta: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_traceDeltas: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+  _js2py_pointsCallback: {
+    deserialize: py2js_deserializer,
+    serialize: js2py_serializer,
+  },
+};
 
 // View
 // ====
@@ -805,9 +814,17 @@ export class FigureModel extends DOMWidgetModel {
  *
  * @type {widgets.DOMWidgetView}
  */
-export class FigureView extends DOMWidgetView {
+export class FigureView {
   viewID: string;
   resizeEventListener: () => void;
+
+  model: FigureModel;
+  el: HTMLElement;
+
+  constructor(model: FigureModel, el: HTMLElement) {
+    this.model = model;
+    this.el = el;
+  }
 
   /**
    * The perform_render method is called by processLuminoMessage
@@ -822,13 +839,13 @@ export class FigureView extends DOMWidgetView {
     // Wire up message property callbacks
     // ----------------------------------
     // Python -> JS event properties
-    this.model.on("change:_py2js_addTraces", this.do_addTraces, this);
-    this.model.on("change:_py2js_deleteTraces", this.do_deleteTraces, this);
-    this.model.on("change:_py2js_moveTraces", this.do_moveTraces, this);
-    this.model.on("change:_py2js_restyle", this.do_restyle, this);
-    this.model.on("change:_py2js_relayout", this.do_relayout, this);
-    this.model.on("change:_py2js_update", this.do_update, this);
-    this.model.on("change:_py2js_animate", this.do_animate, this);
+    this.model.on("change:_py2js_addTraces", () => this.do_addTraces());
+    this.model.on("change:_py2js_deleteTraces", () => this.do_deleteTraces());
+    this.model.on("change:_py2js_moveTraces", () => this.do_moveTraces());
+    this.model.on("change:_py2js_restyle", () => this.do_restyle());
+    this.model.on("change:_py2js_relayout", () => this.do_relayout());
+    this.model.on("change:_py2js_update", () => this.do_update());
+    this.model.on("change:_py2js_animate", () => this.do_animate());
 
     // MathJax v2 configuration
     // ---------------------
@@ -945,14 +962,6 @@ export class FigureView extends DOMWidgetView {
     }
   }
 
-  processPhosphorMessage(msg: any) {
-    this._processLuminoMessage(msg, super["processPhosphorMessage"]);
-  }
-
-  processLuminoMessage(msg: any) {
-    this._processLuminoMessage(msg, super["processLuminoMessage"]);
-  }
-
   autosizeFigure() {
     var that = this;
     var layout = that.model.get("_layout");
@@ -969,8 +978,7 @@ export class FigureView extends DOMWidgetView {
    * Purge Plotly.js data structures from the notebook output display
    * element when the view is destroyed
    */
-   remove() {
-    super.remove();
+  remove() {
     Plotly.purge(this.el);
     window.removeEventListener("resize", this.resizeEventListener);
   }
@@ -1193,6 +1201,10 @@ export class FigureView extends DOMWidgetView {
 
     this.model.set("_js2py_restyle", restyleMsg);
     this.touch();
+  }
+
+  touch() {
+    this.model.save_changes();
   }
 
   /**
@@ -1624,7 +1636,7 @@ function js2py_serializer(v: any, widgetManager?: any) {
     for (var i = 0; i < v.length; i++) {
       res[i] = js2py_serializer(v[i]);
     }
-  } else if (_.isPlainObject(v)) {
+  } else if (_.isObject(v)) {
     // Serialize object properties recursively
     res = {};
     for (var p in v) {
@@ -1656,7 +1668,7 @@ function py2js_deserializer(v: any, widgetManager?: any) {
     for (var i = 0; i < v.length; i++) {
       res[i] = py2js_deserializer(v[i]);
     }
-  } else if (_.isPlainObject(v)) {
+  } else if (_.isObject(v)) {
     if (
       (_.has(v, "value") || _.has(v, "buffer")) &&
       _.has(v, "dtype") &&
@@ -2044,4 +2056,21 @@ function randstr(
     }
     return randstr(existing, bits, base, (_recursion || 0) + 1);
   } else return res;
+}
+
+export default () => {
+  let model;
+  return {
+    /** @type {import('anywidget/types').Initialize<Model>} */
+    initialize(ctx) {
+      model = new FigureModel(ctx.model, serializers);
+      model.initialize();
+    },
+    /** @type {import('anywidget/types').Render<Model>} */
+    render({ el }) {
+      const view = new FigureView(model, el);
+      view.perform_render()
+      return () => view.remove();
+    }
+  }
 }
