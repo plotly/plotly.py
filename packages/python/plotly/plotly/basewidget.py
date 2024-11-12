@@ -1,6 +1,6 @@
 import pathlib
 from traitlets import List, Dict, observe, Integer
-from plotly.io._utils import display_jupyter_version_warnings
+from plotly.io._renderers import display_jupyter_version_warnings
 
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
