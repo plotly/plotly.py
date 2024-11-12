@@ -45,7 +45,7 @@ scipy
 
 ## jupyter ##
 jupyter
-jupyterlab ~=3.0  # To package js extension as federated module
+jupyterlab
 ipykernel
 
 ## deps for _county_choropleth.py figure factory
