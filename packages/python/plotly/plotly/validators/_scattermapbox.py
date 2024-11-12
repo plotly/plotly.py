@@ -213,6 +213,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 mapbox subplots and traces are deprecated!
                 Please consider switching to `map` subplots and
                 traces. Learn more at:
+                https://plotly.com/python/maplibre-migration/
+                as well as
                 https://plotly.com/javascript/maplibre-
                 migration/ Sets a reference between this
                 trace's data coordinates and a mapbox subplot.
