@@ -121,18 +121,13 @@ The first argument of every `px` function is `data_frame`. If you provide a data
 
 ### Supported Dataframes
 
-`px` functions natively support the following types of dataframes:
-
-- pandas
-- Polars
-- PyArrow
-- Modin
-
-`px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support these dataframes. Other types of dataframes that are currently supported by Narwhals may also work with `px`.
+`px` functions natively support pandas, Polars, and PyArrow dataframes. `px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to provide this native dataframe support. Other types of dataframes that are currently supported by Narwhals, for example cuDF and Modin, may also work with `px`.
 
 You can also pass dataframes that are not natively supported, but which support the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/).
 
 PySpark dataframes are also supported and are converted to pandas dataframes internally by Plotly Express.
+
+> There is a known issue where `px.icicle`, `px.treemap`, and `px.sunburst` used with a `path` parameter won't work with cuDF dataframes.
 
 #### Additional Dependencies Required
 
