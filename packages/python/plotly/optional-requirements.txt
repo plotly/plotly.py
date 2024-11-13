@@ -39,13 +39,14 @@ ipython
 
 ## pandas deps for some matplotlib functionality ##
 pandas
+narwhals>=1.13.3
 
 ## scipy deps for some FigureFactory functions ##
 scipy
 
 ## jupyter ##
 jupyter
-jupyterlab ~=3.0  # To package js extension as federated module
+jupyterlab
 ipykernel
 
 ## deps for _county_choropleth.py figure factory
