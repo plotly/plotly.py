@@ -5,8 +5,8 @@ import pytest
 @pytest.mark.parametrize("px_fn", [px.scatter, px.density_heatmap, px.density_contour])
 @pytest.mark.parametrize("marginal_x", [None, "histogram", "box", "violin"])
 @pytest.mark.parametrize("marginal_y", [None, "rug"])
-def test_xy_marginals(px_fn, marginal_x, marginal_y):
-    df = px.data.tips()
+def test_xy_marginals(backend, px_fn, marginal_x, marginal_y):
+    df = px.data.tips(return_type=backend)
 
     fig = px_fn(
         df, x="total_bill", y="tip", marginal_x=marginal_x, marginal_y=marginal_y
@@ -17,8 +17,8 @@ def test_xy_marginals(px_fn, marginal_x, marginal_y):
 @pytest.mark.parametrize("px_fn", [px.histogram, px.ecdf])
 @pytest.mark.parametrize("marginal", [None, "rug", "histogram", "box", "violin"])
 @pytest.mark.parametrize("orientation", ["h", "v"])
-def test_single_marginals(px_fn, marginal, orientation):
-    df = px.data.tips()
+def test_single_marginals(backend, px_fn, marginal, orientation):
+    df = px.data.tips(return_type=backend)
 
     fig = px_fn(
         df, x="total_bill", y="total_bill", marginal=marginal, orientation=orientation
