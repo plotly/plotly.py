@@ -109,7 +109,7 @@ class TestJSONEncoder(TestCase):
                 utils.NotEncodable, utils.PlotlyJSONEncoder.encode_as_plotly, obj
             )
 
-        # should return without exception when obj has `to_plotly_josn` attr
+        # should return without exception when obj has `to_plotly_json` attr
         expected_res = "wedidit"
 
         class ObjWithAttr(object):
@@ -319,11 +319,11 @@ class TestJSONEncoder(TestCase):
         )
         self.assertTrue(
             fig_json.startswith(
-                '{"data":[{"customdata":["2010-01-01T00:00:00","2010-01-02T00:00:00"]'
+                '{"data":[{"customdata":["2010-01-01T00:00:00.000000000","2010-01-02T00:00:00.000000000"]'
             )
         )
 
-    def test_encode_customdata_datetime_homogenous_dataframe(self):
+    def test_encode_customdata_datetime_homogeneous_dataframe(self):
         df = pd.DataFrame(
             dict(
                 t1=pd.to_datetime(["2010-01-01", "2010-01-02"]),
@@ -341,12 +341,12 @@ class TestJSONEncoder(TestCase):
         self.assertTrue(
             fig_json.startswith(
                 '{"data":[{"customdata":'
-                '[["2010-01-01T00:00:00","2011-01-01T00:00:00"],'
-                '["2010-01-02T00:00:00","2011-01-02T00:00:00"]'
+                '[["2010-01-01T00:00:00.000000000","2011-01-01T00:00:00.000000000"],'
+                '["2010-01-02T00:00:00.000000000","2011-01-02T00:00:00.000000000"]'
             )
         )
 
-    def test_encode_customdata_datetime_inhomogenous_dataframe(self):
+    def test_encode_customdata_datetime_inhomogeneous_dataframe(self):
         df = pd.DataFrame(
             dict(
                 t=pd.to_datetime(["2010-01-01", "2010-01-02"]),
