@@ -35,13 +35,14 @@ nbformat = optional_imports.get_module("nbformat")
 from plotly import optional_imports
 
 import warnings
-import psutil
 
 
 def display_jupyter_version_warnings():
     parent_process = None
     try:
-        parent_process = psutil.Process().parent().cmdline()[-1]
+        psutil = optional_imports.get_module("psutil")
+        if psutil is not None:
+            parent_process = psutil.Process().parent().cmdline()[-1]
     except Exception:
         pass
 
