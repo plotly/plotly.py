@@ -17,6 +17,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Updated Plotly.js from version 2.35.0 to version 3.0.0-rc.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2352----2024-11-11) for more information.
 
+### Fixed
+- Removed check for non-leaf nodes in dataframe for sunburst, treemap, and icicle [[#4776](https://github.com/plotly.plotly.py/pull/4776)]
+
 ## [5.24.0] - 2024-08-29
 
 ### Added
