@@ -144,7 +144,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
 
     def show(self, *args, **kwargs):
         return self
-        
+
     # Python -> JavaScript Messages
     # -----------------------------
     def _send_relayout_msg(self, layout_data, source_view_id=None):
