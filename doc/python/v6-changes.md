@@ -131,6 +131,7 @@ The `pointcloud` trace has been removed. Use [`scattergl`](/python/reference/sca
 
 <!-- #endregion -->
 
+<!-- #region -->
 ## Other Removed Features
 
 ### Transforms
@@ -153,3 +154,4 @@ Could be rewritten using Pandas:
 ```python
 df_2007 = df[df['year'] == 2007]
 ```
+<!-- #endregion -->
