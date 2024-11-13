@@ -73,12 +73,13 @@ def color_categorical_pandas(request, pandas_type):
 def dates_array(request):
     return np.array(
         [
-            datetime(year=2013, month=10, day=10),
-            datetime(year=2013, month=11, day=10),
-            datetime(year=2013, month=12, day=10),
-            datetime(year=2014, month=1, day=10),
-            datetime(year=2014, month=2, day=10),
-        ]
+            "2013-10-10",
+            "2013-11-10",
+            "2013-12-10",
+            "2014-01-10",
+            "2014-02-10",
+        ],
+        dtype="datetime64[ns]",
     )
 
 
@@ -183,7 +184,7 @@ def test_data_array_validator_dates_series(
     assert isinstance(res, np.ndarray)
 
     # Check dtype
-    assert res.dtype == "object"
+    assert res.dtype == "<M8[ns]"
 
     # Check values
     np.testing.assert_array_equal(res, dates_array)
@@ -200,7 +201,7 @@ def test_data_array_validator_dates_dataframe(
     assert isinstance(res, np.ndarray)
 
     # Check dtype
-    assert res.dtype == "object"
+    assert res.dtype == "<M8[ns]"
 
     # Check values
     np.testing.assert_array_equal(res, dates_array.reshape(len(dates_array), 1))

@@ -1,6 +1,6 @@
 import plotly.express as px
+import narwhals.stable.v1 as nw
 import numpy as np
-import pandas as pd
 import pytest
 from datetime import datetime
 from plotly.tests.test_optional.test_utils.test_utils import np_nan
@@ -17,10 +17,12 @@ from plotly.tests.test_optional.test_utils.test_utils import np_nan
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_results_passthrough(mode, options):
-    df = px.data.gapminder().query("continent == 'Oceania'")
+def test_trendline_results_passthrough(backend, mode, options):
+    df = nw.from_native(px.data.gapminder(return_type=backend)).filter(
+        nw.col("continent") == "Oceania"
+    )
     fig = px.scatter(
-        df,
+        df.to_native(),
         x="year",
         y="pop",
         color="country",
@@ -37,9 +39,10 @@ def test_trendline_results_passthrough(mode, options):
     results = px.get_trendline_results(fig)
     if mode == "ols":
         assert len(results) == 2
-        assert results["country"].values[0] == "Australia"
-        au_result = results["px_fit_results"].values[0]
-        assert len(au_result.params) == 2
+        # Polars does not guarantee to maintain order in group by
+        assert set(results["country"].to_list()) == {"Australia", "New Zealand"}
+        result = results["px_fit_results"].values[0]
+        assert len(result.params) == 2
     else:
         assert len(results) == 0
 
@@ -110,12 +113,20 @@ def test_trendline_enough_values(mode, options):
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_nan_values(mode, options):
-    df = px.data.gapminder().query("continent == 'Oceania'")
+def test_trendline_nan_values(backend, mode, options):
     start_date = 1970
-    df["pop"][df["year"] < start_date] = np_nan()
+    df = (
+        nw.from_native(px.data.gapminder(return_type=backend))
+        .filter(nw.col("continent") == "Oceania")
+        .with_columns(
+            pop=nw.when(nw.col("year") >= start_date)
+            .then(nw.col("pop"))
+            .otherwise(None)
+        )
+    )
+
     fig = px.scatter(
-        df,
+        df.to_native(),
         x="year",
         y="pop",
         color="country",
@@ -183,28 +194,42 @@ def test_ols_trendline_slopes():
         ("ewm", dict(alpha=0.5)),
     ],
 )
-def test_trendline_on_timeseries(mode, options):
-    df = px.data.stocks()
+def test_trendline_on_timeseries(backend, mode, options):
 
-    with pytest.raises(ValueError) as err_msg:
-        px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
-    assert "Could not convert value of 'x' ('date') into a numeric type." in str(
-        err_msg.value
+    df = nw.from_native(px.data.stocks(return_type=backend))
+
+    pd_err_msg = r"Could not convert value of 'x' \('date'\) into a numeric type."
+    pl_err_msg = "conversion from `str` to `f64` failed in column 'date'"
+
+    with pytest.raises(Exception, match=rf"({pd_err_msg}|{pl_err_msg})"):
+        px.scatter(
+            df.to_native(),
+            x="date",
+            y="GOOG",
+            trendline=mode,
+            trendline_options=options,
+        )
+
+    df = df.with_columns(
+        date=nw.col("date")
+        .str.to_datetime(format="%Y-%m-%d")
+        .dt.replace_time_zone("CET")
     )
 
-    df["date"] = pd.to_datetime(df["date"])
-    df["date"] = df["date"].dt.tz_localize("CET")  # force a timezone
-    fig = px.scatter(df, x="date", y="GOOG", trendline=mode, trendline_options=options)
+    fig = px.scatter(
+        df.to_native(), x="date", y="GOOG", trendline=mode, trendline_options=options
+    )
+
     assert len(fig.data) == 2
     assert len(fig.data[0].x) == len(fig.data[1].x)
-    assert type(fig.data[0].x[0]) == datetime
-    assert type(fig.data[1].x[0]) == datetime
+    assert isinstance(fig.data[0].x[0], (datetime, np.datetime64))
+    assert isinstance(fig.data[1].x[0], (datetime, np.datetime64))
     assert np.all(fig.data[0].x == fig.data[1].x)
     assert str(fig.data[0].x[0]) == str(fig.data[1].x[0])
 
 
-def test_overall_trendline():
-    df = px.data.tips()
+def test_overall_trendline(backend):
+    df = px.data.tips(return_type=backend)
     fig1 = px.scatter(df, x="total_bill", y="tip", trendline="ols")
     assert len(fig1.data) == 2
     assert "trendline" in fig1.data[1].hovertemplate
