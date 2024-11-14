@@ -2444,13 +2444,12 @@ def get_groups_and_orders(args, grouper):
         groups = {tuple(single_group_name): df}
     else:
         required_grouper = [key for key in orders if key in grouper]
-        order_mapping = {key: orders[key] for key in required_grouper}
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
 
         sorted_group_names = sorted(
             grouped.keys(),
             key=lambda group: [
-                order_mapping[key].index(value) if value in order_mapping[key] else -1
+                orders[key].index(value) if value in orders[key] else -1
                 for key, value in zip(required_grouper, group)
             ],
         )
