@@ -59,7 +59,7 @@ Plotly.py now takes advantage of recent changes in how Plotly.js handles typed a
 
 ## Dataframe Support
 
-Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, PyArrow, and Modin.
+Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow.
 
 ## Removed Attributes
 
