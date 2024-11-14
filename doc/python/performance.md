@@ -48,7 +48,7 @@ Plotly Express natively supports [pandas, Polars, PyArrow, and Modin dataframes]
 
 You can improve the performance of generating Plotly figures that use a large number of data points by passing data as NumPy arrays, or in a format that Plotly can convert easily to NumPy arrays, such as Pandas and Polars Series or DataFrames. These formats will usually show better performance than passing data as a Python list.
 
-Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy array and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
+Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy arrays and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
 ### Arrays and Data Types Supported
 
