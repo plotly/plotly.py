@@ -19,5 +19,8 @@ psutil==5.7.0
 kaleido
 vaex
 pydantic<=1.10.11 # for vaex, see https://github.com/vaexio/vaex/issues/2384
+polars[timezone]
+pyarrow
+narwhals>=1.13.3
 polars
 anywidget==0.9.13
