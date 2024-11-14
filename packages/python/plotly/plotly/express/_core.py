@@ -2440,20 +2440,19 @@ def get_groups_and_orders(args, grouper):
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
-    grp_to_idx = {k: i for i, k in enumerate(orders)}
-
     if len(single_group_name) == len(grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        required_grouper = list(orders.keys())
+        required_grouper = [g for g in grouper if g != one_group]
+        grp_to_idx = {k: i for i, k in enumerate(required_grouper)}
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
         sorted_group_names = list(grouped.keys())
 
         for i, col in reversed(list(enumerate(required_grouper))):
             sorted_group_names = sorted(
                 sorted_group_names,
-                key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
+                key=lambda g: [col].index(g[i]) if g[i] in [col] else -1,
             )
 
         # calculate the full group_names by inserting "" in the tuple index for one_group groups
