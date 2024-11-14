@@ -2859,7 +2859,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             e.args = (
                 e.args[0]
                 + """
-Use the {facet_arg} argument to adjust this spacing.""".format(facet_arg=facet_arg),
+Use the {facet_arg} argument to adjust this spacing.""".format(
+                    facet_arg=facet_arg
+                ),
             )
             raise e
 
