@@ -652,8 +652,6 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
-    if "histogram" in [args["marginal_x"], args["marginal_y"]]:
-        fig.layout["barmode"] = "overlay"
 
     nrows = len(fig._grid_ref)
     ncols = len(fig._grid_ref[0])
@@ -2147,6 +2145,9 @@ def process_dataframe_timeline(args):
     args["x"] = args["x_end"]
     args["base"] = args["x_start"]
     del args["x_start"], args["x_end"]
+
+    args["barmode"] = "relative"
+
     return args
 
 
@@ -2558,8 +2559,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     legendgroup=trace_name,
                     showlegend=(trace_name != "" and trace_name not in trace_names),
                 )
+
+            # With marginal histogram, if barmode is not set, set to "overlay"
+            if "histogram" in [args.get("marginal_x"), args.get("marginal_y")] and "barmode" not in args:
+                layout_patch["barmode"] = "overlay"
+
             # Set 'offsetgroup' only in group barmode (or if no barmode is set)
-            barmode = args.get("barmode")
+            barmode = args.get("barmode") or layout_patch.get("barmode")
             if (
                 trace_spec.constructor in [go.Bar, go.Box, go.Violin, go.Histogram]
                 and (barmode == "group" or barmode is None)
