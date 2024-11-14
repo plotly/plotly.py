@@ -4,11 +4,11 @@ for rapid data exploration and figure generation. Learn more at https://plotly.c
 """
 from plotly import optional_imports
 
-pd = optional_imports.get_module("pandas")
-if pd is None:
+np = optional_imports.get_module("numpy")
+if np is None:
     raise ImportError(
         """\
-Plotly express requires pandas to be installed."""
+Plotly express requires numpy to be installed."""
     )
 
 from ._imshow import imshow

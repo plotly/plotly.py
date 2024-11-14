@@ -18,4 +18,7 @@ matplotlib==3.7.3
 scikit-image==0.18.1
 psutil==5.7.0
 kaleido
+polars[timezone]
+pyarrow
+narwhals>=1.13.3
 anywidget==0.9.13

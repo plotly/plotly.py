@@ -1,12 +1,12 @@
-import pandas as pd
 import plotly.express as px
 from pytest import approx
 import pytest
 import random
 
 
-def test_facets():
-    df = px.data.tips()
+def test_facets(backend):
+    df = px.data.tips(return_type=backend)
+
     fig = px.scatter(df, x="total_bill", y="tip")
     assert "xaxis2" not in fig.layout
     assert "yaxis2" not in fig.layout
@@ -46,8 +46,8 @@ def test_facets():
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
-def test_facets_with_marginals():
-    df = px.data.tips()
+def test_facets_with_marginals(backend):
+    df = px.data.tips(return_type=backend)
 
     fig = px.histogram(df, x="total_bill", facet_col="sex", marginal="rug")
     assert len(fig.data) == 4
@@ -93,12 +93,11 @@ def test_facets_with_marginals():
     assert len(fig.data) == 2  # ignore all marginals
 
 
-@pytest.fixture
-def bad_facet_spacing_df():
+def bad_facet_spacing_df(constructor_func):
     NROWS = 101
     NDATA = 1000
     categories = [n % NROWS for n in range(NDATA)]
-    df = pd.DataFrame(
+    df = constructor_func(
         {
             "x": [random.random() for _ in range(NDATA)],
             "y": [random.random() for _ in range(NDATA)],
@@ -108,8 +107,8 @@ def bad_facet_spacing_df():
     return df
 
 
-def test_bad_facet_spacing_eror(bad_facet_spacing_df):
-    df = bad_facet_spacing_df
+def test_bad_facet_spacing_error(constructor):
+    df = bad_facet_spacing_df(constructor_func=constructor)
     with pytest.raises(
         ValueError, match="Use the facet_row_spacing argument to adjust this spacing."
     ):
