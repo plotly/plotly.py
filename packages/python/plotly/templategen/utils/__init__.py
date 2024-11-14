@@ -107,7 +107,7 @@ def initialize_template(
     template.data.histogram2dcontour[0].colorscale = colorscale
     template.data.contour[0].colorscale = colorscale
     template.data.surface[0].colorscale = colorscale
-    template.data.heatmapgl[0].colorscale = colorscale
+    template.data.heatmap[0].colorscale = colorscale
 
     # Cartesian
     template.layout.xaxis = cartesian_axis
