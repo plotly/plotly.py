@@ -2448,9 +2448,9 @@ def get_groups_and_orders(args, grouper):
 
         sorted_group_names = sorted(
             grouped.keys(),
-            key=lambda group: [
-                orders[key].index(value) if value in orders[key] else -1
-                for key, value in zip(required_grouper, group)
+            key=lambda values: [
+                orders[group].index(value) if value in orders[group] else -1
+                for group, value in zip(required_grouper, values)
             ],
         )
 
