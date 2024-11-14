@@ -36,7 +36,7 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
-## DataFrames Types
+## DataFrame Types
 
 *New in Plotly.py version 6*
 
