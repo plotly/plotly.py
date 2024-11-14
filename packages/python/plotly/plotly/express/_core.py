@@ -2194,6 +2194,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     legendgroup=trace_name,
                     showlegend=(trace_name != "" and trace_name not in trace_names),
                 )
+            # Set 'offsetgroup' only in group barmode
+            if (
+                trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]
+                and args["barmode"] == "group"
+            ):
+                trace.update(alignmentgroup=True, offsetgroup=trace_name)
             trace_names.add(trace_name)
 
             # Init subplot row/col
