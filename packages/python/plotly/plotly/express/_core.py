@@ -2443,9 +2443,7 @@ def get_groups_and_orders(args, grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        required_grouper = [
-            key for key in orders if key in grouper and key != one_group
-        ]
+        required_grouper = [key for key in orders if key in grouper]
         order_mapping = {key: orders[key] for key in required_grouper}
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
 
