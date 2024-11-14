@@ -233,7 +233,7 @@ fig.show()
 
 ### Passing dictionaries or array-likes as the data_frame argument
 
-The column-based argument `data_frame` can also be passed with a `dict` or `array`. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a dataframe.
+The `data_frame` argument can also accept a `dict` or `array` in addition to DataFrame objects. Using a dictionary can be a convenient way to pass column names used in axis titles, legend entries and hovers without creating a dataframe.
 
 ```python
 import plotly.express as px
