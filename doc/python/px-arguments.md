@@ -119,7 +119,7 @@ Many more examples of wide-form and messy data input can be found in our [detail
 
 The first argument of every `px` function is `data_frame`. If you provide a dataframe as a `px` function's first argument, you can then specify column names as strings from the dataframe as other arguments.
 
-### Supported Dataframes
+### Supported DataFrame Types
 
 `px` functions natively support pandas, Polars, and PyArrow dataframes. `px` uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to provide this native dataframe support. Other types of dataframes that are currently supported by Narwhals, for example cuDF and Modin, may also work with `px`.
 
