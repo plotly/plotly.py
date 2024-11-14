@@ -2562,7 +2562,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             barmode = args.get("barmode")
             if (
                 trace_spec.constructor in [go.Bar, go.Box, go.Violin, go.Histogram]
-                and barmode == "group" or barmode is None
+                and (barmode == "group" or barmode is None)
             ):
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
             trace_names.add(trace_name)
