@@ -307,7 +307,7 @@ def test_category_order_with_category_as_x(backend):
     )
     assert fig["layout"]["xaxis"]["categoryarray"] == ("Thur", "Fri", "Sat", "Sun")
     for trace in fig["data"]:
-        assert sorted(set(trace["x"])) == ["Fri", "Sat", "Sun", "Thur"]
+        assert set(trace["x"]) == {"Thur", "Fri", "Sat", "Sun"}
 
 
 def test_permissive_defaults():
