@@ -2558,10 +2558,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     legendgroup=trace_name,
                     showlegend=(trace_name != "" and trace_name not in trace_names),
                 )
-            # Set 'offsetgroup' only in group barmode
+            # Set 'offsetgroup' only in group barmode (or if no barmode is set)
+            barmode = args.get("barmode")
             if (
-                trace_spec.constructor in [go.Bar, go.Histogram]
-                and args.get("barmode") == "group"
+                trace_spec.constructor in [go.Bar, go.Box, go.Violin, go.Histogram]
+                and barmode == "group" or barmode is None
             ):
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
             trace_names.add(trace_name)
