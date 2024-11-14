@@ -139,6 +139,9 @@ def simple_white():
     opts = {"marker": {"line": {"width": 0.6, "color": "white"}}}
     template.data.histogram = [opts]
 
+    # Map light style
+    template.layout.map.style = "light"
+
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
@@ -407,6 +410,9 @@ def plotly():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
+    # Map light style
+    template.layout.map.style = "light"
+
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
@@ -486,6 +492,9 @@ def plotly_white():
     # Increase width of cartesian zero lines
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
+
+    # Map light style
+    template.layout.map.style = "light"
 
     # Mapbox light style
     template.layout.mapbox.style = "light"
@@ -574,6 +583,9 @@ def plotly_dark():
     template.layout.yaxis.zerolinecolor = plotly_clrs["Rhino Darker"]
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
+
+    # Map light style
+    template.layout.map.style = "dark"
 
     # Mapbox light style
     template.layout.mapbox.style = "dark"
