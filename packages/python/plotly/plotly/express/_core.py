@@ -1858,17 +1858,20 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
         null_mask=nw.any_horizontal(nw.all())
     ).get_column("null_mask")
 
-    for row_idx, row in zip(
-        null_indices_mask, null_mask.filter(null_indices_mask).iter_rows()
-    ):
-
-        i = row.index(True)
-
-        if not all(row[i:]):
-            raise ValueError(
-                "None entries cannot have not-None children",
-                df_sorted.row(row_idx),
+    null_mask_filtered = null_mask.filter(null_indices_mask)
+    if not null_mask_filtered.is_empty():
+        for col_idx in range(1, null_mask_filtered.shape[1]):
+            # For each row, if a True value is encountered, then check that
+            # all values in subsequent columns are also True
+            null_entries_with_non_null_children = (
+                ~null_mask_filtered[:, col_idx] & null_mask_filtered[:, col_idx - 1]
             )
+            if nw.to_py_scalar(null_entries_with_non_null_children.any()):
+                row_idx = null_entries_with_non_null_children.to_list().index(True)
+                raise ValueError(
+                    "None entries cannot have not-None children",
+                    df_sorted.row(row_idx),
+                )
 
     fill_series = nw.new_series(
         name="fill_value",
