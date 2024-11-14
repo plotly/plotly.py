@@ -2196,8 +2196,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 )
             # Set 'offsetgroup' only in group barmode
             if (
-                trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]
-                and args["barmode"] == "group"
+                trace_spec.constructor in [go.Bar, go.Histogram]
+                and args.get("barmode") == "group"
             ):
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
             trace_names.add(trace_name)
