@@ -2443,7 +2443,7 @@ def get_groups_and_orders(args, grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        required_grouper = [key for key in orders if key in grouper]
+        required_grouper = [group for group in orders if group in grouper]
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
 
         sorted_group_names = sorted(
