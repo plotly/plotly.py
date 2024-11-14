@@ -289,6 +289,27 @@ def test_orthogonal_orderings(backend, days, times):
     assert_orderings(backend, days, days, times, times)
 
 
+def test_category_order_with_category_as_x(backend):
+    # https://github.com/plotly/plotly.py/issues/4875
+    tips = nw.from_native(px.data.tips(return_type=backend))
+    fig = px.bar(
+        tips,
+        x="day",
+        y="total_bill",
+        color="smoker",
+        barmode="group",
+        facet_col="sex",
+        category_orders={
+            "day": ["Thur", "Fri", "Sat", "Sun"],
+            "smoker": ["Yes", "No"],
+            "sex": ["Male", "Female"],
+        },
+    )
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Thur", "Fri", "Sat", "Sun")
+    for trace in fig["data"]:
+        assert sorted(set(trace["x"])) == ["Fri", "Sat", "Sun", "Thur"]
+
+
 def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
