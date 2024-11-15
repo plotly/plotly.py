@@ -2481,7 +2481,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     # With marginal histogram, if barmode is not set, set to "overlay"
     if (
         "histogram" in [args.get("marginal_x"), args.get("marginal_y")]
-        and "barmode" not in args
+        and "barmode" not in layout_patch
     ):
         layout_patch["barmode"] = "overlay"
 
