@@ -42,6 +42,8 @@ jupyter:
 
 Plotly Express natively supports [pandas, Polars, PyArrow, and Modin dataframes](/python/px-arguments). When building figures with Plotly Express, changing your dataframe library may help improve performance.
 
+In versions of Plotly.py prior to version 6, Plotly Express functions accepted non-pandas dataframes as input but used the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/) or converted those dataframes to pandas internally.
+
 ## NumPy and NumPy Convertible Arrays for Improved Performance
 
 *New in Plotly.py version 6*
