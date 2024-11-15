@@ -127,7 +127,7 @@ Each `plotly` trace type is rendered with either SVG or WebGL. The following tra
 
 ### WebGL Limitations and Tradeoffs
 
-WebGL is a powerful technology for accelerating computation but comes with some strict limitations:
+WebGL is a powerful technology for accelerating rendering but comes with some strict limitations:
 
 1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers.
 2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition, text rendering will differ between SVG and WebGL-powered traces.
