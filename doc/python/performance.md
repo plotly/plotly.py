@@ -48,17 +48,18 @@ In versions of Plotly.py prior to version 6, Plotly Express functions accepted n
 
 *New in Plotly.py version 6*
 
-You can improve the performance of generating Plotly figures that use a large number of data points by passing data as NumPy arrays, or in a format that Plotly can convert easily to NumPy arrays, such as Pandas and Polars Series or DataFrames. These formats will usually show better performance than passing data as a Python list.
+You can improve the performance of generating Plotly figures that use a large number of data points by passing data as NumPy arrays, or in a format that Plotly can convert easily to NumPy arrays, such as pandas and Polars Series or DataFrames. These formats will usually show better performance than passing data as a Python list.
 
 Plotly.py uses Plotly.js for rendering, which supports typed arrays. In Plotly.py, NumPy arrays and NumPy-convertible arrays are base64 encoded before being passed to Plotly.js for rendering.
 
 ### Arrays and Data Types Supported
 
-The following types of objects in Python are supported for improved performance:
+The following types of objects in Python are supported for base64 encoding for rendering with Plotly.js.
 
-- Numpy `numpy.ndarray` objects.
-- Pandas Index, Pandas Series, Polars Series, and PyArrow Chunked Array objects.
-- Array objects that can be converted to `numpy.ndarray` objects. i.e., they implement `"__array__"` or `"__array_interface__"` and return a `numpy.ndarray`.
+- NumPy `numpy.ndarray` objects.
+- pandas Index, pandas Series, Polars Series, and PyArrow Chunked Array objects.
+- When working with Plotly Express, pandas DataFrame, Polars DataFrame and PyArrow DataFrame objects passed to the `data_frame` argument of `px` functions.
+- Array objects that can be converted to `numpy.ndarray` objects, i.e., they implement `"__array__"` or `"__array_interface__"` and return a `numpy.ndarray`.
 
 The following [array data types](https://numpy.org/devdocs/reference/arrays.scalars.html) are supported:
 
@@ -73,12 +74,15 @@ The following [array data types](https://numpy.org/devdocs/reference/arrays.scal
 
 *If the array dtype is **int64** or **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
 
+Arrays or data types that are not supported for base64 encoding to Plotly.js's typed arrays specification will still work and render correctly with Plotly. Those arrays and or data types just won't have the performance benefits that Plotly.js's base64 typed arrays feature provides.
+
 ### Unsupported Attributes
 
-Arrays passed to attributes with the following names are not supported for the performance benefits:
+Arrays passed to attributes with the following names are not supported for base64 encoding for rendering with Plotly.js.
 
 `geojson`, `layers`, and `range`.
 
+Attributes that are not supported for base64 encoding to Plotly.js's typed arrays specification will still work and render correctly. Those attributes just won't have the performance benefits that Plotly.js's base64 typed arrays feature provides.
 
 ### Example with NumPy Arrays
 
