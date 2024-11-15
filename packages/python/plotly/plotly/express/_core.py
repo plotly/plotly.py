@@ -2478,6 +2478,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         constructor = go.Bar
         args = process_dataframe_timeline(args)
 
+    # With marginal histogram, if barmode is not set, set to "overlay"
+    if (
+        "histogram" in [args.get("marginal_x"), args.get("marginal_y")]
+        and "barmode" not in args
+    ):
+        layout_patch["barmode"] = "overlay"
+
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch
     )
@@ -2549,13 +2556,6 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     legendgroup=trace_name,
                     showlegend=(trace_name != "" and trace_name not in trace_names),
                 )
-
-            # With marginal histogram, if barmode is not set, set to "overlay"
-            if (
-                "histogram" in [args.get("marginal_x"), args.get("marginal_y")]
-                and "barmode" not in args
-            ):
-                layout_patch["barmode"] = "overlay"
 
             # Set 'offsetgroup' only in group barmode (or if no barmode is set)
             barmode = args.get("barmode") or layout_patch.get("barmode")
