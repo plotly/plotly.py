@@ -2138,7 +2138,6 @@ def process_dataframe_timeline(args):
     args["x"] = args["x_end"]
     args["base"] = args["x_start"]
     del args["x_start"], args["x_end"]
-
     return args
 
 
