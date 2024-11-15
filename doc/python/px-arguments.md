@@ -131,9 +131,9 @@ PySpark dataframes are also supported and are converted to pandas dataframes int
 
 #### Additional Dependencies Required
 
-- To use Polars, PyArrow, or other dataframes supported natively with Plotly Express, you'll need to have NumPy installed. You can install it with: `pip install numpy`.
+- Plotly Express requires NumPy. You can install it with `pip install numpy` if it's not installed by the dataframe library you are using.
 - To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
-- To use PySpark dataframes or datafarmes that support the dataframe interchange protocol, you'll need to have pandas installed.
+- To use PySpark dataframes or dataframes that support the dataframe interchange protocol, you'll need to have pandas installed.
 
 ### Example: Using a Pandas DataFrame with `px.bar`
 
