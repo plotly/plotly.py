@@ -2558,7 +2558,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 )
 
             # Set 'offsetgroup' only in group barmode (or if no barmode is set)
-            barmode = args.get("barmode") or layout_patch.get("barmode")
+            barmode = layout_patch.get("barmode")
             if trace_spec.constructor in [go.Bar, go.Box, go.Violin, go.Histogram] and (
                 barmode == "group" or barmode is None
             ):
