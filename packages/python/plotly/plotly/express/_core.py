@@ -2479,9 +2479,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         args = process_dataframe_timeline(args)
 
     # With marginal histogram, if barmode is not set, set to "overlay"
-    if (
-        "histogram" in [args.get("marginal_x"), args.get("marginal_y")]
-    ):
+    if "histogram" in [args.get("marginal_x"), args.get("marginal_y")]:
         layout_patch["barmode"] = "overlay"
 
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
