@@ -2478,7 +2478,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         constructor = go.Bar
         args = process_dataframe_timeline(args)
 
-    # With marginal histogram, if barmode is not set, set to "overlay"
+    # If we have marginal histograms, set barmode to "overlay"
     if "histogram" in [args.get("marginal_x"), args.get("marginal_y")]:
         layout_patch["barmode"] = "overlay"
 
