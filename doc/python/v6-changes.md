@@ -69,32 +69,7 @@ The following attributes have been removed in Plotly.py 6.
 
 The `titlefont`,`titleposition`, `titleside`, and `titleoffset` attributes have been removed. Replace them with `title.font`, `title.position`, `title.side`, and `title.offset`.
 
-Here's an example using `layout.titlefont`:
-
-```python
-import plotly.graph_objects as go
-
-trace = go.Bar(
-    x=['A', 'B', 'C', 'D'],
-    y=[10, 15, 13, 17]
-)
-
-layout = go.Layout(
-    title=dict(
-        text='Chart Title'
-    ),
-    titlefont=dict(
-        size=40
-    )
-)
-
-fig = go.Figure(data=[trace], layout=layout)
-
-fig.show()
-```
-
-Updated to use `layout.title.font`:
-
+The following example shows how to use `layout.title.font`:
 
 ```python
 import plotly.graph_objects as go
@@ -110,6 +85,11 @@ layout = go.Layout(
         font=dict(size=40)
     )
 )
+
+# Previously this could be written as
+#     titlefont=dict(
+#        size=40
+#    )
 
 fig = go.Figure(data=[trace], layout=layout)
 
