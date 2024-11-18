@@ -43,7 +43,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_validate_property_path_nested(self):
         fn = MagicMock()
         with pytest.raises(ValueError):
-            self.figure.layout.on_change(fn, "xaxis.titlefont.bogus")
+            self.figure.layout.on_change(fn, "xaxis.title_font.bogus")
 
     # Python triggered changes
     # ------------------------
@@ -92,25 +92,25 @@ class TestOnChangeCallbacks(TestCase):
         fn_range.assert_called_once_with(self.figure.layout, (-10, 10), None)
 
     def test_multi_prop_callback_on_assignment_layout_nested(self):
-        fn_titlefont = MagicMock()
+        fn_title_font = MagicMock()
         fn_xaxis = MagicMock()
         fn_layout = MagicMock()
 
-        # Register callback on change to family property under titlefont
-        self.figure.layout.xaxis.titlefont.on_change(fn_titlefont, "family")
+        # Register callback on change to family property under title_font
+        self.figure.layout.xaxis.title.font.on_change(fn_title_font, "family")
 
-        # Register callback on the range and titlefont.family properties
+        # Register callback on the range and title_font.family properties
         # under xaxis
         self.figure.layout.xaxis.on_change(fn_xaxis, "range", "title.font.family")
 
         # Register callback on xaxis object itself
         self.figure.layout.on_change(fn_layout, "xaxis")
 
-        # Assign a new xaxis range and titlefont.family
+        # Assign a new xaxis range and title.font.family
         self.figure.layout.xaxis.title.font.family = "courier"
 
         # Check that all callbacks were executed once
-        fn_titlefont.assert_called_once_with(
+        fn_title_font.assert_called_once_with(
             self.figure.layout.xaxis.title.font, "courier"
         )
 

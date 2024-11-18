@@ -30,6 +30,7 @@ jupyter:
     order: 1
     page_type: u-guide
     permalink: python/mapbox-to-maplibre/
+    redirect_from: python/maplibre-migration/
     thumbnail: thumbnail/mapbox-layers.png
 ---
 

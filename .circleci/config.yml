@@ -46,6 +46,9 @@ commands:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
+            cd js
+            npm ci
+            npm run build
       - run:
           name: Install plotly-geo
           command: |
@@ -249,6 +252,14 @@ jobs:
       - test_optional:
           py: "312_no_numpy"
 
+  python_312_np2:
+    docker:
+      - image: cimg/python:3.12-browsers
+    steps:
+      - test_optional:
+          py: "312_np2"
+
+
   # Percy
   python_39_percy:
     docker:
@@ -339,9 +350,9 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_38_core.txt black inflect
-            pip install jupyterlab~=3.0
+            pip install jupyterlab
       - run:
-          name: Update jupyterlab-plotly version
+          name: Update jupyter widget plotly.js version
           command: |
             cd packages/python/plotly
             . venv/bin/activate
@@ -395,7 +406,7 @@ jobs:
             conda config --remove channels defaults
             conda config --add channels conda-forge
             conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
-            conda install -n env -c conda-forge jupyterlab=3 nodejs=16
+            conda install -n env -c conda-forge jupyterlab nodejs=16
             conda init bash
             mkdir output
 
@@ -404,9 +415,9 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/javascript/jupyterlab-plotly
+            cd packages/python/plotly/js
             npm ci
-            npm run build:prod
+            npm run build
             git status
 
       - run:
@@ -430,13 +441,13 @@ jobs:
             git status
 
       - run:
-          name: NPM Pack
+          name: Build Widget javascript bundle
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/javascript/jupyterlab-plotly
-            npm pack
-            mv jupyterlab-plotly*.tgz ../../../output
+            cd packages/python/plotly/js
+            npm ci
+            npm run build
 
       - run:
           name: Zip output
@@ -483,7 +494,12 @@ jobs:
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
-              pip install -e ../packages/python/plotly
+              cd ../packages/python/plotly
+              pip install -e .
+              cd js
+              npm ci
+              npm run build
+              cd ../../../../doc
             fi
             cd ..
       - run:
@@ -607,4 +623,5 @@ workflows:
       - python_39_pandas_2_optional
       - python_39_percy
       - python_312_no_numpy
+      - python_312_np2
       - build-doc

@@ -5,20 +5,20 @@ for rapid data exploration and figure generation. Learn more at https://plotly.c
 
 from plotly import optional_imports
 
-pd = optional_imports.get_module("pandas")
-if pd is None:
+np = optional_imports.get_module("numpy")
+if np is None:
     raise ImportError(
         """\
-Plotly Express requires pandas to be installed. You can install pandas using pip with:
+Plotly Express requires numpy to be installed. You can install numpy using pip with:
 
-$ pip install pandas
+$ pip install numpy
 
 Or install Plotly Express and its dependencies directly with:
 
-$ pip install "plotly[pandas]"
+$ pip install "plotly[express]"
 
 You can also use Plotly Graph Objects to create a large number of charts without installing
-pandas. See examples here: https://plotly.com/python/graph-objects/
+numpy. See examples here: https://plotly.com/python/graph-objects/
 """
     )
 

@@ -8,9 +8,6 @@ Note that the functions in this module are not meant to be called directly, and 
 exposed as part of the public API for documentation purposes.
 """
 
-import pandas as pd
-import numpy as np
-
 __all__ = ["ols", "lowess", "rolling", "ewm", "expanding"]
 
 
@@ -32,6 +29,8 @@ def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
     respect to the base 10 logarithm of the input. Note that this means no zeros can
     be present in the input.
     """
+    import numpy as np
+
     valid_options = ["add_constant", "log_x", "log_y"]
     for k in trendline_options.keys():
         if k not in valid_options:
@@ -110,11 +109,25 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def _pandas(mode, trendline_options, x_raw, y, non_missing):
+    import numpy as np
+
+    try:
+        import pandas as pd
+    except ImportError:
+        msg = "Trendline requires pandas to be installed"
+        raise ImportError(msg)
+
     modes = dict(rolling="Rolling", ewm="Exponentially Weighted", expanding="Expanding")
     trendline_options = trendline_options.copy()
     function_name = trendline_options.pop("function", "mean")
     function_args = trendline_options.pop("function_args", dict())
-    series = pd.Series(y, index=x_raw)
+
+    series = pd.Series(np.copy(y), index=x_raw.to_pandas())
+
+    # TODO: Narwhals Series/DataFrame do not support rolling, ewm nor expanding, therefore
+    # it fallbacks to pandas Series independently of the original type.
+    # Plotly issue: https://github.com/plotly/plotly.py/issues/4834
+    # Narwhals issue: https://github.com/narwhals-dev/narwhals/issues/1254
     agg = getattr(series, mode)  # e.g. series.rolling
     agg_obj = agg(**trendline_options)  # e.g. series.rolling(**opts)
     function = getattr(agg_obj, function_name)  # e.g. series.rolling(**opts).mean

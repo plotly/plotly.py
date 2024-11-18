@@ -903,7 +903,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_annotated_heatmap_kwargs(self):
 
         # we should be able to create an annotated heatmap with x and y axes
-        # lables, a defined colorscale, and supplied text.
+        # labels, a defined colorscale, and supplied text.
 
         z = [[1, 0], [0.25, 0.75], [0.45, 0.5]]
         text = [["first", "second"], ["third", "fourth"], ["fifth", "sixth"]]
@@ -999,7 +999,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_annotated_heatmap_reversescale(self):
 
         # we should be able to create an annotated heatmap with x and y axes
-        # lables, a defined colorscale, and supplied text.
+        # labels, a defined colorscale, and supplied text.
 
         z = [[1, 0], [0.25, 0.75], [0.45, 0.5]]
         text = [["first", "second"], ["third", "fourth"], ["fifth", "sixth"]]
@@ -1222,7 +1222,7 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_simple_table(self):
 
-        # we should be able to create a striped table by suppling a text matrix
+        # we should be able to create a striped table by supplying a text matrix
 
         text = [
             ["Country", "Year", "Population"],

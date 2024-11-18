@@ -1,8 +1,8 @@
 include LICENSE.txt
 include README.md
-include jupyterlab-plotly.json
 include versioneer.py
 include plotly/_version.py
 include requires-install.txt
 include requires-dev.txt
-include requires-pandas.txt
+include requires-express.txt
+include plotly/package_data/widgetbundle.js
