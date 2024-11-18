@@ -444,5 +444,94 @@ fig.update_layout(title_text="Yahoo")
 fig.show()
 ```
 
+### Creating several independent graphs and using Jinja to insert them into a JavaScript enabled webpage 
+
+It is often easier to  create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a drop down that chooses which div to display.  This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration.  This requires both a Python program and a Jinja template file.  You may want to consult the documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template).  
+
+#### Python Code File
+
+```
+import plotly.express as px
+from jinja2 import Template
+import collections
+# Load the gapminder dataset
+df = px.data.gapminder()
+
+#create a dictionary with Plotly figures as values
+fig_dict = {}
+
+# Loop through each unique continent and create a scatter plot using the 2007 data
+for continent in df['continent'].unique():
+    # Filter data for the current continent 
+    continent_data = df[(df['continent'] == continent) & (df['year'] == 2007)]
+    
+    fig_dict[continent] = px.scatter(continent_data, x='gdpPercap', y='lifeExp', 
+                     title=f'GDP vs Life Expectancy for {continent}',
+                     labels={'gdpPercap': 'GDP per Capita (USD)', 'lifeExp': 'Life Expectancy (Years)'},
+                     hover_name='country',
+                     )
+    
+# Create a dictionary, data_for_jinja with two entries:
+# the value for the "dropdown_entries" key contains string containing a series of <option> tags, one for each item in the drop down
+# the value for the "divs" key contains a string with a series of <div> tags, each containing the content that appears only when the user selects the corresponding item from the dropdown
+# in this example, that content is a figure and descriptive text.  
+data_for_jinja= collections.defaultdict(str)
+text_dict = {}
+for n, figname in enumerate(fig_dict.keys()):
+    text_dict[figname]=f"Here is some custom text about the {figname} figure"  #This is a succinct way to populate text_dict; in practice you'd probably populate it manually elsewhere
+    data_for_jinja["dropdown_entries"]+=f"<option value='{figname}'>{fig_dict[figname].layout.title.text}</option>"
+    #YOU MAY NEED TO UPDATE THE LINK TO THE LATEST PLOTLY.JS
+    fig_html = fig_dict[figname].to_html(full_html=False, config=dict(responsive=False, scrollZoom=False, doubleClick=False), include_plotlyjs = "https://cdn.plot.ly/plotly-2.35.2.min.js")
+    data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {"style=""display:none;"""*(n>0)}>{fig_html}{text_dict[figname]}</div>'
+
+# Insert data into the template and write the file to disk
+# YOU WILL LIKELY NEED TO CUSTOMIZE THESE PATHS
+input_template_path=r"C:\data\demo_template.jinja"
+output_html_path=r"C:\data\demo_result.html"
+
+with open(output_html_path, "w", encoding='utf-8') as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(data_for_jinja))
+```
+
+#### Jinja HTML Template
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Select an analysis</h1>
+        <select id="dropdown" class="form-control">
+    {{ dropdown_entries }}
+        </select>
+
+
+        {{ divs }}
+
+    </div>
+
+    <script>
+        document.getElementById('dropdown').addEventListener('change', function() {
+            const divs = document.querySelectorAll('.content-div');
+            divs.forEach(div => div.style.display = 'none');
+
+            const selectedDiv = document.getElementById(this.value);
+            if (selectedDiv) {
+                selectedDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+
+
 #### Reference
 See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` dropdowns.
