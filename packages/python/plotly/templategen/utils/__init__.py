@@ -5,7 +5,6 @@ colorscale_parent_paths = [
     ("choropleth",),
     ("histogram2d",),
     ("heatmap",),
-    ("heatmapgl",),
     ("contourcarpet",),
     ("contour",),
     ("surface",),

@@ -15,8 +15,7 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def font(self):
         """
-        Sets this axis' title font. Note that the title's font used to
-        be customized by the now deprecated `titlefont` attribute.
+        Sets this axis' title font.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -85,9 +84,7 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def text(self):
         """
-        Sets the title of this axis. Note that before the existence of
-        `title.text`, the title's contents used to be defined as the
-        `title` attribute itself. This behavior has been deprecated.
+        Sets the title of this axis.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -109,14 +106,9 @@ class Title(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         font
-            Sets this axis' title font. Note that the title's font
-            used to be customized by the now deprecated `titlefont`
-            attribute.
+            Sets this axis' title font.
         text
-            Sets the title of this axis. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of this axis.
         """
 
     def __init__(self, arg=None, font=None, text=None, **kwargs):
@@ -130,14 +122,9 @@ class Title(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.scene.yaxis.Title`
         font
-            Sets this axis' title font. Note that the title's font
-            used to be customized by the now deprecated `titlefont`
-            attribute.
+            Sets this axis' title font.
         text
-            Sets the title of this axis. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of this axis.
 
         Returns
         -------

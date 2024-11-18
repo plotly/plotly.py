@@ -38,7 +38,7 @@ jupyter:
 
 `plotly` figures are rendered by web browsers, which broadly speaking have two families of capabilities for rendering graphics: the SVG API which supports vector rendering, and the Canvas API which supports raster rendering, and can exploit GPU hardware acceleration via a browser technology known as WebGL. Each `plotly` trace type is primarily rendered with either SVG or WebGL, although WebGL-powered traces also use some SVG. The following trace types use WebGL for part or all of the rendering:
 
-* Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`, `heatmapgl`
+* Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`,
 * High-performance multidimensional trace types: `splom`, or `parcoords`
 * 3-d trace types `scatter3d`, `surface`, `mesh3d`, `cone`, `streamtube`
 * Mapbox Gl JS-powered trace types: `scattermapbox`, `choroplethmapbox`, `densitymapbox`
@@ -52,7 +52,7 @@ WebGL is a powerful technology for accelerating computation but comes with some 
 3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.**
 4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height)
 
-In addition to the above limitations, the WebGL-powered version of certain SVG-powered trace types (`scattergl`, `scatterpolargl`, `heatmapgl`) are not complete drop-in replacements for their SVG counterparts yet
+In addition to the above limitations, the WebGL-powered version of certain SVG-powered trace types (`scattergl`, `scatterpolargl`) are not complete drop-in replacements for their SVG counterparts yet
 * Available symbols will differ
 * Area fills are not yet supported in WebGL
 * Range breaks on time-series axes are not yet supported

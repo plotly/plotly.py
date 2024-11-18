@@ -401,6 +401,7 @@ for continent_name, df in continent_data.items():
             x=df['gdpPercap'],
             y=df['lifeExp'],
             marker_size=df['size'],
+            text=df['continent'],
             name=continent_name,
 
             # The next three parameters specify the hover text

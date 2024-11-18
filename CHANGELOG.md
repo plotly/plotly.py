@@ -2,15 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Removed
+- Drop deprecated `pointcloud` and `heatmapgl` traces from the API
+- Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
+
 ### Updated
 
-- Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance. 
+- Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance.
+- Add `subtitle` attribute to all Plotly Express traces
+- Make plotly-express dataframe agnostic via Narwhals [#4790](https://github.com/plotly/plotly.py/pull/4790)
 
 ## [5.24.1] - 2024-09-12
 
 ### Updated
 
-- Updated Plotly.js from version 2.35.0 to version 2.35.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2352----2024-09-10) for more information.
+- Updated Plotly.js from version 2.35.0 to version 3.0.0-rc.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2352----2024-11-11) for more information.
 
 ## [5.24.0] - 2024-08-29
 
@@ -24,6 +30,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Deprecate mapbox traces and mapbox subplot [[#7087](https://github.com/plotly/plotly.js/pull/7087)]
 
 - Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
+
+- Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused latex to not render in plotly charts. 
+
+- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7)
 
 ## [5.23.0] - 2024-07-23
 

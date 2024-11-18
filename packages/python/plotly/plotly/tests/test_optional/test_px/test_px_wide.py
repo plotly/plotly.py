@@ -1,50 +1,64 @@
 import plotly.express as px
 import plotly.graph_objects as go
-import pandas as pd
+import narwhals.stable.v1 as nw
 import numpy as np
+import pandas as pd
 from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
 import warnings
 
 
-def test_is_col_list():
-    df_input = pd.DataFrame(dict(a=[1, 2], b=[1, 2]))
-    assert _is_col_list(df_input, ["a"])
-    assert _is_col_list(df_input, ["a", "b"])
-    assert _is_col_list(df_input, [[3, 4]])
-    assert _is_col_list(df_input, [[3, 4], [3, 4]])
-    assert not _is_col_list(df_input, pytest)
-    assert not _is_col_list(df_input, False)
-    assert not _is_col_list(df_input, ["a", 1])
-    assert not _is_col_list(df_input, "a")
-    assert not _is_col_list(df_input, 1)
-    assert not _is_col_list(df_input, ["a", "b", "c"])
-    assert not _is_col_list(df_input, [1, 2])
+def test_is_col_list(constructor):
+    df_input = nw.from_native(constructor(dict(a=[1, 2], b=[1, 2])))
+    native_namespace = nw.get_native_namespace(df_input)
+    columns = df_input.columns
+    df_input = df_input.to_native()
+    is_pd_like = nw.dependencies.is_pandas_like_dataframe(df_input)
+    assert _is_col_list(columns, ["a"], is_pd_like, native_namespace)
+    assert _is_col_list(columns, ["a", "b"], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4]], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4], [3, 4]], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, pytest, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, False, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", 1], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, "a", is_pd_like, native_namespace)
+    assert not _is_col_list(columns, 1, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", "b", "c"], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, [1, 2], is_pd_like, native_namespace)
+
+
+def test_is_col_list_pandas():
     df_input = pd.DataFrame([[1, 2], [1, 2]])
-    assert _is_col_list(df_input, [0])
-    assert _is_col_list(df_input, [0, 1])
-    assert _is_col_list(df_input, [[3, 4]])
-    assert _is_col_list(df_input, [[3, 4], [3, 4]])
-    assert not _is_col_list(df_input, pytest)
-    assert not _is_col_list(df_input, False)
-    assert not _is_col_list(df_input, ["a", 1])
-    assert not _is_col_list(df_input, "a")
-    assert not _is_col_list(df_input, 1)
-    assert not _is_col_list(df_input, [0, 1, 2])
-    assert not _is_col_list(df_input, ["a", "b"])
+    is_pd_like = True
+    native_namespace = pd
+    columns = list(df_input.columns)
+    assert _is_col_list(columns, [0], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [0, 1], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4]], is_pd_like, native_namespace)
+    assert _is_col_list(columns, [[3, 4], [3, 4]], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, pytest, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, False, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", 1], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, "a", is_pd_like, native_namespace)
+    assert not _is_col_list(columns, 1, is_pd_like, native_namespace)
+    assert not _is_col_list(columns, [0, 1, 2], is_pd_like, native_namespace)
+    assert not _is_col_list(columns, ["a", "b"], is_pd_like, native_namespace)
+
     df_input = None
-    assert _is_col_list(df_input, [[3, 4]])
-    assert _is_col_list(df_input, [[3, 4], [3, 4]])
-    assert not _is_col_list(df_input, [0])
-    assert not _is_col_list(df_input, [0, 1])
-    assert not _is_col_list(df_input, pytest)
-    assert not _is_col_list(df_input, False)
-    assert not _is_col_list(df_input, ["a", 1])
-    assert not _is_col_list(df_input, "a")
-    assert not _is_col_list(df_input, 1)
-    assert not _is_col_list(df_input, [0, 1, 2])
-    assert not _is_col_list(df_input, ["a", "b"])
+    is_pd_like = False
+    native_namespace = None
+    assert _is_col_list(df_input, [[3, 4]], is_pd_like, native_namespace)
+    assert _is_col_list(df_input, [[3, 4], [3, 4]], is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, [0], is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, [0, 1], is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, pytest, is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, False, is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, ["a", 1], is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, "a", is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, 1, is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, [0, 1, 2], is_pd_like, native_namespace)
+    assert not _is_col_list(df_input, ["a", "b"], is_pd_like, native_namespace)
 
 
 @pytest.mark.parametrize(
@@ -157,8 +171,8 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
     if x == "index":
         expected["index"] = [11, 12, 13, 11, 12, 13]
     assert_frame_equal(
-        df_out.sort_index(axis=1),
-        pd.DataFrame(expected).sort_index(axis=1),
+        df_out.to_pandas(),
+        pd.DataFrame(expected)[df_out.columns],
     )
     if trace_type in [go.Histogram2dContour, go.Histogram2d]:
         if orientation is None or orientation == "v":
@@ -285,8 +299,8 @@ def test_wide_x_or_y(tt, df_in, args_in, x, y, color, df_out_exp, transpose):
         args_in["y"], args_in["x"] = args_in["x"], args_in["y"]
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, tt)
-    df_out = args_out.pop("data_frame").sort_index(axis=1)
-    assert_frame_equal(df_out, pd.DataFrame(df_out_exp).sort_index(axis=1))
+    df_out = args_out.pop("data_frame")
+    assert_frame_equal(df_out.to_native(), pd.DataFrame(df_out_exp)[df_out.columns])
     if transpose:
         args_exp = dict(x=y, y=x, color=color)
     else:
@@ -306,7 +320,7 @@ def test_wide_mode_internal_bar_exception(orientation):
     args_out = build_dataframe(args_in, go.Bar)
     df_out = args_out.pop("data_frame")
     assert_frame_equal(
-        df_out.sort_index(axis=1),
+        df_out.to_native(),
         pd.DataFrame(
             dict(
                 index=[11, 12, 13, 11, 12, 13],
@@ -314,7 +328,7 @@ def test_wide_mode_internal_bar_exception(orientation):
                 value=["q", "r", "s", "t", "u", "v"],
                 count=[1, 1, 1, 1, 1, 1],
             )
-        ).sort_index(axis=1),
+        )[df_out.columns],
     )
     if orientation is None or orientation == "v":
         assert args_out == dict(x="value", y="count", color="variable", orientation="v")
@@ -797,10 +811,11 @@ def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, go.Scatter)
     df_out = args_out.pop("data_frame")
+
     assert args_out == args_expect
     assert_frame_equal(
-        df_out.sort_index(axis=1),
-        df_expect.sort_index(axis=1),
+        df_out.to_pandas(),
+        df_expect[df_out.columns],
     )
 
 
@@ -828,15 +843,15 @@ def test_mixed_input_error(df):
     )
 
 
-def test_mixed_number_input():
-    df = pd.DataFrame(dict(a=[1, 2], b=[1.1, 2.1]))
+def test_mixed_number_input(constructor):
+    df = constructor(dict(a=[1, 2], b=[1.1, 2.1]))
     fig = px.line(df)
     assert len(fig.data) == 2
 
 
-def test_line_group():
-    df = pd.DataFrame(
-        data={
+def test_line_group(constructor):
+    df = constructor(
+        {
             "who": ["a", "a", "b", "b"],
             "x": [0, 1, 0, 1],
             "score": [1.0, 2, 3, 4],

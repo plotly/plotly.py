@@ -334,18 +334,6 @@ class Carpet(_BaseTraceType):
                 title
                     :class:`plotly.graph_objects.carpet.aaxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use carpet.aaxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleoffset
-                    Deprecated: Please use
-                    carpet.aaxis.title.offset instead. An
-                    additional amount by which to offset the title
-                    from the tick labels, given in pixels. Note
-                    that this used to be set by the now deprecated
-                    `titleoffset` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -667,18 +655,6 @@ class Carpet(_BaseTraceType):
                 title
                     :class:`plotly.graph_objects.carpet.baxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use carpet.baxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleoffset
-                    Deprecated: Please use
-                    carpet.baxis.title.offset instead. An
-                    additional amount by which to offset the title
-                    from the tick labels, given in pixels. Note
-                    that this used to be set by the now deprecated
-                    `titleoffset` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
