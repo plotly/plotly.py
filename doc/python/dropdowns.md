@@ -446,7 +446,7 @@ fig.show()
 
 ### Creating several independent graphs and using Jinja to insert them into a JavaScript enabled webpage 
 
-It is often easier to  create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a drop down that chooses which div to display.  This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration.  This requires both a Python program and a Jinja template file.  You may want to consult the documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template).  
+It is straight forward to  create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a drop down that chooses which div to display.  This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration.  It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections.  This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
 
 #### Python Code File
 
@@ -460,7 +460,9 @@ df = px.data.gapminder()
 #create a dictionary with Plotly figures as values
 fig_dict = {}
 
-# Loop through each unique continent and create a scatter plot using the 2007 data
+# we need to fill that dictionary with figures.  this example assumes that each figure has a title and that
+# we want to use the titles as descriptions in the drop down
+# This example happens to fill the dictionary by creating a scatter plot for each continent using the 2007 Gapminder data
 for continent in df['continent'].unique():
     # Filter data for the current continent 
     continent_data = df[(df['continent'] == continent) & (df['year'] == 2007)]
@@ -470,11 +472,12 @@ for continent in df['continent'].unique():
                      labels={'gdpPercap': 'GDP per Capita (USD)', 'lifeExp': 'Life Expectancy (Years)'},
                      hover_name='country',
                      )
+  #Standardizing the axes would make the graphs easier to compare
     
 # Create a dictionary, data_for_jinja with two entries:
-# the value for the "dropdown_entries" key contains string containing a series of <option> tags, one for each item in the drop down
-# the value for the "divs" key contains a string with a series of <div> tags, each containing the content that appears only when the user selects the corresponding item from the dropdown
-# in this example, that content is a figure and descriptive text.  
+# the value for the "dropdown_entries" key is a string containing a series of <option> tags, one tag for each item in the drop down
+# the value for the "divs" key is a string with a series of <div> tags, each containing the content that appears only when the user selects the corresponding item from the dropdown
+# in this example, the content of each div is a figure and descriptive text.  
 data_for_jinja= collections.defaultdict(str)
 text_dict = {}
 for n, figname in enumerate(fig_dict.keys()):
