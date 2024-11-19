@@ -652,9 +652,6 @@ def set_cartesian_axis_opts(args, axis, letter, orders):
 
 
 def configure_cartesian_marginal_axes(args, fig, orders):
-    if "histogram" in [args["marginal_x"], args["marginal_y"]]:
-        fig.layout["barmode"] = "overlay"
-
     nrows = len(fig._grid_ref)
     ncols = len(fig._grid_ref[0])
 
@@ -1497,17 +1494,14 @@ def build_dataframe(args, constructor):
     # If data_frame is provided, we parse it into a narwhals DataFrame, while accounting
     # for compatibility with pandas specific paths (e.g. Index/MultiIndex case).
     if df_provided:
-
         # data_frame is pandas-like DataFrame (pandas, modin.pandas, cudf)
         if nw.dependencies.is_pandas_like_dataframe(args["data_frame"]):
-
             columns = args["data_frame"].columns  # This can be multi index
             args["data_frame"] = nw.from_native(args["data_frame"], eager_only=True)
             is_pd_like = True
 
         # data_frame is pandas-like Series (pandas, modin.pandas, cudf)
         elif nw.dependencies.is_pandas_like_series(args["data_frame"]):
-
             args["data_frame"] = nw.from_native(
                 args["data_frame"], series_only=True
             ).to_frame()
@@ -1861,7 +1855,6 @@ def _check_dataframe_all_leaves(df: nw.DataFrame) -> None:
     for row_idx, row in zip(
         null_indices_mask, null_mask.filter(null_indices_mask).iter_rows()
     ):
-
         i = row.index(True)
 
         if not all(row[i:]):
@@ -1990,7 +1983,6 @@ def process_dataframe_hierarchy(args):
 
     if args["color"]:
         if discrete_color:
-
             discrete_aggs.append(args["color"])
             agg_f[args["color"]] = nw.col(args["color"]).max()
             agg_f[f'{args["color"]}{n_unique_token}'] = (
@@ -2045,7 +2037,6 @@ def process_dataframe_hierarchy(args):
         ).drop([f"{col}{n_unique_token}" for col in discrete_aggs])
 
     for i, level in enumerate(path):
-
         dfg = (
             df.group_by(path[i:], drop_null_keys=True)
             .agg(**agg_f)
@@ -2422,7 +2413,6 @@ def get_groups_and_orders(args, grouper):
     # figure out orders and what the single group name would be if there were one
     single_group_name = []
     unique_cache = dict()
-    grp_to_idx = dict()
 
     for i, col in enumerate(grouper):
         if col == one_group:
@@ -2440,27 +2430,28 @@ def get_groups_and_orders(args, grouper):
             else:
                 orders[col] = list(OrderedDict.fromkeys(list(orders[col]) + uniques))
 
-    grp_to_idx = {k: i for i, k in enumerate(orders)}
-
     if len(single_group_name) == len(grouper):
         # we have a single group, so we can skip all group-by operations!
         groups = {tuple(single_group_name): df}
     else:
-        required_grouper = list(orders.keys())
+        required_grouper = [group for group in orders if group in grouper]
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
-        sorted_group_names = list(grouped.keys())
 
-        for i, col in reversed(list(enumerate(required_grouper))):
-            sorted_group_names = sorted(
-                sorted_group_names,
-                key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
-            )
+        sorted_group_names = sorted(
+            grouped.keys(),
+            key=lambda values: [
+                orders[group].index(value) if value in orders[group] else -1
+                for group, value in zip(required_grouper, values)
+            ],
+        )
 
         # calculate the full group_names by inserting "" in the tuple index for one_group groups
         full_sorted_group_names = [
             tuple(
                 [
-                    "" if col == one_group else sub_group_names[grp_to_idx[col]]
+                    ""
+                    if col == one_group
+                    else sub_group_names[required_grouper.index(col)]
                     for col in grouper
                 ]
             )
@@ -2486,6 +2477,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     if constructor == "timeline":
         constructor = go.Bar
         args = process_dataframe_timeline(args)
+
+    # If we have marginal histograms, set barmode to "overlay"
+    if "histogram" in [args.get("marginal_x"), args.get("marginal_y")]:
+        layout_patch["barmode"] = "overlay"
 
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch
@@ -2558,7 +2553,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     legendgroup=trace_name,
                     showlegend=(trace_name != "" and trace_name not in trace_names),
                 )
-            if trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]:
+
+            # Set 'offsetgroup' only in group barmode (or if no barmode is set)
+            barmode = layout_patch.get("barmode")
+            if trace_spec.constructor in [go.Bar, go.Box, go.Violin, go.Histogram] and (
+                barmode == "group" or barmode is None
+            ):
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
             trace_names.add(trace_name)
 
