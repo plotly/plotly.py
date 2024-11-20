@@ -95,7 +95,7 @@ df = pd.DataFrame(
     columns=["col 1"], data=[1, 2, 3, dt(2014, 1, 5), pd.NaT, np_nan(), np_inf()]
 )
 
-rng = pd.date_range("1/1/2011", periods=2, freq="H")
+rng = pd.date_range("1/1/2011", periods=2, freq="h")
 ts = pd.Series([1.5, 2.5], index=rng)
 
 
