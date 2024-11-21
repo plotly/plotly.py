@@ -562,7 +562,6 @@ setup(
     install_requires=read_req_file("install"),
     extras_require={
         "express": read_req_file("express"),
-        "dev": read_req_file("dev"),
     },
     zip_safe=False,
     cmdclass=dict(
