@@ -136,17 +136,15 @@ We will support Python 3.12 and higher versions soon.
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
-### Install requirements - (Non-Windows)
+### Install development requirements (Non-Windows)
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requires-install.txt
 (plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
  ```
-### Install requirements - (Windows + Conda)
+### Install development requirements (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
 complete installation and avoid gdal-config errors.
 
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requires-install.txt
 (plotly_dev) $ conda install fiona
 (plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
 ```
