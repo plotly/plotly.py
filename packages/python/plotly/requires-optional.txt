@@ -30,7 +30,7 @@ pytz
 requests
 psutil
 
-## code formatting
+## code formatting ##
 pre-commit
 black==22.3.0
 
@@ -40,9 +40,6 @@ inflect
 ## template generation ##
 colorcet
 
-## ipython ##
-ipython
-
 ## pandas (for some matplotlib functionality) ##
 pandas
 
@@ -51,8 +48,7 @@ scipy
 
 ## jupyter ##
 jupyter
-jupyterlab
-ipykernel
+anywidget
 
 ## deps for _county_choropleth.py figure factory ##
 pyshp
