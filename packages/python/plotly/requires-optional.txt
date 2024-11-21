@@ -1,5 +1,13 @@
 ### Optional Dependencies for Additional Plotly Functionality   ###
 ###                                                             ###
+### This file lists packages which are not strictly required    ###
+### by Plotly.py, but which are needed to use some of the       ###
+### library's functionality. See headings below for more        ###
+### See headings below for more detail.                         ###
+###                                                             ###
+### Packages used in the development process are also listed    ###
+### here.                                                       ###
+###                                                             ###
 ### To install, run:                                            ###
 ###      $ pip install -r requires-dev.txt                      ###
 ###                                                             ###

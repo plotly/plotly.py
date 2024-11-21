@@ -3,6 +3,6 @@ include README.md
 include versioneer.py
 include plotly/_version.py
 include requires-install.txt
-include requires-dev.txt
+include requires-optional.txt
 include requires-express.txt
 include plotly/package_data/widgetbundle.js
