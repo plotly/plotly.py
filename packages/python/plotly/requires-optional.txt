@@ -9,7 +9,7 @@
 ### here.                                                       ###
 ###                                                             ###
 ### To install, run:                                            ###
-###      $ pip install -r requires-dev.txt                      ###
+###      $ pip install -r requires-optional.txt                 ###
 ###                                                             ###
 ###################################################################
 
