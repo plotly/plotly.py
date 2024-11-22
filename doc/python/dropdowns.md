@@ -470,9 +470,12 @@ for continent in df['continent'].unique():
     fig_dict[continent] = px.scatter(continent_data, x='gdpPercap', y='lifeExp', 
                      title=f'GDP vs Life Expectancy for {continent}',
                      labels={'gdpPercap': 'GDP per Capita (USD)', 'lifeExp': 'Life Expectancy (Years)'},
-                     hover_name='country',
+                     hover_name='country',size="pop", size_max=55 
                      )
-  #Standardizing the axes would make the graphs easier to compare
+    #Standardizing the axes makes the graphs easier to compare
+    fig_dict[continent].update_xaxes(range=[0,50000])
+    fig_dict[continent].update_yaxes(range=[25,90])
+
     
 # Create a dictionary, data_for_jinja with two entries:
 # the value for the "dropdown_entries" key is a string containing a series of <option> tags, one tag for each item in the drop down
@@ -485,7 +488,8 @@ for n, figname in enumerate(fig_dict.keys()):
     data_for_jinja["dropdown_entries"]+=f"<option value='{figname}'>{fig_dict[figname].layout.title.text}</option>"
     #YOU MAY NEED TO UPDATE THE LINK TO THE LATEST PLOTLY.JS
     fig_html = fig_dict[figname].to_html(full_html=False, config=dict(responsive=False, scrollZoom=False, doubleClick=False), include_plotlyjs = "https://cdn.plot.ly/plotly-2.35.2.min.js")
-    data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {"style=""display:none;"""*(n>0)}>{fig_html}{text_dict[figname]}</div>'
+    initially_hide_divs_other_than_the_first = "style=""display:none;"""*(n>0)   
+    data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {initially_hide_divs_other_than_the_first}>{fig_html}{text_dict[figname]}</div>'
 
 # Insert data into the template and write the file to disk
 # YOU WILL LIKELY NEED TO CUSTOMIZE THESE PATHS
