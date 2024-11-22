@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Added
+- Add `plotly[express]` extra for easily installing Plotly Express dependencies [#4644](https://github.com/plotly/plotly.py/pull/4644)
+
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API
 - Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
