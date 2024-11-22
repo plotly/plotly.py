@@ -43,14 +43,14 @@ colorcet
 ## pandas (for some matplotlib functionality) ##
 pandas
 
-## scipy deps (for some FigureFactory functions) ##
+## scipy deps (for some Figure Factory functions) ##
 scipy
 
 ## jupyter ##
 jupyter
 anywidget
 
-## deps for _county_choropleth.py figure factory ##
+## deps for _county_choropleth.py (Figure Factory) ##
 pyshp
 geopandas
 shapely
