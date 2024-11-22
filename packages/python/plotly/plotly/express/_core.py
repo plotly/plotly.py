@@ -1486,9 +1486,8 @@ def build_dataframe(args, constructor):
     # PySpark to pandas.
     is_pd_like = False
 
-    # Flag that indicates if data_frame requires to be converted to arrow via the
-    # dataframe interchange protocol.
-    # True if Ibis, DuckDB, Vaex or implements __dataframe__
+    # Flag that indicates if data_frame needs to be converted to PyArrow.
+    # True if Ibis, DuckDB, Vaex, or implements __dataframe__
     needs_interchanging = False
 
     # If data_frame is provided, we parse it into a narwhals DataFrame, while accounting
