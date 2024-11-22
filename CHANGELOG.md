@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API
 - Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
-- Drop support for Jupyter Notebook 6 and earlier [#4822](https://github.com/plotly/plotly.py/pull/4822)
+- Drop support for Jupyter Notebook version 6 and earlier [#4822](https://github.com/plotly/plotly.py/pull/4822)
 
 ### Updated
 - Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance.
