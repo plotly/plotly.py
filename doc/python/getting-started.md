@@ -66,13 +66,14 @@ or `conda`:
 ```
 $ conda install -c plotly plotly=5.24.1
 ```
-This package contains everything you need to write figures to standalone HTML files.
 
-```python
-import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
-fig.write_html('first_figure.html', auto_open=True)
+If you want to use Plotly Express, install its required dependencies with:
+
 ```
+pip install plotly[express]==5.24.1
+```
+
+You'll also need to install a [supported dataframe library](/python/px-arguments#supported-dataFrame-types).
 
 ### Plotly charts in Dash
 
