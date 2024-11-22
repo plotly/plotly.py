@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API
 - Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
-- Drop support for Jupyter Notebook 6 and earlier [#4822](https://github.com/plotly/plotly.py/pull/4822)
+- Drop support for Jupyter Notebook version 6 and earlier [#4822](https://github.com/plotly/plotly.py/pull/4822)
 
 ### Updated
 - Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance.
@@ -51,7 +51,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
 
-- Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused latex to not render in plotly charts.
+- Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused LaTeX to not render in plotly charts.
 
 - Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7)
 
