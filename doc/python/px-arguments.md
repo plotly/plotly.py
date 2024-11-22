@@ -127,8 +127,6 @@ You can also pass dataframes that are not natively supported, but which support 
 
 PySpark dataframes are also supported and are converted to pandas dataframes internally by Plotly Express.
 
-> There is a known issue where `px.icicle`, `px.treemap`, and `px.sunburst` used with a `path` parameter won't work with cuDF dataframes.
-
 #### Additional Dependencies Required
 
 - Plotly Express requires NumPy. You can install it with `pip install numpy` if it's not installed by the dataframe library you are using.
