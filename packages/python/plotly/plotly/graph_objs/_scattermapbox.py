@@ -2299,4 +2299,5 @@ an instance of :class:`plotly.graph_objs.Scattermapbox`"""
             + " Use *scattermap* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
             stacklevel=2,
+            category=DeprecationWarning,
         )
