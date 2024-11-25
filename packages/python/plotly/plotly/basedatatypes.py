@@ -4858,9 +4858,7 @@ class BasePlotlyType(object):
                     self._set_compound_prop(prop, value)
 
                 # ### Handle compound array property ###
-                elif isinstance(
-                    validator, (CompoundArrayValidator, BaseDataValidator)
-                ):
+                elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
                     self._set_array_prop(prop, value)
 
                 # ### Handle simple property ###
