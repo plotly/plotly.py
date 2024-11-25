@@ -5,7 +5,7 @@ from io import StringIO
 from codegen.utils import PlotlyNode, write_source_py
 
 
-Deprecated_mapbox_traces = [
+deprecated_mapbox_traces = [
     "scattermapbox",
     "choroplethmapbox",
     "densitymapbox",
@@ -102,7 +102,7 @@ def build_datatype_py(node):
     )
     buffer.write(f"import copy as _copy\n")
 
-    if node.name_property in Deprecated_mapbox_traces:
+    if node.name_property in deprecated_mapbox_traces:
         buffer.write(f"from warnings import warn\n")
 
     # Write class definition
@@ -410,7 +410,7 @@ an instance of :class:`{class_name}`\"\"\")
 """
     )
 
-    if node.name_property in Deprecated_mapbox_traces:
+    if node.name_property in deprecated_mapbox_traces:
         buffer.write(
             f"""
         warn(
