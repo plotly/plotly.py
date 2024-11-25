@@ -28,12 +28,6 @@ from . import _subplots
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
 
-Deprecated_mapbox_traces = [
-    "scattermapbox",
-    "choroplethmapbox",
-    "densitymapbox",
-]
-
 
 def _len_dict_item(item):
     """
