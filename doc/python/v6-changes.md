@@ -61,6 +61,10 @@ Plotly.py now takes advantage of recent changes in how Plotly.js handles typed a
 
 Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow.
 
+## Mapbox Deprecation
+
+Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [Maplibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
+
 ## Removed Attributes
 
 The following attributes have been removed in Plotly.py 6.
