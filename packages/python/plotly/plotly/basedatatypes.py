@@ -4846,56 +4846,51 @@ class BasePlotlyType(object):
             # ### Unwrap scalar tuple ###
             prop = prop[0]
 
-            # skip deprecated mapbox templates
-            if (
-                prop not in Deprecated_mapbox_traces
-                or "template" not in self._parent_path_str
-            ):
-                if self._validate:
-                    if prop not in self._valid_props:
-                        self._raise_on_invalid_property_error()(prop)
+            if self._validate:
+                if prop not in self._valid_props:
+                    self._raise_on_invalid_property_error()(prop)
 
-                    # ### Get validator for this property ###
-                    validator = self._get_validator(prop)
+                # ### Get validator for this property ###
+                validator = self._get_validator(prop)
 
-                    # ### Handle compound property ###
-                    if isinstance(validator, CompoundValidator):
-                        self._set_compound_prop(prop, value)
+                # ### Handle compound property ###
+                if isinstance(validator, CompoundValidator):
+                    self._set_compound_prop(prop, value)
 
-                    # ### Handle compound array property ###
-                    elif isinstance(
-                        validator, (CompoundArrayValidator, BaseDataValidator)
-                    ):
-                        self._set_array_prop(prop, value)
+                # ### Handle compound array property ###
+                elif isinstance(
+                    validator, (CompoundArrayValidator, BaseDataValidator)
+                ):
+                    self._set_array_prop(prop, value)
 
-                    # ### Handle simple property ###
-                    else:
-                        self._set_prop(prop, value)
+                # ### Handle simple property ###
                 else:
-                    # Make sure properties dict is initialized
-                    self._init_props()
+                    self._set_prop(prop, value)
+            else:
+                # Make sure properties dict is initialized
+                self._init_props()
 
-                    if isinstance(value, BasePlotlyType):
-                        # Extract json from graph objects
-                        value = value.to_plotly_json()
+                if isinstance(value, BasePlotlyType):
+                    # Extract json from graph objects
+                    value = value.to_plotly_json()
 
-                    # Check for list/tuple of graph objects
-                    if (
-                        isinstance(value, (list, tuple))
-                        and value
-                        and isinstance(value[0], BasePlotlyType)
-                    ):
-                        value = [
-                            v.to_plotly_json() if isinstance(v, BasePlotlyType) else v
-                            for v in value
-                        ]
+                # Check for list/tuple of graph objects
+                if (
+                    isinstance(value, (list, tuple))
+                    and value
+                    and isinstance(value[0], BasePlotlyType)
+                ):
+                    value = [
+                        v.to_plotly_json() if isinstance(v, BasePlotlyType) else v
+                        for v in value
+                    ]
 
-                    self._props[prop] = value
+                self._props[prop] = value
 
-                    # Remove any already constructed graph object so that it will be
-                    # reconstructed on property access
-                    self._compound_props.pop(prop, None)
-                    self._compound_array_props.pop(prop, None)
+                # Remove any already constructed graph object so that it will be
+                # reconstructed on property access
+                self._compound_props.pop(prop, None)
+                self._compound_array_props.pop(prop, None)
 
         # Handle non-scalar case
         # ----------------------
