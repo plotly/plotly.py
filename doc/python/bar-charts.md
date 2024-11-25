@@ -307,7 +307,7 @@ fig.show()
 ### Bar Chart with Relative Barmode
 
 With "relative" barmode, the bars are stacked on top of one another, with negative values
-below the axis, positive values above.
+below the axis and positive values above.
 
 ```python
 import plotly.graph_objects as go
@@ -327,7 +327,7 @@ fig.show()
 
 *Supported in Plotly.py 6.0.0 and later*
 
-Use the `offsetgroup` property with `barmode="stacked"` or `barmode="relative"` to create grouped stacked bar charts. Bars that have the same `offsetgroup` will share the same position on the axis. Bars with no `offsetgroup` set will also share the same position on the axis. In the following example, for each quarter, the value for cities that belong to the same `offsetgroup` are stacked together. 
+Use the `offsetgroup` property with `barmode="stacked"` or `barmode="relative"` to create grouped stacked bar charts. Bars that have the same `offsetgroup` will share the same position on the axis. Bars with no `offsetgroup` set will also share the same position on the axis. In the following example, for each quarter, the value for cities that belong to the same `offsetgroup` are stacked together.
 
 ```python
 import plotly.graph_objects as go
