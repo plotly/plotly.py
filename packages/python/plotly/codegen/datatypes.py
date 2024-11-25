@@ -417,7 +417,8 @@ an instance of :class:`{class_name}`\"\"\")
             "*{node.name_property}* is deprecated!"
             + " Use *{node.name_property.replace("mapbox", "map")}* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-            stacklevel=2
+            stacklevel=2,
+            category=DeprecationWarning,
         )
 """
         )

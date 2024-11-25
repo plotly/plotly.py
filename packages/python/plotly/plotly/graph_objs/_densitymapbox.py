@@ -2326,4 +2326,5 @@ an instance of :class:`plotly.graph_objs.Densitymapbox`"""
             + " Use *densitymap* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
             stacklevel=2,
+            category=DeprecationWarning,
         )
