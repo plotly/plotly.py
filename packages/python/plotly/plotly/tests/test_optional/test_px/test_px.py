@@ -293,7 +293,7 @@ def test_category_order_with_category_as_x(backend):
     # https://github.com/plotly/plotly.py/issues/4875
     tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.bar(
-        tips,
+        tips.to_native(),
         x="day",
         y="total_bill",
         color="smoker",
