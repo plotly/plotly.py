@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API [[#4815](https://github.com/plotly/plotly.py/pull/4815)]
 - Drop `tenacity` dependency [[#4831](https://github.com/plotly/plotly.py/pull/4831)]
-- Drop support for Jupyter Notebook version 6 and earlier [[#4822](https://github.com/plotly/plotly.py/pull/4822)]
+- Drop support for Jupyter Notebook version 6 and earlier [[#4822](https://github.com/plotly/plotly.py/pull/4822)]. The minimum supported version is now 7.0.0.
 
 ### Updated
 - Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to Maplibre.
