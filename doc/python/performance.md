@@ -74,7 +74,7 @@ The following [array data types](https://numpy.org/devdocs/reference/arrays.scal
 - int32
 - uint32
 
-*If the array dtype is **int64** or **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to other types internally by Plotly.py where possible. When working with NumPY directly, you can [specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects.
+*If the array dtype is **int64** or **uint64**, often the default dtype for arrays in NumPy when no dtype is specified, those dtypes will be changed to supported types internally by Plotly.py where possible. When working with NumPy directly, you can [also specify the `dtype`](https://numpy.org/doc/stable/user/basics.types.html#array-types-and-conversions-between-types) when creating `ndarray` objects, and Plotly.py won't need to make the conversion internally.
 
 Arrays or data types that are not supported for base64 encoding to Plotly.js's typed arrays specification will still work and render correctly with Plotly. Those arrays and or data types just won't have the performance benefits that Plotly.js's base64 typed arrays feature provides.
 
