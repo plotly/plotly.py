@@ -1,3 +1,5 @@
+from warnings import warn
+
 from ._core import make_figure
 from ._doc import make_docstring
 import plotly.graph_objs as go
@@ -1415,9 +1417,18 @@ def scatter_mapbox(
     height=None,
 ) -> go.Figure:
     """
+    *scatter_mapbox* is deprecated! Use *scatter_map* instead.
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
     In a Mapbox scatter plot, each row of `data_frame` is represented by a
     symbol mark on a Mapbox map.
     """
+    warn(
+        "*scatter_mapbox* is deprecated!"
+        + " Use *scatter_map* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
+        category=DeprecationWarning,
+    )
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
 
@@ -1453,9 +1464,18 @@ def choropleth_mapbox(
     height=None,
 ) -> go.Figure:
     """
+    *choropleth_mapbox* is deprecated! Use *choropleth_map* instead.
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
     In a Mapbox choropleth map, each row of `data_frame` is represented by a
     colored region on a Mapbox map.
     """
+    warn(
+        "*choropleth_mapbox* is deprecated!"
+        + " Use *choropleth_map* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
+        category=DeprecationWarning,
+    )
     return make_figure(args=locals(), constructor=go.Choroplethmapbox)
 
 
@@ -1489,9 +1509,18 @@ def density_mapbox(
     height=None,
 ) -> go.Figure:
     """
+    *density_mapbox* is deprecated! Use *density_map* instead.
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
     In a Mapbox density map, each row of `data_frame` contributes to the intensity of
     the color of the region around the corresponding point on the map
     """
+    warn(
+        "*density_mapbox* is deprecated!"
+        + " Use *density_map* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
+        category=DeprecationWarning,
+    )
     return make_figure(
         args=locals(), constructor=go.Densitymapbox, trace_patch=dict(radius=radius)
     )
@@ -1526,9 +1555,18 @@ def line_mapbox(
     height=None,
 ) -> go.Figure:
     """
+    *line_mapbox* is deprecated! Use *line_map* instead.
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
     In a Mapbox line plot, each row of `data_frame` is represented as
     a vertex of a polyline mark on a Mapbox map.
     """
+    warn(
+        "*line_mapbox* is deprecated!"
+        + " Use *line_map* instead."
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
+        category=DeprecationWarning,
+    )
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
 
