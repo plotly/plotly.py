@@ -55,7 +55,7 @@ pip install anywidget
 
 ## Processing NumPy and NumPy-Convertible Arrays
 
-Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](python/performance/) for more details.
+Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](https://plotly.com/python/performance/) for more details.
 
 ## Dataframe Support
 
