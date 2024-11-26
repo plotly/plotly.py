@@ -70,7 +70,7 @@ $ conda install -c plotly plotly=5.24.1
 If you want to use Plotly Express, install its required dependencies with:
 
 ```
-pip install plotly[express]==5.24.1
+pip install plotly[express]
 ```
 
 You'll also need to install a [supported dataframe library](/python/px-arguments#supported-dataFrame-types).
