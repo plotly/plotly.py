@@ -464,7 +464,7 @@ def test_arguments_not_modified(backend):
 def test_pass_df_columns(backend):
     tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.histogram(
-        tips,
+        tips.to_native(),
         x="total_bill",
         y="tip",
         color="sex",
