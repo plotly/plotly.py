@@ -128,7 +128,7 @@ Each `plotly` trace type is rendered with either SVG or WebGL. The following tra
 
 * Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`,
 * High-performance multidimensional trace types: `splom`, or `parcoords`
-* 3D trace types `scatter3d`, `surface`, `mesh3d`, `cone`, `streamtube`
+* 3D trace types `scatter3d`, `surface`, `mesh3d`, `cone`, `streamtube`, `isosurface`, `volume`
 * Mapbox Gl JS-powered trace types: `scattermapbox`, `choroplethmapbox`, `densitymapbox`
 
 ### WebGL Limitations and Tradeoffs
