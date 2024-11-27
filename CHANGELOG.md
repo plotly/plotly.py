@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
 - Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
 - Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4736](https://github.com/plotly/plotly.py/pull/4763)]
-- Update Plotly.js from version 2.34.2 to version 3.0.0-rc0 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300-rc0----2024-11-11) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Update Plotly.js from version 2.34.2 to version 3.0.0-rc1 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300-rc1----2024-11-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Make offsetgroup work with barmode "stacked" and "relative" for bar traces [[#7009](https://github.com/plotly/plotly.js/pull/7009)]
   - Drop support for deprecated attributes `titlefont`, `titleposition`, `titleside`, and `titleoffset` [[#7212](https://github.com/plotly/plotly.js/pull/7212)].
   - Drop deprecated pointcloud and heatmapgl traces and gl2d subplots [[#7213](https://github.com/plotly/plotly.js/pull/7213)]
