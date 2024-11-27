@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [UNRELEASED]
+
 ### Added
 - Add `plotly[express]` extra for easily installing Plotly Express dependencies [[#4644](https://github.com/plotly/plotly.py/pull/4644)]
 - Add `subtitle` attribute to all Plotly Express traces [[#4830](https://github.com/plotly/plotly.py/pull/4830)].
