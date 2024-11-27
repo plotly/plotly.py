@@ -70,8 +70,6 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 - [Contributing to plotly](https://github.com/plotly/plotly.py/blob/master/contributing.md)
 - [Changelog](https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md)
 - [Code of Conduct](https://github.com/plotly/plotly.py/blob/master/CODE_OF_CONDUCT.md)
-- [Version 4 Migration Guide](https://plotly.com/python/v4-migration/)
-- [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
 - [Community forum](https://community.plotly.com)
 
 ---
@@ -142,12 +140,6 @@ or conda
 ```
 conda install -c plotly plotly-geo=1.0.0
 ```
-
-## Migration
-
-If you're migrating from plotly.py v3 to v4, please check out the [Version 4 migration guide](https://plotly.com/python/v4-migration/)
-
-If you're migrating from plotly.py v2 to v3, please check out the [Version 3 migration guide](https://github.com/plotly/plotly.py/blob/master/migration-guide.md)
 
 ## Copyright and Licenses
 

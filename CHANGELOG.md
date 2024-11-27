@@ -3,17 +3,36 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
-- Add `plotly[express]` extra for easily installing Plotly Express dependencies [#4644](https://github.com/plotly/plotly.py/pull/4644)
+- Add `plotly[express]` extra for easily installing Plotly Express dependencies [[#4644](https://github.com/plotly/plotly.py/pull/4644)]
+- Add `subtitle` attribute to all Plotly Express traces [[#4830](https://github.com/plotly/plotly.py/pull/4830)].
 
 ### Removed
-- Drop deprecated `pointcloud` and `heatmapgl` traces from the API
-- Drop `tenacity` dependency [#4831](https://github.com/plotly/plotly.js/pull/4831)
+- Drop deprecated `pointcloud` and `heatmapgl` traces from the API [[#4815](https://github.com/plotly/plotly.py/pull/4815)]
+- Drop `tenacity` dependency [[#4831](https://github.com/plotly/plotly.py/pull/4831)]
+- Drop support for Jupyter Notebook version 6 and earlier [[#4822](https://github.com/plotly/plotly.py/pull/4822)]. The minimum supported version is now 7.0.0.
 
 ### Updated
+- Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to Maplibre.
+- Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
+- Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
+- Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
+- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4736](https://github.com/plotly/plotly.py/pull/4763)]
+- Update Plotly.js from version 2.34.2 to version 3.0.0-rc0 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300-rc0----2024-11-11) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - Make offsetgroup work with barmode "stacked" and "relative" for bar traces [[#7009](https://github.com/plotly/plotly.js/pull/7009)]
+  - Drop support for deprecated attributes `titlefont`, `titleposition`, `titleside`, and `titleoffset` [[#7212](https://github.com/plotly/plotly.js/pull/7212)].
+  - Drop deprecated pointcloud and heatmapgl traces and gl2d subplots [[#7213](https://github.com/plotly/plotly.js/pull/7213)]
+  - Drop support for deprecated `bardir` attribute (use `orientation` instead) [[#7214](https://github.com/plotly/plotly.js/pull/7214)]
+  - Drop support for deprecated `annotation.ref` attribute (use `annotation.xref` and `annotation.yref` instead) [[#7215](https://github.com/plotly/plotly.js/pull/7215)]
+  - Drop support for deprecated error bar `opacity` attribute (use alpha channel of error bar `color` attribute instead) [[#7214](https://github.com/plotly/plotly.js/pull/7216)]
+  - Drop support for deprecated attribute `gl3d.cameraposition` (use `gl3d.camera` instead) [[#7217](https://github.com/plotly/plotly.js/pull/7217)]
+  - Drop deprecated `plot3dPixelRatio` from config [[#7231](https://github.com/plotly/plotly.js/pull/7231)]
+  - Drop deprecated `zauto`, `zmin` and `zmax` from the surface trace [[#7234](https://github.com/plotly/plotly.js/pull/7234)]
+  - Drop deprecated `autotick` attributes from cartesian axes [[#7236](https://github.com/plotly/plotly.js/pull/7236)]
+  - Drop `transforms` from the API [[#7240](https://github.com/plotly/plotly.js/pull/7240), [#7254](https://github.com/plotly/plotly.js/pull/7254)]
 
-- Updated plotly.py to use base64 encoding of arrays in plotly JSON to improve performance.
-- Add `subtitle` attribute to all Plotly Express traces
-- Make plotly-express dataframe agnostic via Narwhals [#4790](https://github.com/plotly/plotly.py/pull/4790)
+## Fixed
+- Fix a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused LaTeX to not render in plotly charts [[#4763](https://github.com/plotly/plotly.py/pull/4763)].
+- Fix `go.FigureWidget.show` to return `FigureWidget` instead of displaying `Figure` [[#4869](https://github.com/plotly/plotly.py/pull/4869)]
 
 ## [5.24.1] - 2024-09-12
 
@@ -33,10 +52,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Deprecate mapbox traces and mapbox subplot [[#7087](https://github.com/plotly/plotly.js/pull/7087)]
 
 - Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
-
-- Fixed a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused latex to not render in plotly charts. 
-
-- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7)
 
 ## [5.23.0] - 2024-07-23
 
