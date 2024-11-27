@@ -58,13 +58,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==5.24.1
+$ pip install plotly
 ```
 
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.24.1
+$ conda install -c plotly plotly
 ```
 
 If you want to use Plotly Express, install its required dependencies with:
