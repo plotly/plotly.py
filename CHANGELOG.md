@@ -32,7 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Drop deprecated `autotick` attributes from cartesian axes [[#7236](https://github.com/plotly/plotly.js/pull/7236)]
   - Drop `transforms` from the API [[#7240](https://github.com/plotly/plotly.js/pull/7240), [#7254](https://github.com/plotly/plotly.js/pull/7254)]
 
-## Fixed
+### Fixed
 - Fix a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused LaTeX to not render in plotly charts [[#4763](https://github.com/plotly/plotly.py/pull/4763)].
 - Fix `go.FigureWidget.show` to return `FigureWidget` instead of displaying `Figure` [[#4869](https://github.com/plotly/plotly.py/pull/4869)]
 
