@@ -571,16 +571,15 @@ def test_timeline(constructor):
         ["Finish"],
     ],
 )
-def test_timeline_cols_already_temporal(constructor, datetime_columns: list[str]):
+def test_timeline_cols_already_temporal(constructor, datetime_columns):
     # https://github.com/plotly/plotly.py/issues/4913
     data = {
         "Task": ["Job A", "Job B", "Job C"],
         "Start": ["2009-01-01", "2009-03-05", "2009-02-20"],
         "Finish": ["2009-02-28", "2009-04-15", "2009-05-30"],
     }
-    df = constructor(data)
     df = (
-        nw.from_native(df)
+        nw.from_native(constructor(data))
         .with_columns(nw.col(datetime_columns).str.to_datetime(format="%Y-%m-%d"))
         .to_native()
     )
