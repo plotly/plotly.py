@@ -1168,16 +1168,13 @@ def _escape_col_name(columns, col_name, extra):
     return col_name
 
 
-def to_unindexed_series(x, name=None, native_namespace=None):
-    """Assuming x is list-like or even an existing Series, returns a new Series (with
-    its index reset if pandas-like). Stripping the index from existing pd.Series is
-    required to get things to match up right in the new DataFrame we're building.
-    """
+def to_named_series(x, name=None, native_namespace=None):
+    """Assuming x is list-like or even an existing Series, returns a new Series named `name`."""
     # With `pass_through=True`, the original object will be returned if unable to convert
     # to a Narwhals Series.
     x = nw.from_native(x, series_only=True, pass_through=True)
     if isinstance(x, nw.Series):
-        return nw.maybe_reset_index(x).rename(name)
+        return x.rename(name)
     elif native_namespace is not None:
         return nw.new_series(name=name, values=x, native_namespace=native_namespace)
     else:
@@ -1306,7 +1303,7 @@ def process_args_into_dataframe(
                                 length,
                             )
                         )
-                    df_output[col_name] = to_unindexed_series(
+                    df_output[col_name] = to_named_series(
                         real_argument, col_name, native_namespace
                     )
                 elif not df_provided:
@@ -1343,7 +1340,7 @@ def process_args_into_dataframe(
                     )
                 else:
                     col_name = str(argument)
-                    df_output[col_name] = to_unindexed_series(
+                    df_output[col_name] = to_named_series(
                         df_input.get_column(argument), col_name
                     )
             # ----------------- argument is likely a column / array / list.... -------
@@ -1362,7 +1359,7 @@ def process_args_into_dataframe(
                             argument.name is not None
                             and argument.name in df_input.columns
                             and (
-                                to_unindexed_series(
+                                to_named_series(
                                     argument, argument.name, native_namespace
                                 )
                                 == df_input.get_column(argument.name)
@@ -1380,7 +1377,7 @@ def process_args_into_dataframe(
                         % (field, len_arg, str(list(df_output.keys())), length)
                     )
 
-                df_output[str(col_name)] = to_unindexed_series(
+                df_output[str(col_name)] = to_named_series(
                     x=argument,
                     name=str(col_name),
                     native_namespace=native_namespace,

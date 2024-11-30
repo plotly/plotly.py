@@ -6,5 +6,5 @@
 ###################################################
 
 ## dataframe agnostic layer ##
-narwhals>=1.13.3
+narwhals>=1.15.1
 packaging
