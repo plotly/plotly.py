@@ -51,8 +51,8 @@ def to_typed_array_spec(v):
 
     # convert default Big Ints until we could support them in plotly.js
     if dtype == "int64":
-        max = v.max() if v else 0
-        min = v.min() if v else 0
+        max = v.max() if v.size > 0 else 0
+        min = v.min() if v.size > 0 else 0
         if max <= int8max and min >= int8min:
             v = v.astype("int8")
         elif max <= int16max and min >= int16min:
@@ -63,8 +63,8 @@ def to_typed_array_spec(v):
             return v
 
     elif dtype == "uint64":
-        max = v.max() if v else 0
-        min = v.min() if v else 0
+        max = v.max() if v.size > 0 else 0
+        min = v.min() if v.size > 0 else 0
         if max <= uint8max and min >= 0:
             v = v.astype("uint8")
         elif max <= uint16max and min >= 0:
