@@ -504,38 +504,40 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 
 #### Jinja HTML Template
 
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- #region -->
 
-</head>
-<body>
-    <div class="container">
-        <h1>Select an analysis</h1>
-        <select id="dropdown" class="form-control">
+```
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Select an analysis&lt;/h1&gt;
+        &lt;select id="dropdown" class="form-control"&gt;
     {{ dropdown_entries }}
-        </select>
+        &lt;/select&gt;
 
 
         {{ divs }}
 
-    </div>
+    &lt;/div&gt;
 
-    <script>
+    &lt;script&gt;
         document.getElementById('dropdown').addEventListener('change', function() {
             const divs = document.querySelectorAll('.content-div');
-            divs.forEach(div => div.style.display = 'none');
+            divs.forEach(div =&gt; div.style.display = 'none');
 
             const selectedDiv = document.getElementById(this.value);
             if (selectedDiv) {
                 selectedDiv.style.display = 'block';
             }
         });
-    </script>
-</body>
-</html>
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 ```
 
 
