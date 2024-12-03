@@ -43,16 +43,18 @@ def to_typed_array_spec(v):
     """
     v = copy_to_readonly_numpy_array(v)
 
+    # Skip b64 encoding if numpy is not installed,
+    # or if v is not a numpy array, or if v is empty
     np = get_module("numpy", should_load=False)
-    if not np or not isinstance(v, np.ndarray):
+    if not np or not isinstance(v, np.ndarray) or v.size == 0:
         return v
 
     dtype = str(v.dtype)
 
     # convert default Big Ints until we could support them in plotly.js
     if dtype == "int64":
-        max = v.max() if v.size > 0 else 0
-        min = v.min() if v.size > 0 else 0
+        max = v.max()
+        min = v.min()
         if max <= int8max and min >= int8min:
             v = v.astype("int8")
         elif max <= int16max and min >= int16min:
@@ -63,8 +65,8 @@ def to_typed_array_spec(v):
             return v
 
     elif dtype == "uint64":
-        max = v.max() if v.size > 0 else 0
-        min = v.min() if v.size > 0 else 0
+        max = v.max()
+        min = v.min()
         if max <= uint8max and min >= 0:
             v = v.astype("uint8")
         elif max <= uint16max and min >= 0:
