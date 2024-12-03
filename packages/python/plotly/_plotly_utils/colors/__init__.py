@@ -426,12 +426,17 @@ def convert_colors_to_same_type(
     be coverted to the selected colortype. If colors is None, then there is an
     option to return portion of the DEFAULT_PLOTLY_COLORS
 
-    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
-        color, a color tuple or a list/tuple of colors
-    :param (list) scale: see docs for validate_scale_values()
+    Parameters
+    ----------
+    colors : str or tuple or list
+        Either a plotly scale name, an rgb or hex color, a color tuple, or a list/tuple of colors.
+    scale : list
+        See docs for validate_scale_values().
 
-    :rtype (tuple) (colors_list, scale) if scale is None in the function call,
-        then scale will remain None in the returned tuple
+    Returns
+    -------
+    tuple
+        (colors_list, scale) if scale is None in the function call, then scale will remain None in the returned tuple.
     """
     colors_list = []
 
@@ -496,7 +501,10 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
     """
     Converts a colors in a dictionary of colors to the specified color type
 
-    :param (dict) colors_dict: a dictionary whose values are single colors
+    Parameters
+    ----------
+    colors_dict : dict
+        A dictionary whose values are single colors.
     """
     for key in colors_dict:
         if "#" in colors_dict[key]:
@@ -522,14 +530,17 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
 
 def validate_scale_values(scale):
     """
-    Validates scale values from a colorscale
+    Validates scale values from a colorscale.
 
-    :param (list) scale: a strictly increasing list of floats that begins
-        with 0 and ends with 1. Its usage derives from a colorscale which is
-        a list of two-lists (a list with two elements) of the form
-        [value, color] which are used to determine how interpolation weighting
-        works between the colors in the colorscale. Therefore scale is just
-        the extraction of these values from the two-lists in order
+    Parameters
+    ----------
+    scale : list of float
+        A strictly increasing list of floats that begins with 0 and ends with 1.
+        Its usage derives from a colorscale which is a list of two-element lists
+        of the form [value, color]. These values are used to determine how
+        interpolation weighting works between the colors in the colorscale.
+        Therefore, `scale` is just the extraction of these values from the
+        two-element lists in order.
     """
     if len(scale) < 2:
         raise exceptions.PlotlyError(
@@ -565,16 +576,23 @@ def validate_colorscale(colorscale):
 
 def make_colorscale(colors, scale=None):
     """
-    Makes a colorscale from a list of colors and a scale
+    Makes a colorscale from a list of colors and a scale.
 
     Takes a list of colors and scales and constructs a colorscale based
-    on the colors in sequential order. If 'scale' is left empty, a linear-
-    interpolated colorscale will be generated. If 'scale' is a specificed
-    list, it must be the same legnth as colors and must contain all floats
-    For documentation regarding to the form of the output, see
-    https://plot.ly/python/reference/#mesh3d-colorscale
+    on the colors in sequential order. If `scale` is left empty, a linear-
+    interpolated colorscale will be generated. If `scale` is a specified
+    list, it must be the same length as `colors` and must contain all floats.
+    For documentation regarding the form of the output, see
+    https://plot.ly/python/reference/#mesh3d-colorscale.
 
-    :param (list) colors: a list of single colors
+    Parameters
+    ----------
+    colors : list
+        A list of single colors.
+    scale : list of float, optional
+        A list of scale values. If provided, it must be the same length as
+        `colors` and must contain all floats. If not provided, a linear-
+        interpolated colorscale will be generated.
     """
     colorscale = []
 
@@ -646,16 +664,28 @@ def unconvert_from_RGB_255(colors):
 
 def convert_to_RGB_255(colors):
     """
-    Multiplies each element of a triplet by 255
+    Multiplies each element of a triplet by 255.
 
     Each coordinate of the color tuple is rounded to the nearest float and
     then is turned into an integer. If a number is of the form x.5, then
     if x is odd, the number rounds up to (x+1). Otherwise, it rounds down
     to just x. This is the way rounding works in Python 3 and in current
-    statistical analysis to avoid rounding bias
+    statistical analysis to avoid rounding bias.
 
-    :param (list) rgb_components: grabs the three R, G and B values to be
-        returned as computed in the function
+    Parameters
+    ----------
+    colors : list of float
+        A list of three float values representing the RGB components of a color.
+
+    Returns
+    -------
+    tuple of int
+        A tuple of three integers representing the RGB components.
+
+    Examples
+    --------
+    >>> convert_to_RGB_255([0.1, 0.2, 0.3])
+    (26, 51, 76)
     """
     rgb_components = []
 
@@ -752,11 +782,22 @@ def unlabel_rgb(colors):
 
 def hex_to_rgb(value):
     """
-    Calculates rgb values from a hex color code.
+    Calculates RGB values from a hex color code.
 
-    :param (string) value: Hex color string
+    Parameters
+    ----------
+    value : str
+        Hex color string.
 
-    :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
+    Returns
+    -------
+    tuple of int
+        A tuple of three integers representing the RGB components.
+
+    Examples
+    --------
+    >>> hex_to_rgb("#ff5733")
+    (255, 87, 51)
     """
     value = value.lstrip("#")
     hex_total_length = len(value)

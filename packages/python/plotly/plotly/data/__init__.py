@@ -24,19 +24,19 @@ def gapminder(
 
     Parameters
     ----------
-    datetimes: bool
+    datetimes : bool
         Whether or not 'year' column will converted to datetime type
 
-    centroids: bool
+    centroids : bool
         If True, ['centroid_lat', 'centroid_lon'] columns are added
 
-    year: int | None
+    year : int | None
         If provided, the dataset will be filtered for that year
 
-    pretty_names: bool
+    pretty_names : bool
         If True, prettifies the column names
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -91,10 +91,10 @@ def tips(pretty_names=False, return_type="pandas"):
 
     Parameters
     ----------
-    pretty_names: bool
+    pretty_names : bool
         If True, prettifies the column names
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -128,7 +128,7 @@ def iris(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -146,7 +146,7 @@ def wind(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -165,7 +165,7 @@ def election(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -183,9 +183,9 @@ def election_geojson():
 
     Returns
     -------
-        A GeoJSON-formatted `dict` with 58 polygon or multi-polygon features whose `id`
-        is an electoral district numerical ID and whose `district` property is the ID and
-        district name.
+    A GeoJSON-formatted `dict` with 58 polygon or multi-polygon features whose `id`
+    is an electoral district numerical ID and whose `district` property is the ID and
+    district name.
     """
     import gzip
     import json
@@ -209,13 +209,13 @@ def carshare(return_type="pandas"):
 
     Parameters
     ----------
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
     -------
     Dataframe of `return_type` type
-        Dataframe` with 249 rows and the following columns:
+        Dataframe with 249 rows and the following columns:
         `['centroid_lat', 'centroid_lon', 'car_hours', 'peak_hour']`.
     """
     return _get_dataset("carshare", return_type=return_type)
@@ -227,14 +227,14 @@ def stocks(indexed=False, datetimes=False, return_type="pandas"):
 
     Parameters
     ----------
-    indexed: bool
+    indexed : bool
         Whether or not the 'date' column is used as the index and the column index
         is named 'company'. Applicable only if `return_type='pandas'`
 
-    datetimes: bool
+    datetimes : bool
         Whether or not the 'date' column will be of datetime type
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -272,11 +272,11 @@ def experiment(indexed=False, return_type="pandas"):
 
     Parameters
     ----------
-    indexed: bool
+    indexed : bool
         If True, then the index is named "participant".
         Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -308,11 +308,11 @@ def medals_wide(indexed=False, return_type="pandas"):
 
     Parameters
     ----------
-    indexed: bool
+    indexed : bool
         Whether or not the 'nation' column is used as the index and the column index
         is named 'medal'. Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
@@ -345,11 +345,11 @@ def medals_long(indexed=False, return_type="pandas"):
 
     Parameters
     ----------
-    indexed: bool
+    indexed : bool
         Whether or not the 'nation' column is used as the index.
         Applicable only if `return_type='pandas'`
 
-    return_type: {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
+    return_type : {'pandas', 'polars', 'pyarrow', 'modin', 'cudf'}
         Type of the resulting dataframe
 
     Returns
