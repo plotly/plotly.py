@@ -43,8 +43,10 @@ def to_typed_array_spec(v):
     """
     v = copy_to_readonly_numpy_array(v)
 
+    # Skip b64 encoding if numpy is not installed,
+    # or if v is not a numpy array, or if v is empty
     np = get_module("numpy", should_load=False)
-    if not np or not isinstance(v, np.ndarray):
+    if not np or not isinstance(v, np.ndarray) or v.size == 0:
         return v
 
     dtype = str(v.dtype)
