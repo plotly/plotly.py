@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.10.14
   plotly:
     description: Getting Started with Plotly for Python.
     has_thumbnail: false
@@ -58,24 +58,22 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly==5.24.1
+$ pip install plotly
 ```
 
 or `conda`:
 
 ```
-$ conda install -c plotly plotly=5.24.1
+$ conda install -c plotly plotly
 ```
-This package contains everything you need to write figures to standalone HTML files.
 
-> Note: **No internet connection, account, or payment is required to use plotly.py.** Prior to version 4, this library could operate in either an "online" or "offline" mode. The documentation tended to emphasize the online mode, where graphs get published to the Chart Studio web service. In version 4, all "online" functionality was removed from the `plotly` package and is now available as the separate, optional, `chart-studio` package (See below). **plotly.py version 4 is "offline" only, and does not include any functionality for uploading figures or data to cloud services.**
+If you want to use Plotly Express, install its required dependencies with:
 
-
-```python
-import plotly.express as px
-fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
-fig.write_html('first_figure.html', auto_open=True)
 ```
+pip install plotly[express]
+```
+
+You'll also need to install a [supported dataframe library](/python/px-arguments#supported-dataFrame-types).
 
 ### Plotly charts in Dash
 
@@ -96,40 +94,25 @@ IFrame(snippet_url + 'getting-started', width='100%', height=1200)
 
 #### JupyterLab Support
 
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
-packages using `pip`:
+To use `plotly` in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `anywidget` packages in the same environment as you installed `plotly`, using `pip`:
 
 ```
-$ pip install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-or `conda`:
-
-```
-$ conda install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-You'll need `jupyter-dash` to add widgets such as sliders, dropdowns, and buttons to Plotly charts in JupyterLab.
-
-Install [`jupyter-dash`](https://github.com/plotly/jupyter-dash) using `pip`:
-
-```
-$ pip install jupyter-dash
+$ pip install jupyterlab anywidget
 ```
 
 or `conda`:
 
 ```
-$ conda install -c conda-forge -c plotly jupyter-dash
+$ conda install jupyterlab anywidget
 ```
 
-These packages contain everything you need to run JupyterLab...
+Launch JupyterLab with:
 
 ```
 $ jupyter lab
 ```
 
-and display plotly figures inline using the `plotly_mimetype` renderer...
+and display plotly figures inline:
 
 ```python
 import plotly.express as px
@@ -148,18 +131,9 @@ fig_widget = go.FigureWidget(fig)
 fig_widget
 ```
 
-The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.24.1 @jupyter-widgets/jupyterlab-manager
-```
-
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
-
-
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
+See the [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple Python environments inside Jupyter.
 
 
 #### Jupyter Notebook Support
@@ -168,13 +142,13 @@ For use in the classic [Jupyter Notebook](https://jupyter.org/), install the `no
 packages using `pip`:
 
 ```
-$ pip install "notebook>=5.3" "ipywidgets>=7.5"
+pip install "notebook>=7.0" "anywidget>=0.9.13"
 ```
 
 or `conda`:
 
 ```
-$ conda install "notebook>=5.3" "ipywidgets>=7.5"
+conda install "notebook>=7.0" "anywidget>=0.9.13"
 ```
 
 These packages contain everything you need to run a Jupyter notebook...
@@ -267,23 +241,6 @@ $ conda install -c plotly plotly-geo=1.0.0
 ```
 
 See [_USA County Choropleth Maps in Python_](/python/county-choropleth/) for more information on the county choropleth figure factory.
-
-#### Chart Studio Support
-
-The `chart-studio` package can be used to upload plotly figures to Plotly's Chart
-Studio Cloud or On-Prem services. This package can be installed using pip...
-
-```
-$ pip install chart-studio==1.1.0
-```
-
-or conda.
-
-```
-$ conda install -c plotly chart-studio=1.1.0
-```
-
-> **Note:** This package is optional, and if it is not installed it is not possible for figures to be uploaded to the Chart Studio cloud service.
 
 ### Where to next?
 

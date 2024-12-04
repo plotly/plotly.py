@@ -1,6 +1,5 @@
 plotly==5.24.1
 jupytext==1.16.4
-ipywidgets==7.7.2
 jupyter-client<7
 jupyter
 notebook
@@ -46,3 +45,4 @@ dask==2022.2.0
 polars
 geoparse<=2.0.3
 xarray==2022.9.0
+anywidget
