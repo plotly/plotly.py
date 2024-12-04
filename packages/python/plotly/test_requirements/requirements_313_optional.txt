@@ -20,3 +20,4 @@ scikit-image
 psutil
 kaleido
 orjson
+narwhals>=1.13.3
