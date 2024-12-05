@@ -435,6 +435,29 @@ def test_splom_case(backend):
     assert np.all(fig.data[0].dimensions[0].values == ar[:, 0])
 
 
+def test_scatter_matrix_indexed_pandas():
+    # https://github.com/plotly/plotly.py/issues/4917
+    # https://github.com/plotly/plotly.py/issues/4788
+    df = pd.DataFrame(
+        {
+            "x": [1, 2, 3, 4],
+            "y": [10, 20, 10, 20],
+            "z": [-1, -2, -3, -4],
+            "color": [1, 2, 3, 4],
+        }
+    )
+    df.index = pd.DatetimeIndex(
+        [
+            "1/1/2020 10:00:00+00:00",
+            "2/1/2020 11:00:00+00:00",
+            "3/1/2020 10:00:00+00:00",
+            "4/1/2020 11:00:00+00:00",
+        ]
+    )
+    fig = px.scatter_matrix(df, color="color")
+    assert np.all(fig.data[0].marker["color"] == np.array([1, 2, 3, 4]))
+
+
 def test_int_col_names(constructor):
     # DataFrame with int column names
     lengths = constructor({"0": np.random.random(100)})
