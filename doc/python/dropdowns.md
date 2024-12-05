@@ -494,7 +494,7 @@ for n, figname in enumerate(fig_dict.keys()):
     data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {initially_hide_divs_other_than_the_first}>{fig_html}{text_dict[figname]}</div>'
 
 # Insert data into the template and write the file to disk
-# You'll need to add the path to your template and where to output the generated file
+# You'll need to add the path to your template and to your preferred output location
 input_template_path=r"<path-to-Jinja-template.html>"
 output_html_path=r"<path-to-output-file.html>"
 
