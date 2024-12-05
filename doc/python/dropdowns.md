@@ -444,13 +444,15 @@ fig.update_layout(title_text="Yahoo")
 fig.show()
 ```
 
-### Creating several independent graphs and using Jinja to insert them into a JavaScript enabled webpage 
+### Graph Selection Dropdowns in Jinja
 
 It is straight forward to  create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a drop down that chooses which div to display.  This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration.  It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections.  This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
 
+<!-- #region -->
+
 #### Python Code File
 
-```
+```python
 import plotly.express as px
 from jinja2 import Template
 import collections
@@ -504,7 +506,6 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 
 #### Jinja HTML Template
 
-<!-- #region -->
 
 ```
 &lt;!DOCTYPE html&gt;
@@ -540,7 +541,7 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 &lt;/html&gt;
 ```
 
-
+<!-- #endregion -->
 
 #### Reference
 See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` dropdowns.
