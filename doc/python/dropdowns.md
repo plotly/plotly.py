@@ -459,7 +459,7 @@ import collections
 # Load the gapminder dataset
 df = px.data.gapminder()
 
-#create a dictionary with Plotly figures as values
+# Create a dictionary with Plotly figures as values
 fig_dict = {}
 
 # we need to fill that dictionary with figures.  this example assumes that each figure has a title and that
