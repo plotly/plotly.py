@@ -561,3 +561,29 @@ def test_timeline(constructor):
     msg = "Both x_start and x_end must refer to data convertible to datetimes."
     with pytest.raises(TypeError, match=msg):
         px.timeline(df, x_start="Start", x_end=["a", "b", "c"], y="Task", color="Task")
+
+
+@pytest.mark.parametrize(
+    "datetime_columns",
+    [
+        ["Start"],
+        ["Start", "Finish"],
+        ["Finish"],
+    ],
+)
+def test_timeline_cols_already_temporal(constructor, datetime_columns):
+    # https://github.com/plotly/plotly.py/issues/4913
+    data = {
+        "Task": ["Job A", "Job B", "Job C"],
+        "Start": ["2009-01-01", "2009-03-05", "2009-02-20"],
+        "Finish": ["2009-02-28", "2009-04-15", "2009-05-30"],
+    }
+    df = (
+        nw.from_native(constructor(data))
+        .with_columns(nw.col(datetime_columns).str.to_datetime(format="%Y-%m-%d"))
+        .to_native()
+    )
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Task")
+    assert len(fig.data) == 3
+    assert fig.layout.xaxis.type == "date"
+    assert fig.layout.xaxis.title.text is None
