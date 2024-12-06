@@ -1,0 +1,8 @@
+mkdocs==1.6.1
+mkdocs-jupyter==0.25.1
+mkdocstrings==0.27.0
+mkdocstrings-python==1.12.2
+mkdocs-material==9.5.47
+plotly==5.24.1
+pandas==2.2.3
+statsmodels==0.14.4

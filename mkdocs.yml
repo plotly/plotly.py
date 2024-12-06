@@ -1,0 +1,68 @@
+site_name: Plotly.py Graphing Library
+site_url: https://plotly.com/python
+site_description: Plotly's Python graphing library makes interactive, publication-quality graphs.
+
+repo_name: plotly/plotly.py
+repo_url: https://github.com/plotly/plotly.py
+
+extra_css:
+  - assets/stylesheets/custom.css
+
+theme:
+  name: material
+  logo: assets/images/logo.svg
+  palette:
+    primary: black
+    accent: purple
+  features:
+  - navigation.top
+  - navigation.path
+
+hooks:
+  - hooks/script.py
+
+plugins:
+- mkdocs-jupyter:
+    execute: true
+
+- search
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        options:
+          heading_level: 3
+          show_source: false
+          show_bases: false
+          show_submodules: true
+          load_external_modules: true
+          show_symbol_type_heading: true
+          docstring_style: numpy
+          merge_init_into_class: true
+
+nav:
+ - Getting Started: examples/getting-started.md
+ - Fundamentals:
+    - The Figure Data Structure:  examples/fundamentals/figure-structure.md
+    - Creating and Updating Figures:  examples/fundamentals/creating-and-updating-figures.md
+    - Displaying Figures:  examples/fundamentals/renderers.md
+    - Plotly Express:  examples/fundamentals/plotly-express.md
+
+ - API Reference:
+    - plotly.express:
+      - plotly.express: reference/plotly_express/index.md
+      - plotly.express.data: reference/plotly_express/subpackages/data.md
+      - plotly.express.colors: reference/plotly_express/subpackages/colors.md
+      - plotly.express.imshow_utils: reference/plotly_express/subpackages/imshow_utils.md
+      - plotly.express.trendline_functions: reference/plotly_express/subpackages/trendline_functions.md
+    # - plotly.graph_objects:
+    #   - Figure: reference/graph_objects/Figure.md
+    #   - Layout: reference/graph_objects/Layout.md
+    #   - Traces:
+    #     - Scatter: reference/graph_objects/traces/scatter.md
+    - plotly.io: reference/plotly_io.md
+    - plotly.data: reference/plotly_data.md
+    - plotly.colors: reference/plotly_colors.md
+    - plotly.subplots: reference/plotly_subplots.md
+    - plotly.figure_factory: reference/plotly_figure_factory.md
+ - Community Forum: http://community.plotly.com/?_gl=1*1nyon0r*_gcl_au*MzU2OTI4NDQyLjE3MjY1ODQwOTE.*_ga*MjEwMjYwNzg3OC4xNzI2NTg0MDkx*_ga_6G7EE0JNSC*MTczMzQyMTY2OC4xODAuMS4xNzMzNDI0NzQzLjE1LjAuMA..
