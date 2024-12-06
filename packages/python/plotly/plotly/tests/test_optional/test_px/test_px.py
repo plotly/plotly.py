@@ -360,3 +360,18 @@ def test_render_mode(backend):
     )
     assert fig.data[0].type == "histogram2dcontour"
     assert fig.data[1].type == "scatter"
+
+
+def test_empty_df_int64(backend):
+    # Load px data, then filter it such that the dataframe is empty
+    df = px.data.tips(return_type=backend)
+    df = nw.from_native(px.data.tips(return_type=backend))
+    df_empty = df.filter(nw.col("day") == "banana").to_native()
+
+    fig = px.scatter(
+        df_empty,
+        x="total_bill",
+        y="size",  # size is an int64 column
+    )
+    # to_dict() should not raise an exception
+    fig.to_dict()

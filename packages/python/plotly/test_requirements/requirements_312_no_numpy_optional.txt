@@ -19,6 +19,6 @@ kaleido
 orjson==3.9.10
 polars[timezone]
 pyarrow
-narwhals>=1.13.3
+narwhals>=1.15.1
 anywidget==0.9.13
 jupyter-console==6.4.4
