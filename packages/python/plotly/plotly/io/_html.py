@@ -342,6 +342,7 @@ style="height:{height}; width:{width};"></div>\
 
     if full_html:
         return """\
+<!doctype html>
 <html>
 <head><meta charset="utf-8" /></head>
 <body>
