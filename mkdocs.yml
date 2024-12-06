@@ -34,7 +34,6 @@ plugins:
           heading_level: 3
           show_source: false
           show_bases: false
-          show_submodules: true
           load_external_modules: true
           show_symbol_type_heading: true
           docstring_style: numpy
