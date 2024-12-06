@@ -45,6 +45,9 @@ build
 dist
 plotly.egg-info/
 
+# macOS utility file
+**/.DS_Store
+
 plotly/tests/test_orca/images/*/failed
 plotly/tests/test_orca/images/*/tmp
 /plotly-package/plotly/tests/test_core/test_offline/plotly.min.js
