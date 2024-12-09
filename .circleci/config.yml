@@ -476,7 +476,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
+          key: v2-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
