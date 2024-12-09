@@ -22,3 +22,5 @@ kaleido
 orjson
 polars
 narwhals>=1.13.3
+pyarrow
+anywidget==0.9.13
