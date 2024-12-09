@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block footer %}
+  <div id="markprompt"></div>
+  {{ super() }}
+{% endblock %}
+
+{% block styles %}
+<link href="https://esm.sh/@markprompt/css@0.17.1?css" rel="stylesheet" />
+<link href="/python/assets/stylesheets/markprompt.css" rel="stylesheet" />
+  {{ super() }}
+{% endblock %}
+
+{% block scripts %}
+<script src="/python/assets/js/chatbot.js" type="module"></script>
+<script type="module" src="https://esm.sh/@markprompt/web@0.20.1/init"></script>
+  {{ super() }}
+{% endblock %}

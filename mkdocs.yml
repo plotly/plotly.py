@@ -10,6 +10,7 @@ extra_css:
 
 theme:
   name: material
+  custom_dir: docs/overrides
   logo: assets/images/logo.svg
   palette:
     primary: black

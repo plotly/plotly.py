@@ -2,3 +2,17 @@
     font-weight: 500 !important;
     font-size: 16px;
 }
+
+/* Custom CSS to position the image */
+.custom-image-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.custom-image-container img {
+    max-width: 150px; /* Adjust the size as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
