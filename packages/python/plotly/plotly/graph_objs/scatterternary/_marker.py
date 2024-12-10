@@ -9,6 +9,9 @@ class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "scatterternary"
     _path_str = "scatterternary.marker"
     _valid_props = {
+        "angle",
+        "angleref",
+        "anglesrc",
         "autocolorscale",
         "cauto",
         "cmax",
@@ -31,9 +34,76 @@ class Marker(_BaseTraceHierarchyType):
         "sizemode",
         "sizeref",
         "sizesrc",
+        "standoff",
+        "standoffsrc",
         "symbol",
         "symbolsrc",
     }
+
+    # angle
+    # -----
+    @property
+    def angle(self):
+        """
+        Sets the marker angle in respect to `angleref`.
+
+        The 'angle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180, or a list, numpy array or other iterable thereof.
+        Numeric values outside this range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["angle"]
+
+    @angle.setter
+    def angle(self, val):
+        self["angle"] = val
+
+    # angleref
+    # --------
+    @property
+    def angleref(self):
+        """
+        Sets the reference for marker angle. With "previous", angle 0
+        points along the line from the previous point to this one. With
+        "up", angle 0 points toward the top of the screen.
+
+        The 'angleref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['previous', 'up']
+
+        Returns
+        -------
+        Any
+        """
+        return self["angleref"]
+
+    @angleref.setter
+    def angleref(self, val):
+        self["angleref"] = val
+
+    # anglesrc
+    # --------
+    @property
+    def anglesrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `angle`.
+
+        The 'anglesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["anglesrc"]
+
+    @anglesrc.setter
+    def anglesrc(self, val):
+        self["anglesrc"] = val
 
     # autocolorscale
     # --------------
@@ -303,6 +373,19 @@ class Marker(_BaseTraceHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -382,8 +465,8 @@ class Marker(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -466,25 +549,16 @@ class Marker(_BaseTraceHierarchyType):
                     :class:`plotly.graph_objects.scatterternary.mar
                     ker.colorbar.Title` instance or dict with
                     compatible properties
-                titlefont
-                    Deprecated: Please use
-                    scatterternary.marker.colorbar.title.font
-                    instead. Sets this color bar's title font. Note
-                    that the title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleside
-                    Deprecated: Please use
-                    scatterternary.marker.colorbar.title.side
-                    instead. Determines the location of color bar's
-                    title with respect to the color bar. Defaults
-                    to "top" when `orientation` if "v" and
-                    defaults to "right" when `orientation` if "h".
-                    Note that the title's location used to be set
-                    by the now deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -494,10 +568,20 @@ class Marker(_BaseTraceHierarchyType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -507,6 +591,10 @@ class Marker(_BaseTraceHierarchyType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -957,6 +1045,50 @@ class Marker(_BaseTraceHierarchyType):
     def sizesrc(self, val):
         self["sizesrc"] = val
 
+    # standoff
+    # --------
+    @property
+    def standoff(self):
+        """
+        Moves the marker away from the data point in the direction of
+        `angle` (in px). This can be useful for example if you have
+        another marker at this location and you want to point an
+        arrowhead marker at it.
+
+        The 'standoff' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["standoff"]
+
+    @standoff.setter
+    def standoff(self, val):
+        self["standoff"] = val
+
+    # standoffsrc
+    # -----------
+    @property
+    def standoffsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `standoff`.
+
+        The 'standoffsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["standoffsrc"]
+
+    @standoffsrc.setter
+    def standoffsrc(self, val):
+        self["standoffsrc"] = val
+
     # symbol
     # ------
     @property
@@ -1055,7 +1187,9 @@ class Marker(_BaseTraceHierarchyType):
                 'arrow-bar-up-open', 50, '50', 'arrow-bar-down', 150,
                 '150', 'arrow-bar-down-open', 51, '51', 'arrow-bar-left',
                 151, '151', 'arrow-bar-left-open', 52, '52',
-                'arrow-bar-right', 152, '152', 'arrow-bar-right-open']
+                'arrow-bar-right', 152, '152', 'arrow-bar-right-open', 53,
+                '53', 'arrow', 153, '153', 'arrow-open', 54, '54',
+                'arrow-wide', 154, '154', 'arrow-wide-open']
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -1093,6 +1227,16 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        angle
+            Sets the marker angle in respect to `angleref`.
+        angleref
+            Sets the reference for marker angle. With "previous",
+            angle 0 points along the line from the previous point
+            to this one. With "up", angle 0 points toward the top
+            of the screen.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1201,6 +1345,14 @@ class Marker(_BaseTraceHierarchyType):
         sizesrc
             Sets the source reference on Chart Studio Cloud for
             `size`.
+        standoff
+            Moves the marker away from the data point in the
+            direction of `angle` (in px). This can be useful for
+            example if you have another marker at this location and
+            you want to point an arrowhead marker at it.
+        standoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `standoff`.
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
             to appending "-open" to a symbol name. Adding 200 is
@@ -1215,6 +1367,9 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        angle=None,
+        angleref=None,
+        anglesrc=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -1237,6 +1392,8 @@ class Marker(_BaseTraceHierarchyType):
         sizemode=None,
         sizeref=None,
         sizesrc=None,
+        standoff=None,
+        standoffsrc=None,
         symbol=None,
         symbolsrc=None,
         **kwargs,
@@ -1250,6 +1407,16 @@ class Marker(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of
             :class:`plotly.graph_objs.scatterternary.Marker`
+        angle
+            Sets the marker angle in respect to `angleref`.
+        angleref
+            Sets the reference for marker angle. With "previous",
+            angle 0 points along the line from the previous point
+            to this one. With "up", angle 0 points toward the top
+            of the screen.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1358,6 +1525,14 @@ class Marker(_BaseTraceHierarchyType):
         sizesrc
             Sets the source reference on Chart Studio Cloud for
             `size`.
+        standoff
+            Moves the marker away from the data point in the
+            direction of `angle` (in px). This can be useful for
+            example if you have another marker at this location and
+            you want to point an arrowhead marker at it.
+        standoffsrc
+            Sets the source reference on Chart Studio Cloud for
+            `standoff`.
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
             to appending "-open" to a symbol name. Adding 200 is
@@ -1401,6 +1576,18 @@ an instance of :class:`plotly.graph_objs.scatterternary.Marker`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("angle", None)
+        _v = angle if angle is not None else _v
+        if _v is not None:
+            self["angle"] = _v
+        _v = arg.pop("angleref", None)
+        _v = angleref if angleref is not None else _v
+        if _v is not None:
+            self["angleref"] = _v
+        _v = arg.pop("anglesrc", None)
+        _v = anglesrc if anglesrc is not None else _v
+        if _v is not None:
+            self["anglesrc"] = _v
         _v = arg.pop("autocolorscale", None)
         _v = autocolorscale if autocolorscale is not None else _v
         if _v is not None:
@@ -1489,6 +1676,14 @@ an instance of :class:`plotly.graph_objs.scatterternary.Marker`"""
         _v = sizesrc if sizesrc is not None else _v
         if _v is not None:
             self["sizesrc"] = _v
+        _v = arg.pop("standoff", None)
+        _v = standoff if standoff is not None else _v
+        if _v is not None:
+            self["standoff"] = _v
+        _v = arg.pop("standoffsrc", None)
+        _v = standoffsrc if standoffsrc is not None else _v
+        if _v is not None:
+            self["standoffsrc"] = _v
         _v = arg.pop("symbol", None)
         _v = symbol if symbol is not None else _v
         if _v is not None:

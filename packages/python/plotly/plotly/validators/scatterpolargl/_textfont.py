@@ -28,7 +28,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 generates images on a server, where only a
                 select number of fonts are installed and
                 supported. These include "Arial", "Balto",
-                "Courier New", "Droid Sans",, "Droid Serif",
+                "Courier New", "Droid Sans", "Droid Serif",
                 "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
@@ -40,6 +40,22 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizesrc
                 Sets the source reference on Chart Studio Cloud
                 for `size`.
+            style
+                Sets whether a font should be styled with a
+                normal or italic face from its family.
+            stylesrc
+                Sets the source reference on Chart Studio Cloud
+                for `style`.
+            variant
+                Sets the variant of the font.
+            variantsrc
+                Sets the source reference on Chart Studio Cloud
+                for `variant`.
+            weight
+                Sets the weight (or boldness) of the font.
+            weightsrc
+                Sets the source reference on Chart Studio Cloud
+                for `weight`.
 """,
             ),
             **kwargs,

@@ -48,7 +48,7 @@ fig = df.plot()
 fig.show()
 ```
 
-This functionality wraps [Plotly Express](/python/plotly-express/) and so you can use any of the [styling options available to Plotly Express methods](/python/styling-plotly-expres/). Since what you get back is a regular `Figure` object, you can use any of the update mechanisms supported by these objects to apply [templates](/python/templates/) or further customize [axes](/python/axes/), [colors](/python/colorscales/), [legends](/python/legend/), [fonts](/python/figure-labels/), [hover labels](/python/hover-text-and-formatting/) etc. [Faceting](/python/facet-plots/) is also supported.
+This functionality wraps [Plotly Express](/python/plotly-express/) and so you can use any of the [styling options available to Plotly Express methods](/python/styling-plotly-express/). Since what you get back is a regular `Figure` object, you can use any of the update mechanisms supported by these objects to apply [templates](/python/templates/) or further customize [axes](/python/axes/), [colors](/python/colorscales/), [legends](/python/legend/), [fonts](/python/figure-labels/), [hover labels](/python/hover-text-and-formatting/) etc. [Faceting](/python/facet-plots/) is also supported.
 
 ```python
 import pandas as pd

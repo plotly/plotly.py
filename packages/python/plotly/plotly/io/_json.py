@@ -1,8 +1,7 @@
-from __future__ import absolute_import
-
 import json
 import decimal
 import datetime
+import warnings
 from pathlib import Path
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
@@ -55,6 +54,25 @@ def coerce_to_strict(const):
         return None
     else:
         return const
+
+
+_swap_json = (
+    ("<", "\\u003c"),
+    (">", "\\u003e"),
+    ("/", "\\u002f"),
+)
+_swap_orjson = _swap_json + (
+    ("\u2028", "\\u2028"),
+    ("\u2029", "\\u2029"),
+)
+
+
+def _safe(json_str, _swap):
+    out = json_str
+    for unsafe_char, safe_char in _swap:
+        if unsafe_char in out:
+            out = out.replace(unsafe_char, safe_char)
+    return out
 
 
 def to_json_plotly(plotly_object, pretty=False, engine=None):
@@ -120,7 +138,9 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         from _plotly_utils.utils import PlotlyJSONEncoder
 
-        return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
+        return _safe(
+            json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts), _swap_json
+        )
     elif engine == "orjson":
         JsonConfig.validate_orjson()
         opts = orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY
@@ -136,7 +156,9 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
         # Try without cleaning
         try:
-            return orjson.dumps(plotly_object, option=opts).decode("utf8")
+            return _safe(
+                orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
+            )
         except TypeError:
             pass
 
@@ -146,7 +168,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
             datetime_allowed=True,
             modules=modules,
         )
-        return orjson.dumps(cleaned, option=opts).decode("utf8")
+        return _safe(orjson.dumps(cleaned, option=opts).decode("utf8"), _swap_orjson)
 
 
 def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
@@ -514,7 +536,11 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj.values)
             elif obj.dtype.kind == "M":
                 if isinstance(obj, pd.Series):
-                    dt_values = obj.dt.to_pydatetime().tolist()
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", FutureWarning)
+                        # Series.dt.to_pydatetime will return Index[object]
+                        # https://github.com/pandas-dev/pandas/pull/52459
+                        dt_values = np.array(obj.dt.to_pydatetime()).tolist()
                 else:  # DatetimeIndex
                     dt_values = obj.to_pydatetime().tolist()
 

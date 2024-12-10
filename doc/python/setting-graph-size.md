@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.0
+    version: 3.8.0
   plotly:
     description: How to manipulate the graph size, margins and background color.
     display_as: file_settings
@@ -62,6 +62,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'setting-graph-size', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Adjusting Height, Width, & Margins With Graph Objects
 
@@ -114,11 +118,15 @@ fig.update_layout(
     width=500,
     height=500,
     yaxis=dict(
-        title_text="Y-axis Title",
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        titlefont=dict(size=30),
     )
 )
 
@@ -149,15 +157,59 @@ fig.update_layout(
     width=500,
     height=500,
     yaxis=dict(
-        title_text="Y-axis Title",
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],
         tickmode="array",
-        titlefont=dict(size=30),
     )
 )
 
 fig.update_yaxes(automargin='left+top')
+
+fig.show()
+```
+
+### Setting a Minimum Plot Size with Automargins
+
+*New in 5.11*
+
+To set a minimum width and height for a plot to be after automargin is applied, use `minreducedwidth` and `minreducedheight`. Here we set both to `250`.
+
+```python
+import plotly.graph_objects as go
+
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=["Apples", "Oranges", "Watermelon", "Pears"],
+    y=[3, 2, 1, 4]
+))
+
+fig.update_layout(
+    autosize=False,
+    minreducedwidth=250,
+    minreducedheight=250,
+    width=450,
+    height=450,
+    yaxis=dict(
+        title=dict(
+            text="Y-axis Title",
+            font=dict(
+                size=30
+            )
+        ),
+        ticktext=["Label", "Very long label", "Other label", "Very very long label"],
+        tickvals=[1, 2, 3, 4],
+        tickmode="array",
+    )
+)
+
 
 fig.show()
 ```

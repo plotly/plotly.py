@@ -12,9 +12,12 @@ class Legend(_BaseLayoutHierarchyType):
         "bgcolor",
         "bordercolor",
         "borderwidth",
+        "entrywidth",
+        "entrywidthmode",
         "font",
         "groupclick",
         "grouptitlefont",
+        "indentation",
         "itemclick",
         "itemdoubleclick",
         "itemsizing",
@@ -25,10 +28,13 @@ class Legend(_BaseLayoutHierarchyType):
         "traceorder",
         "uirevision",
         "valign",
+        "visible",
         "x",
         "xanchor",
+        "xref",
         "y",
         "yanchor",
+        "yref",
     }
 
     # bgcolor
@@ -170,6 +176,49 @@ class Legend(_BaseLayoutHierarchyType):
     def borderwidth(self, val):
         self["borderwidth"] = val
 
+    # entrywidth
+    # ----------
+    @property
+    def entrywidth(self):
+        """
+        Sets the width (in px or fraction) of the legend. Use 0 to size
+        the entry based on the text width, when `entrywidthmode` is set
+        to "pixels".
+
+        The 'entrywidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["entrywidth"]
+
+    @entrywidth.setter
+    def entrywidth(self, val):
+        self["entrywidth"] = val
+
+    # entrywidthmode
+    # --------------
+    @property
+    def entrywidthmode(self):
+        """
+        Determines what entrywidth means.
+
+        The 'entrywidthmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['fraction', 'pixels']
+
+        Returns
+        -------
+        Any
+        """
+        return self["entrywidthmode"]
+
+    @entrywidthmode.setter
+    def entrywidthmode(self, val):
+        self["entrywidthmode"] = val
+
     # font
     # ----
     @property
@@ -200,11 +249,34 @@ class Legend(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -272,11 +344,34 @@ class Legend(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -287,6 +382,26 @@ class Legend(_BaseLayoutHierarchyType):
     @grouptitlefont.setter
     def grouptitlefont(self, val):
         self["grouptitlefont"] = val
+
+    # indentation
+    # -----------
+    @property
+    def indentation(self):
+        """
+        Sets the indentation (in px) of the legend entries.
+
+        The 'indentation' property is a number and may be specified as:
+          - An int or float in the interval [-15, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["indentation"]
+
+    @indentation.setter
+    def indentation(self, val):
+        self["indentation"] = val
 
     # itemclick
     # ---------
@@ -424,8 +539,9 @@ class Legend(_BaseLayoutHierarchyType):
                     respect to the legend items. Defaulted to "top"
                     with `orientation` is "h". Defaulted to "left"
                     with `orientation` is "v". The *top left*
-                    options could be used to expand legend area in
-                    both x and y sides.
+                    options could be used to expand top center and
+                    top right are for horizontal alignment legend
+                    area in both x and y sides.
                 text
                     Sets the title of the legend.
 
@@ -531,17 +647,41 @@ class Legend(_BaseLayoutHierarchyType):
     def valign(self, val):
         self["valign"] = val
 
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this legend is visible.
+
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["visible"]
+
+    @visible.setter
+    def visible(self, val):
+        self["visible"] = val
+
     # x
     # -
     @property
     def x(self):
         """
-        Sets the x position (in normalized coordinates) of the legend.
-        Defaults to 1.02 for vertical legends and defaults to 0 for
-        horizontal legends.
+        Sets the x position with respect to `xref` (in normalized
+        coordinates) of the legend. When `xref` is "paper", defaults to
+        1.02 for vertical legends and defaults to 0 for horizontal
+        legends. When `xref` is "container", defaults to 1 for vertical
+        legends and defaults to 0 for horizontal legends. Must be
+        between 0 and 1 if `xref` is "container". and between "-2" and
+        3 if `xref` is "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -579,19 +719,45 @@ class Legend(_BaseLayoutHierarchyType):
     def xanchor(self, val):
         self["xanchor"] = val
 
+    # xref
+    # ----
+    @property
+    def xref(self):
+        """
+        Sets the container `x` refers to. "container" spans the entire
+        `width` of the plot. "paper" refers to the width of the
+        plotting area only.
+
+        The 'xref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["xref"]
+
+    @xref.setter
+    def xref(self, val):
+        self["xref"] = val
+
     # y
     # -
     @property
     def y(self):
         """
-        Sets the y position (in normalized coordinates) of the legend.
-        Defaults to 1 for vertical legends, defaults to "-0.1" for
-        horizontal legends on graphs w/o range sliders and defaults to
-        1.1 for horizontal legends on graph with one or multiple range
-        sliders.
+        Sets the y position with respect to `yref` (in normalized
+        coordinates) of the legend. When `yref` is "paper", defaults to
+        1 for vertical legends, defaults to "-0.1" for horizontal
+        legends on graphs w/o range sliders and defaults to 1.1 for
+        horizontal legends on graph with one or multiple range sliders.
+        When `yref` is "container", defaults to 1. Must be between 0
+        and 1 if `yref` is "container" and between "-2" and 3 if `yref`
+        is "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -629,6 +795,29 @@ class Legend(_BaseLayoutHierarchyType):
     def yanchor(self, val):
         self["yanchor"] = val
 
+    # yref
+    # ----
+    @property
+    def yref(self):
+        """
+        Sets the container `y` refers to. "container" spans the entire
+        `height` of the plot. "paper" refers to the height of the
+        plotting area only.
+
+        The 'yref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["yref"]
+
+    @yref.setter
+    def yref(self, val):
+        self["yref"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -642,6 +831,12 @@ class Legend(_BaseLayoutHierarchyType):
         borderwidth
             Sets the width (in px) of the border enclosing the
             legend.
+        entrywidth
+            Sets the width (in px or fraction) of the legend. Use 0
+            to size the entry based on the text width, when
+            `entrywidthmode` is set to "pixels".
+        entrywidthmode
+            Determines what entrywidth means.
         font
             Sets the font used to text the legend items.
         groupclick
@@ -653,6 +848,8 @@ class Legend(_BaseLayoutHierarchyType):
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
+        indentation
+            Sets the indentation (in px) of the legend entries.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -696,10 +893,17 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
-            Sets the x position (in normalized coordinates) of the
-            legend. Defaults to 1.02 for vertical legends and
-            defaults to 0 for horizontal legends.
+            Sets the x position with respect to `xref` (in
+            normalized coordinates) of the legend. When `xref` is
+            "paper", defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends. When `xref` is
+            "container", defaults to 1 for vertical legends and
+            defaults to 0 for horizontal legends. Must be between 0
+            and 1 if `xref` is "container". and between "-2" and 3
+            if `xref` is "paper".
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -708,12 +912,20 @@ class Legend(_BaseLayoutHierarchyType):
             2/3, anchors legends to the left for `x` values less
             than or equal to 1/3 and anchors legends with respect
             to their center otherwise.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position (in normalized coordinates) of the
-            legend. Defaults to 1 for vertical legends, defaults to
-            "-0.1" for horizontal legends on graphs w/o range
+            Sets the y position with respect to `yref` (in
+            normalized coordinates) of the legend. When `yref` is
+            "paper", defaults to 1 for vertical legends, defaults
+            to "-0.1" for horizontal legends on graphs w/o range
             sliders and defaults to 1.1 for horizontal legends on
-            graph with one or multiple range sliders.
+            graph with one or multiple range sliders. When `yref`
+            is "container", defaults to 1. Must be between 0 and 1
+            if `yref` is "container" and between "-2" and 3 if
+            `yref` is "paper".
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
@@ -722,6 +934,10 @@ class Legend(_BaseLayoutHierarchyType):
             anchors legends to at their top for `y` values greater
             than or equal to 2/3 and anchors legends with respect
             to their middle otherwise.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
         """
 
     def __init__(
@@ -730,9 +946,12 @@ class Legend(_BaseLayoutHierarchyType):
         bgcolor=None,
         bordercolor=None,
         borderwidth=None,
+        entrywidth=None,
+        entrywidthmode=None,
         font=None,
         groupclick=None,
         grouptitlefont=None,
+        indentation=None,
         itemclick=None,
         itemdoubleclick=None,
         itemsizing=None,
@@ -743,10 +962,13 @@ class Legend(_BaseLayoutHierarchyType):
         traceorder=None,
         uirevision=None,
         valign=None,
+        visible=None,
         x=None,
         xanchor=None,
+        xref=None,
         y=None,
         yanchor=None,
+        yref=None,
         **kwargs,
     ):
         """
@@ -765,6 +987,12 @@ class Legend(_BaseLayoutHierarchyType):
         borderwidth
             Sets the width (in px) of the border enclosing the
             legend.
+        entrywidth
+            Sets the width (in px or fraction) of the legend. Use 0
+            to size the entry based on the text width, when
+            `entrywidthmode` is set to "pixels".
+        entrywidthmode
+            Determines what entrywidth means.
         font
             Sets the font used to text the legend items.
         groupclick
@@ -776,6 +1004,8 @@ class Legend(_BaseLayoutHierarchyType):
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
+        indentation
+            Sets the indentation (in px) of the legend entries.
         itemclick
             Determines the behavior on legend item click. "toggle"
             toggles the visibility of the item clicked on the
@@ -819,10 +1049,17 @@ class Legend(_BaseLayoutHierarchyType):
         valign
             Sets the vertical alignment of the symbols with respect
             to their associated text.
+        visible
+            Determines whether or not this legend is visible.
         x
-            Sets the x position (in normalized coordinates) of the
-            legend. Defaults to 1.02 for vertical legends and
-            defaults to 0 for horizontal legends.
+            Sets the x position with respect to `xref` (in
+            normalized coordinates) of the legend. When `xref` is
+            "paper", defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends. When `xref` is
+            "container", defaults to 1 for vertical legends and
+            defaults to 0 for horizontal legends. Must be between 0
+            and 1 if `xref` is "container". and between "-2" and 3
+            if `xref` is "paper".
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -831,12 +1068,20 @@ class Legend(_BaseLayoutHierarchyType):
             2/3, anchors legends to the left for `x` values less
             than or equal to 1/3 and anchors legends with respect
             to their center otherwise.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position (in normalized coordinates) of the
-            legend. Defaults to 1 for vertical legends, defaults to
-            "-0.1" for horizontal legends on graphs w/o range
+            Sets the y position with respect to `yref` (in
+            normalized coordinates) of the legend. When `yref` is
+            "paper", defaults to 1 for vertical legends, defaults
+            to "-0.1" for horizontal legends on graphs w/o range
             sliders and defaults to 1.1 for horizontal legends on
-            graph with one or multiple range sliders.
+            graph with one or multiple range sliders. When `yref`
+            is "container", defaults to 1. Must be between 0 and 1
+            if `yref` is "container" and between "-2" and 3 if
+            `yref` is "paper".
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
@@ -845,6 +1090,10 @@ class Legend(_BaseLayoutHierarchyType):
             anchors legends to at their top for `y` values greater
             than or equal to 2/3 and anchors legends with respect
             to their middle otherwise.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
 
         Returns
         -------
@@ -891,6 +1140,14 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = borderwidth if borderwidth is not None else _v
         if _v is not None:
             self["borderwidth"] = _v
+        _v = arg.pop("entrywidth", None)
+        _v = entrywidth if entrywidth is not None else _v
+        if _v is not None:
+            self["entrywidth"] = _v
+        _v = arg.pop("entrywidthmode", None)
+        _v = entrywidthmode if entrywidthmode is not None else _v
+        if _v is not None:
+            self["entrywidthmode"] = _v
         _v = arg.pop("font", None)
         _v = font if font is not None else _v
         if _v is not None:
@@ -903,6 +1160,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = grouptitlefont if grouptitlefont is not None else _v
         if _v is not None:
             self["grouptitlefont"] = _v
+        _v = arg.pop("indentation", None)
+        _v = indentation if indentation is not None else _v
+        if _v is not None:
+            self["indentation"] = _v
         _v = arg.pop("itemclick", None)
         _v = itemclick if itemclick is not None else _v
         if _v is not None:
@@ -943,6 +1204,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = valign if valign is not None else _v
         if _v is not None:
             self["valign"] = _v
+        _v = arg.pop("visible", None)
+        _v = visible if visible is not None else _v
+        if _v is not None:
+            self["visible"] = _v
         _v = arg.pop("x", None)
         _v = x if x is not None else _v
         if _v is not None:
@@ -951,6 +1216,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = xanchor if xanchor is not None else _v
         if _v is not None:
             self["xanchor"] = _v
+        _v = arg.pop("xref", None)
+        _v = xref if xref is not None else _v
+        if _v is not None:
+            self["xref"] = _v
         _v = arg.pop("y", None)
         _v = y if y is not None else _v
         if _v is not None:
@@ -959,6 +1228,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = yanchor if yanchor is not None else _v
         if _v is not None:
             self["yanchor"] = _v
+        _v = arg.pop("yref", None)
+        _v = yref if yref is not None else _v
+        if _v is not None:
+            self["yref"] = _v
 
         # Process unknown kwargs
         # ----------------------

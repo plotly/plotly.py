@@ -67,7 +67,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -125,8 +126,8 @@ class Polar(_BaseLayoutHierarchyType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -135,6 +136,19 @@ class Polar(_BaseLayoutHierarchyType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -224,8 +238,8 @@ class Polar(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -349,7 +363,7 @@ class Polar(_BaseLayoutHierarchyType):
         Determines how bars at the same location coordinate are
         displayed on the graph. With "stack", the bars are stacked on
         top of one another With "overlay", the bars are plotted over
-        one another, you might need to an "opacity" to see multiple
+        one another, you might need to reduce "opacity" to see multiple
         bars.
 
         The 'barmode' property is an enumeration that may be specified as:
@@ -533,7 +547,24 @@ class Polar(_BaseLayoutHierarchyType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.polar.radia
+                    laxis.Autorangeoptions` instance or dict with
+                    compatible properties
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -573,7 +604,8 @@ class Polar(_BaseLayoutHierarchyType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -628,8 +660,8 @@ class Polar(_BaseLayoutHierarchyType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -638,6 +670,19 @@ class Polar(_BaseLayoutHierarchyType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -651,6 +696,10 @@ class Polar(_BaseLayoutHierarchyType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -672,7 +721,9 @@ class Polar(_BaseLayoutHierarchyType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangemode
                     If *tozero*`, the range extends to 0,
                     regardless of the input data If "nonnegative",
@@ -733,8 +784,8 @@ class Polar(_BaseLayoutHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -806,12 +857,6 @@ class Polar(_BaseLayoutHierarchyType):
                     :class:`plotly.graph_objects.layout.polar.radia
                     laxis.Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    layout.polar.radialaxis.title.font instead.
-                    Sets this axis' title font. Note that the
-                    title's font used to be customized by the now
-                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -904,7 +949,7 @@ class Polar(_BaseLayoutHierarchyType):
             Determines how bars at the same location coordinate are
             displayed on the graph. With "stack", the bars are
             stacked on top of one another With "overlay", the bars
-            are plotted over one another, you might need to an
+            are plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot
@@ -971,7 +1016,7 @@ class Polar(_BaseLayoutHierarchyType):
             Determines how bars at the same location coordinate are
             displayed on the graph. With "stack", the bars are
             stacked on top of one another With "overlay", the bars
-            are plotted over one another, you might need to an
+            are plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot

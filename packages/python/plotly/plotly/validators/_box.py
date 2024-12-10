@@ -85,8 +85,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -126,23 +126,36 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 distribution axis. If 1, the sample points are
                 drawn in a random jitter of width equal to the
                 width of the box(es).
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.box.Legendgrouptit
                 le` instance or dict with compatible properties
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.box.Line` instance
                 or dict with compatible properties
@@ -195,7 +208,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover. For box traces,
                 the name will also be used for the position
                 coordinate, if `x` and `x0` (`y` and `y0` if
@@ -282,6 +295,10 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 provided but a sample (in `y` or `x`) is set,
                 we compute the standard deviation for each box
                 using the sample values.
+            sdmultiple
+                Scales the box size when sizemode=sd Allowing
+                boxes to be drawn across any stddev range For
+                example 1-stddev, 3-stddev, 5-stddev
             sdsrc
                 Sets the source reference on Chart Studio Cloud
                 for `sd`.
@@ -300,6 +317,17 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             showlegend
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
+            showwhiskers
+                Determines whether or not whiskers are visible.
+                Defaults to true for `sizemode` "quartiles",
+                false for "sd".
+            sizemode
+                Sets the upper and lower bound for the boxes
+                quartiles means box is drawn between Q1 and Q3
+                SD means the box is drawn between Mean +-
+                Standard Deviation Argument sdmultiple (default
+                1) to scale the box size So it could be drawn
+                1-stddev, 3-stddev etc
             stream
                 :class:`plotly.graph_objects.box.Stream`
                 instance or dict with compatible properties
@@ -349,7 +377,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 attribute has effect only under the
                 q1/median/q3 signature. If `upperfence` is not
                 provided but a sample (in `y` or `x`) is set,
-                we compute the lower as the last sample point
+                we compute the upper as the last sample point
                 above 1.5 times the IQR.
             upperfencesrc
                 Sets the source reference on Chart Studio Cloud
@@ -389,9 +417,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -443,9 +471,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -476,6 +504,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

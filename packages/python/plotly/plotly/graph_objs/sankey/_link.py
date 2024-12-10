@@ -9,12 +9,15 @@ class Link(_BaseTraceHierarchyType):
     _parent_path_str = "sankey"
     _path_str = "sankey.link"
     _valid_props = {
+        "arrowlen",
         "color",
         "colorscaledefaults",
         "colorscales",
         "colorsrc",
         "customdata",
         "customdatasrc",
+        "hovercolor",
+        "hovercolorsrc",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
@@ -29,6 +32,27 @@ class Link(_BaseTraceHierarchyType):
         "value",
         "valuesrc",
     }
+
+    # arrowlen
+    # --------
+    @property
+    def arrowlen(self):
+        """
+        Sets the length (in px) of the links arrow, if 0 no arrow will
+        be drawn.
+
+        The 'arrowlen' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["arrowlen"]
+
+    @arrowlen.setter
+    def arrowlen(self, val):
+        self["arrowlen"] = val
 
     # color
     # -----
@@ -247,6 +271,90 @@ class Link(_BaseTraceHierarchyType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
+    # hovercolor
+    # ----------
+    @property
+    def hovercolor(self):
+        """
+        Sets the `link` hover color. It can be a single value, or an
+        array for specifying hover colors for each `link`. If
+        `link.hovercolor` is omitted, then by default, links will
+        become slightly more opaque when hovered over.
+
+        The 'hovercolor' property is a color and may be specified as:
+          - A hex string (e.g. '#ff0000')
+          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+          - A named CSS color:
+                aliceblue, antiquewhite, aqua, aquamarine, azure,
+                beige, bisque, black, blanchedalmond, blue,
+                blueviolet, brown, burlywood, cadetblue,
+                chartreuse, chocolate, coral, cornflowerblue,
+                cornsilk, crimson, cyan, darkblue, darkcyan,
+                darkgoldenrod, darkgray, darkgrey, darkgreen,
+                darkkhaki, darkmagenta, darkolivegreen, darkorange,
+                darkorchid, darkred, darksalmon, darkseagreen,
+                darkslateblue, darkslategray, darkslategrey,
+                darkturquoise, darkviolet, deeppink, deepskyblue,
+                dimgray, dimgrey, dodgerblue, firebrick,
+                floralwhite, forestgreen, fuchsia, gainsboro,
+                ghostwhite, gold, goldenrod, gray, grey, green,
+                greenyellow, honeydew, hotpink, indianred, indigo,
+                ivory, khaki, lavender, lavenderblush, lawngreen,
+                lemonchiffon, lightblue, lightcoral, lightcyan,
+                lightgoldenrodyellow, lightgray, lightgrey,
+                lightgreen, lightpink, lightsalmon, lightseagreen,
+                lightskyblue, lightslategray, lightslategrey,
+                lightsteelblue, lightyellow, lime, limegreen,
+                linen, magenta, maroon, mediumaquamarine,
+                mediumblue, mediumorchid, mediumpurple,
+                mediumseagreen, mediumslateblue, mediumspringgreen,
+                mediumturquoise, mediumvioletred, midnightblue,
+                mintcream, mistyrose, moccasin, navajowhite, navy,
+                oldlace, olive, olivedrab, orange, orangered,
+                orchid, palegoldenrod, palegreen, paleturquoise,
+                palevioletred, papayawhip, peachpuff, peru, pink,
+                plum, powderblue, purple, red, rosybrown,
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
+          - A list or array of any of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["hovercolor"]
+
+    @hovercolor.setter
+    def hovercolor(self, val):
+        self["hovercolor"] = val
+
+    # hovercolorsrc
+    # -------------
+    @property
+    def hovercolorsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `hovercolor`.
+
+        The 'hovercolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["hovercolorsrc"]
+
+    @hovercolorsrc.setter
+    def hovercolorsrc(self, val):
+        self["hovercolorsrc"] = val
+
     # hoverinfo
     # ---------
     @property
@@ -354,11 +462,12 @@ class Link(_BaseTraceHierarchyType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variables
-        `value` and `label`. Anything contained in tag `<extra>` is
-        displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available.  Variables
+        `source` and `target` are node objects.Finally, the template
+        string has access to variables `value` and `label`. Anything
+        contained in tag `<extra>` is displayed in the secondary box,
+        for example "<extra>{fullData.name}</extra>". To hide the
+        secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -599,6 +708,9 @@ class Link(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -621,6 +733,15 @@ class Link(_BaseTraceHierarchyType):
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -653,11 +774,13 @@ class Link(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  Variables `source` and `target` are
+            node objects.Finally, the template string has access to
+            variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -691,12 +814,15 @@ class Link(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        arrowlen=None,
         color=None,
         colorscales=None,
         colorscaledefaults=None,
         colorsrc=None,
         customdata=None,
         customdatasrc=None,
+        hovercolor=None,
+        hovercolorsrc=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
@@ -722,6 +848,9 @@ class Link(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.sankey.Link`
+        arrowlen
+            Sets the length (in px) of the links arrow, if 0 no
+            arrow will be drawn.
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -744,6 +873,15 @@ class Link(_BaseTraceHierarchyType):
         customdatasrc
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
+        hovercolor
+            Sets the `link` hover color. It can be a single value,
+            or an array for specifying hover colors for each
+            `link`. If `link.hovercolor` is omitted, then by
+            default, links will become slightly more opaque when
+            hovered over.
+        hovercolorsrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovercolor`.
         hoverinfo
             Determines which trace information appear when hovering
             links. If `none` or `skip` are set, no information is
@@ -776,11 +914,13 @@ class Link(_BaseTraceHierarchyType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `value` and `label`. Anything
-            contained in tag `<extra>` is displayed in the
-            secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            are available.  Variables `source` and `target` are
+            node objects.Finally, the template string has access to
+            variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -843,6 +983,10 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("arrowlen", None)
+        _v = arrowlen if arrowlen is not None else _v
+        if _v is not None:
+            self["arrowlen"] = _v
         _v = arg.pop("color", None)
         _v = color if color is not None else _v
         if _v is not None:
@@ -867,6 +1011,14 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
         _v = customdatasrc if customdatasrc is not None else _v
         if _v is not None:
             self["customdatasrc"] = _v
+        _v = arg.pop("hovercolor", None)
+        _v = hovercolor if hovercolor is not None else _v
+        if _v is not None:
+            self["hovercolor"] = _v
+        _v = arg.pop("hovercolorsrc", None)
+        _v = hovercolorsrc if hovercolorsrc is not None else _v
+        if _v is not None:
+            self["hovercolorsrc"] = _v
         _v = arg.pop("hoverinfo", None)
         _v = hoverinfo if hoverinfo is not None else _v
         if _v is not None:

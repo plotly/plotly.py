@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.10.11
   plotly:
     description: Visualize Principle Component Analysis (PCA) of your high-dimensional
       data in Python with Plotly.
@@ -105,17 +105,17 @@ fig.show()
 
 When you will have too many features to visualize, you might be interested in only visualizing the most relevant components. Those components often capture a majority of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation), which is a good way to tell if those components are sufficient for modelling this dataset.
 
-In the example below, our dataset contains 10 features, but we only select the first 4 components, since they explain over 99% of the total variance.
+In the example below, our dataset contains 8 features, but we only select the first 2 components.
 
 ```python
 import pandas as pd
 import plotly.express as px
 from sklearn.decomposition import PCA
-from sklearn.datasets import load_boston
+from sklearn.datasets import fetch_california_housing
 
-boston = load_boston()
-df = pd.DataFrame(boston.data, columns=boston.feature_names)
-n_components = 4
+housing = fetch_california_housing(as_frame=True)
+df = housing.data
+n_components = 2
 
 pca = PCA(n_components=n_components)
 components = pca.fit_transform(df)
@@ -127,7 +127,7 @@ labels['color'] = 'Median Price'
 
 fig = px.scatter_matrix(
     components,
-    color=boston.target,
+    color=housing.target,
     dimensions=range(n_components),
     labels=labels,
     title=f'Total Explained Variance: {total_var:.2f}%',
@@ -148,6 +148,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'pca-visualization', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ## 2D PCA Scatter Plot
 
@@ -220,7 +224,7 @@ px.area(
 
 ## Visualize Loadings
 
-It is also possible to visualize loadings using `shapes`, and use `annotations` to indicate which feature a certain loading original belong to. Here, we define loadings as:
+It is also possible to visualize loadings using `shapes`, and use `annotations` to indicate which feature a certain loading originally belonged to. Here, we define loadings as:
 
 $$
 loadings = eigenvectors \cdot \sqrt{eigenvalues}
@@ -246,11 +250,16 @@ loadings = pca.components_.T * np.sqrt(pca.explained_variance_)
 fig = px.scatter(components, x=0, y=1, color=df['species'])
 
 for i, feature in enumerate(features):
-    fig.add_shape(
-        type='line',
-        x0=0, y0=0,
-        x1=loadings[i, 0],
-        y1=loadings[i, 1]
+    fig.add_annotation(
+        ax=0, ay=0,
+        axref="x", ayref="y",
+        x=loadings[i, 0],
+        y=loadings[i, 1],
+        showarrow=True,
+        arrowsize=2,
+        arrowhead=2,
+        xanchor="right",
+        yanchor="top"
     )
     fig.add_annotation(
         x=loadings[i, 0],
@@ -259,6 +268,7 @@ for i, feature in enumerate(features):
         xanchor="center",
         yanchor="bottom",
         text=feature,
+        yshift=5,
     )
 fig.show()
 ```

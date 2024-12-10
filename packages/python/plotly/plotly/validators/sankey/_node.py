@@ -10,6 +10,9 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            align
+                Sets the alignment method used to position the
+                nodes along the horizontal axis.
             color
                 Sets the `node` color. It can be a single
                 value, or an array for specifying color for
@@ -54,8 +57,8 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -68,9 +71,11 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                variables `value` and `label`. Anything
-                contained in tag `<extra>` is displayed in the
-                secondary box, for example
+                Variables `sourceLinks` and `targetLinks` are
+                arrays of link objects.Finally, the template
+                string has access to variables `value` and
+                `label`. Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
                 secondary box completely, use an empty tag
                 `<extra></extra>`.

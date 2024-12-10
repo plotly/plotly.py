@@ -43,7 +43,6 @@ Simple Traces
    Bar
    Pie
    Heatmap
-   Heatmapgl
    Image
    Contour
    Table
@@ -99,6 +98,9 @@ Map Traces
 
    Scattergeo
    Choropleth
+   Scattermap
+   Choroplethmap
+   Densitymap
    Scattermapbox
    Choroplethmapbox
    Densitymapbox

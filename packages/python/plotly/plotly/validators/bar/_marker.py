@@ -85,6 +85,13 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             colorsrc
                 Sets the source reference on Chart Studio Cloud
                 for `color`.
+            cornerradius
+                Sets the rounding of corners. May be an integer
+                number of pixels, or a percentage of bar width
+                (as a string ending in %). Defaults to
+                `layout.barcornerradius`. In stack or relative
+                barmode, the first trace to set cornerradius is
+                used for the whole stack.
             line
                 :class:`plotly.graph_objects.bar.marker.Line`
                 instance or dict with compatible properties

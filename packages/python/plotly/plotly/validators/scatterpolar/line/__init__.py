@@ -7,6 +7,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._shape import ShapeValidator
     from ._dash import DashValidator
     from ._color import ColorValidator
+    from ._backoffsrc import BackoffsrcValidator
+    from ._backoff import BackoffValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -19,5 +21,7 @@ else:
             "._shape.ShapeValidator",
             "._dash.DashValidator",
             "._color.ColorValidator",
+            "._backoffsrc.BackoffsrcValidator",
+            "._backoff.BackoffValidator",
         ],
     )

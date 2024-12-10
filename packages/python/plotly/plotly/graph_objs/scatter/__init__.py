@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._error_x import ErrorX
     from ._error_y import ErrorY
+    from ._fillgradient import Fillgradient
     from ._fillpattern import Fillpattern
     from ._hoverlabel import Hoverlabel
     from ._legendgrouptitle import Legendgrouptitle
@@ -27,6 +28,7 @@ else:
         [
             "._error_x.ErrorX",
             "._error_y.ErrorY",
+            "._fillgradient.Fillgradient",
             "._fillpattern.Fillpattern",
             "._hoverlabel.Hoverlabel",
             "._legendgrouptitle.Legendgrouptitle",

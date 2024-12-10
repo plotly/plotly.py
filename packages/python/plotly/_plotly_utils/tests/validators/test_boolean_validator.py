@@ -1,7 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import BooleanValidator
-import numpy as np
-
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 # Boolean Validator
 # =================
@@ -18,7 +17,7 @@ def test_acceptance(val, validator):
 
 
 # ### Rejection ###
-@pytest.mark.parametrize("val", [1.0, 0.0, "True", "False", [], 0, np.nan])
+@pytest.mark.parametrize("val", [1.0, 0.0, "True", "False", [], 0, np_nan()])
 def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)

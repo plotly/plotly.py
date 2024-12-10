@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.0
+    version: 3.8.8
   plotly:
     description: How to make Box Plots in Python with Plotly.
     display_as: statistical
@@ -76,6 +76,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'box-plots', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Display the underlying data
 
@@ -229,16 +233,10 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 
-fig.add_trace(go.Box(y=[
-        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
-        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
-        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-      ], name="Precompiled Quartiles"))
-
-fig.update_traces(q1=[ 1, 2, 3 ], median=[ 4, 5, 6 ],
+fig.add_trace(go.Box(q1=[ 1, 2, 3 ], median=[ 4, 5, 6 ],
                   q3=[ 7, 8, 9 ], lowerfence=[-1, 0, 1],
-                  upperfence=[5, 6, 7], mean=[ 2.2, 2.8, 3.2 ],
-                  sd=[ 0.2, 0.4, 0.6 ], notchspan=[ 0.2, 0.4, 0.6 ] )
+                  upperfence=[7, 8, 9], mean=[ 2.2, 2.8, 3.2 ],
+                  sd=[ 0.2, 0.4, 0.6 ], notchspan=[ 0.2, 0.4, 0.6 ], name="Precompiled Quartiles"))
 
 fig.show()
 ```
@@ -454,12 +452,12 @@ x_data = ['Carmelo Anthony', 'Dwyane Wade',
 
 N = 50
 
-y0 = (10 * np.random.randn(N) + 30).astype(np.int)
-y1 = (13 * np.random.randn(N) + 38).astype(np.int)
-y2 = (11 * np.random.randn(N) + 33).astype(np.int)
-y3 = (9 * np.random.randn(N) + 36).astype(np.int)
-y4 = (15 * np.random.randn(N) + 31).astype(np.int)
-y5 = (12 * np.random.randn(N) + 40).astype(np.int)
+y0 = (10 * np.random.randn(N) + 30).astype(int)
+y1 = (13 * np.random.randn(N) + 38).astype(int)
+y2 = (11 * np.random.randn(N) + 33).astype(int)
+y3 = (9 * np.random.randn(N) + 36).astype(int)
+y4 = (15 * np.random.randn(N) + 31).astype(int)
+y5 = (12 * np.random.randn(N) + 40).astype(int)
 
 y_data = [y0, y1, y2, y3, y4, y5]
 

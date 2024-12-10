@@ -1,39 +1,21 @@
-import uuid
-from importlib import import_module
-import os
-import numbers
+import pathlib
+from traitlets import List, Dict, observe, Integer
+from plotly.io._renderers import display_jupyter_version_warnings
 
-try:
-    from urllib import parse
-except ImportError:
-    from urlparse import urlparse as parse
-
-import ipywidgets as widgets
-from traitlets import List, Unicode, Dict, observe, Integer
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
 from .version import __frontend_version__
+import anywidget
 
 
-@widgets.register
-class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
+class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     """
     Base class for FigureWidget. The FigureWidget class is code-generated as a
     subclass
     """
 
-    # Widget Traits
-    # -------------
-    # Widget traitlets are automatically synchronized with the FigureModel
-    # JavaScript object
-    _view_name = Unicode("FigureView").tag(sync=True)
-    _view_module = Unicode("jupyterlab-plotly").tag(sync=True)
-    _view_module_version = Unicode(__frontend_version__).tag(sync=True)
-
-    _model_name = Unicode("FigureModel").tag(sync=True)
-    _model_module = Unicode("jupyterlab-plotly").tag(sync=True)
-    _model_module_version = Unicode(__frontend_version__).tag(sync=True)
+    _esm = pathlib.Path(__file__).parent / "package_data" / "widgetbundle.js"
 
     # ### _data and _layout ###
     # These properties store the current state of the traces and
@@ -159,6 +141,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # ipywidget property that stores the number of active frontend
         # views of this widget
         self._view_count = 0
+
+    def show(self, *args, **kwargs):
+        return self
 
     # Python -> JavaScript Messages
     # -----------------------------
@@ -733,12 +718,30 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Display
     # -------
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        raise NotImplementedError  # Prefer _repr_mimebundle_
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        display_jupyter_version_warnings()
+        return {
+            "application/vnd.jupyter.widget-view+json": {
+                "version_major": 2,
+                "version_minor": 0,
+                "model_id": self._model_id,
+            },
+        }
+
     def _ipython_display_(self):
         """
         Handle rich display of figures in ipython contexts
         """
-        # Override BaseFigure's display to make sure we display the widget version
-        widgets.DOMWidget._ipython_display_(self)
+        raise NotImplementedError  # Prefer _repr_mimebundle_
 
     # Callbacks
     # ---------

@@ -8,7 +8,17 @@ class Tickfont(_BaseTraceHierarchyType):
     # --------------------
     _parent_path_str = "scattergeo.marker.colorbar"
     _path_str = "scattergeo.marker.colorbar.tickfont"
-    _valid_props = {"color", "family", "size"}
+    _valid_props = {
+        "color",
+        "family",
+        "lineposition",
+        "shadow",
+        "size",
+        "style",
+        "textcase",
+        "variant",
+        "weight",
+    }
 
     # color
     # -----
@@ -81,9 +91,9 @@ class Tickfont(_BaseTraceHierarchyType):
         studio.plotly.com or on-premise) generates images on a server,
         where only a select number of fonts are installed and
         supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
-        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
-        Narrow", "Raleway", "Times New Roman".
+        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
+        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
+        "Raleway", "Times New Roman".
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -97,6 +107,55 @@ class Tickfont(_BaseTraceHierarchyType):
     @family.setter
     def family(self, val):
         self["family"] = val
+
+    # lineposition
+    # ------------
+    @property
+    def lineposition(self):
+        """
+        Sets the kind of decoration line(s) with text, such as an
+        "under", "over" or "through" as well as combinations e.g.
+        "under+over", etc.
+
+        The 'lineposition' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['under', 'over', 'through'] joined with '+' characters
+            (e.g. 'under+over')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self["lineposition"]
+
+    @lineposition.setter
+    def lineposition(self, val):
+        self["lineposition"] = val
+
+    # shadow
+    # ------
+    @property
+    def shadow(self):
+        """
+        Sets the shape and color of the shadow behind text. "auto"
+        places minimal shadow and applies contrast text font color. See
+        https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
+        for additional options.
+
+        The 'shadow' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["shadow"]
+
+    @shadow.setter
+    def shadow(self, val):
+        self["shadow"] = val
 
     # size
     # ----
@@ -116,6 +175,95 @@ class Tickfont(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
+    # style
+    # -----
+    @property
+    def style(self):
+        """
+        Sets whether a font should be styled with a normal or italic
+        face from its family.
+
+        The 'style' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'italic']
+
+        Returns
+        -------
+        Any
+        """
+        return self["style"]
+
+    @style.setter
+    def style(self, val):
+        self["style"] = val
+
+    # textcase
+    # --------
+    @property
+    def textcase(self):
+        """
+        Sets capitalization of text. It can be used to make text appear
+        in all-uppercase or all-lowercase, or with each word
+        capitalized.
+
+        The 'textcase' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'word caps', 'upper', 'lower']
+
+        Returns
+        -------
+        Any
+        """
+        return self["textcase"]
+
+    @textcase.setter
+    def textcase(self, val):
+        self["textcase"] = val
+
+    # variant
+    # -------
+    @property
+    def variant(self):
+        """
+        Sets the variant of the font.
+
+        The 'variant' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['normal', 'small-caps', 'all-small-caps',
+                'all-petite-caps', 'petite-caps', 'unicase']
+
+        Returns
+        -------
+        Any
+        """
+        return self["variant"]
+
+    @variant.setter
+    def variant(self, val):
+        self["variant"] = val
+
+    # weight
+    # ------
+    @property
+    def weight(self):
+        """
+        Sets the weight (or boldness) of the font.
+
+        The 'weight' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+            in the interval [1, 1000]
+            OR exactly one of ['normal', 'bold'] (e.g. 'bold')
+
+        Returns
+        -------
+        int
+        """
+        return self["weight"]
+
+    @weight.setter
+    def weight(self, val):
+        self["weight"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -134,14 +282,47 @@ class Tickfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
+        lineposition
+            Sets the kind of decoration line(s) with text, such as
+            an "under", "over" or "through" as well as combinations
+            e.g. "under+over", etc.
+        shadow
+            Sets the shape and color of the shadow behind text.
+            "auto" places minimal shadow and applies contrast text
+            font color. See https://developer.mozilla.org/en-
+            US/docs/Web/CSS/text-shadow for additional options.
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        textcase
+            Sets capitalization of text. It can be used to make
+            text appear in all-uppercase or all-lowercase, or with
+            each word capitalized.
+        variant
+            Sets the variant of the font.
+        weight
+            Sets the weight (or boldness) of the font.
         """
 
-    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        family=None,
+        lineposition=None,
+        shadow=None,
+        size=None,
+        style=None,
+        textcase=None,
+        variant=None,
+        weight=None,
+        **kwargs,
+    ):
         """
         Construct a new Tickfont object
 
@@ -166,11 +347,31 @@ class Tickfont(_BaseTraceHierarchyType):
             premise) generates images on a server, where only a
             select number of fonts are installed and supported.
             These include "Arial", "Balto", "Courier New", "Droid
-            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
             One", "Old Standard TT", "Open Sans", "Overpass", "PT
             Sans Narrow", "Raleway", "Times New Roman".
+        lineposition
+            Sets the kind of decoration line(s) with text, such as
+            an "under", "over" or "through" as well as combinations
+            e.g. "under+over", etc.
+        shadow
+            Sets the shape and color of the shadow behind text.
+            "auto" places minimal shadow and applies contrast text
+            font color. See https://developer.mozilla.org/en-
+            US/docs/Web/CSS/text-shadow for additional options.
         size
 
+        style
+            Sets whether a font should be styled with a normal or
+            italic face from its family.
+        textcase
+            Sets capitalization of text. It can be used to make
+            text appear in all-uppercase or all-lowercase, or with
+            each word capitalized.
+        variant
+            Sets the variant of the font.
+        weight
+            Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -213,10 +414,34 @@ an instance of :class:`plotly.graph_objs.scattergeo.marker.colorbar.Tickfont`"""
         _v = family if family is not None else _v
         if _v is not None:
             self["family"] = _v
+        _v = arg.pop("lineposition", None)
+        _v = lineposition if lineposition is not None else _v
+        if _v is not None:
+            self["lineposition"] = _v
+        _v = arg.pop("shadow", None)
+        _v = shadow if shadow is not None else _v
+        if _v is not None:
+            self["shadow"] = _v
         _v = arg.pop("size", None)
         _v = size if size is not None else _v
         if _v is not None:
             self["size"] = _v
+        _v = arg.pop("style", None)
+        _v = style if style is not None else _v
+        if _v is not None:
+            self["style"] = _v
+        _v = arg.pop("textcase", None)
+        _v = textcase if textcase is not None else _v
+        if _v is not None:
+            self["textcase"] = _v
+        _v = arg.pop("variant", None)
+        _v = variant if variant is not None else _v
+        if _v is not None:
+            self["variant"] = _v
+        _v = arg.pop("weight", None)
+        _v = weight if weight is not None else _v
+        if _v is not None:
+            self["weight"] = _v
 
         # Process unknown kwargs
         # ----------------------

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.7
+    version: 3.10.11
   plotly:
     description: How to make filled area plots in Python with Plotly.
     display_as: basic
@@ -61,6 +61,10 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ### Pattern Fills
 
 *New in v5.7*
@@ -76,13 +80,11 @@ fig = px.area(df, x="medal", y="count", color="nation",
 fig.show()
 ```
 
-<!-- #region tags=[] -->
 ### Filled area chart with plotly.graph_objects
 
 #### Basic Overlaid Area Chart
-<!-- #endregion -->
 
-```python tags=[]
+```python
 import plotly.graph_objects as go
 
 fig = go.Figure()
@@ -125,6 +127,44 @@ fig.add_trace(go.Scatter(
     mode='lines', line_color='indigo'))
 
 fig.show()
+```
+
+#### Gradient Fill
+
+*New in 5.20*
+
+Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
+
+In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    [
+        go.Scatter(
+            x=[1, 2, 3, 4],
+            y=[3, 4, 8, 3],
+            fill=None,
+            mode="lines",
+            line_color="darkblue",
+        ),
+        go.Scatter(
+            x=[1, 2, 3, 4],
+            y=[1, 6, 2, 6],
+            fill="tonexty",
+            mode="lines",
+            line_color="darkblue",
+            fillgradient=dict(
+                type="horizontal",
+                colorscale=[(0.0, "darkblue"), (0.5, "royalblue"), (1.0, "cyan")],
+            ),
+        ),
+    ]
+)
+
+fig.show()
+
 ```
 
 #### Stacked Area Chart

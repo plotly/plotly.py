@@ -55,8 +55,8 @@ df = pd.read_csv(
 )
 
 # frequency of Country
-freq = df
-freq = freq.Country.value_counts().reset_index().rename(columns={"index": "x"})
+freq = df['Country'].value_counts().reset_index()
+freq.columns = ['x', 'Country']
 
 # read in 3d volcano surface data
 df_v = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/volcano.csv")

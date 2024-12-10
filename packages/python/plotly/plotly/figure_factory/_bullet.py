@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-
-import collections
 import math
 
 from plotly import exceptions, optional_imports

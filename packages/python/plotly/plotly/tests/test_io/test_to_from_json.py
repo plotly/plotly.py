@@ -2,6 +2,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 import pytest
 import plotly
+import numpy as np
 import json
 import os
 import tempfile
@@ -259,3 +260,16 @@ def test_write_json_from_file_string(fig1, pretty, remove_uids):
         # Check contents that were written
         expected = pio.to_json(fig1, pretty=pretty, remove_uids=remove_uids)
         assert result == expected
+
+
+def test_to_dict_empty_np_array_int64():
+    fig = go.Figure(
+        [
+            go.Bar(
+                x=np.array([], dtype="str"),
+                y=np.array([], dtype="int64"),
+            )
+        ]
+    )
+    # to_dict() should not raise an exception
+    fig.to_dict()

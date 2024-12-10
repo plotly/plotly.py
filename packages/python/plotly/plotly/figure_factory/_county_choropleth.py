@@ -358,15 +358,15 @@ def _calculations(
     elif fips_polygon_map[f].type == "MultiPolygon":
         x = [
             poly.simplify(simplify_county).exterior.xy[0].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
         y = [
             poly.simplify(simplify_county).exterior.xy[1].tolist()
-            for poly in fips_polygon_map[f]
+            for poly in fips_polygon_map[f].geoms
         ]
 
-        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
-        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
+        x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f].geoms]
+        y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f].geoms]
 
         county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
         state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
@@ -382,7 +382,7 @@ def _calculations(
             + "<br>Value: "
             + str(values[index])
         )
-        t_c = [text for poly in fips_polygon_map[f]]
+        t_c = [text for poly in fips_polygon_map[f].geoms]
         x_centroids = x_c + x_centroids
         y_centroids = y_c + y_centroids
         centroid_text = t_c + centroid_text
@@ -853,11 +853,11 @@ $ conda install -c plotly plotly-geo
         elif df_state["geometry"][index].type == "MultiPolygon":
             x = [
                 poly.simplify(simplify_state).exterior.xy[0].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             y = [
                 poly.simplify(simplify_state).exterior.xy[1].tolist()
-                for poly in df_state["geometry"][index]
+                for poly in df_state["geometry"][index].geoms
             ]
             for segment in range(len(x)):
                 x_states = x_states + x[segment]

@@ -2,7 +2,7 @@ from unittest import TestCase
 import plotly.io as pio
 import subprocess
 import os
-from distutils.version import LooseVersion
+from packaging.version import Version
 import requests
 import time
 import psutil
@@ -79,11 +79,11 @@ def test_orca_executable_path():
 def test_orca_version_number():
     assert pio.orca.status.version is None
 
-    expected_min = LooseVersion("1.1.0")
-    expected_max = LooseVersion("2.0.0")
+    expected_min = Version("1.1.0")
+    expected_max = Version("2.0.0")
 
     pio.orca.validate_executable()
-    version = LooseVersion(pio.orca.status.version)
+    version = Version(pio.orca.status.version)
 
     assert expected_min <= version
     assert version < expected_max

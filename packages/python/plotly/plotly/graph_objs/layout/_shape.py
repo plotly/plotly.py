@@ -12,21 +12,32 @@ class Shape(_BaseLayoutHierarchyType):
         "editable",
         "fillcolor",
         "fillrule",
+        "label",
         "layer",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
         "line",
         "name",
         "opacity",
         "path",
+        "showlegend",
         "templateitemname",
         "type",
         "visible",
         "x0",
+        "x0shift",
         "x1",
+        "x1shift",
         "xanchor",
         "xref",
         "xsizemode",
         "y0",
+        "y0shift",
         "y1",
+        "y1shift",
         "yanchor",
         "yref",
         "ysizemode",
@@ -138,16 +149,108 @@ class Shape(_BaseLayoutHierarchyType):
     def fillrule(self, val):
         self["fillrule"] = val
 
+    # label
+    # -----
+    @property
+    def label(self):
+        """
+        The 'label' property is an instance of Label
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.shape.Label`
+          - A dict of string/value properties that will be passed
+            to the Label constructor
+
+            Supported dict properties:
+
+                font
+                    Sets the shape label text font.
+                padding
+                    Sets padding (in px) between edge of label and
+                    edge of shape.
+                text
+                    Sets the text to display with shape. It is also
+                    used for legend item if `name` is not provided.
+                textangle
+                    Sets the angle at which the label text is drawn
+                    with respect to the horizontal. For lines,
+                    angle "auto" is the same angle as the line. For
+                    all other shapes, angle "auto" is horizontal.
+                textposition
+                    Sets the position of the label text relative to
+                    the shape. Supported values for rectangles,
+                    circles and paths are *top left*, *top center*,
+                    *top right*, *middle left*, *middle center*,
+                    *middle right*, *bottom left*, *bottom center*,
+                    and *bottom right*. Supported values for lines
+                    are "start", "middle", and "end". Default:
+                    *middle center* for rectangles, circles, and
+                    paths; "middle" for lines.
+                texttemplate
+                    Template string used for rendering the shape's
+                    label. Note that this will override `text`.
+                    Variables are inserted using %{variable}, for
+                    example "x0: %{x0}". Numbers are formatted
+                    using d3-format's syntax %{variable:d3-format},
+                    for example "Price: %{x0:$.2f}". See https://gi
+                    thub.com/d3/d3-format/tree/v1.4.5#d3-format for
+                    details on the formatting syntax. Dates are
+                    formatted using d3-time-format's syntax
+                    %{variable|d3-time-format}, for example "Day:
+                    %{x0|%m %b %Y}". See
+                    https://github.com/d3/d3-time-
+                    format/tree/v2.2.3#locale_format for details on
+                    the date formatting syntax. A single
+                    multiplication or division operation may be
+                    applied to numeric variables, and combined with
+                    d3 number formatting, for example "Length in
+                    cm: %{x0*2.54}", "%{slope*60:.1f} meters per
+                    second." For log axes, variable values are
+                    given in log units. For date axes, x/y
+                    coordinate variables and center variables use
+                    datetimes, while all other variable values use
+                    values in ms. Finally, the template string has
+                    access to variables `x0`, `x1`, `y0`, `y1`,
+                    `slope`, `dx`, `dy`, `width`, `height`,
+                    `length`, `xcenter` and `ycenter`.
+                xanchor
+                    Sets the label's horizontal position anchor
+                    This anchor binds the specified `textposition`
+                    to the "left", "center" or "right" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `xanchor` to "right" then the
+                    right-most portion of the label text lines up
+                    with the right-most edge of the shape.
+                yanchor
+                    Sets the label's vertical position anchor This
+                    anchor binds the specified `textposition` to
+                    the "top", "middle" or "bottom" of the label
+                    text. For example, if `textposition` is set to
+                    *top right* and `yanchor` to "top" then the
+                    top-most portion of the label text lines up
+                    with the top-most edge of the shape.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.shape.Label
+        """
+        return self["label"]
+
+    @label.setter
+    def label(self, val):
+        self["label"] = val
+
     # layer
     # -----
     @property
     def layer(self):
         """
-        Specifies whether shapes are drawn below or above traces.
+        Specifies whether shapes are drawn below gridlines ("below"),
+        between gridlines and traces ("between") or above traces
+        ("above").
 
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['below', 'above']
+                ['below', 'above', 'between']
 
         Returns
         -------
@@ -158,6 +261,130 @@ class Shape(_BaseLayoutHierarchyType):
     @layer.setter
     def layer(self, val):
         self["layer"] = val
+
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this shape in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this shape. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
+
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
+    # legendgrouptitle
+    # ----------------
+    @property
+    def legendgrouptitle(self):
+        """
+        The 'legendgrouptitle' property is an instance of Legendgrouptitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.shape.Legendgrouptitle`
+          - A dict of string/value properties that will be passed
+            to the Legendgrouptitle constructor
+
+            Supported dict properties:
+
+                font
+                    Sets this legend group's title font.
+                text
+                    Sets the title of the legend group.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.shape.Legendgrouptitle
+        """
+        return self["legendgrouptitle"]
+
+    @legendgrouptitle.setter
+    def legendgrouptitle(self, val):
+        self["legendgrouptitle"] = val
+
+    # legendrank
+    # ----------
+    @property
+    def legendrank(self):
+        """
+        Sets the legend rank for this shape. Items and groups with
+        smaller ranks are presented on top/left side while with
+        "reversed" `legend.traceorder` they are on bottom/right side.
+        The default legendrank is 1000, so that you can use ranks less
+        than 1000 to place certain items before all unranked items, and
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
+
+        The 'legendrank' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendrank"]
+
+    @legendrank.setter
+    def legendrank(self, val):
+        self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        shape.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -278,6 +505,26 @@ class Shape(_BaseLayoutHierarchyType):
     def path(self, val):
         self["path"] = val
 
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not this shape is shown in the legend.
+
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
+
     # templateitemname
     # ----------------
     @property
@@ -340,14 +587,17 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def visible(self):
         """
-        Determines whether or not this shape is visible.
+        Determines whether or not this shape is visible. If
+        "legendonly", the shape is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
 
         Returns
         -------
-        bool
+        Any
         """
         return self["visible"]
 
@@ -375,6 +625,29 @@ class Shape(_BaseLayoutHierarchyType):
     def x0(self, val):
         self["x0"] = val
 
+    # x0shift
+    # -------
+    @property
+    def x0shift(self):
+        """
+        Shifts `x0` away from the center of the category when `xref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'x0shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["x0shift"]
+
+    @x0shift.setter
+    def x0shift(self, val):
+        self["x0shift"] = val
+
     # x1
     # --
     @property
@@ -394,6 +667,29 @@ class Shape(_BaseLayoutHierarchyType):
     @x1.setter
     def x1(self, val):
         self["x1"] = val
+
+    # x1shift
+    # -------
+    @property
+    def x1shift(self):
+        """
+        Shifts `x1` away from the center of the category when `xref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'x1shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["x1shift"]
+
+    @x1shift.setter
+    def x1shift(self, val):
+        self["x1shift"] = val
 
     # xanchor
     # -------
@@ -499,6 +795,29 @@ class Shape(_BaseLayoutHierarchyType):
     def y0(self, val):
         self["y0"] = val
 
+    # y0shift
+    # -------
+    @property
+    def y0shift(self):
+        """
+        Shifts `y0` away from the center of the category when `yref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'y0shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["y0shift"]
+
+    @y0shift.setter
+    def y0shift(self, val):
+        self["y0shift"] = val
+
     # y1
     # --
     @property
@@ -518,6 +837,29 @@ class Shape(_BaseLayoutHierarchyType):
     @y1.setter
     def y1(self, val):
         self["y1"] = val
+
+    # y1shift
+    # -------
+    @property
+    def y1shift(self):
+        """
+        Shifts `y1` away from the center of the category when `yref` is
+        a "category" or "multicategory" axis. -0.5 corresponds to the
+        start of the category and 0.5 corresponds to the end of the
+        category.
+
+        The 'y1shift' property is a number and may be specified as:
+          - An int or float in the interval [-1, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["y1shift"]
+
+    @y1shift.setter
+    def y1shift(self, val):
+        self["y1shift"] = val
 
     # yanchor
     # -------
@@ -621,9 +963,40 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
-            Specifies whether shapes are drawn below or above
-            traces.
+            Specifies whether shapes are drawn below gridlines
+            ("below"), between gridlines and traces ("between") or
+            above traces ("above").
+        legend
+            Sets the reference to a legend to show this shape in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this shape. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this shape. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this shape.
         line
             :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
@@ -661,6 +1034,9 @@ class Shape(_BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        showlegend
+            Determines whether or not this shape is shown in the
+            legend.
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -684,13 +1060,26 @@ class Shape(_BaseLayoutHierarchyType):
             path using `path`. with respect to the axes' sizing
             mode.
         visible
-            Determines whether or not this shape is visible.
+            Determines whether or not this shape is visible. If
+            "legendonly", the shape is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -725,9 +1114,19 @@ class Shape(_BaseLayoutHierarchyType):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -768,21 +1167,32 @@ class Shape(_BaseLayoutHierarchyType):
         editable=None,
         fillcolor=None,
         fillrule=None,
+        label=None,
         layer=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
         line=None,
         name=None,
         opacity=None,
         path=None,
+        showlegend=None,
         templateitemname=None,
         type=None,
         visible=None,
         x0=None,
+        x0shift=None,
         x1=None,
+        x1shift=None,
         xanchor=None,
         xref=None,
         xsizemode=None,
         y0=None,
+        y0shift=None,
         y1=None,
+        y1shift=None,
         yanchor=None,
         yref=None,
         ysizemode=None,
@@ -809,9 +1219,40 @@ class Shape(_BaseLayoutHierarchyType):
             the interior. For more info please visit
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
+        label
+            :class:`plotly.graph_objects.layout.shape.Label`
+            instance or dict with compatible properties
         layer
-            Specifies whether shapes are drawn below or above
-            traces.
+            Specifies whether shapes are drawn below gridlines
+            ("below"), between gridlines and traces ("between") or
+            above traces ("above").
+        legend
+            Sets the reference to a legend to show this shape in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this shape. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            tle` instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this shape. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this shape.
         line
             :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
@@ -849,6 +1290,9 @@ class Shape(_BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        showlegend
+            Determines whether or not this shape is shown in the
+            legend.
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -872,13 +1316,26 @@ class Shape(_BaseLayoutHierarchyType):
             path using `path`. with respect to the axes' sizing
             mode.
         visible
-            Determines whether or not this shape is visible.
+            Determines whether or not this shape is visible. If
+            "legendonly", the shape is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
         x0
             Sets the shape's starting x position. See `type` and
             `xsizemode` for more info.
+        x0shift
+            Shifts `x0` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         x1
             Sets the shape's end x position. See `type` and
             `xsizemode` for more info.
+        x1shift
+            Shifts `x1` away from the center of the category when
+            `xref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
             "pixel". Specifies the anchor point on the x axis to
@@ -913,9 +1370,19 @@ class Shape(_BaseLayoutHierarchyType):
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
+        y0shift
+            Shifts `y0` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         y1
             Sets the shape's end y position. See `type` and
             `ysizemode` for more info.
+        y1shift
+            Shifts `y1` away from the center of the category when
+            `yref` is a "category" or "multicategory" axis. -0.5
+            corresponds to the start of the category and 0.5
+            corresponds to the end of the category.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
             "pixel". Specifies the anchor point on the y axis to
@@ -994,10 +1461,34 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = fillrule if fillrule is not None else _v
         if _v is not None:
             self["fillrule"] = _v
+        _v = arg.pop("label", None)
+        _v = label if label is not None else _v
+        if _v is not None:
+            self["label"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:
             self["layer"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
+        _v = arg.pop("legendgroup", None)
+        _v = legendgroup if legendgroup is not None else _v
+        if _v is not None:
+            self["legendgroup"] = _v
+        _v = arg.pop("legendgrouptitle", None)
+        _v = legendgrouptitle if legendgrouptitle is not None else _v
+        if _v is not None:
+            self["legendgrouptitle"] = _v
+        _v = arg.pop("legendrank", None)
+        _v = legendrank if legendrank is not None else _v
+        if _v is not None:
+            self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:
@@ -1014,6 +1505,10 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = path if path is not None else _v
         if _v is not None:
             self["path"] = _v
+        _v = arg.pop("showlegend", None)
+        _v = showlegend if showlegend is not None else _v
+        if _v is not None:
+            self["showlegend"] = _v
         _v = arg.pop("templateitemname", None)
         _v = templateitemname if templateitemname is not None else _v
         if _v is not None:
@@ -1030,10 +1525,18 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = x0 if x0 is not None else _v
         if _v is not None:
             self["x0"] = _v
+        _v = arg.pop("x0shift", None)
+        _v = x0shift if x0shift is not None else _v
+        if _v is not None:
+            self["x0shift"] = _v
         _v = arg.pop("x1", None)
         _v = x1 if x1 is not None else _v
         if _v is not None:
             self["x1"] = _v
+        _v = arg.pop("x1shift", None)
+        _v = x1shift if x1shift is not None else _v
+        if _v is not None:
+            self["x1shift"] = _v
         _v = arg.pop("xanchor", None)
         _v = xanchor if xanchor is not None else _v
         if _v is not None:
@@ -1050,10 +1553,18 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
         _v = y0 if y0 is not None else _v
         if _v is not None:
             self["y0"] = _v
+        _v = arg.pop("y0shift", None)
+        _v = y0shift if y0shift is not None else _v
+        if _v is not None:
+            self["y0shift"] = _v
         _v = arg.pop("y1", None)
         _v = y1 if y1 is not None else _v
         if _v is not None:
             self["y1"] = _v
+        _v = arg.pop("y1shift", None)
+        _v = y1shift if y1shift is not None else _v
+        if _v is not None:
+            self["y1shift"] = _v
         _v = arg.pop("yanchor", None)
         _v = yanchor if yanchor is not None else _v
         if _v is not None:

@@ -86,6 +86,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             line
                 :class:`plotly.graph_objects.sunburst.marker.Li
                 ne` instance or dict with compatible properties
+            pattern
+                Sets the pattern within the marker.
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if colors is set to a numerical

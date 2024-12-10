@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.8.0
   plotly:
     description: How to add dropdowns to update Plotly chart attributes in Python.
     display_as: controls
@@ -362,26 +362,26 @@ fig = go.Figure()
 # Add Traces
 
 fig.add_trace(
-    go.Scatter(x=list(df.index),
+    go.Scatter(x=list(df.Date),
                y=list(df.High),
                name="High",
                line=dict(color="#33CFA5")))
 
 fig.add_trace(
-    go.Scatter(x=list(df.index),
+    go.Scatter(x=list(df.Date),
                y=[df.High.mean()] * len(df.index),
                name="High Average",
                visible=False,
                line=dict(color="#33CFA5", dash="dash")))
 
 fig.add_trace(
-    go.Scatter(x=list(df.index),
+    go.Scatter(x=list(df.Date),
                y=list(df.Low),
                name="Low",
                line=dict(color="#F06A6A")))
 
 fig.add_trace(
-    go.Scatter(x=list(df.index),
+    go.Scatter(x=list(df.Date),
                y=[df.Low.mean()] * len(df.index),
                name="Low Average",
                visible=False,
@@ -393,17 +393,17 @@ high_annotations = [dict(x="2016-03-01",
                          xref="x", yref="y",
                          text="High Average:<br> %.3f" % df.High.mean(),
                          ax=0, ay=-40),
-                    dict(x=df.High.idxmax(),
+                    dict(x=df.Date[df.High.idxmax()],
                          y=df.High.max(),
                          xref="x", yref="y",
                          text="High Max:<br> %.3f" % df.High.max(),
-                         ax=0, ay=-40)]
+                         ax=-40, ay=-40)]
 low_annotations = [dict(x="2015-05-01",
                         y=df.Low.mean(),
                         xref="x", yref="y",
                         text="Low Average:<br> %.3f" % df.Low.mean(),
                         ax=0, ay=40),
-                   dict(x=df.High.idxmin(),
+                   dict(x=df.Date[df.High.idxmin()],
                         y=df.Low.min(),
                         xref="x", yref="y",
                         text="Low Min:<br> %.3f" % df.Low.min(),

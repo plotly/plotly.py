@@ -1,14 +1,13 @@
 import warnings
 import itertools
 from contextlib import contextmanager
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 import numpy as np
 import matplotlib as mpl
 from matplotlib import transforms
 
 from .. import utils
-from .. import _py3k_compat as py3k
 
 
 class Renderer(object):
@@ -199,7 +198,7 @@ class Renderer(object):
 
         # Before mpl 1.4.0, path_transform can be a false-y value, not a valid
         # transformation matrix.
-        if LooseVersion(mpl.__version__) < LooseVersion("1.4.0"):
+        if Version(mpl.__version__) < Version("1.4.0"):
             if path_transforms is None:
                 path_transforms = [np.eye(3)]
 
@@ -220,7 +219,7 @@ class Renderer(object):
         ]
 
         it = itertools
-        return it.islice(py3k.zip(*py3k.map(it.cycle, elements)), N)
+        return it.islice(zip(*map(it.cycle, elements)), N)
 
     def draw_path_collection(
         self,

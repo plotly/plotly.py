@@ -10,6 +10,12 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             cliponaxis
                 Determines whether or not markers and text
                 nodes are clipped about the subplot axes. To
@@ -71,7 +77,12 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the fill color. Defaults to a half-
                 transparent variant of the line color, marker
                 color, or marker line color, whichever is
-                available.
+                available. If fillgradient is specified,
+                fillcolor is ignored except for setting the
+                background color of the hover label, if any.
+            fillgradient
+                Sets a fill gradient. If not specified, the
+                fillcolor is used instead.
             fillpattern
                 Sets the pattern within the marker.
             groupnorm
@@ -121,8 +132,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -161,10 +172,17 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.scatter.Legendgrou
                 ptitle` instance or dict with compatible
@@ -172,13 +190,19 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.scatter.Line`
                 instance or dict with compatible properties
@@ -211,19 +235,25 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points and the trace is not stacked then the
                 default is "lines+markers". Otherwise, "lines".
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             opacity
                 Sets the opacity of the trace.
             orientation
-                Only relevant when `stackgroup` is used, and
-                only the first `orientation` found in the
-                `stackgroup` will be used - including if
-                `visible` is "legendonly" but not if it is
-                `false`. Sets the stacking direction. With "v"
-                ("h"), the y (x) values of subsequent traces
-                are added. Also affects the default value of
-                `fill`.
+                Only relevant in the following cases: 1. when
+                `scattermode` is set to "group". 2. when
+                `stackgroup` is used, and only the first
+                `orientation` found in the `stackgroup` will be
+                used - including if `visible` is "legendonly"
+                but not if it is `false`. Sets the stacking
+                direction. With "v" ("h"), the y (x) values of
+                subsequent traces are added. Also affects the
+                default value of `fill`.
             selected
                 :class:`plotly.graph_objects.scatter.Selected`
                 instance or dict with compatible properties
@@ -298,8 +328,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
-                rmat/tree/v1.4.5#d3-format for details on the
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -364,9 +394,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -416,9 +446,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -449,6 +479,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on Chart Studio Cloud
                 for `y`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tools
 =====
@@ -7,12 +5,9 @@ tools
 Functions that USERS will possibly want access to.
 
 """
-from __future__ import absolute_import
-
 import json
 import warnings
 
-import re
 import os
 
 from plotly import exceptions, optional_imports

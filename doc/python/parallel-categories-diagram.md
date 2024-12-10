@@ -45,7 +45,7 @@ For other representations of multivariate data, also see [parallel coordinates](
 
 This example visualizes the restaurant bills of a sample of 244 people. Hovering over a category rectangle (sex, smoker, etc) displays a tooltip with the number of people with that single trait. Hovering over a ribbon in the diagram displays a tooltip with the number of people with a particular combination of the five traits connected by the ribbon.
 
-By default, `px.parallel_categories` will display any column in the `data_frame` that has a cardinality (or number of unique values) of less than 50. This can be overridden either by passing in a specific list of columns to `dimensions` or by setting `dimensions_max_cardinality` to something other than 50. 
+By default, `px.parallel_categories` will display any column in the `data_frame` that has a cardinality (or number of unique values) of less than 50. This can be overridden either by passing in a specific list of columns to `dimensions` or by setting `dimensions_max_cardinality` to something other than 50.
 
 ```python
 import plotly.express as px
@@ -58,7 +58,7 @@ fig.show()
 
 #### Style Diagram
 
-In this example `dimensions` represents a list of stings or the columns of data frame, and `labels` is a dictionary with string keys (column name) and string values ('desired label to be displayed'). See [Plotly express reference page](https://www.plotly.express/plotly_express/#plotly_express.parallel_categories) for more information.
+In this example `dimensions` represents a list of stings or the columns of data frame, and `labels` is a dictionary with string keys (column name) and string values ('desired label to be displayed'). See [Plotly express reference page](https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories) for more information.
 
 ```python
 import plotly.express as px

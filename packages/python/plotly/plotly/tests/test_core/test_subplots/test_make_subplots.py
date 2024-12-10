@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from unittest import TestCase
 import pytest
 from plotly.graph_objs import (
@@ -659,6 +657,22 @@ class TestMakeSubplots(TestCase):
             specs=[[{"l": 0.1}, {"b": 0.2}], [{"t": 0.2}, {"r": 0.1}]],
         )
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_specs_rounding_rounds_down(self):
+        n_subplots = 8
+        padding_size = 0.2
+
+        specs = []
+        for _ in range(n_subplots):
+            specs.append([{"b": padding_size / 2.0, "t": padding_size / 2.0}])
+
+        fig = subplots.make_subplots(rows=n_subplots, specs=specs)
+        self.assertTrue(
+            all(
+                fig.layout[f"yaxis{i if i > 1 else ''}"]["domain"][0] <= 1.0
+                for i in range(1, n_subplots + 1)
+            )
+        )
 
     def test_specs_padding_bottom_left(self):
         expected = Figure(
@@ -1592,7 +1606,6 @@ class TestMakeSubplots(TestCase):
         )
 
     def test_row_width_and_column_width(self):
-
         expected = Figure(
             {
                 "data": [],
@@ -1680,7 +1693,6 @@ class TestMakeSubplots(TestCase):
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_row_width_and_shared_yaxes(self):
-
         expected = Figure(
             {
                 "data": [],

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.8.8
   plotly:
     description: How to make line charts in Python with Plotly. Examples on creating
       and styling line charts in Python with Plotly.
@@ -71,9 +71,13 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'line-charts', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ### Data Order in Line Charts
 
-Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**. 
+Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**.
 
 This makes it possible to make charts like the one below, but also means that it may be required to explicitly sort data before passing it to Plotly to avoid lines moving "backwards" across the chart.
 
@@ -85,17 +89,17 @@ df = pd.DataFrame(dict(
     x = [1, 3, 2, 4],
     y = [1, 2, 3, 4]
 ))
-fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig = px.line(df, x="x", y="y", title="Unsorted Input")
 fig.show()
 
 df = df.sort_values(by="x")
-fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig = px.line(df, x="x", y="y", title="Sorted Input")
 fig.show()
 ```
 
 ### Connected Scatterplots
 
-In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy 
+In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy.
 
 ```python
 import plotly.express as px
@@ -259,7 +263,7 @@ fig.show()
 
 #### Connect Data Gaps
 
-[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-on-mapbox/#multiple-filled-areas-with-a-scattermapbox-trace), we showed how to take benefit of this feature and illustrate multiple areas in mapbox.
+[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-tile-maps/#multiple-filled-areas-with-a-scattermap-trace), we showed how to take benefit of this feature and illustrate multiple areas on a tile map.
 
 ```python
 import plotly.graph_objects as go

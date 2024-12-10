@@ -1,3 +1,8 @@
+0
+0.html
+iframe_figures/
+packages/python/plotly/plotly/tests/test_orca/images/linux/failed/
+
 *.egg-info
 
 *.pyc
@@ -5,6 +10,8 @@
 *.gz
 
 *~
+
+doc/python/raw.githubusercontent.com/
 
 # Don't ignore dataset files
 !*.csv.gz
@@ -38,6 +45,9 @@ build
 dist
 plotly.egg-info/
 
+# macOS utility file
+**/.DS_Store
+
 plotly/tests/test_orca/images/*/failed
 plotly/tests/test_orca/images/*/tmp
 /plotly-package/plotly/tests/test_core/test_offline/plotly.min.js
@@ -52,3 +62,7 @@ doc/check-or-enforce-order.py
 packages/javascript/jupyterlab-plotly/lib/
 packages/python/plotly/jupyterlab_plotly/labextension/
 packages/python/plotly/jupyterlab_plotly/nbextension/index.js*
+packages/python/plotly/plotly/package_data/widgetbundle.js
+
+test/percy/*.html
+test/percy/pandas2/*.html

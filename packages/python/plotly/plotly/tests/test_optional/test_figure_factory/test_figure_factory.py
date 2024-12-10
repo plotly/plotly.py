@@ -6,6 +6,7 @@ import plotly.io as pio
 
 import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 import numpy as np
 from plotly.tests.utils import TestCaseNoTemplate
@@ -975,10 +976,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -1062,10 +1063,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -1217,10 +1218,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -4118,25 +4119,25 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 -88.02432999999999,
                 -88.04504299999999,
                 -88.053375,
-                np.nan,
+                np_nan(),
                 -88.211209,
                 -88.209999,
                 -88.208733,
                 -88.209559,
                 -88.211209,
-                np.nan,
+                np_nan(),
                 -88.22511999999999,
                 -88.22128099999999,
                 -88.218694,
                 -88.22465299999999,
                 -88.22511999999999,
-                np.nan,
+                np_nan(),
                 -88.264659,
                 -88.25782699999999,
                 -88.25947,
                 -88.255659,
                 -88.264659,
-                np.nan,
+                np_nan(),
                 -88.327302,
                 -88.20146799999999,
                 -88.141143,
@@ -4146,13 +4147,13 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 -88.10665399999999,
                 -88.149812,
                 -88.327302,
-                np.nan,
+                np_nan(),
                 -88.346745,
                 -88.341235,
                 -88.33288999999999,
                 -88.346823,
                 -88.346745,
-                np.nan,
+                np_nan(),
                 -88.473227,
                 -88.097888,
                 -88.154617,
@@ -4310,6 +4311,33 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
+    def compare_list_values(self, list1, list2, decimal=7):
+        assert len(list1) == len(list2), "Lists are not of the same length."
+        for i in range(len(list1)):
+            if isinstance(list1[i], list):
+                self.compare_list_values(list1[i], list2[i], decimal=decimal)
+            elif isinstance(list1[i], dict):
+                self.compare_dict_values(list1[i], list2[i], decimal=decimal)
+            elif isinstance(list1[i], float):
+                np.testing.assert_almost_equal(list1[i], list2[i], decimal=decimal)
+            else:
+                assert (
+                    list1[i] == list2[i]
+                ), f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
+
+    def compare_dict_values(self, dict1, dict2, decimal=7):
+        for k, v in dict1.items():
+            if isinstance(v, dict):
+                self.compare_dict_values(v, dict2[k], decimal=decimal)
+            elif isinstance(v, list):
+                self.compare_list_values(v, dict2[k], decimal=decimal)
+            elif isinstance(v, float):
+                np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
+            else:
+                assert (
+                    v == dict2[k]
+                ), f"Values for key {k} are not equal: {v} != {dict2[k]}"
+
     def test_aggregation(self):
 
         lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
@@ -4416,7 +4444,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         actual_agg = [2.0, 2.0, 1.0, 3.0, 9.0]
 
-        self.assert_dict_equal(fig1.data[0].geojson, actual_geojson)
+        self.compare_dict_values(fig1.data[0].geojson, actual_geojson)
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
         fig2 = ff.create_hexbin_mapbox(
@@ -4447,7 +4475,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         lon = np.random.randn(N)
         color = np.ones(N)
         frame = np.random.randint(0, n_frames, N)
-        df = pd.DataFrame(
+        df = pd.DataFrame(  # TODO: Test other constructors?
             np.c_[lat, lon, color, frame],
             columns=["Latitude", "Longitude", "Metric", "Frame"],
         )

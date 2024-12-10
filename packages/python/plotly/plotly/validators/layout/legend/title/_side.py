@@ -7,6 +7,8 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "legend"),
-            values=kwargs.pop("values", ["top", "left", "top left"]),
+            values=kwargs.pop(
+                "values", ["top", "left", "top left", "top center", "top right"]
+            ),
             **kwargs,
         )

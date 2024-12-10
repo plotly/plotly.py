@@ -41,6 +41,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `type` detection. This is the default value;
                 however it could be overridden for individual
                 axes.
+            barcornerradius
+                Sets the rounding of bar corners. May be an
+                integer number of pixels, or a percentage of
+                bar width (as a string ending in %).
             bargap
                 Sets the gap (in plot fraction) between bars of
                 adjacent location coordinates.
@@ -57,8 +61,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             barnorm
                 Sets the normalization for bar traces on the
                 graph. With "fraction", the value of each bar
@@ -215,7 +219,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 another With "group", the bars are plotted next
                 to one another centered around the shared
                 location. With "overlay", the bars are plotted
-                over one another, you might need to an
+                over one another, you might need to reduce
                 "opacity" to see multiple bars.
             geo
                 :class:`plotly.graph_objects.layout.Geo`
@@ -270,6 +274,15 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 spikelines are enabled by default perpendicular
                 to the specified axis. If false, hover
                 interactions are disabled.
+            hoversubplots
+                Determines expansion of hover effects to other
+                subplots If "single" just the axis pair of the
+                primary point is included without overlaying
+                subplots. If "overlaying" all subplots using
+                the main axis and occupying the same space are
+                included. If "axis", also include stacked
+                subplots using the same axis when `hovermode`
+                is set to "x", *x unified*, "y" or *y unified*.
             iciclecolorway
                 Sets the default icicle slice colors. Defaults
                 to the main `colorway` used for trace colors.
@@ -287,6 +300,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 layout.images
             legend
                 :class:`plotly.graph_objects.layout.Legend`
+                instance or dict with compatible properties
+            map
+                :class:`plotly.graph_objects.layout.Map`
                 instance or dict with compatible properties
             mapbox
                 :class:`plotly.graph_objects.layout.Mapbox`
@@ -309,6 +325,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             metasrc
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
+            minreducedheight
+                Minimum height of the plot with
+                margin.automargin applied (in px)
+            minreducedwidth
+                Minimum width of the plot with
+                margin.automargin applied (in px)
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
@@ -333,6 +355,19 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             polar
                 :class:`plotly.graph_objects.layout.Polar`
                 instance or dict with compatible properties
+            scattergap
+                Sets the gap (in plot fraction) between scatter
+                points of adjacent location coordinates.
+                Defaults to `bargap`.
+            scattermode
+                Determines how scatter points at the same
+                location coordinate are displayed on the graph.
+                With "group", the scatter points are plotted
+                next to one another centered around the shared
+                location. With "overlay", the scatter points
+                are plotted over one another, you might need to
+                reduce "opacity" to see multiple scatter
+                points.
             scene
                 :class:`plotly.graph_objects.layout.Scene`
                 instance or dict with compatible properties
@@ -435,11 +470,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             title
                 :class:`plotly.graph_objects.layout.Title`
                 instance or dict with compatible properties
-            titlefont
-                Deprecated: Please use layout.title.font
-                instead. Sets the title font. Note that the
-                title's font used to be customized by the now
-                deprecated `titlefont` attribute.
             transition
                 Sets transition options used during
                 Plotly.react updates.
@@ -513,8 +543,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "group", the bars are plotted next to one
                 another centered around the shared location.
                 With "overlay", the bars are plotted over one
-                another, you might need to an "opacity" to see
-                multiple bars.
+                another, you might need to reduce "opacity" to
+                see multiple bars.
             width
                 Sets the plot's width (in px).
             xaxis

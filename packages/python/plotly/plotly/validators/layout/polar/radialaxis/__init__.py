@@ -36,9 +36,12 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._minexponent import MinexponentValidator
+    from ._minallowed import MinallowedValidator
+    from ._maxallowed import MaxallowedValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
+    from ._labelalias import LabelaliasValidator
     from ._hoverformat import HoverformatValidator
     from ._gridwidth import GridwidthValidator
     from ._griddash import GriddashValidator
@@ -51,6 +54,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._autotypenumbers import AutotypenumbersValidator
+    from ._autotickangles import AutotickanglesValidator
+    from ._autorangeoptions import AutorangeoptionsValidator
     from ._autorange import AutorangeValidator
     from ._angle import AngleValidator
 else:
@@ -94,9 +99,12 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._minexponent.MinexponentValidator",
+            "._minallowed.MinallowedValidator",
+            "._maxallowed.MaxallowedValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",
+            "._labelalias.LabelaliasValidator",
             "._hoverformat.HoverformatValidator",
             "._gridwidth.GridwidthValidator",
             "._griddash.GriddashValidator",
@@ -109,6 +117,8 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._autotypenumbers.AutotypenumbersValidator",
+            "._autotickangles.AutotickanglesValidator",
+            "._autorangeoptions.AutorangeoptionsValidator",
             "._autorange.AutorangeValidator",
             "._angle.AngleValidator",
         ],

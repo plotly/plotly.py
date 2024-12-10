@@ -11,6 +11,7 @@ class Mapbox(_BaseLayoutHierarchyType):
     _valid_props = {
         "accesstoken",
         "bearing",
+        "bounds",
         "center",
         "domain",
         "layerdefaults",
@@ -66,6 +67,46 @@ class Mapbox(_BaseLayoutHierarchyType):
     @bearing.setter
     def bearing(self, val):
         self["bearing"] = val
+
+    # bounds
+    # ------
+    @property
+    def bounds(self):
+        """
+        The 'bounds' property is an instance of Bounds
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.Bounds`
+          - A dict of string/value properties that will be passed
+            to the Bounds constructor
+
+            Supported dict properties:
+
+                east
+                    Sets the maximum longitude of the map (in
+                    degrees East) if `west`, `south` and `north`
+                    are declared.
+                north
+                    Sets the maximum latitude of the map (in
+                    degrees North) if `east`, `west` and `south`
+                    are declared.
+                south
+                    Sets the minimum latitude of the map (in
+                    degrees North) if `east`, `west` and `north`
+                    are declared.
+                west
+                    Sets the minimum longitude of the map (in
+                    degrees East) if `east`, `south` and `north`
+                    are declared.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.mapbox.Bounds
+        """
+        return self["bounds"]
+
+    @bounds.setter
+    def bounds(self, val):
+        self["bounds"] = val
 
     # center
     # ------
@@ -412,6 +453,9 @@ class Mapbox(_BaseLayoutHierarchyType):
         bearing
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
+        bounds
+            :class:`plotly.graph_objects.layout.mapbox.Bounds`
+            instance or dict with compatible properties
         center
             :class:`plotly.graph_objects.layout.mapbox.Center`
             instance or dict with compatible properties
@@ -469,6 +513,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         arg=None,
         accesstoken=None,
         bearing=None,
+        bounds=None,
         center=None,
         domain=None,
         layers=None,
@@ -498,6 +543,9 @@ class Mapbox(_BaseLayoutHierarchyType):
         bearing
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
+        bounds
+            :class:`plotly.graph_objects.layout.mapbox.Bounds`
+            instance or dict with compatible properties
         center
             :class:`plotly.graph_objects.layout.mapbox.Center`
             instance or dict with compatible properties
@@ -590,6 +638,10 @@ an instance of :class:`plotly.graph_objs.layout.Mapbox`"""
         _v = bearing if bearing is not None else _v
         if _v is not None:
             self["bearing"] = _v
+        _v = arg.pop("bounds", None)
+        _v = bounds if bounds is not None else _v
+        if _v is not None:
+            self["bounds"] = _v
         _v = arg.pop("center", None)
         _v = center if center is not None else _v
         if _v is not None:

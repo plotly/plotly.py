@@ -20,6 +20,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             line
                 :class:`plotly.graph_objects.pie.marker.Line`
                 instance or dict with compatible properties
+            pattern
+                Sets the pattern within the marker.
 """,
             ),
             **kwargs,

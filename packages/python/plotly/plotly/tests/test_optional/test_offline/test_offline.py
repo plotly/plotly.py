@@ -2,9 +2,7 @@
 test__offline
 
 """
-from __future__ import absolute_import
 import re
-import json as _json
 
 from unittest import TestCase
 import pytest

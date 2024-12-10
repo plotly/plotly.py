@@ -18,7 +18,7 @@ jupyter:
     language: python
     layout: base
     name: Tesla Supercharging Stations
-    order: 10
+    order: 11
     page_type: u-guide
     permalink: python/tesla-supercharging-stations/
     thumbnail: thumbnail/tesla-stations.jpg

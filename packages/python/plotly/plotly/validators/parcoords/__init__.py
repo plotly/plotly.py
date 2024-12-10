@@ -13,8 +13,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
     from ._line import LineValidator
+    from ._legendwidth import LegendwidthValidator
     from ._legendrank import LegendrankValidator
     from ._legendgrouptitle import LegendgrouptitleValidator
+    from ._legend import LegendValidator
     from ._labelside import LabelsideValidator
     from ._labelfont import LabelfontValidator
     from ._labelangle import LabelangleValidator
@@ -43,8 +45,10 @@ else:
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
             "._line.LineValidator",
+            "._legendwidth.LegendwidthValidator",
             "._legendrank.LegendrankValidator",
             "._legendgrouptitle.LegendgrouptitleValidator",
+            "._legend.LegendValidator",
             "._labelside.LabelsideValidator",
             "._labelfont.LabelfontValidator",
             "._labelangle.LabelangleValidator",

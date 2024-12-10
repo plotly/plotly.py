@@ -29,9 +29,11 @@ class Cone(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "lighting",
         "lightposition",
         "meta",
@@ -291,6 +293,19 @@ class Cone(_BaseTraceType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -370,8 +385,8 @@ class Cone(_BaseTraceType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -452,23 +467,16 @@ class Cone(_BaseTraceType):
                 title
                     :class:`plotly.graph_objects.cone.colorbar.Titl
                     e` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use cone.colorbar.title.font
-                    instead. Sets this color bar's title font. Note
-                    that the title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleside
-                    Deprecated: Please use cone.colorbar.title.side
-                    instead. Determines the location of color bar's
-                    title with respect to the color bar. Defaults
-                    to "top" when `orientation` if "v" and
-                    defaults to "right" when `orientation` if "h".
-                    Note that the title's location used to be set
-                    by the now deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -478,10 +486,20 @@ class Cone(_BaseTraceType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -491,6 +509,10 @@ class Cone(_BaseTraceType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -729,11 +751,11 @@ class Cone(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variable
-        `norm` Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variable `norm` Anything
+        contained in tag `<extra>` is displayed in the secondary box,
+        for example "<extra>{fullData.name}</extra>". To hide the
+        secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -856,14 +878,39 @@ class Cone(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -914,10 +961,12 @@ class Cone(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -931,6 +980,27 @@ class Cone(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # lighting
     # --------
@@ -1066,7 +1136,7 @@ class Cone(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1205,11 +1275,12 @@ class Cone(_BaseTraceType):
         Determines whether `sizeref` is set as a "scaled" (i.e
         unitless) scalar (normalized by the max u/v/w norm in the
         vector field) or as "absolute" value (in the same units as the
-        vector field).
+        vector field). To display sizes in actual vector length use
+        "raw".
 
         The 'sizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['scaled', 'absolute']
+                ['scaled', 'absolute', 'raw']
 
         Returns
         -------
@@ -1232,9 +1303,10 @@ class Cone(_BaseTraceType):
         minimum "time" to travel across two successive x/y/z positions
         at the average velocity of those two successive positions. All
         cones in a given trace use the same factor. With `sizemode` set
-        to "scaled", `sizeref` is unitless, its default value is 0.5
-        With `sizemode` set to "absolute", `sizeref` has the same units
-        as the u/v/w vector field, its the default value is half the
+        to "raw", its default value is 1. With `sizemode` set to
+        "scaled", `sizeref` is unitless, its default value is 0.5. With
+        `sizemode` set to "absolute", `sizeref` has the same units as
+        the u/v/w vector field, its the default value is half the
         sample's maximum vector norm.
 
         The 'sizeref' property is a number and may be specified as:
@@ -1921,11 +1993,11 @@ class Cone(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1941,21 +2013,33 @@ class Cone(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -1979,7 +2063,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -2009,7 +2093,8 @@ class Cone(_BaseTraceType):
             Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
             the vector field) or as "absolute" value (in the same
-            units as the vector field).
+            units as the vector field). To display sizes in actual
+            vector length use "raw".
         sizeref
             Adjusts the cone size scaling. The size of the cones is
             determined by their u/v/w norm multiplied a factor and
@@ -2018,8 +2103,9 @@ class Cone(_BaseTraceType):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
+            "raw", its default value is 1. With `sizemode` set to
             "scaled", `sizeref` is unitless, its default value is
-            0.5 With `sizemode` set to "absolute", `sizeref` has
+            0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
@@ -2175,9 +2261,11 @@ class Cone(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -2323,11 +2411,11 @@ class Cone(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `norm` Anything contained in
-            tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
+            are available. Finally, the template string has access
+            to variable `norm` Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2343,21 +2431,33 @@ class Cone(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         lighting
             :class:`plotly.graph_objects.cone.Lighting` instance or
             dict with compatible properties
@@ -2381,7 +2481,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the surface. Please note that in
@@ -2411,7 +2511,8 @@ class Cone(_BaseTraceType):
             Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
             the vector field) or as "absolute" value (in the same
-            units as the vector field).
+            units as the vector field). To display sizes in actual
+            vector length use "raw".
         sizeref
             Adjusts the cone size scaling. The size of the cones is
             determined by their u/v/w norm multiplied a factor and
@@ -2420,8 +2521,9 @@ class Cone(_BaseTraceType):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
+            "raw", its default value is 1. With `sizemode` set to
             "scaled", `sizeref` is unitless, its default value is
-            0.5 With `sizemode` set to "absolute", `sizeref` has
+            0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
@@ -2666,6 +2768,10 @@ an instance of :class:`plotly.graph_objs.Cone`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2678,6 +2784,10 @@ an instance of :class:`plotly.graph_objs.Cone`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("lighting", None)
         _v = lighting if lighting is not None else _v
         if _v is not None:

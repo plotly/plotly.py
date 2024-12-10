@@ -8,6 +8,6 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             implied_edits=kwargs.pop("implied_edits", {}),
-            values=kwargs.pop("values", ["auto", "linear", "array"]),
+            values=kwargs.pop("values", ["auto", "linear", "array", "sync"]),
             **kwargs,
         )

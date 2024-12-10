@@ -29,8 +29,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the cell value formatting rule using d3
                 formatting mini-languages which are very
                 similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                ormat.
+                ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                format.
             formatsrc
                 Sets the source reference on Chart Studio Cloud
                 for `format`.

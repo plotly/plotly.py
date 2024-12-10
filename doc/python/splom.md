@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.10.11
   plotly:
     description: How to make scatterplot matrices or sploms natively in Python with
       Plotly.
@@ -56,7 +56,7 @@ Specify the columns to be represented with the `dimensions` argument, and set co
 import plotly.express as px
 df = px.data.iris()
 fig = px.scatter_matrix(df,
-    dimensions=["sepal_width", "sepal_length", "petal_width", "petal_length"],
+    dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"],
     color="species")
 fig.show()
 ```
@@ -69,7 +69,7 @@ The scatter matrix plot can be configured thanks to the parameters of `px.scatte
 import plotly.express as px
 df = px.data.iris()
 fig = px.scatter_matrix(df,
-    dimensions=["sepal_width", "sepal_length", "petal_width", "petal_length"],
+    dimensions=["sepal_length", "sepal_width", "petal_length", "petal_width"],
     color="species", symbol="species",
     title="Scatter matrix of iris data set",
     labels={col:col.replace('_', ' ') for col in df.columns}) # remove underscore
@@ -77,7 +77,6 @@ fig.update_traces(diagonal_visible=False)
 fig.show()
 ```
 
-<!-- #region -->
 
 ### Scatter matrix (splom) with go.Splom
 
@@ -103,7 +102,7 @@ trace=go.Splom(dimensions=[dict(label='string-1',
 
 The label in each dimension is assigned to the axes titles of the corresponding matrix cell.
 
-<!-- #endregion -->
+
 
 #### Splom of the Iris data set
 
@@ -290,6 +289,53 @@ fig.update_layout(title=title,
 
 fig.show()
 ```
+#### Hover Effects
+
+*New in 5.21*
+
+Set `hoversubplots='axis'` with `hovermode` set to `x`, `x unified`, `y`, or `y unified` for hover effects to appear across a column or row. For more on hover effects, see the [Hover Text and Formatting](/python/hover-text-and-formatting/) page.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv"
+)
+index_vals = df["class"].astype("category").cat.codes
+
+fig = go.Figure(
+    data=go.Splom(
+        dimensions=[
+            dict(label="sepal length", values=df["sepal length"]),
+            dict(label="sepal width", values=df["sepal width"]),
+            dict(label="petal length", values=df["petal length"]),
+            dict(label="petal width", values=df["petal width"]),
+        ],
+        showupperhalf=False,
+        text=df["class"],
+        marker=dict(
+            color=index_vals,
+            showscale=False,
+            line_color="white",
+            line_width=0.5,
+        ),
+    )
+)
+
+
+fig.update_layout(
+    title="Iris Data set",
+    hoversubplots="axis",
+    width=600,
+    height=600,
+    hovermode="x",
+)
+
+fig.show()
+
+```
+
 #### Reference
 
 See [function reference for `px.scatter_matrix()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_matrix) or https://plotly.com/python/reference/splom/ for more information and chart attribute options!
