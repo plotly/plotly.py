@@ -476,9 +476,11 @@ docs = dict(
     ],
     barmode=[
         "str (default `'relative'`)",
-        "One of `'group'`, `'overlay'` or `'relative'`",
+        "One of `'group'`, `'overlay'`, `'relative'` or `'stack'`",
+        "In `'stack'` mode, bars are placed on top of each other."
+        "Positive and negative values will cancel out, drawn in order of appearance of categories in `data_frame`.",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
-        "In `'overlay'` mode, bars are drawn on top of one another.",
+        "In `'overlay'` mode, bars are drawn over each other.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
@@ -548,7 +550,6 @@ docs = dict(
         "One of `'outliers'`, `'suspectedoutliers'`, `'all'`, or `False`.",
         "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
         "If `'suspectedoutliers'`, all outlier points are shown and those less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted with the marker's `'outliercolor'`.",
-        "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
         "If `'all'`, all sample points are shown.",
         "If `False`, no sample points are shown and the whiskers extend to the full range of the sample.",
     ],
