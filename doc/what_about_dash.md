@@ -15,11 +15,9 @@ fig = go.Figure() # or any Plotly Express function e.g. px.bar(...)
 # fig.add_trace( ... )
 # fig.update_layout( ... )
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import Dash, dcc, html
 
-app = dash.Dash()
+app = Dash()
 app.layout = html.Div([
     dcc.Graph(figure=fig)
 ])

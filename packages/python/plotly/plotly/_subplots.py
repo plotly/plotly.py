@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
 # Constants
 # ---------
 # Subplot types that are each individually positioned with a domain
@@ -11,7 +8,7 @@ from __future__ import absolute_import, unicode_literals
 # little differently.
 import collections
 
-_single_subplot_types = {"scene", "geo", "polar", "ternary", "mapbox"}
+_single_subplot_types = {"scene", "geo", "polar", "ternary", "map", "mapbox"}
 _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 
 # For most subplot types, a trace is associated with a particular subplot
@@ -23,7 +20,7 @@ _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 # the trace property is just named `subplot`.  For example setting
 # the `scatterpolar.subplot` property to `polar3` associates the scatterpolar
 # trace with the third polar subplot in the figure
-_subplot_prop_named_subplot = {"polar", "ternary", "mapbox"}
+_subplot_prop_named_subplot = {"polar", "ternary", "map", "mapbox"}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
@@ -153,7 +150,8 @@ def make_subplots(
                 - 'scene': 3D Cartesian subplot for scatter3d, cone, etc.
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
-                - 'mapbox': Mapbox subplot for scattermapbox
+                - 'map': Map subplot for scattermap, choroplethmap and densitymap
+                - 'mapbox': Mapbox subplot for scattermapbox, choroplethmapbox and densitymapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
                 - trace type: A trace type which will be used to determine
@@ -193,7 +191,7 @@ def make_subplots(
                   in fraction of cell height ('to_end': to cell top edge)
 
     column_widths: list of numbers or None (default None)
-        list of length `cols` of the relative widths of each column of suplots.
+        list of length `cols` of the relative widths of each column of subplots.
         Values are normalized internally and used to distribute overall width
         of the figure (excluding padding) among the columns.
 
@@ -361,7 +359,7 @@ def make_subplots(
     if not isinstance(rows, int) or rows <= 0:
         raise ValueError(
             """
-The 'rows' argument to make_suplots must be an int greater than 0.
+The 'rows' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(rows), val=repr(rows)
             )
@@ -371,7 +369,7 @@ The 'rows' argument to make_suplots must be an int greater than 0.
     if not isinstance(cols, int) or cols <= 0:
         raise ValueError(
             """
-The 'cols' argument to make_suplots must be an int greater than 0.
+The 'cols' argument to make_subplots must be an int greater than 0.
     Received value of type {typ}: {val}""".format(
                 typ=type(cols), val=repr(cols)
             )
@@ -402,7 +400,7 @@ The 'start_cell` argument to make_subplots must be one of \
             if not isinstance(item, dict):
                 raise ValueError(
                     """
-Elements of the '{name}' argument to make_suplots must be dictionaries \
+Elements of the '{name}' argument to make_subplots must be dictionaries \
 or None.
     Received value of type {typ}: {val}""".format(
                         name=name, typ=type(item), val=repr(item)
@@ -487,7 +485,7 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
     ):
         raise ValueError(
             """
-The 'insets' argument to make_suplots must be a list of dictionaries.
+The 'insets' argument to make_subplots must be a list of dictionaries.
     Received value of type {typ}: {val}""".format(
                 typ=type(insets), val=repr(insets)
             )
@@ -590,7 +588,7 @@ The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".f
     else:
         raise ValueError(
             """
-The 'column_widths' argument to make_suplots must be a list of numbers of \
+The 'column_widths' argument to make_subplots must be a list of numbers of \
 length {cols}.
     Received value of type {typ}: {val}""".format(
                 cols=cols, typ=type(column_widths), val=repr(column_widths)
@@ -610,7 +608,7 @@ length {cols}.
     else:
         raise ValueError(
             """
-The 'row_heights' argument to make_suplots must be a list of numbers of \
+The 'row_heights' argument to make_subplots must be a list of numbers of \
 length {rows}.
     Received value of type {typ}: {val}""".format(
                 rows=rows, typ=type(row_heights), val=repr(row_heights)
@@ -671,7 +669,6 @@ The row_titles argument to make_subplots must be a list or tuple
     # Loop through specs -- (r, c) <-> (row, col)
     for r, spec_row in enumerate(specs):
         for c, spec in enumerate(spec_row):
-
             if spec is None:  # skip over None cells
                 continue
 
@@ -702,6 +699,46 @@ The row_titles argument to make_subplots must be a list or tuple
             else:
                 y_s = grid[r_spanned][c][1] + spec["b"]
                 y_e = grid[r][c][1] + heights[-1 - r] - spec["t"]
+
+            if y_s < 0.0:
+                # round for values very close to one
+                # handles some floating point errors
+                if y_s > -0.01:
+                    y_s = 0.0
+                else:
+                    raise Exception(
+                        "A combination of the 'b' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+            if y_s > 1.0:
+                # round for values very close to one
+                # handles some floating point errors
+                if y_s < 1.01:
+                    y_s = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 'b' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
+            if y_e < 0.0:
+                if y_e > -0.01:
+                    y_e = 0.0
+                else:
+                    raise Exception(
+                        "A combination of the 't' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
+            if y_e > 1.0:
+                if y_e < 1.01:
+                    y_e = 1.0
+                else:
+                    raise Exception(
+                        "A combination of the 't' values, heights, and "
+                        "number of subplots too large for this subplot grid."
+                    )
+
             y_domain = [y_s, y_e]
 
             list_of_domains.append(x_domain)
@@ -726,7 +763,6 @@ The row_titles argument to make_subplots must be a list or tuple
     insets_ref = [None for inset in range(len(insets))] if insets else None
     if insets:
         for i_inset, inset in enumerate(insets):
-
             r = inset["cell"][0] - 1
             c = inset["cell"][1] - 1
 
@@ -1052,7 +1088,6 @@ def _subplot_type_for_trace_type(trace_type):
 
 
 def _validate_coerce_subplot_type(subplot_type):
-
     # Lowercase subplot_type
     orig_subplot_type = subplot_type
     subplot_type = subplot_type.lower()
@@ -1200,7 +1235,6 @@ def _build_subplot_title_annotations(
 
 
 def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
-
     # Compute rows and columns
     rows = len(specs)
     cols = len(specs[0])
@@ -1257,7 +1291,6 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     # Loop through specs, fill in _tmp
     for r, spec_row in enumerate(specs):
         for c, spec in enumerate(spec_row):
-
             ref = grid_ref[r][c]
             if ref is None:
                 if _tmp[r][c] == "":
@@ -1339,7 +1372,6 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
 
 
 def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=False):
-
     if row <= 0:
         raise Exception(
             "Row value is out of range. " "Note: the starting cell is (1, 1)"
@@ -1461,7 +1493,6 @@ Unexpected subplot type with layout_keys of {}""".format(
 
 
 def _get_subplot_ref_for_trace(trace):
-
     if "domain" in trace:
         return SubplotRef(
             subplot_type="domain",

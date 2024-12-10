@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division
-
 import plotly.colors as clrs
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils

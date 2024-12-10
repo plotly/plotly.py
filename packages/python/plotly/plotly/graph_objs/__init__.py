@@ -8,10 +8,12 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._candlestick import Candlestick
     from ._carpet import Carpet
     from ._choropleth import Choropleth
+    from ._choroplethmap import Choroplethmap
     from ._choroplethmapbox import Choroplethmapbox
     from ._cone import Cone
     from ._contour import Contour
     from ._contourcarpet import Contourcarpet
+    from ._densitymap import Densitymap
     from ._densitymapbox import Densitymapbox
     from ._deprecations import AngularAxis
     from ._deprecations import Annotation
@@ -43,7 +45,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._funnel import Funnel
     from ._funnelarea import Funnelarea
     from ._heatmap import Heatmap
-    from ._heatmapgl import Heatmapgl
     from ._histogram import Histogram
     from ._histogram2d import Histogram2d
     from ._histogram2dcontour import Histogram2dContour
@@ -57,13 +58,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
-    from ._pointcloud import Pointcloud
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
     from ._scattercarpet import Scattercarpet
     from ._scattergeo import Scattergeo
     from ._scattergl import Scattergl
+    from ._scattermap import Scattermap
     from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
@@ -84,15 +85,16 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import candlestick
     from . import carpet
     from . import choropleth
+    from . import choroplethmap
     from . import choroplethmapbox
     from . import cone
     from . import contour
     from . import contourcarpet
+    from . import densitymap
     from . import densitymapbox
     from . import funnel
     from . import funnelarea
     from . import heatmap
-    from . import heatmapgl
     from . import histogram
     from . import histogram2d
     from . import histogram2dcontour
@@ -106,13 +108,13 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import parcats
     from . import parcoords
     from . import pie
-    from . import pointcloud
     from . import sankey
     from . import scatter
     from . import scatter3d
     from . import scattercarpet
     from . import scattergeo
     from . import scattergl
+    from . import scattermap
     from . import scattermapbox
     from . import scatterpolar
     from . import scatterpolargl
@@ -139,15 +141,16 @@ else:
             ".candlestick",
             ".carpet",
             ".choropleth",
+            ".choroplethmap",
             ".choroplethmapbox",
             ".cone",
             ".contour",
             ".contourcarpet",
+            ".densitymap",
             ".densitymapbox",
             ".funnel",
             ".funnelarea",
             ".heatmap",
-            ".heatmapgl",
             ".histogram",
             ".histogram2d",
             ".histogram2dcontour",
@@ -161,13 +164,13 @@ else:
             ".parcats",
             ".parcoords",
             ".pie",
-            ".pointcloud",
             ".sankey",
             ".scatter",
             ".scatter3d",
             ".scattercarpet",
             ".scattergeo",
             ".scattergl",
+            ".scattermap",
             ".scattermapbox",
             ".scatterpolar",
             ".scatterpolargl",
@@ -190,10 +193,12 @@ else:
             "._candlestick.Candlestick",
             "._carpet.Carpet",
             "._choropleth.Choropleth",
+            "._choroplethmap.Choroplethmap",
             "._choroplethmapbox.Choroplethmapbox",
             "._cone.Cone",
             "._contour.Contour",
             "._contourcarpet.Contourcarpet",
+            "._densitymap.Densitymap",
             "._densitymapbox.Densitymapbox",
             "._deprecations.AngularAxis",
             "._deprecations.Annotation",
@@ -225,7 +230,6 @@ else:
             "._funnel.Funnel",
             "._funnelarea.Funnelarea",
             "._heatmap.Heatmap",
-            "._heatmapgl.Heatmapgl",
             "._histogram.Histogram",
             "._histogram2d.Histogram2d",
             "._histogram2dcontour.Histogram2dContour",
@@ -239,13 +243,13 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
-            "._pointcloud.Pointcloud",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",
             "._scattercarpet.Scattercarpet",
             "._scattergeo.Scattergeo",
             "._scattergl.Scattergl",
+            "._scattermap.Scattermap",
             "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",
@@ -267,14 +271,14 @@ else:
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
-        from distutils.version import LooseVersion as _LooseVersion
+        from packaging.version import Version as _Version
 
-        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
+        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
         else:
             raise ImportError()
     except Exception:
-        from ..missing_ipywidgets import FigureWidget
+        from ..missing_anywidget import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -283,16 +287,16 @@ else:
         if import_name == "FigureWidget":
             try:
                 import ipywidgets
-                from distutils.version import LooseVersion
+                from packaging.version import Version
 
-                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+                if Version(ipywidgets.__version__) >= Version("7.0.0"):
                     from ..graph_objs._figurewidget import FigureWidget
 
                     return FigureWidget
                 else:
                     raise ImportError()
             except Exception:
-                from ..missing_ipywidgets import FigureWidget
+                from ..missing_anywidget import FigureWidget
 
                 return FigureWidget
 

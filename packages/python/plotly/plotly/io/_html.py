@@ -1,12 +1,10 @@
 import uuid
-import os
 from pathlib import Path
 import webbrowser
 
 from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly import utils
 
 _json = get_module("json")
 
@@ -68,12 +66,6 @@ def to_html(
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file.
-
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
 
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
@@ -256,23 +248,13 @@ def to_html(
     if isinstance(include_plotlyjs, str):
         include_plotlyjs = include_plotlyjs.lower()
 
-    # Start/end of requirejs block (if any)
-    require_start = ""
-    require_end = ""
-
     # Init and load
     load_plotlyjs = ""
 
-    # Init plotlyjs. This block needs to run before plotly.js is loaded in
-    # order for MathJax configuration to work properly
-    if include_plotlyjs == "require":
-        require_start = 'require(["plotly"], function(Plotly) {'
-        require_end = "});"
-
-    elif include_plotlyjs == "cdn":
+    if include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
-        <script src="{cdn_url}"></script>\
+        <script charset="utf-8" src="{cdn_url}"></script>\
     """.format(
             win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
         )
@@ -280,7 +262,7 @@ def to_html(
     elif include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
-        <script src="plotly.min.js"></script>\
+        <script charset="utf-8" src="plotly.min.js"></script>\
     """.format(
             win_config=_window_plotly_config
         )
@@ -288,7 +270,7 @@ def to_html(
     elif isinstance(include_plotlyjs, str) and include_plotlyjs.endswith(".js"):
         load_plotlyjs = """\
         {win_config}
-        <script src="{url}"></script>\
+        <script charset="utf-8" src="{url}"></script>\
     """.format(
             win_config=_window_plotly_config, url=include_plotlyjs_orig
         )
@@ -345,10 +327,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
             <div id="{id}" class="plotly-graph-div" \
 style="height:{height}; width:{width};"></div>\
             <script type="text/javascript">\
-                {require_start}\
-                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
-                    {script};\
-                {require_end}\
+                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
+                {script};\
             </script>\
         </div>""".format(
         mathjax_script=mathjax_script,
@@ -357,9 +337,7 @@ style="height:{height}; width:{width};"></div>\
         width=div_width,
         height=div_height,
         base_url_line=base_url_line,
-        require_start=require_start,
         script=script,
-        require_end=require_end,
     ).strip()
 
     if full_html:
@@ -434,12 +412,6 @@ def write_html(
         useful when many figures will be saved as HTML files in the same
         directory because the plotly.js source code will be included only
         once per output directory, rather than once per output file.
-
-        If 'require', Plotly.js is loaded using require.js.  This option
-        assumes that require.js is globally available and that it has been
-        globally configured to know how to find Plotly.js as 'plotly'.
-        This option is not advised when full_html=True as it will result
-        in a non-functional html file.
 
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
@@ -533,7 +505,8 @@ def write_html(
 
     # Write HTML string
     if path is not None:
-        path.write_text(html_str)
+        # To use a different file encoding, pass a file descriptor
+        path.write_text(html_str, "utf-8")
     else:
         file.write(html_str)
 
@@ -542,7 +515,7 @@ def write_html(
         bundle_path = path.parent / "plotly.min.js"
 
         if not bundle_path.exists():
-            bundle_path.write_text(get_plotlyjs())
+            bundle_path.write_text(get_plotlyjs(), encoding="utf-8")
 
     # Handle auto_open
     if path is not None and full_html and auto_open:

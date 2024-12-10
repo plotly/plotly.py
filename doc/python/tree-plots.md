@@ -35,10 +35,10 @@ jupyter:
 
 #### Set Up Tree with [igraph](http://igraph.org/python/)
 
-Install igraph with `pip install python-igraph`.
+Install igraph with `pip install igraph`.
 
 ```python
-!pip install python-igraph
+!pip install igraph
 ```
 
 ```python

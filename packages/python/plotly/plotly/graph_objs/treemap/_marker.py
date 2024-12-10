@@ -19,9 +19,11 @@ class Marker(_BaseTraceHierarchyType):
         "colors",
         "colorscale",
         "colorssrc",
+        "cornerradius",
         "depthfade",
         "line",
         "pad",
+        "pattern",
         "reversescale",
         "showscale",
     }
@@ -226,6 +228,19 @@ class Marker(_BaseTraceHierarchyType):
                     1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
                     "power", 1x10^9 (with 9 in a super script). If
                     "SI", 1G. If "B", 1B.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -305,8 +320,8 @@ class Marker(_BaseTraceHierarchyType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -389,25 +404,16 @@ class Marker(_BaseTraceHierarchyType):
                     :class:`plotly.graph_objects.treemap.marker.col
                     orbar.Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    treemap.marker.colorbar.title.font instead.
-                    Sets this color bar's title font. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleside
-                    Deprecated: Please use
-                    treemap.marker.colorbar.title.side instead.
-                    Determines the location of color bar's title
-                    with respect to the color bar. Defaults to
-                    "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h". Note that
-                    the title's location used to be set by the now
-                    deprecated `titleside` attribute.
                 x
-                    Sets the x position of the color bar (in plot
-                    fraction). Defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h".
+                    Sets the x position with respect to `xref` of
+                    the color bar (in plot fraction). When `xref`
+                    is "paper", defaults to 1.02 when `orientation`
+                    is "v" and 0.5 when `orientation` is "h". When
+                    `xref` is "container", defaults to 1 when
+                    `orientation` is "v" and 0.5 when `orientation`
+                    is "h". Must be between 0 and 1 if `xref` is
+                    "container" and between "-2" and 3 if `xref` is
+                    "paper".
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
@@ -417,10 +423,20 @@ class Marker(_BaseTraceHierarchyType):
                 xpad
                     Sets the amount of padding (in px) along the x
                     direction.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position of the color bar (in plot
-                    fraction). Defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h".
+                    Sets the y position with respect to `yref` of
+                    the color bar (in plot fraction). When `yref`
+                    is "paper", defaults to 0.5 when `orientation`
+                    is "v" and 1.02 when `orientation` is "h". When
+                    `yref` is "container", defaults to 0.5 when
+                    `orientation` is "v" and 1 when `orientation`
+                    is "h". Must be between 0 and 1 if `yref` is
+                    "container" and between "-2" and 3 if `yref` is
+                    "paper".
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
@@ -430,6 +446,10 @@ class Marker(_BaseTraceHierarchyType):
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -536,6 +556,26 @@ class Marker(_BaseTraceHierarchyType):
     def colorssrc(self, val):
         self["colorssrc"] = val
 
+    # cornerradius
+    # ------------
+    @property
+    def cornerradius(self):
+        """
+        Sets the maximum rounding of corners (in px).
+
+        The 'cornerradius' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["cornerradius"]
+
+    @cornerradius.setter
+    def cornerradius(self, val):
+        self["cornerradius"] = val
+
     # depthfade
     # ---------
     @property
@@ -631,6 +671,80 @@ class Marker(_BaseTraceHierarchyType):
     @pad.setter
     def pad(self, val):
         self["pad"] = val
+
+    # pattern
+    # -------
+    @property
+    def pattern(self):
+        """
+        Sets the pattern within the marker.
+
+        The 'pattern' property is an instance of Pattern
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.treemap.marker.Pattern`
+          - A dict of string/value properties that will be passed
+            to the Pattern constructor
+
+            Supported dict properties:
+
+                bgcolor
+                    When there is no colorscale sets the color of
+                    background pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "overlay". Otherwise, defaults to a transparent
+                    background.
+                bgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `bgcolor`.
+                fgcolor
+                    When there is no colorscale sets the color of
+                    foreground pattern fill. Defaults to a
+                    `marker.color` background when `fillmode` is
+                    "replace". Otherwise, defaults to dark grey or
+                    white to increase contrast with the `bgcolor`.
+                fgcolorsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `fgcolor`.
+                fgopacity
+                    Sets the opacity of the foreground pattern
+                    fill. Defaults to a 0.5 when `fillmode` is
+                    "overlay". Otherwise, defaults to 1.
+                fillmode
+                    Determines whether `marker.color` should be
+                    used as a default to `bgcolor` or a `fgcolor`.
+                shape
+                    Sets the shape of the pattern fill. By default,
+                    no pattern is used for filling the area.
+                shapesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `shape`.
+                size
+                    Sets the size of unit squares of the pattern
+                    fill in pixels, which corresponds to the
+                    interval of repetition of the pattern.
+                sizesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `size`.
+                solidity
+                    Sets the solidity of the pattern fill. Solidity
+                    is roughly the fraction of the area filled by
+                    the pattern. Solidity of 0 shows only the
+                    background color without pattern and solidty of
+                    1 shows only the foreground color without
+                    pattern.
+                soliditysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `solidity`.
+
+        Returns
+        -------
+        plotly.graph_objs.treemap.marker.Pattern
+        """
+        return self["pattern"]
+
+    @pattern.setter
+    def pattern(self, val):
+        self["pattern"] = val
 
     # reversescale
     # ------------
@@ -745,6 +859,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             `colors`.
+        cornerradius
+            Sets the maximum rounding of corners (in px).
         depthfade
             Determines if the sector colors are faded towards the
             background from the leaves up to the headers. This
@@ -761,6 +877,8 @@ class Marker(_BaseTraceHierarchyType):
         pad
             :class:`plotly.graph_objects.treemap.marker.Pad`
             instance or dict with compatible properties
+        pattern
+            Sets the pattern within the marker.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colors is set to a numerical array. If true,
@@ -786,9 +904,11 @@ class Marker(_BaseTraceHierarchyType):
         colors=None,
         colorscale=None,
         colorssrc=None,
+        cornerradius=None,
         depthfade=None,
         line=None,
         pad=None,
+        pattern=None,
         reversescale=None,
         showscale=None,
         **kwargs,
@@ -865,6 +985,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on Chart Studio Cloud for
             `colors`.
+        cornerradius
+            Sets the maximum rounding of corners (in px).
         depthfade
             Determines if the sector colors are faded towards the
             background from the leaves up to the headers. This
@@ -881,6 +1003,8 @@ class Marker(_BaseTraceHierarchyType):
         pad
             :class:`plotly.graph_objects.treemap.marker.Pad`
             instance or dict with compatible properties
+        pattern
+            Sets the pattern within the marker.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colors is set to a numerical array. If true,
@@ -965,6 +1089,10 @@ an instance of :class:`plotly.graph_objs.treemap.Marker`"""
         _v = colorssrc if colorssrc is not None else _v
         if _v is not None:
             self["colorssrc"] = _v
+        _v = arg.pop("cornerradius", None)
+        _v = cornerradius if cornerradius is not None else _v
+        if _v is not None:
+            self["cornerradius"] = _v
         _v = arg.pop("depthfade", None)
         _v = depthfade if depthfade is not None else _v
         if _v is not None:
@@ -977,6 +1105,10 @@ an instance of :class:`plotly.graph_objs.treemap.Marker`"""
         _v = pad if pad is not None else _v
         if _v is not None:
             self["pad"] = _v
+        _v = arg.pop("pattern", None)
+        _v = pattern if pattern is not None else _v
+        if _v is not None:
+            self["pattern"] = _v
         _v = arg.pop("reversescale", None)
         _v = reversescale if reversescale is not None else _v
         if _v is not None:

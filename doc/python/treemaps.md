@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -90,7 +90,7 @@ When the argument of `color` corresponds to non-numerical data, discrete colors 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='day')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -101,7 +101,7 @@ In the example below the color of Saturday and Sunday sectors is the same as Din
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='time')
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
@@ -114,7 +114,7 @@ For more information about discrete colors, see the [dedicated page](/python/dis
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'], 
+fig = px.treemap(df, path=[px.Constant("all"), 'sex', 'day', 'time'],
                  values='total_bill', color='time',
                   color_discrete_map={'(?)':'lightgrey', 'Lunch':'gold', 'Dinner':'darkblue'})
 fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
@@ -145,6 +145,23 @@ fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 fig.show()
 ```
 
+### Treemap with Rounded Corners
+
+
+*New in 5.12*
+
+Update treemap sectors to have rounded corners by configuring the `cornerradius` in px.
+
+```python
+import plotly.express as px
+fig = px.treemap(
+    names = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
+)
+fig.update_traces(marker=dict(cornerradius=5))
+fig.show()
+```
+
 ### Basic Treemap with go.Treemap
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Treemap` class from `plotly.graph_objects`](/python/graph-objects/).
@@ -169,7 +186,7 @@ This example uses the following attributes:
 1.  [values](https://plotly.com/python/reference/treemap/#treemap-values): sets the values associated with each of the sectors.
 2.  [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo): determines which trace information appear on the graph that can be 'text', 'value', 'current path', 'percent root', 'percent entry', and 'percent parent', or any combination of them.
 3.  [pathbar](https://plotly.com/python/reference/treemap/#treemap-pathbar): a main extra feature of treemap to display the current path of the visible portion of the hierarchical map. It may also be useful for zooming out of the graph.
-4.  [branchvalues](https://plotly.com/python/reference/treemap/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eva = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
+4.  [branchvalues](https://plotly.com/python/reference/treemap/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eve = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
     When set to "remainder", items in `values` corresponding to the root and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
 
 ```python
@@ -224,7 +241,7 @@ fig = go.Figure(go.Treemap(
     labels = labels,
     values = values,
     parents = parents,
-    marker_colors = ["pink", "royalblue", "lightgray", "purple", 
+    marker_colors = ["pink", "royalblue", "lightgray", "purple",
                      "cyan", "lightgray", "lightblue", "lightgreen"]
 ))
 
@@ -299,7 +316,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
     """
-    df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
+    df_list = []
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
         dfg = df.groupby(levels[i:]).sum()
@@ -311,11 +328,12 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
             df_tree['parent'] = 'total'
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_list.append(df_tree)
     total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
-                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()), name=0)
+    df_list.append(total)
+    df_all_trees = pd.concat(df_list, ignore_index=True)
     return df_all_trees
 
 
@@ -403,6 +421,28 @@ fig.update_layout(
     uniformtext=dict(minsize=10, mode='hide'),
     margin = dict(t=50, l=25, r=25, b=25)
 )
+fig.show()
+```
+
+### Pattern Fills
+
+*New in 5.15*
+
+Treemap charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to the root node.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Treemap(
+        labels = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        root_color="lightgrey",
+        textfont_size=20,
+        marker=dict(pattern=dict(shape=["|"], solidity=0.80)),
+    )
+)
+
 fig.show()
 ```
 

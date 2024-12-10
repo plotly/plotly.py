@@ -41,6 +41,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._labelsuffix import LabelsuffixValidator
     from ._labelprefix import LabelprefixValidator
     from ._labelpadding import LabelpaddingValidator
+    from ._labelalias import LabelaliasValidator
     from ._gridwidth import GridwidthValidator
     from ._griddash import GriddashValidator
     from ._gridcolor import GridcolorValidator
@@ -105,6 +106,7 @@ else:
             "._labelsuffix.LabelsuffixValidator",
             "._labelprefix.LabelprefixValidator",
             "._labelpadding.LabelpaddingValidator",
+            "._labelalias.LabelaliasValidator",
             "._gridwidth.GridwidthValidator",
             "._griddash.GriddashValidator",
             "._gridcolor.GridcolorValidator",

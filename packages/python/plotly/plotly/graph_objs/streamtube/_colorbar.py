@@ -14,6 +14,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "borderwidth",
         "dtick",
         "exponentformat",
+        "labelalias",
         "len",
         "lenmode",
         "minexponent",
@@ -49,14 +50,14 @@ class ColorBar(_BaseTraceHierarchyType):
         "tickvalssrc",
         "tickwidth",
         "title",
-        "titlefont",
-        "titleside",
         "x",
         "xanchor",
         "xpad",
+        "xref",
         "y",
         "yanchor",
         "ypad",
+        "yref",
     }
 
     # bgcolor
@@ -259,6 +260,33 @@ class ColorBar(_BaseTraceHierarchyType):
     @exponentformat.setter
     def exponentformat(self, val):
         self["exponentformat"] = val
+
+    # labelalias
+    # ----------
+    @property
+    def labelalias(self):
+        """
+        Replacement text for specific tick or hover labels. For example
+        using {US: 'USA', CA: 'Canada'} changes US to USA and CA to
+        Canada. The labels we would have shown must match the keys
+        exactly, after adding any tickprefix or ticksuffix. For
+        negative numbers the minus sign symbol used (U+2212) is wider
+        than the regular ascii dash. That means you need to use −1
+        instead of -1. labelalias can be used with any axis type, and
+        both keys (if needed) and values (if desired) can include html-
+        like tags or MathJax.
+
+        The 'labelalias' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["labelalias"]
+
+    @labelalias.setter
+    def labelalias(self, val):
+        self["labelalias"] = val
 
     # len
     # ---
@@ -640,8 +668,8 @@ class ColorBar(_BaseTraceHierarchyType):
         labels vertically.
 
         The 'tickangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -743,11 +771,34 @@ class ColorBar(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1177,22 +1228,14 @@ class ColorBar(_BaseTraceHierarchyType):
             Supported dict properties:
 
                 font
-                    Sets this color bar's title font. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
+                    Sets this color bar's title font.
                 side
                     Determines the location of color bar's title
                     with respect to the color bar. Defaults to
                     "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h". Note that
-                    the title's location used to be set by the now
-                    deprecated `titleside` attribute.
+                    to "right" when `orientation` if "h".
                 text
-                    Sets the title of the color bar. Note that
-                    before the existence of `title.text`, the
-                    title's contents used to be defined as the
-                    `title` attribute itself. This behavior has
-                    been deprecated.
+                    Sets the title of the color bar.
 
         Returns
         -------
@@ -1204,91 +1247,21 @@ class ColorBar(_BaseTraceHierarchyType):
     def title(self, val):
         self["title"] = val
 
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use streamtube.colorbar.title.font instead.
-        Sets this color bar's title font. Note that the title's font
-        used to be set by the now deprecated `titlefont` attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.streamtube.colorbar.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
-
-    # titleside
-    # ---------
-    @property
-    def titleside(self):
-        """
-        Deprecated: Please use streamtube.colorbar.title.side instead.
-        Determines the location of color bar's title with respect to
-        the color bar. Defaults to "top" when `orientation` if "v" and
-        defaults to "right" when `orientation` if "h". Note that the
-        title's location used to be set by the now deprecated
-        `titleside` attribute.
-
-        The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['right', 'top', 'bottom']
-
-        Returns
-        -------
-
-        """
-        return self["titleside"]
-
-    @titleside.setter
-    def titleside(self, val):
-        self["titleside"] = val
-
     # x
     # -
     @property
     def x(self):
         """
-        Sets the x position of the color bar (in plot fraction).
-        Defaults to 1.02 when `orientation` is "v" and 0.5 when
-        `orientation` is "h".
+        Sets the x position with respect to `xref` of the color bar (in
+        plot fraction). When `xref` is "paper", defaults to 1.02 when
+        `orientation` is "v" and 0.5 when `orientation` is "h". When
+        `xref` is "container", defaults to 1 when `orientation` is "v"
+        and 0.5 when `orientation` is "h". Must be between 0 and 1 if
+        `xref` is "container" and between "-2" and 3 if `xref` is
+        "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -1344,17 +1317,44 @@ class ColorBar(_BaseTraceHierarchyType):
     def xpad(self, val):
         self["xpad"] = val
 
+    # xref
+    # ----
+    @property
+    def xref(self):
+        """
+        Sets the container `x` refers to. "container" spans the entire
+        `width` of the plot. "paper" refers to the width of the
+        plotting area only.
+
+        The 'xref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["xref"]
+
+    @xref.setter
+    def xref(self, val):
+        self["xref"] = val
+
     # y
     # -
     @property
     def y(self):
         """
-        Sets the y position of the color bar (in plot fraction).
-        Defaults to 0.5 when `orientation` is "v" and 1.02 when
-        `orientation` is "h".
+        Sets the y position with respect to `yref` of the color bar (in
+        plot fraction). When `yref` is "paper", defaults to 0.5 when
+        `orientation` is "v" and 1.02 when `orientation` is "h". When
+        `yref` is "container", defaults to 0.5 when `orientation` is
+        "v" and 1 when `orientation` is "h". Must be between 0 and 1 if
+        `yref` is "container" and between "-2" and 3 if `yref` is
+        "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+          - An int or float
 
         Returns
         -------
@@ -1410,6 +1410,29 @@ class ColorBar(_BaseTraceHierarchyType):
     def ypad(self, val):
         self["ypad"] = val
 
+    # yref
+    # ----
+    @property
+    def yref(self):
+        """
+        Sets the container `y` refers to. "container" spans the entire
+        `height` of the plot. "paper" refers to the height of the
+        plotting area only.
+
+        The 'yref' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['container', 'paper']
+
+        Returns
+        -------
+        Any
+        """
+        return self["yref"]
+
+    @yref.setter
+    def yref(self, val):
+        self["yref"] = val
+
     # Self properties description
     # ---------------------------
     @property
@@ -1452,6 +1475,17 @@ class ColorBar(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1598,23 +1632,15 @@ class ColorBar(_BaseTraceHierarchyType):
         title
             :class:`plotly.graph_objects.streamtube.colorbar.Title`
             instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use streamtube.colorbar.title.font
-            instead. Sets this color bar's title font. Note that
-            the title's font used to be set by the now deprecated
-            `titlefont` attribute.
-        titleside
-            Deprecated: Please use streamtube.colorbar.title.side
-            instead. Determines the location of color bar's title
-            with respect to the color bar. Defaults to "top" when
-            `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h". Note that the title's location
-            used to be set by the now deprecated `titleside`
-            attribute.
         x
-            Sets the x position of the color bar (in plot
-            fraction). Defaults to 1.02 when `orientation` is "v"
-            and 0.5 when `orientation` is "h".
+            Sets the x position with respect to `xref` of the color
+            bar (in plot fraction). When `xref` is "paper",
+            defaults to 1.02 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". When `xref` is "container",
+            defaults to 1 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". Must be between 0 and 1 if `xref`
+            is "container" and between "-2" and 3 if `xref` is
+            "paper".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -1624,10 +1650,19 @@ class ColorBar(_BaseTraceHierarchyType):
         xpad
             Sets the amount of padding (in px) along the x
             direction.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position of the color bar (in plot
-            fraction). Defaults to 0.5 when `orientation` is "v"
-            and 1.02 when `orientation` is "h".
+            Sets the y position with respect to `yref` of the color
+            bar (in plot fraction). When `yref` is "paper",
+            defaults to 0.5 when `orientation` is "v" and 1.02 when
+            `orientation` is "h". When `yref` is "container",
+            defaults to 0.5 when `orientation` is "v" and 1 when
+            `orientation` is "h". Must be between 0 and 1 if `yref`
+            is "container" and between "-2" and 3 if `yref` is
+            "paper".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
@@ -1637,12 +1672,11 @@ class ColorBar(_BaseTraceHierarchyType):
         ypad
             Sets the amount of padding (in px) along the y
             direction.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
         """
-
-    _mapped_properties = {
-        "titlefont": ("title", "font"),
-        "titleside": ("title", "side"),
-    }
 
     def __init__(
         self,
@@ -1652,6 +1686,7 @@ class ColorBar(_BaseTraceHierarchyType):
         borderwidth=None,
         dtick=None,
         exponentformat=None,
+        labelalias=None,
         len=None,
         lenmode=None,
         minexponent=None,
@@ -1687,14 +1722,14 @@ class ColorBar(_BaseTraceHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
-        titleside=None,
         x=None,
         xanchor=None,
         xpad=None,
+        xref=None,
         y=None,
         yanchor=None,
         ypad=None,
+        yref=None,
         **kwargs,
     ):
         """
@@ -1743,6 +1778,17 @@ class ColorBar(_BaseTraceHierarchyType):
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
             script). If "SI", 1G. If "B", 1B.
+        labelalias
+            Replacement text for specific tick or hover labels. For
+            example using {US: 'USA', CA: 'Canada'} changes US to
+            USA and CA to Canada. The labels we would have shown
+            must match the keys exactly, after adding any
+            tickprefix or ticksuffix. For negative numbers the
+            minus sign symbol used (U+2212) is wider than the
+            regular ascii dash. That means you need to use −1
+            instead of -1. labelalias can be used with any axis
+            type, and both keys (if needed) and values (if desired)
+            can include html-like tags or MathJax.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1889,23 +1935,15 @@ class ColorBar(_BaseTraceHierarchyType):
         title
             :class:`plotly.graph_objects.streamtube.colorbar.Title`
             instance or dict with compatible properties
-        titlefont
-            Deprecated: Please use streamtube.colorbar.title.font
-            instead. Sets this color bar's title font. Note that
-            the title's font used to be set by the now deprecated
-            `titlefont` attribute.
-        titleside
-            Deprecated: Please use streamtube.colorbar.title.side
-            instead. Determines the location of color bar's title
-            with respect to the color bar. Defaults to "top" when
-            `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h". Note that the title's location
-            used to be set by the now deprecated `titleside`
-            attribute.
         x
-            Sets the x position of the color bar (in plot
-            fraction). Defaults to 1.02 when `orientation` is "v"
-            and 0.5 when `orientation` is "h".
+            Sets the x position with respect to `xref` of the color
+            bar (in plot fraction). When `xref` is "paper",
+            defaults to 1.02 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". When `xref` is "container",
+            defaults to 1 when `orientation` is "v" and 0.5 when
+            `orientation` is "h". Must be between 0 and 1 if `xref`
+            is "container" and between "-2" and 3 if `xref` is
+            "paper".
         xanchor
             Sets this color bar's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
@@ -1915,10 +1953,19 @@ class ColorBar(_BaseTraceHierarchyType):
         xpad
             Sets the amount of padding (in px) along the x
             direction.
+        xref
+            Sets the container `x` refers to. "container" spans the
+            entire `width` of the plot. "paper" refers to the width
+            of the plotting area only.
         y
-            Sets the y position of the color bar (in plot
-            fraction). Defaults to 0.5 when `orientation` is "v"
-            and 1.02 when `orientation` is "h".
+            Sets the y position with respect to `yref` of the color
+            bar (in plot fraction). When `yref` is "paper",
+            defaults to 0.5 when `orientation` is "v" and 1.02 when
+            `orientation` is "h". When `yref` is "container",
+            defaults to 0.5 when `orientation` is "v" and 1 when
+            `orientation` is "h". Must be between 0 and 1 if `yref`
+            is "container" and between "-2" and 3 if `yref` is
+            "paper".
         yanchor
             Sets this color bar's vertical position anchor This
             anchor binds the `y` position to the "top", "middle" or
@@ -1928,6 +1975,10 @@ class ColorBar(_BaseTraceHierarchyType):
         ypad
             Sets the amount of padding (in px) along the y
             direction.
+        yref
+            Sets the container `y` refers to. "container" spans the
+            entire `height` of the plot. "paper" refers to the
+            height of the plotting area only.
 
         Returns
         -------
@@ -1982,6 +2033,10 @@ an instance of :class:`plotly.graph_objs.streamtube.ColorBar`"""
         _v = exponentformat if exponentformat is not None else _v
         if _v is not None:
             self["exponentformat"] = _v
+        _v = arg.pop("labelalias", None)
+        _v = labelalias if labelalias is not None else _v
+        if _v is not None:
+            self["labelalias"] = _v
         _v = arg.pop("len", None)
         _v = len if len is not None else _v
         if _v is not None:
@@ -2122,14 +2177,6 @@ an instance of :class:`plotly.graph_objs.streamtube.ColorBar`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
-        _v = arg.pop("titleside", None)
-        _v = titleside if titleside is not None else _v
-        if _v is not None:
-            self["titleside"] = _v
         _v = arg.pop("x", None)
         _v = x if x is not None else _v
         if _v is not None:
@@ -2142,6 +2189,10 @@ an instance of :class:`plotly.graph_objs.streamtube.ColorBar`"""
         _v = xpad if xpad is not None else _v
         if _v is not None:
             self["xpad"] = _v
+        _v = arg.pop("xref", None)
+        _v = xref if xref is not None else _v
+        if _v is not None:
+            self["xref"] = _v
         _v = arg.pop("y", None)
         _v = y if y is not None else _v
         if _v is not None:
@@ -2154,6 +2205,10 @@ an instance of :class:`plotly.graph_objs.streamtube.ColorBar`"""
         _v = ypad if ypad is not None else _v
         if _v is not None:
             self["ypad"] = _v
+        _v = arg.pop("yref", None)
+        _v = yref if yref is not None else _v
+        if _v is not None:
+            self["yref"] = _v
 
         # Process unknown kwargs
         # ----------------------

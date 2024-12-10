@@ -15,8 +15,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def font(self):
         """
-        Sets this axis' title font. Note that the title's font used to
-        be set by the now deprecated `titlefont` attribute.
+        Sets this axis' title font.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -41,11 +40,34 @@ class Title(_BaseTraceHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -63,8 +85,7 @@ class Title(_BaseTraceHierarchyType):
     def offset(self):
         """
         An additional amount by which to offset the title from the tick
-        labels, given in pixels. Note that this used to be set by the
-        now deprecated `titleoffset` attribute.
+        labels, given in pixels.
 
         The 'offset' property is a number and may be specified as:
           - An int or float
@@ -84,9 +105,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def text(self):
         """
-        Sets the title of this axis. Note that before the existence of
-        `title.text`, the title's contents used to be defined as the
-        `title` attribute itself. This behavior has been deprecated.
+        Sets the title of this axis.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -108,19 +127,12 @@ class Title(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         font
-            Sets this axis' title font. Note that the title's font
-            used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets this axis' title font.
         offset
             An additional amount by which to offset the title from
-            the tick labels, given in pixels. Note that this used
-            to be set by the now deprecated `titleoffset`
-            attribute.
+            the tick labels, given in pixels.
         text
-            Sets the title of this axis. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of this axis.
         """
 
     def __init__(self, arg=None, font=None, offset=None, text=None, **kwargs):
@@ -134,19 +146,12 @@ class Title(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.carpet.aaxis.Title`
         font
-            Sets this axis' title font. Note that the title's font
-            used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets this axis' title font.
         offset
             An additional amount by which to offset the title from
-            the tick labels, given in pixels. Note that this used
-            to be set by the now deprecated `titleoffset`
-            attribute.
+            the tick labels, given in pixels.
         text
-            Sets the title of this axis. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of this axis.
 
         Returns
         -------

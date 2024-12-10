@@ -9,8 +9,10 @@ class Title(_BaseLayoutHierarchyType):
     _parent_path_str = "layout"
     _path_str = "layout.title"
     _valid_props = {
+        "automargin",
         "font",
         "pad",
+        "subtitle",
         "text",
         "x",
         "xanchor",
@@ -20,13 +22,42 @@ class Title(_BaseLayoutHierarchyType):
         "yref",
     }
 
+    # automargin
+    # ----------
+    @property
+    def automargin(self):
+        """
+        Determines whether the title can automatically push the figure
+        margins. If `yref='paper'` then the margin will expand to
+        ensure that the title doesn’t overlap with the edges of the
+        container. If `yref='container'` then the margins will ensure
+        that the title doesn’t overlap with the plot area, tick labels,
+        and axis titles. If `automargin=true` and the margins need to
+        be expanded, then y will be set to a default 1 and yanchor will
+        be set to an appropriate default to ensure that minimal margin
+        space is needed. Note that when `yref='paper'`, only 1 or 0 are
+        allowed y values. Invalid values will be reset to the default
+        1.
+
+        The 'automargin' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["automargin"]
+
+    @automargin.setter
+    def automargin(self, val):
+        self["automargin"] = val
+
     # font
     # ----
     @property
     def font(self):
         """
-        Sets the title font. Note that the title's font used to be
-        customized by the now deprecated `titlefont` attribute.
+        Sets the title font.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -51,11 +82,34 @@ class Title(_BaseLayoutHierarchyType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -110,14 +164,40 @@ class Title(_BaseLayoutHierarchyType):
     def pad(self, val):
         self["pad"] = val
 
+    # subtitle
+    # --------
+    @property
+    def subtitle(self):
+        """
+        The 'subtitle' property is an instance of Subtitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.title.Subtitle`
+          - A dict of string/value properties that will be passed
+            to the Subtitle constructor
+
+            Supported dict properties:
+
+                font
+                    Sets the subtitle font.
+                text
+                    Sets the plot's subtitle.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.title.Subtitle
+        """
+        return self["subtitle"]
+
+    @subtitle.setter
+    def subtitle(self, val):
+        self["subtitle"] = val
+
     # text
     # ----
     @property
     def text(self):
         """
-        Sets the plot's title. Note that before the existence of
-        `title.text`, the title's contents used to be defined as the
-        `title` attribute itself. This behavior has been deprecated.
+        Sets the plot's title.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -280,10 +360,21 @@ class Title(_BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        automargin
+            Determines whether the title can automatically push the
+            figure margins. If `yref='paper'` then the margin will
+            expand to ensure that the title doesn’t overlap with
+            the edges of the container. If `yref='container'` then
+            the margins will ensure that the title doesn’t overlap
+            with the plot area, tick labels, and axis titles. If
+            `automargin=true` and the margins need to be expanded,
+            then y will be set to a default 1 and yanchor will be
+            set to an appropriate default to ensure that minimal
+            margin space is needed. Note that when `yref='paper'`,
+            only 1 or 0 are allowed y values. Invalid values will
+            be reset to the default 1.
         font
-            Sets the title font. Note that the title's font used to
-            be customized by the now deprecated `titlefont`
-            attribute.
+            Sets the title font.
         pad
             Sets the padding of the title. Each padding value only
             applies when the corresponding `xanchor`/`yanchor`
@@ -292,11 +383,11 @@ class Title(_BaseLayoutHierarchyType):
             applies if `xanchor`/`yanchor` is determined
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
+        subtitle
+            :class:`plotly.graph_objects.layout.title.Subtitle`
+            instance or dict with compatible properties
         text
-            Sets the plot's title. Note that before the existence
-            of `title.text`, the title's contents used to be
-            defined as the `title` attribute itself. This behavior
-            has been deprecated.
+            Sets the plot's title.
         x
             Sets the x position with respect to `xref` in
             normalized coordinates from 0 (left) to 1 (right).
@@ -332,8 +423,10 @@ class Title(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
+        automargin=None,
         font=None,
         pad=None,
+        subtitle=None,
         text=None,
         x=None,
         xanchor=None,
@@ -351,10 +444,21 @@ class Title(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.layout.Title`
+        automargin
+            Determines whether the title can automatically push the
+            figure margins. If `yref='paper'` then the margin will
+            expand to ensure that the title doesn’t overlap with
+            the edges of the container. If `yref='container'` then
+            the margins will ensure that the title doesn’t overlap
+            with the plot area, tick labels, and axis titles. If
+            `automargin=true` and the margins need to be expanded,
+            then y will be set to a default 1 and yanchor will be
+            set to an appropriate default to ensure that minimal
+            margin space is needed. Note that when `yref='paper'`,
+            only 1 or 0 are allowed y values. Invalid values will
+            be reset to the default 1.
         font
-            Sets the title font. Note that the title's font used to
-            be customized by the now deprecated `titlefont`
-            attribute.
+            Sets the title font.
         pad
             Sets the padding of the title. Each padding value only
             applies when the corresponding `xanchor`/`yanchor`
@@ -363,11 +467,11 @@ class Title(_BaseLayoutHierarchyType):
             applies if `xanchor`/`yanchor` is determined
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
+        subtitle
+            :class:`plotly.graph_objects.layout.title.Subtitle`
+            instance or dict with compatible properties
         text
-            Sets the plot's title. Note that before the existence
-            of `title.text`, the title's contents used to be
-            defined as the `title` attribute itself. This behavior
-            has been deprecated.
+            Sets the plot's title.
         x
             Sets the x position with respect to `xref` in
             normalized coordinates from 0 (left) to 1 (right).
@@ -432,6 +536,10 @@ an instance of :class:`plotly.graph_objs.layout.Title`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("automargin", None)
+        _v = automargin if automargin is not None else _v
+        if _v is not None:
+            self["automargin"] = _v
         _v = arg.pop("font", None)
         _v = font if font is not None else _v
         if _v is not None:
@@ -440,6 +548,10 @@ an instance of :class:`plotly.graph_objs.layout.Title`"""
         _v = pad if pad is not None else _v
         if _v is not None:
             self["pad"] = _v
+        _v = arg.pop("subtitle", None)
+        _v = subtitle if subtitle is not None else _v
+        if _v is not None:
+            self["subtitle"] = _v
         _v = arg.pop("text", None)
         _v = text if text is not None else _v
         if _v is not None:

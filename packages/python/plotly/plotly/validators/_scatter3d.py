@@ -58,8 +58,8 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -98,10 +98,17 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.scatter3d.Legendgr
                 ouptitle` instance or dict with compatible
@@ -109,13 +116,19 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.scatter3d.Line`
                 instance or dict with compatible properties
@@ -148,7 +161,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points and the trace is not stacked then the
                 default is "lines+markers". Otherwise, "lines".
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -185,8 +198,7 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
-                :class:`plotly.graph_objects.scatter3d.Textfont
-                ` instance or dict with compatible properties
+                Sets the text font.
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
@@ -203,8 +215,8 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 are inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". https://github.com/d3/d3-fo
-                rmat/tree/v1.4.5#d3-format for details on the
+                "Price: %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -256,9 +268,9 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -279,9 +291,9 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -302,9 +314,9 @@ class Scatter3DValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `z`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"

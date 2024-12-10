@@ -25,9 +25,11 @@ class Scatterpolargl(_BaseTraceType):
         "hovertextsrc",
         "ids",
         "idssrc",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "line",
         "marker",
         "meta",
@@ -529,14 +531,39 @@ class Scatterpolargl(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -587,10 +614,12 @@ class Scatterpolargl(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -604,6 +633,27 @@ class Scatterpolargl(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # line
     # ----
@@ -622,9 +672,6 @@ class Scatterpolargl(_BaseTraceType):
                     Sets the line color.
                 dash
                     Sets the style of the lines.
-                shape
-                    Determines the line shape. The values
-                    correspond to step-wise line shapes.
                 width
                     Sets the line width (in px).
 
@@ -651,6 +698,11 @@ class Scatterpolargl(_BaseTraceType):
 
             Supported dict properties:
 
+                angle
+                    Sets the marker angle in respect to `angleref`.
+                anglesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `angle`.
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -867,7 +919,7 @@ class Scatterpolargl(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1160,7 +1212,7 @@ class Scatterpolargl(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
@@ -1172,6 +1224,22 @@ class Scatterpolargl(_BaseTraceType):
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for `size`.
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                stylesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `style`.
+                variant
+                    Sets the variant of the font.
+                variantsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `variant`.
+                weight
+                    Sets the weight (or boldness) of the font.
+                weightsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `weight`.
 
         Returns
         -------
@@ -1266,7 +1334,8 @@ class Scatterpolargl(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `r`, `theta` and `text`.
+        Finally, the template string has access to variables `r`,
+        `theta` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1611,21 +1680,33 @@ class Scatterpolargl(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -1656,7 +1737,7 @@ class Scatterpolargl(_BaseTraceType):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -1724,7 +1805,8 @@ class Scatterpolargl(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1791,9 +1873,11 @@ class Scatterpolargl(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         line=None,
         marker=None,
         meta=None,
@@ -1945,21 +2029,33 @@ class Scatterpolargl(_BaseTraceType):
         idssrc
             Sets the source reference on Chart Studio Cloud for
             `ids`.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         line
             :class:`plotly.graph_objects.scatterpolargl.Line`
             instance or dict with compatible properties
@@ -1990,7 +2086,7 @@ class Scatterpolargl(_BaseTraceType):
             20 points and the trace is not stacked then the default
             is "lines+markers". Otherwise, "lines".
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
@@ -2058,7 +2154,8 @@ class Scatterpolargl(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `r`, `theta` and `text`.
+            are available. Finally, the template string has access
+            to variables `r`, `theta` and `text`.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -2202,6 +2299,10 @@ an instance of :class:`plotly.graph_objs.Scatterpolargl`"""
         _v = idssrc if idssrc is not None else _v
         if _v is not None:
             self["idssrc"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2214,6 +2315,10 @@ an instance of :class:`plotly.graph_objs.Scatterpolargl`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("line", None)
         _v = line if line is not None else _v
         if _v is not None:

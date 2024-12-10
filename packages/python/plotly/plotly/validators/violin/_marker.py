@@ -10,6 +10,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            angle
+                Sets the marker angle in respect to `angleref`.
             color
                 Sets the marker color. It accepts either a
                 specific color or an array of numbers that are

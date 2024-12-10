@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import base64
 import numbers
 import textwrap
@@ -7,9 +5,10 @@ import uuid
 from importlib import import_module
 import copy
 import io
-from copy import deepcopy
 import re
 import sys
+import warnings
+import narwhals.stable.v1 as nw
 
 from _plotly_utils.optional_imports import get_module
 
@@ -74,8 +73,6 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     """
     np = get_module("numpy")
 
-    # Don't force pandas to be loaded, we only want to know if it's already loaded
-    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -95,24 +92,26 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
-    # Handle pandas Series and Index objects
-    if pd and isinstance(v, (pd.Series, pd.Index)):
-        if v.dtype.kind in numeric_kinds:
-            # Get the numeric numpy array so we use fast path below
-            v = v.values
-        elif v.dtype.kind == "M":
-            # Convert datetime Series/Index to numpy array of datetimes
-            if isinstance(v, pd.Series):
-                v = v.dt.to_pydatetime()
-            else:
-                # DatetimeIndex
-                v = v.to_pydatetime()
-    elif pd and isinstance(v, pd.DataFrame) and len(set(v.dtypes)) == 1:
-        dtype = v.dtypes.tolist()[0]
-        if dtype.kind in numeric_kinds:
-            v = v.values
-        elif dtype.kind == "M":
-            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+    # With `pass_through=True`, the original object will be returned if unable to convert
+    # to a Narwhals DataFrame or Series.
+    v = nw.from_native(v, allow_series=True, pass_through=True)
+
+    if isinstance(v, nw.Series):
+        if v.dtype == nw.Datetime and v.dtype.time_zone is not None:
+            # Remove time zone so that local time is displayed
+            v = v.dt.replace_time_zone(None).to_numpy()
+        else:
+            v = v.to_numpy()
+    elif isinstance(v, nw.DataFrame):
+        schema = v.schema
+        overrides = {}
+        for key, val in schema.items():
+            if val == nw.Datetime and val.time_zone is not None:
+                # Remove time zone so that local time is displayed
+                overrides[key] = nw.col(key).dt.replace_time_zone(None)
+        if overrides:
+            v = v.with_columns(**overrides)
+        v = v.to_numpy()
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
@@ -147,7 +146,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     # --------------------------
     if force_numeric and new_v.dtype.kind not in numeric_kinds:
         raise ValueError(
-            "Input value is not numeric and" "force_numeric parameter set to True"
+            "Input value is not numeric and force_numeric parameter set to True"
         )
 
     if "U" not in kind:
@@ -185,6 +184,7 @@ def is_homogeneous_array(v):
         np
         and isinstance(v, np.ndarray)
         or (pd and isinstance(v, (pd.Series, pd.Index)))
+        or (isinstance(v, nw.Series))
     ):
         return True
     if is_numpy_convertable(v):
@@ -221,6 +221,17 @@ def type_str(v):
         v = type(v)
 
     return "'{module}.{name}'".format(module=v.__module__, name=v.__name__)
+
+
+def is_typed_array_spec(v):
+    """
+    Return whether a value is considered to be a typed array spec for plotly.js
+    """
+    return isinstance(v, dict) and "bdata" in v and "dtype" in v
+
+
+def is_none_or_typed_array_spec(v):
+    return v is None or is_typed_array_spec(v)
 
 
 # Validators
@@ -393,8 +404,7 @@ class DataArrayValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
@@ -591,8 +601,7 @@ class EnumeratedValidator(BaseValidator):
         return False
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
             v_replaced = [self.perform_replacemenet(v_el) for v_el in v]
@@ -636,8 +645,7 @@ class BooleanValidator(BaseValidator):
         )
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif not isinstance(v, bool):
             self.raise_invalid_val(v)
@@ -661,8 +669,7 @@ class SrcValidator(BaseValidator):
         )
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif isinstance(v, str):
             pass
@@ -752,8 +759,7 @@ class NumberValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
@@ -816,13 +822,21 @@ class IntegerValidator(BaseValidator):
             "dflt",
             "min",
             "max",
+            "extras",
             "arrayOk"
         ]
     },
     """
 
     def __init__(
-        self, plotly_name, parent_name, min=None, max=None, array_ok=False, **kwargs
+        self,
+        plotly_name,
+        parent_name,
+        min=None,
+        max=None,
+        extras=None,
+        array_ok=False,
+        **kwargs,
     ):
         super(IntegerValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
@@ -847,6 +861,7 @@ class IntegerValidator(BaseValidator):
         else:
             self.has_min_max = False
 
+        self.extras = extras if extras is not None else []
         self.array_ok = array_ok
 
     def description(self):
@@ -870,6 +885,16 @@ class IntegerValidator(BaseValidator):
                 )
             )
 
+        # Extras
+        if self.extras:
+            desc = (
+                desc
+                + (
+                    """
+        OR exactly one of {extras} (e.g. '{eg_extra}')"""
+                ).format(extras=self.extras, eg_extra=self.extras[-1])
+            )
+
         if self.array_ok:
             desc = (
                 desc
@@ -880,9 +905,10 @@ class IntegerValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
+        elif v in self.extras:
+            return v
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
             v_array = copy_to_readonly_numpy_array(
@@ -909,14 +935,21 @@ class IntegerValidator(BaseValidator):
             v = v_array
         elif self.array_ok and is_simple_array(v):
             # Check integer type
-            invalid_els = [e for e in v if not isinstance(e, int)]
+            invalid_els = [
+                e for e in v if not isinstance(e, int) and e not in self.extras
+            ]
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
             # Check min/max
             if self.has_min_max:
-                invalid_els = [e for e in v if not (self.min_val <= e <= self.max_val)]
+                invalid_els = [
+                    e
+                    for e in v
+                    if not (isinstance(e, int) and self.min_val <= e <= self.max_val)
+                    and e not in self.extras
+                ]
 
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])
@@ -1035,8 +1068,7 @@ class StringValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
 
@@ -1337,8 +1369,7 @@ class ColorValidator(BaseValidator):
         return valid_color_description
 
     def validate_coerce(self, v, should_raise=True):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
@@ -1482,8 +1513,7 @@ class ColorlistValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif is_array(v):
             validated_v = [
@@ -1660,32 +1690,54 @@ class AngleValidator(BaseValidator):
         "description": "A number (in degree) between -180 and 180.",
         "requiredOpts": [],
         "otherOpts": [
-            "dflt"
+            "dflt",
+            "arrayOk"
         ]
     },
     """
 
-    def __init__(self, plotly_name, parent_name, **kwargs):
+    def __init__(self, plotly_name, parent_name, array_ok=False, **kwargs):
         super(AngleValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
     The '{plotly_name}' property is a angle (in degrees) that may be
-    specified as a number between -180 and 180. Numeric values outside this
-    range are converted to the equivalent value
+    specified as a number between -180 and 180{array_ok}.
+    Numeric values outside this range are converted to the equivalent value
     (e.g. 270 is converted to -90).
         """.format(
-            plotly_name=self.plotly_name
+            plotly_name=self.plotly_name,
+            array_ok=(
+                ", or a list, numpy array or other iterable thereof"
+                if self.array_ok
+                else ""
+            ),
         )
 
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
+        elif self.array_ok and is_homogeneous_array(v):
+            try:
+                v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
+            except (ValueError, TypeError, OverflowError):
+                self.raise_invalid_val(v)
+            v = v_array  # Always numeric numpy array
+            # Normalize v onto the interval [-180, 180)
+            v = (v + 180) % 360 - 180
+        elif self.array_ok and is_simple_array(v):
+            # Check numeric
+            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+
+            v = [(x + 180) % 360 - 180 for x in to_scalar_or_list(v)]
         elif not isinstance(v, numbers.Number):
             self.raise_invalid_val(v)
         else:
@@ -1853,8 +1905,7 @@ class FlaglistValidator(BaseValidator):
             return None
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
 
@@ -1912,8 +1963,7 @@ class AnyValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v, kind="O")
@@ -2121,8 +2171,7 @@ class InfoArrayValidator(BaseValidator):
         return val
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             return None
         elif not is_array(v):
             self.raise_invalid_val(v)
@@ -2641,24 +2690,20 @@ class BaseDataValidator(BaseValidator):
             for v_el in v:
 
                 if isinstance(v_el, BaseTraceType):
-                    # Clone input traces
-                    v_el = v_el.to_plotly_json()
+                    if isinstance(v_el, Histogram2dcontour):
+                        v_el = dict(type="histogram2dcontour", **v_el._props)
+                    else:
+                        v_el = v_el._props
 
                 if isinstance(v_el, dict):
-                    v_copy = deepcopy(v_el)
-
-                    if "type" in v_copy:
-                        trace_type = v_copy.pop("type")
-                    elif isinstance(v_el, Histogram2dcontour):
-                        trace_type = "histogram2dcontour"
-                    else:
-                        trace_type = "scatter"
+                    type_in_v_el = "type" in v_el
+                    trace_type = v_el.pop("type", "scatter")
 
                     if trace_type not in self.class_strs_map:
                         if skip_invalid:
                             # Treat as scatter trace
                             trace = self.get_trace_class("scatter")(
-                                skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                                skip_invalid=skip_invalid, _validate=_validate, **v_el
                             )
                             res.append(trace)
                         else:
@@ -2666,9 +2711,13 @@ class BaseDataValidator(BaseValidator):
                             invalid_els.append(v_el)
                     else:
                         trace = self.get_trace_class(trace_type)(
-                            skip_invalid=skip_invalid, _validate=_validate, **v_copy
+                            skip_invalid=skip_invalid, _validate=_validate, **v_el
                         )
                         res.append(trace)
+
+                    if type_in_v_el:
+                        # Restore type in v_el
+                        v_el["type"] = trace_type
                 else:
                     if skip_invalid:
                         # Add empty scatter trace

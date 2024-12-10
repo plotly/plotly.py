@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.8.8
   plotly:
     description: How to make Network Graphs in Python with Plotly. One examples of
       a network graph with NetworkX
@@ -98,9 +98,11 @@ node_trace = go.Scatter(
         size=10,
         colorbar=dict(
             thickness=15,
-            title='Node Connections',
+            title=dict(
+              text='Node Connections',
+              side='right'
+            ),
             xanchor='left',
-            titleside='right'
         ),
         line_width=2))
 
@@ -128,13 +130,17 @@ node_trace.text = node_text
 ```python
 fig = go.Figure(data=[edge_trace, node_trace],
              layout=go.Layout(
-                title='<br>Network graph made with Python',
-                titlefont_size=16,
+                title=dict(
+                    text="<br>Network graph made with Python",
+                    font=dict(
+                        size=16
+                    )
+                ),
                 showlegend=False,
                 hovermode='closest',
                 margin=dict(b=20,l=5,r=5,t=40),
                 annotations=[ dict(
-                    text="Python code: <a href='https://plotly.com/ipython-notebooks/network-graphs/'> https://plotly.com/ipython-notebooks/network-graphs/</a>",
+                    text="Python code: <a href='https://plotly.com/python/network-graphs/'> https://plotly.com/python/network-graphs/</a>",
                     showarrow=False,
                     xref="paper", yref="paper",
                     x=0.005, y=-0.002 ) ],
@@ -157,6 +163,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'network-graphs', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Reference
 See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!

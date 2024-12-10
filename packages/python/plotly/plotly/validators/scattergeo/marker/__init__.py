@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._symbolsrc import SymbolsrcValidator
     from ._symbol import SymbolValidator
+    from ._standoffsrc import StandoffsrcValidator
+    from ._standoff import StandoffValidator
     from ._sizesrc import SizesrcValidator
     from ._sizeref import SizerefValidator
     from ._sizemode import SizemodeValidator
@@ -25,6 +27,9 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._cmax import CmaxValidator
     from ._cauto import CautoValidator
     from ._autocolorscale import AutocolorscaleValidator
+    from ._anglesrc import AnglesrcValidator
+    from ._angleref import AnglerefValidator
+    from ._angle import AngleValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -34,6 +39,8 @@ else:
         [
             "._symbolsrc.SymbolsrcValidator",
             "._symbol.SymbolValidator",
+            "._standoffsrc.StandoffsrcValidator",
+            "._standoff.StandoffValidator",
             "._sizesrc.SizesrcValidator",
             "._sizeref.SizerefValidator",
             "._sizemode.SizemodeValidator",
@@ -55,5 +62,8 @@ else:
             "._cmax.CmaxValidator",
             "._cauto.CautoValidator",
             "._autocolorscale.AutocolorscaleValidator",
+            "._anglesrc.AnglesrcValidator",
+            "._angleref.AnglerefValidator",
+            "._angle.AngleValidator",
         ],
     )

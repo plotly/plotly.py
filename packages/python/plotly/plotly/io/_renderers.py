@@ -1,10 +1,8 @@
-from __future__ import absolute_import, division
-
 import textwrap
 from copy import copy
 
 import os
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 from plotly import optional_imports
 
@@ -33,6 +31,37 @@ from plotly.io._utils import validate_coerce_fig_to_dict
 ipython = optional_imports.get_module("IPython")
 ipython_display = optional_imports.get_module("IPython.display")
 nbformat = optional_imports.get_module("nbformat")
+
+from plotly import optional_imports
+
+import warnings
+
+
+def display_jupyter_version_warnings():
+    parent_process = None
+    try:
+        psutil = optional_imports.get_module("psutil")
+        if psutil is not None:
+            parent_process = psutil.Process().parent().cmdline()[-1]
+    except Exception:
+        pass
+
+    if parent_process is None:
+        return
+    elif "jupyter-notebook" in parent_process:
+        jupyter_notebook = optional_imports.get_module("notebook")
+        if jupyter_notebook.__version__ < "7":
+            # Add warning about upgrading notebook
+            warnings.warn(
+                f"Plotly version >= 6 requires Jupyter Notebook >= 7 but you have {jupyter_notebook.__version__} installed.\n To upgrade Jupyter Notebook, please run `pip install notebook --upgrade`."
+            )
+    elif "jupyter-lab" in parent_process:
+        jupyter_lab = optional_imports.get_module("jupyterlab")
+        if jupyter_lab.__version__ < "3":
+            # Add warning about upgrading jupyterlab
+            warnings.warn(
+                f"Plotly version >= 6 requires JupyterLab >= 3 but you have {jupyter_lab.__version__} installed. To upgrade JupyterLab, please run `pip install jupyterlab --upgrade`."
+            )
 
 
 # Renderer configuration class
@@ -392,10 +421,12 @@ def show(fig, renderer=None, validate=True, **kwargs):
                 "Mime type rendering requires ipython but it is not installed"
             )
 
-        if not nbformat or LooseVersion(nbformat.__version__) < LooseVersion("4.2.0"):
+        if not nbformat or Version(nbformat.__version__) < Version("4.2.0"):
             raise ValueError(
                 "Mime type rendering requires nbformat>=4.2.0 but it is not installed"
             )
+
+        display_jupyter_version_warnings()
 
         ipython_display.display(bundle, raw=True)
 
@@ -525,13 +556,15 @@ elif ipython and ipython.get_ipython():
 else:
     # If ipython isn't available, try to display figures in the default
     # browser
-    import webbrowser
-
     try:
+        import webbrowser
+
         webbrowser.get()
         default_renderer = "browser"
-    except webbrowser.Error:
-        # Default browser could not be loaded
+    except Exception:
+        # Many things could have gone wrong
+        # There could not be a webbrowser Python module,
+        # or the module may be a dumb placeholder
         pass
 
 renderers.render_on_display = True

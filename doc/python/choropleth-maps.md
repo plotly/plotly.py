@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,20 +20,20 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.0
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
     language: python
     layout: base
     name: Choropleth Maps
-    order: 7
+    order: 8
     page_type: u-guide
     permalink: python/choropleth-maps/
     thumbnail: thumbnail/choropleth.jpg
 ---
 
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps** using our Mapbox trace types](/python/mapbox-county-choropleth).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](/python/tile-county-choropleth).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` function or the lower-level `go.Choropleth` graph object.
 
@@ -154,6 +154,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'choropleth-maps', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Discrete Colors
 

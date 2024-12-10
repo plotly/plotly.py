@@ -29,7 +29,7 @@ jupyter:
     name: Selections
     order: 38
     permalink: python/selections/
-    thumbnail: thumbnail/make_selection.jpg
+    thumbnail: thumbnail/ml_apps.png
 ---
 
 ## Adding Selections to Cartesian Subplots
@@ -60,7 +60,7 @@ fig.show()
 ## Selections Using a Custom SVG
 
 
-In the above example, we added a rectangular selection. You can also render a custom SVG for a selection by defining a `path` that can include single or multiple polygons. Here, we create a selection with a single polygon path "M2,6.5L4,7.5L4,6Z". 
+In the above example, we added a rectangular selection. You can also render a custom SVG for a selection by defining a `path` that can include single or multiple polygons. Here, we create a selection with a single polygon path "M2,6.5L4,7.5L4,6Z".
 
 Please note that multiple polygons e.g. "M0,0L0,10L10,10,L10,0Z M2,2L2,8L8,8,L8,2Z" could be used to subtract certain regions from the selection.
 
@@ -145,7 +145,7 @@ Selections are also supported on time series figures. Here, we add a rectangular
 import plotly.express as px
 
 df = px.data.stocks()
-fig = px.line(df, x='date', y="GOOG")
+fig = px.line(df, x='date', y="GOOG", markers=True)
 fig.add_selection(x0="2019-01-01", y0=0.95, x1="2019-10-01", y1=1.15)
 fig.show()
 ```
@@ -226,7 +226,7 @@ fig.update_layout(
     width = 600,
     bargap = 0,
     hovermode = 'closest',
-    showlegend = False, 
+    showlegend = False,
     selections = [
         dict(
             x0 = 0.5,
@@ -249,7 +249,7 @@ fig.update_layout(
             line = dict(
                 color="yellow"
             )
-        ),   
+        ),
         dict(
             path= "M0.75,2.39L0.98,3.38L1.46,3.68L1.80,3.35L2.01,2.51L1.67,1.15L1.18,0.50L0.65,0.66L0.54,0.83L0.49,1.56Z",
             xref= 'x',
@@ -310,6 +310,3 @@ fig.update_layout(
 fig.show()
 ```
 
-## More on Selections
-
-For more on selections, see the [selections section of the `dcc.Graph` page](https://dash.plotly.com/dash-core-components/graph#selections) in the Dash docs.

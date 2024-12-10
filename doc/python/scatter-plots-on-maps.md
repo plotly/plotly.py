@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Scatter Plots on Maps
-    order: 11
+    order: 12
     page_type: u-guide
     permalink: python/scatter-plots-on-maps/
     thumbnail: thumbnail/scatter-plot-on-maps.jpg
@@ -187,7 +187,9 @@ fig = go.Figure(data=go.Scattergeo(
         opacity = 0.7,
         size = 2,
         colorbar = dict(
-            titleside = "right",
+            title = dict(
+                side="right"
+            ),
             outlinecolor = "rgba(68, 68, 68, 0)",
             ticks = "outside",
             showticksuffix = "last",

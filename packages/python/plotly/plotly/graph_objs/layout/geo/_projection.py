@@ -150,11 +150,11 @@ class Projection(_BaseLayoutHierarchyType):
                 equidistant', 'craig', 'craster', 'cylindrical equal
                 area', 'cylindrical stereographic', 'eckert1', 'eckert2',
                 'eckert3', 'eckert4', 'eckert5', 'eckert6', 'eisenlohr',
-                'equirectangular', 'fahey', 'foucaut', 'foucaut
-                sinusoidal', 'ginzburg4', 'ginzburg5', 'ginzburg6',
-                'ginzburg8', 'ginzburg9', 'gnomonic', 'gringorten',
-                'gringorten quincuncial', 'guyou', 'hammer', 'hill',
-                'homolosine', 'hufnagel', 'hyperelliptical',
+                'equal earth', 'equirectangular', 'fahey', 'foucaut',
+                'foucaut sinusoidal', 'ginzburg4', 'ginzburg5',
+                'ginzburg6', 'ginzburg8', 'ginzburg9', 'gnomonic',
+                'gringorten', 'gringorten quincuncial', 'guyou', 'hammer',
+                'hill', 'homolosine', 'hufnagel', 'hyperelliptical',
                 'kavrayskiy7', 'lagrange', 'larrivee', 'laskowski',
                 'loximuthal', 'mercator', 'miller', 'mollweide', 'mt flat
                 polar parabolic', 'mt flat polar quartic', 'mt flat polar

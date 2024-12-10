@@ -40,7 +40,7 @@ def test_write_html():
     mock_pathlib_path = Mock(spec=Path)
     pio.write_html(fig, mock_pathlib_path)
     mock_pathlib_path.write_text.assert_called_once()
-    (pl_html,) = mock_pathlib_path.write_text.call_args[0]
+    pl_html = mock_pathlib_path.write_text.call_args[0][0]
     assert replace_div_id(html) == replace_div_id(pl_html)
 
     # Test pio.write_html with a mock file descriptor

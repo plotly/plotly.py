@@ -7,9 +7,10 @@ from io import BytesIO
 import base64
 import datetime
 from plotly.express.imshow_utils import rescale_intensity
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
-img_gray = np.arange(100, dtype=np.float).reshape((10, 10))
+img_gray = np.arange(100, dtype=float).reshape((10, 10))
 
 
 def decode_image_string(image_string):
@@ -47,7 +48,7 @@ def test_automatic_zmax_from_dtype():
     dtypes_dict = {
         np.uint8: 2**8 - 1,
         np.uint16: 2**16 - 1,
-        np.float: 1,
+        float: 1,
         bool: 255,
     }
     for key, val in dtypes_dict.items():
@@ -111,7 +112,7 @@ def test_nan_inf_data(binary_string):
     zmaxs = [1, 255]
     for zmax, img in zip(zmaxs, imgs):
         img[0] = 0
-        img[10:12] = np.nan
+        img[10:12] = np_nan()
         # the case of 2d/heatmap is handled gracefully by the JS trace but I don't know how to check it
         fig = px.imshow(
             np.dstack((img,) * 3),
@@ -192,6 +193,40 @@ def test_imshow_xarray_slicethrough():
     assert fig.layout.xaxis.title.text == "dim_2"
     assert fig.layout.yaxis.title.text == "dim_1"
     assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
+def test_imshow_xarray_facet_col_string():
+    img = np.random.random((3, 4, 5))
+    da = xr.DataArray(
+        img, dims=["str_dim", "dim_1", "dim_2"], coords={"str_dim": ["A", "B", "C"]}
+    )
+    fig = px.imshow(da, facet_col="str_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
+def test_imshow_xarray_animation_frame_string():
+    img = np.random.random((3, 4, 5))
+    da = xr.DataArray(
+        img, dims=["str_dim", "dim_1", "dim_2"], coords={"str_dim": ["A", "B", "C"]}
+    )
+    fig = px.imshow(da, animation_frame="str_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
+def test_imshow_xarray_animation_facet_slicethrough():
+    img = np.random.random((3, 4, 5, 6))
+    da = xr.DataArray(img, dims=["dim_0", "dim_1", "dim_2", "dim_3"])
+    fig = px.imshow(da, facet_col="dim_0", animation_frame="dim_1")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_3"
+    assert fig.layout.yaxis.title.text == "dim_2"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_3"]))
 
 
 def test_imshow_labels_and_ranges():
@@ -307,7 +342,7 @@ def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
             assert (
                 np.abs(
                     np.max(decode_image_string(fig.data[0].source))
-                    - 255 * img.max() / np.iinfo(dtype).max
+                    - np.int64(255) * img.max() / np.iinfo(dtype).max
                 )
                 < 1
             )

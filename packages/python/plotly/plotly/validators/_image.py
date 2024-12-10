@@ -55,8 +55,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -69,6 +69,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variables `z`, `color` and `colormodel`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example
@@ -91,6 +92,12 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgrouptitle
                 :class:`plotly.graph_objects.image.Legendgroupt
                 itle` instance or dict with compatible
@@ -98,13 +105,19 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -123,7 +136,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -172,7 +185,10 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x0
-                Set the image's x position.
+                Set the image's x position. The left edge of
+                the image (or the right edge if the x axis is
+                reversed or dx is negative) will be found at
+                xmin=x0-dx/2
             xaxis
                 Sets a reference between this trace's x
                 coordinates and a 2D cartesian x axis. If "x"
@@ -180,7 +196,14 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             y0
-                Set the image's y position.
+                Set the image's y position. The top edge of the
+                image (or the bottom edge if the y axis is NOT
+                reversed or if dy is negative) will be found at
+                ymin=y0-dy/2. By default when an image trace is
+                included, the y axis will be reversed so that
+                the image is right-side-up, but you can disable
+                this by setting yaxis.autorange=true or by
+                providing an explicit y axis range.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -210,6 +233,11 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `rgba256` colormodel, it is [0, 0, 0, 0]. For
                 the `hsl` colormodel, it is [0, 0, 0]. For the
                 `hsla` colormodel, it is [0, 0, 0, 0].
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
             zsmooth
                 Picks a smoothing algorithm used to smooth `z`
                 data. This only applies for image traces that

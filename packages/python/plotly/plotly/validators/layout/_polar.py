@@ -24,7 +24,7 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinate are displayed on the graph. With
                 "stack", the bars are stacked on top of one
                 another With "overlay", the bars are plotted
-                over one another, you might need to an
+                over one another, you might need to reduce
                 "opacity" to see multiple bars.
             bgcolor
                 Set the background color of the subplot

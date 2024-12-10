@@ -7,6 +7,8 @@ class Layout(_BaseLayoutType):
     _subplotid_prop_names = [
         "coloraxis",
         "geo",
+        "legend",
+        "map",
         "mapbox",
         "polar",
         "scene",
@@ -32,6 +34,8 @@ class Layout(_BaseLayoutType):
         from plotly.validators.layout import (
             ColoraxisValidator,
             GeoValidator,
+            LegendValidator,
+            MapValidator,
             MapboxValidator,
             PolarValidator,
             SceneValidator,
@@ -44,6 +48,8 @@ class Layout(_BaseLayoutType):
         return {
             "coloraxis": ColoraxisValidator,
             "geo": GeoValidator,
+            "legend": LegendValidator,
+            "map": MapValidator,
             "mapbox": MapboxValidator,
             "polar": PolarValidator,
             "scene": SceneValidator,
@@ -67,6 +73,7 @@ class Layout(_BaseLayoutType):
         "annotations",
         "autosize",
         "autotypenumbers",
+        "barcornerradius",
         "bargap",
         "bargroupgap",
         "barmode",
@@ -102,14 +109,18 @@ class Layout(_BaseLayoutType):
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "hoversubplots",
         "iciclecolorway",
         "imagedefaults",
         "images",
         "legend",
+        "map",
         "mapbox",
         "margin",
         "meta",
         "metasrc",
+        "minreducedheight",
+        "minreducedwidth",
         "modebar",
         "newselection",
         "newshape",
@@ -117,6 +128,8 @@ class Layout(_BaseLayoutType):
         "piecolorway",
         "plot_bgcolor",
         "polar",
+        "scattergap",
+        "scattermode",
         "scene",
         "selectdirection",
         "selectiondefaults",
@@ -134,7 +147,6 @@ class Layout(_BaseLayoutType):
         "template",
         "ternary",
         "title",
-        "titlefont",
         "transition",
         "treemapcolorway",
         "uirevision",
@@ -254,21 +266,21 @@ class Layout(_BaseLayoutType):
                     same coordinates as `xref`.
                 axref
                     Indicates in what coordinates the tail of the
-                    annotation (ax,ay) is specified. If set to a ax
-                    axis id (e.g. "ax" or "ax2"), the `ax` position
-                    refers to a ax coordinate. If set to "paper",
-                    the `ax` position refers to the distance from
+                    annotation (ax,ay) is specified. If set to a x
+                    axis id (e.g. "x" or "x2"), the `x` position
+                    refers to a x coordinate. If set to "paper",
+                    the `x` position refers to the distance from
                     the left of the plotting area in normalized
                     coordinates where 0 (1) corresponds to the left
-                    (right). If set to a ax axis ID followed by
+                    (right). If set to a x axis ID followed by
                     "domain" (separated by a space), the position
                     behaves like for "paper", but refers to the
                     distance in fractions of the domain length from
-                    the left of the domain of that axis: e.g., *ax2
-                    domain* refers to the domain of the second ax
-                    axis and a ax position of 0.5 refers to the
+                    the left of the domain of that axis: e.g., *x2
+                    domain* refers to the domain of the second x
+                    axis and a x position of 0.5 refers to the
                     point between the left and the right of the
-                    domain of the second ax axis. In order for
+                    domain of the second x axis. In order for
                     absolute positioning of the arrow to work,
                     "axref" must be exactly the same as "xref",
                     otherwise "axref" will revert to "pixel"
@@ -291,33 +303,32 @@ class Layout(_BaseLayoutType):
                     same coordinates as `yref`.
                 ayref
                     Indicates in what coordinates the tail of the
-                    annotation (ax,ay) is specified. If set to a ay
-                    axis id (e.g. "ay" or "ay2"), the `ay` position
-                    refers to a ay coordinate. If set to "paper",
-                    the `ay` position refers to the distance from
+                    annotation (ax,ay) is specified. If set to a y
+                    axis id (e.g. "y" or "y2"), the `y` position
+                    refers to a y coordinate. If set to "paper",
+                    the `y` position refers to the distance from
                     the bottom of the plotting area in normalized
                     coordinates where 0 (1) corresponds to the
-                    bottom (top). If set to a ay axis ID followed
-                    by "domain" (separated by a space), the
-                    position behaves like for "paper", but refers
-                    to the distance in fractions of the domain
-                    length from the bottom of the domain of that
-                    axis: e.g., *ay2 domain* refers to the domain
-                    of the second ay  axis and a ay position of 0.5
-                    refers to the point between the bottom and the
-                    top of the domain of the second ay axis. In
-                    order for absolute positioning of the arrow to
-                    work, "ayref" must be exactly the same as
-                    "yref", otherwise "ayref" will revert to
-                    "pixel" (explained next). For relative
-                    positioning, "ayref" can be set to "pixel", in
-                    which case the "ay" value is specified in
-                    pixels relative to "y". Absolute positioning is
-                    useful for trendline annotations which should
-                    continue to indicate the correct trend when
-                    zoomed. Relative positioning is useful for
-                    specifying the text offset for an annotated
-                    point.
+                    bottom (top). If set to a y axis ID followed by
+                    "domain" (separated by a space), the position
+                    behaves like for "paper", but refers to the
+                    distance in fractions of the domain length from
+                    the bottom of the domain of that axis: e.g.,
+                    *y2 domain* refers to the domain of the second
+                    y  axis and a y position of 0.5 refers to the
+                    point between the bottom and the top of the
+                    domain of the second y axis. In order for
+                    absolute positioning of the arrow to work,
+                    "ayref" must be exactly the same as "yref",
+                    otherwise "ayref" will revert to "pixel"
+                    (explained next). For relative positioning,
+                    "ayref" can be set to "pixel", in which case
+                    the "ay" value is specified in pixels relative
+                    to "y". Absolute positioning is useful for
+                    trendline annotations which should continue to
+                    indicate the correct trend when zoomed.
+                    Relative positioning is useful for specifying
+                    the text offset for an annotated point.
                 bgcolor
                     Sets the background color of the annotation.
                 bordercolor
@@ -426,8 +437,8 @@ class Layout(_BaseLayoutType):
                     Plotly uses a subset of HTML tags to do things
                     like newline (<br>), bold (<b></b>), italics
                     (<i></i>), hyperlinks (<a href='...'></a>).
-                    Tags <em>, <sup>, <sub> <span> are also
-                    supported.
+                    Tags <em>, <sup>, <sub>, <s>, <u> <span> are
+                    also supported.
                 textangle
                     Sets the angle at which the `text` is drawn
                     with respect to the horizontal.
@@ -628,6 +639,26 @@ class Layout(_BaseLayoutType):
     def autotypenumbers(self, val):
         self["autotypenumbers"] = val
 
+    # barcornerradius
+    # ---------------
+    @property
+    def barcornerradius(self):
+        """
+        Sets the rounding of bar corners. May be an integer number of
+        pixels, or a percentage of bar width (as a string ending in %).
+
+        The 'barcornerradius' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["barcornerradius"]
+
+    @barcornerradius.setter
+    def barcornerradius(self, val):
+        self["barcornerradius"] = val
+
     # bargap
     # ------
     @property
@@ -681,7 +712,7 @@ class Layout(_BaseLayoutType):
         of one another, with negative values below the axis, positive
         values above With "group", the bars are plotted next to one
         another centered around the shared location. With "overlay",
-        the bars are plotted over one another, you might need to an
+        the bars are plotted over one another, you might need to reduce
         "opacity" to see multiple bars.
 
         The 'barmode' property is an enumeration that may be specified as:
@@ -1247,11 +1278,34 @@ class Layout(_BaseLayoutType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1339,7 +1393,7 @@ class Layout(_BaseLayoutType):
         top of one another With "group", the bars are plotted next to
         one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
-        need to an "opacity" to see multiple bars.
+        need to reduce "opacity" to see multiple bars.
 
         The 'funnelmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1398,7 +1452,7 @@ class Layout(_BaseLayoutType):
                     `center.lon`, `center.lat`,
                     `projection.rotation.lon`,
                     `projection.rotation.lat`, `lonaxis.range` and
-                    `lonaxis.range` getting auto-filled. If
+                    `lataxis.range` getting auto-filled. If
                     "locations", only the trace's visible locations
                     are considered in the `fitbounds` computations.
                     If "geojson", the entire trace input `geojson`
@@ -1777,6 +1831,32 @@ class Layout(_BaseLayoutType):
     def hovermode(self, val):
         self["hovermode"] = val
 
+    # hoversubplots
+    # -------------
+    @property
+    def hoversubplots(self):
+        """
+        Determines expansion of hover effects to other subplots If
+        "single" just the axis pair of the primary point is included
+        without overlaying subplots. If "overlaying" all subplots using
+        the main axis and occupying the same space are included. If
+        "axis", also include stacked subplots using the same axis when
+        `hovermode` is set to "x", *x unified*, "y" or *y unified*.
+
+        The 'hoversubplots' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['single', 'overlaying', 'axis']
+
+        Returns
+        -------
+        Any
+        """
+        return self["hoversubplots"]
+
+    @hoversubplots.setter
+    def hoversubplots(self, val):
+        self["hoversubplots"] = val
+
     # iciclecolorway
     # --------------
     @property
@@ -1971,6 +2051,13 @@ class Layout(_BaseLayoutType):
                 borderwidth
                     Sets the width (in px) of the border enclosing
                     the legend.
+                entrywidth
+                    Sets the width (in px or fraction) of the
+                    legend. Use 0 to size the entry based on the
+                    text width, when `entrywidthmode` is set to
+                    "pixels".
+                entrywidthmode
+                    Determines what entrywidth means.
                 font
                     Sets the font used to text the legend items.
                 groupclick
@@ -1984,6 +2071,9 @@ class Layout(_BaseLayoutType):
                     Sets the font for group titles in legend.
                     Defaults to `legend.font` with its size
                     increased about 10%.
+                indentation
+                    Sets the indentation (in px) of the legend
+                    entries.
                 itemclick
                     Determines the behavior on legend item click.
                     "toggle" toggles the visibility of the item
@@ -2031,11 +2121,19 @@ class Layout(_BaseLayoutType):
                 valign
                     Sets the vertical alignment of the symbols with
                     respect to their associated text.
+                visible
+                    Determines whether or not this legend is
+                    visible.
                 x
-                    Sets the x position (in normalized coordinates)
-                    of the legend. Defaults to 1.02 for vertical
-                    legends and defaults to 0 for horizontal
-                    legends.
+                    Sets the x position with respect to `xref` (in
+                    normalized coordinates) of the legend. When
+                    `xref` is "paper", defaults to 1.02 for
+                    vertical legends and defaults to 0 for
+                    horizontal legends. When `xref` is "container",
+                    defaults to 1 for vertical legends and defaults
+                    to 0 for horizontal legends. Must be between 0
+                    and 1 if `xref` is "container". and between
+                    "-2" and 3 if `xref` is "paper".
                 xanchor
                     Sets the legend's horizontal position anchor.
                     This anchor binds the `x` position to the
@@ -2045,13 +2143,21 @@ class Layout(_BaseLayoutType):
                     anchors legends to the left for `x` values less
                     than or equal to 1/3 and anchors legends with
                     respect to their center otherwise.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
                 y
-                    Sets the y position (in normalized coordinates)
-                    of the legend. Defaults to 1 for vertical
+                    Sets the y position with respect to `yref` (in
+                    normalized coordinates) of the legend. When
+                    `yref` is "paper", defaults to 1 for vertical
                     legends, defaults to "-0.1" for horizontal
                     legends on graphs w/o range sliders and
                     defaults to 1.1 for horizontal legends on graph
-                    with one or multiple range sliders.
+                    with one or multiple range sliders. When `yref`
+                    is "container", defaults to 1. Must be between
+                    0 and 1 if `yref` is "container" and between
+                    "-2" and 3 if `yref` is "paper".
                 yanchor
                     Sets the legend's vertical position anchor This
                     anchor binds the `y` position to the "top",
@@ -2061,6 +2167,10 @@ class Layout(_BaseLayoutType):
                     legends to at their top for `y` values greater
                     than or equal to 2/3 and anchors legends with
                     respect to their middle otherwise.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
@@ -2071,6 +2181,83 @@ class Layout(_BaseLayoutType):
     @legend.setter
     def legend(self, val):
         self["legend"] = val
+
+    # map
+    # ---
+    @property
+    def map(self):
+        """
+        The 'map' property is an instance of Map
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Map`
+          - A dict of string/value properties that will be passed
+            to the Map constructor
+
+            Supported dict properties:
+
+                bearing
+                    Sets the bearing angle of the map in degrees
+                    counter-clockwise from North (map.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.map.Bounds`
+                    instance or dict with compatible properties
+                center
+                    :class:`plotly.graph_objects.layout.map.Center`
+                    instance or dict with compatible properties
+                domain
+                    :class:`plotly.graph_objects.layout.map.Domain`
+                    instance or dict with compatible properties
+                layers
+                    A tuple of
+                    :class:`plotly.graph_objects.layout.map.Layer`
+                    instances or dicts with compatible properties
+                layerdefaults
+                    When used in a template (as
+                    layout.template.layout.map.layerdefaults), sets
+                    the default property values to use for elements
+                    of layout.map.layers
+                pitch
+                    Sets the pitch angle of the map (in degrees,
+                    where 0 means perpendicular to the surface of
+                    the map) (map.pitch).
+                style
+                    Defines the map layers that are rendered by
+                    default below the trace layers defined in
+                    `data`, which are themselves by default
+                    rendered below the layers defined in
+                    `layout.map.layers`.  These layers can be
+                    defined either explicitly as a Map Style object
+                    which can contain multiple layer definitions
+                    that load data from any public or private Tile
+                    Map Service (TMS or XYZ) or Web Map Service
+                    (WMS) or implicitly by using one of the built-
+                    in style objects which use WMSes or by using a
+                    custom style URL  Map Style objects are of the
+                    form described in the MapLibre GL JS
+                    documentation available at
+                    https://maplibre.org/maplibre-style-spec/  The
+                    built-in plotly.js styles objects are: basic,
+                    carto-darkmatter, carto-darkmatter-nolabels,
+                    carto-positron, carto-positron-nolabels, carto-
+                    voyager, carto-voyager-nolabels, dark, light,
+                    open-street-map, outdoors, satellite,
+                    satellite-streets, streets, white-bg.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view: `center`, `zoom`, `bearing`, `pitch`.
+                    Defaults to `layout.uirevision`.
+                zoom
+                    Sets the zoom level of the map (map.zoom).
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Map
+        """
+        return self["map"]
+
+    @map.setter
+    def map(self, val):
+        self["map"] = val
 
     # mapbox
     # ------
@@ -2097,6 +2284,9 @@ class Layout(_BaseLayoutType):
                 bearing
                     Sets the bearing angle of the map in degrees
                     counter-clockwise from North (mapbox.bearing).
+                bounds
+                    :class:`plotly.graph_objects.layout.mapbox.Boun
+                    ds` instance or dict with compatible properties
                 center
                     :class:`plotly.graph_objects.layout.mapbox.Cent
                     er` instance or dict with compatible properties
@@ -2248,6 +2438,48 @@ class Layout(_BaseLayoutType):
     def metasrc(self, val):
         self["metasrc"] = val
 
+    # minreducedheight
+    # ----------------
+    @property
+    def minreducedheight(self):
+        """
+        Minimum height of the plot with margin.automargin applied (in
+        px)
+
+        The 'minreducedheight' property is a number and may be specified as:
+          - An int or float in the interval [2, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minreducedheight"]
+
+    @minreducedheight.setter
+    def minreducedheight(self, val):
+        self["minreducedheight"] = val
+
+    # minreducedwidth
+    # ---------------
+    @property
+    def minreducedwidth(self):
+        """
+        Minimum width of the plot with margin.automargin applied (in
+        px)
+
+        The 'minreducedwidth' property is a number and may be specified as:
+          - An int or float in the interval [2, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minreducedwidth"]
+
+    @minreducedwidth.setter
+    def minreducedwidth(self, val):
+        self["minreducedwidth"] = val
+
     # modebar
     # -------
     @property
@@ -2296,18 +2528,19 @@ class Layout(_BaseLayoutType):
                     "reset", "resetCameraDefault3d",
                     "resetCameraLastSave3d", "resetGeo",
                     "resetSankeyGroup", "resetScale2d",
-                    "resetViewMapbox", "resetViews",
-                    "resetcameradefault", "resetcameralastsave",
-                    "resetsankeygroup", "resetscale", "resetview",
-                    "resetviews", "select", "select2d",
-                    "sendDataToCloud", "senddatatocloud",
-                    "tableRotation", "tablerotation", "toImage",
-                    "toggleHover", "toggleSpikelines",
-                    "togglehover", "togglespikelines", "toimage",
-                    "zoom", "zoom2d", "zoom3d", "zoomIn2d",
-                    "zoomInGeo", "zoomInMapbox", "zoomOut2d",
-                    "zoomOutGeo", "zoomOutMapbox", "zoomin",
-                    "zoomout".
+                    "resetViewMap", "resetViewMapbox",
+                    "resetViews", "resetcameradefault",
+                    "resetcameralastsave", "resetsankeygroup",
+                    "resetscale", "resetview", "resetviews",
+                    "select", "select2d", "sendDataToCloud",
+                    "senddatatocloud", "tableRotation",
+                    "tablerotation", "toImage", "toggleHover",
+                    "toggleSpikelines", "togglehover",
+                    "togglespikelines", "toimage", "zoom",
+                    "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
+                    "zoomInMap", "zoomInMapbox", "zoomOut2d",
+                    "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+                    "zoomin", "zoomout".
                 removesrc
                     Sets the source reference on Chart Studio Cloud
                     for `remove`.
@@ -2396,14 +2629,57 @@ class Layout(_BaseLayoutType):
                     Determines the path's interior. For more info
                     please visit https://developer.mozilla.org/en-
                     US/docs/Web/SVG/Attribute/fill-rule
+                label
+                    :class:`plotly.graph_objects.layout.newshape.La
+                    bel` instance or dict with compatible
+                    properties
                 layer
-                    Specifies whether new shapes are drawn below or
-                    above traces.
+                    Specifies whether new shapes are drawn below
+                    gridlines ("below"), between gridlines and
+                    traces ("between") or above traces ("above").
+                legend
+                    Sets the reference to a legend to show new
+                    shape in. References to these legends are
+                    "legend", "legend2", "legend3", etc. Settings
+                    for these legends are set in the layout, under
+                    `layout.legend`, `layout.legend2`, etc.
+                legendgroup
+                    Sets the legend group for new shape. Traces and
+                    shapes part of the same legend group hide/show
+                    at the same time when toggling legend items.
+                legendgrouptitle
+                    :class:`plotly.graph_objects.layout.newshape.Le
+                    gendgrouptitle` instance or dict with
+                    compatible properties
+                legendrank
+                    Sets the legend rank for new shape. Items and
+                    groups with smaller ranks are presented on
+                    top/left side while with "reversed"
+                    `legend.traceorder` they are on bottom/right
+                    side. The default legendrank is 1000, so that
+                    you can use ranks less than 1000 to place
+                    certain items before all unranked items, and
+                    ranks greater than 1000 to go after all
+                    unranked items.
+                legendwidth
+                    Sets the width (in px or fraction) of the
+                    legend for new shape.
                 line
                     :class:`plotly.graph_objects.layout.newshape.Li
                     ne` instance or dict with compatible properties
+                name
+                    Sets new shape name. The name appears as the
+                    legend item.
                 opacity
                     Sets the opacity of new shapes.
+                showlegend
+                    Determines whether or not new shape is shown in
+                    the legend.
+                visible
+                    Determines whether or not new shape is visible.
+                    If "legendonly", the shape is not drawn, but
+                    can appear as a legend item (provided that the
+                    legend itself is visible).
 
         Returns
         -------
@@ -2586,7 +2862,7 @@ class Layout(_BaseLayoutType):
                     coordinate are displayed on the graph. With
                     "stack", the bars are stacked on top of one
                     another With "overlay", the bars are plotted
-                    over one another, you might need to an
+                    over one another, you might need to reduce
                     "opacity" to see multiple bars.
                 bgcolor
                     Set the background color of the subplot
@@ -2630,6 +2906,53 @@ class Layout(_BaseLayoutType):
     @polar.setter
     def polar(self, val):
         self["polar"] = val
+
+    # scattergap
+    # ----------
+    @property
+    def scattergap(self):
+        """
+        Sets the gap (in plot fraction) between scatter points of
+        adjacent location coordinates. Defaults to `bargap`.
+
+        The 'scattergap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["scattergap"]
+
+    @scattergap.setter
+    def scattergap(self, val):
+        self["scattergap"] = val
+
+    # scattermode
+    # -----------
+    @property
+    def scattermode(self):
+        """
+        Determines how scatter points at the same location coordinate
+        are displayed on the graph. With "group", the scatter points
+        are plotted next to one another centered around the shared
+        location. With "overlay", the scatter points are plotted over
+        one another, you might need to reduce "opacity" to see multiple
+        scatter points.
+
+        The 'scattermode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['group', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self["scattermode"]
+
+    @scattermode.setter
+    def scattermode(self, val):
+        self["scattermode"] = val
 
     # scene
     # -----
@@ -2929,9 +3252,44 @@ class Layout(_BaseLayoutType):
                     constitute the interior. For more info please
                     visit https://developer.mozilla.org/en-
                     US/docs/Web/SVG/Attribute/fill-rule
+                label
+                    :class:`plotly.graph_objects.layout.shape.Label
+                    ` instance or dict with compatible properties
                 layer
-                    Specifies whether shapes are drawn below or
-                    above traces.
+                    Specifies whether shapes are drawn below
+                    gridlines ("below"), between gridlines and
+                    traces ("between") or above traces ("above").
+                legend
+                    Sets the reference to a legend to show this
+                    shape in. References to these legends are
+                    "legend", "legend2", "legend3", etc. Settings
+                    for these legends are set in the layout, under
+                    `layout.legend`, `layout.legend2`, etc.
+                legendgroup
+                    Sets the legend group for this shape. Traces
+                    and shapes part of the same legend group
+                    hide/show at the same time when toggling legend
+                    items.
+                legendgrouptitle
+                    :class:`plotly.graph_objects.layout.shape.Legen
+                    dgrouptitle` instance or dict with compatible
+                    properties
+                legendrank
+                    Sets the legend rank for this shape. Items and
+                    groups with smaller ranks are presented on
+                    top/left side while with "reversed"
+                    `legend.traceorder` they are on bottom/right
+                    side. The default legendrank is 1000, so that
+                    you can use ranks less than 1000 to place
+                    certain items before all unranked items, and
+                    ranks greater than 1000 to go after all
+                    unranked items. When having unranked or equal
+                    rank items shapes would be displayed after
+                    traces i.e. according to their order in data
+                    and layout.
+                legendwidth
+                    Sets the width (in px or fraction) of the
+                    legend for this shape.
                 line
                     :class:`plotly.graph_objects.layout.shape.Line`
                     instance or dict with compatible properties
@@ -2973,6 +3331,9 @@ class Layout(_BaseLayoutType):
                     strings, we can't use either to separate date
                     from time parts. Therefore we'll use underscore
                     for this purpose: 2015-02-21_13:45:56.789
+                showlegend
+                    Determines whether or not this shape is shown
+                    in the legend.
                 templateitemname
                     Used to refer to a named item in this array in
                     the template. Named items from the template
@@ -3000,13 +3361,27 @@ class Layout(_BaseLayoutType):
                     sizing mode.
                 visible
                     Determines whether or not this shape is
-                    visible.
+                    visible. If "legendonly", the shape is not
+                    drawn, but can appear as a legend item
+                    (provided that the legend itself is visible).
                 x0
                     Sets the shape's starting x position. See
                     `type` and `xsizemode` for more info.
+                x0shift
+                    Shifts `x0` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 x1
                     Sets the shape's end x position. See `type` and
                     `xsizemode` for more info.
+                x1shift
+                    Shifts `x1` away from the center of the
+                    category when `xref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 xanchor
                     Only relevant in conjunction with `xsizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3046,9 +3421,21 @@ class Layout(_BaseLayoutType):
                 y0
                     Sets the shape's starting y position. See
                     `type` and `ysizemode` for more info.
+                y0shift
+                    Shifts `y0` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 y1
                     Sets the shape's end y position. See `type` and
                     `ysizemode` for more info.
+                y1shift
+                    Shifts `y1` away from the center of the
+                    category when `yref` is a "category" or
+                    "multicategory" axis. -0.5 corresponds to the
+                    start of the category and 0.5 corresponds to
+                    the end of the category.
                 yanchor
                     Only relevant in conjunction with `ysizemode`
                     set to "pixel". Specifies the anchor point on
@@ -3500,10 +3887,24 @@ class Layout(_BaseLayoutType):
 
             Supported dict properties:
 
+                automargin
+                    Determines whether the title can automatically
+                    push the figure margins. If `yref='paper'` then
+                    the margin will expand to ensure that the title
+                    doesn’t overlap with the edges of the
+                    container. If `yref='container'` then the
+                    margins will ensure that the title doesn’t
+                    overlap with the plot area, tick labels, and
+                    axis titles. If `automargin=true` and the
+                    margins need to be expanded, then y will be set
+                    to a default 1 and yanchor will be set to an
+                    appropriate default to ensure that minimal
+                    margin space is needed. Note that when
+                    `yref='paper'`, only 1 or 0 are allowed y
+                    values. Invalid values will be reset to the
+                    default 1.
                 font
-                    Sets the title font. Note that the title's font
-                    used to be customized by the now deprecated
-                    `titlefont` attribute.
+                    Sets the title font.
                 pad
                     Sets the padding of the title. Each padding
                     value only applies when the corresponding
@@ -3513,11 +3914,12 @@ class Layout(_BaseLayoutType):
                     `xanchor`/`yanchor` is determined
                     automatically. Padding is muted if the
                     respective anchor value is "middle*/*center".
+                subtitle
+                    :class:`plotly.graph_objects.layout.title.Subti
+                    tle` instance or dict with compatible
+                    properties
                 text
-                    Sets the plot's title. Note that before the
-                    existence of `title.text`, the title's contents
-                    used to be defined as the `title` attribute
-                    itself. This behavior has been deprecated.
+                    Sets the plot's title.
                 x
                     Sets the x position with respect to `xref` in
                     normalized coordinates from 0 (left) to 1
@@ -3562,54 +3964,6 @@ class Layout(_BaseLayoutType):
     @title.setter
     def title(self, val):
         self["title"] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Deprecated: Please use layout.title.font instead. Sets the
-        title font. Note that the title's font used to be customized by
-        the now deprecated `titlefont` attribute.
-
-        The 'font' property is an instance of Font
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
-
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-        Returns
-        -------
-
-        """
-        return self["titlefont"]
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self["titlefont"] = val
 
     # transition
     # ----------
@@ -3994,7 +4348,7 @@ class Layout(_BaseLayoutType):
         displayed on the graph. With "group", the bars are plotted next
         to one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
-        need to an "opacity" to see multiple bars.
+        need to reduce "opacity" to see multiple bars.
 
         The 'waterfallmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -4056,7 +4410,24 @@ class Layout(_BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.xaxis.Autor
+                    angeoptions` instance or dict with compatible
+                    properties
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -4096,7 +4467,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -4179,8 +4551,8 @@ class Layout(_BaseLayoutType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4189,6 +4561,26 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                insiderange
+                    Could be used to set the desired inside range
+                    of this axis (excluding the labels) when
+                    `ticklabelposition` of the anchored axis has
+                    "inside". Not implemented for axes with `type`
+                    "log". This would be ignored when `range` is
+                    provided.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4212,6 +4604,10 @@ class Layout(_BaseLayoutType):
                     `scaleanchor` and a `matches` constraint is
                     currently forbidden. Moreover, note that
                     matching axes must have the same `type`.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -4257,7 +4653,9 @@ class Layout(_BaseLayoutType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangebreaks
                     A tuple of :class:`plotly.graph_objects.layout.
                     xaxis.Rangebreak` instances or dicts with
@@ -4304,6 +4702,15 @@ class Layout(_BaseLayoutType):
                     constraints via `scaleratio`. Note that setting
                     axes simultaneously in both a `scaleanchor` and
                     a `matches` constraint is currently forbidden.
+                    Setting `false` allows to remove a default
+                    constraint (occasionally, you may need to
+                    prevent a default `scaleanchor` constraint from
+                    being applied, eg. when having an image trace
+                    `yaxis: {scaleanchor: "x"}` is set
+                    automatically in order for pixels to be
+                    rendered as squares, setting `yaxis:
+                    {scaleanchor: false}` allows to remove the
+                    constraint).
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to
@@ -4397,8 +4804,8 @@ class Layout(_BaseLayoutType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4416,6 +4823,20 @@ class Layout(_BaseLayoutType):
                     out.xaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.xaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -4443,6 +4864,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value
@@ -4465,7 +4904,9 @@ class Layout(_BaseLayoutType):
                     "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
                     ("array" is the default value if `tickvals` is
-                    provided).
+                    provided). If "sync", the number of ticks will
+                    sync with the overlayed axis set by
+                    `overlaying` property.
                 tickprefix
                     Sets a tick label prefix.
                 ticks
@@ -4502,11 +4943,6 @@ class Layout(_BaseLayoutType):
                 title
                     :class:`plotly.graph_objects.layout.xaxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use layout.xaxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be customized by the
-                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -4567,7 +5003,32 @@ class Layout(_BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
+                    provided and it has a value for both the lower
+                    and upper bound, `autorange` is set to False.
+                    Using "min" applies autorange only to set the
+                    minimum. Using "max" applies autorange only to
+                    set the maximum. Using *min reversed* applies
+                    autorange only to set the minimum on a reversed
+                    axis. Using *max reversed* applies autorange
+                    only to set the maximum on a reversed axis.
+                    Using "reversed" applies autorange on both ends
+                    and reverses the axis direction.
+                autorangeoptions
+                    :class:`plotly.graph_objects.layout.yaxis.Autor
+                    angeoptions` instance or dict with compatible
+                    properties
+                autoshift
+                    Automatically reposition the axis to avoid
+                    overlap with other axes with the same
+                    `overlaying` value. This repositioning will
+                    account for any `shift` amount applied to other
+                    axes on the same side with `autoshift` is set
+                    to true. Only has an effect if `anchor` is set
+                    to "free".
+                autotickangles
+                    When `tickangle` is set to "auto", it will be
+                    set to the first angle in this array that is
+                    large enough to prevent label overlap.
                 autotypenumbers
                     Using "strict" a numeric string in trace data
                     is not converted to a number. Using *convert
@@ -4607,7 +5068,8 @@ class Layout(_BaseLayoutType):
                     descending* if order should be determined by
                     the numerical order of the values. Similarly,
                     the order can be determined by the min, max,
-                    sum, mean or median of all the values.
+                    sum, mean, geometric mean or median of all the
+                    values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -4690,8 +5152,8 @@ class Layout(_BaseLayoutType):
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4700,6 +5162,26 @@ class Layout(_BaseLayoutType):
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
+                insiderange
+                    Could be used to set the desired inside range
+                    of this axis (excluding the labels) when
+                    `ticklabelposition` of the anchored axis has
+                    "inside". Not implemented for axes with `type`
+                    "log". This would be ignored when `range` is
+                    provided.
+                labelalias
+                    Replacement text for specific tick or hover
+                    labels. For example using {US: 'USA', CA:
+                    'Canada'} changes US to USA and CA to Canada.
+                    The labels we would have shown must match the
+                    keys exactly, after adding any tickprefix or
+                    ticksuffix. For negative numbers the minus sign
+                    symbol used (U+2212) is wider than the regular
+                    ascii dash. That means you need to use −1
+                    instead of -1. labelalias can be used with any
+                    axis type, and both keys (if needed) and values
+                    (if desired) can include html-like tags or
+                    MathJax.
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4723,6 +5205,10 @@ class Layout(_BaseLayoutType):
                     `scaleanchor` and a `matches` constraint is
                     currently forbidden. Moreover, note that
                     matching axes must have the same `type`.
+                maxallowed
+                    Determines the maximum range of this axis.
+                minallowed
+                    Determines the minimum range of this axis.
                 minexponent
                     Hide SI prefix for 10^n if |n| is below this
                     number. This only has an effect when
@@ -4768,7 +5254,9 @@ class Layout(_BaseLayoutType):
                     strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
-                    in the order it appears.
+                    in the order it appears. Leaving either or both
+                    elements `null` impacts the default
+                    `autorange`.
                 rangebreaks
                     A tuple of :class:`plotly.graph_objects.layout.
                     yaxis.Rangebreak` instances or dicts with
@@ -4807,6 +5295,15 @@ class Layout(_BaseLayoutType):
                     constraints via `scaleratio`. Note that setting
                     axes simultaneously in both a `scaleanchor` and
                     a `matches` constraint is currently forbidden.
+                    Setting `false` allows to remove a default
+                    constraint (occasionally, you may need to
+                    prevent a default `scaleanchor` constraint from
+                    being applied, eg. when having an image trace
+                    `yaxis: {scaleanchor: "x"}` is set
+                    automatically in order for pixels to be
+                    rendered as squares, setting `yaxis:
+                    {scaleanchor: false}` allows to remove the
+                    constraint).
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to
@@ -4819,6 +5316,17 @@ class Layout(_BaseLayoutType):
                     horizontal.
                 separatethousands
                     If "true", even 4-digit integers are separated
+                shift
+                    Moves the axis a given number of pixels from
+                    where it would have been otherwise. Accepts
+                    both positive and negative values, which will
+                    shift the axis either right or left,
+                    respectively. If `autoshift` is set to true,
+                    then this defaults to a padding of -3 if `side`
+                    is set to "left". and defaults to +3 if `side`
+                    is set to "right". Defaults to 0 if `autoshift`
+                    is set to false. Only has an effect if `anchor`
+                    is set to "free".
                 showdividers
                     Determines whether or not a dividers are drawn
                     between the category levels of this axis. Only
@@ -4900,8 +5408,8 @@ class Layout(_BaseLayoutType):
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
                     similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-f
-                    ormat. And for dates see:
+                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
+                    format. And for dates see:
                     https://github.com/d3/d3-time-
                     format/tree/v2.2.3#locale_format. We add two
                     items to d3's date formatter: "%h" for half of
@@ -4919,6 +5427,20 @@ class Layout(_BaseLayoutType):
                     out.yaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.yaxis.tickformatstops
+                ticklabelindex
+                    Only for axes with `type` "date" or "linear".
+                    Instead of drawing the major tick label, draw
+                    the label for the minor tick that is n
+                    positions away from the major tick. E.g. to
+                    always draw the label for the minor tick before
+                    each major tick, choose `ticklabelindex` -1.
+                    This is useful for date axes with
+                    `ticklabelmode` "period" if you want to label
+                    the period that ends with each major tick
+                    instead of the period that begins there.
+                ticklabelindexsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for `ticklabelindex`.
                 ticklabelmode
                     Determines where tick labels are drawn with
                     respect to their corresponding ticks and grid
@@ -4946,6 +5468,24 @@ class Layout(_BaseLayoutType):
                     axes linked by `matches` or `scaleanchor`, no
                     extra padding for inside labels would be added
                     by autorange, so that the scales could match.
+                ticklabelshift
+                    Shifts the tick labels by the specified number
+                    of pixels in parallel to the axis. Positive
+                    values move the labels in the positive
+                    direction of the axis.
+                ticklabelstandoff
+                    Sets the standoff distance (in px) between the
+                    axis tick labels and their default position. A
+                    positive `ticklabelstandoff` moves the labels
+                    farther away from the plot area if
+                    `ticklabelposition` is "outside", and deeper
+                    into the plot area if `ticklabelposition` is
+                    "inside". A negative `ticklabelstandoff` works
+                    in the opposite direction, moving outside ticks
+                    towards the plot area and inside ticks towards
+                    the outside. If the negative value is large
+                    enough, inside ticks can even end up outside
+                    and vice versa.
                 ticklabelstep
                     Sets the spacing between tick labels as
                     compared to the spacing between ticks. A value
@@ -4968,7 +5508,9 @@ class Layout(_BaseLayoutType):
                     "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
                     ("array" is the default value if `tickvals` is
-                    provided).
+                    provided). If "sync", the number of ticks will
+                    sync with the overlayed axis set by
+                    `overlaying` property.
                 tickprefix
                     Sets a tick label prefix.
                 ticks
@@ -5005,11 +5547,6 @@ class Layout(_BaseLayoutType):
                 title
                     :class:`plotly.graph_objects.layout.yaxis.Title
                     ` instance or dict with compatible properties
-                titlefont
-                    Deprecated: Please use layout.yaxis.title.font
-                    instead. Sets this axis' title font. Note that
-                    the title's font used to be customized by the
-                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -5077,6 +5614,10 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of bar corners. May be an integer
+            number of pixels, or a percentage of bar width (as a
+            string ending in %).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5091,7 +5632,7 @@ class Layout(_BaseLayoutType):
             below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
             the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
+            plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
@@ -5230,8 +5771,8 @@ class Layout(_BaseLayoutType):
             stacked on top of one another With "group", the bars
             are plotted next to one another centered around the
             shared location. With "overlay", the bars are plotted
-            over one another, you might need to an "opacity" to see
-            multiple bars.
+            over one another, you might need to reduce "opacity" to
+            see multiple bars.
         geo
             :class:`plotly.graph_objects.layout.Geo` instance or
             dict with compatible properties
@@ -5282,6 +5823,14 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversubplots
+            Determines expansion of hover effects to other subplots
+            If "single" just the axis pair of the primary point is
+            included without overlaying subplots. If "overlaying"
+            all subplots using the main axis and occupying the same
+            space are included. If "axis", also include stacked
+            subplots using the same axis when `hovermode` is set to
+            "x", *x unified*, "y" or *y unified*.
         iciclecolorway
             Sets the default icicle slice colors. Defaults to the
             main `colorway` used for trace colors. If you specify a
@@ -5296,6 +5845,9 @@ class Layout(_BaseLayoutType):
             property values to use for elements of layout.images
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
+            dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
@@ -5317,6 +5869,12 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on Chart Studio Cloud for
             `meta`.
+        minreducedheight
+            Minimum height of the plot with margin.automargin
+            applied (in px)
+        minreducedwidth
+            Minimum width of the plot with margin.automargin
+            applied (in px)
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -5340,6 +5898,17 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
+        scattergap
+            Sets the gap (in plot fraction) between scatter points
+            of adjacent location coordinates. Defaults to `bargap`.
+        scattermode
+            Determines how scatter points at the same location
+            coordinate are displayed on the graph. With "group",
+            the scatter points are plotted next to one another
+            centered around the shared location. With "overlay",
+            the scatter points are plotted over one another, you
+            might need to reduce "opacity" to see multiple scatter
+            points.
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -5431,10 +6000,6 @@ class Layout(_BaseLayoutType):
         title
             :class:`plotly.graph_objects.layout.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.title.font instead. Sets
-            the title font. Note that the title's font used to be
-            customized by the now deprecated `titlefont` attribute.
         transition
             Sets transition options used during Plotly.react
             updates.
@@ -5501,8 +6066,8 @@ class Layout(_BaseLayoutType):
             displayed on the graph. With "group", the bars are
             plotted next to one another centered around the shared
             location. With "overlay", the bars are plotted over one
-            another, you might need to an "opacity" to see multiple
-            bars.
+            another, you might need to reduce "opacity" to see
+            multiple bars.
         width
             Sets the plot's width (in px).
         xaxis
@@ -5513,8 +6078,6 @@ class Layout(_BaseLayoutType):
             dict with compatible properties
         """
 
-    _mapped_properties = {"titlefont": ("title", "font")}
-
     def __init__(
         self,
         arg=None,
@@ -5524,6 +6087,7 @@ class Layout(_BaseLayoutType):
         annotationdefaults=None,
         autosize=None,
         autotypenumbers=None,
+        barcornerradius=None,
         bargap=None,
         bargroupgap=None,
         barmode=None,
@@ -5559,14 +6123,18 @@ class Layout(_BaseLayoutType):
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        hoversubplots=None,
         iciclecolorway=None,
         images=None,
         imagedefaults=None,
         legend=None,
+        map=None,
         mapbox=None,
         margin=None,
         meta=None,
         metasrc=None,
+        minreducedheight=None,
+        minreducedwidth=None,
         modebar=None,
         newselection=None,
         newshape=None,
@@ -5574,6 +6142,8 @@ class Layout(_BaseLayoutType):
         piecolorway=None,
         plot_bgcolor=None,
         polar=None,
+        scattergap=None,
+        scattermode=None,
         scene=None,
         selectdirection=None,
         selectionrevision=None,
@@ -5591,7 +6161,6 @@ class Layout(_BaseLayoutType):
         template=None,
         ternary=None,
         title=None,
-        titlefont=None,
         transition=None,
         treemapcolorway=None,
         uirevision=None,
@@ -5645,6 +6214,10 @@ class Layout(_BaseLayoutType):
             automatic axis `type` detection. This is the default
             value; however it could be overridden for individual
             axes.
+        barcornerradius
+            Sets the rounding of bar corners. May be an integer
+            number of pixels, or a percentage of bar width (as a
+            string ending in %).
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5659,7 +6232,7 @@ class Layout(_BaseLayoutType):
             below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
             the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
+            plotted over one another, you might need to reduce
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
@@ -5798,8 +6371,8 @@ class Layout(_BaseLayoutType):
             stacked on top of one another With "group", the bars
             are plotted next to one another centered around the
             shared location. With "overlay", the bars are plotted
-            over one another, you might need to an "opacity" to see
-            multiple bars.
+            over one another, you might need to reduce "opacity" to
+            see multiple bars.
         geo
             :class:`plotly.graph_objects.layout.Geo` instance or
             dict with compatible properties
@@ -5850,6 +6423,14 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversubplots
+            Determines expansion of hover effects to other subplots
+            If "single" just the axis pair of the primary point is
+            included without overlaying subplots. If "overlaying"
+            all subplots using the main axis and occupying the same
+            space are included. If "axis", also include stacked
+            subplots using the same axis when `hovermode` is set to
+            "x", *x unified*, "y" or *y unified*.
         iciclecolorway
             Sets the default icicle slice colors. Defaults to the
             main `colorway` used for trace colors. If you specify a
@@ -5864,6 +6445,9 @@ class Layout(_BaseLayoutType):
             property values to use for elements of layout.images
         legend
             :class:`plotly.graph_objects.layout.Legend` instance or
+            dict with compatible properties
+        map
+            :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
         mapbox
             :class:`plotly.graph_objects.layout.Mapbox` instance or
@@ -5885,6 +6469,12 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on Chart Studio Cloud for
             `meta`.
+        minreducedheight
+            Minimum height of the plot with margin.automargin
+            applied (in px)
+        minreducedwidth
+            Minimum width of the plot with margin.automargin
+            applied (in px)
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
@@ -5908,6 +6498,17 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
+        scattergap
+            Sets the gap (in plot fraction) between scatter points
+            of adjacent location coordinates. Defaults to `bargap`.
+        scattermode
+            Determines how scatter points at the same location
+            coordinate are displayed on the graph. With "group",
+            the scatter points are plotted next to one another
+            centered around the shared location. With "overlay",
+            the scatter points are plotted over one another, you
+            might need to reduce "opacity" to see multiple scatter
+            points.
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -5999,10 +6600,6 @@ class Layout(_BaseLayoutType):
         title
             :class:`plotly.graph_objects.layout.Title` instance or
             dict with compatible properties
-        titlefont
-            Deprecated: Please use layout.title.font instead. Sets
-            the title font. Note that the title's font used to be
-            customized by the now deprecated `titlefont` attribute.
         transition
             Sets transition options used during Plotly.react
             updates.
@@ -6069,8 +6666,8 @@ class Layout(_BaseLayoutType):
             displayed on the graph. With "group", the bars are
             plotted next to one another centered around the shared
             location. With "overlay", the bars are plotted over one
-            another, you might need to an "opacity" to see multiple
-            bars.
+            another, you might need to reduce "opacity" to see
+            multiple bars.
         width
             Sets the plot's width (in px).
         xaxis
@@ -6099,6 +6696,7 @@ class Layout(_BaseLayoutType):
             "annotations",
             "autosize",
             "autotypenumbers",
+            "barcornerradius",
             "bargap",
             "bargroupgap",
             "barmode",
@@ -6134,14 +6732,18 @@ class Layout(_BaseLayoutType):
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "hoversubplots",
             "iciclecolorway",
             "imagedefaults",
             "images",
             "legend",
+            "map",
             "mapbox",
             "margin",
             "meta",
             "metasrc",
+            "minreducedheight",
+            "minreducedwidth",
             "modebar",
             "newselection",
             "newshape",
@@ -6149,6 +6751,8 @@ class Layout(_BaseLayoutType):
             "piecolorway",
             "plot_bgcolor",
             "polar",
+            "scattergap",
+            "scattermode",
             "scene",
             "selectdirection",
             "selectiondefaults",
@@ -6166,7 +6770,6 @@ class Layout(_BaseLayoutType):
             "template",
             "ternary",
             "title",
-            "titlefont",
             "transition",
             "treemapcolorway",
             "uirevision",
@@ -6231,6 +6834,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = autotypenumbers if autotypenumbers is not None else _v
         if _v is not None:
             self["autotypenumbers"] = _v
+        _v = arg.pop("barcornerradius", None)
+        _v = barcornerradius if barcornerradius is not None else _v
+        if _v is not None:
+            self["barcornerradius"] = _v
         _v = arg.pop("bargap", None)
         _v = bargap if bargap is not None else _v
         if _v is not None:
@@ -6371,6 +6978,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = hovermode if hovermode is not None else _v
         if _v is not None:
             self["hovermode"] = _v
+        _v = arg.pop("hoversubplots", None)
+        _v = hoversubplots if hoversubplots is not None else _v
+        if _v is not None:
+            self["hoversubplots"] = _v
         _v = arg.pop("iciclecolorway", None)
         _v = iciclecolorway if iciclecolorway is not None else _v
         if _v is not None:
@@ -6387,6 +6998,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = legend if legend is not None else _v
         if _v is not None:
             self["legend"] = _v
+        _v = arg.pop("map", None)
+        _v = map if map is not None else _v
+        if _v is not None:
+            self["map"] = _v
         _v = arg.pop("mapbox", None)
         _v = mapbox if mapbox is not None else _v
         if _v is not None:
@@ -6403,6 +7018,14 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = metasrc if metasrc is not None else _v
         if _v is not None:
             self["metasrc"] = _v
+        _v = arg.pop("minreducedheight", None)
+        _v = minreducedheight if minreducedheight is not None else _v
+        if _v is not None:
+            self["minreducedheight"] = _v
+        _v = arg.pop("minreducedwidth", None)
+        _v = minreducedwidth if minreducedwidth is not None else _v
+        if _v is not None:
+            self["minreducedwidth"] = _v
         _v = arg.pop("modebar", None)
         _v = modebar if modebar is not None else _v
         if _v is not None:
@@ -6431,6 +7054,14 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = polar if polar is not None else _v
         if _v is not None:
             self["polar"] = _v
+        _v = arg.pop("scattergap", None)
+        _v = scattergap if scattergap is not None else _v
+        if _v is not None:
+            self["scattergap"] = _v
+        _v = arg.pop("scattermode", None)
+        _v = scattermode if scattermode is not None else _v
+        if _v is not None:
+            self["scattermode"] = _v
         _v = arg.pop("scene", None)
         _v = scene if scene is not None else _v
         if _v is not None:
@@ -6499,10 +7130,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = title if title is not None else _v
         if _v is not None:
             self["title"] = _v
-        _v = arg.pop("titlefont", None)
-        _v = titlefont if titlefont is not None else _v
-        if _v is not None:
-            self["titlefont"] = _v
         _v = arg.pop("transition", None)
         _v = transition if transition is not None else _v
         if _v is not None:

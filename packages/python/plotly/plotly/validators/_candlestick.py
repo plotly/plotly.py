@@ -63,10 +63,17 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.candlestick.Increa
                 sing` instance or dict with compatible
                 properties
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.candlestick.Legend
                 grouptitle` instance or dict with compatible
@@ -74,13 +81,19 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             line
                 :class:`plotly.graph_objects.candlestick.Line`
                 instance or dict with compatible properties
@@ -107,7 +120,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
@@ -191,9 +204,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `x`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -234,9 +247,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the hover text formatting rulefor `y`
                 using d3 formatting mini-languages which are
                 very similar to those in Python. For numbers,
-                see: https://github.com/d3/d3-format/tree/v1.4.
-                5#d3-format. And for dates see:
-                https://github.com/d3/d3-time-
+                see: https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format. And for dates
+                see: https://github.com/d3/d3-time-
                 format/tree/v2.2.3#locale_format. We add two
                 items to d3's date formatter: "%h" for half of
                 the year as a decimal number as well as "%{n}f"
@@ -245,6 +258,11 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 *09~15~23.46*By default the values are
                 formatted using `yaxis.hoverformat`.
+            zorder
+                Sets the layer on which this trace is
+                displayed, relative to other SVG traces on the
+                same subplot. SVG traces with higher `zorder`
+                appear in front of those with lower `zorder`.
 """,
             ),
             **kwargs,

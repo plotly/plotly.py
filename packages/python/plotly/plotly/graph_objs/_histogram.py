@@ -33,9 +33,11 @@ class Histogram(_BaseTraceType):
         "idssrc",
         "insidetextanchor",
         "insidetextfont",
+        "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendwidth",
         "marker",
         "meta",
         "metasrc",
@@ -73,6 +75,7 @@ class Histogram(_BaseTraceType):
         "ycalendar",
         "yhoverformat",
         "ysrc",
+        "zorder",
     }
 
     # alignmentgroup
@@ -339,7 +342,7 @@ class Histogram(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `array`.
                 color
-                    Sets the stoke color of the error bars.
+                    Sets the stroke color of the error bars.
                 copy_ystyle
 
                 symmetric
@@ -420,7 +423,7 @@ class Histogram(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `array`.
                 color
-                    Sets the stoke color of the error bars.
+                    Sets the stroke color of the error bars.
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -660,11 +663,11 @@ class Histogram(_BaseTraceType):
         are the ones emitted as event data described at this link
         https://plotly.com/javascript/plotlyjs-events/#event-data.
         Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. variable
-        `binNumber` Anything contained in tag `<extra>` is displayed in
-        the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        (the ones that are `arrayOk: true`) are available. Finally, the
+        template string has access to variable `binNumber` Anything
+        contained in tag `<extra>` is displayed in the secondary box,
+        for example "<extra>{fullData.name}</extra>". To hide the
+        secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -839,11 +842,34 @@ class Histogram(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -855,14 +881,39 @@ class Histogram(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
+    # legend
+    # ------
+    @property
+    def legend(self):
+        """
+        Sets the reference to a legend to show this trace in.
+        References to these legends are "legend", "legend2", "legend3",
+        etc. Settings for these legends are set in the layout, under
+        `layout.legend`, `layout.legend2`, etc.
+
+        The 'legend' property is an identifier of a particular
+        subplot, of type 'legend', that may be specified as the string 'legend'
+        optionally followed by an integer >= 1
+        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self["legend"]
+
+    @legend.setter
+    def legend(self, val):
+        self["legend"] = val
+
     # legendgroup
     # -----------
     @property
     def legendgroup(self):
         """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
+        Sets the legend group for this trace. Traces and shapes part of
+        the same legend group hide/show at the same time when toggling
+        legend items.
 
         The 'legendgroup' property is a string and must be specified as:
           - A string
@@ -913,10 +964,12 @@ class Histogram(_BaseTraceType):
         """
         Sets the legend rank for this trace. Items and groups with
         smaller ranks are presented on top/left side while with
-        `*reversed* `legend.traceorder` they are on bottom/right side.
+        "reversed" `legend.traceorder` they are on bottom/right side.
         The default legendrank is 1000, so that you can use ranks less
         than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items.
+        ranks greater than 1000 to go after all unranked items. When
+        having unranked or equal rank items shapes would be displayed
+        after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
@@ -930,6 +983,27 @@ class Histogram(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    # legendwidth
+    # -----------
+    @property
+    def legendwidth(self):
+        """
+        Sets the width (in px or fraction) of the legend for this
+        trace.
+
+        The 'legendwidth' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["legendwidth"]
+
+    @legendwidth.setter
+    def legendwidth(self, val):
+        self["legendwidth"] = val
 
     # marker
     # ------
@@ -1020,6 +1094,13 @@ class Histogram(_BaseTraceType):
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for `color`.
+                cornerradius
+                    Sets the rounding of corners. May be an integer
+                    number of pixels, or a percentage of bar width
+                    (as a string ending in %). Defaults to
+                    `layout.barcornerradius`. In stack or relative
+                    barmode, the first trace to set cornerradius is
+                    used for the whole stack.
                 line
                     :class:`plotly.graph_objects.histogram.marker.L
                     ine` instance or dict with compatible
@@ -1106,7 +1187,7 @@ class Histogram(_BaseTraceType):
     @property
     def name(self):
         """
-        Sets the trace name. The trace name appear as the legend item
+        Sets the trace name. The trace name appears as the legend item
         and on hover.
 
         The 'name' property is a string and must be specified as:
@@ -1266,11 +1347,34 @@ class Histogram(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1428,8 +1532,8 @@ class Histogram(_BaseTraceType):
         the maximum size in bars.
 
         The 'textangle' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
+        specified as a number between -180 and 180.
+        Numeric values outside this range are converted to the equivalent value
         (e.g. 270 is converted to -90).
 
         Returns
@@ -1472,11 +1576,34 @@ class Histogram(_BaseTraceType):
                     generates images on a server, where only a
                     select number of fonts are installed and
                     supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Courier New", "Droid Sans", "Droid Serif",
                     "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                lineposition
+                    Sets the kind of decoration line(s) with text,
+                    such as an "under", "over" or "through" as well
+                    as combinations e.g. "under+over", etc.
+                shadow
+                    Sets the shape and color of the shadow behind
+                    text. "auto" places minimal shadow and applies
+                    contrast text font color. See
+                    https://developer.mozilla.org/en-
+                    US/docs/Web/CSS/text-shadow for additional
+                    options.
                 size
+
+                style
+                    Sets whether a font should be styled with a
+                    normal or italic face from its family.
+                textcase
+                    Sets capitalization of text. It can be used to
+                    make text appear in all-uppercase or all-
+                    lowercase, or with each word capitalized.
+                variant
+                    Sets the variant of the font.
+                weight
+                    Sets the weight (or boldness) of the font.
 
         Returns
         -------
@@ -1553,7 +1680,8 @@ class Histogram(_BaseTraceType):
         format/tree/v2.2.3#locale_format for details on the date
         formatting syntax. Every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        variables `label` and `value`.
+        Finally, the template string has access to variables `label`
+        and `value`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -2055,6 +2183,28 @@ class Histogram(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
+    # zorder
+    # ------
+    @property
+    def zorder(self):
+        """
+        Sets the layer on which this trace is displayed, relative to
+        other SVG traces on the same subplot. SVG traces with higher
+        `zorder` appear in front of those with lower `zorder`.
+
+        The 'zorder' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self["zorder"]
+
+    @zorder.setter
+    def zorder(self, val):
+        self["zorder"] = val
+
     # type
     # ----
     @property
@@ -2177,8 +2327,9 @@ class Histogram(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -2202,21 +2353,33 @@ class Histogram(_BaseTraceType):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -2237,7 +2400,7 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         nbinsx
             Specifies the maximum number of desired bins. This
@@ -2320,7 +2483,8 @@ class Histogram(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2407,6 +2571,11 @@ class Histogram(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
         """
 
     def __init__(
@@ -2436,9 +2605,11 @@ class Histogram(_BaseTraceType):
         idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
+        legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendwidth=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -2475,6 +2646,7 @@ class Histogram(_BaseTraceType):
         ycalendar=None,
         yhoverformat=None,
         ysrc=None,
+        zorder=None,
         **kwargs,
     ):
         """
@@ -2602,8 +2774,9 @@ class Histogram(_BaseTraceType):
             https://plotly.com/javascript/plotlyjs-events/#event-
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variable `binNumber` Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
+            are available. Finally, the template string has access
+            to variable `binNumber` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
             example "<extra>{fullData.name}</extra>". To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
@@ -2627,21 +2800,33 @@ class Histogram(_BaseTraceType):
             points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
         legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
         legendgrouptitle
             :class:`plotly.graph_objects.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
             with smaller ranks are presented on top/left side while
-            with `*reversed* `legend.traceorder` they are on
+            with "reversed" `legend.traceorder` they are on
             bottom/right side. The default legendrank is 1000, so
             that you can use ranks less than 1000 to place certain
             items before all unranked items, and ranks greater than
-            1000 to go after all unranked items.
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
         marker
             :class:`plotly.graph_objects.histogram.Marker` instance
             or dict with compatible properties
@@ -2662,7 +2847,7 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `meta`.
         name
-            Sets the trace name. The trace name appear as the
+            Sets the trace name. The trace name appears as the
             legend item and on hover.
         nbinsx
             Specifies the maximum number of desired bins. This
@@ -2745,7 +2930,8 @@ class Histogram(_BaseTraceType):
             format/tree/v2.2.3#locale_format for details on the
             date formatting syntax. Every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available. variables `label` and `value`.
+            are available. Finally, the template string has access
+            to variables `label` and `value`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2832,6 +3018,11 @@ class Histogram(_BaseTraceType):
         ysrc
             Sets the source reference on Chart Studio Cloud for
             `y`.
+        zorder
+            Sets the layer on which this trace is displayed,
+            relative to other SVG traces on the same subplot. SVG
+            traces with higher `zorder` appear in front of those
+            with lower `zorder`.
 
         Returns
         -------
@@ -2962,6 +3153,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = insidetextfont if insidetextfont is not None else _v
         if _v is not None:
             self["insidetextfont"] = _v
+        _v = arg.pop("legend", None)
+        _v = legend if legend is not None else _v
+        if _v is not None:
+            self["legend"] = _v
         _v = arg.pop("legendgroup", None)
         _v = legendgroup if legendgroup is not None else _v
         if _v is not None:
@@ -2974,6 +3169,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = legendrank if legendrank is not None else _v
         if _v is not None:
             self["legendrank"] = _v
+        _v = arg.pop("legendwidth", None)
+        _v = legendwidth if legendwidth is not None else _v
+        if _v is not None:
+            self["legendwidth"] = _v
         _v = arg.pop("marker", None)
         _v = marker if marker is not None else _v
         if _v is not None:
@@ -3118,6 +3317,10 @@ an instance of :class:`plotly.graph_objs.Histogram`"""
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
             self["ysrc"] = _v
+        _v = arg.pop("zorder", None)
+        _v = zorder if zorder is not None else _v
+        if _v is not None:
+            self["zorder"] = _v
 
         # Read-only literals
         # ------------------

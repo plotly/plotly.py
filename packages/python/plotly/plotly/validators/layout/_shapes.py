@@ -24,9 +24,44 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 constitute the interior. For more info please
                 visit https://developer.mozilla.org/en-
                 US/docs/Web/SVG/Attribute/fill-rule
+            label
+                :class:`plotly.graph_objects.layout.shape.Label
+                ` instance or dict with compatible properties
             layer
-                Specifies whether shapes are drawn below or
-                above traces.
+                Specifies whether shapes are drawn below
+                gridlines ("below"), between gridlines and
+                traces ("between") or above traces ("above").
+            legend
+                Sets the reference to a legend to show this
+                shape in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
+            legendgroup
+                Sets the legend group for this shape. Traces
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
+            legendgrouptitle
+                :class:`plotly.graph_objects.layout.shape.Legen
+                dgrouptitle` instance or dict with compatible
+                properties
+            legendrank
+                Sets the legend rank for this shape. Items and
+                groups with smaller ranks are presented on
+                top/left side while with "reversed"
+                `legend.traceorder` they are on bottom/right
+                side. The default legendrank is 1000, so that
+                you can use ranks less than 1000 to place
+                certain items before all unranked items, and
+                ranks greater than 1000 to go after all
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this shape.
             line
                 :class:`plotly.graph_objects.layout.shape.Line`
                 instance or dict with compatible properties
@@ -68,6 +103,9 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 strings, we can't use either to separate date
                 from time parts. Therefore we'll use underscore
                 for this purpose: 2015-02-21_13:45:56.789
+            showlegend
+                Determines whether or not this shape is shown
+                in the legend.
             templateitemname
                 Used to refer to a named item in this array in
                 the template. Named items from the template
@@ -95,13 +133,27 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 sizing mode.
             visible
                 Determines whether or not this shape is
-                visible.
+                visible. If "legendonly", the shape is not
+                drawn, but can appear as a legend item
+                (provided that the legend itself is visible).
             x0
                 Sets the shape's starting x position. See
                 `type` and `xsizemode` for more info.
+            x0shift
+                Shifts `x0` away from the center of the
+                category when `xref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             x1
                 Sets the shape's end x position. See `type` and
                 `xsizemode` for more info.
+            x1shift
+                Shifts `x1` away from the center of the
+                category when `xref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             xanchor
                 Only relevant in conjunction with `xsizemode`
                 set to "pixel". Specifies the anchor point on
@@ -141,9 +193,21 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             y0
                 Sets the shape's starting y position. See
                 `type` and `ysizemode` for more info.
+            y0shift
+                Shifts `y0` away from the center of the
+                category when `yref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             y1
                 Sets the shape's end y position. See `type` and
                 `ysizemode` for more info.
+            y1shift
+                Shifts `y1` away from the center of the
+                category when `yref` is a "category" or
+                "multicategory" axis. -0.5 corresponds to the
+                start of the category and 0.5 corresponds to
+                the end of the category.
             yanchor
                 Only relevant in conjunction with `ysizemode`
                 set to "pixel". Specifies the anchor point on

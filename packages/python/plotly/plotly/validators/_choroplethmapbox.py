@@ -100,8 +100,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -114,6 +114,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                Finally, the template string has access to
                 variable `properties` Anything contained in tag
                 `<extra>` is displayed in the secondary box,
                 for example "<extra>{fullData.name}</extra>".
@@ -135,10 +136,17 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on Chart Studio Cloud
                 for `ids`.
+            legend
+                Sets the reference to a legend to show this
+                trace in. References to these legends are
+                "legend", "legend2", "legend3", etc. Settings
+                for these legends are set in the layout, under
+                `layout.legend`, `layout.legend2`, etc.
             legendgroup
                 Sets the legend group for this trace. Traces
-                part of the same legend group hide/show at the
-                same time when toggling legend items.
+                and shapes part of the same legend group
+                hide/show at the same time when toggling legend
+                items.
             legendgrouptitle
                 :class:`plotly.graph_objects.choroplethmapbox.L
                 egendgrouptitle` instance or dict with
@@ -146,13 +154,19 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             legendrank
                 Sets the legend rank for this trace. Items and
                 groups with smaller ranks are presented on
-                top/left side while with `*reversed*
+                top/left side while with "reversed"
                 `legend.traceorder` they are on bottom/right
                 side. The default legendrank is 1000, so that
                 you can use ranks less than 1000 to place
                 certain items before all unranked items, and
                 ranks greater than 1000 to go after all
-                unranked items.
+                unranked items. When having unranked or equal
+                rank items shapes would be displayed after
+                traces i.e. according to their order in data
+                and layout.
+            legendwidth
+                Sets the width (in px or fraction) of the
+                legend for this trace.
             locations
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.
@@ -181,7 +195,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `meta`.
             name
-                Sets the trace name. The trace name appear as
+                Sets the trace name. The trace name appears as
                 the legend item and on hover.
             reversescale
                 Reverses the color mapping if true. If true,
@@ -212,11 +226,17 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tream` instance or dict with compatible
                 properties
             subplot
-                Sets a reference between this trace's data
-                coordinates and a mapbox subplot. If "mapbox"
-                (the default value), the data refer to
-                `layout.mapbox`. If "mapbox2", the data refer
-                to `layout.mapbox2`, and so on.
+                mapbox subplots and traces are deprecated!
+                Please consider switching to `map` subplots and
+                traces. Learn more at:
+                https://plotly.com/python/maplibre-migration/
+                as well as
+                https://plotly.com/javascript/maplibre-
+                migration/ Sets a reference between this
+                trace's data coordinates and a mapbox subplot.
+                If "mapbox" (the default value), the data refer
+                to `layout.mapbox`. If "mapbox2", the data
+                refer to `layout.mapbox2`, and so on.
             text
                 Sets the text elements associated with each
                 location.

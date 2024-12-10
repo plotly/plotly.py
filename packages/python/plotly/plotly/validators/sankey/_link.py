@@ -10,6 +10,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            arrowlen
+                Sets the length (in px) of the links arrow, if
+                0 no arrow will be drawn.
             color
                 Sets the `link` color. It can be a single
                 value, or an array for specifying color for
@@ -33,6 +36,15 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on Chart Studio Cloud
                 for `customdata`.
+            hovercolor
+                Sets the `link` hover color. It can be a single
+                value, or an array for specifying hover colors
+                for each `link`. If `link.hovercolor` is
+                omitted, then by default, links will become
+                slightly more opaque when hovered over.
+            hovercolorsrc
+                Sets the source reference on Chart Studio Cloud
+                for `hovercolor`.
             hoverinfo
                 Determines which trace information appear when
                 hovering links. If `none` or `skip` are set, no
@@ -57,8 +69,8 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only when this field is shown. Numbers are
                 formatted using d3-format's syntax
                 %{variable:d3-format}, for example "Price:
-                %{y:$.2f}". https://github.com/d3/d3-format/tre
-                e/v1.4.5#d3-format for details on the
+                %{y:$.2f}". https://github.com/d3/d3-
+                format/tree/v1.4.5#d3-format for details on the
                 formatting syntax. Dates are formatted using
                 d3-time-format's syntax %{variable|d3-time-
                 format}, for example "Day: %{2019-01-01|%A}".
@@ -71,7 +83,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                variables `value` and `label`. Anything
+                Variables `source` and `target` are node
+                objects.Finally, the template string has access
+                to variables `value` and `label`. Anything
                 contained in tag `<extra>` is displayed in the
                 secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the

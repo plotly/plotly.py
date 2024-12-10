@@ -18,7 +18,7 @@ docs = dict(
     data_frame=[
         "DataFrame or array-like or dict",
         "This argument needs to be passed for column names (and not keyword names) to be used.",
-        "Array-like and dict are tranformed internally to a pandas DataFrame.",
+        "Array-like and dict are transformed internally to a pandas DataFrame.",
         "Optional: if missing, a DataFrame gets constructed under the hood using the other arguments.",
     ],
     x=[
@@ -199,8 +199,8 @@ docs = dict(
         "Values from this column or array_like appear in bold in the hover tooltip.",
     ],
     hover_data=[
-        "list of str or int, or Series or array-like, or dict",
-        "Either a list of names of columns in `data_frame`, or pandas Series,",
+        "str, or list of str or int, or Series or array-like, or dict",
+        "Either a name or list of names of columns in `data_frame`, or pandas Series,",
         "or array_like objects",
         "or a dict with column names as keys, with values True (for default formatting)",
         "False (in order to remove this column from hover information),",
@@ -211,8 +211,8 @@ docs = dict(
         "Values from these columns appear as extra data in the hover tooltip.",
     ],
     custom_data=[
-        colref_list_type,
-        colref_list_desc,
+        "str, or list of str or int, or Series or array-like",
+        "Either name or list of names of columns in `data_frame`, or pandas Series, or array_like objects",
         "Values from these columns are extra data, to be used in widgets or Dash callbacks for example. This data is not user-visible but is included in events emitted by the figure (lasso selection etc.)",
     ],
     text=[
@@ -248,7 +248,7 @@ docs = dict(
     ],
     facet_row_spacing=[
         "float between 0 and 1",
-        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.07 when facet_col_wrap is used.",
     ],
     facet_col_spacing=[
         "float between 0 and 1",
@@ -371,6 +371,7 @@ docs = dict(
         "If provided, overrides auto-scaling on the angular axis in polar coordinates.",
     ],
     title=["str", "The figure title."],
+    subtitle=["str", "The figure subtitle."],
     template=[
         "str or dict or plotly.graph_objects.layout.Template instance",
         "The figure template name (must be a key in plotly.io.templates) or definition.",
@@ -433,7 +434,7 @@ docs = dict(
         "str",
         "One of `'auto'`, `'svg'` or `'webgl'`, default `'auto'`",
         "Controls the browser API used to draw marks.",
-        "`'svg`' is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
+        "`'svg'` is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
         "`'webgl'` is likely necessary for acceptable performance above 1000 points but rasterizes part of the output. ",
         "`'auto'` uses heuristics to choose the mode.",
     ],
@@ -448,7 +449,7 @@ docs = dict(
     ],
     histfunc=[
         "str (default `'count'` if no arguments are provided, else `'sum'`)",
-        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`."
+        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`.",
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
     ],
     histnorm=[
@@ -502,7 +503,7 @@ docs = dict(
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
         "str, one of `'h'` for horizontal or `'v'` for vertical. ",
-        "(default `'v'` if `x` and `y` are provided and both continous or both categorical, ",
+        "(default `'v'` if `x` and `y` are provided and both continuous or both categorical, ",
         "otherwise `'v'`(`'h'`) if `x`(`y`) is categorical and `y`(`x`) is continuous, ",
         "otherwise `'v'`(`'h'`) if only `x`(`y`) is provided) ",
     ],
@@ -510,7 +511,10 @@ docs = dict(
         "boolean (default `False`)",
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
-    line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
+    line_shape=[
+        "str (default `'linear'`)",
+        "One of `'linear'`, `'spline'`, `'hv'`, `'vh'`, `'hvh'`, or `'vhv'`",
+    ],
     fitbounds=["str (default `False`).", "One of `False`, `locations` or `geojson`."],
     basemap_visible=["bool", "Force the basemap visibility."],
     scope=[
@@ -528,11 +532,17 @@ docs = dict(
         "Dict keys are `'lat'` and `'lon'`",
         "Sets the center point of the map.",
     ],
+    map_style=[
+        "str (default `'basic'`)",
+        "Identifier of base map style.",
+        "Allowed values are `'basic'`, `'carto-darkmatter'`, `'carto-darkmatter-nolabels'`, `'carto-positron'`, `'carto-positron-nolabels'`, `'carto-voyager'`, `'carto-voyager-nolabels'`, `'dark'`, `'light'`, `'open-street-map'`, `'outdoors'`, `'satellite'`, `'satellite-streets'`, `'streets'`, `'white-bg'`.",
+    ],
     mapbox_style=[
         "str (default `'basic'`, needs Mapbox API token)",
-        "Identifier of base map style, some of which require a Mapbox API token to be set using `plotly.express.set_mapbox_access_token()`.",
-        "Allowed values which do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
-        "Allowed values which do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Identifier of base map style, some of which require a Mapbox or Stadia Maps API token to be set using `plotly.express.set_mapbox_access_token()`.",
+        "Allowed values which do not require a token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`.",
+        "Allowed values which require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+        "Allowed values which require a Stadia Maps API token are `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
     ],
     points=[
         "str or boolean (default `'outliers'`)",

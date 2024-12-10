@@ -33,7 +33,7 @@ Plotly's Python library is free and open source! [Get started](https://plot.ly/p
 
 
 We define our graph as an `igraph.Graph` object. [Python `igraph`](http://igraph.org/python/)
-is a library for high-performance graph generation  and analysis. Install the Python library with `sudo pip install python-igraph`.
+is a library for high-performance graph generation  and analysis. Install the Python library with `sudo pip install igraph`.
 
 ```python
 import igraph as ig

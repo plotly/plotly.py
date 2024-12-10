@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.4
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.11
+    version: 3.8.8
   plotly:
     description: How to make Heatmaps in Python with Plotly.
     display_as: scientific
@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/heatmap.jpg
 ---
 
-The term "heatmap" usually refers to a cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/mapbox-density-heatmaps/).
+The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/tile-density-heatmaps/).
 
 Plotly supports two different types of colored-tile heatmaps:
 
@@ -48,7 +48,7 @@ Plotly supports two different types of colored-tile heatmaps:
 
 
 <!-- #region -->
-The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as `pandas.DataFrame` objects.
+The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](/python/px-arguments#supported-dataframes).
 
 
 > For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](/python/imshow).
@@ -105,6 +105,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'heatmaps', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Controlling Aspect Ratio
 

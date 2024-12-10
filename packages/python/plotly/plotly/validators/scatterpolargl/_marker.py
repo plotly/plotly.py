@@ -10,6 +10,11 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            angle
+                Sets the marker angle in respect to `angleref`.
+            anglesrc
+                Sets the source reference on Chart Studio Cloud
+                for `angle`.
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
