@@ -489,7 +489,7 @@ for n, figname in enumerate(fig_dict.keys()):
     text_dict[figname]=f"Here is some custom text about the {figname} figure"  #This is a succinct way to populate text_dict; in practice you'd probably populate it manually elsewhere
     data_for_jinja["dropdown_entries"]+=f"<option value='{figname}'>{fig_dict[figname].layout.title.text}</option>"
     #YOU MAY NEED TO UPDATE THE LINK TO THE LATEST PLOTLY.JS
-    fig_html = fig_dict[figname].to_html(full_html=False, config=dict(responsive=False, scrollZoom=False, doubleClick=False), include_plotlyjs = "https://cdn.plot.ly/plotly-2.35.2.min.js")
+    fig_html = fig_dict[figname].to_html(full_html=False, config=dict(responsive=False, scrollZoom=False, doubleClick=False), include_plotlyjs = "cdn")
     initially_hide_divs_other_than_the_first = "style=""display:none;"""*(n>0)   
     data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {initially_hide_divs_other_than_the_first}>{fig_html}{text_dict[figname]}</div>'
 
