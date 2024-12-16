@@ -782,6 +782,47 @@ fig.add_annotation(
 
 fig.show()
 ```
+### Specifying Source Lines or Figure Notes on the Bottom of a Figure
+
+Container coordinates are an easy and robust way to put text -- such as a source line or figure note -- at the bottom of a figure.  Only the title command supports container coordinates.  If you have access to the HTML of the webpage in which you are embedding the graphic, either the source line, title, or both could go there instead.
+
+```
+import plotly.express as px
+df_iris = px.data.iris()
+fig = px.scatter(df_iris, x="sepal_width", y="sepal_length", color="species",
+                 size='petal_length', hover_data=['petal_width'])
+
+#Use the title for the source line
+fig.update_layout(
+        title=dict(text="Note: a near zero container coordinate is the most robust way to position this on the bottom.  Only the 'title' supports container coordinates.",
+                yref="container",
+                # A small positive y coordinate avoids cutting off the descending strokes of letters like y, p, and q.
+                y=0.005,
+                # Paper coordinates let us align this at either edge of the plot region 
+                # (use x=0, xanchor="left" for the lower left corner; that yields a slightly busier result since it's 
+                # not obvious whether we should align with the lower left corner of the plot area or the left edge of the axis labeling )
+                xref="paper",
+                xanchor="right",
+                x=1, 
+                font=dict(size=12))
+)
+
+#Repurpose an annotation to insert a title
+fig.add_annotation(
+    xref="paper",
+    yref="paper",
+    xanchor="center",
+    x=0.5, 
+    yanchor="bottom",
+    y=1.025,  # y = 1 is the top of the plot area
+            text="We can use an annotation to provide the title",
+            showarrow=False,
+            font=dict(size=18)
+            )
+
+fig.show()
+```
+
 
 ### Customize Displayed Text with a Text Template
 
