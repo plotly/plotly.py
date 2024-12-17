@@ -39,35 +39,38 @@ def create_table(
     See also the plotly.graph_objects trace
     :class:`plotly.graph_objects.Table`
 
-    :param (pandas.Dataframe | list[list]) text: data for table.
-    :param (str|list[list]) colorscale: Colorscale for table where the
-        color at value 0 is the header color, .5 is the first table color
-        and 1 is the second table color. (Set .5 and 1 to avoid the striped
-        table effect). Default=[[0, '#66b2ff'], [.5, '#d9d9d9'],
+    Parameters
+    ----------
+    text : pandas.DataFrame or list of list
+        Data for table.
+    colorscale : str or list of list
+        Colorscale for table where the color at value 0 is the header color, .5 is the first table color
+        and 1 is the second table color. (Set .5 and 1 to avoid the striped table effect). Default=[[0, '#66b2ff'], [.5, '#d9d9d9'],
         [1, '#ffffff']]
-    :param (list) font_colors: Color for fonts in table. Can be a single
-        color, three colors, or a color for each row in the table.
+    font_colors : list
+        Color for fonts in table. Can be a single color, three colors, or a color for each row in the table.
         Default=['#000000'] (black text for the entire table)
-    :param (int) height_constant: Constant multiplied by # of rows to
-        create table height. Default=30.
-    :param (bool) index: Create (header-colored) index column index from
-        Pandas dataframe or list[0] for each list in text. Default=False.
-    :param (string) index_title: Title for index column. Default=''.
-    :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
-        These kwargs describe other attributes about the annotated Heatmap
-        trace such as the colorscale. For more information on valid kwargs
-        call help(plotly.graph_objs.Heatmap)
+    height_constant : int
+        Constant multiplied by the number of rows to create table height. Default=30.
+    index : bool
+        Create (header-colored) index column index from Pandas dataframe or list[0] for each list in text. Default=False.
+    index_title : str
+        Title for index column. Default=''.
+    **kwargs
+        Additional keyword arguments passed through to `plotly.graph_objs.Heatmap`.
+        These kwargs describe other attributes about the annotated Heatmap trace such as the colorscale.
+        For more information on valid kwargs call `help(plotly.graph_objs.Heatmap)`.
 
+    Examples
+    --------
     Example 1: Simple Plotly Table
 
     >>> from plotly.figure_factory import create_table
-
     >>> text = [['Country', 'Year', 'Population'],
     ...         ['US', 2000, 282200000],
     ...         ['Canada', 2000, 27790000],
     ...         ['US', 2010, 309000000],
     ...         ['Canada', 2010, 34000000]]
-
     >>> table = create_table(text)
     >>> table.show()
 
@@ -84,7 +87,7 @@ def create_table(
     ...                                  [.5, '#80beff'],
     ...                                  [1, '#cce5ff']],
     ...                      font_colors=['#ffffff', '#000000',
-    ...                                 '#000000'])
+    ...                                   '#000000'])
     >>> table.show()
 
     Example 3: Simple Plotly Table with Pandas
@@ -95,7 +98,6 @@ def create_table(
     >>> df_p = df[0:25]
     >>> table_simple = create_table(df_p)
     >>> table_simple.show()
-
     """
 
     # Avoiding mutables in the call signature
