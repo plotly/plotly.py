@@ -2907,6 +2907,9 @@ Invalid property path '{key_path_str}' for layout
     # Plotly message stubs
     # --------------------
     # send-message stubs that may be overridden by the widget subclass
+    def _send_react_msg(self):
+        pass
+    
     def _send_animate_msg(
         self, styles_data, relayout_data, trace_indexes, animation_opts
     ):
@@ -2978,6 +2981,8 @@ Invalid property path '{key_path_str}' for layout
                     relayout_data=relayout_data,
                     trace_indexes=trace_indexes,
                 )
+
+                self._send_react_msg()
 
                 # ### Clear out saved batch edits ###
                 self._batch_layout_edits.clear()
@@ -3141,6 +3146,7 @@ Invalid property path '{key_path_str}' for layout
         -------
         None
         """
+        print('perform batch animate')
         # Apply commands to internal dictionaries as an update
         # ----------------------------------------------------
         (

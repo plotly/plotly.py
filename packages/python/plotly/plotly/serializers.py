@@ -1,3 +1,4 @@
+from _plotly_utils.utils import to_typed_array_spec
 from .basedatatypes import Undefined
 from .optional_imports import get_module
 
@@ -37,6 +38,7 @@ def _py_to_js(v, widget_manager):
     # Handle numpy array
     # ------------------
     elif np is not None and isinstance(v, np.ndarray):
+        return to_typed_array_spec(v)
         # Convert 1D numpy arrays with numeric types to memoryviews with
         # datatype and shape metadata.
         if (

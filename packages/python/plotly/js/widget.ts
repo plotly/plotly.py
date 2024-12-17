@@ -13,30 +13,11 @@ type InputDeviceState = {
   buttons: any;
 };
 
-type Js2PyMsg = {
-  source_view_id: string;
-};
-
 type Js2PyPointsCallbackMsg = {
   event_type: string;
   points: Points;
   device_state: InputDeviceState;
   selector: Selector;
-};
-
-type Js2PyRelayoutMsg = Js2PyMsg & {
-  relayout_data: any;
-};
-
-type Js2PyRestyleMsg = Js2PyMsg & {
-  style_data: any;
-  style_traces?: null | number | number[];
-};
-
-type Js2PyUpdateMsg = Js2PyMsg & {
-  style_data: any;
-  layout_data: any;
-  style_traces?: null | number | number[];
 };
 
 type Points = {
@@ -48,34 +29,16 @@ type Points = {
 };
 
 type Py2JsMsg = {
-  trace_edit_id?: any;
-  layout_edit_id?: any;
-  source_view_id?: any;
+    trace_edit_id?: any;
+    layout_edit_id?: any;
+    source_view_id?: any;
 };
 
-type Py2JsAddTracesMsg = Py2JsMsg & {
-  trace_data: any;
-};
-
-// type Py2JsAnimateMsg = Py2JsMsg & {
-//   style_data: any;
-//   layout_data: any;
-//   style_traces?: null | number | number[];
-//   animation_opts?: any;
-// };
-
-type Py2JsDeleteTracesMsg = Py2JsMsg & {
-  delete_inds: number[];
-};
-
-type Py2JsMoveTracesMsg = {
-  current_trace_inds: number[];
-  new_trace_inds: number[];
-};
-
-type Py2JsRestyleMsg = Py2JsMsg & {
-  restyle_data: any;
-  restyle_traces?: null | number | number[];
+type Py2JsAnimateMsg = Py2JsMsg & {
+  style_data: any;
+  layout_data: any;
+  style_traces?: null | number | number[];
+  animation_opts?: any;
 };
 
 type Selector = {
@@ -83,357 +46,6 @@ type Selector = {
   selector_state:
     | { xrange: number[]; yrange: number[] }
     | { xs: number[]; ys: number[] };
-};
-
-// Model
-// =====
-/**
- * A FigureModel holds a mirror copy of the state of a FigureWidget on
- * the Python side.  There is a one-to-one relationship between JavaScript
- * FigureModels and Python FigureWidgets. The JavaScript FigureModel is
- * initialized as soon as a Python FigureWidget initialized, this happens
- * even before the widget is first displayed in the Notebook
- */
-
-type Serializer<In=any, Out=any> = {
-  deserialize(value: Out): In;
-  serialize(value: In): Out;
-}
-
-export class FigureModel {
-  model;
-  serializers: Record<string, Serializer>
-
-  constructor(model, serializers: Record<string, Serializer>) {
-    this.model = model;
-    this.serializers = serializers;
-  }
-
-  get(key: string) {
-    const serializer = this.serializers[key];
-    const update = this.model.get(key)
-    if (serializer?.deserialize) {
-      return serializer.deserialize(update)
-    }
-    return update;
-  }
-
-  set(key: string, value: unknown) {
-    let serializer = this.serializers[key];
-    if (serializer?.serialize) {
-      value = serializer.serialize(value)
-    }
-    this.model.set(key, value);
-  }
-  
-  on(event: string, cb?: () => void) {
-    this.model.on(event, cb);
-  }
-
-  save_changes() {
-    this.model.save_changes();
-  }
-
-  defaults() {
-    return {
-
-      // Data and Layout
-      // ---------------
-      // The _widget_data and _widget_layout properties are synchronized with the
-      // Python side on initialization only.  After initialization, these
-      // properties are kept in sync through the use of the _py2js_*
-      // messages
-      _widget_data: [],
-      _widget_layout: {},
-      _config: {},
-
-      // Python -> JS messages
-      // ---------------------
-      // Messages are implemented using trait properties. This is done so
-      // this we can take advantage of ipywidget's binary serialization
-      // protocol.
-      //
-      // Messages are sent by the Python side by assigning the message
-      // contents to the appropriate _py2js_* property, and then immediately
-      // setting it to None.  Messages are received by the JavaScript
-      // side by registering property change callbacks in the initialize
-      // methods for FigureModel and FigureView. e.g. (where this is a
-      // FigureModel):
-      //
-      //      this.on('change:_py2js_addTraces', this.do_addTraces, this);
-      //
-      // Message handling methods, do_addTraces, are responsible for
-      // performing the appropriate action if the message contents are
-      // not null
-
-      /**
-       * @typedef {null|Object} Py2JsAnimateMsg
-       * @property {Object} style_data
-       *  Style data as accepted by Plotly.animate
-       * @property {Object} layout_data
-       *  Layout data as accepted by Plotly.animate
-       * @property {Array.<Number>} style_traces
-       *  Array of indexes of the traces this the animate operation applies
-       *  to, or null to apply the operation to all traces
-       * @property {Object} animation_opts
-       *  Animation options as accepted by Plotly.animate
-       * @property {Number} trace_edit_id
-       *  Edit ID to use when returning trace deltas using
-       *  the _js2py_traceDeltas message
-       * @property {Number} layout_edit_id
-       *  Edit ID to use when returning layout deltas using
-       *  the _js2py_layoutDelta message
-       * @property {null|String} source_view_id
-       *  view_id of the FigureView this triggered the original animate
-       *  event (e.g. by clicking a button), or null if the update was
-       *  triggered from Python
-       */
-    //   _py2js_animate: null,
-
-      /**
-       * @typedef {null|Object} Py2JsRemoveTracePropsMsg
-       * @property {Number} remove_trace
-       *  The index of the trace from which to remove properties
-       * @property {Array.<Array.<String|Number>>} remove_props
-       *  Array of property paths to remove. Each propery path is an
-       *  array of property names or array indexes this locate a property
-       *  inside the _widget_data[remove_trace] object
-       */
-      _py2js_removeTraceProps: null,
-
-      /**
-       * Object representing a collection of points for use in click, hover,
-       * and selection events
-       * @typedef {Object} Points
-       * @property {Array.<Number>} trace_indexes
-       *  Array of the trace index for each point
-       * @property {Array.<Number>} point_indexes
-       *  Array of the index of each point in its own trace
-       * @property {null|Array.<Number>} xs
-       *  Array of the x coordinate of each point (for cartesian trace types)
-       *  or null (for non-cartesian trace types)
-       * @property {null|Array.<Number>} ys
-       *  Array of the y coordinate of each point (for cartesian trace types)
-       *  or null (for non-cartesian trace types
-       * @property {null|Array.<Number>} zs
-       *  Array of the z coordinate of each point (for 3D cartesian
-       *  trace types)
-       *  or null (for non-3D-cartesian trace types)
-       */
-
-      /**
-       * Object representing the state of the input devices during a
-       * plotly event
-       * @typedef {Object} InputDeviceState
-       * @property {boolean} alt - true if alt key pressed,
-       * false otherwise
-       * @property {boolean} ctrl - true if ctrl key pressed,
-       * false otherwise
-       * @property {boolean} meta - true if meta key pressed,
-       * false otherwise
-       * @property {boolean} shift - true if shift key pressed,
-       * false otherwise
-       *
-       * @property {boolean} button
-       *  Indicates which button was pressed on the mouse to trigger the
-       *  event.
-       *    0: Main button pressed, usually the left button or the
-       *       un-initialized state
-       *    1: Auxiliary button pressed, usually the wheel button or
-       *       the middle button (if present)
-       *    2: Secondary button pressed, usually the right button
-       *    3: Fourth button, typically the Browser Back button
-       *    4: Fifth button, typically the Browser Forward button
-       *
-       * @property {boolean} buttons
-       *  Indicates which buttons were pressed on the mouse when the event
-       *  is triggered.
-       *    0  : No button or un-initialized
-       *    1  : Primary button (usually left)
-       *    2  : Secondary button (usually right)
-       *    4  : Auxilary button (usually middle or mouse wheel button)
-       *    8  : 4th button (typically the "Browser Back" button)
-       *    16 : 5th button (typically the "Browser Forward" button)
-       *
-       *  Combinations of buttons are represented by the sum of the codes
-       *  above. e.g. a value of 7 indicates buttons 1 (primary),
-       *  2 (secondary), and 4 (auxilary) were pressed during the event
-       */
-
-      /**
-       * @typedef {Object} BoxSelectorState
-       * @property {Array.<Number>} xrange
-       *  Two element array containing the x-range of the box selection
-       * @property {Array.<Number>} yrange
-       *  Two element array containing the y-range of the box selection
-       */
-
-      /**
-       * @typedef {Object} LassoSelectorState
-       * @property {Array.<Number>} xs
-       *  Array of the x-coordinates of the lasso selection region
-       * @property {Array.<Number>} ys
-       *  Array of the y-coordinates of the lasso selection region
-       */
-
-      /**
-       * Object representing the state of the selection tool during a
-       * plotly_select event
-       * @typedef {Object} Selector
-       * @property {String} type
-       *  Selection type. One of: 'box', or 'lasso'
-       * @property {BoxSelectorState|LassoSelectorState} selector_state
-       */
-
-      /**
-       * @typedef {null|Object} Js2PyPointsCallbackMsg
-       * @property {string} event_type
-       *  Name of the triggering event. One of 'plotly_click',
-       *  'plotly_hover', 'plotly_unhover', or 'plotly_selected'
-       * @property {null|Points} points
-       *  Points object for event
-       * @property {null|InputDeviceState} device_state
-       *  InputDeviceState object for event
-       * @property {null|Selector} selector
-       *  State of the selection tool for 'plotly_selected' events, null
-       *  for other event types
-       */
-      _js2py_pointsCallback: null,
-
-    };
-  }
-
-  /**
-   * Initialize FigureModel. Called when the Python FigureWidget is first
-   * constructed
-   */
-  initialize() {
-    this.model.on("change:_widget_data", () => this.do_data());
-    this.model.on("change:_widget_layout", () => this.do_layout());
-    // this.model.on("change:_py2js_animate", () => this.do_animate());
-  }
-
-  /**
-   * Input a trace index specification and return an Array of trace
-   * indexes where:
-   *
-   *  - null|undefined -> Array of all traces
-   *  - Trace index as Number -> Single element array of input index
-   *  - Array of trace indexes -> Input array unchanged
-   *
-   * @param {undefined|null|Number|Array.<Number>} trace_indexes
-   * @returns {Array.<Number>}
-   *  Array of trace indexes
-   * @private
-   */
-  _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
-    if (trace_indexes === null || trace_indexes === undefined) {
-      var numTraces = this.model.get("_widget_data").length;
-      trace_indexes = _.range(numTraces);
-    }
-    if (!Array.isArray(trace_indexes)) {
-      // Make sure idx is an array
-      trace_indexes = [trace_indexes];
-    }
-    return trace_indexes;
-  }
-
-  /**
-   * Log changes to the _widget_data trait
-   *
-   * This should only happed on FigureModel initialization
-   */
-  do_data() {}
-
-  /**
-   * Log changes to the _widget_layout trait
-   *
-   * This should only happed on FigureModel initialization
-   */
-  do_layout() {
-    console.log("layout changed");
-  }
-
-  /**
-   * Handle addTraces message
-   */
-  do_addTraces() {
-    // add trace to plot
-    /** @type {Py2JsAddTracesMsg} */
-    var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
-
-    if (msgData !== null) {
-      var currentTraces = this.model.get("_widget_data");
-      var newTraces = msgData.trace_data;
-      _.forEach(newTraces, function (newTrace) {
-        currentTraces.push(newTrace);
-      });
-    }
-  }
-
-  /**
-   * Handle deleteTraces message
-   */
-  do_deleteTraces() {
-    // remove traces from plot
-
-    /** @type {Py2JsDeleteTracesMsg} */
-    var msgData: Py2JsDeleteTracesMsg = this.model.get("_py2js_deleteTraces");
-
-    if (msgData !== null) {
-      var delete_inds = msgData.delete_inds;
-      var tracesData = this.model.get("_widget_data");
-
-      // Remove del inds in reverse order so indexes remain valid
-      // throughout loop
-      delete_inds
-        .slice()
-        .reverse()
-        .forEach(function (del_ind) {
-          tracesData.splice(del_ind, 1);
-        });
-    }
-  }
-
-
-  /**
-   * Handle animate message
-   */
-//   do_animate() {
-//     /** @type {Py2JsAnimateMsg} */
-//     var msgData: Py2JsAnimateMsg = this.model.get("_py2js_animate");
-//     if (msgData !== null) {
-//       var styles = msgData.style_data;
-//       var layout = msgData.layout_data;
-//       var trace_indexes = this._normalize_trace_indexes(msgData.style_traces);
-
-//       for (var i = 0; i < styles.length; i++) {
-//         var style = styles[i];
-//         var trace_index = trace_indexes[i];
-//         var trace = this.model.get("_widget_data")[trace_index];
-//       }
-
-//     }
-//   }
-}
-
-const serializers: Record<string, Serializer> = {
-  _widget_data: {
-    deserialize: py2js_deserializer,
-    serialize: js2py_serializer,
-  },
-  _widget_layout: {
-    deserialize: py2js_deserializer,
-    serialize: js2py_serializer,
-  },
-//   _py2js_animate: {
-//     deserialize: py2js_deserializer,
-//     serialize: js2py_serializer,
-//   },
-  _js2py_pointsCallback: {
-    deserialize: py2js_deserializer,
-    serialize: js2py_serializer,
-  },
 };
 
 // View
@@ -448,13 +60,12 @@ const serializers: Record<string, Serializer> = {
  * @type {widgets.DOMWidgetView}
  */
 export class FigureView {
-  viewID: string;
   resizeEventListener: () => void;
 
-  model: FigureModel;
+  model;
   el: HTMLElement;
 
-  constructor(model: FigureModel, el: HTMLElement) {
+  constructor(model, el: HTMLElement) {
     this.model = model;
     this.el = el;
 
@@ -477,16 +88,11 @@ export class FigureView {
     // Wire up message property callbacks
     // ----------------------------------
     // Python -> JS event properties
-    // this.model.on("change:_py2js_animate", () => this.do_animate());
+    this.model.on("change:_py2js_animate", () => this.do_animate());
 
     // MathJax v2 configuration
     // ---------------------
-    console.log('rerendering');
     (window as any)?.MathJax?.Hub?.Config?.({ SVG: { font: "STIX-Web" } });
-
-    // Set view UID
-    // ------------
-    this.viewID = randstr();
 
     // Initialize Plotly.js figure
     // ---------------------------
@@ -520,12 +126,6 @@ export class FigureView {
         });
         (<Plotly.PlotlyHTMLElement>this.el).on("plotly_doubleclick", function () {
             that.handle_plotly_doubleclick({});
-        });
-    
-        // Emit event indicating this the widget has finished
-        // rendering
-        var event = new CustomEvent("plotlywidget-after-render", {
-            detail: { element: this.el, viewID: this.viewID },
         });
     
         // Dispatch/Trigger/Fire the event
@@ -707,94 +307,6 @@ export class FigureView {
   }
 
   /**
-   * Handle ploty_restyle events emitted by the Plotly.js library
-   * @param data
-   */
-  handle_plotly_restyle(data: any) {
-    if (data === null || data === undefined) {
-      // No data to report to the Python side
-      return;
-    }
-
-    if (data[0] && data[0].hasOwnProperty("_doNotReportToPy")) {
-      // Restyle originated on the Python side
-      return;
-    }
-
-    // Unpack data
-    var styleData = data[0];
-    var styleTraces = data[1];
-
-    // Construct restyle message to send to the Python side
-    /** @type {Js2PyRestyleMsg} */
-    var restyleMsg: Js2PyRestyleMsg = {
-      style_data: styleData,
-      style_traces: styleTraces,
-      source_view_id: this.viewID,
-    };
-
-    this.model.set("_js2py_restyle", restyleMsg);
-    this.touch();
-  }
-
-  touch() {
-    this.model.save_changes();
-  }
-
-  /**
-   * Handle plotly_relayout events emitted by the Plotly.js library
-   * @param data
-   */
-  handle_plotly_relayout(data: any) {
-    if (data === null || data === undefined) {
-      // No data to report to the Python side
-      return;
-    }
-
-    if (data.hasOwnProperty("_doNotReportToPy")) {
-      // Relayout originated on the Python side
-      return;
-    }
-
-    /** @type {Js2PyRelayoutMsg} */
-    var relayoutMsg: Js2PyRelayoutMsg = {
-      relayout_data: data,
-      source_view_id: this.viewID,
-    };
-
-    this.model.set("_js2py_relayout", relayoutMsg);
-    this.touch();
-  }
-
-  /**
-   * Handle plotly_update events emitted by the Plotly.js library
-   * @param data
-   */
-  handle_plotly_update(data: any) {
-    if (data === null || data === undefined) {
-      // No data to report to the Python side
-      return;
-    }
-
-    if (data["data"] && data["data"][0].hasOwnProperty("_doNotReportToPy")) {
-      // Update originated on the Python side
-      return;
-    }
-
-    /** @type {Js2PyUpdateMsg} */
-    var updateMsg: Js2PyUpdateMsg = {
-      style_data: data["data"][0],
-      style_traces: data["data"][1],
-      layout_data: data["layout"],
-      source_view_id: this.viewID,
-    };
-
-    // Log message
-    this.model.set("_js2py_update", updateMsg);
-    this.touch();
-  }
-
-  /**
    * Handle plotly_click events emitted by the Plotly.js library
    * @param data
    */
@@ -864,7 +376,7 @@ export class FigureView {
 
     if (pointsMsg["points"] !== null && pointsMsg["points"] !== undefined) {
       this.model.set("_js2py_pointsCallback", pointsMsg);
-      this.touch();
+      this.model.save_changes();
     }
   }
 
@@ -874,275 +386,48 @@ export class FigureView {
    */
   handle_plotly_doubleclick(data: any) {}
 
-  /**
-   * Handle Plotly.addTraces request
-   */
-  do_addTraces() {
-    /** @type {Py2JsAddTracesMsg} */
-    var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
-
-    if (msgData !== null) {
-      Plotly.addTraces(this.el, msgData.trace_data);
+  _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
+    if (trace_indexes === null || trace_indexes === undefined) {
+      var numTraces = this.model.get("_widget_data").length;
+      trace_indexes = _.range(numTraces);
     }
-  }
-
-  /**
-   * Handle Plotly.deleteTraces request
-   */
-  do_deleteTraces() {
-    /** @type {Py2JsDeleteTracesMsg} */
-    var msgData: Py2JsDeleteTracesMsg = this.model.get("_py2js_deleteTraces");
-
-    if (msgData !== null) {
-      var delete_inds = msgData.delete_inds;
-      Plotly.deleteTraces(this.el, delete_inds);
+    if (!Array.isArray(trace_indexes)) {
+      // Make sure idx is an array
+      trace_indexes = [trace_indexes];
     }
+    return trace_indexes;
   }
-
-  /**
-   * Handle Plotly.moveTraces request
-   */
-  do_moveTraces() {
-    /** @type {Py2JsMoveTracesMsg} */
-    var msgData: Py2JsMoveTracesMsg = this.model.get("_py2js_moveTraces");
-
-    if (msgData !== null) {
-      // Unpack message
-      var currentInds = msgData.current_trace_inds;
-      var newInds = msgData.new_trace_inds;
-
-      // Check if the new trace indexes are actually different than
-      // the current indexes
-      var inds_equal = _.isEqual(currentInds, newInds);
-
-      if (!inds_equal) {
-        Plotly.moveTraces(this.el, currentInds, newInds);
-      }
-    }
-  }
-
-  /**
-   * Handle Plotly.restyle request
-   */
-  do_restyle() {
-    /** @type {Py2JsRestyleMsg} */
-    var msgData: Py2JsRestyleMsg = this.model.get("_py2js_restyle");
-    if (msgData !== null) {
-      var restyleData = msgData.restyle_data;
-      var traceIndexes = (this.model as FigureModel)._normalize_trace_indexes(
-        msgData.restyle_traces
-      );
-
-      restyleData["_doNotReportToPy"] = true;
-      Plotly.restyle(this.el, restyleData, traceIndexes);
-    }
-  }
-
 
   /**
    * Handle Plotly.animate request
    */
-//   do_animate() {
-//     /** @type {Py2JsAnimateMsg} */
-//     var msgData: Py2JsAnimateMsg = this.model.get("_py2js_animate");
+  do_animate() {
+    /** @type {Py2JsAnimateMsg} */
+    var msgData: Py2JsAnimateMsg = this.model.get("_py2js_animate");
 
-//     if (msgData !== null) {
-//       // Unpack params
-//       // var animationData = msgData[0];
-//       var animationOpts = msgData.animation_opts;
+    console.log('do_animate', msgData)
+    if (msgData !== null) {
+      // Unpack params
+      // var animationData = msgData[0];
+      var animationOpts = msgData.animation_opts;
 
-//       var styles = msgData.style_data;
-//       var layout = msgData.layout_data;
-//       var traceIndexes = (this.model as FigureModel)._normalize_trace_indexes(
-//         msgData.style_traces
-//       );
+      var styles = msgData.style_data;
+      var layout = msgData.layout_data;
 
-//       var animationData: any = {
-//         data: styles,
-//         layout: layout,
-//         traces: traceIndexes,
-//       };
+      var animationData: any = {
+        data: styles,
+        layout: layout,
+        traces: this._normalize_trace_indexes(msgData.style_traces),
+      };
 
-//       animationData["_doNotReportToPy"] = true;
-//       // @ts-ignore
-//       Plotly.animate(this.el, animationData, animationOpts);
-//     }
-//   }
-}
-
-// Serialization
-/**
- * Create a mapping from numpy dtype strings to corresponding typed array
- * constructors
- */
-const numpy_dtype_to_typedarray_type = {
-  int8: Int8Array,
-  int16: Int16Array,
-  int32: Int32Array,
-  uint8: Uint8Array,
-  uint16: Uint16Array,
-  uint32: Uint32Array,
-  float32: Float32Array,
-  float64: Float64Array,
-};
-
-function serializeTypedArray(v: ArrayConstructor) {
-  var numpyType;
-  if (v instanceof Int8Array) {
-    numpyType = "int8";
-  } else if (v instanceof Int16Array) {
-    numpyType = "int16";
-  } else if (v instanceof Int32Array) {
-    numpyType = "int32";
-  } else if (v instanceof Uint8Array) {
-    numpyType = "uint8";
-  } else if (v instanceof Uint16Array) {
-    numpyType = "uint16";
-  } else if (v instanceof Uint32Array) {
-    numpyType = "uint32";
-  } else if (v instanceof Float32Array) {
-    numpyType = "float32";
-  } else if (v instanceof Float64Array) {
-    numpyType = "float64";
-  } else {
-    // Don't understand it, return as is
-    return v;
-  }
-  var res = {
-    dtype: numpyType,
-    shape: [v.length],
-    value: v.buffer,
-  };
-  return res;
-}
-
-/**
- * ipywidget JavaScript -> Python serializer
- */
-function js2py_serializer(v: any, widgetManager?: any) {
-  var res: any;
-
-  if (_.isTypedArray(v)) {
-    res = serializeTypedArray(v);
-  } else if (Array.isArray(v)) {
-    // Serialize array elements recursively
-    res = new Array(v.length);
-    for (var i = 0; i < v.length; i++) {
-      res[i] = js2py_serializer(v[i]);
-    }
-  } else if (_.isObject(v)) {
-    // Serialize object properties recursively
-    res = {};
-    for (var p in v) {
-      if (v.hasOwnProperty(p)) {
-        res[p] = js2py_serializer(v[p]);
-      }
-    }
-  } else if (v === undefined) {
-    // Translate undefined into '_undefined_' sentinal string. The
-    // Python _js_to_py deserializer will convert this into an
-    // Undefined object
-    res = "_undefined_";
-  } else {
-    // Primitive value to transfer directly
-    res = v;
-  }
-  return res;
-}
-
-/**
- * ipywidget Python -> Javascript deserializer
- */
-function py2js_deserializer(v: any, widgetManager?: any) {
-  var res: any;
-
-  if (Array.isArray(v)) {
-    // Deserialize array elements recursively
-    res = new Array(v.length);
-    for (var i = 0; i < v.length; i++) {
-      res[i] = py2js_deserializer(v[i]);
-    }
-  } else if (_.isObject(v)) {
-    if (
-      (_.has(v, "value") || _.has(v, "buffer")) &&
-      _.has(v, "dtype") &&
-      _.has(v, "shape")
-    ) {
-      // Deserialize special buffer/dtype/shape objects into typed arrays
-      // These objects correspond to numpy arrays on the Python side
-      //
-      // Note plotly.py<=3.1.1 called the buffer object `buffer`
-      // This was renamed `value` in 3.2 to work around a naming conflict
-      // when saving widget state to a notebook.
+      animationData["_doNotReportToPy"] = true;
       // @ts-ignore
-      var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
-      var buffer = _.has(v, "value") ? v.value.buffer : v.buffer.buffer;
-      res = new typedarray_type(buffer);
-    } else {
-      // Deserialize object properties recursively
-      res = {};
-      for (var p in v) {
-        if (v.hasOwnProperty(p)) {
-          res[p] = py2js_deserializer(v[p]);
-        }
-      }
+      Plotly.animate(this.el, animationData, animationOpts);
     }
-  } else if (v === "_undefined_") {
-    // Convert the _undefined_ sentinal into undefined
-    res = undefined;
-  } else {
-    // Accept primitive value directly
-    res = v;
   }
-  return res;
-}
-
-function randstr(
-  existing?: { [k: string]: any },
-  bits?: number,
-  base?: number,
-  _recursion?: number
-): string {
-  if (!base) base = 16;
-  if (bits === undefined) bits = 24;
-  if (bits <= 0) return "0";
-
-  var digits = Math.log(Math.pow(2, bits)) / Math.log(base);
-  var res = "";
-  var i, b, x;
-
-  for (i = 2; digits === Infinity; i *= 2) {
-    digits = (Math.log(Math.pow(2, bits / i)) / Math.log(base)) * i;
-  }
-
-  var rem = digits - Math.floor(digits);
-
-  for (i = 0; i < Math.floor(digits); i++) {
-    x = Math.floor(Math.random() * base).toString(base);
-    res = x + res;
-  }
-
-  if (rem) {
-    b = Math.pow(base, rem);
-    x = Math.floor(Math.random() * b).toString(base);
-    res = x + res;
-  }
-
-  var parsed = parseInt(res, base);
-  if (
-    (existing && existing[res]) ||
-    (parsed !== Infinity && parsed >= Math.pow(2, bits))
-  ) {
-    if (_recursion > 10) {
-      console.warn("randstr failed uniqueness");
-      return res;
-    }
-    return randstr(existing, bits, base, (_recursion || 0) + 1);
-  } else return res;
 }
 
 function render ({ el, model }) {
-    console.log('rendering', model.get('_widget_data'), model.get('_widget_layout'));
     const view = new FigureView(model, el);
     view.render()
     return () => view.remove();
