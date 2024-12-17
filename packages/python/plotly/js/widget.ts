@@ -139,11 +139,11 @@ export class FigureModel {
 
       // Data and Layout
       // ---------------
-      // The _data and _widget_layout properties are synchronized with the
+      // The _widget_data and _widget_layout properties are synchronized with the
       // Python side on initialization only.  After initialization, these
       // properties are kept in sync through the use of the _py2js_*
       // messages
-      _data: [],
+      _widget_data: [],
       _widget_layout: {},
       _config: {},
 
@@ -197,7 +197,7 @@ export class FigureModel {
        * @property {Array.<Array.<String|Number>>} remove_props
        *  Array of property paths to remove. Each propery path is an
        *  array of property names or array indexes this locate a property
-       *  inside the _data[remove_trace] object
+       *  inside the _widget_data[remove_trace] object
        */
       _py2js_removeTraceProps: null,
 
@@ -308,7 +308,7 @@ export class FigureModel {
    * constructed
    */
   initialize() {
-    this.model.on("change:_data", () => this.do_data());
+    this.model.on("change:_widget_data", () => this.do_data());
     this.model.on("change:_widget_layout", () => this.do_layout());
     // this.model.on("change:_py2js_animate", () => this.do_animate());
   }
@@ -328,7 +328,7 @@ export class FigureModel {
    */
   _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
     if (trace_indexes === null || trace_indexes === undefined) {
-      var numTraces = this.model.get("_data").length;
+      var numTraces = this.model.get("_widget_data").length;
       trace_indexes = _.range(numTraces);
     }
     if (!Array.isArray(trace_indexes)) {
@@ -339,7 +339,7 @@ export class FigureModel {
   }
 
   /**
-   * Log changes to the _data trait
+   * Log changes to the _widget_data trait
    *
    * This should only happed on FigureModel initialization
    */
@@ -363,7 +363,7 @@ export class FigureModel {
     var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
 
     if (msgData !== null) {
-      var currentTraces = this.model.get("_data");
+      var currentTraces = this.model.get("_widget_data");
       var newTraces = msgData.trace_data;
       _.forEach(newTraces, function (newTrace) {
         currentTraces.push(newTrace);
@@ -382,7 +382,7 @@ export class FigureModel {
 
     if (msgData !== null) {
       var delete_inds = msgData.delete_inds;
-      var tracesData = this.model.get("_data");
+      var tracesData = this.model.get("_widget_data");
 
       // Remove del inds in reverse order so indexes remain valid
       // throughout loop
@@ -410,7 +410,7 @@ export class FigureModel {
 //       for (var i = 0; i < styles.length; i++) {
 //         var style = styles[i];
 //         var trace_index = trace_indexes[i];
-//         var trace = this.model.get("_data")[trace_index];
+//         var trace = this.model.get("_widget_data")[trace_index];
 //       }
 
 //     }
@@ -418,7 +418,7 @@ export class FigureModel {
 }
 
 const serializers: Record<string, Serializer> = {
-  _data: {
+  _widget_data: {
     deserialize: py2js_deserializer,
     serialize: js2py_serializer,
   },
@@ -461,7 +461,7 @@ export class FigureView {
     model.on('change:_widget_layout', () => { 
         this.render();
     });
-    model.on('change:_data', () => {
+    model.on('change:_widget_data', () => {
         this.render();
     });
   }
@@ -492,7 +492,7 @@ export class FigureView {
     // ---------------------------
     // We must clone the model's data and layout properties so that
     // the model is not directly mutated by the Plotly.js library.
-    var initialTraces = _.cloneDeep(this.model.get("_data"));
+    var initialTraces = _.cloneDeep(this.model.get("_widget_data"));
     var initialLayout = _.cloneDeep(this.model.get("_widget_layout"));
     if (!initialLayout.height) {
       initialLayout.height = 360;
@@ -1142,7 +1142,7 @@ function randstr(
 }
 
 function render ({ el, model }) {
-    console.log('rendering', model.get('_data'), model.get('_widget_layout'));
+    console.log('rendering', model.get('_widget_data'), model.get('_widget_layout'));
     const view = new FigureView(model, el);
     view.render()
     return () => view.remove();

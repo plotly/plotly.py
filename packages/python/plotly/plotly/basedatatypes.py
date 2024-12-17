@@ -1031,10 +1031,6 @@ class BaseFigure(object):
             # Modify in-place so we don't trigger serialization
             del self._data[i]
 
-        if delete_inds:
-            # Update widget, if any
-            self._send_deleteTraces_msg(delete_inds)
-
         # Move traces
         # -----------
 
@@ -1043,37 +1039,8 @@ class BaseFigure(object):
         for uid in uids_post_removal:
             new_inds.append(new_uids.index(uid))
 
-        # ### Compute current index for each remaining trace ###
-        current_inds = list(range(len(traces_props_post_removal)))
-
-        # ### Check whether a move is needed ###
-        if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
-
-            # #### Save off index lists for moveTraces message ####
-            msg_current_inds = current_inds
-            msg_new_inds = new_inds
-
-            # #### Reorder trace elements ####
-            # We do so in-place so we don't trigger traitlet property
-            # serialization for the FigureWidget case
-            # ##### Remove by curr_inds in reverse order #####
-            moving_traces_data = []
-            for ci in reversed(current_inds):
-                # Push moving traces data to front of list
-                moving_traces_data.insert(0, self._data[ci])
-                del self._data[ci]
-
-            # #### Sort new_inds and moving_traces_data by new_inds ####
-            new_inds, moving_traces_data = zip(
-                *sorted(zip(new_inds, moving_traces_data))
-            )
-
-            # #### Insert by new_inds in forward order ####
-            for ni, trace_data in zip(new_inds, moving_traces_data):
-                self._data.insert(ni, trace_data)
-
-            # #### Update widget, if any ####
-            self._send_moveTraces_msg(msg_current_inds, msg_new_inds)
+        # #### Update widget, if any ####
+        self._send_react_msg()
 
         # ### Update data defaults ###
         # There is to front-end syncronization to worry about so this
@@ -1658,29 +1625,11 @@ is of type {subplot_type}.""".format(
         # -----------------------
         trace_indexes = self._normalize_trace_indexes(trace_indexes)
 
-        # Handle source_view_id
-        # ---------------------
-        # If not None, the source_view_id is the UID of the frontend
-        # Plotly.js view that initially triggered this restyle operation
-        # (e.g. the user clicked on the legend to hide a trace). We pass
-        # this UID along so that the frontend views can determine whether
-        # they need to apply the restyle operation on themselves.
-        source_view_id = kwargs.get("source_view_id", None)
-
         # Perform restyle on trace dicts
         # ------------------------------
         restyle_changes = self._perform_plotly_restyle(restyle_data, trace_indexes)
         if restyle_changes:
-            # The restyle operation resulted in a change to some trace
-            # properties, so we dispatch change callbacks and send the
-            # restyle message to the frontend (if any)
-            msg_kwargs = (
-                {"source_view_id": source_view_id} if source_view_id is not None else {}
-            )
-
-            self._send_restyle_msg(
-                restyle_changes, trace_indexes=trace_indexes, **msg_kwargs
-            )
+            self._send_react_msg()
 
             self._dispatch_trace_change_callbacks(restyle_changes, trace_indexes)
 
@@ -1788,7 +1737,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         if not self._in_batch_mode:
             send_val = [val]
             restyle = {key_path_str: send_val}
-            self._send_restyle_msg(restyle, trace_indexes=trace_index)
+            self._send_react_msg()
             self._dispatch_trace_change_callbacks(restyle, [trace_index])
 
         # In batch mode
@@ -2262,7 +2211,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         self._data_objs = self._data_objs + data
 
         # Update messages
-        self._send_addTraces_msg(new_traces_data)
+        self._send_react_msg()
 
         return self
 
@@ -2573,7 +2522,7 @@ Please use the add_trace method with the row and col parameters.
         self._layout_obj = new_layout
 
         # Notify JS side
-        self._send_relayout_msg(new_layout_data)
+        self._send_react_msg()
 
     def plotly_relayout(self, relayout_data, **kwargs):
         """
@@ -2595,19 +2544,6 @@ Please use the add_trace method with the row and col parameters.
         None
         """
 
-        # Handle source_view_id
-        # ---------------------
-        # If not None, the source_view_id is the UID of the frontend
-        # Plotly.js view that initially triggered this relayout operation
-        # (e.g. the user clicked on the toolbar to change the drag mode
-        # from zoom to pan). We pass this UID along so that the frontend
-        # views can determine whether they need to apply the relayout
-        # operation on themselves.
-        if "source_view_id" in kwargs:
-            msg_kwargs = {"source_view_id": kwargs["source_view_id"]}
-        else:
-            msg_kwargs = {}
-
         # Perform relayout operation on layout dict
         # -----------------------------------------
         relayout_changes = self._perform_plotly_relayout(relayout_data)
@@ -2615,7 +2551,7 @@ Please use the add_trace method with the row and col parameters.
             # The relayout operation resulted in a change to some layout
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
-            self._send_relayout_msg(relayout_changes, **msg_kwargs)
+            self._send_react_msg()
 
             self._dispatch_layout_change_callbacks(relayout_changes)
 
@@ -2711,7 +2647,7 @@ Invalid property path '{key_path_str}' for layout
         # Dispatch change callbacks and send relayout message
         if not self._in_batch_mode:
             relayout_msg = {key_path_str: val}
-            self._send_relayout_msg(relayout_msg)
+            self._send_react_msg()
             self._dispatch_layout_change_callbacks(relayout_msg)
 
         # In batch mode
@@ -2925,12 +2861,7 @@ Invalid property path '{key_path_str}' for layout
         # -------------------
         # Send a plotly_update message to the frontend (if any)
         if restyle_changes or relayout_changes:
-            self._send_update_msg(
-                restyle_data=restyle_changes,
-                relayout_data=relayout_changes,
-                trace_indexes=trace_indexes,
-                **msg_kwargs,
-            )
+            self._send_react_msg()
 
         # Dispatch changes
         # ----------------
@@ -2976,26 +2907,6 @@ Invalid property path '{key_path_str}' for layout
     # Plotly message stubs
     # --------------------
     # send-message stubs that may be overridden by the widget subclass
-    def _send_addTraces_msg(self, new_traces_data):
-        pass
-
-    def _send_moveTraces_msg(self, current_inds, new_inds):
-        pass
-
-    def _send_deleteTraces_msg(self, delete_inds):
-        pass
-
-    def _send_restyle_msg(self, style, trace_indexes=None, source_view_id=None):
-        pass
-
-    def _send_relayout_msg(self, layout, source_view_id=None):
-        pass
-
-    def _send_update_msg(
-        self, restyle_data, relayout_data, trace_indexes=None, source_view_id=None
-    ):
-        pass
-
     def _send_animate_msg(
         self, styles_data, relayout_data, trace_indexes, animation_opts
     ):

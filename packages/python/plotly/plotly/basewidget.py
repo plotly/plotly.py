@@ -24,7 +24,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     # layout as JSON-style dicts. These dicts do not store any subclasses of
     # `BasePlotlyType`
     _widget_layout = Dict().tag(sync=True, **custom_serializers)
-    _data = List().tag(sync=True, **custom_serializers)
+    _widget_data = List().tag(sync=True, **custom_serializers)
     _config = Dict().tag(sync=True, **custom_serializers)
 
     _frame_objs = []
@@ -49,6 +49,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         )
 
         self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
 
     def show(self, *args, **kwargs):
         return self
@@ -84,10 +85,9 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         # print('notify_change', change)
         return super().notify_change(change)
 
-    def _send_relayout_msg(self, layout, source_view_id=None):
-        new_layout = deepcopy(self._layout_obj._props)
-        # del new_layout['template']['layout']['font']
+    def _send_react_msg(self):
         self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
 
     # Validate No Frames
     # ------------------
