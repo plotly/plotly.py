@@ -97,38 +97,46 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Candlestick`
+    **Deprecated**. Use [`plotly.graph_objs.Candlestick`][plotly.graph_objs.Candlestick] instead.
 
-    :param (list) open: opening values
-    :param (list) high: high values
-    :param (list) low: low values
-    :param (list) close: closing values
-    :param (list) dates: list of datetime objects. Default: None
-    :param (string) direction: direction can be 'increasing', 'decreasing',
-        or 'both'. When the direction is 'increasing', the returned figure
-        consists of all candlesticks where the close value is greater than
-        the corresponding open value, and when the direction is
-        'decreasing', the returned figure consists of all candlesticks
-        where the close value is less than or equal to the corresponding
-        open value. When the direction is 'both', both increasing and
-        decreasing candlesticks are returned. Default: 'both'
-    :param kwargs: kwargs passed through plotly.graph_objs.Scatter.
-        These kwargs describe other attributes about the ohlc Scatter trace
-        such as the color or the legend name. For more information on valid
-        kwargs call help(plotly.graph_objs.Scatter)
+    Parameters
+    ----------
+    open : list
+        Opening values.
+    high : list
+        High values.
+    low : list
+        Low values.
+    close : list
+        Closing values.
+    dates : list of datetime objects
+        List of datetime objects. Default is None.
+    direction : str
+        Direction can be 'increasing', 'decreasing', or 'both'. When the direction is 'increasing',
+        the returned figure consists of all candlesticks where the close value is greater than
+        the corresponding open value, and when the direction is 'decreasing', the returned figure
+        consists of all candlesticks where the close value is less than or equal to the corresponding
+        open value. When the direction is 'both', both increasing and decreasing candlesticks are
+        returned. Default is 'both'.
+    **kwargs
+        Additional keyword arguments passed through to `plotly.graph_objs.Scatter`.
+        These kwargs describe other attributes about the OHLC Scatter trace such as the color
+        or the legend name. For more information on valid kwargs, call `help(plotly.graph_objs.Scatter)`.
 
-    :rtype (dict): returns a representation of candlestick chart figure.
+    Returns
+    -------
+    dict
+        Returns a representation of the candlestick chart figure.
 
+    Examples
+    --------
     Example 1: Simple candlestick chart from a Pandas DataFrame
 
     >>> from plotly.figure_factory import create_candlestick
     >>> from datetime import datetime
     >>> import pandas as pd
-
     >>> df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-    >>> fig = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
-    ...                          dates=df.index)
+    >>> fig = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'], dates=df.index)
     >>> fig.show()
 
     Example 2: Customize the candlestick colors
@@ -136,27 +144,18 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     >>> from plotly.figure_factory import create_candlestick
     >>> from plotly.graph_objs import Line, Marker
     >>> from datetime import datetime
-
     >>> import pandas as pd
     >>> df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-
     >>> # Make increasing candlesticks and customize their color and name
     >>> fig_increasing = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
-    ...     dates=df.index,
-    ...     direction='increasing', name='AAPL',
-    ...     marker=Marker(color='rgb(150, 200, 250)'),
-    ...     line=Line(color='rgb(150, 200, 250)'))
-
+    ...     dates=df.index, direction='increasing', name='AAPL',
+    ...     marker=Marker(color='rgb(150, 200, 250)'), line=Line(color='rgb(150, 200, 250)'))
     >>> # Make decreasing candlesticks and customize their color and name
     >>> fig_decreasing = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
-    ...     dates=df.index,
-    ...     direction='decreasing',
-    ...     marker=Marker(color='rgb(128, 128, 128)'),
-    ...     line=Line(color='rgb(128, 128, 128)'))
-
+    ...     dates=df.index, direction='decreasing',
+    ...     marker=Marker(color='rgb(128, 128, 128)'), line=Line(color='rgb(128, 128, 128)'))
     >>> # Initialize the figure
     >>> fig = fig_increasing
-
     >>> # Add decreasing data with .extend()
     >>> fig.add_trace(fig_decreasing['data']) # doctest: +SKIP
     >>> fig.show()
@@ -164,9 +163,7 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     Example 3: Candlestick chart with datetime objects
 
     >>> from plotly.figure_factory import create_candlestick
-
     >>> from datetime import datetime
-
     >>> # Add data
     >>> open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
     >>> high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
@@ -177,10 +174,8 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     ...          datetime(year=2013, month=12, day=10),
     ...          datetime(year=2014, month=1, day=10),
     ...          datetime(year=2014, month=2, day=10)]
-
     >>> # Create ohlc
-    >>> fig = create_candlestick(open_data, high_data,
-    ...     low_data, close_data, dates=dates)
+    >>> fig = create_candlestick(open_data, high_data, low_data, close_data, dates=dates)
     >>> fig.show()
     """
     if dates is not None:
