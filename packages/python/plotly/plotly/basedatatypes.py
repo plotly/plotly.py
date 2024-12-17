@@ -1,5 +1,6 @@
 import collections
 from collections import OrderedDict
+import pdb
 import re
 import warnings
 from contextlib import contextmanager
@@ -557,6 +558,11 @@ class BaseFigure(object):
             layout, skip_invalid=skip_invalid, _validate=self._validate
         )
 
+        # Template
+        # --------
+        # ### Check for default template ###
+        self._initialize_layout_template()
+
         # ### Import clone of layout properties ###
         self._layout = deepcopy(self._layout_obj._props)
 
@@ -623,11 +629,6 @@ class BaseFigure(object):
 
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
-
-        # Template
-        # --------
-        # ### Check for default template ###
-        self._initialize_layout_template()
 
         # Process kwargs
         # --------------
@@ -2559,16 +2560,17 @@ Please use the add_trace method with the row and col parameters.
             self._layout_obj._orphan_props.update(old_layout_data)
             self._layout_obj._parent = None
 
+        print('layout setter')
+        # Initialize template object
+        # --------------------------
+        self._initialize_layout_template()
+
         # Parent new layout
         # -----------------
         self._layout = new_layout_data
         new_layout._parent = self
         new_layout._orphan_props.clear()
         self._layout_obj = new_layout
-
-        # Initialize template object
-        # --------------------------
-        self._initialize_layout_template()
 
         # Notify JS side
         self._send_relayout_msg(new_layout_data)

@@ -24,7 +24,6 @@ def _py_to_js(v, widget_manager):
     any
         Value that the ipywidget library can serialize natively
     """
-
     # Handle dict recursively
     # -----------------------
     if isinstance(v, dict):
