@@ -57,46 +57,50 @@ def create_annotated_heatmap(
     **kwargs,
 ):
     """
-    **deprecated**, use instead
-    :func:`plotly.express.imshow`.
+    **Deprecated**. Use [`plotly.express.imshow`][plotly.express.imshow] instead.
 
-    Function that creates annotated heatmaps
+    Function that creates annotated heatmaps.
 
     This function adds annotations to each cell of the heatmap.
 
-    :param (list[list]|ndarray) z: z matrix to create heatmap.
-    :param (list) x: x axis labels.
-    :param (list) y: y axis labels.
-    :param (list[list]|ndarray) annotation_text: Text strings for
-        annotations. Should have the same dimensions as the z matrix. If no
-        text is added, the values of the z matrix are annotated. Default =
-        z matrix values.
-    :param (list|str) colorscale: heatmap colorscale.
-    :param (list) font_colors: List of two color strings: [min_text_color,
-        max_text_color] where min_text_color is applied to annotations for
-        heatmap values < (max_value - min_value)/2. If font_colors is not
-        defined, the colors are defined logically as black or white
-        depending on the heatmap's colorscale.
-    :param (bool) showscale: Display colorscale. Default = False
-    :param (bool) reversescale: Reverse colorscale. Default = False
-    :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
-        These kwargs describe other attributes about the annotated Heatmap
-        trace such as the colorscale. For more information on valid kwargs
-        call help(plotly.graph_objs.Heatmap)
+    Parameters
+    ----------
+    z : list of list or ndarray
+        z matrix to create heatmap.
+    x : list
+        x axis labels.
+    y : list
+        y axis labels.
+    annotation_text : list of list or ndarray
+        Text strings for annotations. Should have the same dimensions as the z matrix. If no
+        text is added, the values of the z matrix are annotated. Default is the z matrix values.
+    colorscale : list or str
+        Heatmap colorscale.
+    font_colors : list
+        List of two color strings: [min_text_color, max_text_color] where min_text_color is applied to annotations for
+        heatmap values < (max_value - min_value)/2. If font_colors is not defined, the colors are defined logically as
+        black or white depending on the heatmap's colorscale.
+    showscale : bool
+        Display colorscale. Default is False.
+    reversescale : bool
+        Reverse colorscale. Default is False.
+    **kwargs
+        Additional keyword arguments passed through to `plotly.graph_objs.Heatmap`.
+        These kwargs describe other attributes about the annotated Heatmap trace such as the colorscale.
+        For more information on valid kwargs, call `help(plotly.graph_objs.Heatmap)`.
 
+    Examples
+    --------
     Example 1: Simple annotated heatmap with default configuration
 
     >>> import plotly.figure_factory as ff
-
     >>> z = [[0.300000, 0.00000, 0.65, 0.300000],
     ...      [1, 0.100005, 0.45, 0.4300],
     ...      [0.300000, 0.00000, 0.65, 0.300000],
     ...      [1, 0.100005, 0.45, 0.00000]]
-
     >>> fig = ff.create_annotated_heatmap(z)
     >>> fig.show()
     """
-
     # Avoiding mutables in the call signature
     font_colors = font_colors if font_colors is not None else []
     validate_annotated_heatmap(z, x, y, annotation_text)
@@ -173,7 +177,6 @@ class _AnnotatedHeatmap(object):
     def __init__(
         self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ):
-
         self.z = z
         if x:
             self.x = x
@@ -261,7 +264,6 @@ class _AnnotatedHeatmap(object):
             min_text_color = black
             max_text_color = white
         elif isinstance(self.colorscale, list):
-
             min_col = to_rgb_color_list(self.colorscale[0][1], [255, 255, 255])
             max_col = to_rgb_color_list(self.colorscale[-1][1], [255, 255, 255])
 
