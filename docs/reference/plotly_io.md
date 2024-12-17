@@ -1,1 +1,1 @@
-::: packages.python.plotly.plotly.io
+::: plotly.io

@@ -1,2 +1,4 @@
-::: packages.python.plotly.plotly.figure_factory
+::: plotly.figure_factory
+    options:
+        show_submodules: true
 

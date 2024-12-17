@@ -1,2 +1,2 @@
-::: packages.python.plotly.plotly.data
+::: plotly.data
 

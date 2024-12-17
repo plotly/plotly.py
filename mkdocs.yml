@@ -31,11 +31,13 @@ plugins:
     default_handler: python
     handlers:
       python:
+        paths: [packages/python/plotly]
         options:
+          preload_modules:
+            - _plotly_utils
+            - _plotly_future_
           heading_level: 3
-          show_source: false
           show_bases: false
-          load_external_modules: true
           show_symbol_type_heading: true
           docstring_style: numpy
           merge_init_into_class: true
@@ -47,22 +49,71 @@ nav:
     - Creating and Updating Figures:  examples/fundamentals/creating-and-updating-figures.md
     - Displaying Figures:  examples/fundamentals/renderers.md
     - Plotly Express:  examples/fundamentals/plotly-express.md
+    - Static Image Export: examples/fundamentals/static-image-export.md
+    - Theming and Templates: examples/fundamentals/templates.md
+    - Orca: examples/fundamentals/orca-management.md
+    - Configuration: examples/fundamentals/configuration-options.md
+    - Setting Graph Size: examples/fundamentals/setting-graph-size.md
+    - Formatting Ticks: examples/fundamentals/tick-formatting.md
+
 
  - API Reference:
-    - plotly.express:
-      - plotly.express: reference/plotly_express/index.md
-      - plotly.express.data: reference/plotly_express/subpackages/data.md
-      - plotly.express.colors: reference/plotly_express/subpackages/colors.md
-      - plotly.express.imshow_utils: reference/plotly_express/subpackages/imshow_utils.md
-      - plotly.express.trendline_functions: reference/plotly_express/subpackages/trendline_functions.md
-    # - plotly.graph_objects:
-    #   - Figure: reference/graph_objects/Figure.md
-    #   - Layout: reference/graph_objects/Layout.md
-    #   - Traces:
-    #     - Scatter: reference/graph_objects/traces/scatter.md
+    - plotly.express: reference/plotly_express/index.md
+    - plotly.graph_objects:
+      - Figure: reference/graph_objects/Figure.md
+      - Layout: reference/graph_objects/Layout.md
+      - Traces:
+        - Bar: reference/graph_objects/Bar.md
+        - Barpolar: reference/graph_objects/Barpolar.md
+        - Box: reference/graph_objects/Box.md
+        - Candlestick: reference/graph_objects/Candlestick.md
+        - Carpet: reference/graph_objects/Carpet.md
+        - Choropleth: reference/graph_objects/Choropleth.md
+        - Choroplethmap: reference/graph_objects/Choroplethmap.md
+        - Choroplethmapbox: reference/graph_objects/Choroplethmapbox.md
+        - Cone: reference/graph_objects/Cone.md
+        - Contour: reference/graph_objects/Contour.md
+        - Contourcarpet: reference/graph_objects/Contourcarpet.md
+        - Densitymap: reference/graph_objects/Densitymap.md
+        - Densitymapbox: reference/graph_objects/Densitymapbox.md
+        - Funnel: reference/graph_objects/Funnel.md
+        - Funnelarea: reference/graph_objects/Funnelarea.md
+        - Heatmap: reference/graph_objects/Heatmap.md
+        - Histogram: reference/graph_objects/Histogram.md
+        - Histogram2d: reference/graph_objects/Histogram2d.md
+        - Histogram2dContour: reference/graph_objects/Histogram2dContour.md
+        - Icicle: reference/graph_objects/Icicle.md
+        - Image: reference/graph_objects/Image.md
+        - Indicator: reference/graph_objects/Indicator.md
+        - Isosurface: reference/graph_objects/Isosurface.md
+        - Mesh3d: reference/graph_objects/Mesh3d.md
+        - Ohlc: reference/graph_objects/Ohlc.md
+        - Parcats: reference/graph_objects/Parcats.md
+        - Parcoords: reference/graph_objects/Parcoords.md
+        - Pie: reference/graph_objects/Pie.md
+        - Sankey: reference/graph_objects/Sankey.md
+        - Scatter: reference/graph_objects/Scatter.md
+        - Scatter3d: reference/graph_objects/Scatter3d.md
+        - Scattercarpet: reference/graph_objects/Scattercarpet.md
+        - Scattergeo: reference/graph_objects/Scattergeo.md
+        - Scattergl: reference/graph_objects/Scattergl.md
+        - Scattermap: reference/graph_objects/Scattermap.md
+        - Scattermapbox: reference/graph_objects/Scattermapbox.md
+        - Scatterpolar: reference/graph_objects/Scatterpolar.md
+        - Scatterpolargl: reference/graph_objects/Scatterpolargl.md
+        - Scatterternary: reference/graph_objects/Scatterternary.md
+        - Splom: reference/graph_objects/Splom.md
+        - Streamtube: reference/graph_objects/Streamtube.md
+        - Sunburst: reference/graph_objects/Sunburst.md
+        - Surface: reference/graph_objects/Surface.md
+        - Table: reference/graph_objects/Table.md
+        - Treemap: reference/graph_objects/Treemap.md
+        - Violin: reference/graph_objects/Violin.md
+        - Volume: reference/graph_objects/Volume.md
+        - Waterfall: reference/graph_objects/Waterfall.md
     - plotly.io: reference/plotly_io.md
     - plotly.data: reference/plotly_data.md
     - plotly.colors: reference/plotly_colors.md
     - plotly.subplots: reference/plotly_subplots.md
     - plotly.figure_factory: reference/plotly_figure_factory.md
- - Community Forum: http://community.plotly.com/?_gl=1*1nyon0r*_gcl_au*MzU2OTI4NDQyLjE3MjY1ODQwOTE.*_ga*MjEwMjYwNzg3OC4xNzI2NTg0MDkx*_ga_6G7EE0JNSC*MTczMzQyMTY2OC4xODAuMS4xNzMzNDI0NzQzLjE1LjAuMA..
+ - Community Forum: http://community.plotly.com/

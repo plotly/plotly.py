@@ -1,3 +1,3 @@
-::: packages.python.plotly.plotly.subplots
+::: plotly.subplots
 
 
