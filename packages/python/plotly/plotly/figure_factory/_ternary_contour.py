@@ -417,9 +417,6 @@ def _contour_trace(
         How to display contour. Filled contours if None, lines if ``lines``.
     vmin, vmax : float
         Bounds of interval of values used for the colorspace
-
-    Notes
-    =====
     """
     # Prepare colors
     # We do not take extrema, for example for one single contour
