@@ -5127,6 +5127,69 @@ class BasePlotlyType(object):
 
         return self
 
+    def __or__(self, other):
+        """
+        Overload the bitwise or operator to perform a deep merge of two
+        objects. The other object is merged into a copy of the current
+        object which is returned.
+
+        Parameters
+        ----------
+        other : dict | BasePlotlyType
+            Object to merge into the current object
+
+        Returns
+        -------
+        BasePlotlyType
+            Updated plotly object
+        """
+        if not isinstance(other, (dict, BasePlotlyType)):
+            return NotImplemented
+        new = self.copy()
+        new.update(other)
+        return new
+
+    def __ror__(self, other):
+        """
+        Overload the bitwise or operator to perform a deep merge of two
+        objects. The current object is merged into the other object which
+        is returned.
+
+        Parameters
+        ----------
+        other : dict | BasePlotlyType
+            Object to merge the current object into
+
+        Returns
+        -------
+        dict | BasePlotlyType
+            Updated object
+        """
+        if not isinstance(other, (dict, BasePlotlyType)):
+            return NotImplemented
+        new = other.copy()
+        new.update(self)
+        return new
+
+    def __ior__(self, other):
+        """
+        Overload the bitwise or operator to perform a deep merge of two
+        objects. The other object is merged into the current object, modifying
+        it in place.
+
+        Parameters
+        ----------
+        other : BasePlotlyType
+            Object to merge into the current object
+
+        Returns
+        -------
+        BasePlotlyType
+            Updated plotly object
+        """
+        dict.update(self, other)
+        return self
+
     def pop(self, key, *args):
         """
         Remove the value associated with the specified key and return it
