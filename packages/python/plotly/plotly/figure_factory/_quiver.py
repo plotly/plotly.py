@@ -11,88 +11,84 @@ def create_quiver(
     """
     Returns data for a quiver plot.
 
-    :param (list|ndarray) x: x coordinates of the arrow locations
-    :param (list|ndarray) y: y coordinates of the arrow locations
-    :param (list|ndarray) u: x components of the arrow vectors
-    :param (list|ndarray) v: y components of the arrow vectors
-    :param (float in [0,1]) scale: scales size of the arrows(ideally to
-        avoid overlap). Default = .1
-    :param (float in [0,1]) arrow_scale: value multiplied to length of barb
-        to get length of arrowhead. Default = .3
-    :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-    :param (positive float) scaleratio: the ratio between the scale of the y-axis
-        and the scale of the x-axis (scale_y / scale_x). Default = None, the
-        scale ratio is not fixed.
-    :param kwargs: kwargs passed through plotly.graph_objs.Scatter
-        for more information on valid kwargs call
-        help(plotly.graph_objs.Scatter)
+    Parameters
+    ----------
+    x : list or ndarray
+        x coordinates of the arrow locations.
+    y : list or ndarray
+        y coordinates of the arrow locations.
+    u : list or ndarray
+        x components of the arrow vectors.
+    v : list or ndarray
+        y components of the arrow vectors.
+    scale : float
+        Scales size of the arrows (ideally to avoid overlap). Must be in the range [0, 1]. Default is 0.1.
+    arrow_scale : float
+        Value multiplied to length of barb to get length of arrowhead. Must be in the range [0, 1]. Default is 0.3.
+    angle : float
+        Angle of arrowhead in radians. Default is pi/9.
+    scaleratio : float
+        The ratio between the scale of the y-axis and the scale of the x-axis (scale_y / scale_x). Must be a positive float. Default is None, meaning the scale ratio is not fixed.
+    **kwargs
+        Additional keyword arguments passed through to `plotly.graph_objs.Scatter`. For more information on valid kwargs, call `help(plotly.graph_objs.Scatter)`.
 
-    :rtype (dict): returns a representation of quiver figure.
+    Returns
+    -------
+    dict
+        A representation of the quiver figure.
 
+    Examples
+    --------
     Example 1: Trivial Quiver
 
     >>> from plotly.figure_factory import create_quiver
     >>> import math
-
     >>> # 1 Arrow from (0,0) to (1,1)
     >>> fig = create_quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
     >>> fig.show()
 
-
     Example 2: Quiver plot using meshgrid
 
     >>> from plotly.figure_factory import create_quiver
-
     >>> import numpy as np
     >>> import math
-
     >>> # Add data
-    >>> x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
-    >>> u = np.cos(x)*y
-    >>> v = np.sin(x)*y
-
-    >>> #Create quiver
+    >>> x, y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
+    >>> u = np.cos(x) * y
+    >>> v = np.sin(x) * y
+    >>> # Create quiver
     >>> fig = create_quiver(x, y, u, v)
     >>> fig.show()
-
 
     Example 3: Styling the quiver plot
 
     >>> from plotly.figure_factory import create_quiver
     >>> import numpy as np
     >>> import math
-
     >>> # Add data
-    >>> x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
-    ...                    np.arange(-math.pi, math.pi, .5))
-    >>> u = np.cos(x)*y
-    >>> v = np.sin(x)*y
-
+    >>> x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5), np.arange(-math.pi, math.pi, .5))
+    >>> u = np.cos(x) * y
+    >>> v = np.sin(x) * y
     >>> # Create quiver
-    >>> fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
-    ...                     name='Wind Velocity', line=dict(width=1))
-
+    >>> fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6, name='Wind Velocity', line=dict(width=1))
     >>> # Add title to layout
     >>> fig.update_layout(title='Quiver Plot') # doctest: +SKIP
     >>> fig.show()
 
-
-    Example 4: Forcing a fix scale ratio to maintain the arrow length
+    Example 4: Forcing a fixed scale ratio to maintain the arrow length
 
     >>> from plotly.figure_factory import create_quiver
     >>> import numpy as np
-
     >>> # Add data
-    >>> x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
+    >>> x, y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
     >>> u = x
     >>> v = y
     >>> angle = np.arctan(v / u)
     >>> norm = 0.25
     >>> u = norm * np.cos(angle)
     >>> v = norm * np.sin(angle)
-
-    >>> # Create quiver with a fix scale ratio
-    >>> fig = create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
+    >>> # Create quiver with a fixed scale ratio
+    >>> fig = create_quiver(x, y, u, v, scale=1, scaleratio=0.5)
     >>> fig.show()
     """
     utils.validate_equal_length(x, y, u, v)
