@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import imghdr
 import tempfile
 import os

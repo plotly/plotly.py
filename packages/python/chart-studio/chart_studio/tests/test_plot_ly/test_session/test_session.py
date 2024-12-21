@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from chart_studio.tests.utils import PlotlyTestCase
 
 from chart_studio import session

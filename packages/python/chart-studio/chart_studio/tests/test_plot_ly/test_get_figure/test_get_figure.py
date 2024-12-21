@@ -5,7 +5,7 @@ test_get_figure:
 A module intended for use with Nose.
 
 """
-from __future__ import absolute_import
+
 
 import _plotly_utils.exceptions
 from chart_studio import exceptions

@@ -5,7 +5,7 @@ exceptions
 A module that contains plotly's exception hierarchy.
 
 """
-from __future__ import absolute_import
+
 
 from chart_studio.api.utils import to_native_utf8_string
 

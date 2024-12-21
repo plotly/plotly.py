@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from chart_studio.api.v2 import (
     dash_apps,
     dashboards,

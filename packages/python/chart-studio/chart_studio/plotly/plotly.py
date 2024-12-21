@@ -14,7 +14,7 @@ and ploty's servers.
 4. update plot_options with kwargs!
 
 """
-from __future__ import absolute_import
+
 
 import base64
 import copy

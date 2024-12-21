@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import requests
 import json as _json
 from requests.exceptions import RequestException

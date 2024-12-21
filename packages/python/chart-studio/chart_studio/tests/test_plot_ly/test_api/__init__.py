@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from requests import Response
 
 from chart_studio.session import sign_in

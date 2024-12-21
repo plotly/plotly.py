@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import _plotly_utils.exceptions
 from chart_studio import plotly as py, exceptions
 import chart_studio.session as session

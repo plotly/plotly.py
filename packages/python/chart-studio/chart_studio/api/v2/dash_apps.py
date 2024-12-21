@@ -1,7 +1,7 @@
 """
 Beta interface to Plotly's /v2/dash-apps endpoints.
 """
-from __future__ import absolute_import
+
 
 from chart_studio.api.v2.utils import build_url, request
 
