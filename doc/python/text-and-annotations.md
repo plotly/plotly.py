@@ -784,41 +784,60 @@ fig.show()
 ```
 ### Specifying Source Lines or Figure Notes on the Bottom of a Figure
 
-Container coordinates are an easy and robust way to put text -- such as a source line or figure note -- at the bottom of a figure.  Only the title command supports container coordinates.  If you have access to the HTML of the webpage in which you are embedding the graphic, either the source line, title, or both could go there instead.
+A near zero container coordinate is an easy and robust way to put text -- such as a source line or figure note -- at the bottom of a figure.  It is easier to specify the bottom of the figure in container coordinates than in e.g. a paper coordinate since it is unclear how big legends and x-axis labels will be.  Making the y coordinate of the source/note line very slightly positive avoids cutting off the descending strokes of letters like y, p, and q.  Only the title command supports container coordinates, so this example repurposes the title element to insert the note and repurposes an annotation element for the title.  The top of the figure is typically less cluttered and more predictable, so an annotation with a paper y-coordinate slightly greater than 1 will generally be a reasonable title location above the plot area.
 
-```
-import plotly.express as px
+```import plotly.express as px
 df_iris = px.data.iris()
 fig = px.scatter(df_iris, x="sepal_width", y="sepal_length", color="species",
                  size='petal_length', hover_data=['petal_width'])
 
-#Use the title for the source line
+#Use the title for the source / note line
 fig.update_layout(
-        title=dict(text="Note: a near zero container coordinate is the most robust way to position this on the bottom.  Only the 'title' supports container coordinates.",
+        title=dict(text="Note: this is the Plotly title element.",
+                   #keep this short to avoid being cut off in small windows
                 yref="container",
-                # A small positive y coordinate avoids cutting off the descending strokes of letters like y, p, and q.
+                # A small positive y coordinate avoids cutting off the descending 
+                # strokes of letters like y, p, and q.
                 y=0.005,
-                # Paper coordinates let us align this at either edge of the plot region 
-                # (use x=0, xanchor="left" for the lower left corner; that yields a slightly busier result since it's 
-                # not obvious whether we should align with the lower left corner of the plot area or the left edge of the axis labeling )
+                # Paper x-coordinates let us align this at either the right or left
+                # edge of the plot region 
+                # Aligning this flush with the right edge of the plot area is 
+                # predictable and easy to code.  That is easier than trying to put
+                # this in the lower left corner since that would likely look best
+                # aligned with the left edge of the axis labeling and such an alignment
+                # will require graph specific coordinate adjustments.
                 xref="paper",
                 xanchor="right",
                 x=1, 
-                font=dict(size=12))
-)
+
+                font=dict(size=12)),
+  # We move the legend out of the right margin so the right-aligned note is 
+  # flush with the right most element of the graph.
+  # In this particular example, the top right corner of the graph region
+  # is consistently available at all screen resolutions.
+  legend=dict(
+                yanchor="top",
+                y=1,
+                xanchor="right",
+                x=1)
+                )
 
 #Repurpose an annotation to insert a title
 fig.add_annotation(
-    xref="paper",
     yref="paper",
+    yanchor="bottom",
+    y=1.025,  # y = 1 is the top of the plot area; the top is typically uncluttered, 
+              # so this should work on most graphs
+            text="This title is a Plotly annotation",
+
+    #center horizontally over the plot area
+    xref="paper",
     xanchor="center",
     x=0.5, 
-    yanchor="bottom",
-    y=1.025,  # y = 1 is the top of the plot area
-            text="We can use an annotation to provide the title",
-            showarrow=False,
-            font=dict(size=18)
-            )
+
+    showarrow=False,
+    font=dict(size=18)
+    )
 
 fig.show()
 ```
