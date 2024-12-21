@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._width import WidthValidator
     from ._dash import DashValidator
     from ._color import ColorValidator

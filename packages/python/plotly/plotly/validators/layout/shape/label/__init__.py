@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._yanchor import YanchorValidator
     from ._xanchor import XanchorValidator
     from ._texttemplate import TexttemplateValidator
