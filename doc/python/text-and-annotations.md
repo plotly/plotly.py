@@ -810,10 +810,10 @@ fig.update_layout(
                 xref="paper",
                 xanchor="right",
                 x=1, 
+                font=dict(size=12)),
 
                 plot_bgcolor="white",
 
-                font=dict(size=12)),
   # We move the legend out of the right margin so the right-aligned note is 
   # flush with the right most element of the graph.
   # Here we put the legend in a corners of the graph region
