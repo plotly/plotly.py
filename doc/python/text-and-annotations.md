@@ -811,6 +811,8 @@ fig.update_layout(
                 xanchor="right",
                 x=1, 
 
+                plot_bgcolor="white",
+
                 font=dict(size=12)),
   # We move the legend out of the right margin so the right-aligned note is 
   # flush with the right most element of the graph.
@@ -820,7 +822,8 @@ fig.update_layout(
                 yanchor="top",
                 y=1,
                 xanchor="right",
-                x=1)
+                x=1,
+                borderwidth=1)
                 )
 
 # Repurpose an annotation to insert a title
