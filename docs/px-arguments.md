@@ -21,6 +21,16 @@ jupyter:
     nbconvert_exporter: python
     pygments_lexer: ipython3
     version: 3.11.10
+  plotly:
+    description: Input data arguments accepted by Plotly Express functions
+    display_as: file_settings
+    language: python
+    layout: base
+    name: Plotly Express Arguments
+    order: 19
+    page_type: u-guide
+    permalink: python/px-arguments/
+    thumbnail: thumbnail/plotly-express.png
 ---
 
 Plotly Express (`px`) is the high-level interface to Plotly and provides functions for generating charts. `px` functions support data provided in a number of different formats (long, wide, and mixed) and as different types of objects, including pandas and Polars dataframes.
@@ -123,7 +133,7 @@ PySpark dataframes are also supported and are converted to pandas dataframes int
 - To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
 - To use PySpark dataframes, you'll need to have pandas installed. To use dataframes that support the dataframe interchange protocol, you'll need to have PyArrow installed.
 
-### Example: Using a Pandas DataFrame with px.bar
+### Example: Using a Pandas DataFrame with `px.bar`
 
 Here, we create a pandas `DataFrame`, pass it to `px.bar` as its first argument, and then use the `"sepal_length"` column for the x-axis and the `"sepal_width"` for the y-axis.
 
@@ -136,7 +146,7 @@ fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', size='p
 fig.show()
 ```
 
-### Example: Polars DataFrame with px.bar
+### Example: Polars DataFrame with `px.bar`
 
 `px` provides native support for dataframe types other than pandas, including Polars:
 

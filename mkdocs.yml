@@ -25,6 +25,7 @@ hooks:
 plugins:
 - mkdocs-jupyter:
     execute: true
+    allow_errors: false
 
 - search
 - mkdocstrings:
@@ -43,19 +44,189 @@ plugins:
           merge_init_into_class: true
 
 nav:
- - Getting Started: examples/getting-started.md
+ - Getting Started: index.md
  - Fundamentals:
-    - The Figure Data Structure:  examples/fundamentals/figure-structure.md
-    - Creating and Updating Figures:  examples/fundamentals/creating-and-updating-figures.md
-    - Displaying Figures:  examples/fundamentals/renderers.md
-    - Plotly Express:  examples/fundamentals/plotly-express.md
-    - Static Image Export: examples/fundamentals/static-image-export.md
-    - Theming and Templates: examples/fundamentals/templates.md
-    - Orca: examples/fundamentals/orca-management.md
-    - Configuration: examples/fundamentals/configuration-options.md
-    - Setting Graph Size: examples/fundamentals/setting-graph-size.md
-    - Formatting Ticks: examples/fundamentals/tick-formatting.md
+    - The Figure Data Structure: figure-structure.md
+    - Creating and Updating Figures: creating-and-updating-figures.md
+    - Displaying Figures: renderers.md
+    - Plotly Express: plotly-express.md
+    - Static Image Export: static-image-export.md
+    - Theming and Templates: templates.md
+    - Changes in Version 6: v6-changes.md
+    - Version 4 Migration Guide: v4-migration.md
+    - Orca: orca-management.md
+    - Configuration: configuration-options.md
+    - Setting Graph Size: setting-graph-size.md
+    - Formatting Ticks: tick-formatting.md
+    - Setting the Font, Title, Legend Entries, and Axis Titles: figure-labels.md
+    - Axes: axes.md
+    - Legends: legend.md
+    - Multiple Axes: multiple-axes.md
+    - Subplots: subplots.md
+    - Multiple Chart Types: graphing-multiple-chart-types.md
+    - Plotly Express Arguments: px-arguments.md
+    - Styling Markers: marker-style.md
+    - Continuous Colorscales and Colorbars: colorscales.md
+    - Text and Annotations: text-and-annotations.md
+    - Hover Text and Formatting: hover-text-and-formatting.md
+    - Images: images.md
+    - Shapes: shapes.md
+    - Troubleshooting: troubleshooting.md
+    - Built-in Continuous Color Scales: builtin-colorscales.md
+    - Discrete Colors: discrete-color.md
+    - Styling Plotly Express: styling-plotly-express.md
+    - Interactive HTML Export: interactive-html-export.md
+    - Pandas Plotting Backend: pandas-backend.md
+    - Figure Factories: figure-factories.md
+    - Wide Form: wide-form.md
+    - Graph Objects: graph-objects.md
+    - Figure Introspection: figure-introspection.md
+    - Horizontal and Vertical Lines and Rectangles: horizontal-vertical-shapes.md
+    - Selections: selections.md
+    - Performance: performance.md
 
+ - Basic Charts:
+    - Scatter Plots:  line-and-scatter.md
+    - Line Charts:  line-charts.md
+    - Bar Charts:  bar-charts.md
+    - Pie Charts:  pie-charts.md
+    - Bubble Charts:  bubble-charts.md
+    - Dot Plots:  dot-plots.md
+    - Filled Area Plots:  filled-area-plots.md
+    - Horizontal Bar Charts:  horizontal-bar-charts.md
+    - Gantt Charts:  gantt.md
+    - Sunburst Charts:  sunburst-charts.md
+    - Tables:  table.md
+    - Sankey Diagram:  sankey-diagram.md
+    - Treemap Charts:  treemaps.md
+    - Figure Factory Tables:  figure-factory-table.md
+    - Categorical Axes:  categorical-axes.md
+    - Icicle Charts:  icicle-charts.md
+    - Patterns, Hatching, Texture:  pattern-hatching-texture.md
+    - Dumbbell Plots:  dumbbell-plots.md
+
+ - Statistical Charts:
+    - Error Bars: error-bars.md
+    - Box Plots: box-plots.md
+    - Histograms: histograms.md
+    - Distplots: distplot.md
+    - 2D Histograms: 2D-Histogram.md
+    - Scatterplot Matrix: splom.md
+    - Facet and Trellis Plots: facet-plots.md
+    - Parallel Categories Diagram: parallel-categories-diagram.md
+    - Tree Plots: tree-plots.md
+    - Violin Plots: violin.md
+    - 2D Histogram Contour: 2d-histogram-contour.md
+    - Linear and Non-Linear Trendlines: linear-fits.md
+    - Marginal Distribution Plots: marginal-plots.md
+    - Strip Charts: strip-charts.md
+    - Continuous Error Bands: continuous-error-bars.md
+    - Empirical Cumulative Distribution Plots: ecdf-plots.md
+
+ - Scientific Charts:
+    - Contour Plots: contour-plots.md
+    - Heatmaps: heatmaps.md
+    - Imshow: imshow.md
+    - Ternary Plots: ternary-plots.md
+    - Log Plots: log-plot.md
+    - Dendrograms: dendrogram.md
+    - Annotated Heatmaps: annotated-heatmap.md
+    - Ternary Overlay: ternary-scatter-contour.md
+    - Parallel Coordinates Plot: parallel-coordinates-plot.md
+    - Quiver Plots: quiver-plots.md
+    - Streamline Plots: streamline-plots.md
+    - Network Graphs: network-graphs.md
+    - Carpet Plots: carpet-plot.md
+    - Carpet Contour Plot: carpet-contour.md
+    - Carpet Scatter Plot: carpet-scatter.md
+    - Polar Charts: polar-chart.md
+    - Radar Charts: radar-chart.md
+    - Ternary Contours: ternary-contour.md
+    - Wind Rose Charts: wind-rose-charts.md
+    - Smith Charts: smith-charts.md
+
+ - Financial Charts:
+    - Time Series and Date Axes: time-series.md
+    - Candlestick Charts: candlestick-charts.md
+    - Waterfall Charts: waterfall-charts.md
+    - Funnel Charts: funnel-charts.md
+    - OHLC Charts: ohlc-charts.md
+    - Indicators: indicator.md
+    - Gauge Charts: gauge-charts.md
+    - Bullet Charts: bullet-charts.md
+
+ - Maps:
+    - Maplibre Migration:  migrate-to-maplibre.md
+    - Tile Choropleth Maps:  tile-county-choropleth.md
+    - Lines on Tile Maps:  lines-on-tile-maps.md
+    - Filled Area on Tile Maps:  filled-area-tile-maps.md
+    - Bubble Maps:  bubble-maps.md
+    - Density Heatmap:  density-heatmaps.md
+    - Lines on Maps:  lines-on-maps.md
+    - Choropleth Maps:  choropleth-maps.md
+    - Tile Map Layers:  tile-map-layers.md
+    - Scatter Plots on Tile Maps:  tile-scatter-maps.md
+    - County Choropleth:  county-choropleth.md
+    - Scatter Plots on Maps:  scatter-plots-on-maps.md
+    - Map Configuration and Styling on Geo Maps:  map-configuration.md
+    - Hexbin Mapbox:  hexbin-mapbox.md
+
+ - AI and ML:
+    - ML Regression: ml-regression.md
+    - kNN Classification: ml-knn.md
+    - ROC and PR Curves: ml-roc-pr.md
+    - PCA Visualization: ml-pca.md
+    - AI/ML Apps with Dash: ml-apps.md
+    - t-SNE and UMAP projections: ml-tsne-umap-projections.md
+
+ - Visualizing Biological Data:
+    - Volcano Plot: volcano.md
+    - Manhattan Plot: manhattan.md
+    - Clustergram: clustergram.md
+    - Alignment Chart: alignment-chart.md
+
+ - 3D Charts:
+    - 3D Axes: 3d-axes.md
+    - 3D Scatter Plots: 3d-scatter-plots.md
+    - 3D Surface Plots: 3d-surface-plots.md
+    - 3D Subplots: 3d-subplots.md
+    - 3D Camera Controls: 3d-camera-controls.md
+    - 3D Bubble Charts: 3d-bubble-charts.md
+    - 3D Line Plots: 3d-line-plots.md
+    - Trisurf: trisurf.md
+    - 3D Mesh Plots: 3d-mesh.md
+    - 3D Isosurface Plots: 3d-isosurface-plots.md
+    - 3D Volume Plots: 3d-volume.md
+    - 3D Cone Plots: cone-plot.md
+    - 3D Streamtube Plots: streamtube-plot.md
+
+ - Subplots:
+    - Mixed Subplots:  mixed-subplots.md
+    - Map Subplots:  map-subplots-and-small-multiples.md
+    - Table and Chart Subplots:  table-subplots.md
+    - Figure Factory Subplots:  figure-factory-subplots.md
+
+ - Jupyter Widgets:
+    - FigureWidget Overview:  figurewidget.md
+    - JupyterLab with FigureWidget:  jupyter-lab-tools.md
+    - Interactive Data Analysis with FigureWidgets:  figurewidget-app.md
+    - Click Events:  click-events.md
+
+ - Custom Controls:
+    - Custom Buttons: custom-buttons.md
+    - Sliders: sliders.md
+    - Dropdowns: dropdowns.md
+    - Range Slider: range-slider.md
+
+ - Animations:
+    - Intro to Animations: animations.md
+
+ - Advanced:
+    - Plot CSV Data: plot-data-from-csv.md
+    - Random Walk: random-walk.md
+    - Peak Finding: peak-finding.md
+    - Smoothing: smoothing.md
+    - LaTeX: LaTeX.md
 
  - API Reference:
     - plotly.express: reference/plotly_express/index.md
@@ -116,4 +287,5 @@ nav:
     - plotly.colors: reference/plotly_colors.md
     - plotly.subplots: reference/plotly_subplots.md
     - plotly.figure_factory: reference/plotly_figure_factory.md
+
  - Community Forum: http://community.plotly.com/

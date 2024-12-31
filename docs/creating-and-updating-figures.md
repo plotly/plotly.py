@@ -21,20 +21,6 @@ jupyter:
     nbconvert_exporter: python
     pygments_lexer: ipython3
     version: 3.8.8
-  plotly:
-    description: Creating and Updating Figures with Plotly's Python graphing library
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Creating and Updating Figures
-    order: 2
-    page_type: example_index
-    permalink: python/creating-and-updating-figures/
-    redirect_from:
-    - python/user-guide/
-    - python/user-g/
-    thumbnail: thumbnail/creating-and-updating-figures.png
-    v4upgrade: true
 ---
 
 The `plotly` Python package exists to create, manipulate and [render](/python/renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](/python/figure-structure/). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
