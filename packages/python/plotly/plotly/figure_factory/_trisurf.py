@@ -310,6 +310,8 @@ def create_trisurf(
     aspectratio : dict
         A dictionary of the aspect ratio values for the x, y, and z axes. 'x', 'y', and 'z' take int or float values.
 
+    Examples
+    --------
     Example 1: Sphere
 
     >>> # Necessary Imports for Trisurf
