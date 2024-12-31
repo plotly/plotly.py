@@ -12,6 +12,8 @@ packages/python/plotly/plotly/tests/test_orca/images/linux/failed/
 *~
 
 doc/python/raw.githubusercontent.com/
+raw.githubusercontent.com/
+files.figshare.com/
 
 # Don't ignore dataset files
 !*.csv.gz
@@ -63,3 +65,5 @@ packages/python/plotly/plotly/package_data/widgetbundle.js
 
 test/percy/*.html
 test/percy/pandas2/*.html
+
+.DS_Store
