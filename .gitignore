@@ -14,6 +14,7 @@ packages/python/plotly/plotly/tests/test_orca/images/linux/failed/
 doc/python/raw.githubusercontent.com/
 raw.githubusercontent.com/
 files.figshare.com/
+ne_50m_rivers_lake_centerlines*
 
 # Don't ignore dataset files
 !*.csv.gz
