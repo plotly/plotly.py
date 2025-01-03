@@ -597,22 +597,24 @@ This bar-style pictogram allows readers to focus on the relative sizes of smalle
 import plotly.graph_objects as go
 import pandas as pd
 
-def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, column_spacing=0.005,icon_spacing=0.005):
+def pictogram_bar(df, title, icon_size, max_height=10, units_per_icon=1, column_spacing=0.005,icon_spacing=0.005, scale_factor=1.45,description_of_unit = ""):
    
     fig = go.Figure()
     x_start = 1
     tick_locations = []
 
-    for i, (category, value) in enumerate(data.items()):
+    for i, (category, value) in df.iterrows():
         icon_count = round(value / units_per_icon)
         num_columns = -(-icon_count // max_height)  # Ceiling division
 
+        
+        
         x_coordinates, y_coordinates = [], []
         for col in range(num_columns):
             column_icons = min(max_height, icon_count - col * max_height)
-            x_coordinates.extend([x_start + col] * column_icons)
+            x_coordinates.extend([(x_start + col)*(1 + icon_spacing)] * column_icons)
            # y_coordinates.extend(range(1, column_icons + 1))
-            y_coordinates.extend([y + icon_spacing * y for y in range(1, column_icons + 1)])
+            y_coordinates.extend([(1 + icon_spacing) * y for y in range(2, column_icons + 2)])
 
 
         # Add scatter plot for the category
@@ -621,61 +623,71 @@ def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, colum
             y=y_coordinates,
             mode='markers',
             marker=dict(size=icon_size, symbol="square", color= i),
-            name=category,
             hoverinfo="text",
-            text=[f"{category}: {value}" for _ in range(len(x_coordinates))]
+            text=[f"{category}: {value}" for _ in range(len(x_coordinates))],
+            name= f"(1 icon =<br> {units_per_icon} {description_of_unit})",
+            showlegend=(i==0)
+
         ))
         
 
+        center_of_category_x = (x_start + (num_columns - 1) / 2)*(1 + icon_spacing)
+
         # Add value annotations above the section: new line of code 
         fig.add_trace(go.Scatter(
-            x=[x_start + (num_columns - 1) / 2],
-            y=[max_height + 1],
+            x=[center_of_category_x],
+            y=[1],#(max_height+ 1)*(1 + icon_spacing) 
             mode="text",
-            text=[f"{value}"],
+            text=[f"{value:,.0f}"],
             textfont=dict(size=14, color="black"),
-            showlegend=False
+            showlegend=False,
         ))
 
         # Track tick locations
-        tick_locations.append(x_start + (num_columns - 1) / 2)
+        tick_locations.append(center_of_category_x)
         x_start += num_columns + column_spacing
 
+    print(x_start)
     # Update layout
     fig.update_layout(
         title=title,
         xaxis=dict(
+            #range=[0,x_start],
             tickvals=tick_locations,
-            ticktext=list(data.keys()),
+            ticktext=list(df.keys()),
             tickangle=-45,
             showgrid=False,
-            title="Categories"
         ),
         yaxis=dict(
-            title=f"Units (1 icon = {units_per_icon})",
-            showgrid=False,
-            zeroline=False,
+             visible= False,
+            #scaleanchor = "x",
+            #scaleratio = 1,
         ),
-        showlegend=False,
-        height=600,
-        width=(len(data) * 200 + 200)  # Done adjused width based on number of categories
+        
+        legend=dict(  #this works best with the big category last, so there will be typically space for a legend in the lower right
+                yanchor="top",
+                y=-0.1,
+                xanchor="right",
+                x=1),
+        height=(max_height * (icon_size*(1+icon_spacing)*scale_factor) + 200),  #we care about the ratio of the icon size measured in PX to the size of the plot area, so 
+        width=(x_start * (icon_size*(1+icon_spacing)*scale_factor) + 100)  # Done adjusted width based on number of categories
     )
 
     fig.show()
 
 
-# done as pd 
 df = pd.DataFrame({
     'School': ["Haverford College", "University of Mary Washington", "Brown University", "Arizona State University"],
     'Enrollment': [1421, 3611, 7226, 65174]
 })
 
 pictogram_bar(
-    data={row['School']: row['Enrollment'] for _, row in df.iterrows()},
+    df,
     title="Undergraduate Enrollment at Participating Schools",
     units_per_icon=1000,
-    icon_size=27,
-   icon_spacing=0.05
+    icon_size=20,
+   icon_spacing=0.7,
+   description_of_unit="students"
 )
 ```
 
