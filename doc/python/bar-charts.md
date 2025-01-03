@@ -597,82 +597,86 @@ This bar-style pictogram allows readers to focus on the relative sizes of smalle
 import plotly.graph_objects as go
 import pandas as pd
 
-#TODO:  make the results and the code compellingly clear, terse, and well designed; for example, make sure all the variable names are descriptive
-#TODO:  when we're happy, remove print statements
-#TODO:  consider adding the value for each group either above its section or to its title
-
-def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1,columns_between_units=.5):
-    fig = go.Figure()
+def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, column_spacing=0.005,icon_spacing=0.005):
    
-    # Iterate through the data and create a scatter plot for each category
+    fig = go.Figure()
     x_start = 1
     tick_locations = []
-    for i, (category, count) in enumerate(data.items()):
-        #convert the real number input to an integer number of icons.  Depending on the context, you might want to take floor or a ceiling rather than rouding
-        count = round(count / units_per_icon)
-        num_cols = (count + max_height - 1) // max_height  # Ceiling division
-        x_coordinates = []
-        y_coordinates = []
-        for col in range(num_cols):
-            print([x_start+col]*min(max_height, count-col*max_height))
-            x_coordinates += [x_start+col]*min(max_height, count-col*max_height)
-            print(list(range(0, min(max_height, count-col*max_height))))
-            for yc in range(1, min(max_height, count-col*max_height)+1):
-                y_coordinates.append(yc)
-        print(f"{category=}")
-        print(f"{x_coordinates=}")
-        print(f"{y_coordinates=}")
-        # Add dots for this category
+
+    for i, (category, value) in enumerate(data.items()):
+        icon_count = round(value / units_per_icon)
+        num_columns = -(-icon_count // max_height)  # Ceiling division
+
+        x_coordinates, y_coordinates = [], []
+        for col in range(num_columns):
+            column_icons = min(max_height, icon_count - col * max_height)
+            x_coordinates.extend([x_start + col] * column_icons)
+           # y_coordinates.extend(range(1, column_icons + 1))
+            y_coordinates.extend([y + icon_spacing * y for y in range(1, column_icons + 1)])
+
+
+        # Add scatter plot for the category
         fig.add_trace(go.Scatter(
-            x=x_coordinates,  # All dots are in the same x position (category)
+            x=x_coordinates,
             y=y_coordinates,
             mode='markers',
-            marker=dict(size=icon_size, symbol="square", color=i),
+            marker=dict(size=icon_size, symbol="square", color= i),
             name=category,
-            #text=[category] * (y_end - y_start),  # Hover text
-            hoverinfo="text"
+            hoverinfo="text",
+            text=[f"{category}: {value}" for _ in range(len(x_coordinates))]
         ))
-        tick_locations += [x_start+ (col)/2]
-        x_start += col+1+columns_between_units
-        print(f"{tick_locations=}")
-   
-    # Update layout for better visualization
+        
+
+        # Add value annotations above the section: new line of code 
+        fig.add_trace(go.Scatter(
+            x=[x_start + (num_columns - 1) / 2],
+            y=[max_height + 1],
+            mode="text",
+            text=[f"{value}"],
+            textfont=dict(size=14, color="black"),
+            showlegend=False
+        ))
+
+        # Track tick locations
+        tick_locations.append(x_start + (num_columns - 1) / 2)
+        x_start += num_columns + column_spacing
+
+    # Update layout
     fig.update_layout(
         title=title,
         xaxis=dict(
             tickvals=tick_locations,
             ticktext=list(data.keys()),
             tickangle=-45,
-            showgrid=False
-        ),
-        #TODO:  HIDE THE Y-AXIS?  OR ENUMERATE IT IN "NATURAL UNITS" -- so count
-        yaxis=dict(
-            title="Units",
             showgrid=False,
-            showline=False,
-            zeroline=False
+            title="Categories"
         ),
-        #TO DO:  SHOW THE LEGEND, BUT JUST FOR ONE TRACE; LABEL IT WITH SOMETHING LIKE "EACH ICON REPRESENTS {units_per_icon} {Y_VARNAME}"
+        yaxis=dict(
+            title=f"Units (1 icon = {units_per_icon})",
+            showgrid=False,
+            zeroline=False,
+        ),
         showlegend=False,
-        #setting the width implicitly sets the amount of space between columns within groups and it's desirable to keep those columns close but not too close
-        #TODO:  set the width to a value that makes the spacing between columns reasonable; try it as a function of the number of columns of data, number of columns left blank as spacers, the icon size; and the left and right margins
-        # there's no right answer; but some answers will look a lot better than others; I'm guessing that roughly 2-3 times as many px as we fill with icons might be good
-        height=600
+        height=600,
+        width=(len(data) * 200 + 200)  # Done adjused width based on number of categories
     )
 
-    # Show the plot
     fig.show()
 
-# TODO:  CHANGE THIS THROUGHOUT TO A DF NAMED DF.
 
-data = {
-    "Haverford College": 1421, #https://www.usnews.com/best-colleges/haverford-college-3274
-    "University of Mary Washington": 3611,  #https://www.usnews.com/best-colleges/university-of-mary-washington-3746#:~:text=Overview,campus%20size%20is%20234%20acres.
-    "Brown University": 7226,  #https://oir.brown.edu/institutional-data/factbooks/enrollment
-    "Arizona State University": 65174,  #https://www.usnews.com/best-colleges/arizona-state-university-1081
-}
+# done as pd 
+df = pd.DataFrame({
+    'School': ["Haverford College", "University of Mary Washington", "Brown University", "Arizona State University"],
+    'Enrollment': [1421, 3611, 7226, 65174]
+})
 
-pictogram_bar(data, title="Undergraduate Enrollment at Participating Schools", units_per_icon=1000, icon_size=27)
+pictogram_bar(
+    data={row['School']: row['Enrollment'] for _, row in df.iterrows()},
+    title="Undergraduate Enrollment at Participating Schools",
+    units_per_icon=1000,
+    icon_size=27,
+   icon_spacing=0.05
+)
 ```
 
 ### Customizing Individual Bar Base
