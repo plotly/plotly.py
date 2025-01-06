@@ -1,4 +1,7 @@
+from copy import deepcopy
+import datetime
 import pathlib
+import time
 from traitlets import List, Dict, observe, Integer
 from plotly.io._renderers import display_jupyter_version_warnings
 
@@ -27,8 +30,8 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     # them to the front-end on FigureWidget construction. All other updates
     # are made using mutation, and they are manually synced to the frontend
     # using the relayout/restyle/update/etc. messages.
-    _layout = Dict().tag(sync=True, **custom_serializers)
-    _data = List().tag(sync=True, **custom_serializers)
+    _widget_layout = Dict().tag(sync=True, **custom_serializers)
+    _widget_data = List().tag(sync=True, **custom_serializers)
     _config = Dict().tag(sync=True, **custom_serializers)
 
     # ### Python -> JS message properties ###
@@ -104,6 +107,9 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             **kwargs,
         )
 
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._widget_data)
+
         # Validate Frames
         # ---------------
         # Frames are not supported by figure widget
@@ -143,6 +149,8 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         self._view_count = 0
 
     def show(self, *args, **kwargs):
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._widget_data)
         return self
 
     # Python -> JavaScript Messages
@@ -510,7 +518,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             # If a property is present in both _layout and _layout_defaults
             # then we remove the copy from _layout
             removed_props = self._remove_overlapping_props(
-                self._layout, self._layout_defaults
+                self._widget_layout, self._layout_defaults
             )
 
             # ### Notify frontend model of property removal ###
@@ -729,6 +737,8 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         Return mimebundle corresponding to default renderer.
         """
         display_jupyter_version_warnings()
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
         return {
             "application/vnd.jupyter.widget-view+json": {
                 "version_major": 2,
