@@ -106,7 +106,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         )
 
         self._widget_layout = deepcopy(self._layout_obj._props)
-        self._widget_data = deepcopy(self._widget_data)
+        self._widget_data = deepcopy(self._data)
 
         # Validate Frames
         # ---------------
