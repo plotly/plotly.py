@@ -18,7 +18,7 @@ jupyter:
     language: python
     layout: base
     name: Python Chord Diagram
-    order: 24
+    order: 23
     page_type: u-guide
     permalink: python/chord-diagram/
     thumbnail: thumbnail/chord.jpg

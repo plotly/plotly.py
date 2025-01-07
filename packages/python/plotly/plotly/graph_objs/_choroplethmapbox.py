@@ -1,5 +1,6 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Choroplethmapbox(_BaseTraceType):
@@ -1248,6 +1249,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         mapbox subplots and traces are deprecated! Please consider
         switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/python/maplibre-migration/ as well as
         https://plotly.com/javascript/maplibre-migration/ Sets a
         reference between this trace's data coordinates and a mapbox
         subplot. If "mapbox" (the default value), the data refer to
@@ -1745,7 +1747,8 @@ class Choroplethmapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -1869,10 +1872,11 @@ class Choroplethmapbox(_BaseTraceType):
 
         "choroplethmapbox" trace is deprecated! Please consider
         switching to the "choroplethmap" trace type and `map` subplots.
-        Learn more at: https://plotly.com/javascript/maplibre-
-        migration/ GeoJSON features to be filled are set in `geojson`
-        The data that describes the choropleth value-to-color mapping
-        is set in `locations` and `z`.
+        Learn more at: https://plotly.com/python/maplibre-migration/ as
+        well as https://plotly.com/javascript/maplibre-migration/
+        GeoJSON features to be filled are set in `geojson` The data
+        that describes the choropleth value-to-color mapping is set in
+        `locations` and `z`.
 
         Parameters
         ----------
@@ -2070,7 +2074,8 @@ class Choroplethmapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -2374,3 +2379,11 @@ an instance of :class:`plotly.graph_objs.Choroplethmapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*choroplethmapbox* is deprecated!"
+            + " Use *choroplethmap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+            category=DeprecationWarning,
+        )

@@ -7,7 +7,6 @@ Pillow==8.2.0
 pytest==8.1.1
 pytz==2021.1
 ipython[all]==7.22.0
-ipywidgets==8.0.2
 ipykernel==5.5.3
 jupyter==1.0.0
 scipy==1.6.2
@@ -19,3 +18,7 @@ matplotlib==3.7.3
 scikit-image==0.18.1
 psutil==5.7.0
 kaleido
+polars[timezone]
+pyarrow
+narwhals>=1.15.1
+anywidget==0.9.13

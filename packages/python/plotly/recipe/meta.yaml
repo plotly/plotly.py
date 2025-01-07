@@ -25,6 +25,7 @@ requirements:
     - setuptools
   run:
     - python
+    - narwhals >=1.15.1
 
 test:
   imports:

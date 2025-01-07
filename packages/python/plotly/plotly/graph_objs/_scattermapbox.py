@@ -1,5 +1,6 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Scattermapbox(_BaseTraceType):
@@ -1164,6 +1165,7 @@ class Scattermapbox(_BaseTraceType):
         """
         mapbox subplots and traces are deprecated! Please consider
         switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/python/maplibre-migration/ as well as
         https://plotly.com/javascript/maplibre-migration/ Sets a
         reference between this trace's data coordinates and a mapbox
         subplot. If "mapbox" (the default value), the data refer to
@@ -1659,7 +1661,8 @@ class Scattermapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -1792,7 +1795,8 @@ class Scattermapbox(_BaseTraceType):
 
         "scattermapbox" trace is deprecated! Please consider switching
         to the "scattermap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/javascript/maplibre-migration/ The data
+        at: https://plotly.com/python/maplibre-migration/ as well as
+        https://plotly.com/javascript/maplibre-migration/ The data
         visualized as scatter point, lines or marker symbols on a
         Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
@@ -1978,7 +1982,8 @@ class Scattermapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -2288,3 +2293,11 @@ an instance of :class:`plotly.graph_objs.Scattermapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*scattermapbox* is deprecated!"
+            + " Use *scattermap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+            category=DeprecationWarning,
+        )

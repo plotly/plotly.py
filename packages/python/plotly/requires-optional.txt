@@ -1,0 +1,59 @@
+### Optional Dependencies for Additional Plotly Functionality   ###
+###                                                             ###
+### This file lists packages which are not strictly required    ###
+### by Plotly.py, but which are needed to use some of the       ###
+### library's functionality. See headings below for more        ###
+### See headings below for more detail.                         ###
+###                                                             ###
+### Packages used in the development process are also listed    ###
+### here.                                                       ###
+###                                                             ###
+### To install, run:                                            ###
+###      $ pip install -r requires-optional.txt                 ###
+###                                                             ###
+###################################################################
+
+## numpy (required by Plotly Express) ##
+numpy
+
+## matplotlylib dependencies ##
+# matplotlib==2.2.2
+
+## testing dependencies ##
+coverage==4.3.1
+mock==2.0.0
+pytest==8.1.1
+xarray
+pytz
+
+## orca dependencies ##
+requests
+psutil
+
+## code formatting ##
+pre-commit
+black==22.3.0
+
+## codegen dependencies ##
+inflect
+
+## template generation ##
+colorcet
+
+## pandas (for some matplotlib functionality) ##
+pandas
+
+## scipy deps (for some Figure Factory functions) ##
+scipy
+
+## jupyter ##
+jupyter
+anywidget
+
+## deps for _county_choropleth.py (Figure Factory) ##
+pyshp
+geopandas
+shapely
+
+## image uri conversion ##
+pillow
