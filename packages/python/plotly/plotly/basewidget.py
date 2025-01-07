@@ -105,9 +105,6 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             **kwargs,
         )
 
-        self._widget_layout = deepcopy(self._layout_obj._props)
-        self._widget_data = deepcopy(self._data)
-
         # Validate Frames
         # ---------------
         # Frames are not supported by figure widget
