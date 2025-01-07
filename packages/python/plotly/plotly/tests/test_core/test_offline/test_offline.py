@@ -106,7 +106,9 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)  # so is config
         self.assertIn(PLOTLYJS, html)  # and the source code
         # and it's an <html> doc
-        self.assertTrue(html.startswith("<html>") and html.endswith("</html>"))
+        self.assertTrue(
+            html.startswith("<!doctype html>\n<html>") and html.endswith("</html>")
+        )
 
     def test_including_plotlyjs_truthy_html(self):
         # For backwards compatibility all truthy values that aren't otherwise

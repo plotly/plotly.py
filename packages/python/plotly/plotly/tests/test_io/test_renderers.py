@@ -130,11 +130,11 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
 # HTML
 # ----
 def assert_full_html(html):
-    assert html.startswith("<html")
+    assert html.startswith("<!doctype html>")
 
 
 def assert_not_full_html(html):
-    assert not html.startswith("<html")
+    assert not html.startswith("<!doctype html>")
 
 
 def assert_html_renderer_connected(html):
