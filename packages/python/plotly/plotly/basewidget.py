@@ -1,7 +1,5 @@
 from copy import deepcopy
-import datetime
 import pathlib
-import time
 from traitlets import List, Dict, observe, Integer
 from plotly.io._renderers import display_jupyter_version_warnings
 
@@ -149,8 +147,6 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         self._view_count = 0
 
     def show(self, *args, **kwargs):
-        self._widget_layout = deepcopy(self._layout_obj._props)
-        self._widget_data = deepcopy(self._widget_data)
         return self
 
     # Python -> JavaScript Messages
