@@ -168,12 +168,12 @@ export class FigureModel {
 
       // Data and Layout
       // ---------------
-      // The _data and _layout properties are synchronized with the
+      // The _widget_data and _widget_layout properties are synchronized with the
       // Python side on initialization only.  After initialization, these
       // properties are kept in sync through the use of the _py2js_*
       // messages
-      _data: [],
-      _layout: {},
+      _widget_data: [],
+      _widget_layout: {},
       _config: {},
 
       // Python -> JS messages
@@ -315,7 +315,7 @@ export class FigureModel {
        * @property {Array.<Array.<String|Number>>} remove_props
        *  Array of property paths to remove. Each propery path is an
        *  array of property names or array indexes that locate a property
-       *  inside the _layout object
+       *  inside the _widget_layout object
        */
       _py2js_removeLayoutProps: null,
 
@@ -326,7 +326,7 @@ export class FigureModel {
        * @property {Array.<Array.<String|Number>>} remove_props
        *  Array of property paths to remove. Each propery path is an
        *  array of property names or array indexes that locate a property
-       *  inside the _data[remove_trace] object
+       *  inside the _widget_data[remove_trace] object
        */
       _py2js_removeTraceProps: null,
 
@@ -389,7 +389,7 @@ export class FigureModel {
        * @property {Object} layout_delta
        *  The layout delta object that contains all of the properties of
        *  _fullLayout that are not identical to those in the
-       *  FigureModel's _layout property
+       *  FigureModel's _widget_layout property
        * @property {Number} layout_edit_id
        *  Edit ID of message that triggered the creation of layout delta
        */
@@ -400,7 +400,7 @@ export class FigureModel {
        * @property {Array.<Object>} trace_deltas
        *  Array of trace delta objects. Each trace delta contains the
        *  trace's uid along with all of the properties of _fullData that
-       *  are not identical to those in the FigureModel's _data property
+       *  are not identical to those in the FigureModel's _widget_data property
        * @property {Number} trace_edit_id
        *  Edit ID of message that triggered the creation of trace deltas
        */
@@ -528,8 +528,8 @@ export class FigureModel {
    * constructed
    */
   initialize() {
-    this.model.on("change:_data", () => this.do_data());
-    this.model.on("change:_layout", () => this.do_layout());
+    this.model.on("change:_widget_data", () => this.do_data());
+    this.model.on("change:_widget_layout", () => this.do_layout());
     this.model.on("change:_py2js_addTraces", () => this.do_addTraces());
     this.model.on("change:_py2js_deleteTraces", () => this.do_deleteTraces());
     this.model.on("change:_py2js_moveTraces", () => this.do_moveTraces());
@@ -556,7 +556,7 @@ export class FigureModel {
    */
   _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
     if (trace_indexes === null || trace_indexes === undefined) {
-      var numTraces = this.model.get("_data").length;
+      var numTraces = this.model.get("_widget_data").length;
       trace_indexes = _.range(numTraces);
     }
     if (!Array.isArray(trace_indexes)) {
@@ -567,14 +567,14 @@ export class FigureModel {
   }
 
   /**
-   * Log changes to the _data trait
+   * Log changes to the _widget_data trait
    *
    * This should only happed on FigureModel initialization
    */
   do_data() {}
 
   /**
-   * Log changes to the _layout trait
+   * Log changes to the _widget_layout trait
    *
    * This should only happed on FigureModel initialization
    */
@@ -589,7 +589,7 @@ export class FigureModel {
     var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
 
     if (msgData !== null) {
-      var currentTraces = this.model.get("_data");
+      var currentTraces = this.model.get("_widget_data");
       var newTraces = msgData.trace_data;
       _.forEach(newTraces, function (newTrace) {
         currentTraces.push(newTrace);
@@ -608,7 +608,7 @@ export class FigureModel {
 
     if (msgData !== null) {
       var delete_inds = msgData.delete_inds;
-      var tracesData = this.model.get("_data");
+      var tracesData = this.model.get("_widget_data");
 
       // Remove del inds in reverse order so indexes remain valid
       // throughout loop
@@ -629,7 +629,7 @@ export class FigureModel {
     var msgData: Py2JsMoveTracesMsg = this.model.get("_py2js_moveTraces");
 
     if (msgData !== null) {
-      var tracesData = this.model.get("_data");
+      var tracesData = this.model.get("_widget_data");
       var currentInds = msgData.current_trace_inds;
       var newInds = msgData.new_trace_inds;
 
@@ -646,7 +646,7 @@ export class FigureModel {
     if (msgData !== null) {
       var restyleData = msgData.restyle_data;
       var restyleTraces = this._normalize_trace_indexes(msgData.restyle_traces);
-      performRestyleLike(this.model.get("_data"), restyleData, restyleTraces);
+      performRestyleLike(this.model.get("_widget_data"), restyleData, restyleTraces);
     }
   }
 
@@ -658,7 +658,7 @@ export class FigureModel {
     var msgData: Py2JsRelayoutMsg = this.model.get("_py2js_relayout");
 
     if (msgData !== null) {
-      performRelayoutLike(this.model.get("_layout"), msgData.relayout_data);
+      performRelayoutLike(this.model.get("_widget_layout"), msgData.relayout_data);
     }
   }
 
@@ -673,8 +673,8 @@ export class FigureModel {
       var style = msgData.style_data;
       var layout = msgData.layout_data;
       var styleTraces = this._normalize_trace_indexes(msgData.style_traces);
-      performRestyleLike(this.model.get("_data"), style, styleTraces);
-      performRelayoutLike(this.model.get("_layout"), layout);
+      performRestyleLike(this.model.get("_widget_data"), style, styleTraces);
+      performRelayoutLike(this.model.get("_widget_layout"), layout);
     }
   }
 
@@ -692,11 +692,11 @@ export class FigureModel {
       for (var i = 0; i < styles.length; i++) {
         var style = styles[i];
         var trace_index = trace_indexes[i];
-        var trace = this.model.get("_data")[trace_index];
+        var trace = this.model.get("_widget_data")[trace_index];
         performRelayoutLike(trace, style);
       }
 
-      performRelayoutLike(this.model.get("_layout"), layout);
+      performRelayoutLike(this.model.get("_widget_layout"), layout);
     }
   }
 
@@ -711,7 +711,7 @@ export class FigureModel {
 
     if (msgData !== null) {
       var keyPaths = msgData.remove_props;
-      var layout = this.model.get("_layout");
+      var layout = this.model.get("_widget_layout");
       performRemoveProps(layout, keyPaths);
     }
   }
@@ -725,7 +725,7 @@ export class FigureModel {
     if (msgData !== null) {
       var keyPaths = msgData.remove_props;
       var traceIndex = msgData.remove_trace;
-      var trace = this.model.get("_data")[traceIndex];
+      var trace = this.model.get("_widget_data")[traceIndex];
 
       performRemoveProps(trace, keyPaths);
     }
@@ -733,11 +733,11 @@ export class FigureModel {
 }
 
 const serializers: Record<string, Serializer> = {
-  _data: {
+  _widget_data: {
     deserialize: py2js_deserializer,
     serialize: js2py_serializer,
   },
-  _layout: {
+  _widget_layout: {
     deserialize: py2js_deserializer,
     serialize: js2py_serializer,
   },
@@ -864,8 +864,8 @@ export class FigureView {
     // ---------------------------
     // We must clone the model's data and layout properties so that
     // the model is not directly mutated by the Plotly.js library.
-    var initialTraces = _.cloneDeep(this.model.get("_data"));
-    var initialLayout = _.cloneDeep(this.model.get("_layout"));
+    var initialTraces = _.cloneDeep(this.model.get("_widget_data"));
+    var initialLayout = _.cloneDeep(this.model.get("_widget_layout"));
     if (!initialLayout.height) {
       initialLayout.height = 360;
     }
@@ -964,7 +964,7 @@ export class FigureView {
 
   autosizeFigure() {
     var that = this;
-    var layout = that.model.get("_layout");
+    var layout = that.model.get("_widget_layout");
     if (_.isNil(layout) || _.isNil(layout.width)) {
       // @ts-ignore
       Plotly.Plots.resize(that.el).then(function () {
@@ -1530,7 +1530,7 @@ export class FigureView {
     // ### Handle layout delta ###
     var layout_delta = createDeltaObject(
       this.getFullLayout(),
-      this.model.get("_layout")
+      this.model.get("_widget_layout")
     );
 
     /** @type{Js2PyLayoutDeltaMsg} */
@@ -1539,7 +1539,7 @@ export class FigureView {
       layout_edit_id: layout_edit_id,
     };
 
-    this.model.set("_js2py_layoutDelta", layoutDeltaMsg);
+    this.model.set("_js2py_widget_layoutDelta", layoutDeltaMsg);
     this.touch();
   }
 
@@ -1552,7 +1552,7 @@ export class FigureView {
    * @private
    */
   _sendTraceDeltas(trace_edit_id: any) {
-    var trace_data = this.model.get("_data");
+    var trace_data = this.model.get("_widget_data");
     var traceIndexes = _.range(trace_data.length);
     var trace_deltas = new Array(traceIndexes.length);
 
