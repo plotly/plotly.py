@@ -730,6 +730,10 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         Return mimebundle corresponding to default renderer.
         """
         display_jupyter_version_warnings()
+
+        # Widget layout and data need to be set here in case there are
+        # changes made to the figure after the widget is created but before
+        # the cell is run. 
         self._widget_layout = deepcopy(self._layout_obj._props)
         self._widget_data = deepcopy(self._data)
         return {

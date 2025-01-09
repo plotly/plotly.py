@@ -968,7 +968,7 @@ export class FigureView {
     if (_.isNil(layout) || _.isNil(layout.width)) {
       // @ts-ignore
       Plotly.Plots.resize(that.el).then(function () {
-        var layout_edit_id = that.model.get("_last_widget_layout_edit_id");
+        var layout_edit_id = that.model.get("_last_layout_edit_id");
         that._sendLayoutDelta(layout_edit_id);
       });
     }
