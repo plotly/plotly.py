@@ -426,6 +426,10 @@ fig = go.Figure(data=go.Scatter(
 fig.show()
 ```
 
+#### Using a scatter plot to create a bar-style pictograph
+
+An [example in the bar chart documentation](/python/bar-charts/#clarifying-the-size-of-smaller-categories-by-wrapping-the-largest-bars) uses scatter traces to create a bar-style pictograph that clarifies the relative sizes of entities with radically different sizes and demonstrates the versatility of the scatter trace.
+
 #### Trace Zorder
 
 *New in 5.21*
