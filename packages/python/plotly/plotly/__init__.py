@@ -178,3 +178,4 @@ def hist_series(data_frame, **kwargs):
     return histogram(data_frame, **new_kwargs)
 
 __version__ = "6.3.0"
+version = __version__
