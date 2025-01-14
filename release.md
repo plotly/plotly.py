@@ -2,7 +2,10 @@
 # How to release plotly packages
 
 There are 3 Python packages (`plotly`, `plotly-geo` and `chart-studio`) which need to be
-published to PyPI and conda. In addition, there are various changelogs, github releases and forum announcements to do :)
+published to PyPI and conda. The `plotly` package is located in this repository, while `plotly-geo` and `chart-studio` are located in their own separate repositories under those names.
+
+In addition, there are various changelogs, github releases and forum announcements to do :)
+
 
 ## Release process - `plotly` package and extensions
 
@@ -149,103 +152,3 @@ $ anaconda upload --label test plotly-*.tar.bz2
 
 The `--label test` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version with the `next` tag.
-
-
-## Release process - `plotly-geo` package
-
-The `plotly-geo` package contains the shape file resources used by plotly.py.
-These files are relatively large and change infrequently so it is useful
-to release them in a separate package.
-
-### Update version
-
-Update the version of the `plotly-geo` package in
-`packages/python/plotly-geo/setup.py`.
-
-This version is not intended to match the version of plotly.py.
-
-### Update CHANGELOG
-
-Add a new entry to the CHANGELOG at `packages/python/plotly-geo/CHANGELOG.md`
-and commit the changes.
-
-### Tag Release
-
-Create a new tag for the release
-
-```bash
-(plotly_dev) $ git checkout master
-(plotly_dev) $ git stash
-(plotly_dev) $ git pull origin master
-(plotly_dev) $ git tag plotly-geo-vX.Y.Z
-(plotly_dev) $ git push origin plotly-geo-vX.Y.Z
-```
-
-### Publishing to PYPI
-
-Publish the final version to PyPI
-
-```bash
-(plotly_dev) $ cd packages/python/plotly-geo
-(plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ twine upload dist/plotly-geo-X.Y.Z.tar.gz
-(plotly_dev) $ twine upload dist/plotly_geo-X.Y.Z-py3-none-any.whl
-```
-
-### Publish to plotly anaconda channel
-
-From `packages/python/plotly-geo`, build the conda package
-```bash
-(plotly_dev) $ conda build recipe/
-```
-
-Then upload to the plotly anaconda channel as described above
-
-## Release process - `chart-studio` package
-
-The `chart-studio` package contains the utilities for interacting with
-Chart Studio (both Cloud or On-Prem).
-
-### Update version
-
-Update the version of the `chart-studio` package in
-`packages/python/chart-studio/setup.py`.
-
-This version is not intended to match the version of plotly.py.
-
-### Update CHANGELOG
-
-Add a new entry to the CHANGELOG at `packages/python/chart-studio/CHANGELOG.md`
-and commit the changes.
-
-### Tag Release
-
-Create a new tag for the release
-
-```bash
-(plotly_dev) $ git checkout master
-(plotly_dev) $ git stash
-(plotly_dev) $ git pull origin master
-(plotly_dev) $ git tag chart-studio-vX.Y.Z
-(plotly_dev) $ git push origin chart-studio-vX.Y.Z
-```
-
-### Publishing to PYPI
-
-Publish the final version to PyPI
-
-```bash
-(plotly_dev) $ cd packages/python/chart-studio
-(plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ twine upload dist/chart-studio-X.Y.Z.tar.gz
-(plotly_dev) $ twine upload dist/chart_studio-X.Y.Z-py3-none-any.whl
-```
-
-### Publish to plotly anaconda channel
-
-From `packages/python/plotly-geo`, build the conda package
-```bash
-(plotly_dev) $ conda build recipe/
-```
-
-Then upload to the plotly anaconda channel as described above.
