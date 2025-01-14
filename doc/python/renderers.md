@@ -252,7 +252,7 @@ Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.i
 
 See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for more information on integrating `plotly.py` figures with `ipywidgets`.
 
-It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `show()` figure method or the `plotly.io.show` function on `FigureWidget` objects.
+It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `plotly.io.show` function on `FigureWidget` objects.
 
 
 ## Performance
