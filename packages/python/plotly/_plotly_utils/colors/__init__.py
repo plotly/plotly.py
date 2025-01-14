@@ -278,6 +278,22 @@ PLOTLY_SCALES = {
     ],
 }
 
+PLOTLY_NAMED_COLORS = {
+    "red": (255, 0, 0),
+    "blue": (0, 0, 255),
+    "green": (0, 255, 0),
+    "yellow": (255, 255, 0),
+    "black": (0, 0, 0),
+    "white": (255, 255, 255),
+    "purple": (128, 0, 128),
+    "orange": (255, 165, 0),
+    "pink": (255, 192, 203),
+    "brown": (165, 42, 42),
+    "gold": (255, 215, 0),
+    "silver": (192, 192, 192),
+    "gray": (128, 128, 128),
+}
+
 
 def color_parser(colors, function):
     """
@@ -324,10 +340,13 @@ def validate_colors(colors, colortype="tuple"):
             colors = [colors_list[0]] + [colors_list[-1]]
         elif "rgb" in colors or "#" in colors or "hsl" in colors:
             colors = [colors]
+        elif colors in PLOTLY_NAMED_COLORS:
+            colors = [PLOTLY_NAMED_COLORS[colors]]
+
         else:
             raise exceptions.PlotlyError(
                 "If your colors variable is a string, it must be a "
-                "Plotly scale, an rgb color or a hex color."
+                "Plotly scale, a named color, an rgb color, a hex color, or an hsl color."
             )
 
     elif isinstance(colors, tuple):
