@@ -224,7 +224,7 @@ px.area(
 
 ## Visualize Loadings
 
-It is also possible to visualize loadings using `shapes`, and use `annotations` to indicate which feature a certain loading original belong to. Here, we define loadings as:
+It is also possible to visualize loadings using `shapes`, and use `annotations` to indicate which feature a certain loading originally belonged to. Here, we define loadings as:
 
 $$
 loadings = eigenvectors \cdot \sqrt{eigenvalues}

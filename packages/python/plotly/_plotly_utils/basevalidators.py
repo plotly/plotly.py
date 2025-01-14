@@ -8,6 +8,7 @@ import io
 import re
 import sys
 import warnings
+import narwhals.stable.v1 as nw
 
 from _plotly_utils.optional_imports import get_module
 
@@ -72,8 +73,6 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     """
     np = get_module("numpy")
 
-    # Don't force pandas to be loaded, we only want to know if it's already loaded
-    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -93,34 +92,26 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
-    # Handle pandas Series and Index objects
-    if pd and isinstance(v, (pd.Series, pd.Index)):
-        if v.dtype.kind in numeric_kinds:
-            # Get the numeric numpy array so we use fast path below
-            v = v.values
-        elif v.dtype.kind == "M":
-            # Convert datetime Series/Index to numpy array of datetimes
-            if isinstance(v, pd.Series):
-                with warnings.catch_warnings():
-                    warnings.simplefilter("ignore", FutureWarning)
-                    # Series.dt.to_pydatetime will return Index[object]
-                    # https://github.com/pandas-dev/pandas/pull/52459
-                    v = np.array(v.dt.to_pydatetime())
-            else:
-                # DatetimeIndex
-                v = v.to_pydatetime()
-    elif pd and isinstance(v, pd.DataFrame) and len(set(v.dtypes)) == 1:
-        dtype = v.dtypes.tolist()[0]
-        if dtype.kind in numeric_kinds:
-            v = v.values
-        elif dtype.kind == "M":
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore", FutureWarning)
-                # Series.dt.to_pydatetime will return Index[object]
-                # https://github.com/pandas-dev/pandas/pull/52459
-                v = [
-                    np.array(row.dt.to_pydatetime()).tolist() for i, row in v.iterrows()
-                ]
+    # With `pass_through=True`, the original object will be returned if unable to convert
+    # to a Narwhals DataFrame or Series.
+    v = nw.from_native(v, allow_series=True, pass_through=True)
+
+    if isinstance(v, nw.Series):
+        if v.dtype == nw.Datetime and v.dtype.time_zone is not None:
+            # Remove time zone so that local time is displayed
+            v = v.dt.replace_time_zone(None).to_numpy()
+        else:
+            v = v.to_numpy()
+    elif isinstance(v, nw.DataFrame):
+        schema = v.schema
+        overrides = {}
+        for key, val in schema.items():
+            if val == nw.Datetime and val.time_zone is not None:
+                # Remove time zone so that local time is displayed
+                overrides[key] = nw.col(key).dt.replace_time_zone(None)
+        if overrides:
+            v = v.with_columns(**overrides)
+        v = v.to_numpy()
 
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
@@ -193,6 +184,7 @@ def is_homogeneous_array(v):
         np
         and isinstance(v, np.ndarray)
         or (pd and isinstance(v, (pd.Series, pd.Index)))
+        or (isinstance(v, nw.Series))
     ):
         return True
     if is_numpy_convertable(v):
@@ -229,6 +221,17 @@ def type_str(v):
         v = type(v)
 
     return "'{module}.{name}'".format(module=v.__module__, name=v.__name__)
+
+
+def is_typed_array_spec(v):
+    """
+    Return whether a value is considered to be a typed array spec for plotly.js
+    """
+    return isinstance(v, dict) and "bdata" in v and "dtype" in v
+
+
+def is_none_or_typed_array_spec(v):
+    return v is None or is_typed_array_spec(v)
 
 
 # Validators
@@ -401,8 +404,7 @@ class DataArrayValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
@@ -599,8 +601,7 @@ class EnumeratedValidator(BaseValidator):
         return False
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
             v_replaced = [self.perform_replacemenet(v_el) for v_el in v]
@@ -644,8 +645,7 @@ class BooleanValidator(BaseValidator):
         )
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif not isinstance(v, bool):
             self.raise_invalid_val(v)
@@ -669,8 +669,7 @@ class SrcValidator(BaseValidator):
         )
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif isinstance(v, str):
             pass
@@ -760,8 +759,7 @@ class NumberValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             np = get_module("numpy")
@@ -907,8 +905,7 @@ class IntegerValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif v in self.extras:
             return v
@@ -1071,8 +1068,7 @@ class StringValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
 
@@ -1373,8 +1369,7 @@ class ColorValidator(BaseValidator):
         return valid_color_description
 
     def validate_coerce(self, v, should_raise=True):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
@@ -1518,8 +1513,7 @@ class ColorlistValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif is_array(v):
             validated_v = [
@@ -1716,16 +1710,17 @@ class AngleValidator(BaseValidator):
     (e.g. 270 is converted to -90).
         """.format(
             plotly_name=self.plotly_name,
-            array_ok=", or a list, numpy array or other iterable thereof"
-            if self.array_ok
-            else "",
+            array_ok=(
+                ", or a list, numpy array or other iterable thereof"
+                if self.array_ok
+                else ""
+            ),
         )
 
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             try:
@@ -1910,8 +1905,7 @@ class FlaglistValidator(BaseValidator):
             return None
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_array(v):
 
@@ -1969,8 +1963,7 @@ class AnyValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v, kind="O")
@@ -2178,8 +2171,7 @@ class InfoArrayValidator(BaseValidator):
         return val
 
     def validate_coerce(self, v):
-        if v is None:
-            # Pass None through
+        if is_none_or_typed_array_spec(v):
             return None
         elif not is_array(v):
             self.raise_invalid_val(v)

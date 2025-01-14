@@ -6,6 +6,7 @@ import plotly.io as pio
 
 import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 import numpy as np
 from plotly.tests.utils import TestCaseNoTemplate
@@ -975,10 +976,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -1062,10 +1063,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -1217,10 +1218,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
             ],
             layout=go.Layout(
                 autosize=False,
-                height=np.inf,
+                height=np_inf(),
                 hovermode="closest",
                 showlegend=False,
-                width=np.inf,
+                width=np_inf(),
                 xaxis=go.layout.XAxis(
                     mirror="allticks",
                     rangemode="tozero",
@@ -4118,25 +4119,25 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 -88.02432999999999,
                 -88.04504299999999,
                 -88.053375,
-                np.nan,
+                np_nan(),
                 -88.211209,
                 -88.209999,
                 -88.208733,
                 -88.209559,
                 -88.211209,
-                np.nan,
+                np_nan(),
                 -88.22511999999999,
                 -88.22128099999999,
                 -88.218694,
                 -88.22465299999999,
                 -88.22511999999999,
-                np.nan,
+                np_nan(),
                 -88.264659,
                 -88.25782699999999,
                 -88.25947,
                 -88.255659,
                 -88.264659,
-                np.nan,
+                np_nan(),
                 -88.327302,
                 -88.20146799999999,
                 -88.141143,
@@ -4146,13 +4147,13 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 -88.10665399999999,
                 -88.149812,
                 -88.327302,
-                np.nan,
+                np_nan(),
                 -88.346745,
                 -88.341235,
                 -88.33288999999999,
                 -88.346823,
                 -88.346745,
-                np.nan,
+                np_nan(),
                 -88.473227,
                 -88.097888,
                 -88.154617,
@@ -4474,7 +4475,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         lon = np.random.randn(N)
         color = np.ones(N)
         frame = np.random.randint(0, n_frames, N)
-        df = pd.DataFrame(
+        df = pd.DataFrame(  # TODO: Test other constructors?
             np.c_[lat, lon, color, frame],
             columns=["Latitude", "Longitude", "Metric", "Frame"],
         )
