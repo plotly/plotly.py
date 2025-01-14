@@ -145,14 +145,6 @@ def assert_offline(html):
     assert get_plotlyjs() in html
 
 
-def assert_requirejs(html):
-    assert 'require(["plotly"]' in html
-
-
-def assert_not_requirejs(html):
-    assert 'require(["plotly"]' not in html
-
-
 def test_colab_renderer_show(fig1):
     pio.renderers.default = "colab"
 
@@ -170,7 +162,6 @@ def test_colab_renderer_show(fig1):
     html = mock_arg1["text/html"]
     assert_full_html(html)
     assert_html_renderer_connected(html)
-    assert_not_requirejs(html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
@@ -213,7 +204,6 @@ def test_notebook_connected_show(fig1, name, connected):
     # Check html display contents
     bundle_html = mock_arg1["text/html"]
     assert_not_full_html(bundle_html)
-    assert_requirejs(bundle_html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
@@ -275,7 +265,6 @@ def test_browser_renderer_show(fig1, renderer):
     html = response.content.decode("utf8")
     assert_full_html(html)
     assert_offline(html)
-    assert_not_requirejs(html)
 
 
 # Validation
@@ -317,12 +306,12 @@ def test_repr_html(renderer):
         + '"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
-        "                                    window.PLOTLYENV=window.PLOTLYENV || {};"
-        '                                    if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
+        "                window.PLOTLYENV=window.PLOTLYENV || {};"
+        '                                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
         ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
         '                        [],                        {"template":{}},'
         '                        {"responsive": true}                    )                };'
-        "                            </script>        </div>"
+        "            </script>        </div>"
     )
     if "text/html" in bundle:
         str_bundle = bundle["text/html"]
