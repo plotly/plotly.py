@@ -380,7 +380,7 @@ jobs:
             cd packages/python/plotly
             . venv/bin/activate
             pip install build
-            python -m build --sdist --wheel
+            python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
@@ -422,7 +422,7 @@ jobs:
             conda activate env
             cd packages/python/plotly
             pip install build
-            python -m build --sdist --wheel
+            python -m build --sdist --wheel -o dist
             cp -R dist ../../../output/dist
             git status
 
