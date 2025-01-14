@@ -1,3 +1,71 @@
 [build-system]
 requires = ["jupyterlab~=3.0;python_version>='3.6'", "setuptools>=40.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project.urls]
+"HomePage" = "https://plotly.com/python/"
+"Documentation" = "https://plotly.com/python/"
+"Github" = "https://github.com/plotly/plotly.py"
+"Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
+
+[project]
+name = "plotly"
+authors = [
+    { name = "Chris P", email = "chris@plot.ly" }
+]
+maintainers = [
+    { name="Martha Cryan", email="martha.cryan@plot.ly" },
+    { name="Emily Kellison-Linn", email="emily@plot.ly" }
+]
+description = "An open-source interactive data visualization library for Python"
+readme = {file = "README.txt", content-type = "text/markdown"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "License :: OSI Approved :: MIT License"
+]
+requires-python = ">=3.8"
+license = {text = "MIT License"}
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools.dynamic]
+version = {attr = "plotly.__version__"}
+
+# TODO: check that this works
+[tool.setuptools.packages.find]
+where = [
+    "plotly",
+    "plotly.plotly",
+    "plotly.offline",
+    "plotly.io",
+    "plotly.matplotlylib",
+    "plotly.matplotlylib.mplexporter",
+    "plotly.matplotlylib.mplexporter.renderers",
+    "plotly.figure_factory",
+    "plotly.data",
+    "plotly.colors",
+    "plotly.express",
+    "plotly.express.data",
+    "plotly.express.colors",
+    "plotly.express.trendline_functions",
+    "plotly.graph_objects",
+    "_plotly_utils",
+    "_plotly_utils.colors",
+    "_plotly_future_",
+    "plotly.graph_objs",
+    "plotly.validators"
+]
+include = ["plotly.*", "_plotly.*"]
+exclude = ["__pycache__"]
+
+[tool.setuptools.package-data]
+plotly = [
+    "package_data/*",
+    "package_data/templates/*",
+    "package_data/datasets/*",
+]

@@ -176,3 +176,5 @@ def hist_series(data_frame, **kwargs):
     skip += ["figsize", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
+
+__version__ = "6.3.0"
