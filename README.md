@@ -39,7 +39,7 @@
 
 ## Quickstart
 
-`pip install plotly==6.0.0rc0`
+`pip install plotly`
 
 ```python
 import plotly.express as px
@@ -79,13 +79,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip
 
 ```
-pip install plotly==6.0.0rc0
+pip install plotly
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=6.0.0rc0
+conda install -c plotly plotly
 ```
 
 ### Jupyter Widget Support
