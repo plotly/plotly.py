@@ -382,6 +382,19 @@ def validate_colors(colors, colortype="tuple"):
             each_color = color_parser(each_color, unconvert_from_RGB_255)
             colors[j] = each_color
 
+        elif isinstance(colors, list):
+            validated_colors = []
+            for each_color in colors:
+                if each_color in NAMED_COLORS:
+                    validated_colors.append(NAMED_COLORS[each_color])
+                elif "rgb" in each_color or "#" in each_color or "hsl" in each_color:
+                    validated_colors.append(each_color)
+                else:
+                    raise exceptions.PlotlyError(
+                        f"Invalid color in list: {each_color}. Each color must be a valid "
+                        "Plotly scale, named color, rgb color, hex color, or hsl color."
+                    )
+            colors = validated_colors
 
         if isinstance(each_color, tuple):
             for value in each_color:
