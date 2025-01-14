@@ -356,7 +356,7 @@ jobs:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            python commands.py update_plotlyjs_dev
+            python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
