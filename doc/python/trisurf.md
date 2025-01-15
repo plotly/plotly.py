@@ -59,7 +59,7 @@ simplices = tri.simplices
 
 fig = ff.create_trisurf(x=x, y=y, z=z,
                          simplices=simplices,
-                         title="Torus", aspectratio=dict(x=1, y=1, z=0.3))
+                         title=dict(text="Torus"), aspectratio=dict(x=1, y=1, z=0.3))
 fig.show()
 ```
 
@@ -90,7 +90,7 @@ simplices = tri.simplices
 fig = ff.create_trisurf(x=x, y=y, z=z,
                          colormap="Portland",
                          simplices=simplices,
-                         title="Mobius Band")
+                         title=dict(text="Mobius Band"))
 fig.show()
 ```
 
@@ -122,7 +122,7 @@ fig = ff.create_trisurf(x=x, y=y, z=z,
                          colormap=['rgb(50, 0, 75)', 'rgb(200, 0, 200)', '#c8dcc8'],
                          show_colorbar=True,
                          simplices=simplices,
-                         title="Boy's Surface")
+                         title=dict(text="Boy's Surface"))
 fig.show()
 ```
 

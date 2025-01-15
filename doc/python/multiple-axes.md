@@ -270,21 +270,36 @@ fig.add_trace(
 
 
 fig.update_layout(
-    xaxis=dict(domain=[0.25, 0.75]),
+    xaxis=dict(
+        domain=[0.25, 0.75]
+    ),
     yaxis=dict(
-        title="yaxis title",
+        title=dict(
+            text="yaxis title"
+        )
     ),
     yaxis2=dict(
-        title="yaxis2 title",
+        title=dict(
+            text="yaxis2 title"
+        ),
         overlaying="y",
-        side="right",
+        side="right"
     ),
-    yaxis3=dict(title="yaxis3 title", anchor="free", overlaying="y", autoshift=True),
-    yaxis4=dict(
-        title="yaxis4 title",
+    yaxis3=dict(
+        title=dict(
+            text="yaxis3 title"
+        ),
         anchor="free",
         overlaying="y",
-        autoshift=True,
+        autoshift=True
+    ),
+    yaxis4=dict(
+        title=dict(
+            text="yaxis4 title"
+        ),
+        anchor="free",
+        overlaying="y",
+        autoshift=True
     ),
 )
 
@@ -321,22 +336,37 @@ fig.add_trace(
 
 
 fig.update_layout(
-    xaxis=dict(domain=[0.25, 0.75]),
+    xaxis=dict(
+        domain=[0.25, 0.75]
+    ),
     yaxis=dict(
-        title="yaxis title",
+        title=dict(
+            text="yaxis title"
+        )
     ),
     yaxis2=dict(
-        title="yaxis2 title",
+        title=dict(
+            text="yaxis2 title"
+        ),
         overlaying="y",
-        side="right",
+        side="right"
     ),
-    yaxis3=dict(title="yaxis3 title", anchor="free", overlaying="y", autoshift=True),
+    yaxis3=dict(
+        title=dict(
+            text="yaxis3 title"
+        ),
+        anchor="free",
+        overlaying="y",
+        autoshift=True
+    ),
     yaxis4=dict(
-        title="yaxis4 title",
+        title=dict(
+            text="yaxis4 title"
+        ),
         anchor="free",
         overlaying="y",
         autoshift=True,
-        shift=-100,
+        shift=-100
     ),
 )
 
