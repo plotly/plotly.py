@@ -261,7 +261,7 @@ fig = go.Figure(data=go.Heatmap(
         colorscale='Viridis'))
 
 fig.update_layout(
-    title='GitHub commits per day',
+    title=dict(text='GitHub commits per day'),
     xaxis_nticks=36)
 
 fig.show()
