@@ -222,7 +222,7 @@ Then run the `updateplotlyjs` command with:
 
 ```bash
 $ cd packages/python/plotly
-$ python setup.py updateplotlyjs
+$ python commands.py updateplotlyjs
 ```
 
 This will download new versions of `plot-schema.json` and `plotly.min.js` from
@@ -236,7 +236,7 @@ For dev branches, it is also possible to use `updateplotlyjsdev` in two configur
 
 If your devbranch is part of the official plotly.js repository, you can use
 ```bash
-python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
+python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
 ```
 to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
 
@@ -252,7 +252,7 @@ $ npm pack
 $ mv plotly.js-*.tgz plotly.js.tgz
 
 # In your plotly.py/packages/python/plotly/ directory:
-$ python setup.py updateplotlyjsdev --local /path/to/your/plotly.js/
+$ python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
 ```
 
 ## Testing

@@ -352,17 +352,11 @@ jobs:
             pip install -r ./test_requirements/requirements_38_core.txt black inflect
             pip install jupyterlab
       - run:
-          name: Update jupyter widget plotly.js version
-          command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            python setup.py updateplotlywidgetversion
-      - run:
           name: Update plotly.js to dev
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            python setup.py updateplotlyjsdev
+            python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
@@ -385,7 +379,8 @@ jobs:
           command: |
             cd packages/python/plotly
             . venv/bin/activate
-            python setup.py sdist
+            pip install build
+            python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
@@ -426,7 +421,8 @@ jobs:
             eval "$(conda shell.bash hook)"
             conda activate env
             cd packages/python/plotly
-            python setup.py sdist bdist_wheel
+            pip install build
+            python -m build --sdist --wheel -o dist
             cp -R dist ../../../output/dist
             git status
 
