@@ -152,8 +152,6 @@ complete installation and avoid gdal-config errors.
 ### Editable install of plotly packages
 ```bash
 (plotly_dev) $ pip install -e packages/python/plotly/
-(plotly_dev) $ pip install -e packages/python/chart-studio/
-(plotly_dev) $ pip install -e packages/python/plotly-geo/
 ```
 
 **Note**: To test `go.FigureWidget` locally, you'll need to generate the javascript bundle as follows:

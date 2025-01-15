@@ -52,9 +52,9 @@ commands:
       - run:
           name: Install plotly-geo
           command: |
-            cd packages/python/plotly-geo
-            . ../plotly/venv/bin/activate
-            pip install -e .
+            cd packages/python/plotly
+            . venv/bin/activate
+            pip install plotly-geo
       - run:
           name: Test core
           command: |
@@ -115,9 +115,9 @@ commands:
       - run:
           name: Install plotly-geo
           command: |
-            cd packages/python/plotly-geo
-            . ../plotly/venv/bin/activate
-            pip install -e .
+            cd packages/python/plotly
+            . venv/bin/activate
+            pip install plotly-geo
       - run:
           name: Install orca
           command: |
@@ -284,8 +284,9 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip wheel
             pip install -e ./packages/python/plotly
-            pip install -e ./packages/python/plotly-geo
+            pip install plotly-geo
             pip install -r ./packages/python/plotly/test_requirements/requirements_39_pandas_2_optional.txt
+
       - run:
           name: Build html figures (Pandas 2)
           command: |
@@ -308,30 +309,6 @@ jobs:
             npm i @percy/cli
             npx percy snapshot -c test/percy/snapshots.yml test/percy/
             rm test/percy/*.html
-
-  # Chart studio
-  python_38_chart_studio:
-    docker:
-      - image: cimg/python:3.8
-    resource_class: large
-
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            cd packages/python/chart-studio
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_38.txt
-      - run:
-          name: Tests
-          command: |
-            cd packages/python/chart-studio
-            . venv/bin/activate
-            pytest -x chart_studio/tests/
-          no_output_timeout: 20m
 
   plotlyjs_dev_build:
     docker:
