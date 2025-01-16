@@ -423,18 +423,18 @@ jobs:
             cd packages/python/plotly
             pip install build
             python -m build --sdist --wheel -o dist
-            cp -R dist ../../../output/dist
+            cp -R dist ../../../output
             git status
 
-      - run:
-          name: Conda Build
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly
-            conda build recipe/
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
-            git status
+      # - run:
+      #     name: Conda Build
+      #     command: |
+      #       eval "$(conda shell.bash hook)"
+      #       conda activate env
+      #       cd packages/python/plotly
+      #       conda build recipe/
+      #       mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
+      #       git status
 
       - run:
           name: Build Widget javascript bundle
@@ -449,12 +449,6 @@ jobs:
           name: Zip output
           command: |
             tar czf output.tgz output
-
-      - run:
-          name: Git Diff
-          command: |
-            git status
-            git diff
 
       - store_artifacts:
           path: output.tgz

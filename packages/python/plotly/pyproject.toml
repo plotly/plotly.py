@@ -31,37 +31,14 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {text = "MIT License"}
-dynamic = ["version", "dependencies"]
-
-[tool.setuptools.dynamic]
-version = {attr = "plotly.__version__"}
+version = "5.3.13"
+dynamic = ["dependencies"]
 
 # TODO: check that this works
 [tool.setuptools.packages.find]
-where = [
-    "plotly",
-    "plotly.plotly",
-    "plotly.offline",
-    "plotly.io",
-    "plotly.matplotlylib",
-    "plotly.matplotlylib.mplexporter",
-    "plotly.matplotlylib.mplexporter.renderers",
-    "plotly.figure_factory",
-    "plotly.data",
-    "plotly.colors",
-    "plotly.express",
-    "plotly.express.data",
-    "plotly.express.colors",
-    "plotly.express.trendline_functions",
-    "plotly.graph_objects",
-    "_plotly_utils",
-    "_plotly_utils.colors",
-    "_plotly_future_",
-    "plotly.graph_objs",
-    "plotly.validators"
-]
-include = ["plotly.*", "_plotly.*"]
-exclude = ["__pycache__"]
+where = ["."]
+include = ["plotly*", "_plotly*"]
+exclude = ["__pycache__", "tests"]
 
 [tool.setuptools.package-data]
 plotly = [
