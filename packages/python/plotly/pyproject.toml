@@ -31,7 +31,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {text = "MIT License"}
-version = "5.3.13"
+version = "5.3.14"
 dynamic = ["dependencies"]
 
 # TODO: check that this works
