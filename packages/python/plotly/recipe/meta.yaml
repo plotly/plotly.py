@@ -12,7 +12,7 @@ build:
   number: 0
   script: |
     cd packages/python/plotly
-    {{ PYTHON }} setup.py sdist
+    {{ PYTHON }} -m build --sdist --wheel
     {{ PYTHON }} -m pip install dist/plotly-{{ version }}.tar.gz --no-deps --ignore-installed --no-cache-dir -q
   noarch: python
 
