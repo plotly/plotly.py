@@ -237,3 +237,65 @@ class TestColors(TestCase):
         ]
 
         self.assertEqual(generated_colorscale, expected_colorscale)
+
+    def test_hsl_support(self):
+        # Test valid HSL input
+        valid_hsl = "hsl(240, 100%, 50%)"  # Blue
+        expected_rgb = (0, 0, 255)
+        self.assertEqual(colors.hsl_to_rgb(valid_hsl), expected_rgb)
+
+        # Test HSL input with spaces
+        valid_hsl_with_spaces = "hsl( 120 , 100% , 25% )"  # Dark Green
+        expected_rgb_with_spaces = (0, 64, 0)
+        self.assertEqual(
+            colors.hsl_to_rgb(valid_hsl_with_spaces), expected_rgb_with_spaces
+        )
+
+        # Test malformed HSL input
+        invalid_hsl = "hsl(120, 100, 50%)"  # Missing '%'
+        with self.assertRaises(ValueError):
+            colors.hsl_to_rgb(invalid_hsl)
+
+        # Test HSL with out-of-range values
+        out_of_range_hsl = "hsl(400, 120%, 50%)"
+        with self.assertRaises(ValueError):
+            colors.hsl_to_rgb(out_of_range_hsl)
+
+        # Test validate_colors with a list containing HSL
+        colors_list = ["hsl(0, 100%, 50%)", "hsl(120, 100%, 25%)"]
+        expected_colors = [(255, 0, 0), (0, 64, 0)]
+        self.assertEqual(
+            colors.validate_colors(colors_list, colortype="rgb"), expected_colors
+        )
+
+        # Test validate_colors with an invalid HSL in the list
+        invalid_colors_list = ["hsl(0, 100%, 50%)", "hsl(120, 100, 25%)"]
+        with self.assertRaises(PlotlyError):
+            colors.validate_colors(invalid_colors_list)
+
+    def test_named_colors(self):
+        # Test valid named color
+        valid_named_color = "red"
+        self.assertEqual(
+            colors.validate_colors(valid_named_color),
+            [valid_named_color],
+            "Valid named color 'red' should pass validation.",
+        )
+
+        # Test invalid named color
+        invalid_named_color = "notacolor"
+        with self.assertRaisesRegex(PlotlyError, "Invalid named color: notacolor"):
+            colors.validate_colors(invalid_named_color)
+
+        # Test list of valid named colors
+        valid_named_colors_list = ["red", "blue", "green"]
+        self.assertEqual(
+            colors.validate_colors(valid_named_colors_list),
+            valid_named_colors_list,
+            "Valid named colors list should pass validation.",
+        )
+
+        # Test list with an invalid named color
+        mixed_named_colors_list = ["red", "invalidcolor", "blue"]
+        with self.assertRaisesRegex(PlotlyError, "Invalid named color: invalidcolor"):
+            colors.validate_colors(mixed_named_colors_list)

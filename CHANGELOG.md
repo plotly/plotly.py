@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.1] - 2025-01-13
+
+### Added
+- Support for HSL colors and Named colors. [#4957](https://github.com/plotly/plotly.py/issues/4957)
+- Function to converge from HSL to RGB: `hsl_to_rgb`.
+
+### Fixed
+- Fix a bug `validate_colors` that caused invalid colors within lists to pass without raising errors [#4957](https://github.com/plotly/plotly.py/issues/4957)
+
+
 ## [6.0.0rc0] - 2024-11-27
 
 ### Added
