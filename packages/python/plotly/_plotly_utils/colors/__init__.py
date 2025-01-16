@@ -322,7 +322,7 @@ def validate_colors(colors, colortype="tuple"):
             # color in the plotly colorscale. In resolving this issue we
             # will be removing the immediate line below
             colors = [colors_list[0]] + [colors_list[-1]]
-        elif "rgb" in colors or "#" in colors:
+        elif "rgb" in colors or "#" in colors or "hsl" in colors:
             colors = [colors]
         else:
             raise exceptions.PlotlyError(
@@ -353,6 +353,16 @@ def validate_colors(colors, colortype="tuple"):
             each_color = color_parser(each_color, hex_to_rgb)
             each_color = color_parser(each_color, unconvert_from_RGB_255)
 
+            colors[j] = each_color
+
+        if "hsl" in each_color:
+            try:
+                each_color = color_parser(each_color, hsl_to_rgb)
+            except ValueError as e:
+                raise exceptions.PlotlyError(
+                    f"Invalid HSL color: {each_color}. {str(e)}"
+                )
+            each_color = color_parser(each_color, unconvert_from_RGB_255)
             colors[j] = each_color
 
         if isinstance(each_color, tuple):
@@ -765,6 +775,68 @@ def hex_to_rgb(value):
         int(value[i : i + rgb_section_length], 16)
         for i in range(0, hex_total_length, rgb_section_length)
     )
+
+
+def hsl_to_rgb(value):
+    """
+    Converts an HSL color to RGB
+
+    :param (string) value: HSL color string
+
+    :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
+    """
+
+    def _hue_to_rgb(p, q, t):
+        """
+        Helper function for hsl_to_rgb
+        """
+        if t < 0:
+            t += 1
+        if t > 1:
+            t -= 1
+        if t < 1 / 6:
+            return p + (q - p) * 6 * t
+        if t < 1 / 2:
+            return q
+        if t < 2 / 3:
+            return p + (q - p) * (2 / 3 - t) * 6
+        return p
+
+    value = value.replace(" ", "").lower()
+
+    # Validate the format
+    if not value.startswith("hsl(") or not value.endswith(")"):
+        raise ValueError(
+            f"Invalid HSL format: {value}. Expected format: 'hsl(h, s%, l%)'"
+        )
+
+    try:
+        # Parsing the hsl string (usually of the form "hsl(h, s%, l%)")
+        h, s, l = value.lstrip("hsl(").rstrip(")%").split(",")
+        h, s, l = float(h) / 360, float(s.strip("%")) / 100, float(l.strip("%")) / 100
+    except Exception:
+        raise ValueError(f"Malformed HSL string: {value}")
+
+    if not (0 <= s <= 1 and 0 <= l <= 1):
+        raise ValueError(
+            f"Saturation and lightness must be between 0% and 100%. Got: s={s*100}%, l={l*100}%"
+        )
+
+    if not (0 <= h <= 1):
+        raise ValueError(f"Hue must be between 0 and 360. Got: {h*360}")
+
+    # Convert HSL to RGB
+    if s == 0:  # Achromatic
+        r = g = b = l
+
+    else:
+        q = l * (1 + s) if l < 0.5 else l + s - l * s
+        p = 2 * l - q
+        r = _hue_to_rgb(p, q, h + 1 / 3)
+        g = _hue_to_rgb(p, q, h)
+        b = _hue_to_rgb(p, q, h - 1 / 3)
+
+    return (round(r * 255), round(g * 255), round(b * 255))
 
 
 def colorscale_to_colors(colorscale):
