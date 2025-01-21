@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Marker(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "histogram2d"
-    _path_str = "histogram2d.marker"
+    _parent_path_str = 'histogram2d'
+    _path_str = 'histogram2d.marker'
     _valid_props = {"color", "colorsrc"}
 
     # color
@@ -24,11 +26,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # colorsrc
     # --------
@@ -44,11 +46,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorsrc"]
+        return self['colorsrc']
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self["colorsrc"] = val
+        self['colorsrc'] = val
 
     # Self properties description
     # ---------------------------
@@ -61,8 +63,12 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         """
-
-    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            color=None,
+            colorsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Marker object
 
@@ -82,10 +88,10 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
+        super(Marker, self).__init__('marker')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -97,28 +103,21 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram2d.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram2d.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram2d.Marker`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
+        self._init_provided('color', arg, color)
+        self._init_provided('colorsrc', arg, colorsrc)
 
         # Process unknown kwargs
         # ----------------------

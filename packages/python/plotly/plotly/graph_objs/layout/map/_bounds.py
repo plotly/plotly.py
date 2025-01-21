@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Bounds(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.map"
-    _path_str = "layout.map.bounds"
+    _parent_path_str = 'layout.map'
+    _path_str = 'layout.map.bounds'
     _valid_props = {"east", "north", "south", "west"}
 
     # east
@@ -25,11 +27,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["east"]
+        return self['east']
 
     @east.setter
     def east(self, val):
-        self["east"] = val
+        self['east'] = val
 
     # north
     # -----
@@ -46,11 +48,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["north"]
+        return self['north']
 
     @north.setter
     def north(self, val):
-        self["north"] = val
+        self['north'] = val
 
     # south
     # -----
@@ -67,11 +69,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["south"]
+        return self['south']
 
     @south.setter
     def south(self, val):
-        self["south"] = val
+        self['south'] = val
 
     # west
     # ----
@@ -88,11 +90,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["west"]
+        return self['west']
 
     @west.setter
     def west(self, val):
-        self["west"] = val
+        self['west'] = val
 
     # Self properties description
     # ---------------------------
@@ -112,10 +114,14 @@ class Bounds(_BaseLayoutHierarchyType):
             Sets the minimum longitude of the map (in degrees East)
             if `east`, `south` and `north` are declared.
         """
-
-    def __init__(
-        self, arg=None, east=None, north=None, south=None, west=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            east=None,
+            north=None,
+            south=None,
+            west=None,
+            **kwargs
+        ):
         """
         Construct a new Bounds object
 
@@ -142,10 +148,10 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         Bounds
         """
-        super(Bounds, self).__init__("bounds")
+        super(Bounds, self).__init__('bounds')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -157,36 +163,23 @@ class Bounds(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.Bounds
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.Bounds`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.Bounds`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("east", None)
-        _v = east if east is not None else _v
-        if _v is not None:
-            self["east"] = _v
-        _v = arg.pop("north", None)
-        _v = north if north is not None else _v
-        if _v is not None:
-            self["north"] = _v
-        _v = arg.pop("south", None)
-        _v = south if south is not None else _v
-        if _v is not None:
-            self["south"] = _v
-        _v = arg.pop("west", None)
-        _v = west if west is not None else _v
-        if _v is not None:
-            self["west"] = _v
+        self._init_provided('east', arg, east)
+        self._init_provided('north', arg, north)
+        self._init_provided('south', arg, south)
+        self._init_provided('west', arg, west)
 
         # Process unknown kwargs
         # ----------------------

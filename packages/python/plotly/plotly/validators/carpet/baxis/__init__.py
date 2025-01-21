@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._type import TypeValidator
     from ._title import TitleValidator
@@ -62,68 +61,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._arraydtick import ArraydtickValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._type.TypeValidator",
-            "._title.TitleValidator",
-            "._tickvalssrc.TickvalssrcValidator",
-            "._tickvals.TickvalsValidator",
-            "._ticktextsrc.TicktextsrcValidator",
-            "._ticktext.TicktextValidator",
-            "._ticksuffix.TicksuffixValidator",
-            "._tickprefix.TickprefixValidator",
-            "._tickmode.TickmodeValidator",
-            "._tickformatstopdefaults.TickformatstopdefaultsValidator",
-            "._tickformatstops.TickformatstopsValidator",
-            "._tickformat.TickformatValidator",
-            "._tickfont.TickfontValidator",
-            "._tickangle.TickangleValidator",
-            "._tick0.Tick0Validator",
-            "._startlinewidth.StartlinewidthValidator",
-            "._startlinecolor.StartlinecolorValidator",
-            "._startline.StartlineValidator",
-            "._smoothing.SmoothingValidator",
-            "._showticksuffix.ShowticksuffixValidator",
-            "._showtickprefix.ShowtickprefixValidator",
-            "._showticklabels.ShowticklabelsValidator",
-            "._showline.ShowlineValidator",
-            "._showgrid.ShowgridValidator",
-            "._showexponent.ShowexponentValidator",
-            "._separatethousands.SeparatethousandsValidator",
-            "._rangemode.RangemodeValidator",
-            "._range.RangeValidator",
-            "._nticks.NticksValidator",
-            "._minorgridwidth.MinorgridwidthValidator",
-            "._minorgriddash.MinorgriddashValidator",
-            "._minorgridcount.MinorgridcountValidator",
-            "._minorgridcolor.MinorgridcolorValidator",
-            "._minexponent.MinexponentValidator",
-            "._linewidth.LinewidthValidator",
-            "._linecolor.LinecolorValidator",
-            "._labelsuffix.LabelsuffixValidator",
-            "._labelprefix.LabelprefixValidator",
-            "._labelpadding.LabelpaddingValidator",
-            "._labelalias.LabelaliasValidator",
-            "._gridwidth.GridwidthValidator",
-            "._griddash.GriddashValidator",
-            "._gridcolor.GridcolorValidator",
-            "._fixedrange.FixedrangeValidator",
-            "._exponentformat.ExponentformatValidator",
-            "._endlinewidth.EndlinewidthValidator",
-            "._endlinecolor.EndlinecolorValidator",
-            "._endline.EndlineValidator",
-            "._dtick.DtickValidator",
-            "._color.ColorValidator",
-            "._cheatertype.CheatertypeValidator",
-            "._categoryorder.CategoryorderValidator",
-            "._categoryarraysrc.CategoryarraysrcValidator",
-            "._categoryarray.CategoryarrayValidator",
-            "._autotypenumbers.AutotypenumbersValidator",
-            "._autorange.AutorangeValidator",
-            "._arraytick0.Arraytick0Validator",
-            "._arraydtick.ArraydtickValidator",
-        ],
+        ['._type.TypeValidator', '._title.TitleValidator', '._tickvalssrc.TickvalssrcValidator', '._tickvals.TickvalsValidator', '._ticktextsrc.TicktextsrcValidator', '._ticktext.TicktextValidator', '._ticksuffix.TicksuffixValidator', '._tickprefix.TickprefixValidator', '._tickmode.TickmodeValidator', '._tickformatstopdefaults.TickformatstopdefaultsValidator', '._tickformatstops.TickformatstopsValidator', '._tickformat.TickformatValidator', '._tickfont.TickfontValidator', '._tickangle.TickangleValidator', '._tick0.Tick0Validator', '._startlinewidth.StartlinewidthValidator', '._startlinecolor.StartlinecolorValidator', '._startline.StartlineValidator', '._smoothing.SmoothingValidator', '._showticksuffix.ShowticksuffixValidator', '._showtickprefix.ShowtickprefixValidator', '._showticklabels.ShowticklabelsValidator', '._showline.ShowlineValidator', '._showgrid.ShowgridValidator', '._showexponent.ShowexponentValidator', '._separatethousands.SeparatethousandsValidator', '._rangemode.RangemodeValidator', '._range.RangeValidator', '._nticks.NticksValidator', '._minorgridwidth.MinorgridwidthValidator', '._minorgriddash.MinorgriddashValidator', '._minorgridcount.MinorgridcountValidator', '._minorgridcolor.MinorgridcolorValidator', '._minexponent.MinexponentValidator', '._linewidth.LinewidthValidator', '._linecolor.LinecolorValidator', '._labelsuffix.LabelsuffixValidator', '._labelprefix.LabelprefixValidator', '._labelpadding.LabelpaddingValidator', '._labelalias.LabelaliasValidator', '._gridwidth.GridwidthValidator', '._griddash.GriddashValidator', '._gridcolor.GridcolorValidator', '._fixedrange.FixedrangeValidator', '._exponentformat.ExponentformatValidator', '._endlinewidth.EndlinewidthValidator', '._endlinecolor.EndlinecolorValidator', '._endline.EndlineValidator', '._dtick.DtickValidator', '._color.ColorValidator', '._cheatertype.CheatertypeValidator', '._categoryorder.CategoryorderValidator', '._categoryarraysrc.CategoryarraysrcValidator', '._categoryarray.CategoryarrayValidator', '._autotypenumbers.AutotypenumbersValidator', '._autorange.AutorangeValidator', '._arraytick0.Arraytick0Validator', '._arraydtick.ArraydtickValidator']
     )
+
+

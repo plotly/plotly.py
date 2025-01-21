@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Marker(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "choropleth.selected"
-    _path_str = "choropleth.selected.marker"
+    _parent_path_str = 'choropleth.selected'
+    _path_str = 'choropleth.selected.marker'
     _valid_props = {"opacity"}
 
     # opacity
@@ -24,11 +26,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # Self properties description
     # ---------------------------
@@ -38,8 +40,11 @@ class Marker(_BaseTraceHierarchyType):
         opacity
             Sets the marker opacity of selected points.
         """
-
-    def __init__(self, arg=None, opacity=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            opacity=None,
+            **kwargs
+        ):
         """
         Construct a new Marker object
 
@@ -56,10 +61,10 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
+        super(Marker, self).__init__('marker')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -71,24 +76,20 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.choropleth.selected.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choropleth.selected.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.choropleth.selected.Marker`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
+        self._init_provided('opacity', arg, opacity)
 
         # Process unknown kwargs
         # ----------------------

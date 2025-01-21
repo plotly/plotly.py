@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Projection(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.scene.camera"
-    _path_str = "layout.scene.camera.projection"
+    _parent_path_str = 'layout.scene.camera'
+    _path_str = 'layout.scene.camera.projection'
     _valid_props = {"type"}
 
     # type
@@ -26,11 +28,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # Self properties description
     # ---------------------------
@@ -42,8 +44,11 @@ class Projection(_BaseLayoutHierarchyType):
             either "perspective" or "orthographic". The default is
             "perspective".
         """
-
-    def __init__(self, arg=None, type=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            type=None,
+            **kwargs
+        ):
         """
         Construct a new Projection object
 
@@ -62,10 +67,10 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super(Projection, self).__init__("projection")
+        super(Projection, self).__init__('projection')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -77,24 +82,20 @@ class Projection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.camera.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
+        self._init_provided('type', arg, type)
 
         # Process unknown kwargs
         # ----------------------

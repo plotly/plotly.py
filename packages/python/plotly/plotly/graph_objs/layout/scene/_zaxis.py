@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,70 +8,9 @@ class ZAxis(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.scene"
-    _path_str = "layout.scene.zaxis"
-    _valid_props = {
-        "autorange",
-        "autorangeoptions",
-        "autotypenumbers",
-        "backgroundcolor",
-        "calendar",
-        "categoryarray",
-        "categoryarraysrc",
-        "categoryorder",
-        "color",
-        "dtick",
-        "exponentformat",
-        "gridcolor",
-        "gridwidth",
-        "hoverformat",
-        "labelalias",
-        "linecolor",
-        "linewidth",
-        "maxallowed",
-        "minallowed",
-        "minexponent",
-        "mirror",
-        "nticks",
-        "range",
-        "rangemode",
-        "separatethousands",
-        "showaxeslabels",
-        "showbackground",
-        "showexponent",
-        "showgrid",
-        "showline",
-        "showspikes",
-        "showticklabels",
-        "showtickprefix",
-        "showticksuffix",
-        "spikecolor",
-        "spikesides",
-        "spikethickness",
-        "tick0",
-        "tickangle",
-        "tickcolor",
-        "tickfont",
-        "tickformat",
-        "tickformatstopdefaults",
-        "tickformatstops",
-        "ticklen",
-        "tickmode",
-        "tickprefix",
-        "ticks",
-        "ticksuffix",
-        "ticktext",
-        "ticktextsrc",
-        "tickvals",
-        "tickvalssrc",
-        "tickwidth",
-        "title",
-        "type",
-        "visible",
-        "zeroline",
-        "zerolinecolor",
-        "zerolinewidth",
-    }
+    _parent_path_str = 'layout.scene'
+    _path_str = 'layout.scene.zaxis'
+    _valid_props = {"autorange", "autorangeoptions", "autotypenumbers", "backgroundcolor", "calendar", "categoryarray", "categoryarraysrc", "categoryorder", "color", "dtick", "exponentformat", "gridcolor", "gridwidth", "hoverformat", "labelalias", "linecolor", "linewidth", "maxallowed", "minallowed", "minexponent", "mirror", "nticks", "range", "rangemode", "separatethousands", "showaxeslabels", "showbackground", "showexponent", "showgrid", "showline", "showspikes", "showticklabels", "showtickprefix", "showticksuffix", "spikecolor", "spikesides", "spikethickness", "tick0", "tickangle", "tickcolor", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "ticklen", "tickmode", "tickprefix", "ticks", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "tickwidth", "title", "type", "visible", "zeroline", "zerolinecolor", "zerolinewidth"}
 
     # autorange
     # ---------
@@ -96,11 +37,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["autorange"]
+        return self['autorange']
 
     @autorange.setter
     def autorange(self, val):
-        self["autorange"] = val
+        self['autorange'] = val
 
     # autorangeoptions
     # ----------------
@@ -113,35 +54,15 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Autorangeoptions constructor
 
-            Supported dict properties:
-
-                clipmax
-                    Clip autorange maximum if it goes beyond this
-                    value. Has no effect when
-                    `autorangeoptions.maxallowed` is provided.
-                clipmin
-                    Clip autorange minimum if it goes beyond this
-                    value. Has no effect when
-                    `autorangeoptions.minallowed` is provided.
-                include
-                    Ensure this value is included in autorange.
-                includesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `include`.
-                maxallowed
-                    Use this value exactly as autorange maximum.
-                minallowed
-                    Use this value exactly as autorange minimum.
-
         Returns
         -------
         plotly.graph_objs.layout.scene.zaxis.Autorangeoptions
         """
-        return self["autorangeoptions"]
+        return self['autorangeoptions']
 
     @autorangeoptions.setter
     def autorangeoptions(self, val):
-        self["autorangeoptions"] = val
+        self['autorangeoptions'] = val
 
     # autotypenumbers
     # ---------------
@@ -161,11 +82,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["autotypenumbers"]
+        return self['autotypenumbers']
 
     @autotypenumbers.setter
     def autotypenumbers(self, val):
-        self["autotypenumbers"] = val
+        self['autotypenumbers'] = val
 
     # backgroundcolor
     # ---------------
@@ -179,52 +100,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["backgroundcolor"]
+        return self['backgroundcolor']
 
     @backgroundcolor.setter
     def backgroundcolor(self, val):
-        self["backgroundcolor"] = val
+        self['backgroundcolor'] = val
 
     # calendar
     # --------
@@ -247,11 +133,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["calendar"]
+        return self['calendar']
 
     @calendar.setter
     def calendar(self, val):
-        self["calendar"] = val
+        self['calendar'] = val
 
     # categoryarray
     # -------------
@@ -269,11 +155,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["categoryarray"]
+        return self['categoryarray']
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self["categoryarray"] = val
+        self['categoryarray'] = val
 
     # categoryarraysrc
     # ----------------
@@ -290,11 +176,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["categoryarraysrc"]
+        return self['categoryarraysrc']
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
+        self['categoryarraysrc'] = val
 
     # categoryorder
     # -------------
@@ -331,11 +217,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["categoryorder"]
+        return self['categoryorder']
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self["categoryorder"] = val
+        self['categoryorder'] = val
 
     # color
     # -----
@@ -352,52 +238,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # dtick
     # -----
@@ -431,11 +282,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["dtick"]
+        return self['dtick']
 
     @dtick.setter
     def dtick(self, val):
-        self["dtick"] = val
+        self['dtick'] = val
 
     # exponentformat
     # --------------
@@ -456,11 +307,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["exponentformat"]
+        return self['exponentformat']
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self["exponentformat"] = val
+        self['exponentformat'] = val
 
     # gridcolor
     # ---------
@@ -474,52 +325,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["gridcolor"]
+        return self['gridcolor']
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self["gridcolor"] = val
+        self['gridcolor'] = val
 
     # gridwidth
     # ---------
@@ -535,11 +351,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["gridwidth"]
+        return self['gridwidth']
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self["gridwidth"] = val
+        self['gridwidth'] = val
 
     # hoverformat
     # -----------
@@ -565,11 +381,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["hoverformat"]
+        return self['hoverformat']
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self["hoverformat"] = val
+        self['hoverformat'] = val
 
     # labelalias
     # ----------
@@ -592,11 +408,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["labelalias"]
+        return self['labelalias']
 
     @labelalias.setter
     def labelalias(self, val):
-        self["labelalias"] = val
+        self['labelalias'] = val
 
     # linecolor
     # ---------
@@ -610,52 +426,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["linecolor"]
+        return self['linecolor']
 
     @linecolor.setter
     def linecolor(self, val):
-        self["linecolor"] = val
+        self['linecolor'] = val
 
     # linewidth
     # ---------
@@ -671,11 +452,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["linewidth"]
+        return self['linewidth']
 
     @linewidth.setter
     def linewidth(self, val):
-        self["linewidth"] = val
+        self['linewidth'] = val
 
     # maxallowed
     # ----------
@@ -690,11 +471,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["maxallowed"]
+        return self['maxallowed']
 
     @maxallowed.setter
     def maxallowed(self, val):
-        self["maxallowed"] = val
+        self['maxallowed'] = val
 
     # minallowed
     # ----------
@@ -709,11 +490,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["minallowed"]
+        return self['minallowed']
 
     @minallowed.setter
     def minallowed(self, val):
-        self["minallowed"] = val
+        self['minallowed'] = val
 
     # minexponent
     # -----------
@@ -730,11 +511,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["minexponent"]
+        return self['minexponent']
 
     @minexponent.setter
     def minexponent(self, val):
-        self["minexponent"] = val
+        self['minexponent'] = val
 
     # mirror
     # ------
@@ -756,11 +537,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["mirror"]
+        return self['mirror']
 
     @mirror.setter
     def mirror(self, val):
-        self["mirror"] = val
+        self['mirror'] = val
 
     # nticks
     # ------
@@ -780,43 +561,43 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["nticks"]
+        return self['nticks']
 
     @nticks.setter
     def nticks(self, val):
-        self["nticks"] = val
+        self['nticks'] = val
 
     # range
     # -----
     @property
     def range(self):
         """
-            Sets the range of this axis. If the axis `type` is "log", then
-            you must take the log of your desired range (e.g. to set the
-            range from 1 to 100, set the range from 0 to 2). If the axis
-            `type` is "date", it should be date strings, like date data,
-            though Date objects and unix milliseconds will be accepted and
-            converted to strings. If the axis `type` is "category", it
-            should be numbers, using the scale where each category is
-            assigned a serial number from zero in the order it appears.
-            Leaving either or both elements `null` impacts the default
-            `autorange`.
+        Sets the range of this axis. If the axis `type` is "log", then
+        you must take the log of your desired range (e.g. to set the
+        range from 1 to 100, set the range from 0 to 2). If the axis
+        `type` is "date", it should be date strings, like date data,
+        though Date objects and unix milliseconds will be accepted and
+        converted to strings. If the axis `type` is "category", it
+        should be numbers, using the scale where each category is
+        assigned a serial number from zero in the order it appears.
+        Leaving either or both elements `null` impacts the default
+        `autorange`.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property accepts values of any type
+    (1) The 'range[1]' property accepts values of any type
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     # rangemode
     # ---------
@@ -837,11 +618,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["rangemode"]
+        return self['rangemode']
 
     @rangemode.setter
     def rangemode(self, val):
-        self["rangemode"] = val
+        self['rangemode'] = val
 
     # separatethousands
     # -----------------
@@ -857,11 +638,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["separatethousands"]
+        return self['separatethousands']
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self["separatethousands"] = val
+        self['separatethousands'] = val
 
     # showaxeslabels
     # --------------
@@ -877,11 +658,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showaxeslabels"]
+        return self['showaxeslabels']
 
     @showaxeslabels.setter
     def showaxeslabels(self, val):
-        self["showaxeslabels"] = val
+        self['showaxeslabels'] = val
 
     # showbackground
     # --------------
@@ -897,11 +678,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showbackground"]
+        return self['showbackground']
 
     @showbackground.setter
     def showbackground(self, val):
-        self["showbackground"] = val
+        self['showbackground'] = val
 
     # showexponent
     # ------------
@@ -921,11 +702,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showexponent"]
+        return self['showexponent']
 
     @showexponent.setter
     def showexponent(self, val):
-        self["showexponent"] = val
+        self['showexponent'] = val
 
     # showgrid
     # --------
@@ -942,11 +723,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showgrid"]
+        return self['showgrid']
 
     @showgrid.setter
     def showgrid(self, val):
-        self["showgrid"] = val
+        self['showgrid'] = val
 
     # showline
     # --------
@@ -962,11 +743,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showline"]
+        return self['showline']
 
     @showline.setter
     def showline(self, val):
-        self["showline"] = val
+        self['showline'] = val
 
     # showspikes
     # ----------
@@ -983,11 +764,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showspikes"]
+        return self['showspikes']
 
     @showspikes.setter
     def showspikes(self, val):
-        self["showspikes"] = val
+        self['showspikes'] = val
 
     # showticklabels
     # --------------
@@ -1003,11 +784,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showticklabels"]
+        return self['showticklabels']
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self["showticklabels"] = val
+        self['showticklabels'] = val
 
     # showtickprefix
     # --------------
@@ -1027,11 +808,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showtickprefix"]
+        return self['showtickprefix']
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self["showtickprefix"] = val
+        self['showtickprefix'] = val
 
     # showticksuffix
     # --------------
@@ -1048,11 +829,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showticksuffix"]
+        return self['showticksuffix']
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self["showticksuffix"] = val
+        self['showticksuffix'] = val
 
     # spikecolor
     # ----------
@@ -1066,52 +847,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["spikecolor"]
+        return self['spikecolor']
 
     @spikecolor.setter
     def spikecolor(self, val):
-        self["spikecolor"] = val
+        self['spikecolor'] = val
 
     # spikesides
     # ----------
@@ -1128,11 +874,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["spikesides"]
+        return self['spikesides']
 
     @spikesides.setter
     def spikesides(self, val):
-        self["spikesides"] = val
+        self['spikesides'] = val
 
     # spikethickness
     # --------------
@@ -1148,11 +894,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["spikethickness"]
+        return self['spikethickness']
 
     @spikethickness.setter
     def spikethickness(self, val):
-        self["spikethickness"] = val
+        self['spikethickness'] = val
 
     # tick0
     # -----
@@ -1175,11 +921,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["tick0"]
+        return self['tick0']
 
     @tick0.setter
     def tick0(self, val):
-        self["tick0"] = val
+        self['tick0'] = val
 
     # tickangle
     # ---------
@@ -1199,11 +945,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["tickangle"]
+        return self['tickangle']
 
     @tickangle.setter
     def tickangle(self, val):
-        self["tickangle"] = val
+        self['tickangle'] = val
 
     # tickcolor
     # ---------
@@ -1217,52 +963,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["tickcolor"]
+        return self['tickcolor']
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self["tickcolor"] = val
+        self['tickcolor'] = val
 
     # tickfont
     # --------
@@ -1277,61 +988,15 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.scene.zaxis.Tickfont
         """
-        return self["tickfont"]
+        return self['tickfont']
 
     @tickfont.setter
     def tickfont(self, val):
-        self["tickfont"] = val
+        self['tickfont'] = val
 
     # tickformat
     # ----------
@@ -1357,11 +1022,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickformat"]
+        return self['tickformat']
 
     @tickformat.setter
     def tickformat(self, val):
-        self["tickformat"] = val
+        self['tickformat'] = val
 
     # tickformatstops
     # ---------------
@@ -1374,51 +1039,15 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
 
-            Supported dict properties:
-
-                dtickrange
-                    range [*min*, *max*], where "min", "max" -
-                    dtick values which describe some zoom level, it
-                    is possible to omit "min" or "max" value by
-                    passing "null"
-                enabled
-                    Determines whether or not this stop is used. If
-                    `false`, this stop is ignored even within its
-                    `dtickrange`.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                value
-                    string - dtickformat for described zoom level,
-                    the same as "tickformat"
-
         Returns
         -------
         tuple[plotly.graph_objs.layout.scene.zaxis.Tickformatstop]
         """
-        return self["tickformatstops"]
+        return self['tickformatstops']
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self["tickformatstops"] = val
+        self['tickformatstops'] = val
 
     # tickformatstopdefaults
     # ----------------------
@@ -1436,17 +1065,15 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.layout.scene.zaxis.Tickformatstop
         """
-        return self["tickformatstopdefaults"]
+        return self['tickformatstopdefaults']
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self["tickformatstopdefaults"] = val
+        self['tickformatstopdefaults'] = val
 
     # ticklen
     # -------
@@ -1462,11 +1089,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["ticklen"]
+        return self['ticklen']
 
     @ticklen.setter
     def ticklen(self, val):
-        self["ticklen"] = val
+        self['ticklen'] = val
 
     # tickmode
     # --------
@@ -1489,11 +1116,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["tickmode"]
+        return self['tickmode']
 
     @tickmode.setter
     def tickmode(self, val):
-        self["tickmode"] = val
+        self['tickmode'] = val
 
     # tickprefix
     # ----------
@@ -1510,11 +1137,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickprefix"]
+        return self['tickprefix']
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self["tickprefix"] = val
+        self['tickprefix'] = val
 
     # ticks
     # -----
@@ -1533,11 +1160,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["ticks"]
+        return self['ticks']
 
     @ticks.setter
     def ticks(self, val):
-        self["ticks"] = val
+        self['ticks'] = val
 
     # ticksuffix
     # ----------
@@ -1554,11 +1181,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["ticksuffix"]
+        return self['ticksuffix']
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self["ticksuffix"] = val
+        self['ticksuffix'] = val
 
     # ticktext
     # --------
@@ -1576,11 +1203,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["ticktext"]
+        return self['ticktext']
 
     @ticktext.setter
     def ticktext(self, val):
-        self["ticktext"] = val
+        self['ticktext'] = val
 
     # ticktextsrc
     # -----------
@@ -1596,11 +1223,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["ticktextsrc"]
+        return self['ticktextsrc']
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
+        self['ticktextsrc'] = val
 
     # tickvals
     # --------
@@ -1617,11 +1244,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["tickvals"]
+        return self['tickvals']
 
     @tickvals.setter
     def tickvals(self, val):
-        self["tickvals"] = val
+        self['tickvals'] = val
 
     # tickvalssrc
     # -----------
@@ -1637,11 +1264,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickvalssrc"]
+        return self['tickvalssrc']
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
+        self['tickvalssrc'] = val
 
     # tickwidth
     # ---------
@@ -1657,11 +1284,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["tickwidth"]
+        return self['tickwidth']
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self["tickwidth"] = val
+        self['tickwidth'] = val
 
     # title
     # -----
@@ -1674,22 +1301,15 @@ class ZAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Title constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this axis' title font.
-                text
-                    Sets the title of this axis.
-
         Returns
         -------
         plotly.graph_objs.layout.scene.zaxis.Title
         """
-        return self["title"]
+        return self['title']
 
     @title.setter
     def title(self, val):
-        self["title"] = val
+        self['title'] = val
 
     # type
     # ----
@@ -1708,11 +1328,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # visible
     # -------
@@ -1730,11 +1350,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # zeroline
     # --------
@@ -1752,11 +1372,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["zeroline"]
+        return self['zeroline']
 
     @zeroline.setter
     def zeroline(self, val):
-        self["zeroline"] = val
+        self['zeroline'] = val
 
     # zerolinecolor
     # -------------
@@ -1770,52 +1390,17 @@ class ZAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["zerolinecolor"]
+        return self['zerolinecolor']
 
     @zerolinecolor.setter
     def zerolinecolor(self, val):
-        self["zerolinecolor"] = val
+        self['zerolinecolor'] = val
 
     # zerolinewidth
     # -------------
@@ -1831,11 +1416,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["zerolinewidth"]
+        return self['zerolinewidth']
 
     @zerolinewidth.setter
     def zerolinewidth(self, val):
-        self["zerolinewidth"] = val
+        self['zerolinewidth'] = val
 
     # Self properties description
     # ---------------------------
@@ -2134,72 +1719,70 @@ class ZAxis(_BaseLayoutHierarchyType):
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        autorange=None,
-        autorangeoptions=None,
-        autotypenumbers=None,
-        backgroundcolor=None,
-        calendar=None,
-        categoryarray=None,
-        categoryarraysrc=None,
-        categoryorder=None,
-        color=None,
-        dtick=None,
-        exponentformat=None,
-        gridcolor=None,
-        gridwidth=None,
-        hoverformat=None,
-        labelalias=None,
-        linecolor=None,
-        linewidth=None,
-        maxallowed=None,
-        minallowed=None,
-        minexponent=None,
-        mirror=None,
-        nticks=None,
-        range=None,
-        rangemode=None,
-        separatethousands=None,
-        showaxeslabels=None,
-        showbackground=None,
-        showexponent=None,
-        showgrid=None,
-        showline=None,
-        showspikes=None,
-        showticklabels=None,
-        showtickprefix=None,
-        showticksuffix=None,
-        spikecolor=None,
-        spikesides=None,
-        spikethickness=None,
-        tick0=None,
-        tickangle=None,
-        tickcolor=None,
-        tickfont=None,
-        tickformat=None,
-        tickformatstops=None,
-        tickformatstopdefaults=None,
-        ticklen=None,
-        tickmode=None,
-        tickprefix=None,
-        ticks=None,
-        ticksuffix=None,
-        ticktext=None,
-        ticktextsrc=None,
-        tickvals=None,
-        tickvalssrc=None,
-        tickwidth=None,
-        title=None,
-        type=None,
-        visible=None,
-        zeroline=None,
-        zerolinecolor=None,
-        zerolinewidth=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            autorange=None,
+            autorangeoptions=None,
+            autotypenumbers=None,
+            backgroundcolor=None,
+            calendar=None,
+            categoryarray=None,
+            categoryarraysrc=None,
+            categoryorder=None,
+            color=None,
+            dtick=None,
+            exponentformat=None,
+            gridcolor=None,
+            gridwidth=None,
+            hoverformat=None,
+            labelalias=None,
+            linecolor=None,
+            linewidth=None,
+            maxallowed=None,
+            minallowed=None,
+            minexponent=None,
+            mirror=None,
+            nticks=None,
+            range=None,
+            rangemode=None,
+            separatethousands=None,
+            showaxeslabels=None,
+            showbackground=None,
+            showexponent=None,
+            showgrid=None,
+            showline=None,
+            showspikes=None,
+            showticklabels=None,
+            showtickprefix=None,
+            showticksuffix=None,
+            spikecolor=None,
+            spikesides=None,
+            spikethickness=None,
+            tick0=None,
+            tickangle=None,
+            tickcolor=None,
+            tickfont=None,
+            tickformat=None,
+            tickformatstops=None,
+            tickformatstopdefaults=None,
+            ticklen=None,
+            tickmode=None,
+            tickprefix=None,
+            ticks=None,
+            ticksuffix=None,
+            ticktext=None,
+            ticktextsrc=None,
+            tickvals=None,
+            tickvalssrc=None,
+            tickwidth=None,
+            title=None,
+            type=None,
+            visible=None,
+            zeroline=None,
+            zerolinecolor=None,
+            zerolinewidth=None,
+            **kwargs
+        ):
         """
         Construct a new ZAxis object
 
@@ -2505,10 +2088,10 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         ZAxis
         """
-        super(ZAxis, self).__init__("zaxis")
+        super(ZAxis, self).__init__('zaxis')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -2520,260 +2103,79 @@ class ZAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.ZAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("autorange", None)
-        _v = autorange if autorange is not None else _v
-        if _v is not None:
-            self["autorange"] = _v
-        _v = arg.pop("autorangeoptions", None)
-        _v = autorangeoptions if autorangeoptions is not None else _v
-        if _v is not None:
-            self["autorangeoptions"] = _v
-        _v = arg.pop("autotypenumbers", None)
-        _v = autotypenumbers if autotypenumbers is not None else _v
-        if _v is not None:
-            self["autotypenumbers"] = _v
-        _v = arg.pop("backgroundcolor", None)
-        _v = backgroundcolor if backgroundcolor is not None else _v
-        if _v is not None:
-            self["backgroundcolor"] = _v
-        _v = arg.pop("calendar", None)
-        _v = calendar if calendar is not None else _v
-        if _v is not None:
-            self["calendar"] = _v
-        _v = arg.pop("categoryarray", None)
-        _v = categoryarray if categoryarray is not None else _v
-        if _v is not None:
-            self["categoryarray"] = _v
-        _v = arg.pop("categoryarraysrc", None)
-        _v = categoryarraysrc if categoryarraysrc is not None else _v
-        if _v is not None:
-            self["categoryarraysrc"] = _v
-        _v = arg.pop("categoryorder", None)
-        _v = categoryorder if categoryorder is not None else _v
-        if _v is not None:
-            self["categoryorder"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("dtick", None)
-        _v = dtick if dtick is not None else _v
-        if _v is not None:
-            self["dtick"] = _v
-        _v = arg.pop("exponentformat", None)
-        _v = exponentformat if exponentformat is not None else _v
-        if _v is not None:
-            self["exponentformat"] = _v
-        _v = arg.pop("gridcolor", None)
-        _v = gridcolor if gridcolor is not None else _v
-        if _v is not None:
-            self["gridcolor"] = _v
-        _v = arg.pop("gridwidth", None)
-        _v = gridwidth if gridwidth is not None else _v
-        if _v is not None:
-            self["gridwidth"] = _v
-        _v = arg.pop("hoverformat", None)
-        _v = hoverformat if hoverformat is not None else _v
-        if _v is not None:
-            self["hoverformat"] = _v
-        _v = arg.pop("labelalias", None)
-        _v = labelalias if labelalias is not None else _v
-        if _v is not None:
-            self["labelalias"] = _v
-        _v = arg.pop("linecolor", None)
-        _v = linecolor if linecolor is not None else _v
-        if _v is not None:
-            self["linecolor"] = _v
-        _v = arg.pop("linewidth", None)
-        _v = linewidth if linewidth is not None else _v
-        if _v is not None:
-            self["linewidth"] = _v
-        _v = arg.pop("maxallowed", None)
-        _v = maxallowed if maxallowed is not None else _v
-        if _v is not None:
-            self["maxallowed"] = _v
-        _v = arg.pop("minallowed", None)
-        _v = minallowed if minallowed is not None else _v
-        if _v is not None:
-            self["minallowed"] = _v
-        _v = arg.pop("minexponent", None)
-        _v = minexponent if minexponent is not None else _v
-        if _v is not None:
-            self["minexponent"] = _v
-        _v = arg.pop("mirror", None)
-        _v = mirror if mirror is not None else _v
-        if _v is not None:
-            self["mirror"] = _v
-        _v = arg.pop("nticks", None)
-        _v = nticks if nticks is not None else _v
-        if _v is not None:
-            self["nticks"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("rangemode", None)
-        _v = rangemode if rangemode is not None else _v
-        if _v is not None:
-            self["rangemode"] = _v
-        _v = arg.pop("separatethousands", None)
-        _v = separatethousands if separatethousands is not None else _v
-        if _v is not None:
-            self["separatethousands"] = _v
-        _v = arg.pop("showaxeslabels", None)
-        _v = showaxeslabels if showaxeslabels is not None else _v
-        if _v is not None:
-            self["showaxeslabels"] = _v
-        _v = arg.pop("showbackground", None)
-        _v = showbackground if showbackground is not None else _v
-        if _v is not None:
-            self["showbackground"] = _v
-        _v = arg.pop("showexponent", None)
-        _v = showexponent if showexponent is not None else _v
-        if _v is not None:
-            self["showexponent"] = _v
-        _v = arg.pop("showgrid", None)
-        _v = showgrid if showgrid is not None else _v
-        if _v is not None:
-            self["showgrid"] = _v
-        _v = arg.pop("showline", None)
-        _v = showline if showline is not None else _v
-        if _v is not None:
-            self["showline"] = _v
-        _v = arg.pop("showspikes", None)
-        _v = showspikes if showspikes is not None else _v
-        if _v is not None:
-            self["showspikes"] = _v
-        _v = arg.pop("showticklabels", None)
-        _v = showticklabels if showticklabels is not None else _v
-        if _v is not None:
-            self["showticklabels"] = _v
-        _v = arg.pop("showtickprefix", None)
-        _v = showtickprefix if showtickprefix is not None else _v
-        if _v is not None:
-            self["showtickprefix"] = _v
-        _v = arg.pop("showticksuffix", None)
-        _v = showticksuffix if showticksuffix is not None else _v
-        if _v is not None:
-            self["showticksuffix"] = _v
-        _v = arg.pop("spikecolor", None)
-        _v = spikecolor if spikecolor is not None else _v
-        if _v is not None:
-            self["spikecolor"] = _v
-        _v = arg.pop("spikesides", None)
-        _v = spikesides if spikesides is not None else _v
-        if _v is not None:
-            self["spikesides"] = _v
-        _v = arg.pop("spikethickness", None)
-        _v = spikethickness if spikethickness is not None else _v
-        if _v is not None:
-            self["spikethickness"] = _v
-        _v = arg.pop("tick0", None)
-        _v = tick0 if tick0 is not None else _v
-        if _v is not None:
-            self["tick0"] = _v
-        _v = arg.pop("tickangle", None)
-        _v = tickangle if tickangle is not None else _v
-        if _v is not None:
-            self["tickangle"] = _v
-        _v = arg.pop("tickcolor", None)
-        _v = tickcolor if tickcolor is not None else _v
-        if _v is not None:
-            self["tickcolor"] = _v
-        _v = arg.pop("tickfont", None)
-        _v = tickfont if tickfont is not None else _v
-        if _v is not None:
-            self["tickfont"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("tickformatstops", None)
-        _v = tickformatstops if tickformatstops is not None else _v
-        if _v is not None:
-            self["tickformatstops"] = _v
-        _v = arg.pop("tickformatstopdefaults", None)
-        _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        if _v is not None:
-            self["tickformatstopdefaults"] = _v
-        _v = arg.pop("ticklen", None)
-        _v = ticklen if ticklen is not None else _v
-        if _v is not None:
-            self["ticklen"] = _v
-        _v = arg.pop("tickmode", None)
-        _v = tickmode if tickmode is not None else _v
-        if _v is not None:
-            self["tickmode"] = _v
-        _v = arg.pop("tickprefix", None)
-        _v = tickprefix if tickprefix is not None else _v
-        if _v is not None:
-            self["tickprefix"] = _v
-        _v = arg.pop("ticks", None)
-        _v = ticks if ticks is not None else _v
-        if _v is not None:
-            self["ticks"] = _v
-        _v = arg.pop("ticksuffix", None)
-        _v = ticksuffix if ticksuffix is not None else _v
-        if _v is not None:
-            self["ticksuffix"] = _v
-        _v = arg.pop("ticktext", None)
-        _v = ticktext if ticktext is not None else _v
-        if _v is not None:
-            self["ticktext"] = _v
-        _v = arg.pop("ticktextsrc", None)
-        _v = ticktextsrc if ticktextsrc is not None else _v
-        if _v is not None:
-            self["ticktextsrc"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("tickwidth", None)
-        _v = tickwidth if tickwidth is not None else _v
-        if _v is not None:
-            self["tickwidth"] = _v
-        _v = arg.pop("title", None)
-        _v = title if title is not None else _v
-        if _v is not None:
-            self["title"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("zeroline", None)
-        _v = zeroline if zeroline is not None else _v
-        if _v is not None:
-            self["zeroline"] = _v
-        _v = arg.pop("zerolinecolor", None)
-        _v = zerolinecolor if zerolinecolor is not None else _v
-        if _v is not None:
-            self["zerolinecolor"] = _v
-        _v = arg.pop("zerolinewidth", None)
-        _v = zerolinewidth if zerolinewidth is not None else _v
-        if _v is not None:
-            self["zerolinewidth"] = _v
+        self._init_provided('autorange', arg, autorange)
+        self._init_provided('autorangeoptions', arg, autorangeoptions)
+        self._init_provided('autotypenumbers', arg, autotypenumbers)
+        self._init_provided('backgroundcolor', arg, backgroundcolor)
+        self._init_provided('calendar', arg, calendar)
+        self._init_provided('categoryarray', arg, categoryarray)
+        self._init_provided('categoryarraysrc', arg, categoryarraysrc)
+        self._init_provided('categoryorder', arg, categoryorder)
+        self._init_provided('color', arg, color)
+        self._init_provided('dtick', arg, dtick)
+        self._init_provided('exponentformat', arg, exponentformat)
+        self._init_provided('gridcolor', arg, gridcolor)
+        self._init_provided('gridwidth', arg, gridwidth)
+        self._init_provided('hoverformat', arg, hoverformat)
+        self._init_provided('labelalias', arg, labelalias)
+        self._init_provided('linecolor', arg, linecolor)
+        self._init_provided('linewidth', arg, linewidth)
+        self._init_provided('maxallowed', arg, maxallowed)
+        self._init_provided('minallowed', arg, minallowed)
+        self._init_provided('minexponent', arg, minexponent)
+        self._init_provided('mirror', arg, mirror)
+        self._init_provided('nticks', arg, nticks)
+        self._init_provided('range', arg, range)
+        self._init_provided('rangemode', arg, rangemode)
+        self._init_provided('separatethousands', arg, separatethousands)
+        self._init_provided('showaxeslabels', arg, showaxeslabels)
+        self._init_provided('showbackground', arg, showbackground)
+        self._init_provided('showexponent', arg, showexponent)
+        self._init_provided('showgrid', arg, showgrid)
+        self._init_provided('showline', arg, showline)
+        self._init_provided('showspikes', arg, showspikes)
+        self._init_provided('showticklabels', arg, showticklabels)
+        self._init_provided('showtickprefix', arg, showtickprefix)
+        self._init_provided('showticksuffix', arg, showticksuffix)
+        self._init_provided('spikecolor', arg, spikecolor)
+        self._init_provided('spikesides', arg, spikesides)
+        self._init_provided('spikethickness', arg, spikethickness)
+        self._init_provided('tick0', arg, tick0)
+        self._init_provided('tickangle', arg, tickangle)
+        self._init_provided('tickcolor', arg, tickcolor)
+        self._init_provided('tickfont', arg, tickfont)
+        self._init_provided('tickformat', arg, tickformat)
+        self._init_provided('tickformatstops', arg, tickformatstops)
+        self._init_provided('tickformatstopdefaults', arg, tickformatstopdefaults)
+        self._init_provided('ticklen', arg, ticklen)
+        self._init_provided('tickmode', arg, tickmode)
+        self._init_provided('tickprefix', arg, tickprefix)
+        self._init_provided('ticks', arg, ticks)
+        self._init_provided('ticksuffix', arg, ticksuffix)
+        self._init_provided('ticktext', arg, ticktext)
+        self._init_provided('ticktextsrc', arg, ticktextsrc)
+        self._init_provided('tickvals', arg, tickvals)
+        self._init_provided('tickvalssrc', arg, tickvalssrc)
+        self._init_provided('tickwidth', arg, tickwidth)
+        self._init_provided('title', arg, title)
+        self._init_provided('type', arg, type)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('zeroline', arg, zeroline)
+        self._init_provided('zerolinecolor', arg, zerolinecolor)
+        self._init_provided('zerolinewidth', arg, zerolinewidth)
 
         # Process unknown kwargs
         # ----------------------

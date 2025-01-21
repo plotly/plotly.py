@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Rotation(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.geo.projection"
-    _path_str = "layout.geo.projection.rotation"
+    _parent_path_str = 'layout.geo.projection'
+    _path_str = 'layout.geo.projection.rotation'
     _valid_props = {"lat", "lon", "roll"}
 
     # lat
@@ -24,11 +26,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["lat"]
+        return self['lat']
 
     @lat.setter
     def lat(self, val):
-        self["lat"] = val
+        self['lat'] = val
 
     # lon
     # ---
@@ -45,11 +47,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["lon"]
+        return self['lon']
 
     @lon.setter
     def lon(self, val):
-        self["lon"] = val
+        self['lon'] = val
 
     # roll
     # ----
@@ -66,11 +68,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["roll"]
+        return self['roll']
 
     @roll.setter
     def roll(self, val):
-        self["roll"] = val
+        self['roll'] = val
 
     # Self properties description
     # ---------------------------
@@ -86,8 +88,13 @@ class Rotation(_BaseLayoutHierarchyType):
             Roll the map (in degrees) For example, a roll of 180
             makes the map appear upside down.
         """
-
-    def __init__(self, arg=None, lat=None, lon=None, roll=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            lat=None,
+            lon=None,
+            roll=None,
+            **kwargs
+        ):
         """
         Construct a new Rotation object
 
@@ -110,10 +117,10 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         Rotation
         """
-        super(Rotation, self).__init__("rotation")
+        super(Rotation, self).__init__('rotation')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -125,32 +132,22 @@ class Rotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.projection.Rotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("lat", None)
-        _v = lat if lat is not None else _v
-        if _v is not None:
-            self["lat"] = _v
-        _v = arg.pop("lon", None)
-        _v = lon if lon is not None else _v
-        if _v is not None:
-            self["lon"] = _v
-        _v = arg.pop("roll", None)
-        _v = roll if roll is not None else _v
-        if _v is not None:
-            self["roll"] = _v
+        self._init_provided('lat', arg, lat)
+        self._init_provided('lon', arg, lon)
+        self._init_provided('roll', arg, roll)
 
         # Process unknown kwargs
         # ----------------------

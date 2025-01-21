@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._namelengthsrc import NamelengthsrcValidator
     from ._namelength import NamelengthValidator
@@ -13,19 +12,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._align import AlignValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._namelengthsrc.NamelengthsrcValidator",
-            "._namelength.NamelengthValidator",
-            "._font.FontValidator",
-            "._bordercolorsrc.BordercolorsrcValidator",
-            "._bordercolor.BordercolorValidator",
-            "._bgcolorsrc.BgcolorsrcValidator",
-            "._bgcolor.BgcolorValidator",
-            "._alignsrc.AlignsrcValidator",
-            "._align.AlignValidator",
-        ],
+        ['._namelengthsrc.NamelengthsrcValidator', '._namelength.NamelengthValidator', '._font.FontValidator', '._bordercolorsrc.BordercolorsrcValidator', '._bordercolor.BordercolorValidator', '._bgcolorsrc.BgcolorsrcValidator', '._bgcolor.BgcolorValidator', '._alignsrc.AlignsrcValidator', '._align.AlignValidator']
     )
+
+

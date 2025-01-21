@@ -373,10 +373,7 @@ an instance of :class:`{class_name}`\"\"\")
         name_prop = subtype_node.name_property
         buffer.write(
             f"""
-        _v = arg.pop('{name_prop}', None)
-        _v = {name_prop} if {name_prop} is not None else _v
-        if _v is not None:
-            self['{name_prop}'] = _v"""
+        self._init_provided('{name_prop}', arg, {name_prop})"""
         )
 
     # ### Literals ###

@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._symbolsrc import SymbolsrcValidator
     from ._symbol import SymbolValidator
@@ -25,31 +24,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._autocolorscale import AutocolorscaleValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._symbolsrc.SymbolsrcValidator",
-            "._symbol.SymbolValidator",
-            "._sizesrc.SizesrcValidator",
-            "._sizeref.SizerefValidator",
-            "._sizemode.SizemodeValidator",
-            "._sizemin.SizeminValidator",
-            "._size.SizeValidator",
-            "._showscale.ShowscaleValidator",
-            "._reversescale.ReversescaleValidator",
-            "._opacity.OpacityValidator",
-            "._line.LineValidator",
-            "._colorsrc.ColorsrcValidator",
-            "._colorscale.ColorscaleValidator",
-            "._colorbar.ColorbarValidator",
-            "._coloraxis.ColoraxisValidator",
-            "._color.ColorValidator",
-            "._cmin.CminValidator",
-            "._cmid.CmidValidator",
-            "._cmax.CmaxValidator",
-            "._cauto.CautoValidator",
-            "._autocolorscale.AutocolorscaleValidator",
-        ],
+        ['._symbolsrc.SymbolsrcValidator', '._symbol.SymbolValidator', '._sizesrc.SizesrcValidator', '._sizeref.SizerefValidator', '._sizemode.SizemodeValidator', '._sizemin.SizeminValidator', '._size.SizeValidator', '._showscale.ShowscaleValidator', '._reversescale.ReversescaleValidator', '._opacity.OpacityValidator', '._line.LineValidator', '._colorsrc.ColorsrcValidator', '._colorscale.ColorscaleValidator', '._colorbar.ColorbarValidator', '._coloraxis.ColoraxisValidator', '._color.ColorValidator', '._cmin.CminValidator', '._cmid.CmidValidator', '._cmax.CmaxValidator', '._cauto.CautoValidator', '._autocolorscale.AutocolorscaleValidator']
     )
+
+

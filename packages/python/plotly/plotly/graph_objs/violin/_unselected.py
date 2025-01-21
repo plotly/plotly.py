@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Unselected(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "violin"
-    _path_str = "violin.unselected"
+    _parent_path_str = 'violin'
+    _path_str = 'violin.unselected'
     _valid_props = {"marker"}
 
     # marker
@@ -21,27 +23,15 @@ class Unselected(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Marker constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the marker color of unselected points,
-                    applied only when a selection exists.
-                opacity
-                    Sets the marker opacity of unselected points,
-                    applied only when a selection exists.
-                size
-                    Sets the marker size of unselected points,
-                    applied only when a selection exists.
-
         Returns
         -------
         plotly.graph_objs.violin.unselected.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     # Self properties description
     # ---------------------------
@@ -52,8 +42,11 @@ class Unselected(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.violin.unselected.Marker`
             instance or dict with compatible properties
         """
-
-    def __init__(self, arg=None, marker=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            marker=None,
+            **kwargs
+        ):
         """
         Construct a new Unselected object
 
@@ -71,10 +64,10 @@ class Unselected(_BaseTraceHierarchyType):
         -------
         Unselected
         """
-        super(Unselected, self).__init__("unselected")
+        super(Unselected, self).__init__('unselected')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -86,24 +79,20 @@ class Unselected(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.violin.Unselected
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.violin.Unselected`"""
-            )
+an instance of :class:`plotly.graph_objs.violin.Unselected`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
+        self._init_provided('marker', arg, marker)
 
         # Process unknown kwargs
         # ----------------------

@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,20 +8,9 @@ class Cluster(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "scattermap"
-    _path_str = "scattermap.cluster"
-    _valid_props = {
-        "color",
-        "colorsrc",
-        "enabled",
-        "maxzoom",
-        "opacity",
-        "opacitysrc",
-        "size",
-        "sizesrc",
-        "step",
-        "stepsrc",
-    }
+    _parent_path_str = 'scattermap'
+    _path_str = 'scattermap.cluster'
+    _valid_props = {"color", "colorsrc", "enabled", "maxzoom", "opacity", "opacitysrc", "size", "sizesrc", "step", "stepsrc"}
 
     # color
     # -----
@@ -33,53 +24,18 @@ class Cluster(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # colorsrc
     # --------
@@ -95,11 +51,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorsrc"]
+        return self['colorsrc']
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self["colorsrc"] = val
+        self['colorsrc'] = val
 
     # enabled
     # -------
@@ -115,11 +71,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["enabled"]
+        return self['enabled']
 
     @enabled.setter
     def enabled(self, val):
-        self["enabled"] = val
+        self['enabled'] = val
 
     # maxzoom
     # -------
@@ -136,11 +92,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["maxzoom"]
+        return self['maxzoom']
 
     @maxzoom.setter
     def maxzoom(self, val):
-        self["maxzoom"] = val
+        self['maxzoom'] = val
 
     # opacity
     # -------
@@ -157,11 +113,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # opacitysrc
     # ----------
@@ -177,11 +133,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["opacitysrc"]
+        return self['opacitysrc']
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self["opacitysrc"] = val
+        self['opacitysrc'] = val
 
     # size
     # ----
@@ -198,11 +154,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # sizesrc
     # -------
@@ -218,11 +174,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["sizesrc"]
+        return self['sizesrc']
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self["sizesrc"] = val
+        self['sizesrc'] = val
 
     # step
     # ----
@@ -243,11 +199,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["step"]
+        return self['step']
 
     @step.setter
     def step(self, val):
-        self["step"] = val
+        self['step'] = val
 
     # stepsrc
     # -------
@@ -263,11 +219,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["stepsrc"]
+        return self['stepsrc']
 
     @stepsrc.setter
     def stepsrc(self, val):
-        self["stepsrc"] = val
+        self['stepsrc'] = val
 
     # Self properties description
     # ---------------------------
@@ -305,22 +261,20 @@ class Cluster(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `step`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        colorsrc=None,
-        enabled=None,
-        maxzoom=None,
-        opacity=None,
-        opacitysrc=None,
-        size=None,
-        sizesrc=None,
-        step=None,
-        stepsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            colorsrc=None,
+            enabled=None,
+            maxzoom=None,
+            opacity=None,
+            opacitysrc=None,
+            size=None,
+            sizesrc=None,
+            step=None,
+            stepsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Cluster object
 
@@ -365,10 +319,10 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         Cluster
         """
-        super(Cluster, self).__init__("cluster")
+        super(Cluster, self).__init__('cluster')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -380,60 +334,29 @@ class Cluster(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattermap.Cluster
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermap.Cluster`"""
-            )
+an instance of :class:`plotly.graph_objs.scattermap.Cluster`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("enabled", None)
-        _v = enabled if enabled is not None else _v
-        if _v is not None:
-            self["enabled"] = _v
-        _v = arg.pop("maxzoom", None)
-        _v = maxzoom if maxzoom is not None else _v
-        if _v is not None:
-            self["maxzoom"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("opacitysrc", None)
-        _v = opacitysrc if opacitysrc is not None else _v
-        if _v is not None:
-            self["opacitysrc"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("sizesrc", None)
-        _v = sizesrc if sizesrc is not None else _v
-        if _v is not None:
-            self["sizesrc"] = _v
-        _v = arg.pop("step", None)
-        _v = step if step is not None else _v
-        if _v is not None:
-            self["step"] = _v
-        _v = arg.pop("stepsrc", None)
-        _v = stepsrc if stepsrc is not None else _v
-        if _v is not None:
-            self["stepsrc"] = _v
+        self._init_provided('color', arg, color)
+        self._init_provided('colorsrc', arg, colorsrc)
+        self._init_provided('enabled', arg, enabled)
+        self._init_provided('maxzoom', arg, maxzoom)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('opacitysrc', arg, opacitysrc)
+        self._init_provided('size', arg, size)
+        self._init_provided('sizesrc', arg, sizesrc)
+        self._init_provided('step', arg, step)
+        self._init_provided('stepsrc', arg, stepsrc)
 
         # Process unknown kwargs
         # ----------------------

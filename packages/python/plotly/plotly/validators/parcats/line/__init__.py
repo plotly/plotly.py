@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._showscale import ShowscaleValidator
     from ._shape import ShapeValidator
@@ -18,24 +17,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._autocolorscale import AutocolorscaleValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._showscale.ShowscaleValidator",
-            "._shape.ShapeValidator",
-            "._reversescale.ReversescaleValidator",
-            "._hovertemplate.HovertemplateValidator",
-            "._colorsrc.ColorsrcValidator",
-            "._colorscale.ColorscaleValidator",
-            "._colorbar.ColorbarValidator",
-            "._coloraxis.ColoraxisValidator",
-            "._color.ColorValidator",
-            "._cmin.CminValidator",
-            "._cmid.CmidValidator",
-            "._cmax.CmaxValidator",
-            "._cauto.CautoValidator",
-            "._autocolorscale.AutocolorscaleValidator",
-        ],
+        ['._showscale.ShowscaleValidator', '._shape.ShapeValidator', '._reversescale.ReversescaleValidator', '._hovertemplate.HovertemplateValidator', '._colorsrc.ColorsrcValidator', '._colorscale.ColorscaleValidator', '._colorbar.ColorbarValidator', '._coloraxis.ColoraxisValidator', '._color.ColorValidator', '._cmin.CminValidator', '._cmid.CmidValidator', '._cmax.CmaxValidator', '._cauto.CautoValidator', '._autocolorscale.AutocolorscaleValidator']
     )
+
+

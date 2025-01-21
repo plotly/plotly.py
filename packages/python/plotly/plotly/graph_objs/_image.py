@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,50 +8,9 @@ class Image(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "image"
-    _valid_props = {
-        "colormodel",
-        "customdata",
-        "customdatasrc",
-        "dx",
-        "dy",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "meta",
-        "metasrc",
-        "name",
-        "opacity",
-        "source",
-        "stream",
-        "text",
-        "textsrc",
-        "type",
-        "uid",
-        "uirevision",
-        "visible",
-        "x0",
-        "xaxis",
-        "y0",
-        "yaxis",
-        "z",
-        "zmax",
-        "zmin",
-        "zorder",
-        "zsmooth",
-        "zsrc",
-    }
+    _parent_path_str = ''
+    _path_str = 'image'
+    _valid_props = {"colormodel", "customdata", "customdatasrc", "dx", "dy", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "meta", "metasrc", "name", "opacity", "source", "stream", "text", "textsrc", "type", "uid", "uirevision", "visible", "x0", "xaxis", "y0", "yaxis", "z", "zmax", "zmin", "zorder", "zsmooth", "zsrc"}
 
     # colormodel
     # ----------
@@ -69,11 +30,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["colormodel"]
+        return self['colormodel']
 
     @colormodel.setter
     def colormodel(self, val):
-        self["colormodel"] = val
+        self['colormodel'] = val
 
     # customdata
     # ----------
@@ -92,11 +53,11 @@ class Image(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -113,11 +74,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # dx
     # --
@@ -133,11 +94,11 @@ class Image(_BaseTraceType):
         -------
         int|float
         """
-        return self["dx"]
+        return self['dx']
 
     @dx.setter
     def dx(self, val):
-        self["dx"] = val
+        self['dx'] = val
 
     # dy
     # --
@@ -153,11 +114,11 @@ class Image(_BaseTraceType):
         -------
         int|float
         """
-        return self["dy"]
+        return self['dy']
 
     @dy.setter
     def dy(self, val):
-        self["dy"] = val
+        self['dy'] = val
 
     # hoverinfo
     # ---------
@@ -179,11 +140,11 @@ class Image(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverinfosrc
     # ------------
@@ -200,11 +161,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -217,53 +178,15 @@ class Image(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.image.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertemplate
     # -------------
@@ -305,11 +228,11 @@ class Image(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -326,11 +249,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -346,11 +269,11 @@ class Image(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # hovertextsrc
     # ------------
@@ -367,11 +290,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -389,11 +312,11 @@ class Image(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -409,11 +332,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # legend
     # ------
@@ -434,11 +357,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgrouptitle
     # ----------------
@@ -451,22 +374,15 @@ class Image(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.image.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -489,11 +405,11 @@ class Image(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -510,11 +426,11 @@ class Image(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # meta
     # ----
@@ -538,11 +454,11 @@ class Image(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -558,11 +474,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # name
     # ----
@@ -580,11 +496,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -600,11 +516,11 @@ class Image(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # source
     # ------
@@ -622,11 +538,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["source"]
+        return self['source']
 
     @source.setter
     def source(self, val):
-        self["source"] = val
+        self['source'] = val
 
     # stream
     # ------
@@ -639,27 +555,15 @@ class Image(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.image.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # text
     # ----
@@ -675,11 +579,11 @@ class Image(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textsrc
     # -------
@@ -695,11 +599,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     # uid
     # ---
@@ -717,11 +621,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -750,11 +654,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -773,11 +677,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # x0
     # --
@@ -794,11 +698,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["x0"]
+        return self['x0']
 
     @x0.setter
     def x0(self, val):
-        self["x0"] = val
+        self['x0'] = val
 
     # xaxis
     # -----
@@ -819,11 +723,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["xaxis"]
+        return self['xaxis']
 
     @xaxis.setter
     def xaxis(self, val):
-        self["xaxis"] = val
+        self['xaxis'] = val
 
     # y0
     # --
@@ -843,11 +747,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["y0"]
+        return self['y0']
 
     @y0.setter
     def y0(self, val):
-        self["y0"] = val
+        self['y0'] = val
 
     # yaxis
     # -----
@@ -868,11 +772,11 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["yaxis"]
+        return self['yaxis']
 
     @yaxis.setter
     def yaxis(self, val):
-        self["yaxis"] = val
+        self['yaxis'] = val
 
     # z
     # -
@@ -889,80 +793,80 @@ class Image(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     # zmax
     # ----
     @property
     def zmax(self):
         """
-            Array defining the higher bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
-            colormodel, it is [255, 255, 255, 1]. For the `rgba256`
-            colormodel, it is [255, 255, 255, 255]. For the `hsl`
-            colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
-            it is [360, 100, 100, 1].
+        Array defining the higher bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
+        colormodel, it is [255, 255, 255, 1]. For the `rgba256`
+        colormodel, it is [255, 255, 255, 255]. For the `hsl`
+        colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
+        it is [360, 100, 100, 1].
 
-            The 'zmax' property is an info array that may be specified as:
+        The 'zmax' property is an info array that may be specified as:
+    
+        * a list or tuple of 4 elements where:
+    (0) The 'zmax[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'zmax[1]' property is a number and may be specified as:
+          - An int or float
+    (2) The 'zmax[2]' property is a number and may be specified as:
+          - An int or float
+    (3) The 'zmax[3]' property is a number and may be specified as:
+          - An int or float
 
-            * a list or tuple of 4 elements where:
-        (0) The 'zmax[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmax[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmax[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmax[3]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["zmax"]
+        return self['zmax']
 
     @zmax.setter
     def zmax(self, val):
-        self["zmax"] = val
+        self['zmax'] = val
 
     # zmin
     # ----
     @property
     def zmin(self):
         """
-            Array defining the lower bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
-            it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
-            0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
-            `hsla` colormodel, it is [0, 0, 0, 0].
+        Array defining the lower bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
+        it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
+        0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
+        `hsla` colormodel, it is [0, 0, 0, 0].
 
-            The 'zmin' property is an info array that may be specified as:
+        The 'zmin' property is an info array that may be specified as:
+    
+        * a list or tuple of 4 elements where:
+    (0) The 'zmin[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'zmin[1]' property is a number and may be specified as:
+          - An int or float
+    (2) The 'zmin[2]' property is a number and may be specified as:
+          - An int or float
+    (3) The 'zmin[3]' property is a number and may be specified as:
+          - An int or float
 
-            * a list or tuple of 4 elements where:
-        (0) The 'zmin[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmin[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmin[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmin[3]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["zmin"]
+        return self['zmin']
 
     @zmin.setter
     def zmin(self, val):
-        self["zmin"] = val
+        self['zmin'] = val
 
     # zorder
     # ------
@@ -980,11 +884,11 @@ class Image(_BaseTraceType):
         -------
         int
         """
-        return self["zorder"]
+        return self['zorder']
 
     @zorder.setter
     def zorder(self, val):
-        self["zorder"] = val
+        self['zorder'] = val
 
     # zsmooth
     # -------
@@ -1002,11 +906,11 @@ class Image(_BaseTraceType):
         -------
         Any
         """
-        return self["zsmooth"]
+        return self['zsmooth']
 
     @zsmooth.setter
     def zsmooth(self, val):
-        self["zsmooth"] = val
+        self['zsmooth'] = val
 
     # zsrc
     # ----
@@ -1022,17 +926,17 @@ class Image(_BaseTraceType):
         -------
         str
         """
-        return self["zsrc"]
+        return self['zsrc']
 
     @zsrc.setter
     def zsrc(self, val):
-        self["zsrc"] = val
+        self['zsrc'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -1251,51 +1155,49 @@ class Image(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        colormodel=None,
-        customdata=None,
-        customdatasrc=None,
-        dx=None,
-        dy=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        opacity=None,
-        source=None,
-        stream=None,
-        text=None,
-        textsrc=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        x0=None,
-        xaxis=None,
-        y0=None,
-        yaxis=None,
-        z=None,
-        zmax=None,
-        zmin=None,
-        zorder=None,
-        zsmooth=None,
-        zsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            colormodel=None,
+            customdata=None,
+            customdatasrc=None,
+            dx=None,
+            dy=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            opacity=None,
+            source=None,
+            stream=None,
+            text=None,
+            textsrc=None,
+            uid=None,
+            uirevision=None,
+            visible=None,
+            x0=None,
+            xaxis=None,
+            y0=None,
+            yaxis=None,
+            z=None,
+            zmax=None,
+            zmin=None,
+            zorder=None,
+            zsmooth=None,
+            zsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Image object
 
@@ -1527,10 +1429,10 @@ class Image(_BaseTraceType):
         -------
         Image
         """
-        super(Image, self).__init__("image")
+        super(Image, self).__init__('image')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -1542,182 +1444,64 @@ class Image(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Image
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Image`"""
-            )
+an instance of :class:`plotly.graph_objs.Image`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("colormodel", None)
-        _v = colormodel if colormodel is not None else _v
-        if _v is not None:
-            self["colormodel"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("dx", None)
-        _v = dx if dx is not None else _v
-        if _v is not None:
-            self["dx"] = _v
-        _v = arg.pop("dy", None)
-        _v = dy if dy is not None else _v
-        if _v is not None:
-            self["dy"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("source", None)
-        _v = source if source is not None else _v
-        if _v is not None:
-            self["source"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x0", None)
-        _v = x0 if x0 is not None else _v
-        if _v is not None:
-            self["x0"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("y0", None)
-        _v = y0 if y0 is not None else _v
-        if _v is not None:
-            self["y0"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-        _v = arg.pop("zmax", None)
-        _v = zmax if zmax is not None else _v
-        if _v is not None:
-            self["zmax"] = _v
-        _v = arg.pop("zmin", None)
-        _v = zmin if zmin is not None else _v
-        if _v is not None:
-            self["zmin"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-        _v = arg.pop("zsmooth", None)
-        _v = zsmooth if zsmooth is not None else _v
-        if _v is not None:
-            self["zsmooth"] = _v
-        _v = arg.pop("zsrc", None)
-        _v = zsrc if zsrc is not None else _v
-        if _v is not None:
-            self["zsrc"] = _v
+        self._init_provided('colormodel', arg, colormodel)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('dx', arg, dx)
+        self._init_provided('dy', arg, dy)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('hovertextsrc', arg, hovertextsrc)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('source', arg, source)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('text', arg, text)
+        self._init_provided('textsrc', arg, textsrc)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('x0', arg, x0)
+        self._init_provided('xaxis', arg, xaxis)
+        self._init_provided('y0', arg, y0)
+        self._init_provided('yaxis', arg, yaxis)
+        self._init_provided('z', arg, z)
+        self._init_provided('zmax', arg, zmax)
+        self._init_provided('zmin', arg, zmin)
+        self._init_provided('zorder', arg, zorder)
+        self._init_provided('zsmooth', arg, zsmooth)
+        self._init_provided('zsrc', arg, zsrc)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "image"
-        arg.pop("type", None)
+        self._props['type'] = 'image'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

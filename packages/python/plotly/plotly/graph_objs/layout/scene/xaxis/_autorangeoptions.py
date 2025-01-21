@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,16 +8,9 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.scene.xaxis"
-    _path_str = "layout.scene.xaxis.autorangeoptions"
-    _valid_props = {
-        "clipmax",
-        "clipmin",
-        "include",
-        "includesrc",
-        "maxallowed",
-        "minallowed",
-    }
+    _parent_path_str = 'layout.scene.xaxis'
+    _path_str = 'layout.scene.xaxis.autorangeoptions'
+    _valid_props = {"clipmax", "clipmin", "include", "includesrc", "maxallowed", "minallowed"}
 
     # clipmax
     # -------
@@ -31,11 +26,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["clipmax"]
+        return self['clipmax']
 
     @clipmax.setter
     def clipmax(self, val):
-        self["clipmax"] = val
+        self['clipmax'] = val
 
     # clipmin
     # -------
@@ -51,11 +46,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["clipmin"]
+        return self['clipmin']
 
     @clipmin.setter
     def clipmin(self, val):
-        self["clipmin"] = val
+        self['clipmin'] = val
 
     # include
     # -------
@@ -70,11 +65,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self["include"]
+        return self['include']
 
     @include.setter
     def include(self, val):
-        self["include"] = val
+        self['include'] = val
 
     # includesrc
     # ----------
@@ -90,11 +85,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["includesrc"]
+        return self['includesrc']
 
     @includesrc.setter
     def includesrc(self, val):
-        self["includesrc"] = val
+        self['includesrc'] = val
 
     # maxallowed
     # ----------
@@ -109,11 +104,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["maxallowed"]
+        return self['maxallowed']
 
     @maxallowed.setter
     def maxallowed(self, val):
-        self["maxallowed"] = val
+        self['maxallowed'] = val
 
     # minallowed
     # ----------
@@ -128,11 +123,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["minallowed"]
+        return self['minallowed']
 
     @minallowed.setter
     def minallowed(self, val):
-        self["minallowed"] = val
+        self['minallowed'] = val
 
     # Self properties description
     # ---------------------------
@@ -157,18 +152,16 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         minallowed
             Use this value exactly as autorange minimum.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        clipmax=None,
-        clipmin=None,
-        include=None,
-        includesrc=None,
-        maxallowed=None,
-        minallowed=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            clipmax=None,
+            clipmin=None,
+            include=None,
+            includesrc=None,
+            maxallowed=None,
+            minallowed=None,
+            **kwargs
+        ):
         """
         Construct a new Autorangeoptions object
 
@@ -200,10 +193,10 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Autorangeoptions
         """
-        super(Autorangeoptions, self).__init__("autorangeoptions")
+        super(Autorangeoptions, self).__init__('autorangeoptions')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -215,44 +208,25 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.xaxis.Autorangeoptions
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.xaxis.Autorangeoptions`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.xaxis.Autorangeoptions`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("clipmax", None)
-        _v = clipmax if clipmax is not None else _v
-        if _v is not None:
-            self["clipmax"] = _v
-        _v = arg.pop("clipmin", None)
-        _v = clipmin if clipmin is not None else _v
-        if _v is not None:
-            self["clipmin"] = _v
-        _v = arg.pop("include", None)
-        _v = include if include is not None else _v
-        if _v is not None:
-            self["include"] = _v
-        _v = arg.pop("includesrc", None)
-        _v = includesrc if includesrc is not None else _v
-        if _v is not None:
-            self["includesrc"] = _v
-        _v = arg.pop("maxallowed", None)
-        _v = maxallowed if maxallowed is not None else _v
-        if _v is not None:
-            self["maxallowed"] = _v
-        _v = arg.pop("minallowed", None)
-        _v = minallowed if minallowed is not None else _v
-        if _v is not None:
-            self["minallowed"] = _v
+        self._init_provided('clipmax', arg, clipmax)
+        self._init_provided('clipmin', arg, clipmin)
+        self._init_provided('include', arg, include)
+        self._init_provided('includesrc', arg, includesrc)
+        self._init_provided('maxallowed', arg, maxallowed)
+        self._init_provided('minallowed', arg, minallowed)
 
         # Process unknown kwargs
         # ----------------------

@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class YAxis(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.xaxis.rangeslider"
-    _path_str = "layout.xaxis.rangeslider.yaxis"
+    _parent_path_str = 'layout.xaxis.rangeslider'
+    _path_str = 'layout.xaxis.rangeslider.yaxis'
     _valid_props = {"range", "rangemode"}
 
     # range
@@ -15,23 +17,23 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of this axis for the rangeslider.
+        Sets the range of this axis for the rangeslider.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property accepts values of any type
+    (1) The 'range[1]' property accepts values of any type
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     # rangemode
     # ---------
@@ -52,11 +54,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["rangemode"]
+        return self['rangemode']
 
     @rangemode.setter
     def rangemode(self, val):
-        self["rangemode"] = val
+        self['rangemode'] = val
 
     # Self properties description
     # ---------------------------
@@ -73,8 +75,12 @@ class YAxis(_BaseLayoutHierarchyType):
             current range of the corresponding y-axis on the main
             subplot is used.
         """
-
-    def __init__(self, arg=None, range=None, rangemode=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            range=None,
+            rangemode=None,
+            **kwargs
+        ):
         """
         Construct a new YAxis object
 
@@ -98,10 +104,10 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super(YAxis, self).__init__("yaxis")
+        super(YAxis, self).__init__('yaxis')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -113,28 +119,21 @@ class YAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("rangemode", None)
-        _v = rangemode if rangemode is not None else _v
-        if _v is not None:
-            self["rangemode"] = _v
+        self._init_provided('range', arg, range)
+        self._init_provided('rangemode', arg, rangemode)
 
         # Process unknown kwargs
         # ----------------------

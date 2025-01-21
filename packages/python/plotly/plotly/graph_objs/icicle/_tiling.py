@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Tiling(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "icicle"
-    _path_str = "icicle.tiling"
+    _parent_path_str = 'icicle'
+    _path_str = 'icicle.tiling'
     _valid_props = {"flip", "orientation", "pad"}
 
     # flip
@@ -27,11 +29,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["flip"]
+        return self['flip']
 
     @flip.setter
     def flip(self, val):
-        self["flip"] = val
+        self['flip'] = val
 
     # orientation
     # -----------
@@ -55,11 +57,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["orientation"]
+        return self['orientation']
 
     @orientation.setter
     def orientation(self, val):
-        self["orientation"] = val
+        self['orientation'] = val
 
     # pad
     # ---
@@ -75,11 +77,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["pad"]
+        return self['pad']
 
     @pad.setter
     def pad(self, val):
-        self["pad"] = val
+        self['pad'] = val
 
     # Self properties description
     # ---------------------------
@@ -103,8 +105,13 @@ class Tiling(_BaseTraceHierarchyType):
         pad
             Sets the inner padding (in px).
         """
-
-    def __init__(self, arg=None, flip=None, orientation=None, pad=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            flip=None,
+            orientation=None,
+            pad=None,
+            **kwargs
+        ):
         """
         Construct a new Tiling object
 
@@ -134,10 +141,10 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Tiling
         """
-        super(Tiling, self).__init__("tiling")
+        super(Tiling, self).__init__('tiling')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -149,32 +156,22 @@ class Tiling(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.icicle.Tiling
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.icicle.Tiling`"""
-            )
+an instance of :class:`plotly.graph_objs.icicle.Tiling`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("flip", None)
-        _v = flip if flip is not None else _v
-        if _v is not None:
-            self["flip"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("pad", None)
-        _v = pad if pad is not None else _v
-        if _v is not None:
-            self["pad"] = _v
+        self._init_provided('flip', arg, flip)
+        self._init_provided('orientation', arg, orientation)
+        self._init_provided('pad', arg, pad)
 
         # Process unknown kwargs
         # ----------------------

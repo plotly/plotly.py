@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,55 +8,40 @@ class Dimension(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "parcoords"
-    _path_str = "parcoords.dimension"
-    _valid_props = {
-        "constraintrange",
-        "label",
-        "multiselect",
-        "name",
-        "range",
-        "templateitemname",
-        "tickformat",
-        "ticktext",
-        "ticktextsrc",
-        "tickvals",
-        "tickvalssrc",
-        "values",
-        "valuessrc",
-        "visible",
-    }
+    _parent_path_str = 'parcoords'
+    _path_str = 'parcoords.dimension'
+    _valid_props = {"constraintrange", "label", "multiselect", "name", "range", "templateitemname", "tickformat", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "values", "valuessrc", "visible"}
 
     # constraintrange
     # ---------------
     @property
     def constraintrange(self):
         """
-            The domain range to which the filter on the dimension is
-            constrained. Must be an array of `[fromValue, toValue]` with
-            `fromValue <= toValue`, or if `multiselect` is not disabled,
-            you may give an array of arrays, where each inner array is
-            `[fromValue, toValue]`.
+        The domain range to which the filter on the dimension is
+        constrained. Must be an array of `[fromValue, toValue]` with
+        `fromValue <= toValue`, or if `multiselect` is not disabled,
+        you may give an array of arrays, where each inner array is
+        `[fromValue, toValue]`.
 
-            The 'constraintrange' property is an info array that may be specified as:
+        The 'constraintrange' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'constraintrange[0]' property accepts values of any type
+    (1) The 'constraintrange[1]' property accepts values of any type
+    
+        * a 2D list where:
+    (0) The 'constraintrange[i][0]' property accepts values of any type
+    (1) The 'constraintrange[i][1]' property accepts values of any type
 
-            * a list or tuple of 2 elements where:
-        (0) The 'constraintrange[0]' property accepts values of any type
-        (1) The 'constraintrange[1]' property accepts values of any type
-
-            * a 2D list where:
-        (0) The 'constraintrange[i][0]' property accepts values of any type
-        (1) The 'constraintrange[i][1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["constraintrange"]
+        return self['constraintrange']
 
     @constraintrange.setter
     def constraintrange(self, val):
-        self["constraintrange"] = val
+        self['constraintrange'] = val
 
     # label
     # -----
@@ -71,11 +58,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["label"]
+        return self['label']
 
     @label.setter
     def label(self, val):
-        self["label"] = val
+        self['label'] = val
 
     # multiselect
     # -----------
@@ -91,11 +78,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["multiselect"]
+        return self['multiselect']
 
     @multiselect.setter
     def multiselect(self, val):
-        self["multiselect"] = val
+        self['multiselect'] = val
 
     # name
     # ----
@@ -118,38 +105,38 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # range
     # -----
     @property
     def range(self):
         """
-            The domain range that represents the full, shown axis extent.
-            Defaults to the `values` extent. Must be an array of
-            `[fromValue, toValue]` with finite numbers as elements.
+        The domain range that represents the full, shown axis extent.
+        Defaults to the `values` extent. Must be an array of
+        `[fromValue, toValue]` with finite numbers as elements.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'range[1]' property is a number and may be specified as:
+          - An int or float
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'range[1]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     # templateitemname
     # ----------------
@@ -173,11 +160,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     # tickformat
     # ----------
@@ -203,11 +190,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["tickformat"]
+        return self['tickformat']
 
     @tickformat.setter
     def tickformat(self, val):
-        self["tickformat"] = val
+        self['tickformat'] = val
 
     # ticktext
     # --------
@@ -223,11 +210,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["ticktext"]
+        return self['ticktext']
 
     @ticktext.setter
     def ticktext(self, val):
-        self["ticktext"] = val
+        self['ticktext'] = val
 
     # ticktextsrc
     # -----------
@@ -243,11 +230,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["ticktextsrc"]
+        return self['ticktextsrc']
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
+        self['ticktextsrc'] = val
 
     # tickvals
     # --------
@@ -263,11 +250,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["tickvals"]
+        return self['tickvals']
 
     @tickvals.setter
     def tickvals(self, val):
-        self["tickvals"] = val
+        self['tickvals'] = val
 
     # tickvalssrc
     # -----------
@@ -283,11 +270,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["tickvalssrc"]
+        return self['tickvalssrc']
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
+        self['tickvalssrc'] = val
 
     # values
     # ------
@@ -306,11 +293,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["values"]
+        return self['values']
 
     @values.setter
     def values(self, val):
-        self["values"] = val
+        self['values'] = val
 
     # valuessrc
     # ---------
@@ -326,11 +313,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["valuessrc"]
+        return self['valuessrc']
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self["valuessrc"] = val
+        self['valuessrc'] = val
 
     # visible
     # -------
@@ -347,11 +334,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # Self properties description
     # ---------------------------
@@ -430,26 +417,24 @@ class Dimension(_BaseTraceHierarchyType):
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        constraintrange=None,
-        label=None,
-        multiselect=None,
-        name=None,
-        range=None,
-        templateitemname=None,
-        tickformat=None,
-        ticktext=None,
-        ticktextsrc=None,
-        tickvals=None,
-        tickvalssrc=None,
-        values=None,
-        valuessrc=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            constraintrange=None,
+            label=None,
+            multiselect=None,
+            name=None,
+            range=None,
+            templateitemname=None,
+            tickformat=None,
+            ticktext=None,
+            ticktextsrc=None,
+            tickvals=None,
+            tickvalssrc=None,
+            values=None,
+            valuessrc=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Dimension object
 
@@ -538,10 +523,10 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super(Dimension, self).__init__("dimensions")
+        super(Dimension, self).__init__('dimensions')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -553,76 +538,33 @@ class Dimension(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcoords.Dimension
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.Dimension`"""
-            )
+an instance of :class:`plotly.graph_objs.parcoords.Dimension`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("constraintrange", None)
-        _v = constraintrange if constraintrange is not None else _v
-        if _v is not None:
-            self["constraintrange"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("multiselect", None)
-        _v = multiselect if multiselect is not None else _v
-        if _v is not None:
-            self["multiselect"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("ticktext", None)
-        _v = ticktext if ticktext is not None else _v
-        if _v is not None:
-            self["ticktext"] = _v
-        _v = arg.pop("ticktextsrc", None)
-        _v = ticktextsrc if ticktextsrc is not None else _v
-        if _v is not None:
-            self["ticktextsrc"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("values", None)
-        _v = values if values is not None else _v
-        if _v is not None:
-            self["values"] = _v
-        _v = arg.pop("valuessrc", None)
-        _v = valuessrc if valuessrc is not None else _v
-        if _v is not None:
-            self["valuessrc"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('constraintrange', arg, constraintrange)
+        self._init_provided('label', arg, label)
+        self._init_provided('multiselect', arg, multiselect)
+        self._init_provided('name', arg, name)
+        self._init_provided('range', arg, range)
+        self._init_provided('templateitemname', arg, templateitemname)
+        self._init_provided('tickformat', arg, tickformat)
+        self._init_provided('ticktext', arg, ticktext)
+        self._init_provided('ticktextsrc', arg, ticktextsrc)
+        self._init_provided('tickvals', arg, tickvals)
+        self._init_provided('tickvalssrc', arg, tickvalssrc)
+        self._init_provided('values', arg, values)
+        self._init_provided('valuessrc', arg, valuessrc)
+        self._init_provided('visible', arg, visible)
 
         # Process unknown kwargs
         # ----------------------

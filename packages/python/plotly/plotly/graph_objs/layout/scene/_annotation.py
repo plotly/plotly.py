@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,47 +8,9 @@ class Annotation(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.scene"
-    _path_str = "layout.scene.annotation"
-    _valid_props = {
-        "align",
-        "arrowcolor",
-        "arrowhead",
-        "arrowside",
-        "arrowsize",
-        "arrowwidth",
-        "ax",
-        "ay",
-        "bgcolor",
-        "bordercolor",
-        "borderpad",
-        "borderwidth",
-        "captureevents",
-        "font",
-        "height",
-        "hoverlabel",
-        "hovertext",
-        "name",
-        "opacity",
-        "showarrow",
-        "standoff",
-        "startarrowhead",
-        "startarrowsize",
-        "startstandoff",
-        "templateitemname",
-        "text",
-        "textangle",
-        "valign",
-        "visible",
-        "width",
-        "x",
-        "xanchor",
-        "xshift",
-        "y",
-        "yanchor",
-        "yshift",
-        "z",
-    }
+    _parent_path_str = 'layout.scene'
+    _path_str = 'layout.scene.annotation'
+    _valid_props = {"align", "arrowcolor", "arrowhead", "arrowside", "arrowsize", "arrowwidth", "ax", "ay", "bgcolor", "bordercolor", "borderpad", "borderwidth", "captureevents", "font", "height", "hoverlabel", "hovertext", "name", "opacity", "showarrow", "standoff", "startarrowhead", "startarrowsize", "startstandoff", "templateitemname", "text", "textangle", "valign", "visible", "width", "x", "xanchor", "xshift", "y", "yanchor", "yshift", "z"}
 
     # align
     # -----
@@ -66,11 +30,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["align"]
+        return self['align']
 
     @align.setter
     def align(self, val):
-        self["align"] = val
+        self['align'] = val
 
     # arrowcolor
     # ----------
@@ -84,52 +48,17 @@ class Annotation(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["arrowcolor"]
+        return self['arrowcolor']
 
     @arrowcolor.setter
     def arrowcolor(self, val):
-        self["arrowcolor"] = val
+        self['arrowcolor'] = val
 
     # arrowhead
     # ---------
@@ -146,11 +75,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["arrowhead"]
+        return self['arrowhead']
 
     @arrowhead.setter
     def arrowhead(self, val):
-        self["arrowhead"] = val
+        self['arrowhead'] = val
 
     # arrowside
     # ---------
@@ -169,11 +98,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["arrowside"]
+        return self['arrowside']
 
     @arrowside.setter
     def arrowside(self, val):
-        self["arrowside"] = val
+        self['arrowside'] = val
 
     # arrowsize
     # ---------
@@ -191,11 +120,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["arrowsize"]
+        return self['arrowsize']
 
     @arrowsize.setter
     def arrowsize(self, val):
-        self["arrowsize"] = val
+        self['arrowsize'] = val
 
     # arrowwidth
     # ----------
@@ -211,11 +140,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["arrowwidth"]
+        return self['arrowwidth']
 
     @arrowwidth.setter
     def arrowwidth(self, val):
-        self["arrowwidth"] = val
+        self['arrowwidth'] = val
 
     # ax
     # --
@@ -232,11 +161,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["ax"]
+        return self['ax']
 
     @ax.setter
     def ax(self, val):
-        self["ax"] = val
+        self['ax'] = val
 
     # ay
     # --
@@ -253,11 +182,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["ay"]
+        return self['ay']
 
     @ay.setter
     def ay(self, val):
-        self["ay"] = val
+        self['ay'] = val
 
     # bgcolor
     # -------
@@ -271,52 +200,17 @@ class Annotation(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["bgcolor"]
+        return self['bgcolor']
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self["bgcolor"] = val
+        self['bgcolor'] = val
 
     # bordercolor
     # -----------
@@ -330,52 +224,17 @@ class Annotation(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["bordercolor"]
+        return self['bordercolor']
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self["bordercolor"] = val
+        self['bordercolor'] = val
 
     # borderpad
     # ---------
@@ -392,11 +251,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["borderpad"]
+        return self['borderpad']
 
     @borderpad.setter
     def borderpad(self, val):
-        self["borderpad"] = val
+        self['borderpad'] = val
 
     # borderwidth
     # -----------
@@ -413,11 +272,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["borderwidth"]
+        return self['borderwidth']
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self["borderwidth"] = val
+        self['borderwidth'] = val
 
     # captureevents
     # -------------
@@ -438,11 +297,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["captureevents"]
+        return self['captureevents']
 
     @captureevents.setter
     def captureevents(self, val):
-        self["captureevents"] = val
+        self['captureevents'] = val
 
     # font
     # ----
@@ -457,61 +316,15 @@ class Annotation(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Font constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.scene.annotation.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     # height
     # ------
@@ -528,11 +341,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["height"]
+        return self['height']
 
     @height.setter
     def height(self, val):
-        self["height"] = val
+        self['height'] = val
 
     # hoverlabel
     # ----------
@@ -545,30 +358,15 @@ class Annotation(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                bgcolor
-                    Sets the background color of the hover label.
-                    By default uses the annotation's `bgcolor` made
-                    opaque, or white if it was transparent.
-                bordercolor
-                    Sets the border color of the hover label. By
-                    default uses either dark grey or white, for
-                    maximum contrast with `hoverlabel.bgcolor`.
-                font
-                    Sets the hover label text font. By default uses
-                    the global hover font and size, with color from
-                    `hoverlabel.bordercolor`.
-
         Returns
         -------
         plotly.graph_objs.layout.scene.annotation.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertext
     # ---------
@@ -586,11 +384,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # name
     # ----
@@ -613,11 +411,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -633,11 +431,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # showarrow
     # ---------
@@ -655,11 +453,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showarrow"]
+        return self['showarrow']
 
     @showarrow.setter
     def showarrow(self, val):
-        self["showarrow"] = val
+        self['showarrow'] = val
 
     # standoff
     # --------
@@ -679,11 +477,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["standoff"]
+        return self['standoff']
 
     @standoff.setter
     def standoff(self, val):
-        self["standoff"] = val
+        self['standoff'] = val
 
     # startarrowhead
     # --------------
@@ -700,11 +498,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["startarrowhead"]
+        return self['startarrowhead']
 
     @startarrowhead.setter
     def startarrowhead(self, val):
-        self["startarrowhead"] = val
+        self['startarrowhead'] = val
 
     # startarrowsize
     # --------------
@@ -722,11 +520,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["startarrowsize"]
+        return self['startarrowsize']
 
     @startarrowsize.setter
     def startarrowsize(self, val):
-        self["startarrowsize"] = val
+        self['startarrowsize'] = val
 
     # startstandoff
     # -------------
@@ -746,11 +544,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["startstandoff"]
+        return self['startstandoff']
 
     @startstandoff.setter
     def startstandoff(self, val):
-        self["startstandoff"] = val
+        self['startstandoff'] = val
 
     # templateitemname
     # ----------------
@@ -774,11 +572,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     # text
     # ----
@@ -798,11 +596,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textangle
     # ---------
@@ -821,11 +619,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["textangle"]
+        return self['textangle']
 
     @textangle.setter
     def textangle(self, val):
-        self["textangle"] = val
+        self['textangle'] = val
 
     # valign
     # ------
@@ -844,11 +642,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["valign"]
+        return self['valign']
 
     @valign.setter
     def valign(self, val):
-        self["valign"] = val
+        self['valign'] = val
 
     # visible
     # -------
@@ -864,11 +662,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # width
     # -----
@@ -886,11 +684,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["width"]
+        return self['width']
 
     @width.setter
     def width(self, val):
-        self["width"] = val
+        self['width'] = val
 
     # x
     # -
@@ -905,11 +703,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     # xanchor
     # -------
@@ -934,11 +732,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xanchor"]
+        return self['xanchor']
 
     @xanchor.setter
     def xanchor(self, val):
-        self["xanchor"] = val
+        self['xanchor'] = val
 
     # xshift
     # ------
@@ -955,11 +753,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["xshift"]
+        return self['xshift']
 
     @xshift.setter
     def xshift(self, val):
-        self["xshift"] = val
+        self['xshift'] = val
 
     # y
     # -
@@ -974,11 +772,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     # yanchor
     # -------
@@ -1003,11 +801,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yanchor"]
+        return self['yanchor']
 
     @yanchor.setter
     def yanchor(self, val):
-        self["yanchor"] = val
+        self['yanchor'] = val
 
     # yshift
     # ------
@@ -1024,11 +822,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["yshift"]
+        return self['yshift']
 
     @yshift.setter
     def yshift(self, val):
-        self["yshift"] = val
+        self['yshift'] = val
 
     # z
     # -
@@ -1043,11 +841,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     # Self properties description
     # ---------------------------
@@ -1211,49 +1009,47 @@ class Annotation(_BaseLayoutHierarchyType):
         z
             Sets the annotation's z position.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        align=None,
-        arrowcolor=None,
-        arrowhead=None,
-        arrowside=None,
-        arrowsize=None,
-        arrowwidth=None,
-        ax=None,
-        ay=None,
-        bgcolor=None,
-        bordercolor=None,
-        borderpad=None,
-        borderwidth=None,
-        captureevents=None,
-        font=None,
-        height=None,
-        hoverlabel=None,
-        hovertext=None,
-        name=None,
-        opacity=None,
-        showarrow=None,
-        standoff=None,
-        startarrowhead=None,
-        startarrowsize=None,
-        startstandoff=None,
-        templateitemname=None,
-        text=None,
-        textangle=None,
-        valign=None,
-        visible=None,
-        width=None,
-        x=None,
-        xanchor=None,
-        xshift=None,
-        y=None,
-        yanchor=None,
-        yshift=None,
-        z=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            align=None,
+            arrowcolor=None,
+            arrowhead=None,
+            arrowside=None,
+            arrowsize=None,
+            arrowwidth=None,
+            ax=None,
+            ay=None,
+            bgcolor=None,
+            bordercolor=None,
+            borderpad=None,
+            borderwidth=None,
+            captureevents=None,
+            font=None,
+            height=None,
+            hoverlabel=None,
+            hovertext=None,
+            name=None,
+            opacity=None,
+            showarrow=None,
+            standoff=None,
+            startarrowhead=None,
+            startarrowsize=None,
+            startstandoff=None,
+            templateitemname=None,
+            text=None,
+            textangle=None,
+            valign=None,
+            visible=None,
+            width=None,
+            x=None,
+            xanchor=None,
+            xshift=None,
+            y=None,
+            yanchor=None,
+            yshift=None,
+            z=None,
+            **kwargs
+        ):
         """
         Construct a new Annotation object
 
@@ -1424,10 +1220,10 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Annotation
         """
-        super(Annotation, self).__init__("annotations")
+        super(Annotation, self).__init__('annotations')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -1439,168 +1235,56 @@ class Annotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.Annotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.Annotation`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.Annotation`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("align", None)
-        _v = align if align is not None else _v
-        if _v is not None:
-            self["align"] = _v
-        _v = arg.pop("arrowcolor", None)
-        _v = arrowcolor if arrowcolor is not None else _v
-        if _v is not None:
-            self["arrowcolor"] = _v
-        _v = arg.pop("arrowhead", None)
-        _v = arrowhead if arrowhead is not None else _v
-        if _v is not None:
-            self["arrowhead"] = _v
-        _v = arg.pop("arrowside", None)
-        _v = arrowside if arrowside is not None else _v
-        if _v is not None:
-            self["arrowside"] = _v
-        _v = arg.pop("arrowsize", None)
-        _v = arrowsize if arrowsize is not None else _v
-        if _v is not None:
-            self["arrowsize"] = _v
-        _v = arg.pop("arrowwidth", None)
-        _v = arrowwidth if arrowwidth is not None else _v
-        if _v is not None:
-            self["arrowwidth"] = _v
-        _v = arg.pop("ax", None)
-        _v = ax if ax is not None else _v
-        if _v is not None:
-            self["ax"] = _v
-        _v = arg.pop("ay", None)
-        _v = ay if ay is not None else _v
-        if _v is not None:
-            self["ay"] = _v
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("bordercolor", None)
-        _v = bordercolor if bordercolor is not None else _v
-        if _v is not None:
-            self["bordercolor"] = _v
-        _v = arg.pop("borderpad", None)
-        _v = borderpad if borderpad is not None else _v
-        if _v is not None:
-            self["borderpad"] = _v
-        _v = arg.pop("borderwidth", None)
-        _v = borderwidth if borderwidth is not None else _v
-        if _v is not None:
-            self["borderwidth"] = _v
-        _v = arg.pop("captureevents", None)
-        _v = captureevents if captureevents is not None else _v
-        if _v is not None:
-            self["captureevents"] = _v
-        _v = arg.pop("font", None)
-        _v = font if font is not None else _v
-        if _v is not None:
-            self["font"] = _v
-        _v = arg.pop("height", None)
-        _v = height if height is not None else _v
-        if _v is not None:
-            self["height"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("showarrow", None)
-        _v = showarrow if showarrow is not None else _v
-        if _v is not None:
-            self["showarrow"] = _v
-        _v = arg.pop("standoff", None)
-        _v = standoff if standoff is not None else _v
-        if _v is not None:
-            self["standoff"] = _v
-        _v = arg.pop("startarrowhead", None)
-        _v = startarrowhead if startarrowhead is not None else _v
-        if _v is not None:
-            self["startarrowhead"] = _v
-        _v = arg.pop("startarrowsize", None)
-        _v = startarrowsize if startarrowsize is not None else _v
-        if _v is not None:
-            self["startarrowsize"] = _v
-        _v = arg.pop("startstandoff", None)
-        _v = startstandoff if startstandoff is not None else _v
-        if _v is not None:
-            self["startstandoff"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textangle", None)
-        _v = textangle if textangle is not None else _v
-        if _v is not None:
-            self["textangle"] = _v
-        _v = arg.pop("valign", None)
-        _v = valign if valign is not None else _v
-        if _v is not None:
-            self["valign"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xanchor", None)
-        _v = xanchor if xanchor is not None else _v
-        if _v is not None:
-            self["xanchor"] = _v
-        _v = arg.pop("xshift", None)
-        _v = xshift if xshift is not None else _v
-        if _v is not None:
-            self["xshift"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("yanchor", None)
-        _v = yanchor if yanchor is not None else _v
-        if _v is not None:
-            self["yanchor"] = _v
-        _v = arg.pop("yshift", None)
-        _v = yshift if yshift is not None else _v
-        if _v is not None:
-            self["yshift"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
+        self._init_provided('align', arg, align)
+        self._init_provided('arrowcolor', arg, arrowcolor)
+        self._init_provided('arrowhead', arg, arrowhead)
+        self._init_provided('arrowside', arg, arrowside)
+        self._init_provided('arrowsize', arg, arrowsize)
+        self._init_provided('arrowwidth', arg, arrowwidth)
+        self._init_provided('ax', arg, ax)
+        self._init_provided('ay', arg, ay)
+        self._init_provided('bgcolor', arg, bgcolor)
+        self._init_provided('bordercolor', arg, bordercolor)
+        self._init_provided('borderpad', arg, borderpad)
+        self._init_provided('borderwidth', arg, borderwidth)
+        self._init_provided('captureevents', arg, captureevents)
+        self._init_provided('font', arg, font)
+        self._init_provided('height', arg, height)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('showarrow', arg, showarrow)
+        self._init_provided('standoff', arg, standoff)
+        self._init_provided('startarrowhead', arg, startarrowhead)
+        self._init_provided('startarrowsize', arg, startarrowsize)
+        self._init_provided('startstandoff', arg, startstandoff)
+        self._init_provided('templateitemname', arg, templateitemname)
+        self._init_provided('text', arg, text)
+        self._init_provided('textangle', arg, textangle)
+        self._init_provided('valign', arg, valign)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('width', arg, width)
+        self._init_provided('x', arg, x)
+        self._init_provided('xanchor', arg, xanchor)
+        self._init_provided('xshift', arg, xshift)
+        self._init_provided('y', arg, y)
+        self._init_provided('yanchor', arg, yanchor)
+        self._init_provided('yshift', arg, yshift)
+        self._init_provided('z', arg, z)
 
         # Process unknown kwargs
         # ----------------------

@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Fillgradient(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "scatter"
-    _path_str = "scatter.fillgradient"
+    _parent_path_str = 'scatter'
+    _path_str = 'scatter.fillgradient'
     _valid_props = {"colorscale", "start", "stop", "type"}
 
     # colorscale
@@ -52,11 +54,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorscale"]
+        return self['colorscale']
 
     @colorscale.setter
     def colorscale(self, val):
-        self["colorscale"] = val
+        self['colorscale'] = val
 
     # start
     # -----
@@ -77,11 +79,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["start"]
+        return self['start']
 
     @start.setter
     def start(self, val):
-        self["start"] = val
+        self['start'] = val
 
     # stop
     # ----
@@ -102,11 +104,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["stop"]
+        return self['stop']
 
     @stop.setter
     def stop(self, val):
-        self["stop"] = val
+        self['stop'] = val
 
     # type
     # ----
@@ -124,11 +126,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # Self properties description
     # ---------------------------
@@ -162,10 +164,14 @@ class Fillgradient(_BaseTraceHierarchyType):
             Sets the type/orientation of the color gradient for the
             fill. Defaults to "none".
         """
-
-    def __init__(
-        self, arg=None, colorscale=None, start=None, stop=None, type=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            colorscale=None,
+            start=None,
+            stop=None,
+            type=None,
+            **kwargs
+        ):
         """
         Construct a new Fillgradient object
 
@@ -209,10 +215,10 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Fillgradient
         """
-        super(Fillgradient, self).__init__("fillgradient")
+        super(Fillgradient, self).__init__('fillgradient')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -224,36 +230,23 @@ class Fillgradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter.Fillgradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.Fillgradient`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter.Fillgradient`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("colorscale", None)
-        _v = colorscale if colorscale is not None else _v
-        if _v is not None:
-            self["colorscale"] = _v
-        _v = arg.pop("start", None)
-        _v = start if start is not None else _v
-        if _v is not None:
-            self["start"] = _v
-        _v = arg.pop("stop", None)
-        _v = stop if stop is not None else _v
-        if _v is not None:
-            self["stop"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
+        self._init_provided('colorscale', arg, colorscale)
+        self._init_provided('start', arg, start)
+        self._init_provided('stop', arg, stop)
+        self._init_provided('type', arg, type)
 
         # Process unknown kwargs
         # ----------------------

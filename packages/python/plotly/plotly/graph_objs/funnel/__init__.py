@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._connector import Connector
     from ._hoverlabel import Hoverlabel
@@ -16,18 +15,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import marker
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".connector", ".hoverlabel", ".legendgrouptitle", ".marker"],
-        [
-            "._connector.Connector",
-            "._hoverlabel.Hoverlabel",
-            "._insidetextfont.Insidetextfont",
-            "._legendgrouptitle.Legendgrouptitle",
-            "._marker.Marker",
-            "._outsidetextfont.Outsidetextfont",
-            "._stream.Stream",
-            "._textfont.Textfont",
-        ],
+        ['.connector', '.hoverlabel', '.legendgrouptitle', '.marker'],
+        ['._connector.Connector', '._hoverlabel.Hoverlabel', '._insidetextfont.Insidetextfont', '._legendgrouptitle.Legendgrouptitle', '._marker.Marker', '._outsidetextfont.Outsidetextfont', '._stream.Stream', '._textfont.Textfont']
     )
+
+

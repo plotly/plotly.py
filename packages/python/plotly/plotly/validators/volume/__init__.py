@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._zsrc import ZsrcValidator
     from ._zhoverformat import ZhoverformatValidator
@@ -65,71 +64,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._autocolorscale import AutocolorscaleValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._zsrc.ZsrcValidator",
-            "._zhoverformat.ZhoverformatValidator",
-            "._z.ZValidator",
-            "._ysrc.YsrcValidator",
-            "._yhoverformat.YhoverformatValidator",
-            "._y.YValidator",
-            "._xsrc.XsrcValidator",
-            "._xhoverformat.XhoverformatValidator",
-            "._x.XValidator",
-            "._visible.VisibleValidator",
-            "._valuesrc.ValuesrcValidator",
-            "._valuehoverformat.ValuehoverformatValidator",
-            "._value.ValueValidator",
-            "._uirevision.UirevisionValidator",
-            "._uid.UidValidator",
-            "._textsrc.TextsrcValidator",
-            "._text.TextValidator",
-            "._surface.SurfaceValidator",
-            "._stream.StreamValidator",
-            "._spaceframe.SpaceframeValidator",
-            "._slices.SlicesValidator",
-            "._showscale.ShowscaleValidator",
-            "._showlegend.ShowlegendValidator",
-            "._scene.SceneValidator",
-            "._reversescale.ReversescaleValidator",
-            "._opacityscale.OpacityscaleValidator",
-            "._opacity.OpacityValidator",
-            "._name.NameValidator",
-            "._metasrc.MetasrcValidator",
-            "._meta.MetaValidator",
-            "._lightposition.LightpositionValidator",
-            "._lighting.LightingValidator",
-            "._legendwidth.LegendwidthValidator",
-            "._legendrank.LegendrankValidator",
-            "._legendgrouptitle.LegendgrouptitleValidator",
-            "._legendgroup.LegendgroupValidator",
-            "._legend.LegendValidator",
-            "._isomin.IsominValidator",
-            "._isomax.IsomaxValidator",
-            "._idssrc.IdssrcValidator",
-            "._ids.IdsValidator",
-            "._hovertextsrc.HovertextsrcValidator",
-            "._hovertext.HovertextValidator",
-            "._hovertemplatesrc.HovertemplatesrcValidator",
-            "._hovertemplate.HovertemplateValidator",
-            "._hoverlabel.HoverlabelValidator",
-            "._hoverinfosrc.HoverinfosrcValidator",
-            "._hoverinfo.HoverinfoValidator",
-            "._flatshading.FlatshadingValidator",
-            "._customdatasrc.CustomdatasrcValidator",
-            "._customdata.CustomdataValidator",
-            "._contour.ContourValidator",
-            "._colorscale.ColorscaleValidator",
-            "._colorbar.ColorbarValidator",
-            "._coloraxis.ColoraxisValidator",
-            "._cmin.CminValidator",
-            "._cmid.CmidValidator",
-            "._cmax.CmaxValidator",
-            "._cauto.CautoValidator",
-            "._caps.CapsValidator",
-            "._autocolorscale.AutocolorscaleValidator",
-        ],
+        ['._zsrc.ZsrcValidator', '._zhoverformat.ZhoverformatValidator', '._z.ZValidator', '._ysrc.YsrcValidator', '._yhoverformat.YhoverformatValidator', '._y.YValidator', '._xsrc.XsrcValidator', '._xhoverformat.XhoverformatValidator', '._x.XValidator', '._visible.VisibleValidator', '._valuesrc.ValuesrcValidator', '._valuehoverformat.ValuehoverformatValidator', '._value.ValueValidator', '._uirevision.UirevisionValidator', '._uid.UidValidator', '._textsrc.TextsrcValidator', '._text.TextValidator', '._surface.SurfaceValidator', '._stream.StreamValidator', '._spaceframe.SpaceframeValidator', '._slices.SlicesValidator', '._showscale.ShowscaleValidator', '._showlegend.ShowlegendValidator', '._scene.SceneValidator', '._reversescale.ReversescaleValidator', '._opacityscale.OpacityscaleValidator', '._opacity.OpacityValidator', '._name.NameValidator', '._metasrc.MetasrcValidator', '._meta.MetaValidator', '._lightposition.LightpositionValidator', '._lighting.LightingValidator', '._legendwidth.LegendwidthValidator', '._legendrank.LegendrankValidator', '._legendgrouptitle.LegendgrouptitleValidator', '._legendgroup.LegendgroupValidator', '._legend.LegendValidator', '._isomin.IsominValidator', '._isomax.IsomaxValidator', '._idssrc.IdssrcValidator', '._ids.IdsValidator', '._hovertextsrc.HovertextsrcValidator', '._hovertext.HovertextValidator', '._hovertemplatesrc.HovertemplatesrcValidator', '._hovertemplate.HovertemplateValidator', '._hoverlabel.HoverlabelValidator', '._hoverinfosrc.HoverinfosrcValidator', '._hoverinfo.HoverinfoValidator', '._flatshading.FlatshadingValidator', '._customdatasrc.CustomdatasrcValidator', '._customdata.CustomdataValidator', '._contour.ContourValidator', '._colorscale.ColorscaleValidator', '._colorbar.ColorbarValidator', '._coloraxis.ColoraxisValidator', '._cmin.CminValidator', '._cmid.CmidValidator', '._cmax.CmaxValidator', '._cauto.CautoValidator', '._caps.CapsValidator', '._autocolorscale.AutocolorscaleValidator']
     )
+
+

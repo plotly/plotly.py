@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,82 +8,9 @@ class Heatmap(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "heatmap"
-    _valid_props = {
-        "autocolorscale",
-        "coloraxis",
-        "colorbar",
-        "colorscale",
-        "connectgaps",
-        "customdata",
-        "customdatasrc",
-        "dx",
-        "dy",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hoverongaps",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "meta",
-        "metasrc",
-        "name",
-        "opacity",
-        "reversescale",
-        "showlegend",
-        "showscale",
-        "stream",
-        "text",
-        "textfont",
-        "textsrc",
-        "texttemplate",
-        "transpose",
-        "type",
-        "uid",
-        "uirevision",
-        "visible",
-        "x",
-        "x0",
-        "xaxis",
-        "xcalendar",
-        "xgap",
-        "xhoverformat",
-        "xperiod",
-        "xperiod0",
-        "xperiodalignment",
-        "xsrc",
-        "xtype",
-        "y",
-        "y0",
-        "yaxis",
-        "ycalendar",
-        "ygap",
-        "yhoverformat",
-        "yperiod",
-        "yperiod0",
-        "yperiodalignment",
-        "ysrc",
-        "ytype",
-        "z",
-        "zauto",
-        "zhoverformat",
-        "zmax",
-        "zmid",
-        "zmin",
-        "zorder",
-        "zsmooth",
-        "zsrc",
-    }
+    _parent_path_str = ''
+    _path_str = 'heatmap'
+    _valid_props = {"autocolorscale", "coloraxis", "colorbar", "colorscale", "connectgaps", "customdata", "customdatasrc", "dx", "dy", "hoverinfo", "hoverinfosrc", "hoverlabel", "hoverongaps", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "meta", "metasrc", "name", "opacity", "reversescale", "showlegend", "showscale", "stream", "text", "textfont", "textsrc", "texttemplate", "transpose", "type", "uid", "uirevision", "visible", "x", "x0", "xaxis", "xcalendar", "xgap", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "xtype", "y", "y0", "yaxis", "ycalendar", "ygap", "yhoverformat", "yperiod", "yperiod0", "yperiodalignment", "ysrc", "ytype", "z", "zauto", "zhoverformat", "zmax", "zmid", "zmin", "zorder", "zsmooth", "zsrc"}
 
     # autocolorscale
     # --------------
@@ -102,11 +31,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["autocolorscale"]
+        return self['autocolorscale']
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self["autocolorscale"] = val
+        self['autocolorscale'] = val
 
     # coloraxis
     # ---------
@@ -129,11 +58,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["coloraxis"]
+        return self['coloraxis']
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self["coloraxis"] = val
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -146,281 +75,15 @@ class Heatmap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
 
-            Supported dict properties:
-
-                bgcolor
-                    Sets the color of padded area.
-                bordercolor
-                    Sets the axis line color.
-                borderwidth
-                    Sets the width (in px) or the border enclosing
-                    this color bar.
-                dtick
-                    Sets the step in-between ticks on this axis.
-                    Use with `tick0`. Must be a positive number, or
-                    special strings available to "log" and "date"
-                    axes. If the axis `type` is "log", then ticks
-                    are set every 10^(n*dtick) where n is the tick
-                    number. For example, to set a tick mark at 1,
-                    10, 100, 1000, ... set dtick to 1. To set tick
-                    marks at 1, 100, 10000, ... set dtick to 2. To
-                    set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. "log"
-                    has several special values; "L<f>", where `f`
-                    is a positive number, gives ticks linearly
-                    spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
-                    at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use "D1" (all
-                    digits) or "D2" (only 2 and 5). `tick0` is
-                    ignored for "D1" and "D2". If the axis `type`
-                    is "date", then you must convert the time to
-                    milliseconds. For example, to set the interval
-                    between ticks to one day, set `dtick` to
-                    86400000.0. "date" also has special values
-                    "M<n>" gives ticks spaced by a number of
-                    months. `n` must be a positive integer. To set
-                    ticks on the 15th of every third month, set
-                    `tick0` to "2000-01-15" and `dtick` to "M3". To
-                    set ticks every 4 years, set `dtick` to "M48"
-                exponentformat
-                    Determines a formatting rule for the tick
-                    exponents. For example, consider the number
-                    1,000,000,000. If "none", it appears as
-                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
-                    "power", 1x10^9 (with 9 in a super script). If
-                    "SI", 1G. If "B", 1B.
-                labelalias
-                    Replacement text for specific tick or hover
-                    labels. For example using {US: 'USA', CA:
-                    'Canada'} changes US to USA and CA to Canada.
-                    The labels we would have shown must match the
-                    keys exactly, after adding any tickprefix or
-                    ticksuffix. For negative numbers the minus sign
-                    symbol used (U+2212) is wider than the regular
-                    ascii dash. That means you need to use −1
-                    instead of -1. labelalias can be used with any
-                    axis type, and both keys (if needed) and values
-                    (if desired) can include html-like tags or
-                    MathJax.
-                len
-                    Sets the length of the color bar This measure
-                    excludes the padding of both ends. That is, the
-                    color bar length is this length minus the
-                    padding on both ends.
-                lenmode
-                    Determines whether this color bar's length
-                    (i.e. the measure in the color variation
-                    direction) is set in units of plot "fraction"
-                    or in *pixels. Use `len` to set the value.
-                minexponent
-                    Hide SI prefix for 10^n if |n| is below this
-                    number. This only has an effect when
-                    `tickformat` is "SI" or "B".
-                nticks
-                    Specifies the maximum number of ticks for the
-                    particular axis. The actual number of ticks
-                    will be chosen automatically to be less than or
-                    equal to `nticks`. Has an effect only if
-                    `tickmode` is set to "auto".
-                orientation
-                    Sets the orientation of the colorbar.
-                outlinecolor
-                    Sets the axis line color.
-                outlinewidth
-                    Sets the width (in px) of the axis line.
-                separatethousands
-                    If "true", even 4-digit integers are separated
-                showexponent
-                    If "all", all exponents are shown besides their
-                    significands. If "first", only the exponent of
-                    the first tick is shown. If "last", only the
-                    exponent of the last tick is shown. If "none",
-                    no exponents appear.
-                showticklabels
-                    Determines whether or not the tick labels are
-                    drawn.
-                showtickprefix
-                    If "all", all tick labels are displayed with a
-                    prefix. If "first", only the first tick is
-                    displayed with a prefix. If "last", only the
-                    last tick is displayed with a suffix. If
-                    "none", tick prefixes are hidden.
-                showticksuffix
-                    Same as `showtickprefix` but for tick suffixes.
-                thickness
-                    Sets the thickness of the color bar This
-                    measure excludes the size of the padding, ticks
-                    and labels.
-                thicknessmode
-                    Determines whether this color bar's thickness
-                    (i.e. the measure in the constant color
-                    direction) is set in units of plot "fraction"
-                    or in "pixels". Use `thickness` to set the
-                    value.
-                tick0
-                    Sets the placement of the first tick on this
-                    axis. Use with `dtick`. If the axis `type` is
-                    "log", then you must take the log of your
-                    starting tick (e.g. to set the starting tick to
-                    100, set the `tick0` to 2) except when
-                    `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is "date", it should be a date
-                    string, like date data. If the axis `type` is
-                    "category", it should be a number, using the
-                    scale where each category is assigned a serial
-                    number from zero in the order it appears.
-                tickangle
-                    Sets the angle of the tick labels with respect
-                    to the horizontal. For example, a `tickangle`
-                    of -90 draws the tick labels vertically.
-                tickcolor
-                    Sets the tick color.
-                tickfont
-                    Sets the color bar's tick label font
-                tickformat
-                    Sets the tick label formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format. We add two
-                    items to d3's date formatter: "%h" for half of
-                    the year as a decimal number as well as "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
-                tickformatstops
-                    A tuple of :class:`plotly.graph_objects.heatmap
-                    .colorbar.Tickformatstop` instances or dicts
-                    with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.heatmap.colorbar.tickformatstopdefaults),
-                    sets the default property values to use for
-                    elements of heatmap.colorbar.tickformatstops
-                ticklabeloverflow
-                    Determines how we handle tick labels that would
-                    overflow either the graph div or the domain of
-                    the axis. The default value for inside tick
-                    labels is *hide past domain*. In other cases
-                    the default is *hide past div*.
-                ticklabelposition
-                    Determines where tick labels are drawn relative
-                    to the ticks. Left and right options are used
-                    when `orientation` is "h", top and bottom when
-                    `orientation` is "v".
-                ticklabelstep
-                    Sets the spacing between tick labels as
-                    compared to the spacing between ticks. A value
-                    of 1 (default) means each tick gets a label. A
-                    value of 2 means shows every 2nd label. A
-                    larger value n means only every nth tick is
-                    labeled. `tick0` determines which labels are
-                    shown. Not implemented for axes with `type`
-                    "log" or "multicategory", or when `tickmode` is
-                    "array".
-                ticklen
-                    Sets the tick length (in px).
-                tickmode
-                    Sets the tick mode for this axis. If "auto",
-                    the number of ticks is set via `nticks`. If
-                    "linear", the placement of the ticks is
-                    determined by a starting position `tick0` and a
-                    tick step `dtick` ("linear" is the default
-                    value if `tick0` and `dtick` are provided). If
-                    "array", the placement of the ticks is set via
-                    `tickvals` and the tick text is `ticktext`.
-                    ("array" is the default value if `tickvals` is
-                    provided).
-                tickprefix
-                    Sets a tick label prefix.
-                ticks
-                    Determines whether ticks are drawn or not. If
-                    "", this axis' ticks are not drawn. If
-                    "outside" ("inside"), this axis' are drawn
-                    outside (inside) the axis lines.
-                ticksuffix
-                    Sets a tick label suffix.
-                ticktext
-                    Sets the text displayed at the ticks position
-                    via `tickvals`. Only has an effect if
-                    `tickmode` is set to "array". Used with
-                    `tickvals`.
-                ticktextsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `ticktext`.
-                tickvals
-                    Sets the values at which ticks on this axis
-                    appear. Only has an effect if `tickmode` is set
-                    to "array". Used with `ticktext`.
-                tickvalssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `tickvals`.
-                tickwidth
-                    Sets the tick width (in px).
-                title
-                    :class:`plotly.graph_objects.heatmap.colorbar.T
-                    itle` instance or dict with compatible
-                    properties
-                x
-                    Sets the x position with respect to `xref` of
-                    the color bar (in plot fraction). When `xref`
-                    is "paper", defaults to 1.02 when `orientation`
-                    is "v" and 0.5 when `orientation` is "h". When
-                    `xref` is "container", defaults to 1 when
-                    `orientation` is "v" and 0.5 when `orientation`
-                    is "h". Must be between 0 and 1 if `xref` is
-                    "container" and between "-2" and 3 if `xref` is
-                    "paper".
-                xanchor
-                    Sets this color bar's horizontal position
-                    anchor. This anchor binds the `x` position to
-                    the "left", "center" or "right" of the color
-                    bar. Defaults to "left" when `orientation` is
-                    "v" and "center" when `orientation` is "h".
-                xpad
-                    Sets the amount of padding (in px) along the x
-                    direction.
-                xref
-                    Sets the container `x` refers to. "container"
-                    spans the entire `width` of the plot. "paper"
-                    refers to the width of the plotting area only.
-                y
-                    Sets the y position with respect to `yref` of
-                    the color bar (in plot fraction). When `yref`
-                    is "paper", defaults to 0.5 when `orientation`
-                    is "v" and 1.02 when `orientation` is "h". When
-                    `yref` is "container", defaults to 0.5 when
-                    `orientation` is "v" and 1 when `orientation`
-                    is "h". Must be between 0 and 1 if `yref` is
-                    "container" and between "-2" and 3 if `yref` is
-                    "paper".
-                yanchor
-                    Sets this color bar's vertical position anchor
-                    This anchor binds the `y` position to the
-                    "top", "middle" or "bottom" of the color bar.
-                    Defaults to "middle" when `orientation` is "v"
-                    and "bottom" when `orientation` is "h".
-                ypad
-                    Sets the amount of padding (in px) along the y
-                    direction.
-                yref
-                    Sets the container `y` refers to. "container"
-                    spans the entire `height` of the plot. "paper"
-                    refers to the height of the plotting area only.
-
         Returns
         -------
         plotly.graph_objs.heatmap.ColorBar
         """
-        return self["colorbar"]
+        return self['colorbar']
 
     @colorbar.setter
     def colorbar(self, val):
-        self["colorbar"] = val
+        self['colorbar'] = val
 
     # colorscale
     # ----------
@@ -469,11 +132,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["colorscale"]
+        return self['colorscale']
 
     @colorscale.setter
     def colorscale(self, val):
-        self["colorscale"] = val
+        self['colorscale'] = val
 
     # connectgaps
     # -----------
@@ -492,11 +155,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["connectgaps"]
+        return self['connectgaps']
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self["connectgaps"] = val
+        self['connectgaps'] = val
 
     # customdata
     # ----------
@@ -515,11 +178,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -536,11 +199,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # dx
     # --
@@ -556,11 +219,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["dx"]
+        return self['dx']
 
     @dx.setter
     def dx(self, val):
-        self["dx"] = val
+        self['dx'] = val
 
     # dy
     # --
@@ -576,11 +239,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["dy"]
+        return self['dy']
 
     @dy.setter
     def dy(self, val):
-        self["dy"] = val
+        self['dy'] = val
 
     # hoverinfo
     # ---------
@@ -602,11 +265,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverinfosrc
     # ------------
@@ -623,11 +286,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -640,53 +303,15 @@ class Heatmap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.heatmap.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hoverongaps
     # -----------
@@ -703,11 +328,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["hoverongaps"]
+        return self['hoverongaps']
 
     @hoverongaps.setter
     def hoverongaps(self, val):
-        self["hoverongaps"] = val
+        self['hoverongaps'] = val
 
     # hovertemplate
     # -------------
@@ -747,11 +372,11 @@ class Heatmap(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -768,11 +393,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -788,11 +413,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # hovertextsrc
     # ------------
@@ -809,11 +434,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -831,11 +456,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -851,11 +476,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # legend
     # ------
@@ -876,11 +501,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgroup
     # -----------
@@ -899,11 +524,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     # legendgrouptitle
     # ----------------
@@ -916,22 +541,15 @@ class Heatmap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.heatmap.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -954,11 +572,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -975,11 +593,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # meta
     # ----
@@ -1003,11 +621,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -1023,11 +641,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # name
     # ----
@@ -1045,11 +663,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -1065,11 +683,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # reversescale
     # ------------
@@ -1087,11 +705,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["reversescale"]
+        return self['reversescale']
 
     @reversescale.setter
     def reversescale(self, val):
-        self["reversescale"] = val
+        self['reversescale'] = val
 
     # showlegend
     # ----------
@@ -1108,11 +726,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -1129,11 +747,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["showscale"]
+        return self['showscale']
 
     @showscale.setter
     def showscale(self, val):
-        self["showscale"] = val
+        self['showscale'] = val
 
     # stream
     # ------
@@ -1146,27 +764,15 @@ class Heatmap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.heatmap.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # text
     # ----
@@ -1182,11 +788,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textfont
     # --------
@@ -1201,61 +807,15 @@ class Heatmap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.heatmap.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     # textsrc
     # -------
@@ -1271,11 +831,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     # texttemplate
     # ------------
@@ -1305,11 +865,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["texttemplate"]
+        return self['texttemplate']
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self["texttemplate"] = val
+        self['texttemplate'] = val
 
     # transpose
     # ---------
@@ -1325,11 +885,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["transpose"]
+        return self['transpose']
 
     @transpose.setter
     def transpose(self, val):
-        self["transpose"] = val
+        self['transpose'] = val
 
     # uid
     # ---
@@ -1347,11 +907,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -1380,11 +940,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -1403,11 +963,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # x
     # -
@@ -1423,11 +983,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     # x0
     # --
@@ -1444,11 +1004,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["x0"]
+        return self['x0']
 
     @x0.setter
     def x0(self, val):
-        self["x0"] = val
+        self['x0'] = val
 
     # xaxis
     # -----
@@ -1469,11 +1029,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["xaxis"]
+        return self['xaxis']
 
     @xaxis.setter
     def xaxis(self, val):
-        self["xaxis"] = val
+        self['xaxis'] = val
 
     # xcalendar
     # ---------
@@ -1493,11 +1053,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["xcalendar"]
+        return self['xcalendar']
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self["xcalendar"] = val
+        self['xcalendar'] = val
 
     # xgap
     # ----
@@ -1513,11 +1073,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["xgap"]
+        return self['xgap']
 
     @xgap.setter
     def xgap(self, val):
-        self["xgap"] = val
+        self['xgap'] = val
 
     # xhoverformat
     # ------------
@@ -1544,11 +1104,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["xhoverformat"]
+        return self['xhoverformat']
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self["xhoverformat"] = val
+        self['xhoverformat'] = val
 
     # xperiod
     # -------
@@ -1566,11 +1126,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiod"]
+        return self['xperiod']
 
     @xperiod.setter
     def xperiod(self, val):
-        self["xperiod"] = val
+        self['xperiod'] = val
 
     # xperiod0
     # --------
@@ -1589,11 +1149,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiod0"]
+        return self['xperiod0']
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self["xperiod0"] = val
+        self['xperiod0'] = val
 
     # xperiodalignment
     # ----------------
@@ -1611,11 +1171,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiodalignment"]
+        return self['xperiodalignment']
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self["xperiodalignment"] = val
+        self['xperiodalignment'] = val
 
     # xsrc
     # ----
@@ -1631,11 +1191,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["xsrc"]
+        return self['xsrc']
 
     @xsrc.setter
     def xsrc(self, val):
-        self["xsrc"] = val
+        self['xsrc'] = val
 
     # xtype
     # -----
@@ -1655,11 +1215,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["xtype"]
+        return self['xtype']
 
     @xtype.setter
     def xtype(self, val):
-        self["xtype"] = val
+        self['xtype'] = val
 
     # y
     # -
@@ -1675,11 +1235,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     # y0
     # --
@@ -1696,11 +1256,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["y0"]
+        return self['y0']
 
     @y0.setter
     def y0(self, val):
-        self["y0"] = val
+        self['y0'] = val
 
     # yaxis
     # -----
@@ -1721,11 +1281,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["yaxis"]
+        return self['yaxis']
 
     @yaxis.setter
     def yaxis(self, val):
-        self["yaxis"] = val
+        self['yaxis'] = val
 
     # ycalendar
     # ---------
@@ -1745,11 +1305,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["ycalendar"]
+        return self['ycalendar']
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self["ycalendar"] = val
+        self['ycalendar'] = val
 
     # ygap
     # ----
@@ -1765,11 +1325,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["ygap"]
+        return self['ygap']
 
     @ygap.setter
     def ygap(self, val):
-        self["ygap"] = val
+        self['ygap'] = val
 
     # yhoverformat
     # ------------
@@ -1796,11 +1356,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["yhoverformat"]
+        return self['yhoverformat']
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self["yhoverformat"] = val
+        self['yhoverformat'] = val
 
     # yperiod
     # -------
@@ -1818,11 +1378,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiod"]
+        return self['yperiod']
 
     @yperiod.setter
     def yperiod(self, val):
-        self["yperiod"] = val
+        self['yperiod'] = val
 
     # yperiod0
     # --------
@@ -1841,11 +1401,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiod0"]
+        return self['yperiod0']
 
     @yperiod0.setter
     def yperiod0(self, val):
-        self["yperiod0"] = val
+        self['yperiod0'] = val
 
     # yperiodalignment
     # ----------------
@@ -1863,11 +1423,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiodalignment"]
+        return self['yperiodalignment']
 
     @yperiodalignment.setter
     def yperiodalignment(self, val):
-        self["yperiodalignment"] = val
+        self['yperiodalignment'] = val
 
     # ysrc
     # ----
@@ -1883,11 +1443,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["ysrc"]
+        return self['ysrc']
 
     @ysrc.setter
     def ysrc(self, val):
-        self["ysrc"] = val
+        self['ysrc'] = val
 
     # ytype
     # -----
@@ -1907,11 +1467,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["ytype"]
+        return self['ytype']
 
     @ytype.setter
     def ytype(self, val):
-        self["ytype"] = val
+        self['ytype'] = val
 
     # z
     # -
@@ -1927,11 +1487,11 @@ class Heatmap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     # zauto
     # -----
@@ -1950,11 +1510,11 @@ class Heatmap(_BaseTraceType):
         -------
         bool
         """
-        return self["zauto"]
+        return self['zauto']
 
     @zauto.setter
     def zauto(self, val):
-        self["zauto"] = val
+        self['zauto'] = val
 
     # zhoverformat
     # ------------
@@ -1975,11 +1535,11 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["zhoverformat"]
+        return self['zhoverformat']
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self["zhoverformat"] = val
+        self['zhoverformat'] = val
 
     # zmax
     # ----
@@ -1996,11 +1556,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmax"]
+        return self['zmax']
 
     @zmax.setter
     def zmax(self, val):
-        self["zmax"] = val
+        self['zmax'] = val
 
     # zmid
     # ----
@@ -2018,11 +1578,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmid"]
+        return self['zmid']
 
     @zmid.setter
     def zmid(self, val):
-        self["zmid"] = val
+        self['zmid'] = val
 
     # zmin
     # ----
@@ -2039,11 +1599,11 @@ class Heatmap(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmin"]
+        return self['zmin']
 
     @zmin.setter
     def zmin(self, val):
-        self["zmin"] = val
+        self['zmin'] = val
 
     # zorder
     # ------
@@ -2061,11 +1621,11 @@ class Heatmap(_BaseTraceType):
         -------
         int
         """
-        return self["zorder"]
+        return self['zorder']
 
     @zorder.setter
     def zorder(self, val):
-        self["zorder"] = val
+        self['zorder'] = val
 
     # zsmooth
     # -------
@@ -2082,11 +1642,11 @@ class Heatmap(_BaseTraceType):
         -------
         Any
         """
-        return self["zsmooth"]
+        return self['zsmooth']
 
     @zsmooth.setter
     def zsmooth(self, val):
-        self["zsmooth"] = val
+        self['zsmooth'] = val
 
     # zsrc
     # ----
@@ -2102,17 +1662,17 @@ class Heatmap(_BaseTraceType):
         -------
         str
         """
-        return self["zsrc"]
+        return self['zsrc']
 
     @zsrc.setter
     def zsrc(self, val):
-        self["zsrc"] = val
+        self['zsrc'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -2480,83 +2040,81 @@ class Heatmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        autocolorscale=None,
-        coloraxis=None,
-        colorbar=None,
-        colorscale=None,
-        connectgaps=None,
-        customdata=None,
-        customdatasrc=None,
-        dx=None,
-        dy=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hoverongaps=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        opacity=None,
-        reversescale=None,
-        showlegend=None,
-        showscale=None,
-        stream=None,
-        text=None,
-        textfont=None,
-        textsrc=None,
-        texttemplate=None,
-        transpose=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        x=None,
-        x0=None,
-        xaxis=None,
-        xcalendar=None,
-        xgap=None,
-        xhoverformat=None,
-        xperiod=None,
-        xperiod0=None,
-        xperiodalignment=None,
-        xsrc=None,
-        xtype=None,
-        y=None,
-        y0=None,
-        yaxis=None,
-        ycalendar=None,
-        ygap=None,
-        yhoverformat=None,
-        yperiod=None,
-        yperiod0=None,
-        yperiodalignment=None,
-        ysrc=None,
-        ytype=None,
-        z=None,
-        zauto=None,
-        zhoverformat=None,
-        zmax=None,
-        zmid=None,
-        zmin=None,
-        zorder=None,
-        zsmooth=None,
-        zsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            autocolorscale=None,
+            coloraxis=None,
+            colorbar=None,
+            colorscale=None,
+            connectgaps=None,
+            customdata=None,
+            customdatasrc=None,
+            dx=None,
+            dy=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hoverongaps=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            opacity=None,
+            reversescale=None,
+            showlegend=None,
+            showscale=None,
+            stream=None,
+            text=None,
+            textfont=None,
+            textsrc=None,
+            texttemplate=None,
+            transpose=None,
+            uid=None,
+            uirevision=None,
+            visible=None,
+            x=None,
+            x0=None,
+            xaxis=None,
+            xcalendar=None,
+            xgap=None,
+            xhoverformat=None,
+            xperiod=None,
+            xperiod0=None,
+            xperiodalignment=None,
+            xsrc=None,
+            xtype=None,
+            y=None,
+            y0=None,
+            yaxis=None,
+            ycalendar=None,
+            ygap=None,
+            yhoverformat=None,
+            yperiod=None,
+            yperiod0=None,
+            yperiodalignment=None,
+            ysrc=None,
+            ytype=None,
+            z=None,
+            zauto=None,
+            zhoverformat=None,
+            zmax=None,
+            zmid=None,
+            zmin=None,
+            zorder=None,
+            zsmooth=None,
+            zsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Heatmap object
 
@@ -2948,10 +2506,10 @@ class Heatmap(_BaseTraceType):
         -------
         Heatmap
         """
-        super(Heatmap, self).__init__("heatmap")
+        super(Heatmap, self).__init__('heatmap')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -2963,310 +2521,96 @@ class Heatmap(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Heatmap
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Heatmap`"""
-            )
+an instance of :class:`plotly.graph_objs.Heatmap`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("autocolorscale", None)
-        _v = autocolorscale if autocolorscale is not None else _v
-        if _v is not None:
-            self["autocolorscale"] = _v
-        _v = arg.pop("coloraxis", None)
-        _v = coloraxis if coloraxis is not None else _v
-        if _v is not None:
-            self["coloraxis"] = _v
-        _v = arg.pop("colorbar", None)
-        _v = colorbar if colorbar is not None else _v
-        if _v is not None:
-            self["colorbar"] = _v
-        _v = arg.pop("colorscale", None)
-        _v = colorscale if colorscale is not None else _v
-        if _v is not None:
-            self["colorscale"] = _v
-        _v = arg.pop("connectgaps", None)
-        _v = connectgaps if connectgaps is not None else _v
-        if _v is not None:
-            self["connectgaps"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("dx", None)
-        _v = dx if dx is not None else _v
-        if _v is not None:
-            self["dx"] = _v
-        _v = arg.pop("dy", None)
-        _v = dy if dy is not None else _v
-        if _v is not None:
-            self["dy"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hoverongaps", None)
-        _v = hoverongaps if hoverongaps is not None else _v
-        if _v is not None:
-            self["hoverongaps"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("reversescale", None)
-        _v = reversescale if reversescale is not None else _v
-        if _v is not None:
-            self["reversescale"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("showscale", None)
-        _v = showscale if showscale is not None else _v
-        if _v is not None:
-            self["showscale"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("transpose", None)
-        _v = transpose if transpose is not None else _v
-        if _v is not None:
-            self["transpose"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("x0", None)
-        _v = x0 if x0 is not None else _v
-        if _v is not None:
-            self["x0"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("xcalendar", None)
-        _v = xcalendar if xcalendar is not None else _v
-        if _v is not None:
-            self["xcalendar"] = _v
-        _v = arg.pop("xgap", None)
-        _v = xgap if xgap is not None else _v
-        if _v is not None:
-            self["xgap"] = _v
-        _v = arg.pop("xhoverformat", None)
-        _v = xhoverformat if xhoverformat is not None else _v
-        if _v is not None:
-            self["xhoverformat"] = _v
-        _v = arg.pop("xperiod", None)
-        _v = xperiod if xperiod is not None else _v
-        if _v is not None:
-            self["xperiod"] = _v
-        _v = arg.pop("xperiod0", None)
-        _v = xperiod0 if xperiod0 is not None else _v
-        if _v is not None:
-            self["xperiod0"] = _v
-        _v = arg.pop("xperiodalignment", None)
-        _v = xperiodalignment if xperiodalignment is not None else _v
-        if _v is not None:
-            self["xperiodalignment"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("xtype", None)
-        _v = xtype if xtype is not None else _v
-        if _v is not None:
-            self["xtype"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("y0", None)
-        _v = y0 if y0 is not None else _v
-        if _v is not None:
-            self["y0"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("ycalendar", None)
-        _v = ycalendar if ycalendar is not None else _v
-        if _v is not None:
-            self["ycalendar"] = _v
-        _v = arg.pop("ygap", None)
-        _v = ygap if ygap is not None else _v
-        if _v is not None:
-            self["ygap"] = _v
-        _v = arg.pop("yhoverformat", None)
-        _v = yhoverformat if yhoverformat is not None else _v
-        if _v is not None:
-            self["yhoverformat"] = _v
-        _v = arg.pop("yperiod", None)
-        _v = yperiod if yperiod is not None else _v
-        if _v is not None:
-            self["yperiod"] = _v
-        _v = arg.pop("yperiod0", None)
-        _v = yperiod0 if yperiod0 is not None else _v
-        if _v is not None:
-            self["yperiod0"] = _v
-        _v = arg.pop("yperiodalignment", None)
-        _v = yperiodalignment if yperiodalignment is not None else _v
-        if _v is not None:
-            self["yperiodalignment"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("ytype", None)
-        _v = ytype if ytype is not None else _v
-        if _v is not None:
-            self["ytype"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-        _v = arg.pop("zauto", None)
-        _v = zauto if zauto is not None else _v
-        if _v is not None:
-            self["zauto"] = _v
-        _v = arg.pop("zhoverformat", None)
-        _v = zhoverformat if zhoverformat is not None else _v
-        if _v is not None:
-            self["zhoverformat"] = _v
-        _v = arg.pop("zmax", None)
-        _v = zmax if zmax is not None else _v
-        if _v is not None:
-            self["zmax"] = _v
-        _v = arg.pop("zmid", None)
-        _v = zmid if zmid is not None else _v
-        if _v is not None:
-            self["zmid"] = _v
-        _v = arg.pop("zmin", None)
-        _v = zmin if zmin is not None else _v
-        if _v is not None:
-            self["zmin"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-        _v = arg.pop("zsmooth", None)
-        _v = zsmooth if zsmooth is not None else _v
-        if _v is not None:
-            self["zsmooth"] = _v
-        _v = arg.pop("zsrc", None)
-        _v = zsrc if zsrc is not None else _v
-        if _v is not None:
-            self["zsrc"] = _v
+        self._init_provided('autocolorscale', arg, autocolorscale)
+        self._init_provided('coloraxis', arg, coloraxis)
+        self._init_provided('colorbar', arg, colorbar)
+        self._init_provided('colorscale', arg, colorscale)
+        self._init_provided('connectgaps', arg, connectgaps)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('dx', arg, dx)
+        self._init_provided('dy', arg, dy)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hoverongaps', arg, hoverongaps)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('hovertextsrc', arg, hovertextsrc)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgroup', arg, legendgroup)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('reversescale', arg, reversescale)
+        self._init_provided('showlegend', arg, showlegend)
+        self._init_provided('showscale', arg, showscale)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('text', arg, text)
+        self._init_provided('textfont', arg, textfont)
+        self._init_provided('textsrc', arg, textsrc)
+        self._init_provided('texttemplate', arg, texttemplate)
+        self._init_provided('transpose', arg, transpose)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('x', arg, x)
+        self._init_provided('x0', arg, x0)
+        self._init_provided('xaxis', arg, xaxis)
+        self._init_provided('xcalendar', arg, xcalendar)
+        self._init_provided('xgap', arg, xgap)
+        self._init_provided('xhoverformat', arg, xhoverformat)
+        self._init_provided('xperiod', arg, xperiod)
+        self._init_provided('xperiod0', arg, xperiod0)
+        self._init_provided('xperiodalignment', arg, xperiodalignment)
+        self._init_provided('xsrc', arg, xsrc)
+        self._init_provided('xtype', arg, xtype)
+        self._init_provided('y', arg, y)
+        self._init_provided('y0', arg, y0)
+        self._init_provided('yaxis', arg, yaxis)
+        self._init_provided('ycalendar', arg, ycalendar)
+        self._init_provided('ygap', arg, ygap)
+        self._init_provided('yhoverformat', arg, yhoverformat)
+        self._init_provided('yperiod', arg, yperiod)
+        self._init_provided('yperiod0', arg, yperiod0)
+        self._init_provided('yperiodalignment', arg, yperiodalignment)
+        self._init_provided('ysrc', arg, ysrc)
+        self._init_provided('ytype', arg, ytype)
+        self._init_provided('z', arg, z)
+        self._init_provided('zauto', arg, zauto)
+        self._init_provided('zhoverformat', arg, zhoverformat)
+        self._init_provided('zmax', arg, zmax)
+        self._init_provided('zmid', arg, zmid)
+        self._init_provided('zmin', arg, zmin)
+        self._init_provided('zorder', arg, zorder)
+        self._init_provided('zsmooth', arg, zsmooth)
+        self._init_provided('zsrc', arg, zsrc)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "heatmap"
-        arg.pop("type", None)
+        self._props['type'] = 'heatmap'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

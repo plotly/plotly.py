@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._ysrc import YsrcValidator
     from ._yperiodalignment import YperiodalignmentValidator
@@ -67,73 +66,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._connectgaps import ConnectgapsValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._ysrc.YsrcValidator",
-            "._yperiodalignment.YperiodalignmentValidator",
-            "._yperiod0.Yperiod0Validator",
-            "._yperiod.YperiodValidator",
-            "._yhoverformat.YhoverformatValidator",
-            "._ycalendar.YcalendarValidator",
-            "._yaxis.YaxisValidator",
-            "._y0.Y0Validator",
-            "._y.YValidator",
-            "._xsrc.XsrcValidator",
-            "._xperiodalignment.XperiodalignmentValidator",
-            "._xperiod0.Xperiod0Validator",
-            "._xperiod.XperiodValidator",
-            "._xhoverformat.XhoverformatValidator",
-            "._xcalendar.XcalendarValidator",
-            "._xaxis.XaxisValidator",
-            "._x0.X0Validator",
-            "._x.XValidator",
-            "._visible.VisibleValidator",
-            "._unselected.UnselectedValidator",
-            "._uirevision.UirevisionValidator",
-            "._uid.UidValidator",
-            "._texttemplatesrc.TexttemplatesrcValidator",
-            "._texttemplate.TexttemplateValidator",
-            "._textsrc.TextsrcValidator",
-            "._textpositionsrc.TextpositionsrcValidator",
-            "._textposition.TextpositionValidator",
-            "._textfont.TextfontValidator",
-            "._text.TextValidator",
-            "._stream.StreamValidator",
-            "._showlegend.ShowlegendValidator",
-            "._selectedpoints.SelectedpointsValidator",
-            "._selected.SelectedValidator",
-            "._opacity.OpacityValidator",
-            "._name.NameValidator",
-            "._mode.ModeValidator",
-            "._metasrc.MetasrcValidator",
-            "._meta.MetaValidator",
-            "._marker.MarkerValidator",
-            "._line.LineValidator",
-            "._legendwidth.LegendwidthValidator",
-            "._legendrank.LegendrankValidator",
-            "._legendgrouptitle.LegendgrouptitleValidator",
-            "._legendgroup.LegendgroupValidator",
-            "._legend.LegendValidator",
-            "._idssrc.IdssrcValidator",
-            "._ids.IdsValidator",
-            "._hovertextsrc.HovertextsrcValidator",
-            "._hovertext.HovertextValidator",
-            "._hovertemplatesrc.HovertemplatesrcValidator",
-            "._hovertemplate.HovertemplateValidator",
-            "._hoverlabel.HoverlabelValidator",
-            "._hoverinfosrc.HoverinfosrcValidator",
-            "._hoverinfo.HoverinfoValidator",
-            "._fillcolor.FillcolorValidator",
-            "._fill.FillValidator",
-            "._error_y.Error_YValidator",
-            "._error_x.Error_XValidator",
-            "._dy.DyValidator",
-            "._dx.DxValidator",
-            "._customdatasrc.CustomdatasrcValidator",
-            "._customdata.CustomdataValidator",
-            "._connectgaps.ConnectgapsValidator",
-        ],
+        ['._ysrc.YsrcValidator', '._yperiodalignment.YperiodalignmentValidator', '._yperiod0.Yperiod0Validator', '._yperiod.YperiodValidator', '._yhoverformat.YhoverformatValidator', '._ycalendar.YcalendarValidator', '._yaxis.YaxisValidator', '._y0.Y0Validator', '._y.YValidator', '._xsrc.XsrcValidator', '._xperiodalignment.XperiodalignmentValidator', '._xperiod0.Xperiod0Validator', '._xperiod.XperiodValidator', '._xhoverformat.XhoverformatValidator', '._xcalendar.XcalendarValidator', '._xaxis.XaxisValidator', '._x0.X0Validator', '._x.XValidator', '._visible.VisibleValidator', '._unselected.UnselectedValidator', '._uirevision.UirevisionValidator', '._uid.UidValidator', '._texttemplatesrc.TexttemplatesrcValidator', '._texttemplate.TexttemplateValidator', '._textsrc.TextsrcValidator', '._textpositionsrc.TextpositionsrcValidator', '._textposition.TextpositionValidator', '._textfont.TextfontValidator', '._text.TextValidator', '._stream.StreamValidator', '._showlegend.ShowlegendValidator', '._selectedpoints.SelectedpointsValidator', '._selected.SelectedValidator', '._opacity.OpacityValidator', '._name.NameValidator', '._mode.ModeValidator', '._metasrc.MetasrcValidator', '._meta.MetaValidator', '._marker.MarkerValidator', '._line.LineValidator', '._legendwidth.LegendwidthValidator', '._legendrank.LegendrankValidator', '._legendgrouptitle.LegendgrouptitleValidator', '._legendgroup.LegendgroupValidator', '._legend.LegendValidator', '._idssrc.IdssrcValidator', '._ids.IdsValidator', '._hovertextsrc.HovertextsrcValidator', '._hovertext.HovertextValidator', '._hovertemplatesrc.HovertemplatesrcValidator', '._hovertemplate.HovertemplateValidator', '._hoverlabel.HoverlabelValidator', '._hoverinfosrc.HoverinfosrcValidator', '._hoverinfo.HoverinfoValidator', '._fillcolor.FillcolorValidator', '._fill.FillValidator', '._error_y.Error_YValidator', '._error_x.Error_XValidator', '._dy.DyValidator', '._dx.DxValidator', '._customdatasrc.CustomdatasrcValidator', '._customdata.CustomdataValidator', '._connectgaps.ConnectgapsValidator']
     )
+
+

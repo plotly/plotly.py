@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Stream(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "scatterternary"
-    _path_str = "scatterternary.stream"
+    _parent_path_str = 'scatterternary'
+    _path_str = 'scatterternary.stream'
     _valid_props = {"maxpoints", "token"}
 
     # maxpoints
@@ -26,11 +28,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["maxpoints"]
+        return self['maxpoints']
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self["maxpoints"] = val
+        self['maxpoints'] = val
 
     # token
     # -----
@@ -48,11 +50,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["token"]
+        return self['token']
 
     @token.setter
     def token(self, val):
-        self["token"] = val
+        self['token'] = val
 
     # Self properties description
     # ---------------------------
@@ -69,8 +71,12 @@ class Stream(_BaseTraceHierarchyType):
             a stream. See https://chart-studio.plotly.com/settings
             for more details.
         """
-
-    def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            maxpoints=None,
+            token=None,
+            **kwargs
+        ):
         """
         Construct a new Stream object
 
@@ -94,10 +100,10 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__("stream")
+        super(Stream, self).__init__('stream')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -109,28 +115,21 @@ class Stream(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterternary.Stream
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterternary.Stream`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterternary.Stream`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("maxpoints", None)
-        _v = maxpoints if maxpoints is not None else _v
-        if _v is not None:
-            self["maxpoints"] = _v
-        _v = arg.pop("token", None)
-        _v = token if token is not None else _v
-        if _v is not None:
-            self["token"] = _v
+        self._init_provided('maxpoints', arg, maxpoints)
+        self._init_provided('token', arg, token)
 
         # Process unknown kwargs
         # ----------------------

@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class YBins(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "histogram2d"
-    _path_str = "histogram2d.ybins"
+    _parent_path_str = 'histogram2d'
+    _path_str = 'histogram2d.ybins'
     _valid_props = {"end", "size", "start"}
 
     # end
@@ -28,11 +30,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["end"]
+        return self['end']
 
     @end.setter
     def end(self, val):
-        self["end"] = val
+        self['end'] = val
 
     # size
     # ----
@@ -54,11 +56,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # start
     # -----
@@ -82,11 +84,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["start"]
+        return self['start']
 
     @start.setter
     def start(self, val):
-        self["start"] = val
+        self['start'] = val
 
     # Self properties description
     # ---------------------------
@@ -123,8 +125,13 @@ class YBins(_BaseTraceHierarchyType):
             string. For category data, `start` is based on the
             category serial numbers, and defaults to -0.5.
         """
-
-    def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            end=None,
+            size=None,
+            start=None,
+            **kwargs
+        ):
         """
         Construct a new YBins object
 
@@ -168,10 +175,10 @@ class YBins(_BaseTraceHierarchyType):
         -------
         YBins
         """
-        super(YBins, self).__init__("ybins")
+        super(YBins, self).__init__('ybins')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -183,32 +190,22 @@ class YBins(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram2d.YBins
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram2d.YBins`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram2d.YBins`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("end", None)
-        _v = end if end is not None else _v
-        if _v is not None:
-            self["end"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("start", None)
-        _v = start if start is not None else _v
-        if _v is not None:
-            self["start"] = _v
+        self._init_provided('end', arg, end)
+        self._init_provided('size', arg, size)
+        self._init_provided('start', arg, start)
 
         # Process unknown kwargs
         # ----------------------

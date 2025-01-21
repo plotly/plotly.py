@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class X(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "volume.slices"
-    _path_str = "volume.slices.x"
+    _parent_path_str = 'volume.slices'
+    _path_str = 'volume.slices.x'
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
     # fill
@@ -27,11 +29,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     # locations
     # ---------
@@ -49,11 +51,11 @@ class X(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["locations"]
+        return self['locations']
 
     @locations.setter
     def locations(self, val):
-        self["locations"] = val
+        self['locations'] = val
 
     # locationssrc
     # ------------
@@ -70,11 +72,11 @@ class X(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["locationssrc"]
+        return self['locationssrc']
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self["locationssrc"] = val
+        self['locationssrc'] = val
 
     # show
     # ----
@@ -91,11 +93,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     # Self properties description
     # ---------------------------
@@ -119,16 +121,14 @@ class X(_BaseTraceHierarchyType):
             Determines whether or not slice planes about the x
             dimension are drawn.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        fill=None,
-        locations=None,
-        locationssrc=None,
-        show=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            fill=None,
+            locations=None,
+            locationssrc=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new X object
 
@@ -159,10 +159,10 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super(X, self).__init__("x")
+        super(X, self).__init__('x')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -174,36 +174,23 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.slices.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.slices.X`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.slices.X`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("locations", None)
-        _v = locations if locations is not None else _v
-        if _v is not None:
-            self["locations"] = _v
-        _v = arg.pop("locationssrc", None)
-        _v = locationssrc if locationssrc is not None else _v
-        if _v is not None:
-            self["locationssrc"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
+        self._init_provided('fill', arg, fill)
+        self._init_provided('locations', arg, locations)
+        self._init_provided('locationssrc', arg, locationssrc)
+        self._init_provided('show', arg, show)
 
         # Process unknown kwargs
         # ----------------------

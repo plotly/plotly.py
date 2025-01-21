@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._domain import Domain
     from ._hoverlabel import Hoverlabel
@@ -15,17 +14,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import node
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".hoverlabel", ".legendgrouptitle", ".link", ".node"],
-        [
-            "._domain.Domain",
-            "._hoverlabel.Hoverlabel",
-            "._legendgrouptitle.Legendgrouptitle",
-            "._link.Link",
-            "._node.Node",
-            "._stream.Stream",
-            "._textfont.Textfont",
-        ],
+        ['.hoverlabel', '.legendgrouptitle', '.link', '.node'],
+        ['._domain.Domain', '._hoverlabel.Hoverlabel', '._legendgrouptitle.Legendgrouptitle', '._link.Link', '._node.Node', '._stream.Stream', '._textfont.Textfont']
     )
+
+

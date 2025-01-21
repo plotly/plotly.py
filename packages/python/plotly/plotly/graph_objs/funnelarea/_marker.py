@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Marker(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "funnelarea"
-    _path_str = "funnelarea.marker"
+    _parent_path_str = 'funnelarea'
+    _path_str = 'funnelarea.marker'
     _valid_props = {"colors", "colorssrc", "line", "pattern"}
 
     # colors
@@ -25,11 +27,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["colors"]
+        return self['colors']
 
     @colors.setter
     def colors(self, val):
-        self["colors"] = val
+        self['colors'] = val
 
     # colorssrc
     # ---------
@@ -45,11 +47,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorssrc"]
+        return self['colorssrc']
 
     @colorssrc.setter
     def colorssrc(self, val):
-        self["colorssrc"] = val
+        self['colorssrc'] = val
 
     # line
     # ----
@@ -62,30 +64,15 @@ class Marker(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the color of the line enclosing each
-                    sector. Defaults to the `paper_bgcolor` value.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                width
-                    Sets the width (in px) of the line enclosing
-                    each sector.
-                widthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `width`.
-
         Returns
         -------
         plotly.graph_objs.funnelarea.marker.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # pattern
     # -------
@@ -100,66 +87,15 @@ class Marker(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Pattern constructor
 
-            Supported dict properties:
-
-                bgcolor
-                    When there is no colorscale sets the color of
-                    background pattern fill. Defaults to a
-                    `marker.color` background when `fillmode` is
-                    "overlay". Otherwise, defaults to a transparent
-                    background.
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                fgcolor
-                    When there is no colorscale sets the color of
-                    foreground pattern fill. Defaults to a
-                    `marker.color` background when `fillmode` is
-                    "replace". Otherwise, defaults to dark grey or
-                    white to increase contrast with the `bgcolor`.
-                fgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `fgcolor`.
-                fgopacity
-                    Sets the opacity of the foreground pattern
-                    fill. Defaults to a 0.5 when `fillmode` is
-                    "overlay". Otherwise, defaults to 1.
-                fillmode
-                    Determines whether `marker.color` should be
-                    used as a default to `bgcolor` or a `fgcolor`.
-                shape
-                    Sets the shape of the pattern fill. By default,
-                    no pattern is used for filling the area.
-                shapesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shape`.
-                size
-                    Sets the size of unit squares of the pattern
-                    fill in pixels, which corresponds to the
-                    interval of repetition of the pattern.
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                solidity
-                    Sets the solidity of the pattern fill. Solidity
-                    is roughly the fraction of the area filled by
-                    the pattern. Solidity of 0 shows only the
-                    background color without pattern and solidty of
-                    1 shows only the foreground color without
-                    pattern.
-                soliditysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `solidity`.
-
         Returns
         -------
         plotly.graph_objs.funnelarea.marker.Pattern
         """
-        return self["pattern"]
+        return self['pattern']
 
     @pattern.setter
     def pattern(self, val):
-        self["pattern"] = val
+        self['pattern'] = val
 
     # Self properties description
     # ---------------------------
@@ -179,10 +115,14 @@ class Marker(_BaseTraceHierarchyType):
         pattern
             Sets the pattern within the marker.
         """
-
-    def __init__(
-        self, arg=None, colors=None, colorssrc=None, line=None, pattern=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            colors=None,
+            colorssrc=None,
+            line=None,
+            pattern=None,
+            **kwargs
+        ):
         """
         Construct a new Marker object
 
@@ -209,10 +149,10 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
+        super(Marker, self).__init__('marker')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -224,36 +164,23 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.funnelarea.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnelarea.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.funnelarea.Marker`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("colors", None)
-        _v = colors if colors is not None else _v
-        if _v is not None:
-            self["colors"] = _v
-        _v = arg.pop("colorssrc", None)
-        _v = colorssrc if colorssrc is not None else _v
-        if _v is not None:
-            self["colorssrc"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("pattern", None)
-        _v = pattern if pattern is not None else _v
-        if _v is not None:
-            self["pattern"] = _v
+        self._init_provided('colors', arg, colors)
+        self._init_provided('colorssrc', arg, colorssrc)
+        self._init_provided('line', arg, line)
+        self._init_provided('pattern', arg, pattern)
 
         # Process unknown kwargs
         # ----------------------

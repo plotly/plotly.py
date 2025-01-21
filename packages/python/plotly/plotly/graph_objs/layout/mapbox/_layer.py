@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,28 +8,9 @@ class Layer(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.mapbox"
-    _path_str = "layout.mapbox.layer"
-    _valid_props = {
-        "below",
-        "circle",
-        "color",
-        "coordinates",
-        "fill",
-        "line",
-        "maxzoom",
-        "minzoom",
-        "name",
-        "opacity",
-        "source",
-        "sourceattribution",
-        "sourcelayer",
-        "sourcetype",
-        "symbol",
-        "templateitemname",
-        "type",
-        "visible",
-    }
+    _parent_path_str = 'layout.mapbox'
+    _path_str = 'layout.mapbox.layer'
+    _valid_props = {"below", "circle", "color", "coordinates", "fill", "line", "maxzoom", "minzoom", "name", "opacity", "source", "sourceattribution", "sourcelayer", "sourcetype", "symbol", "templateitemname", "type", "visible"}
 
     # below
     # -----
@@ -46,11 +29,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["below"]
+        return self['below']
 
     @below.setter
     def below(self, val):
-        self["below"] = val
+        self['below'] = val
 
     # circle
     # ------
@@ -63,22 +46,15 @@ class Layer(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Circle constructor
 
-            Supported dict properties:
-
-                radius
-                    Sets the circle radius
-                    (mapbox.layer.paint.circle-radius). Has an
-                    effect only when `type` is set to "circle".
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.Circle
         """
-        return self["circle"]
+        return self['circle']
 
     @circle.setter
     def circle(self, val):
-        self["circle"] = val
+        self['circle'] = val
 
     # color
     # -----
@@ -98,52 +74,17 @@ class Layer(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # coordinates
     # -----------
@@ -161,11 +102,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["coordinates"]
+        return self['coordinates']
 
     @coordinates.setter
     def coordinates(self, val):
-        self["coordinates"] = val
+        self['coordinates'] = val
 
     # fill
     # ----
@@ -178,22 +119,15 @@ class Layer(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Fill constructor
 
-            Supported dict properties:
-
-                outlinecolor
-                    Sets the fill outline color
-                    (mapbox.layer.paint.fill-outline-color). Has an
-                    effect only when `type` is set to "fill".
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.Fill
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     # line
     # ----
@@ -206,29 +140,15 @@ class Layer(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                dash
-                    Sets the length of dashes and gaps
-                    (mapbox.layer.paint.line-dasharray). Has an
-                    effect only when `type` is set to "line".
-                dashsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `dash`.
-                width
-                    Sets the line width (mapbox.layer.paint.line-
-                    width). Has an effect only when `type` is set
-                    to "line".
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # maxzoom
     # -------
@@ -246,11 +166,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["maxzoom"]
+        return self['maxzoom']
 
     @maxzoom.setter
     def maxzoom(self, val):
-        self["maxzoom"] = val
+        self['maxzoom'] = val
 
     # minzoom
     # -------
@@ -267,11 +187,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["minzoom"]
+        return self['minzoom']
 
     @minzoom.setter
     def minzoom(self, val):
-        self["minzoom"] = val
+        self['minzoom'] = val
 
     # name
     # ----
@@ -294,11 +214,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -321,11 +241,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # source
     # ------
@@ -345,11 +265,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["source"]
+        return self['source']
 
     @source.setter
     def source(self, val):
-        self["source"] = val
+        self['source'] = val
 
     # sourceattribution
     # -----------------
@@ -366,11 +286,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["sourceattribution"]
+        return self['sourceattribution']
 
     @sourceattribution.setter
     def sourceattribution(self, val):
-        self["sourceattribution"] = val
+        self['sourceattribution'] = val
 
     # sourcelayer
     # -----------
@@ -389,11 +309,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["sourcelayer"]
+        return self['sourcelayer']
 
     @sourcelayer.setter
     def sourcelayer(self, val):
-        self["sourcelayer"] = val
+        self['sourcelayer'] = val
 
     # sourcetype
     # ----------
@@ -411,11 +331,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["sourcetype"]
+        return self['sourcetype']
 
     @sourcetype.setter
     def sourcetype(self, val):
-        self["sourcetype"] = val
+        self['sourcetype'] = val
 
     # symbol
     # ------
@@ -428,46 +348,15 @@ class Layer(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Symbol constructor
 
-            Supported dict properties:
-
-                icon
-                    Sets the symbol icon image
-                    (mapbox.layer.layout.icon-image). Full list:
-                    https://www.mapbox.com/maki-icons/
-                iconsize
-                    Sets the symbol icon size
-                    (mapbox.layer.layout.icon-size). Has an effect
-                    only when `type` is set to "symbol".
-                placement
-                    Sets the symbol and/or text placement
-                    (mapbox.layer.layout.symbol-placement). If
-                    `placement` is "point", the label is placed
-                    where the geometry is located If `placement` is
-                    "line", the label is placed along the line of
-                    the geometry If `placement` is "line-center",
-                    the label is placed on the center of the
-                    geometry
-                text
-                    Sets the symbol text (mapbox.layer.layout.text-
-                    field).
-                textfont
-                    Sets the icon text font
-                    (color=mapbox.layer.paint.text-color,
-                    size=mapbox.layer.layout.text-size). Has an
-                    effect only when `type` is set to "symbol".
-                textposition
-                    Sets the positions of the `text` elements with
-                    respects to the (x,y) coordinates.
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.Symbol
         """
-        return self["symbol"]
+        return self['symbol']
 
     @symbol.setter
     def symbol(self, val):
-        self["symbol"] = val
+        self['symbol'] = val
 
     # templateitemname
     # ----------------
@@ -491,11 +380,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     # type
     # ----
@@ -519,11 +408,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # visible
     # -------
@@ -539,11 +428,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # Self properties description
     # ---------------------------
@@ -649,30 +538,28 @@ class Layer(_BaseLayoutHierarchyType):
         visible
             Determines whether this layer is displayed
         """
-
-    def __init__(
-        self,
-        arg=None,
-        below=None,
-        circle=None,
-        color=None,
-        coordinates=None,
-        fill=None,
-        line=None,
-        maxzoom=None,
-        minzoom=None,
-        name=None,
-        opacity=None,
-        source=None,
-        sourceattribution=None,
-        sourcelayer=None,
-        sourcetype=None,
-        symbol=None,
-        templateitemname=None,
-        type=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            below=None,
+            circle=None,
+            color=None,
+            coordinates=None,
+            fill=None,
+            line=None,
+            maxzoom=None,
+            minzoom=None,
+            name=None,
+            opacity=None,
+            source=None,
+            sourceattribution=None,
+            sourcelayer=None,
+            sourcetype=None,
+            symbol=None,
+            templateitemname=None,
+            type=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Layer object
 
@@ -785,10 +672,10 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Layer
         """
-        super(Layer, self).__init__("layers")
+        super(Layer, self).__init__('layers')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -800,92 +687,37 @@ class Layer(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.mapbox.Layer
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("below", None)
-        _v = below if below is not None else _v
-        if _v is not None:
-            self["below"] = _v
-        _v = arg.pop("circle", None)
-        _v = circle if circle is not None else _v
-        if _v is not None:
-            self["circle"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("coordinates", None)
-        _v = coordinates if coordinates is not None else _v
-        if _v is not None:
-            self["coordinates"] = _v
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("maxzoom", None)
-        _v = maxzoom if maxzoom is not None else _v
-        if _v is not None:
-            self["maxzoom"] = _v
-        _v = arg.pop("minzoom", None)
-        _v = minzoom if minzoom is not None else _v
-        if _v is not None:
-            self["minzoom"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("source", None)
-        _v = source if source is not None else _v
-        if _v is not None:
-            self["source"] = _v
-        _v = arg.pop("sourceattribution", None)
-        _v = sourceattribution if sourceattribution is not None else _v
-        if _v is not None:
-            self["sourceattribution"] = _v
-        _v = arg.pop("sourcelayer", None)
-        _v = sourcelayer if sourcelayer is not None else _v
-        if _v is not None:
-            self["sourcelayer"] = _v
-        _v = arg.pop("sourcetype", None)
-        _v = sourcetype if sourcetype is not None else _v
-        if _v is not None:
-            self["sourcetype"] = _v
-        _v = arg.pop("symbol", None)
-        _v = symbol if symbol is not None else _v
-        if _v is not None:
-            self["symbol"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('below', arg, below)
+        self._init_provided('circle', arg, circle)
+        self._init_provided('color', arg, color)
+        self._init_provided('coordinates', arg, coordinates)
+        self._init_provided('fill', arg, fill)
+        self._init_provided('line', arg, line)
+        self._init_provided('maxzoom', arg, maxzoom)
+        self._init_provided('minzoom', arg, minzoom)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('source', arg, source)
+        self._init_provided('sourceattribution', arg, sourceattribution)
+        self._init_provided('sourcelayer', arg, sourcelayer)
+        self._init_provided('sourcetype', arg, sourcetype)
+        self._init_provided('symbol', arg, symbol)
+        self._init_provided('templateitemname', arg, templateitemname)
+        self._init_provided('type', arg, type)
+        self._init_provided('visible', arg, visible)
 
         # Process unknown kwargs
         # ----------------------

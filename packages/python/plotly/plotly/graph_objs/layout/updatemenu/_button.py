@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,69 +8,60 @@ class Button(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.updatemenu"
-    _path_str = "layout.updatemenu.button"
-    _valid_props = {
-        "args",
-        "args2",
-        "execute",
-        "label",
-        "method",
-        "name",
-        "templateitemname",
-        "visible",
-    }
+    _parent_path_str = 'layout.updatemenu'
+    _path_str = 'layout.updatemenu.button'
+    _valid_props = {"args", "args2", "execute", "label", "method", "name", "templateitemname", "visible"}
 
     # args
     # ----
     @property
     def args(self):
         """
-            Sets the arguments values to be passed to the Plotly method set
-            in `method` on click.
+        Sets the arguments values to be passed to the Plotly method set
+        in `method` on click.
 
-            The 'args' property is an info array that may be specified as:
+        The 'args' property is an info array that may be specified as:
+    
+        * a list or tuple of up to 3 elements where:
+    (0) The 'args[0]' property accepts values of any type
+    (1) The 'args[1]' property accepts values of any type
+    (2) The 'args[2]' property accepts values of any type
 
-            * a list or tuple of up to 3 elements where:
-        (0) The 'args[0]' property accepts values of any type
-        (1) The 'args[1]' property accepts values of any type
-        (2) The 'args[2]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["args"]
+        return self['args']
 
     @args.setter
     def args(self, val):
-        self["args"] = val
+        self['args'] = val
 
     # args2
     # -----
     @property
     def args2(self):
         """
-            Sets a 2nd set of `args`, these arguments values are passed to
-            the Plotly method set in `method` when clicking this button
-            while in the active state. Use this to create toggle buttons.
+        Sets a 2nd set of `args`, these arguments values are passed to
+        the Plotly method set in `method` when clicking this button
+        while in the active state. Use this to create toggle buttons.
 
-            The 'args2' property is an info array that may be specified as:
+        The 'args2' property is an info array that may be specified as:
+    
+        * a list or tuple of up to 3 elements where:
+    (0) The 'args2[0]' property accepts values of any type
+    (1) The 'args2[1]' property accepts values of any type
+    (2) The 'args2[2]' property accepts values of any type
 
-            * a list or tuple of up to 3 elements where:
-        (0) The 'args2[0]' property accepts values of any type
-        (1) The 'args2[1]' property accepts values of any type
-        (2) The 'args2[2]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["args2"]
+        return self['args2']
 
     @args2.setter
     def args2(self, val):
-        self["args2"] = val
+        self['args2'] = val
 
     # execute
     # -------
@@ -90,11 +83,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["execute"]
+        return self['execute']
 
     @execute.setter
     def execute(self, val):
-        self["execute"] = val
+        self['execute'] = val
 
     # label
     # -----
@@ -111,11 +104,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["label"]
+        return self['label']
 
     @label.setter
     def label(self, val):
-        self["label"] = val
+        self['label'] = val
 
     # method
     # ------
@@ -136,11 +129,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["method"]
+        return self['method']
 
     @method.setter
     def method(self, val):
-        self["method"] = val
+        self['method'] = val
 
     # name
     # ----
@@ -163,11 +156,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # templateitemname
     # ----------------
@@ -191,11 +184,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     # visible
     # -------
@@ -211,11 +204,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # Self properties description
     # ---------------------------
@@ -270,20 +263,18 @@ class Button(_BaseLayoutHierarchyType):
         visible
             Determines whether or not this button is visible.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        args=None,
-        args2=None,
-        execute=None,
-        label=None,
-        method=None,
-        name=None,
-        templateitemname=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            args=None,
+            args2=None,
+            execute=None,
+            label=None,
+            method=None,
+            name=None,
+            templateitemname=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Button object
 
@@ -345,10 +336,10 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Button
         """
-        super(Button, self).__init__("buttons")
+        super(Button, self).__init__('buttons')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -360,52 +351,27 @@ class Button(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.updatemenu.Button
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("args", None)
-        _v = args if args is not None else _v
-        if _v is not None:
-            self["args"] = _v
-        _v = arg.pop("args2", None)
-        _v = args2 if args2 is not None else _v
-        if _v is not None:
-            self["args2"] = _v
-        _v = arg.pop("execute", None)
-        _v = execute if execute is not None else _v
-        if _v is not None:
-            self["execute"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("method", None)
-        _v = method if method is not None else _v
-        if _v is not None:
-            self["method"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('args', arg, args)
+        self._init_provided('args2', arg, args2)
+        self._init_provided('execute', arg, execute)
+        self._init_provided('label', arg, label)
+        self._init_provided('method', arg, method)
+        self._init_provided('name', arg, name)
+        self._init_provided('templateitemname', arg, templateitemname)
+        self._init_provided('visible', arg, visible)
 
         # Process unknown kwargs
         # ----------------------

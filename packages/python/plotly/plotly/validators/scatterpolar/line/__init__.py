@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._width import WidthValidator
     from ._smoothing import SmoothingValidator
@@ -11,17 +10,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._backoff import BackoffValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._width.WidthValidator",
-            "._smoothing.SmoothingValidator",
-            "._shape.ShapeValidator",
-            "._dash.DashValidator",
-            "._color.ColorValidator",
-            "._backoffsrc.BackoffsrcValidator",
-            "._backoff.BackoffValidator",
-        ],
+        ['._width.WidthValidator', '._smoothing.SmoothingValidator', '._shape.ShapeValidator', '._dash.DashValidator', '._color.ColorValidator', '._backoffsrc.BackoffsrcValidator', '._backoff.BackoffValidator']
     )
+
+

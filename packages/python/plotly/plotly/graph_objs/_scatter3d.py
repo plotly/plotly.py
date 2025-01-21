@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,66 +8,9 @@ class Scatter3d(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "scatter3d"
-    _valid_props = {
-        "connectgaps",
-        "customdata",
-        "customdatasrc",
-        "error_x",
-        "error_y",
-        "error_z",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "line",
-        "marker",
-        "meta",
-        "metasrc",
-        "mode",
-        "name",
-        "opacity",
-        "projection",
-        "scene",
-        "showlegend",
-        "stream",
-        "surfaceaxis",
-        "surfacecolor",
-        "text",
-        "textfont",
-        "textposition",
-        "textpositionsrc",
-        "textsrc",
-        "texttemplate",
-        "texttemplatesrc",
-        "type",
-        "uid",
-        "uirevision",
-        "visible",
-        "x",
-        "xcalendar",
-        "xhoverformat",
-        "xsrc",
-        "y",
-        "ycalendar",
-        "yhoverformat",
-        "ysrc",
-        "z",
-        "zcalendar",
-        "zhoverformat",
-        "zsrc",
-    }
+    _parent_path_str = ''
+    _path_str = 'scatter3d'
+    _valid_props = {"connectgaps", "customdata", "customdatasrc", "error_x", "error_y", "error_z", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "marker", "meta", "metasrc", "mode", "name", "opacity", "projection", "scene", "showlegend", "stream", "surfaceaxis", "surfacecolor", "text", "textfont", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "visible", "x", "xcalendar", "xhoverformat", "xsrc", "y", "ycalendar", "yhoverformat", "ysrc", "z", "zcalendar", "zhoverformat", "zsrc"}
 
     # connectgaps
     # -----------
@@ -82,11 +27,11 @@ class Scatter3d(_BaseTraceType):
         -------
         bool
         """
-        return self["connectgaps"]
+        return self['connectgaps']
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self["connectgaps"] = val
+        self['connectgaps'] = val
 
     # customdata
     # ----------
@@ -105,11 +50,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -126,11 +71,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # error_x
     # -------
@@ -143,75 +88,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
 
-            Supported dict properties:
-
-                array
-                    Sets the data corresponding the length of each
-                    error bar. Values are plotted relative to the
-                    underlying data.
-                arrayminus
-                    Sets the data corresponding the length of each
-                    error bar in the bottom (left) direction for
-                    vertical (horizontal) bars Values are plotted
-                    relative to the underlying data.
-                arrayminussrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `arrayminus`.
-                arraysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `array`.
-                color
-                    Sets the stroke color of the error bars.
-                copy_zstyle
-
-                symmetric
-                    Determines whether or not the error bars have
-                    the same length in both direction (top/bottom
-                    for vertical bars, left/right for horizontal
-                    bars.
-                thickness
-                    Sets the thickness (in px) of the error bars.
-                traceref
-
-                tracerefminus
-
-                type
-                    Determines the rule used to generate the error
-                    bars. If *constant`, the bar lengths are of a
-                    constant value. Set this constant in `value`.
-                    If "percent", the bar lengths correspond to a
-                    percentage of underlying data. Set this
-                    percentage in `value`. If "sqrt", the bar
-                    lengths correspond to the square of the
-                    underlying data. If "data", the bar lengths are
-                    set with data set `array`.
-                value
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars.
-                valueminus
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars in the bottom
-                    (left) direction for vertical (horizontal) bars
-                visible
-                    Determines whether or not this set of error
-                    bars is visible.
-                width
-                    Sets the width (in px) of the cross-bar at both
-                    ends of the error bars.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.ErrorX
         """
-        return self["error_x"]
+        return self['error_x']
 
     @error_x.setter
     def error_x(self, val):
-        self["error_x"] = val
+        self['error_x'] = val
 
     # error_y
     # -------
@@ -224,75 +109,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
 
-            Supported dict properties:
-
-                array
-                    Sets the data corresponding the length of each
-                    error bar. Values are plotted relative to the
-                    underlying data.
-                arrayminus
-                    Sets the data corresponding the length of each
-                    error bar in the bottom (left) direction for
-                    vertical (horizontal) bars Values are plotted
-                    relative to the underlying data.
-                arrayminussrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `arrayminus`.
-                arraysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `array`.
-                color
-                    Sets the stroke color of the error bars.
-                copy_zstyle
-
-                symmetric
-                    Determines whether or not the error bars have
-                    the same length in both direction (top/bottom
-                    for vertical bars, left/right for horizontal
-                    bars.
-                thickness
-                    Sets the thickness (in px) of the error bars.
-                traceref
-
-                tracerefminus
-
-                type
-                    Determines the rule used to generate the error
-                    bars. If *constant`, the bar lengths are of a
-                    constant value. Set this constant in `value`.
-                    If "percent", the bar lengths correspond to a
-                    percentage of underlying data. Set this
-                    percentage in `value`. If "sqrt", the bar
-                    lengths correspond to the square of the
-                    underlying data. If "data", the bar lengths are
-                    set with data set `array`.
-                value
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars.
-                valueminus
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars in the bottom
-                    (left) direction for vertical (horizontal) bars
-                visible
-                    Determines whether or not this set of error
-                    bars is visible.
-                width
-                    Sets the width (in px) of the cross-bar at both
-                    ends of the error bars.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.ErrorY
         """
-        return self["error_y"]
+        return self['error_y']
 
     @error_y.setter
     def error_y(self, val):
-        self["error_y"] = val
+        self['error_y'] = val
 
     # error_z
     # -------
@@ -305,73 +130,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the ErrorZ constructor
 
-            Supported dict properties:
-
-                array
-                    Sets the data corresponding the length of each
-                    error bar. Values are plotted relative to the
-                    underlying data.
-                arrayminus
-                    Sets the data corresponding the length of each
-                    error bar in the bottom (left) direction for
-                    vertical (horizontal) bars Values are plotted
-                    relative to the underlying data.
-                arrayminussrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `arrayminus`.
-                arraysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `array`.
-                color
-                    Sets the stroke color of the error bars.
-                symmetric
-                    Determines whether or not the error bars have
-                    the same length in both direction (top/bottom
-                    for vertical bars, left/right for horizontal
-                    bars.
-                thickness
-                    Sets the thickness (in px) of the error bars.
-                traceref
-
-                tracerefminus
-
-                type
-                    Determines the rule used to generate the error
-                    bars. If *constant`, the bar lengths are of a
-                    constant value. Set this constant in `value`.
-                    If "percent", the bar lengths correspond to a
-                    percentage of underlying data. Set this
-                    percentage in `value`. If "sqrt", the bar
-                    lengths correspond to the square of the
-                    underlying data. If "data", the bar lengths are
-                    set with data set `array`.
-                value
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars.
-                valueminus
-                    Sets the value of either the percentage (if
-                    `type` is set to "percent") or the constant (if
-                    `type` is set to "constant") corresponding to
-                    the lengths of the error bars in the bottom
-                    (left) direction for vertical (horizontal) bars
-                visible
-                    Determines whether or not this set of error
-                    bars is visible.
-                width
-                    Sets the width (in px) of the cross-bar at both
-                    ends of the error bars.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.ErrorZ
         """
-        return self["error_z"]
+        return self['error_z']
 
     @error_z.setter
     def error_z(self, val):
-        self["error_z"] = val
+        self['error_z'] = val
 
     # hoverinfo
     # ---------
@@ -393,11 +160,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverinfosrc
     # ------------
@@ -414,11 +181,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -431,53 +198,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertemplate
     # -------------
@@ -517,11 +246,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -538,11 +267,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -564,11 +293,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # hovertextsrc
     # ------------
@@ -585,11 +314,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -607,11 +336,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -627,11 +356,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # legend
     # ------
@@ -652,11 +381,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgroup
     # -----------
@@ -675,11 +404,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     # legendgrouptitle
     # ----------------
@@ -692,22 +421,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -730,11 +452,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -751,11 +473,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # line
     # ----
@@ -768,108 +490,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                autocolorscale
-                    Determines whether the colorscale is a default
-                    palette (`autocolorscale: true`) or the palette
-                    determined by `line.colorscale`. Has an effect
-                    only if in `line.color` is set to a numerical
-                    array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default palette
-                    will be chosen according to whether numbers in
-                    the `color` array are all positive, all
-                    negative or mixed.
-                cauto
-                    Determines whether or not the color domain is
-                    computed with respect to the input data (here
-                    in `line.color`) or the bounds set in
-                    `line.cmin` and `line.cmax` Has an effect only
-                    if in `line.color` is set to a numerical array.
-                    Defaults to `false` when `line.cmin` and
-                    `line.cmax` are set by the user.
-                cmax
-                    Sets the upper bound of the color domain. Has
-                    an effect only if in `line.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `line.color` and if set,
-                    `line.cmin` must be set as well.
-                cmid
-                    Sets the mid-point of the color domain by
-                    scaling `line.cmin` and/or `line.cmax` to be
-                    equidistant to this point. Has an effect only
-                    if in `line.color` is set to a numerical array.
-                    Value should have the same units as in
-                    `line.color`. Has no effect when `line.cauto`
-                    is `false`.
-                cmin
-                    Sets the lower bound of the color domain. Has
-                    an effect only if in `line.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `line.color` and if set,
-                    `line.cmax` must be set as well.
-                color
-                    Sets the line color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `line.cmin` and `line.cmax` if set.
-                coloraxis
-                    Sets a reference to a shared color axis.
-                    References to these shared color axes are
-                    "coloraxis", "coloraxis2", "coloraxis3", etc.
-                    Settings for these shared color axes are set in
-                    the layout, under `layout.coloraxis`,
-                    `layout.coloraxis2`, etc. Note that multiple
-                    color scales can be linked to the same color
-                    axis.
-                colorbar
-                    :class:`plotly.graph_objects.scatter3d.line.Col
-                    orBar` instance or dict with compatible
-                    properties
-                colorscale
-                    Sets the colorscale. Has an effect only if in
-                    `line.color` is set to a numerical array. The
-                    colorscale must be an array containing arrays
-                    mapping a normalized value to an rgb, rgba,
-                    hex, hsl, hsv, or named color string. At
-                    minimum, a mapping for the lowest (0) and
-                    highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
-                    To control the bounds of the colorscale in
-                    color space, use `line.cmin` and `line.cmax`.
-                    Alternatively, `colorscale` may be a palette
-                    name string of the following list: Blackbody,Bl
-                    uered,Blues,Cividis,Earth,Electric,Greens,Greys
-                    ,Hot,Jet,Picnic,Portland,Rainbow,RdBu,Reds,Viri
-                    dis,YlGnBu,YlOrRd.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                dash
-                    Sets the dash style of the lines.
-                reversescale
-                    Reverses the color mapping if true. Has an
-                    effect only if in `line.color` is set to a
-                    numerical array. If true, `line.cmin` will
-                    correspond to the last color in the array and
-                    `line.cmax` will correspond to the first color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    in `line.color` is set to a numerical array.
-                width
-                    Sets the line width (in px).
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # marker
     # ------
@@ -882,139 +511,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Marker constructor
 
-            Supported dict properties:
-
-                autocolorscale
-                    Determines whether the colorscale is a default
-                    palette (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. In case `colorscale` is
-                    unspecified or `autocolorscale` is true, the
-                    default palette will be chosen according to
-                    whether numbers in the `color` array are all
-                    positive, all negative or mixed.
-                cauto
-                    Determines whether or not the color domain is
-                    computed with respect to the input data (here
-                    in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax` Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Defaults to `false` when `marker.cmin`
-                    and `marker.cmax` are set by the user.
-                cmax
-                    Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmin` must be set as well.
-                cmid
-                    Sets the mid-point of the color domain by
-                    scaling `marker.cmin` and/or `marker.cmax` to
-                    be equidistant to this point. Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Value should have the same units as in
-                    `marker.color`. Has no effect when
-                    `marker.cauto` is `false`.
-                cmin
-                    Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmax` must be set as well.
-                color
-                    Sets the marker color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
-                coloraxis
-                    Sets a reference to a shared color axis.
-                    References to these shared color axes are
-                    "coloraxis", "coloraxis2", "coloraxis3", etc.
-                    Settings for these shared color axes are set in
-                    the layout, under `layout.coloraxis`,
-                    `layout.coloraxis2`, etc. Note that multiple
-                    color scales can be linked to the same color
-                    axis.
-                colorbar
-                    :class:`plotly.graph_objects.scatter3d.marker.C
-                    olorBar` instance or dict with compatible
-                    properties
-                colorscale
-                    Sets the colorscale. Has an effect only if in
-                    `marker.color` is set to a numerical array. The
-                    colorscale must be an array containing arrays
-                    mapping a normalized value to an rgb, rgba,
-                    hex, hsl, hsv, or named color string. At
-                    minimum, a mapping for the lowest (0) and
-                    highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
-                    To control the bounds of the colorscale in
-                    color space, use `marker.cmin` and
-                    `marker.cmax`. Alternatively, `colorscale` may
-                    be a palette name string of the following list:
-                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
-                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
-                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                line
-                    :class:`plotly.graph_objects.scatter3d.marker.L
-                    ine` instance or dict with compatible
-                    properties
-                opacity
-                    Sets the marker opacity. Note that the marker
-                    opacity for scatter3d traces must be a scalar
-                    value for performance reasons. To set a
-                    blending opacity value (i.e. which is not
-                    transparent), set "marker.color" to an rgba
-                    color and use its alpha channel.
-                reversescale
-                    Reverses the color mapping if true. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. If true, `marker.cmin` will
-                    correspond to the last color in the array and
-                    `marker.cmax` will correspond to the first
-                    color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    in `marker.color` is set to a numerical array.
-                size
-                    Sets the marker size (in px).
-                sizemin
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the minimum size (in px)
-                    of the rendered marker points.
-                sizemode
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the rule for which the
-                    data in `size` is converted to pixels.
-                sizeref
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the scale factor used to
-                    determine the rendered size of marker points.
-                    Use with `sizemin` and `sizemode`.
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                symbol
-                    Sets the marker symbol type.
-                symbolsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `symbol`.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     # meta
     # ----
@@ -1038,11 +543,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -1058,11 +563,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -1086,11 +591,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["mode"]
+        return self['mode']
 
     @mode.setter
     def mode(self, val):
-        self["mode"] = val
+        self['mode'] = val
 
     # name
     # ----
@@ -1108,11 +613,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -1128,11 +633,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # projection
     # ----------
@@ -1145,30 +650,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Projection constructor
 
-            Supported dict properties:
-
-                x
-                    :class:`plotly.graph_objects.scatter3d.projecti
-                    on.X` instance or dict with compatible
-                    properties
-                y
-                    :class:`plotly.graph_objects.scatter3d.projecti
-                    on.Y` instance or dict with compatible
-                    properties
-                z
-                    :class:`plotly.graph_objects.scatter3d.projecti
-                    on.Z` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Projection
         """
-        return self["projection"]
+        return self['projection']
 
     @projection.setter
     def projection(self, val):
-        self["projection"] = val
+        self['projection'] = val
 
     # scene
     # -----
@@ -1189,11 +679,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["scene"]
+        return self['scene']
 
     @scene.setter
     def scene(self, val):
-        self["scene"] = val
+        self['scene'] = val
 
     # showlegend
     # ----------
@@ -1210,11 +700,11 @@ class Scatter3d(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     # stream
     # ------
@@ -1227,27 +717,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # surfaceaxis
     # -----------
@@ -1266,11 +744,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["surfaceaxis"]
+        return self['surfaceaxis']
 
     @surfaceaxis.setter
     def surfaceaxis(self, val):
-        self["surfaceaxis"] = val
+        self['surfaceaxis'] = val
 
     # surfacecolor
     # ------------
@@ -1284,52 +762,17 @@ class Scatter3d(_BaseTraceType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["surfacecolor"]
+        return self['surfacecolor']
 
     @surfacecolor.setter
     def surfacecolor(self, val):
-        self["surfacecolor"] = val
+        self['surfacecolor'] = val
 
     # text
     # ----
@@ -1352,11 +795,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textfont
     # --------
@@ -1371,64 +814,15 @@ class Scatter3d(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.scatter3d.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     # textposition
     # ------------
@@ -1449,11 +843,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["textposition"]
+        return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
-        self["textposition"] = val
+        self['textposition'] = val
 
     # textpositionsrc
     # ---------------
@@ -1470,11 +864,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["textpositionsrc"]
+        return self['textpositionsrc']
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
+        self['textpositionsrc'] = val
 
     # textsrc
     # -------
@@ -1490,11 +884,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     # texttemplate
     # ------------
@@ -1523,11 +917,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["texttemplate"]
+        return self['texttemplate']
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self["texttemplate"] = val
+        self['texttemplate'] = val
 
     # texttemplatesrc
     # ---------------
@@ -1544,11 +938,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["texttemplatesrc"]
+        return self['texttemplatesrc']
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
+        self['texttemplatesrc'] = val
 
     # uid
     # ---
@@ -1566,11 +960,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -1599,11 +993,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -1622,11 +1016,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # x
     # -
@@ -1642,11 +1036,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     # xcalendar
     # ---------
@@ -1666,11 +1060,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["xcalendar"]
+        return self['xcalendar']
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self["xcalendar"] = val
+        self['xcalendar'] = val
 
     # xhoverformat
     # ------------
@@ -1697,11 +1091,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["xhoverformat"]
+        return self['xhoverformat']
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self["xhoverformat"] = val
+        self['xhoverformat'] = val
 
     # xsrc
     # ----
@@ -1717,11 +1111,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["xsrc"]
+        return self['xsrc']
 
     @xsrc.setter
     def xsrc(self, val):
-        self["xsrc"] = val
+        self['xsrc'] = val
 
     # y
     # -
@@ -1737,11 +1131,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     # ycalendar
     # ---------
@@ -1761,11 +1155,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["ycalendar"]
+        return self['ycalendar']
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self["ycalendar"] = val
+        self['ycalendar'] = val
 
     # yhoverformat
     # ------------
@@ -1792,11 +1186,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["yhoverformat"]
+        return self['yhoverformat']
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self["yhoverformat"] = val
+        self['yhoverformat'] = val
 
     # ysrc
     # ----
@@ -1812,11 +1206,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["ysrc"]
+        return self['ysrc']
 
     @ysrc.setter
     def ysrc(self, val):
-        self["ysrc"] = val
+        self['ysrc'] = val
 
     # z
     # -
@@ -1832,11 +1226,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     # zcalendar
     # ---------
@@ -1856,11 +1250,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self["zcalendar"]
+        return self['zcalendar']
 
     @zcalendar.setter
     def zcalendar(self, val):
-        self["zcalendar"] = val
+        self['zcalendar'] = val
 
     # zhoverformat
     # ------------
@@ -1887,11 +1281,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["zhoverformat"]
+        return self['zhoverformat']
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self["zhoverformat"] = val
+        self['zhoverformat'] = val
 
     # zsrc
     # ----
@@ -1907,17 +1301,17 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self["zsrc"]
+        return self['zsrc']
 
     @zsrc.setter
     def zsrc(self, val):
-        self["zsrc"] = val
+        self['zsrc'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -2211,67 +1605,65 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        connectgaps=None,
-        customdata=None,
-        customdatasrc=None,
-        error_x=None,
-        error_y=None,
-        error_z=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        line=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        mode=None,
-        name=None,
-        opacity=None,
-        projection=None,
-        scene=None,
-        showlegend=None,
-        stream=None,
-        surfaceaxis=None,
-        surfacecolor=None,
-        text=None,
-        textfont=None,
-        textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
-        texttemplate=None,
-        texttemplatesrc=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        x=None,
-        xcalendar=None,
-        xhoverformat=None,
-        xsrc=None,
-        y=None,
-        ycalendar=None,
-        yhoverformat=None,
-        ysrc=None,
-        z=None,
-        zcalendar=None,
-        zhoverformat=None,
-        zsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            connectgaps=None,
+            customdata=None,
+            customdatasrc=None,
+            error_x=None,
+            error_y=None,
+            error_z=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            line=None,
+            marker=None,
+            meta=None,
+            metasrc=None,
+            mode=None,
+            name=None,
+            opacity=None,
+            projection=None,
+            scene=None,
+            showlegend=None,
+            stream=None,
+            surfaceaxis=None,
+            surfacecolor=None,
+            text=None,
+            textfont=None,
+            textposition=None,
+            textpositionsrc=None,
+            textsrc=None,
+            texttemplate=None,
+            texttemplatesrc=None,
+            uid=None,
+            uirevision=None,
+            visible=None,
+            x=None,
+            xcalendar=None,
+            xhoverformat=None,
+            xsrc=None,
+            y=None,
+            ycalendar=None,
+            yhoverformat=None,
+            ysrc=None,
+            z=None,
+            zcalendar=None,
+            zhoverformat=None,
+            zsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Scatter3d object
 
@@ -2578,10 +1970,10 @@ class Scatter3d(_BaseTraceType):
         -------
         Scatter3d
         """
-        super(Scatter3d, self).__init__("scatter3d")
+        super(Scatter3d, self).__init__('scatter3d')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -2593,246 +1985,80 @@ class Scatter3d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scatter3d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scatter3d`"""
-            )
+an instance of :class:`plotly.graph_objs.Scatter3d`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("connectgaps", None)
-        _v = connectgaps if connectgaps is not None else _v
-        if _v is not None:
-            self["connectgaps"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("error_x", None)
-        _v = error_x if error_x is not None else _v
-        if _v is not None:
-            self["error_x"] = _v
-        _v = arg.pop("error_y", None)
-        _v = error_y if error_y is not None else _v
-        if _v is not None:
-            self["error_y"] = _v
-        _v = arg.pop("error_z", None)
-        _v = error_z if error_z is not None else _v
-        if _v is not None:
-            self["error_z"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("mode", None)
-        _v = mode if mode is not None else _v
-        if _v is not None:
-            self["mode"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("projection", None)
-        _v = projection if projection is not None else _v
-        if _v is not None:
-            self["projection"] = _v
-        _v = arg.pop("scene", None)
-        _v = scene if scene is not None else _v
-        if _v is not None:
-            self["scene"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("surfaceaxis", None)
-        _v = surfaceaxis if surfaceaxis is not None else _v
-        if _v is not None:
-            self["surfaceaxis"] = _v
-        _v = arg.pop("surfacecolor", None)
-        _v = surfacecolor if surfacecolor is not None else _v
-        if _v is not None:
-            self["surfacecolor"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-        _v = arg.pop("textpositionsrc", None)
-        _v = textpositionsrc if textpositionsrc is not None else _v
-        if _v is not None:
-            self["textpositionsrc"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("texttemplatesrc", None)
-        _v = texttemplatesrc if texttemplatesrc is not None else _v
-        if _v is not None:
-            self["texttemplatesrc"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xcalendar", None)
-        _v = xcalendar if xcalendar is not None else _v
-        if _v is not None:
-            self["xcalendar"] = _v
-        _v = arg.pop("xhoverformat", None)
-        _v = xhoverformat if xhoverformat is not None else _v
-        if _v is not None:
-            self["xhoverformat"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("ycalendar", None)
-        _v = ycalendar if ycalendar is not None else _v
-        if _v is not None:
-            self["ycalendar"] = _v
-        _v = arg.pop("yhoverformat", None)
-        _v = yhoverformat if yhoverformat is not None else _v
-        if _v is not None:
-            self["yhoverformat"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-        _v = arg.pop("zcalendar", None)
-        _v = zcalendar if zcalendar is not None else _v
-        if _v is not None:
-            self["zcalendar"] = _v
-        _v = arg.pop("zhoverformat", None)
-        _v = zhoverformat if zhoverformat is not None else _v
-        if _v is not None:
-            self["zhoverformat"] = _v
-        _v = arg.pop("zsrc", None)
-        _v = zsrc if zsrc is not None else _v
-        if _v is not None:
-            self["zsrc"] = _v
+        self._init_provided('connectgaps', arg, connectgaps)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('error_x', arg, error_x)
+        self._init_provided('error_y', arg, error_y)
+        self._init_provided('error_z', arg, error_z)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('hovertextsrc', arg, hovertextsrc)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgroup', arg, legendgroup)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('line', arg, line)
+        self._init_provided('marker', arg, marker)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('mode', arg, mode)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('projection', arg, projection)
+        self._init_provided('scene', arg, scene)
+        self._init_provided('showlegend', arg, showlegend)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('surfaceaxis', arg, surfaceaxis)
+        self._init_provided('surfacecolor', arg, surfacecolor)
+        self._init_provided('text', arg, text)
+        self._init_provided('textfont', arg, textfont)
+        self._init_provided('textposition', arg, textposition)
+        self._init_provided('textpositionsrc', arg, textpositionsrc)
+        self._init_provided('textsrc', arg, textsrc)
+        self._init_provided('texttemplate', arg, texttemplate)
+        self._init_provided('texttemplatesrc', arg, texttemplatesrc)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('x', arg, x)
+        self._init_provided('xcalendar', arg, xcalendar)
+        self._init_provided('xhoverformat', arg, xhoverformat)
+        self._init_provided('xsrc', arg, xsrc)
+        self._init_provided('y', arg, y)
+        self._init_provided('ycalendar', arg, ycalendar)
+        self._init_provided('yhoverformat', arg, yhoverformat)
+        self._init_provided('ysrc', arg, ysrc)
+        self._init_provided('z', arg, z)
+        self._init_provided('zcalendar', arg, zcalendar)
+        self._init_provided('zhoverformat', arg, zhoverformat)
+        self._init_provided('zsrc', arg, zsrc)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "scatter3d"
-        arg.pop("type", None)
+        self._props['type'] = 'scatter3d'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

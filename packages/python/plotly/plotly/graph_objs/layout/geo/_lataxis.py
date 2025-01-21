@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,17 +8,9 @@ class Lataxis(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.geo"
-    _path_str = "layout.geo.lataxis"
-    _valid_props = {
-        "dtick",
-        "gridcolor",
-        "griddash",
-        "gridwidth",
-        "range",
-        "showgrid",
-        "tick0",
-    }
+    _parent_path_str = 'layout.geo'
+    _path_str = 'layout.geo.lataxis'
+    _valid_props = {"dtick", "gridcolor", "griddash", "gridwidth", "range", "showgrid", "tick0"}
 
     # dtick
     # -----
@@ -32,11 +26,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["dtick"]
+        return self['dtick']
 
     @dtick.setter
     def dtick(self, val):
-        self["dtick"] = val
+        self['dtick'] = val
 
     # gridcolor
     # ---------
@@ -50,52 +44,17 @@ class Lataxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["gridcolor"]
+        return self['gridcolor']
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self["gridcolor"] = val
+        self['gridcolor'] = val
 
     # griddash
     # --------
@@ -117,11 +76,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["griddash"]
+        return self['griddash']
 
     @griddash.setter
     def griddash(self, val):
-        self["griddash"] = val
+        self['griddash'] = val
 
     # gridwidth
     # ---------
@@ -137,37 +96,37 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["gridwidth"]
+        return self['gridwidth']
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self["gridwidth"] = val
+        self['gridwidth'] = val
 
     # range
     # -----
     @property
     def range(self):
         """
-            Sets the range of this axis (in degrees), sets the map's
-            clipped coordinates.
+        Sets the range of this axis (in degrees), sets the map's
+        clipped coordinates.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'range[1]' property is a number and may be specified as:
+          - An int or float
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'range[1]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     # showgrid
     # --------
@@ -183,11 +142,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showgrid"]
+        return self['showgrid']
 
     @showgrid.setter
     def showgrid(self, val):
-        self["showgrid"] = val
+        self['showgrid'] = val
 
     # tick0
     # -----
@@ -203,11 +162,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["tick0"]
+        return self['tick0']
 
     @tick0.setter
     def tick0(self, val):
-        self["tick0"] = val
+        self['tick0'] = val
 
     # Self properties description
     # ---------------------------
@@ -233,19 +192,17 @@ class Lataxis(_BaseLayoutHierarchyType):
         tick0
             Sets the graticule's starting tick longitude/latitude.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        dtick=None,
-        gridcolor=None,
-        griddash=None,
-        gridwidth=None,
-        range=None,
-        showgrid=None,
-        tick0=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            dtick=None,
+            gridcolor=None,
+            griddash=None,
+            gridwidth=None,
+            range=None,
+            showgrid=None,
+            tick0=None,
+            **kwargs
+        ):
         """
         Construct a new Lataxis object
 
@@ -278,10 +235,10 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         Lataxis
         """
-        super(Lataxis, self).__init__("lataxis")
+        super(Lataxis, self).__init__('lataxis')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -293,48 +250,26 @@ class Lataxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.Lataxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("dtick", None)
-        _v = dtick if dtick is not None else _v
-        if _v is not None:
-            self["dtick"] = _v
-        _v = arg.pop("gridcolor", None)
-        _v = gridcolor if gridcolor is not None else _v
-        if _v is not None:
-            self["gridcolor"] = _v
-        _v = arg.pop("griddash", None)
-        _v = griddash if griddash is not None else _v
-        if _v is not None:
-            self["griddash"] = _v
-        _v = arg.pop("gridwidth", None)
-        _v = gridwidth if gridwidth is not None else _v
-        if _v is not None:
-            self["gridwidth"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("showgrid", None)
-        _v = showgrid if showgrid is not None else _v
-        if _v is not None:
-            self["showgrid"] = _v
-        _v = arg.pop("tick0", None)
-        _v = tick0 if tick0 is not None else _v
-        if _v is not None:
-            self["tick0"] = _v
+        self._init_provided('dtick', arg, dtick)
+        self._init_provided('gridcolor', arg, gridcolor)
+        self._init_provided('griddash', arg, griddash)
+        self._init_provided('gridwidth', arg, gridwidth)
+        self._init_provided('range', arg, range)
+        self._init_provided('showgrid', arg, showgrid)
+        self._init_provided('tick0', arg, tick0)
 
         # Process unknown kwargs
         # ----------------------

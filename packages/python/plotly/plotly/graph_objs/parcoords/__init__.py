@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._dimension import Dimension
     from ._domain import Domain
@@ -16,19 +15,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import unselected
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".legendgrouptitle", ".line", ".unselected"],
-        [
-            "._dimension.Dimension",
-            "._domain.Domain",
-            "._labelfont.Labelfont",
-            "._legendgrouptitle.Legendgrouptitle",
-            "._line.Line",
-            "._rangefont.Rangefont",
-            "._stream.Stream",
-            "._tickfont.Tickfont",
-            "._unselected.Unselected",
-        ],
+        ['.legendgrouptitle', '.line', '.unselected'],
+        ['._dimension.Dimension', '._domain.Domain', '._labelfont.Labelfont', '._legendgrouptitle.Legendgrouptitle', '._line.Line', '._rangefont.Rangefont', '._stream.Stream', '._tickfont.Tickfont', '._unselected.Unselected']
     )
+
+

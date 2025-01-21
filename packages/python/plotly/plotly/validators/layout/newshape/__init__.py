@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._visible import VisibleValidator
     from ._showlegend import ShowlegendValidator
@@ -19,25 +18,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._drawdirection import DrawdirectionValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._visible.VisibleValidator",
-            "._showlegend.ShowlegendValidator",
-            "._opacity.OpacityValidator",
-            "._name.NameValidator",
-            "._line.LineValidator",
-            "._legendwidth.LegendwidthValidator",
-            "._legendrank.LegendrankValidator",
-            "._legendgrouptitle.LegendgrouptitleValidator",
-            "._legendgroup.LegendgroupValidator",
-            "._legend.LegendValidator",
-            "._layer.LayerValidator",
-            "._label.LabelValidator",
-            "._fillrule.FillruleValidator",
-            "._fillcolor.FillcolorValidator",
-            "._drawdirection.DrawdirectionValidator",
-        ],
+        ['._visible.VisibleValidator', '._showlegend.ShowlegendValidator', '._opacity.OpacityValidator', '._name.NameValidator', '._line.LineValidator', '._legendwidth.LegendwidthValidator', '._legendrank.LegendrankValidator', '._legendgrouptitle.LegendgrouptitleValidator', '._legendgroup.LegendgroupValidator', '._legend.LegendValidator', '._layer.LayerValidator', '._label.LabelValidator', '._fillrule.FillruleValidator', '._fillcolor.FillcolorValidator', '._drawdirection.DrawdirectionValidator']
     )
+
+

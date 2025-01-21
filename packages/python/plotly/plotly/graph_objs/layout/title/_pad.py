@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Pad(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.title"
-    _path_str = "layout.title.pad"
+    _parent_path_str = 'layout.title'
+    _path_str = 'layout.title.pad'
     _valid_props = {"b", "l", "r", "t"}
 
     # b
@@ -25,11 +27,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["b"]
+        return self['b']
 
     @b.setter
     def b(self, val):
-        self["b"] = val
+        self['b'] = val
 
     # l
     # -
@@ -46,11 +48,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["l"]
+        return self['l']
 
     @l.setter
     def l(self, val):
-        self["l"] = val
+        self['l'] = val
 
     # r
     # -
@@ -67,11 +69,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["r"]
+        return self['r']
 
     @r.setter
     def r(self, val):
-        self["r"] = val
+        self['r'] = val
 
     # t
     # -
@@ -87,11 +89,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["t"]
+        return self['t']
 
     @t.setter
     def t(self, val):
-        self["t"] = val
+        self['t'] = val
 
     # Self properties description
     # ---------------------------
@@ -111,8 +113,14 @@ class Pad(_BaseLayoutHierarchyType):
             The amount of padding (in px) along the top of the
             component.
         """
-
-    def __init__(self, arg=None, b=None, l=None, r=None, t=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            b=None,
+            l=None,
+            r=None,
+            t=None,
+            **kwargs
+        ):
         """
         Construct a new Pad object
 
@@ -146,10 +154,10 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         Pad
         """
-        super(Pad, self).__init__("pad")
+        super(Pad, self).__init__('pad')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -161,36 +169,23 @@ class Pad(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.title.Pad
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.title.Pad`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.title.Pad`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("b", None)
-        _v = b if b is not None else _v
-        if _v is not None:
-            self["b"] = _v
-        _v = arg.pop("l", None)
-        _v = l if l is not None else _v
-        if _v is not None:
-            self["l"] = _v
-        _v = arg.pop("r", None)
-        _v = r if r is not None else _v
-        if _v is not None:
-            self["r"] = _v
-        _v = arg.pop("t", None)
-        _v = t if t is not None else _v
-        if _v is not None:
-            self["t"] = _v
+        self._init_provided('b', arg, b)
+        self._init_provided('l', arg, l)
+        self._init_provided('r', arg, r)
+        self._init_provided('t', arg, t)
 
         # Process unknown kwargs
         # ----------------------

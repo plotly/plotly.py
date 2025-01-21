@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,25 +8,9 @@ class ErrorX(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "histogram"
-    _path_str = "histogram.error_x"
-    _valid_props = {
-        "array",
-        "arrayminus",
-        "arrayminussrc",
-        "arraysrc",
-        "color",
-        "copy_ystyle",
-        "symmetric",
-        "thickness",
-        "traceref",
-        "tracerefminus",
-        "type",
-        "value",
-        "valueminus",
-        "visible",
-        "width",
-    }
+    _parent_path_str = 'histogram'
+    _path_str = 'histogram.error_x'
+    _valid_props = {"array", "arrayminus", "arrayminussrc", "arraysrc", "color", "copy_ystyle", "symmetric", "thickness", "traceref", "tracerefminus", "type", "value", "valueminus", "visible", "width"}
 
     # array
     # -----
@@ -41,11 +27,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["array"]
+        return self['array']
 
     @array.setter
     def array(self, val):
-        self["array"] = val
+        self['array'] = val
 
     # arrayminus
     # ----------
@@ -63,11 +49,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["arrayminus"]
+        return self['arrayminus']
 
     @arrayminus.setter
     def arrayminus(self, val):
-        self["arrayminus"] = val
+        self['arrayminus'] = val
 
     # arrayminussrc
     # -------------
@@ -84,11 +70,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["arrayminussrc"]
+        return self['arrayminussrc']
 
     @arrayminussrc.setter
     def arrayminussrc(self, val):
-        self["arrayminussrc"] = val
+        self['arrayminussrc'] = val
 
     # arraysrc
     # --------
@@ -104,11 +90,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["arraysrc"]
+        return self['arraysrc']
 
     @arraysrc.setter
     def arraysrc(self, val):
-        self["arraysrc"] = val
+        self['arraysrc'] = val
 
     # color
     # -----
@@ -122,52 +108,17 @@ class ErrorX(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # copy_ystyle
     # -----------
@@ -181,11 +132,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["copy_ystyle"]
+        return self['copy_ystyle']
 
     @copy_ystyle.setter
     def copy_ystyle(self, val):
-        self["copy_ystyle"] = val
+        self['copy_ystyle'] = val
 
     # symmetric
     # ---------
@@ -203,11 +154,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["symmetric"]
+        return self['symmetric']
 
     @symmetric.setter
     def symmetric(self, val):
-        self["symmetric"] = val
+        self['symmetric'] = val
 
     # thickness
     # ---------
@@ -223,11 +174,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["thickness"]
+        return self['thickness']
 
     @thickness.setter
     def thickness(self, val):
-        self["thickness"] = val
+        self['thickness'] = val
 
     # traceref
     # --------
@@ -242,11 +193,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self["traceref"]
+        return self['traceref']
 
     @traceref.setter
     def traceref(self, val):
-        self["traceref"] = val
+        self['traceref'] = val
 
     # tracerefminus
     # -------------
@@ -261,11 +212,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self["tracerefminus"]
+        return self['tracerefminus']
 
     @tracerefminus.setter
     def tracerefminus(self, val):
-        self["tracerefminus"] = val
+        self['tracerefminus'] = val
 
     # type
     # ----
@@ -288,11 +239,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # value
     # -----
@@ -310,11 +261,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["value"]
+        return self['value']
 
     @value.setter
     def value(self, val):
-        self["value"] = val
+        self['value'] = val
 
     # valueminus
     # ----------
@@ -333,11 +284,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["valueminus"]
+        return self['valueminus']
 
     @valueminus.setter
     def valueminus(self, val):
-        self["valueminus"] = val
+        self['valueminus'] = val
 
     # visible
     # -------
@@ -353,11 +304,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # width
     # -----
@@ -374,11 +325,11 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["width"]
+        return self['width']
 
     @width.setter
     def width(self, val):
-        self["width"] = val
+        self['width'] = val
 
     # Self properties description
     # ---------------------------
@@ -441,27 +392,25 @@ class ErrorX(_BaseTraceHierarchyType):
             Sets the width (in px) of the cross-bar at both ends of
             the error bars.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        array=None,
-        arrayminus=None,
-        arrayminussrc=None,
-        arraysrc=None,
-        color=None,
-        copy_ystyle=None,
-        symmetric=None,
-        thickness=None,
-        traceref=None,
-        tracerefminus=None,
-        type=None,
-        value=None,
-        valueminus=None,
-        visible=None,
-        width=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            array=None,
+            arrayminus=None,
+            arrayminussrc=None,
+            arraysrc=None,
+            color=None,
+            copy_ystyle=None,
+            symmetric=None,
+            thickness=None,
+            traceref=None,
+            tracerefminus=None,
+            type=None,
+            value=None,
+            valueminus=None,
+            visible=None,
+            width=None,
+            **kwargs
+        ):
         """
         Construct a new ErrorX object
 
@@ -531,10 +480,10 @@ class ErrorX(_BaseTraceHierarchyType):
         -------
         ErrorX
         """
-        super(ErrorX, self).__init__("error_x")
+        super(ErrorX, self).__init__('error_x')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -546,80 +495,34 @@ class ErrorX(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram.ErrorX
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram.ErrorX`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram.ErrorX`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("array", None)
-        _v = array if array is not None else _v
-        if _v is not None:
-            self["array"] = _v
-        _v = arg.pop("arrayminus", None)
-        _v = arrayminus if arrayminus is not None else _v
-        if _v is not None:
-            self["arrayminus"] = _v
-        _v = arg.pop("arrayminussrc", None)
-        _v = arrayminussrc if arrayminussrc is not None else _v
-        if _v is not None:
-            self["arrayminussrc"] = _v
-        _v = arg.pop("arraysrc", None)
-        _v = arraysrc if arraysrc is not None else _v
-        if _v is not None:
-            self["arraysrc"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("copy_ystyle", None)
-        _v = copy_ystyle if copy_ystyle is not None else _v
-        if _v is not None:
-            self["copy_ystyle"] = _v
-        _v = arg.pop("symmetric", None)
-        _v = symmetric if symmetric is not None else _v
-        if _v is not None:
-            self["symmetric"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("traceref", None)
-        _v = traceref if traceref is not None else _v
-        if _v is not None:
-            self["traceref"] = _v
-        _v = arg.pop("tracerefminus", None)
-        _v = tracerefminus if tracerefminus is not None else _v
-        if _v is not None:
-            self["tracerefminus"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-        _v = arg.pop("valueminus", None)
-        _v = valueminus if valueminus is not None else _v
-        if _v is not None:
-            self["valueminus"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
+        self._init_provided('array', arg, array)
+        self._init_provided('arrayminus', arg, arrayminus)
+        self._init_provided('arrayminussrc', arg, arrayminussrc)
+        self._init_provided('arraysrc', arg, arraysrc)
+        self._init_provided('color', arg, color)
+        self._init_provided('copy_ystyle', arg, copy_ystyle)
+        self._init_provided('symmetric', arg, symmetric)
+        self._init_provided('thickness', arg, thickness)
+        self._init_provided('traceref', arg, traceref)
+        self._init_provided('tracerefminus', arg, tracerefminus)
+        self._init_provided('type', arg, type)
+        self._init_provided('value', arg, value)
+        self._init_provided('valueminus', arg, valueminus)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('width', arg, width)
 
         # Process unknown kwargs
         # ----------------------

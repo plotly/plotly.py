@@ -85,7 +85,7 @@ an item with matching `templateitemname` and `visible: false`.""",
         items["colorscale"] = items.pop("concentrationscales")
 
 
-def perform_codegen():
+def perform_codegen(reformat=True):
     # Set root codegen output directory
     # ---------------------------------
     # (relative to project root)
@@ -337,9 +337,12 @@ else:
         f.write(graph_objects_init_source)
 
     # ### Run black code formatter on output directories ###
-    subprocess.call(["black", "--target-version=py36", validators_pkgdir])
-    subprocess.call(["black", "--target-version=py36", graph_objs_pkgdir])
-    subprocess.call(["black", "--target-version=py36", graph_objects_path])
+    if reformat:
+        subprocess.call(["black", "--target-version=py36", validators_pkgdir])
+        subprocess.call(["black", "--target-version=py36", graph_objs_pkgdir])
+        subprocess.call(["black", "--target-version=py36", graph_objects_path])
+    else:
+        print("skipping reformatting")
 
 
 if __name__ == "__main__":

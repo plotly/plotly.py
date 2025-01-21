@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,22 +8,9 @@ class Pattern(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "barpolar.marker"
-    _path_str = "barpolar.marker.pattern"
-    _valid_props = {
-        "bgcolor",
-        "bgcolorsrc",
-        "fgcolor",
-        "fgcolorsrc",
-        "fgopacity",
-        "fillmode",
-        "shape",
-        "shapesrc",
-        "size",
-        "sizesrc",
-        "solidity",
-        "soliditysrc",
-    }
+    _parent_path_str = 'barpolar.marker'
+    _path_str = 'barpolar.marker.pattern'
+    _valid_props = {"bgcolor", "bgcolorsrc", "fgcolor", "fgcolorsrc", "fgopacity", "fillmode", "shape", "shapesrc", "size", "sizesrc", "solidity", "soliditysrc"}
 
     # bgcolor
     # -------
@@ -38,53 +27,18 @@ class Pattern(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["bgcolor"]
+        return self['bgcolor']
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self["bgcolor"] = val
+        self['bgcolor'] = val
 
     # bgcolorsrc
     # ----------
@@ -100,11 +54,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["bgcolorsrc"]
+        return self['bgcolorsrc']
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self["bgcolorsrc"] = val
+        self['bgcolorsrc'] = val
 
     # fgcolor
     # -------
@@ -121,53 +75,18 @@ class Pattern(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["fgcolor"]
+        return self['fgcolor']
 
     @fgcolor.setter
     def fgcolor(self, val):
-        self["fgcolor"] = val
+        self['fgcolor'] = val
 
     # fgcolorsrc
     # ----------
@@ -183,11 +102,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["fgcolorsrc"]
+        return self['fgcolorsrc']
 
     @fgcolorsrc.setter
     def fgcolorsrc(self, val):
-        self["fgcolorsrc"] = val
+        self['fgcolorsrc'] = val
 
     # fgopacity
     # ---------
@@ -204,11 +123,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fgopacity"]
+        return self['fgopacity']
 
     @fgopacity.setter
     def fgopacity(self, val):
-        self["fgopacity"] = val
+        self['fgopacity'] = val
 
     # fillmode
     # --------
@@ -226,11 +145,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["fillmode"]
+        return self['fillmode']
 
     @fillmode.setter
     def fillmode(self, val):
-        self["fillmode"] = val
+        self['fillmode'] = val
 
     # shape
     # -----
@@ -249,11 +168,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self["shape"]
+        return self['shape']
 
     @shape.setter
     def shape(self, val):
-        self["shape"] = val
+        self['shape'] = val
 
     # shapesrc
     # --------
@@ -269,11 +188,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["shapesrc"]
+        return self['shapesrc']
 
     @shapesrc.setter
     def shapesrc(self, val):
-        self["shapesrc"] = val
+        self['shapesrc'] = val
 
     # size
     # ----
@@ -291,11 +210,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # sizesrc
     # -------
@@ -311,11 +230,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["sizesrc"]
+        return self['sizesrc']
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self["sizesrc"] = val
+        self['sizesrc'] = val
 
     # solidity
     # --------
@@ -335,11 +254,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["solidity"]
+        return self['solidity']
 
     @solidity.setter
     def solidity(self, val):
-        self["solidity"] = val
+        self['solidity'] = val
 
     # soliditysrc
     # -----------
@@ -355,11 +274,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["soliditysrc"]
+        return self['soliditysrc']
 
     @soliditysrc.setter
     def soliditysrc(self, val):
-        self["soliditysrc"] = val
+        self['soliditysrc'] = val
 
     # Self properties description
     # ---------------------------
@@ -413,24 +332,22 @@ class Pattern(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `solidity`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        bgcolor=None,
-        bgcolorsrc=None,
-        fgcolor=None,
-        fgcolorsrc=None,
-        fgopacity=None,
-        fillmode=None,
-        shape=None,
-        shapesrc=None,
-        size=None,
-        sizesrc=None,
-        solidity=None,
-        soliditysrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            bgcolor=None,
+            bgcolorsrc=None,
+            fgcolor=None,
+            fgcolorsrc=None,
+            fgopacity=None,
+            fillmode=None,
+            shape=None,
+            shapesrc=None,
+            size=None,
+            sizesrc=None,
+            solidity=None,
+            soliditysrc=None,
+            **kwargs
+        ):
         """
         Construct a new Pattern object
 
@@ -493,10 +410,10 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Pattern
         """
-        super(Pattern, self).__init__("pattern")
+        super(Pattern, self).__init__('pattern')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -508,68 +425,31 @@ class Pattern(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.barpolar.marker.Pattern
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.barpolar.marker.Pattern`"""
-            )
+an instance of :class:`plotly.graph_objs.barpolar.marker.Pattern`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("bgcolorsrc", None)
-        _v = bgcolorsrc if bgcolorsrc is not None else _v
-        if _v is not None:
-            self["bgcolorsrc"] = _v
-        _v = arg.pop("fgcolor", None)
-        _v = fgcolor if fgcolor is not None else _v
-        if _v is not None:
-            self["fgcolor"] = _v
-        _v = arg.pop("fgcolorsrc", None)
-        _v = fgcolorsrc if fgcolorsrc is not None else _v
-        if _v is not None:
-            self["fgcolorsrc"] = _v
-        _v = arg.pop("fgopacity", None)
-        _v = fgopacity if fgopacity is not None else _v
-        if _v is not None:
-            self["fgopacity"] = _v
-        _v = arg.pop("fillmode", None)
-        _v = fillmode if fillmode is not None else _v
-        if _v is not None:
-            self["fillmode"] = _v
-        _v = arg.pop("shape", None)
-        _v = shape if shape is not None else _v
-        if _v is not None:
-            self["shape"] = _v
-        _v = arg.pop("shapesrc", None)
-        _v = shapesrc if shapesrc is not None else _v
-        if _v is not None:
-            self["shapesrc"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("sizesrc", None)
-        _v = sizesrc if sizesrc is not None else _v
-        if _v is not None:
-            self["sizesrc"] = _v
-        _v = arg.pop("solidity", None)
-        _v = solidity if solidity is not None else _v
-        if _v is not None:
-            self["solidity"] = _v
-        _v = arg.pop("soliditysrc", None)
-        _v = soliditysrc if soliditysrc is not None else _v
-        if _v is not None:
-            self["soliditysrc"] = _v
+        self._init_provided('bgcolor', arg, bgcolor)
+        self._init_provided('bgcolorsrc', arg, bgcolorsrc)
+        self._init_provided('fgcolor', arg, fgcolor)
+        self._init_provided('fgcolorsrc', arg, fgcolorsrc)
+        self._init_provided('fgopacity', arg, fgopacity)
+        self._init_provided('fillmode', arg, fillmode)
+        self._init_provided('shape', arg, shape)
+        self._init_provided('shapesrc', arg, shapesrc)
+        self._init_provided('size', arg, size)
+        self._init_provided('sizesrc', arg, sizesrc)
+        self._init_provided('solidity', arg, solidity)
+        self._init_provided('soliditysrc', arg, soliditysrc)
 
         # Process unknown kwargs
         # ----------------------

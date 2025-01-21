@@ -456,9 +456,7 @@ class PlotlyNode:
 
         if self.is_compound:
             params["data_class_str"] = repr(self.name_datatype_class)
-            params["data_docs"] = (
-                '"""' + self.get_constructor_params_docstring() + '\n"""'
-            )
+            params["data_docs"] = '"""\n"""'
         else:
             assert self.is_simple
 

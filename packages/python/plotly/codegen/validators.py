@@ -24,15 +24,15 @@ def build_validator_py(node: PlotlyNode):
     # ---------------
     assert node.is_datatype
 
-    # Initialize source code buffer
-    # -----------------------------
+    # Initialize
     buffer = StringIO()
+    import_alias = "_bv"
 
     # Imports
     # -------
     # ### Import package of the validator's superclass ###
     import_str = ".".join(node.name_base_validator.split(".")[:-1])
-    buffer.write(f"import {import_str }\n")
+    buffer.write(f"import {import_str} as {import_alias}\n")
 
     # Build Validator
     # ---------------
@@ -41,11 +41,11 @@ def build_validator_py(node: PlotlyNode):
 
     # ### Write class definition ###
     class_name = node.name_validator_class
-    superclass_name = node.name_base_validator
+    superclass_name = node.name_base_validator.split(".")[-1]
     buffer.write(
         f"""
 
-class {class_name}({superclass_name}):
+class {class_name}({import_alias}.{superclass_name}):
     def __init__(self, plotly_name={params['plotly_name']},
                        parent_name={params['parent_name']},
                        **kwargs):"""

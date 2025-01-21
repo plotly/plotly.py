@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,58 +8,9 @@ class Barpolar(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "barpolar"
-    _valid_props = {
-        "base",
-        "basesrc",
-        "customdata",
-        "customdatasrc",
-        "dr",
-        "dtheta",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "marker",
-        "meta",
-        "metasrc",
-        "name",
-        "offset",
-        "offsetsrc",
-        "opacity",
-        "r",
-        "r0",
-        "rsrc",
-        "selected",
-        "selectedpoints",
-        "showlegend",
-        "stream",
-        "subplot",
-        "text",
-        "textsrc",
-        "theta",
-        "theta0",
-        "thetasrc",
-        "thetaunit",
-        "type",
-        "uid",
-        "uirevision",
-        "unselected",
-        "visible",
-        "width",
-        "widthsrc",
-    }
+    _parent_path_str = ''
+    _path_str = 'barpolar'
+    _valid_props = {"base", "basesrc", "customdata", "customdatasrc", "dr", "dtheta", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "marker", "meta", "metasrc", "name", "offset", "offsetsrc", "opacity", "r", "r0", "rsrc", "selected", "selectedpoints", "showlegend", "stream", "subplot", "text", "textsrc", "theta", "theta0", "thetasrc", "thetaunit", "type", "uid", "uirevision", "unselected", "visible", "width", "widthsrc"}
 
     # base
     # ----
@@ -74,11 +27,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["base"]
+        return self['base']
 
     @base.setter
     def base(self, val):
-        self["base"] = val
+        self['base'] = val
 
     # basesrc
     # -------
@@ -94,11 +47,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["basesrc"]
+        return self['basesrc']
 
     @basesrc.setter
     def basesrc(self, val):
-        self["basesrc"] = val
+        self['basesrc'] = val
 
     # customdata
     # ----------
@@ -117,11 +70,11 @@ class Barpolar(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -138,11 +91,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # dr
     # --
@@ -158,11 +111,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float
         """
-        return self["dr"]
+        return self['dr']
 
     @dr.setter
     def dr(self, val):
-        self["dr"] = val
+        self['dr'] = val
 
     # dtheta
     # ------
@@ -180,11 +133,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float
         """
-        return self["dtheta"]
+        return self['dtheta']
 
     @dtheta.setter
     def dtheta(self, val):
-        self["dtheta"] = val
+        self['dtheta'] = val
 
     # hoverinfo
     # ---------
@@ -206,11 +159,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverinfosrc
     # ------------
@@ -227,11 +180,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -244,53 +197,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.barpolar.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertemplate
     # -------------
@@ -330,11 +245,11 @@ class Barpolar(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -351,11 +266,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -373,11 +288,11 @@ class Barpolar(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # hovertextsrc
     # ------------
@@ -394,11 +309,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -416,11 +331,11 @@ class Barpolar(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -436,11 +351,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # legend
     # ------
@@ -461,11 +376,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgroup
     # -----------
@@ -484,11 +399,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     # legendgrouptitle
     # ----------------
@@ -501,22 +416,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.barpolar.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -539,11 +447,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -560,11 +468,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # marker
     # ------
@@ -577,115 +485,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Marker constructor
 
-            Supported dict properties:
-
-                autocolorscale
-                    Determines whether the colorscale is a default
-                    palette (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. In case `colorscale` is
-                    unspecified or `autocolorscale` is true, the
-                    default palette will be chosen according to
-                    whether numbers in the `color` array are all
-                    positive, all negative or mixed.
-                cauto
-                    Determines whether or not the color domain is
-                    computed with respect to the input data (here
-                    in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax` Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Defaults to `false` when `marker.cmin`
-                    and `marker.cmax` are set by the user.
-                cmax
-                    Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmin` must be set as well.
-                cmid
-                    Sets the mid-point of the color domain by
-                    scaling `marker.cmin` and/or `marker.cmax` to
-                    be equidistant to this point. Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Value should have the same units as in
-                    `marker.color`. Has no effect when
-                    `marker.cauto` is `false`.
-                cmin
-                    Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmax` must be set as well.
-                color
-                    Sets the marker color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
-                coloraxis
-                    Sets a reference to a shared color axis.
-                    References to these shared color axes are
-                    "coloraxis", "coloraxis2", "coloraxis3", etc.
-                    Settings for these shared color axes are set in
-                    the layout, under `layout.coloraxis`,
-                    `layout.coloraxis2`, etc. Note that multiple
-                    color scales can be linked to the same color
-                    axis.
-                colorbar
-                    :class:`plotly.graph_objects.barpolar.marker.Co
-                    lorBar` instance or dict with compatible
-                    properties
-                colorscale
-                    Sets the colorscale. Has an effect only if in
-                    `marker.color` is set to a numerical array. The
-                    colorscale must be an array containing arrays
-                    mapping a normalized value to an rgb, rgba,
-                    hex, hsl, hsv, or named color string. At
-                    minimum, a mapping for the lowest (0) and
-                    highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
-                    To control the bounds of the colorscale in
-                    color space, use `marker.cmin` and
-                    `marker.cmax`. Alternatively, `colorscale` may
-                    be a palette name string of the following list:
-                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
-                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
-                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                line
-                    :class:`plotly.graph_objects.barpolar.marker.Li
-                    ne` instance or dict with compatible properties
-                opacity
-                    Sets the opacity of the bars.
-                opacitysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `opacity`.
-                pattern
-                    Sets the pattern within the marker.
-                reversescale
-                    Reverses the color mapping if true. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. If true, `marker.cmin` will
-                    correspond to the last color in the array and
-                    `marker.cmax` will correspond to the first
-                    color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    in `marker.color` is set to a numerical array.
-
         Returns
         -------
         plotly.graph_objs.barpolar.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     # meta
     # ----
@@ -709,11 +517,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -729,11 +537,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # name
     # ----
@@ -751,11 +559,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # offset
     # ------
@@ -773,11 +581,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float|numpy.ndarray
         """
-        return self["offset"]
+        return self['offset']
 
     @offset.setter
     def offset(self, val):
-        self["offset"] = val
+        self['offset'] = val
 
     # offsetsrc
     # ---------
@@ -793,11 +601,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["offsetsrc"]
+        return self['offsetsrc']
 
     @offsetsrc.setter
     def offsetsrc(self, val):
-        self["offsetsrc"] = val
+        self['offsetsrc'] = val
 
     # opacity
     # -------
@@ -813,11 +621,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # r
     # -
@@ -833,11 +641,11 @@ class Barpolar(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["r"]
+        return self['r']
 
     @r.setter
     def r(self, val):
-        self["r"] = val
+        self['r'] = val
 
     # r0
     # --
@@ -854,11 +662,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["r0"]
+        return self['r0']
 
     @r0.setter
     def r0(self, val):
-        self["r0"] = val
+        self['r0'] = val
 
     # rsrc
     # ----
@@ -874,11 +682,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["rsrc"]
+        return self['rsrc']
 
     @rsrc.setter
     def rsrc(self, val):
-        self["rsrc"] = val
+        self['rsrc'] = val
 
     # selected
     # --------
@@ -891,26 +699,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Selected constructor
 
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.barpolar.selected.
-                    Marker` instance or dict with compatible
-                    properties
-                textfont
-                    :class:`plotly.graph_objects.barpolar.selected.
-                    Textfont` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.barpolar.Selected
         """
-        return self["selected"]
+        return self['selected']
 
     @selected.setter
     def selected(self, val):
-        self["selected"] = val
+        self['selected'] = val
 
     # selectedpoints
     # --------------
@@ -930,11 +727,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["selectedpoints"]
+        return self['selectedpoints']
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self["selectedpoints"] = val
+        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -951,11 +748,11 @@ class Barpolar(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     # stream
     # ------
@@ -968,27 +765,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.barpolar.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # subplot
     # -------
@@ -1009,11 +794,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["subplot"]
+        return self['subplot']
 
     @subplot.setter
     def subplot(self, val):
-        self["subplot"] = val
+        self['subplot'] = val
 
     # text
     # ----
@@ -1034,11 +819,11 @@ class Barpolar(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textsrc
     # -------
@@ -1054,11 +839,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     # theta
     # -----
@@ -1074,11 +859,11 @@ class Barpolar(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["theta"]
+        return self['theta']
 
     @theta.setter
     def theta(self, val):
-        self["theta"] = val
+        self['theta'] = val
 
     # theta0
     # ------
@@ -1095,11 +880,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["theta0"]
+        return self['theta0']
 
     @theta0.setter
     def theta0(self, val):
-        self["theta0"] = val
+        self['theta0'] = val
 
     # thetasrc
     # --------
@@ -1115,11 +900,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["thetasrc"]
+        return self['thetasrc']
 
     @thetasrc.setter
     def thetasrc(self, val):
-        self["thetasrc"] = val
+        self['thetasrc'] = val
 
     # thetaunit
     # ---------
@@ -1137,11 +922,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["thetaunit"]
+        return self['thetaunit']
 
     @thetaunit.setter
     def thetaunit(self, val):
-        self["thetaunit"] = val
+        self['thetaunit'] = val
 
     # uid
     # ---
@@ -1159,11 +944,11 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -1192,11 +977,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # unselected
     # ----------
@@ -1209,26 +994,15 @@ class Barpolar(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Unselected constructor
 
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.barpolar.unselecte
-                    d.Marker` instance or dict with compatible
-                    properties
-                textfont
-                    :class:`plotly.graph_objects.barpolar.unselecte
-                    d.Textfont` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.barpolar.Unselected
         """
-        return self["unselected"]
+        return self['unselected']
 
     @unselected.setter
     def unselected(self, val):
-        self["unselected"] = val
+        self['unselected'] = val
 
     # visible
     # -------
@@ -1247,11 +1021,11 @@ class Barpolar(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # width
     # -----
@@ -1268,11 +1042,11 @@ class Barpolar(_BaseTraceType):
         -------
         int|float|numpy.ndarray
         """
-        return self["width"]
+        return self['width']
 
     @width.setter
     def width(self, val):
-        self["width"] = val
+        self['width'] = val
 
     # widthsrc
     # --------
@@ -1288,17 +1062,17 @@ class Barpolar(_BaseTraceType):
         -------
         str
         """
-        return self["widthsrc"]
+        return self['widthsrc']
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self["widthsrc"] = val
+        self['widthsrc'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -1523,59 +1297,57 @@ class Barpolar(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `width`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        base=None,
-        basesrc=None,
-        customdata=None,
-        customdatasrc=None,
-        dr=None,
-        dtheta=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        offset=None,
-        offsetsrc=None,
-        opacity=None,
-        r=None,
-        r0=None,
-        rsrc=None,
-        selected=None,
-        selectedpoints=None,
-        showlegend=None,
-        stream=None,
-        subplot=None,
-        text=None,
-        textsrc=None,
-        theta=None,
-        theta0=None,
-        thetasrc=None,
-        thetaunit=None,
-        uid=None,
-        uirevision=None,
-        unselected=None,
-        visible=None,
-        width=None,
-        widthsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            base=None,
+            basesrc=None,
+            customdata=None,
+            customdatasrc=None,
+            dr=None,
+            dtheta=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            marker=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            offset=None,
+            offsetsrc=None,
+            opacity=None,
+            r=None,
+            r0=None,
+            rsrc=None,
+            selected=None,
+            selectedpoints=None,
+            showlegend=None,
+            stream=None,
+            subplot=None,
+            text=None,
+            textsrc=None,
+            theta=None,
+            theta0=None,
+            thetasrc=None,
+            thetaunit=None,
+            uid=None,
+            uirevision=None,
+            unselected=None,
+            visible=None,
+            width=None,
+            widthsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Barpolar object
 
@@ -1809,10 +1581,10 @@ class Barpolar(_BaseTraceType):
         -------
         Barpolar
         """
-        super(Barpolar, self).__init__("barpolar")
+        super(Barpolar, self).__init__('barpolar')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -1824,214 +1596,72 @@ class Barpolar(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Barpolar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Barpolar`"""
-            )
+an instance of :class:`plotly.graph_objs.Barpolar`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("base", None)
-        _v = base if base is not None else _v
-        if _v is not None:
-            self["base"] = _v
-        _v = arg.pop("basesrc", None)
-        _v = basesrc if basesrc is not None else _v
-        if _v is not None:
-            self["basesrc"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("dr", None)
-        _v = dr if dr is not None else _v
-        if _v is not None:
-            self["dr"] = _v
-        _v = arg.pop("dtheta", None)
-        _v = dtheta if dtheta is not None else _v
-        if _v is not None:
-            self["dtheta"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("offset", None)
-        _v = offset if offset is not None else _v
-        if _v is not None:
-            self["offset"] = _v
-        _v = arg.pop("offsetsrc", None)
-        _v = offsetsrc if offsetsrc is not None else _v
-        if _v is not None:
-            self["offsetsrc"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("r", None)
-        _v = r if r is not None else _v
-        if _v is not None:
-            self["r"] = _v
-        _v = arg.pop("r0", None)
-        _v = r0 if r0 is not None else _v
-        if _v is not None:
-            self["r0"] = _v
-        _v = arg.pop("rsrc", None)
-        _v = rsrc if rsrc is not None else _v
-        if _v is not None:
-            self["rsrc"] = _v
-        _v = arg.pop("selected", None)
-        _v = selected if selected is not None else _v
-        if _v is not None:
-            self["selected"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("subplot", None)
-        _v = subplot if subplot is not None else _v
-        if _v is not None:
-            self["subplot"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("theta", None)
-        _v = theta if theta is not None else _v
-        if _v is not None:
-            self["theta"] = _v
-        _v = arg.pop("theta0", None)
-        _v = theta0 if theta0 is not None else _v
-        if _v is not None:
-            self["theta0"] = _v
-        _v = arg.pop("thetasrc", None)
-        _v = thetasrc if thetasrc is not None else _v
-        if _v is not None:
-            self["thetasrc"] = _v
-        _v = arg.pop("thetaunit", None)
-        _v = thetaunit if thetaunit is not None else _v
-        if _v is not None:
-            self["thetaunit"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("unselected", None)
-        _v = unselected if unselected is not None else _v
-        if _v is not None:
-            self["unselected"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("widthsrc", None)
-        _v = widthsrc if widthsrc is not None else _v
-        if _v is not None:
-            self["widthsrc"] = _v
+        self._init_provided('base', arg, base)
+        self._init_provided('basesrc', arg, basesrc)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('dr', arg, dr)
+        self._init_provided('dtheta', arg, dtheta)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('hovertextsrc', arg, hovertextsrc)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgroup', arg, legendgroup)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('marker', arg, marker)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('name', arg, name)
+        self._init_provided('offset', arg, offset)
+        self._init_provided('offsetsrc', arg, offsetsrc)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('r', arg, r)
+        self._init_provided('r0', arg, r0)
+        self._init_provided('rsrc', arg, rsrc)
+        self._init_provided('selected', arg, selected)
+        self._init_provided('selectedpoints', arg, selectedpoints)
+        self._init_provided('showlegend', arg, showlegend)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('subplot', arg, subplot)
+        self._init_provided('text', arg, text)
+        self._init_provided('textsrc', arg, textsrc)
+        self._init_provided('theta', arg, theta)
+        self._init_provided('theta0', arg, theta0)
+        self._init_provided('thetasrc', arg, thetasrc)
+        self._init_provided('thetaunit', arg, thetaunit)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('unselected', arg, unselected)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('width', arg, width)
+        self._init_provided('widthsrc', arg, widthsrc)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "barpolar"
-        arg.pop("type", None)
+        self._props['type'] = 'barpolar'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

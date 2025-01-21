@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._value import ValueValidator
     from ._type import TypeValidator
@@ -15,21 +14,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._coloring import ColoringValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._value.ValueValidator",
-            "._type.TypeValidator",
-            "._start.StartValidator",
-            "._size.SizeValidator",
-            "._showlines.ShowlinesValidator",
-            "._showlabels.ShowlabelsValidator",
-            "._operation.OperationValidator",
-            "._labelformat.LabelformatValidator",
-            "._labelfont.LabelfontValidator",
-            "._end.EndValidator",
-            "._coloring.ColoringValidator",
-        ],
+        ['._value.ValueValidator', '._type.TypeValidator', '._start.StartValidator', '._size.SizeValidator', '._showlines.ShowlinesValidator', '._showlabels.ShowlabelsValidator', '._operation.OperationValidator', '._labelformat.LabelformatValidator', '._labelfont.LabelfontValidator', '._end.EndValidator', '._coloring.ColoringValidator']
     )
+
+

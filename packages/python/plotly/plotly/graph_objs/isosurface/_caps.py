@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Caps(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "isosurface"
-    _path_str = "isosurface.caps"
+    _parent_path_str = 'isosurface'
+    _path_str = 'isosurface.caps'
     _valid_props = {"x", "y", "z"}
 
     # x
@@ -21,31 +23,15 @@ class Caps(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the X constructor
 
-            Supported dict properties:
-
-                fill
-                    Sets the fill ratio of the `caps`. The default
-                    fill value of the `caps` is 1 meaning that they
-                    are entirely shaded. On the other hand Applying
-                    a `fill` ratio less than one would allow the
-                    creation of openings parallel to the edges.
-                show
-                    Sets the fill ratio of the `slices`. The
-                    default fill value of the x `slices` is 1
-                    meaning that they are entirely shaded. On the
-                    other hand Applying a `fill` ratio less than
-                    one would allow the creation of openings
-                    parallel to the edges.
-
         Returns
         -------
         plotly.graph_objs.isosurface.caps.X
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     # y
     # -
@@ -58,31 +44,15 @@ class Caps(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Y constructor
 
-            Supported dict properties:
-
-                fill
-                    Sets the fill ratio of the `caps`. The default
-                    fill value of the `caps` is 1 meaning that they
-                    are entirely shaded. On the other hand Applying
-                    a `fill` ratio less than one would allow the
-                    creation of openings parallel to the edges.
-                show
-                    Sets the fill ratio of the `slices`. The
-                    default fill value of the y `slices` is 1
-                    meaning that they are entirely shaded. On the
-                    other hand Applying a `fill` ratio less than
-                    one would allow the creation of openings
-                    parallel to the edges.
-
         Returns
         -------
         plotly.graph_objs.isosurface.caps.Y
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     # z
     # -
@@ -95,31 +65,15 @@ class Caps(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Z constructor
 
-            Supported dict properties:
-
-                fill
-                    Sets the fill ratio of the `caps`. The default
-                    fill value of the `caps` is 1 meaning that they
-                    are entirely shaded. On the other hand Applying
-                    a `fill` ratio less than one would allow the
-                    creation of openings parallel to the edges.
-                show
-                    Sets the fill ratio of the `slices`. The
-                    default fill value of the z `slices` is 1
-                    meaning that they are entirely shaded. On the
-                    other hand Applying a `fill` ratio less than
-                    one would allow the creation of openings
-                    parallel to the edges.
-
         Returns
         -------
         plotly.graph_objs.isosurface.caps.Z
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     # Self properties description
     # ---------------------------
@@ -136,8 +90,13 @@ class Caps(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.isosurface.caps.Z`
             instance or dict with compatible properties
         """
-
-    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            x=None,
+            y=None,
+            z=None,
+            **kwargs
+        ):
         """
         Construct a new Caps object
 
@@ -161,10 +120,10 @@ class Caps(_BaseTraceHierarchyType):
         -------
         Caps
         """
-        super(Caps, self).__init__("caps")
+        super(Caps, self).__init__('caps')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -176,32 +135,22 @@ class Caps(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.Caps
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.Caps`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.Caps`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
+        self._init_provided('x', arg, x)
+        self._init_provided('y', arg, y)
+        self._init_provided('z', arg, z)
 
         # Process unknown kwargs
         # ----------------------

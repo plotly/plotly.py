@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Colorscale(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout"
-    _path_str = "layout.colorscale"
+    _parent_path_str = 'layout'
+    _path_str = 'layout.colorscale'
     _valid_props = {"diverging", "sequential", "sequentialminus"}
 
     # diverging
@@ -49,11 +51,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["diverging"]
+        return self['diverging']
 
     @diverging.setter
     def diverging(self, val):
-        self["diverging"] = val
+        self['diverging'] = val
 
     # sequential
     # ----------
@@ -95,11 +97,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["sequential"]
+        return self['sequential']
 
     @sequential.setter
     def sequential(self, val):
-        self["sequential"] = val
+        self['sequential'] = val
 
     # sequentialminus
     # ---------------
@@ -141,11 +143,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["sequentialminus"]
+        return self['sequentialminus']
 
     @sequentialminus.setter
     def sequentialminus(self, val):
-        self["sequentialminus"] = val
+        self['sequentialminus'] = val
 
     # Self properties description
     # ---------------------------
@@ -165,10 +167,13 @@ class Colorscale(_BaseLayoutHierarchyType):
             values. Note that `autocolorscale` must be true for
             this attribute to work.
         """
-
-    def __init__(
-        self, arg=None, diverging=None, sequential=None, sequentialminus=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            diverging=None,
+            sequential=None,
+            sequentialminus=None,
+            **kwargs
+        ):
         """
         Construct a new Colorscale object
 
@@ -195,10 +200,10 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         Colorscale
         """
-        super(Colorscale, self).__init__("colorscale")
+        super(Colorscale, self).__init__('colorscale')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -210,32 +215,22 @@ class Colorscale(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Colorscale
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Colorscale`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Colorscale`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("diverging", None)
-        _v = diverging if diverging is not None else _v
-        if _v is not None:
-            self["diverging"] = _v
-        _v = arg.pop("sequential", None)
-        _v = sequential if sequential is not None else _v
-        if _v is not None:
-            self["sequential"] = _v
-        _v = arg.pop("sequentialminus", None)
-        _v = sequentialminus if sequentialminus is not None else _v
-        if _v is not None:
-            self["sequentialminus"] = _v
+        self._init_provided('diverging', arg, diverging)
+        self._init_provided('sequential', arg, sequential)
+        self._init_provided('sequentialminus', arg, sequentialminus)
 
         # Process unknown kwargs
         # ----------------------

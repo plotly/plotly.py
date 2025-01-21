@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Surface(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "volume"
-    _path_str = "volume.surface"
+    _parent_path_str = 'volume'
+    _path_str = 'volume.surface'
     _valid_props = {"count", "fill", "pattern", "show"}
 
     # count
@@ -27,11 +29,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self["count"]
+        return self['count']
 
     @count.setter
     def count(self, val):
-        self["count"] = val
+        self['count'] = val
 
     # fill
     # ----
@@ -50,11 +52,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     # pattern
     # -------
@@ -79,11 +81,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["pattern"]
+        return self['pattern']
 
     @pattern.setter
     def pattern(self, val):
-        self["pattern"] = val
+        self['pattern'] = val
 
     # show
     # ----
@@ -99,11 +101,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     # Self properties description
     # ---------------------------
@@ -134,10 +136,14 @@ class Surface(_BaseTraceHierarchyType):
             Hides/displays surfaces between minimum and maximum
             iso-values.
         """
-
-    def __init__(
-        self, arg=None, count=None, fill=None, pattern=None, show=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            count=None,
+            fill=None,
+            pattern=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new Surface object
 
@@ -175,10 +181,10 @@ class Surface(_BaseTraceHierarchyType):
         -------
         Surface
         """
-        super(Surface, self).__init__("surface")
+        super(Surface, self).__init__('surface')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -190,36 +196,23 @@ class Surface(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.Surface
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.Surface`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.Surface`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("count", None)
-        _v = count if count is not None else _v
-        if _v is not None:
-            self["count"] = _v
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("pattern", None)
-        _v = pattern if pattern is not None else _v
-        if _v is not None:
-            self["pattern"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
+        self._init_provided('count', arg, count)
+        self._init_provided('fill', arg, fill)
+        self._init_provided('pattern', arg, pattern)
+        self._init_provided('show', arg, show)
 
         # Process unknown kwargs
         # ----------------------

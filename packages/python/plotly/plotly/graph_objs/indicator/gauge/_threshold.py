@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Threshold(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "indicator.gauge"
-    _path_str = "indicator.gauge.threshold"
+    _parent_path_str = 'indicator.gauge'
+    _path_str = 'indicator.gauge.threshold'
     _valid_props = {"line", "thickness", "value"}
 
     # line
@@ -21,22 +23,15 @@ class Threshold(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the color of the threshold line.
-                width
-                    Sets the width (in px) of the threshold line.
-
         Returns
         -------
         plotly.graph_objs.indicator.gauge.threshold.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # thickness
     # ---------
@@ -53,11 +48,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["thickness"]
+        return self['thickness']
 
     @thickness.setter
     def thickness(self, val):
-        self["thickness"] = val
+        self['thickness'] = val
 
     # value
     # -----
@@ -73,11 +68,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["value"]
+        return self['value']
 
     @value.setter
     def value(self, val):
-        self["value"] = val
+        self['value'] = val
 
     # Self properties description
     # ---------------------------
@@ -93,8 +88,13 @@ class Threshold(_BaseTraceHierarchyType):
         value
             Sets a treshold value drawn as a line.
         """
-
-    def __init__(self, arg=None, line=None, thickness=None, value=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            line=None,
+            thickness=None,
+            value=None,
+            **kwargs
+        ):
         """
         Construct a new Threshold object
 
@@ -117,10 +117,10 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         Threshold
         """
-        super(Threshold, self).__init__("threshold")
+        super(Threshold, self).__init__('threshold')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -132,32 +132,22 @@ class Threshold(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.gauge.Threshold
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
+        self._init_provided('line', arg, line)
+        self._init_provided('thickness', arg, thickness)
+        self._init_provided('value', arg, value)
 
         # Process unknown kwargs
         # ----------------------

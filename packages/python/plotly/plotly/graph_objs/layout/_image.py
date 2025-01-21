@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,25 +8,9 @@ class Image(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout"
-    _path_str = "layout.image"
-    _valid_props = {
-        "layer",
-        "name",
-        "opacity",
-        "sizex",
-        "sizey",
-        "sizing",
-        "source",
-        "templateitemname",
-        "visible",
-        "x",
-        "xanchor",
-        "xref",
-        "y",
-        "yanchor",
-        "yref",
-    }
+    _parent_path_str = 'layout'
+    _path_str = 'layout.image'
+    _valid_props = {"layer", "name", "opacity", "sizex", "sizey", "sizing", "source", "templateitemname", "visible", "x", "xanchor", "xref", "y", "yanchor", "yref"}
 
     # layer
     # -----
@@ -43,11 +29,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["layer"]
+        return self['layer']
 
     @layer.setter
     def layer(self, val):
-        self["layer"] = val
+        self['layer'] = val
 
     # name
     # ----
@@ -70,11 +56,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -90,11 +76,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # sizex
     # -----
@@ -114,11 +100,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["sizex"]
+        return self['sizex']
 
     @sizex.setter
     def sizex(self, val):
-        self["sizex"] = val
+        self['sizex'] = val
 
     # sizey
     # -----
@@ -138,11 +124,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["sizey"]
+        return self['sizey']
 
     @sizey.setter
     def sizey(self, val):
-        self["sizey"] = val
+        self['sizey'] = val
 
     # sizing
     # ------
@@ -159,11 +145,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["sizing"]
+        return self['sizing']
 
     @sizing.setter
     def sizing(self, val):
-        self["sizing"] = val
+        self['sizing'] = val
 
     # source
     # ------
@@ -187,11 +173,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["source"]
+        return self['source']
 
     @source.setter
     def source(self, val):
-        self["source"] = val
+        self['source'] = val
 
     # templateitemname
     # ----------------
@@ -215,11 +201,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     # visible
     # -------
@@ -235,11 +221,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # x
     # -
@@ -256,11 +242,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     # xanchor
     # -------
@@ -277,11 +263,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xanchor"]
+        return self['xanchor']
 
     @xanchor.setter
     def xanchor(self, val):
-        self["xanchor"] = val
+        self['xanchor'] = val
 
     # xref
     # ----
@@ -310,11 +296,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xref"]
+        return self['xref']
 
     @xref.setter
     def xref(self, val):
-        self["xref"] = val
+        self['xref'] = val
 
     # y
     # -
@@ -331,11 +317,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     # yanchor
     # -------
@@ -352,11 +338,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yanchor"]
+        return self['yanchor']
 
     @yanchor.setter
     def yanchor(self, val):
-        self["yanchor"] = val
+        self['yanchor'] = val
 
     # yref
     # ----
@@ -385,11 +371,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yref"]
+        return self['yref']
 
     @yref.setter
     def yref(self, val):
-        self["yref"] = val
+        self['yref'] = val
 
     # Self properties description
     # ---------------------------
@@ -482,27 +468,25 @@ class Image(_BaseLayoutHierarchyType):
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        layer=None,
-        name=None,
-        opacity=None,
-        sizex=None,
-        sizey=None,
-        sizing=None,
-        source=None,
-        templateitemname=None,
-        visible=None,
-        x=None,
-        xanchor=None,
-        xref=None,
-        y=None,
-        yanchor=None,
-        yref=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            layer=None,
+            name=None,
+            opacity=None,
+            sizex=None,
+            sizey=None,
+            sizing=None,
+            source=None,
+            templateitemname=None,
+            visible=None,
+            x=None,
+            xanchor=None,
+            xref=None,
+            y=None,
+            yanchor=None,
+            yref=None,
+            **kwargs
+        ):
         """
         Construct a new Image object
 
@@ -601,10 +585,10 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Image
         """
-        super(Image, self).__init__("images")
+        super(Image, self).__init__('images')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -616,80 +600,34 @@ class Image(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Image
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Image`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Image`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("layer", None)
-        _v = layer if layer is not None else _v
-        if _v is not None:
-            self["layer"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("sizex", None)
-        _v = sizex if sizex is not None else _v
-        if _v is not None:
-            self["sizex"] = _v
-        _v = arg.pop("sizey", None)
-        _v = sizey if sizey is not None else _v
-        if _v is not None:
-            self["sizey"] = _v
-        _v = arg.pop("sizing", None)
-        _v = sizing if sizing is not None else _v
-        if _v is not None:
-            self["sizing"] = _v
-        _v = arg.pop("source", None)
-        _v = source if source is not None else _v
-        if _v is not None:
-            self["source"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xanchor", None)
-        _v = xanchor if xanchor is not None else _v
-        if _v is not None:
-            self["xanchor"] = _v
-        _v = arg.pop("xref", None)
-        _v = xref if xref is not None else _v
-        if _v is not None:
-            self["xref"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("yanchor", None)
-        _v = yanchor if yanchor is not None else _v
-        if _v is not None:
-            self["yanchor"] = _v
-        _v = arg.pop("yref", None)
-        _v = yref if yref is not None else _v
-        if _v is not None:
-            self["yref"] = _v
+        self._init_provided('layer', arg, layer)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('sizex', arg, sizex)
+        self._init_provided('sizey', arg, sizey)
+        self._init_provided('sizing', arg, sizing)
+        self._init_provided('source', arg, source)
+        self._init_provided('templateitemname', arg, templateitemname)
+        self._init_provided('visible', arg, visible)
+        self._init_provided('x', arg, x)
+        self._init_provided('xanchor', arg, xanchor)
+        self._init_provided('xref', arg, xref)
+        self._init_provided('y', arg, y)
+        self._init_provided('yanchor', arg, yanchor)
+        self._init_provided('yref', arg, yref)
 
         # Process unknown kwargs
         # ----------------------

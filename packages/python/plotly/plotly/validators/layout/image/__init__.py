@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yref import YrefValidator
     from ._yanchor import YanchorValidator
@@ -19,25 +18,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._layer import LayerValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._yref.YrefValidator",
-            "._yanchor.YanchorValidator",
-            "._y.YValidator",
-            "._xref.XrefValidator",
-            "._xanchor.XanchorValidator",
-            "._x.XValidator",
-            "._visible.VisibleValidator",
-            "._templateitemname.TemplateitemnameValidator",
-            "._source.SourceValidator",
-            "._sizing.SizingValidator",
-            "._sizey.SizeyValidator",
-            "._sizex.SizexValidator",
-            "._opacity.OpacityValidator",
-            "._name.NameValidator",
-            "._layer.LayerValidator",
-        ],
+        ['._yref.YrefValidator', '._yanchor.YanchorValidator', '._y.YValidator', '._xref.XrefValidator', '._xanchor.XanchorValidator', '._x.XValidator', '._visible.VisibleValidator', '._templateitemname.TemplateitemnameValidator', '._source.SourceValidator', '._sizing.SizingValidator', '._sizey.SizeyValidator', '._sizex.SizexValidator', '._opacity.OpacityValidator', '._name.NameValidator', '._layer.LayerValidator']
     )
+
+

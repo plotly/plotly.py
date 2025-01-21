@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yanchor import YanchorValidator
     from ._y import YValidator
@@ -28,34 +27,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._active import ActiveValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._yanchor.YanchorValidator",
-            "._y.YValidator",
-            "._xanchor.XanchorValidator",
-            "._x.XValidator",
-            "._visible.VisibleValidator",
-            "._transition.TransitionValidator",
-            "._tickwidth.TickwidthValidator",
-            "._ticklen.TicklenValidator",
-            "._tickcolor.TickcolorValidator",
-            "._templateitemname.TemplateitemnameValidator",
-            "._stepdefaults.StepdefaultsValidator",
-            "._steps.StepsValidator",
-            "._pad.PadValidator",
-            "._name.NameValidator",
-            "._minorticklen.MinorticklenValidator",
-            "._lenmode.LenmodeValidator",
-            "._len.LenValidator",
-            "._font.FontValidator",
-            "._currentvalue.CurrentvalueValidator",
-            "._borderwidth.BorderwidthValidator",
-            "._bordercolor.BordercolorValidator",
-            "._bgcolor.BgcolorValidator",
-            "._activebgcolor.ActivebgcolorValidator",
-            "._active.ActiveValidator",
-        ],
+        ['._yanchor.YanchorValidator', '._y.YValidator', '._xanchor.XanchorValidator', '._x.XValidator', '._visible.VisibleValidator', '._transition.TransitionValidator', '._tickwidth.TickwidthValidator', '._ticklen.TicklenValidator', '._tickcolor.TickcolorValidator', '._templateitemname.TemplateitemnameValidator', '._stepdefaults.StepdefaultsValidator', '._steps.StepsValidator', '._pad.PadValidator', '._name.NameValidator', '._minorticklen.MinorticklenValidator', '._lenmode.LenmodeValidator', '._len.LenValidator', '._font.FontValidator', '._currentvalue.CurrentvalueValidator', '._borderwidth.BorderwidthValidator', '._bordercolor.BordercolorValidator', '._bgcolor.BgcolorValidator', '._activebgcolor.ActivebgcolorValidator', '._active.ActiveValidator']
     )
+
+

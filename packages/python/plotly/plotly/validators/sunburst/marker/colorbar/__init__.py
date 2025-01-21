@@ -1,6 +1,5 @@
 import sys
 from typing import TYPE_CHECKING
-
 if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._yref import YrefValidator
     from ._ypad import YpadValidator
@@ -53,59 +52,10 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._bgcolor import BgcolorValidator
 else:
     from _plotly_utils.importers import relative_import
-
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [],
-        [
-            "._yref.YrefValidator",
-            "._ypad.YpadValidator",
-            "._yanchor.YanchorValidator",
-            "._y.YValidator",
-            "._xref.XrefValidator",
-            "._xpad.XpadValidator",
-            "._xanchor.XanchorValidator",
-            "._x.XValidator",
-            "._title.TitleValidator",
-            "._tickwidth.TickwidthValidator",
-            "._tickvalssrc.TickvalssrcValidator",
-            "._tickvals.TickvalsValidator",
-            "._ticktextsrc.TicktextsrcValidator",
-            "._ticktext.TicktextValidator",
-            "._ticksuffix.TicksuffixValidator",
-            "._ticks.TicksValidator",
-            "._tickprefix.TickprefixValidator",
-            "._tickmode.TickmodeValidator",
-            "._ticklen.TicklenValidator",
-            "._ticklabelstep.TicklabelstepValidator",
-            "._ticklabelposition.TicklabelpositionValidator",
-            "._ticklabeloverflow.TicklabeloverflowValidator",
-            "._tickformatstopdefaults.TickformatstopdefaultsValidator",
-            "._tickformatstops.TickformatstopsValidator",
-            "._tickformat.TickformatValidator",
-            "._tickfont.TickfontValidator",
-            "._tickcolor.TickcolorValidator",
-            "._tickangle.TickangleValidator",
-            "._tick0.Tick0Validator",
-            "._thicknessmode.ThicknessmodeValidator",
-            "._thickness.ThicknessValidator",
-            "._showticksuffix.ShowticksuffixValidator",
-            "._showtickprefix.ShowtickprefixValidator",
-            "._showticklabels.ShowticklabelsValidator",
-            "._showexponent.ShowexponentValidator",
-            "._separatethousands.SeparatethousandsValidator",
-            "._outlinewidth.OutlinewidthValidator",
-            "._outlinecolor.OutlinecolorValidator",
-            "._orientation.OrientationValidator",
-            "._nticks.NticksValidator",
-            "._minexponent.MinexponentValidator",
-            "._lenmode.LenmodeValidator",
-            "._len.LenValidator",
-            "._labelalias.LabelaliasValidator",
-            "._exponentformat.ExponentformatValidator",
-            "._dtick.DtickValidator",
-            "._borderwidth.BorderwidthValidator",
-            "._bordercolor.BordercolorValidator",
-            "._bgcolor.BgcolorValidator",
-        ],
+        ['._yref.YrefValidator', '._ypad.YpadValidator', '._yanchor.YanchorValidator', '._y.YValidator', '._xref.XrefValidator', '._xpad.XpadValidator', '._xanchor.XanchorValidator', '._x.XValidator', '._title.TitleValidator', '._tickwidth.TickwidthValidator', '._tickvalssrc.TickvalssrcValidator', '._tickvals.TickvalsValidator', '._ticktextsrc.TicktextsrcValidator', '._ticktext.TicktextValidator', '._ticksuffix.TicksuffixValidator', '._ticks.TicksValidator', '._tickprefix.TickprefixValidator', '._tickmode.TickmodeValidator', '._ticklen.TicklenValidator', '._ticklabelstep.TicklabelstepValidator', '._ticklabelposition.TicklabelpositionValidator', '._ticklabeloverflow.TicklabeloverflowValidator', '._tickformatstopdefaults.TickformatstopdefaultsValidator', '._tickformatstops.TickformatstopsValidator', '._tickformat.TickformatValidator', '._tickfont.TickfontValidator', '._tickcolor.TickcolorValidator', '._tickangle.TickangleValidator', '._tick0.Tick0Validator', '._thicknessmode.ThicknessmodeValidator', '._thickness.ThicknessValidator', '._showticksuffix.ShowticksuffixValidator', '._showtickprefix.ShowtickprefixValidator', '._showticklabels.ShowticklabelsValidator', '._showexponent.ShowexponentValidator', '._separatethousands.SeparatethousandsValidator', '._outlinewidth.OutlinewidthValidator', '._outlinecolor.OutlinecolorValidator', '._orientation.OrientationValidator', '._nticks.NticksValidator', '._minexponent.MinexponentValidator', '._lenmode.LenmodeValidator', '._len.LenValidator', '._labelalias.LabelaliasValidator', '._exponentformat.ExponentformatValidator', '._dtick.DtickValidator', '._borderwidth.BorderwidthValidator', '._bordercolor.BordercolorValidator', '._bgcolor.BgcolorValidator']
     )
+
+

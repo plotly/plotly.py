@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,37 +8,9 @@ class Sankey(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "sankey"
-    _valid_props = {
-        "arrangement",
-        "customdata",
-        "customdatasrc",
-        "domain",
-        "hoverinfo",
-        "hoverlabel",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "link",
-        "meta",
-        "metasrc",
-        "name",
-        "node",
-        "orientation",
-        "selectedpoints",
-        "stream",
-        "textfont",
-        "type",
-        "uid",
-        "uirevision",
-        "valueformat",
-        "valuesuffix",
-        "visible",
-    }
+    _parent_path_str = ''
+    _path_str = 'sankey'
+    _valid_props = {"arrangement", "customdata", "customdatasrc", "domain", "hoverinfo", "hoverlabel", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "link", "meta", "metasrc", "name", "node", "orientation", "selectedpoints", "stream", "textfont", "type", "uid", "uirevision", "valueformat", "valuesuffix", "visible"}
 
     # arrangement
     # -----------
@@ -59,11 +33,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["arrangement"]
+        return self['arrangement']
 
     @arrangement.setter
     def arrangement(self, val):
-        self["arrangement"] = val
+        self['arrangement'] = val
 
     # customdata
     # ----------
@@ -82,11 +56,11 @@ class Sankey(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -103,11 +77,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # domain
     # ------
@@ -120,30 +94,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Domain constructor
 
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this sankey trace .
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this sankey trace .
-                x
-                    Sets the horizontal domain of this sankey trace
-                    (in plot fraction).
-                y
-                    Sets the vertical domain of this sankey trace
-                    (in plot fraction).
-
         Returns
         -------
         plotly.graph_objs.sankey.Domain
         """
-        return self["domain"]
+        return self['domain']
 
     @domain.setter
     def domain(self, val):
-        self["domain"] = val
+        self['domain'] = val
 
     # hoverinfo
     # ---------
@@ -166,11 +125,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverlabel
     # ----------
@@ -183,53 +142,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.sankey.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # ids
     # ---
@@ -247,11 +168,11 @@ class Sankey(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -267,11 +188,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # legend
     # ------
@@ -292,11 +213,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgrouptitle
     # ----------------
@@ -309,22 +230,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.sankey.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -347,11 +261,11 @@ class Sankey(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -368,11 +282,11 @@ class Sankey(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # link
     # ----
@@ -387,128 +301,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Link constructor
 
-            Supported dict properties:
-
-                arrowlen
-                    Sets the length (in px) of the links arrow, if
-                    0 no arrow will be drawn.
-                color
-                    Sets the `link` color. It can be a single
-                    value, or an array for specifying color for
-                    each `link`. If `link.color` is omitted, then
-                    by default, a translucent grey link will be
-                    used.
-                colorscales
-                    A tuple of :class:`plotly.graph_objects.sankey.
-                    link.Colorscale` instances or dicts with
-                    compatible properties
-                colorscaledefaults
-                    When used in a template (as layout.template.dat
-                    a.sankey.link.colorscaledefaults), sets the
-                    default property values to use for elements of
-                    sankey.link.colorscales
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                customdata
-                    Assigns extra data to each link.
-                customdatasrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `customdata`.
-                hovercolor
-                    Sets the `link` hover color. It can be a single
-                    value, or an array for specifying hover colors
-                    for each `link`. If `link.hovercolor` is
-                    omitted, then by default, links will become
-                    slightly more opaque when hovered over.
-                hovercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `hovercolor`.
-                hoverinfo
-                    Determines which trace information appear when
-                    hovering links. If `none` or `skip` are set, no
-                    information is displayed upon hovering. But, if
-                    `none` is set, click and hover events are still
-                    fired.
-                hoverlabel
-                    :class:`plotly.graph_objects.sankey.link.Hoverl
-                    abel` instance or dict with compatible
-                    properties
-                hovertemplate
-                    Template string used for rendering the
-                    information that appear on hover box. Note that
-                    this will override `hoverinfo`. Variables are
-                    inserted using %{variable}, for example "y:
-                    %{y}" as well as %{xother}, {%_xother},
-                    {%_xother_}, {%xother_}. When showing info for
-                    several points, "xother" will be added to those
-                    with different x positions from the first
-                    point. An underscore before or after
-                    "(x|y)other" will add a space on that side,
-                    only when this field is shown. Numbers are
-                    formatted using d3-format's syntax
-                    %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-
-                    format/tree/v1.4.5#d3-format for details on the
-                    formatting syntax. Dates are formatted using
-                    d3-time-format's syntax %{variable|d3-time-
-                    format}, for example "Day: %{2019-01-01|%A}".
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format for details on
-                    the date formatting syntax. The variables
-                    available in `hovertemplate` are the ones
-                    emitted as event data described at this link
-                    https://plotly.com/javascript/plotlyjs-
-                    events/#event-data. Additionally, every
-                    attributes that can be specified per-point (the
-                    ones that are `arrayOk: true`) are available.
-                    Variables `source` and `target` are node
-                    objects.Finally, the template string has access
-                    to variables `value` and `label`. Anything
-                    contained in tag `<extra>` is displayed in the
-                    secondary box, for example
-                    "<extra>{fullData.name}</extra>". To hide the
-                    secondary box completely, use an empty tag
-                    `<extra></extra>`.
-                hovertemplatesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `hovertemplate`.
-                label
-                    The shown name of the link.
-                labelsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `label`.
-                line
-                    :class:`plotly.graph_objects.sankey.link.Line`
-                    instance or dict with compatible properties
-                source
-                    An integer number `[0..nodes.length - 1]` that
-                    represents the source node.
-                sourcesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `source`.
-                target
-                    An integer number `[0..nodes.length - 1]` that
-                    represents the target node.
-                targetsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `target`.
-                value
-                    A numeric value representing the flow volume
-                    value.
-                valuesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `value`.
-
         Returns
         -------
         plotly.graph_objs.sankey.Link
         """
-        return self["link"]
+        return self['link']
 
     @link.setter
     def link(self, val):
-        self["link"] = val
+        self['link'] = val
 
     # meta
     # ----
@@ -532,11 +333,11 @@ class Sankey(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -552,11 +353,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # name
     # ----
@@ -574,11 +375,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # node
     # ----
@@ -593,112 +394,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Node constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the alignment method used to position the
-                    nodes along the horizontal axis.
-                color
-                    Sets the `node` color. It can be a single
-                    value, or an array for specifying color for
-                    each `node`. If `node.color` is omitted, then
-                    the default `Plotly` color palette will be
-                    cycled through to have a variety of colors.
-                    These defaults are not fully opaque, to allow
-                    some visibility of what is beneath the node.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                customdata
-                    Assigns extra data to each node.
-                customdatasrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `customdata`.
-                groups
-                    Groups of nodes. Each group is defined by an
-                    array with the indices of the nodes it
-                    contains. Multiple groups can be specified.
-                hoverinfo
-                    Determines which trace information appear when
-                    hovering nodes. If `none` or `skip` are set, no
-                    information is displayed upon hovering. But, if
-                    `none` is set, click and hover events are still
-                    fired.
-                hoverlabel
-                    :class:`plotly.graph_objects.sankey.node.Hoverl
-                    abel` instance or dict with compatible
-                    properties
-                hovertemplate
-                    Template string used for rendering the
-                    information that appear on hover box. Note that
-                    this will override `hoverinfo`. Variables are
-                    inserted using %{variable}, for example "y:
-                    %{y}" as well as %{xother}, {%_xother},
-                    {%_xother_}, {%xother_}. When showing info for
-                    several points, "xother" will be added to those
-                    with different x positions from the first
-                    point. An underscore before or after
-                    "(x|y)other" will add a space on that side,
-                    only when this field is shown. Numbers are
-                    formatted using d3-format's syntax
-                    %{variable:d3-format}, for example "Price:
-                    %{y:$.2f}". https://github.com/d3/d3-
-                    format/tree/v1.4.5#d3-format for details on the
-                    formatting syntax. Dates are formatted using
-                    d3-time-format's syntax %{variable|d3-time-
-                    format}, for example "Day: %{2019-01-01|%A}".
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format for details on
-                    the date formatting syntax. The variables
-                    available in `hovertemplate` are the ones
-                    emitted as event data described at this link
-                    https://plotly.com/javascript/plotlyjs-
-                    events/#event-data. Additionally, every
-                    attributes that can be specified per-point (the
-                    ones that are `arrayOk: true`) are available.
-                    Variables `sourceLinks` and `targetLinks` are
-                    arrays of link objects.Finally, the template
-                    string has access to variables `value` and
-                    `label`. Anything contained in tag `<extra>` is
-                    displayed in the secondary box, for example
-                    "<extra>{fullData.name}</extra>". To hide the
-                    secondary box completely, use an empty tag
-                    `<extra></extra>`.
-                hovertemplatesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `hovertemplate`.
-                label
-                    The shown name of the node.
-                labelsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `label`.
-                line
-                    :class:`plotly.graph_objects.sankey.node.Line`
-                    instance or dict with compatible properties
-                pad
-                    Sets the padding (in px) between the `nodes`.
-                thickness
-                    Sets the thickness (in px) of the `nodes`.
-                x
-                    The normalized horizontal position of the node.
-                xsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `x`.
-                y
-                    The normalized vertical position of the node.
-                ysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `y`.
-
         Returns
         -------
         plotly.graph_objs.sankey.Node
         """
-        return self["node"]
+        return self['node']
 
     @node.setter
     def node(self, val):
-        self["node"] = val
+        self['node'] = val
 
     # orientation
     # -----------
@@ -715,11 +419,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["orientation"]
+        return self['orientation']
 
     @orientation.setter
     def orientation(self, val):
-        self["orientation"] = val
+        self['orientation'] = val
 
     # selectedpoints
     # --------------
@@ -739,11 +443,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["selectedpoints"]
+        return self['selectedpoints']
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self["selectedpoints"] = val
+        self['selectedpoints'] = val
 
     # stream
     # ------
@@ -756,27 +460,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.sankey.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # textfont
     # --------
@@ -791,61 +483,15 @@ class Sankey(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.sankey.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     # uid
     # ---
@@ -863,11 +509,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -896,11 +542,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # valueformat
     # -----------
@@ -920,11 +566,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["valueformat"]
+        return self['valueformat']
 
     @valueformat.setter
     def valueformat(self, val):
-        self["valueformat"] = val
+        self['valueformat'] = val
 
     # valuesuffix
     # -----------
@@ -942,11 +588,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["valuesuffix"]
+        return self['valuesuffix']
 
     @valuesuffix.setter
     def valuesuffix(self, val):
-        self["valuesuffix"] = val
+        self['valuesuffix'] = val
 
     # visible
     # -------
@@ -965,17 +611,17 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -1115,38 +761,36 @@ class Sankey(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-
-    def __init__(
-        self,
-        arg=None,
-        arrangement=None,
-        customdata=None,
-        customdatasrc=None,
-        domain=None,
-        hoverinfo=None,
-        hoverlabel=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        link=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        node=None,
-        orientation=None,
-        selectedpoints=None,
-        stream=None,
-        textfont=None,
-        uid=None,
-        uirevision=None,
-        valueformat=None,
-        valuesuffix=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            arrangement=None,
+            customdata=None,
+            customdatasrc=None,
+            domain=None,
+            hoverinfo=None,
+            hoverlabel=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            link=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            node=None,
+            orientation=None,
+            selectedpoints=None,
+            stream=None,
+            textfont=None,
+            uid=None,
+            uirevision=None,
+            valueformat=None,
+            valuesuffix=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Sankey object
 
@@ -1297,10 +941,10 @@ class Sankey(_BaseTraceType):
         -------
         Sankey
         """
-        super(Sankey, self).__init__("sankey")
+        super(Sankey, self).__init__('sankey')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -1312,130 +956,51 @@ class Sankey(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Sankey
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Sankey`"""
-            )
+an instance of :class:`plotly.graph_objs.Sankey`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("arrangement", None)
-        _v = arrangement if arrangement is not None else _v
-        if _v is not None:
-            self["arrangement"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("link", None)
-        _v = link if link is not None else _v
-        if _v is not None:
-            self["link"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("node", None)
-        _v = node if node is not None else _v
-        if _v is not None:
-            self["node"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("valueformat", None)
-        _v = valueformat if valueformat is not None else _v
-        if _v is not None:
-            self["valueformat"] = _v
-        _v = arg.pop("valuesuffix", None)
-        _v = valuesuffix if valuesuffix is not None else _v
-        if _v is not None:
-            self["valuesuffix"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('arrangement', arg, arrangement)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('domain', arg, domain)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('link', arg, link)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('name', arg, name)
+        self._init_provided('node', arg, node)
+        self._init_provided('orientation', arg, orientation)
+        self._init_provided('selectedpoints', arg, selectedpoints)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('textfont', arg, textfont)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('valueformat', arg, valueformat)
+        self._init_provided('valuesuffix', arg, valuesuffix)
+        self._init_provided('visible', arg, visible)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "sankey"
-        arg.pop("type", None)
+        self._props['type'] = 'sankey'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

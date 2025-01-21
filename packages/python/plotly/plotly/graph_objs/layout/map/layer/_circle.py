@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Circle(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.map.layer"
-    _path_str = "layout.map.layer.circle"
+    _parent_path_str = 'layout.map.layer'
+    _path_str = 'layout.map.layer.circle'
     _valid_props = {"radius"}
 
     # radius
@@ -25,11 +27,11 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["radius"]
+        return self['radius']
 
     @radius.setter
     def radius(self, val):
-        self["radius"] = val
+        self['radius'] = val
 
     # Self properties description
     # ---------------------------
@@ -40,8 +42,11 @@ class Circle(_BaseLayoutHierarchyType):
             Sets the circle radius (map.layer.paint.circle-radius).
             Has an effect only when `type` is set to "circle".
         """
-
-    def __init__(self, arg=None, radius=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            radius=None,
+            **kwargs
+        ):
         """
         Construct a new Circle object
 
@@ -59,10 +64,10 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         Circle
         """
-        super(Circle, self).__init__("circle")
+        super(Circle, self).__init__('circle')
 
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -74,24 +79,20 @@ class Circle(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.Circle
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.Circle`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.Circle`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("radius", None)
-        _v = radius if radius is not None else _v
-        if _v is not None:
-            self["radius"] = _v
+        self._init_provided('radius', arg, radius)
 
         # Process unknown kwargs
         # ----------------------
