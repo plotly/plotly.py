@@ -1,0 +1,15 @@
+df outliers(df : pandas.DataFrame, num_col : int ):
+
+  colunas = df.select_dtypes(include=['float64', 'int64']).columns
+  num_colunas = len(colunas)
+  fig, axes = plt.subplots(num_col, 2, figsize=(12, 5 * num_colunas))
+  
+  for i, coluna in enumerate(colunas):
+    sns.histplot(df[coluna], kde=True, ax=axes[i, 0])
+    axes[i, 0].set_title(f'Histograma de {coluna}')
+  
+    sns.boxplot(x=df[coluna], ax=axes[i, 1])
+    axes[i, 1].set_title(f'Boxplot de {coluna}')
+  
+  plt.tight_layout()
+  plt.show();
