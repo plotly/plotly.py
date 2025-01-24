@@ -267,36 +267,24 @@ def perform_codegen(reformat=True):
         root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
     optional_figure_widget_import = f"""
-if sys.version_info < (3, 7) or TYPE_CHECKING:
-    try:
-        import ipywidgets as _ipywidgets
-        from packaging.version import Version as _Version
-        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
-        else:
-            raise ImportError()
-    except Exception:
-        from ..missing_anywidget import FigureWidget
-else:
-    __all__.append("FigureWidget")
-    orig_getattr = __getattr__
-    def __getattr__(import_name):
-        if import_name == "FigureWidget":
-            try:
-                import ipywidgets
-                from packaging.version import Version
+__all__.append("FigureWidget")
+orig_getattr = __getattr__
+def __getattr__(import_name):
+    if import_name == "FigureWidget":
+        try:
+            import ipywidgets
+            from packaging.version import Version
 
-                if Version(ipywidgets.__version__) >= Version("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
-
-                    return FigureWidget
-                else:
-                    raise ImportError()
-            except Exception:
-                from ..missing_anywidget import FigureWidget
+            if Version(ipywidgets.__version__) >= Version("7.0.0"):
+                from ..graph_objs._figurewidget import FigureWidget
                 return FigureWidget
+            else:
+                raise ImportError()
+        except Exception:
+            from ..missing_anywidget import FigureWidget
+            return FigureWidget
 
-        return orig_getattr(import_name)
+    return orig_getattr(import_name)
 """
     # ### __all__ ###
     for path_parts, class_names in alls.items():
