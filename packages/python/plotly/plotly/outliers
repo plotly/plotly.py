@@ -1,4 +1,4 @@
-df outliers(df : pandas.DataFrame, num_col : int ):
+def outliers(df : pandas.DataFrame, num_col : int ):
 
   colunas = df.select_dtypes(include=['float64', 'int64']).columns
   num_colunas = len(colunas)
