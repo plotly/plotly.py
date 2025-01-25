@@ -217,6 +217,82 @@ fig.update_layout(annotations=annotations)
 fig.show()
 ```
 
+# Q2. Example 1: Butterfly chart/diverging bar chart-1
+import pandas as pd
+
+data = {
+    "Category": ["Content Quality", "Instructor Effectiveness", "Ease of Use", "Customer Support", "Value for Money"],
+    "Strongly Agree": [40, 35, 50, 30, 60],
+    "Somewhat Agree": [30, 25, 40, 20, 49],
+    "Neutral": [15, 10, 20, 10, 30],
+    "Somewhat Disagree": [-20, -15, -25, -10, -30],
+    "Strongly Disagree": [-10, -50, -15, -15,-20]
+}
+df = pd.DataFrame(data)
+
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+# Add bars for each category
+fig.add_trace(go.Bar(
+    y=df["Category"], 
+    x=df["Strongly Agree"], 
+    name="Strongly Agree", 
+    orientation='h', 
+    marker=dict(color='dark blue')
+))
+
+fig.add_trace(go.Bar(
+    y=df["Category"], 
+    x=df["Somewhat Agree"], 
+    name="Somewhat Agree", 
+    orientation='h', 
+    marker=dict(color='lightblue')
+))
+
+fig.add_trace(go.Bar(
+    y=df["Category"], 
+    x=df["Neutral"], 
+    name="Neutral", 
+    orientation='h', 
+    marker=dict(color='Lightgray')
+))
+
+fig.add_trace(go.Bar(
+    y=df["Category"], 
+    x=df["Somewhat Disagree"], 
+    name="Somewhat Disagree", 
+    orientation='h', 
+    marker=dict(color='Orange')
+))
+
+fig.add_trace(go.Bar(
+    y=df["Category"], 
+    x=df["Strongly Disagree"], 
+    name="Strongly Disagree", 
+    orientation='h', 
+    marker=dict(color='red')
+))
+
+fig.update_layout(
+   title="User Feedback on Online Education Services",
+    xaxis=dict(
+        title="Number of Responses",
+        zeroline=True,  # Ensure there's a zero line for divergence
+        zerolinecolor="black",
+    ),
+    yaxis=dict(title=""),
+    barmode='relative',  # Allows bars to diverge from the center
+    plot_bgcolor="white",
+    height=600,
+    width=800
+)
+
+fig.show()
+
+# Reference https://plotly.com/python/horizontal-bar-charts/#basic-horizontal-bar-chart
+
 ### Bar Chart with Line Plot
 
 ```python
