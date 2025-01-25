@@ -109,6 +109,42 @@ fig.add_trace(go.Bar(
 fig.update_layout(barmode='stack')
 fig.show()
 ```
+# 1. Example Horizontal Bar Chart (Facet)
+import pandas as pd
+
+data = {
+    "Quarter": ["Q1", "Q2", "Q3", "Q4"] * 3,
+    "Region": ["North", "North", "North", "North", "South", "South", "South", "South", "West", "West", "West", "West"],
+    "Outcome": [150, 200, 250, 300, 120, 180, 240, 310, 100, 150, 220, 280]
+}
+df = pd.DataFrame(data)
+
+import plotly.express as px
+
+fig = px.bar(
+    df, 
+    x="Outcome", 
+    y="Region",
+    orientation="h",  
+    facet_col="Quarter", 
+    title="Quarterly Number of Patients Served by Region", 
+    labels={"Outcome": "Patients Served", "Region": "Region"} 
+)
+
+fig.update_layout(
+    height=400,  
+    title_font_size=16,
+    title_x=0.5,
+    showlegend=False,  # Remove legend for simplicity
+    margin=dict(t=50, l=50, r=50, b=50)  # Adjust margins
+)
+
+fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))  
+# Remove duplicate y-axis labels
+fig.for_each_yaxis(lambda axis: axis.update(title="Region"))
+fig.for_each_xaxis(lambda axis: axis.update(title=None))
+
+fig.show()
 
 ### Color Palette for Bar Chart
 
