@@ -136,7 +136,7 @@ fig.show()
 
 *New in 5.12*
 
-You can configure the gap between groups of scatter points using `scattergap`. Here we set it to `0.75`, which brings the points closer together by allocating more space to the gap between groups. If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value. 
+You can configure the gap between groups of scatter points using `scattergap`. Here we set it to `0.75`, which brings the points closer together by allocating more space to the gap between groups. If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value.
 
 
 ```python
@@ -250,7 +250,7 @@ fig.show()
 
 ### Data Order in Scatter and Line Charts
 
-Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**. 
+Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**.
 
 This makes it possible to make charts like the one below, but also means that it may be required to explicitly sort data before passing it to Plotly to avoid lines moving "backwards" across the chart.
 
@@ -262,17 +262,17 @@ df = pd.DataFrame(dict(
     x = [1, 3, 2, 4],
     y = [1, 2, 3, 4]
 ))
-fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig = px.line(df, x="x", y="y", title="Unsorted Input")
 fig.show()
 
 df = df.sort_values(by="x")
-fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig = px.line(df, x="x", y="y", title="Sorted Input")
 fig.show()
 ```
 
 ### Connected Scatterplots
 
-In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy 
+In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy
 
 ```python
 import plotly.express as px
@@ -380,7 +380,7 @@ fig.add_trace(go.Scatter(
 
 # Set options common to all traces with fig.update_traces
 fig.update_traces(mode='markers', marker_line_width=2, marker_size=10)
-fig.update_layout(title='Styled Scatter',
+fig.update_layout(title=dict(text='Styled Scatter'),
                   yaxis_zeroline=False, xaxis_zeroline=False)
 
 
@@ -401,7 +401,7 @@ fig = go.Figure(data=go.Scatter(x=data['Postal'],
                                 marker_color=data['Population'],
                                 text=data['State'])) # hover text goes here
 
-fig.update_layout(title='Population of USA States')
+fig.update_layout(title=dict(text='Population of USA States'))
 fig.show()
 
 ```
@@ -444,28 +444,28 @@ df = data.gapminder()
 
 df_europe = df[df['continent'] == 'Europe']
 
-trace1 = go.Scatter(x=df_europe[df_europe['country'] == 'France']['year'], 
-                    y=df_europe[df_europe['country'] == 'France']['lifeExp'], 
-                    mode='lines+markers', 
+trace1 = go.Scatter(x=df_europe[df_europe['country'] == 'France']['year'],
+                    y=df_europe[df_europe['country'] == 'France']['lifeExp'],
+                    mode='lines+markers',
                     zorder=3,
                     name='France',
                     marker=dict(size=15))
 
-trace2 = go.Scatter(x=df_europe[df_europe['country'] == 'Germany']['year'], 
-                    y=df_europe[df_europe['country'] == 'Germany']['lifeExp'], 
+trace2 = go.Scatter(x=df_europe[df_europe['country'] == 'Germany']['year'],
+                    y=df_europe[df_europe['country'] == 'Germany']['lifeExp'],
                     mode='lines+markers',
                     zorder=1,
                     name='Germany',
                     marker=dict(size=15))
 
-trace3 = go.Scatter(x=df_europe[df_europe['country'] == 'Spain']['year'], 
-                    y=df_europe[df_europe['country'] == 'Spain']['lifeExp'], 
+trace3 = go.Scatter(x=df_europe[df_europe['country'] == 'Spain']['year'],
+                    y=df_europe[df_europe['country'] == 'Spain']['lifeExp'],
                     mode='lines+markers',
                     zorder=2,
                     name='Spain',
                     marker=dict(size=15))
 
-layout = go.Layout(title='Life Expectancy in Europe Over Time')
+layout = go.Layout(title=dict(text='Life Expectancy in Europe Over Time'))
 
 fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
 

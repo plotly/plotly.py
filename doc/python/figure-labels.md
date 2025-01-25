@@ -90,7 +90,7 @@ fig.show()
 
 *New in 5.14*
 
-Set `automargin=True` to allow the title to push the figure margins. With `yref` set to `paper`, `automargin=True`  expands the margins to make the title visible, but doesn't push outside the container. With `yref` set to `container`, `automargin=True` expands the margins, but the title doesn't overlap with the plot area, tick labels, and axis titles. 
+Set `automargin=True` to allow the title to push the figure margins. With `yref` set to `paper`, `automargin=True`  expands the margins to make the title visible, but doesn't push outside the container. With `yref` set to `container`, `automargin=True` expands the margins, but the title doesn't overlap with the plot area, tick labels, and axis titles.
 
 
 ```python
@@ -145,10 +145,24 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.update_layout(
-    title="Plot Title",
-    xaxis_title="X Axis Title",
-    yaxis_title="Y Axis Title",
-    legend_title="Legend Title",
+    title=dict(
+        text="Plot Title"
+    ),
+    xaxis=dict(
+        title=dict(
+            text="X Axis Title"
+        )
+    ),
+    yaxis=dict(
+        title=dict(
+            text="Y Axis Title"
+        )
+    ),
+    legend=dict(
+        title=dict(
+            text="Legend Title"
+        )
+    ),
     font=dict(
         family="Courier New, monospace",
         size=18,
@@ -197,10 +211,24 @@ fig = go.Figure(
         ),
     ],
     layout=go.Layout(
-        title="Plot Title",
-        xaxis=dict(title="X Axis Title"),
-        yaxis=dict(title="Y Axis Title"),
-        legend=dict(title="Legend Title"),
+        title=dict(
+            text="Plot Title"
+        ),
+        xaxis=dict(
+            title=dict(
+                text="X Axis Title"
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Y Axis Title"
+            )
+        ),
+        legend=dict(
+            title=dict(
+                text="Legend Title"
+            )
+        ),
         font=dict(
             family="Courier New, monospace",
             size=18,

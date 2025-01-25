@@ -144,7 +144,11 @@ fig = go.Figure(data=go.Scattergeo(
             cmin = 0,
             color = df['cnt'],
             cmax = df['cnt'].max(),
-            colorbar_title="Incoming flights<br>February 2011"
+            colorbar=dict(
+                title=dict(
+                    text="Incoming flights<br>February 2011"
+                )
+            )
         )))
 
 fig.update_layout(
@@ -227,7 +231,7 @@ fig.update_layout(
             dtick = 5
         )
     ),
-    title='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>',
+    title=dict(text='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>'),
 )
 fig.show()
 ```

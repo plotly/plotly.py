@@ -29,14 +29,8 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
  - `CHANGELOG.md`
    + update the release date
- - `README.md`
-   + this must be done at this point because the README gets baked into PyPI
  - `packages/python/plotly/plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
- - `packages/python/plotly/js/package.json`
-   + Update `"version"` to `X.Y.Z`
- - `packages/python/plotly/js/package-lock.json`
-   + Update `"version"` to `X.Y.Z` in two places (to avoid dirty repo after rebuild)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
 

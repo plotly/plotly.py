@@ -151,7 +151,7 @@ fig = go.Figure(data=[go.Sankey(
 
 fig.update_layout(
     hovermode = 'x',
-    title="Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>",
+    title=dict(text="Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>"),
     font=dict(size = 10, color = 'white'),
     plot_bgcolor='black',
     paper_bgcolor='black'
@@ -264,7 +264,7 @@ fig = go.Figure(go.Sankey(
         arrowlen=15,
         source=[0, 0, 1, 2, 5, 4, 3, 5],
         target=[5, 3, 4, 3, 0, 2, 2, 3],
-        value=[1, 2, 1, 1, 1, 1, 1, 2]  
+        value=[1, 2, 1, 1, 1, 1, 1, 2]
     )
 ))
 
@@ -275,7 +275,7 @@ fig.show()
 
 *New in 5.19*
 
-You can set the alignment of nodes using `node.align`. Here are two examples with the same `source` and `target`. The first example has nodes aligned "left" and the second has nodes aligned "right". `node.align` also supports "center" and "justify". "justify" is the default if `node.align` is not set, and is similar to aligning to the "left", except that nodes without outgoing links are moved to the right of the figure. 
+You can set the alignment of nodes using `node.align`. Here are two examples with the same `source` and `target`. The first example has nodes aligned "left" and the second has nodes aligned "right". `node.align` also supports "center" and "justify". "justify" is the default if `node.align` is not set, and is similar to aligning to the "left", except that nodes without outgoing links are moved to the right of the figure.
 
 ```python
 import plotly.graph_objects as go
@@ -291,7 +291,7 @@ fig = go.Figure(go.Sankey(
         arrowlen=15,
         source=[0, 1, 4, 2, 1],
         target=[1, 4, 5, 4, 3],
-        value=[4, 2, 3, 1, 2]  
+        value=[4, 2, 3, 1, 2]
     )
 ))
 
@@ -311,7 +311,7 @@ fig = go.Figure(go.Sankey(
         arrowlen=15,
         source=[0, 1, 4, 2, 1],
         target=[1, 4, 5, 4, 3],
-        value=[4, 2, 3, 1, 2]  
+        value=[4, 2, 3, 1, 2]
     )
 ))
 

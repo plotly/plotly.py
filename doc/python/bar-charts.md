@@ -808,7 +808,7 @@ fig.add_trace(go.Bar(x=years,
                 ))
 
 fig.update_layout(
-    title='US Export of Plastic Scrap',
+    title=dict(text='US Export of Plastic Scrap'),
     xaxis_tickfont_size=14,
     yaxis=dict(
         title=dict(

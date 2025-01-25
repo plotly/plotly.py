@@ -180,7 +180,7 @@ fig.add_trace(go.Scattermap(
     ))
 
 fig.update_layout(
-    title='Nuclear Waste Sites on Campus',
+    title=dict(text='Nuclear Waste Sites on Campus'),
     autosize=True,
     hovermode='closest',
     showlegend=False,

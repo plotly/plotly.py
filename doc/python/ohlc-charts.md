@@ -77,8 +77,8 @@ fig = go.Figure(data=go.Ohlc(x=df['Date'],
                 close=df['AAPL.Close']))
 
 fig.update_layout(
-    title='The Great Recession',
-    yaxis_title='AAPL Stock',
+    title=dict(text='The Great Recession'),
+    yaxis=dict(title=dict(text='AAPL Stock')),
     shapes = [dict(
         x0='2016-12-09', x1='2016-12-09', y0=0, y1=1, xref='x', yref='paper',
         line_width=2)],
