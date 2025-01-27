@@ -54,6 +54,8 @@ fig.show()
 
 ### Bar Chart Row Facets
 
+There is a similar horizontal, faceted bar chart in the [horizontal bar documentation](/python/horizontal-bar-charts/#Small-multiple-horizontal-bar-charts-show-each-component's-size-more-clearly-than-a-stacked-bar)
+
 ```python
 import plotly.express as px
 df = px.data.tips()
