@@ -217,81 +217,77 @@ fig.update_layout(annotations=annotations)
 fig.show()
 ```
 
-# Q2. Example 1: Butterfly chart/diverging bar chart-1
+### Diverging Bar (or Butterfly) Chart
+
+Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.  Implementing presentation-ready versions of them in Plotly requires a few non standard layout and legendrank options.
+
+```
 import pandas as pd
+import plotly.graph_objects as go
 
 data = {
     "Category": ["Content Quality", "Instructor Effectiveness", "Ease of Use", "Customer Support", "Value for Money"],
-    "Strongly Agree": [40, 35, 50, 30, 60],
     "Somewhat Agree": [30, 25, 40, 20, 49],
-    "Neutral": [15, 10, 20, 10, 30],
+    "Strongly Agree": [40, 35, 50, 30, 60],
     "Somewhat Disagree": [-20, -15, -25, -10, -30],
     "Strongly Disagree": [-10, -50, -15, -15,-20]
 }
 df = pd.DataFrame(data)
-
-import plotly.graph_objects as go
+print(df.columns)
 
 fig = go.Figure()
 
+color_by_category={
+    "Strongly Agree":'darkblue',
+    "Somewhat Agree":'lightblue',
+    "Somewhat Disagree":'orange',
+    "Strongly Disagree":'red',
+}
+
+# We want the legend to be ordered in the same order that the categories appear, left to right -- 
+# which is different from the order in which we add the traces to the figure.
+# since we need to create the "somewhat" traces first, then the "strongly" traces to display 
+# the segments in the desired order
+
+legend_rank_by_category={
+    "Strongly Disagree":1,
+    "Somewhat Disagree":2,
+    "Somewhat Agree":3,
+    "Strongly Agree":4,
+}
+
 # Add bars for each category
-fig.add_trace(go.Bar(
-    y=df["Category"], 
-    x=df["Strongly Agree"], 
-    name="Strongly Agree", 
-    orientation='h', 
-    marker=dict(color='dark blue')
-))
+for col in df.columns[1:]:
+    fig.add_trace(go.Bar(
+        y=df["Category"], 
+        x=df[col], 
+        name=col, 
+        orientation='h',
+        marker=dict(color=color_by_category[col]),
+        legendrank=legend_rank_by_category[col]
 
-fig.add_trace(go.Bar(
-    y=df["Category"], 
-    x=df["Somewhat Agree"], 
-    name="Somewhat Agree", 
-    orientation='h', 
-    marker=dict(color='lightblue')
-))
+    ))
 
-fig.add_trace(go.Bar(
-    y=df["Category"], 
-    x=df["Neutral"], 
-    name="Neutral", 
-    orientation='h', 
-    marker=dict(color='Lightgray')
-))
-
-fig.add_trace(go.Bar(
-    y=df["Category"], 
-    x=df["Somewhat Disagree"], 
-    name="Somewhat Disagree", 
-    orientation='h', 
-    marker=dict(color='Orange')
-))
-
-fig.add_trace(go.Bar(
-    y=df["Category"], 
-    x=df["Strongly Disagree"], 
-    name="Strongly Disagree", 
-    orientation='h', 
-    marker=dict(color='red')
-))
 
 fig.update_layout(
-   title="User Feedback on Online Education Services",
+   title="Reactions to the statement, 'The service met your expectations for':",
     xaxis=dict(
         title="Number of Responses",
         zeroline=True,  # Ensure there's a zero line for divergence
         zerolinecolor="black",
+        # use array tick mode to show that the counts to the left of zero are still positive.
+        # this is hard coded; generalize this if you plan to create a function that takes unknown or widely varying data
+        tickmode = 'array',     
+        tickvals = [-50, 0, 50, 100],
+        ticktext = [50, 0, 50, 100]
     ),
-    yaxis=dict(title=""),
+    yaxis_title = "",
     barmode='relative',  # Allows bars to diverge from the center
     plot_bgcolor="white",
-    height=600,
-    width=800
 )
 
 fig.show()
-
-# Reference https://plotly.com/python/horizontal-bar-charts/#basic-horizontal-bar-chart
+```
 
 ### Bar Chart with Line Plot
 
