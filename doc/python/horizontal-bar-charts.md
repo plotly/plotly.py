@@ -109,8 +109,15 @@ fig.add_trace(go.Bar(
 fig.update_layout(barmode='stack')
 fig.show()
 ```
-# 1. Example Horizontal Bar Chart (Facet)
+### Small multiple horizontal bar charts show each component's size more clearly than a stacked bar
+
+Bar charts with multiple components pose a fundamental trade off between presenting the total clearly and presenting the component values clearly.  This small multiples approach shows the component magnitudes clearly at the cost of slightly obscuring the totals.  A stacked bar does the opposite.  Small multiple bar charts often work better in a horizontal orientation; and are easy to create with the px.bar orientation and facet_col parameters.
+
+  .
+
+```
 import pandas as pd
+import plotly.express as px
 
 data = {
     "Quarter": ["Q1", "Q2", "Q3", "Q4"] * 3,
@@ -119,7 +126,6 @@ data = {
 }
 df = pd.DataFrame(data)
 
-import plotly.express as px
 
 fig = px.bar(
     df, 
@@ -127,24 +133,28 @@ fig = px.bar(
     y="Region",
     orientation="h",  
     facet_col="Quarter", 
-    title="Quarterly Number of Patients Served by Region", 
+    title="Number of Patients Served by Region and Quarter", 
     labels={"Outcome": "Patients Served", "Region": "Region"} 
 )
 
+## the section below is optional clean up to make this presentation ready
+
 fig.update_layout(
-    height=400,  
-    title_font_size=16,
-    title_x=0.5,
-    showlegend=False,  # Remove legend for simplicity
-    margin=dict(t=50, l=50, r=50, b=50)  # Adjust margins
+    height=400,  #the Plotly default makes the bars awkwardly large; setting a height improves the display
+    showlegend=False,  # the legend does not add anything
 )
 
+#remove up the default "facet_variable =" text from the title of each facet graph
 fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))  
-# Remove duplicate y-axis labels
-fig.for_each_yaxis(lambda axis: axis.update(title="Region"))
+
+# Remove duplicate axis labels
+fig.for_each_yaxis(lambda axis: axis.update(title=None))
 fig.for_each_xaxis(lambda axis: axis.update(title=None))
+# add the one valuable axis label back in
+fig.update_xaxes(title="Count", row=1, col=1)
 
 fig.show()
+```
 
 ### Color Palette for Bar Chart
 
