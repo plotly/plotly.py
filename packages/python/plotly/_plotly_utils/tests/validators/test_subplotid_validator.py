@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import SubplotidValidator
-import numpy as np
+from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
 
 
 # Fixtures
@@ -19,7 +19,7 @@ def test_acceptance(val, validator):
 
 
 # ### Rejection by type ###
-@pytest.mark.parametrize("val", [23, [], {}, set(), np.inf, np.nan])
+@pytest.mark.parametrize("val", [23, [], {}, set(), np_inf(), np_nan()])
 def test_rejection_type(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)

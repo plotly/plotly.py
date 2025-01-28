@@ -18,7 +18,7 @@ jupyter:
     language: python
     layout: base
     name: Filled Chord Diagram
-    order: 25
+    order: 24
     page_type: u-guide
     permalink: python/filled-chord-diagram/
     thumbnail: thumbnail/filled-chord.jpg

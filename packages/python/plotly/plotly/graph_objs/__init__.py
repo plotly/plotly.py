@@ -45,7 +45,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._funnel import Funnel
     from ._funnelarea import Funnelarea
     from ._heatmap import Heatmap
-    from ._heatmapgl import Heatmapgl
     from ._histogram import Histogram
     from ._histogram2d import Histogram2d
     from ._histogram2dcontour import Histogram2dContour
@@ -59,7 +58,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
-    from ._pointcloud import Pointcloud
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
@@ -97,7 +95,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import funnel
     from . import funnelarea
     from . import heatmap
-    from . import heatmapgl
     from . import histogram
     from . import histogram2d
     from . import histogram2dcontour
@@ -111,7 +108,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from . import parcats
     from . import parcoords
     from . import pie
-    from . import pointcloud
     from . import sankey
     from . import scatter
     from . import scatter3d
@@ -155,7 +151,6 @@ else:
             ".funnel",
             ".funnelarea",
             ".heatmap",
-            ".heatmapgl",
             ".histogram",
             ".histogram2d",
             ".histogram2dcontour",
@@ -169,7 +164,6 @@ else:
             ".parcats",
             ".parcoords",
             ".pie",
-            ".pointcloud",
             ".sankey",
             ".scatter",
             ".scatter3d",
@@ -236,7 +230,6 @@ else:
             "._funnel.Funnel",
             "._funnelarea.Funnelarea",
             "._heatmap.Heatmap",
-            "._heatmapgl.Heatmapgl",
             "._histogram.Histogram",
             "._histogram2d.Histogram2d",
             "._histogram2dcontour.Histogram2dContour",
@@ -250,7 +243,6 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
-            "._pointcloud.Pointcloud",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",
@@ -286,7 +278,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         else:
             raise ImportError()
     except Exception:
-        from ..missing_ipywidgets import FigureWidget
+        from ..missing_anywidget import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -304,7 +296,7 @@ else:
                 else:
                     raise ImportError()
             except Exception:
-                from ..missing_ipywidgets import FigureWidget
+                from ..missing_anywidget import FigureWidget
 
                 return FigureWidget
 

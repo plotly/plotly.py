@@ -2,7 +2,7 @@ import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade, init_figure, configure_animation_controls
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
-import pandas as pd
+import narwhals.stable.v1 as nw
 import numpy as np
 import itertools
 from plotly.utils import image_array_to_data_uri
@@ -321,7 +321,8 @@ def imshow(
             aspect = "equal"
 
     # --- Set the value of binary_string (forbidden for pandas)
-    if isinstance(img, pd.DataFrame):
+    img = nw.from_native(img, pass_through=True)
+    if isinstance(img, nw.DataFrame):
         if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
         is_dataframe = True

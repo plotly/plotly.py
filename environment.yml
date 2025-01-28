@@ -10,7 +10,6 @@ dependencies:
   - pandas
   - black
   - pytest
-  - tenacity
   - inflect
   - jupyterlab
   - ipywidgets

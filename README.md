@@ -37,12 +37,9 @@
   </a>
 </div>
 
-
 ## Quickstart
 
-`pip install plotly==5.24.1`
-
-Inside [Jupyter](https://jupyter.org/install) (installable with `pip install "jupyterlab>=3" "ipywidgets>=7.6"`):
+`pip install plotly`
 
 ```python
 import plotly.express as px
@@ -51,7 +48,6 @@ fig.show()
 ```
 
 See the [Python documentation](https://plotly.com/python/) for more examples.
-
 
 ## Overview
 
@@ -74,63 +70,37 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 - [Contributing to plotly](https://github.com/plotly/plotly.py/blob/master/contributing.md)
 - [Changelog](https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md)
 - [Code of Conduct](https://github.com/plotly/plotly.py/blob/master/CODE_OF_CONDUCT.md)
-- [Version 4 Migration Guide](https://plotly.com/python/v4-migration/)
-- [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
 - [Community forum](https://community.plotly.com)
 
 ---
 
 ## Installation
 
-plotly.py may be installed using pip...
+plotly.py may be installed using pip
 
 ```
-pip install plotly==5.24.1
+pip install plotly
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=5.24.1
+conda install -c plotly plotly
 ```
 
-### JupyterLab Support
+### Jupyter Widget Support
 
-For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
+For use as a Jupyter widget, install `jupyter` and `anywidget`
 packages using `pip`:
 
 ```
-pip install "jupyterlab>=3" "ipywidgets>=7.6"
+pip install jupyter anywidget
 ```
 
 or `conda`:
 
 ```
-conda install "jupyterlab>=3" "ipywidgets>=7.6"
-```
-
-The instructions above apply to JupyterLab 3.x. **For JupyterLab 2 or earlier**, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
-
-```
-# JupyterLab 2.x renderer support
-jupyter labextension install jupyterlab-plotly@5.24.1 @jupyter-widgets/jupyterlab-manager
-```
-
-Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
-
-### Jupyter Notebook Support
-
-For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
-packages using `pip`:
-
-```
-pip install "notebook>=5.3" "ipywidgets>=7.5"
-```
-
-or `conda`:
-
-```
-conda install "notebook>=5.3" "ipywidgets>=7.5"
+conda install jupyter anywidget
 ```
 
 ### Static Image Export
@@ -143,40 +113,17 @@ command line utility (legacy as of `plotly` version 4.9).
 #### Kaleido
 
 The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
-using pip...
+using pip
 
 ```
 pip install -U kaleido
 ```
 
-or conda.
+or conda
 
 ```
 conda install -c conda-forge python-kaleido
 ```
-
-#### Orca
-
-While Kaleido is now the recommended image export approach because it is easier to install
-and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
-can also be supported
-by the legacy [orca](https://github.com/plotly/orca) command line utility and the
- [`psutil`](https://github.com/giampaolo/psutil) Python package.
-
-These dependencies can both be installed using conda:
-
-```
-conda install -c plotly plotly-orca==1.3.1 psutil
-```
-
-Or, `psutil` can be installed using pip...
-
-```
-pip install psutil
-```
-
-and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
-
 
 ### Extended Geo Support
 
@@ -193,12 +140,6 @@ or conda
 ```
 conda install -c plotly plotly-geo=1.0.0
 ```
-
-## Migration
-
-If you're migrating from plotly.py v3 to v4, please check out the [Version 4 migration guide](https://plotly.com/python/v4-migration/)
-
-If you're migrating from plotly.py v2 to v3, please check out the [Version 3 migration guide](https://github.com/plotly/plotly.py/blob/master/migration-guide.md)
 
 ## Copyright and Licenses
 

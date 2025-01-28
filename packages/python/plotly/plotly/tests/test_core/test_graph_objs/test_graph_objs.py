@@ -87,8 +87,8 @@ class TestBackwardsCompat(TestCase):
             self.assertEqual(obj.title.text, "A title 2")
             self.assertEqual(obj.to_plotly_json(), {"title": {"text": "A title 2"}})
 
-            # Update titlefont
-            obj.update(titlefont={"size": 23})
+            # Update title_font
+            obj.update(title_font={"size": 23})
             self.assertEqual(obj.title.font.size, 23)
             self.assertEqual(
                 obj.to_plotly_json(),
@@ -110,38 +110,13 @@ class TestBackwardsCompat(TestCase):
             obj.to_plotly_json(), {"type": "pie", "title": {"text": "A title 2"}}
         )
 
-        # Update titlefont
-        obj.update(titlefont={"size": 23})
+        # Update title_font
+        obj.update(title_font={"size": 23})
         self.assertEqual(obj.title.font.size, 23)
         self.assertEqual(
             obj.to_plotly_json(),
             {"type": "pie", "title": {"text": "A title 2", "font": {"size": 23}}},
         )
-
-    def test_legacy_title_props_remapped(self):
-
-        # plain Layout
-        obj = go.Layout()
-        self.assertIs(obj.titlefont, obj.title.font)
-        self.assertIsNone(obj.title.font.family)
-
-        # Set titlefont in constructor
-        obj = go.Layout(titlefont={"family": "Courier"})
-        self.assertIs(obj.titlefont, obj.title.font)
-        self.assertEqual(obj.titlefont.family, "Courier")
-        self.assertEqual(obj.title.font.family, "Courier")
-
-        # Property assignment
-        obj = go.Layout()
-        obj.titlefont.family = "Courier"
-        self.assertIs(obj.titlefont, obj.title.font)
-        self.assertEqual(obj["titlefont.family"], "Courier")
-        self.assertEqual(obj.title.font.family, "Courier")
-
-        # In/Iter
-        self.assertIn("titlefont", obj)
-        self.assertIn("titlefont.family", obj)
-        self.assertIn("titlefont", iter(obj))
 
 
 class TestPop(TestCase):
