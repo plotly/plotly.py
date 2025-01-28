@@ -1,0 +1,2 @@
+#/bin/bash
+PYTHONPATH=proto/px_combine python3 proto/px_combine/multilayered_data_test.py

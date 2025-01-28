@@ -624,6 +624,9 @@ class BaseFigure(object):
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
 
+        # Space for auxiliary data
+        self._aux = dict()
+
         # Template
         # --------
         # ### Check for default template ###
