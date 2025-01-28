@@ -344,3 +344,4 @@ You're *strongly* encouraged to write tests that check your added functionality.
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
 Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`.
+
