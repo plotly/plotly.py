@@ -7,7 +7,6 @@
 ---
 {{ super() }}
 {{ '{% raw %}' }}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
 
 {%- endblock header-%}
 
