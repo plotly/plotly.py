@@ -23,7 +23,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import Scatter3d
     from ..graph_objs import Scatter
     from ..graph_objs import Sankey
-    from ..graph_objs import Pointcloud
     from ..graph_objs import Pie
     from ..graph_objs import Parcoords
     from ..graph_objs import Parcats
@@ -36,7 +35,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import Histogram2dContour
     from ..graph_objs import Histogram2d
     from ..graph_objs import Histogram
-    from ..graph_objs import Heatmapgl
     from ..graph_objs import Heatmap
     from ..graph_objs import Funnelarea
     from ..graph_objs import Funnel
@@ -102,7 +100,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import scatter3d
     from ..graph_objs import scatter
     from ..graph_objs import sankey
-    from ..graph_objs import pointcloud
     from ..graph_objs import pie
     from ..graph_objs import parcoords
     from ..graph_objs import parcats
@@ -115,7 +112,6 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ..graph_objs import histogram2dcontour
     from ..graph_objs import histogram2d
     from ..graph_objs import histogram
-    from ..graph_objs import heatmapgl
     from ..graph_objs import heatmap
     from ..graph_objs import funnelarea
     from ..graph_objs import funnel
@@ -160,7 +156,6 @@ else:
             "..graph_objs.scatter3d",
             "..graph_objs.scatter",
             "..graph_objs.sankey",
-            "..graph_objs.pointcloud",
             "..graph_objs.pie",
             "..graph_objs.parcoords",
             "..graph_objs.parcats",
@@ -173,7 +168,6 @@ else:
             "..graph_objs.histogram2dcontour",
             "..graph_objs.histogram2d",
             "..graph_objs.histogram",
-            "..graph_objs.heatmapgl",
             "..graph_objs.heatmap",
             "..graph_objs.funnelarea",
             "..graph_objs.funnel",
@@ -214,7 +208,6 @@ else:
             "..graph_objs.Scatter3d",
             "..graph_objs.Scatter",
             "..graph_objs.Sankey",
-            "..graph_objs.Pointcloud",
             "..graph_objs.Pie",
             "..graph_objs.Parcoords",
             "..graph_objs.Parcats",
@@ -227,7 +220,6 @@ else:
             "..graph_objs.Histogram2dContour",
             "..graph_objs.Histogram2d",
             "..graph_objs.Histogram",
-            "..graph_objs.Heatmapgl",
             "..graph_objs.Heatmap",
             "..graph_objs.Funnelarea",
             "..graph_objs.Funnel",
@@ -286,7 +278,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         else:
             raise ImportError()
     except Exception:
-        from ..missing_ipywidgets import FigureWidget
+        from ..missing_anywidget import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -304,7 +296,7 @@ else:
                 else:
                     raise ImportError()
             except Exception:
-                from ..missing_ipywidgets import FigureWidget
+                from ..missing_anywidget import FigureWidget
 
                 return FigureWidget
 

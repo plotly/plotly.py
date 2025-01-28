@@ -209,7 +209,7 @@ class Scattergl(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `array`.
                 color
-                    Sets the stoke color of the error bars.
+                    Sets the stroke color of the error bars.
                 copy_ystyle
 
                 symmetric
@@ -290,7 +290,7 @@ class Scattergl(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for `array`.
                 color
-                    Sets the stoke color of the error bars.
+                    Sets the stroke color of the error bars.
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom

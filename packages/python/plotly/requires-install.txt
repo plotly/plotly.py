@@ -1,0 +1,10 @@
+### Dependencies for Core Plotly Functionality  ###
+###                                             ###
+### To install, run:                            ###
+###      $ pip install -r requires-install.txt  ###
+###                                             ###
+###################################################
+
+## dataframe agnostic layer ##
+narwhals>=1.15.1
+packaging

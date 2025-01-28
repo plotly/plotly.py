@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Smith Charts
-    order: 21
+    order: 20
     page_type: u-guide
     permalink: python/smith-charts/
     thumbnail: thumbnail/contourcarpet.jpg

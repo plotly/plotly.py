@@ -25,7 +25,7 @@ requirements:
     - setuptools
   run:
     - python
-    - tenacity >=6.2.0
+    - narwhals >=1.15.1
 
 test:
   imports:

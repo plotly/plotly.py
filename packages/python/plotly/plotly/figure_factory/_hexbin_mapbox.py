@@ -1,8 +1,8 @@
 from plotly.express._core import build_dataframe
 from plotly.express._doc import make_docstring
 from plotly.express._chart_types import choropleth_mapbox, scatter_mapbox
+import narwhals.stable.v1 as nw
 import numpy as np
-import pandas as pd
 
 
 def _project_latlon_to_wgs84(lat, lon):
@@ -231,6 +231,7 @@ def _compute_wgs84_hexbin(
     nx=None,
     agg_func=None,
     min_count=None,
+    native_namespace=None,
 ):
     """
     Computes the lat-lon aggregation at hexagonal bin level.
@@ -263,7 +264,7 @@ def _compute_wgs84_hexbin(
         Lat coordinates of each hexagon (shape M x 6)
     np.ndarray
         Lon coordinates of each hexagon (shape M x 6)
-    pd.Series
+    nw.Series
         Unique id for each hexagon, to be used in the geojson data (shape M)
     np.ndarray
         Aggregated value in each hexagon (shape M)
@@ -288,7 +289,14 @@ def _compute_wgs84_hexbin(
 
     # Create unique feature id based on hexagon center
     centers = centers.astype(str)
-    hexagons_ids = pd.Series(centers[:, 0]) + "," + pd.Series(centers[:, 1])
+    hexagons_ids = (
+        nw.from_dict(
+            {"x1": centers[:, 0], "x2": centers[:, 1]},
+            native_namespace=native_namespace,
+        )
+        .select(hexagons_ids=nw.concat_str([nw.col("x1"), nw.col("x2")], separator=","))
+        .get_column("hexagons_ids")
+    )
 
     return hexagons_lats, hexagons_lons, hexagons_ids, agreggated_value
 
@@ -344,22 +352,40 @@ def create_hexbin_mapbox(
     Returns a figure aggregating scattered points into connected hexagons
     """
     args = build_dataframe(args=locals(), constructor=None)
-
+    native_namespace = nw.get_native_namespace(args["data_frame"])
     if agg_func is None:
         agg_func = np.mean
 
-    lat_range = args["data_frame"][args["lat"]].agg(["min", "max"]).values
-    lon_range = args["data_frame"][args["lon"]].agg(["min", "max"]).values
+    lat_range = (
+        args["data_frame"]
+        .select(
+            nw.min(args["lat"]).name.suffix("_min"),
+            nw.max(args["lat"]).name.suffix("_max"),
+        )
+        .to_numpy()
+        .squeeze()
+    )
+
+    lon_range = (
+        args["data_frame"]
+        .select(
+            nw.min(args["lon"]).name.suffix("_min"),
+            nw.max(args["lon"]).name.suffix("_max"),
+        )
+        .to_numpy()
+        .squeeze()
+    )
 
     hexagons_lats, hexagons_lons, hexagons_ids, count = _compute_wgs84_hexbin(
-        lat=args["data_frame"][args["lat"]].values,
-        lon=args["data_frame"][args["lon"]].values,
+        lat=args["data_frame"].get_column(args["lat"]).to_numpy(),
+        lon=args["data_frame"].get_column(args["lon"]).to_numpy(),
         lat_range=lat_range,
         lon_range=lon_range,
         color=None,
         nx=nx_hexagon,
         agg_func=agg_func,
         min_count=min_count,
+        native_namespace=native_namespace,
     )
 
     geojson = _hexagons_to_geojson(hexagons_lats, hexagons_lons, hexagons_ids)
@@ -381,41 +407,47 @@ def create_hexbin_mapbox(
         center = dict(lat=lat_range.mean(), lon=lon_range.mean())
 
     if args["animation_frame"] is not None:
-        groups = args["data_frame"].groupby(args["animation_frame"]).groups
+        groups = dict(
+            args["data_frame"]
+            .group_by(args["animation_frame"], drop_null_keys=True)
+            .__iter__()
+        )
     else:
-        groups = {0: args["data_frame"].index}
+        groups = {(0,): args["data_frame"]}
 
     agg_data_frame_list = []
-    for frame, index in groups.items():
-        df = args["data_frame"].loc[index]
+    for key, df in groups.items():
         _, _, hexagons_ids, aggregated_value = _compute_wgs84_hexbin(
-            lat=df[args["lat"]].values,
-            lon=df[args["lon"]].values,
+            lat=df.get_column(args["lat"]).to_numpy(),
+            lon=df.get_column(args["lon"]).to_numpy(),
             lat_range=lat_range,
             lon_range=lon_range,
-            color=df[args["color"]].values if args["color"] else None,
+            color=df.get_column(args["color"]).to_numpy() if args["color"] else None,
             nx=nx_hexagon,
             agg_func=agg_func,
             min_count=min_count,
+            native_namespace=native_namespace,
         )
         agg_data_frame_list.append(
-            pd.DataFrame(
-                np.c_[hexagons_ids, aggregated_value], columns=["locations", "color"]
+            nw.from_dict(
+                {
+                    "frame": [key[0]] * len(hexagons_ids),
+                    "locations": hexagons_ids,
+                    "color": aggregated_value,
+                },
+                native_namespace=native_namespace,
             )
         )
-    agg_data_frame = (
-        pd.concat(agg_data_frame_list, axis=0, keys=groups.keys())
-        .rename_axis(index=("frame", "index"))
-        .reset_index("frame")
-    )
 
-    agg_data_frame["color"] = pd.to_numeric(agg_data_frame["color"])
+    agg_data_frame = nw.concat(agg_data_frame_list, how="vertical").with_columns(
+        color=nw.col("color").cast(nw.Int64)
+    )
 
     if range_color is None:
         range_color = [agg_data_frame["color"].min(), agg_data_frame["color"].max()]
 
     fig = choropleth_mapbox(
-        data_frame=agg_data_frame,
+        data_frame=agg_data_frame.to_native(),
         geojson=geojson,
         locations="locations",
         color="color",
@@ -440,10 +472,12 @@ def create_hexbin_mapbox(
     if show_original_data:
         original_fig = scatter_mapbox(
             data_frame=(
-                args["data_frame"].sort_values(by=args["animation_frame"])
+                args["data_frame"].sort(
+                    by=args["animation_frame"], descending=False, nulls_last=True
+                )
                 if args["animation_frame"] is not None
                 else args["data_frame"]
-            ),
+            ).to_native(),
             lat=args["lat"],
             lon=args["lon"],
             animation_frame=args["animation_frame"],
