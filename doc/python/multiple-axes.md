@@ -198,9 +198,6 @@ fig.update_layout(
                 color="#1f77b4"
             )
         ),
-        tickfont=dict(
-            color="#1f77b4"
-        )
     ),
     yaxis2=dict(
         title=dict(
@@ -208,9 +205,6 @@ fig.update_layout(
             font=dict(
                 color="#ff7f0e"
             )
-        ),
-        tickfont=dict(
-            color="#ff7f0e"
         ),
         anchor="free",
         overlaying="y",
@@ -224,9 +218,6 @@ fig.update_layout(
                 color="#d62728"
             )
         ),
-        tickfont=dict(
-            color="#d62728"
-        ),
         anchor="x",
         overlaying="y",
         side="right"
@@ -237,9 +228,6 @@ fig.update_layout(
             font=dict(
                 color="#9467bd"
             )
-        ),
-        tickfont=dict(
-            color="#9467bd"
         ),
         anchor="free",
         overlaying="y",

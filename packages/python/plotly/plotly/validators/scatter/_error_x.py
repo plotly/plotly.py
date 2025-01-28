@@ -26,7 +26,7 @@ class Error_XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for `array`.
             color
-                Sets the stoke color of the error bars.
+                Sets the stroke color of the error bars.
             copy_ystyle
 
             symmetric

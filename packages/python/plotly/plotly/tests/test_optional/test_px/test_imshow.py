@@ -7,6 +7,7 @@ from io import BytesIO
 import base64
 import datetime
 from plotly.express.imshow_utils import rescale_intensity
+from plotly.tests.test_optional.test_utils.test_utils import np_nan
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
 img_gray = np.arange(100, dtype=float).reshape((10, 10))
@@ -111,7 +112,7 @@ def test_nan_inf_data(binary_string):
     zmaxs = [1, 255]
     for zmax, img in zip(zmaxs, imgs):
         img[0] = 0
-        img[10:12] = np.nan
+        img[10:12] = np_nan()
         # the case of 2d/heatmap is handled gracefully by the JS trace but I don't know how to check it
         fig = px.imshow(
             np.dstack((img,) * 3),
@@ -341,7 +342,7 @@ def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
             assert (
                 np.abs(
                     np.max(decode_image_string(fig.data[0].source))
-                    - 255 * img.max() / np.iinfo(dtype).max
+                    - np.int64(255) * img.max() / np.iinfo(dtype).max
                 )
                 < 1
             )
