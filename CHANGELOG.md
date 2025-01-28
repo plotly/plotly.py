@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.0.0rc0] - 2024-11-27
+## [6.0.0] - 2025-01-28
 
 ### Added
 - Add `plotly[express]` extra for easily installing Plotly Express dependencies [[#4644](https://github.com/plotly/plotly.py/pull/4644)]
