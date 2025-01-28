@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/package_data/widgetbundle.js widget.ts",
+    "watch": "npm run build -- --watch --sourcemap=inline",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "plotly.js": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/plotly.js": "^2.33.4",
+    "esbuild": "^0.23.1",
+    "typescript": "^5.6.2"
+  }
+}

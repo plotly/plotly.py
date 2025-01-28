@@ -1,30 +1,22 @@
-import ipywidgets as widgets
-from traitlets import List, Unicode, Dict, observe, Integer
+from copy import deepcopy
+import pathlib
+from traitlets import List, Dict, observe, Integer
+from plotly.io._renderers import display_jupyter_version_warnings
 
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
 from .version import __frontend_version__
+import anywidget
 
 
-@widgets.register
-class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
+class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     """
     Base class for FigureWidget. The FigureWidget class is code-generated as a
     subclass
     """
 
-    # Widget Traits
-    # -------------
-    # Widget traitlets are automatically synchronized with the FigureModel
-    # JavaScript object
-    _view_name = Unicode("FigureView").tag(sync=True)
-    _view_module = Unicode("jupyterlab-plotly").tag(sync=True)
-    _view_module_version = Unicode(__frontend_version__).tag(sync=True)
-
-    _model_name = Unicode("FigureModel").tag(sync=True)
-    _model_module = Unicode("jupyterlab-plotly").tag(sync=True)
-    _model_module_version = Unicode(__frontend_version__).tag(sync=True)
+    _esm = pathlib.Path(__file__).parent / "package_data" / "widgetbundle.js"
 
     # ### _data and _layout ###
     # These properties store the current state of the traces and
@@ -36,8 +28,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # them to the front-end on FigureWidget construction. All other updates
     # are made using mutation, and they are manually synced to the frontend
     # using the relayout/restyle/update/etc. messages.
-    _layout = Dict().tag(sync=True, **custom_serializers)
-    _data = List().tag(sync=True, **custom_serializers)
+    _widget_layout = Dict().tag(sync=True, **custom_serializers)
+    _widget_data = List().tag(sync=True, **custom_serializers)
     _config = Dict().tag(sync=True, **custom_serializers)
 
     # ### Python -> JS message properties ###
@@ -150,6 +142,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # ipywidget property that stores the number of active frontend
         # views of this widget
         self._view_count = 0
+
+    def show(self, *args, **kwargs):
+        return self
 
     # Python -> JavaScript Messages
     # -----------------------------
@@ -516,7 +511,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # If a property is present in both _layout and _layout_defaults
             # then we remove the copy from _layout
             removed_props = self._remove_overlapping_props(
-                self._layout, self._layout_defaults
+                self._widget_layout, self._layout_defaults
             )
 
             # ### Notify frontend model of property removal ###
@@ -734,6 +729,13 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         """
         Return mimebundle corresponding to default renderer.
         """
+        display_jupyter_version_warnings()
+
+        # Widget layout and data need to be set here in case there are
+        # changes made to the figure after the widget is created but before
+        # the cell is run.
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
         return {
             "application/vnd.jupyter.widget-view+json": {
                 "version_major": 2,

@@ -260,17 +260,6 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             title
                 :class:`plotly.graph_objects.pie.Title`
                 instance or dict with compatible properties
-            titlefont
-                Deprecated: Please use pie.title.font instead.
-                Sets the font used for `title`. Note that the
-                title's font used to be set by the now
-                deprecated `titlefont` attribute.
-            titleposition
-                Deprecated: Please use pie.title.position
-                instead. Specifies the location of the `title`.
-                Note that the title's position used to be set
-                by the now deprecated `titleposition`
-                attribute.
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

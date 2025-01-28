@@ -11,9 +11,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 "data_docs",
                 """
             font
-                Sets this axis' title font. Note that the
-                title's font used to be customized by the now
-                deprecated `titlefont` attribute.
+                Sets this axis' title font.
             standoff
                 Sets the standoff distance (in px) between the
                 axis labels and the title text The default
@@ -27,11 +25,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 the margins to fit the axis title at given
                 standoff distance.
             text
-                Sets the title of this axis. Note that before
-                the existence of `title.text`, the title's
-                contents used to be defined as the `title`
-                attribute itself. This behavior has been
-                deprecated.
+                Sets the title of this axis.
 """,
             ),
             **kwargs,

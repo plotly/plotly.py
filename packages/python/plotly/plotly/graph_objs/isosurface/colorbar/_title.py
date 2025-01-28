@@ -15,8 +15,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def font(self):
         """
-        Sets this color bar's title font. Note that the title's font
-        used to be set by the now deprecated `titlefont` attribute.
+        Sets this color bar's title font.
 
         The 'font' property is an instance of Font
         that may be specified as:
@@ -87,9 +86,7 @@ class Title(_BaseTraceHierarchyType):
         """
         Determines the location of color bar's title with respect to
         the color bar. Defaults to "top" when `orientation` if "v" and
-        defaults to "right" when `orientation` if "h". Note that the
-        title's location used to be set by the now deprecated
-        `titleside` attribute.
+        defaults to "right" when `orientation` if "h".
 
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -110,9 +107,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def text(self):
         """
-        Sets the title of the color bar. Note that before the existence
-        of `title.text`, the title's contents used to be defined as the
-        `title` attribute itself. This behavior has been deprecated.
+        Sets the title of the color bar.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -134,21 +129,14 @@ class Title(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         font
-            Sets this color bar's title font. Note that the title's
-            font used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets this color bar's title font.
         side
             Determines the location of color bar's title with
             respect to the color bar. Defaults to "top" when
             `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h". Note that the title's location
-            used to be set by the now deprecated `titleside`
-            attribute.
+            `orientation` if "h".
         text
-            Sets the title of the color bar. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of the color bar.
         """
 
     def __init__(self, arg=None, font=None, side=None, text=None, **kwargs):
@@ -162,21 +150,14 @@ class Title(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.isosurface.colorbar.Title`
         font
-            Sets this color bar's title font. Note that the title's
-            font used to be set by the now deprecated `titlefont`
-            attribute.
+            Sets this color bar's title font.
         side
             Determines the location of color bar's title with
             respect to the color bar. Defaults to "top" when
             `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h". Note that the title's location
-            used to be set by the now deprecated `titleside`
-            attribute.
+            `orientation` if "h".
         text
-            Sets the title of the color bar. Note that before the
-            existence of `title.text`, the title's contents used to
-            be defined as the `title` attribute itself. This
-            behavior has been deprecated.
+            Sets the title of the color bar.
 
         Returns
         -------
