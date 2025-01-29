@@ -786,12 +786,9 @@ fig.show()
 
 This example shows how to put a terse note about the data source or interpretation at the bottom of the figure.  This example achieves the desired alignment in the bottom right corner using the title element and container coordinates and then uses an annotation to add a figure title.  A near zero container coordinate is an easy and robust way to put text -- such as a source line or figure note -- at the bottom of a figure.  It is easier to specify the bottom of the figure in container coordinates than in e.g. a paper coordinate since uncertainty about the size of legends and x-axis labels make the paper coordinate of the bottom of the figure uncertain.  Making the y container coordinate very slightly positive avoids cutting off the descending strokes of letters like y, p, and q.  Only the title command supports container coordinates, so this example repurposes the title element to insert the note and repurposes an annotation element for the title.  The top of the figure is typically less cluttered and more predictable, so an annotation with its bottom at a paper y-coordinate slightly greater than 1 is a reasonable title location on many graphs.
 
-```import plotly.express as px
-df_iris = px.data.iris()
-fig = px.scatter(df_iris, x="sepal_width", y="sepal_length", color="species",
-                 size='petal_length', hover_data=['petal_width'])
-
-#Use the title for the source / note line
+```python
+import plotly.express as px
+df = px.data.iris()
 fig.update_layout(
         title=dict(text="Note: this is the Plotly title element.",
                  # keeping this title string short avoids getting the text cut off in small windows
