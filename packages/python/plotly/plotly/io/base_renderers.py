@@ -9,6 +9,7 @@ from ._base_renderers import (
     JpegRenderer,
     HtmlRenderer,
     ColabRenderer,
+    DeepnoteRenderer,
     KaggleRenderer,
     NotebookRenderer,
     ExternalRenderer,

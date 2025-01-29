@@ -139,6 +139,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Repair crash on Matplotlib 3.8 related to get_offset_position [[#4372](https://github.com/plotly/plotly.py/pull/4372)],
 - Handle deprecation of `pandas.Series.dt.to_pydatetime()` calls and suppress the `FutureWarning` they currently emit. [[#4379](https://github.com/plotly/plotly.py/pull/4379)]
+- Add DeepnoteRenderer to pio.renderers [[#4389](https://github.com/plotly/plotly.py/pull/4389)]
 
 ## [5.17.0] - 2023-09-15
 

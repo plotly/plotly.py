@@ -14,6 +14,7 @@ from plotly.io._base_renderers import (
     KaggleRenderer,
     AzureRenderer,
     ColabRenderer,
+    DeepnoteRenderer,
     JsonRenderer,
     PngRenderer,
     JpegRenderer,
@@ -451,6 +452,7 @@ renderers["notebook_connected"] = NotebookRenderer(config=config, connected=True
 renderers["kaggle"] = KaggleRenderer(config=config)
 renderers["azure"] = AzureRenderer(config=config)
 renderers["colab"] = ColabRenderer(config=config)
+renderers["deepnote"] = DeepnoteRenderer(config=config)
 renderers["cocalc"] = CoCalcRenderer()
 renderers["databricks"] = DatabricksRenderer()
 
