@@ -131,7 +131,7 @@ df = data.stocks()
 
 layout = dict(
     hoversubplots="axis",
-    title="Stock Price Changes",
+    title=dict(text="Stock Price Changes"),
     hovermode="x",
     grid=dict(rows=3, columns=1),
 )

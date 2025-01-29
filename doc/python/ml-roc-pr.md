@@ -187,10 +187,19 @@ for i in range(y_scores.shape[1]):
     fig.add_trace(go.Scatter(x=fpr, y=tpr, name=name, mode='lines'))
 
 fig.update_layout(
-    xaxis_title='False Positive Rate',
-    yaxis_title='True Positive Rate',
-    yaxis=dict(scaleanchor="x", scaleratio=1),
-    xaxis=dict(constrain='domain'),
+    xaxis=dict(
+        title=dict(
+            text='False Positive Rate'
+        ),
+        constrain='domain'
+    ),
+    yaxis=dict(
+        title=dict(
+            text='True Positive Rate'
+        ),
+        scaleanchor='x',
+        scaleratio=1
+    ),
     width=700, height=500
 )
 fig.show()
@@ -277,10 +286,19 @@ for i in range(y_scores.shape[1]):
     fig.add_trace(go.Scatter(x=recall, y=precision, name=name, mode='lines'))
 
 fig.update_layout(
-    xaxis_title='Recall',
-    yaxis_title='Precision',
-    yaxis=dict(scaleanchor="x", scaleratio=1),
-    xaxis=dict(constrain='domain'),
+    xaxis=dict(
+        title=dict(
+            text='Recall'
+        ),
+        constrain='domain'
+    ),
+    yaxis=dict(
+        title=dict(
+            text='Precision'
+        ),
+        scaleanchor='x',
+        scaleratio=1
+    ),
     width=700, height=500
 )
 fig.show()
