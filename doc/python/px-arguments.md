@@ -244,6 +244,8 @@ fig = px.density_contour(dict(effect_size=5 + np.random.randn(N),
 fig.show()
 ```
 
+To pass a `dict` or an array (such as a NumPy `ndarray`) to the `data_frame` parameter, you'll need to have pandas installed, because `plotly.express` internally converts the `dict` or array to a pandas DataFrame.
+
 #### Integer column names
 
 When the `data_frame` argument is a NumPy array, column names are integer corresponding to the columns of the array. In this case, keyword names are used in axis, legend and hovers. This is also the case for a pandas DataFrame with integer column names. Use the `labels` argument to override these names.

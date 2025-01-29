@@ -583,7 +583,7 @@ fig.show()
 
 *New in 5.23*
 
-When drawing shapes where `xref` or `yref` reference axes of type category or multicategory, you can shift `x0`, `x1`, `y0`, and `y1` away from the center of the category using `x0shift`, `x1shift`, `y0shift`, and `y1shift` by specifying a value between -1 and 1. 
+When drawing shapes where `xref` or `yref` reference axes of type category or multicategory, you can shift `x0`, `x1`, `y0`, and `y1` away from the center of the category using `x0shift`, `x1shift`, `y0shift`, and `y1shift` by specifying a value between -1 and 1.
 
 -1 is the center of the previous category, 0 is the center of the referenced category, and 1 is the center of the next category.
 
@@ -636,9 +636,19 @@ fig = go.Figure(
 )
 
 fig.update_layout(
-    title="GDP per Capita in Europe (1972)",
-    xaxis_title="Country",
-    yaxis_title="GDP per Capita",
+    title=dict(
+        text="GDP per Capita in Europe (1972)"
+    ),
+    xaxis=dict(
+        title=dict(
+            text="Country"
+        )
+    ),
+    yaxis=dict(
+        title=dict(
+            text="GDP per Capita"
+        )
+    ),
 )
 
 fig.show()
@@ -1074,11 +1084,14 @@ fig = go.Figure(
         y=df.GOOG,
     ),
     layout=go.Layout(
-        yaxis=dict(title="Price in USD"),
+        yaxis=dict(
+            title=dict(
+                text="Price in USD"
+            )),
         newshape=dict(
             label=dict(texttemplate="Change: %{dy:.2f}")
         ),
-        title="Google Share Price 2018/2019",
+        title=dict(text="Google Share Price 2018/2019"),
     ),
 )
 
@@ -1152,12 +1165,14 @@ fig = go.Figure(
         name="Apple"
     ),
     layout=go.Layout(
-        yaxis=dict(title="Price in USD"),
+        yaxis=dict(
+            title=dict(text="Price in USD"),
+            ),
         newshape=dict(
             showlegend=True,
             label=dict(texttemplate="Change: %{dy:.2f}")
         ),
-        title="Apple Share Price 2018/2019",
+        title=dict(text="Apple Share Price 2018/2019"),
     ),
 )
 
