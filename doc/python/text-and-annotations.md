@@ -807,7 +807,6 @@ fig.update_layout(
                 xanchor="right",
                 x=1, 
                 font=dict(size=12)),
-
                 plot_bgcolor="white",
 
   # We move the legend out of the right margin so the right-aligned note is 
