@@ -1246,7 +1246,7 @@ def process_args_into_dataframe(
             else args.get(field_name)
         )
         # argument not specified, continue
-        if argument_list is None or argument_list is [None]:
+        if argument_list is None or argument_list == [None]:
             continue
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
