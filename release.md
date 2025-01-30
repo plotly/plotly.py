@@ -1,15 +1,9 @@
 
-# How to release plotly packages
+# Release guide
 
-There are 3 Python packages (`plotly`, `plotly-geo` and `chart-studio`) which need to be
-published to PyPI and conda. The `plotly` package is located in this repository, while `plotly-geo` and `chart-studio` are located in their own separate repositories under those names.
+## Release process - full release of `plotly` package
 
-In addition, there are various changelogs, github releases and forum announcements to do :)
-
-
-## Release process - `plotly` package and extensions
-
-This is the release process for releasing `plotly.py` version `X.Y.Z`.
+This is the release process for releasing `plotly.py` version `X.Y.Z`, including changelogs, Github release and forum announcement.
 
 ### Finalize changelog
 
@@ -123,7 +117,7 @@ to features in the release.
 * Update the Github Release entry and CHANGELOG entry to have the nice title and a link to the announcement
 * Follow up on issues resolved in this release or forum posts with better answers as of this release
 
-## Release *Candidate* process - `plotly` package and extensions
+## Release process - Release *Candidate* of `plotly` package
 
 (rough notes for a rough/ad hoc process!)
 
