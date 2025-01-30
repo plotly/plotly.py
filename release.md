@@ -26,8 +26,6 @@ Manually update the versions to `X.Y.Z` in the files specified below.
 
  - `CHANGELOG.md`
    + update the release date
- - `packages/python/plotly/plotly/_widget_version.py`:
-   + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
 
