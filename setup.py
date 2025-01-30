@@ -19,8 +19,8 @@ import versioneer
 
 
 here = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-node_root = os.path.join(project_root, "packages", "python", "plotly", "js")
+project_root = here
+node_root = os.path.join(project_root, "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 
 npm_path = os.pathsep.join(
