@@ -28,7 +28,7 @@ Modules:
 import sys
 from typing import TYPE_CHECKING
 from _plotly_utils.importers import relative_import
-import importlib
+import importlib.metadata
 
 # This is the version of the plotly package
 __version__ = importlib.metadata.version("plotly")
