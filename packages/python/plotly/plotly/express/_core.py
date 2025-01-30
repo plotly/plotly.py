@@ -2147,6 +2147,8 @@ def process_dataframe_timeline(args):
 
 
 def process_dataframe_pie(args, trace_patch):
+    import numpy as np
+
     names = args.get("names")
     if names is None:
         return args, trace_patch
@@ -2159,12 +2161,12 @@ def process_dataframe_pie(args, trace_patch):
     uniques = df.get_column(names).unique(maintain_order=True).to_list()
     order = [x for x in OrderedDict.fromkeys(list(order_in) + uniques) if x in uniques]
 
-    # Sort args['data_frame'] by column 'b' according to order `order`.
+    # Sort args['data_frame'] by column `names` according to order `order`.
     token = nw.generate_temporary_column_name(8, df.columns)
     args["data_frame"] = (
         df.with_columns(
-            nw.col("b")
-            .replace_strict(order, range(len(order)), return_dtype=nw.UInt32)
+            nw.col(names)
+            .replace_strict(order, np.arange(len(order)), return_dtype=nw.UInt32)
             .alias(token)
         )
         .sort(token)
