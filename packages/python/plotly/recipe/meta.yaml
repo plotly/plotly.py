@@ -1,4 +1,4 @@
-{% set data = load_file_data('../pyproject.toml') %}
+{% set data = load_file_data('pyproject.toml') %}
 {% set version = data.get('version') %}
 
 package:
