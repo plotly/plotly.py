@@ -1,5 +1,5 @@
 """Interface to Plotly's /v2/plots endpoints."""
-from __future__ import absolute_import
+
 
 from chart_studio.api.v2.utils import build_url, make_params, request
 

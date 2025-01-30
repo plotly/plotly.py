@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -268,7 +268,7 @@ else:
     )
 
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
         from packaging.version import Version as _Version

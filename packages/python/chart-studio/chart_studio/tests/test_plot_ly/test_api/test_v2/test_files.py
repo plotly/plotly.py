@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from chart_studio.api.v2 import files
 from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase
 

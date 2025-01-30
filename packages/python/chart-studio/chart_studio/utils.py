@@ -5,7 +5,7 @@ utils
 Low-level functionality NOT intended for users to EVER use.
 
 """
-from __future__ import absolute_import
+
 
 import os.path
 import re

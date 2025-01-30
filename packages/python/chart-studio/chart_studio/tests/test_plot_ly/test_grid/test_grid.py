@@ -5,7 +5,7 @@ test_grid:
 A module intended for use with Nose.
 
 """
-from __future__ import absolute_import
+
 
 import random
 import string

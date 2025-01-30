@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ..graph_objs import Waterfall
     from ..graph_objs import Volume
     from ..graph_objs import Violin
@@ -268,7 +268,7 @@ else:
     )
 
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     try:
         import ipywidgets as _ipywidgets
         from packaging.version import Version as _Version

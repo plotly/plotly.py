@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._show import ShowValidator
     from ._locationssrc import LocationssrcValidator
     from ._locations import LocationsValidator

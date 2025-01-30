@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json as _json
 
 from chart_studio.api.v2 import grids

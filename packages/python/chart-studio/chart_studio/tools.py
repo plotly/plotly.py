@@ -7,7 +7,7 @@ tools
 Functions that USERS will possibly want access to.
 
 """
-from __future__ import absolute_import
+
 
 import urllib
 import warnings

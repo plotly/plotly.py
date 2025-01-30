@@ -3,7 +3,7 @@ grid_objs
 =========
 
 """
-from __future__ import absolute_import
+
 
 import _plotly_utils.exceptions
 

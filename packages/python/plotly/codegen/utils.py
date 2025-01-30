@@ -76,7 +76,7 @@ def build_from_imports_py(rel_modules=(), rel_classes=(), init_extra=""):
     result = f"""\
 import sys
 from typing import TYPE_CHECKING
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     {imports_str}
 else:
     from _plotly_utils.importers import relative_import

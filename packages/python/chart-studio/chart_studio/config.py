@@ -4,7 +4,7 @@ Merges and prioritizes file/session config and credentials.
 This is promoted to its own module to simplify imports.
 
 """
-from __future__ import absolute_import
+
 
 from chart_studio import session, tools
 

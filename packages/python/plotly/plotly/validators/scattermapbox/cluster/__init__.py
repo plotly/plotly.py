@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._stepsrc import StepsrcValidator
     from ._step import StepValidator
     from ._sizesrc import SizesrcValidator

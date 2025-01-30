@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._textposition import TextpositionValidator
     from ._textfont import TextfontValidator
     from ._text import TextValidator
