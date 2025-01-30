@@ -56,6 +56,29 @@ def test_pie_like_px():
     _compare_figures(trace, fig)
 
 
+def test_pie_custom_category_order(constructor):
+    # https://github.com/plotly/plotly.py/issues/4999
+    df = constructor(
+        {
+            "status": ["On Route", "Pending", "Waiting Result", "Delivered"],
+            "count": [28, 10, 73, 8],
+        }
+    )
+    custom_order = ["Pending", "Waiting Result", "On Route", "Delivered"]
+    result = px.pie(
+        data_frame=df,
+        values="count",
+        names="status",
+        category_orders={"status": custom_order},
+    ).to_dict()
+    assert list(result["data"][0]["labels"]) == [
+        "Pending",
+        "Waiting Result",
+        "On Route",
+        "Delivered",
+    ]
+
+
 def test_sunburst_treemap_colorscales():
     labels = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
     parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
