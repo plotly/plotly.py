@@ -20,6 +20,7 @@ commands:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
+            pip install -e .
             pip install -r ./test_requirements/requirements_<<parameters.py>>_core.txt
       - run:
           name: Test core
@@ -45,6 +46,7 @@ commands:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
+            pip install -e .
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
             npm ci
