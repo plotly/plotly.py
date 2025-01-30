@@ -384,7 +384,7 @@ jobs:
             eval "$(conda shell.bash hook)"
             conda activate env
             python setup.py sdist bdist_wheel
-            cp -R dist ../../../output/dist
+            cp -R dist output/dist
             git status
 
       - run:
@@ -393,7 +393,7 @@ jobs:
             eval "$(conda shell.bash hook)"
             conda activate env
             conda build recipe/
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
+            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 output/
             git status
 
       - run:
@@ -455,7 +455,7 @@ jobs:
               cd js
               npm ci
               npm run build
-              cd ../../../../doc
+              cd ../doc
             fi
             cd ..
       - run:
@@ -534,7 +534,7 @@ jobs:
               pip uninstall -y plotly
               cd ..
               pip install -e .
-              cd ../../../doc
+              cd doc
               cd apidoc
               make html
               cd _build/html
