@@ -299,9 +299,9 @@ def update_plotlyjs_dev():
     update_schema_bundle_from_master()
     run_codegen()
 
-
-if "updateplotlyjsdev" in sys.argv:
-    update_plotlyjs_dev()
-elif "updateplotlyjs" in sys.argv:
-    print(plotly_js_version())
-    update_plotlyjs(plotly_js_version())
+if __name__ == "__main__":
+    if "updateplotlyjsdev" in sys.argv:
+        update_plotlyjs_dev()
+    elif "updateplotlyjs" in sys.argv:
+        print(plotly_js_version())
+        update_plotlyjs(plotly_js_version())
