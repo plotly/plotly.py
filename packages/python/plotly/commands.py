@@ -299,6 +299,7 @@ def update_plotlyjs_dev():
     update_schema_bundle_from_master()
     run_codegen()
 
+
 if __name__ == "__main__":
     if "updateplotlyjsdev" in sys.argv:
         update_plotlyjs_dev()

@@ -328,7 +328,8 @@ jobs:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_38_core.txt black inflect
+            pip install -e .
+            pip install -r ./test_requirements/requirements_311_core.txt black inflect
             pip install jupyterlab
       - run:
           name: Update plotly.js to dev
