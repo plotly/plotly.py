@@ -202,15 +202,15 @@ fig.update_traces(mode='markers', marker=dict(sizemode='area',
                                               sizeref=sizeref, line_width=2))
 
 fig.update_layout(
-    title='Life Expectancy v. Per Capita GDP, 2007',
+    title=dict(text='Life Expectancy v. Per Capita GDP, 2007'),
     xaxis=dict(
-        title='GDP per capita (2000 dollars)',
+        title=dict(text='GDP per capita (2000 dollars)'),
         gridcolor='white',
         type='log',
         gridwidth=2,
     ),
     yaxis=dict(
-        title='Life Expectancy (years)',
+        title=dict(text='Life Expectancy (years)'),
         gridcolor='white',
         gridwidth=2,
     ),

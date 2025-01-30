@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "plotly.js": "3.0.0-rc.1"
+    "plotly.js": "3.0.0"
   },
   "devDependencies": {
     "@types/plotly.js": "^2.33.4",

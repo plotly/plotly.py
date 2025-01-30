@@ -253,9 +253,21 @@ fig.add_trace(go.Scatter(x=month, y=low_2000, name='Low 2000',
                          line=dict(color='royalblue', width=4, dash='dot')))
 
 # Edit the layout
-fig.update_layout(title='Average High and Low Temperatures in New York',
-                   xaxis_title='Month',
-                   yaxis_title='Temperature (degrees F)')
+fig.update_layout(
+        title=dict(
+            text='Average High and Low Temperatures in New York'
+        ),
+        xaxis=dict(
+            title=dict(
+                text='Month'
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text='Temperature (degrees F)'
+            )
+        ),
+)
 
 
 fig.show()

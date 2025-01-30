@@ -260,7 +260,7 @@ fig.append_trace(go.Scatter(
 ), 1, 2)
 
 fig.update_layout(
-    title='Household savings & net worth for eight OECD countries',
+    title=dict(text='Household savings & net worth for eight OECD countries'),
     yaxis=dict(
         showgrid=False,
         showline=False,
