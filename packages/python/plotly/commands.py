@@ -47,7 +47,6 @@ def install_js_deps(local):
     except:
         has_npm = False
 
-
     skip_npm = os.environ.get("SKIP_NPM", False)
     if skip_npm:
         log.info("Skipping npm-installation")
@@ -62,9 +61,7 @@ def install_js_deps(local):
     env["PATH"] = npm_path
 
     if has_npm:
-        log.info(
-            "Installing build dependencies with npm.  This may take a while..."
-        )
+        log.info("Installing build dependencies with npm.  This may take a while...")
         check_call(
             [npmName, "install"],
             cwd=node_root,
@@ -91,6 +88,7 @@ def install_js_deps(local):
         if not os.path.exists(t):
             msg = "Missing file: %s" % t
             raise ValueError(msg)
+
 
 # Generate class hierarchy from Plotly JSON schema
 def run_codegen():
@@ -126,7 +124,7 @@ def overwrite_bundle(url):
     import requests
 
     req = requests.get(url)
-    print('url:', url)
+    print("url:", url)
     assert req.status_code == 200
     path = os.path.join(here, "plotly", "package_data", "plotly.min.js")
     with open(path, "wb") as f:
@@ -145,6 +143,7 @@ __plotlyjs_version__ = "{plotlyjs_version}"
                 plotlyjs_version=plotlyjs_version
             )
         )
+
 
 def request_json(url):
     import requests
@@ -212,6 +211,7 @@ def update_schema(plotly_js_version):
     )
     overwrite_schema(url)
 
+
 # Download latest version of the plotly.js bundle
 def update_bundle(plotly_js_version):
     url = (
@@ -224,12 +224,14 @@ def update_bundle(plotly_js_version):
     plotlyjs_version = plotly_js_version
     overwrite_plotlyjs_version_file(plotlyjs_version)
 
+
 # Update project to a new version of plotly.js
 def update_plotlyjs(plotly_js_version):
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
     run_codegen()
-    
+
+
 # Update the plotly.js schema and bundle from master
 def update_schema_bundle_from_master():
 
@@ -291,14 +293,15 @@ def update_schema_bundle_from_master():
     overwrite_plotlyjs_version_file(version)
     install_js_deps(local)
 
+
 # Update project to a new development version of plotly.js
 def update_plotlyjs_dev():
     update_schema_bundle_from_master()
     run_codegen()
+
 
 if "updateplotlyjsdev" in sys.argv:
     update_plotlyjs_dev()
 elif "updateplotlyjs" in sys.argv:
     print(plotly_js_version())
     update_plotlyjs(plotly_js_version())
-
