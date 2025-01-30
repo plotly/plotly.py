@@ -314,7 +314,7 @@ jobs:
 
   plotlyjs_dev_build:
     docker:
-      - image: cimg/python:3.9-node
+      - image: cimg/python:3.11-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
