@@ -58,25 +58,35 @@ def test_pie_like_px():
 
 def test_pie_custom_category_order(constructor):
     # https://github.com/plotly/plotly.py/issues/4999
-    df = constructor(
-        {
-            "status": ["On Route", "Pending", "Waiting Result", "Delivered"],
-            "count": [28, 10, 73, 8],
-        }
-    )
+    data = {
+        "status": ["On Route", "Pending", "Waiting Result", "Delivered"],
+        "count": [28, 10, 73, 8],
+    }
+    df = constructor(data)
     custom_order = ["Pending", "Waiting Result", "On Route", "Delivered"]
     result = px.pie(
         data_frame=df,
         values="count",
         names="status",
         category_orders={"status": custom_order},
-    ).to_dict()
-    assert list(result["data"][0]["labels"]) == [
+    )
+    assert list(result.to_dict()["data"][0]["labels"]) == [
         "Pending",
         "Waiting Result",
         "On Route",
         "Delivered",
     ]
+    values_ = np.array(
+        [
+            x[0]
+            for x in sorted(
+                zip(data["count"], data["status"]),
+                key=lambda t: custom_order.index(t[1]),
+            )
+        ]
+    )
+    trace = go.Pie(values=values_, labels=custom_order)
+    _compare_figures(trace, result)
 
 
 def test_sunburst_treemap_colorscales():
