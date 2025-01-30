@@ -88,19 +88,25 @@ def _bullet(
                 range_colors[0], range_colors[1], len(df.iloc[row]["ranges"]), "rgb"
             )
             x = (
-                [sorted(df.iloc[row]["ranges"])[-1 - idx]]
+                [sorted(df.iloc[row]["ranges"], key=abs, reverse=True)[idx]]
                 if orientation == "h"
                 else [0]
             )
             y = (
                 [0]
                 if orientation == "h"
-                else [sorted(df.iloc[row]["ranges"])[-1 - idx]]
+                else [sorted(df.iloc[row]["ranges"], key=abs, reverse=True)[idx]]
             )
             bar = go.Bar(
                 x=x,
                 y=y,
-                marker=dict(color=inter_colors[-1 - idx]),
+                marker=dict(
+                    color=inter_colors[
+                        sorted(df.iloc[row]["ranges"]).index(
+                            sorted(df.iloc[row]["ranges"], key=abs, reverse=True)[idx]
+                        )
+                    ]
+                ),
                 name="ranges",
                 hoverinfo="x" if orientation == "h" else "y",
                 orientation=orientation,
@@ -120,19 +126,25 @@ def _bullet(
                 "rgb",
             )
             x = (
-                [sorted(df.iloc[row]["measures"])[-1 - idx]]
+                [sorted(df.iloc[row]["measures"], key=abs, reverse=True)[idx]]
                 if orientation == "h"
                 else [0.5]
             )
             y = (
                 [0.5]
                 if orientation == "h"
-                else [sorted(df.iloc[row]["measures"])[-1 - idx]]
+                else [sorted(df.iloc[row]["measures"], key=abs, reverse=True)[idx]]
             )
             bar = go.Bar(
                 x=x,
                 y=y,
-                marker=dict(color=inter_colors[-1 - idx]),
+                marker=dict(
+                    color=inter_colors[
+                        sorted(df.iloc[row]["measures"]).index(
+                            sorted(df.iloc[row]["measures"], key=abs, reverse=True)[idx]
+                        )
+                    ]
+                ),
                 name="measures",
                 hoverinfo="x" if orientation == "h" else "y",
                 orientation=orientation,
