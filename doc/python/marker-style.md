@@ -352,7 +352,7 @@ fig = go.Figure(go.Scatter(mode="markers", x=namevariants, y=namestems, marker_s
                            marker_line_color="midnightblue", marker_color="lightskyblue",
                            marker_line_width=2, marker_size=15,
                            hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
-fig.update_layout(title="Mouse over symbols for name & number!",
+fig.update_layout(title=dict(text="Mouse over symbols for name & number!"),
                   xaxis_range=[-1,4], yaxis_range=[len(set(namestems)),-1],
                   margin=dict(b=0,r=0), xaxis_side="top", height=1400, width=400)
 fig.show()
@@ -361,7 +361,7 @@ fig.show()
 
 ### Using a Custom Marker
 
-To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`. 
+To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`.
 
 
 ```python
@@ -390,10 +390,10 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
 
 fig.update_traces(
     marker=dict(
-        size=8, 
-        symbol="diamond-open", 
+        size=8,
+        symbol="diamond-open",
         line=dict(
-            width=2, 
+            width=2,
 #             color="DarkSlateGrey" Line colors don't apply to open markers
         )
     ),
@@ -465,7 +465,7 @@ fig.show()
 
 *New in 5.11*
 
-When you have multiple markers at one location, you can use `standoff` on a marker to move it away from the other marker in the direction of the `angle`. 
+When you have multiple markers at one location, you can use `standoff` on a marker to move it away from the other marker in the direction of the `angle`.
 In this example, we set `standoff=8` on the `arrow` marker, which is half the size of the other `circle` marker, meaning it points exactly at the `circle`.
 
 ```python
@@ -525,7 +525,7 @@ fig = go.Figure(
 )
 
 fig.update_layout(
-    title="Population changes 1987 to 2007",
+    title=dict(text="Population changes 1987 to 2007"),
     width=1000,
     height=1000,
     showlegend=False,

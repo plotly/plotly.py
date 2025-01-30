@@ -367,7 +367,10 @@ fig.add_trace(go.Box(
 ))
 
 fig.update_layout(
-    yaxis_title='normalized moisture',
+    yaxis=dict(
+        title=dict(
+            text='normalized moisture')
+    ),
     boxmode='group' # group together boxes of the different traces for each value of x
 )
 fig.show()
@@ -402,7 +405,7 @@ fig.add_trace(go.Box(
 ))
 
 fig.update_layout(
-    xaxis=dict(title='normalized moisture', zeroline=False),
+    xaxis=dict(title=dict(text='normalized moisture'), zeroline=False),
     boxmode='group'
 )
 
@@ -479,7 +482,7 @@ for xd, yd, cls in zip(x_data, y_data, colors):
         )
 
 fig.update_layout(
-    title='Points Scored by the Top 9 Scoring NBA Players in 2012',
+    title=dict(text='Points Scored by the Top 9 Scoring NBA Players in 2012'),
     yaxis=dict(
         autorange=True,
         showgrid=True,
