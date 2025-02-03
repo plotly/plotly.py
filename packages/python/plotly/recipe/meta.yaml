@@ -1,17 +1,16 @@
 {% set data = load_file_data('pyproject.toml') %}
-{% set version = data.get('version') %}
+{% set version = data.get('project', {}).get('version') %}
 
 package:
   name: plotly
   version: {{ version }}
 
 source:
-  path: ../../../../
+  path: ../
 
 build:
   number: 0
   script: |
-    cd packages/python/plotly
     {{ PYTHON }} -m build --sdist --wheel
     {{ PYTHON }} -m pip install dist/plotly-{{ version }}.tar.gz --no-deps --ignore-installed --no-cache-dir -q
   noarch: python
@@ -20,9 +19,10 @@ requirements:
   build:
     - python
     - pip
-    - jupyterlab =3
-    - nodejs =16
+    - jupyterlab
+    - build
     - setuptools
+    - nodejs =16
   run:
     - python
     - narwhals >=1.15.1
