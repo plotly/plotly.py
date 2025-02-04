@@ -24,27 +24,20 @@ a link to the plotly.js CHANGELOG.
 
 Manually update the versions to `X.Y.Z` in the files specified below.
 
+ - `pyproject.toml`
+   + update version
  - `CHANGELOG.md`
    + update the release date
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
-
- ### Triggering (and Retriggering) the build
-
- - Commit and add this specific tag which `versioneer` will pick up, and push to Github so that CI will build the release artifacts. This is an atomic push so that CI will read the tag on the commit:
+ - Create a tag for Github release
    + `git tag vX.Y.Z`
    + `git push --atomic origin release-X.Y.Z vX.Y.Z`
  - Create a Github pull request from `release-X.Y.Z` to `master` and wait for CI to be green
- - *If something goes wrong below*, you'll need to trigger the build process again after a fix. You'll need to commit your changes in the release branch, move the tag and atomically force push:
-   + `git commit ....`
-   + `git tag -f vX.Y.Z`
-   + `git push --force --atomic origin release-X.Y.Z vX.Y.Z`
 
 ### Download and QA CI Artifacts
 
 The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress, which will give you a directory called `output`. The filenames contained within will contain version numbers.
-
-**Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
 To locally install the PyPI dist, make sure you have an environment with JupyterLab installed (maybe one created with `conda create -n condatest python=3.10 jupyter anywidget pandas`):
 
@@ -55,8 +48,6 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 
 You'll want to check, in both Lab and Notebook, **in a brand new notebook in each** so that there is no caching of previous results, that `go.Figure()` and `go.FigureWidget()` work without error.
 
-If something is broken, you'll need to fix it and trigger the build again (see above section).
-
 ### Publishing
 
 Once you're satisfied that things render in Lab and Notebook in Widget and regular mode,
@@ -65,7 +56,7 @@ you can publish the artifacts. **You will need special credentials from Plotly l
 
 Publishing to PyPI:
 ```bash
-(plotly_dev) $ cd path/to/output/dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
 
