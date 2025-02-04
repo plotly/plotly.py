@@ -53,12 +53,6 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 - `conda uninstall plotly` (just in case!)
 - `pip install path/to/output/dist/plotly-X.Y.X-py3-none-any.whl`
 
-To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
-
-- `conda uninstall plotly`
-- `pip uninstall plotly` (just in case!)
-- `conda install path/to/output/plotly-X.Y.Z.tar.bz2`
-
 You'll want to check, in both Lab and Notebook, **in a brand new notebook in each** so that there is no caching of previous results, that `go.Figure()` and `go.FigureWidget()` work without error.
 
 If something is broken, you'll need to fix it and trigger the build again (see above section).
@@ -74,14 +68,6 @@ Publishing to PyPI:
 (plotly_dev) $ cd path/to/output/dist
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
-
-Publishing to `plotly` conda channel (make sure you have run `conda install anaconda-client` to get the `anaconda` command):
-
-```
-(plotly_dev) $ cd path/to/output
-(plotly_dev) $ anaconda upload plotly-X.Y.Z.tar.bz2
-```
-
 
 ### Merge the PR and make a Release
 
@@ -128,13 +114,4 @@ PyPI RC (no special flags, just the `rc1` suffix):
 ```
 
 The `--tag next` part ensures that users won't install this version unless
-they explicitly ask for the version or for the version with the `next` tag.
-
-Conda RC:
-
-```
-$ anaconda upload --label test plotly-*.tar.bz2
-```
-
-The `--label test` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version with the `next` tag.
