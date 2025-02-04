@@ -7,7 +7,7 @@ This is the release process for releasing `plotly.py` version `X.Y.Z`, including
 
 ### Finalize changelog
 
-Review the contents of `packages/python/plotly/CHANGELOG.md`. We try to follow
+Review the contents of `CHANGELOG.md`. We try to follow
 the [keepachangelog](https://keepachangelog.com/en/1.0.0/) guidelines.
 Make sure the changelog includes the version being published at the top, along
 with the expected publication date.

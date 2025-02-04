@@ -375,3 +375,22 @@ def test_empty_df_int64(backend):
     )
     # to_dict() should not raise an exception
     fig.to_dict()
+
+
+@pytest.mark.parametrize("return_type", ["pandas", "polars", "pyarrow"])
+def test_load_px_data(return_type):
+    # Test that all px.data functions can be called without error
+    data_func_names = [
+        f
+        for f in dir(px.data)
+        if not f.startswith("_")
+        and callable(getattr(px.data, f))
+        and not f == "import_module"
+    ]
+    for fname in data_func_names:
+        if fname == "election_geojson":
+            # As a geojson file, election_geojson does not support the return_type argument
+            df = getattr(px.data, fname)()
+        else:
+            df = getattr(px.data, fname)(return_type=return_type)
+        assert len(df) > 0
