@@ -16,7 +16,6 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
@@ -25,7 +24,6 @@ commands:
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest plotly/tests/test_core
           no_output_timeout: 20m
@@ -42,7 +40,6 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
@@ -54,47 +51,40 @@ commands:
       - run:
           name: Install plotly-geo
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pip install plotly-geo
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest plotly/tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest plotly/tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest _plotly_utils/tests/
           no_output_timeout: 20m
       - run:
           name: Test io
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest plotly/tests/test_io
           no_output_timeout: 20m
       - run:
           name: Test dependencdies not imported
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest -x test_init/test_lazy_imports.py
   test_orca:
@@ -109,7 +99,6 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
@@ -117,7 +106,6 @@ commands:
       - run:
           name: Install plotly-geo
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pip install plotly-geo
       - run:
@@ -131,12 +119,11 @@ commands:
       - run:
           name: Test orca
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pytest plotly/tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
+          path: plotly/tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
@@ -285,9 +272,9 @@ jobs:
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
-            pip install -e ./packages/python/plotly
+            pip install -e .
             pip install plotly-geo
-            pip install -r ./packages/python/plotly/test_requirements/requirements_39_pandas_2_optional.txt
+            pip install -r test_requirements/requirements_39_pandas_2_optional.txt
 
       - run:
           name: Build html figures (Pandas 2)
@@ -324,7 +311,6 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
             python -m venv venv
             . venv/bin/activate
             pip install --upgrade pip wheel
@@ -334,13 +320,11 @@ jobs:
       - run:
           name: Update plotly.js to dev
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             locale
             pytest -k 'not nodev' plotly/tests/test_core
@@ -348,7 +332,6 @@ jobs:
       - run:
           name: Commit
           command: |
-            cd packages/python/plotly
             git config --global user.email "you@example.com"
             git config --global user.name "Your Name"
             git add -A
@@ -357,13 +340,12 @@ jobs:
       - run:
           name: Build source distribution packages
           command: |
-            cd packages/python/plotly
             . venv/bin/activate
             pip install build
             python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
-          path: packages/python/plotly/dist
+          path: dist/
 
   full_build:
     docker:
@@ -390,7 +372,7 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/python/plotly/js
+            cd js
             npm ci
             npm run build
             git status
@@ -400,7 +382,6 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/python/plotly
             pip install build
             python -m build --sdist --wheel -o dist
             cp -R dist ../../../output
@@ -411,9 +392,8 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/python/plotly
             conda build recipe/
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
+            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 output/
             git status
 
       - run:
@@ -421,7 +401,7 @@ jobs:
           command: |
             eval "$(conda shell.bash hook)"
             conda activate env
-            cd packages/python/plotly/js
+            cd js
             npm ci
             npm run build
 
@@ -464,12 +444,12 @@ jobs:
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
-              cd ../packages/python/plotly
+              cd ..
               pip install -e .
               cd js
               npm ci
               npm run build
-              cd ../../../../doc
+              cd ../doc
             fi
             cd ..
       - run:
@@ -546,9 +526,9 @@ jobs:
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
               pip uninstall -y plotly
-              cd ../packages/python/plotly
+              cd ..
               pip install -e .
-              cd ../../../doc
+              cd doc
               cd apidoc
               make html
               cd _build/html
