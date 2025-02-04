@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Symbol(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.map.layer"
-    _path_str = "layout.map.layer.symbol"
+    _parent_path_str = 'layout.map.layer'
+    _path_str = 'layout.map.layer.symbol'
     _valid_props = {"icon", "iconsize", "placement", "text", "textfont", "textposition"}
 
     # icon
@@ -26,11 +28,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["icon"]
+        return self['icon']
 
     @icon.setter
     def icon(self, val):
-        self["icon"] = val
+        self['icon'] = val
 
     # iconsize
     # --------
@@ -47,11 +49,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["iconsize"]
+        return self['iconsize']
 
     @iconsize.setter
     def iconsize(self, val):
-        self["iconsize"] = val
+        self['iconsize'] = val
 
     # placement
     # ---------
@@ -73,11 +75,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["placement"]
+        return self['placement']
 
     @placement.setter
     def placement(self, val):
-        self["placement"] = val
+        self['placement'] = val
 
     # text
     # ----
@@ -94,11 +96,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textfont
     # --------
@@ -115,44 +117,15 @@ class Symbol(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.map.layer.symbol.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     # textposition
     # ------------
@@ -172,11 +145,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["textposition"]
+        return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
-        self["textposition"] = val
+        self['textposition'] = val
 
     # Self properties description
     # ---------------------------
@@ -207,18 +180,16 @@ class Symbol(_BaseLayoutHierarchyType):
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        icon=None,
-        iconsize=None,
-        placement=None,
-        text=None,
-        textfont=None,
-        textposition=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            icon=None,
+            iconsize=None,
+            placement=None,
+            text=None,
+            textfont=None,
+            textposition=None,
+            **kwargs
+        ):
         """
         Construct a new Symbol object
 
@@ -256,10 +227,9 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Symbol
         """
-        super(Symbol, self).__init__("symbol")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('symbol')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -271,44 +241,25 @@ class Symbol(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.Symbol
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.Symbol`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.Symbol`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("icon", None)
-        _v = icon if icon is not None else _v
-        if _v is not None:
-            self["icon"] = _v
-        _v = arg.pop("iconsize", None)
-        _v = iconsize if iconsize is not None else _v
-        if _v is not None:
-            self["iconsize"] = _v
-        _v = arg.pop("placement", None)
-        _v = placement if placement is not None else _v
-        if _v is not None:
-            self["placement"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
+        self._init_provided('icon', arg, icon)
+        self._init_provided('iconsize', arg, iconsize)
+        self._init_provided('placement', arg, placement)
+        self._init_provided('text', arg, text)
+        self._init_provided('textfont', arg, textfont)
+        self._init_provided('textposition', arg, textposition)
 
         # Process unknown kwargs
         # ----------------------

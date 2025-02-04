@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Textfont(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.map.layer.symbol"
-    _path_str = "layout.map.layer.symbol.textfont"
+    _parent_path_str = 'layout.map.layer.symbol'
+    _path_str = 'layout.map.layer.symbol.textfont'
     _valid_props = {"color", "family", "size", "style", "weight"}
 
     # color
@@ -20,52 +22,17 @@ class Textfont(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # family
     # ------
@@ -73,17 +40,10 @@ class Textfont(_BaseLayoutHierarchyType):
     def family(self):
         """
         HTML font family - the typeface that will be applied by the web
-        browser. The web browser will only be able to apply a font if
-        it is available on the system which it operates. Provide
-        multiple font families, separated by commas, to indicate the
-        preference in which to apply fonts if they aren't available on
-        the system. The Chart Studio Cloud (at https://chart-
-        studio.plotly.com or on-premise) generates images on a server,
-        where only a select number of fonts are installed and
-        supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
-        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
-        "Raleway", "Times New Roman".
+        browser. The web browser can only apply a font if it is
+        available on the system where it runs. Provide multiple font
+        families, separated by commas, to indicate the order in which
+        to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -92,11 +52,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["family"]
+        return self['family']
 
     @family.setter
     def family(self, val):
-        self["family"] = val
+        self['family'] = val
 
     # size
     # ----
@@ -110,11 +70,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # style
     # -----
@@ -132,11 +92,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["style"]
+        return self['style']
 
     @style.setter
     def style(self, val):
-        self["style"] = val
+        self['style'] = val
 
     # weight
     # ------
@@ -154,11 +114,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["weight"]
+        return self['weight']
 
     @weight.setter
     def weight(self, val):
-        self["weight"] = val
+        self['weight'] = val
 
     # Self properties description
     # ---------------------------
@@ -169,18 +129,11 @@ class Textfont(_BaseLayoutHierarchyType):
 
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         size
 
         style
@@ -189,17 +142,15 @@ class Textfont(_BaseLayoutHierarchyType):
         weight
             Sets the weight (or boldness) of the font.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        family=None,
-        size=None,
-        style=None,
-        weight=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            family=None,
+            size=None,
+            style=None,
+            weight=None,
+            **kwargs
+        ):
         """
         Construct a new Textfont object
 
@@ -217,18 +168,11 @@ class Textfont(_BaseLayoutHierarchyType):
 
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         size
 
         style
@@ -241,10 +185,9 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Textfont
         """
-        super(Textfont, self).__init__("textfont")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('textfont')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -256,40 +199,24 @@ class Textfont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.symbol.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.symbol.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.symbol.Textfont`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("family", None)
-        _v = family if family is not None else _v
-        if _v is not None:
-            self["family"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("style", None)
-        _v = style if style is not None else _v
-        if _v is not None:
-            self["style"] = _v
-        _v = arg.pop("weight", None)
-        _v = weight if weight is not None else _v
-        if _v is not None:
-            self["weight"] = _v
+        self._init_provided('color', arg, color)
+        self._init_provided('family', arg, family)
+        self._init_provided('size', arg, size)
+        self._init_provided('style', arg, style)
+        self._init_provided('weight', arg, weight)
 
         # Process unknown kwargs
         # ----------------------
