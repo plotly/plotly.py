@@ -13,7 +13,7 @@ node_root = os.path.join(project_root, "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 node_modules = os.path.join(node_root, "node_modules")
 targets = [
-    os.path.join(here, "plotly", "package_data", "widgetbundle.js"),
+    os.path.join(project_root, "plotly", "package_data", "widgetbundle.js"),
 ]
 
 npm_path = os.pathsep.join(
@@ -25,7 +25,7 @@ npm_path = os.pathsep.join(
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
-    path = os.path.join(here, "js", "package.json")
+    path = os.path.join(project_root, "js", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
@@ -100,7 +100,7 @@ def run_codegen():
 
 
 def overwrite_schema_local(uri):
-    path = os.path.join(here, "codegen", "resources", "plot-schema.json")
+    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
     shutil.copyfile(uri, path)
 
 
@@ -109,13 +109,13 @@ def overwrite_schema(url):
 
     req = requests.get(url)
     assert req.status_code == 200
-    path = os.path.join(here, "codegen", "resources", "plot-schema.json")
+    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_bundle_local(uri):
-    path = os.path.join(here, "plotly", "package_data", "plotly.min.js")
+    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
     shutil.copyfile(uri, path)
 
 
@@ -125,13 +125,13 @@ def overwrite_bundle(url):
     req = requests.get(url)
     print("url:", url)
     assert req.status_code == 200
-    path = os.path.join(here, "plotly", "package_data", "plotly.min.js")
+    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_plotlyjs_version_file(plotlyjs_version):
-    path = os.path.join(here, "plotly", "offline", "_plotlyjs_version.py")
+    path = os.path.join(project_root, "plotly", "offline", "_plotlyjs_version.py")
     with open(path, "w") as f:
         f.write(
             """\
