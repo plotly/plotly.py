@@ -8,10 +8,11 @@ build-backend = "setuptools.build_meta"
 "Github" = "https://github.com/plotly/plotly.py"
 "Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
 
-[pytest]
-markers =
-    nodev: mark a test as nodev
-    matplotlib: mark a test as matplotlib
+[tool.pytest.ini_options]
+markers = [
+    "nodev: mark a test as nodev",
+    "matplotlib: mark a test as matplotlib"
+]
 
 [project]
 name = "plotly"
@@ -35,8 +36,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License"
 ]
 requires-python = ">=3.8"
-license = {text = "MIT License"}
-license-files = ["LICENSE.txt"]
+license = {file="LICENSE.txt"}
 version = "6.0.0"
 dynamic = ["dependencies"]
 
