@@ -1,3 +1,6 @@
+# Migration to Version 6
+See https://plotly.com/python/v6-migration/
+
 # Migration to Version 5
 See https://community.plotly.com/t/introducing-plotly-py-5-0-0-a-new-federated-jupyter-extension-icicle-charts-and-bar-chart-patterns/54039
 
